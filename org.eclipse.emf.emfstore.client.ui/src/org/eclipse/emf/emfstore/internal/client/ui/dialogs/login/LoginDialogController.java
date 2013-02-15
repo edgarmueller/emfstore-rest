@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 
@@ -56,7 +56,7 @@ public class LoginDialogController implements ILoginDialogController {
 		return set.toArray(new Usersession[set.size()]);
 	}
 
-	private ESUsersession login(final boolean force) throws EMFStoreException {
+	private ESUsersession login(final boolean force) throws ESException {
 		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
 			public Usersession call() throws Exception {
 
@@ -107,7 +107,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#validate(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
-	public void validate(Usersession usersession) throws EMFStoreException {
+	public void validate(Usersession usersession) throws ESException {
 		// TODO login code
 		usersession.logIn();
 		// if successful, else exception is thrown prior reaching this code
@@ -154,10 +154,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @param force
 	 *            whether to force requesting the password
 	 * @return a logged-in usersession
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public ESUsersession login(ServerInfo serverInfo, boolean force) throws EMFStoreException {
+	public ESUsersession login(ServerInfo serverInfo, boolean force) throws ESException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(force);
@@ -170,10 +170,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 *            the usersession to be used during login
 	 * @param force
 	 *            whether to force requesting the password
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public void login(Usersession usersession, boolean force) throws EMFStoreException {
+	public void login(Usersession usersession, boolean force) throws ESException {
 		this.serverInfo = null;
 		this.usersession = usersession;
 		login(force);
@@ -187,10 +187,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @param serverInfo
 	 *            the server info to be used in order to determine a valid usersession
 	 * @return a logged-in usersession
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public ESUsersession login(ServerInfo serverInfo) throws EMFStoreException {
+	public ESUsersession login(ServerInfo serverInfo) throws ESException {
 		this.serverInfo = serverInfo;
 		this.usersession = null;
 		return login(false);
@@ -201,10 +201,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @param usersession
 	 *            the usersession to be used during login
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public void login(Usersession usersession) throws EMFStoreException {
+	public void login(Usersession usersession) throws ESException {
 		this.serverInfo = null;
 		this.usersession = usersession;
 		login(false);

@@ -26,9 +26,9 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.ServerUrlResolu
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectException;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
@@ -111,13 +111,13 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 *            The {@link ServerInfo} that should be used to retrieve the
 	 *            admin broker.
 	 * @return an {@link AdminBroker} related to the given server info.
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             If an error occurs while retrieving the admin broker
 	 * @throws AccessControlException
 	 *             If access is denied
 	 * @generated NOT
 	 */
-	AdminBroker getAdminBroker(ServerInfo serverInfo) throws EMFStoreException, AccessControlException;
+	AdminBroker getAdminBroker(ServerInfo serverInfo) throws ESException, AccessControlException;
 
 	/**
 	 * Returns an {@link AdminBroker} related to the given {@link Usersession}.
@@ -128,13 +128,13 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 *            If <code>null</code>, the session manager will search for a
 	 *            session.
 	 * @return an {@link AdminBroker} related to the given user session.
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             If an error occurs while retrieving the admin broker
 	 * @throws AccessControlException
 	 *             If access is denied
 	 * @generated NOT
 	 */
-	AdminBroker getAdminBroker(Usersession session) throws EMFStoreException, AccessControlException;
+	AdminBroker getAdminBroker(Usersession session) throws ESException, AccessControlException;
 
 	/**
 	 * Return this editing domain belonging to this workspace.
@@ -318,10 +318,10 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 * 
 	 * @param serverInfo
 	 *            The {@link ServerInfo} that is used to update the ACUser.
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an error occurs while updating the ACUser
 	 */
-	void updateACUser(ServerInfo serverInfo) throws EMFStoreException;
+	void updateACUser(ServerInfo serverInfo) throws ESException;
 
 	/**
 	 * Updates the ACUser and it roles.
@@ -330,9 +330,9 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 *            The {@link Usersession} that should be used to update the
 	 *            ACUser. If <code>null</code>, the session manager will search
 	 *            for a session.
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an error occurs while updating the ACUser
 	 */
-	void updateACUser(Usersession session) throws EMFStoreException;
+	void updateACUser(Usersession session) throws ESException;
 
 } // Workspace

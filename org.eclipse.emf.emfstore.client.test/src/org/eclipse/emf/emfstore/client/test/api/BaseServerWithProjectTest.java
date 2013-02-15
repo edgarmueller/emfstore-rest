@@ -2,7 +2,7 @@ package org.eclipse.emf.emfstore.client.test.api;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.Before;
 
@@ -18,7 +18,7 @@ public abstract class BaseServerWithProjectTest extends BaseLoggedInUserTest {
 		createRemoteProject();
 	}
 
-	private void createRemoteProject() throws EMFStoreException {
+	private void createRemoteProject() throws ESException {
 		remoteProject = server.createRemoteProject(usersession, projectName, new NullProgressMonitor());
 	}
 

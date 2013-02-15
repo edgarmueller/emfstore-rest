@@ -17,11 +17,11 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * The {@link ProjectPropertiesSubInterfaceImpl} class is responsible for handling modifications of project properties.
@@ -44,11 +44,11 @@ public class ProjectPropertiesSubInterfaceImpl extends AbstractSubEmfstoreInterf
 	 * @param changedProperty the property that has been changed
 	 * @param recUser the specified {@link ACUser}
 	 * @param projectId the specified {@link ProjectId}
-	 * @throws EMFStoreException if any error occurs setting the properties
+	 * @throws ESException if any error occurs setting the properties
 	 */
 	@EmfStoreMethod(MethodId.TRANSMITPROPERTY)
 	public void transmitProperty(OrgUnitProperty changedProperty, ACUser recUser, ProjectId projectId)
-		throws EMFStoreException {
+		throws ESException {
 		sanityCheckObjects(changedProperty, recUser, projectId);
 		EList<ACUser> users = getServerSpace().getUsers();
 		ACUser user = null;
@@ -59,7 +59,7 @@ public class ProjectPropertiesSubInterfaceImpl extends AbstractSubEmfstoreInterf
 			}
 		}
 		if (user == null) {
-			throw new EMFStoreException("The user does not exist on the server. Cannot set the property.");
+			throw new ESException("The user does not exist on the server. Cannot set the property.");
 		}
 		for (OrgUnitProperty property : user.getProperties()) {
 			if (property.getName().equals(changedProperty.getName()) && isProjectEqual(property, changedProperty)) {
@@ -85,11 +85,11 @@ public class ProjectPropertiesSubInterfaceImpl extends AbstractSubEmfstoreInterf
 		return (property.getProject().equals(changedProperty.getProject()));
 	}
 
-	private void save() throws EMFStoreException {
+	private void save() throws ESException {
 		try {
 			getServerSpace().save();
 		} catch (IOException e) {
-			throw new EMFStoreException("Cannot set the property on the server.");
+			throw new ESException("Cannot set the property on the server.");
 		}
 	}
 }

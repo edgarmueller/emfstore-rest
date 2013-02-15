@@ -20,8 +20,8 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -50,7 +50,7 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 	}
 
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor monitor) throws ESException {
 		if (!projectSpace.getOperations().isEmpty()) {
 			MessageDialog
 				.openError(getShell(), "Merge not possible",
@@ -66,7 +66,7 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 		return null;
 	}
 
-	private PrimaryVersionSpec branchSelection(ProjectSpace projectSpace) throws EMFStoreException {
+	private PrimaryVersionSpec branchSelection(ProjectSpace projectSpace) throws ESException {
 
 		// OTS: progress monitor
 		List<ESBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());

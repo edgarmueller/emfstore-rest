@@ -10,13 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Represents a condition where a version specifier is invalid.
  * 
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class InvalidVersionSpecException extends EMFStoreException {
+public class InvalidVersionSpecException extends ESException {
 
 	/**
 	 * Default constructor.

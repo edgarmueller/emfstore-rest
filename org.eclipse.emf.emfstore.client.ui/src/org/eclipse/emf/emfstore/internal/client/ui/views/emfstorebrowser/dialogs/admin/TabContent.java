@@ -15,11 +15,11 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -323,7 +323,7 @@ public abstract class TabContent {
 				ACUser user = (ACUser) currentInput;
 				adminBroker.removeGroup(user.getId(), ((ACGroup) orgUnit).getId());
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 	}

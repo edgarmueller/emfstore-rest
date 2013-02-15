@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,14 +51,14 @@ public class UsersessionTest extends BaseLoggedInUserTest {
 	}
 
 	@Test
-	public void testLogout() throws EMFStoreException {
+	public void testLogout() throws ESException {
 		assertTrue(usersession.isLoggedIn());
 		usersession.logout();
 		assertFalse(usersession.isLoggedIn());
 	}
 
 	@Test
-	public void testRenew() throws EMFStoreException {
+	public void testRenew() throws ESException {
 		assertTrue(usersession.isLoggedIn());
 		usersession.logout();
 		assertFalse(usersession.isLoggedIn());

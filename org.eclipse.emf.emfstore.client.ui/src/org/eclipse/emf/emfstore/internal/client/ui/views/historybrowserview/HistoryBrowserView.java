@@ -43,7 +43,6 @@ import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -53,6 +52,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
@@ -299,13 +299,13 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		List<HistoryInfo> result = new AbstractEMFStoreUIController<List<HistoryInfo>>(getViewSite().getShell(), true,
 			false) {
 			@Override
-			public List<HistoryInfo> doRun(final IProgressMonitor monitor) throws EMFStoreException {
+			public List<HistoryInfo> doRun(final IProgressMonitor monitor) throws ESException {
 				return new UnknownEMFStoreWorkloadCommand<List<HistoryInfo>>(monitor) {
 					@Override
-					public List<HistoryInfo> run(final IProgressMonitor monitor) throws EMFStoreException {
+					public List<HistoryInfo> run(final IProgressMonitor monitor) throws ESException {
 						return new ServerCall<List<HistoryInfo>>(projectSpace) {
 							@Override
-							protected List<HistoryInfo> run() throws EMFStoreException {
+							protected List<HistoryInfo> run() throws ESException {
 								monitor.beginTask("Fetching history form server", 100);
 								List<HistoryInfo> historyInfos = getLocalChanges();
 								monitor.worked(10);
@@ -407,7 +407,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			showAll(true);
 			setCenterVersion();
 			refresh();
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 		}
 	}
 
@@ -682,14 +682,14 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	private PrimaryVersionSpec resolveVersion(final String value) {
 		return new AbstractEMFStoreUIController<PrimaryVersionSpec>(getViewSite().getShell()) {
 			@Override
-			public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws EMFStoreException {
+			public PrimaryVersionSpec doRun(IProgressMonitor monitor) throws ESException {
 				return new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(monitor) {
 					@Override
-					public PrimaryVersionSpec run(IProgressMonitor monitor) throws EMFStoreException {
+					public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
 						try {
 							return (PrimaryVersionSpec) projectSpace.resolveVersionSpec(Versions.createPRIMARY(
 								VersionSpec.GLOBAL, Integer.parseInt(value)), new NullProgressMonitor());
-						} catch (EMFStoreException e) {
+						} catch (ESException e) {
 							EMFStoreMessageDialog.showExceptionDialog(
 								"Error: The version you requested does not exist.", e);
 						} catch (NumberFormatException e) {

@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.Before;
 
@@ -20,7 +20,7 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 		server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		try {
 			usersession = server.login("super", "super");
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}

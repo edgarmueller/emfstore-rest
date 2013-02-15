@@ -31,8 +31,8 @@ import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -103,7 +103,7 @@ public abstract class WorkspaceTest {
 	 * @throws SerializationException
 	 */
 	@After
-	public void teardown() throws IOException, SerializationException, EMFStoreException {
+	public void teardown() throws IOException, SerializationException, ESException {
 		boolean areEqual = false;
 		projectSpace.save();
 
@@ -129,7 +129,7 @@ public abstract class WorkspaceTest {
 	}
 
 	@AfterClass
-	public static void tearDownAfterClass() throws IOException, EMFStoreException {
+	public static void tearDownAfterClass() throws IOException, ESException {
 		WorkspaceProvider.getInstance().dispose();
 	}
 
@@ -153,7 +153,7 @@ public abstract class WorkspaceTest {
 					// FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
 				} catch (IOException e) {
 					// ignore
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					// ignore
 				}
 			}
@@ -184,7 +184,7 @@ public abstract class WorkspaceTest {
 						}
 						WorkspaceUtil.logWarning(e.getMessage() + " Retrying...(" + retried + " out of 3)", e);
 					}
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					// TODO: OTS
 				}
 			}

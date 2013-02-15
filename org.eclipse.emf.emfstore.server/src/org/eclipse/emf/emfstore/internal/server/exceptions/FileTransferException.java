@@ -10,12 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Exception class for file transfers.
  * 
  * @author Carl Pfeiffer
  */
-public class FileTransferException extends EMFStoreException {
+public class FileTransferException extends ESException {
 
 	private static final long serialVersionUID = 1L;
 

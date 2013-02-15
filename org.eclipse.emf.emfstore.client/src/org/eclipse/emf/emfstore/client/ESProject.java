@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
@@ -65,10 +65,10 @@ public interface ESProject {
 	 * 
 	 * @throws IOException
 	 *             in case an I/O related error occurred while deleting the project
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case any other error occurred while deleting the project
 	 */
-	void delete(IProgressMonitor monitor) throws IOException, EMFStoreException;
+	void delete(IProgressMonitor monitor) throws IOException, ESException;
 
 	/**
 	 * Resolves a {@link ESVersionSpec} to a {@link ESPrimaryVersionSpec} by querying the server.
@@ -83,10 +83,10 @@ public interface ESProject {
 	 * 
 	 * @return the resolved {@link ESPrimaryVersionSpec}
 	 * 
-	 * @throws EMFStoreException in case an error occurs while resolving the given {@link ESVersionSpec}
+	 * @throws ESException in case an error occurs while resolving the given {@link ESVersionSpec}
 	 */
 	ESPrimaryVersionSpec resolveVersionSpec(ESVersionSpec versionSpec, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * <p>
@@ -103,9 +103,9 @@ public interface ESProject {
 	 * 
 	 * @return a list containing information about all branches for the current project
 	 * 
-	 * @throws EMFStoreException in case an error occurs while retrieving the branch information for the project
+	 * @throws ESException in case an error occurs while retrieving the branch information for the project
 	 */
-	List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException;
+	List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * <p>
@@ -121,9 +121,9 @@ public interface ESProject {
 	 * 
 	 * @return a list containg the history information for the given query
 	 * 
-	 * @throws EMFStoreException in case an error occurs while retrieving the history information
+	 * @throws ESException in case an error occurs while retrieving the history information
 	 */
-	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws EMFStoreException;
+	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * <p>
@@ -142,10 +142,10 @@ public interface ESProject {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while adding the tag
 	 * 
-	 * @throws EMFStoreException in case the given tag could not be removed
+	 * @throws ESException in case the given tag could not be removed
 	 */
 	void addTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * <p>
@@ -163,8 +163,8 @@ public interface ESProject {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while removing the tag
 	 * 
-	 * @throws EMFStoreException in case the given tag could not be removed
+	 * @throws ESException in case the given tag could not be removed
 	 */
 	void removeTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 }

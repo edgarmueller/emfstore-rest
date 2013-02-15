@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Represents a access control violation. Access to a server resource may not be allowed for current user or user name
  * or password might be wrong.
@@ -17,7 +19,7 @@ package org.eclipse.emf.emfstore.internal.server.exceptions;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class AccessControlException extends EMFStoreException {
+public class AccessControlException extends ESException {
 
 	/**
 	 * Constructor.

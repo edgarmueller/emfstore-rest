@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
@@ -72,12 +72,12 @@ public interface IUpdateCallback {
 	 * 
 	 * @return {@code true}, if the checksum error has been handled successfully, {@code false}
 	 * 
-	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
+	 * @throws ESException in case any error occurs during the execution of the checksum error handler
 	 * 
 	 */
 	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * A default implementation of an update callback that does nothing and defaults
@@ -99,7 +99,7 @@ public interface IUpdateCallback {
 		}
 
 		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws EMFStoreException {
+			IProgressMonitor progressMonitor) throws ESException {
 			return true;
 		}
 	};

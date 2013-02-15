@@ -28,7 +28,6 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -36,6 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * The controller responsible for performing a commit.
@@ -94,12 +94,12 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	}
 
 	@Override
-	protected PrimaryVersionSpec run() throws EMFStoreException {
+	protected PrimaryVersionSpec run() throws ESException {
 		return commit(this.logMessage, this.branch);
 	}
 
 	private PrimaryVersionSpec commit(LogMessage logMessage, final BranchVersionSpec branch)
-		throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException {
+		throws InvalidVersionSpecException, BaseVersionOutdatedException, ESException {
 
 		getProgressMonitor().beginTask("Commiting changes", 100);
 		getProgressMonitor().worked(1);
@@ -157,7 +157,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		PrimaryVersionSpec newBaseVersion;
 		newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(getProgressMonitor()) {
 			@Override
-			public PrimaryVersionSpec run(IProgressMonitor monitor) throws EMFStoreException {
+			public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
 				return getConnectionManager().createVersion(getUsersession().getSessionId(),
 					getLocalProject().getProjectId(), getLocalProject().getBaseVersion(), changePackage, branch,
 					getLocalProject().getMergedVersion(), changePackage.getLogMessage());
@@ -186,7 +186,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			boolean errorHandled = callback
 				.checksumCheckFailed(getLocalProject(), newBaseVersion, getProgressMonitor());
 			if (!errorHandled) {
-				throw new EMFStoreException("Commit cancelled by checksum error handler due to invalid checksum.");
+				throw new ESException("Commit cancelled by checksum error handler due to invalid checksum.");
 			}
 		}
 
@@ -216,7 +216,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 	private boolean checkForCommitPreconditions(final BranchVersionSpec branch, IProgressMonitor monitor)
 		throws InvalidVersionSpecException,
-		EMFStoreException, BaseVersionOutdatedException {
+		ESException, BaseVersionOutdatedException {
 		if (branch != null) {
 			// check branch conditions
 			if (StringUtils.isEmpty(branch.getBranch())) {

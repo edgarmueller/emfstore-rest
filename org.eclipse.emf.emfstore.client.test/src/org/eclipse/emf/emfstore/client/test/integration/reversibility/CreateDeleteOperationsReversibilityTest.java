@@ -15,8 +15,8 @@ import static org.junit.Assert.assertTrue;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Test;
 
 /**
@@ -30,11 +30,11 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * create a random ME and change one of its attributes.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createAndChangeAttributeReversibilityTest() throws SerializationException, EMFStoreException {
+	public void createAndChangeAttributeReversibilityTest() throws SerializationException, ESException {
 		System.out.println("CreateAndChangeAttributeReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -61,11 +61,11 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * Create a random ME and change one of its references.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createAndChangeRefReversibilityTest() throws SerializationException, EMFStoreException {
+	public void createAndChangeRefReversibilityTest() throws SerializationException, ESException {
 		System.out.println("CreateAndChangeRefReversibilityTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -95,11 +95,11 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * Create a random ME. Change one of its non-containment references. Delete ME.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createChangeRefDeleteReversibilityTest() throws SerializationException, EMFStoreException {
+	public void createChangeRefDeleteReversibilityTest() throws SerializationException, ESException {
 		System.out.println("CreateChangeRefDeleteReversibilityTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {
@@ -118,11 +118,11 @@ public class CreateDeleteOperationsReversibilityTest extends OperationsReversibi
 	/**
 	 * Create a random ME. Delete ME.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createDeleteReversibilityTest() throws SerializationException, EMFStoreException {
+	public void createDeleteReversibilityTest() throws SerializationException, ESException {
 		System.out.println("CreateDeleteReversibilityTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.sessionprovider;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * <p>
@@ -54,9 +54,9 @@ public abstract class AbstractSessionProvider {
 	 *            current server call
 	 * @return an user session. It is not specified whether this session is logged in or logged out.
 	 * 
-	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
+	 * @throws ESException in case an exception occurred while obtaining the user session
 	 */
-	public ESUsersession provideUsersession(IServerCall serverCall) throws EMFStoreException {
+	public ESUsersession provideUsersession(IServerCall serverCall) throws ESException {
 
 		ESUsersession usersession = serverCall.getUsersession();
 
@@ -100,9 +100,9 @@ public abstract class AbstractSessionProvider {
 	 *            is set you should allow the user to select the account for the given server.
 	 * 
 	 * @return an user session. It is not specified whether this session is logged in or logged out.
-	 * @throws EMFStoreException in case an exception occurred while obtaining the user session
+	 * @throws ESException in case an exception occurred while obtaining the user session
 	 */
-	public abstract ESUsersession provideUsersession(ESServer server) throws EMFStoreException;
+	public abstract ESUsersession provideUsersession(ESServer server) throws ESException;
 
 	/**
 	 * This method is called by the SessionManager in order to login a given user session. Either you are able to
@@ -111,7 +111,7 @@ public abstract class AbstractSessionProvider {
 	 * @param usersession
 	 *            the session to be logged in
 	 * 
-	 * @throws EMFStoreException in case an exception occurred while logging in the given session
+	 * @throws ESException in case an exception occurred while logging in the given session
 	 */
-	public abstract void login(ESUsersession usersession) throws EMFStoreException;
+	public abstract void login(ESUsersession usersession) throws ESException;
 }

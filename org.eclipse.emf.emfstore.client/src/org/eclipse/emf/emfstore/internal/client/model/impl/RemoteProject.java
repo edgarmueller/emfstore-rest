@@ -36,7 +36,6 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
@@ -49,6 +48,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
@@ -110,13 +110,13 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getBranches(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws EMFStoreException {
+	public List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws ESException {
 		return new UnknownEMFStoreWorkloadCommand<List<ESBranchInfo>>(monitor) {
 			@Override
-			public List<ESBranchInfo> run(IProgressMonitor monitor) throws EMFStoreException {
+			public List<ESBranchInfo> run(IProgressMonitor monitor) throws ESException {
 				return copy(new ServerCall<List<BranchInfo>>(server) {
 					@Override
-					protected List<BranchInfo> run() throws EMFStoreException {
+					protected List<BranchInfo> run() throws ESException {
 						final ConnectionManager connectionManager = WorkspaceProvider.getInstance()
 							.getConnectionManager();
 						return connectionManager.getBranches(getSessionId(), (ProjectId) getGlobalProjectId());
@@ -133,10 +133,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getBranches(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<ESBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+	public List<ESBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
 		return copy(new ServerCall<List<BranchInfo>>(server) {
 			@Override
-			protected List<BranchInfo> run() throws EMFStoreException {
+			protected List<BranchInfo> run() throws ESException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 				return cm.getBranches(getSessionId(), (ProjectId) getGlobalProjectId());
 			};
@@ -151,10 +151,10 @@ public class RemoteProject implements ESRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(final ESVersionSpec versionSpec, IProgressMonitor monitor)
-		throws EMFStoreException {
+		throws ESException {
 		return new ServerCall<PrimaryVersionSpec>(server, monitor) {
 			@Override
-			protected PrimaryVersionSpec run() throws EMFStoreException {
+			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getGlobalProjectId(),
 					(VersionSpec) versionSpec);
 			}
@@ -169,10 +169,10 @@ public class RemoteProject implements ESRemoteProject {
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(ESUsersession session, final ESVersionSpec versionSpec,
-		IProgressMonitor monitor) throws EMFStoreException {
+		IProgressMonitor monitor) throws ESException {
 		return new ServerCall<PrimaryVersionSpec>(session) {
 			@Override
-			protected PrimaryVersionSpec run() throws EMFStoreException {
+			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getGlobalProjectId(),
 					(VersionSpec) versionSpec);
 			}
@@ -187,10 +187,10 @@ public class RemoteProject implements ESRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<ESHistoryInfo> getHistoryInfos(final ESHistoryQuery query, IProgressMonitor monitor)
-		throws EMFStoreException {
+		throws ESException {
 		return copy(new ServerCall<List<HistoryInfo>>(server, monitor) {
 			@Override
-			protected List<HistoryInfo> run() throws EMFStoreException {
+			protected List<HistoryInfo> run() throws ESException {
 				return getConnectionManager().getHistoryInfo(getSessionId(), (ProjectId) getGlobalProjectId(),
 					(HistoryQuery) query);
 			}
@@ -205,10 +205,10 @@ public class RemoteProject implements ESRemoteProject {
 	 *      org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<ESHistoryInfo> getHistoryInfos(ESUsersession usersession, final ESHistoryQuery query,
-		IProgressMonitor monitor) throws EMFStoreException {
+		IProgressMonitor monitor) throws ESException {
 		return copy(new ServerCall<List<HistoryInfo>>(usersession, monitor) {
 			@Override
-			protected List<HistoryInfo> run() throws EMFStoreException {
+			protected List<HistoryInfo> run() throws ESException {
 				return getConnectionManager().getHistoryInfo(getUsersession().getSessionId(),
 					(ProjectId) getGlobalProjectId(), (HistoryQuery) query);
 			}
@@ -224,10 +224,10 @@ public class RemoteProject implements ESRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void addTag(final ESPrimaryVersionSpec versionSpec, final ESTagVersionSpec tag, IProgressMonitor monitor)
-		throws EMFStoreException {
+		throws ESException {
 		new ServerCall<Void>(server, monitor) {
 			@Override
-			protected Void run() throws EMFStoreException {
+			protected Void run() throws ESException {
 				getConnectionManager().addTag(getUsersession().getSessionId(), (ProjectId) getGlobalProjectId(),
 					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
@@ -244,10 +244,10 @@ public class RemoteProject implements ESRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void removeTag(final ESPrimaryVersionSpec versionSpec, final ESTagVersionSpec tag, IProgressMonitor monitor)
-		throws EMFStoreException {
+		throws ESException {
 		new ServerCall<Void>(server, monitor) {
 			@Override
-			protected Void run() throws EMFStoreException {
+			protected Void run() throws ESException {
 				getConnectionManager().removeTag(getUsersession().getSessionId(), (ProjectId) getGlobalProjectId(),
 					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
 				return null;
@@ -261,10 +261,10 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ProjectSpace checkout(final IProgressMonitor monitor) throws EMFStoreException {
+	public ProjectSpace checkout(final IProgressMonitor monitor) throws ESException {
 		return new ServerCall<ProjectSpace>(server) {
 			@Override
-			protected ProjectSpace run() throws EMFStoreException {
+			protected ProjectSpace run() throws ESException {
 				return checkout(getUsersession(), monitor);
 			}
 		}.execute();
@@ -277,7 +277,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ProjectSpace checkout(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+	public ProjectSpace checkout(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
 		PrimaryVersionSpec targetSpec = resolveVersionSpec(usersession, Versions.createHEAD(), monitor);
 		return checkout(usersession, targetSpec, monitor);
 	}
@@ -290,7 +290,7 @@ public class RemoteProject implements ESRemoteProject {
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ProjectSpace checkout(ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor progressMonitor)
-		throws EMFStoreException {
+		throws ESException {
 
 		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
 		final Usersession session = (Usersession) usersession;
@@ -308,10 +308,10 @@ public class RemoteProject implements ESRemoteProject {
 		parent.subTask("Fetching project from server...");
 		project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
 			@Override
-			public Project run(IProgressMonitor monitor) throws EMFStoreException {
+			public Project run(IProgressMonitor monitor) throws ESException {
 				return new ServerCall<Project>(session) {
 					@Override
-					protected Project run() throws EMFStoreException {
+					protected Project run() throws ESException {
 						return getConnectionManager().getProject(session.getSessionId(), projectInfo.getProjectId(),
 							projectInfoCopy.getVersion());
 					}
@@ -320,7 +320,7 @@ public class RemoteProject implements ESRemoteProject {
 		}.execute();
 
 		if (project == null) {
-			throw new EMFStoreException("Server returned a null project!");
+			throw new ESException("Server returned a null project!");
 		}
 
 		final PrimaryVersionSpec primaryVersionSpec = projectInfoCopy.getVersion();
@@ -362,7 +362,7 @@ public class RemoteProject implements ESRemoteProject {
 			}
 			ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
 
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException e) {
@@ -391,7 +391,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#delete(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void delete(IProgressMonitor monitor) throws EMFStoreException {
+	public void delete(IProgressMonitor monitor) throws ESException {
 		getDeleteProjectServerCall().setProgressMonitor(monitor).setServer(server).execute();
 	}
 
@@ -402,7 +402,7 @@ public class RemoteProject implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#delete(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void delete(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException {
+	public void delete(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
 		getDeleteProjectServerCall().setProgressMonitor(monitor).setUsersession(usersession).execute();
 	}
 
@@ -422,17 +422,17 @@ public class RemoteProject implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getHeadVersion(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws EMFStoreException {
+	public PrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws ESException {
 		return resolveVersionSpec(Versions.createHEAD(), monitor);
 	}
 
 	private ServerCall<Void> getDeleteProjectServerCall() {
 		return new ServerCall<Void>() {
 			@Override
-			protected Void run() throws EMFStoreException {
+			protected Void run() throws ESException {
 				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
 					@Override
-					public Void run(IProgressMonitor monitor) throws EMFStoreException {
+					public Void run(IProgressMonitor monitor) throws ESException {
 						getConnectionManager().deleteProject(getSessionId(), projectInfo.getProjectId(), true);
 						return null;
 					}

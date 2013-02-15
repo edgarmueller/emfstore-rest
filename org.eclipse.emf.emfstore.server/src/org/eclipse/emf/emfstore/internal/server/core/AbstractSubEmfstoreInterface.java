@@ -18,11 +18,11 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl;
 import org.eclipse.emf.emfstore.internal.server.core.helper.ResourceHelper;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * This is the super class for all subinterfaces of emfstore. Main interfaces, such as {@link EMFStoreImpl}, check and
@@ -136,9 +136,9 @@ public abstract class AbstractSubEmfstoreInterface {
 	 * @param method the method to invoke
 	 * @param args parameters
 	 * @return result of the operation
-	 * @throws EMFStoreException thrown if operation could not be executed properly
+	 * @throws ESException thrown if operation could not be executed properly
 	 */
-	public Object execute(Method method, Object[] args) throws EMFStoreException {
+	public Object execute(Method method, Object[] args) throws ESException {
 		try {
 			if (method.getParameterTypes()[0] == SessionId.class) {
 				return method.invoke(this, args);
@@ -148,16 +148,16 @@ public abstract class AbstractSubEmfstoreInterface {
 			return method.invoke(this, argsWoSessionId);
 		} catch (IllegalArgumentException e) {
 			ModelUtil.logWarning("this must not happen, bad parameters", e);
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (IllegalAccessException e) {
 			ModelUtil.logWarning("this must not happen, method is not accessible", e);
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (InvocationTargetException e) {
 			ModelUtil.logWarning("exception on execution", e);
-			if (e.getTargetException() instanceof EMFStoreException) {
-				throw (EMFStoreException) e.getTargetException();
+			if (e.getTargetException() instanceof ESException) {
+				throw (ESException) e.getTargetException();
 			}
-			throw new EMFStoreException(e.getTargetException());
+			throw new ESException(e.getTargetException());
 		}
 	}
 

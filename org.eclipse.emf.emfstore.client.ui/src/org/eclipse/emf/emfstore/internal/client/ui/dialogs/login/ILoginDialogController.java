@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * The login dialog controller manages a given {@link Usersession} and/or a {@link ServerInfo} instance
@@ -30,10 +30,10 @@ public interface ILoginDialogController {
 	 * 
 	 * @param usersession
 	 *            the usersession to be validated
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case the log-in of the user session fails
 	 */
-	void validate(Usersession usersession) throws EMFStoreException;
+	void validate(Usersession usersession) throws ESException;
 
 	/**
 	 * Whether the login controller has an {@link Usersession} assigned.

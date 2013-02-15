@@ -32,7 +32,6 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -47,6 +46,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -96,7 +96,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		connectionManager = newConnectionManager;
 	}
 
-	public RemoteProject getRemoteProject() throws EMFStoreException {
+	public RemoteProject getRemoteProject() throws ESException {
 		return getProjectSpace().getRemoteProject();
 	}
 
@@ -104,7 +104,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		return getProjectSpace().getProjectId();
 	}
 
-	public PrimaryVersionSpec getProjectVersion() throws EMFStoreException {
+	public PrimaryVersionSpec getProjectVersion() throws ESException {
 		return getRemoteProject().getHeadVersion(new NullProgressMonitor());
 	}
 
@@ -117,7 +117,7 @@ public abstract class ServerTests extends WorkspaceTest {
 
 	@Override
 	@After
-	public void teardown() throws IOException, SerializationException, EMFStoreException {
+	public void teardown() throws IOException, SerializationException, ESException {
 		super.teardown();
 		for (ESRemoteProject project : getServerInfo().getRemoteProjects()) {
 			// TODO: monitor
@@ -129,11 +129,11 @@ public abstract class ServerTests extends WorkspaceTest {
 	/**
 	 * Start server and gain sessionid.
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 * @throws IOException
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws EMFStoreException, IOException {
+	public static void setUpBeforeClass() throws ESException, IOException {
 		WorkspaceTest.beforeClass();
 		ServerConfiguration.setTesting(true);
 		SetupHelper.addUserFileToServer(false);
@@ -149,9 +149,9 @@ public abstract class ServerTests extends WorkspaceTest {
 
 	/**
 	 * @param serverInfo serverinfo
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
-	protected static void login() throws EMFStoreException {
+	protected static void login() throws ESException {
 		SessionId sessionId = login(getServerInfo(), "super", "super").getSessionId();
 		WorkspaceProvider.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
 		setSessionId(sessionId);
@@ -162,10 +162,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @param username username
 	 * @param password password
 	 * @return sessionId
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	protected static AuthenticationInformation login(ServerInfo serverInfo, String username, String password)
-		throws EMFStoreException {
+		throws ESException {
 		return getConnectionManager().logIn(username, KeyStoreManager.getInstance().encrypt(password, serverInfo),
 			serverInfo, Configuration.getClientVersion());
 	}
@@ -194,10 +194,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * 
 	 * @throws IOException
 	 *             in case cleanup/teardown fails
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@AfterClass
-	public static void tearDownAfterClass() throws IOException, EMFStoreException {
+	public static void tearDownAfterClass() throws IOException, ESException {
 		SetupHelper.stopServer();
 		WorkspaceProvider.getInstance().dispose();
 		SetupHelper.cleanupServer();
@@ -207,7 +207,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	/**
 	 * Adds a project to the server before test.
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	@Override
 	public void beforeHook() {
@@ -218,7 +218,7 @@ public abstract class ServerTests extends WorkspaceTest {
 					// getProjectSpace().setUsersession(getServerInfo().getLastUsersession());
 					// getProjectSpace().getUsersession().logIn();
 					getProjectSpace().shareProject(new NullProgressMonitor());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					Assert.fail();
 				}
 			}
@@ -229,10 +229,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	/**
 	 * Removes all projects from server after test.
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	@After
-	public void afterTest() throws EMFStoreException {
+	public void afterTest() throws ESException {
 
 		new EMFStoreCommand() {
 
@@ -242,7 +242,7 @@ public abstract class ServerTests extends WorkspaceTest {
 					for (ESRemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
 						remoteProject.delete(new NullProgressMonitor());
 					}
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 				}
 
 				SetupHelper.cleanupServer();
@@ -255,10 +255,10 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * 
 	 * @param name name of the user (must be specified in users.properties)
 	 * @param role of type RolesPackage.eINSTANCE.getWriterRole() or RolesPackage.eINSTANCE.getReaderRole() ....
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 
-	public ACOrgUnitId setupUsers(String name, EClass role) throws EMFStoreException {
+	public ACOrgUnitId setupUsers(String name, EClass role) throws ESException {
 		try {
 			ACOrgUnitId orgUnitId = SetupHelper.createUserOnServer(name);
 			SetupHelper.setUsersRole(orgUnitId, role, getProjectId());

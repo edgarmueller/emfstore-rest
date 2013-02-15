@@ -19,10 +19,10 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -41,7 +41,7 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 		 * {@inheritDoc}
 		 */
 		public boolean execute(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-			throws EMFStoreException {
+			throws ESException {
 			WorkspaceUtil.logWarning("Checksum comparison failed.", null);
 			return true;
 		}
@@ -55,7 +55,7 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 		 * {@inheritDoc}
 		 */
 		public boolean execute(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-			throws EMFStoreException {
+			throws ESException {
 			return false;
 		}
 	},
@@ -70,14 +70,14 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 		 * {@inheritDoc}
 		 */
 		public boolean execute(final ESLocalProject project, final ESPrimaryVersionSpec versionSpec,
-			IProgressMonitor monitor) throws EMFStoreException {
+			IProgressMonitor monitor) throws ESException {
 
 			// TODO: OTS casts
 			ProjectSpace projectSpace = (ProjectSpace) project;
 
 			Project fetchedProject = new UnknownEMFStoreWorkloadCommand<Project>(monitor) {
 				@Override
-				public Project run(IProgressMonitor monitor) throws EMFStoreException {
+				public Project run(IProgressMonitor monitor) throws ESException {
 					return WorkspaceProvider
 						.getInstance()
 						.getConnectionManager()
@@ -88,7 +88,7 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 			}.execute();
 
 			if (fetchedProject == null) {
-				throw new EMFStoreException("Server returned a null project!");
+				throw new ESException("Server returned a null project!");
 			}
 
 			projectSpace.setProject(fetchedProject);

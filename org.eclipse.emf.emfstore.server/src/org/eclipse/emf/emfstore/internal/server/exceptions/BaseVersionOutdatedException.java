@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Represents an exception because the base version of a project space is not up to date.
  * 
@@ -17,7 +19,7 @@ package org.eclipse.emf.emfstore.internal.server.exceptions;
  */
 // MK: move to workspace
 @SuppressWarnings("serial")
-public class BaseVersionOutdatedException extends EMFStoreException {
+public class BaseVersionOutdatedException extends ESException {
 
 	private static final String MESSAGE = "BaseVersion outdated, please update before commit.";
 

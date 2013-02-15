@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.exceptions;
+package org.eclipse.emf.emfstore.server.exceptions;
 
 /**
  * An EmfStore Exception expresses that any exceptional condition in the EmfStore occurred that prevented the store from
@@ -19,7 +19,7 @@ package org.eclipse.emf.emfstore.internal.server.exceptions;
  * @generated NOT
  */
 @SuppressWarnings("serial")
-public class EMFStoreException extends Exception {
+public class ESException extends Exception {
 
 	/**
 	 * Constructor.
@@ -28,7 +28,7 @@ public class EMFStoreException extends Exception {
 	 * @param cause the causing exception
 	 * @generated NOT
 	 */
-	public EMFStoreException(String message, Throwable cause) {
+	public ESException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -38,7 +38,7 @@ public class EMFStoreException extends Exception {
 	 * @param message the message
 	 * @generated NOT
 	 */
-	public EMFStoreException(String message) {
+	public ESException(String message) {
 		super(message);
 	}
 
@@ -47,7 +47,7 @@ public class EMFStoreException extends Exception {
 	 * 
 	 * @param cause the causing exception
 	 */
-	public EMFStoreException(Throwable cause) {
+	public ESException(Throwable cause) {
 		super(cause);
 	}
 }

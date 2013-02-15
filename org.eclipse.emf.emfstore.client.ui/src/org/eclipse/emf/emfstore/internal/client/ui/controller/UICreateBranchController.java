@@ -29,13 +29,13 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -166,7 +166,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws EMFStoreException {
+	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
 		try {
 			if (branch == null) {
 				branch = branchSelection(projectSpace);
@@ -177,7 +177,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore
-		} catch (final EMFStoreException e) {
+		} catch (final ESException e) {
 			if (e instanceof CancelOperationException) {
 				return null;
 			}
@@ -194,7 +194,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 		return null;
 	}
 
-	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace) throws EMFStoreException {
+	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace) throws ESException {
 		final List<ESBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());
 
 		@SuppressWarnings("static-access")
@@ -224,7 +224,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor monitor) throws EMFStoreException {
+		IProgressMonitor monitor) throws ESException {
 		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}

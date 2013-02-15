@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.TestProjectEnum;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -91,9 +91,9 @@ public abstract class IntegrationTest {
 	 * changes.
 	 * 
 	 * @return project lying on the server
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 */
-	public Project getCompareProject() throws EMFStoreException {
+	public Project getCompareProject() throws ESException {
 		return setupHelper.getCompareProject();
 
 	}

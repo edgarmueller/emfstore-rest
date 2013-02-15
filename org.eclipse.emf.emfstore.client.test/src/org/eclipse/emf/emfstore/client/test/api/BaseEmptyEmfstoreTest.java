@@ -22,9 +22,9 @@ import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -107,13 +107,13 @@ public abstract class BaseEmptyEmfstoreTest {
 		}
 	}
 
-	protected static void deleteLocalProjects() throws IOException, FatalEmfStoreException, EMFStoreException {
+	protected static void deleteLocalProjects() throws IOException, FatalEmfStoreException, ESException {
 		for (ESLocalProject project : WorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
 			project.delete(new NullProgressMonitor());
 		}
 	}
 
-	protected static void deleteRemoteProjects() throws IOException, FatalEmfStoreException, EMFStoreException {
+	protected static void deleteRemoteProjects() throws IOException, FatalEmfStoreException, ESException {
 		for (ESRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0).getRemoteProjects()) {
 			project.delete(new NullProgressMonitor());
 		}

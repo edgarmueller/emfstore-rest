@@ -19,8 +19,9 @@ import org.eclipse.emf.emfstore.client.test.UpdateCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
@@ -62,7 +63,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			ESRemoteProject remoteProject = localProject.getRemoteProject();
 			assertNotNull(remoteProject);
 			assertTrue(localProject.isShared());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -75,13 +76,13 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			addPlayerToProject();
 			ESPrimaryVersionSpec head = localProject.commit();
 			assertNotSame(base, head);
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
 	}
 
-	public void testCommitWithoutChange() throws EMFStoreException {
+	public void testCommitWithoutChange() throws ESException {
 		localProject.commit(null, new CommitCallbackAdapter() {
 			@Override
 			public void noLocalChanges(ESLocalProject projectSpace) {
@@ -99,7 +100,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			addPlayerToProject();
 			ESPrimaryVersionSpec head = localProject.commit(logMessage, callback, new NullProgressMonitor());
 			assertNotSame(base, head);
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -115,13 +116,13 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			ESPrimaryVersionSpec head = localProject.commitToBranch(branch, logMessage, callback,
 				new NullProgressMonitor());
 			assertNotSame(base, head);
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
 	}
 
-	public void testCommitBranchWithoutChange() throws EMFStoreException {
+	public void testCommitBranchWithoutChange() throws ESException {
 		ESBranchVersionSpec branch = ESVersionSpec.FACTORY.createBRANCH("newBranch");
 		localProject.commitToBranch(branch, logMessage, new CommitCallbackAdapter() {
 			@Override
@@ -138,7 +139,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			List<? extends ESBranchInfo> branches = localProject.getBranches(new NullProgressMonitor());
 			assertEquals(1, branches.size());
 			// TODO assert branch name
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -158,7 +159,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			branches = localProject.getBranches(new NullProgressMonitor());
 			assertEquals(2, branches.size());
 			// TODO assert branch names
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -167,7 +168,8 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testHistoryInfoOnlyTrunk() {
 		try {
-			ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
+			ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true,
+				true,
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			;
@@ -183,7 +185,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 				monitor);
 			assertEquals(2, infos.size());
 			// TODO assert infos
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -192,7 +194,8 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testHistoryInfoBranch() {
 		try {
-			ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true, true,
+			ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(localProject.getBaseVersion(), 1, 1, true, true,
+				true,
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			;
@@ -206,7 +209,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			infos = localProject.getHistoryInfos(query, monitor);
 			assertEquals(2, infos.size());
 			// TODO assert infos
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -223,7 +226,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		assertTrue(localProject.hasUncommitedChanges());
 		try {
 			localProject.commit(logMessage, callback, new NullProgressMonitor());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -232,7 +235,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	}
 
 	@Test(expected = BaseVersionOutdatedException.class)
-	public void testMergeAndExpectBaseVersionOutOfDateException() throws EMFStoreException {
+	public void testMergeAndExpectBaseVersionOutOfDateException() throws ESException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
@@ -247,10 +250,9 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	}
 
 	@Test
-	public void testMerge() throws EMFStoreException {
+	public void testMerge() throws ESException {
 
 		final NullProgressMonitor monitor = new NullProgressMonitor();
-		;
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		localProject.commit();
 		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
@@ -268,19 +270,20 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 						.createHEAD(baseVersion), monitor);
 					localProject.update(version, new UpdateCallbackAdapter() {
 						@Override
-						public boolean conflictOccurred(org.eclipse.emf.emfstore.client.ESChangeConflict changeConflict,
+						public boolean conflictOccurred(
+							org.eclipse.emf.emfstore.client.ESChangeConflict changeConflict,
 							IProgressMonitor progressMonitor) {
 							try {
 								return localProject.merge(version, changeConflict,
 									new TestConflictResolver(
 										false, 1), null, new NullProgressMonitor());
-							} catch (EMFStoreException e) {
+							} catch (ESException e) {
 								fail("Merge failed.");
 							}
 							return false;
 						};
 					}, new NullProgressMonitor());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					fail("Expected ChangeConflictException");
 				}
 				return true;
@@ -289,5 +292,6 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		assertEquals("B", checkedoutPlayer.getName());
 		localProject.update();
 		assertEquals("B", player.getName());
+		assertTrue(EMFStoreClientUtil.areEqual(localProject, checkedoutCopy));
 	}
 }

@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -184,7 +184,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ESLocalProject doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
+	public ESLocalProject doRun(IProgressMonitor progressMonitor) throws ESException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
@@ -205,7 +205,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 				}
 			}
 
-		} catch (final EMFStoreException e) {
+		} catch (final ESException e) {
 			if (e instanceof CancelOperationException) {
 				return null;
 			}
@@ -223,7 +223,7 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	}
 
 	private ESPrimaryVersionSpec branchSelection(ESRemoteProject remoteProject, IProgressMonitor monitor)
-		throws EMFStoreException {
+		throws ESException {
 
 		final List<ESBranchInfo> branches;
 

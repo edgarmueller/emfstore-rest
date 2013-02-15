@@ -10,13 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Is thrown when the input parameters of a method are null.
  * 
  * @author wesendonk
  */
 @SuppressWarnings("serial")
-public class InvalidInputException extends EMFStoreException {
+public class InvalidInputException extends ESException {
 
 	/**
 	 * Default constructor.

@@ -30,9 +30,9 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -115,7 +115,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 			// merge opens up a dialog
 			return projectSpace.merge(targetVersion, changeConflict,
 				new MergeProjectHandler(), this, progressMonitor);
-		} catch (final EMFStoreException e) {
+		} catch (final ESException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					handleMergeException(projectSpace, e);
@@ -127,7 +127,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 		return mergeSuccessful;
 	}
 
-	private void handleMergeException(final ESLocalProject projectSpace, EMFStoreException e) {
+	private void handleMergeException(final ESLocalProject projectSpace, ESException e) {
 		WorkspaceUtil.logException(
 			String.format("Exception while merging the project %s!", projectSpace.getProjectName()), e);
 		EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
@@ -162,7 +162,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor) throws EMFStoreException {
+	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor) throws ESException {
 		ESPrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
 
 		ESPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(ESVersionSpec.FACTORY
@@ -188,7 +188,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor monitor) throws EMFStoreException {
+		IProgressMonitor monitor) throws ESException {
 		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}

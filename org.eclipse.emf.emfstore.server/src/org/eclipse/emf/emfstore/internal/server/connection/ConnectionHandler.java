@@ -15,8 +15,8 @@ package org.eclipse.emf.emfstore.internal.server.connection;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreInterface;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * The ConnectionHandler makes the network transport layer transparent for the server. It requires {@link EMFStore} and
@@ -35,9 +35,9 @@ public interface ConnectionHandler<T extends EMFStoreInterface> {
 	 * @param emfStore an implementation of a server interface.
 	 * @param accessControl an implementation of the {@link AuthenticationControl}
 	 * @throws FatalEmfStoreException is thrown if the server can't initialize
-	 * @throws EMFStoreException exception within the server
+	 * @throws ESException exception within the server
 	 */
-	void init(T emfStore, AuthenticationControl accessControl) throws FatalEmfStoreException, EMFStoreException;
+	void init(T emfStore, AuthenticationControl accessControl) throws FatalEmfStoreException, ESException;
 
 	/**
 	 * Stop the handler.

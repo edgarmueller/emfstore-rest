@@ -10,13 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Represents a condition where a project id is invalid.
  * 
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class InvalidProjectIdException extends EMFStoreException {
+public class InvalidProjectIdException extends ESException {
 
 	/**
 	 * Default constructor.

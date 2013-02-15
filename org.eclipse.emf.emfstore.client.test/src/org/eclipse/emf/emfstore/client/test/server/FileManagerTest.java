@@ -22,10 +22,10 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus.Status;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Test;
 
 /**
@@ -37,7 +37,7 @@ import org.junit.Test;
 public class FileManagerTest extends TransmissionTests {
 
 	@Test
-	public void testTransfer() throws EMFStoreException, IOException, InterruptedException {
+	public void testTransfer() throws ESException, IOException, InterruptedException {
 		File file = File.createTempFile("foo", "tmp");
 		file.deleteOnExit();
 		LogMessage msg = VersioningFactory.eINSTANCE.createLogMessage();

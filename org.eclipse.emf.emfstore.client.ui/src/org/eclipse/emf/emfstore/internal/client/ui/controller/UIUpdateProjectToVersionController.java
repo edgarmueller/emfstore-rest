@@ -22,9 +22,9 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
@@ -54,7 +54,7 @@ public class UIUpdateProjectToVersionController extends
 
 	@Override
 	public ESPrimaryVersionSpec doRun(IProgressMonitor monitor)
-		throws EMFStoreException {
+		throws ESException {
 		ESRangeQuery query = ESHistoryQuery.FACTORY.rangeQuery(
 			projectSpace.getBaseVersion(), 20, 0, false, false, false,
 			false);
@@ -122,7 +122,7 @@ public class UIUpdateProjectToVersionController extends
 						}
 					});
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 
 		}
 		return null;

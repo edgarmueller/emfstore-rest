@@ -30,7 +30,6 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -50,6 +49,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * This subinterfaces implements all history related functionality for the
@@ -81,7 +81,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 */
 	@EmfStoreMethod(MethodId.ADDTAG)
 	public void addTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EMFStoreException {
+		throws ESException {
 		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
@@ -103,7 +103,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 */
 	@EmfStoreMethod(MethodId.REMOVETAG)
 	public void removeTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EMFStoreException {
+		throws ESException {
 		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
@@ -125,7 +125,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.GETHISTORYINFO)
-	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery historyQuery) throws EMFStoreException {
+	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery historyQuery) throws ESException {
 		sanityCheckObjects(projectId, historyQuery);
 		synchronized (getMonitor()) {
 
@@ -148,7 +148,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 	}
 
-	private List<Version> handleRangeQuery(ProjectId projectId, RangeQuery query) throws EMFStoreException {
+	private List<Version> handleRangeQuery(ProjectId projectId, RangeQuery query) throws ESException {
 		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 		if (query.isIncludeAllVersions()) {
 			return getAllVersions(project, sourceNumber(query) - query.getLowerLimit(),
@@ -164,7 +164,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return new ArrayList<Version>(result);
 	}
 
-	private List<Version> handlePathQuery(ProjectId projectId, PathQuery query) throws EMFStoreException {
+	private List<Version> handlePathQuery(ProjectId projectId, PathQuery query) throws ESException {
 		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 		if (query.isIncludeAllVersions()) {
 			List<Version> result = getAllVersions(project, sourceNumber(query), targetNumber(query), false);
@@ -184,7 +184,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return result;
 	}
 
-	private List<HistoryInfo> handleMEQuery(ProjectId projectId, ModelElementQuery query) throws EMFStoreException {
+	private List<HistoryInfo> handleMEQuery(ProjectId projectId, ModelElementQuery query) throws ESException {
 		List<Version> inRange = handleRangeQuery(projectId, query);
 		// SortedSet<Version> relevantVersions = new TreeSet<Version>(new VersionComparator(false));
 		// for (ModelElementId id : query.getModelElements()) {
@@ -229,14 +229,14 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return result;
 	}
 
-	private int sourceNumber(HistoryQuery query) throws EMFStoreException {
+	private int sourceNumber(HistoryQuery query) throws ESException {
 		if (query.getSource() == null) {
 			throw new InvalidInputException();
 		}
 		return query.getSource().getIdentifier();
 	}
 
-	private int targetNumber(PathQuery query) throws EMFStoreException {
+	private int targetNumber(PathQuery query) throws ESException {
 		if (query.getTarget() == null) {
 			throw new InvalidInputException();
 		}
@@ -245,10 +245,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	/**
 	 * @return higher versions first
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	private List<Version> getAllVersions(ProjectHistory project, int from, int to, boolean tollerant)
-		throws EMFStoreException {
+		throws ESException {
 		if (to < from) {
 			return getAllVersions(project, to, from, tollerant);
 		}
@@ -360,7 +360,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private List<HistoryInfo> versionToHistoryInfo(ProjectId projectId, Collection<Version> versions, boolean includeCP)
-		throws EMFStoreException {
+		throws ESException {
 		ArrayList<HistoryInfo> result = new ArrayList<HistoryInfo>();
 		for (Version version : versions) {
 			result.add(createHistoryInfo(projectId, version, includeCP));
@@ -378,10 +378,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *            version
 	 * @param includeChangePackage
 	 * @return history info
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	private HistoryInfo createHistoryInfo(ProjectId projectId, Version version, boolean includeChangePackage)
-		throws EMFStoreException {
+		throws ESException {
 		HistoryInfo history = VersioningFactory.eINSTANCE.createHistoryInfo();
 		if (includeChangePackage && version.getChanges() != null) {
 			history.setChangePackage(ModelUtil.clone(version.getChanges()));
@@ -405,7 +405,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return history;
 	}
 
-	private void setTags(ProjectId projectId, Version version, HistoryInfo history) throws EMFStoreException {
+	private void setTags(ProjectId projectId, Version version, HistoryInfo history) throws ESException {
 		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
 		if (version.getPrimarySpec().equals(project.getLastVersion().getPrimarySpec())) {

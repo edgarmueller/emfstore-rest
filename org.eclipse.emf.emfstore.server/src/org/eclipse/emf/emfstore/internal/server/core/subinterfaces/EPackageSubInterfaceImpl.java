@@ -35,8 +35,8 @@ import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Subinterface for EPackage registration.
@@ -62,11 +62,11 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * Register and store the given EPackage.
 	 * 
 	 * @param ePackage the package
-	 * @throws EMFStoreException if registration storage fails
+	 * @throws ESException if registration storage fails
 	 * 
 	 */
 	@EmfStoreMethod(MethodId.REGISTEREPACKAGE)
-	public void registerEPackage(EPackage ePackage) throws EMFStoreException {
+	public void registerEPackage(EPackage ePackage) throws ESException {
 		synchronized (MonitorProvider.getInstance().getMonitor(E_PACKAGE_REGISTRATION)) {
 			List<EPackage> packages = EPackageHelper.getAllSubPackages(ePackage);
 			Set<EPackage> rmPackages = new LinkedHashSet<EPackage>();
@@ -85,7 +85,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			EPackageHelper.removeSubPackages(ePackage, rmPackages);
 
 			if (packages.isEmpty()) {
-				throw new EMFStoreException(
+				throw new ESException(
 					"Registration failed: Package(s) with supplied NsUris(s) is/are already registred!");
 
 			}
@@ -95,7 +95,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			try {
 				uriFileName = URLEncoder.encode(ePackage.getNsURI(), CommonUtil.getEncoding());
 			} catch (UnsupportedEncodingException e1) {
-				throw new EMFStoreException("Registration failed: Could not convert NsUri to filename!");
+				throw new ESException("Registration failed: Could not convert NsUri to filename!");
 			}
 			URI fileUri = URI.createFileURI(ServerConfiguration.getServerHome() + "dynamic-models/" + uriFileName
 				+ (uriFileName.endsWith(".ecore") ? "" : ".ecore"));
@@ -113,7 +113,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					// Ignore, as the referenced elements were either stored earlier or can still be
 					// stored later.
 				} else {
-					throw new EMFStoreException("Registration failed: Could not persist .ecore!", e);
+					throw new ESException("Registration failed: Could not persist .ecore!", e);
 				}
 			}
 			// Finally register EPackages in global EPackage-registry.

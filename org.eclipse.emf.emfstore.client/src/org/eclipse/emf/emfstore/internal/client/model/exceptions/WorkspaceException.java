@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Indicates that an exception occured in the workspace.
@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class WorkspaceException extends EMFStoreException {
+public class WorkspaceException extends ESException {
 
 	/**
 	 * Constructor.

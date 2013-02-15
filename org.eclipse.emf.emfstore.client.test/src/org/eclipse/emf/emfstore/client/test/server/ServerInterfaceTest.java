@@ -29,7 +29,6 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -39,6 +38,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.junit.Test;
 
@@ -52,10 +52,10 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Gets the list of all projects.
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	@Test
-	public void getProjectListTest() throws EMFStoreException {
+	public void getProjectListTest() throws ESException {
 		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
 	}
 
@@ -65,13 +65,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void getProjectTest() throws EMFStoreException {
+	public void getProjectTest() throws ESException {
 		ProjectSpace projectSpace2 = new EMFStoreCommandWithResult<ProjectSpace>() {
 
 			@Override
@@ -79,7 +79,7 @@ public class ServerInterfaceTest extends ServerTests {
 				try {
 					return getRemoteProject().checkout(TestSessionProvider.getInstance().getDefaultUsersession()
 						, new NullProgressMonitor());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					Assert.fail();
 					return null;
 				}
@@ -97,13 +97,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure.
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void createEmptyProjectTest() throws EMFStoreException {
+	public void createEmptyProjectTest() throws ESException {
 		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects().size());
 
 		new EMFStoreCommand() {
@@ -114,7 +114,7 @@ public class ServerInterfaceTest extends ServerTests {
 					.createLocalProject("createEmptyProjectAndDelete", "TestProject");
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					Assert.fail();
 				}
 			}
@@ -132,13 +132,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure.
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void shareProjectTest() throws EMFStoreException {
+	public void shareProjectTest() throws ESException {
 		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
 
 		ProjectSpace projectSpace2 = new EMFStoreCommandWithResult<ProjectSpace>() {
@@ -150,7 +150,7 @@ public class ServerInterfaceTest extends ServerTests {
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
 					return projectSpace;
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					Assert.fail();
 					return null;
 				}
@@ -168,15 +168,15 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 * @throws IOException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 * @throws IOException
 	 */
 	@Test
-	public void deleteProjectTest() throws EMFStoreException, IOException {
+	public void deleteProjectTest() throws ESException, IOException {
 
 		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects().size());
 
@@ -191,7 +191,7 @@ public class ServerInterfaceTest extends ServerTests {
 				}
 			}
 			assertTrue(true);
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			assertTrue(true);
 		}
 
@@ -204,13 +204,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure.
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void resolveVersionSpecTest() throws EMFStoreException {
+	public void resolveVersionSpecTest() throws ESException {
 
 		List<ESRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
 		NullProgressMonitor monitor = new NullProgressMonitor();
@@ -234,13 +234,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void createVersionTest() throws EMFStoreException {
+	public void createVersionTest() throws ESException {
 
 		PrimaryVersionSpec createdVersion = new EMFStoreCommandWithResult<PrimaryVersionSpec>() {
 			@Override
@@ -253,7 +253,7 @@ public class ServerInterfaceTest extends ServerTests {
 					return (PrimaryVersionSpec) getProjectSpace().commit(
 						SetupHelper.createLogMessage("bla", "blablba"), null, null);
 
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 
@@ -271,13 +271,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void getEmptyChangesTest() throws EMFStoreException {
+	public void getEmptyChangesTest() throws ESException {
 		List<ChangePackage> changes = getProjectSpace().getChanges(SetupHelper.createPrimaryVersionSpec(0),
 			getProjectVersion());
 		assertTrue(changes.size() == 0);
@@ -290,15 +290,15 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws SerializationException in case of failure
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 * @throws SerializationException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 * @throws SerializationException
 	 */
 	@Test
-	public void getChangesTest() throws EMFStoreException, SerializationException {
+	public void getChangesTest() throws ESException, SerializationException {
 
 		new EMFStoreCommand() {
 			@Override
@@ -325,7 +325,7 @@ public class ServerInterfaceTest extends ServerTests {
 					return (PrimaryVersionSpec) getProjectSpace().commit(
 						SetupHelper.createLogMessage("bla", "blablba"), null, null);
 
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 
@@ -351,13 +351,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void getHistoryInfoTest() throws EMFStoreException {
+	public void getHistoryInfoTest() throws ESException {
 		final String logMessage = "historyInfo";
 		PrimaryVersionSpec createdVersion = new EMFStoreCommandWithResult<PrimaryVersionSpec>() {
 			@Override
@@ -370,7 +370,7 @@ public class ServerInterfaceTest extends ServerTests {
 					return (PrimaryVersionSpec) getProjectSpace().commit(
 						SetupHelper.createLogMessage("bla", logMessage), null, null);
 
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 
@@ -388,10 +388,10 @@ public class ServerInterfaceTest extends ServerTests {
 	/**
 	 * Sets a tag on the head revision.
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	@Test
-	public void addTagTest() throws EMFStoreException {
+	public void addTagTest() throws ESException {
 		String tagName = "testValue";
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
@@ -417,13 +417,13 @@ public class ServerInterfaceTest extends ServerTests {
 	 * @throws EmfStoreException in case of failure.
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	@Test
-	public void removeTagTest() throws EMFStoreException {
+	public void removeTagTest() throws ESException {
 		String tagName = "testValue";
 
 		TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
@@ -451,12 +451,12 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	// @Test
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	/**
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
-	public void logOutTest() throws EMFStoreException {
+	public void logOutTest() throws ESException {
 
 		Assert.assertNotNull(getConnectionManager().resolveUser(getSessionId(), null));
 		getConnectionManager().logout(getSessionId());

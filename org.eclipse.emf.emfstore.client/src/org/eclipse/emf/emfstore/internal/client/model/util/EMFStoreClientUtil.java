@@ -10,15 +10,18 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.util;
 
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Utility class for EMFStore clients to ease connecting to the server.
@@ -131,10 +134,10 @@ public final class EMFStoreClientUtil {
 	 * @param serverPort server port
 	 * @param certificateAlias the certificateAlias (defaults to {@link KeyStoreManager.DEFAULT_CERTIFICATE})
 	 * @return true, if user name & password are right
-	 * @throws EMFStoreException Problem with the EMFStore Server
+	 * @throws ESException Problem with the EMFStore Server
 	 */
 	public static boolean dryLogin(String username, String password, String serverUrl, int serverPort,
-		String certificateAlias) throws EMFStoreException {
+		String certificateAlias) throws ESException {
 		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(createServerInfo(serverUrl, serverPort, certificateAlias));
 		usersession.setUsername(username);
@@ -145,5 +148,12 @@ public final class EMFStoreClientUtil {
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean areEqual(ESLocalProject projectA, ESLocalProject projectB) {
+		ProjectSpace projectSpaceA = (ProjectSpace) projectA;
+		ProjectSpace projectSpaceB = (ProjectSpace) projectB;
+
+		return ModelUtil.areEqual(projectSpaceA.getProject(), projectSpaceB.getProject());
 	}
 }

@@ -16,15 +16,15 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Test;
 
 public class SampleAPITest extends CoreServerTest {
 
 	@Test
-	public void createProject() throws EMFStoreException {
+	public void createProject() throws ESException {
 		final ProjectSpace ps = getProjectSpace();
 
 		new EMFStoreCommand() {
@@ -33,7 +33,7 @@ public class SampleAPITest extends CoreServerTest {
 				ps.getProject().addModelElement(createTestElement("Horst"));
 				try {
 					ps.shareProject(new NullProgressMonitor());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -62,7 +62,7 @@ public class SampleAPITest extends CoreServerTest {
 					testElement.setName("2");
 					getProjectSpace().commitToBranch(Versions.createBRANCH("test"), null, null, null);
 
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 				}
 			}
 		}.run(false);

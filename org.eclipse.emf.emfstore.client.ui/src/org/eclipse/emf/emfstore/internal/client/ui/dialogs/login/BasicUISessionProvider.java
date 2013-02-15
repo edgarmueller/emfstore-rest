@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledEx
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Display;
 
@@ -44,7 +44,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.SessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	@Override
-	public ESUsersession provideUsersession(ESServer server) throws EMFStoreException {
+	public ESUsersession provideUsersession(ESServer server) throws ESException {
 		if (server == null) {
 			Integer userInput = RunInUI.runWithResult(new Callable<Integer>() {
 				public Integer call() throws Exception {
@@ -77,9 +77,9 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	 * 
 	 * @param serverInfo given serverInfo
 	 * @return Usersession
-	 * @throws EMFStoreException in case of an exception
+	 * @throws ESException in case of an exception
 	 */
-	protected ESUsersession loginServerInfo(ESServer server) throws EMFStoreException {
+	protected ESUsersession loginServerInfo(ESServer server) throws ESException {
 		// TODO Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
 		// wanted.
 		if (server.getLastUsersession() != null && ((Usersession) server.getLastUsersession()).isLoggedIn()) {
@@ -89,7 +89,7 @@ public class BasicUISessionProvider extends AbstractSessionProvider {
 	}
 
 	@Override
-	public void login(ESUsersession usersession) throws EMFStoreException {
+	public void login(ESUsersession usersession) throws ESException {
 		if (usersession != null) {
 			new LoginDialogController().login((Usersession) usersession);
 		}

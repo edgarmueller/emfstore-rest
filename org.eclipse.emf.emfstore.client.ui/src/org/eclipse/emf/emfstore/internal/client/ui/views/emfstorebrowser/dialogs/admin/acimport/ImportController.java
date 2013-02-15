@@ -18,10 +18,10 @@ import java.util.List;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * @author deser, karakoc
@@ -69,7 +69,7 @@ public class ImportController {
 					if (null == existUser(username)) {
 						this.importedUnits.put(adminBroker.createUser(username), wrappedOrgUnit);
 					}
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					WorkspaceUtil.logWarning(e.getMessage(), e);
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
@@ -87,7 +87,7 @@ public class ImportController {
 					if (null == existGroup(groupname)) {
 						this.importedUnits.put(adminBroker.createGroup(groupname), wrappedOrgUnit);
 					}
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					WorkspaceUtil.logWarning(e.getMessage(), e);
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
@@ -106,7 +106,7 @@ public class ImportController {
 				if (existGroup != null && !existGroup.equals(unitId)) {
 					try {
 						adminBroker.addMember(existGroup, unitId);
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						WorkspaceUtil.logWarning(e.getMessage(), e);
 						EMFStoreMessageDialog.showExceptionDialog(e);
 					}
@@ -132,7 +132,7 @@ public class ImportController {
 					exist = gr.getId();
 				}
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return exist;
@@ -155,7 +155,7 @@ public class ImportController {
 					exist = us.getId();
 				}
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return exist;

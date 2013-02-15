@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.swt.dnd.DND;
@@ -63,7 +63,7 @@ public class UserComposite extends PropertiesComposite {
 	protected void removeOrgUnit(ACOrgUnit group) {
 		try {
 			getAdminBroker().removeGroup(user.getId(), ((ACGroup) group).getId());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -80,7 +80,7 @@ public class UserComposite extends PropertiesComposite {
 				getAdminBroker().addMember(((ACGroup) group).getId(), user.getId());
 
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -100,7 +100,7 @@ public class UserComposite extends PropertiesComposite {
 
 			}
 
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -130,7 +130,7 @@ public class UserComposite extends PropertiesComposite {
 					groups.add((ACGroup) result[i]);
 				}
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return groups;
@@ -243,7 +243,7 @@ public class UserComposite extends PropertiesComposite {
 				((Form) (this.getParent().getParent())).setText("User: " + getTxtName().getText());
 				orgUnitMgmtGUI.getActiveTabContent().getTableViewer().refresh();
 
-			} catch (EMFStoreException e) {
+			} catch (ESException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}

@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
@@ -67,7 +67,7 @@ public abstract class MonitoredEMFStoreAction<T> {
 				public void run(final IProgressMonitor monitor) {
 					try {
 						returnValue = doRun(monitor);
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						handleException(e);
 					}
 				}
@@ -94,7 +94,7 @@ public abstract class MonitoredEMFStoreAction<T> {
 		}
 		try {
 			returnValue = doRun(new SubProgressMonitor(monitor, 5, SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));//
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			handleException(e);
 		}
 
@@ -118,15 +118,15 @@ public abstract class MonitoredEMFStoreAction<T> {
 
 	/**
 	 * Generic exception handling method that is called in case {@link #doRun(IProgressMonitor)} throws an
-	 * {@link EMFStoreException}.<br/>
-	 * Clients may override this method if they want to treat all {@link EMFStoreException} equally. Otherwise they are
-	 * obliged to handle {@link EMFStoreException} in {@link #doRun(IProgressMonitor)}, if
+	 * {@link ESException}.<br/>
+	 * Clients may override this method if they want to treat all {@link ESException} equally. Otherwise they are
+	 * obliged to handle {@link ESException} in {@link #doRun(IProgressMonitor)}, if
 	 * possible.
 	 * 
 	 * @param e
 	 *            the exception that has been thrown
 	 */
-	protected abstract void handleException(EMFStoreException e);
+	protected abstract void handleException(ESException e);
 
 	/**
 	 * The actual behavior that should be performed when the {@link #execute()} is called.<br/>
@@ -137,10 +137,10 @@ public abstract class MonitoredEMFStoreAction<T> {
 	 *            update the status of their progress
 	 * @return an optional return value
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case an error occurs
 	 */
-	public abstract T doRun(IProgressMonitor monitor) throws EMFStoreException;
+	public abstract T doRun(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Whether this action runs in its own thread.

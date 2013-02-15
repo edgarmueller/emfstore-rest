@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * This class is responsible for keeping the workspace's project infos update to date.
@@ -54,7 +54,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	public void loginCompleted(ESUsersession session) {
 		try {
 			update(session);
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't project infos upon loginCompleted.", e);
 		}
@@ -70,7 +70,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	public void shareDone(ProjectSpace projectSpace) {
 		try {
 			update(projectSpace.getUsersession());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't project infos upon shareDone.", e);
 		}
@@ -79,13 +79,13 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	private void updateACUser(ESUsersession session) {
 		try {
 			((WorkspaceBase) workspace).updateACUser((Usersession) session);
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't update ACUser.", e);
 		}
 	}
 
-	private void update(final ESUsersession session) throws EMFStoreException {
+	private void update(final ESUsersession session) throws ESException {
 		RunInUI.WithException.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				// throw new NotImplementedException("TODO OTS");

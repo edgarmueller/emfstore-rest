@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Is thrown if an operation is cancleded.
@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
  * @author wesendon
  */
 @SuppressWarnings("serial")
-public class CancelOperationException extends EMFStoreException {
+public class CancelOperationException extends ESException {
 
 	/**
 	 * Constructor.

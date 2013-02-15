@@ -19,9 +19,9 @@ import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.wizard.AcUserImportAction;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -60,7 +60,7 @@ public class GroupTabContent extends TabContent implements IPropertyChangeListen
 			public void run() {
 				try {
 					getAdminBroker().createGroup("New Group");
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				getTableViewer().refresh();
@@ -83,7 +83,7 @@ public class GroupTabContent extends TabContent implements IPropertyChangeListen
 					}
 					try {
 						getAdminBroker().deleteGroup(ou.getId());
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						EMFStoreMessageDialog.showExceptionDialog(e);
 					}
 
@@ -147,7 +147,7 @@ public class GroupTabContent extends TabContent implements IPropertyChangeListen
 				List<ACGroup> groups = new ArrayList<ACGroup>();
 				try {
 					groups.addAll(getAdminBroker().getGroups());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				return groups.toArray(new ACGroup[groups.size()]);

@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.client.properties.EMFStorePropertiesOut
 import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,7 +33,7 @@ public class PropertiesTest extends TransmissionTests {
 	private static PropertyManager propertyManager2;
 
 	@Test
-	public void testSharedProperties() throws EMFStoreException {
+	public void testSharedProperties() throws ESException {
 
 		propertyManager1 = getProjectSpace1().getPropertyManager();
 		propertyManager2 = getProjectSpace2().getPropertyManager();
@@ -48,7 +48,7 @@ public class PropertiesTest extends TransmissionTests {
 					propertyManager1.synchronizeSharedProperties();
 					propertyManager2.synchronizeSharedProperties();
 					propertyManager1.synchronizeSharedProperties();
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				} catch (EMFStorePropertiesOutdatedException e) {
 					throw new RuntimeException(e);
@@ -79,7 +79,7 @@ public class PropertiesTest extends TransmissionTests {
 					propertyManager1.synchronizeSharedProperties();
 					propertyManager2.synchronizeSharedProperties();
 					propertyManager1.synchronizeSharedProperties();
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				} catch (EMFStorePropertiesOutdatedException e) {
 					throw new RuntimeException(e);
@@ -113,7 +113,7 @@ public class PropertiesTest extends TransmissionTests {
 				try {
 					propertyManager2.synchronizeSharedProperties();
 					junit.framework.Assert.fail();
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					junit.framework.Assert.fail();
 				} catch (EMFStorePropertiesOutdatedException e) {
 					junit.framework.Assert.assertEquals(1, e.getOutdatedProperties().size());

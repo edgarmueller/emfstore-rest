@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
@@ -83,10 +83,10 @@ public interface ICommitCallback {
 	 * 
 	 * @return whether the commit should be continued, {@code true}, if so, {@code false} otherwise
 	 * 
-	 * @throws EMFStoreException in case any error occurs during the execution of the checksum error handler
+	 * @throws ESException in case any error occurs during the execution of the checksum error handler
 	 */
 	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * <p>

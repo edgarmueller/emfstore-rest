@@ -26,11 +26,11 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
@@ -80,11 +80,11 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall#run()
 	 */
 	@Override
-	protected PrimaryVersionSpec run() throws EMFStoreException {
+	protected PrimaryVersionSpec run() throws ESException {
 		return doUpdate(version);
 	}
 
-	private PrimaryVersionSpec doUpdate(VersionSpec version) throws ChangeConflictException, EMFStoreException {
+	private PrimaryVersionSpec doUpdate(VersionSpec version) throws ChangeConflictException, ESException {
 		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
@@ -101,7 +101,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Fetching changes from server");
 		List<ChangePackage> changes = new UnknownEMFStoreWorkloadCommand<List<ChangePackage>>(getProgressMonitor()) {
 			@Override
-			public List<ChangePackage> run(IProgressMonitor monitor) throws EMFStoreException {
+			public List<ChangePackage> run(IProgressMonitor monitor) throws ESException {
 				return getConnectionManager().getChanges(getSessionId(), getLocalProject().getProjectId(),
 					getLocalProject().getBaseVersion(), resolvedVersion);
 			}

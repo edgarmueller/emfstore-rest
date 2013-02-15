@@ -17,11 +17,11 @@ import java.rmi.RemoteException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FilePartitionerUtil;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * File Download Job class is responsible for downloading files from the server in the Eclipse Worker thread.
@@ -62,7 +62,7 @@ public class FileDownloadJob extends FileTransferJob {
 			if (!executeTransfer(monitor)) {
 				return Status.CANCEL_STATUS;
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			return registerException(e);
 		} catch (IOException e) {
 			return registerException(e);
@@ -89,10 +89,10 @@ public class FileDownloadJob extends FileTransferJob {
 	/**
 	 * . {@inheritDoc}
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 * @throws RemoteException
 	 */
-	private boolean executeTransfer(IProgressMonitor monitor) throws RemoteException, EMFStoreException {
+	private boolean executeTransfer(IProgressMonitor monitor) throws RemoteException, ESException {
 
 		// download file chunk to retrieve filesize (file chunk is discarded)
 		FileChunk fileChunk = null;

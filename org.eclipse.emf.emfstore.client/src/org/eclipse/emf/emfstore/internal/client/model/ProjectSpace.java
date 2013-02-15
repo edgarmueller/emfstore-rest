@@ -27,7 +27,6 @@ import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -36,6 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'.
@@ -322,11 +322,11 @@ public interface ProjectSpace extends IdentifiableElement, ESLocalProject {
 	 *            the source version spec
 	 * @param targetVersion
 	 *            the target version spec
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
-	List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion) throws EMFStoreException;
+	List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion) throws ESException;
 
 	/**
 	 * Gets a file with a specific identifier. If the file is not cached
@@ -594,12 +594,12 @@ public interface ProjectSpace extends IdentifiableElement, ESLocalProject {
 	 * revision and the head revision are equal.
 	 * 
 	 * @return true, if the project is up to date, false otherwise
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if the head revision can not be resolved
 	 * 
 	 * @generated NOT
 	 */
-	boolean isUpdated() throws EMFStoreException;
+	boolean isUpdated() throws ESException;
 
 	/**
 	 * Will make the projectSpace transient, it will not make its content or
@@ -784,7 +784,7 @@ public interface ProjectSpace extends IdentifiableElement, ESLocalProject {
 
 	ProjectId getProjectId();
 
-	RemoteProject getRemoteProject() throws EMFStoreException;
+	RemoteProject getRemoteProject() throws ESException;
 
 	List<AbstractOperation> getOperations();
 

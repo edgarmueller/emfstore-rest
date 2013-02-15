@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 		try {
 			usersession.logout();
 			assertFalse(usersession.isLoggedIn());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -66,7 +66,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 			// we expect a copy to be returned
 			assertFalse(remoteProject.equals(remoteProjects.get(0)));
 			assertEquals(remoteProject.getProjectName(), remoteProjects.get(0).getProjectName());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -85,7 +85,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 			// we expect a copy to be returned
 			assertFalse(remoteProject.equals(remoteProjects.get(0)));
 			assertEquals(remoteProject.getProjectName(), remoteProjects.get(0).getProjectName());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -99,7 +99,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 			assertEquals(1, server.getRemoteProjects().size());
 			remoteProject.delete(new NullProgressMonitor());
 			assertEquals(0, server.getRemoteProjects().size());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -113,7 +113,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 			assertEquals(2, server.getRemoteProjects().size());
 			server.getRemoteProjects().add(project);
 			assertEquals(2, server.getRemoteProjects().size());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}

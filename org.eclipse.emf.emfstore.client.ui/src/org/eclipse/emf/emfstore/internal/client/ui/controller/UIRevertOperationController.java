@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -47,7 +47,7 @@ public class UIRevertOperationController extends AbstractEMFStoreUIController<Vo
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws ESException {
 
 		String message = "Do you really want to revert all your changes on project " + projectSpace.getProjectName()
 			+ "?";

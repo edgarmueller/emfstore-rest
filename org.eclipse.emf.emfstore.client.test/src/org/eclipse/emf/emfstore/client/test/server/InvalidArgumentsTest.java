@@ -20,7 +20,6 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.X
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -32,6 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,11 +46,11 @@ public class InvalidArgumentsTest extends ServerTests {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 * @throws IOException
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws EMFStoreException, IOException {
+	public static void setUpBeforeClass() throws ESException, IOException {
 		ServerConfiguration.setTesting(true);
 		CommonUtil.setTesting(true);
 
@@ -80,14 +80,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void deleteProjectTest() throws EMFStoreException {
+	public void deleteProjectTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("deleteProject",
 				new Class[] { SessionId.class, ProjectId.class, boolean.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -95,14 +95,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void createProjectTest() throws EMFStoreException {
+	public void createProjectTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("createEmptyProject",
 				new Class[] { SessionId.class, String.class, String.class, LogMessage.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -110,14 +110,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void createProject2Test() throws EMFStoreException {
+	public void createProject2Test() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("createProject",
 				new Class[] { SessionId.class, String.class, String.class, LogMessage.class, Project.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -125,16 +125,16 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void createVersionTest() throws EMFStoreException {
+	public void createVersionTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod(
 				"createVersion",
 				new Class[] { SessionId.class, ProjectId.class, PrimaryVersionSpec.class, ChangePackage.class,
 					BranchVersionSpec.class, PrimaryVersionSpec.class, LogMessage.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -142,14 +142,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void getChangesTest() throws EMFStoreException {
+	public void getChangesTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("getChanges",
 				new Class[] { SessionId.class, ProjectId.class, VersionSpec.class, VersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -157,14 +157,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void getHistoryInfoTest() throws EMFStoreException {
+	public void getHistoryInfoTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("getHistoryInfo",
 				new Class[] { SessionId.class, ProjectId.class, HistoryQuery.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -172,14 +172,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void getProjectTest() throws EMFStoreException {
+	public void getProjectTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("getProject",
 				new Class[] { SessionId.class, ProjectId.class, VersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -187,14 +187,14 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void addTagTest() throws EMFStoreException {
+	public void addTagTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("addTag",
 				new Class[] { SessionId.class, ProjectId.class, PrimaryVersionSpec.class, TagVersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
@@ -202,18 +202,18 @@ public class InvalidArgumentsTest extends ServerTests {
 	 * {@inheritDoc}
 	 */
 	@Test(expected = InvalidInputException.class)
-	public void removeTagTest() throws EMFStoreException {
+	public void removeTagTest() throws ESException {
 		try {
 			testAllInvalidCombinations(getConnectionManager().getClass().getMethod("removeTag",
 				new Class[] { SessionId.class, ProjectId.class, PrimaryVersionSpec.class, TagVersionSpec.class }));
 		} catch (SecurityException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		} catch (NoSuchMethodException e) {
-			throw new EMFStoreException(e);
+			throw new ESException(e);
 		}
 	}
 
-	private void testAllInvalidCombinations(Method method) throws EMFStoreException {
+	private void testAllInvalidCombinations(Method method) throws ESException {
 		int parameterLength = method.getParameterTypes().length;
 		Object[] parameters = new Object[parameterLength];
 		int combinations = (int) (Math.round(Math.pow(2, parameterLength)) - 1);
@@ -225,7 +225,7 @@ public class InvalidArgumentsTest extends ServerTests {
 		}
 	}
 
-	private void callMethod(Method method, Object[] parameters) throws EMFStoreException {
+	private void callMethod(Method method, Object[] parameters) throws ESException {
 		if (method.getParameterTypes().length != parameters.length) {
 			throw new AssertionError("parameter length not equal");
 		}
@@ -243,8 +243,8 @@ public class InvalidArgumentsTest extends ServerTests {
 			e.printStackTrace();
 			Assert.assertTrue(false);
 		} catch (InvocationTargetException e) {
-			if (e.getCause() instanceof EMFStoreException) {
-				throw (EMFStoreException) e.getCause();
+			if (e.getCause() instanceof ESException) {
+				throw (ESException) e.getCause();
 			}
 			Assert.assertTrue(false);
 		}

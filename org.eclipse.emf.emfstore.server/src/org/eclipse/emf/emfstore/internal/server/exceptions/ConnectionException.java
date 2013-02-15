@@ -10,13 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Represents a connection problem.
  * 
  * @author koegel
  */
 // MK: move to workspace
-public class ConnectionException extends EMFStoreException {
+public class ConnectionException extends ESException {
 
 	private static final long serialVersionUID = -2839606769454873809L;
 

@@ -26,11 +26,11 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
@@ -163,7 +163,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws EMFStoreException {
+	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
 		ESPrimaryVersionSpec version;
 		try {
 			version = projectSpace.commit(logMessage, UICommitProjectController.this, progressMonitor);
@@ -171,7 +171,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore
-		} catch (final EMFStoreException e) {
+		} catch (final ESException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
@@ -193,7 +193,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor monitor) throws EMFStoreException {
+		IProgressMonitor monitor) throws ESException {
 		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}

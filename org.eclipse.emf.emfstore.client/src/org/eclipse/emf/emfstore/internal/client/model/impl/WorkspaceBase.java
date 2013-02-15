@@ -51,7 +51,6 @@ import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment;
@@ -60,6 +59,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -104,10 +104,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ESBranchInfo> getBranches(ESServer serverInfo, final ESGlobalProjectId projectId) throws EMFStoreException {
+	public List<ESBranchInfo> getBranches(ESServer serverInfo, final ESGlobalProjectId projectId) throws ESException {
 		return new ServerCall<List<ESBranchInfo>>((ServerInfo) serverInfo) {
 			@Override
-			protected List<ESBranchInfo> run() throws EMFStoreException {
+			protected List<ESBranchInfo> run() throws ESException {
 				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
 				return (List<ESBranchInfo>) (List<?>) cm.getBranches(getSessionId(), (ProjectId) projectId);
 			};
@@ -115,7 +115,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	}
 
 	public ProjectInfo createEmptyRemoteProject(final ESUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor progressMonitor) throws EMFStoreException {
+		final String projectDescription, final IProgressMonitor progressMonitor) throws ESException {
 		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
 		final Usersession session = (Usersession) usersession;
@@ -126,7 +126,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 
 		new UnknownEMFStoreWorkloadCommand<ProjectInfo>(progressMonitor) {
 			@Override
-			public ProjectInfo run(IProgressMonitor monitor) throws EMFStoreException {
+			public ProjectInfo run(IProgressMonitor monitor) throws ESException {
 				return connectionManager.createEmptyProject(session.getSessionId(), projectName, projectDescription,
 					log);
 			}
@@ -169,10 +169,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(ESServer serverInfo, final String projectName,
-		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
+		final String projectDescription, final IProgressMonitor monitor) throws ESException {
 		return new ServerCall<ProjectInfo>((ServerInfo) serverInfo) {
 			@Override
-			protected ProjectInfo run() throws EMFStoreException {
+			protected ProjectInfo run() throws ESException {
 				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription, monitor);
 			}
 		}.execute();
@@ -186,10 +186,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      java.lang.String, java.lang.String)
 	 */
 	public ProjectInfo createRemoteProject(ESUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor monitor) throws EMFStoreException {
+		final String projectDescription, final IProgressMonitor monitor) throws ESException {
 		return new ServerCall<ProjectInfo>((Usersession) usersession) {
 			@Override
-			protected ProjectInfo run() throws EMFStoreException {
+			protected ProjectInfo run() throws ESException {
 				return createEmptyRemoteProject(getUsersession(), projectName, projectDescription, monitor);
 			}
 		}.execute();
@@ -198,12 +198,12 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#deleteProjectSpace(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	// TODO: OTS: move to ProjectSpaceBase
-	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException, EMFStoreException {
+	public void deleteProjectSpace(ProjectSpace projectSpace) throws IOException, ESException {
 
 		assert (projectSpace != null);
 
@@ -270,10 +270,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
-	public void updateACUser(ServerInfo serverInfo) throws EMFStoreException {
+	public void updateACUser(ServerInfo serverInfo) throws ESException {
 		new ServerCall<Void>(serverInfo) {
 			@Override
-			protected Void run() throws EMFStoreException {
+			protected Void run() throws ESException {
 				getUsersession().setACUser(getConnectionManager().resolveUser(getSessionId(), null));
 				return null;
 			}
@@ -286,10 +286,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#updateACUser(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
-	public void updateACUser(Usersession usersession) throws EMFStoreException {
+	public void updateACUser(Usersession usersession) throws ESException {
 		new ServerCall<Void>(usersession) {
 			@Override
-			protected Void run() throws EMFStoreException {
+			protected Void run() throws ESException {
 				getUsersession().setACUser(getConnectionManager().resolveUser(getSessionId(), null));
 				return null;
 			}
@@ -418,10 +418,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public ESPrimaryVersionSpec resolveVersionSpec(final ESUsersession usersession, final ESVersionSpec versionSpec,
-		final ESGlobalProjectId projectId) throws EMFStoreException {
+		final ESGlobalProjectId projectId) throws ESException {
 		return new ServerCall<ESPrimaryVersionSpec>((Usersession) usersession) {
 			@Override
-			protected PrimaryVersionSpec run() throws EMFStoreException {
+			protected PrimaryVersionSpec run() throws ESException {
 				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 				return connectionManager.resolveVersionSpec(getSessionId(), (ProjectId) projectId,
 					(VersionSpec) versionSpec);
@@ -506,10 +506,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
-	public AdminBroker getAdminBroker(final ServerInfo serverInfo) throws EMFStoreException, AccessControlException {
+	public AdminBroker getAdminBroker(final ServerInfo serverInfo) throws ESException, AccessControlException {
 		return new ServerCall<AdminBroker>(serverInfo) {
 			@Override
-			protected AdminBroker run() throws EMFStoreException {
+			protected AdminBroker run() throws ESException {
 				return new AdminBrokerImpl(serverInfo, getSessionId());
 			}
 		}.execute();
@@ -521,10 +521,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getAdminBroker(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
-	public AdminBroker getAdminBroker(final Usersession usersession) throws EMFStoreException, AccessControlException {
+	public AdminBroker getAdminBroker(final Usersession usersession) throws ESException, AccessControlException {
 		return new ServerCall<AdminBroker>(usersession) {
 			@Override
-			protected AdminBroker run() throws EMFStoreException {
+			protected AdminBroker run() throws ESException {
 				return new AdminBrokerImpl(usersession.getServerInfo(), getSessionId());
 			}
 		}.execute();

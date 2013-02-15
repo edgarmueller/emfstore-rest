@@ -42,6 +42,7 @@ Export-Package: org.apache.xmlrpc,
  org.eclipse.emf.emfstore.internal.server.filetransfer,
  org.eclipse.emf.emfstore.internal.server.startup,
  org.eclipse.emf.emfstore.internal.server.storage,
- org.eclipse.emf.emfstore.server
+ org.eclipse.emf.emfstore.server,
+ org.eclipse.emf.emfstore.server.exceptions
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.commons.logging

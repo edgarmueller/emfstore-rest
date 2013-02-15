@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
@@ -36,6 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * An EMF store is responsible for storing projects, change management on
@@ -63,11 +63,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param sessionId
 	 *            the session id for authentication
 	 * @return a list of project infos for the projects the user can access
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
-	List<ProjectInfo> getProjectList(SessionId sessionId) throws EMFStoreException;
+	List<ProjectInfo> getProjectList(SessionId sessionId) throws ESException;
 
 	/**
 	 * Gets a project in a certain revision from the server. Depending on your
@@ -82,11 +82,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param versionSpec
 	 *            the version to get
 	 * @return a project in the specified revision
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
-	Project getProject(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec) throws EMFStoreException;
+	Project getProject(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec) throws ESException;
 
 	/**
 	 * Create a new version on the server of the given project.
@@ -112,13 +112,13 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @throws InvalidVersionSpecException
 	 *             if the base version is not equal to the current head
 	 *             revision.
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
 	PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec baseVersionSpec,
 		ChangePackage changePackage, BranchVersionSpec targetBranch, PrimaryVersionSpec sourceVersion,
-		LogMessage logMessage) throws EMFStoreException, InvalidVersionSpecException;
+		LogMessage logMessage) throws ESException, InvalidVersionSpecException;
 
 	/**
 	 * Resolve a version specified to a primary version specifier.
@@ -130,12 +130,12 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param projectId
 	 *            the project id
 	 * @return a primary version specifier identifing the same version
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
 	PrimaryVersionSpec resolveVersionSpec(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Get changes from the server.
@@ -150,12 +150,12 @@ public interface EMFStore extends EMFStoreInterface {
 	 *            the target version specifier
 	 * @return a list of change packages from source to target representing the
 	 *         changes that happened between the two versions.
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
 	List<ChangePackage> getChanges(SessionId sessionId, ProjectId projectId, VersionSpec source, VersionSpec target)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Lista all branches of the given project.
@@ -165,10 +165,10 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param projectId
 	 *            the project id
 	 * @return list of {@link BranchInfo}
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case of an error
 	 */
-	List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EMFStoreException;
+	List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws ESException;
 
 	/**
 	 * Get history information from the server. The list returned will describe
@@ -181,12 +181,12 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param historyQuery
 	 *            the historyQuery
 	 * @return list of history information
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
 	List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Adds a tag to a version of the specified project.
@@ -199,11 +199,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 *            the version versionSpec
 	 * @param tag
 	 *            the tag
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 */
 	void addTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Removes a tag to a version of the specified project.
@@ -216,11 +216,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 *            the version versionSpec
 	 * @param tag
 	 *            the tags
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 */
 	void removeTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Create a new project on the server.
@@ -234,12 +234,12 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param logMessage
 	 *            the logMessage
 	 * @return a {@link ProjectInfo} for the new project
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
 	ProjectInfo createEmptyProject(SessionId sessionId, String name, String description, LogMessage logMessage)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Create a new project on the server. This createProject method allows to
@@ -256,12 +256,12 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param project
 	 *            the initial project state
 	 * @return a {@link ProjectInfo} for the new project
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
 	ProjectInfo createProject(SessionId sessionId, String name, String description, LogMessage logMessage,
-		Project project) throws EMFStoreException;
+		Project project) throws ESException;
 
 	/**
 	 * Deletes a project on the server. It's possible to delete the project from
@@ -273,10 +273,10 @@ public interface EMFStore extends EMFStoreInterface {
 	 *            the project id
 	 * @param deleteFiles
 	 *            if true, the project files will be deleted too
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case of failure
 	 */
-	void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws EMFStoreException;
+	void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws ESException;
 
 	/**
 	 * Resolves a user by id and returns an ACUser with all roles on the server.
@@ -289,10 +289,10 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param id
 	 *            user id, can be null, then requesting user gets resolved
 	 * @return ACuser with all roles on the server
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 */
-	ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws EMFStoreException;
+	ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws ESException;
 
 	/**
 	 * Imports a project history to the server. The project history elements
@@ -305,10 +305,10 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param projectHistory
 	 *            project history
 	 * @return projectId
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case of failure
 	 */
-	ProjectId importProjectHistoryToServer(SessionId sessionId, ProjectHistory projectHistory) throws EMFStoreException;
+	ProjectId importProjectHistoryToServer(SessionId sessionId, ProjectHistory projectHistory) throws ESException;
 
 	/**
 	 * Exports a given project history from the server. Caution if you try to
@@ -319,10 +319,10 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param projectId
 	 *            project id
 	 * @return a projecthistory
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case of failure
 	 */
-	ProjectHistory exportProjectHistoryFromServer(SessionId sessionId, ProjectId projectId) throws EMFStoreException;
+	ProjectHistory exportProjectHistoryFromServer(SessionId sessionId, ProjectId projectId) throws ESException;
 
 	/**
 	 * Uploads a file chunk to the server.
@@ -334,11 +334,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param fileChunk
 	 *            file chunk
 	 * @return FileVersion denoting the current file version to be written to
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error occurs in the EmfStore
 	 */
 	FileTransferInformation uploadFileChunk(SessionId sessionId, ProjectId projectId, FileChunk fileChunk)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Downloads a file chunk from the server.
@@ -350,11 +350,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param fileInformation
 	 *            file information
 	 * @return FileChunk
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error occurs in the EmfStore
 	 */
 	FileChunk downloadFileChunk(SessionId sessionId, ProjectId projectId, FileTransferInformation fileInformation)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * @param sessionId
@@ -365,11 +365,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 *            the respective user
 	 * @param projectId
 	 *            the project id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error occurs in the EmfStore
 	 */
 	void transmitProperty(SessionId sessionId, OrgUnitProperty changedProperty, ACUser tmpUser, ProjectId projectId)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Store EMFProperties on the server.
@@ -382,11 +382,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 *            the project id
 	 * @return a list of properties which have not been set on the server due
 	 *         there were more recent versions of these properties on the server
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error occurs in the EmfStore
 	 * */
 	List<EMFStoreProperty> setEMFProperties(SessionId sessionId, List<EMFStoreProperty> property, ProjectId projectId)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Get stored EMFStoreProperties from the server.
@@ -398,11 +398,11 @@ public interface EMFStore extends EMFStoreInterface {
 	 * 
 	 * @return list of EMFStoreProperties
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error occurs in the EmfStore
 	 * 
 	 * **/
-	List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EMFStoreException;
+	List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws ESException;
 
 	/**
 	 * Register a new EPackage.
@@ -412,9 +412,9 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param pkg
 	 *            the EPackage to be registered
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if any error occurs in the EmfStore
 	 */
-	void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException;
+	void registerEPackage(SessionId sessionId, EPackage pkg) throws ESException;
 
 }

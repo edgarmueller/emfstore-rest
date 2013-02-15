@@ -14,11 +14,11 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * This subinterfaces implements all user related functionality for the
@@ -42,7 +42,7 @@ public class UserSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.RESOLVEUSER)
-	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws EMFStoreException {
+	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws ESException {
 		sanityCheckObjects(sessionId);
 		synchronized (getMonitor()) {
 			ACUser requestingUser = getAuthorizationControl().resolveUser(sessionId);

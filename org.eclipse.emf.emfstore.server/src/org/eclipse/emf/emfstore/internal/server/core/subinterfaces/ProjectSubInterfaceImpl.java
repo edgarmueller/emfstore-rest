@@ -25,7 +25,6 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterfac
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalEmfStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidProjectIdException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -42,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * This subinterfaces implements all project related functionality for the
@@ -74,10 +74,10 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param projectId
 	 *            project id
 	 * @return a project or throws exception
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if project couldn't be found
 	 */
-	protected ProjectHistory getProject(ProjectId projectId) throws EMFStoreException {
+	protected ProjectHistory getProject(ProjectId projectId) throws ESException {
 		ProjectHistory projectHistory = getProjectOrNull(projectId);
 		if (projectHistory != null) {
 			return projectHistory;
@@ -99,7 +99,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.GETPROJECT)
-	public Project getProject(ProjectId projectId, VersionSpec versionSpec) throws EMFStoreException {
+	public Project getProject(ProjectId projectId, VersionSpec versionSpec) throws ESException {
 		sanityCheckObjects(projectId, versionSpec);
 		synchronized (getMonitor()) {
 
@@ -114,7 +114,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected Project getProject(Version version) throws InvalidVersionSpecException, EMFStoreException {
+	protected Project getProject(Version version) throws InvalidVersionSpecException, ESException {
 		if (version.getProjectState() == null) {
 
 			// TODO BRANCH Review potential performance optimization by searching state in both directions
@@ -127,7 +127,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			if (currentVersion.getProjectState() == null) {
 				// TODO: nicer exception. Is this null check necessary anyway? (there were problems
 				// in past, because the xml files were inconsistent.
-				throw new EMFStoreException("Couldn't find project state.");
+				throw new ESException("Couldn't find project state.");
 			}
 			Project projectState = ModelUtil.clone(currentVersion.getProjectState());
 			Collections.reverse(versions);
@@ -142,11 +142,11 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 * @throws AccessControlException
 	 */
 	@EmfStoreMethod(MethodId.GETPROJECTLIST)
-	public List<ProjectInfo> getProjectList(SessionId sessionId) throws EMFStoreException {
+	public List<ProjectInfo> getProjectList(SessionId sessionId) throws ESException {
 		synchronized (getMonitor()) {
 			List<ProjectInfo> result = new ArrayList<ProjectInfo>();
 			for (ProjectHistory projectHistory : getServerSpace().getProjects()) {
@@ -165,7 +165,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.CREATEEMPTYPROJECT)
-	public ProjectInfo createProject(String name, String description, LogMessage logMessage) throws EMFStoreException {
+	public ProjectInfo createProject(String name, String description, LogMessage logMessage) throws ESException {
 		sanityCheckObjects(name, description, logMessage);
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = null;
@@ -185,7 +185,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 */
 	@EmfStoreMethod(MethodId.CREATEPROJECT)
 	public ProjectInfo createProject(String name, String description, LogMessage logMessage, Project project)
-		throws EMFStoreException {
+		throws ESException {
 		sanityCheckObjects(name, description, logMessage, project);
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = null;
@@ -204,7 +204,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.DELETEPROJECT)
-	public void deleteProject(ProjectId projectId, boolean deleteFiles) throws EMFStoreException {
+	public void deleteProject(ProjectId projectId, boolean deleteFiles) throws ESException {
 		sanityCheckObjects(projectId);
 		deleteProject(projectId, deleteFiles, true);
 	}
@@ -219,11 +219,11 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *            boolean, whether to delete files in file system
 	 * @param throwInvalidIdException
 	 *            boolean
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case of failure
 	 */
 	protected void deleteProject(ProjectId projectId, boolean deleteFiles, boolean throwInvalidIdException)
-		throws EMFStoreException {
+		throws ESException {
 		synchronized (getMonitor()) {
 			try {
 				ProjectHistory project = getProject(projectId);
@@ -272,7 +272,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.IMPORTPROJECTHISTORYTOSERVER)
-	public ProjectId importProjectHistoryToServer(ProjectHistory projectHistory) throws EMFStoreException {
+	public ProjectId importProjectHistoryToServer(ProjectHistory projectHistory) throws ESException {
 		sanityCheckObjects(projectHistory);
 		synchronized (getMonitor()) {
 			ProjectHistory projectOrNull = getProjectOrNull(projectHistory.getProjectId());
@@ -310,7 +310,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.EXPORTPROJECTHISTORYFROMSERVER)
-	public ProjectHistory exportProjectHistoryFromServer(ProjectId projectId) throws EMFStoreException {
+	public ProjectHistory exportProjectHistoryFromServer(ProjectId projectId) throws ESException {
 		sanityCheckObjects(projectId);
 		synchronized (getMonitor()) {
 			return ModelUtil.clone(getProject(projectId));

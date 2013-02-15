@@ -23,8 +23,8 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IComm
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
@@ -54,9 +54,9 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
-	 * @throws EMFStoreException in case any error occurs during commit
+	 * @throws ESException in case any error occurs during commit
 	 */
-	ESPrimaryVersionSpec commit() throws EMFStoreException;
+	ESPrimaryVersionSpec commit() throws ESException;
 
 	/**
 	 * <p>
@@ -80,10 +80,10 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
-	 * @throws EMFStoreException in case any other error occurs during commit
+	 * @throws ESException in case any other error occurs during commit
 	 */
 	ESPrimaryVersionSpec commit(ESLogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
-		throws BaseVersionOutdatedException, EMFStoreException;
+		throws BaseVersionOutdatedException, ESException;
 
 	/**
 	 * <p>
@@ -110,10 +110,10 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * 
 	 * @throws InvalidVersionSpecException in case the given {@link ESBranchVersionSpec} could not be resolved
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
-	 * @throws EMFStoreException in case any other error occurs during commit
+	 * @throws ESException in case any other error occurs during commit
 	 */
 	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage, ICommitCallback callback,
-		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, EMFStoreException;
+		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, ESException;
 
 	/**
 	 * <p>
@@ -127,9 +127,9 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @return the new base version
 	 * 
 	 * @throws ChangeConflictException in case a conflict is detected on update
-	 * @throws EMFStoreException in case update fails for any other reason
+	 * @throws ESException in case update fails for any other reason
 	 */
-	ESPrimaryVersionSpec update() throws ChangeConflictException, EMFStoreException;
+	ESPrimaryVersionSpec update() throws ChangeConflictException, ESException;
 
 	/**
 	 * <p>
@@ -145,9 +145,9 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @return the new base version
 	 * 
 	 * @throws ChangeConflictException in case a conflict is detected on update
-	 * @throws EMFStoreException in case update fails for any other reason
+	 * @throws ESException in case update fails for any other reason
 	 */
-	ESPrimaryVersionSpec update(ESVersionSpec version) throws ChangeConflictException, EMFStoreException;
+	ESPrimaryVersionSpec update(ESVersionSpec version) throws ChangeConflictException, ESException;
 
 	/**
 	 * <p>
@@ -167,10 +167,10 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @return the new base version
 	 * 
 	 * @throws ChangeConflictException in case a conflict is detected on update
-	 * @throws EMFStoreException in case update fails for any other reason
+	 * @throws ESException in case update fails for any other reason
 	 */
 	ESPrimaryVersionSpec update(ESVersionSpec version, IUpdateCallback callback, IProgressMonitor monitor)
-		throws ChangeConflictException, EMFStoreException;
+		throws ChangeConflictException, ESException;
 
 	/**
 	 * Performs a merge in case of a conflict.
@@ -188,11 +188,11 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * 
 	 * @return true, if the merge was successful, false otherwise
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case an error occurs while merging the branch
 	 */
 	boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, IConflictResolver conflictResolver,
-		IUpdateCallback callback, IProgressMonitor monitor) throws EMFStoreException;
+		IUpdateCallback callback, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Allows to merge a version from another branch into the current project.
@@ -204,11 +204,11 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while merging the branch
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case an error occurs while merging the branch
 	 */
 	void mergeBranch(ESPrimaryVersionSpec branchSpec, IConflictResolver conflictResolver, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * <p>
@@ -221,10 +221,10 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while sharing the project
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case an error occurs while sharing the project
 	 */
-	void shareProject(IProgressMonitor monitor) throws EMFStoreException;
+	void shareProject(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Shares this project.
@@ -234,10 +234,10 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while sharing the project
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case an error occurs while sharing the project
 	 */
-	void shareProject(ESUsersession session, IProgressMonitor monitor) throws EMFStoreException;
+	void shareProject(ESUsersession session, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Whether this project has been shared.
@@ -294,12 +294,12 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * revision and the head revision are equal.
 	 * 
 	 * @return true, if the project is up to date, false otherwise
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if the head revision can not be resolved
 	 * 
 	 * @generated NOT
 	 */
-	boolean isUpdated() throws EMFStoreException;
+	boolean isUpdated() throws ESException;
 
 	/**
 	 * Revert all local changes in the project space. Returns the state of the
@@ -335,9 +335,9 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * 
 	 * @return the remote project this project is associated with
 	 * 
-	 * @throws EMFStoreException in case any error occurs while retrieving the remote project
+	 * @throws ESException in case any error occurs while retrieving the remote project
 	 */
-	ESRemoteProject getRemoteProject() throws EMFStoreException;
+	ESRemoteProject getRemoteProject() throws ESException;
 
 	/**
 	 * Returns a locally unique ID for the project. It is only unique within the same workspace and it is not the same

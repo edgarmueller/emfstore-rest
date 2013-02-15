@@ -25,9 +25,9 @@ import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImport
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Controller class for exporting a {@link ProjectHistory}.
@@ -137,7 +137,7 @@ public class ExportProjectHistoryController extends ServerCall<Void> implements 
 	}
 
 	@Override
-	protected Void run() throws EMFStoreException {
+	protected Void run() throws ESException {
 		projectHistory = WorkspaceProvider.getInstance().getConnectionManager()
 			.exportProjectHistoryFromServer(getSessionId(), projectInfo.getProjectId());
 		return null;

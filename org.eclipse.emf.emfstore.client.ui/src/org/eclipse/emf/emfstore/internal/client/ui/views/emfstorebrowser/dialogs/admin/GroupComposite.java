@@ -17,9 +17,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetAdapter;
@@ -69,7 +69,7 @@ public class GroupComposite extends PropertiesComposite {
 		try {
 			getAdminBroker().removeMember(group.getId(), orgUnit.getId());
 
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -86,7 +86,7 @@ public class GroupComposite extends PropertiesComposite {
 				try {
 					getAdminBroker().addMember(group.getId(), orgUnit.getId());
 
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 			}
@@ -106,7 +106,7 @@ public class GroupComposite extends PropertiesComposite {
 			try {
 				getAdminBroker().addMember(group.getId(), ou.getId());
 
-			} catch (EMFStoreException e) {
+			} catch (ESException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}
@@ -141,7 +141,7 @@ public class GroupComposite extends PropertiesComposite {
 					members.add((ACOrgUnit) result[i]);
 				}
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			// ZH Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -191,7 +191,7 @@ public class GroupComposite extends PropertiesComposite {
 				getAdminBroker().changeOrgUnit(group.getId(), getTxtName().getText(), getTxtDescription().getText());
 				((Form) (this.getParent().getParent())).setText("Group: " + getTxtName().getText());
 				orgUnitMgmtGUI.getActiveTabContent().getTableViewer().refresh();
-			} catch (EMFStoreException e) {
+			} catch (ESException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}

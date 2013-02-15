@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * If the login fails, this exception will be thrown. This is usually the case if the user
@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
  * @author Max Hohenegger
  */
 @SuppressWarnings("serial")
-public class LoginCanceledException extends EMFStoreException {
+public class LoginCanceledException extends ESException {
 
 	/**
 	 * Constructor.

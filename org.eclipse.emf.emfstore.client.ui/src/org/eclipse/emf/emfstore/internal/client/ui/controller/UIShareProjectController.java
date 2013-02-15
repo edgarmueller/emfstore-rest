@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledEx
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -53,7 +53,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(final IProgressMonitor progressMonitor) throws EMFStoreException {
+	public Void doRun(final IProgressMonitor progressMonitor) throws ESException {
 		try {
 			((ProjectSpaceImpl) projectSpace).shareProject(null, progressMonitor);
 			RunInUI.run(new Callable<Void>() {
@@ -65,7 +65,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 			});
 		} catch (LoginCanceledException e) {
 			// fail silently
-		} catch (final EMFStoreException e) {
+		} catch (final ESException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Share project failed", e.getMessage());

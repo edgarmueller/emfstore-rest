@@ -15,9 +15,9 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -53,7 +53,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws ESException {
 		String revision = "<unknown>";
 		ESPrimaryVersionSpec versionSpec;
 
@@ -62,7 +62,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 			versionSpec = new RemoteProject((ESServer) projectInfo.eContainer(), projectInfo)
 				.resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor());
 			revision = "" + versionSpec.getIdentifier();
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			// do nothing
 		}
 

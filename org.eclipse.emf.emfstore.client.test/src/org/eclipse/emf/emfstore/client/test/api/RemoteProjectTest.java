@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
@@ -56,7 +56,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -70,7 +70,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -84,7 +84,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -98,7 +98,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
@@ -109,27 +109,27 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		try {
 			List<? extends ESBranchInfo> branches = remoteProject.getBranches(new NullProgressMonitor());
 			assertEquals(1, branches.size());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			log(e);
 			fail(e.getMessage());
 		}
 	}
 
 	@Test
-	public void testGetHeadVersion() throws EMFStoreException {
+	public void testGetHeadVersion() throws ESException {
 		ESPrimaryVersionSpec versionSpec;
 		versionSpec = remoteProject.getHeadVersion(new NullProgressMonitor());
 		assertNotNull(versionSpec);
 	}
 
 	@Test
-	public void testGetHeadVersionFetch() throws EMFStoreException {
+	public void testGetHeadVersionFetch() throws ESException {
 		ESPrimaryVersionSpec versionSpec = remoteProject.getHeadVersion(new NullProgressMonitor());
 		assertNotNull(versionSpec);
 	}
 
 	@Test
-	public void testGetHistoryInfosSession() throws EMFStoreException {
+	public void testGetHistoryInfosSession() throws ESException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
 		List<? extends ESHistoryInfo> historyInfos = remoteProject.getHistoryInfos(
@@ -141,7 +141,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	}
 
 	@Test
-	public void testGetHistoryInfos() throws EMFStoreException {
+	public void testGetHistoryInfos() throws ESException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
 		List<? extends ESHistoryInfo> historyInfos = remoteProject.getHistoryInfos(ESHistoryQuery.FACTORY.pathQuery(
@@ -151,7 +151,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	}
 
 	@Test
-	public void testAddTag() throws EMFStoreException {
+	public void testAddTag() throws ESException {
 		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		;
@@ -160,8 +160,8 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 			remoteProject.resolveVersionSpec(tagSpec, new NullProgressMonitor()));
 	}
 
-	@Test(expected = EMFStoreException.class)
-	public void testRemoveTag() throws EMFStoreException {
+	@Test(expected = ESException.class)
+	public void testRemoveTag() throws ESException {
 		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
@@ -174,7 +174,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	}
 
 	@Test
-	public void testResolveVersion() throws EMFStoreException {
+	public void testResolveVersion() throws ESException {
 		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);
@@ -183,7 +183,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	}
 
 	@Test
-	public void testResolveVersionSession() throws EMFStoreException {
+	public void testResolveVersionSession() throws ESException {
 		ESTagVersionSpec tagSpec = ESVersionSpec.FACTORY.createTAG("MyTag", "trunk");
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		remoteProject.addTag(remoteProject.getHeadVersion(monitor), tagSpec, monitor);

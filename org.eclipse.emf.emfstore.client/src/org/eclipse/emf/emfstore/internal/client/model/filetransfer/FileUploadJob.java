@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FilePartitionerUtil;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * File Upload Job class is responsible for uploading files to the server in the Eclipse Worker thread.
@@ -56,7 +56,7 @@ public class FileUploadJob extends FileTransferJob {
 			if (!executeTransfer(monitor)) {
 				return Status.CANCEL_STATUS;
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			setException(e);
 			monitor.setCanceled(true);
 			monitor.done();
@@ -70,9 +70,9 @@ public class FileUploadJob extends FileTransferJob {
 	 * 
 	 * @param fileChunk file chunk
 	 * @param monitor showing the progress of the transfer.
-	 * @throws EMFStoreException if any error occurs in the emf store
+	 * @throws ESException if any error occurs in the emf store
 	 */
-	private boolean executeTransfer(IProgressMonitor monitor) throws EMFStoreException {
+	private boolean executeTransfer(IProgressMonitor monitor) throws ESException {
 		FileChunk fileChunk;
 		initializeMonitor(monitor);
 		long transmitted = 0;

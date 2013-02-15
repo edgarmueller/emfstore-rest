@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -63,11 +63,11 @@ public class PerformanceTest {
 	/**
 	 * Start server and gain sessionid.
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 * @throws IOException
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws EMFStoreException, IOException {
+	public static void setUpBeforeClass() throws ESException, IOException {
 		ServerTests.setUpBeforeClass();
 		memoryMeter = new MemoryMeter();
 		memoryMeter.start();
@@ -76,10 +76,10 @@ public class PerformanceTest {
 	/**
 	 * Overrides parent implementation.
 	 * 
-	 * @throws EMFStoreException in case of failure
+	 * @throws ESException in case of failure
 	 */
 	@Before
-	public void beforeTest() throws EMFStoreException {
+	public void beforeTest() throws ESException {
 		setupHelper = new SetupHelper(modelKey, 10000, lastSeed);
 		setupHelper.setupWorkSpace();
 		setupHelper.generateRandomProject();
@@ -94,7 +94,7 @@ public class PerformanceTest {
 	}
 
 	@AfterClass
-	public static void finish() throws EMFStoreException, IOException {
+	public static void finish() throws ESException, IOException {
 		memoryMeter.finish();
 		ServerTests.tearDownAfterClass();
 	}
@@ -105,11 +105,11 @@ public class PerformanceTest {
 	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
-	 * @throws EMFStoreException in case of failure.
+	 * @throws ESException in case of failure.
 	 * @throws IOException
 	 */
 	@Test
-	public void shareProjectTest() throws EMFStoreException, IOException {
+	public void shareProjectTest() throws ESException, IOException {
 
 		new EMFStoreCommand() {
 			@Override
@@ -136,7 +136,7 @@ public class PerformanceTest {
 							usersession.logIn();
 						}
 						projectSpace.shareProject(usersession, null);
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						fail();
 					}
 				}
@@ -161,7 +161,7 @@ public class PerformanceTest {
 					try {
 						WorkspaceProvider.getInstance().getConnectionManager()
 							.deleteProject(usersession.getSessionId(), projectSpace.getProjectId(), true);
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						e.printStackTrace();
 					}
 				}
@@ -179,10 +179,10 @@ public class PerformanceTest {
 	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
-	 * @throws EMFStoreException in case of failure.
+	 * @throws ESException in case of failure.
 	 */
 	@Test
-	public void checkoutProjectTest() throws EMFStoreException {
+	public void checkoutProjectTest() throws ESException {
 
 		final ProjectSpace projectSpace = setupHelper.getTestProjectSpace();
 		long memAfterThreshold = 0;
@@ -198,7 +198,7 @@ public class PerformanceTest {
 						// TODO: OTS cast
 						projectSpace2 = projectSpace.getRemoteProject().checkout(setupHelper.getUsersession(),
 							new NullProgressMonitor());
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						e.printStackTrace();
 					}
 				}
@@ -223,7 +223,7 @@ public class PerformanceTest {
 						projectSpace2 = null;
 					} catch (IOException e) {
 						e.printStackTrace();
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						e.printStackTrace();
 					}
 				}
@@ -238,7 +238,7 @@ public class PerformanceTest {
 				try {
 					WorkspaceProvider.getInstance().getConnectionManager()
 						.deleteProject(setupHelper.getUsersession().getSessionId(), projectSpace.getProjectId(), true);
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					e.printStackTrace();
 				} finally {
 					SetupHelper.cleanupServer();
@@ -256,10 +256,10 @@ public class PerformanceTest {
 	 * @see org.EMFStore.emfstore.EmfStore#createProject(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      String, String, org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage, Project)
 	 * @see org.EMFStore.emfstore.EmfStore#getProjectList(org.eclipse.emf.emfstore.internal.server.model.SessionId)
-	 * @throws EMFStoreException in case of failure.
+	 * @throws ESException in case of failure.
 	 */
 	@Test
-	public void commitAndUpdateProjectTest() throws EMFStoreException {
+	public void commitAndUpdateProjectTest() throws ESException {
 
 		final SetupHelper setupHelper2 = new SetupHelper((String) null);
 		setupHelper2.setupWorkSpace();
@@ -273,7 +273,7 @@ public class PerformanceTest {
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
 					projectSpace2 = setupHelper.getTestProjectSpace().getRemoteProject()
 						.checkout(usersession2, new NullProgressMonitor());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					e.printStackTrace();
 				}
 			}
@@ -311,7 +311,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						projectSpace1.update();
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						e.printStackTrace();
 					}
 				}
@@ -324,7 +324,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						projectSpace1.commit(null, null, null);
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						fail();
 					}
 				}
@@ -349,7 +349,7 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						projectSpace2.update();
-					} catch (EMFStoreException e) {
+					} catch (ESException e) {
 						e.printStackTrace();
 					}
 				}

@@ -16,24 +16,24 @@ import static org.junit.Assert.assertEquals;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.Test;
 
 public class VersionSpecTests extends CoreServerTest {
 
 	@Test
-	public void resolvePrimary() throws EMFStoreException {
+	public void resolvePrimary() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(versions[5], new NullProgressMonitor()));
 	}
 
 	@Test
-	public void resolveNearestPrimary() throws EMFStoreException {
+	public void resolveNearestPrimary() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5],
@@ -41,7 +41,7 @@ public class VersionSpecTests extends CoreServerTest {
 	}
 
 	@Test
-	public void resolvePrimaryGlobal() throws EMFStoreException {
+	public void resolvePrimaryGlobal() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5],
@@ -49,28 +49,28 @@ public class VersionSpecTests extends CoreServerTest {
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
-	public void resolvePrimaryInvalid() throws EMFStoreException {
+	public void resolvePrimaryInvalid() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		history.resolveVersionSpec(Versions.createPRIMARY("foo", 5), new NullProgressMonitor());
 	}
 
 	@Test
-	public void resolveLocalHead() throws EMFStoreException {
+	public void resolveLocalHead() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(Versions.createHEAD("b2"), new NullProgressMonitor()));
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
-	public void resolveIllegalHead() throws EMFStoreException {
+	public void resolveIllegalHead() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		history.resolveVersionSpec(Versions.createHEAD("foobar"), new NullProgressMonitor());
 	}
 
 	@Test
-	public void resolveGlobalHead() throws EMFStoreException {
+	public void resolveGlobalHead() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[7],
@@ -78,14 +78,14 @@ public class VersionSpecTests extends CoreServerTest {
 	}
 
 	@Test
-	public void resolveBranch() throws EMFStoreException {
+	public void resolveBranch() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		assertEquals(versions[5], history.resolveVersionSpec(Versions.createBRANCH("b2"), new NullProgressMonitor()));
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
-	public void resolveIllegalBranch() throws EMFStoreException {
+	public void resolveIllegalBranch() throws ESException {
 		ProjectSpace history = createHistory(this);
 
 		history.resolveVersionSpec(Versions.createBRANCH("foobar"), new NullProgressMonitor());

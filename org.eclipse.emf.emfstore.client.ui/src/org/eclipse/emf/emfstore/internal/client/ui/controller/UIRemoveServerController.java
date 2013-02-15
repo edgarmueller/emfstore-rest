@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -57,7 +57,7 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor monitor) throws ESException {
 
 		boolean shouldDelete = MessageDialog.openQuestion(getShell(), "Confirm deletion",
 			String.format("Are you sure you want to delete the server \'%s\'", serverInfo.getName()));

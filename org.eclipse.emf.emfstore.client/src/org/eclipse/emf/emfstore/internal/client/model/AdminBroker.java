@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.client.model;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
@@ -21,6 +20,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Interface for administrative services of the EMFStore. The Adminbroker
@@ -37,40 +37,40 @@ public interface AdminBroker {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getProjectInfos(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @return list of project infos
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	List<ProjectInfo> getProjectInfos() throws EMFStoreException;
+	List<ProjectInfo> getProjectInfos() throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getGroups(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @return list of groups
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	List<ACGroup> getGroups() throws EMFStoreException;
+	List<ACGroup> getGroups() throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getUsers(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 * @return list of users
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	List<ACUser> getUsers() throws EMFStoreException;
+	List<ACUser> getUsers() throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getOrgUnits(org.eclipse.emf.emfstore.internal.server.model.SessionId)}
 	 * 
 	 * @return list of orgUnits
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	List<ACOrgUnit> getOrgUnits() throws EMFStoreException;
+	List<ACOrgUnit> getOrgUnits() throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -80,10 +80,10 @@ public interface AdminBroker {
 	 * @param name
 	 *            new name
 	 * @return ACOrgUnitId
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	ACOrgUnitId createGroup(String name) throws EMFStoreException;
+	ACOrgUnitId createGroup(String name) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -92,10 +92,10 @@ public interface AdminBroker {
 	 *      ACOrgUnitId)
 	 * @param group
 	 *            orgUnit id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void deleteGroup(ACOrgUnitId group) throws EMFStoreException;
+	void deleteGroup(ACOrgUnitId group) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -105,10 +105,10 @@ public interface AdminBroker {
 	 * @param user
 	 *            orgUnit id
 	 * @return list of groups
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	List<ACGroup> getGroups(ACOrgUnitId user) throws EMFStoreException;
+	List<ACGroup> getGroups(ACOrgUnitId user) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -119,10 +119,10 @@ public interface AdminBroker {
 	 *            orgUnit id
 	 * @param group
 	 *            group id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void removeGroup(ACOrgUnitId user, ACOrgUnitId group) throws EMFStoreException;
+	void removeGroup(ACOrgUnitId user, ACOrgUnitId group) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -132,10 +132,10 @@ public interface AdminBroker {
 	 * @param name
 	 *            user's name
 	 * @return ACOrgUnitId
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	ACOrgUnitId createUser(String name) throws EMFStoreException;
+	ACOrgUnitId createUser(String name) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -144,10 +144,10 @@ public interface AdminBroker {
 	 *      ACOrgUnitId)
 	 * @param user
 	 *            user id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void deleteUser(ACOrgUnitId user) throws EMFStoreException;
+	void deleteUser(ACOrgUnitId user) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -157,10 +157,10 @@ public interface AdminBroker {
 	 * @param groupId
 	 *            group id
 	 * @return list of members
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	List<ACOrgUnit> getMembers(ACOrgUnitId groupId) throws EMFStoreException;
+	List<ACOrgUnit> getMembers(ACOrgUnitId groupId) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -170,10 +170,10 @@ public interface AdminBroker {
 	 * @param orgUnitId
 	 *            orgUnit id
 	 * @return orgUnit
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws EMFStoreException;
+	ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -184,10 +184,10 @@ public interface AdminBroker {
 	 *            group id
 	 * @param member
 	 *            member id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void addMember(ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException;
+	void addMember(ACOrgUnitId group, ACOrgUnitId member) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -198,10 +198,10 @@ public interface AdminBroker {
 	 *            group id
 	 * @param member
 	 *            member id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void removeMember(ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException;
+	void removeMember(ACOrgUnitId group, ACOrgUnitId member) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -214,10 +214,10 @@ public interface AdminBroker {
 	 *            new name
 	 * @param description
 	 *            new description
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void changeOrgUnit(ACOrgUnitId orgUnitId, String name, String description) throws EMFStoreException;
+	void changeOrgUnit(ACOrgUnitId orgUnitId, String name, String description) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -227,10 +227,10 @@ public interface AdminBroker {
 	 * @param projectId
 	 *            project id
 	 * @return list of participating orgUnits
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	List<ACOrgUnit> getParticipants(ProjectId projectId) throws EMFStoreException;
+	List<ACOrgUnit> getParticipants(ProjectId projectId) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -241,10 +241,10 @@ public interface AdminBroker {
 	 *            project id
 	 * @param participant
 	 *            orgUnit id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException;
+	void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -255,10 +255,10 @@ public interface AdminBroker {
 	 *            project id
 	 * @param participant
 	 *            orgUnit id
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void removeParticipant(ProjectId projectId, ACOrgUnitId participant) throws EMFStoreException;
+	void removeParticipant(ProjectId projectId, ACOrgUnitId participant) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -270,10 +270,10 @@ public interface AdminBroker {
 	 * @param orgUnit
 	 *            orgUnit id
 	 * @return the role
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	Role getRole(ProjectId projectId, ACOrgUnitId orgUnit) throws EMFStoreException;
+	Role getRole(ProjectId projectId, ACOrgUnitId orgUnit) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -286,9 +286,9 @@ public interface AdminBroker {
 	 *            the orgUnit id
 	 * @param role
 	 *            new role
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void changeRole(ProjectId projectId, ACOrgUnitId orgUnit, EClass role) throws EMFStoreException;
+	void changeRole(ProjectId projectId, ACOrgUnitId orgUnit, EClass role) throws ESException;
 
 }

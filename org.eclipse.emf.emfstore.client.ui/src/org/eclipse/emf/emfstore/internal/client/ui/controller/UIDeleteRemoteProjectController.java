@@ -20,8 +20,8 @@ import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -104,7 +104,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor monitor) throws ESException {
 
 		try {
 
@@ -116,7 +116,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 				return null;
 			}
 
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			String msg;
 			if (remoteProject != null) {
 				msg = "Deletion of project " + remoteProject.getProjectName() + " failed: ";
@@ -130,7 +130,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	}
 
 	private void deleteRemoteProject(ESServer server, ProjectInfo projectInfo, ESUsersession session,
-		IProgressMonitor monitor) throws EMFStoreException {
+		IProgressMonitor monitor) throws ESException {
 		if (confirm("Confirmation",
 			MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {
 			if (session != null) {
@@ -142,7 +142,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	}
 
 	private void deleteRemoteProject(ESRemoteProject remoteProject, ESUsersession session, IProgressMonitor monitor)
-		throws EMFStoreException {
+		throws ESException {
 		if (confirm(
 			"Confirmation",
 			MessageFormat.format("Do you really want to delete the remote project {0}?", remoteProject.getProjectName()))) {

@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESSessionId;
 
 /**
@@ -58,17 +58,17 @@ public interface ESUsersession {
 	/**
 	 * Relogins into the server using the same credentials in order to update the {@link ESSessionId}.
 	 * 
-	 * @throws EMFStoreException in case renewal of the session failed
+	 * @throws ESException in case renewal of the session failed
 	 */
 	// TODO: mention how long an user session valid
-	void renew() throws EMFStoreException;
+	void renew() throws ESException;
 
 	/**
 	 * Logs out the user session.
 	 * 
-	 * @throws EMFStoreException in case an error occurred during logout
+	 * @throws ESException in case an error occurred during logout
 	 */
-	void logout() throws EMFStoreException;
+	void logout() throws ESException;
 
 	/**
 	 * Returns the session id of this session.

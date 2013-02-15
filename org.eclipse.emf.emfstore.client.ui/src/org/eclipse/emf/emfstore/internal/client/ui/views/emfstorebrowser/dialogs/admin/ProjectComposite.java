@@ -17,11 +17,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesPackage;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -80,7 +80,7 @@ public class ProjectComposite extends PropertiesComposite {
 	protected void removeOrgUnit(ACOrgUnit orgUnit) {
 		try {
 			getAdminBroker().removeParticipant(projectInfo.getProjectId(), orgUnit.getId());
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -95,7 +95,7 @@ public class ProjectComposite extends PropertiesComposite {
 			if (participant != null) {
 				getAdminBroker().addParticipant(projectInfo.getProjectId(), participant.getId());
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -114,7 +114,7 @@ public class ProjectComposite extends PropertiesComposite {
 
 			}
 
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -147,7 +147,7 @@ public class ProjectComposite extends PropertiesComposite {
 					participants.add((ACOrgUnit) result[i]);
 				}
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 
@@ -260,7 +260,7 @@ public class ProjectComposite extends PropertiesComposite {
 				break;
 
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -324,7 +324,7 @@ public class ProjectComposite extends PropertiesComposite {
 			} else if (role.eClass().equals(RolesPackage.eINSTANCE.getServerAdmin())) {
 				result = SERVER_ADMIN_ROLE;
 			}
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return result;

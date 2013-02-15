@@ -18,7 +18,6 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.Abstract
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcAdminConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
@@ -27,6 +26,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * connection manager for adminemfstore.
@@ -48,7 +48,7 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	/**
 	 * {@inheritDoc}
 	 */
-	public void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
+	public void addMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws ESException {
 		getConnectionProxy(sessionId).call("addMember", sessionId, group, member);
 	}
 
@@ -56,7 +56,7 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	 * {@inheritDoc}
 	 */
 	public void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
-		throws EMFStoreException {
+		throws ESException {
 		getConnectionProxy(sessionId).call("addParticipant", sessionId, projectId, participant);
 	}
 
@@ -64,7 +64,7 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	 * {@inheritDoc}
 	 */
 	public void changeOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId, String name, String description)
-		throws EMFStoreException {
+		throws ESException {
 		getConnectionProxy(sessionId).call("changeOrgUnit", sessionId, orgUnitId, name, description);
 	}
 
@@ -72,77 +72,77 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	 * {@inheritDoc}
 	 */
 	public void changeRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit, EClass role)
-		throws EMFStoreException {
+		throws ESException {
 		getConnectionProxy(sessionId).call("changeRole", sessionId, projectId, orgUnit, role);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnitId createGroup(SessionId sessionId, String name) throws EMFStoreException {
+	public ACOrgUnitId createGroup(SessionId sessionId, String name) throws ESException {
 		return getConnectionProxy(sessionId).callWithResult("createGroup", ACOrgUnitId.class, sessionId, name);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnitId createUser(SessionId sessionId, String name) throws EMFStoreException {
+	public ACOrgUnitId createUser(SessionId sessionId, String name) throws ESException {
 		return getConnectionProxy(sessionId).callWithResult("createUser", ACOrgUnitId.class, sessionId, name);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws EMFStoreException {
+	public void deleteGroup(SessionId sessionId, ACOrgUnitId group) throws ESException {
 		getConnectionProxy(sessionId).call("deleteGroup", sessionId, group);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteUser(SessionId sessionId, ACOrgUnitId user) throws EMFStoreException {
+	public void deleteUser(SessionId sessionId, ACOrgUnitId user) throws ESException {
 		getConnectionProxy(sessionId).call("deleteUser", sessionId, user);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACGroup> getGroups(SessionId sessionId) throws EMFStoreException {
+	public List<ACGroup> getGroups(SessionId sessionId) throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getGroups", ACGroup.class, sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId user) throws EMFStoreException {
+	public List<ACGroup> getGroups(SessionId sessionId, ACOrgUnitId user) throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getGroups", ACGroup.class, sessionId, user);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws EMFStoreException {
+	public List<ACOrgUnit> getMembers(SessionId sessionId, ACOrgUnitId groupId) throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getMembers", ACOrgUnit.class, sessionId, groupId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws EMFStoreException {
+	public ACOrgUnit getOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws ESException {
 		return getConnectionProxy(sessionId).callWithResult("getOrgUnit", ACOrgUnit.class, sessionId, orgUnitId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws EMFStoreException {
+	public List<ACOrgUnit> getOrgUnits(SessionId sessionId) throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getOrgUnits", ACOrgUnit.class, sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
+	public List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getParticipants", ACOrgUnit.class, sessionId,
 			projectId);
 	}
@@ -150,35 +150,35 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ProjectInfo> getProjectInfos(SessionId sessionId) throws EMFStoreException {
+	public List<ProjectInfo> getProjectInfos(SessionId sessionId) throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getProjectInfos", ProjectInfo.class, sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit) throws EMFStoreException {
+	public Role getRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit) throws ESException {
 		return getConnectionProxy(sessionId).callWithResult("getRole", Role.class, sessionId, projectId, orgUnit);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ACUser> getUsers(SessionId sessionId) throws EMFStoreException {
+	public List<ACUser> getUsers(SessionId sessionId) throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getUsers", ACUser.class, sessionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws EMFStoreException {
+	public void removeGroup(SessionId sessionId, ACOrgUnitId user, ACOrgUnitId group) throws ESException {
 		getConnectionProxy(sessionId).call("removeGroup", sessionId, user, group);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws EMFStoreException {
+	public void removeMember(SessionId sessionId, ACOrgUnitId group, ACOrgUnitId member) throws ESException {
 		getConnectionProxy(sessionId).call("removeMember", sessionId, group, member);
 	}
 
@@ -186,7 +186,7 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	 * {@inheritDoc}
 	 */
 	public void removeParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
-		throws EMFStoreException {
+		throws ESException {
 		getConnectionProxy(sessionId).call("removeParticipant", sessionId, projectId, participant);
 	}
 

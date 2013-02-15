@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * If the preparation phase of the commit fails, this exception will be thrown. This is usually the case if the user
@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
  * @author Adrian Staudt
  */
 @SuppressWarnings("serial")
-public class CommitCanceledException extends EMFStoreException {
+public class CommitCanceledException extends ESException {
 
 	/**
 	 * Constructor.

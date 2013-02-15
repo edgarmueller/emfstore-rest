@@ -15,9 +15,9 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
@@ -58,7 +58,7 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor monitor) throws ESException {
 
 		// TODO: controller currently does not work if the active workbench window is not
 		// the history view
@@ -99,7 +99,7 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 				try {
 					// TODO: monitor
 					projectSpace.removeTag(historyInfo.getPrimarySpec(), tag, new NullProgressMonitor());
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					MessageDialog.openError(getShell(), "Remove tag failed", "Remove tag failed: " + e.getMessage());
 				}
 			}

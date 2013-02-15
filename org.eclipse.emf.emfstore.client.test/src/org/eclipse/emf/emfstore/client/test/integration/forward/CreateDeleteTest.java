@@ -14,8 +14,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Test;
 
 /**
@@ -29,11 +29,11 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * create a random ME and change one of its attributes.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createAndChangeAttributeTest() throws SerializationException, EMFStoreException {
+	public void createAndChangeAttributeTest() throws SerializationException, ESException {
 		System.out.println("CreateAndChangeAttributeTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -57,11 +57,11 @@ public class CreateDeleteTest extends IntegrationTest {
 	 * Create a random ME and change one of its attributes, then changes one of its references, then changes one of its
 	 * attributes, and again changes one of its references.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	// @Test
-	public void createAndMultipleChangeTest() throws SerializationException, EMFStoreException {
+	public void createAndMultipleChangeTest() throws SerializationException, ESException {
 		System.out.println("CreateAndMultipleChangeTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -84,11 +84,11 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Create a random ME and change one of its references.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createAndChangeRefTest() throws SerializationException, EMFStoreException {
+	public void createAndChangeRefTest() throws SerializationException, ESException {
 		System.out.println("CreateAndChangeRefTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -111,11 +111,11 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Create a random ME. Change one of its non-containment references. Delete ME.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createChangeRefDeleteTest() throws SerializationException, EMFStoreException {
+	public void createChangeRefDeleteTest() throws SerializationException, ESException {
 		System.out.println("CreateChangeRefDeleteTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {
@@ -135,11 +135,11 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Create a random ME. Delete ME.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void createDeleteTest() throws SerializationException, EMFStoreException {
+	public void createDeleteTest() throws SerializationException, ESException {
 		System.out.println("CreateDeleteTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
 		new EMFStoreCommand() {
@@ -159,11 +159,11 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Delete a random ME. Revert delete.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void deleteAndRevertDeleteTest() throws SerializationException, EMFStoreException {
+	public void deleteAndRevertDeleteTest() throws SerializationException, ESException {
 		System.out.println("DeleteAndRevertDeleteTest");
 
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());
@@ -176,11 +176,11 @@ public class CreateDeleteTest extends IntegrationTest {
 	/**
 	 * Delete a random ME.
 	 * 
-	 * @throws EMFStoreException EmfStoreException
+	 * @throws ESException EmfStoreException
 	 * @throws SerializationException SerializationException
 	 */
 	@Test
-	public void deleteTest() throws SerializationException, EMFStoreException {
+	public void deleteTest() throws SerializationException, ESException {
 
 		System.out.println("DeleteTest");
 		final IntegrationTestHelper testHelper = new IntegrationTestHelper(randomSeed, getTestProject());

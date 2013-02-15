@@ -33,11 +33,11 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Usersession</b></em>'. <!-- end-user-doc -->
@@ -553,7 +553,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Usersession#logIn()
 	 * @generated NOT
 	 */
-	public void logIn() throws EMFStoreException, AccessControlException {
+	public void logIn() throws ESException, AccessControlException {
 		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		// sanity checks
 		if (getUsername() == null || getPassword() == null) {
@@ -581,7 +581,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void logout() throws EMFStoreException {
+	public void logout() throws ESException {
 		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
@@ -782,7 +782,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		return getServerInfo();
 	}
 
-	public void renew() throws EMFStoreException {
+	public void renew() throws ESException {
 		logIn();
 	}
 

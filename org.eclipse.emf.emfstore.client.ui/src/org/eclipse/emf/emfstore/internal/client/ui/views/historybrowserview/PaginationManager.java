@@ -17,12 +17,12 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Class handling pagination. See constructor {@link #PaginationManager(ProjectSpace, int, int)}
@@ -82,10 +82,10 @@ public class PaginationManager {
 
 	/**
 	 * @return The history info objects to be displayed on the current page.
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             If an exception gets thrown contacting the server.
 	 */
-	public List<HistoryInfo> retrieveHistoryInfos() throws EMFStoreException {
+	public List<HistoryInfo> retrieveHistoryInfos() throws ESException {
 		PrimaryVersionSpec newCenterVersion;
 		int beforeCurrent = -1;
 		if ((prevPage || nextPage) && currentCenterVersionShown != null && !currentlyPresentedInfos.isEmpty()) {
@@ -276,10 +276,10 @@ public class PaginationManager {
 	 * 
 	 * @param centerVersion The query center version.
 	 * @return
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	private HistoryQuery getQuery(PrimaryVersionSpec centerVersion, int aboveCenter, int belowCenter)
-		throws EMFStoreException {
+		throws ESException {
 		PrimaryVersionSpec version;
 		if (centerVersion != null) {
 			version = centerVersion;
@@ -313,10 +313,10 @@ public class PaginationManager {
 	/**
 	 * Helper functions for retrieving history info when the current margin info is of the wrong branch.
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 */
 	private QueryMargins getBranchAdaptedMargins(PrimaryVersionSpec centerVersion, int aboveCenter, int belowCenter)
-		throws EMFStoreException {
+		throws ESException {
 		QueryMargins margins = new QueryMargins();
 		centerVersion.setBranch(projectBranch);
 		margins.aboveCenter = aboveCenter;
@@ -373,12 +373,12 @@ public class PaginationManager {
 	 * retrieve the new page.
 	 * 
 	 * @param id The identifier of the version to display.
-	 * @throws EMFStoreException When an error occurs while retrieving versions from the server.
+	 * @throws ESException When an error occurs while retrieving versions from the server.
 	 * 
 	 * @return true if a version range surrounding the id has been found, false otherwise. Note that the range does not
 	 *         necessarily contain the id, for example if only versions for a certain branch are shown.
 	 */
-	public boolean setVersion(int id) throws EMFStoreException {
+	public boolean setVersion(int id) throws ESException {
 		prevPage = false;
 		nextPage = false;
 		if (currentlyPresentedInfos.isEmpty() || currentCenterVersionShown == null) {

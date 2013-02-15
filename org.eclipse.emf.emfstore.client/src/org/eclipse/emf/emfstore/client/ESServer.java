@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.impl.ServerFactoryImpl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Represents an EMFStore server and its API. It gives access to {@link ESRemoteProject} which can be used to operate on
@@ -97,9 +97,9 @@ public interface ESServer {
 	 * 
 	 * @return a list with all remote project
 	 * 
-	 * @throws EMFStoreException in case an error occurs while retrieving the list of remote projects
+	 * @throws ESException in case an error occurs while retrieving the list of remote projects
 	 */
-	List<ESRemoteProject> getRemoteProjects() throws EMFStoreException;
+	List<ESRemoteProject> getRemoteProjects() throws ESException;
 
 	/**
 	 * Returns a list with all remote projects hosted on this server.
@@ -110,9 +110,9 @@ public interface ESServer {
 	 * 
 	 * @return a list with all remote project
 	 * 
-	 * @throws EMFStoreException in case an error occurs while retrieving the list of remote projects
+	 * @throws ESException in case an error occurs while retrieving the list of remote projects
 	 */
-	List<ESRemoteProject> getRemoteProjects(ESUsersession usersession) throws EMFStoreException;
+	List<ESRemoteProject> getRemoteProjects(ESUsersession usersession) throws ESException;
 
 	/**
 	 * Returns the {@link ESUsersession} which was used on the last call to this server.
@@ -131,11 +131,11 @@ public interface ESServer {
 	 *            about creating the remote project
 	 * @return a {@link ESRemoteProject} object containing information about the
 	 *         created project
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             If an error occurs while creating the remote project
 	 */
 	ESRemoteProject createRemoteProject(String projectName, final IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Creates an empty project on the server.
@@ -151,11 +151,11 @@ public interface ESServer {
 	 *            a monitor to show the progress
 	 * @return a {@link ESRemoteProject} object containing information about the
 	 *         created project
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             If an error occurs while creating the remote project
 	 */
 	ESRemoteProject createRemoteProject(ESUsersession usersession, String projectName, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Logs into this server, returning a {@link ESUsersession}.
@@ -166,8 +166,8 @@ public interface ESServer {
 	 *            the cleartext password of the user
 	 * 
 	 * @return a logged in {@link ESUsersession}
-	 * @throws EMFStoreException in case an error occurs while creating and logging in the session for the given user
+	 * @throws ESException in case an error occurs while creating and logging in the session for the given user
 	 */
-	ESUsersession login(String name, String password) throws EMFStoreException;
+	ESUsersession login(String name, String password) throws ESException;
 
 }

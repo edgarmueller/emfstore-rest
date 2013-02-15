@@ -14,9 +14,9 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -52,7 +52,7 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 		RemoteProject remoteProject = null;
 		try {
 			remoteProject = view.getProjectSpace().getRemoteProject();
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			// TODO: OTS
 		}
 

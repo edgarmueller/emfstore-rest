@@ -23,8 +23,8 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Controller for import a {@link ProjectHistory}.
@@ -126,7 +126,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall#run()
 	 */
 	@Override
-	protected Void run() throws EMFStoreException {
+	protected Void run() throws ESException {
 		WorkspaceProvider.getInstance().getConnectionManager()
 			.importProjectHistoryToServer(getUsersession().getSessionId(), projectHistory);
 		return null;

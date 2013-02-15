@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -47,7 +47,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor progressMonitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor progressMonitor) throws ESException {
 
 		if (session == null) {
 			return null;
@@ -55,7 +55,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 
 		try {
 			session.logout();
-		} catch (EMFStoreException e) {
+		} catch (ESException e) {
 			MessageDialog.openWarning(getShell(), "Logout failed", "Logout failed: " + e.getMessage());
 		}
 

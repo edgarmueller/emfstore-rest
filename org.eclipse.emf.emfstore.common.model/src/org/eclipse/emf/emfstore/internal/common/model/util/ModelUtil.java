@@ -321,7 +321,8 @@ public final class ModelUtil {
 
 		if (ignoredDataTypes == null) {
 			ignoredDataTypes = new LinkedHashSet<String>();
-			for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.common.model.ignoreDatatype",
+			for (ESExtensionElement element : new ESExtensionPoint(
+				"org.eclipse.emf.emfstore.common.model.ignoreDatatype",
 				true).getExtensionElements()) {
 				try {
 					ignoredDataTypes.add(element.getAttribute("type"));
@@ -832,7 +833,8 @@ public final class ModelUtil {
 	 *             if there is no well formed or defined model version
 	 */
 	public static int getModelVersionNumber() throws MalformedModelVersionException {
-		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.ommon.model.modelVersion", true);
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.ommon.model.modelVersion",
+			true);
 		if (extensionPoint.size() != 1) {
 			String message = "There is " + extensionPoint.size()
 				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";

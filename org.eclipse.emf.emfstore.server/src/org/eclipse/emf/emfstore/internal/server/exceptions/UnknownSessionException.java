@@ -10,13 +10,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Represents a condition where a session is not known.
  * 
  * @author koegel
  */
 @SuppressWarnings("serial")
-public class UnknownSessionException extends EMFStoreException {
+public class UnknownSessionException extends ESException {
 
 	/**
 	 * Default constructor.

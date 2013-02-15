@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.exceptions;
 
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+
 /**
  * Represents a problem with data storage. This is a condition the server or one of its components can not recover from
  * and where a server shutdown is inevitable.
@@ -17,7 +19,7 @@ package org.eclipse.emf.emfstore.internal.server.exceptions;
  * @author Otto Wesendonk
  */
 @SuppressWarnings("serial")
-public class StorageException extends EMFStoreException {
+public class StorageException extends ESException {
 
 	/**
 	 * String constant for loading problem message.

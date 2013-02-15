@@ -19,7 +19,6 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
@@ -41,6 +40,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * XML RPC connection interface for emfstore.
@@ -76,7 +76,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public void addTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EMFStoreException {
+		throws ESException {
 		getEmfStore().addTag(sessionId, projectId, versionSpec, tag);
 	}
 
@@ -84,7 +84,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public ProjectInfo createEmptyProject(SessionId sessionId, String name, String description, LogMessage logMessage)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().createEmptyProject(sessionId, name, description, logMessage);
 	}
 
@@ -92,7 +92,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public ProjectInfo createProject(SessionId sessionId, String name, String description, LogMessage logMessage,
-		Project project) throws EMFStoreException {
+		Project project) throws ESException {
 		return getEmfStore().createProject(sessionId, name, description, logMessage, project);
 	}
 
@@ -101,7 +101,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 */
 	public PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId,
 		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
-		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws EMFStoreException, InvalidVersionSpecException {
+		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws ESException, InvalidVersionSpecException {
 		return getEmfStore().createVersion(sessionId, projectId, baseVersionSpec, changePackage, targetBranch,
 			sourceVersion, logMessage);
 	}
@@ -109,7 +109,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws EMFStoreException {
+	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws ESException {
 		getEmfStore().deleteProject(sessionId, projectId, deleteFiles);
 	}
 
@@ -117,7 +117,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public FileChunk downloadFileChunk(SessionId sessionId, ProjectId projectId, FileTransferInformation fileInformation)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().downloadFileChunk(sessionId, projectId, fileInformation);
 	}
 
@@ -125,7 +125,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public ProjectHistory exportProjectHistoryFromServer(SessionId sessionId, ProjectId projectId)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().exportProjectHistoryFromServer(sessionId, projectId);
 	}
 
@@ -133,7 +133,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public List<ChangePackage> getChanges(SessionId sessionId, ProjectId projectId, VersionSpec source,
-		VersionSpec target) throws EMFStoreException {
+		VersionSpec target) throws ESException {
 		return getEmfStore().getChanges(sessionId, projectId, source, target);
 	}
 
@@ -141,7 +141,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * 
 	 * {@inheritDoc}
 	 */
-	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
+	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws ESException {
 		return getEmfStore().getBranches(sessionId, projectId);
 	}
 
@@ -149,7 +149,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().getHistoryInfo(sessionId, projectId, historyQuery);
 	}
 
@@ -157,14 +157,14 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public Project getProject(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().getProject(sessionId, projectId, versionSpec);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ProjectInfo> getProjectList(SessionId sessionId) throws EMFStoreException {
+	public List<ProjectInfo> getProjectList(SessionId sessionId) throws ESException {
 		return getEmfStore().getProjectList(sessionId);
 	}
 
@@ -172,7 +172,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public ProjectId importProjectHistoryToServer(SessionId sessionId, ProjectHistory projectHistory)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().importProjectHistoryToServer(sessionId, projectHistory);
 	}
 
@@ -180,14 +180,14 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public void removeTag(SessionId sessionId, ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
-		throws EMFStoreException {
+		throws ESException {
 		getEmfStore().removeTag(sessionId, projectId, versionSpec, tag);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws EMFStoreException {
+	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws ESException {
 		return getEmfStore().resolveUser(sessionId, id);
 	}
 
@@ -195,7 +195,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().resolveVersionSpec(sessionId, projectId, versionSpec);
 	}
 
@@ -203,7 +203,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public void transmitProperty(SessionId sessionId, OrgUnitProperty changedProperty, ACUser tmpUser,
-		ProjectId projectId) throws EMFStoreException {
+		ProjectId projectId) throws ESException {
 		getEmfStore().transmitProperty(sessionId, changedProperty, tmpUser, projectId);
 	}
 
@@ -211,7 +211,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public FileTransferInformation uploadFileChunk(SessionId sessionId, ProjectId projectId, FileChunk fileChunk)
-		throws EMFStoreException {
+		throws ESException {
 		return getEmfStore().uploadFileChunk(sessionId, projectId, fileChunk);
 	}
 
@@ -219,7 +219,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * {@inheritDoc}
 	 */
 	public List<EMFStoreProperty> setEMFProperties(SessionId sessionId, List<EMFStoreProperty> properties,
-		ProjectId projectId) throws EMFStoreException {
+		ProjectId projectId) throws ESException {
 		if (properties != null && properties.size() > 0) {
 			return getEmfStore().setEMFProperties(sessionId, properties, projectId);
 		}
@@ -230,7 +230,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws EMFStoreException {
+	public List<EMFStoreProperty> getEMFProperties(SessionId sessionId, ProjectId projectId) throws ESException {
 		return getEmfStore().getEMFProperties(sessionId, projectId);
 	}
 
@@ -240,7 +240,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	 * @see org.eclipse.emf.emfstore.internal.server.EMFStore#registerEPackage(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      org.eclipse.emf.ecore.EPackage)
 	 */
-	public void registerEPackage(SessionId sessionId, EPackage pkg) throws EMFStoreException {
+	public void registerEPackage(SessionId sessionId, EPackage pkg) throws ESException {
 		getEmfStore().registerEPackage(sessionId, pkg);
 
 	}

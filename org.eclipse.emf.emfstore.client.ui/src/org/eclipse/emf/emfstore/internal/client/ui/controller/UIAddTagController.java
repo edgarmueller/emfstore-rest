@@ -19,11 +19,11 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
@@ -75,7 +75,7 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public Void doRun(IProgressMonitor monitor) throws EMFStoreException {
+	public Void doRun(IProgressMonitor monitor) throws ESException {
 
 		HistoryBrowserView historyBrowserView = getHistoryBrowserViewFromActivePart();
 
@@ -103,7 +103,7 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 			try {
 				// TODO: monitor
 				projectSpace.addTag(versionSpec, tag, new NullProgressMonitor());
-			} catch (EMFStoreException e) {
+			} catch (ESException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 				MessageDialog.openError(getShell(), "Error", "Could not create tag. Reason: " + e.getMessage());
 				return null;

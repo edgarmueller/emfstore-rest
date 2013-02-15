@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.client;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
@@ -50,9 +50,9 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @return the checked out project
 	 * 
-	 * @throws EMFStoreException in case an error occurs during checkout
+	 * @throws ESException in case an error occurs during checkout
 	 */
-	ESLocalProject checkout(IProgressMonitor monitor) throws EMFStoreException;
+	ESLocalProject checkout(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * <p>
@@ -78,13 +78,13 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @return the checked out project
 	 * 
-	 * @throws EMFStoreException in case an error occurs during checkout
+	 * @throws ESException in case an error occurs during checkout
 	 * 
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
 	 * @see ESServer#getLastUsersession()
 	 */
 	ESLocalProject checkout(final ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Resolves a {@link ESVersionSpec} to a {@link ESPrimaryVersionSpec} by querying the server.
@@ -100,11 +100,11 @@ public interface ESRemoteProject extends ESProject {
 	 *            specifier
 	 * @return the resolved primary version
 	 * 
-	 * @throws EMFStoreException in case an error occurs while resolving the version
+	 * @throws ESException in case an error occurs while resolving the version
 	 */
 	ESPrimaryVersionSpec resolveVersionSpec(ESUsersession usersession, ESVersionSpec versionSpec,
 		IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Returns all branches for the current project.
@@ -117,9 +117,9 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @return a list containing information about all branches for the current project
 	 * 
-	 * @throws EMFStoreException in case an error occurs while retrieving the branch information for the project
+	 * @throws ESException in case an error occurs while retrieving the branch information for the project
 	 */
-	List<ESBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
+	List<ESBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Retrieves a part of the project's version history from the server based on the given query. Use
@@ -136,10 +136,10 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @return a list of history infos
 	 * 
-	 * @throws EMFStoreException in case an error occurs while retrieving the history information
+	 * @throws ESException in case an error occurs while retrieving the history information
 	 */
 	List<ESHistoryInfo> getHistoryInfos(ESUsersession usersession, ESHistoryQuery query, IProgressMonitor monitor)
-		throws EMFStoreException;
+		throws ESException;
 
 	/**
 	 * Deletes the remote project on the server.
@@ -147,10 +147,10 @@ public interface ESRemoteProject extends ESProject {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} used to indicate progress
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case an error occurs during the deletion of the project
 	 */
-	void delete(IProgressMonitor monitor) throws EMFStoreException;
+	void delete(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Deletes the remote project on the server.
@@ -161,10 +161,10 @@ public interface ESRemoteProject extends ESProject {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} used to indicate progress
 	 * 
-	 * @throws EMFStoreException
+	 * @throws ESException
 	 *             in case an error occurs during the deletion of the project
 	 */
-	void delete(ESUsersession usersession, IProgressMonitor monitor) throws EMFStoreException;
+	void delete(ESUsersession usersession, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Returns the HEAD version of the project.
@@ -174,7 +174,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @return the HEAD version
 	 * 
-	 * @throws EMFStoreException in case an error occurs while fetching the HEAD version of the project
+	 * @throws ESException in case an error occurs while fetching the HEAD version of the project
 	 */
-	ESPrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws EMFStoreException;
+	ESPrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws ESException;
 }

@@ -19,12 +19,12 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Test;
 
 public class BranchTests extends CoreServerTest {
@@ -140,7 +140,7 @@ public class BranchTests extends CoreServerTest {
 	}
 
 	@Test
-	public void updateFromBranch() throws InvalidVersionSpecException, EMFStoreException {
+	public void updateFromBranch() throws InvalidVersionSpecException, ESException {
 		final ProjectSpace ps = getProjectSpace();
 		final TestElement testElement = createTestElement("Horst");
 		share(ps);
@@ -175,7 +175,7 @@ public class BranchTests extends CoreServerTest {
 			protected void doRun() {
 				try {
 					ps.update();
-				} catch (EMFStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -185,7 +185,7 @@ public class BranchTests extends CoreServerTest {
 	}
 
 	@Test
-	public void tagBranch() throws EMFStoreException {
+	public void tagBranch() throws ESException {
 		final ProjectSpace ps = getProjectSpace();
 		final TestElement testElement = createTestElement("Horst");
 		share(ps);
@@ -214,7 +214,7 @@ public class BranchTests extends CoreServerTest {
 	}
 
 	@Test
-	public void untagBranch() throws EMFStoreException {
+	public void untagBranch() throws ESException {
 		final ProjectSpace ps = getProjectSpace();
 		final TestElement testElement = createTestElement("Horst");
 		share(ps);

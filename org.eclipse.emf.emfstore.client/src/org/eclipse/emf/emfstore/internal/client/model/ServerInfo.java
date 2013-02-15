@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.model;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.internal.server.exceptions.EMFStoreException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Info</b></em>'.
@@ -204,6 +204,6 @@ public interface ServerInfo extends EObject, ESServer {
 	 * 
 	 * @generated NOT
 	 */
-	Usersession login(String name, String password) throws EMFStoreException;
+	Usersession login(String name, String password) throws ESException;
 
 } // ServerInfo
