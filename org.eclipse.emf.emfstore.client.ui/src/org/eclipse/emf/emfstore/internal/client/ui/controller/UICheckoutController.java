@@ -15,7 +15,6 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
@@ -37,7 +36,8 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UICheckoutController extends AbstractEMFStoreUIController<ESProject> {
+public class UICheckoutController extends
+		AbstractEMFStoreUIController<ESLocalProject> {
 
 	private ESUsersession session;
 	private ESPrimaryVersionSpec versionSpec;
@@ -67,9 +67,11 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @param remoteProject
 	 *            the {@link ESRemoteProject} to be checked out
 	 * @param askForBranch
-	 *            whether to ask for a branch from which the checkout should happen
+	 *            whether to ask for a branch from which the checkout should
+	 *            happen
 	 */
-	public UICheckoutController(Shell shell, ESRemoteProject remoteProject, boolean askForBranch) {
+	public UICheckoutController(Shell shell, ESRemoteProject remoteProject,
+			boolean askForBranch) {
 		this(shell, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -80,11 +82,13 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @param shell
 	 *            the parent {@link Shell} that will be used during checkout
 	 * @param versionSpec
-	 *            the {@link ESPrimaryVersionSpec} that identifies a specific version to be checked out
+	 *            the {@link ESPrimaryVersionSpec} that identifies a specific
+	 *            version to be checked out
 	 * @param remoteProject
 	 *            the {@link ESRemoteProject} to be checked out
 	 */
-	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec, ESRemoteProject remoteProject) {
+	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
+			ESRemoteProject remoteProject) {
 		this(shell, remoteProject);
 		this.versionSpec = versionSpec;
 	}
@@ -95,14 +99,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @param shell
 	 *            the parent {@link Shell} that will be used during checkout
 	 * @param versionSpec
-	 *            the {@link ESPrimaryVersionSpec} that identifies a specific version to be checked out
+	 *            the {@link ESPrimaryVersionSpec} that identifies a specific
+	 *            version to be checked out
 	 * @param remoteProject
 	 *            the {@link ESRemoteProject} to be checked out
 	 * @param askForBranch
-	 *            whether to ask for a branch from which the checkout should happen
+	 *            whether to ask for a branch from which the checkout should
+	 *            happen
 	 */
-	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec, ESRemoteProject remoteProject,
-		boolean askForBranch) {
+	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
+			ESRemoteProject remoteProject, boolean askForBranch) {
 		this(shell, versionSpec, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -113,11 +119,13 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @param shell
 	 *            the parent {@link Shell} that will be used during checkout
 	 * @param session
-	 *            the {@link ESUsersession} that will be used to checkout the project
+	 *            the {@link ESUsersession} that will be used to checkout the
+	 *            project
 	 * @param remoteProject
 	 *            the {@link ESRemoteProject} to be checked out
 	 */
-	public UICheckoutController(Shell shell, ESUsersession session, ESRemoteProject remoteProject) {
+	public UICheckoutController(Shell shell, ESUsersession session,
+			ESRemoteProject remoteProject) {
 		this(shell, remoteProject);
 		this.session = session;
 	}
@@ -128,13 +136,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @param shell
 	 *            the parent {@link Shell} that will be used during checkout
 	 * @param session
-	 *            the {@link ESUsersession} that will be used to checkout the project
+	 *            the {@link ESUsersession} that will be used to checkout the
+	 *            project
 	 * @param remoteProject
 	 *            the {@link ESRemoteProject} to be checked out
 	 * @param askForBranch
-	 *            whether to ask for a branch from which the checkout should happen
+	 *            whether to ask for a branch from which the checkout should
+	 *            happen
 	 */
-	public UICheckoutController(Shell shell, ESUsersession session, ESRemoteProject remoteProject, boolean askForBranch) {
+	public UICheckoutController(Shell shell, ESUsersession session,
+			ESRemoteProject remoteProject, boolean askForBranch) {
 		this(shell, session, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -145,14 +156,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @param shell
 	 *            the parent {@link Shell} that will be used during checkout
 	 * @param versionSpec
-	 *            the {@link ESPrimaryVersionSpec} that identifies a specific version to be checked out
+	 *            the {@link ESPrimaryVersionSpec} that identifies a specific
+	 *            version to be checked out
 	 * @param session
-	 *            the {@link ESUsersession} that will be used to checkout the project
+	 *            the {@link ESUsersession} that will be used to checkout the
+	 *            project
 	 * @param remoteProject
 	 *            the {@link ESRemoteProject} to be checked out
 	 */
-	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec, ESUsersession session,
-		ESRemoteProject remoteProject) {
+	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
+			ESUsersession session, ESRemoteProject remoteProject) {
 		this(shell, versionSpec, remoteProject);
 		this.session = session;
 	}
@@ -165,14 +178,18 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @param remoteProject
 	 *            the {@link ESRemoteProject} to be checked out
 	 * @param versionSpec
-	 *            the {@link ESPrimaryVersionSpec} that identifies a specific version to be checked out
+	 *            the {@link ESPrimaryVersionSpec} that identifies a specific
+	 *            version to be checked out
 	 * @param session
-	 *            the {@link ESUsersession} that will be used to checkout the project
+	 *            the {@link ESUsersession} that will be used to checkout the
+	 *            project
 	 * @param askForBranch
-	 *            whether to ask for a branch from which the checkout should happen
+	 *            whether to ask for a branch from which the checkout should
+	 *            happen
 	 */
-	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec, ESUsersession session,
-		ESRemoteProject remoteProject, boolean askForBranch) {
+	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
+			ESUsersession session, ESRemoteProject remoteProject,
+			boolean askForBranch) {
 		this(shell, versionSpec, session, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -184,7 +201,8 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ESLocalProject doRun(IProgressMonitor progressMonitor) throws ESException {
+	public ESLocalProject doRun(IProgressMonitor progressMonitor)
+			throws ESException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
@@ -193,9 +211,13 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 
 			if (session != null) {
 				if (versionSpec == null) {
-					remoteProject.checkout(session, ESVersionSpec.FACTORY.createHEAD(), progressMonitor);
+					remoteProject
+							.checkout(session,
+									ESVersionSpec.FACTORY.createHEAD(),
+									progressMonitor);
 				} else {
-					remoteProject.checkout(session, versionSpec, progressMonitor);
+					remoteProject.checkout(session, versionSpec,
+							progressMonitor);
 				}
 			} else {
 				if (versionSpec == null) {
@@ -212,8 +234,12 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
-					MessageDialog.openError(getShell(), "Checkout failed",
-						"Checkout of project " + remoteProject.getProjectName() + " failed: " + e.getMessage());
+					MessageDialog.openError(
+							getShell(),
+							"Checkout failed",
+							"Checkout of project "
+									+ remoteProject.getProjectName()
+									+ " failed: " + e.getMessage());
 					return null;
 				}
 			});
@@ -222,8 +248,8 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 		return null;
 	}
 
-	private ESPrimaryVersionSpec branchSelection(ESRemoteProject remoteProject, IProgressMonitor monitor)
-		throws ESException {
+	private ESPrimaryVersionSpec branchSelection(ESRemoteProject remoteProject,
+			IProgressMonitor monitor) throws ESException {
 
 		final List<ESBranchInfo> branches;
 
@@ -233,20 +259,23 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 			branches = remoteProject.getBranches(monitor);
 		}
 
-		ESBranchInfo result = RunInUI.WithException.runWithResult(new Callable<ESBranchInfo>() {
-			public ESBranchInfo call() throws Exception {
+		ESBranchInfo result = RunInUI.WithException
+				.runWithResult(new Callable<ESBranchInfo>() {
+					public ESBranchInfo call() throws Exception {
 
-				BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
-					getShell(), branches);
-				dialog.setBlockOnOpen(true);
+						BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
+								getShell(), branches);
+						dialog.setBlockOnOpen(true);
 
-				if (dialog.open() != Dialog.OK || dialog.getResult() == null) {
-					throw new CancelOperationException("No Branch specified");
-				}
-				return dialog.getResult();
+						if (dialog.open() != Dialog.OK
+								|| dialog.getResult() == null) {
+							throw new CancelOperationException(
+									"No Branch specified");
+						}
+						return dialog.getResult();
 
-			}
-		});
+					}
+				});
 
 		return result.getHead();
 	}
