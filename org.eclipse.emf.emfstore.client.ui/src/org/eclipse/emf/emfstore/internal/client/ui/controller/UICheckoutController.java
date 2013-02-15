@@ -15,7 +15,6 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
@@ -37,7 +36,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UICheckoutController extends AbstractEMFStoreUIController<ESProject> {
+public class UICheckoutController extends AbstractEMFStoreUIController<ESLocalProject> {
 
 	private ESUsersession session;
 	private ESPrimaryVersionSpec versionSpec;
