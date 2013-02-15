@@ -193,15 +193,16 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESProject
 
 			if (session != null) {
 				if (versionSpec == null) {
-					remoteProject.checkout(session, ESVersionSpec.FACTORY.createHEAD(), progressMonitor);
+					return remoteProject.checkout(session, ESVersionSpec.FACTORY.createHEAD(), progressMonitor);
 				} else {
-					remoteProject.checkout(session, versionSpec, progressMonitor);
+					return remoteProject.checkout(session, versionSpec, progressMonitor);
 				}
 			} else {
 				if (versionSpec == null) {
-					remoteProject.checkout(progressMonitor);
+					return remoteProject.checkout(progressMonitor);
 				} else {
-
+					return remoteProject.checkout(remoteProject.getServer().getLastUsersession(), versionSpec,
+						progressMonitor);
 				}
 			}
 
