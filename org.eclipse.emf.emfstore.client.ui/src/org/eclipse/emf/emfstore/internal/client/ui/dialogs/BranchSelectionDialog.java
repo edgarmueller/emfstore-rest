@@ -77,7 +77,6 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 			PrimaryVersionSpec baseVersion,
 			java.util.List<ESBranchInfo> branches) {
 		super(parentShell);
-		this.setTitle("Select Branch");
 		this.baseVersion = baseVersion;
 		this.branches = branches;
 	}
@@ -91,7 +90,6 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-
 		setHeaderTexts();
 
 		Composite area = (Composite) super.createDialogArea(parent);
@@ -163,6 +161,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * Hook to set header texts.
 	 */
 	protected void setHeaderTexts() {
+		getShell().setText("Branch Selection");
 		setTitle("Branch Selection");
 		setMessage("Please select which Branch you want to merge into your local copy of the project.");
 	}
@@ -267,8 +266,10 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 		@Override
 		protected void setHeaderTexts() {
+			getShell().setText("Checkout Branch");
 			setTitle("Checkout Branch");
 			setMessage("Please choose which Branch should be checked out.");
+
 		}
 
 	}
@@ -303,6 +304,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 		@Override
 		protected void setHeaderTexts() {
+			getShell().setText("Create Branch");
 			setTitle("Create Branch");
 			setMessage("Please specify a name for the new Branch.");
 		}
