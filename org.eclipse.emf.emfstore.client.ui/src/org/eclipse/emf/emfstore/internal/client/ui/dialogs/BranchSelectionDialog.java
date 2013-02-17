@@ -73,8 +73,11 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * @param branches
 	 *            list of branches
 	 */
-	public BranchSelectionDialog(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<ESBranchInfo> branches) {
+	public BranchSelectionDialog(Shell parentShell,
+			PrimaryVersionSpec baseVersion,
+			java.util.List<ESBranchInfo> branches) {
 		super(parentShell);
+		this.setTitle("Select Branch");
 		this.baseVersion = baseVersion;
 		this.branches = branches;
 	}
@@ -110,10 +113,12 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 				Object element = cell.getElement();
 				if (element instanceof BranchInfo) {
 					BranchInfo branch = (BranchInfo) element;
-					StyledString styledString = new StyledString("Branch:  " + branch.getName() + "  ", StyledString
-						.createColorRegistryStyler("red", null));
-					styledString.append("[Version: " + branch.getHead().getIdentifier() + "]",
-						StyledString.DECORATIONS_STYLER);
+					StyledString styledString = new StyledString("Branch:  "
+							+ branch.getName() + "  ", StyledString
+							.createColorRegistryStyler("red", null));
+					styledString.append("[Version: "
+							+ branch.getHead().getIdentifier() + "]",
+							StyledString.DECORATIONS_STYLER);
 					cell.setText(styledString.toString());
 					cell.setStyleRanges(styledString.getStyleRanges());
 				}
@@ -139,7 +144,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	protected void okPressed() {
 		ISelection selection = getTableViewer().getSelection();
 		if (selection instanceof IStructuredSelection) {
-			setResult((BranchInfo) ((IStructuredSelection) selection).getFirstElement());
+			setResult((BranchInfo) ((IStructuredSelection) selection)
+					.getFirstElement());
 		}
 		super.okPressed();
 	}
@@ -178,8 +184,10 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
+				true);
+		createButton(parent, IDialogConstants.CANCEL_ID,
+				IDialogConstants.CANCEL_LABEL, false);
 	}
 
 	/**
@@ -288,7 +296,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		 * @param branches
 		 *            list of branches
 		 */
-		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion, java.util.List<ESBranchInfo> branches) {
+		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion,
+				java.util.List<ESBranchInfo> branches) {
 			super(parentShell, baseVersion, branches);
 		}
 
@@ -310,7 +319,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		@Override
 		protected void endOfInit() {
 			getTableViewer().getTable().setEnabled(false);
-			getTableViewer().getTable().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
+			getTableViewer().getTable().setBackground(
+					Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
 		}
 
 		@Override
@@ -325,14 +335,17 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		protected void addCreationField(Composite container) {
 			Composite creationContainer = new Composite(container, SWT.NONE);
 			creationContainer.setLayout(new GridLayout(2, false));
-			creationContainer.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+			creationContainer.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
+					true, false, 1, 1));
 
 			Label lblNewBranch = new Label(creationContainer, SWT.NONE);
-			lblNewBranch.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblNewBranch.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
 			lblNewBranch.setText("New Branch:");
 
 			text = new Text(creationContainer, SWT.BORDER);
-			text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+			text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+					1, 1));
 		}
 	}
 }
