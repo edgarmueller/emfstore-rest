@@ -262,4 +262,8 @@ public class ESExtensionPoint {
 	public int size() {
 		return this.elements.size();
 	}
+
+	public String getId() {
+		return id;
+	}
 }
