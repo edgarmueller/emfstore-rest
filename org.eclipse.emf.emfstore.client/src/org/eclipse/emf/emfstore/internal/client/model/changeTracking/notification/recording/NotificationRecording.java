@@ -125,7 +125,7 @@ public class NotificationRecording {
 		}
 
 		// debug messages only in developer and internal release versions
-		if (!Configuration.isReleaseVersion()) {
+		if (!Configuration.VERSIONING.isReleaseVersion()) {
 			debugLog("captured notification chain: " + hintType + " operation");
 		}
 	}

@@ -69,7 +69,7 @@ public final class IntegrationTestHelper {
 	public static final int NUM_OF_TESTS = 16;
 
 	private static EditingDomain domain;
-	private static final String TEMP_PATH = Configuration.getWorkspaceDirectory() + "tmp";
+	private static final String TEMP_PATH = Configuration.FILE_INFO.getWorkspaceDirectory() + "tmp";
 	private Random random;
 	private Set<EObject> allMEsInProject;
 	private Project testProject;
@@ -223,7 +223,7 @@ public final class IntegrationTestHelper {
 	public static EditingDomain getDomain() {
 
 		if (domain == null) {
-			domain = Configuration.getEditingDomain();
+			domain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
 
 		}
 		return domain;

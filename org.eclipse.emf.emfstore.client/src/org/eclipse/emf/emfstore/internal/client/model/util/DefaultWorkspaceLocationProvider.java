@@ -10,9 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.util;
 
-import static org.eclipse.emf.emfstore.internal.client.model.Configuration.isInternalReleaseVersion;
-import static org.eclipse.emf.emfstore.internal.client.model.Configuration.isReleaseVersion;
-
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
@@ -59,8 +57,8 @@ public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLoca
 			parameter = "default";
 			if (CommonUtil.isTesting()) {
 				parameter += "_test";
-			} else if (!isReleaseVersion()) {
-				if (isInternalReleaseVersion()) {
+			} else if (!Configuration.VERSIONING.isReleaseVersion()) {
+				if (Configuration.VERSIONING.isInternalReleaseVersion()) {
 					parameter += "_internal";
 				} else {
 					parameter += "_dev";

@@ -66,7 +66,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		Configuration.ClIENT_BEHAVIOR.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 
 		final TestElement testElement = createTestElement();
 		getProject().addModelElement(testElement);
@@ -106,7 +106,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		Configuration.ClIENT_BEHAVIOR.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
@@ -168,7 +168,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
+		Configuration.ClIENT_BEHAVIOR.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -194,7 +194,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
+		Configuration.ClIENT_BEHAVIOR.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -236,7 +236,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
+		Configuration.ClIENT_BEHAVIOR.setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -273,7 +273,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		Configuration.ClIENT_BEHAVIOR.setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -336,7 +336,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws ESException {
-			ESChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
+			ESChecksumErrorHandler checksumErrorHandler = Configuration.ClIENT_BEHAVIOR.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec,
 				progressMonitor);
 		}
@@ -361,7 +361,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 			IProgressMonitor progressMonitor) throws ESException {
-			ESChecksumErrorHandler checksumErrorHandler = Configuration.getChecksumErrorHandler();
+			ESChecksumErrorHandler checksumErrorHandler = Configuration.ClIENT_BEHAVIOR.getChecksumErrorHandler();
 			return checksumErrorHandler.execute(projectSpace, versionSpec,
 				progressMonitor);
 		}

@@ -32,7 +32,7 @@ public class IsAutoSaveEnabledTester extends PropertyTester {
 	 *      java.lang.Object)
 	 */
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		return (expectedValue != null && expectedValue.equals(Configuration.isAutoSaveEnabled()) && !isAutoSaveEnabledTesterDisabled);
+		return (expectedValue != null && expectedValue.equals(Configuration.ClIENT_BEHAVIOR.isAutoSaveEnabled()) && !isAutoSaveEnabledTesterDisabled);
 	}
 
 	private static boolean initExtensionPoint() {

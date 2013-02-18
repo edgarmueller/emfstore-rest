@@ -176,10 +176,10 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 
 		// register an editing domain on the resource
-		Configuration.setEditingDomain(createEditingDomain(resourceSet));
+		Configuration.ClIENT_BEHAVIOR.setEditingDomain(createEditingDomain(resourceSet));
 
-		URI fileURI = URI.createFileURI(Configuration.getWorkspacePath());
-		File workspaceFile = new File(Configuration.getWorkspacePath());
+		URI fileURI = URI.createFileURI(Configuration.FILE_INFO.getWorkspacePath());
+		File workspaceFile = new File(Configuration.FILE_INFO.getWorkspacePath());
 		final Workspace workspace;
 		final Resource resource;
 		if (!workspaceFile.exists()) {
@@ -242,7 +242,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 		// no workspace content found, create a workspace
 		resource = resourceSet.createResource(fileURI);
 		workspace = ModelFactory.eINSTANCE.createWorkspace();
-		workspace.getServerInfos().addAll(Configuration.getDefaultServerInfos());
+		workspace.getServerInfos().addAll(Configuration.ClIENT_BEHAVIOR.getDefaultServerInfos());
 		EList<Usersession> usersessions = workspace.getUsersessions();
 		for (ServerInfo serverInfo : workspace.getServerInfos()) {
 			Usersession lastUsersession = serverInfo.getLastUsersession();
@@ -262,7 +262,8 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 			resource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
-				"Creating new workspace failed! Delete workspace folder: " + Configuration.getWorkspaceDirectory(), e);
+				"Creating new workspace failed! Delete workspace folder: "
+					+ Configuration.FILE_INFO.getWorkspaceDirectory(), e);
 		}
 		int modelVersionNumber;
 		try {
@@ -275,7 +276,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	}
 
 	private void stampCurrentVersionNumber(int modelReleaseNumber) {
-		URI versionFileUri = URI.createFileURI(Configuration.getModelReleaseNumberFileName());
+		URI versionFileUri = URI.createFileURI(Configuration.FILE_INFO.getModelReleaseNumberFileName());
 		Resource versionResource = new ResourceSetImpl().createResource(versionFileUri);
 		ModelVersion modelVersion = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createModelVersion();
@@ -285,7 +286,8 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 			ModelUtil.saveResource(versionResource, WorkspaceUtil.getResourceLogger());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
-				"Version stamping workspace failed! Delete workspace folder: " + Configuration.getWorkspaceDirectory(),
+				"Version stamping workspace failed! Delete workspace folder: "
+					+ Configuration.FILE_INFO.getWorkspaceDirectory(),
 				e);
 		}
 	}
@@ -317,12 +319,12 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 		}
 
 		backupWorkspace(false);
-		File workspaceFile = new File(Configuration.getWorkspaceDirectory());
+		File workspaceFile = new File(Configuration.FILE_INFO.getWorkspaceDirectory());
 		for (File file : workspaceFile.listFiles()) {
-			if (file.getName().startsWith(Configuration.getProjectSpaceDirectoryPrefix())) {
+			if (file.getName().startsWith(Configuration.FILE_INFO.getProjectSpaceDirectoryPrefix())) {
 				String projectFilePath = file.getAbsolutePath() + File.separatorChar
-					+ Configuration.getProjectFolderName() + File.separatorChar + 0
-					+ Configuration.getProjectFragmentFileExtension();
+					+ Configuration.FILE_INFO.ProjectFolderName + File.separatorChar + 0
+					+ Configuration.FILE_INFO.ProjectFragmentExtension;
 				URI projectURI = URI.createFileURI(projectFilePath);
 				String operationsFilePath = null;
 				File[] listFiles = file.listFiles();
@@ -332,7 +334,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 					continue;
 				}
 				for (File subDirFile : listFiles) {
-					if (subDirFile.getName().endsWith(Configuration.getLocalChangePackageFileExtension())) {
+					if (subDirFile.getName().endsWith(Configuration.FILE_INFO.LocalChangePackageExtension)) {
 						operationsFilePath = subDirFile.getAbsolutePath();
 					}
 				}
@@ -377,18 +379,19 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 
 	private void backupAndRecreateWorkspace(ResourceSet resourceSet) {
 		backupWorkspace(true);
-		URI fileURI = URI.createFileURI(Configuration.getWorkspacePath());
+		URI fileURI = URI.createFileURI(Configuration.FILE_INFO.getWorkspacePath());
 		createNewWorkspace(resourceSet, fileURI);
 	}
 
 	private void backupWorkspace(boolean move) {
-		String workspaceDirectory = Configuration.getWorkspaceDirectory();
+		String workspaceDirectory = Configuration.FILE_INFO.getWorkspaceDirectory();
 		File workspacePath = new File(workspaceDirectory);
 
 		// TODO: if you want the date included in the backup folder you should
 		// change the format. the default format
 		// does not work with every os due to : and other characters.
-		String newWorkspaceDirectory = Configuration.getLocationProvider().getBackupDirectory() + "emfstore_backup_"
+		String newWorkspaceDirectory = Configuration.FILE_INFO.getLocationProvider().getBackupDirectory()
+			+ "emfstore_backup_"
 			+ System.currentTimeMillis();
 
 		File workspacebackupPath = new File(newWorkspaceDirectory);
@@ -405,7 +408,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 
 	private ModelVersion getWorkspaceModelVersion() {
 		// check for legacy workspace
-		File versionFile = new File(Configuration.getModelReleaseNumberFileName());
+		File versionFile = new File(Configuration.FILE_INFO.getModelReleaseNumberFileName());
 		if (!versionFile.exists()) {
 			int modelVersionNumber;
 			try {
@@ -417,7 +420,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 		}
 
 		// check if we need to migrate
-		URI versionFileUri = URI.createFileURI(Configuration.getModelReleaseNumberFileName());
+		URI versionFileUri = URI.createFileURI(Configuration.FILE_INFO.getModelReleaseNumberFileName());
 		ResourceSet resourceSet = new ResourceSetImpl();
 		try {
 			Resource resource = resourceSet.getResource(versionFileUri, true);

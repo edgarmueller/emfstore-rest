@@ -136,7 +136,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 *            whether to force the saving of resources
 	 */
 	public void saveDirtyResources(boolean force) {
-		if (!force && !Configuration.isAutoSaveEnabled()) {
+		if (!force && !Configuration.ClIENT_BEHAVIOR.isAutoSaveEnabled()) {
 			return;
 		}
 

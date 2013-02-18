@@ -118,7 +118,8 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
 				if (shouldUpdate) {
 					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
-					ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
+					ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(),
+						(ProjectSpace) projectSpace)
 						.executeSub(progressMonitor);
 					if (version.equals(baseVersion)) {
 						return false;
@@ -225,7 +226,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	 */
 	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws ESException {
-		ESChecksumErrorHandler errorHandler = Configuration.getChecksumErrorHandler();
+		ESChecksumErrorHandler errorHandler = Configuration.ClIENT_BEHAVIOR.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

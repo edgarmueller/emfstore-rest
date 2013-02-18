@@ -126,7 +126,7 @@ public class SetupHelper {
 		Project project = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject();
 		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, minObjectsCount,
 			seed);
-		Configuration.setAutoSave(false);
+		Configuration.ClIENT_BEHAVIOR.setAutoSave(false);
 		ModelMutator.generateModel(config);
 		testProjectSpace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).importProject(project,
 			"Generated project", "");
@@ -726,7 +726,7 @@ public class SetupHelper {
 	 */
 	public static void removeServerTestProfile() throws IOException {
 		String serverPath = ServerConfiguration.getServerHome();
-		String clientPath = Configuration.getWorkspaceDirectory();
+		String clientPath = Configuration.FILE_INFO.getWorkspaceDirectory();
 		File serverDirectory = new File(serverPath);
 		File clientDirectory = new File(clientPath);
 

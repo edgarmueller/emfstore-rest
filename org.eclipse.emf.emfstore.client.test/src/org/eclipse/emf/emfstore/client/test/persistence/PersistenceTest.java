@@ -33,7 +33,7 @@ public class PersistenceTest extends WorkspaceTest {
 
 	@Test
 	public void testReinitWorkspace() {
-		Configuration.setAutoSave(false);
+		Configuration.ClIENT_BEHAVIOR.setAutoSave(false);
 		Project originalProject = ModelUtil.clone(((Workspace) WorkspaceProvider.getInstance().getWorkspace())
 			.getProjectSpaces().get(0).getProject());
 

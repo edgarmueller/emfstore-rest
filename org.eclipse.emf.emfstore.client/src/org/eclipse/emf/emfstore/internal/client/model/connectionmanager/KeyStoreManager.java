@@ -116,14 +116,14 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		// No changes to exception handling here, due to call nature.
 		if (!keyStoreExists()) {
 			// create directory ~/.emfstore/ if necessary
-			File emfstoreDir = new File(Configuration.getWorkspaceDirectory());
+			File emfstoreDir = new File(Configuration.FILE_INFO.getWorkspaceDirectory());
 			if (!emfstoreDir.exists()) {
 				emfstoreDir.mkdir();
 			}
 			InputStream inputStream = getClass().getResourceAsStream(KEYSTORENAME);
 			try {
 				// configure file
-				File clientKeyTarget = new File(Configuration.getWorkspaceDirectory() + KEYSTORENAME);
+				File clientKeyTarget = new File(Configuration.FILE_INFO.getWorkspaceDirectory() + KEYSTORENAME);
 				// copy to destination
 				FileUtil.copyFile(inputStream, clientKeyTarget);
 			} catch (IOException e) {
@@ -200,7 +200,8 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String,
 	 *      java.lang.String)
 	 */
-	public void addCertificate(String alias, String path) throws ESInvalidCertificateException, ESCertificateStoreException {
+	public void addCertificate(String alias, String path) throws ESInvalidCertificateException,
+		ESCertificateStoreException {
 		FileInputStream fileInputStream = null;
 		try {
 			fileInputStream = new FileInputStream(path);
@@ -369,7 +370,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @return a path
 	 */
 	public String getPathToKeyStore() {
-		return Configuration.getWorkspaceDirectory() + KEYSTORENAME;
+		return Configuration.FILE_INFO.getWorkspaceDirectory() + KEYSTORENAME;
 	}
 
 	/**
@@ -452,7 +453,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	public String getDefaultCertificate() {
 		if (defaultCertificate != null) {
 			return defaultCertificate;
-		} else if (Configuration.isDeveloperVersion()) {
+		} else if (Configuration.VERSIONING.isDeveloperVersion()) {
 			return DEFAULT_CERTIFICATE;
 		} else {
 			return DEFAULT_CERTIFICATE;

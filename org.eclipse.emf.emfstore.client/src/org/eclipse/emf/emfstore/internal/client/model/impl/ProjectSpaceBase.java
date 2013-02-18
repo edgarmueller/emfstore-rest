@@ -287,7 +287,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private boolean performChecksumCheck(PrimaryVersionSpec baseVersion, Project project) {
 
-		if (Configuration.isChecksumCheckActive()) {
+		if (Configuration.ClIENT_BEHAVIOR.isChecksumCheckActive()) {
 			long expectedChecksum = baseVersion.getProjectStateChecksum();
 			try {
 				long computedChecksum = ModelUtil.computeChecksum(project);
@@ -533,9 +533,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// are not different, then reinitialize operations URI
 		// TODO: first case kills change package
 		if (this.eResource() == eResource) {
-			String localChangePackageFileName = Configuration.getWorkspaceDirectory()
-				+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
-				+ this.getIdentifier() + Configuration.getLocalChangePackageFileExtension();
+
+			String localChangePackageFileName = Configuration.FILE_INFO.getWorkspaceDirectory()
+				+ Configuration.FILE_INFO.ProjectSpaceDirectoryPrefix + getIdentifier() + File.separatorChar
+				+ this.getIdentifier() + Configuration.FILE_INFO.getLocalChangePackageFileExtension();
+
 			eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
 		} else {
 			eResource.getContents().remove(0);
@@ -612,7 +614,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void init() {
 		initCrossReferenceAdapter();
 
-		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
+		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.ClIENT_BEHAVIOR.getEditingDomain()
+			.getCommandStack();
 
 		fileTransferManager = new FileTransferManager(this);
 
@@ -704,20 +707,24 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void initResources(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 		initCompleted = true;
-		String projectSpaceFileNamePrefix = Configuration.getWorkspaceDirectory()
-			+ Configuration.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
+
+		String projectSpaceFileNamePrefix = Configuration.FILE_INFO.getWorkspaceDirectory()
+			+ Configuration.FILE_INFO.ProjectSpaceDirectoryPrefix + getIdentifier() + File.separatorChar;
+
 		String projectSpaceFileName = projectSpaceFileNamePrefix + this.getIdentifier()
-			+ Configuration.getProjectSpaceFileExtension();
+			+ Configuration.FILE_INFO.ProjectSpaceFileExtension;
+
 		String localChangePackageFileName = projectSpaceFileNamePrefix + this.getIdentifier()
-			+ Configuration.getLocalChangePackageFileExtension();
-		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix + Configuration.getProjectFolderName()
+			+ Configuration.FILE_INFO.LocalChangePackageExtension;
+
+		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix + Configuration.FILE_INFO.ProjectFolderName
 			+ File.separatorChar;
 		URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
 		URI localChangePackageURI = URI.createFileURI(localChangePackageFileName);
 
 		setResourceCount(0);
 		String fileName = projectFragementsFileNamePrefix + getResourceCount()
-			+ Configuration.getProjectFragmentFileExtension();
+			+ Configuration.FILE_INFO.ProjectFragmentExtension;
 		URI fileURI = URI.createFileURI(fileName);
 
 		List<Resource> resources = new ArrayList<Resource>();
@@ -767,9 +774,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// delete project to notify listeners
 		getProject().delete();
 
-		// /////////////
-		String pathToProject = Configuration.getWorkspaceDirectory() + Configuration.getProjectSpaceDirectoryPrefix()
-			+ getIdentifier();
+		String pathToProject = Configuration.FILE_INFO.getWorkspaceDirectory()
+			+ Configuration.FILE_INFO.ProjectSpaceDirectoryPrefix + getIdentifier();
 
 		resourceSet.getResources().remove(getProject().eResource());
 		resourceSet.getResources().remove(eResource());
@@ -1299,7 +1305,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			getProject().eAdapters().remove(crossReferenceAdapter);
 		}
 
-		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getEditingDomain().getCommandStack();
+		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.ClIENT_BEHAVIOR.getEditingDomain()
+			.getCommandStack();
 		commandStack.removeCommandStackObserver(operationManager);
 		commandStack.removeCommandStackObserver(resourcePersister);
 

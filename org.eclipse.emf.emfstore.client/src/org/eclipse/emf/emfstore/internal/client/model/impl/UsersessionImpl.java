@@ -571,7 +571,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		ServerInfo copy = ModelUtil.clone(serverInfo);
 		copy.setLastUsersession(null);
 		AuthenticationInformation authenticationInformation = connectionManager.logIn(username, getPassword(), copy,
-			Configuration.getClientVersion());
+			Configuration.VERSIONING.getClientVersion());
 		getServerInfo().setLastUsersession(this);
 		this.setSessionId(authenticationInformation.getSessionId());
 		this.setACUser(authenticationInformation.getResolvedACUser());

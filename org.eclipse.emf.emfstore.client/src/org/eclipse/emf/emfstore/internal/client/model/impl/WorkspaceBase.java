@@ -535,7 +535,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getEditingDomain()
 	 */
 	public EditingDomain getEditingDomain() {
-		return Configuration.getEditingDomain();
+		return Configuration.ClIENT_BEHAVIOR.getEditingDomain();
 	}
 
 	/**

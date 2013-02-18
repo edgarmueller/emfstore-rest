@@ -61,8 +61,8 @@ public class XmlRpcClientManager {
 			config.setServerURL(createURL(serverInfo));
 			config.setEnabledForExceptions(true);
 			config.setEnabledForExtensions(true);
-			config.setConnectionTimeout(Configuration.getXMLRPCConnectionTimeout());
-			config.setReplyTimeout(Configuration.getXMLRPCReplyTimeout());
+			config.setConnectionTimeout(Configuration.XML_RPC.getXMLRPCConnectionTimeout());
+			config.setReplyTimeout(Configuration.XML_RPC.getXMLRPCReplyTimeout());
 			config.setContentLengthOptional(true);
 
 			client = new XmlRpcClient();
