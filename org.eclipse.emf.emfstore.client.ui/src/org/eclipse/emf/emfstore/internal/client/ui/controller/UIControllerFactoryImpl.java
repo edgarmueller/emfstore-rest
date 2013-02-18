@@ -40,8 +40,8 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 		return new UICreateLocalProjectController(shell).execute();
 	}
 
-	public ESLocalProject createLocalProject(Shell shell, String name, String description) {
-		return new UICreateLocalProjectController(shell, name, description).execute();
+	public ESLocalProject createLocalProject(Shell shell, String name) {
+		return new UICreateLocalProjectController(shell, name).execute();
 	}
 
 	public ESRemoteProject createRemoteProject(Shell shell) {

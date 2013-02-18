@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Text;
  * 
  * @author shterev
  */
+// TODO: remove description
 public class CreateProjectDialog extends TitleAreaDialog {
 
 	private Text txtProjectName;

@@ -28,7 +28,6 @@ import org.eclipse.swt.widgets.Shell;
 public class UICreateLocalProjectController extends AbstractEMFStoreUIController<ESLocalProject> {
 
 	private final String name;
-	private final String description;
 
 	/**
 	 * Constructor.
@@ -39,7 +38,6 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 	public UICreateLocalProjectController(Shell shell) {
 		super(shell);
 		name = null;
-		description = null;
 	}
 
 	/**
@@ -52,26 +50,24 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 	 * @param description
 	 *            an optional description for the project. May be <code>null</code>
 	 */
-	public UICreateLocalProjectController(Shell shell, String name, String description) {
+	public UICreateLocalProjectController(Shell shell, String name) {
 		super(shell);
 		this.name = name;
-		this.description = description == null ? "" : description;
 	}
 
 	private ESLocalProject createLocalProject() {
 		CreateProjectDialog dialog = new CreateProjectDialog(getShell());
 		if (dialog.open() == Dialog.OK) {
 			String projectName = dialog.getName();
-			String description = dialog.getDescription();
 
-			return createLocalProject(projectName, description);
+			return createLocalProject(projectName);
 		}
 
 		return null;
 	}
 
-	private ESLocalProject createLocalProject(final String name, final String description) {
-		return WorkspaceProvider.getInstance().getWorkspace().createLocalProject(name, description);
+	private ESLocalProject createLocalProject(final String name) {
+		return WorkspaceProvider.getInstance().getWorkspace().createLocalProject(name);
 	}
 
 	/**
@@ -85,6 +81,6 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 		if (name == null) {
 			return createLocalProject();
 		}
-		return createLocalProject(name, description);
+		return createLocalProject(name);
 	}
 }
