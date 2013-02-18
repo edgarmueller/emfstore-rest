@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -33,7 +35,7 @@ public interface ILoginDialogController {
 	 * @throws ESException
 	 *             in case the log-in of the user session fails
 	 */
-	void validate(Usersession usersession) throws ESException;
+	void validate(ESUsersession usersession) throws ESException;
 
 	/**
 	 * Whether the login controller has an {@link Usersession} assigned.
@@ -47,7 +49,7 @@ public interface ILoginDialogController {
 	 * 
 	 * @return the assigned user session or <code>null</code>, if none exists
 	 */
-	Usersession getUsersession();
+	ESUsersession getUsersession();
 
 	/**
 	 * Returns the available {@link Usersession}s based on server info object, that is retrieved via
@@ -55,7 +57,7 @@ public interface ILoginDialogController {
 	 * 
 	 * @return all available user sessions as an array.
 	 */
-	Usersession[] getKnownUsersessions();
+	ESUsersession[] getKnownUsersessions();
 
 	/**
 	 * Returns the name of the {@link ServerInfo} that may be retrieved via {@link getServerInfo()}.
@@ -71,5 +73,5 @@ public interface ILoginDialogController {
 	 * 
 	 * @return the server info, if any
 	 */
-	ServerInfo getServerInfo();
+	ESServer getServerInfo();
 }

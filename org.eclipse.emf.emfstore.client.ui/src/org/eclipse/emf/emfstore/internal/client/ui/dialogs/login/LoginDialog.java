@@ -10,7 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -53,7 +55,7 @@ public class LoginDialog extends TitleAreaDialog {
 	private final ILoginDialogController controller;
 	private Usersession selectedUsersession;
 	private boolean passwordModified;
-	private Usersession[] knownUsersessions;
+	private ESUsersession[] knownUsersessions;
 
 	/**
 	 * Create the dialog.
@@ -169,12 +171,12 @@ public class LoginDialog extends TitleAreaDialog {
 	 * @param usersession
 	 *            the user session to be loaded
 	 */
-	private void loadUsersession(Usersession usersession) {
+	private void loadUsersession(ESUsersession usersession) {
 		if (usersession != null && selectedUsersession == usersession) {
 			return;
 		}
 
-		selectedUsersession = usersession;
+		selectedUsersession = (Usersession) usersession;
 
 		// reset fields
 		passwordField.setMessage("");
@@ -214,12 +216,13 @@ public class LoginDialog extends TitleAreaDialog {
 
 			// try to find usersession with same username in order to avoid duplicates
 			if (candidate == null) {
-				candidate = getUsersessionIfKnown(username);
+				candidate = (Usersession) getUsersessionIfKnown(username);
 			}
 
 			if (candidate == null) {
 				candidate = ModelFactory.eINSTANCE.createUsersession();
-				candidate.setServerInfo(controller.getServerInfo());
+				// TODO: cast
+				candidate.setServerInfo((ServerInfo) controller.getServerInfo());
 				candidate.setUsername(username);
 			}
 
@@ -235,8 +238,8 @@ public class LoginDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-	private Usersession getUsersessionIfKnown(String username) {
-		for (Usersession session : knownUsersessions) {
+	private ESUsersession getUsersessionIfKnown(String username) {
+		for (ESUsersession session : knownUsersessions) {
 			if (session.getUsername().equals(username)) {
 				return session;
 			}

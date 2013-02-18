@@ -15,6 +15,7 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -36,8 +37,8 @@ import org.eclipse.swt.widgets.Display;
  */
 public class LoginDialogController implements ILoginDialogController {
 
-	private Usersession usersession;
-	private ServerInfo serverInfo;
+	private ESUsersession usersession;
+	private ESServer server;
 
 	/**
 	 * 
@@ -57,12 +58,12 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	private ESUsersession login(final boolean force) throws ESException {
-		return RunInUI.WithException.runWithResult(new Callable<Usersession>() {
-			public Usersession call() throws Exception {
+		return RunInUI.WithException.runWithResult(new Callable<ESUsersession>() {
+			public ESUsersession call() throws Exception {
 
-				if (serverInfo != null && serverInfo.getLastUsersession() != null
-					&& serverInfo.getLastUsersession().isLoggedIn() && !force) {
-					return serverInfo.getLastUsersession();
+				if (server != null && server.getLastUsersession() != null
+					&& server.getLastUsersession().isLoggedIn() && !force) {
+					return server.getLastUsersession();
 				}
 
 				LoginDialog dialog = new LoginDialog(Display.getCurrent().getActiveShell(), LoginDialogController.this);
@@ -107,7 +108,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#validate(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
-	public void validate(Usersession usersession) throws ESException {
+	public void validate(ESUsersession session) throws ESException {
+
+		Usersession usersession = (Usersession) session;
+
 		// TODO login code
 		usersession.logIn();
 		// if successful, else exception is thrown prior reaching this code
@@ -127,7 +131,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getUsersession()
 	 */
-	public Usersession getUsersession() {
+	public ESUsersession getUsersession() {
 		return usersession;
 	}
 
@@ -137,11 +141,11 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getServerInfo()
 	 */
-	public ServerInfo getServerInfo() {
-		if (serverInfo != null) {
-			return serverInfo;
+	public ESServer getServerInfo() {
+		if (server != null) {
+			return server;
 		}
-		return usersession.getServerInfo();
+		return usersession.getServer();
 	}
 
 	/**
@@ -149,7 +153,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * with the given {@link ServerInfo}.
 	 * 
 	 * 
-	 * @param serverInfo
+	 * @param server
 	 *            the server info to be used in order to determine a valid usersession
 	 * @param force
 	 *            whether to force requesting the password
@@ -157,8 +161,8 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public ESUsersession login(ServerInfo serverInfo, boolean force) throws ESException {
-		this.serverInfo = serverInfo;
+	public ESUsersession login(ESServer server, boolean force) throws ESException {
+		this.server = server;
 		this.usersession = null;
 		return login(force);
 	}
@@ -173,8 +177,8 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public void login(Usersession usersession, boolean force) throws ESException {
-		this.serverInfo = null;
+	public void login(ESUsersession usersession, boolean force) throws ESException {
+		this.server = null;
 		this.usersession = usersession;
 		login(force);
 	}
@@ -184,14 +188,14 @@ public class LoginDialogController implements ILoginDialogController {
 	 * with the given {@link ServerInfo}.
 	 * 
 	 * 
-	 * @param serverInfo
+	 * @param server
 	 *            the server info to be used in order to determine a valid usersession
 	 * @return a logged-in usersession
 	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public ESUsersession login(ServerInfo serverInfo) throws ESException {
-		this.serverInfo = serverInfo;
+	public ESUsersession login(ESServer server) throws ESException {
+		this.server = server;
 		this.usersession = null;
 		return login(false);
 	}
@@ -204,8 +208,8 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public void login(Usersession usersession) throws ESException {
-		this.serverInfo = null;
+	public void login(ESUsersession usersession) throws ESException {
+		this.server = null;
 		this.usersession = usersession;
 		login(false);
 	}
