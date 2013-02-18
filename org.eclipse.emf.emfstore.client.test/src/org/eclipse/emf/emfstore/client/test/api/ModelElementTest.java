@@ -571,19 +571,20 @@ public class ModelElementTest {
 
 	@Test
 	public void testUndoMoveOperation() {
-		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
+		final ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+			"SimpleEmptyProject", "");
+
 		final Tournament tournamentA = ProjectChangeUtil.createTournament(true);
 		final Tournament tournamentB = ProjectChangeUtil.createTournament(true);
+		final Matchup matchupA = ProjectChangeUtil.createMatchup(null, null);
 
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
 				localProject.getModelElements().add(tournamentA);
-				localProject.getModelElements().add(tournamentB);
+
 			}
 		}.run(false);
-
-		final Matchup matchupA = ProjectChangeUtil.createMatchup(null, null);
 
 		new EMFStoreCommand() {
 			@Override
@@ -592,10 +593,17 @@ public class ModelElementTest {
 			}
 		}.run(false);
 
+		ESModelElementId matchupID = localProject.getModelElementId(matchupA);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.getModelElements().add(tournamentB);
+			}
+		}.run(false);
+
 		assertEquals(1, tournamentA.getMatchups().size());
 		assertTrue(tournamentA.getMatchups().contains(matchupA));
-
-		EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(tournamentA);
 
 		new EMFStoreCommand() {
 			@Override
@@ -603,6 +611,8 @@ public class ModelElementTest {
 				tournamentA.getMatchups().remove(matchupA);
 			}
 		}.run(false);
+
+		assertEquals(2, localProject.getModelElements().size());
 
 		new EMFStoreCommand() {
 			@Override
@@ -614,7 +624,9 @@ public class ModelElementTest {
 		assertEquals(1, tournamentB.getMatchups().size());
 		assertTrue(tournamentB.getMatchups().contains(matchupA));
 		assertEquals(0, tournamentA.getMatchups().size());
+		assertEquals(2, localProject.getModelElements().size());
 
+		// undos move from root to container
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -624,6 +636,7 @@ public class ModelElementTest {
 
 		assertEquals(0, tournamentB.getMatchups().size());
 		assertEquals(0, tournamentA.getMatchups().size());
+		assertEquals(3, localProject.getModelElements().size());
 
 		new EMFStoreCommand() {
 			@Override
@@ -632,7 +645,18 @@ public class ModelElementTest {
 			}
 		}.run(false);
 
-		// assertTrue(tournamentA.getMatchups().contains(matchupA));
+		assertEquals(0, tournamentA.getMatchups().size());
+		assertEquals(2, localProject.getModelElements().size());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				localProject.undoLastOperation();
+			}
+		}.run(false);
+
 		assertEquals(1, tournamentA.getMatchups().size());
+		assertEquals(2, localProject.getModelElements().size());
+		assertEquals(matchupID, localProject.getModelElementId(tournamentA.getMatchups().get(0)));
 	}
 }
