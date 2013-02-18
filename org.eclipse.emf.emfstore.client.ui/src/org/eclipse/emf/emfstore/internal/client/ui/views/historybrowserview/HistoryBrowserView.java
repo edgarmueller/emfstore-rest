@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -95,6 +96,7 @@ import org.eclipse.ui.part.ViewPart;
  * @author Shterev
  * 
  */
+// TODO: review setInput methods
 public class HistoryBrowserView extends ViewPart implements ProjectSpaceContainer {
 
 	// Config
@@ -411,6 +413,10 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		}
 	}
 
+	public void setInput(ESLocalProject localProject) {
+		setInput((EObject) localProject);
+	}
+
 	private void showAll(boolean show) {
 		showAllVersions = show;
 		showAllBranches.setChecked(show);
@@ -454,7 +460,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					for (Object o : elsd.getResult()) {
 						ProjectSpace resultSelection = (ProjectSpace) o;
 						if (resultSelection != null) {
-							setInput(resultSelection);
+							setInput((EObject) resultSelection);
 						}
 						break;
 					}
@@ -471,7 +477,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		WorkspaceProvider.getObserverBus().register(new DeleteProjectSpaceObserver() {
 			public void projectSpaceDeleted(ProjectSpace projectSpace) {
 				if (HistoryBrowserView.this.projectSpace == projectSpace) {
-					setInput(null);
+					setInput((EObject) null);
 				}
 			}
 		});
