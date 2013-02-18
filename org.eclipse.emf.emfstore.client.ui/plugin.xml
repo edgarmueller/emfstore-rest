@@ -851,4 +851,10 @@
          </variable>
       </sourceProvider>
    </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.usersessionProvider">
+      <sessionProvider
+            class="org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.BasicUISessionProvider">
+      </sessionProvider>
+   </extension>
 </plugin>
