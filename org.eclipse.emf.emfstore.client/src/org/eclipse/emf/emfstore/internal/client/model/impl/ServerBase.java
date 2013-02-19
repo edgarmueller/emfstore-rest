@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -53,6 +54,15 @@ public abstract class ServerBase extends EObjectImpl implements ESServer, Server
 		}.execute());
 	}
 
+	private ServerCall<List<ProjectInfo>> getRemoteProjectsServerCall() {
+		return new ServerCall<List<ProjectInfo>>() {
+			@Override
+			protected List<ProjectInfo> run() throws ESException {
+				return getConnectionManager().getProjectList(getSessionId());
+			}
+		};
+	}
+
 	private LogMessage createLogmessage(ESUsersession usersession, final String projectName) {
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
 		log.setMessage("Creating project '" + projectName + "'");
@@ -63,14 +73,7 @@ public abstract class ServerBase extends EObjectImpl implements ESServer, Server
 
 	public List<ESRemoteProject> getRemoteProjects(ESUsersession usersession)
 		throws ESException {
-
-		List<ProjectInfo> projectInfos = new ServerCall<List<ProjectInfo>>(usersession) {
-			@Override
-			protected List<ProjectInfo> run() throws ESException {
-				return getConnectionManager().getProjectList(getSessionId());
-			}
-		}.execute();
-
+		List<ProjectInfo> projectInfos = getRemoteProjectsServerCall().setUsersession(usersession).execute();
 		return copy(mapToRemoteProject(projectInfos));
 	}
 
@@ -93,15 +96,27 @@ public abstract class ServerBase extends EObjectImpl implements ESServer, Server
 	 * @generated NOT
 	 */
 	public Usersession login(String name, String password) throws ESException {
+
+		WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProvider.INSTANCE.getWorkspace();
+
+		if (!workspace.getServers().contains(this)) {
+			workspace.addServer(this);
+		}
+
 		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setUsername(name);
 		usersession.setPassword(password);
 		usersession.setServerInfo(this);
+
+		workspace.getUsersessions().add(usersession);
+		workspace.save();
+
 		usersession.logIn();
 		return usersession;
 	}
 
 	public List<ESRemoteProject> getRemoteProjects() throws ESException {
-		return getRemoteProjects(null);
+		List<ProjectInfo> projectInfos = getRemoteProjectsServerCall().setServer(this).execute();
+		return copy(mapToRemoteProject(projectInfos));
 	}
 }
