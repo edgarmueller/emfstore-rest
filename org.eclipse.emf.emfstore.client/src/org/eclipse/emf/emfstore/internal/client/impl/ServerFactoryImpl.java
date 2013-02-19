@@ -15,6 +15,8 @@ package org.eclipse.emf.emfstore.internal.client.impl;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESServerFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 
 /**
@@ -43,7 +45,9 @@ public final class ServerFactoryImpl implements ESServerFactory {
 	 * @see org.eclipse.emf.emfstore.client.ESServerFactory#getServer(java.lang.String, int, java.lang.String)
 	 */
 	public ESServer getServer(String url, int port, String certificate) {
-		return EMFStoreClientUtil.createServerInfo(url, port, certificate);
+		ESServer server = EMFStoreClientUtil.createServerInfo(url, port, certificate);
+		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getServerInfos().add((ServerInfo) server);
+		return server;
 	}
 
 	/**
