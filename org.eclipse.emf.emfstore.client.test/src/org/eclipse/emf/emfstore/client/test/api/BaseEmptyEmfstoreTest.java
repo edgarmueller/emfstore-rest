@@ -18,6 +18,7 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.Activator;
 import org.eclipse.emf.emfstore.client.test.TestSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
@@ -48,10 +49,9 @@ public abstract class BaseEmptyEmfstoreTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		deleteLocalProjects();
-		deleteRemoteProjects();
 		stopEMFStore();
 		((TestSessionProvider) WorkspaceProvider.getInstance().getSessionManager().getSessionProvider()).clearSession();
+		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).save();
 	}
 
 	private static void stopEMFStore() {
@@ -73,7 +73,7 @@ public abstract class BaseEmptyEmfstoreTest {
 
 	@After
 	public void tearDown() throws Exception {
-
+		deleteLocalProjects();
 	}
 
 	private static void deleteResources(String pathToMainFile) throws FatalESException {
@@ -114,7 +114,8 @@ public abstract class BaseEmptyEmfstoreTest {
 	}
 
 	protected static void deleteRemoteProjects() throws IOException, FatalESException, ESException {
-		for (ESRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0).getRemoteProjects()) {
+		for (ESRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0)
+			.getRemoteProjects()) {
 			project.delete(new NullProgressMonitor());
 		}
 	}

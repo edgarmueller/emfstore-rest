@@ -7,9 +7,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.League;
@@ -20,6 +18,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
@@ -47,11 +46,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-		List<ESLocalProject> projects = new ArrayList<ESLocalProject>(workspace.getLocalProjects());
-		for (ESLocalProject lp : projects) {
-			lp.delete(new NullProgressMonitor());
-		}
-		super.tearDown();
+		deleteLocalProjects();
 	}
 
 	@Test
@@ -78,24 +73,17 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		assertFalse(localProject.isShared());
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testCommit() throws ESException {
 		// can not commit an unshared project
-		localProject.commit();
+		localProject.commit(new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testCommit2() throws ESException {
 		// can not commit an unshared project
 		localProject.commit(ESLogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
-		fail("Should not be able to commit an unshared Project!");
-	}
-
-	@Test(expected = RuntimeException.class)
-	public void testCommitToBranch() throws ESException {
-		localProject.commitToBranch(ESVersionSpec.FACTORY.createBRANCH(localProject.getBaseVersion()),
-			ESLogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 
@@ -106,7 +94,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		assertNull(version);
 	}
 
-	@Test(expected = ESException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testGetBranches() throws ESException {
 		localProject.getBranches(new NullProgressMonitor());
 		fail("Should not be able to getBranches from an unshared Project!");
@@ -276,19 +264,19 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		assertFalse(localProject.getAllModelElements().contains(player3));
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testUpdate() throws ESException {
-		localProject.update();
+		localProject.update(new NullProgressMonitor());
 		fail("Should not be able to update an unshared Project!");
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testUpdateVersion() throws ESException {
-		localProject.update(localProject.getBaseVersion());
+		localProject.update(localProject.getBaseVersion(), null, new NullProgressMonitor());
 		fail("Should not be able to update an unshared Project!");
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testUpdateVersionCallback() throws ESException {
 		localProject.update(localProject.getBaseVersion(), null, new NullProgressMonitor());
 		fail("Should not be able to update an unshared Project!");

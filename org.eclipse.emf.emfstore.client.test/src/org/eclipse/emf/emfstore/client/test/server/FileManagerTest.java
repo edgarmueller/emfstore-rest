@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
@@ -47,7 +48,7 @@ public class FileManagerTest extends TransmissionTests {
 		getProjectSpace1().getProject().addModelElement(useCase);
 		getProjectSpace1().commit(msg, null, null);
 
-		getProjectSpace2().update();
+		getProjectSpace2().update(new NullProgressMonitor());
 		FileDownloadStatus status = getProjectSpace2().getFile(id);
 		assertTrue(status != null);
 		// wait for file to be completely transferred

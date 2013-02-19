@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.model.observer.ESMergeObserver;
@@ -352,8 +353,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit()
 	 */
-	public PrimaryVersionSpec commit() throws ESException {
-		return commit(null, null, new NullProgressMonitor());
+	public PrimaryVersionSpec commit(IProgressMonitor monitor) throws ESException {
+		return commit(null, null, monitor);
 	}
 
 	/**
@@ -366,7 +367,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public PrimaryVersionSpec commit(ESLogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
 		throws ESException {
-		checkIsShared();
 		return new CommitController(this, (LogMessage) logMessage, callback, monitor).execute();
 	}
 
@@ -375,7 +375,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public PrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage,
 		ICommitCallback callback, IProgressMonitor monitor) throws ESException {
-		checkIsShared();
 		return new CommitController(this, (BranchVersionSpec) branch, (LogMessage) logMessage, callback, monitor)
 			.execute();
 	}
@@ -960,8 +959,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void checkIsShared() {
 		if (!isShared()) {
-			// TODO: OTS runtimeException?
-			throw new RuntimeException("Project has not been shared.");
+			throw new ESProjectNotSharedException();
 		}
 	}
 
@@ -971,6 +969,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public List<ESBranchInfo> getBranches(IProgressMonitor monitor) throws ESException {
+
+		checkIsShared();
+
 		// TODO: OTS use monitor
 		return copy(new ServerCall<List<BranchInfo>>(this) {
 			@Override
@@ -1252,18 +1253,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update()
 	 */
-	public PrimaryVersionSpec update() throws ESException {
-		return update(Versions.createHEAD(getBaseVersion()));
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec)
-	 */
-	public PrimaryVersionSpec update(final ESVersionSpec version) throws ESException {
-		return update(version, null, null);
+	public PrimaryVersionSpec update(IProgressMonitor monitor) throws ESException {
+		return update(Versions.createHEAD(getBaseVersion()), null, monitor);
 	}
 
 	/**

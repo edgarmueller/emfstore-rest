@@ -1,10 +1,16 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
+import java.io.IOException;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.Before;
 
@@ -24,12 +30,16 @@ public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-		workspace.removeServer(server);
-		for (ESRemoteProject project : server.getRemoteProjects())
-			project.delete(new NullProgressMonitor());
-		for (ESLocalProject project : workspace.getLocalProjects())
-			project.delete(new NullProgressMonitor());
+		deleteRemoteProjects(usersession);
 		super.tearDown();
+		// deleteLocalProjects();
 	}
 
+	protected static void deleteRemoteProjects(ESUsersession usersession) throws IOException, FatalESException,
+		ESException {
+		for (ESRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0)
+			.getRemoteProjects(usersession)) {
+			project.delete(usersession, new NullProgressMonitor());
+		}
+	}
 }

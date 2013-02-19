@@ -6,12 +6,20 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,9 +34,31 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
+		deleteRemoteProjects(usersession);
 		super.tearDown();
-		deleteRemoteProjects();
 		// deleteLocalProjects();
+	}
+
+	@AfterClass
+	public static void tearDownClass() {
+		for (ServerInfo serverInfo : ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getServerInfos()) {
+			Usersession lastUsersession = serverInfo.getLastUsersession();
+			if (lastUsersession != null) {
+				lastUsersession.setServerInfo(null);
+			}
+			serverInfo.setLastUsersession(null);
+		}
+		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getServerInfos().clear();
+		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).save();
+		System.out.println("");
+	}
+
+	protected static void deleteRemoteProjects(ESUsersession usersession) throws IOException, FatalESException,
+		ESException {
+		for (ESRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0)
+			.getRemoteProjects(usersession)) {
+			project.delete(usersession, new NullProgressMonitor());
+		}
 	}
 
 	@Test

@@ -14,6 +14,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -28,17 +29,25 @@ public class TestSessionProvider extends AbstractSessionProvider {
 
 	}
 
-	private void initSession() {
+	private void initSession(ESServer serverInfo) {
+
+		if (serverInfo == null) {
+			serverInfo = SetupHelper.getServerInfo();
+		}
+
+		Workspace currentWorkspace = (Workspace) WorkspaceProvider.INSTANCE.getWorkspace();
+		((WorkspaceBase) currentWorkspace).save();
+		if (!((WorkspaceBase) currentWorkspace).getServerInfos().contains(serverInfo)) {
+			currentWorkspace.addServer(serverInfo);
+		}
+
 		// ServerInfo serverInfo = SetupHelper.getServerInfo();
 		session = ModelFactory.eINSTANCE.createUsersession();
 		// session.setServerInfo(serverInfo);
 		session.setUsername("super");
 		session.setPassword("super");
 		session.setSavePassword(true);
-		session.setServerInfo(SetupHelper.getServerInfo());
-
-		Workspace currentWorkspace = (Workspace) WorkspaceProvider.INSTANCE.getWorkspace();
-		// currentWorkspace.getServerInfos().add(serverInfo);
+		session.setServerInfo((ServerInfo) serverInfo);
 		currentWorkspace.getUsersessions().add(session);
 		((WorkspaceBase) currentWorkspace).save();
 	}
@@ -57,7 +66,7 @@ public class TestSessionProvider extends AbstractSessionProvider {
 
 		if (session == null
 			|| !((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
-			initSession();
+			initSession(serverInfo);
 		}
 
 		return session;

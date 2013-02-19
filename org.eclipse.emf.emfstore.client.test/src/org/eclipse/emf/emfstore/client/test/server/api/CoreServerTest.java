@@ -136,7 +136,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				try {
-					return (PrimaryVersionSpec) ps.commit();
+					return (PrimaryVersionSpec) ps.commit(new NullProgressMonitor());
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}

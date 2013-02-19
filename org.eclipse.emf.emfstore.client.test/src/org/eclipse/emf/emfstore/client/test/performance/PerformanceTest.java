@@ -310,7 +310,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						projectSpace1.update();
+						projectSpace1.update(new NullProgressMonitor());
 					} catch (ESException e) {
 						e.printStackTrace();
 					}
@@ -348,7 +348,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						projectSpace2.update();
+						projectSpace2.update(new NullProgressMonitor());
 					} catch (ESException e) {
 						e.printStackTrace();
 					}

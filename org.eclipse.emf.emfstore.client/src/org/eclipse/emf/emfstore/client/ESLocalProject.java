@@ -50,13 +50,14 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * </p>
 	 * <p>
 	 * <b>Note</b>: The commit will be executed in headless mode, so no callback can be specified. If clients would like
-	 * to influence the commit behavior, they should use {@link #commit(ESLogMessage, ICommitCallback, IProgressMonitor)}.
+	 * to influence the commit behavior, they should use
+	 * {@link #commit(ESLogMessage, ICommitCallback, IProgressMonitor)}.
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
 	 * @throws ESException in case any error occurs during commit
 	 */
-	ESPrimaryVersionSpec commit() throws ESException;
+	ESPrimaryVersionSpec commit(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * <p>
@@ -129,25 +130,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @throws ChangeConflictException in case a conflict is detected on update
 	 * @throws ESException in case update fails for any other reason
 	 */
-	ESPrimaryVersionSpec update() throws ChangeConflictException, ESException;
-
-	/**
-	 * <p>
-	 * Updates the project to the given version from the server.
-	 * </p>
-	 * <p>
-	 * If the project has not been shared yet, a
-	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
-	 * </p>
-	 * 
-	 * @param version
-	 *            the version to update to
-	 * @return the new base version
-	 * 
-	 * @throws ChangeConflictException in case a conflict is detected on update
-	 * @throws ESException in case update fails for any other reason
-	 */
-	ESPrimaryVersionSpec update(ESVersionSpec version) throws ChangeConflictException, ESException;
+	ESPrimaryVersionSpec update(IProgressMonitor monitor) throws ChangeConflictException, ESException;
 
 	/**
 	 * <p>

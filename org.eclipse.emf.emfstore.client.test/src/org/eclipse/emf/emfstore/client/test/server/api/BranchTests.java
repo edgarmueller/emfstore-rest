@@ -174,7 +174,7 @@ public class BranchTests extends CoreServerTest {
 			@Override
 			protected void doRun() {
 				try {
-					ps.update();
+					ps.update(new NullProgressMonitor());
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}

@@ -57,7 +57,7 @@ public class SampleAPITest extends CoreServerTest {
 					getProjectSpace().shareProject(new NullProgressMonitor());
 
 					testElement.setName("1");
-					getProjectSpace().commit();
+					getProjectSpace().commit(new NullProgressMonitor());
 
 					testElement.setName("2");
 					getProjectSpace().commitToBranch(Versions.createBRANCH("test"), null, null, null);

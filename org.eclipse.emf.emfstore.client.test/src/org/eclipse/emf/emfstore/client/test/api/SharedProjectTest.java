@@ -74,7 +74,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		try {
 			ESPrimaryVersionSpec base = localProject.getBaseVersion();
 			addPlayerToProject();
-			ESPrimaryVersionSpec head = localProject.commit();
+			ESPrimaryVersionSpec head = localProject.commit(new NullProgressMonitor());
 			assertNotSame(base, head);
 		} catch (ESException e) {
 			log(e);
@@ -237,16 +237,15 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test(expected = BaseVersionOutdatedException.class)
 	public void testMergeAndExpectBaseVersionOutOfDateException() throws ESException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
-		;
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
-		localProject.commit();
+		localProject.commit(monitor);
 		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
 		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
 
 		player.setName("A");
-		localProject.commit();
+		localProject.commit(monitor);
 		checkedoutPlayer.setName("B");
-		checkedoutCopy.commit();
+		checkedoutCopy.commit(monitor);
 	}
 
 	@Test
@@ -254,12 +253,12 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 
 		final NullProgressMonitor monitor = new NullProgressMonitor();
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
-		localProject.commit();
+		localProject.commit(monitor);
 		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
 		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
 
 		player.setName("A");
-		localProject.commit();
+		localProject.commit(monitor);
 		checkedoutPlayer.setName("B");
 		checkedoutCopy.commit(null, new CommitCallbackAdapter() {
 			@Override
@@ -290,7 +289,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			}
 		}, new NullProgressMonitor());
 		assertEquals("B", checkedoutPlayer.getName());
-		localProject.update();
+		localProject.update(monitor);
 		assertEquals("B", player.getName());
 		assertTrue(EMFStoreClientUtil.areEqual(localProject, checkedoutCopy));
 	}

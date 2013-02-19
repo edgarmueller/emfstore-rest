@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -59,6 +60,10 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, IUpdateCallback callback,
 		IProgressMonitor progress) {
 		super(projectSpace);
+
+		if (!projectSpace.isShared()) {
+			throw new ESProjectNotSharedException();
+		}
 
 		// SANITY CHECKS
 		if (version == null) {

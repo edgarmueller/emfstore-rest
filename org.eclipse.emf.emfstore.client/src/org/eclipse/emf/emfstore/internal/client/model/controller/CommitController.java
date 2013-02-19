@@ -15,6 +15,7 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -100,6 +101,10 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 	private PrimaryVersionSpec commit(LogMessage logMessage, final BranchVersionSpec branch)
 		throws InvalidVersionSpecException, BaseVersionOutdatedException, ESException {
+
+		if (!getLocalProject().isShared()) {
+			throw new ESProjectNotSharedException();
+		}
 
 		getProgressMonitor().beginTask("Commiting changes", 100);
 		getProgressMonitor().worked(1);
