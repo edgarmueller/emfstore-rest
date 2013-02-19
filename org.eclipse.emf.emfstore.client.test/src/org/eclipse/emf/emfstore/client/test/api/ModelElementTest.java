@@ -572,7 +572,7 @@ public class ModelElementTest {
 	@Test
 	public void testUndoMoveOperation() {
 		final ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
-			"SimpleEmptyProject", "");
+			"SimpleEmptyProject");
 
 		final Tournament tournamentA = ProjectChangeUtil.createTournament(true);
 		final Tournament tournamentB = ProjectChangeUtil.createTournament(true);
