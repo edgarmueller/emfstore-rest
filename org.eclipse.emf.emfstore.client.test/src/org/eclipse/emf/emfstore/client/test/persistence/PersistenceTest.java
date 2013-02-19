@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.junit.Test;
 
 public class PersistenceTest extends WorkspaceTest {
@@ -32,7 +33,7 @@ public class PersistenceTest extends WorkspaceTest {
 	}
 
 	@Test
-	public void testReinitWorkspace() {
+	public void testReinitWorkspace() throws SerializationException {
 		Configuration.ClIENT_BEHAVIOR.setAutoSave(false);
 		Project originalProject = ModelUtil.clone(((Workspace) WorkspaceProvider.getInstance().getWorkspace())
 			.getProjectSpaces().get(0).getProject());
@@ -49,9 +50,9 @@ public class PersistenceTest extends WorkspaceTest {
 			WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
 		WorkspaceProvider.getInstance().dispose();
 		WorkspaceProvider.getInstance().reinit();
-		assertTrue(ModelUtil.areEqual(
-			((ProjectSpace) WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0)).getProject(),
-			originalProject));
+		Project project = ((ProjectSpace) WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0))
+			.getProject();
+		assertTrue(ModelUtil.areEqual(project, originalProject));
 	}
 
 }

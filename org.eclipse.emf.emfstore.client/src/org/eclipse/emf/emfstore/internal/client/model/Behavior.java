@@ -9,7 +9,6 @@ import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
@@ -55,13 +54,13 @@ public class Behavior {
 	 * @return true, if auto-save is enabled, false otherwise
 	 */
 	public static boolean isAutoSaveEnabled() {
-		return ExtensionRegistry.INSTANCE.getBoolean("org.eclipse.emf.emfstore.client.recordingOptions",
-			AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
-		// if (autoSave == null) {
-		// autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
+		// return ExtensionRegistry.INSTANCE.getBoolean("org.eclipse.emf.emfstore.client.recordingOptions",
 		// AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
-		// }
-		// return autoSave;
+		if (autoSave == null) {
+			autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
+				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
+		}
+		return autoSave;
 	}
 
 	/**
