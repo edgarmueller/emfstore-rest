@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Helper class for creating version specifier.
@@ -89,7 +90,8 @@ public final class Versions {
 	 * @return version spec
 	 */
 	public static PrimaryVersionSpec createPRIMARY(int i) {
-		return createPRIMARY(VersionSpec.BRANCH_DEFAULT_NAME, i);
+		// TODO: remove dependency to ESVersionSpec
+		return createPRIMARY(ESVersionSpec.BRANCH_DEFAULT_NAME, i);
 	}
 
 	/**

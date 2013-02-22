@@ -10,10 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning.impl;
 
-import static org.eclipse.emf.emfstore.internal.common.ListUtil.copy;
-
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
@@ -31,7 +29,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>History Info</b></em>'. <!-- end-user-doc -->
@@ -62,6 +59,12 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @generated
  */
 public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
+
+	/**
+	 * @generated NOT
+	 */
+	private ESHistoryInfoImpl apiImpl;
+
 	/**
 	 * The cached value of the '{@link #getPrimarySpec() <em>Primery Spec</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -729,16 +732,45 @@ public class HistoryInfoImpl extends EObjectImpl implements HistoryInfo {
 		return super.eIsSet(featureID);
 	}
 
-	public List<ESPrimaryVersionSpec> getNextSpecs() {
-		return copy(getNextSpec());
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESHistoryInfoImpl getAPIImpl() {
+
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
 	}
 
-	public List<ESPrimaryVersionSpec> getMergedFromSpecs() {
-		return copy(getMergedFrom());
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
+	 * 
+	 * @generated NOT
+	 */
+	public void setAPIImpl(ESHistoryInfoImpl esHistoryInfoImpl) {
+		apiImpl = esHistoryInfoImpl;
 	}
 
-	public List<ESPrimaryVersionSpec> getMergedToSpecs() {
-		return copy(getMergedTo());
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESHistoryInfoImpl createAPIImpl() {
+		return new ESHistoryInfoImpl(this);
 	}
 
 } // HistoryInfoImpl

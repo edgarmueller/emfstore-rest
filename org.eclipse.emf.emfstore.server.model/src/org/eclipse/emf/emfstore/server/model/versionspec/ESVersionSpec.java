@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionsFactory;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESVersionsFactoryImpl;
 
 /**
  * <p>
@@ -50,7 +50,7 @@ public interface ESVersionSpec {
 	/**
 	 * The factory used for creating {@link ESVersionSpec}s.
 	 */
-	ESVersionFactory FACTORY = VersionsFactory.INSTANCE;
+	ESVersionFactory FACTORY = ESVersionsFactoryImpl.INSTANCE;
 
 	/**
 	 * Returns the branch name.

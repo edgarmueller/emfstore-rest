@@ -15,11 +15,12 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc -->
@@ -27,11 +28,13 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getOperations <em>Operations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getOperations <em>Operations</em>}
+ * </li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getEvents <em>Events</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getLogMessage <em>Log Message</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getVersionProperties <em>Version Properties
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getLogMessage <em>Log Message
  * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getVersionProperties <em>Version
+ * Properties </em>}</li>
  * </ul>
  * </p>
  * 
@@ -39,7 +42,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * @model
  * @generated
  */
-public interface ChangePackage extends EObject, ESChangePackage {
+public interface ChangePackage extends EObject, APIDelegate<ESChangePackageImpl> {
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
@@ -90,7 +93,8 @@ public interface ChangePackage extends EObject, ESChangePackage {
 	LogMessage getLogMessage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getLogMessage
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getLogMessage
 	 * <em>Log Message</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

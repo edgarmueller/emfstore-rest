@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Version Spec</b></em>'.
@@ -30,7 +29,17 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
  * @model abstract="true"
  * @generated
  */
-public interface VersionSpec extends EObject, ESVersionSpec {
+public interface VersionSpec extends EObject {
+
+	/**
+	 * The default branch name 'trunk'.
+	 */
+	String BRANCH_DEFAULT_NAME = "trunk";
+
+	/**
+	 * Global identifier.
+	 */
+	String GLOBAL = "___GLOBAL___";
 
 	/**
 	 * Returns the value of the '<em><b>Branch</b></em>' attribute.

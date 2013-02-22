@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
@@ -34,7 +35,13 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * 
  * @generated
  */
-public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
+public class RangeQueryImpl<T extends ESRangeQueryImpl<?>> extends HistoryQueryImpl implements RangeQuery<T> {
+
+	/**
+	 * @generated NOT
+	 */
+	private T apiImpl;
+
 	/**
 	 * The default value of the '{@link #getUpperLimit() <em>Upper Limit</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -335,5 +342,47 @@ public class RangeQueryImpl extends HistoryQueryImpl implements RangeQuery {
 		result.append(includeOutgoing);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public T getAPIImpl() {
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
+	 * 
+	 * @generated NOT
+	 */
+	public void setAPIImpl(T esRangeQueryImpl) {
+		apiImpl = esRangeQueryImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public T createAPIImpl() {
+		// TODO fix type warnings
+		return (T) new ESRangeQueryImpl(this);
 	}
 } // RangeQueryImpl

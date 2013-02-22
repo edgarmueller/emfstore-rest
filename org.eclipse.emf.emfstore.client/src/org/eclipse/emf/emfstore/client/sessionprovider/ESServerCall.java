@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
  * 
  * @author emueller
  */
-public interface IServerCall {
+public interface ESServerCall {
 
 	/**
 	 * Returns the user session used by the server call.

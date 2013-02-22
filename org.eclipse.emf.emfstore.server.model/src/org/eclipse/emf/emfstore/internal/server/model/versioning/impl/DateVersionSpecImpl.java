@@ -15,6 +15,7 @@ import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESDateVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
@@ -33,9 +34,16 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * @generated
  */
 public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionSpec {
+
+	/**
+	 * @generated NOT
+	 */
+	private ESDateVersionSpecImpl apiImpl;
+
 	/**
 	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDate()
 	 * @generated
 	 * @ordered
@@ -45,6 +53,7 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 	/**
 	 * The cached value of the '{@link #getDate() <em>Date</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDate()
 	 * @generated
 	 * @ordered
@@ -53,6 +62,7 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected DateVersionSpecImpl() {
@@ -61,6 +71,7 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -70,6 +81,7 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Date getDate() {
@@ -78,82 +90,131 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setDate(Date newDate) {
 		Date oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.DATE_VERSION_SPEC__DATE, oldDate, date));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.DATE_VERSION_SPEC__DATE, oldDate,
+				date));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VersioningPackage.DATE_VERSION_SPEC__DATE:
-				return getDate();
+		case VersioningPackage.DATE_VERSION_SPEC__DATE:
+			return getDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VersioningPackage.DATE_VERSION_SPEC__DATE:
-				setDate((Date)newValue);
-				return;
+		case VersioningPackage.DATE_VERSION_SPEC__DATE:
+			setDate((Date) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.DATE_VERSION_SPEC__DATE:
-				setDate(DATE_EDEFAULT);
-				return;
+		case VersioningPackage.DATE_VERSION_SPEC__DATE:
+			setDate(DATE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.DATE_VERSION_SPEC__DATE:
-				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
+		case VersioningPackage.DATE_VERSION_SPEC__DATE:
+			return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (date: ");
 		result.append(date);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESDateVersionSpecImpl getAPIImpl() {
+
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
+	 * 
+	 * @generated NOT
+	 */
+	public void setAPIImpl(ESDateVersionSpecImpl esDateVersionSpecImpl) {
+		apiImpl = esDateVersionSpecImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESDateVersionSpecImpl createAPIImpl() {
+		return new ESDateVersionSpecImpl(this);
 	}
 
 } // DateVersionSpecImpl

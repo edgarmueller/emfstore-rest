@@ -23,7 +23,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
@@ -135,7 +134,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 			} else if (historyQuery instanceof RangeQuery) {
 
-				return versionToHistoryInfo(projectId, handleRangeQuery(projectId, (RangeQuery) historyQuery),
+				return versionToHistoryInfo(projectId, handleRangeQuery(projectId, (RangeQuery<?>) historyQuery),
 					historyQuery.isIncludeChangePackages());
 
 			} else if (historyQuery instanceof PathQuery) {
@@ -148,7 +147,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 	}
 
-	private List<Version> handleRangeQuery(ProjectId projectId, RangeQuery query) throws ESException {
+	private List<Version> handleRangeQuery(ProjectId projectId, RangeQuery<?> query) throws ESException {
 		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 		if (query.isIncludeAllVersions()) {
 			return getAllVersions(project, sourceNumber(query) - query.getLowerLimit(),
@@ -208,7 +207,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			if (version.getPrimarySpec() != null && version.getPrimarySpec().getIdentifier() == 0) {
 				if (version.getProjectState() != null) {
 					for (ModelElementId id : modelElements) {
-						if (version.getProjectState().contains((ESModelElementId) id)) {
+						if (version.getProjectState().contains(id)) {
 							result.add(version);
 							break;
 						}

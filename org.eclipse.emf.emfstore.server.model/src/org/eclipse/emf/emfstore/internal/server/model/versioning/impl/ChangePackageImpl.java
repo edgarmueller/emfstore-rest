@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionProperty;
@@ -63,6 +64,12 @@ import org.eclipse.emf.emfstore.server.model.ESLogMessage;
  * @generated
  */
 public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
+
+	/**
+	 * @generated NOT
+	 */
+	private ESChangePackageImpl apiImpl;
+
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -525,6 +532,47 @@ public class ChangePackageImpl extends EObjectImpl implements ChangePackage {
 			count += changePackage.getOperations().size();
 		}
 		return count;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESChangePackageImpl getAPIImpl() {
+
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
+	 * 
+	 * @generated NOT
+	 */
+	public void setAPIImpl(ESChangePackageImpl esChangePackageImpl) {
+		apiImpl = esChangePackageImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESChangePackageImpl createAPIImpl() {
+		return new ESChangePackageImpl(this);
 	}
 
 } // ChangePackageImpl

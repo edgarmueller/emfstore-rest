@@ -11,7 +11,8 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'.
@@ -32,7 +33,7 @@ import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
  * @model
  * @generated
  */
-public interface BranchInfo extends EObject, ESBranchInfo {
+public interface BranchInfo extends EObject, APIDelegate<ESBranchInfoImpl> {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -50,7 +51,8 @@ public interface BranchInfo extends EObject, ESBranchInfo {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo#getName <em>Name</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo#getName
+	 * <em>Name</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -78,7 +80,8 @@ public interface BranchInfo extends EObject, ESBranchInfo {
 	PrimaryVersionSpec getHead();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo#getHead <em>Head</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo#getHead
+	 * <em>Head</em>}'
 	 * containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->

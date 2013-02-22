@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
@@ -22,17 +23,27 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier <em>Identifier</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PrimaryVersionSpecImpl#getProjectStateChecksum <em>Project State Checksum</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PrimaryVersionSpecImpl#getIdentifier <em>
+ * Identifier</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PrimaryVersionSpecImpl#getProjectStateChecksum
+ * <em>Project State Checksum</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVersionSpec {
+
+	/**
+	 * @generated NOT
+	 */
+	private ESPrimaryVersionSpecImpl apiImpl;
+
 	/**
 	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getIdentifier()
 	 * @generated
 	 * @ordered
@@ -42,6 +53,7 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	/**
 	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getIdentifier()
 	 * @generated
 	 * @ordered
@@ -52,6 +64,7 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 * The default value of the '{@link #getProjectStateChecksum() <em>Project State Checksum</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectStateChecksum()
 	 * @generated
 	 * @ordered
@@ -62,6 +75,7 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 * The cached value of the '{@link #getProjectStateChecksum() <em>Project State Checksum</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getProjectStateChecksum()
 	 * @generated
 	 * @ordered
@@ -70,6 +84,7 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PrimaryVersionSpecImpl() {
@@ -78,6 +93,7 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -87,6 +103,7 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getIdentifier() {
@@ -95,18 +112,21 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setIdentifier(int newIdentifier) {
 		int oldIdentifier = identifier;
 		identifier = newIdentifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER, oldIdentifier, identifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER,
+				oldIdentifier, identifier));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public long getProjectStateChecksum() {
@@ -116,86 +136,95 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setProjectStateChecksum(long newProjectStateChecksum) {
 		long oldProjectStateChecksum = projectStateChecksum;
 		projectStateChecksum = newProjectStateChecksum;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM, oldProjectStateChecksum, projectStateChecksum));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM, oldProjectStateChecksum,
+				projectStateChecksum));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-				return getIdentifier();
-			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
-				return getProjectStateChecksum();
+		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+			return getIdentifier();
+		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+			return getProjectStateChecksum();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-				setIdentifier((Integer)newValue);
-				return;
-			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
-				setProjectStateChecksum((Long)newValue);
-				return;
+		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+			setIdentifier((Integer) newValue);
+			return;
+		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+			setProjectStateChecksum((Long) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-				setIdentifier(IDENTIFIER_EDEFAULT);
-				return;
-			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
-				setProjectStateChecksum(PROJECT_STATE_CHECKSUM_EDEFAULT);
-				return;
+		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+			setIdentifier(IDENTIFIER_EDEFAULT);
+			return;
+		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+			setProjectStateChecksum(PROJECT_STATE_CHECKSUM_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
-				return identifier != IDENTIFIER_EDEFAULT;
-			case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
-				return projectStateChecksum != PROJECT_STATE_CHECKSUM_EDEFAULT;
+		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+			return identifier != IDENTIFIER_EDEFAULT;
+		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
+			return projectStateChecksum != PROJECT_STATE_CHECKSUM_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (identifier: ");
@@ -225,6 +254,47 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 		} else {
 			return 1;
 		}
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESPrimaryVersionSpecImpl getAPIImpl() {
+
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
+	 * 
+	 * @generated NOT
+	 */
+	public void setAPIImpl(ESPrimaryVersionSpecImpl esPrimaryVersionSpecImpl) {
+		apiImpl = esPrimaryVersionSpecImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESPrimaryVersionSpecImpl createAPIImpl() {
+		return new ESPrimaryVersionSpecImpl(this);
 	}
 
 } // PrimaryVersionSpecImpl

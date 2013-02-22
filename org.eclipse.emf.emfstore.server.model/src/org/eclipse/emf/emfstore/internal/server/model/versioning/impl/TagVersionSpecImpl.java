@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESTagVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
@@ -31,9 +32,16 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * @generated
  */
 public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpec {
+
+	/**
+	 * @generated NOT
+	 */
+	private ESTagVersionSpecImpl apiImpl;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -43,6 +51,7 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -51,6 +60,7 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TagVersionSpecImpl() {
@@ -59,6 +69,7 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -68,6 +79,7 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -76,76 +88,84 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.TAG_VERSION_SPEC__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.TAG_VERSION_SPEC__NAME, oldName,
+				name));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VersioningPackage.TAG_VERSION_SPEC__NAME:
-				return getName();
+		case VersioningPackage.TAG_VERSION_SPEC__NAME:
+			return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VersioningPackage.TAG_VERSION_SPEC__NAME:
-				setName((String)newValue);
-				return;
+		case VersioningPackage.TAG_VERSION_SPEC__NAME:
+			setName((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.TAG_VERSION_SPEC__NAME:
-				setName(NAME_EDEFAULT);
-				return;
+		case VersioningPackage.TAG_VERSION_SPEC__NAME:
+			setName(NAME_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.TAG_VERSION_SPEC__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		case VersioningPackage.TAG_VERSION_SPEC__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
@@ -177,6 +197,46 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	@Override
 	public int hashCode() {
 		return getName().hashCode();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESTagVersionSpecImpl getAPIImpl() {
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
+	 * 
+	 * @generated NOT
+	 */
+	public void setAPIImpl(ESTagVersionSpecImpl esTagVersionSpecImpl) {
+		apiImpl = esTagVersionSpecImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESTagVersionSpecImpl createAPIImpl() {
+		return new ESTagVersionSpecImpl(this);
 	}
 
 } // TagVersionSpecImpl

@@ -10,10 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning.impl;
 
-import static org.eclipse.emf.emfstore.internal.common.ListUtil.copy;
-
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -21,8 +18,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESModelElementQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
@@ -39,7 +36,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * 
  * @generated
  */
-public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElementQuery {
+public class ModelElementQueryImpl extends RangeQueryImpl<ESModelElementQueryImpl> implements ModelElementQuery {
+
 	/**
 	 * The cached value of the '{@link #getModelElements() <em>Model Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc
@@ -157,16 +155,8 @@ public class ModelElementQueryImpl extends RangeQueryImpl implements ModelElemen
 		return super.eIsSet(featureID);
 	}
 
-	public List<ESModelElementId> getModelElementIds() {
-		return copy(getModelElements());
+	@Override
+	public ESModelElementQueryImpl createAPIImpl() {
+		return new ESModelElementQueryImpl(this);
 	}
-
-	public void addModelElementId(ESModelElementId id) {
-		getModelElements().add((ModelElementId) id);
-	}
-
-	public void removeModelElementId(ESModelElementId id) {
-		getModelElements().remove(id);
-	}
-
 } // ModelElementQueryImpl

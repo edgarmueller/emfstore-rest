@@ -29,17 +29,19 @@ public final class LogMessageFactory implements ESLogMessageFactory {
 	}
 
 	/**
-	 * creates a new logMessage with the specified message and author.
+	 * Creates a new log message with the specified message and author.
 	 * 
-	 * @param message the message
-	 * @param author the author
-	 * @return the log message
+	 * @param message
+	 *            the message
+	 * @param author
+	 *            the author
+	 * @return the created log message instance
 	 */
 	public ESLogMessage createLogMessage(String message, String author) {
 		final LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
 		logMessage.setMessage(message);
 		logMessage.setAuthor(author);
 		logMessage.setClientDate(Calendar.getInstance().getTime());
-		return logMessage;
+		return logMessage.getAPIImpl();
 	}
 }

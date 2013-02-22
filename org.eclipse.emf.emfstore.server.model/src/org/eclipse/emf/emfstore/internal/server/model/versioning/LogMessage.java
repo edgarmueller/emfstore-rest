@@ -13,7 +13,8 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.ESLogMessage;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Log Message</b></em>'.
@@ -25,9 +26,11 @@ import org.eclipse.emf.emfstore.server.model.ESLogMessage;
  *          The following features are supported:
  *          <ul>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getAuthor <em>Author</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getMessage <em>Message</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getMessage <em>Message</em>}
+ *          </li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getDate <em>Date</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getClientDate <em>Client Date</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getClientDate <em>Client
+ *          Date</em>}</li>
  *          </ul>
  *          </p>
  * 
@@ -35,7 +38,7 @@ import org.eclipse.emf.emfstore.server.model.ESLogMessage;
  * @model
  * @generated
  */
-public interface LogMessage extends EObject, ESLogMessage {
+public interface LogMessage extends EObject, APIDelegate<ESLogMessageImpl> {
 	/**
 	 * Returns the value of the '<em><b>Message</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -111,7 +114,8 @@ public interface LogMessage extends EObject, ESLogMessage {
 	Date getDate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getDate <em>Date</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage#getDate
+	 * <em>Date</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

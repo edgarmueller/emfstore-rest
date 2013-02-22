@@ -12,20 +12,20 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESModelElementQueryImpl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Model Element Query</b></em>'.
  * 
- * @extends ESModelElementQuery
+ * @extends ESModelElementQueryImpl
  *          <!--
  *          end-user-doc -->
  * 
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery#getModelElements <em>Model
- *          Elements </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery#getModelElements <em>
+ *          Model Elements </em>}</li>
  *          </ul>
  *          </p>
  * 
@@ -33,10 +33,11 @@ import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
  * @model
  * @generated
  */
-public interface ModelElementQuery extends RangeQuery, ESModelElementQuery {
+public interface ModelElementQuery extends RangeQuery<ESModelElementQueryImpl> {
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}. <!--
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.ModelElementId}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Model Elements</em>' containment reference list isn't clear, there really should be

@@ -12,7 +12,8 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Info</b></em>'.
@@ -48,7 +49,7 @@ import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
  * @model
  * @generated
  */
-public interface HistoryInfo extends EObject, ESHistoryInfo {
+public interface HistoryInfo extends EObject, APIDelegate<ESHistoryInfoImpl> {
 	/**
 	 * Returns the value of the '<em><b>Primery Spec</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

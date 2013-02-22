@@ -10,7 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Primary Version Spec</b></em>'.
@@ -22,10 +23,11 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getIdentifier <em>Identifier
- *          </em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum <em>
- *          Project State Checksum</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getIdentifier <em>
+ *          Identifier </em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum
+ *          <em> Project State Checksum</em>}</li>
  *          </ul>
  *          </p>
  * 
@@ -33,7 +35,8 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @model
  * @generated
  */
-public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersionSpec>, ESPrimaryVersionSpec {
+public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersionSpec>,
+	APIDelegate<ESPrimaryVersionSpecImpl> {
 
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' attribute. <!--
@@ -53,7 +56,8 @@ public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersi
 	int getIdentifier();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getIdentifier
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getIdentifier
 	 * <em>Identifier</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->

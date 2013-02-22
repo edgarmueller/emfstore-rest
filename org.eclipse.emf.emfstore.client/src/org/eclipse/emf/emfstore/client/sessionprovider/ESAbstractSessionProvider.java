@@ -18,14 +18,14 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 /**
  * <p>
  * This is the abstract super class for SessionProviders. All SessionProvider should extend this class. SessionProvider
- * derives a user session for a given server request (IServerCall). When overriding
- * {@link #provideUsersession(IServerCall)} , it is possible to gain more context for the {@link ESUsersession}
+ * derives a user session for a given server request (ESServerCall). When overriding
+ * {@link #provideUsersession(ESServerCall)} , it is possible to gain more context for the {@link ESUsersession}
  * selection.
  * </p>
  * <p>
  * However, in most usecases most, users will use the session provider to open a login dialog of some kind. For this
- * purpose it is better to use {@link #provideUsersession(ESServer)}. SessionProviders can be registered via an extension
- * point.<br/>
+ * purpose it is better to use {@link #provideUsersession(ESServer)}. SessionProviders can be registered via an
+ * extension point.<br/>
  * </p>
  * 
  * <p>
@@ -35,14 +35,15 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @author wesendon
  * 
  */
-public abstract class AbstractSessionProvider {
+public abstract class ESAbstractSessionProvider {
 
 	/**
 	 * <p>
 	 * The SessionManager calls this method in order to obtain a user session. In its default implementation it first
-	 * looks for specified user session in the {@link IServerCall}, then it checks whether the local project is
+	 * looks for specified user session in the {@link ESServerCall}, then it checks whether the local project is
 	 * associated with a user session (e.g. in case of update). If there is still no user session,
-	 * {@link #provideUsersession(ESServer)} is called, which is meant to be used when implementing an UI to select a UI.
+	 * {@link #provideUsersession(ESServer)} is called, which is meant to be used when implementing an UI to select a
+	 * UI.
 	 * </p>
 	 * 
 	 * <p>
@@ -56,7 +57,7 @@ public abstract class AbstractSessionProvider {
 	 * 
 	 * @throws ESException in case an exception occurred while obtaining the user session
 	 */
-	public ESUsersession provideUsersession(IServerCall serverCall) throws ESException {
+	public ESUsersession provideUsersession(ESServerCall serverCall) throws ESException {
 
 		ESUsersession usersession = serverCall.getUsersession();
 

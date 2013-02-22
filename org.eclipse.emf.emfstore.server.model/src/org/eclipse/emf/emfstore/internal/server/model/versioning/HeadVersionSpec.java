@@ -10,7 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.server.model.versionspec.ESHeadVersionSpec;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESHeadVersionSpecImpl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Head Version Spec</b></em>'.
@@ -24,5 +25,5 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESHeadVersionSpec;
  * @model
  * @generated
  */
-public interface HeadVersionSpec extends VersionSpec, ESHeadVersionSpec {
+public interface HeadVersionSpec extends VersionSpec, APIDelegate<ESHeadVersionSpecImpl> {
 } // HeadVersionSpec
