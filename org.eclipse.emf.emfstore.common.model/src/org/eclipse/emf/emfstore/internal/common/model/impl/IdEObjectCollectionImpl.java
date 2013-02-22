@@ -36,7 +36,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdGenerator;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
@@ -48,7 +48,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
  * @author emueller
  */
 public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection, ESDisposable,
-	IModelElementIdToEObjectMapping {
+	ESModelElementIdToEObjectMapping {
 
 	/**
 	 * The extension point id to configure the {@link ESModelElementIdGenerator}.
@@ -225,7 +225,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 *            a {@link ModelElementId}
 	 * @return the deleted model element or null if it is not in the project
 	 */
-	public EObject getDeletedModelElement(ModelElementId modelElementId) {
+	public EObject getDeletedModelElement(ESModelElementId modelElementId) {
 
 		if (modelElementId == null) {
 			return null;
@@ -774,7 +774,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping#getEObjectId(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping#getEObjectId(org.eclipse.emf.ecore.EObject)
 	 */
 	public String getEObjectId(EObject eObject) {
 		ModelElementId modelElementId = getModelElementId(eObject);
@@ -799,9 +799,9 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public EObject get(ModelElementId modelElementId) {
+	public EObject get(ESModelElementId modelElementId) {
 		EObject modelElement = getModelElement(modelElementId);
 		if (modelElement != null) {
 			return modelElement;

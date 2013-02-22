@@ -9,7 +9,7 @@
  * Contributors:
  * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.provider;
+package org.eclipse.emf.emfstore.client.provider;
 
 import java.io.InputStream;
 

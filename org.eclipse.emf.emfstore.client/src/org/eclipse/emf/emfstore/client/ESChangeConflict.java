@@ -15,6 +15,8 @@ package org.eclipse.emf.emfstore.client;
 /**
  * Represents conflicting changes on model objects.
  * 
+ * Currently no further information is provided.
+ * 
  * @author emueller
  * @author wesendon
  */

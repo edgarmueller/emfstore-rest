@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
@@ -30,18 +30,18 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Crea
  * @author emueller
  * @author koegel
  */
-public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEObjectMapping {
+public class BasicModelElementIdToEObjectMapping implements ESModelElementIdToEObjectMapping {
 
 	private Map<String, EObject> idToEObjectMapping;
-	private IModelElementIdToEObjectMapping delegateMapping;
+	private ESModelElementIdToEObjectMapping delegateMapping;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param mapping
-	 *            an initial mapping from {EObject}s to their {@link ModelElementId}s
+	 *            an initial mapping from {EObject}s to their {@link ESModelElementId}s
 	 */
-	public BasicModelElementIdToEObjectMapping(IModelElementIdToEObjectMapping mapping) {
+	public BasicModelElementIdToEObjectMapping(ESModelElementIdToEObjectMapping mapping) {
 		this.delegateMapping = mapping;
 		this.idToEObjectMapping = new LinkedHashMap<String, EObject>();
 	}
@@ -50,12 +50,12 @@ public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEOb
 	 * Constructor.
 	 * 
 	 * @param mapping
-	 *            an initial mapping from {EObject}s to their {@link ModelElementId}s
+	 *            an initial mapping from {EObject}s to their {@link ESModelElementId}s
 	 * @param changePackages
 	 *            a list of {@link ChangePackage}s whose involved model elements should
 	 *            be added to the mapping
 	 */
-	public BasicModelElementIdToEObjectMapping(IModelElementIdToEObjectMapping mapping,
+	public BasicModelElementIdToEObjectMapping(ESModelElementIdToEObjectMapping mapping,
 		List<ChangePackage> changePackages) {
 		this(mapping);
 		for (ChangePackage changePackage : changePackages) {
@@ -67,12 +67,12 @@ public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEOb
 	 * Constructor.
 	 * 
 	 * @param mapping
-	 *            an initial mapping from {EObject}s to their {@link ModelElementId}s
+	 *            an initial mapping from {EObject}s to their {@link ESModelElementId}s
 	 * @param changePackage
 	 *            a {@link ChangePackage}s whose involved model elements should
 	 *            be added to the mapping
 	 */
-	public BasicModelElementIdToEObjectMapping(IModelElementIdToEObjectMapping mapping, ChangePackage changePackage) {
+	public BasicModelElementIdToEObjectMapping(ESModelElementIdToEObjectMapping mapping, ChangePackage changePackage) {
 		this(mapping);
 		this.put(changePackage);
 	}
@@ -112,9 +112,9 @@ public class BasicModelElementIdToEObjectMapping implements IModelElementIdToEOb
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
+	 * @see org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public EObject get(ModelElementId modelElementId) {
+	public EObject get(ESModelElementId modelElementId) {
 		EObject eObject = delegateMapping.get(modelElementId);
 		if (eObject != null) {
 			return eObject;

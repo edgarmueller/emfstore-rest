@@ -28,9 +28,9 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver;
-import org.eclipse.emf.emfstore.client.model.provider.ESEditingDomainProvider;
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
+import org.eclipse.emf.emfstore.client.provider.ESAbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
@@ -586,9 +586,9 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see ESWorkspaceProvider#setSessionProvider(AbstractSessionProvider)
+	 * @see ESWorkspaceProvider#setSessionProvider(ESAbstractSessionProvider)
 	 */
-	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
+	public void setSessionProvider(ESAbstractSessionProvider sessionProvider) {
 		getSessionManager().setSessionProvider(sessionProvider);
 	}
 

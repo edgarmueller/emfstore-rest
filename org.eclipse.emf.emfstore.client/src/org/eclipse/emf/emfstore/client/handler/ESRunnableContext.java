@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.handler;
+package org.eclipse.emf.emfstore.client.handler;
 
 /**
  * Provides a context in which a {@link Runnable} is executed.

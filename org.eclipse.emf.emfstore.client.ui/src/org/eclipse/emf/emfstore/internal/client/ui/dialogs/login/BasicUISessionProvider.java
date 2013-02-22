@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.provider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Display;
  * @author wesendon
  * @author emueller
  */
-public class BasicUISessionProvider extends AbstractSessionProvider {
+public class BasicUISessionProvider extends ESAbstractSessionProvider {
 
 	private ServerInfo selectedServerInfo;
 

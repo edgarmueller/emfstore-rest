@@ -14,11 +14,11 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.test.CommitCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.UpdateCallbackAdapter;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -38,8 +38,8 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 
 	// TODO: OTS
 	private ESLogMessage logMessage;
-	private ICommitCallback callback;
-	private IUpdateCallback updateCallback;
+	private ESCommitCallback callback;
+	private ESUpdateCallback updateCallback;
 	private ESPrimaryVersionSpec target;
 
 	private boolean conflictOccurred;

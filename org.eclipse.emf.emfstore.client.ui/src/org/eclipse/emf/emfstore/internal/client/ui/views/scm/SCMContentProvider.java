@@ -19,7 +19,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
@@ -38,7 +38,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	private boolean reverseNodes = true;
 	private Map<ChangePackage, VirtualNode<AbstractOperation>> changePackageToFilteredMapping;
 	private Map<ChangePackage, List<Object>> changePackageToNonFilteredMapping;
-	private IModelElementIdToEObjectMapping idToEObjectMapping;
+	private ESModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Default constructor.
@@ -55,7 +55,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 	 *            a mapping from IDs to EObjects that is necessary to resolve
 	 *            deleted EObjects
 	 */
-	public SCMContentProvider(IModelElementIdToEObjectMapping idToEObjectMapping) {
+	public SCMContentProvider(ESModelElementIdToEObjectMapping idToEObjectMapping) {
 		this();
 		this.idToEObjectMapping = idToEObjectMapping;
 	}

@@ -5,16 +5,16 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
-public class UpdateCallbackAdapter implements IUpdateCallback {
+public class UpdateCallbackAdapter implements ESUpdateCallback {
 
 	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
-		IModelElementIdToEObjectMapping idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 		return true;
 	}
 

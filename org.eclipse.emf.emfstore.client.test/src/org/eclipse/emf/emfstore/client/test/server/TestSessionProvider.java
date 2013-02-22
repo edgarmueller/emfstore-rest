@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.test.server;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.provider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
@@ -28,7 +28,7 @@ import org.junit.Assert;
  * 
  * @author emueller
  */
-public final class TestSessionProvider extends AbstractSessionProvider {
+public final class TestSessionProvider extends ESAbstractSessionProvider {
 
 	private static Usersession usersession;
 

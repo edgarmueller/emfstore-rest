@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.observers;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
+import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -42,7 +42,7 @@ public abstract class SimpleOperationObserver implements OperationObserver, ESCo
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -54,7 +54,7 @@ public abstract class SimpleOperationObserver implements OperationObserver, ESCo
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */

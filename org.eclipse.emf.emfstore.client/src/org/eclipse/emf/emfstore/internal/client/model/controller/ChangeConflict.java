@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 
@@ -34,7 +34,7 @@ public class ChangeConflict implements ESChangeConflict {
 	private List<ChangePackage> newPackages;
 	private ProjectSpace projectSpace;
 	private Set<ConflictBucketCandidate> conflictBucketCandidates;
-	private final IModelElementIdToEObjectMapping idToEObjectMapping;
+	private final ESModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Retrieve the list of change packages that caused the exception.
@@ -64,7 +64,7 @@ public class ChangeConflict implements ESChangeConflict {
 	 */
 	public ChangeConflict(ProjectSpace projectSpace, List<ChangePackage> myChangePackages,
 		List<ChangePackage> newPackages, Set<ConflictBucketCandidate> conflictBucketCandidates,
-		IModelElementIdToEObjectMapping idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 		this.myChangePackages = myChangePackages;
 		this.newPackages = newPackages;
 		this.projectSpace = projectSpace;
@@ -100,7 +100,7 @@ public class ChangeConflict implements ESChangeConflict {
 	 * 
 	 * @return the mapping from IDs to EObjects and vice versa
 	 */
-	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
+	public ESModelElementIdToEObjectMapping getIdToEObjectMapping() {
 		return idToEObjectMapping;
 	}
 

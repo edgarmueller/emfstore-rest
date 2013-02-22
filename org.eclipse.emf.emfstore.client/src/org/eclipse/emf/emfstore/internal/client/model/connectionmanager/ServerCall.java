@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.sessionprovider.IServerCall;
+import org.eclipse.emf.emfstore.client.provider.ESServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.server.model.ESSessionId;
  * 
  * @param <U> the return type of the wrapped action
  */
-public abstract class ServerCall<U> implements IServerCall {
+public abstract class ServerCall<U> implements ESServerCall {
 
 	private ESLocalProject projectSpace;
 	private ESUsersession usersession;

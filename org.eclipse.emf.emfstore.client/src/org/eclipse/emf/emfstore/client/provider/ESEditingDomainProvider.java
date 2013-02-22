@@ -9,7 +9,7 @@
  * Contributors:
  * Otto von Wesendonk
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.provider;
+package org.eclipse.emf.emfstore.client.provider;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;

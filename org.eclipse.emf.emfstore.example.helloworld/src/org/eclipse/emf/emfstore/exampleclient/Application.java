@@ -17,18 +17,17 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Player;
-import org.eclipse.emf.emfstore.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.client.model.Usersession;
-import org.eclipse.emf.emfstore.client.model.Workspace;
-import org.eclipse.emf.emfstore.client.model.WorkspaceManager;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreClientUtil;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.common.ConsoleProgressMonitor;
-import org.eclipse.emf.emfstore.server.exceptions.EmfStoreException;
-import org.eclipse.emf.emfstore.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
+import org.eclipse.emf.emfstore.internal.common.ConsoleProgressMonitor;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
@@ -100,7 +99,7 @@ public class Application implements IApplication {
 				ProjectSpace project1 = workspace.createLocalProject("projectNo1", "My project");
 				try {
 					project1.shareProject(usersession, new ConsoleProgressMonitor());
-				} catch (EmfStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 				return project1;

@@ -37,10 +37,12 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
-import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
-import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
-import org.eclipse.emf.emfstore.client.model.observer.ESMergeObserver;
+import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
+import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
 import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
@@ -59,8 +61,6 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.UpdateController;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.IllegalProjectSpaceStateException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.PropertyNotFoundException;
@@ -220,7 +220,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges)
 		throws ESException {
-		applyChanges(baseSpec, incoming, myChanges, IUpdateCallback.NOCALLBACK, new NullProgressMonitor());
+		applyChanges(baseSpec, incoming, myChanges, ESUpdateCallback.NOCALLBACK, new NullProgressMonitor());
 	}
 
 	/**
@@ -234,7 +234,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @param myChanges
 	 *            merged changes
 	 * @param callback
-	 *            a {@link IUpdateCallback} that is used to handle a possibly occurring checksum error
+	 *            a {@link ESUpdateCallback} that is used to handle a possibly occurring checksum error
 	 * @param progressMonitor
 	 *            an {@link IProgressMonitor} to inform about the progress of the UpdateCallback in case it is called
 	 * 
@@ -242,7 +242,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *             also failed
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges,
-		IUpdateCallback callback, IProgressMonitor progressMonitor) throws ESException {
+		ESUpdateCallback callback, IProgressMonitor progressMonitor) throws ESException {
 
 		// revert local changes
 		notifyPreRevertMyChanges(getLocalChangePackage());
@@ -362,10 +362,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage,
-	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback,
+	 *      org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec commit(ESLogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
+	public PrimaryVersionSpec commit(ESLogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws ESException {
 		return new CommitController(this, (LogMessage) logMessage, callback, monitor).execute();
 	}
@@ -374,7 +374,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 */
 	public PrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage,
-		ICommitCallback callback, IProgressMonitor monitor) throws ESException {
+		ESCommitCallback callback, IProgressMonitor monitor) throws ESException {
 		return new CommitController(this, (BranchVersionSpec) branch, (LogMessage) logMessage, callback, monitor)
 			.execute();
 	}
@@ -893,7 +893,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 */
 	public boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict,
-		IConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
+		IConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
 		throws ESException {
 		// merge the conflicts
 		// TODO: OTS casts
@@ -1262,10 +1262,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback,
+	 *      org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec update(ESVersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
+	public PrimaryVersionSpec update(ESVersionSpec version, ESUpdateCallback callback, IProgressMonitor progress)
 		throws ChangeConflictException, ESException {
 		return new UpdateController(this, (VersionSpec) version, callback, progress).execute();
 	}

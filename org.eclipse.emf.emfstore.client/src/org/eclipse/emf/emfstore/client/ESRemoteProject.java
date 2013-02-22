@@ -70,7 +70,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to checkout the project
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to checkout the project
 	 * @param versionSpec
 	 *            the version that should be checked out.
 	 * @param monitor
@@ -91,7 +91,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to resolve the given
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to resolve the given
 	 *            {@link ESVersionSpec}
 	 * @param versionSpec
 	 *            the version specifier to resolve
@@ -127,7 +127,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to fetch the history information
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to fetch the history information
 	 * @param query
 	 *            the query to be performed in order to fetch the history information
 	 * @param monitor
@@ -157,7 +157,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.IServerCall} to delete the remote project
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to delete the remote project
 	 * @param monitor
 	 *            an {@link IProgressMonitor} used to indicate progress
 	 * 

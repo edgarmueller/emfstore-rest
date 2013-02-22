@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.emfstore.client.model.observer.ESExceptionObserver;
+import org.eclipse.emf.emfstore.client.observer.ESExceptionObserver;
 import org.eclipse.emf.emfstore.internal.client.model.Activator;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;

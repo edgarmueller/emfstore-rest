@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.handler;
+package org.eclipse.emf.emfstore.client.handler;
 
 import java.util.List;
 

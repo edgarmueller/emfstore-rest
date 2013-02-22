@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.model.handler.ESNotificationFilter;
-import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
-import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
+import org.eclipse.emf.emfstore.client.handler.ESNotificationFilter;
+import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
+import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
@@ -307,7 +307,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages,
@@ -328,7 +328,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      org.eclipse.emf.emfstore.internal.server.model.ESChangePackage.IChangePackage,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -341,7 +341,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      org.eclipse.emf.emfstore.internal.server.model.ESPrimaryVersionSpec.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */

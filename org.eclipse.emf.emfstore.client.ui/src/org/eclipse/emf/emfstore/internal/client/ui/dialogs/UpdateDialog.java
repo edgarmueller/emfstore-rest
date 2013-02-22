@@ -14,10 +14,10 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
 
 import java.util.List;
 
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -38,7 +38,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	private List<ChangePackage> changes;
 	private ProjectSpace projectSpace;
 	private Image updateImage;
-	private final IModelElementIdToEObjectMapping idToEObjectMapping;
+	private final ESModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
 	 * Constructor.
@@ -53,7 +53,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	 *            a mapping of EObjects to their respective IDs
 	 */
 	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes,
-		IModelElementIdToEObjectMapping idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 		super(parentShell);
 		this.idToEObjectMapping = idToEObjectMapping;
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);

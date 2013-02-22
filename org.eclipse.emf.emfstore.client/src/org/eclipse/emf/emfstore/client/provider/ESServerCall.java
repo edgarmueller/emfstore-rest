@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.sessionprovider;
+package org.eclipse.emf.emfstore.client.provider;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
  * 
  * @author emueller
  */
-public interface IServerCall {
+public interface ESServerCall {
 
 	/**
 	 * Returns the user session used by the server call.

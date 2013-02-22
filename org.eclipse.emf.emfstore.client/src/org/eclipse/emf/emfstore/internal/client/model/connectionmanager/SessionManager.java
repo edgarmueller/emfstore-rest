@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.provider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class SessionManager {
 
-	private AbstractSessionProvider provider;
+	private ESAbstractSessionProvider provider;
 
 	/**
 	 * Constructor.
@@ -105,21 +105,21 @@ public class SessionManager {
 	}
 
 	/**
-	 * Sets the {@link AbstractSessionProvider} to be used by this session manager.
+	 * Sets the {@link ESAbstractSessionProvider} to be used by this session manager.
 	 * 
 	 * @param sessionProvider
 	 *            the session provider to be used
 	 */
-	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
+	public void setSessionProvider(ESAbstractSessionProvider sessionProvider) {
 		provider = sessionProvider;
 	}
 
 	/**
-	 * Returns the {@link AbstractSessionProvider} in use by this session manager.
+	 * Returns the {@link ESAbstractSessionProvider} in use by this session manager.
 	 * 
 	 * @return the session provider in use
 	 */
-	public AbstractSessionProvider getSessionProvider() {
+	public ESAbstractSessionProvider getSessionProvider() {
 		return provider;
 	}
 
@@ -127,8 +127,8 @@ public class SessionManager {
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.usersessionProvider");
 
 		if (extensionPoint.getExtensionElements().size() > 0) {
-			AbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",
-				AbstractSessionProvider.class);
+			ESAbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",
+				ESAbstractSessionProvider.class);
 			if (sessionProvider != null) {
 				provider = sessionProvider;
 			}

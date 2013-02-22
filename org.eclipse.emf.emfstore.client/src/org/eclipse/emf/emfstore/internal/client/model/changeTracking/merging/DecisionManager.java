@@ -31,6 +31,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.CompositeConflict;
@@ -51,7 +52,6 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
@@ -89,7 +89,7 @@ public class DecisionManager {
 	private ConflictDetector conflictDetector;
 	private ChangeConflict changeConflict;
 	private Set<AbstractOperation> notInvolvedInConflict;
-	private IModelElementIdToEObjectMapping mapping;
+	private ESModelElementIdToEObjectMapping mapping;
 	private final boolean isBranchMerge;
 	private final Project project;
 
@@ -734,7 +734,7 @@ public class DecisionManager {
 	 * 
 	 * @return the ID to {@link EObject} mapping
 	 */
-	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
+	public ESModelElementIdToEObjectMapping getIdToEObjectMapping() {
 		return mapping;
 	}
 
