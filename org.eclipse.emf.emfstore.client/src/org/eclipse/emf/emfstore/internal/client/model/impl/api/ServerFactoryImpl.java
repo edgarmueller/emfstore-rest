@@ -10,7 +10,7 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.impl;
+package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESServerFactory;
@@ -47,7 +47,7 @@ public final class ServerFactoryImpl implements ESServerFactory {
 	public ESServer getServer(final String url, final int port, final String certificate) {
 
 		final ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
-		final ESServerImpl server = new ESServerImpl(serverInfo);
+		final ESServerImpl server = serverInfo.getAPIImpl();
 
 		new EMFStoreCommand() {
 			@Override
@@ -70,6 +70,6 @@ public final class ServerFactoryImpl implements ESServerFactory {
 		String certificate) {
 		ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
 		serverInfo.setName(name);
-		return new ESServerImpl(serverInfo);
+		return serverInfo.getAPIImpl();
 	}
 }

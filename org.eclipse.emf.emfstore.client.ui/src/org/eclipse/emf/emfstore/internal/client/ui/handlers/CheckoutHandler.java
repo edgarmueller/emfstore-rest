@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.impl.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
@@ -34,7 +34,7 @@ public class CheckoutHandler extends AbstractEMFStoreHandler {
 
 		// FIXME: eContainer call
 		new UICheckoutController(getShell(),
-			new RemoteProject((ESServer) projectInfo.eContainer(), projectInfo)).execute();
+			new ESRemoteProjectImpl((ESServer) projectInfo.eContainer(), projectInfo)).execute();
 	}
 
 }

@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
@@ -15,7 +16,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
@@ -41,16 +42,26 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 
 	@AfterClass
 	public static void tearDownClass() {
-		for (ServerInfo serverInfo : ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getServerInfos()) {
-			Usersession lastUsersession = serverInfo.getLastUsersession();
-			if (lastUsersession != null) {
-				lastUsersession.setServerInfo(null);
-			}
-			serverInfo.setLastUsersession(null);
+		for (final ServerInfo serverInfo : WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl()
+			.getServerInfos()) {
+			final Usersession lastUsersession = serverInfo.getLastUsersession();
+			RunESCommand.run(new Callable<Void>() {
+				public Void call() throws Exception {
+					if (lastUsersession != null) {
+						lastUsersession.setServerInfo(null);
+					}
+					serverInfo.setLastUsersession(null);
+					return null;
+				}
+			});
 		}
-		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getServerInfos().clear();
-		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).save();
-		System.out.println("");
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().getServerInfos().clear();
+				WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().save();
+				return null;
+			}
+		});
 	}
 
 	protected static void deleteRemoteProjects(ESUsersession usersession) throws IOException, FatalESException,

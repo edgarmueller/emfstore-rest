@@ -16,11 +16,13 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Controller that forces a revert of version spec.
@@ -56,16 +58,18 @@ public class RevertCommitController extends ServerCall<Void> {
 			.resolveVersionSpec(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(),
 				Versions.createHEAD(baseVersion));
 
-		ProjectSpace revertSpace = projectSpace.getRemoteProject().checkout(
-			projectSpace.getUsersession(), getProgressMonitor());
+		ESLocalProjectImpl revertSpace = (ESLocalProjectImpl) projectSpace.getAPIImpl().getRemoteProject().checkout(
+			projectSpace.getUsersession().getAPIImpl(),
+			ESVersionSpec.FACTORY.createHEAD(),
+			getProgressMonitor());
 
-		List<ChangePackage> changes = revertSpace.getChanges(baseVersion,
+		List<ChangePackage> changes = revertSpace.getInternalAPIImpl().getChanges(baseVersion,
 			headRevert ? localHead : ModelUtil.clone(baseVersion));
 
 		Collections.reverse(changes);
 
 		for (ChangePackage cp : changes) {
-			cp.reverse().apply(revertSpace.getProject(), true);
+			cp.reverse().apply(revertSpace.getInternalAPIImpl().getProject(), true);
 		}
 	}
 

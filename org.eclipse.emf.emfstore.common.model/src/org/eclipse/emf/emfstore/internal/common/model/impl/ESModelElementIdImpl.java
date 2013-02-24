@@ -6,14 +6,16 @@
 package org.eclipse.emf.emfstore.internal.common.model.impl;
 
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
-import org.eclipse.emf.emfstore.internal.common.ESBase;
+import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 
 /**
- * @author Edgar
+ * Mapping between {@link ESModelElementId} and {@link ModelElementId}.
  * 
+ * @author emueller
  */
-public class ESModelElementIdImpl extends ESBase<ModelElementId, ESModelElementIdImpl> implements ESModelElementId {
+public class ESModelElementIdImpl extends AbstractAPIImpl<ESModelElementIdImpl, ModelElementId> implements
+	ESModelElementId {
 
 	public ESModelElementIdImpl(ModelElementId modelElementId) {
 		super(modelElementId);
@@ -25,7 +27,7 @@ public class ESModelElementIdImpl extends ESBase<ModelElementId, ESModelElementI
 	 * @see org.eclipse.emf.emfstore.common.model.ESUniqueIdentifier#getId()
 	 */
 	public String getId() {
-		return getInternal().getId();
+		return getInternalAPIImpl().getId();
 	}
 
 	/**
@@ -38,7 +40,7 @@ public class ESModelElementIdImpl extends ESBase<ModelElementId, ESModelElementI
 		if (!(obj instanceof ESModelElementIdImpl)) {
 			return false;
 		}
-		return getInternal().equals(((ESModelElementIdImpl) obj).getInternal());
+		return getInternalAPIImpl().equals(((ESModelElementIdImpl) obj).getInternalAPIImpl());
 	}
 
 	/**
@@ -48,6 +50,6 @@ public class ESModelElementIdImpl extends ESBase<ModelElementId, ESModelElementI
 	 */
 	@Override
 	public int hashCode() {
-		return getInternal().hashCode();
+		return getInternalAPIImpl().hashCode();
 	}
 }

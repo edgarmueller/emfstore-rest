@@ -10,12 +10,13 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.impl;
+package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -34,6 +35,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.Connecti
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.ListUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -59,7 +61,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
-import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -99,7 +100,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getGlobalProjectId()
 	 */
-	public ESGlobalProjectId getGlobalProjectId() {
+	public ESGlobalProjectIdImpl getGlobalProjectId() {
 		return projectInfo.getProjectId().getAPIImpl();
 	}
 
@@ -163,14 +164,17 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESPrimaryVersionSpec resolveVersionSpec(final ESVersionSpec versionSpec, IProgressMonitor monitor)
+	public ESPrimaryVersionSpecImpl resolveVersionSpec(final ESVersionSpec versionSpec, IProgressMonitor monitor)
 		throws ESException {
+
+		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
 
 		PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(server.getInternalAPIImpl(), monitor) {
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
-				return getConnectionManager().resolveVersionSpec(getSessionId(), (ProjectId) getGlobalProjectId(),
-					(VersionSpec) versionSpec);
+				return getConnectionManager().resolveVersionSpec(getSessionId(),
+					getGlobalProjectId().getInternalAPIImpl(),
+					versionSpecImpl.getInternalAPIImpl());
 			}
 		}.execute();
 
@@ -188,14 +192,13 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		IProgressMonitor monitor) throws ESException {
 
 		Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
-		final ESGlobalProjectIdImpl globalProjectIdImpl = (ESGlobalProjectIdImpl) getGlobalProjectId();
 		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = (ESVersionSpecImpl<?, ?>) versionSpec;
 
 		PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(usersession) {
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(getSessionId(),
-					globalProjectIdImpl.getInternalAPIImpl(),
+					getGlobalProjectId().getInternalAPIImpl(),
 					versionSpecImpl.getInternalAPIImpl());
 			}
 		}.execute();
@@ -322,7 +325,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProject checkout(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
+	public ESLocalProjectImpl checkout(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
 		ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD().getAPIImpl(),
 			monitor);
 		return checkout(usersession, primaryVersionSpec, monitor);
@@ -335,105 +338,112 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProject checkout(ESUsersession session, ESVersionSpec versionSpec, IProgressMonitor progressMonitor)
+	public ESLocalProjectImpl checkout(final ESUsersession session, final ESVersionSpec versionSpec,
+		final IProgressMonitor progressMonitor)
 		throws ESException {
 
-		SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
-		final Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		final SubMonitor parent = SubMonitor.convert(progressMonitor, "Checkout", 100);
+		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 
-		// FIXME: MK: hack: set head version manually because esbrowser does not
-		// update revisions properly
-		final ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
-		ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) versionSpec;
-		projectInfoCopy.setVersion(primaryVersionSpecImpl.getInternalAPIImpl());
+			public ESLocalProjectImpl call() throws Exception {
+				final Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
 
-		Project project = null;
+				// FIXME: MK: hack: set head version manually because esbrowser does not
+				// update revisions properly
+				final ProjectInfo projectInfoCopy = ModelUtil.clone(projectInfo);
+				ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) versionSpec;
+				projectInfoCopy.setVersion(primaryVersionSpecImpl.getInternalAPIImpl());
 
-		SubMonitor newChild = parent.newChild(40);
-		parent.subTask("Fetching project from server...");
-		project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
-			@Override
-			public Project run(IProgressMonitor monitor) throws ESException {
-				return new ServerCall<Project>(usersession) {
+				Project project = null;
+
+				SubMonitor newChild = parent.newChild(40);
+				parent.subTask("Fetching project from server...");
+				project = new UnknownEMFStoreWorkloadCommand<Project>(newChild) {
 					@Override
-					protected Project run() throws ESException {
-						return getConnectionManager().getProject(usersession.getSessionId(),
-							projectInfo.getProjectId(),
-							projectInfoCopy.getVersion());
+					public Project run(IProgressMonitor monitor) throws ESException {
+						return new ServerCall<Project>(usersession) {
+							@Override
+							protected Project run() throws ESException {
+								return getConnectionManager().getProject(usersession.getSessionId(),
+									projectInfo.getProjectId(),
+									projectInfoCopy.getVersion());
+							}
+						}.execute();
 					}
 				}.execute();
+
+				if (project == null) {
+					throw new ESException("Server returned a null project!");
+				}
+
+				final PrimaryVersionSpec primaryVersionSpec = projectInfoCopy.getVersion();
+				ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
+
+				// initialize project space
+				parent.subTask("Initializing Projectspace...");
+				projectSpace.setProjectId(projectInfoCopy.getProjectId());
+				projectSpace.setProjectName(projectInfoCopy.getName());
+				projectSpace.setProjectDescription(projectInfoCopy.getDescription());
+				projectSpace.setBaseVersion(primaryVersionSpec);
+				projectSpace.setLastUpdated(new Date());
+				projectSpace.setUsersession(usersession);
+				WorkspaceProvider.getObserverBus().register((ProjectSpaceBase) projectSpace);
+				projectSpace.setProject(project);
+				projectSpace.setResourceCount(0);
+				projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
+				parent.worked(20);
+
+				// progressMonitor.subTask("Initializing resources...");
+				// TODO: OTS cast
+				Workspace workspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+				projectSpace.initResources(workspace.getResourceSet());
+				parent.worked(10);
+
+				ESLocalProjectImpl localProject = new ESLocalProjectImpl(projectSpace);
+
+				// retrieve recent changes
+				// TODO why are we doing this?? And why HERE?
+				parent.subTask("Retrieving recent changes...");
+				try {
+					DateVersionSpec dateVersionSpec = VersioningFactory.eINSTANCE.createDateVersionSpec();
+					Calendar calendar = Calendar.getInstance();
+					calendar.add(Calendar.DAY_OF_YEAR, -10);
+					dateVersionSpec.setDate(calendar.getTime());
+					ESPrimaryVersionSpec sourceSpec;
+					try {
+						sourceSpec = resolveVersionSpec(session, dateVersionSpec.getAPIImpl(), progressMonitor);
+					} catch (InvalidVersionSpecException e) {
+						PrimaryVersionSpec spec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+						spec.setIdentifier(0);
+						sourceSpec = spec.getAPIImpl();
+					}
+					ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
+
+				} catch (ESException e) {
+					WorkspaceUtil.logException(e.getMessage(), e);
+					// BEGIN SUPRESS CATCH EXCEPTION
+				} catch (RuntimeException e) {
+					// END SUPRESS CATCH EXCEPTION
+					WorkspaceUtil.logException(e.getMessage(), e);
+				} catch (IOException e) {
+					WorkspaceUtil.logException(e.getMessage(), e);
+				}
+				parent.worked(10);
+
+				parent.subTask("Finishing checkout...");
+				// TODO: OTS cast
+				((WorkspaceBase) workspace).addProjectSpace(projectSpace);
+				// TODO: OTS save
+				workspace.save();
+				WorkspaceProvider.getObserverBus().notify(ESCheckoutObserver.class)
+					.checkoutDone(localProject);
+				parent.worked(10);
+				parent.done();
+
+				return localProject;
 			}
-		}.execute();
+		});
 
-		if (project == null) {
-			throw new ESException("Server returned a null project!");
-		}
-
-		final PrimaryVersionSpec primaryVersionSpec = projectInfoCopy.getVersion();
-		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
-
-		// initialize project space
-		parent.subTask("Initializing Projectspace...");
-		projectSpace.setProjectId(projectInfoCopy.getProjectId());
-		projectSpace.setProjectName(projectInfoCopy.getName());
-		projectSpace.setProjectDescription(projectInfoCopy.getDescription());
-		projectSpace.setBaseVersion(primaryVersionSpec);
-		projectSpace.setLastUpdated(new Date());
-		projectSpace.setUsersession(usersession);
-		WorkspaceProvider.getObserverBus().register((ProjectSpaceBase) projectSpace);
-		projectSpace.setProject(project);
-		projectSpace.setResourceCount(0);
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
-		parent.worked(20);
-
-		// progressMonitor.subTask("Initializing resources...");
-		// TODO: OTS cast
-		Workspace workspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
-		projectSpace.initResources(workspace.getResourceSet());
-		parent.worked(10);
-
-		ESLocalProjectImpl localProject = new ESLocalProjectImpl(projectSpace);
-
-		// retrieve recent changes
-		// TODO why are we doing this?? And why HERE?
-		parent.subTask("Retrieving recent changes...");
-		try {
-			DateVersionSpec dateVersionSpec = VersioningFactory.eINSTANCE.createDateVersionSpec();
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_YEAR, -10);
-			dateVersionSpec.setDate(calendar.getTime());
-			ESPrimaryVersionSpec sourceSpec;
-			try {
-				sourceSpec = resolveVersionSpec(session, dateVersionSpec.getAPIImpl(), progressMonitor);
-			} catch (InvalidVersionSpecException e) {
-				PrimaryVersionSpec spec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-				spec.setIdentifier(0);
-				sourceSpec = new ESPrimaryVersionSpecImpl(spec);
-			}
-			ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
-
-		} catch (ESException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (RuntimeException e) {
-			// END SUPRESS CATCH EXCEPTION
-			WorkspaceUtil.logException(e.getMessage(), e);
-		} catch (IOException e) {
-			WorkspaceUtil.logException(e.getMessage(), e);
-		}
-		parent.worked(10);
-
-		parent.subTask("Finishing checkout...");
-		// TODO: OTS cast
-		((WorkspaceBase) workspace).addProjectSpace(projectSpace);
-		// TODO: OTS save
-		workspace.save();
-		WorkspaceProvider.getObserverBus().notify(ESCheckoutObserver.class)
-			.checkoutDone(localProject);
-		parent.worked(10);
-		parent.done();
-
-		return localProject;
 	}
 
 	/**
@@ -474,7 +484,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getHeadVersion(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESPrimaryVersionSpec getHeadVersion(IProgressMonitor monitor) throws ESException {
+	public ESPrimaryVersionSpecImpl getHeadVersion(IProgressMonitor monitor) throws ESException {
 		return resolveVersionSpec(Versions.createHEAD().getAPIImpl(), monitor);
 	}
 

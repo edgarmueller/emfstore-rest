@@ -498,7 +498,7 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 		case ModelPackage.PROJECT_SPACE__RESOURCE_COUNT:
 			return getResourceCount();
 		case ModelPackage.PROJECT_SPACE__DIRTY:
-			return hasUncommitedChanges();
+			return isDirty();
 		case ModelPackage.PROJECT_SPACE__OLD_LOG_MESSAGES:
 			return getOldLogMessages();
 		case ModelPackage.PROJECT_SPACE__LOCAL_OPERATIONS:
@@ -993,7 +993,7 @@ public class ProjectSpaceImpl extends ProjectSpaceBase implements ProjectSpace {
 	 * 
 	 * @generated
 	 */
-	public boolean hasUncommitedChanges() {
+	public boolean isDirty() {
 		return dirty;
 	}
 

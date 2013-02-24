@@ -103,6 +103,7 @@ public class AttributeTest extends WorkspaceTest {
 		}.run(false);
 
 		assertTrue(ModelUtil.areEqual(getProject(), expectedProject));
+		getProjectSpace().save();
 
 		Project loadedProject = ModelUtil.loadEObjectFromResource(
 			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.getModelPackage().getProject(),

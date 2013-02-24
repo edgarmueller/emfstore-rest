@@ -10,10 +10,12 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerCallImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SessionTimedOutException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.UnknownSessionException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -25,7 +27,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class SessionManager {
 
-	private AbstractSessionProvider provider;
+	private ESAbstractSessionProvider provider;
 
 	/**
 	 * Constructor.
@@ -43,11 +45,12 @@ public class SessionManager {
 	 *             If an error occurs during execution of the server call
 	 */
 	public void execute(ServerCall<?> serverCall) throws ESException {
-		Usersession usersession = (Usersession) getSessionProvider().provideUsersession(serverCall);
-		serverCall.setUsersession(usersession);
+		ESUsersessionImpl session = (ESUsersessionImpl) getSessionProvider().provideUsersession(
+			new ESServerCallImpl(serverCall));
+		serverCall.setUsersession(session.getInternalAPIImpl());
 		// TODO OTS
-		loginUsersession(usersession, false);
-		executeCall(serverCall, usersession, true);
+		loginUsersession(session.getInternalAPIImpl(), false);
+		executeCall(serverCall, session.getInternalAPIImpl(), true);
 	}
 
 	/**
@@ -81,7 +84,7 @@ public class SessionManager {
 					// ignore, session provider should try to login
 				}
 			}
-			getSessionProvider().login(usersession);
+			getSessionProvider().login(usersession.getAPIImpl());
 		}
 	}
 
@@ -105,21 +108,21 @@ public class SessionManager {
 	}
 
 	/**
-	 * Sets the {@link AbstractSessionProvider} to be used by this session manager.
+	 * Sets the {@link ESAbstractSessionProvider} to be used by this session manager.
 	 * 
 	 * @param sessionProvider
 	 *            the session provider to be used
 	 */
-	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
+	public void setSessionProvider(ESAbstractSessionProvider sessionProvider) {
 		provider = sessionProvider;
 	}
 
 	/**
-	 * Returns the {@link AbstractSessionProvider} in use by this session manager.
+	 * Returns the {@link ESAbstractSessionProvider} in use by this session manager.
 	 * 
 	 * @return the session provider in use
 	 */
-	public AbstractSessionProvider getSessionProvider() {
+	public ESAbstractSessionProvider getSessionProvider() {
 		return provider;
 	}
 
@@ -127,8 +130,8 @@ public class SessionManager {
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.usersessionProvider");
 
 		if (extensionPoint.getExtensionElements().size() > 0) {
-			AbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",
-				AbstractSessionProvider.class);
+			ESAbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",
+				ESAbstractSessionProvider.class);
 			if (sessionProvider != null) {
 				provider = sessionProvider;
 			}

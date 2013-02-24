@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * 
  * @generated
  */
-public class RangeQueryImpl<T extends ESRangeQueryImpl<?>> extends HistoryQueryImpl implements RangeQuery<T> {
+public class RangeQueryImpl<T extends ESRangeQueryImpl<?>> extends HistoryQueryImpl<T> implements RangeQuery<T> {
 
 	/**
 	 * @generated NOT

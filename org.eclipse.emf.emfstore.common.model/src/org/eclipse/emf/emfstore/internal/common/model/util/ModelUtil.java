@@ -55,7 +55,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -1203,16 +1202,17 @@ public final class ModelUtil {
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver#getSingleton(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public static EObject getSingleton(ESModelElementId singletonId) {
+	public static EObject getSingleton(ModelElementId singletonId) {
 
-		initSingletonIdResolvers();
-
-		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
-			EObject singleton = resolver.getSingleton(singletonId);
-			if (singleton != null) {
-				return singleton;
-			}
-		}
+		// TODO: reactivate
+		// initSingletonIdResolvers();
+		//
+		// for (ESSingletonIdResolver resolver : singletonIdResolvers) {
+		// EObject singleton = resolver.getSingleton(singletonId);
+		// if (singleton != null) {
+		// return singleton;
+		// }
+		// }
 
 		return null;
 	}

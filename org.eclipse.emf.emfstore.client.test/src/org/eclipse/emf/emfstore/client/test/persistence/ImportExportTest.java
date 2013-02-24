@@ -60,7 +60,7 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectController("importedProject"));
 
-		ESLocalProject newProjectSpace = null;
+		ProjectSpace newProjectSpace = null;
 
 		for (ESProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.getProjectName().equals("importedProject")) {

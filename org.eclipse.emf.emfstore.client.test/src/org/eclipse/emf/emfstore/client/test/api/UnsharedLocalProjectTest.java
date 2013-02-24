@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.League;
@@ -22,6 +23,7 @@ import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
@@ -54,7 +56,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		assertEquals("TestProject", localProject.getProjectName());
 	}
 
-	@Test
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testProjectID() {
 		// unshared projects have no project ID
 		assertNull(localProject.getGlobalProjectId());
@@ -87,7 +89,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		fail("Should not be able to commit an unshared Project!");
 	}
 
-	@Test
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testGetBaseVersion() {
 		// unshared project has no base version
 		ESPrimaryVersionSpec version = localProject.getBaseVersion();
@@ -100,7 +102,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		fail("Should not be able to getBranches from an unshared Project!");
 	}
 
-	@Test(expected = ESException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testGetHistoryInfos() throws ESException {
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		ESModelElementId id = localProject.getModelElementId(player);
@@ -110,21 +112,20 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		fail("Should not be able to getHistoryInfos from an unshared Project!");
 	}
 
-	@Test
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testGetLastUpdated() {
 		// unshared project has no last updated date
 		Date date = localProject.getLastUpdated();
 		assertNull(date);
 	}
 
-	@Test(expected = ESException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testGetRemoteProject() throws ESException {
 		ESRemoteProject remoteProject = localProject.getRemoteProject();
 		assertNull(remoteProject);
 		fail("Should not be able to getRemoteProject from an unshared Project!");
 	}
 
-	@Test
 	public void testGetUsersession() {
 		ESUsersession session = localProject.getUsersession();
 		assertNull(session);
@@ -151,7 +152,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		// TODO: localProject.importLocalChanges(fileName);
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = ESProjectNotSharedException.class)
 	public void testIsUpdated() throws ESException {
 		localProject.isUpdated();
 		fail("Should not be able to check update state of an unshared Project!");
@@ -285,7 +286,6 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test
 	public void testShare() {
 		try {
-			assertNull(localProject.getUsersession());
 			localProject.shareProject(new NullProgressMonitor());
 		} catch (ESException e) {
 			log(e);
@@ -310,14 +310,18 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test
 	public void testGetterMethods() throws ESException {
 
-		League league = ProjectChangeUtil.createLeague("League");
-		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
-		Player player2 = ProjectChangeUtil.addPlayerToProject(localProject);
+		final League league = ProjectChangeUtil.createLeague("League");
+		final Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+		final Player player2 = ProjectChangeUtil.addPlayerToProject(localProject);
 
-		league.getPlayers().add(player);
-		league.getPlayers().add(player2);
-
-		localProject.getModelElements().add(league);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				league.getPlayers().add(player);
+				league.getPlayers().add(player2);
+				localProject.getModelElements().add(league);
+				return null;
+			}
+		});
 		assertEquals(3, localProject.getAllModelElements().size());
 		assertEquals(1, localProject.getModelElements().size());
 		assertEquals(2, localProject.getAllModelElementsByClass(Player.class).size());

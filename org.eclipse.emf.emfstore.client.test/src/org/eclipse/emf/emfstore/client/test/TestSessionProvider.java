@@ -12,16 +12,16 @@ package org.eclipse.emf.emfstore.client.test;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
-public class TestSessionProvider extends AbstractSessionProvider {
+public class TestSessionProvider extends ESAbstractSessionProvider {
 
 	private Usersession session;
 
@@ -29,16 +29,17 @@ public class TestSessionProvider extends AbstractSessionProvider {
 
 	}
 
-	private void initSession(ESServer serverInfo) {
+	private void initSession(ESServer server) {
 
-		if (serverInfo == null) {
-			serverInfo = SetupHelper.getServerInfo();
+		if (server == null) {
+			server = SetupHelper.getServerInfo().getAPIImpl();
 		}
 
-		Workspace currentWorkspace = (Workspace) WorkspaceProvider.INSTANCE.getWorkspace();
-		((WorkspaceBase) currentWorkspace).save();
-		if (!((WorkspaceBase) currentWorkspace).getServerInfos().contains(serverInfo)) {
-			currentWorkspace.addServer(serverInfo);
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		Workspace internalWorkspace = workspace.getInternalAPIImpl();
+		// TODO: contaisn check for server infos
+		if (!internalWorkspace.getServerInfos().contains(server)) {
+			workspace.addServer(server);
 		}
 
 		// ServerInfo serverInfo = SetupHelper.getServerInfo();
@@ -47,16 +48,16 @@ public class TestSessionProvider extends AbstractSessionProvider {
 		session.setUsername("super");
 		session.setPassword("super");
 		session.setSavePassword(true);
-		session.setServerInfo((ServerInfo) serverInfo);
-		currentWorkspace.getUsersessions().add(session);
-		((WorkspaceBase) currentWorkspace).save();
+		session.setServerInfo(((ESServerImpl) server).getInternalAPIImpl());
+		internalWorkspace.getUsersessions().add(session);
+		internalWorkspace.save();
 	}
 
 	@Override
 	public ESUsersession provideUsersession(ESServer serverInfo) throws ESException {
-		if (session != null
-			&& ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
-			return session;
+		Workspace internalWorkspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+		if (session != null && internalWorkspace.getUsersessions().contains(session)) {
+			return session.getAPIImpl();
 		}
 
 		if (serverInfo != null && serverInfo.getLastUsersession() != null) {
@@ -64,12 +65,11 @@ public class TestSessionProvider extends AbstractSessionProvider {
 
 		}
 
-		if (session == null
-			|| !((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
+		if (session == null || !internalWorkspace.getUsersessions().contains(session)) {
 			initSession(serverInfo);
 		}
 
-		return session;
+		return session.getAPIImpl();
 	}
 
 	@Override
@@ -79,9 +79,9 @@ public class TestSessionProvider extends AbstractSessionProvider {
 	}
 
 	public void clearSession() {
-		if (session != null
-			&& ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().contains(session)) {
-			((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().remove(session);
+		Workspace internalWorkspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+		if (session != null && internalWorkspace.getUsersessions().contains(session)) {
+			internalWorkspace.getUsersessions().remove(session);
 			session = null;
 		}
 	}

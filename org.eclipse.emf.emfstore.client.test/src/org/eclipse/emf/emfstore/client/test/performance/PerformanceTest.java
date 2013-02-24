@@ -17,12 +17,14 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -31,6 +33,7 @@ import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfigurat
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -115,8 +118,16 @@ public class PerformanceTest {
 			@Override
 			protected void doRun() {
 				setupHelper.loginServer();
-				usersession = setupHelper.getUsersession();
-				((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().add(usersession);
+				Usersession session = setupHelper.getUsersession();
+				if (!session.isLoggedIn()) {
+					try {
+						session.logIn();
+					} catch (ESException e) {
+						fail("Usersession could not be logged in.");
+					}
+				}
+				((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().add(session);
+				usersession = session;
 			}
 		}.run(false);
 
@@ -132,9 +143,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						if (!usersession.isLoggedIn()) {
-							usersession.logIn();
-						}
+
 						projectSpace.shareProject(usersession, null);
 					} catch (ESException e) {
 						fail();
@@ -196,8 +205,11 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						// TODO: OTS cast
-						projectSpace2 = projectSpace.getRemoteProject().checkout(setupHelper.getUsersession(),
+						ESLocalProject checkout = projectSpace.getAPIImpl().getRemoteProject().checkout(
+							setupHelper.getUsersession().getAPIImpl(),
+							ESVersionSpec.FACTORY.createHEAD(),
 							new NullProgressMonitor());
+						projectSpace2 = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 					} catch (ESException e) {
 						e.printStackTrace();
 					}
@@ -222,8 +234,6 @@ public class PerformanceTest {
 						projectSpace2.delete(new NullProgressMonitor());
 						projectSpace2 = null;
 					} catch (IOException e) {
-						e.printStackTrace();
-					} catch (ESException e) {
 						e.printStackTrace();
 					}
 				}
@@ -271,8 +281,12 @@ public class PerformanceTest {
 					Usersession usersession2 = setupHelper2.getUsersession();
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
-					projectSpace2 = setupHelper.getTestProjectSpace().getRemoteProject()
-						.checkout(usersession2, new NullProgressMonitor());
+					ESLocalProject checkout = setupHelper.getTestProjectSpace().getAPIImpl().getRemoteProject()
+						.checkout(
+							usersession2.getAPIImpl(),
+							ESVersionSpec.FACTORY.createHEAD(),
+							new NullProgressMonitor());
+					projectSpace2 = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 				} catch (ESException e) {
 					e.printStackTrace();
 				}

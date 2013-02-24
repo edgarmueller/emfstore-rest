@@ -22,11 +22,16 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.junit.Test;
 
 /**
@@ -89,7 +94,7 @@ public class HistoryAPITests extends CoreServerTest {
 		assertEquals(versions[5], p.commit(ps2));
 
 		// v6
-		ProjectSpace thirdBranch = p.checkout(ps.getRemoteProject(), versions[3]);
+		ProjectSpace thirdBranch = p.checkout(ps.getAPIImpl().getRemoteProject(), versions[3]);
 		rename(thirdBranch, 6);
 		assertEquals(versions[6], p.branch(thirdBranch, branches[2]));
 
@@ -115,46 +120,52 @@ public class HistoryAPITests extends CoreServerTest {
 	public void rangequery() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 5, 25, false, false, false, false), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[3], 5, 25, false, false,
+			false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(rangeQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[5], result.get(0).getPrimarySpec());
-		assertEquals(versions[3], result.get(1).getPrimarySpec());
-		assertEquals(versions[1], result.get(2).getPrimarySpec());
-		assertEquals(versions[0], result.get(3).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(2).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(3).getPrimarySpec());
 	}
 
 	@Test
 	public void rangequeryAllVersions() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 5, 25, true, false, false, false), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[3], 5,
+			25, true, false, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl().getHistoryInfos(rangeQuery.getAPIImpl(),
+			new NullProgressMonitor());
 
 		assertEquals(8, result.size());
-		assertEquals(versions[7], result.get(0).getPrimarySpec());
-		assertEquals(versions[6], result.get(1).getPrimarySpec());
-		assertEquals(versions[5], result.get(2).getPrimarySpec());
-		assertEquals(versions[4], result.get(3).getPrimarySpec());
-		assertEquals(versions[3], result.get(4).getPrimarySpec());
-		assertEquals(versions[2], result.get(5).getPrimarySpec());
-		assertEquals(versions[1], result.get(6).getPrimarySpec());
-		assertEquals(versions[0], result.get(7).getPrimarySpec());
+		assertEquals(versions[7].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[6].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(2).getPrimarySpec());
+		assertEquals(versions[4].getAPIImpl(), result.get(3).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(4).getPrimarySpec());
+		assertEquals(versions[2].getAPIImpl(), result.get(5).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(6).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(7).getPrimarySpec());
 	}
 
 	@Test
 	public void rangequeryIncludeCp() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 1, 25, false, false, false, true), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[3], 1,
+			25, false, false, false, true);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(rangeQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[5], result.get(0).getPrimarySpec());
-		assertEquals(versions[3], result.get(1).getPrimarySpec());
-		assertEquals(versions[1], result.get(2).getPrimarySpec());
-		assertEquals(versions[0], result.get(3).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(2).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(3).getPrimarySpec());
 
 		assertTrue(result.get(0).getChangePackage() != null);
 		assertTrue(result.get(1).getChangePackage() != null);
@@ -167,110 +178,121 @@ public class HistoryAPITests extends CoreServerTest {
 	public void rangequeryNoUpper() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[5], 5, 1, false, false, false, false), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[5], 5,
+			1, false, false, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(rangeQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(2, result.size());
-		assertEquals(versions[5], result.get(0).getPrimarySpec());
-		assertEquals(versions[3], result.get(1).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(1).getPrimarySpec());
 	}
 
 	@Test
 	public void rangequeryNoLower() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[0], 1, 20, false, false, false, false), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[0], 1,
+			20, false, false, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(rangeQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(2, result.size());
-		assertEquals(versions[1], result.get(0).getPrimarySpec());
-		assertEquals(versions[0], result.get(1).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(1).getPrimarySpec());
 	}
 
 	@Test
 	public void rangequeryLimitZero() throws ESException {
 		ProjectSpace ps = createHistory(this);
-
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[0], 0, 0, false, false, false, false), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[0], 0,
+			0, false, false, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(rangeQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(1, result.size());
-		assertEquals(versions[0], result.get(0).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(0).getPrimarySpec());
 	}
 
 	@Test
 	public void rangequeryIncoming() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[7], 0, 2, false, true, false, false), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[7], 0,
+			2, false, true, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(rangeQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[7], result.get(0).getPrimarySpec());
-		assertEquals(versions[6], result.get(1).getPrimarySpec());
-		assertEquals(versions[5], result.get(2).getPrimarySpec());
+		assertEquals(versions[7].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[6].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(2).getPrimarySpec());
 	}
 
 	@Test
 	public void rangequeryOutgoing() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.rangeQuery(
-			versions[3], 2, 0, false, false, true, false), new NullProgressMonitor());
+		RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder.rangeQuery(versions[3], 2,
+			0, false, false, true, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(rangeQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[6], result.get(0).getPrimarySpec());
-		assertEquals(versions[5], result.get(1).getPrimarySpec());
-		assertEquals(versions[3], result.get(2).getPrimarySpec());
+		assertEquals(versions[6].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(2).getPrimarySpec());
 	}
 
 	@Test
 	public void pathQuery() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
-			versions[0], versions[5], false, false), new NullProgressMonitor());
+		PathQuery pathQuery = HistoryQueryBuilder.pathQuery(versions[0], versions[5], false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(pathQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[0], result.get(0).getPrimarySpec());
-		assertEquals(versions[1], result.get(1).getPrimarySpec());
-		assertEquals(versions[3], result.get(2).getPrimarySpec());
-		assertEquals(versions[5], result.get(3).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(2).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(3).getPrimarySpec());
 	}
 
 	@Test
 	public void pathQueryInverse() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
-			versions[5], versions[0], false, false), new NullProgressMonitor());
+		PathQuery pathQuery = HistoryQueryBuilder.pathQuery(versions[5], versions[0], false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(pathQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(4, result.size());
-		assertEquals(versions[5], result.get(0).getPrimarySpec());
-		assertEquals(versions[3], result.get(1).getPrimarySpec());
-		assertEquals(versions[1], result.get(2).getPrimarySpec());
-		assertEquals(versions[0], result.get(3).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(2).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(3).getPrimarySpec());
 	}
 
 	@Test
 	public void pathQueryAllVersions() throws ESException {
 		ProjectSpace ps = createHistory(this);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(
-			versions[1], versions[3], true, false), new NullProgressMonitor());
+		PathQuery pathQuery = HistoryQueryBuilder.pathQuery(versions[1], versions[3], true, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl()
+			.getHistoryInfos(pathQuery.getAPIImpl(), new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[1], result.get(0).getPrimarySpec());
-		assertEquals(versions[2], result.get(1).getPrimarySpec());
-		assertEquals(versions[3], result.get(2).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[2].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(2).getPrimarySpec());
 	}
 
 	@Test(expected = InvalidVersionSpecException.class)
 	public void invalidPathQuery() throws ESException {
 		ProjectSpace ps = createHistory(this);
-
-		ps.getHistoryInfos(HistoryQueryBuilder.pathQuery(versions[2], versions[3], false, false),
-			new NullProgressMonitor());
+		PathQuery pathQuery = HistoryQueryBuilder.pathQuery(versions[2], versions[3], false, false);
+		ps.getAPIImpl().getHistoryInfos(pathQuery.getAPIImpl(), new NullProgressMonitor());
 	}
 
 	@Test
@@ -279,11 +301,13 @@ public class HistoryAPITests extends CoreServerTest {
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[3], id, 0, 0, false, false), new NullProgressMonitor());
+		ModelElementQuery modelelementQuery = HistoryQueryBuilder
+			.modelelementQuery(versions[3], id, 0, 0, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl().getHistoryInfos(modelelementQuery.getAPIImpl(),
+			new NullProgressMonitor());
 
 		assertEquals(1, result.size());
-		assertEquals(versions[3], result.get(0).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(0).getPrimarySpec());
 	}
 
 	@Test
@@ -292,12 +316,14 @@ public class HistoryAPITests extends CoreServerTest {
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[1], id, 0, 1, false, false), new NullProgressMonitor());
+		ModelElementQuery modelelementQuery = HistoryQueryBuilder
+			.modelelementQuery(versions[1], id, 0, 1, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl().getHistoryInfos(modelelementQuery.getAPIImpl(),
+			new NullProgressMonitor());
 
 		assertEquals(2, result.size());
-		assertEquals(versions[1], result.get(0).getPrimarySpec());
-		assertEquals(versions[0], result.get(1).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[0].getAPIImpl(), result.get(1).getPrimarySpec());
 	}
 
 	@Test
@@ -306,13 +332,15 @@ public class HistoryAPITests extends CoreServerTest {
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[3], id, 1, 1, false, false), new NullProgressMonitor());
+		ModelElementQuery modelelementQuery = HistoryQueryBuilder
+			.modelelementQuery(versions[3], id, 1, 1, false, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl().getHistoryInfos(modelelementQuery.getAPIImpl(),
+			new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[5], result.get(0).getPrimarySpec());
-		assertEquals(versions[3], result.get(1).getPrimarySpec());
-		assertEquals(versions[1], result.get(2).getPrimarySpec());
+		assertEquals(versions[5].getAPIImpl(), result.get(0).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), result.get(1).getPrimarySpec());
+		assertEquals(versions[1].getAPIImpl(), result.get(2).getPrimarySpec());
 	}
 
 	@Test
@@ -321,12 +349,13 @@ public class HistoryAPITests extends CoreServerTest {
 		EObject element = ps.getProject().getModelElements().get(0);
 		ModelElementId id = ps.getProject().getModelElementId(element);
 
-		List<HistoryInfo> result = (List<HistoryInfo>) (List<?>) ps.getHistoryInfos(HistoryQueryBuilder
-			.modelelementQuery(versions[3], id, 1, 1, true, false), new NullProgressMonitor());
+		ModelElementQuery modelElementQuery = HistoryQueryBuilder.modelelementQuery(versions[3], id, 1, 1, true, false);
+		List<ESHistoryInfo> result = ps.getAPIImpl().getHistoryInfos(modelElementQuery.getAPIImpl(),
+			new NullProgressMonitor());
 
 		assertEquals(3, result.size());
-		assertEquals(versions[4], result.get(0).getPrimarySpec());
-		assertEquals(versions[3], result.get(1).getPrimarySpec());
-		assertEquals(versions[2], result.get(2).getPrimarySpec());
+		assertEquals(versions[4].getAPIImpl(), ((ESHistoryInfoImpl) result.get(0)).getPrimarySpec());
+		assertEquals(versions[3].getAPIImpl(), ((ESHistoryInfoImpl) result.get(1)).getPrimarySpec());
+		assertEquals(versions[2].getAPIImpl(), ((ESHistoryInfoImpl) result.get(2)).getPrimarySpec());
 	}
 }

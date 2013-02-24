@@ -11,6 +11,8 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Query</b></em>'.
@@ -34,7 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface HistoryQuery extends EObject {
+public interface HistoryQuery<T extends ESHistoryQuery> extends EObject, APIDelegate<T> {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

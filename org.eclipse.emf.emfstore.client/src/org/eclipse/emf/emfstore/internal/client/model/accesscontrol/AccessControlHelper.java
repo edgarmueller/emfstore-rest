@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
 import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 
 /**
@@ -62,7 +63,7 @@ public class AccessControlHelper {
 	 */
 	public void checkWriteAccess(ESGlobalProjectId globalId) throws AccessControlException {
 
-		ProjectId projectId = (ProjectId) globalId;
+		ProjectId projectId = ((ESGlobalProjectIdImpl) globalId).getInternalAPIImpl();
 
 		for (Role role : user.getRoles()) {
 			if (role.canDelete(projectId, null) || role.canCreate(projectId, null) || role.canModify(projectId, null)) {

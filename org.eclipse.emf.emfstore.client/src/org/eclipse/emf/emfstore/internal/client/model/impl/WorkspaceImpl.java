@@ -126,7 +126,7 @@ public class WorkspaceImpl extends WorkspaceBase {
 		case ModelPackage.WORKSPACE__PROJECT_SPACES:
 			return ((InternalEList<?>) getProjectSpaces()).basicRemove(otherEnd, msgs);
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			return ((InternalEList<?>) getServers()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getServerInfos()).basicRemove(otherEnd, msgs);
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			return ((InternalEList<?>) getUsersessions()).basicRemove(otherEnd, msgs);
 		}
@@ -165,8 +165,8 @@ public class WorkspaceImpl extends WorkspaceBase {
 			getProjectSpaces().addAll((Collection<? extends ProjectSpace>) newValue);
 			return;
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			getServers().clear();
-			getServers().addAll((Collection<? extends ServerInfo>) newValue);
+			getServerInfos().clear();
+			getServerInfos().addAll((Collection<? extends ServerInfo>) newValue);
 			return;
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			getUsersessions().clear();
@@ -198,7 +198,7 @@ public class WorkspaceImpl extends WorkspaceBase {
 			getProjectSpaces().clear();
 			return;
 		case ModelPackage.WORKSPACE__SERVER_INFOS:
-			getServers().clear();
+			getServerInfos().clear();
 			return;
 		case ModelPackage.WORKSPACE__USERSESSIONS:
 			getUsersessions().clear();

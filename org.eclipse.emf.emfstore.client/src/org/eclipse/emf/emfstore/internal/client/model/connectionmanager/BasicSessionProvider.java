@@ -12,27 +12,27 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * Basic implementation of {@link AbstractSessionProvider}. It's intended for when using EMFStore headless. The UI
+ * Basic implementation of {@link ESAbstractSessionProvider}. It's intended for when using EMFStore headless. The UI
  * counterpart of this would open the login dialog, this implementation throws an exceptions and requires you to login
  * the {@link Usersession} first.
  * 
  * @author wesendon
  */
-public class BasicSessionProvider extends AbstractSessionProvider {
+public class BasicSessionProvider extends ESAbstractSessionProvider {
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
 	 */
 	@Override
-	public Usersession provideUsersession(ESServer serverInfo) throws ESException {
+	public ESUsersession provideUsersession(ESServer serverInfo) throws ESException {
 		throw new ESException("No usersession found.");
 	}
 
@@ -40,7 +40,7 @@ public class BasicSessionProvider extends AbstractSessionProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider#login(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider#login(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	@Override
 	public void login(ESUsersession usersession) throws ESException {

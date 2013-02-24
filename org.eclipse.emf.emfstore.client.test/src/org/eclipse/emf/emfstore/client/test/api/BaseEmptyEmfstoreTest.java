@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -18,7 +19,7 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.Activator;
 import org.eclipse.emf.emfstore.client.test.TestSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
@@ -50,8 +51,14 @@ public abstract class BaseEmptyEmfstoreTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		stopEMFStore();
-		((TestSessionProvider) WorkspaceProvider.getInstance().getSessionManager().getSessionProvider()).clearSession();
-		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).save();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				((TestSessionProvider) WorkspaceProvider.getInstance().getSessionManager().getSessionProvider())
+					.clearSession();
+				WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().save();
+				return null;
+			}
+		});
 	}
 
 	private static void stopEMFStore() {

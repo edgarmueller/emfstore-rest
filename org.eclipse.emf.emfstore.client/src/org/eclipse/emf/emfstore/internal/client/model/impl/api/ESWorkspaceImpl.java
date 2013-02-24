@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.impl;
+package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -58,10 +58,10 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#createLocalProject(java.lang.String)
 	 */
-	public ESLocalProject createLocalProject(final String projectName) {
-		return new EMFStoreCommandWithResult<ESLocalProject>() {
+	public ESLocalProjectImpl createLocalProject(final String projectName) {
+		return new EMFStoreCommandWithResult<ESLocalProjectImpl>() {
 			@Override
-			protected ESLocalProject doRun() {
+			protected ESLocalProjectImpl doRun() {
 				ProjectSpace projectSpace = getInternalAPIImpl().createLocalProject(projectName);
 				return projectSpace.getAPIImpl();
 			}

@@ -20,10 +20,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ServerUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment;
@@ -33,28 +34,39 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
- * @implements IAdaptable, ESWorkspace <!-- end-user-doc -->
+ * @implements IAdaptable <!-- end-user-doc -->
  * 
  *             <p>
  *             The following features are supported:
  *             <ul>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces
+ *             {@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces
  *             <em>Project Spaces</em>}</li>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getServerInfos
+ *             {@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos
  *             <em>Server Infos</em>}</li>
  *             <li>
- *             {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getUsersessions
+ *             {@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions
  *             <em>Usersessions</em>}</li>
  *             </ul>
  *             </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace()
+ * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace()
  * @model
  * @generated
  */
-public interface Workspace extends EObject, IAdaptable, ESWorkspace {
+public interface Workspace extends EObject, IAdaptable, APIDelegate<ESWorkspaceImpl> {
+
+	/**
+	 * Creates a new local project that is not shared with the server yet.
+	 * 
+	 * @param projectName
+	 *            the project name
+	 * @param projectDescription
+	 *            the project description
+	 * @return the project space that the new project resides in
+	 */
+	ProjectSpace createLocalProject(String projectName);
 
 	/**
 	 * Exports a project space to a file.
@@ -157,10 +169,8 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 
 	/**
 	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace}
-	 * . It is
-	 * bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}. It is
+	 * bidirectional and its opposite is ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't clear, there really should be more of a
@@ -170,8 +180,8 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 * 
 	 * @return the value of the '<em>Project Spaces</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace_ProjectSpaces()
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ProjectSpaces()
+	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
 	 * @model opposite="workspace" containment="true" resolveProxies="true"
 	 *        keys="identifier"
 	 * @generated
@@ -180,8 +190,7 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 
 	/**
 	 * Returns the value of the '<em><b>Server Infos</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo}.
-	 * <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ServerInfo}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Server Infos</em>' containment reference list isn't clear, there really should be more
@@ -191,7 +200,7 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 * 
 	 * @return the value of the '<em>Server Infos</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace_ServerInfos()
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ServerInfos()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -199,8 +208,7 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 
 	/**
 	 * Returns the value of the '<em><b>Usersessions</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.Usersession}.
-	 * <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.client.model.Usersession}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Usersessions</em>' containment reference list isn't clear, there really should be more
@@ -210,7 +218,7 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 * 
 	 * @return the value of the '<em>Usersessions</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getWorkspace_Usersessions()
+	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_Usersessions()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -288,13 +296,9 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException;
 
 	/**
-	 * Set the workspace connection manager.
-	 * 
-	 * @param connectionManager
-	 *            The connection manager to be set.
-	 * @generated NOT
+	 * Make the current workspace state persistent.
 	 */
-	// void setConnectionManager(ConnectionManager connectionManager);
+	void save();
 
 	/**
 	 * Returns the workspace resource set.
@@ -334,5 +338,21 @@ public interface Workspace extends EObject, IAdaptable, ESWorkspace {
 	 *             if an error occurs while updating the ACUser
 	 */
 	void updateACUser(Usersession session) throws ESException;
+
+	/**
+	 * Adds an server info and saves.
+	 * 
+	 * @param serverInfo
+	 *            the server info to be added
+	 */
+	void addServerInfo(ServerInfo serverInfo);
+
+	/**
+	 * Removes an server info and saves.
+	 * 
+	 * @param serverInfo
+	 *            the server info to be removed
+	 */
+	void removeServerInfo(ServerInfo serverInfo);
 
 } // Workspace

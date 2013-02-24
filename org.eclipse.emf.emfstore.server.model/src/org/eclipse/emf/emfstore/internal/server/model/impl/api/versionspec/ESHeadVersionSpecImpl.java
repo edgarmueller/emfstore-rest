@@ -33,4 +33,19 @@ public class ESHeadVersionSpecImpl extends ESVersionSpecImpl<ESHeadVersionSpecIm
 		super(headVersionSpec);
 	}
 
+	@Override
+	public boolean equals(Object object) {
+
+		if (object instanceof ESHeadVersionSpecImpl) {
+			ESHeadVersionSpecImpl headVersionSpecImpl = (ESHeadVersionSpecImpl) object;
+			return getInternalAPIImpl().equals(headVersionSpecImpl.getInternalAPIImpl());
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getInternalAPIImpl().hashCode() + super.hashCode();
+	}
 }

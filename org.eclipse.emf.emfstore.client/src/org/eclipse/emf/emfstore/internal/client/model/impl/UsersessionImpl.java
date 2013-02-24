@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
@@ -61,6 +62,11 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @generated
  */
 public class UsersessionImpl extends EObjectImpl implements Usersession {
+
+	/**
+	 * @generated NOT
+	 */
+	private ESUsersessionImpl apiImpl;
 
 	/**
 	 * The default value of the '{@link #getUsername() <em>Username</em>}' attribute.
@@ -575,7 +581,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		getServerInfo().setLastUsersession(this);
 		this.setSessionId(authenticationInformation.getSessionId());
 		this.setACUser(authenticationInformation.getResolvedACUser());
-		WorkspaceProvider.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this);
+		WorkspaceProvider.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this.getAPIImpl());
 	}
 
 	/**
@@ -585,7 +591,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
-		WorkspaceProvider.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(this);
+		WorkspaceProvider.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(getAPIImpl());
 	}
 
 	// end of custom code
@@ -774,16 +780,27 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ESUsersession.IUsersession#getServer()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
 	 * 
 	 * @generated NOT
 	 */
-	public ServerInfo getServer() {
-		return getServerInfo();
+	public ESUsersessionImpl getAPIImpl() {
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+		return apiImpl;
 	}
 
-	public void renew() throws ESException {
-		logIn();
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESUsersessionImpl createAPIImpl() {
+		return new ESUsersessionImpl(this);
 	}
 
 } // UsersessionImpl

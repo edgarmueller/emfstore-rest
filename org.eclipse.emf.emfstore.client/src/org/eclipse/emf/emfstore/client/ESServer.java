@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.client;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.impl.ServerFactoryImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ServerFactoryImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -66,7 +66,7 @@ public interface ESServer {
 	 * 
 	 * @return the URL of the server as a string
 	 */
-	String getUrl();
+	String getURL();
 
 	/**
 	 * Sets the URL of the server.
@@ -74,7 +74,7 @@ public interface ESServer {
 	 * @param url
 	 *            the URL of the server as a string
 	 */
-	void setUrl(String url);
+	void setURL(String url);
 
 	/**
 	 * Returns the alias for the certificate used by this server.

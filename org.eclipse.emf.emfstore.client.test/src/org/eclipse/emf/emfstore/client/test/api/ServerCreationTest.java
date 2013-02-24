@@ -34,13 +34,15 @@ public class ServerCreationTest {
 
 	@Test
 	public void testNameSet() {
-		ESServer server = ESServer.FACTORY.getServer("MyServer", "localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY
+			.getServer("MyServer", "localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		assertEquals("MyServer", server.getName());
 	}
 
 	@Test
 	public void testNameChange() {
-		ESServer server = ESServer.FACTORY.getServer("MyServer", "localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY
+			.getServer("MyServer", "localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		assertEquals("MyServer", server.getName());
 		server.setName("NewName");
 		assertEquals("NewName", server.getName());
@@ -49,15 +51,15 @@ public class ServerCreationTest {
 	@Test
 	public void testURL() {
 		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
-		assertEquals("localhost", server.getUrl());
+		assertEquals("localhost", server.getURL());
 	}
 
 	@Test
 	public void testURLChange() {
 		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
-		assertEquals("localhost", server.getUrl());
-		server.setUrl("127.0.0.1");
-		assertEquals("127.0.0.1", server.getUrl());
+		assertEquals("localhost", server.getURL());
+		server.setURL("127.0.0.1");
+		assertEquals("127.0.0.1", server.getURL());
 	}
 
 	@Test

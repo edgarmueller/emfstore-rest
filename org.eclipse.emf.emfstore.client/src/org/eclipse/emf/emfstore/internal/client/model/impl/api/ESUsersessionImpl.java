@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.impl;
+package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import java.util.concurrent.Callable;
 

@@ -16,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -35,11 +34,10 @@ public class PersistenceTest extends WorkspaceTest {
 	@Test
 	public void testReinitWorkspace() throws SerializationException {
 		Configuration.ClIENT_BEHAVIOR.setAutoSave(false);
-		Project originalProject = ModelUtil.clone(((Workspace) WorkspaceProvider.getInstance().getWorkspace())
+		Project originalProject = ModelUtil.clone(WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl()
 			.getProjectSpaces().get(0).getProject());
 
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
 				getProject().addModelElement(TestmodelFactory.eINSTANCE.createTestElement());
@@ -50,8 +48,8 @@ public class PersistenceTest extends WorkspaceTest {
 			WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
 		WorkspaceProvider.getInstance().dispose();
 		WorkspaceProvider.getInstance().reinit();
-		Project project = ((ProjectSpace) WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().get(0))
-			.getProject();
+		Workspace internalWorkspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+		Project project = internalWorkspace.getProjectSpaces().get(0).getProject();
 		assertTrue(ModelUtil.areEqual(project, originalProject));
 	}
 

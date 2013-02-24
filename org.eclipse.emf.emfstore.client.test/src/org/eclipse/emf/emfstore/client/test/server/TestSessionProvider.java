@@ -12,12 +12,11 @@ package org.eclipse.emf.emfstore.client.test.server;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -28,16 +27,11 @@ import org.junit.Assert;
  * 
  * @author emueller
  */
-public final class TestSessionProvider extends AbstractSessionProvider {
+public final class TestSessionProvider extends ESAbstractSessionProvider {
 
 	private static Usersession usersession;
 
-	/**
-	 * Initializes the singleton statically.
-	 */
-	private static class SingletonHolder {
-		public static final TestSessionProvider INSTANCE = new TestSessionProvider();
-	}
+	public static final TestSessionProvider INSTANCE = new TestSessionProvider();
 
 	/**
 	 * Returns the singleton instance.
@@ -45,7 +39,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 	 * @return the singleton instance
 	 */
 	public static TestSessionProvider getInstance() {
-		return SingletonHolder.INSTANCE;
+		return INSTANCE;
 	}
 
 	/**
@@ -75,7 +69,7 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 
 	public TestSessionProvider() {
 
-		final Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		final ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
 		usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(SetupHelper.getServerInfo());
 		usersession.setUsername("super");
@@ -84,19 +78,19 @@ public final class TestSessionProvider extends AbstractSessionProvider {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				workspace.getUsersessions().add(usersession);
+				workspace.getInternalAPIImpl().getUsersessions().add(usersession);
 			}
 		}.run(false);
 
-		((WorkspaceBase) workspace).save();
+		workspace.getInternalAPIImpl().save();
 	}
 
 	@Override
-	public Usersession provideUsersession(ESServer serverInfo) throws ESException {
+	public ESUsersession provideUsersession(ESServer serverInfo) throws ESException {
 		if (!usersession.isLoggedIn()) {
 			usersession.logIn();
 		}
-		return usersession;
+		return usersession.getAPIImpl();
 	}
 
 	@Override

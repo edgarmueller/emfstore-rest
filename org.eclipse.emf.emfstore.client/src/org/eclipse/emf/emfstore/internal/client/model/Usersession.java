@@ -12,7 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
@@ -46,7 +47,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @model
  * @generated
  */
-public interface Usersession extends EObject, ESUsersession {
+public interface Usersession extends EObject, APIDelegate<ESUsersessionImpl> {
 	/**
 	 * Returns the value of the '<em><b>Username</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.impl.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -49,7 +49,7 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 
 		HistoryBrowserView view = (HistoryBrowserView) activePage.getActivePart();
 
-		RemoteProject remoteProject = null;
+		ESRemoteProjectImpl remoteProject = null;
 		try {
 			remoteProject = view.getProjectSpace().getRemoteProject();
 		} catch (ESException e) {

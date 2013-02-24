@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdGenerator;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -192,7 +191,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#contains(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public boolean contains(ESModelElementId id) {
+	public boolean contains(ModelElementId id) {
 		if (!isCacheInitialized()) {
 			initMapping();
 		}
@@ -285,7 +284,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#getModelElement(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public EObject getModelElement(ESModelElementId modelElementId) {
+	public EObject getModelElement(ModelElementId modelElementId) {
 
 		if (modelElementId == null) {
 			return null;
@@ -295,7 +294,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			initMapping();
 		}
 
-		EObject eObject = getIdToEObjectCache().get(((ModelElementId) modelElementId).getId());
+		EObject eObject = getIdToEObjectCache().get(modelElementId.getId());
 
 		return eObject != null ? eObject : ModelUtil.getSingleton(modelElementId);
 	}
@@ -829,5 +828,14 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		Map<EObject, String> mapping = new LinkedHashMap<EObject, String>(eObjectToIdMap);
 		mapping.putAll(new LinkedHashMap<EObject, String>(allocatedEObjectToIdMap));
 		return mapping;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#removeModelElement(org.eclipse.emf.ecore.EObject)
+	 */
+	public void removeModelElement(EObject modelElement) {
+		getModelElements().remove(modelElement);
 	}
 }

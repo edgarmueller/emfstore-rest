@@ -17,24 +17,27 @@ import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 
 /**
- * The actual implementation of an {@link ESChangeConflict} containing
+ * The actual implementation of an {@link ESChangeConflictImpl} containing
  * the changes that caused the conflict.
  * 
  * @author wesendon
  * @author emueller
  */
-public class ChangeConflict implements ESChangeConflict {
+public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 
 	private List<ChangePackage> myChangePackages;
 	private List<ChangePackage> newPackages;
 	private ProjectSpace projectSpace;
 	private Set<ConflictBucketCandidate> conflictBucketCandidates;
 	private final IModelElementIdToEObjectMapping idToEObjectMapping;
+	private ESChangeConflictImpl apiImpl;
 
 	/**
 	 * Retrieve the list of change packages that caused the exception.
@@ -102,6 +105,29 @@ public class ChangeConflict implements ESChangeConflict {
 	 */
 	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
 		return idToEObjectMapping;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 */
+	public ESChangeConflict getAPIImpl() {
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+		return apiImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 */
+	public ESChangeConflictImpl createAPIImpl() {
+		return new ESChangeConflictImpl(this);
 	}
 
 }

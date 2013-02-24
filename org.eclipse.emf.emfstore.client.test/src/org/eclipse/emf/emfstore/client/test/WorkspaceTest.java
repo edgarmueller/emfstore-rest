@@ -20,10 +20,12 @@ import junit.framework.Assert;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -51,8 +53,12 @@ public abstract class WorkspaceTest {
 	// private static Workspace workspace;
 	private boolean compareAtEnd = true;
 
+	private static boolean saveState;
+
 	@BeforeClass
 	public static void beforeClass() {
+		saveState = Configuration.ClIENT_BEHAVIOR.isAutoSaveEnabled();
+		Configuration.ClIENT_BEHAVIOR.setAutoSave(true);
 		CommonUtil.setTesting(true);
 		WorkspaceProvider workspaceManager = WorkspaceProvider.getInstance();
 		workspaceManager.reinit();
@@ -69,15 +75,17 @@ public abstract class WorkspaceTest {
 
 			@Override
 			protected void doRun() {
-				ProjectSpace localProjectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
+				ESLocalProjectImpl localProject = WorkspaceProvider.getInstance().getWorkspace()
 					.createLocalProject("testProject");
+				ProjectSpace localProjectSpace = localProject.getInternalAPIImpl();
 				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
 
 				if (isCompareAtEnd()) {
 					Project clonedProject = ModelUtil.clone(getProject());
-					clonedProjectSpace = (ProjectSpaceBase) ((WorkspaceBase) WorkspaceProvider.getInstance()
-						.getWorkspace()).createLocalProject("clonedProject");
+					ESLocalProjectImpl localProject2 = WorkspaceProvider.getInstance()
+						.getWorkspace().createLocalProject("clonedProject");
+					clonedProjectSpace = (ProjectSpaceBase) localProject2.getInternalAPIImpl();
 					clonedProjectSpace.setProject(clonedProject);
 					Assert.assertTrue(ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject()));
 				}
@@ -129,6 +137,7 @@ public abstract class WorkspaceTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws IOException, ESException {
 		WorkspaceProvider.getInstance().dispose();
+		Configuration.ClIENT_BEHAVIOR.setAutoSave(saveState);
 	}
 
 	private void cleanProjects() {
@@ -138,8 +147,9 @@ public abstract class WorkspaceTest {
 			protected void doRun() {
 				try {
 
-					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(((WorkspaceBase) WorkspaceProvider
-						.getInstance().getWorkspace()).getProjectSpaces())) {
+					ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.getInternalAPIImpl()
+						.getProjectSpaces())) {
 						// TODO: monitor
 						projectSpace.delete(new NullProgressMonitor());
 					}
@@ -150,8 +160,6 @@ public abstract class WorkspaceTest {
 					// workspace = null;
 					// FileUtil.deleteDirectory(new File(Configuration.getWorkspaceDirectory()), true);
 				} catch (IOException e) {
-					// ignore
-				} catch (ESException e) {
 					// ignore
 				}
 			}
@@ -182,8 +190,6 @@ public abstract class WorkspaceTest {
 						}
 						WorkspaceUtil.logWarning(e.getMessage() + " Retrying...(" + retried + " out of 3)", e);
 					}
-				} catch (ESException e) {
-					// TODO: OTS
 				}
 			}
 		}.run(false);

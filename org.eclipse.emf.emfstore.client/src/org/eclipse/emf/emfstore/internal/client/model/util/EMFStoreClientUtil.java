@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -151,8 +152,8 @@ public final class EMFStoreClientUtil {
 	}
 
 	public static boolean areEqual(ESLocalProject projectA, ESLocalProject projectB) {
-		ProjectSpace projectSpaceA = (ProjectSpace) projectA;
-		ProjectSpace projectSpaceB = (ProjectSpace) projectB;
+		ProjectSpace projectSpaceA = ((ESLocalProjectImpl) projectA).getInternalAPIImpl();
+		ProjectSpace projectSpaceB = ((ESLocalProjectImpl) projectB).getInternalAPIImpl();
 
 		return ModelUtil.areEqual(projectSpaceA.getProject(), projectSpaceB.getProject());
 	}

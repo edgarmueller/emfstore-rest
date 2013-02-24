@@ -58,7 +58,7 @@ public class Behavior {
 		// AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		if (autoSave == null) {
 			autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
-				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
+				AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, false);
 		}
 		return autoSave;
 	}

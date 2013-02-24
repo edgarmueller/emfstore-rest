@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.client.test.server;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,19 +21,22 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.UnknownSessionException;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESHistoryQueryImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
@@ -40,6 +44,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Attr
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 import org.junit.Test;
 
 /**
@@ -56,7 +61,7 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void getProjectListTest() throws ESException {
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
+		assertTrue(getServer().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
 	}
 
 	/**
@@ -77,10 +82,12 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					return getRemoteProject().checkout(TestSessionProvider.getInstance().getDefaultUsersession()
-						, new NullProgressMonitor());
+					ESLocalProject checkout = getRemoteProject().checkout(
+						TestSessionProvider.getInstance().getDefaultUsersession().getAPIImpl(),
+						new NullProgressMonitor());
+					return ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 				} catch (ESException e) {
-					Assert.fail();
+					Assert.fail(e.getMessage());
 					return null;
 				}
 			}
@@ -104,14 +111,15 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void createEmptyProjectTest() throws ESException {
-		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects().size());
+		assertEquals(getProjectsOnServerBeforeTest(), getServer().getRemoteProjects().size());
 
 		new EMFStoreCommand() {
 
 			@Override
 			protected void doRun() {
-				ProjectSpace projectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-					.createLocalProject("createEmptyProjectAndDelete");
+				ESWorkspaceImpl workspaceImpl = WorkspaceProvider.getInstance().getWorkspace();
+				ProjectSpace projectSpace = workspaceImpl.createLocalProject("createEmptyProjectAndDelete")
+					.getInternalAPIImpl();
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
 				} catch (ESException e) {
@@ -120,7 +128,7 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		assertEquals(getProjectsOnServerBeforeTest() + 1, getServerInfo().getRemoteProjects().size());
+		assertEquals(getProjectsOnServerBeforeTest() + 1, getServer().getRemoteProjects().size());
 	}
 
 	/**
@@ -139,14 +147,15 @@ public class ServerInterfaceTest extends ServerTests {
 	 */
 	@Test
 	public void shareProjectTest() throws ESException {
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
+		assertTrue(getServer().getRemoteProjects().size() == getProjectsOnServerBeforeTest());
 
 		ProjectSpace projectSpace2 = new EMFStoreCommandWithResult<ProjectSpace>() {
 
 			@Override
 			protected ProjectSpace doRun() {
-				ProjectSpace projectSpace = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-					.createLocalProject("createEmptyProjectAndDelete");
+				ESWorkspaceImpl workspaceImpl = WorkspaceProvider.getInstance().getWorkspace();
+				ProjectSpace projectSpace = workspaceImpl.createLocalProject("createEmptyProjectAndDelete")
+					.getInternalAPIImpl();
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
 					return projectSpace;
@@ -157,7 +166,7 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		assertTrue(getServerInfo().getRemoteProjects().size() == getProjectsOnServerBeforeTest() + 1);
+		assertTrue(getServer().getRemoteProjects().size() == getProjectsOnServerBeforeTest() + 1);
 		assertNotNull(getProject());
 		assertEqual(getProject(), projectSpace2.getProject());
 	}
@@ -167,24 +176,14 @@ public class ServerInterfaceTest extends ServerTests {
 	 * 
 	 * @throws ESException in case of failure
 	 */
-	/**
-	 * @throws ESException
-	 * @throws IOException
-	 */
-	/**
-	 * @throws ESException
-	 * @throws IOException
-	 */
 	@Test
 	public void deleteProjectTest() throws ESException, IOException {
 
-		assertEquals(getProjectsOnServerBeforeTest(), getServerInfo().getRemoteProjects().size());
-
-		// TODO: monitor
+		assertEquals(getProjectsOnServerBeforeTest(), getServer().getRemoteProjects().size());
 		getRemoteProject().delete(new NullProgressMonitor());
 
 		try {
-			List<ESRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
+			List<ESRemoteProject> remoteProjectList = getServer().getRemoteProjects();
 			for (ESRemoteProject projectInfo : remoteProjectList) {
 				if (projectInfo.getGlobalProjectId() == getProjectId()) {
 					assertTrue(false);
@@ -192,10 +191,10 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 			assertTrue(true);
 		} catch (ESException e) {
-			assertTrue(true);
+			fail(e.getMessage());
 		}
 
-		assertEquals(getProjectsOnServerBeforeTest() - 1, getServerInfo().getRemoteProjects().size());
+		assertEquals(getProjectsOnServerBeforeTest() - 1, getServer().getRemoteProjects().size());
 	}
 
 	/**
@@ -212,11 +211,13 @@ public class ServerInterfaceTest extends ServerTests {
 	@Test
 	public void resolveVersionSpecTest() throws ESException {
 
-		List<ESRemoteProject> remoteProjectList = getServerInfo().getRemoteProjects();
+		List<ESRemoteProject> remoteProjectList = getServer().getRemoteProjects();
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		boolean sameVersionSpec = false;
 		for (ESRemoteProject project : remoteProjectList) {
-			if (project.getHeadVersion(monitor).equals(getProjectVersion())) {
+			PrimaryVersionSpec internalAPIImpl = ((ESPrimaryVersionSpecImpl) project.getHeadVersion(monitor))
+				.getInternalAPIImpl();
+			if (internalAPIImpl.equals(getProjectVersion())) {
 				sameVersionSpec = true;
 			}
 		}
@@ -250,7 +251,7 @@ public class ServerInterfaceTest extends ServerTests {
 
 				try {
 					// TODO: TQ cast
-					return (PrimaryVersionSpec) getProjectSpace().commit(
+					return getProjectSpace().commit(
 						SetupHelper.createLogMessage("bla", "blablba"), null, null);
 
 				} catch (ESException e) {
@@ -322,7 +323,7 @@ public class ServerInterfaceTest extends ServerTests {
 				getProjectSpace().getOperations().add(attributeOperation);
 				try {
 					// TODO: TQ cast
-					return (PrimaryVersionSpec) getProjectSpace().commit(
+					return getProjectSpace().commit(
 						SetupHelper.createLogMessage("bla", "blablba"), null, null);
 
 				} catch (ESException e) {
@@ -367,7 +368,7 @@ public class ServerInterfaceTest extends ServerTests {
 
 				try {
 					// TODO: TQ cast
-					return (PrimaryVersionSpec) getProjectSpace().commit(
+					return getProjectSpace().commit(
 						SetupHelper.createLogMessage("bla", logMessage), null, null);
 
 				} catch (ESException e) {
@@ -377,11 +378,13 @@ public class ServerInterfaceTest extends ServerTests {
 			}
 		}.run(false);
 
-		// TODO: TQ cast
-		List<HistoryInfo> historyInfo = (List<HistoryInfo>) (List<?>) getProjectSpace().getHistoryInfos(
-			createHistoryQuery(createdVersion, createdVersion), new NullProgressMonitor());
+		HistoryQuery<ESHistoryQueryImpl<?, ?>> historyQuery = createHistoryQuery(createdVersion, createdVersion);
+		List<ESHistoryInfo> historyInfos = getProjectSpace().getAPIImpl().getHistoryInfos(
+			historyQuery.getAPIImpl(),
+			new NullProgressMonitor());
 
-		assertTrue(historyInfo.size() == 1);
+		assertTrue(historyInfos.size() == 1);
+		// TODO
 		// assertTrue(historyInfo.get(0).getLogMessage().getMessage().equals(logMessage));
 	}
 
@@ -397,14 +400,18 @@ public class ServerInterfaceTest extends ServerTests {
 		TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
 		tag.setName(tagName);
 
-		getProjectSpace().addTag(getProjectVersion(), tag, monitor);
+		// TOOD: add monitor parameter to internal API
+		getProjectSpace().addTag(getProjectVersion(), tag);// , monitor);
 
 		// TODO: TQ cast
-		List<HistoryInfo> historyInfo = (List<HistoryInfo>) (List<?>) getProjectSpace().getHistoryInfos(
-			createHistoryQuery(getProjectVersion(), getProjectVersion()), monitor);
+		HistoryQuery<ESHistoryQueryImpl<?, ?>> historyQuery = createHistoryQuery(getProjectVersion(),
+			getProjectVersion());
+		List<ESHistoryInfo> historyInfos = getProjectSpace().getAPIImpl().getHistoryInfos(
+			historyQuery.getAPIImpl(),
+			new NullProgressMonitor());
+		assertTrue(historyInfos.size() == 1);
 
-		assertTrue(historyInfo.size() == 1);
-		EList<TagVersionSpec> tagSpecs = historyInfo.get(0).getTagSpecs();
+		List<ESTagVersionSpec> tagSpecs = historyInfos.get(0).getTagSpecs();
 		assertEquals(3, tagSpecs.size());
 		assertEquals("HEAD", tagSpecs.get(0).getName());
 		assertEquals("HEAD: trunk", tagSpecs.get(1).getName());
@@ -430,15 +437,18 @@ public class ServerInterfaceTest extends ServerTests {
 		tag.setName(tagName);
 		NullProgressMonitor monitor = new NullProgressMonitor();
 
-		getProjectSpace().addTag(getProjectVersion(), tag, monitor);
-		getProjectSpace().removeTag(getProjectVersion(), tag, monitor);
+		getProjectSpace().addTag(getProjectVersion(), tag);
+		getProjectSpace().removeTag(getProjectVersion(), tag);
 
-		List<ESHistoryInfo> historyInfo = getProjectSpace().getHistoryInfos(
-			createHistoryQuery(getProjectVersion(), getProjectVersion()), monitor);
+		HistoryQuery<ESHistoryQueryImpl<?, ?>> historyQuery = createHistoryQuery(getProjectVersion(),
+			getProjectVersion());
+		List<ESHistoryInfo> historyInfos = getProjectSpace().getAPIImpl().getHistoryInfos(
+			historyQuery.getAPIImpl(),
+			new NullProgressMonitor());
 
-		assertTrue(historyInfo.size() == 1);
-		HistoryInfo iHistoryInfo = (HistoryInfo) historyInfo.get(0);
-		List<TagVersionSpec> tagSpecs = iHistoryInfo.getTagSpecs();
+		assertTrue(historyInfos.size() == 1);
+		ESHistoryInfo historyInfo = historyInfos.get(0);
+		List<ESTagVersionSpec> tagSpecs = historyInfo.getTagSpecs();
 		assertEquals(2, tagSpecs.size());
 		assertEquals("HEAD", tagSpecs.get(0).getName());
 		assertEquals("HEAD: trunk", tagSpecs.get(1).getName());

@@ -32,7 +32,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * 
  * @generated
  */
-public class PathQueryImpl extends HistoryQueryImpl implements PathQuery {
+public class PathQueryImpl extends HistoryQueryImpl<ESPathQueryImpl> implements PathQuery {
 
 	/**
 	 * @generated NOT
@@ -260,7 +260,7 @@ public class PathQueryImpl extends HistoryQueryImpl implements PathQuery {
 	 * @generated NOT
 	 */
 	public ESPathQueryImpl createAPIImpl() {
-		return apiImpl;
+		return new ESPathQueryImpl(this);
 	}
 
 } // PathQueryImpl

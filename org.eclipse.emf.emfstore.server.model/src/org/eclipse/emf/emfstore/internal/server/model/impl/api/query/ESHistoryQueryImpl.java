@@ -11,7 +11,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.impl.api.query;
 
-import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
@@ -24,7 +23,7 @@ import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
  * @param <U> a subtype of the API implementation class {@link ESHistoryQueryImpl}
  * @param <T> a subtype of the internal type {@link HistoryQuery}
  */
-public abstract class ESHistoryQueryImpl<U extends ESHistoryQuery, T extends HistoryQuery & APIDelegate<U>>
+public abstract class ESHistoryQueryImpl<U extends ESHistoryQuery, T extends HistoryQuery<U>>
 	extends AbstractAPIImpl<U, T> implements ESHistoryQuery {
 
 	/**

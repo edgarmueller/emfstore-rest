@@ -24,9 +24,11 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.internal.common.ListUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
@@ -93,64 +95,68 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
-		final PrimaryVersionSpec resolvedVersion = getLocalProject().resolveVersionSpec(version, getProgressMonitor());
-		if (resolvedVersion.compareTo(getLocalProject().getBaseVersion()) == 0) {
+		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version, getProgressMonitor());
+		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
 			return resolvedVersion;
 		}
 		getProgressMonitor().worked(5);
 
 		if (getProgressMonitor().isCanceled()) {
-			return getLocalProject().getBaseVersion();
+			return getProjectSpace().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Fetching changes from server");
 		List<ChangePackage> changes = new UnknownEMFStoreWorkloadCommand<List<ChangePackage>>(getProgressMonitor()) {
 			@Override
 			public List<ChangePackage> run(IProgressMonitor monitor) throws ESException {
-				return getConnectionManager().getChanges(getSessionId(), getLocalProject().getProjectId(),
-					getLocalProject().getBaseVersion(), resolvedVersion);
+				return getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
+					getProjectSpace().getBaseVersion(), resolvedVersion);
 			}
 		}.execute();
 
-		ChangePackage localChanges = getLocalProject().getLocalChangePackage(false);
+		ChangePackage localChanges = getProjectSpace().getLocalChangePackage(false);
 
 		// build a mapping including deleted and create model elements in local and incoming change packages
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
-			getLocalProject().getProject(), changes);
+			getProjectSpace().getProject(), changes);
 		idToEObjectMapping.put(localChanges);
 
 		getProgressMonitor().worked(65);
 
 		if (getProgressMonitor().isCanceled()) {
-			return getLocalProject().getBaseVersion();
+			return getProjectSpace().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Checking for conflicts");
 
 		ConflictDetector conflictDetector = new ConflictDetector();
 
+		List<ESChangePackageImpl> mapToInverse = ListUtil.mapToInverse(changes);
+		List<ESChangePackage> copy = ListUtil.copy(mapToInverse);
 		// TODO ASYNC review this cancel
 		// TODO casts..
 		if (getProgressMonitor().isCanceled()
-			|| !callback.inspectChanges(getLocalProject(), (List<ESChangePackage>) (List<?>) changes,
-				idToEObjectMapping)) {
-			return getLocalProject().getBaseVersion();
+			|| !callback.inspectChanges(getProjectSpace().getAPIImpl(), copy, idToEObjectMapping)) {
+			return getProjectSpace().getBaseVersion();
 		}
-		WorkspaceProvider.getObserverBus().notify(ESUpdateObserver.class)
-			.inspectChanges(getLocalProject(), (List<ESChangePackage>) (List<?>) changes, getProgressMonitor());
+
+		WorkspaceProvider
+			.getObserverBus()
+			.notify(ESUpdateObserver.class)
+			.inspectChanges(getProjectSpace().getAPIImpl(), copy, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
-		if (getLocalProject().getOperations().size() > 0) {
+		if (getProjectSpace().getOperations().size() > 0) {
 			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
 				Collections.singletonList(localChanges), changes);
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
 				ChangeConflictException conflictException = new ChangeConflictException(new ChangeConflict(
-					getLocalProject(), Arrays.asList(localChanges), changes, conflictBucketCandidates,
-					idToEObjectMapping));
+					getProjectSpace(), Arrays.asList(localChanges), changes, conflictBucketCandidates,
+					idToEObjectMapping).getAPIImpl());
 				if (callback.conflictOccurred(conflictException.getChangeConflict(), getProgressMonitor())) {
-					return getLocalProject().getBaseVersion();
+					return getProjectSpace().getBaseVersion();
 				} else {
 					throw conflictException;
 				}
@@ -161,11 +167,11 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Applying changes");
 
-		getLocalProject().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
+		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
 		WorkspaceProvider.getObserverBus().notify(ESUpdateObserver.class)
-			.updateCompleted(getLocalProject(), getProgressMonitor());
+			.updateCompleted(getProjectSpace().getAPIImpl(), getProgressMonitor());
 
-		return getLocalProject().getBaseVersion();
+		return getProjectSpace().getBaseVersion();
 	}
 }

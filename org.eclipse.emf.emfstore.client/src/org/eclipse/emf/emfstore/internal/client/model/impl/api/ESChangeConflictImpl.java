@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.impl;
+package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;

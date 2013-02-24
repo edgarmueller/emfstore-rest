@@ -12,36 +12,32 @@ package org.eclipse.emf.emfstore.internal.client.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Info</b></em>'.
  * 
- * @extends IServerInfo
- *          <!-- end-user-doc -->
+ * <!-- end-user-doc -->
  * 
- *          <p>
- *          The following features are supported:
- *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName <em>Name</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl <em>Url</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort <em>Port</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}
- *          </li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession
- *          </em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate
- *          Alias</em>}</li>
- *          </ul>
- *          </p>
+ * <p>
+ * The following features are supported:
+ * <ul>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl <em>Url</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort <em>Port</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate Alias</em>}</li>
+ * </ul>
+ * </p>
  * 
  * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo()
  * @model
  * @generated
  */
-public interface ServerInfo extends EObject, ESServer {
+public interface ServerInfo extends EObject, APIDelegate<ESServerImpl> {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -195,15 +191,5 @@ public interface ServerInfo extends EObject, ESServer {
 	 * @generated
 	 */
 	void setCertificateAlias(String value);
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ESServer.IServer#login(java.lang.String, java.lang.String)
-	 * 
-	 * @generated NOT
-	 */
-	Usersession login(String name, String password) throws ESException;
 
 } // ServerInfo

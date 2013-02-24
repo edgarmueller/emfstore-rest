@@ -40,7 +40,7 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	 */
 	public ProjectSpace cloneProjectSpace(final ProjectSpace ps) {
 
-		final Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		final Workspace workspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
 		ProjectSpace result = new EMFStoreCommandWithResult<ProjectSpace>() {
 			@Override
 			protected ProjectSpace doRun() {

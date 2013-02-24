@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -53,7 +54,7 @@ public interface IUpdateCallback {
 	 * Called when local and remote changes overlap.
 	 * 
 	 * @param changeConflict
-	 *            the {@link ESChangeConflict} containing the changes that led to the conflict
+	 *            the {@link ESChangeConflictImpl} containing the changes that led to the conflict
 	 * @param monitor
 	 *            an {@link IProgressMonitor} to report on progress
 	 * @return {@code true}, if the conflict has been resolved, {@code false} otherwise
@@ -81,7 +82,7 @@ public interface IUpdateCallback {
 
 	/**
 	 * A default implementation of an update callback that does nothing and defaults
-	 * {@link IUpdateCallback#conflictOccurred(ESChangeConflict)} to false and
+	 * {@link IUpdateCallback#conflictOccurred(ESChangeConflictImpl)} to false and
 	 * {@link IUpdateCallback#inspectChanges(ESLocalProject, List)} to true.
 	 */
 	IUpdateCallback NOCALLBACK = new IUpdateCallback() {

@@ -43,4 +43,19 @@ public class ESTagVersionSpecImpl extends ESVersionSpecImpl<ESTagVersionSpecImpl
 		return getInternalAPIImpl().getName();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ESTagVersionSpecImpl) {
+			if (((ESTagVersionSpecImpl) obj).getName().equals(getName())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getInternalAPIImpl().hashCode() + super.hashCode() + getName().hashCode();
+	}
 }

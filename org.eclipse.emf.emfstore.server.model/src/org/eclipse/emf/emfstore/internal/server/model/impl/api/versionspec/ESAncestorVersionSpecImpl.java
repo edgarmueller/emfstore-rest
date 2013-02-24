@@ -53,4 +53,20 @@ public class ESAncestorVersionSpecImpl extends ESVersionSpecImpl<ESAncestorVersi
 	public ESPrimaryVersionSpec getSource() {
 		return getInternalAPIImpl().getSource().getAPIImpl();
 	}
+
+	@Override
+	public boolean equals(Object object) {
+
+		if (object instanceof ESAncestorVersionSpecImpl) {
+			ESAncestorVersionSpecImpl ancestorVersionSpecImpl = (ESAncestorVersionSpecImpl) object;
+			return getInternalAPIImpl().equals(ancestorVersionSpecImpl.getInternalAPIImpl());
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getInternalAPIImpl().hashCode() + super.hashCode();
+	}
 }

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -20,6 +21,7 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
@@ -172,7 +174,6 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 				true,
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
-			;
 			List<ESHistoryInfo> infos = localProject.getHistoryInfos(query, monitor);
 			assertEquals(1, infos.size());
 
@@ -198,8 +199,8 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 				true,
 				true);
 			NullProgressMonitor monitor = new NullProgressMonitor();
-			;
-			List<? extends ESHistoryInfo> infos = localProject.getHistoryInfos(query, monitor);
+
+			List<ESHistoryInfo> infos = localProject.getHistoryInfos(query, monitor);
 			assertEquals(1, infos.size());
 
 			addPlayerToProject();
@@ -237,14 +238,26 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test(expected = BaseVersionOutdatedException.class)
 	public void testMergeAndExpectBaseVersionOutOfDateException() throws ESException {
 		NullProgressMonitor monitor = new NullProgressMonitor();
-		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+		final Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		localProject.commit(monitor);
 		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
-		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
+		final Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
 
-		player.setName("A");
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				player.setName("A");
+				return null;
+			}
+		});
+
 		localProject.commit(monitor);
-		checkedoutPlayer.setName("B");
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				checkedoutPlayer.setName("B");
+				return null;
+			}
+		});
 		checkedoutCopy.commit(monitor);
 	}
 
@@ -252,14 +265,32 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	public void testMerge() throws ESException {
 
 		final NullProgressMonitor monitor = new NullProgressMonitor();
-		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+		final Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		localProject.commit(monitor);
 		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
-		Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
+		final Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
 
-		player.setName("A");
-		localProject.commit(monitor);
-		checkedoutPlayer.setName("B");
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				player.setName("A");
+				return null;
+			}
+		});
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.commit(monitor);
+				return null;
+			}
+		});
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				checkedoutPlayer.setName("B");
+				return null;
+			}
+		});
+
 		checkedoutCopy.commit(null, new CommitCallbackAdapter() {
 			@Override
 			public boolean baseVersionOutOfDate(final ESLocalProject localProject, IProgressMonitor progressMonitor) {

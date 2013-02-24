@@ -10,7 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model;
 
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Element Id</b></em>'.
@@ -23,6 +24,6 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementId;
  * @model
  * @generated
  */
-public interface ModelElementId extends UniqueIdentifier, ESModelElementId {
+public interface ModelElementId extends UniqueIdentifier, APIDelegate<ESModelElementIdImpl> {
 
 } // ModelElementId

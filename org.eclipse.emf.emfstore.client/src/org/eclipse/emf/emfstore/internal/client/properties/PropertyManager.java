@@ -292,7 +292,8 @@ public final class PropertyManager {
 			throw new ESException("Project has not been shared yet.");
 		}
 
-		new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId());
+		new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId()
+			.getAPIImpl());
 
 		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>(
 			projectSpace.getChangedSharedProperties());

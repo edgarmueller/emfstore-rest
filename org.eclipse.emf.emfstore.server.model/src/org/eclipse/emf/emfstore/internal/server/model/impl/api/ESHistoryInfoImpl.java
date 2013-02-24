@@ -18,9 +18,11 @@ import org.eclipse.emf.emfstore.internal.common.ListUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 
 /**
  * Mapping between {@link ESHistoryInfo} and {@link HistoryInfo}.
@@ -99,6 +101,25 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 */
 	public ESLogMessage getLogMessage() {
 		return getInternalAPIImpl().getLogMessage().getAPIImpl();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getTagSpecs()
+	 */
+	public List<ESTagVersionSpec> getTagSpecs() {
+		return ListUtil.mapToAPI(getInternalAPIImpl().getTagSpecs());
+	}
+
+	public ESChangePackage getChangePackage() {
+
+		if (getInternalAPIImpl().getChangePackage() == null) {
+			return null;
+		}
+
+		return getInternalAPIImpl().getChangePackage().getAPIImpl();
 	}
 
 }

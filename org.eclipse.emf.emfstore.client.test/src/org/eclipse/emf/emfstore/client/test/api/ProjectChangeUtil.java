@@ -1,5 +1,7 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.Game;
 import org.eclipse.emf.emfstore.bowling.League;
@@ -9,15 +11,21 @@ import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 
 public final class ProjectChangeUtil {
 
 	private ProjectChangeUtil() {
 	}
 
-	public static Player addPlayerToProject(ESLocalProject localProject) {
-		Player player = createPlayer("player");
-		localProject.getModelElements().add(player);
+	public static Player addPlayerToProject(final ESLocalProject localProject) {
+		final Player player = createPlayer("player");
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(player);
+				return null;
+			}
+		});
 		return player;
 	}
 
@@ -63,16 +71,16 @@ public final class ProjectChangeUtil {
 	}
 
 	public static ESLocalProject createBasicBowlingProject() {
-		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
+		final ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
 			"BasicBowlingProject");
 
-		League leagueA = ProjectChangeUtil.createLeague("America");
-		League leagueB = ProjectChangeUtil.createLeague("Europe");
+		final League leagueA = ProjectChangeUtil.createLeague("America");
+		final League leagueB = ProjectChangeUtil.createLeague("Europe");
 		Player playerA = ProjectChangeUtil.createPlayer("Hans");
 		Player playerB = ProjectChangeUtil.createPlayer("Anton");
 		Player playerC = ProjectChangeUtil.createPlayer("Paul");
 		Player playerD = ProjectChangeUtil.createPlayer("Klaus");
-		Tournament tournamentA = ProjectChangeUtil.createTournament(false);
+		final Tournament tournamentA = ProjectChangeUtil.createTournament(false);
 		Game gameA = ProjectChangeUtil.createGame(playerA);
 		Game gameB = ProjectChangeUtil.createGame(playerB);
 		Game gameC = ProjectChangeUtil.createGame(playerC);
@@ -88,9 +96,14 @@ public final class ProjectChangeUtil {
 		tournamentA.getMatchups().add(matchupA);
 		tournamentA.getMatchups().add(matchupB);
 
-		localProject.getModelElements().add(leagueA);
-		localProject.getModelElements().add(leagueB);
-		localProject.getModelElements().add(tournamentA);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(leagueA);
+				localProject.getModelElements().add(leagueB);
+				localProject.getModelElements().add(tournamentA);
+				return null;
+			}
+		});
 
 		return localProject;
 	}

@@ -70,18 +70,18 @@ public class ShareController extends ServerCall<Void> {
 		logMessage.setMessage("Initial commit");
 		ProjectInfo createdProject = null;
 
-		getLocalProject().stopChangeRecording();
+		getProjectSpace().stopChangeRecording();
 
 		getProgressMonitor().worked(10);
 		if (getProgressMonitor().isCanceled()) {
-			getLocalProject().save();
-			getLocalProject().startChangeRecording();
+			getProjectSpace().save();
+			getProjectSpace().startChangeRecording();
 			getProgressMonitor().done();
 		}
 		getProgressMonitor().subTask("Sharing project with server");
 
 		// make sure, current state of caches is written to resource
-		getLocalProject().save();
+		getProjectSpace().save();
 
 		createdProject = new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
 			@Override
@@ -91,9 +91,9 @@ public class ShareController extends ServerCall<Void> {
 					.getConnectionManager()
 					.createProject(
 						getUsersession().getSessionId(),
-						getLocalProject().getProjectName() == null ? "Project@" + new Date() : getLocalProject()
+						getProjectSpace().getProjectName() == null ? "Project@" + new Date() : getProjectSpace()
 							.getProjectName(),
-						"", logMessage, getLocalProject().getProject());
+						"", logMessage, getProjectSpace().getProject());
 			}
 		}.execute();
 
@@ -103,28 +103,28 @@ public class ShareController extends ServerCall<Void> {
 		// set attributes after server call
 		getProgressMonitor().subTask("Setting attributes");
 		this.setUsersession(getUsersession());
-		WorkspaceProvider.getObserverBus().register(getLocalProject(), ESLoginObserver.class);
+		WorkspaceProvider.getObserverBus().register(getProjectSpace(), ESLoginObserver.class);
 
-		getLocalProject().save();
-		getLocalProject().startChangeRecording();
-		getLocalProject().setBaseVersion(createdProject.getVersion());
-		getLocalProject().setLastUpdated(new Date());
-		getLocalProject().setProjectId(createdProject.getProjectId());
-		getLocalProject().setUsersession(getUsersession());
-		getLocalProject().saveProjectSpaceOnly();
+		getProjectSpace().save();
+		getProjectSpace().startChangeRecording();
+		getProjectSpace().setBaseVersion(createdProject.getVersion());
+		getProjectSpace().setLastUpdated(new Date());
+		getProjectSpace().setProjectId(createdProject.getProjectId());
+		getProjectSpace().setUsersession(getUsersession());
+		getProjectSpace().saveProjectSpaceOnly();
 
 		// TODO ASYNC implement File Upload with observer
 		// If any files have already been added, upload them.
 		getProgressMonitor().worked(20);
 		getProgressMonitor().subTask("Uploading files");
-		getLocalProject().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
+		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
 
 		getProgressMonitor().worked(20);
 		getProgressMonitor().subTask("Finalizing share.");
-		getLocalProject().getOperations().clear();
-		getLocalProject().updateDirtyState();
+		getProjectSpace().getOperations().clear();
+		getProjectSpace().updateDirtyState();
 
 		getProgressMonitor().done();
-		WorkspaceProvider.getObserverBus().notify(ESShareObserver.class).shareDone(getLocalProject());
+		WorkspaceProvider.getObserverBus().notify(ESShareObserver.class).shareDone(getProjectSpace());
 	}
 }

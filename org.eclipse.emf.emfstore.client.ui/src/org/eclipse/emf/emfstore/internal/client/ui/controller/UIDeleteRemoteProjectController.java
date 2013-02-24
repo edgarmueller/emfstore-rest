@@ -16,9 +16,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.internal.client.impl.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -134,9 +134,9 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		if (confirm("Confirmation",
 			MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {
 			if (session != null) {
-				new RemoteProject(server, projectInfo).delete(session, monitor);
+				new ESRemoteProjectImpl(server, projectInfo).delete(session, monitor);
 			} else {
-				new RemoteProject(server, projectInfo).delete(monitor);
+				new ESRemoteProjectImpl(server, projectInfo).delete(monitor);
 			}
 		}
 	}

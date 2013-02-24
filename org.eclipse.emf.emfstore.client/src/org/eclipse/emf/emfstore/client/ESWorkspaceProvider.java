@@ -12,7 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 
 /**
@@ -37,11 +37,11 @@ public interface ESWorkspaceProvider {
 	ESWorkspace getWorkspace();
 
 	/**
-	 * Allows the user to set the {@link AbstractSessionProvider} to use.
+	 * Allows the user to set the {@link ESAbstractSessionProvider} to use.
 	 * 
 	 * @param sessionProvider
-	 *            the {@link AbstractSessionProvider} to use
+	 *            the {@link ESAbstractSessionProvider} to use
 	 */
-	void setSessionProvider(AbstractSessionProvider sessionProvider);
+	void setSessionProvider(ESAbstractSessionProvider sessionProvider);
 
 }

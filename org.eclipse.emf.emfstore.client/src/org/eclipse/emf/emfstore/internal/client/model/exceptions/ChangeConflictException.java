@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 
 /**
  * Exception that represents that there are conflicting changes.
@@ -26,7 +27,7 @@ public class ChangeConflictException extends WorkspaceException {
 	 * Constructor.
 	 * 
 	 * @param changeConflict
-	 *            the {@link ESChangeConflict} leading to the conflict
+	 *            the {@link ESChangeConflictImpl} leading to the conflict
 	 */
 	public ChangeConflictException(ESChangeConflict changeConflict) {
 		super("Conflict detected on update");
@@ -35,7 +36,7 @@ public class ChangeConflictException extends WorkspaceException {
 	}
 
 	/**
-	 * Returns the {@link ESChangeConflict} that caused the exception.
+	 * Returns the {@link ESChangeConflictImpl} that caused the exception.
 	 * 
 	 * @return the change conflict that led to the exception
 	 */

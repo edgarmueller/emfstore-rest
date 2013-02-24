@@ -6,6 +6,8 @@ import java.util.List;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESModelElementQueryImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
@@ -38,7 +40,8 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 			outgoing,
 			includeChangePackages);
 
-		return rangeQuery.getAPIImpl();
+		ESRangeQueryImpl<?> apiImpl = rangeQuery.getAPIImpl();
+		return apiImpl;
 	}
 
 	/**
@@ -79,7 +82,8 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 			allVersions,
 			includeChangePackages);
 
-		return modelelementQuery.getAPIImpl();
+		ESModelElementQueryImpl apiImpl = modelelementQuery.getAPIImpl();
+		return apiImpl;
 	}
 
 	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, ESModelElementId id, int upper,

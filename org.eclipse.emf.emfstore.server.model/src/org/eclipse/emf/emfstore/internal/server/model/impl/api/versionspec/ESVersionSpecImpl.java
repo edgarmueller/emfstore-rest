@@ -40,4 +40,5 @@ public class ESVersionSpecImpl<U extends ESVersionSpec, T extends VersionSpec & 
 	public String getBranch() {
 		return getInternalAPIImpl().getBranch();
 	}
+
 }

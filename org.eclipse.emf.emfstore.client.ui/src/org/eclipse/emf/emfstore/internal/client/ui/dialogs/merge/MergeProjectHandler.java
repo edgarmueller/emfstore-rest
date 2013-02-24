@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.MergeLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.DefaultMergeLabelProvider;
@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Display;
  * 
  * @author wesendon
  */
-public class MergeProjectHandler extends AbstractConflictResolver implements IConflictResolver {
+public class MergeProjectHandler extends AbstractConflictResolver implements ESConflictResolver {
 
 	private static MergeLabelProvider labelProvider;
 

@@ -17,8 +17,9 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
+
+// import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 
 /**
  * A collection of {@link EObject}s where each one can be identified via a {@link ModelElementId}. {@link EObject}s can
@@ -28,7 +29,8 @@ import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
  * @author emueller
  * 
  */
-public interface IdEObjectCollection extends EObject, ESObjectContainer, IModelElementIdToEObjectMapping {
+public interface IdEObjectCollection extends EObject, ESObjectContainer<ModelElementId>,
+	IModelElementIdToEObjectMapping {
 
 	/**
 	 * Adds the given model element to the collection.
@@ -72,7 +74,7 @@ public interface IdEObjectCollection extends EObject, ESObjectContainer, IModelE
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#contains(org.eclipse.emf.emfstore.common.model.ESModelElementId)
 	 */
-	boolean contains(ESModelElementId eObjectId);
+	boolean contains(ModelElementId eObjectId);
 
 	/**
 	 * 
@@ -88,7 +90,7 @@ public interface IdEObjectCollection extends EObject, ESObjectContainer, IModelE
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElement(org.eclipse.emf.emfstore.common.model.ESModelElementId)
 	 */
-	EObject getModelElement(ESModelElementId modelElementId);
+	EObject getModelElement(ModelElementId modelElementId);
 
 	/**
 	 * 

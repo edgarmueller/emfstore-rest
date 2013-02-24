@@ -14,8 +14,10 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
@@ -44,8 +46,9 @@ public abstract class TransmissionTests extends ServerTests {
 			@Override
 			protected void doRun() {
 				NullProgressMonitor monitor = new NullProgressMonitor();
-				WorkspaceBase workspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
-				workspace.getServers().add(getServerInfo());
+				ESWorkspaceImpl workspaceImpl = WorkspaceProvider.getInstance().getWorkspace();
+				Workspace workspace = workspaceImpl.getInternalAPIImpl();
+				workspace.getServerInfos().add(getServer().getInternalAPIImpl());
 				workspace.getUsersessions().add(usersession1);
 				workspace.getUsersessions().add(usersession2);
 				workspace.save();
@@ -53,8 +56,12 @@ public abstract class TransmissionTests extends ServerTests {
 				try {
 					usersession1.logIn();
 					usersession2.logIn();
-					setProjectSpace1(getRemoteProject().checkout(usersession1, monitor));
-					setProjectSpace2(getRemoteProject().checkout(usersession2, monitor));
+					ESLocalProjectImpl localProjectImpl = getRemoteProject().checkout(usersession1.getAPIImpl(),
+						monitor);
+					ESLocalProjectImpl localProjectImpl2 = getRemoteProject().checkout(usersession2.getAPIImpl(),
+						monitor);
+					setProjectSpace1(localProjectImpl.getInternalAPIImpl());
+					setProjectSpace2(localProjectImpl2.getInternalAPIImpl());
 				} catch (AccessControlException e) {
 					throw new RuntimeException(e);
 				} catch (ESException e) {

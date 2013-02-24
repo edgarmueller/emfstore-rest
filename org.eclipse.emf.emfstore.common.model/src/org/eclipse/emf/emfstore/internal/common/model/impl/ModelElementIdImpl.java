@@ -22,6 +22,12 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelPackage;
  * @generated
  */
 public class ModelElementIdImpl extends UniqueIdentifierImpl implements ModelElementId {
+
+	/**
+	 * @generated NOT
+	 */
+	private ESModelElementIdImpl apiImpl;
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -39,6 +45,38 @@ public class ModelElementIdImpl extends UniqueIdentifierImpl implements ModelEle
 	@Override
 	protected EClass eStaticClass() {
 		return ModelPackage.Literals.MODEL_ELEMENT_ID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 */
+	public ESModelElementIdImpl getAPIImpl() {
+
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
+	 */
+	public void setAPIImpl(ESModelElementIdImpl esModelElementIdImpl) {
+		apiImpl = esModelElementIdImpl;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 */
+	public ESModelElementIdImpl createAPIImpl() {
+		return new ESModelElementIdImpl(this);
 	}
 
 } // ModelElementIdImpl

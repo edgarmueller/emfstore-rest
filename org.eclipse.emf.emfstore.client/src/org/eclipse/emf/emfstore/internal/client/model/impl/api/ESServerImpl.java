@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.impl;
+package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import static org.eclipse.emf.emfstore.internal.common.ListUtil.copy;
 
@@ -208,7 +208,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		usersession.setUsername(name);
 		usersession.setPassword(password);
 		usersession.setServerInfo(getInternalAPIImpl());
-		ESUsersessionImpl esSession = new ESUsersessionImpl(usersession);
+		ESUsersessionImpl esSession = usersession.getAPIImpl();
 
 		EMFStoreCommandWithException<ESException> cmd =
 			new EMFStoreCommandWithException<ESException>() {
@@ -272,7 +272,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 			.setUsersession(((ESUsersessionImpl) usersession).getInternalAPIImpl());
 
 		List<ProjectInfo> projectInfos = RunESCommand.WithException
-			.runWithResult(new Callable<List<ProjectInfo>>() {
+			.runWithResult(ESException.class, new Callable<List<ProjectInfo>>() {
 				public List<ProjectInfo> call() throws Exception {
 					return serverCall.execute();
 				}

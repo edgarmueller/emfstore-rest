@@ -6,10 +6,10 @@ public class ExtensionRegistryTest {
 
 	@Test
 	public void testGetExistingExtensionPoin() {
-		// AbstractSessionProvider sessionProvider = ExtensionRegistry.INSTANCE.getType(
+		// ESAbstractSessionProvider sessionProvider = ExtensionRegistry.INSTANCE.getType(
 		// "org.eclipse.emf.emfstore.client.usersessionProvider",
 		// "class",
-		// AbstractSessionProvider.class);
+		// ESAbstractSessionProvider.class);
 		// assertNotNull(sessionProvider);
 	}
 

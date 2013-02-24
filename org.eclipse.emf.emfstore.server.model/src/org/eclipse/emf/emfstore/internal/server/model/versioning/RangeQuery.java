@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
-import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
 
 /**
@@ -39,7 +38,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQuer
  * @model
  * @generated
  */
-public interface RangeQuery<T extends ESRangeQueryImpl> extends HistoryQuery, APIDelegate<T> {
+public interface RangeQuery<T extends ESRangeQueryImpl> extends HistoryQuery<T> {
 	/**
 	 * Returns the value of the '<em><b>Upper Limit</b></em>' attribute. <!--
 	 * begin-user-doc -->

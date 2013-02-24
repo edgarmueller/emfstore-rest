@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.impl.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
@@ -59,7 +59,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 
 		try {
 			// TODO: monitor
-			versionSpec = new RemoteProject((ESServer) projectInfo.eContainer(), projectInfo)
+			versionSpec = new ESRemoteProjectImpl((ESServer) projectInfo.eContainer(), projectInfo)
 				.resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor());
 			revision = "" + versionSpec.getIdentifier();
 		} catch (ESException e) {

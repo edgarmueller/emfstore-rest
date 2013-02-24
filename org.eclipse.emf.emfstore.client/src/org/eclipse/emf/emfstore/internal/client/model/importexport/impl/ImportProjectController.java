@@ -93,7 +93,7 @@ public class ImportProjectController implements IExportImportController {
 	 *             in case an error occurs during the import of the project
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		Workspace currentWorkspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
 		ProjectSpace projectSpace = currentWorkspace.importProject(file.getAbsolutePath());
 		projectSpace.setProjectName(projectName);
 		ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());

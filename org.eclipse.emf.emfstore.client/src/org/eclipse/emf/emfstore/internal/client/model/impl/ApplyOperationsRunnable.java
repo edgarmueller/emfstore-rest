@@ -72,7 +72,9 @@ public class ApplyOperationsRunnable implements Runnable {
 						projectSpace.addOperations(operations);
 					}
 				} finally {
-					projectSpace.startChangeRecording();
+					if (projectSpace.getOperationManager() != null) {
+						projectSpace.startChangeRecording();
+					}
 				}
 			}
 		}.run(false);

@@ -41,15 +41,16 @@ public final class RunESCommand {
 		 * 
 		 * @param <T> the return type of the callable
 		 */
-		public static <T> T runWithResult(final Callable<T> callable) throws ESException {
-			return new EMFStoreCommandWithResultAndException<T, ESException>() {
+		public static <T, E extends Exception> T runWithResult(final Class<E> exceptionType, final Callable<T> callable)
+			throws E {
+			EMFStoreCommandWithResultAndException<T, E> cmd = new EMFStoreCommandWithResultAndException<T, E>() {
 				@Override
 				protected T doRun() {
 					try {
 						return callable.call();
 					} catch (Exception e) {
-						if (e instanceof ESException) {
-							setExcpetion((ESException) e);
+						if (exceptionType.isInstance(e)) {
+							setExcpetion(exceptionType.cast(e));
 						} else if (e instanceof RuntimeException) {
 							throw (RuntimeException) e;
 						} else {
@@ -59,7 +60,15 @@ public final class RunESCommand {
 
 					return null;
 				}
-			}.run(false);
+			};
+
+			T result = cmd.run(false);
+
+			if (cmd.hasException()) {
+				throw cmd.getExcpetion();
+			}
+
+			return result;
 		}
 
 		/**
@@ -67,23 +76,33 @@ public final class RunESCommand {
 		 * 
 		 * @param callable
 		 *            the callable to be execued
-		 * @throws ESException in case an error occurs during execution of the callable
+		 * @throws T in case an error occurs during execution of the callable
 		 */
-		public static void run(final Callable<Void> callable) throws ESException {
-			new EMFStoreCommandWithException<ESException>() {
+		public static <T extends Exception> void run(final Class<T> exceptionType, final Callable<Void> callable)
+			throws T {
+
+			EMFStoreCommandWithException<T> cmd = new EMFStoreCommandWithException<T>() {
 				@Override
 				protected void doRun() {
 					try {
 						callable.call();
 					} catch (Exception e) {
-						if (e instanceof ESException) {
-							setExcpetion((ESException) e);
+						if (exceptionType.isInstance(e)) {
+							setException(exceptionType.cast(e));
+						} else if (e instanceof RuntimeException) {
+							throw (RuntimeException) e;
 						} else {
 							throw new RuntimeException(e);
 						}
 					}
 				}
-			}.run(false);
+			};
+
+			cmd.run(false);
+
+			if (cmd.hasException()) {
+				throw cmd.getException();
+			}
 		}
 	}
 

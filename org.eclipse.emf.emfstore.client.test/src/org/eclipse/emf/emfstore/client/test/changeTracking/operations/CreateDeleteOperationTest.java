@@ -46,7 +46,6 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -677,7 +676,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		assertEquals(true, getProject().contains((ESModelElementId) useCaseId));
+		assertEquals(true, getProject().contains(useCaseId));
 		assertEquals(true, getProject().contains(oldActor));
 		assertEquals(true, getProject().contains(newActor));
 		assertEquals(true, getProject().contains(otherActor));
@@ -695,10 +694,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				.eResource().getURI(), false);
 
 		assertTrue(ModelUtil.areEqual(loadedProject, getProject()));
-		assertEquals(true, loadedProject.contains((ESModelElementId) useCaseId));
-		assertEquals(true, loadedProject.contains((ESModelElementId) oldActorId));
-		assertEquals(true, loadedProject.contains((ESModelElementId) newActorId));
-		assertEquals(true, loadedProject.contains((ESModelElementId) otherActorId));
+		assertEquals(true, loadedProject.contains(useCaseId));
+		assertEquals(true, loadedProject.contains(oldActorId));
+		assertEquals(true, loadedProject.contains(newActorId));
+		assertEquals(true, loadedProject.contains(otherActorId));
 	}
 
 	/**

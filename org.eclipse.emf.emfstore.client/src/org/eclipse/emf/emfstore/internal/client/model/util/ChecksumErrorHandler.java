@@ -17,11 +17,13 @@ import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
-import org.eclipse.emf.emfstore.internal.server.model.SessionId;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESSessionIdImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESVersionSpecImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
@@ -73,17 +75,24 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 			IProgressMonitor monitor) throws ESException {
 
 			// TODO: OTS casts
-			ProjectSpace projectSpace = (ProjectSpace) project;
+			ProjectSpace projectSpace = ((ESLocalProjectImpl) project).getInternalAPIImpl();
 
 			Project fetchedProject = new UnknownEMFStoreWorkloadCommand<Project>(monitor) {
 				@Override
 				public Project run(IProgressMonitor monitor) throws ESException {
+
+					ESSessionIdImpl sessionIdImpl = (ESSessionIdImpl) project.getUsersession().getSessionId();
+					ESGlobalProjectIdImpl globalProjectIdImpl = (ESGlobalProjectIdImpl) project.getRemoteProject()
+						.getGlobalProjectId();
+					ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
+
 					return WorkspaceProvider
 						.getInstance()
 						.getConnectionManager()
-						.getProject((SessionId) project.getUsersession().getSessionId(),
-							(ProjectId) project.getRemoteProject().getGlobalProjectId(),
-							ModelUtil.clone((PrimaryVersionSpec) versionSpec));
+						.getProject(
+							sessionIdImpl.getInternalAPIImpl(),
+							globalProjectIdImpl.getInternalAPIImpl(),
+							ModelUtil.clone(versionSpecImpl.getInternalAPIImpl()));
 				}
 			}.execute();
 

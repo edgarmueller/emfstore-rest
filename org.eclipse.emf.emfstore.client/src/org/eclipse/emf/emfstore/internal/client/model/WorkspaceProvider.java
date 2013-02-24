@@ -26,11 +26,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.model.provider.ESEditingDomainProvider;
-import org.eclipse.emf.emfstore.client.sessionprovider.AbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
@@ -42,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.SessionM
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcAdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
@@ -130,7 +130,8 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 		for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", true)
 			.getExtensionElements()) {
 			try {
-				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(currentWorkspace);
+				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
+					currentWorkspace.getAPIImpl());
 			} catch (ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
@@ -463,8 +464,8 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	 * 
 	 * @return the workspace
 	 */
-	public ESWorkspace getWorkspace() {
-		return currentWorkspace;
+	public ESWorkspaceImpl getWorkspace() {
+		return currentWorkspace.getAPIImpl();
 	}
 
 	/**
@@ -586,9 +587,9 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see ESWorkspaceProvider#setSessionProvider(AbstractSessionProvider)
+	 * @see ESWorkspaceProvider#setSessionProvider(ESAbstractSessionProvider)
 	 */
-	public void setSessionProvider(AbstractSessionProvider sessionProvider) {
+	public void setSessionProvider(ESAbstractSessionProvider sessionProvider) {
 		getSessionManager().setSessionProvider(sessionProvider);
 	}
 

@@ -17,8 +17,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.IConflictResolver;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
@@ -38,7 +39,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
  * @author wesendon
  * @author mkoegel
  */
-public interface ESLocalProject extends ESProject, ESObjectContainer {
+public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElementId> {
 
 	/**
 	 * <p>
@@ -163,7 +164,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @param changeConflict
 	 *            the {@link ESChangeConflict} containing the conflicting changes
 	 * @param conflictResolver
-	 *            a {@link IConflictResolver} for resolving conflicts
+	 *            a {@link ESConflictResolver} for resolving conflicts
 	 * @param callback
 	 *            the {@link IUpdateCallback} that will be called while the update is performing
 	 * @param monitor
@@ -174,7 +175,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @throws ESException
 	 *             in case an error occurs while merging the branch
 	 */
-	boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, IConflictResolver conflictResolver,
+	boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, ESConflictResolver conflictResolver,
 		IUpdateCallback callback, IProgressMonitor monitor) throws ESException;
 
 	/**
@@ -183,14 +184,14 @@ public interface ESLocalProject extends ESProject, ESObjectContainer {
 	 * @param branchSpec
 	 *            the {@link ESPrimaryVersionSpec} which is supposed to be merged
 	 * @param conflictResolver
-	 *            a {@link IConflictResolver} for resolving conflicts in case any conflicts occur
+	 *            a {@link ESConflictResolver} for resolving conflicts in case any conflicts occur
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while merging the branch
 	 * 
 	 * @throws ESException
 	 *             in case an error occurs while merging the branch
 	 */
-	void mergeBranch(ESPrimaryVersionSpec branchSpec, IConflictResolver conflictResolver, IProgressMonitor monitor)
+	void mergeBranch(ESPrimaryVersionSpec branchSpec, ESConflictResolver conflictResolver, IProgressMonitor monitor)
 		throws ESException;
 
 	/**

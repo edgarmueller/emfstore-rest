@@ -1,19 +1,22 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import static org.junit.Assert.fail;
+import junit.framework.Assert;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.Before;
 
 public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
+
 	protected ESServer server;
 	protected ESUsersession usersession;
 
@@ -28,20 +31,37 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 			log(e);
 			fail(e.getMessage());
 		}
+		Assert.assertEquals(usersession, server.getLastUsersession());
 	}
 
 	@Override
 	@After
 	public void tearDown() throws Exception {
-		((ServerInfo) server).setLastUsersession(null);
-		((Usersession) usersession).setServerInfo(null);
-		// setUp might have failed
-		if (usersession != null && usersession.isLoggedIn()) {
-			usersession.logout();
-			((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().remove(usersession);
+		EMFStoreCommandWithException<ESException> cmd = new EMFStoreCommandWithException<ESException>() {
+			@Override
+			protected void doRun() {
+				((ESServerImpl) server).getInternalAPIImpl().setLastUsersession(null);
+				((ESUsersessionImpl) usersession).setServer(null);
+				// setUp might have failed
+				if (usersession != null && usersession.isLoggedIn()) {
+					try {
+						usersession.logout();
+					} catch (ESException e) {
+						setException(e);
+					}
+					WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().getUsersessions().remove(
+						usersession);
+				}
+				ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
+			}
+		};
+
+		cmd.run();
+
+		if (cmd.hasException()) {
+			throw cmd.getException();
 		}
-		((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).removeServer(server);
+
 		super.tearDown();
 	}
-
 }

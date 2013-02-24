@@ -33,4 +33,19 @@ public class ESBranchVersionSpecImpl extends ESVersionSpecImpl<ESBranchVersionSp
 		super(branchVersionSpec);
 	}
 
+	@Override
+	public boolean equals(Object object) {
+
+		if (object instanceof ESBranchVersionSpecImpl) {
+			ESBranchVersionSpecImpl branchVersionSpecImpl = (ESBranchVersionSpecImpl) object;
+			return getInternalAPIImpl().equals(branchVersionSpecImpl.getInternalAPIImpl());
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getInternalAPIImpl().hashCode() + super.hashCode();
+	}
 }

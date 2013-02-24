@@ -29,6 +29,8 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -40,9 +42,11 @@ import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -634,10 +638,10 @@ public class SetupHelper {
 			protected void doRun() {
 
 				try {
-					// TODO OTS hot code incoming
-					compareProject = new RemoteProject(usersession.getServer(), projectInfo).checkout(usersession,
-						new NullProgressMonitor())
-						.getProject();
+					ESServerImpl serverImpl = usersession.getServerInfo().getAPIImpl();
+					ESRemoteProject remoteProject = new ESRemoteProjectImpl(serverImpl, projectInfo);
+					ESLocalProject checkout = remoteProject.checkout(new NullProgressMonitor());
+					compareProject = ((ESLocalProjectImpl) checkout).getInternalAPIImpl().getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (ESException e) {
 					e.printStackTrace();

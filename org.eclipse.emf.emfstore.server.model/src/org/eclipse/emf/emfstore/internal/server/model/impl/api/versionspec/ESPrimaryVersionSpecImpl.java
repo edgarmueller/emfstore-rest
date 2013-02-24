@@ -43,4 +43,30 @@ public class ESPrimaryVersionSpecImpl extends ESVersionSpecImpl<ESPrimaryVersion
 		return getInternalAPIImpl().getIdentifier();
 	}
 
+	@Override
+	public boolean equals(Object object) {
+
+		if (object instanceof ESPrimaryVersionSpecImpl) {
+			ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl = ((ESPrimaryVersionSpecImpl) object);
+			if (sameIdentifier(otherPrimaryVersionSpecImpl) && sameBranch(otherPrimaryVersionSpecImpl)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getInternalAPIImpl().hashCode() + super.hashCode() + getIdentifier();
+	}
+
+	private boolean sameIdentifier(ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl) {
+		return getInternalAPIImpl().getIdentifier() == otherPrimaryVersionSpecImpl.getInternalAPIImpl().getIdentifier();
+	}
+
+	private boolean sameBranch(ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl) {
+		String branch = getInternalAPIImpl().getBranch();
+		return branch != null && branch == otherPrimaryVersionSpecImpl.getInternalAPIImpl().getBranch();
+	}
 }

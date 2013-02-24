@@ -18,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ConcurrentModificationException;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.MoveCommand;
@@ -34,6 +35,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.junit.Test;
 
 /**
@@ -47,77 +49,20 @@ public class ModelElementTest {
 	 * Tests adding model elements.
 	 */
 	@Test
-	public void testAddModelElementsWithoutCommands() {
-		ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject("Testprojekt");
-
-		League leagueA = ProjectChangeUtil.createLeague("America");
-		League leagueB = ProjectChangeUtil.createLeague("Europe");
-
-		localProject.getModelElements().add(leagueA);
-		localProject.getModelElements().add(leagueB);
-
-		assertEquals(2, localProject.getAllModelElements().size());
-
-		Player playerA = ProjectChangeUtil.createPlayer("Hans");
-		Player playerB = ProjectChangeUtil.createPlayer("Anton");
-
-		leagueA.getPlayers().add(playerA);
-		leagueA.getPlayers().add(playerB);
-
-		assertEquals(4, localProject.getAllModelElements().size());
-
-		Player playerC = ProjectChangeUtil.createPlayer("Paul");
-		Player playerD = ProjectChangeUtil.createPlayer("Klaus");
-
-		leagueA.getPlayers().add(playerC);
-		leagueA.getPlayers().add(playerD);
-
-		assertEquals(6, localProject.getAllModelElements().size());
-		assertEquals(2, localProject.getModelElements().size());
-
-		Tournament tournamentA = ProjectChangeUtil.createTournament(false);
-		localProject.getModelElements().add(tournamentA);
-
-		Matchup matchupA = ProjectChangeUtil.createMatchup(null, null);
-		Matchup matchupB = ProjectChangeUtil.createMatchup(null, null);
-
-		Game gameA = ProjectChangeUtil.createGame(playerA);
-		Game gameB = ProjectChangeUtil.createGame(playerB);
-		Game gameC = ProjectChangeUtil.createGame(playerC);
-		Game gameD = ProjectChangeUtil.createGame(playerD);
-
-		tournamentA.getMatchups().add(matchupA);
-		matchupA.getGames().add(gameA);
-		matchupA.getGames().add(gameB);
-
-		assertEquals(10, localProject.getAllModelElements().size());
-
-		tournamentA.getMatchups().add(matchupB);
-		matchupB.getGames().add(gameC);
-		matchupB.getGames().add(gameD);
-
-		assertEquals(13, localProject.getAllModelElements().size());
-		assertEquals(3, localProject.getModelElements().size());
-	}
-
-	/**
-	 * Tests adding model elements.
-	 */
-	@Test
 	public void testAddModelElementsWithCommands() {
 		final ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject(
-			"Testprojekt");
+			"Test project");
 
 		final League leagueA = ProjectChangeUtil.createLeague("America");
 		final League leagueB = ProjectChangeUtil.createLeague("Europe");
 
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				localProject.getModelElements().add(leagueA);
 				localProject.getModelElements().add(leagueB);
+				return null;
 			}
-		}.execute();
+		});
 
 		assertEquals(2, localProject.getAllModelElements().size());
 
@@ -130,7 +75,7 @@ public class ModelElementTest {
 				leagueA.getPlayers().add(playerA);
 				leagueA.getPlayers().add(playerB);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(4, localProject.getAllModelElements().size());
 
@@ -143,7 +88,7 @@ public class ModelElementTest {
 				leagueA.getPlayers().add(playerC);
 				leagueA.getPlayers().add(playerD);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(6, localProject.getAllModelElements().size());
 		assertEquals(2, localProject.getModelElements().size());
@@ -155,7 +100,7 @@ public class ModelElementTest {
 			protected void doRun() {
 				localProject.getModelElements().add(tournamentA);
 			}
-		}.execute();
+		}.run(false);
 
 		final Matchup matchupA = ProjectChangeUtil.createMatchup(null, null);
 		final Matchup matchupB = ProjectChangeUtil.createMatchup(null, null);
@@ -172,7 +117,7 @@ public class ModelElementTest {
 				matchupA.getGames().add(gameA);
 				matchupA.getGames().add(gameB);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(10, localProject.getAllModelElements().size());
 
@@ -183,7 +128,7 @@ public class ModelElementTest {
 				matchupB.getGames().add(gameC);
 				matchupB.getGames().add(gameD);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(13, localProject.getAllModelElements().size());
 		assertEquals(3, localProject.getModelElements().size());
@@ -191,6 +136,7 @@ public class ModelElementTest {
 
 	@Test(expected = ConcurrentModificationException.class)
 	public void testDeleteAllModelElementsWithCommand() {
+
 		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
 
 		new EMFStoreCommand() {
@@ -201,21 +147,9 @@ public class ModelElementTest {
 					localProject.getModelElements().remove(object);
 				}
 			}
-		}.execute();
+		}.run(false);
 
-		assertEquals(0, localProject.getAllModelElements().size());
-	}
-
-	@Test(expected = ConcurrentModificationException.class)
-	public void testDeleteAllModelElementsWithoutCommand() {
-		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
-
-		Set<EObject> elements = localProject.getAllModelElements();
-		for (EObject object : elements) {
-			localProject.getModelElements().remove(object);
-		}
-
-		assertEquals(0, localProject.getAllModelElements().size());
+		// assertEquals(0, loca lProject.getAllModelElements().size());
 	}
 
 	/**
@@ -263,34 +197,6 @@ public class ModelElementTest {
 		assertNotNull(localProject.getModelElement(id));
 	}
 
-	/**
-	 * adds and deletes model element and undos the deletion.
-	 */
-	@Test
-	public void testDeleteUndoWithoutCommand() {
-		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
-		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
-		final int SIZE = localProject.getAllModelElements().size();
-
-		localProject.getModelElements().add(player);
-
-		assertTrue(localProject.getAllModelElements().contains(player));
-		assertTrue(localProject.contains(player));
-		ESModelElementId id = localProject.getModelElementId(player);
-		localProject.getModelElements().remove(player);
-
-		assertEquals(SIZE, localProject.getAllModelElements().size());
-		assertFalse(localProject.getAllModelElements().contains(player));
-		assertFalse(localProject.contains(player));
-
-		localProject.undoLastOperation();
-
-		assertEquals(SIZE + 1, localProject.getAllModelElements().size());
-		assertFalse(localProject.getAllModelElements().contains(player));
-		assertFalse(localProject.contains(player));
-		assertNotNull(localProject.getModelElement(id));
-	}
-
 	@Test
 	public void testReferenceDeletionWithCommand() {
 		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
@@ -323,37 +229,12 @@ public class ModelElementTest {
 			protected void doRun() {
 				localProject.getModelElements().remove(player2);
 			}
-		}.execute();
+		}.run(false);
 
 		assertEquals(2, tournament.getPlayers().size());
 		assertTrue(localProject.contains(player));
 		assertTrue(localProject.contains(player3));
 		assertFalse(localProject.contains(player2));
-	}
-
-	@Test
-	public void testReferenceDeletionWithoutCommand() {
-		final ESLocalProject localProject = ProjectChangeUtil.createBasicBowlingProject();
-		final Tournament tournament = ProjectChangeUtil.createTournament(true);
-		localProject.getModelElements().add(tournament);
-
-		final Player player = ProjectChangeUtil.createPlayer("Heinrich");
-		final Player player2 = ProjectChangeUtil.createPlayer("Walter");
-		final Player player3 = ProjectChangeUtil.createPlayer("Wilhelm");
-
-		tournament.getPlayers().add(player);
-		tournament.getPlayers().add(player2);
-		tournament.getPlayers().add(player3);
-
-		assertEquals(3, tournament.getPlayers().size());
-
-		tournament.getPlayers().remove(player2);
-
-		assertEquals(2, tournament.getPlayers().size());
-		assertTrue(localProject.contains(player));
-		assertTrue(localProject.contains(player3));
-		// TODO: enable this assert once the operation recorder works without commands too
-		// assertFalse(localProject.contains(player2));
 	}
 
 	@Test

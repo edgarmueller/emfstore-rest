@@ -46,4 +46,19 @@ public class ESDateVersionSpecImpl extends ESVersionSpecImpl<ESDateVersionSpecIm
 		return getInternalAPIImpl().getDate();
 	}
 
+	@Override
+	public boolean equals(Object object) {
+
+		if (object instanceof ESDateVersionSpecImpl) {
+			ESDateVersionSpecImpl dateVersionSpecImpl = (ESDateVersionSpecImpl) object;
+			return getInternalAPIImpl().equals(dateVersionSpecImpl.getInternalAPIImpl());
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return getInternalAPIImpl().hashCode() + super.hashCode() + getDate().hashCode();
+	}
 }

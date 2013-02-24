@@ -42,13 +42,13 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
-import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
 import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 
@@ -382,7 +382,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 *            the server from which to fetch the public key that is used for encryption
 	 * @return the encrypted password
 	 */
-	public String encrypt(String password, ESServer server) {
+	public String encrypt(String password, ServerInfo server) {
 		try {
 			Certificate publicKey = getCertificateForEncryption(server);
 			PublicKey key = publicKey.getPublicKey();
@@ -418,7 +418,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		return "";
 	}
 
-	private Certificate getCertificateForEncryption(ESServer server) throws ESCertificateStoreException {
+	private Certificate getCertificateForEncryption(ServerInfo server) throws ESCertificateStoreException {
 		Certificate publicKey;
 		if (server == null) {
 			publicKey = getCertificate(getDefaultCertificate());

@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * @author wesendon
  * 
  */
-public interface ESObjectContainer {
+public interface ESObjectContainer<T> {
 
 	/**
 	 * Returns the model element with the given {@link ESModelElementId}.
@@ -38,7 +38,7 @@ public interface ESObjectContainer {
 	 *            the ID of the model element, that should be retrieved
 	 * @return the model element that has the given ID assigned to it within the container
 	 */
-	EObject getModelElement(ESModelElementId modelElementId);
+	EObject getModelElement(T modelElementId);
 
 	/**
 	 * Retrieve the {@link ESModelElementId} of the given model element.
@@ -47,7 +47,7 @@ public interface ESObjectContainer {
 	 *            the model element for which to retrieve the ID for
 	 * @return the {@link ESModelElementId} of the given model element
 	 */
-	ESModelElementId getModelElementId(EObject modelElement);
+	T getModelElementId(EObject modelElement);
 
 	/**
 	 * Returns all directly contained model element of the container, i.e. a
@@ -79,7 +79,7 @@ public interface ESObjectContainer {
 	 * @return {@code true}, if the EObject with the given model element ID is
 	 *         contained in the collection, {@code false}
 	 */
-	boolean contains(ESModelElementId modelElementId);
+	boolean contains(T modelElementId);
 
 	/**
 	 * Checks whether a given {@link EObject} is contained in the collection.
@@ -114,5 +114,4 @@ public interface ESObjectContainer {
 	 * @return a list of model elements of the given type
 	 */
 	<T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass);
-
 }

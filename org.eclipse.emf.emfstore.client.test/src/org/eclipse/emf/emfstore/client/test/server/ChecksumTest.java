@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
@@ -34,6 +34,38 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.junit.Test;
 
 public class ChecksumTest extends CoreServerTest {
+
+	@Test
+	public void testRevert() throws SerializationException {
+		// createTestElement automatically adds the element to the project
+		final TestElement a = createTestElement("A");
+		final TestElement b = createTestElement("B");
+		final TestElement d = createTestElement("d");
+		final TestElement c1 = createTestElement("c1");
+		final TestElement c2 = createTestElement("c2");
+		a.getElementMap().put(c1, c2);
+		d.getReferences().add(c1);
+		c1.getReferences().add(b);
+
+		getProject().getModelElements().add(b);
+		getProject().getModelElements().add(a);
+
+		long computeChecksum = ModelUtil.computeChecksum(getProject());
+		clearOperations();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().getModelElements().remove(a);
+			}
+		}.run(false);
+
+		getProjectSpace().revert();
+
+		long checksum = ModelUtil.computeChecksum(getProject());
+
+		Assert.assertEquals(computeChecksum, checksum);
+	}
 
 	@Test
 	public void testOrderOfRootElementsInvariance() throws SerializationException {
@@ -92,7 +124,7 @@ public class ChecksumTest extends CoreServerTest {
 		PrimaryVersionSpec commit = commitWithoutCommand(getProjectSpace());
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Project restoredProject = ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()
+		Project restoredProject = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().getProjectSpaces()
 			.get(0).getProject();
 		long computedChecksum = ModelUtil.computeChecksum(restoredProject);
 
@@ -112,8 +144,14 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
-			getProjectSpace().getUsersession(), new NullProgressMonitor());
+		ESLocalProject checkout = getProjectSpace()
+			.getAPIImpl()
+			.getRemoteProject()
+			.checkout(
+				getProjectSpace().getUsersession().getAPIImpl(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+				new NullProgressMonitor());
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 
 		new EMFStoreCommand() {
 			@Override
@@ -199,8 +237,12 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
-			getProjectSpace().getUsersession(), new NullProgressMonitor());
+		ESLocalProject checkout = getProjectSpace().getAPIImpl().getRemoteProject()
+			.checkout(getProjectSpace().getUsersession().getAPIImpl(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+
+				new NullProgressMonitor());
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 
 		new EMFStoreCommand() {
 			@Override
@@ -241,8 +283,11 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
-			getProjectSpace().getUsersession(), new NullProgressMonitor());
+		ESLocalProject checkout = getProjectSpace().getAPIImpl().getRemoteProject()
+			.checkout(getProjectSpace().getUsersession().getAPIImpl(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+				new NullProgressMonitor());
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 
 		new EMFStoreCommand() {
 			@Override
@@ -278,8 +323,11 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		final ProjectSpace checkedOutProjectSpace = getProjectSpace().getRemoteProject().checkout(
-			getProjectSpace().getUsersession(), new NullProgressMonitor());
+		ESLocalProject checkout = getProjectSpace().getAPIImpl().getRemoteProject()
+			.checkout(getProjectSpace().getUsersession().getAPIImpl(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+				new NullProgressMonitor());
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 
 		new EMFStoreCommand() {
 			@Override
@@ -368,12 +416,12 @@ public class ChecksumTest extends CoreServerTest {
 	}
 
 	protected PrimaryVersionSpec commitWithoutCommand(final ProjectSpace projectSpace) throws ESException {
-		return (PrimaryVersionSpec) projectSpace.commit(createEmptyLogMessage(), new MyCommitCallback(),
+		return projectSpace.commit(createEmptyLogMessage(), new MyCommitCallback(),
 			new NullProgressMonitor());
 	}
 
 	protected PrimaryVersionSpec update(ProjectSpace projectSpace) throws ESException {
-		return (PrimaryVersionSpec) projectSpace.update(Versions.createHEAD(), new MyUpdateCallback(),
+		return projectSpace.update(Versions.createHEAD(), new MyUpdateCallback(),
 			new NullProgressMonitor());
 	}
 

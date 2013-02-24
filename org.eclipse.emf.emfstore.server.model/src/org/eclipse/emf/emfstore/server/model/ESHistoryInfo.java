@@ -15,6 +15,7 @@ package org.eclipse.emf.emfstore.server.model;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 
 /**
  * When querying the history API successfully, the result is a set of {@link ESHistoryInfo}.
@@ -70,5 +71,10 @@ public interface ESHistoryInfo {
 	 * @return the log message that is associated with this history information
 	 */
 	ESLogMessage getLogMessage();
+
+	// TODO: javadoc
+	List<ESTagVersionSpec> getTagSpecs();
+
+	ESChangePackage getChangePackage();
 
 }

@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.server.api.util.AuthControlMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.ConnectionMock;
@@ -23,7 +24,8 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
@@ -109,7 +111,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			protected PrimaryVersionSpec doRun() {
 				try {
 					// TODO: TQ cast
-					return (PrimaryVersionSpec) ps.commitToBranch(Versions.createBRANCH(branchName), null, null, null);
+					return ps.commitToBranch(Versions.createBRANCH(branchName), null, null, null);
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
@@ -136,7 +138,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected PrimaryVersionSpec doRun() {
 				try {
-					return (PrimaryVersionSpec) ps.commit(new NullProgressMonitor());
+					return ps.commit(new NullProgressMonitor());
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
@@ -151,9 +153,11 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					return projectSpace.getRemoteProject().checkout(projectSpace.getUsersession(),
-						projectSpace.getBaseVersion(), new NullProgressMonitor());
-
+					ESLocalProject checkout = projectSpace.getAPIImpl().getRemoteProject().checkout(
+						projectSpace.getUsersession().getAPIImpl(),
+						projectSpace.getBaseVersion().getAPIImpl(),
+						new NullProgressMonitor());
+					return ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
@@ -161,16 +165,18 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		}.run(false);
 	}
 
-	protected ProjectSpace checkout(final RemoteProject remoteProject, final PrimaryVersionSpec baseVersion) {
+	protected ProjectSpace checkout(final ESRemoteProjectImpl remoteProject, final PrimaryVersionSpec baseVersion) {
 		return new EMFStoreCommandWithResult<ProjectSpace>() {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
 					((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					return remoteProject.checkout(getProjectSpace().getUsersession(), baseVersion,
+					ESLocalProject checkout = remoteProject.checkout(
+						getProjectSpace().getUsersession().getAPIImpl(),
+						baseVersion.getAPIImpl(),
 						new NullProgressMonitor());
-
+					return ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}

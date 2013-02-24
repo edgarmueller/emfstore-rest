@@ -4,11 +4,11 @@ public abstract class EMFStoreCommandWithException<T> extends EMFStoreCommand {
 
 	private T excpetion;
 
-	public T getExcpetion() {
+	public T getException() {
 		return excpetion;
 	}
 
-	public void setExcpetion(T excpetion) {
+	public void setException(T excpetion) {
 		this.excpetion = excpetion;
 	}
 

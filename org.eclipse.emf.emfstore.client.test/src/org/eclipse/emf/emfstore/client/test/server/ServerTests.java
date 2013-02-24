@@ -25,8 +25,10 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.impl.RemoteProject;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -64,14 +66,14 @@ public abstract class ServerTests extends WorkspaceTest {
 	private static ConnectionManager connectionManager;
 	private int projectsOnServerBeforeTest;
 	private static HashMap<Class<?>, Object> arguments;
-	private static ServerInfo serverInfo;
+	private static ESServerImpl server;
 
 	public static void setServerInfo(ServerInfo newServerInfo) {
-		serverInfo = newServerInfo;
+		server = newServerInfo.getAPIImpl();
 	}
 
-	public static ServerInfo getServerInfo() {
-		return serverInfo;
+	public static ESServerImpl getServer() {
+		return server;
 	}
 
 	/**
@@ -96,8 +98,9 @@ public abstract class ServerTests extends WorkspaceTest {
 		connectionManager = newConnectionManager;
 	}
 
-	public RemoteProject getRemoteProject() throws ESException {
-		return getProjectSpace().getRemoteProject();
+	public ESRemoteProjectImpl getRemoteProject() throws ESException {
+		ESLocalProjectImpl apiImpl = getProjectSpace().getAPIImpl();
+		return apiImpl.getRemoteProject();
 	}
 
 	public ProjectId getProjectId() {
@@ -105,7 +108,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public PrimaryVersionSpec getProjectVersion() throws ESException {
-		return getRemoteProject().getHeadVersion(new NullProgressMonitor());
+		return getRemoteProject().getHeadVersion(new NullProgressMonitor()).getInternalAPIImpl();
 	}
 
 	/**
@@ -119,11 +122,11 @@ public abstract class ServerTests extends WorkspaceTest {
 	@After
 	public void teardown() throws IOException, SerializationException, ESException {
 		super.teardown();
-		for (ESRemoteProject project : getServerInfo().getRemoteProjects()) {
+		for (ESRemoteProject project : getServer().getRemoteProjects()) {
 			// TODO: monitor
 			project.delete(new NullProgressMonitor());
 		}
-		Assert.assertEquals(0, getServerInfo().getRemoteProjects().size());
+		Assert.assertEquals(0, getServer().getRemoteProjects().size());
 	}
 
 	/**
@@ -142,23 +145,24 @@ public abstract class ServerTests extends WorkspaceTest {
 		setServerInfo(SetupHelper.getServerInfo());
 		// login();
 		initArguments();
-		WorkspaceBase currentWorkspace = (WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace();
-		serverInfo = SetupHelper.getServerInfo();
-		currentWorkspace.addServer(serverInfo);
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		setServerInfo(SetupHelper.getServerInfo());
+		workspace.addServer(server);
 	}
 
 	/**
-	 * @param serverInfo serverinfo
+	 * @param server serverinfo
 	 * @throws ESException in case of failure
 	 */
 	protected static void login() throws ESException {
-		SessionId sessionId = login(getServerInfo(), "super", "super").getSessionId();
-		WorkspaceProvider.getInstance().getAdminConnectionManager().initConnection(getServerInfo(), sessionId);
+		SessionId sessionId = login(server.getInternalAPIImpl(), "super", "super").getSessionId();
+		WorkspaceProvider.getInstance().getAdminConnectionManager()
+			.initConnection(server.getInternalAPIImpl(), sessionId);
 		setSessionId(sessionId);
 	}
 
 	/**
-	 * @param serverInfo serverinfo
+	 * @param server serverinfo
 	 * @param username username
 	 * @param password password
 	 * @return sessionId
@@ -239,7 +243,7 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					for (ESRemoteProject remoteProject : getServerInfo().getRemoteProjects()) {
+					for (ESRemoteProject remoteProject : getServer().getRemoteProjects()) {
 						remoteProject.delete(new NullProgressMonitor());
 					}
 				} catch (ESException e) {
@@ -278,7 +282,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	public Usersession setUpUsersession(String username, String password) {
 		Usersession usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE
 			.createUsersession();
-		usersession.setServerInfo(getServerInfo());
+		usersession.setServerInfo(server.getInternalAPIImpl());
 		usersession.setUsername(username);
 		usersession.setPassword(password);
 		return usersession;
