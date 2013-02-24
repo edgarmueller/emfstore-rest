@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.observer;
+package org.eclipse.emf.emfstore.client.observer;
 
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 

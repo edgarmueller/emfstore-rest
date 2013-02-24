@@ -12,8 +12,8 @@
 package org.eclipse.emf.emfstore.internal.client.ui.views.scm;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.ui.common.EClassFilter;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  */
 public class FilterOperations {
 
-	private final IModelElementIdToEObjectMapping idToEObjectMapping;
+	private final ESModelElementIdToEObjectMapping idToEObjectMapping;
 	private final Class<? extends EObject> ignoredClass;
 
 	/**
@@ -35,7 +35,7 @@ public class FilterOperations {
 	 *            a mapping from {@link EObject}s to their IDs. Used to resolve {@link EObject}s involved within
 	 *            operations
 	 */
-	public FilterOperations(IModelElementIdToEObjectMapping idToEObjectMapping) {
+	public FilterOperations(ESModelElementIdToEObjectMapping idToEObjectMapping) {
 		this.idToEObjectMapping = idToEObjectMapping;
 		this.ignoredClass = null;
 	}
@@ -50,7 +50,7 @@ public class FilterOperations {
 	 *            a type that is completely ignored while filtering, i.e.
 	 *            instances of this type are ignored by the {@link FilteredOperationsResult} type
 	 */
-	public FilterOperations(IModelElementIdToEObjectMapping idToEObjectMapping, Class<? extends EObject> ignoredClass) {
+	public FilterOperations(ESModelElementIdToEObjectMapping idToEObjectMapping, Class<? extends EObject> ignoredClass) {
 		this.idToEObjectMapping = idToEObjectMapping;
 		this.ignoredClass = ignoredClass;
 	}

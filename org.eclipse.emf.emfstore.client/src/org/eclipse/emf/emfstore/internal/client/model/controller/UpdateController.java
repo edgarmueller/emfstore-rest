@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
-import org.eclipse.emf.emfstore.client.model.observer.ESUpdateObserver;
+import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.common.ListUtil;
@@ -45,7 +45,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 	private VersionSpec version;
-	private IUpdateCallback callback;
+	private ESUpdateCallback callback;
 
 	/**
 	 * Constructor.
@@ -59,7 +59,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 	 * @param progress
 	 *            a progress monitor that is used to indicate the progress of the update
 	 */
-	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, IUpdateCallback callback,
+	public UpdateController(ProjectSpaceBase projectSpace, VersionSpec version, ESUpdateCallback callback,
 		IProgressMonitor progress) {
 		super(projectSpace);
 
@@ -72,7 +72,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			version = Versions.createHEAD(projectSpace.getBaseVersion());
 		}
 		if (callback == null) {
-			callback = IUpdateCallback.NOCALLBACK;
+			callback = ESUpdateCallback.NOCALLBACK;
 		}
 
 		this.version = version;

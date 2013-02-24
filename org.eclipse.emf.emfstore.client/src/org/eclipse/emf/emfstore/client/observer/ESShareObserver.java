@@ -7,24 +7,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.observer;
+package org.eclipse.emf.emfstore.client.observer;
 
 import org.eclipse.emf.emfstore.common.ESObserver;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
- * Observes exceptions and tries to handle them.
+ * Share listeners are added to a project space and informed whenever a share is
+ * executed.
  * 
- * @author koegel
+ * @author pfeifferc
  */
-public interface ESExceptionObserver extends ESObserver {
+public interface ESShareObserver extends ESObserver {
 
 	/**
-	 * Handle the exception.
+	 * Share is executed.
 	 * 
-	 * @param exception the exception
-	 * @return true if exception was successfully handled
+	 * @param projectSpace the {@link ProjectSpace} that got shared
 	 */
-	boolean handleError(RuntimeException exception);
+	void shareDone(ProjectSpace projectSpace);
 }

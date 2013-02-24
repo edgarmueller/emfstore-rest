@@ -15,13 +15,13 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
-import org.eclipse.emf.emfstore.client.model.observer.ESCommitObserver;
+import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -46,7 +46,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 	private LogMessage logMessage;
-	private ICommitCallback callback;
+	private ESCommitCallback callback;
 	private BranchVersionSpec branch;
 
 	/**
@@ -63,7 +63,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            an {@link IProgressMonitor} that will be used to inform
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
-	public CommitController(ProjectSpaceBase projectSpace, LogMessage logMessage, ICommitCallback callback,
+	public CommitController(ProjectSpaceBase projectSpace, LogMessage logMessage, ESCommitCallback callback,
 		IProgressMonitor monitor) {
 		this(projectSpace, null, logMessage, callback, monitor);
 	}
@@ -86,11 +86,11 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
 	public CommitController(ProjectSpaceBase projectSpace, BranchVersionSpec branch, LogMessage logMessage,
-		ICommitCallback callback, IProgressMonitor monitor) {
+		ESCommitCallback callback, IProgressMonitor monitor) {
 		super(projectSpace);
 		this.branch = branch;
 		this.logMessage = (logMessage == null) ? createLogMessage() : logMessage;
-		this.callback = callback == null ? ICommitCallback.NOCALLBACK : callback;
+		this.callback = callback == null ? ESCommitCallback.NOCALLBACK : callback;
 		setProgressMonitor(monitor);
 	}
 

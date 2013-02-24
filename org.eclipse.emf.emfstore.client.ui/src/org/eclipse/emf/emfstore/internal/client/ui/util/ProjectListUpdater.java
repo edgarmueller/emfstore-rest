@@ -14,10 +14,10 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
-import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
-import org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver;
-import org.eclipse.emf.emfstore.client.model.observer.ESShareObserver;
-import org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver;
+import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.observer.ESLogoutObserver;
+import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
+import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -38,7 +38,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESWorkspaceInitObserver#workspaceInitComplete(org.eclipse.emf.emfstore.client.ESWorkspace)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver#workspaceInitComplete(org.eclipse.emf.emfstore.client.ESWorkspace)
 	 */
 	public void workspaceInitComplete(ESWorkspace currentWorkspace) {
 		this.workspace = currentWorkspace;
@@ -49,7 +49,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.ESUsersession)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESLoginObserver#loginCompleted(org.eclipse.emf.emfstore.client.ESUsersession)
 	 */
 	public void loginCompleted(ESUsersession session) {
 		try {
@@ -65,7 +65,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESShareObserver#shareDone(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESShareObserver#shareDone(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	public void shareDone(ProjectSpace projectSpace) {
 		try {
@@ -98,7 +98,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.ESUsersession)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESLogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.client.ESUsersession)
 	 */
 	public void logoutCompleted(ESUsersession session) {
 		// TODO OTS cast

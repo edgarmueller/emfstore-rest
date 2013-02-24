@@ -70,7 +70,11 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
+<<<<<<< HEAD
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to checkout the project
+=======
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to checkout the project
+>>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 	 * @param versionSpec
 	 *            the version that should be checked out.
 	 * @param monitor
@@ -91,7 +95,11 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
+<<<<<<< HEAD
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to resolve the given
+=======
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to resolve the given
+>>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 	 *            {@link ESVersionSpec}
 	 * @param versionSpec
 	 *            the version specifier to resolve
@@ -127,7 +135,11 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
+<<<<<<< HEAD
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to fetch the history information
+=======
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to fetch the history information
+>>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 	 * @param query
 	 *            the query to be performed in order to fetch the history information
 	 * @param monitor
@@ -157,7 +169,11 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
+<<<<<<< HEAD
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to delete the remote project
+=======
+	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to delete the remote project
+>>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 	 * @param monitor
 	 *            an {@link IProgressMonitor} used to indicate progress
 	 * 

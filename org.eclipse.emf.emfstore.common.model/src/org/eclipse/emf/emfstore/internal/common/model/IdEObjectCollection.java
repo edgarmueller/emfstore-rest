@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 
 // import org.eclipse.emf.emfstore.common.model.ESModelElementId;
@@ -29,8 +30,9 @@ import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
  * @author emueller
  * 
  */
+
 public interface IdEObjectCollection extends EObject, ESObjectContainer<ModelElementId>,
-	IModelElementIdToEObjectMapping {
+	ESModelElementIdToEObjectMapping<ModelElementId> {
 
 	/**
 	 * Adds the given model element to the collection.

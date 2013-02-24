@@ -1,7 +1,7 @@
 package org.eclipse.emf.emfstore.internal.client.model;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.emfstore.client.model.provider.ESClientVersionProvider;
+import org.eclipse.emf.emfstore.client.provider.ESClientVersionProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;

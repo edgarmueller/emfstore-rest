@@ -17,11 +17,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -52,7 +52,9 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * <p>
 	 * <b>Note</b>: The commit will be executed in headless mode, so no callback can be specified. If clients would like
 	 * to influence the commit behavior, they should use
-	 * {@link #commit(ESLogMessage, ICommitCallback, IProgressMonitor)}.
+	 * {@link #commit(ESLogMessage, ESCommitCallback, IProgressMonitor)}.
+	 * 
+	 * @param monitor a progress monitor to track progress
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
@@ -75,7 +77,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param logMessage
 	 *            a {@link ESLogMessage} describing the changes being committed
 	 * @param callback
-	 *            a optional {@link ICommitCallback}
+	 *            an optional {@link ESCommitCallback}
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while committing the project
 	 * 
@@ -84,7 +86,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
 	 * @throws ESException in case any other error occurs during commit
 	 */
-	ESPrimaryVersionSpec commit(ESLogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
+	ESPrimaryVersionSpec commit(ESLogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws BaseVersionOutdatedException, ESException;
 
 	/**
@@ -104,7 +106,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param logMessage
 	 *            a {@link ESLogMessage} describing the changes being committed
 	 * @param callback
-	 *            a optional {@link ICommitCallback}
+	 *            a optional {@link ESCommitCallback}
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while committing the project
 	 * 
@@ -114,7 +116,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
 	 * @throws ESException in case any other error occurs during commit
 	 */
-	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage, ICommitCallback callback,
+	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage, ESCommitCallback callback,
 		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, ESException;
 
 	/**
@@ -125,6 +127,8 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * If the project has not been shared yet, a
 	 * {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} will be thrown.
 	 * </p>
+	 * 
+	 * @param monitor a progress monitor to track progress
 	 * 
 	 * @return the new base version
 	 * 
@@ -145,7 +149,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param version
 	 *            the {@link ESVersionSpec} to update to
 	 * @param callback
-	 *            the {@link IUpdateCallback} that will be called while the update is performing
+	 *            the {@link ESUpdateCallback} that will be called while the update is performing
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while updating
 	 * @return the new base version
@@ -153,7 +157,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @throws ChangeConflictException in case a conflict is detected on update
 	 * @throws ESException in case update fails for any other reason
 	 */
-	ESPrimaryVersionSpec update(ESVersionSpec version, IUpdateCallback callback, IProgressMonitor monitor)
+	ESPrimaryVersionSpec update(ESVersionSpec version, ESUpdateCallback callback, IProgressMonitor monitor)
 		throws ChangeConflictException, ESException;
 
 	/**
@@ -166,7 +170,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param conflictResolver
 	 *            a {@link ESConflictResolver} for resolving conflicts
 	 * @param callback
-	 *            the {@link IUpdateCallback} that will be called while the update is performing
+	 *            the {@link ESUpdateCallback} that will be called while the update is performing
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while merging the branch
 	 * 
@@ -176,7 +180,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 *             in case an error occurs while merging the branch
 	 */
 	boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, ESConflictResolver conflictResolver,
-		IUpdateCallback callback, IProgressMonitor monitor) throws ESException;
+		ESUpdateCallback callback, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Allows to merge a version from another branch into the current project.

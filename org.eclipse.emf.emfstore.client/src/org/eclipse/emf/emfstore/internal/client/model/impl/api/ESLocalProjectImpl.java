@@ -25,13 +25,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
@@ -342,7 +342,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESPrimaryVersionSpec commit(final ESLogMessage logMessage, final ICommitCallback callback,
+	public ESPrimaryVersionSpec commit(final ESLogMessage logMessage, final ESCommitCallback callback,
 		final IProgressMonitor monitor) throws BaseVersionOutdatedException, ESException {
 
 		checkIsShared();
@@ -374,7 +374,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ESPrimaryVersionSpec commitToBranch(final ESBranchVersionSpec branch, final ESLogMessage logMessage,
-		final ICommitCallback callback, final IProgressMonitor monitor) throws InvalidVersionSpecException,
+		final ESCommitCallback callback, final IProgressMonitor monitor) throws InvalidVersionSpecException,
 		BaseVersionOutdatedException, ESException {
 
 		PrimaryVersionSpec versionSpec = RunESCommand.WithException.runWithResult(ESException.class,
@@ -422,7 +422,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESPrimaryVersionSpecImpl update(ESVersionSpec versionSpec, final IUpdateCallback callback,
+	public ESPrimaryVersionSpecImpl update(ESVersionSpec versionSpec, final ESUpdateCallback callback,
 		final IProgressMonitor monitor)
 		throws ChangeConflictException, ESException {
 
@@ -451,7 +451,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean merge(ESPrimaryVersionSpec target, final ESChangeConflict changeConflict,
-		final ESConflictResolver conflictResolver, final IUpdateCallback callback, final IProgressMonitor monitor)
+		final ESConflictResolver conflictResolver, final ESUpdateCallback callback, final IProgressMonitor monitor)
 		throws ESException {
 
 		final ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) target;

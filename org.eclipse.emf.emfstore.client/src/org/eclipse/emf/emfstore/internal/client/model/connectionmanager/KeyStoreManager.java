@@ -44,8 +44,8 @@ import javax.net.ssl.TrustManagerFactory;
 import org.apache.commons.codec.binary.Base64;
 import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
 import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
-import org.eclipse.emf.emfstore.client.model.provider.ESClientConfigurationProvider;
-import org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager;
+import org.eclipse.emf.emfstore.client.provider.ESClientConfigurationProvider;
+import org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -197,7 +197,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String,
+	 * @see org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager#addCertificate(java.lang.String,
 	 *      java.lang.String)
 	 */
 	public void addCertificate(String alias, String path) throws ESInvalidCertificateException,
@@ -226,7 +226,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#addCertificate(java.lang.String,
+	 * @see org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager#addCertificate(java.lang.String,
 	 *      java.io.InputStream)
 	 */
 	public void addCertificate(String alias, InputStream certificate) throws ESInvalidCertificateException,
@@ -448,7 +448,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#getDefaultCertificate()
+	 * @see org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager#getDefaultCertificate()
 	 */
 	public String getDefaultCertificate() {
 		if (defaultCertificate != null) {
@@ -480,7 +480,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#setDefaultCertificate(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager#setDefaultCertificate(java.lang.String)
 	 */
 	public void setDefaultCertificate(String defaultCertificate) {
 		this.defaultCertificate = defaultCertificate;
@@ -512,7 +512,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.provider.ESKeyStoreManager#certificateExists(java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager#certificateExists(java.lang.String)
 	 */
 	public boolean certificateExists(String alias) throws ESCertificateStoreException {
 		try {

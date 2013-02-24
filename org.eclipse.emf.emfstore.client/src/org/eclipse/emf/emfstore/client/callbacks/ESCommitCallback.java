@@ -8,11 +8,11 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
+package org.eclipse.emf.emfstore.client.callbacks;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author ovonwesen
  * @author emueller
  */
-public interface ICommitCallback {
+public interface ESCommitCallback {
 
 	/**
 	 * <p>
@@ -61,7 +61,7 @@ public interface ICommitCallback {
 	 * @return {@code true}, if the commit should continue, {@code false} otherwise
 	 */
 	boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
-		IModelElementIdToEObjectMapping idToEObjectMapping);
+		ESModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
 	 * Called when there are no changes on the given project space.
@@ -98,10 +98,10 @@ public interface ICommitCallback {
 	 * {@link #inspectChanges(ESLocalProject, ESChangePackage)}, such that a commit is always performed.
 	 * </p>
 	 */
-	ICommitCallback NOCALLBACK = new ICommitCallback() {
+	ESCommitCallback NOCALLBACK = new ESCommitCallback() {
 
 		public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
-			IModelElementIdToEObjectMapping idToEObjectMapping) {
+			ESModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 

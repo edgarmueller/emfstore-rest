@@ -16,10 +16,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 
@@ -36,7 +37,7 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	private List<ChangePackage> newPackages;
 	private ProjectSpace projectSpace;
 	private Set<ConflictBucketCandidate> conflictBucketCandidates;
-	private final IModelElementIdToEObjectMapping idToEObjectMapping;
+	private final ESModelElementIdToEObjectMapping<ModelElementId> idToEObjectMapping;
 	private ESChangeConflictImpl apiImpl;
 
 	/**
@@ -67,7 +68,7 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	 */
 	public ChangeConflict(ProjectSpace projectSpace, List<ChangePackage> myChangePackages,
 		List<ChangePackage> newPackages, Set<ConflictBucketCandidate> conflictBucketCandidates,
-		IModelElementIdToEObjectMapping idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 		this.myChangePackages = myChangePackages;
 		this.newPackages = newPackages;
 		this.projectSpace = projectSpace;
@@ -103,7 +104,7 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	 * 
 	 * @return the mapping from IDs to EObjects and vice versa
 	 */
-	public IModelElementIdToEObjectMapping getIdToEObjectMapping() {
+	public ESModelElementIdToEObjectMapping getIdToEObjectMapping() {
 		return idToEObjectMapping;
 	}
 

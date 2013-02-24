@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.emfstore.client.model.handler.ESOperationModifier;
+import org.eclipse.emf.emfstore.client.handler.ESOperationModifier;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**

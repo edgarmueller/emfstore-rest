@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider;
 
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
-import org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver;
+import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.observer.ESLogoutObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.jface.viewers.IDecoration;
@@ -88,7 +88,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver#loginCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESLoginObserver#loginCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void loginCompleted(ESUsersession session) {
 		update(session);
@@ -98,7 +98,7 @@ public class ESBrowserLabelDecorator extends LabelProvider implements ILightweig
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.ESLogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESLogoutObserver#logoutCompleted(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
 	public void logoutCompleted(ESUsersession session) {
 		update(session);

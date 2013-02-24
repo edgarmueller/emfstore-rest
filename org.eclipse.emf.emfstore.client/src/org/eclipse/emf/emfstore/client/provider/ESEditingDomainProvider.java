@@ -7,24 +7,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.observer;
+package org.eclipse.emf.emfstore.client.provider;
 
-import org.eclipse.emf.emfstore.common.ESObserver;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.edit.domain.EditingDomain;
 
 /**
- * Share listeners are added to a project space and informed whenever a share is
- * executed.
+ * Interface for editing domain provider.
  * 
- * @author pfeifferc
+ * @author wesendon
  */
-public interface ESShareObserver extends ESObserver {
+public interface ESEditingDomainProvider {
 
 	/**
-	 * Share is executed.
+	 * Returns EditingDomain.
 	 * 
-	 * @param projectSpace the {@link ProjectSpace} that got shared
+	 * @param resourceSet resource set
+	 * @return domain
 	 */
-	void shareDone(ProjectSpace projectSpace);
+	EditingDomain getEditingDomain(ResourceSet resourceSet);
 }

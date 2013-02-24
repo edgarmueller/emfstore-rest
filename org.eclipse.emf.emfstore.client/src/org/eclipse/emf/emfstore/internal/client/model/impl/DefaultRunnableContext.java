@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
-import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
+import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 
 /**
  * A {@link ESRunnableContext} implementation that does nothing.
@@ -25,7 +25,7 @@ public class DefaultRunnableContext implements ESRunnableContext {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext#executeRunnable(java.lang.Runnable)
+	 * @see org.eclipse.emf.emfstore.client.handler.ESRunnableContext#executeRunnable(java.lang.Runnable)
 	 */
 	public void executeRunnable(Runnable runnable) {
 		runnable.run();

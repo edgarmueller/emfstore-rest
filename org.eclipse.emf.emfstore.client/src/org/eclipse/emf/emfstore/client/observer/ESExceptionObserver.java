@@ -7,28 +7,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Aleksander Shterev
- * Carl Pfeiffer
+ * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.observer;
+package org.eclipse.emf.emfstore.client.observer;
 
-import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
- * Observer interface for logging in.
+ * Observes exceptions and tries to handle them.
  * 
- * @author pfeifferc
- * @author shterev
+ * @author koegel
  */
-public interface ESLoginObserver extends ESObserver {
+public interface ESExceptionObserver extends ESObserver {
 
 	/**
-	 * To be called when login is completed.
+	 * Handle the exception.
 	 * 
-	 * @param session
-	 *            the usersession which was logged in
+	 * @param exception the exception
+	 * @return true if exception was successfully handled
 	 */
-	void loginCompleted(ESUsersession session);
-
+	boolean handleError(RuntimeException exception);
 }

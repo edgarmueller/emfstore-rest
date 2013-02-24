@@ -7,29 +7,28 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Aleksander Shterev
+ * Carl Pfeiffer
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.provider;
+package org.eclipse.emf.emfstore.client.observer;
 
+import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
- * Determines the version identifier of the client component.
+ * Observer interface for logging in.
  * 
- * @author emueller
+ * @author pfeifferc
+ * @author shterev
  */
-public interface ESClientVersionProvider {
+public interface ESLoginObserver extends ESObserver {
 
 	/**
-	 * Returns the version of the client.
+	 * To be called when login is completed.
 	 * 
-	 * @return the client version
+	 * @param session
+	 *            the usersession which was logged in
 	 */
-	String getVersion();
+	void loginCompleted(ESUsersession session);
 
-	/**
-	 * Returns the name of the client.
-	 * 
-	 * @return the client name
-	 */
-	String getName();
 }

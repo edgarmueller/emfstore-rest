@@ -10,7 +10,7 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.model.observer;
+package org.eclipse.emf.emfstore.client.observer;
 
 import java.util.List;
 

@@ -14,7 +14,11 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+<<<<<<< HEAD
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
+=======
+import org.eclipse.emf.emfstore.client.provider.ESAbstractSessionProvider;
+>>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;

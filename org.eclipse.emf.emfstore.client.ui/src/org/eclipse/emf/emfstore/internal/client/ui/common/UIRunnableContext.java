@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.common;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.client.model.handler.ESRunnableContext;
+import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 
 /**
  * Executes the given {@link Runnable} in the UI thread.

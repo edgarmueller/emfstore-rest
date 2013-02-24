@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.common.model;
+package org.eclipse.emf.emfstore.common.model;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -18,14 +18,14 @@ import org.eclipse.emf.ecore.EObject;
  * 
  * @author emueller
  */
-public interface IModelElementIdToEObjectMapping {
+public interface ESModelElementIdToEObjectMapping<T> {
 
 	/**
-	 * Get the {@link EObject} for the given {@link ModelElementId}, if any.
+	 * Get the {@link EObject} for the given {@link ESModelElementId}, if any.
 	 * 
 	 * @param modelElementId the ID
-	 * @return the ID or null if no EObject for the ID is found
+	 * @return the object or null if no EObject for the ID is found
 	 */
-	EObject get(ModelElementId modelElementId);
+	EObject get(T modelElementId);
 
 }

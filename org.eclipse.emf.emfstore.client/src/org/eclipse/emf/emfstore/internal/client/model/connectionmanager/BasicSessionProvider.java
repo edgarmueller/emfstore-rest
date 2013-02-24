@@ -29,7 +29,7 @@ public class BasicSessionProvider extends ESAbstractSessionProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 * @see org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider#provideUsersession(org.eclipse.emf.emfstore.client.ESServer)
 	 */
 	@Override
 	public ESUsersession provideUsersession(ESServer serverInfo) throws ESException {
@@ -40,7 +40,7 @@ public class BasicSessionProvider extends ESAbstractSessionProvider {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider#login(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 * @see org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider#login(org.eclipse.emf.emfstore.client.ESUsersession)
 	 */
 	@Override
 	public void login(ESUsersession usersession) throws ESException {

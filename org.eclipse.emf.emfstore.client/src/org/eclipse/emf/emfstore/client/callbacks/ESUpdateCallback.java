@@ -8,15 +8,15 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.controller.callbacks;
+package org.eclipse.emf.emfstore.client.callbacks;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author ovonwesen
  * @author emueller
  */
-public interface IUpdateCallback {
+public interface ESUpdateCallback {
 
 	/**
 	 * Called right before the changes get applied upon the project space.
@@ -43,7 +43,7 @@ public interface IUpdateCallback {
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
 	boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
-		IModelElementIdToEObjectMapping idToEObjectMapping);
+		ESModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
 	 * Called when no remote changes are available.
@@ -82,13 +82,20 @@ public interface IUpdateCallback {
 
 	/**
 	 * A default implementation of an update callback that does nothing and defaults
-	 * {@link IUpdateCallback#conflictOccurred(ESChangeConflictImpl)} to false and
+	 * <<<<<<<
+	 * HEAD:org.eclipse.emf.emfstore.client/src/org/eclipse/emf/emfstore/internal/client/model/controller/callbacks
+	 * /IUpdateCallback.java {@link IUpdateCallback#conflictOccurred(ESChangeConflictImpl)} to false and
 	 * {@link IUpdateCallback#inspectChanges(ESLocalProject, List)} to true.
+	 * ======= {@link ESUpdateCallback#conflictOccurred(ESChangeConflict)} to false and
+	 * {@link ESUpdateCallback#inspectChanges(ESLocalProject, List)} to true.
+	 * >>>>>>>
+	 * 897c2ca7d066fbf6e610eabfe0a600a2a4512500:org.eclipse.emf.emfstore.client/src/org/eclipse/emf/emfstore/client
+	 * /callbacks/ESUpdateCallback.java
 	 */
-	IUpdateCallback NOCALLBACK = new IUpdateCallback() {
+	ESUpdateCallback NOCALLBACK = new ESUpdateCallback() {
 
 		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
-			IModelElementIdToEObjectMapping idToEObjectMapping) {
+			ESModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 

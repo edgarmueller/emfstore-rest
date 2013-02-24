@@ -20,9 +20,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
+import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
@@ -187,7 +187,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec commit(LogMessage logMessage, ICommitCallback callback, IProgressMonitor monitor)
+	PrimaryVersionSpec commit(LogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws ESException;
 
 	/**
@@ -208,7 +208,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * @throws ESException
 	 *             in case of an exception
 	 */
-	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, ICommitCallback callback,
+	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, ESCommitCallback callback,
 		IProgressMonitor monitor) throws ESException;
 
 	/**
@@ -825,7 +825,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * @generated NOT
 	 */
 	boolean merge(PrimaryVersionSpec target, ESChangeConflict conflict,
-		ESConflictResolver conflictResolver, IUpdateCallback callback, IProgressMonitor progressMonitor)
+		ESConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
 		throws ESException;
 
 	/**
@@ -1110,7 +1110,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * @see UpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec update(VersionSpec version, IUpdateCallback callback, IProgressMonitor progress)
+	PrimaryVersionSpec update(VersionSpec version, ESUpdateCallback callback, IProgressMonitor progress)
 		throws ESException;
 
 	/**

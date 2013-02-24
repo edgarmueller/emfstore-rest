@@ -8,19 +8,19 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
+import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback;
-import org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.internal.common.model.IModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
@@ -124,7 +124,8 @@ public class ChecksumTest extends CoreServerTest {
 		PrimaryVersionSpec commit = commitWithoutCommand(getProjectSpace());
 		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
 
-		Project restoredProject = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().getProjectSpaces()
+		Project restoredProject = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl()
+			.getProjectSpaces()
 			.get(0).getProject();
 		long computedChecksum = ModelUtil.computeChecksum(restoredProject);
 
@@ -367,19 +368,19 @@ public class ChecksumTest extends CoreServerTest {
 		Assert.assertEquals(1, getProjectSpace().getOperations().size());
 	}
 
-	private class MyCommitCallback implements ICommitCallback {
+	private class MyCommitCallback implements ESCommitCallback {
 
 		public boolean baseVersionOutOfDate(ESLocalProject projectSpace, IProgressMonitor progressMonitor) {
-			return ICommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
+			return ESCommitCallback.NOCALLBACK.baseVersionOutOfDate(projectSpace, progressMonitor);
 		}
 
 		public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
-			IModelElementIdToEObjectMapping idToEObjectMapping) {
-			return ICommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
+			ESModelElementIdToEObjectMapping idToEObjectMapping) {
+			return ESCommitCallback.NOCALLBACK.inspectChanges(projectSpace, changePackage, idToEObjectMapping);
 		}
 
 		public void noLocalChanges(ESLocalProject projectSpace) {
-			ICommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
+			ESCommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
 		}
 
 		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
@@ -391,20 +392,20 @@ public class ChecksumTest extends CoreServerTest {
 
 	}
 
-	private class MyUpdateCallback implements IUpdateCallback {
+	private class MyUpdateCallback implements ESUpdateCallback {
 
 		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
-			IModelElementIdToEObjectMapping idToEObjectMapping) {
-			return IUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
+			ESModelElementIdToEObjectMapping idToEObjectMapping) {
+			return ESUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}
 
 		public void noChangesOnServer() {
-			IUpdateCallback.NOCALLBACK.noChangesOnServer();
+			ESUpdateCallback.NOCALLBACK.noChangesOnServer();
 		}
 
 		public boolean conflictOccurred(ESChangeConflict changeConflictException,
 			IProgressMonitor progressMonitor) {
-			return IUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
+			return ESUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
 		}
 
 		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,

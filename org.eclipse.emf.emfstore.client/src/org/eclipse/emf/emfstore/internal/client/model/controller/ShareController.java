@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.model.controller;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.model.observer.ESLoginObserver;
-import org.eclipse.emf.emfstore.client.model.observer.ESShareObserver;
+import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
+import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
