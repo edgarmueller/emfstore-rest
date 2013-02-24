@@ -14,11 +14,10 @@ import java.text.MessageFormat;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.internal.client.impl.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -71,7 +70,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @param projectInfo
 	 *            the {@link ProjectInfo} that will be used to identify the remote project
 	 */
-	public UIDeleteRemoteProjectController(Shell shell, Usersession session, ProjectInfo projectInfo) {
+	public UIDeleteRemoteProjectController(Shell shell, ESUsersession session, ProjectInfo projectInfo) {
 		super(shell);
 		this.serverInfo = null;
 		this.projectInfo = projectInfo;
@@ -112,7 +111,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 				deleteRemoteProject(remoteProject, session, monitor);
 				return null;
 			} else {
-				deleteRemoteProject(serverInfo, projectInfo, session, monitor);
+				deleteRemoteProject(serverInfo.getAPIImpl(), projectInfo, session, monitor);
 				return null;
 			}
 
@@ -129,7 +128,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		return null;
 	}
 
-	private void deleteRemoteProject(ESServer server, ProjectInfo projectInfo, ESUsersession session,
+	private void deleteRemoteProject(ESServerImpl server, ProjectInfo projectInfo, ESUsersession session,
 		IProgressMonitor monitor) throws ESException {
 		if (confirm("Confirmation",
 			MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {

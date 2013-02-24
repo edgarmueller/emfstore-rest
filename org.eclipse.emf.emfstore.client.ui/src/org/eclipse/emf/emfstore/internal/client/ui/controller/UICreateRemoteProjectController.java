@@ -108,7 +108,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 
 	private ESRemoteProject createRemoteProject(final Usersession usersession, final String name,
 		final String description, IProgressMonitor monitor) throws ESException {
-		return usersession.getServer().createRemoteProject(name, monitor);
+		return usersession.getAPIImpl().getServer().createRemoteProject(name, monitor);
 	}
 
 	/**

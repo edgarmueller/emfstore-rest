@@ -69,7 +69,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 */
 	public void shareDone(ProjectSpace projectSpace) {
 		try {
-			update(projectSpace.getUsersession());
+			update(projectSpace.getUsersession().getAPIImpl());
 		} catch (ESException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't project infos upon shareDone.", e);

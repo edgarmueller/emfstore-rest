@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
-import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
@@ -117,9 +116,9 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 			public Boolean call() throws Exception {
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(), "Confirmation", message);
 				if (shouldUpdate) {
-					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion();
-					ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(),
-						(ProjectSpace) projectSpace)
+					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace.getBaseVersion()
+						.getAPIImpl();
+					ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
 						.executeSub(progressMonitor);
 					if (version.equals(baseVersion)) {
 						return false;
@@ -167,14 +166,16 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
+	public ESPrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
 		try {
 			if (branch == null) {
 				branch = branchSelection(projectSpace);
 			}
 			// TODO OTS
-			return (PrimaryVersionSpec) projectSpace.commitToBranch(branch, logMessage, UICreateBranchController.this,
+			PrimaryVersionSpec commitToBranch = projectSpace.commitToBranch(branch, logMessage,
+				UICreateBranchController.this,
 				progressMonitor);
+			return commitToBranch.getAPIImpl();
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore
@@ -196,7 +197,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	}
 
 	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace) throws ESException {
-		final List<ESBranchInfo> branches = ((ProjectSpaceBase) projectSpace).getBranches(new NullProgressMonitor());
+		final List<ESBranchInfo> branches = projectSpace.getAPIImpl().getBranches(new NullProgressMonitor());
 
 		@SuppressWarnings("static-access")
 		String branch = new RunInUI.WithException().runWithResult(new Callable<String>() {

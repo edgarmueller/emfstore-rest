@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
@@ -21,7 +22,9 @@ import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
+import org.eclipse.emf.emfstore.internal.common.ListUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.window.Window;
@@ -46,15 +49,11 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getKnownUsersessions()
 	 */
-	public Usersession[] getKnownUsersessions() {
+	public ESUsersession[] getKnownUsersessions() {
 		HashSet<Object> set = new LinkedHashSet<Object>();
-		// TODO OTS
-		for (Usersession session : ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions()) {
-			if (getServerInfo().equals(session.getServerInfo())) {
-				set.add(session);
-			}
-		}
-		return set.toArray(new Usersession[set.size()]);
+		List<ESUsersession> mapToAPI = ListUtil.mapToAPI(ESUsersession.class, WorkspaceProvider.getInstance()
+			.getWorkspace().getInternalAPIImpl().getUsersessions());
+		return mapToAPI.toArray(new ESUsersession[mapToAPI.size()]);
 	}
 
 	private ESUsersession login(final boolean force) throws ESException {
@@ -110,7 +109,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 */
 	public void validate(ESUsersession session) throws ESException {
 
-		Usersession usersession = (Usersession) session;
+		Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
 
 		// TODO login code
 		usersession.logIn();
@@ -121,7 +120,7 @@ public class LoginDialogController implements ILoginDialogController {
 		if (!usersessions.contains(usersession)) {
 			usersessions.add(usersession);
 		}
-		this.usersession = usersession;
+		this.usersession = session;
 		// TODO OTS auto save
 	}
 

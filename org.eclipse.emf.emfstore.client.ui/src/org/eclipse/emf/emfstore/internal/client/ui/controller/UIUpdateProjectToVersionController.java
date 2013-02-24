@@ -19,11 +19,9 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
@@ -46,10 +44,9 @@ public class UIUpdateProjectToVersionController extends
 
 	private final ESLocalProject projectSpace;
 
-	public UIUpdateProjectToVersionController(Shell shell,
-		ProjectSpace projectSpace) {
+	public UIUpdateProjectToVersionController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
-		this.projectSpace = projectSpace;
+		this.projectSpace = localProject;
 	}
 
 	@Override
@@ -114,10 +111,10 @@ public class UIUpdateProjectToVersionController extends
 					.runWithResult(new Callable<ESPrimaryVersionSpec>() {
 						public ESPrimaryVersionSpec call() throws Exception {
 							return new UIUpdateProjectController(
-								getShell(), projectSpace, Versions
-									.createPRIMARY(info
-										.getPrimarySpec()
-										.getIdentifier()))
+								getShell(),
+								projectSpace,
+								ESVersionSpec.FACTORY.createPRIMARY(
+									info.getPrimarySpec().getIdentifier()))
 								.execute();
 						}
 					});

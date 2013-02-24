@@ -14,6 +14,7 @@ import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -395,7 +396,7 @@ public class ChecksumTest extends CoreServerTest {
 	private class MyUpdateCallback implements ESUpdateCallback {
 
 		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
-			ESModelElementIdToEObjectMapping idToEObjectMapping) {
+			ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 			return ESUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}
 

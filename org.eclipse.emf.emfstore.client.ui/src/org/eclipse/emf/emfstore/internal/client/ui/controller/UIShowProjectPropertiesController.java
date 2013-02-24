@@ -12,13 +12,14 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.internal.client.impl.ESRemoteProjectImpl;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -58,9 +59,11 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 		ESPrimaryVersionSpec versionSpec;
 
 		try {
+			ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
+			ESRemoteProject remoteProjectImpl = new ESRemoteProjectImpl(serverInfo.getAPIImpl(), projectInfo);
 			// TODO: monitor
-			versionSpec = new ESRemoteProjectImpl((ESServer) projectInfo.eContainer(), projectInfo)
-				.resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor());
+			versionSpec = remoteProjectImpl.resolveVersionSpec(ESVersionSpec.FACTORY.createHEAD(),
+				new NullProgressMonitor());
 			revision = "" + versionSpec.getIdentifier();
 		} catch (ESException e) {
 			// do nothing

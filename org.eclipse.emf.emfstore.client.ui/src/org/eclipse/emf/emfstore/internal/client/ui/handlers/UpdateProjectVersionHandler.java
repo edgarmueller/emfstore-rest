@@ -25,6 +25,8 @@ public class UpdateProjectVersionHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIUpdateProjectToVersionController(getShell(), requireSelection(ProjectSpace.class)).execute();
+		new UIUpdateProjectToVersionController(
+			getShell(),
+			requireSelection(ProjectSpace.class).getAPIImpl()).execute();
 	}
 }

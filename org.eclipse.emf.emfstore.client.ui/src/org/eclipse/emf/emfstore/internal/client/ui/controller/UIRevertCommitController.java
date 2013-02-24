@@ -74,7 +74,7 @@ public class UIRevertCommitController extends AbstractEMFStoreUIController<Void>
 		if (result == Window.OK) {
 			PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimarySpec());
 			try {
-				new RevertCommitController(view.getProjectSpace(), versionSpec, true).execute();
+				new RevertCommitController(view.getProjectSpace().getProject(), versionSpec, true).execute();
 			} catch (ESException e) {
 				// TODO: no error handling?
 			}

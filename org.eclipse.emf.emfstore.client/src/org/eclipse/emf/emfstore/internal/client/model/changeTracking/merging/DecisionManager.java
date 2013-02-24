@@ -31,6 +31,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
@@ -89,7 +90,7 @@ public class DecisionManager {
 	private ConflictDetector conflictDetector;
 	private ChangeConflict changeConflict;
 	private Set<AbstractOperation> notInvolvedInConflict;
-	private ESModelElementIdToEObjectMapping mapping;
+	private ESModelElementIdToEObjectMapping<ESModelElementId> mapping;
 	private final boolean isBranchMerge;
 	private final Project project;
 
@@ -568,7 +569,7 @@ public class DecisionManager {
 	 * @return the model element with the given ID or <code>null</code> if no such model element has been found
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		return mapping.get(modelElementId);
+		return mapping.get(modelElementId.getAPIImpl());
 	}
 
 	/**

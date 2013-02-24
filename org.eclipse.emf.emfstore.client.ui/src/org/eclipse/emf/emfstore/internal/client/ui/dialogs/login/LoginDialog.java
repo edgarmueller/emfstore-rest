@@ -14,6 +14,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -176,7 +177,7 @@ public class LoginDialog extends TitleAreaDialog {
 			return;
 		}
 
-		selectedUsersession = (Usersession) usersession;
+		selectedUsersession = ((ESUsersessionImpl) usersession).getInternalAPIImpl();
 
 		// reset fields
 		passwordField.setMessage("");
@@ -212,25 +213,25 @@ public class LoginDialog extends TitleAreaDialog {
 			String password = passwordField.getText();
 			boolean savePass = savePassword.getSelection();
 
-			Usersession candidate = selectedUsersession;
+			Usersession candidateSession = selectedUsersession;
 
 			// try to find usersession with same username in order to avoid duplicates
-			if (candidate == null) {
-				candidate = (Usersession) getUsersessionIfKnown(username);
+			if (candidateSession == null) {
+				candidateSession = (Usersession) getUsersessionIfKnown(username);
 			}
 
-			if (candidate == null) {
-				candidate = ModelFactory.eINSTANCE.createUsersession();
+			if (candidateSession == null) {
+				candidateSession = ModelFactory.eINSTANCE.createUsersession();
 				// TODO: cast
-				candidate.setServerInfo((ServerInfo) controller.getServerInfo());
-				candidate.setUsername(username);
+				candidateSession.setServerInfo((ServerInfo) controller.getServerInfo());
+				candidateSession.setUsername(username);
 			}
 
-			candidate.setSavePassword(savePass);
+			candidateSession.setSavePassword(savePass);
 			if (passwordModified) {
-				candidate.setPassword(password);
+				candidateSession.setPassword(password);
 			}
-			controller.validate(candidate);
+			controller.validate(candidateSession.getAPIImpl());
 		} catch (ESException e) {
 			setErrorMessage(e.getMessage());
 			return;
@@ -292,7 +293,7 @@ public class LoginDialog extends TitleAreaDialog {
 			if (selection instanceof StructuredSelection) {
 				Object firstElement = ((StructuredSelection) selection).getFirstElement();
 				if (firstElement instanceof Usersession) {
-					loadUsersession((Usersession) firstElement);
+					loadUsersession(((Usersession) firstElement).getAPIImpl());
 				}
 			}
 		}

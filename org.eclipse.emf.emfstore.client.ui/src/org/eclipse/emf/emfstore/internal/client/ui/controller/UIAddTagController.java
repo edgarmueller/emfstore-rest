@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
@@ -102,7 +101,7 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 
 			try {
 				// TODO: monitor
-				projectSpace.addTag(versionSpec, tag, new NullProgressMonitor());
+				projectSpace.addTag(versionSpec, tag);
 			} catch (ESException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 				MessageDialog.openError(getShell(), "Error", "Could not create tag. Reason: " + e.getMessage());

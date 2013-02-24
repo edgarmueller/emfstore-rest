@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.LoginDialogController;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
@@ -25,7 +26,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UILoginSessionController extends AbstractEMFStoreUIController<Void> {
 
-	private final ServerInfo serverInfo;
+	private final ESServer serverInfo;
 
 	/**
 	 * Constructor.
@@ -35,7 +36,7 @@ public class UILoginSessionController extends AbstractEMFStoreUIController<Void>
 	 * @param serverInfo
 	 *            the {@link ServerInfo} that is used to determine the server that is used to log in the session against
 	 */
-	public UILoginSessionController(Shell shell, ServerInfo serverInfo) {
+	public UILoginSessionController(Shell shell, ESServer serverInfo) {
 		super(shell);
 		this.serverInfo = serverInfo;
 	}

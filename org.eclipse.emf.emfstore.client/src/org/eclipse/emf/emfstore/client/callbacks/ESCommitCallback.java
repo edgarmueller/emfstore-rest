@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.callbacks;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -61,7 +62,7 @@ public interface ESCommitCallback {
 	 * @return {@code true}, if the commit should continue, {@code false} otherwise
 	 */
 	boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
-		ESModelElementIdToEObjectMapping idToEObjectMapping);
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping);
 
 	/**
 	 * Called when there are no changes on the given project space.
@@ -101,7 +102,7 @@ public interface ESCommitCallback {
 	ESCommitCallback NOCALLBACK = new ESCommitCallback() {
 
 		public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage,
-			ESModelElementIdToEObjectMapping idToEObjectMapping) {
+			ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 			return true;
 		}
 

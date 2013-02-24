@@ -18,14 +18,15 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
-import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.common.ListUtil;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -56,54 +57,55 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 		if (!projectSpace.getOperations().isEmpty()) {
 			MessageDialog
-					.openError(
-							getShell(),
-							"Merge not possible",
-							"There are pending changes. Please revert or commit first. Merging with local changes is currently not supported.");
+				.openError(
+					getShell(),
+					"Merge not possible",
+					"There are pending changes. Please revert or commit first. Merging with local changes is currently not supported.");
 			return null;
 		}
-		ESPrimaryVersionSpec selectedSource = branchSelection(projectSpace);
-		if (selectedSource != null) {
+
+		PrimaryVersionSpec selectedVersionSpec = branchSelection(projectSpace);
+
+		if (selectedVersionSpec != null) {
 			// TODO: monitor
-			((ProjectSpaceBase) projectSpace).mergeBranch(selectedSource,
-					new MergeProjectHandler(true), new NullProgressMonitor());
+			projectSpace.mergeBranch(selectedVersionSpec,
+				new MergeProjectHandler(true), new NullProgressMonitor());
 		}
 		return null;
 	}
 
-	private ESPrimaryVersionSpec branchSelection(final ProjectSpace projectSpace)
-			throws ESException {
+	private PrimaryVersionSpec branchSelection(final ProjectSpace projectSpace)
+		throws ESException {
 
 		// OTS: progress monitor
-		final List<ESBranchInfo> branches = ((ProjectSpaceBase) projectSpace)
-				.getBranches(new NullProgressMonitor());
-		ListIterator<ESBranchInfo> iterator = branches.listIterator();
+		final List<BranchInfo> branches = projectSpace.getBranches();
+		ListIterator<BranchInfo> iterator = branches.listIterator();
 		while (iterator.hasNext()) {
-			ESBranchInfo current = iterator.next();
+			BranchInfo current = iterator.next();
 			if (current.getName().equals(
-					projectSpace.getBaseVersion().getBranch())) {
+				projectSpace.getBaseVersion().getBranch())) {
 				iterator.remove();
 			}
 		}
 
-		ESBranchInfo result = RunInUI.WithException
-				.runWithResult(new Callable<ESBranchInfo>() {
-					public ESBranchInfo call() throws Exception {
+		BranchInfo result = RunInUI.WithException
+			.runWithResult(new Callable<BranchInfo>() {
+				public BranchInfo call() throws Exception {
 
-						BranchSelectionDialog dialog = new BranchSelectionDialog(
-								getShell(), projectSpace.getBaseVersion(),
-								branches);
-						dialog.setBlockOnOpen(true);
+					BranchSelectionDialog dialog = new BranchSelectionDialog(
+						getShell(), projectSpace.getBaseVersion(),
+						ListUtil.mapToAPI(ESBranchInfo.class, branches));
+					dialog.setBlockOnOpen(true);
 
-						if (dialog.open() != Dialog.OK
-								|| dialog.getResult() == null) {
-							throw new CancelOperationException(
-									"No Branch specified");
-						}
-						return dialog.getResult();
-
+					if (dialog.open() != Dialog.OK
+						|| dialog.getResult() == null) {
+						throw new CancelOperationException(
+							"No Branch specified");
 					}
-				});
+					return dialog.getResult();
+
+				}
+			});
 		return result.getHead();
 	}
 }

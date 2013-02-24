@@ -11,8 +11,8 @@
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.internal.client.impl.ESRemoteProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
@@ -33,7 +33,13 @@ public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements IH
 		}
 
 		// FIXME: eContainer call
-		new UICheckoutController(getShell(), new ESRemoteProjectImpl((ESServer) projectInfo.eContainer(),
-			projectInfo), true).execute();
+		ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
+
+		new UICheckoutController(
+			getShell(),
+			new ESRemoteProjectImpl(
+				serverInfo.getAPIImpl(),
+				projectInfo),
+			true).execute();
 	}
 }

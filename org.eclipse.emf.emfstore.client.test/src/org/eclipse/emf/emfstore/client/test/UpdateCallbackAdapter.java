@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -14,7 +15,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 public class UpdateCallbackAdapter implements ESUpdateCallback {
 
 	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
-		ESModelElementIdToEObjectMapping idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 		return true;
 	}
 

@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
@@ -44,9 +43,13 @@ import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
@@ -54,6 +57,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
@@ -271,7 +276,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	private void addBaseVersionTag(List<HistoryInfo> infos) {
 		HistoryInfo historyInfo = getHistoryInfo(projectSpace.getBaseVersion());
 		if (historyInfo != null) {
-			historyInfo.getTagSpecs().add(Versions.createTAG(VersionSpec.BASE, VersionSpec.GLOBAL));
+			historyInfo.getTagSpecs().add(Versions.createTAG(
+				ESVersionSpec.BASE, ESVersionSpec.GLOBAL));
 		}
 	}
 
@@ -312,18 +318,33 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 								List<HistoryInfo> historyInfos = getLocalChanges();
 								monitor.worked(10);
 								if (projectSpace != modelElement) {
-									historyInfos.addAll(((List<HistoryInfo>) (List<?>) projectSpace
-										.getHistoryInfos(HistoryQueryBuilder.modelelementQuery(centerVersion,
-											Arrays.asList(ModelUtil.getModelElementId(modelElement)), UPPER_LIMIT,
-											LOWER_LIMIT, showAllVersions, true),
-											new NullProgressMonitor())));// TODO monitor
+									ModelElementQuery query = HistoryQueryBuilder.modelelementQuery(
+										centerVersion,
+										Arrays.asList(ModelUtil.getModelElementId(modelElement)),
+										UPPER_LIMIT,
+										LOWER_LIMIT,
+										showAllVersions,
+										true);
+									// TODO: proivde util method
+									List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(
+										query.getAPIImpl(), new NullProgressMonitor());
+									for (ESHistoryInfo info : infos) {
+										historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+									}
 								} else {
 									// TODO monitor
-									historyInfos
-										.addAll((List<HistoryInfo>) (List<?>) projectSpace
-											.getHistoryInfos(HistoryQueryBuilder.rangeQuery(centerVersion, UPPER_LIMIT,
-												LOWER_LIMIT, showAllVersions, true, true, true),
-												new NullProgressMonitor()));
+									RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder
+										.rangeQuery(
+											centerVersion,
+											UPPER_LIMIT,
+											LOWER_LIMIT,
+											showAllVersions, true, true, true);
+									List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(
+										rangeQuery.getAPIImpl(),
+										new NullProgressMonitor());
+									for (ESHistoryInfo info : infos) {
+										historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+									}
 								}
 								monitor.worked(90);
 								return historyInfos;
@@ -460,7 +481,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					for (Object o : elsd.getResult()) {
 						ProjectSpace resultSelection = (ProjectSpace) o;
 						if (resultSelection != null) {
-							setInput((EObject) resultSelection);
+							setInput(resultSelection);
 						}
 						break;
 					}
@@ -693,7 +714,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					@Override
 					public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
 						try {
-							return (PrimaryVersionSpec) projectSpace.resolveVersionSpec(Versions.createPRIMARY(
+							return projectSpace.resolveVersionSpec(Versions.createPRIMARY(
 								VersionSpec.GLOBAL, Integer.parseInt(value)), new NullProgressMonitor());
 						} catch (ESException e) {
 							EMFStoreMessageDialog.showExceptionDialog(
@@ -801,7 +822,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			} else if (element instanceof ProjectSpace) {
 				selectedModelElement = ((ProjectSpace) element).getProject();
 			} else if (element instanceof ModelElementId
-				&& projectSpace.getProject().contains((ESModelElementId) element)) {
+				&& projectSpace.getProject().contains((ModelElementId) element)) {
 				selectedModelElement = projectSpace.getProject().getModelElement((ModelElementId) element);
 			} else if (projectSpace.getProject().contains((EObject) element)) {
 				selectedModelElement = (EObject) element;

@@ -42,7 +42,7 @@ public class IsACUserTester extends PropertyTester {
 					if (usersession != null) {
 						AccessControlHelper accessControlHelper = new AccessControlHelper(usersession);
 						try {
-							accessControlHelper.checkWriteAccess(projectSpace.getProjectId());
+							accessControlHelper.checkWriteAccess(projectSpace.getProjectId().getAPIImpl());
 							isACUser = true;
 						} catch (AccessControlException e) {
 							isACUser = false;

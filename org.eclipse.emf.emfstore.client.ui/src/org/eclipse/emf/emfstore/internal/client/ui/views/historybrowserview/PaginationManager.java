@@ -17,12 +17,16 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESHistoryQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 
 /**
  * Class handling pagination. See constructor {@link #PaginationManager(ProjectSpace, int, int)}
@@ -111,10 +115,16 @@ public class PaginationManager {
 		} else {
 			newCenterVersion = currentCenterVersionShown;
 		}
-		HistoryQuery query = getQuery(newCenterVersion, aboveCenterCount, belowCenterCount);
+		HistoryQuery<ESHistoryQueryImpl<ESHistoryQuery, ?>> query = getQuery(newCenterVersion,
+			aboveCenterCount, belowCenterCount);
 		// TODO monitor
-		List<HistoryInfo> historyInfos = (List<HistoryInfo>) (List<?>) projectSpace.getHistoryInfos(query,
+		List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(query.getAPIImpl(),
 			new NullProgressMonitor());
+
+		List<HistoryInfo> historyInfos = new ArrayList<HistoryInfo>();
+		for (ESHistoryInfo info : infos) {
+			historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+		}
 
 		if (newCenterVersion != null && !currentCenterVersionShown.equals(newCenterVersion)) {
 			setCorrectCenterVersionAndHistory(historyInfos, newCenterVersion.getIdentifier(), beforeCurrent);
@@ -325,7 +335,7 @@ public class PaginationManager {
 		// currently always the biggest primary version of given branch which is equal or lower
 		// to the given versionSpec
 		// TODO monitor
-		PrimaryVersionSpec nearestSpec = (PrimaryVersionSpec) projectSpace.resolveVersionSpec(centerVersion,
+		PrimaryVersionSpec nearestSpec = projectSpace.resolveVersionSpec(centerVersion,
 			new NullProgressMonitor());
 		if (nearestSpec.getIdentifier() < centerVersion.getIdentifier()) {
 			margins.aboveCenter = aboveCenter + (centerVersion.getIdentifier() - nearestSpec.getIdentifier()) + 1;
@@ -395,11 +405,16 @@ public class PaginationManager {
 			return true; // already there
 		}
 
-		HistoryQuery query = getQuery(Versions.createPRIMARY(projectSpace.getBaseVersion(), id), aboveCenterCount
-			+ belowCenterCount, aboveCenterCount + belowCenterCount);
+		HistoryQuery<ESHistoryQuery> query = getQuery(Versions.createPRIMARY(projectSpace.getBaseVersion(), id),
+			aboveCenterCount
+				+ belowCenterCount, aboveCenterCount + belowCenterCount);
 		// TODO: monitor
-		List<HistoryInfo> historyInfos = (List<HistoryInfo>) (List<?>) projectSpace.getHistoryInfos(query,
+		List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(query.getAPIImpl(),
 			new NullProgressMonitor());
+		List<HistoryInfo> historyInfos = new ArrayList<HistoryInfo>();
+		for (ESHistoryInfo info : infos) {
+			historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+		}
 		int requestedIdPos = findPositionOfId(id, historyInfos, false);
 		boolean contained = containsId(historyInfos, id);
 		int newCenterPos;

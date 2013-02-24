@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -233,8 +234,8 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESLocalPr
 			branches = remoteProject.getBranches(monitor);
 		}
 
-		ESBranchInfo result = RunInUI.WithException.runWithResult(new Callable<ESBranchInfo>() {
-			public ESBranchInfo call() throws Exception {
+		BranchInfo result = RunInUI.WithException.runWithResult(new Callable<BranchInfo>() {
+			public BranchInfo call() throws Exception {
 
 				BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
 					getShell(), branches);
@@ -248,6 +249,6 @@ public class UICheckoutController extends AbstractEMFStoreUIController<ESLocalPr
 			}
 		});
 
-		return result.getHead();
+		return result.getAPIImpl().getHead();
 	}
 }

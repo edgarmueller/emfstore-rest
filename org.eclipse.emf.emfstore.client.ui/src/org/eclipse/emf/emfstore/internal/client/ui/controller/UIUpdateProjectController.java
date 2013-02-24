@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -31,7 +32,6 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -49,7 +49,7 @@ import org.eclipse.swt.widgets.Shell;
 public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ESUpdateCallback {
 
-	private final ESLocalProject projectSpace;
+	private final ESLocalProject localProject;
 	private ESVersionSpec version;
 
 	/**
@@ -57,12 +57,12 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 * 
 	 * @param shell
 	 *            the {@link Shell} that will be used during the update
-	 * @param projectSpace
+	 * @param localProject
 	 *            the {@link ProjectSpace} that should get updated
 	 */
-	public UIUpdateProjectController(Shell shell, ProjectSpace projectSpace) {
+	public UIUpdateProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
-		this.projectSpace = projectSpace;
+		this.localProject = localProject;
 		version = null;
 	}
 
@@ -71,14 +71,14 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 * 
 	 * @param shell
 	 *            the {@link Shell} that will be used during the update
-	 * @param projectSpace
+	 * @param localProject
 	 *            the {@link ProjectSpace} that should get updated
 	 * @param version
 	 *            the version to update to
 	 */
 	public UIUpdateProjectController(Shell shell, ESLocalProject projectSpace, ESVersionSpec version) {
 		super(shell);
-		this.projectSpace = projectSpace;
+		this.localProject = projectSpace;
 		this.version = version;
 	}
 
@@ -109,16 +109,16 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 		// TODO OTS
 		boolean mergeSuccessful = false;
 		try {
-			final ESPrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(ESVersionSpec.FACTORY
-				.createHEAD(projectSpace
+			final ESPrimaryVersionSpec targetVersion = localProject.resolveVersionSpec(ESVersionSpec.FACTORY
+				.createHEAD(localProject
 					.getBaseVersion()), new NullProgressMonitor());
 			// merge opens up a dialog
-			return projectSpace.merge(targetVersion, changeConflict,
+			return localProject.merge(targetVersion, changeConflict,
 				new MergeProjectHandler(), this, progressMonitor);
 		} catch (final ESException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					handleMergeException(projectSpace, e);
+					handleMergeException(localProject, e);
 					return null;
 				}
 			});
@@ -141,7 +141,8 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 *      java.util.List)
 	 */
 	public boolean inspectChanges(final ESLocalProject projectSpace,
-		final List<ESChangePackage> changePackages, final ESModelElementIdToEObjectMapping idToEObjectMapping) {
+		final List<ESChangePackage> changePackages,
+		final ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				@SuppressWarnings("unchecked")
@@ -163,9 +164,9 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 */
 	@Override
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor) throws ESException {
-		ESPrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
+		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
 
-		ESPrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(ESVersionSpec.FACTORY
+		ESPrimaryVersionSpec resolveVersionSpec = localProject.resolveVersionSpec(ESVersionSpec.FACTORY
 			.createHEAD(oldBaseVersion), new NullProgressMonitor());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
@@ -173,8 +174,7 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 			return oldBaseVersion;
 		}
 
-		PrimaryVersionSpec newBaseVersion = (PrimaryVersionSpec) projectSpace.update(version,
-			UIUpdateProjectController.this, monitor);
+		ESPrimaryVersionSpec newBaseVersion = localProject.update(version, UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
 	}

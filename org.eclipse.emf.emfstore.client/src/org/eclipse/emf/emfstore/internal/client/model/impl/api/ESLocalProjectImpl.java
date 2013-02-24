@@ -45,6 +45,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecExc
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.impl.LocalProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESBranchVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
@@ -58,7 +59,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
-import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
@@ -69,7 +69,12 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
+ * <p>
  * Mapping between {@link ESLocalProject} and {@link ProjectSpace}.
+ * </p>
+ * <p>
+ * All methods except {@link this#getModelElements()} are wrapped in commands by default.
+ * </p>
  * 
  * @author emueller
  * 
@@ -77,6 +82,12 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, ProjectSpace>
 	implements ESLocalProject {
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectSpace
+	 *            the delegate
+	 */
 	public ESLocalProjectImpl(ProjectSpace projectSpace) {
 		super(projectSpace);
 	}
@@ -87,9 +98,13 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getGlobalProjectId()
 	 */
-	public ESGlobalProjectId getGlobalProjectId() {
+	public ESGlobalProjectIdImpl getGlobalProjectId() {
 		checkIsShared();
-		return getInternalAPIImpl().getProjectId().getAPIImpl();
+		return RunESCommand.runWithResult(new Callable<ESGlobalProjectIdImpl>() {
+			public ESGlobalProjectIdImpl call() throws Exception {
+				return getInternalAPIImpl().getProjectId().getAPIImpl();
+			}
+		});
 	}
 
 	/**
@@ -99,7 +114,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getProjectName()
 	 */
 	public String getProjectName() {
-		return getInternalAPIImpl().getProjectName();
+		return RunESCommand.runWithResult(new Callable<String>() {
+			public String call() throws Exception {
+				return getInternalAPIImpl().getProjectName();
+			}
+		});
 	}
 
 	/**
@@ -109,14 +128,12 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESProject#delete(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void delete(final IProgressMonitor monitor) throws IOException {
-
 		RunESCommand.WithException.run(IOException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				getInternalAPIImpl().delete(monitor);
 				return null;
 			}
 		});
-
 	}
 
 	/**
@@ -126,25 +143,36 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESProject#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESPrimaryVersionSpec resolveVersionSpec(ESVersionSpec versionSpec, IProgressMonitor monitor)
+	public ESPrimaryVersionSpecImpl resolveVersionSpec(ESVersionSpec versionSpec, final IProgressMonitor monitor)
 		throws ESException {
 
 		checkIsShared();
 
 		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
 
-		PrimaryVersionSpec resolvedVersionSpec = new ServerCall<PrimaryVersionSpec>(getInternalAPIImpl(), monitor) {
-			@Override
-			protected PrimaryVersionSpec run() throws ESException {
-				return getConnectionManager().resolveVersionSpec(
-					getSessionId(),
-					getInternalAPIImpl().getProjectId(),
-					versionSpecImpl.getInternalAPIImpl());
-			}
-		}.execute();
+		final PrimaryVersionSpec resolvedVersionSpec =
+			RunESCommand.WithException.runWithResult(ESException.class, new Callable<PrimaryVersionSpec>() {
+				public PrimaryVersionSpec call() throws Exception {
+					return new ServerCall<PrimaryVersionSpec>(getInternalAPIImpl(), monitor) {
+						@Override
+						protected PrimaryVersionSpec run() throws ESException {
+							return getConnectionManager().resolveVersionSpec(
+								getSessionId(),
+								getInternalAPIImpl().getProjectId(),
+								versionSpecImpl.getInternalAPIImpl());
+						}
+					}.execute();
+				}
+			});
 
-		return resolvedVersionSpec.getAPIImpl();
+		return RunESCommand.runWithResult(new Callable<ESPrimaryVersionSpecImpl>() {
+			public ESPrimaryVersionSpecImpl call() throws Exception {
+				return resolvedVersionSpec.getAPIImpl();
+			}
+		});
 	}
+
+	// TODO: ab hier weiter
 
 	/**
 	 * 
@@ -237,8 +265,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElement(java.lang.Object)
 	 */
 	public EObject getModelElement(ESModelElementId modelElementId) {
-		ESModelElementIdImpl modelElementIdImpl = (ESModelElementIdImpl) modelElementId;
-		return getInternalAPIImpl().getProject().get(modelElementIdImpl.getInternalAPIImpl());
+		return getInternalAPIImpl().getProject().get(modelElementId);
 	}
 
 	/**

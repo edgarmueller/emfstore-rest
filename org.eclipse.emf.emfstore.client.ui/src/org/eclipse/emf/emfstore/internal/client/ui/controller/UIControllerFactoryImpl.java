@@ -67,7 +67,7 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public void login(Shell shell, ESServer server) {
-		new UILoginSessionController(shell, (ServerInfo) server).execute();
+		new UILoginSessionController(shell, server).execute();
 	}
 
 	public void logout(Shell shell, ESUsersession usersession) {
@@ -99,7 +99,7 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public ESPrimaryVersionSpec updateProject(Shell shell, ESLocalProject project) {
-		return new UIUpdateProjectController(shell, (ProjectSpace) project).execute();
+		return new UIUpdateProjectController(shell, project).execute();
 	}
 
 	public ESPrimaryVersionSpec updateProject(Shell shell, ESLocalProject project, ESVersionSpec version) {
@@ -107,7 +107,7 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public ESPrimaryVersionSpec updateProjectToVersion(Shell shell, ESLocalProject project) {
-		return new UIUpdateProjectToVersionController(shell, (ProjectSpace) project).execute();
+		return new UIUpdateProjectToVersionController(shell, project).execute();
 	}
 
 }

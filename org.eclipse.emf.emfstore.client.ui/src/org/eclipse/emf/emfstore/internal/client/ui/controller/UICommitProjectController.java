@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -100,8 +101,9 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 			}
 		});
 		if (shouldUpdate) {
-			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion();
-			ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), (ProjectSpace) projectSpace)
+			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion()
+				.getAPIImpl();
+			ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
 				.executeSub(progressMonitor);
 			if (version.equals(baseVersion)) {
 				return false;
@@ -120,7 +122,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
 	public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
-		ESModelElementIdToEObjectMapping idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 
 		if (((ChangePackage) changePackage).getOperations().isEmpty()) {
 			RunInUI.run(new Callable<Void>() {
@@ -163,11 +165,11 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public PrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
-		ESPrimaryVersionSpec version;
+	public ESPrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
 		try {
-			version = projectSpace.commit(logMessage, UICommitProjectController.this, progressMonitor);
-			return (PrimaryVersionSpec) version;
+			PrimaryVersionSpec primaryVersionSpec = projectSpace.commit(logMessage, UICommitProjectController.this,
+				progressMonitor);
+			return primaryVersionSpec.getAPIImpl();
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore

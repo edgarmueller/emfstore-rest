@@ -47,7 +47,10 @@ public class ListUtil {
 	 * @param <V> the type of the API interface
 	 * @param <U> the type of the API implementation class
 	 */
-	public static <T extends APIDelegate<U>, V, U extends V> List<V> mapToAPI(List<T> toCopy) {
+	// T = Usersession
+	// U = ESUsersessionImpl
+	// V = ESUsersession
+	public static <T extends APIDelegate<U>, V, U extends V> List<V> mapToAPI(Class<V> apiClass, List<T> toCopy) {
 		if(toCopy == null) {
 			return null;
 		}

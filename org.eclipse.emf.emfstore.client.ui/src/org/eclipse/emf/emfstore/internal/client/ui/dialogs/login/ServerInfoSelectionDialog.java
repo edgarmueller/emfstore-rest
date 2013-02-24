@@ -38,7 +38,7 @@ import org.eclipse.swt.widgets.Shell;
 public class ServerInfoSelectionDialog extends TitleAreaDialog {
 
 	private final java.util.List<ESServer> servers;
-	private ServerInfo result;
+	private ESServer result;
 	private ListViewer listViewer;
 	private ServerInfoLabelProvider labelProvider;
 
@@ -95,7 +95,8 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 		ISelection selection = listViewer.getSelection();
 		if (selection instanceof IStructuredSelection
 			&& ((IStructuredSelection) selection).getFirstElement() instanceof ServerInfo) {
-			result = (ServerInfo) ((IStructuredSelection) selection).getFirstElement();
+			ServerInfo serverInfo = (ServerInfo) ((IStructuredSelection) selection).getFirstElement();
+			result = serverInfo.getAPIImpl();
 		}
 		super.okPressed();
 	}
@@ -105,7 +106,7 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 	 * 
 	 * @return the selected server.
 	 */
-	public ServerInfo getResult() {
+	public ESServer getResult() {
 		return result;
 	}
 

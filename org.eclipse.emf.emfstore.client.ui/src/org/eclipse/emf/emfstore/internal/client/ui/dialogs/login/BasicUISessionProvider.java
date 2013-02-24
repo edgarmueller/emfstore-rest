@@ -14,16 +14,10 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-<<<<<<< HEAD
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
-=======
-import org.eclipse.emf.emfstore.client.provider.ESAbstractSessionProvider;
->>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledException;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -39,7 +33,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class BasicUISessionProvider extends ESAbstractSessionProvider {
 
-	private ServerInfo selectedServerInfo;
+	private ESServer selectedServerInfo;
 
 	/**
 	 * 
@@ -53,9 +47,9 @@ public class BasicUISessionProvider extends ESAbstractSessionProvider {
 			Integer userInput = RunInUI.runWithResult(new Callable<Integer>() {
 				public Integer call() throws Exception {
 					// try to retrieve a server info by showing a server info selection dialog
-					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(Display.getCurrent()
-						.getActiveShell(), ((WorkspaceBase) WorkspaceProvider.getInstance().getWorkspace())
-						.getServers());
+					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(
+						Display.getCurrent().getActiveShell(),
+						WorkspaceProvider.getInstance().getWorkspace().getServers());
 					int input = dialog.open();
 					selectedServerInfo = dialog.getResult();
 					return input;
@@ -86,16 +80,16 @@ public class BasicUISessionProvider extends ESAbstractSessionProvider {
 	protected ESUsersession loginServerInfo(ESServer server) throws ESException {
 		// TODO Short cut for logged in sessions to avoid loginscreen. We have to discuss whether this is really
 		// wanted.
-		if (server.getLastUsersession() != null && ((Usersession) server.getLastUsersession()).isLoggedIn()) {
+		if (server.getLastUsersession() != null && server.getLastUsersession().isLoggedIn()) {
 			return server.getLastUsersession();
 		}
-		return new LoginDialogController().login((ServerInfo) server);
+		return new LoginDialogController().login(server);
 	}
 
 	@Override
 	public void login(ESUsersession usersession) throws ESException {
 		if (usersession != null) {
-			new LoginDialogController().login((Usersession) usersession);
+			new LoginDialogController().login(usersession);
 		}
 	}
 }

@@ -251,7 +251,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			}
 		}.execute();
 
-		return ListUtil.mapToAPI(historyInfos);
+		return ListUtil.mapToAPI(ESHistoryInfo.class, historyInfos);
 	}
 
 	/**
