@@ -208,7 +208,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query, monitor));
 	}
 
-	public void addTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, IProgressMonitor monitor)
+	public void addTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, final IProgressMonitor monitor)
 		throws ESException {
 
 		checkIsShared();
@@ -216,17 +216,22 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		final PrimaryVersionSpec primaryVersionSpec = ((ESPrimaryVersionSpecImpl) versionSpec).getInternalAPIImpl();
 		final TagVersionSpec tagVersionSpec = ((ESTagVersionSpecImpl) tag).getInternalAPIImpl();
 
-		new ServerCall<Void>(getInternalAPIImpl(), monitor) {
-			@Override
-			protected Void run() throws ESException {
-				getConnectionManager().addTag(
-					getUsersession().getSessionId(),
-					getInternalAPIImpl().getProjectId(),
-					primaryVersionSpec,
-					tagVersionSpec);
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+			public Void call() throws Exception {
+				new ServerCall<Void>(getInternalAPIImpl(), monitor) {
+					@Override
+					protected Void run() throws ESException {
+						getConnectionManager().addTag(
+							getUsersession().getSessionId(),
+							getInternalAPIImpl().getProjectId(),
+							primaryVersionSpec,
+							tagVersionSpec);
+						return null;
+					}
+				}.execute();
 				return null;
 			}
-		}.execute();
+		});
 	}
 
 	/**
@@ -237,7 +242,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void removeTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, IProgressMonitor monitor)
+	public void removeTag(ESPrimaryVersionSpec versionSpec, ESTagVersionSpec tag, final IProgressMonitor monitor)
 		throws ESException {
 
 		checkIsShared();
@@ -245,17 +250,22 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		final PrimaryVersionSpec primaryVersionSpec = ((ESPrimaryVersionSpecImpl) versionSpec).getInternalAPIImpl();
 		final TagVersionSpec tagVersionSpec = ((ESTagVersionSpecImpl) tag).getInternalAPIImpl();
 
-		new ServerCall<Void>(getInternalAPIImpl(), monitor) {
-			@Override
-			protected Void run() throws ESException {
-				getConnectionManager().removeTag(
-					getSessionId(),
-					getInternalAPIImpl().getProjectId(),
-					primaryVersionSpec,
-					tagVersionSpec);
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+			public Void call() throws Exception {
+				new ServerCall<Void>(getInternalAPIImpl(), monitor) {
+					@Override
+					protected Void run() throws ESException {
+						getConnectionManager().removeTag(
+							getSessionId(),
+							getInternalAPIImpl().getProjectId(),
+							primaryVersionSpec,
+							tagVersionSpec);
+						return null;
+					}
+				}.execute();
 				return null;
 			}
-		}.execute();
+		});
 	}
 
 	/**
@@ -508,7 +518,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 
 		final ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) branchSpec;
 
-		RunESCommand.run(new Callable<Void>() {
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				getInternalAPIImpl().mergeBranch(
 					primaryVersionSpecImpl.getInternalAPIImpl(),
@@ -526,7 +536,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#shareProject(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void shareProject(final IProgressMonitor monitor) throws ESException {
-		RunESCommand.run(new Callable<Void>() {
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				getInternalAPIImpl().shareProject(monitor);
 				return null;
@@ -545,7 +555,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 
 		final ESUsersessionImpl usersessionImpl = (ESUsersessionImpl) session;
 
-		RunESCommand.run(new Callable<Void>() {
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				getInternalAPIImpl().shareProject(
 					usersessionImpl.getInternalAPIImpl(),
@@ -678,7 +688,12 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#save()
 	 */
 	public void save() {
-		getInternalAPIImpl().save();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				getInternalAPIImpl().save();
+				return null;
+			}
+		});
 	}
 
 	/**

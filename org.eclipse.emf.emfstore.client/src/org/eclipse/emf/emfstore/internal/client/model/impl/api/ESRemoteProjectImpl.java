@@ -20,7 +20,6 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
@@ -263,24 +262,29 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void addTag(final ESPrimaryVersionSpec primaryVersionSpec, final ESTagVersionSpec tagVersionSpec,
-		IProgressMonitor monitor)
+		final IProgressMonitor monitor)
 		throws ESException {
 
 		final ESGlobalProjectIdImpl globalProjectIdImpl = (ESGlobalProjectIdImpl) getGlobalProjectId();
 		final ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) primaryVersionSpec;
 		final ESTagVersionSpecImpl tagVersionSpecImpl = (ESTagVersionSpecImpl) tagVersionSpec;
 
-		new ServerCall<Void>(server.getInternalAPIImpl(), monitor) {
-			@Override
-			protected Void run() throws ESException {
-				getConnectionManager().addTag(
-					getUsersession().getSessionId(),
-					globalProjectIdImpl.getInternalAPIImpl(),
-					primaryVersionSpecImpl.getInternalAPIImpl(),
-					tagVersionSpecImpl.getInternalAPIImpl());
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+			public Void call() throws Exception {
+				new ServerCall<Void>(server.getInternalAPIImpl(), monitor) {
+					@Override
+					protected Void run() throws ESException {
+						getConnectionManager().addTag(
+							getUsersession().getSessionId(),
+							globalProjectIdImpl.getInternalAPIImpl(),
+							primaryVersionSpecImpl.getInternalAPIImpl(),
+							tagVersionSpecImpl.getInternalAPIImpl());
+						return null;
+					}
+				}.execute();
 				return null;
 			}
-		}.execute();
+		});
 	}
 
 	/**
@@ -291,16 +295,26 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void removeTag(final ESPrimaryVersionSpec versionSpec, final ESTagVersionSpec tag, IProgressMonitor monitor)
+	public void removeTag(final ESPrimaryVersionSpec versionSpec, final ESTagVersionSpec tag,
+		final IProgressMonitor monitor)
 		throws ESException {
-		new ServerCall<Void>(server.getInternalAPIImpl(), monitor) {
-			@Override
-			protected Void run() throws ESException {
-				getConnectionManager().removeTag(getUsersession().getSessionId(), (ProjectId) getGlobalProjectId(),
-					(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
+
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+
+			public Void call() throws Exception {
+				new ServerCall<Void>(server.getInternalAPIImpl(), monitor) {
+					@Override
+					protected Void run() throws ESException {
+						getConnectionManager().removeTag(getUsersession().getSessionId(),
+							(ProjectId) getGlobalProjectId(),
+							(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
+						return null;
+					}
+				}.execute();
 				return null;
 			}
-		}.execute();
+		});
+		;
 	}
 
 	/**
@@ -309,13 +323,17 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProject checkout(final IProgressMonitor monitor) throws ESException {
-		return new ServerCall<ESLocalProject>(server.getInternalAPIImpl()) {
-			@Override
-			protected ESLocalProject run() throws ESException {
-				return checkout(getUsersession().getAPIImpl(), monitor);
+	public ESLocalProjectImpl checkout(final IProgressMonitor monitor) throws ESException {
+		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
+			public ESLocalProjectImpl call() throws Exception {
+				return new ServerCall<ESLocalProjectImpl>(server.getInternalAPIImpl()) {
+					@Override
+					protected ESLocalProjectImpl run() throws ESException {
+						return checkout(getUsersession().getAPIImpl(), monitor);
+					}
+				}.execute();
 			}
-		}.execute();
+		});
 	}
 
 	/**
@@ -325,10 +343,16 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
-		ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD().getAPIImpl(),
-			monitor);
-		return checkout(usersession, primaryVersionSpec, monitor);
+	public ESLocalProjectImpl checkout(final ESUsersession usersession, final IProgressMonitor monitor)
+		throws ESException {
+		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
+			public ESLocalProjectImpl call() throws Exception {
+				ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD()
+					.getAPIImpl(),
+					monitor);
+				return checkout(usersession, primaryVersionSpec, monitor);
+			}
+		});
 	}
 
 	/**
@@ -452,8 +476,16 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#delete(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void delete(IProgressMonitor monitor) throws ESException {
-		getDeleteProjectServerCall().setProgressMonitor(monitor).setServer(server.getInternalAPIImpl()).execute();
+	public void delete(final IProgressMonitor monitor) throws ESException {
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+			public Void call() throws Exception {
+				getDeleteProjectServerCall()
+					.setProgressMonitor(monitor)
+					.setServer(server.getInternalAPIImpl())
+					.execute();
+				return null;
+			}
+		});
 	}
 
 	/**
@@ -463,9 +495,17 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#delete(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void delete(ESUsersession session, IProgressMonitor monitor) throws ESException {
-		Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
-		getDeleteProjectServerCall().setProgressMonitor(monitor).setUsersession(usersession).execute();
+	public void delete(ESUsersession session, final IProgressMonitor monitor) throws ESException {
+		final Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+			public Void call() throws Exception {
+				getDeleteProjectServerCall()
+					.setProgressMonitor(monitor)
+					.setUsersession(usersession)
+					.execute();
+				return null;
+			}
+		});
 	}
 
 	/**
