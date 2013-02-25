@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.internal.client.model;
+package org.eclipse.emf.emfstore.internal.client.configuration;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.emfstore.client.provider.ESClientVersionProvider;

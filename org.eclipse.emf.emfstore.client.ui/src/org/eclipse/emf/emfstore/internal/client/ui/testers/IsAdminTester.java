@@ -11,9 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.ui.testers;
 
 import org.eclipse.core.expressions.PropertyTester;
+import org.eclipse.emf.emfstore.internal.client.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 

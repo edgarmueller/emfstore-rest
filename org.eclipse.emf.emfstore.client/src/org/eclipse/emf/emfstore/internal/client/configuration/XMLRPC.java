@@ -1,4 +1,4 @@
-package org.eclipse.emf.emfstore.internal.client.model;
+package org.eclipse.emf.emfstore.internal.client.configuration;
 
 public class XMLRPC {
 

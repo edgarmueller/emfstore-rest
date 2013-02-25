@@ -10,6 +10,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model;
 
+import org.eclipse.emf.emfstore.internal.client.configuration.Behavior;
+import org.eclipse.emf.emfstore.internal.client.configuration.FilePaths;
+import org.eclipse.emf.emfstore.internal.client.configuration.VersioningInfo;
+import org.eclipse.emf.emfstore.internal.client.configuration.XMLRPC;
+
 
 /**
  * Represents the current Workspace Configuration.
