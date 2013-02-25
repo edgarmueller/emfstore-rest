@@ -130,7 +130,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			@Override
 			public void noLocalChanges(ESLocalProject projectSpace) {
 				noLocalChangesOccurred = true;
-			};
+			}
 		}, new NullProgressMonitor());
 		assertTrue(noLocalChangesOccurred);
 	}
