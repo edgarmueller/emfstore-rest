@@ -16,7 +16,7 @@ public class FileTransferTest extends WorkspaceTest {
 
 	@Test
 	public void testReinitWorkspace() throws FileTransferException, IOException {
-		Configuration.ClIENT_BEHAVIOR.setAutoSave(false);
+		Configuration.getClientBehavior().setAutoSave(false);
 		FileTransferManager transferManager = ((ProjectSpaceBase) getProjectSpace()).getFileTransferManager();
 		transferManager.addFile(new File(FileLocator.toFileURL(Activator.getDefault().getBundle().getEntry("."))
 			.getPath() + "TestProjects/REGISPeelSessions.zip"));

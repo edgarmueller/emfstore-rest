@@ -223,7 +223,7 @@ public final class IntegrationTestHelper {
 	public static EditingDomain getDomain() {
 
 		if (domain == null) {
-			domain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+			domain = Configuration.getClientBehavior().getEditingDomain();
 
 		}
 		return domain;

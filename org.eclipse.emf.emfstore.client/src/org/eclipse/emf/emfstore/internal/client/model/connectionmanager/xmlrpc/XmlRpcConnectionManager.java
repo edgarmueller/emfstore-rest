@@ -136,7 +136,8 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public List<ChangePackage> getChanges(SessionId sessionId, ProjectId projectId, VersionSpec source,
-		VersionSpec target) throws ESException {
+		VersionSpec target)
+		throws InvalidVersionSpecException, ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getChanges", ChangePackage.class, sessionId,
 			projectId, source, target);
 	}
@@ -165,7 +166,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public Project getProject(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws ESException {
+		throws InvalidVersionSpecException, ESException {
 		return getConnectionProxy(sessionId).callWithResult("getProject", Project.class, sessionId, projectId,
 			versionSpec);
 	}
@@ -205,7 +206,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
-		throws ESException {
+		throws InvalidVersionSpecException, ESException {
 		return getConnectionProxy(sessionId).callWithResult("resolveVersionSpec", PrimaryVersionSpec.class, sessionId,
 			projectId, versionSpec);
 	}

@@ -177,7 +177,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 
 		// register an editing domain on the resource
-		Configuration.ClIENT_BEHAVIOR.setEditingDomain(createEditingDomain(resourceSet));
+		Configuration.getClientBehavior().setEditingDomain(createEditingDomain(resourceSet));
 
 		URI fileURI = URI.createFileURI(Configuration.FILE_INFO.getWorkspacePath());
 		File workspaceFile = new File(Configuration.FILE_INFO.getWorkspacePath());
@@ -243,7 +243,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 		// no workspace content found, create a workspace
 		resource = resourceSet.createResource(fileURI);
 		workspace = ModelFactory.eINSTANCE.createWorkspace();
-		workspace.getServerInfos().addAll(Configuration.ClIENT_BEHAVIOR.getDefaultServerInfos());
+		workspace.getServerInfos().addAll(Configuration.getClientBehavior().getDefaultServerInfos());
 		EList<Usersession> usersessions = workspace.getUsersessions();
 		for (ServerInfo serverInfo : workspace.getServerInfos()) {
 			Usersession lastUsersession = serverInfo.getLastUsersession();

@@ -102,7 +102,7 @@ public abstract class AbstractEMFStoreCommand extends AbstractCommand {
 	 */
 	protected void aRun(boolean ignoreExceptions) {
 		this.ignoreExceptions = ignoreExceptions;
-		Configuration.ClIENT_BEHAVIOR.getEditingDomain().getCommandStack().execute(this);
+		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(this);
 
 	}
 }

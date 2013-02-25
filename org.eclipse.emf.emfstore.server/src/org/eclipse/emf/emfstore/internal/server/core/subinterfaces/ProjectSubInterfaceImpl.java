@@ -99,8 +99,11 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * {@inheritDoc}
 	 */
 	@EmfStoreMethod(MethodId.GETPROJECT)
-	public Project getProject(ProjectId projectId, VersionSpec versionSpec) throws ESException {
+	public Project getProject(ProjectId projectId, VersionSpec versionSpec)
+		throws InvalidVersionSpecException, ESException {
+
 		sanityCheckObjects(projectId, versionSpec);
+
 		synchronized (getMonitor()) {
 
 			PrimaryVersionSpec resolvedVersion = getSubInterface(VersionSubInterfaceImpl.class).resolveVersionSpec(

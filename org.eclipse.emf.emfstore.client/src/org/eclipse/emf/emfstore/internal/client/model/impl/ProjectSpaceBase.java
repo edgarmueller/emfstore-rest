@@ -269,7 +269,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private boolean performChecksumCheck(PrimaryVersionSpec baseVersion, Project project) {
 
-		if (Configuration.ClIENT_BEHAVIOR.isChecksumCheckActive()) {
+		if (Configuration.getClientBehavior().isChecksumCheckActive()) {
 			long expectedChecksum = baseVersion.getProjectStateChecksum();
 			try {
 				long computedChecksum = ModelUtil.computeChecksum(project);
@@ -408,9 +408,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion)
-		throws ESException {
+		throws InvalidVersionSpecException, ESException {
+		// TODO: is this a server call?
 		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-
 		List<ChangePackage> changes = connectionManager.getChanges(getUsersession().getSessionId(), getProjectId(),
 			sourceVersion, targetVersion);
 		return changes;
@@ -593,7 +593,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void init() {
 		initCrossReferenceAdapter();
 
-		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.ClIENT_BEHAVIOR.getEditingDomain()
+		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getClientBehavior().getEditingDomain()
 			.getCommandStack();
 
 		fileTransferManager = new FileTransferManager(this);
@@ -969,12 +969,14 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(final VersionSpec versionSpec, IProgressMonitor monitor)
-		throws ESException {
+		throws InvalidVersionSpecException, ESException {
 		return new ServerCall<PrimaryVersionSpec>(this, monitor) {
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
-				ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-				return connectionManager.resolveVersionSpec(getSessionId(), getProjectId(), versionSpec);
+				return getConnectionManager().resolveVersionSpec(
+					getSessionId(),
+					getProjectId(),
+					versionSpec);
 			}
 		}.execute();
 	}
@@ -1253,7 +1255,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			getProject().eAdapters().remove(crossReferenceAdapter);
 		}
 
-		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.ClIENT_BEHAVIOR.getEditingDomain()
+		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getClientBehavior().getEditingDomain()
 			.getCommandStack();
 		commandStack.removeCommandStackObserver(operationManager);
 		commandStack.removeCommandStackObserver(resourcePersister);

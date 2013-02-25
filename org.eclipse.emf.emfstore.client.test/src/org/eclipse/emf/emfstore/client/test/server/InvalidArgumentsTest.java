@@ -57,7 +57,7 @@ public class InvalidArgumentsTest extends ServerTests {
 		SetupHelper.addUserFileToServer(false);
 
 		// setConnectionManager(WorkspaceManager.getInstance().getConnectionManager());
-		setServerInfo(SetupHelper.getServerInfo());
+		setServerInfo(SetupHelper.createServer());
 		// login();
 		initArguments();
 

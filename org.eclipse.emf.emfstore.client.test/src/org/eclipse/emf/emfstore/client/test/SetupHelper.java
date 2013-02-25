@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -130,7 +131,7 @@ public class SetupHelper {
 		Project project = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject();
 		ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey, project, minObjectsCount,
 			seed);
-		Configuration.ClIENT_BEHAVIOR.setAutoSave(false);
+		Configuration.getClientBehavior().setAutoSave(false);
 		ModelMutator.generateModel(config);
 		testProjectSpace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).importProject(project,
 			"Generated project", "");
@@ -211,7 +212,7 @@ public class SetupHelper {
 	public static ACOrgUnitId createUserOnServer(String username) throws ESException {
 		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
-		adminConnectionManager.initConnection(getServerInfo(), sessionId);
+		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		return adminConnectionManager.createUser(sessionId, username);
 	}
 
@@ -224,7 +225,7 @@ public class SetupHelper {
 	public static void deleteUserOnServer(ACOrgUnitId userId) throws ESException {
 		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
-		adminConnectionManager.initConnection(getServerInfo(), sessionId);
+		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		adminConnectionManager.deleteUser(sessionId, userId);
 	}
 
@@ -239,7 +240,7 @@ public class SetupHelper {
 	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws ESException {
 		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
-		adminConnectionManager.initConnection(getServerInfo(), sessionId);
+		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		adminConnectionManager.changeRole(sessionId, projectId, orgUnitId, role);
 	}
 
@@ -297,7 +298,7 @@ public class SetupHelper {
 		if (usersession == null) {
 			usersession = ModelFactory.eINSTANCE.createUsersession();
 
-			ServerInfo serverInfo = getServerInfo();
+			ServerInfo serverInfo = createServer().getInternalAPIImpl();
 			usersession.setServerInfo(serverInfo);
 			usersession.setUsername("super");
 			usersession.setPassword("super");
@@ -319,14 +320,14 @@ public class SetupHelper {
 	 * 
 	 * @return server info
 	 */
-	public static ServerInfo getServerInfo() {
-		ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
-		serverInfo.setPort(8080);
-		// serverInfo.setUrl("127.0.0.1");
-		serverInfo.setUrl("localhost");
-		serverInfo.setCertificateAlias(KeyStoreManager.DEFAULT_CERTIFICATE);
+	public static ESServerImpl createServer() {
 
-		return serverInfo;
+		ESServerImpl server = (ESServerImpl) ESServer.FACTORY.getServer(
+			"localhost",
+			8080,
+			KeyStoreManager.DEFAULT_CERTIFICATE);
+
+		return server;
 	}
 
 	/**
@@ -558,7 +559,7 @@ public class SetupHelper {
 			protected void doRun() {
 				if (usersession == null) {
 					usersession = ModelFactory.eINSTANCE.createUsersession();
-					ServerInfo serverInfo = getServerInfo();
+					ServerInfo serverInfo = createServer().getInternalAPIImpl();
 					usersession.setServerInfo(serverInfo);
 					usersession.setUsername("super");
 					usersession.setPassword("super");
@@ -691,21 +692,6 @@ public class SetupHelper {
 		PrimaryVersionSpec versionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 		versionSpec.setIdentifier(i);
 		return versionSpec;
-	}
-
-	/**
-	 * Creates a new Usersession and adds it to the workspace.
-	 * 
-	 * @param user the session is initialized with this User's name
-	 * @return the session
-	 */
-	public Usersession createUsersession(String user) {
-		Usersession session = ModelFactory.eINSTANCE.createUsersession();
-		getWorkSpace().getUsersessions().add(session);
-		session.setServerInfo(getServerInfo());
-		session.setUsername(user);
-		session.setPassword("foo");
-		return session;
 	}
 
 	/**

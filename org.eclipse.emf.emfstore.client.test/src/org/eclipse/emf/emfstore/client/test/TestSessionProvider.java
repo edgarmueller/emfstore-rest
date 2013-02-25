@@ -32,7 +32,7 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 	private void initSession(ESServer server) {
 
 		if (server == null) {
-			server = SetupHelper.getServerInfo().getAPIImpl();
+			server = SetupHelper.createServer();
 		}
 
 		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();

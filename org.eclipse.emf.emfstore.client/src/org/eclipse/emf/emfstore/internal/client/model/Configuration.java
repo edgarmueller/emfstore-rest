@@ -26,11 +26,15 @@ public final class Configuration {
 
 	public static final XMLRPC XML_RPC = new XMLRPC();
 	public static final VersioningInfo VERSIONING = new VersioningInfo();
-	public static final Behavior ClIENT_BEHAVIOR = new Behavior();
+	private static final Behavior ClIENT_BEHAVIOR = new Behavior();
 	public static final FilePaths FILE_INFO = new FilePaths();
 
 	private Configuration() {
 		// nothing to do
+	}
+
+	public static Behavior getClientBehavior() {
+		return ClIENT_BEHAVIOR;
 	}
 
 }

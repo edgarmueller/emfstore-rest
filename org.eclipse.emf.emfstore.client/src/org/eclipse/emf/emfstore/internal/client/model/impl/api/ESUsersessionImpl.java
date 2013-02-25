@@ -48,6 +48,11 @@ public class ESUsersessionImpl extends AbstractAPIImpl<ESUsersessionImpl, Userse
 	 * @see org.eclipse.emf.emfstore.client.ESUsersession#getServer()
 	 */
 	public ESServer getServer() {
+
+		if (getInternalAPIImpl().getServerInfo() == null) {
+			return null;
+		}
+
 		return getInternalAPIImpl().getServerInfo().getAPIImpl();
 	}
 

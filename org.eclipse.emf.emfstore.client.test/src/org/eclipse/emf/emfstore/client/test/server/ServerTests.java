@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -28,8 +29,8 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
@@ -68,8 +69,8 @@ public abstract class ServerTests extends WorkspaceTest {
 	private static HashMap<Class<?>, Object> arguments;
 	private static ESServerImpl server;
 
-	public static void setServerInfo(ServerInfo newServerInfo) {
-		server = newServerInfo.getAPIImpl();
+	public static void setServerInfo(ESServer newServer) {
+		server = (ESServerImpl) newServer;
 	}
 
 	public static ESServerImpl getServer() {
@@ -138,16 +139,19 @@ public abstract class ServerTests extends WorkspaceTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws ESException, IOException {
 		WorkspaceTest.beforeClass();
+
 		ServerConfiguration.setTesting(true);
+		CommonUtil.setTesting(true);
+
 		SetupHelper.addUserFileToServer(false);
-		SetupHelper.startSever();
+
 		setConnectionManager(WorkspaceProvider.getInstance().getConnectionManager());
-		setServerInfo(SetupHelper.getServerInfo());
-		// login();
+		setServerInfo(SetupHelper.createServer());
 		initArguments();
-		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
-		setServerInfo(SetupHelper.getServerInfo());
-		workspace.addServer(server);
+
+		SetupHelper.startSever();
+		ServerTests.login();
+
 	}
 
 	/**
@@ -285,6 +289,7 @@ public abstract class ServerTests extends WorkspaceTest {
 		usersession.setServerInfo(server.getInternalAPIImpl());
 		usersession.setUsername(username);
 		usersession.setPassword(password);
+
 		return usersession;
 	}
 

@@ -82,9 +82,7 @@ public class ServerInterfaceTest extends ServerTests {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					ESLocalProject checkout = getRemoteProject().checkout(
-						TestSessionProvider.getInstance().getDefaultUsersession().getAPIImpl(),
-						new NullProgressMonitor());
+					ESLocalProject checkout = getRemoteProject().checkout(new NullProgressMonitor());
 					return ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 				} catch (ESException e) {
 					Assert.fail(e.getMessage());

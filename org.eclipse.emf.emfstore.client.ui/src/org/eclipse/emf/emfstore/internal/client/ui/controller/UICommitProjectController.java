@@ -196,7 +196,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 */
 	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
 		IProgressMonitor monitor) throws ESException {
-		ESChecksumErrorHandler errorHandler = Configuration.ClIENT_BEHAVIOR.getChecksumErrorHandler();
+		ESChecksumErrorHandler errorHandler = Configuration.getClientBehavior().getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

@@ -57,8 +57,8 @@ public abstract class WorkspaceTest {
 
 	@BeforeClass
 	public static void beforeClass() {
-		saveState = Configuration.ClIENT_BEHAVIOR.isAutoSaveEnabled();
-		Configuration.ClIENT_BEHAVIOR.setAutoSave(true);
+		saveState = Configuration.getClientBehavior().isAutoSaveEnabled();
+		Configuration.getClientBehavior().setAutoSave(true);
 		CommonUtil.setTesting(true);
 		WorkspaceProvider workspaceManager = WorkspaceProvider.getInstance();
 		workspaceManager.reinit();
@@ -137,7 +137,7 @@ public abstract class WorkspaceTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws IOException, ESException {
 		WorkspaceProvider.getInstance().dispose();
-		Configuration.ClIENT_BEHAVIOR.setAutoSave(saveState);
+		Configuration.getClientBehavior().setAutoSave(saveState);
 	}
 
 	private void cleanProjects() {

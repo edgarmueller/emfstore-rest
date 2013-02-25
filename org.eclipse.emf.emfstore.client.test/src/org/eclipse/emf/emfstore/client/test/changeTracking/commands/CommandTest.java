@@ -89,7 +89,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// copy to clipboard
 		Collection<EObject> toCopy = new ArrayList<EObject>();
@@ -142,8 +142,8 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		Command delete = DeleteCommand.create(Configuration.ClIENT_BEHAVIOR.getEditingDomain(), createWorkPackage);
-		Configuration.ClIENT_BEHAVIOR.getEditingDomain().getCommandStack().execute(delete);
+		Command delete = DeleteCommand.create(Configuration.getClientBehavior().getEditingDomain(), createWorkPackage);
+		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(delete);
 
 		assertEquals(0, createComment.getRecipients().size());
 		assertEquals(1, getProjectSpace().getOperations().size());
@@ -168,7 +168,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// copy
 		CopyCommand.Helper helper = new CopyCommand.Helper();
@@ -212,7 +212,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// copy
 		Command command = CopyToClipboardCommand.create(editingDomain, actor);
@@ -247,7 +247,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// copy
 		Command command = CopyCommand.create(editingDomain, actor);
@@ -291,8 +291,8 @@ public class CommandTest extends WorkspaceTest {
 
 		ModelElementId useCaseId = ModelUtil.getProject(useCase).getModelElementId(useCase);
 
-		Command deleteCommand = DeleteCommand.create(Configuration.ClIENT_BEHAVIOR.getEditingDomain(), useCase);
-		Configuration.ClIENT_BEHAVIOR.getEditingDomain().getCommandStack().execute(deleteCommand);
+		Command deleteCommand = DeleteCommand.create(Configuration.getClientBehavior().getEditingDomain(), useCase);
+		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(deleteCommand);
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 
@@ -347,8 +347,8 @@ public class CommandTest extends WorkspaceTest {
 		Project project = ModelUtil.getProject(useCase);
 		ModelElementId useCaseId = project.getModelElementId(useCase);
 
-		Command deleteCommand = DeleteCommand.create(Configuration.ClIENT_BEHAVIOR.getEditingDomain(), useCase);
-		Configuration.ClIENT_BEHAVIOR.getEditingDomain().getCommandStack().execute(deleteCommand);
+		Command deleteCommand = DeleteCommand.create(Configuration.getClientBehavior().getEditingDomain(), useCase);
+		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(deleteCommand);
 
 		assertEquals(false, getProject().contains(useCase));
 		// assertEquals(null, useCase.eContainer());
@@ -493,7 +493,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// cut to clipboard
 		Collection<Actor> toCut = new ArrayList<Actor>();
@@ -566,7 +566,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// copy to clipboard
 		Command cutCommand = CutToClipboardCommand.create(editingDomain, leafSection,
@@ -637,7 +637,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// cut to clipboard
 		Command cutCommand = CutToClipboardCommand.create(editingDomain, leafSection,
@@ -681,7 +681,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// remove
 		Command removeCommand = RemoveCommand.create(editingDomain, leafSection,
@@ -721,7 +721,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// remove
 		Collection<Actor> toRemove = new ArrayList<Actor>();
@@ -764,7 +764,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// delete
 		Collection<Actor> toDelete = new ArrayList<Actor>();
@@ -807,7 +807,7 @@ public class CommandTest extends WorkspaceTest {
 		}.run(false);
 
 		assertEquals(0, getProjectSpace().getOperations().size());
-		final EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// delete
 		Collection<Actor> toDelete = new ArrayList<Actor>();
@@ -868,13 +868,13 @@ public class CommandTest extends WorkspaceTest {
 		}.run(false);
 		ModelElementId workPackageId = getProject().getModelElementId(workPackage);
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// cut the element
 		Command command = CutToClipboardCommand.create(editingDomain, workPackage);
 		editingDomain.getCommandStack().execute(command);
 
-		assertTrue(Configuration.ClIENT_BEHAVIOR.getEditingDomain().getClipboard().contains(workPackage));
+		assertTrue(Configuration.getClientBehavior().getEditingDomain().getClipboard().contains(workPackage));
 		assertEquals(1, ModelUtil.getAllContainedModelElements(leafSection, false).size());
 
 		assertTrue(getProject().contains(workPackageId));
@@ -906,7 +906,7 @@ public class CommandTest extends WorkspaceTest {
 
 		assertEquals(0, getProjectSpace().getOperations().size());
 
-		EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		EditingDomain domain1 = AdapterFactoryEditingDomain.getEditingDomainFor(actor);
 		assertSame(editingDomain, domain1);
@@ -932,7 +932,7 @@ public class CommandTest extends WorkspaceTest {
 		}.run(false);
 
 		assertEquals(0, getProjectSpace().getOperations().size());
-		final EditingDomain editingDomain = Configuration.ClIENT_BEHAVIOR.getEditingDomain();
+		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
 
 		// delete
 		editingDomain.getCommandStack().execute(DeleteCommand.create(editingDomain, actor));

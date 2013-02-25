@@ -12,12 +12,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESServerFactory;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 
 /**
  * Implementation of a factory for creating {@link ESServer} instances.
@@ -49,12 +51,12 @@ public final class ServerFactoryImpl implements ESServerFactory {
 		final ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
 		final ESServerImpl server = serverInfo.getAPIImpl();
 
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
+				return null;
 			}
-		}.run(false);
+		});
 
 		return server;
 	}

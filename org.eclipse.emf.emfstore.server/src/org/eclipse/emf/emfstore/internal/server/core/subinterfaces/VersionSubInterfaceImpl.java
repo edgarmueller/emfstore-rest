@@ -94,8 +94,11 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *             if versionSpec can't be resolved or other failure
 	 */
 	@EmfStoreMethod(MethodId.RESOLVEVERSIONSPEC)
-	public PrimaryVersionSpec resolveVersionSpec(ProjectId projectId, VersionSpec versionSpec) throws ESException {
+	public PrimaryVersionSpec resolveVersionSpec(ProjectId projectId, VersionSpec versionSpec)
+		throws InvalidVersionSpecException, ESException {
+
 		sanityCheckObjects(projectId, versionSpec);
+
 		synchronized (getMonitor()) {
 			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
@@ -490,7 +493,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 */
 	@EmfStoreMethod(MethodId.GETCHANGES)
 	public List<ChangePackage> getChanges(ProjectId projectId, VersionSpec source, VersionSpec target)
-		throws ESException {
+		throws InvalidVersionSpecException, ESException {
 		sanityCheckObjects(projectId, source, target);
 		synchronized (getMonitor()) {
 			PrimaryVersionSpec resolvedSource = resolveVersionSpec(projectId, source);

@@ -22,7 +22,6 @@ public abstract class BaseSharedProjectTest extends BaseLoggedInUserTest {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		workspace.addServer(server);
 		localProject = workspace.createLocalProject("TestProject");
 		localProject.shareProject(usersession, new NullProgressMonitor());
 	}

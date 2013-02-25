@@ -15,8 +15,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -68,21 +67,14 @@ public final class TestSessionProvider extends ESAbstractSessionProvider {
 	}
 
 	public TestSessionProvider() {
-
-		final ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
-		usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE.createUsersession();
-		usersession.setServerInfo(SetupHelper.getServerInfo());
-		usersession.setUsername("super");
-		usersession.setPassword("super");
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				workspace.getInternalAPIImpl().getUsersessions().add(usersession);
-			}
-		}.run(false);
-
-		workspace.getInternalAPIImpl().save();
+		ESServer server = SetupHelper.createServer();
+		ESUsersessionImpl login;
+		try {
+			login = (ESUsersessionImpl) server.login("super", "super");
+			usersession = login.getInternalAPIImpl();
+		} catch (ESException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

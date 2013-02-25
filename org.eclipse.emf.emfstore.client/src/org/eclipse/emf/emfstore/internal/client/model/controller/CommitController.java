@@ -212,7 +212,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	private boolean performChecksumCheck(PrimaryVersionSpec newBaseVersion, Project project)
 		throws SerializationException {
 
-		if (Configuration.ClIENT_BEHAVIOR.isChecksumCheckActive()) {
+		if (Configuration.getClientBehavior().isChecksumCheckActive()) {
 			long computedChecksum = ModelUtil.computeChecksum(project);
 			return computedChecksum == newBaseVersion.getProjectStateChecksum();
 		}

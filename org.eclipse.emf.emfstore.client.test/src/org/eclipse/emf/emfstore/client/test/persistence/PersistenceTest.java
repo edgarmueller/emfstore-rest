@@ -33,7 +33,7 @@ public class PersistenceTest extends WorkspaceTest {
 
 	@Test
 	public void testReinitWorkspace() throws SerializationException {
-		Configuration.ClIENT_BEHAVIOR.setAutoSave(false);
+		Configuration.getClientBehavior().setAutoSave(false);
 		Project originalProject = ModelUtil.clone(WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl()
 			.getProjectSpaces().get(0).getProject());
 

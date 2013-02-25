@@ -73,7 +73,7 @@ public class Behavior {
 	 * 
 	 * @return true, if the checksum comparison is activated, false otherwise
 	 */
-	public static boolean isChecksumCheckActive() {
+	public boolean isChecksumCheckActive() {
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
