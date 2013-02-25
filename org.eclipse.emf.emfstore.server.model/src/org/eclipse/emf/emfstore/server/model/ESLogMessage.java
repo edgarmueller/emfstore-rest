@@ -14,8 +14,6 @@ package org.eclipse.emf.emfstore.server.model;
 
 import java.util.Date;
 
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
-
 /**
  * A log message that is used to describe any changes done by a user.
  * 
@@ -25,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFacto
 public interface ESLogMessage {
 
 	/** Factory for creating ILogMessages. */
-	ESLogMessageFactory FACTORY = LogMessageFactory.INSTANCE;
+	ESLogMessageFactory FACTORY = ESLogMessageFactory.INSTANCE;
 
 	/**
 	 * Returns the actual log message.

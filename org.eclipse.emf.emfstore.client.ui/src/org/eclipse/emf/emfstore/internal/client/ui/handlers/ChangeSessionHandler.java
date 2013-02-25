@@ -22,7 +22,8 @@ public class ChangeSessionHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UILogoutSessionController(getShell(), requireSelection(ServerInfo.class).getLastUsersession()).execute();
+		new UILogoutSessionController(getShell(), requireSelection(
+			ServerInfo.class).getLastUsersession().getAPIImpl()).execute();
 	}
 
 }

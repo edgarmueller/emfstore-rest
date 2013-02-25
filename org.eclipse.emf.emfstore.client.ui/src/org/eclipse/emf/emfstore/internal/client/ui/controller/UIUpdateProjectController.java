@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -31,6 +32,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -140,14 +142,21 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      java.util.List)
 	 */
-	public boolean inspectChanges(final ESLocalProject projectSpace,
+	public boolean inspectChanges(final ESLocalProject localProject,
 		final List<ESChangePackage> changePackages,
 		final ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
+
+		// TODO: provide util method for mapping to internal class
+		final List<ChangePackage> internalChangePackages = new ArrayList<ChangePackage>();
+		for (ESChangePackage changePackage : changePackages) {
+			internalChangePackages.add(((ESChangePackageImpl) changePackage).getInternalAPIImpl());
+		}
+
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				@SuppressWarnings("unchecked")
-				UpdateDialog updateDialog = new UpdateDialog(getShell(), (ProjectSpace) projectSpace,
-					(List<ChangePackage>) (List<?>) changePackages, idToEObjectMapping);
+				UpdateDialog updateDialog = new UpdateDialog(getShell(), localProject,
+					internalChangePackages, idToEObjectMapping);
 				if (updateDialog.open() == Window.OK) {
 					return true;
 				}

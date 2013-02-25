@@ -48,6 +48,7 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -133,8 +134,8 @@ public class SetupHelper {
 			seed);
 		Configuration.getClientBehavior().setAutoSave(false);
 		ModelMutator.generateModel(config);
-		testProjectSpace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).importProject(project,
-			"Generated project", "");
+		ESWorkspaceImpl workspace2 = WorkspaceProvider.getInstance().getWorkspace();
+		testProjectSpace = workspace2.getInternalAPIImpl().importProject(project, "Generated project", "");
 		testProject = testProjectSpace.getProject();
 		projectId = testProjectSpace.getProjectId();
 	}
@@ -148,7 +149,8 @@ public class SetupHelper {
 		List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
 		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE
 			.getProject_CutElements());
-		config.setEditingDomain(((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getEditingDomain());
+		ESWorkspaceImpl workspace2 = WorkspaceProvider.getInstance().getWorkspace();
+		config.setEditingDomain(workspace2.getInternalAPIImpl().getEditingDomain());
 		config.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
 		return config;
 	}
@@ -336,7 +338,8 @@ public class SetupHelper {
 	public void setupWorkSpace() {
 		LOGGER.log(Level.INFO, "setting up workspace...");
 		CommonUtil.setTesting(true);
-		workSpace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace2 = WorkspaceProvider.getInstance().getWorkspace();
+		workSpace = workspace2.getInternalAPIImpl();
 		LOGGER.log(Level.INFO, "workspace initialized");
 
 	}
@@ -563,7 +566,8 @@ public class SetupHelper {
 					usersession.setServerInfo(serverInfo);
 					usersession.setUsername("super");
 					usersession.setPassword("super");
-					((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().add(usersession);
+					ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+					workspace.getInternalAPIImpl().getUsersessions().add(usersession);
 				}
 				try {
 					if (!usersession.isLoggedIn()) {

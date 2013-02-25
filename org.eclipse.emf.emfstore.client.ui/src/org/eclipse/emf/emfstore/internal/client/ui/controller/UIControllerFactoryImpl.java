@@ -7,9 +7,7 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ui.ESUIControllerFactory;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -23,7 +21,7 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public ESPrimaryVersionSpec commitProject(Shell shell, ESLocalProject project) {
-		return new UICommitProjectController(shell, (ProjectSpace) project).execute();
+		return new UICommitProjectController(shell, project).execute();
 	}
 
 	public ESPrimaryVersionSpec createBranch(Shell shell, ESProject project) {
@@ -49,17 +47,16 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession) {
-		return new UICreateRemoteProjectController(shell, (Usersession) usersession).execute();
+		return new UICreateRemoteProjectController(shell, usersession).execute();
 	}
 
-	public ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession, String projectName,
-		String description) {
-		return new UICreateRemoteProjectController(shell, (Usersession) usersession, projectName, description)
+	public ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession, String projectName) {
+		return new UICreateRemoteProjectController(shell, usersession, projectName)
 			.execute();
 	}
 
 	public void deleteLocalProject(Shell shell, ESLocalProject project) {
-		new UIDeleteProjectController(shell, (ProjectSpace) project).execute();
+		new UIDeleteProjectController(shell, project).execute();
 	}
 
 	public void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject, ESUsersession usersession) {
@@ -71,11 +68,11 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public void logout(Shell shell, ESUsersession usersession) {
-		new UILogoutSessionController(shell, (Usersession) usersession).execute();
+		new UILogoutSessionController(shell, usersession).execute();
 	}
 
 	public void mergeBranch(Shell shell, ESLocalProject project) {
-		new UIMergeController(shell, (ProjectSpace) project).execute();
+		new UIMergeController(shell, project).execute();
 	}
 
 	public void registerEPackage(Shell shell, ESServer server) {
@@ -87,11 +84,11 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public void shareProject(Shell shell, ESLocalProject project) {
-		new UIShareProjectController(shell, (ProjectSpace) project).execute();
+		new UIShareProjectController(shell, project).execute();
 	}
 
 	public void showHistoryView(Shell shell, ESLocalProject project) {
-		new UIShowHistoryController(shell, ((ProjectSpace) project).getProject()).execute();
+		new UIShowHistoryController(shell, project).execute();
 	}
 
 	public void showHistoryView(Shell shell, EObject eObject) {

@@ -14,8 +14,8 @@ import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.internal.client.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
@@ -76,16 +76,11 @@ public class IsServerAdminTester extends PropertyTester {
 	}
 
 	private ServerInfo findServerInfo(ProjectInfo projectInfo) {
-		for (ServerInfo serverInfo : ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getServerInfos()) {
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		for (ServerInfo serverInfo : workspace.getInternalAPIImpl().getServerInfos()) {
 			if (projectInfo.eContainer() != null && projectInfo.eContainer().equals(serverInfo)) {
 				return serverInfo;
 			}
-			// for (ProjectInfo info : WorkspaceManager.getInstance().getCurrentWorkspace()
-			// .getRemoteProjectList(serverInfo)) {
-			// if (info.getProjectId().equals(projectInfo.getProjectId())) {
-			// return serverInfo;
-			// }
-			// }
 		}
 
 		return null;

@@ -16,8 +16,10 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
@@ -48,9 +50,9 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 	 * @param projectSpace
 	 *            projectspace
 	 */
-	public UIMergeController(Shell shell, ProjectSpace projectSpace) {
+	public UIMergeController(Shell shell, ESLocalProject localProject) {
 		super(shell);
-		this.projectSpace = projectSpace;
+		this.projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
 	}
 
 	@Override

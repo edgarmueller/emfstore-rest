@@ -12,15 +12,12 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import java.util.Calendar;
 
-import org.eclipse.emf.emfstore.server.model.ESLogMessage;
-import org.eclipse.emf.emfstore.server.model.ESLogMessageFactory;
-
 /**
  * A factory for creating ESLogMessage objects.
  * 
  * @author Tobias Verhoeven
  */
-public final class LogMessageFactory implements ESLogMessageFactory {
+public final class LogMessageFactory {
 
 	/** The factory INSTANCE. */
 	public static final LogMessageFactory INSTANCE = new LogMessageFactory();
@@ -37,11 +34,11 @@ public final class LogMessageFactory implements ESLogMessageFactory {
 	 *            the author
 	 * @return the created log message instance
 	 */
-	public ESLogMessage createLogMessage(String message, String author) {
+	public LogMessage createLogMessage(String message, String author) {
 		final LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
 		logMessage.setMessage(message);
 		logMessage.setAuthor(author);
 		logMessage.setClientDate(Calendar.getInstance().getTime());
-		return logMessage.getAPIImpl();
+		return logMessage;
 	}
 }

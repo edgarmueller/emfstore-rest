@@ -463,13 +463,20 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		final IProgressMonitor monitor)
 		throws ChangeConflictException, ESException {
 
-		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
+		final VersionSpec version;
+
+		if (versionSpec == null) {
+			version = null;
+		} else {
+			final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
+			version = versionSpecImpl.getInternalAPIImpl();
+		}
 
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESPrimaryVersionSpecImpl>() {
 
 			public ESPrimaryVersionSpecImpl call() throws Exception {
 				PrimaryVersionSpec primaryVersionSpec = getInternalAPIImpl().update(
-					versionSpecImpl.getInternalAPIImpl(),
+					version,
 					callback,
 					monitor);
 				return primaryVersionSpec.getAPIImpl();

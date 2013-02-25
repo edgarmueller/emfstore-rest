@@ -14,8 +14,11 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
 
 import java.util.List;
 
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -38,7 +41,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	private List<ChangePackage> changes;
 	private ProjectSpace projectSpace;
 	private Image updateImage;
-	private final ESModelElementIdToEObjectMapping idToEObjectMapping;
+	private final ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping;
 
 	/**
 	 * Constructor.
@@ -52,13 +55,14 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	 * @param idToEObjectMapping
 	 *            a mapping of EObjects to their respective IDs
 	 */
-	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes,
-		ESModelElementIdToEObjectMapping idToEObjectMapping) {
+	public UpdateDialog(Shell parentShell, ESLocalProject localProject,
+		List<ChangePackage> changes,
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 		super(parentShell);
 		this.idToEObjectMapping = idToEObjectMapping;
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
-		this.projectSpace = projectSpace;
+		this.projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
 	}
 
 	/**

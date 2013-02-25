@@ -217,7 +217,8 @@ public class LoginDialog extends TitleAreaDialog {
 
 			// try to find usersession with same username in order to avoid duplicates
 			if (candidateSession == null) {
-				candidateSession = (Usersession) getUsersessionIfKnown(username);
+				ESUsersession usersessionIfKnown = getUsersessionIfKnown(username);
+				candidateSession = ((ESUsersessionImpl) usersessionIfKnown).getInternalAPIImpl();
 			}
 
 			if (candidateSession == null) {

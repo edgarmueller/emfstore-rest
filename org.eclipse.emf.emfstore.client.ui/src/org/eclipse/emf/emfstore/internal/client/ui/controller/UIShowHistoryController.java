@@ -14,6 +14,8 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
@@ -45,6 +47,11 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	public UIShowHistoryController(Shell shell, EObject modelElement) {
 		super(shell, true, true);
 		this.modelElement = modelElement;
+	}
+
+	public UIShowHistoryController(Shell shell, ESLocalProject localProject) {
+		super(shell, true, true);
+		this.modelElement = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
 	}
 
 	/**

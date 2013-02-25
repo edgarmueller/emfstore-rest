@@ -40,7 +40,6 @@ import org.eclipse.emf.emfstore.internal.common.ListUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
-import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
@@ -52,9 +51,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESVer
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
@@ -129,7 +126,9 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 					protected List<BranchInfo> run() throws ESException {
 						final ConnectionManager connectionManager = WorkspaceProvider.getInstance()
 							.getConnectionManager();
-						return connectionManager.getBranches(getSessionId(), (ProjectId) getGlobalProjectId());
+						return connectionManager.getBranches(
+							getSessionId(),
+							getGlobalProjectId().getInternalAPIImpl());
 					};
 				}.execute()));
 				return ListUtil.copy(mapToInverse);
@@ -149,8 +148,9 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			.getInternalAPIImpl()) {
 			@Override
 			protected List<BranchInfo> run() throws ESException {
-				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-				return cm.getBranches(getSessionId(), (ProjectId) getGlobalProjectId());
+				return getConnectionManager().getBranches(
+					getSessionId(),
+					getGlobalProjectId().getInternalAPIImpl());
 			};
 		}.execute()));
 		return ListUtil.copy(mapToInverse);
@@ -214,12 +214,17 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 */
 	public List<ESHistoryInfo> getHistoryInfos(final ESHistoryQuery query, IProgressMonitor monitor)
 		throws ESException {
+
+		final ESHistoryQueryImpl<ESHistoryQuery, ?> queryImpl = (ESHistoryQueryImpl<ESHistoryQuery, ?>) query;
+
 		List<ESHistoryInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<HistoryInfo>>(server
 			.getInternalAPIImpl(), monitor) {
 			@Override
 			protected List<HistoryInfo> run() throws ESException {
-				return getConnectionManager().getHistoryInfo(getSessionId(), (ProjectId) getGlobalProjectId(),
-					(HistoryQuery) query);
+				return getConnectionManager().getHistoryInfo(
+					getSessionId(),
+					getGlobalProjectId().getInternalAPIImpl(),
+					queryImpl.getInternalAPIImpl());
 			}
 		}.execute()));
 		return ListUtil.copy(mapToInverse);
@@ -299,15 +304,20 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		final IProgressMonitor monitor)
 		throws ESException {
 
+		final ESPrimaryVersionSpecImpl versionSpecImpl = (ESPrimaryVersionSpecImpl) versionSpec;
+		final ESTagVersionSpecImpl tagVersionSpecImpl = (ESTagVersionSpecImpl) tag;
+
 		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 
 			public Void call() throws Exception {
 				new ServerCall<Void>(server.getInternalAPIImpl(), monitor) {
 					@Override
 					protected Void run() throws ESException {
-						getConnectionManager().removeTag(getUsersession().getSessionId(),
-							(ProjectId) getGlobalProjectId(),
-							(PrimaryVersionSpec) versionSpec, (TagVersionSpec) tag);
+						getConnectionManager().removeTag(
+							getUsersession().getSessionId(),
+							getGlobalProjectId().getInternalAPIImpl(),
+							versionSpecImpl.getInternalAPIImpl(),
+							tagVersionSpecImpl.getInternalAPIImpl());
 						return null;
 					}
 				}.execute();

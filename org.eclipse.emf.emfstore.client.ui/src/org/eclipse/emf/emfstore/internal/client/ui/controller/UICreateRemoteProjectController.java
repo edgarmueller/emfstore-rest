@@ -14,7 +14,9 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
@@ -56,9 +58,9 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @param session
 	 *            the session to be used to create the project
 	 */
-	public UICreateRemoteProjectController(Shell shell, Usersession session) {
+	public UICreateRemoteProjectController(Shell shell, ESUsersession session) {
 		super(shell);
-		this.session = session;
+		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
 		projectName = null;
 		description = "";
 	}
@@ -75,9 +77,9 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @param description
 	 *            an optional description of the project. May be <code>null</code>
 	 */
-	public UICreateRemoteProjectController(Shell shell, Usersession session, String projectName, String description) {
+	public UICreateRemoteProjectController(Shell shell, ESUsersession session, String projectName) {
 		super(shell);
-		this.session = session;
+		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
 		this.projectName = projectName;
 		this.description = description == null ? "" : description;
 	}

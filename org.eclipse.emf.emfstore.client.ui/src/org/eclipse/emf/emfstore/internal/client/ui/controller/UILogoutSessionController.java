@@ -11,7 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -35,9 +37,9 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 	 * @param session
 	 *            the session to be logged out
 	 */
-	public UILogoutSessionController(Shell shell, Usersession session) {
+	public UILogoutSessionController(Shell shell, ESUsersession session) {
 		super(shell);
-		this.session = session;
+		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
 	}
 
 	/**

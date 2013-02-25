@@ -22,17 +22,18 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -52,8 +53,9 @@ import org.eclipse.swt.widgets.Shell;
 public class UICommitProjectController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ESCommitCallback {
 
-	private final ProjectSpace projectSpace;
-	private LogMessage logMessage;
+	private final ESLocalProject localProject;
+	// TODO: is never initialized
+	private ESLogMessage logMessage;
 	private int dialogReturnValue;
 
 	/**
@@ -65,9 +67,9 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 *            the {@link ProjectSpace} that contains the pending changes
 	 *            that should get committed
 	 */
-	public UICommitProjectController(Shell shell, ProjectSpace projectSpace) {
+	public UICommitProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
-		this.projectSpace = projectSpace;
+		this.localProject = localProject;
 	}
 
 	/**
@@ -101,8 +103,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 			}
 		});
 		if (shouldUpdate) {
-			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion()
-				.getAPIImpl();
+			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.localProject.getBaseVersion();
 			ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
 				.executeSub(progressMonitor);
 			if (version.equals(baseVersion)) {
@@ -121,12 +122,16 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
+	public boolean inspectChanges(
+		ESLocalProject localProject,
+		ESChangePackage changePackage,
 		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 
-		if (((ChangePackage) changePackage).getOperations().isEmpty()) {
-			RunInUI.run(new Callable<Void>() {
+		ChangePackage internalChangePackage = ((ESChangePackageImpl) changePackage).getInternalAPIImpl();
+		ProjectSpace projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
 
+		if (internalChangePackage.getOperations().isEmpty()) {
+			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openInformation(getShell(), "No local changes",
 						"No need to commit any more, there are no more changes pending for commit.\n"
@@ -139,8 +144,11 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 			return false;
 		}
 
-		final CommitDialog commitDialog = new CommitDialog(getShell(), (ChangePackage) changePackage,
-			(ProjectSpace) projectSpace, idToEObjectMapping);
+		final CommitDialog commitDialog = new CommitDialog(
+			getShell(),
+			internalChangePackage,
+			projectSpace,
+			idToEObjectMapping);
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {
@@ -149,7 +157,7 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 		});
 
 		if (dialogReturnValue == Dialog.OK) {
-			changePackage.setLogMessage(
+			internalChangePackage.setLogMessage(
 				LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
 					projectSpace.getUsersession().getUsername()));
 			return true;
@@ -167,9 +175,11 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	@Override
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
 		try {
-			PrimaryVersionSpec primaryVersionSpec = projectSpace.commit(logMessage, UICommitProjectController.this,
+			ESPrimaryVersionSpec primaryVersionSpec = localProject.commit(
+				logMessage,
+				UICommitProjectController.this,
 				progressMonitor);
-			return primaryVersionSpec.getAPIImpl();
+			return primaryVersionSpec;
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore

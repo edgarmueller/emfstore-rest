@@ -23,6 +23,8 @@ import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -78,7 +80,9 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 
 	private void updateACUser(ESUsersession session) {
 		try {
-			((WorkspaceBase) workspace).updateACUser((Usersession) session);
+			ESWorkspaceImpl w = (ESWorkspaceImpl) workspace;
+			Usersession u = ((ESUsersessionImpl) session).getInternalAPIImpl();
+			((WorkspaceBase) w.getInternalAPIImpl()).updateACUser(u);
 		} catch (ESException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't update ACUser.", e);

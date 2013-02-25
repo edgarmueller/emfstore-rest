@@ -22,9 +22,9 @@ import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -126,7 +126,8 @@ public class PerformanceTest {
 						fail("Usersession could not be logged in.");
 					}
 				}
-				((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getUsersessions().add(session);
+				ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+				workspace.getInternalAPIImpl().getUsersessions().add(session);
 				usersession = session;
 			}
 		}.run(false);
@@ -369,8 +370,8 @@ public class PerformanceTest {
 				}
 			}.run(false);
 			updateTimes[i] = (System.currentTimeMillis() - time) / 1000.0;
-			CleanMemoryTask task = new CleanMemoryTask(
-				((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getResourceSet());
+			ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+			CleanMemoryTask task = new CleanMemoryTask(workspace.getInternalAPIImpl().getResourceSet());
 			task.run();
 			memDuringUpdate[i] = memoryMeter.stopMeasurements();
 			memAfterUpdate[i] = usedMemory();

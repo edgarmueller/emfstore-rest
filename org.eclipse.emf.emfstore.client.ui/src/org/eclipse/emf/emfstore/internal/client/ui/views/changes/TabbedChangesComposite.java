@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.changes;
 
 import java.util.List;
 
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMLabelProvider;
@@ -59,7 +60,7 @@ public class TabbedChangesComposite extends Composite {
 	 *            whether to show root nodes
 	 */
 	public TabbedChangesComposite(Composite parent, int style, List<ChangePackage> changePackages, Project project,
-		ESModelElementIdToEObjectMapping idToEObjectMapping, boolean showRootNodes) {
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping, boolean showRootNodes) {
 		super(parent, style);
 		createComposite(style, project, idToEObjectMapping, showRootNodes);
 		tabTreeViewer.setInput(changePackages);
@@ -83,13 +84,15 @@ public class TabbedChangesComposite extends Composite {
 	 *            whether to show root nodes
 	 */
 	public TabbedChangesComposite(Composite parent, int style, Project project, List<AbstractOperation> operations,
-		ESModelElementIdToEObjectMapping idToEObjectMapping, boolean showRootNodes) {
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping, boolean showRootNodes) {
 		super(parent, style);
 		createComposite(style, project, idToEObjectMapping, showRootNodes);
 		tabTreeViewer.setInput(operations);
 	}
 
-	private void createComposite(int style, Project project, ESModelElementIdToEObjectMapping idToEObjectMapping,
+	private void createComposite(int style,
+		Project project,
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping,
 		boolean showRootNodes) {
 		setLayout(new GridLayout());
 		folder = new TabFolder(this, style);

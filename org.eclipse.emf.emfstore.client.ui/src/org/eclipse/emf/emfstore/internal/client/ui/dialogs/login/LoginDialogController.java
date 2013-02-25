@@ -20,9 +20,9 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.common.ListUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
@@ -115,8 +115,8 @@ public class LoginDialogController implements ILoginDialogController {
 		usersession.logIn();
 		// if successful, else exception is thrown prior reaching this code
 		// TODO OTS
-		EList<Usersession> usersessions = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
-			.getUsersessions();
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		EList<Usersession> usersessions = workspace.getInternalAPIImpl().getUsersessions();
 		if (!usersessions.contains(usersession)) {
 			usersessions.add(usersession);
 		}

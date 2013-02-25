@@ -15,11 +15,11 @@ import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -49,8 +49,10 @@ public final class EMFStoreClientUtil {
 	 * @return a server info
 	 */
 	public static ServerInfo giveServerInfo(String url, int port) {
-		Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
-		for (ServerInfo existingServerInfo : workspace.getServerInfos()) {
+
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+
+		for (ServerInfo existingServerInfo : workspace.getInternalAPIImpl().getServerInfos()) {
 			if (existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)) {
 				if (url.equals(existingServerInfo.getUrl()) && port == existingServerInfo.getPort()) {
 					return existingServerInfo;
@@ -58,9 +60,9 @@ public final class EMFStoreClientUtil {
 			}
 		}
 		ServerInfo serverInfo = createServerInfo(url, port, null);
-		workspace.getServerInfos().add(serverInfo);
+		workspace.getInternalAPIImpl().getServerInfos().add(serverInfo);
 		// TODO: OTS
-		((WorkspaceBase) workspace).save();
+		((WorkspaceBase) workspace.getInternalAPIImpl()).save();
 		return serverInfo;
 	}
 
@@ -105,8 +107,8 @@ public final class EMFStoreClientUtil {
 	 * @return a user session
 	 */
 	public static Usersession createUsersession(String username, String password, String serverUrl, int serverPort) {
-		Workspace workspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
-		for (Usersession usersession : workspace.getUsersessions()) {
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		for (Usersession usersession : workspace.getInternalAPIImpl().getUsersessions()) {
 			ServerInfo existingServerInfo = usersession.getServerInfo();
 			if (existingServerInfo != null && existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)
 				&& existingServerInfo.getUrl().equals(serverUrl) && existingServerInfo.getPort() == serverPort) {
@@ -120,9 +122,9 @@ public final class EMFStoreClientUtil {
 		usersession.setServerInfo(giveServerInfo(serverUrl, serverPort));
 		usersession.setUsername(username);
 		usersession.setPassword(password);
-		workspace.getUsersessions().add(usersession);
+		workspace.getInternalAPIImpl().getUsersessions().add(usersession);
 		// TODO: OTS
-		((WorkspaceBase) workspace).save();
+		((WorkspaceBase) workspace.getInternalAPIImpl()).save();
 		return usersession;
 	}
 

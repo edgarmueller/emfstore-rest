@@ -25,9 +25,9 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.internal.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
@@ -419,9 +419,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			if (input instanceof ProjectSpace) {
 				this.projectSpace = (ProjectSpace) input;
 			} else if (input != null) {
-				// TODO OTS
-				this.projectSpace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
-					.getProjectSpace(ModelUtil.getProject(input));
+				ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+				this.projectSpace = workspace.getInternalAPIImpl().getProjectSpace(ModelUtil.getProject(input));
 			} else {
 				this.projectSpace = null;
 			}
@@ -468,7 +467,8 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					new ESBrowserLabelProvider());
 				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
 				// TODO OTS
-				for (ProjectSpace ps : ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()) {
+				ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+				for (ProjectSpace ps : workspace.getInternalAPIImpl().getProjectSpaces()) {
 					if (ps.getUsersession() != null) {
 						relevantProjectSpaces.add(ps);
 					}

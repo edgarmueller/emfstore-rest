@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -46,7 +47,7 @@ import org.eclipse.swt.graphics.Image;
 public class ChangePackageVisualizationHelper implements ESDisposable {
 
 	private DefaultOperationLabelProvider defaultOperationLabelProvider;
-	private ESModelElementIdToEObjectMapping idToEObjectMapping;
+	private ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping;
 
 	/**
 	 * Constructor.
@@ -55,7 +56,7 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 	 *            the ID to EObject mapping that is holding the EObjects that are going to be visualized
 	 *            as part of the change packages
 	 */
-	public ChangePackageVisualizationHelper(ESModelElementIdToEObjectMapping idToEObjectMapping) {
+	public ChangePackageVisualizationHelper(ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
 		this.idToEObjectMapping = idToEObjectMapping;
 	}
@@ -238,7 +239,7 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 	 * @return the model element instance
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		return idToEObjectMapping.get(modelElementId);
+		return idToEObjectMapping.get(modelElementId.getAPIImpl());
 	}
 
 	/**

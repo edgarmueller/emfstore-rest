@@ -99,43 +99,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	public List<ESBranchInfo> getBranches(ESServer serverInfo, final ESGlobalProjectId projectId) throws ESException {
-		return new ServerCall<List<ESBranchInfo>>((ServerInfo) serverInfo) {
-			@Override
-			protected List<ESBranchInfo> run() throws ESException {
-				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
-				return (List<ESBranchInfo>) (List<?>) cm.getBranches(getSessionId(), (ProjectId) projectId);
-			};
-		}.execute();
-	}
-
-	public ProjectInfo createEmptyRemoteProject(final ESUsersession usersession, final String projectName,
-		final String projectDescription, final IProgressMonitor progressMonitor) throws ESException {
-		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
-		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
-		final Usersession session = (Usersession) usersession;
-		log.setMessage("Creating project '" + projectName + "'");
-		log.setAuthor(session.getUsername());
-		log.setClientDate(new Date());
-		ProjectInfo emptyProject = null;
-
-		new UnknownEMFStoreWorkloadCommand<ProjectInfo>(progressMonitor) {
-			@Override
-			public ProjectInfo run(IProgressMonitor monitor) throws ESException {
-				return connectionManager.createEmptyProject(session.getSessionId(), projectName, projectDescription,
-					log);
-			}
-		}.execute();
-
-		progressMonitor.worked(10);
-		// TODO: OTS update remote project list
-		// updateProjectInfos(session);
-		return emptyProject;
-	}
-
-	/**
 	 * 
 	 * {@inheritDoc}
 	 * 

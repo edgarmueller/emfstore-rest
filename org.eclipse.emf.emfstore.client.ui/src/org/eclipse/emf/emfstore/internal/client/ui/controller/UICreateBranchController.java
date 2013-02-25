@@ -18,25 +18,27 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -137,11 +139,17 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
-		ESModelElementIdToEObjectMapping idToEObjectMapping) {
+	public boolean inspectChanges(ESLocalProject localProject, ESChangePackage changePackage,
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 
-		final CommitDialog commitDialog = new CommitDialog(getShell(), (ChangePackage) changePackage,
-			(ProjectSpace) projectSpace, idToEObjectMapping);
+		ESChangePackageImpl internalChangePackage = (ESChangePackageImpl) changePackage;
+		ESLocalProjectImpl localProjectImpl = (ESLocalProjectImpl) localProject;
+
+		final CommitDialog commitDialog = new CommitDialog(
+			getShell(),
+			internalChangePackage.getInternalAPIImpl(),
+			localProjectImpl.getInternalAPIImpl(),
+			idToEObjectMapping);
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {
@@ -151,7 +159,7 @@ public class UICreateBranchController extends AbstractEMFStoreUIController<ESPri
 
 		if (dialogReturnValue == Dialog.OK) {
 			changePackage.setLogMessage(
-				LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
+				ESLogMessage.FACTORY.createLogMessage(commitDialog.getLogText(),
 					projectSpace.getUsersession().getUsername()));
 			return true;
 		}

@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
@@ -67,8 +67,8 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 		}
 
 		// TODO OTS
-		EList<ProjectSpace> projectSpaces = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
-			.getProjectSpaces();
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		EList<ProjectSpace> projectSpaces = workspace.getInternalAPIImpl().getProjectSpaces();
 		ArrayList<ProjectSpace> usedSpaces = new ArrayList<ProjectSpace>();
 
 		for (ProjectSpace projectSpace : projectSpaces) {

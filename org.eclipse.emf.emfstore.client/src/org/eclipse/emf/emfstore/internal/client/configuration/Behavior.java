@@ -14,6 +14,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 
@@ -163,14 +164,16 @@ public class Behavior {
 		ESClientConfigurationProvider provider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
 			ESClientConfigurationProvider.class);
+		ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();
 		if (provider != null) {
 			List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
-			if (defaultServerInfos != null) {
-				// OTS cast
-				return (List<ServerInfo>) (List<?>) defaultServerInfos;
+
+			for (ESServer server : defaultServerInfos) {
+				result.add(((ESServerImpl) server).getInternalAPIImpl());
 			}
+
+			return result;
 		}
-		ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();
 		result.add(getLocalhostServerInfo());
 		return result;
 	}

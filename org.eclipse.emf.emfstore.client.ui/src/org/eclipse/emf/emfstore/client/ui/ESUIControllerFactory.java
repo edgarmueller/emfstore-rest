@@ -30,7 +30,7 @@ public interface ESUIControllerFactory {
 
 	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession);
 
-	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession, String projectName, String description);
+	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession, String projectName);
 
 	void deleteLocalProject(Shell shell, ESLocalProject project);
 

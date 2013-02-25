@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserViewerSorter;
@@ -116,7 +117,8 @@ public class ESBrowserView extends ViewPart implements ESLoginObserver {
 	 */
 	public ESBrowserView() {
 		// TODO OTS
-		Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		Workspace currentWorkspace = workspace.getInternalAPIImpl();
 		WorkspaceProvider.getObserverBus().register(this);
 		for (final ServerInfo serverInfo : currentWorkspace.getServerInfos()) {
 			AdapterImpl serverInfoAdapter = new ServerInfoAdapter(serverInfo);
@@ -225,7 +227,8 @@ public class ESBrowserView extends ViewPart implements ESLoginObserver {
 	public void dispose() {
 		super.dispose();
 		// TODO OTS
-		Workspace currentWorkspace = ((Workspace) WorkspaceProvider.getInstance().getWorkspace());
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		Workspace currentWorkspace = workspace.getInternalAPIImpl();
 		currentWorkspace.eAdapters().remove(workspaceAdapter);
 		WorkspaceProvider.getObserverBus().unregister(this);
 		for (ServerInfo s : currentWorkspace.getServerInfos()) {

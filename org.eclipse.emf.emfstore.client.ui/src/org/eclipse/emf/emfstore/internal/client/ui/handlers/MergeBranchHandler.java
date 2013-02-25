@@ -23,7 +23,7 @@ public class MergeBranchHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIMergeController(getShell(), requireSelection(ProjectSpace.class)).execute();
+		new UIMergeController(getShell(), requireSelection(ProjectSpace.class).getAPIImpl()).execute();
 	}
 
 }

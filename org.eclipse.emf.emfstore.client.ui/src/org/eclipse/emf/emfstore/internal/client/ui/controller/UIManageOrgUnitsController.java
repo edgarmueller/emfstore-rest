@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
@@ -56,8 +56,8 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 	public Void doRun(IProgressMonitor progressMonitor) throws ESException {
 		try {
 			// TODO OTS
-			final AdminBroker adminBroker = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
-				.getAdminBroker(session);
+			ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+			final AdminBroker adminBroker = workspace.getInternalAPIImpl().getAdminBroker(session);
 			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay()
 				.getActiveShell(), adminBroker);
 			dialog.create();

@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
+import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
@@ -63,7 +64,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	private Map<String, CommitDialogTray> trays;
 	private Image commitImage;
 	private int numberOfChanges;
-	private final ESModelElementIdToEObjectMapping idToEObjectMapping;
+	private final ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping;
 
 	/**
 	 * Constructor.
@@ -79,7 +80,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	 *            correctly infer information about deleted model elements
 	 */
 	public CommitDialog(Shell parentShell, ChangePackage changes, ProjectSpace activeProjectSpace,
-		ESModelElementIdToEObjectMapping idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 		super(parentShell);
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.idToEObjectMapping = idToEObjectMapping;

@@ -13,9 +13,11 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -41,9 +43,9 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	 * @param projectSpace
 	 *            the {@link ProjectSpace} that should get shared
 	 */
-	public UIShareProjectController(Shell shell, ProjectSpace projectSpace) {
+	public UIShareProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
-		this.projectSpace = projectSpace;
+		this.projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
 	}
 
 	/**

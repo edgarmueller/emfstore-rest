@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -26,7 +27,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void> {
 
-	private final ProjectSpace projectSpace;
+	private final ESLocalProject localProject;
 
 	/**
 	 * Constructor.
@@ -36,26 +37,28 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void
 	 * @param projectSpace
 	 *            the {@link ProjectSpace} containing the project that should be deleted
 	 */
-	public UIDeleteProjectController(Shell shell, ProjectSpace projectSpace) {
+	public UIDeleteProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell);
-		this.projectSpace = projectSpace;
+		this.localProject = localProject;
 	}
 
-	private void deleteProject(final ProjectSpace projectSpace) {
+	private void deleteProject(final ESLocalProject localProject) {
 		try {
-			// TODO: pass monitor in
-			projectSpace.delete(new NullProgressMonitor());
+			// TODO: pass monitor in & handle exceptions
+			localProject.delete(new NullProgressMonitor());
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ESException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private boolean confirmation(final ProjectSpace projectSpace) {
-		String message = "Do you really want to delete your local copy of project \"" + projectSpace.getProjectName()
+	private boolean confirmation(final ESLocalProject localProject) {
+		String message = "Do you really want to delete your local copy of project \"" + localProject.getProjectName()
 			+ "\n";
 
-		if (projectSpace.getBaseVersion() != null) {
-			message += " in version " + projectSpace.getBaseVersion().getIdentifier();
+		if (localProject.getBaseVersion() != null) {
+			message += " in version " + localProject.getBaseVersion().getIdentifier();
 		}
 
 		message += " ?";
@@ -72,11 +75,11 @@ public class UIDeleteProjectController extends AbstractEMFStoreUIController<Void
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 
-		if (!confirmation(projectSpace)) {
+		if (!confirmation(localProject)) {
 			return null;
 		}
 
-		deleteProject(projectSpace);
+		deleteProject(localProject);
 		return null;
 	}
 

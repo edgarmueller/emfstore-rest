@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
@@ -96,13 +97,13 @@ public class ExportWorkspaceController implements IExportImportController {
 			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Workspace.getExtension());
 		}
 
-		Workspace copy = ModelUtil.clone((Workspace) WorkspaceProvider.getInstance().getWorkspace());
+		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		Workspace copy = ModelUtil.clone(workspace.getInternalAPIImpl());
 
 		int i = 0;
 
 		for (ProjectSpace copiedProjectSpace : copy.getProjectSpaces()) {
-			Project orgProject = ((Workspace) WorkspaceProvider.getInstance().getWorkspace()).getProjectSpaces()
-				.get(i++).getProject();
+			Project orgProject = workspace.getInternalAPIImpl().getProjectSpaces().get(i++).getProject();
 			copiedProjectSpace.setProject(ModelUtil.clone(orgProject));
 		}
 

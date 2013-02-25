@@ -51,9 +51,9 @@ public class CommitProjectHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		if (projectSpace == null) {
-			new UICommitProjectController(getShell(), requireSelection(ProjectSpace.class)).execute();
+			new UICommitProjectController(getShell(), requireSelection(ProjectSpace.class).getAPIImpl()).execute();
 		} else {
-			new UICommitProjectController(getShell(), projectSpace).execute();
+			new UICommitProjectController(getShell(), projectSpace.getAPIImpl()).execute();
 		}
 	}
 
