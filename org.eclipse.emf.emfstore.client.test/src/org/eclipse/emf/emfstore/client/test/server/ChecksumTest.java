@@ -1,6 +1,7 @@
 package org.eclipse.emf.emfstore.client.test.server;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import junit.framework.Assert;
 
@@ -22,6 +23,7 @@ import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
@@ -39,17 +41,20 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testRevert() throws SerializationException {
 		// createTestElement automatically adds the element to the project
-		final TestElement a = createTestElement("A");
-		final TestElement b = createTestElement("B");
-		final TestElement d = createTestElement("d");
-		final TestElement c1 = createTestElement("c1");
-		final TestElement c2 = createTestElement("c2");
-		a.getElementMap().put(c1, c2);
-		d.getReferences().add(c1);
-		c1.getReferences().add(b);
+		final TestElement table = createTestElement("A");
+		// final TestElement b = createTestElement("B");
 
-		getProject().getModelElements().add(b);
-		getProject().getModelElements().add(a);
+		final TestElement value = createTestElement("value");
+		final TestElement attributeName = createTestElement("attributeName");
+		final TestElement attribute = createTestElement("attribute");
+		attribute.getContainedElements().add(value);
+
+		table.getElementMap().put(attributeName, value);
+		// d.getReferences().add(attributeName);
+		// attributeName.getReferences().add(b);
+
+		// getProject().getModelElements().add(b);
+		getProject().getModelElements().add(table);
 
 		long computeChecksum = ModelUtil.computeChecksum(getProject());
 		clearOperations();
@@ -57,11 +62,20 @@ public class ChecksumTest extends CoreServerTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				getProject().getModelElements().remove(a);
+				// getProjectSpace().getOperationManager().beginCompositeOperation();
+				getProject().getModelElements().remove(attribute);
+				// getProjectSpace().getOperationManager().endCompositeOperation();
 			}
 		}.run(false);
 
-		getProjectSpace().revert();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				// getProjectSpace().getOperationManager().beginCompositeOperation();
+				getProjectSpace().revert();
+				// getProjectSpace().getOperationManager().endCompositeOperation();
+				return null;
+			}
+		});
 
 		long checksum = ModelUtil.computeChecksum(getProject());
 
