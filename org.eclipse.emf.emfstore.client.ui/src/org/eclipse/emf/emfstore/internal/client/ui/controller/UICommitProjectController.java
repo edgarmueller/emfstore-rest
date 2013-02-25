@@ -22,12 +22,13 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -39,7 +40,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * UI-dependent commit controller for committing pending changes on a {@link ProjectSpace}.<br/>
+ * UI-dependent commit controller for committing pending changes on a
+ * {@link ProjectSpace}.<br/>
  * The controller presents the user a dialog will all changes made before he is
  * able to confirm the commit. If no changes have been made by the user a
  * information dialog is presented that states that there are no pending changes
@@ -49,8 +51,9 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UICommitProjectController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
-	ESCommitCallback {
+public class UICommitProjectController extends
+		AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
+		ESCommitCallback {
 
 	private final ProjectSpace projectSpace;
 	private LogMessage logMessage;
@@ -79,7 +82,8 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	public void noLocalChanges(ESLocalProject projectSpace) {
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				MessageDialog.openInformation(getShell(), null, "No local changes in your project. No need to commit.");
+				MessageDialog.openInformation(getShell(), null,
+						"No local changes in your project. No need to commit.");
 				return null;
 			}
 		});
@@ -91,20 +95,22 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
-	public boolean baseVersionOutOfDate(final ESLocalProject projectSpace, IProgressMonitor progressMonitor) {
+	public boolean baseVersionOutOfDate(final ESLocalProject projectSpace,
+			IProgressMonitor progressMonitor) {
 
 		final String message = "Your project is outdated, you need to update before commit. Do you want to update now?";
 		boolean shouldUpdate = RunInUI.runWithResult(new Callable<Boolean>() {
 
 			public Boolean call() throws Exception {
-				return MessageDialog.openConfirm(getShell(), "Confirmation", message);
+				return MessageDialog.openConfirm(getShell(), "Confirmation",
+						message);
 			}
 		});
 		if (shouldUpdate) {
-			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace.getBaseVersion()
-				.getAPIImpl();
-			ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
-				.executeSub(progressMonitor);
+			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.projectSpace
+					.getBaseVersion().getAPIImpl();
+			ESPrimaryVersionSpec version = new UIUpdateProjectController(
+					getShell(), projectSpace).executeSub(progressMonitor);
 			if (version.equals(baseVersion)) {
 				return false;
 			}
@@ -121,17 +127,23 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
-	public boolean inspectChanges(ESLocalProject projectSpace, ESChangePackage changePackage,
-		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
+	public boolean inspectChanges(
+			ESLocalProject projectSpace,
+			ESChangePackage changePackage,
+			ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
 
-		if (((ChangePackage) changePackage).getOperations().isEmpty()) {
+		if (((ESChangePackageImpl) changePackage).getInternalAPIImpl()
+				.getOperations().isEmpty()) {
 			RunInUI.run(new Callable<Void>() {
 
 				public Void call() throws Exception {
-					MessageDialog.openInformation(getShell(), "No local changes",
-						"No need to commit any more, there are no more changes pending for commit.\n"
-							+ "This may have happened because you rejected your changes in favor for changes "
-							+ "of other users in a merge.");
+					MessageDialog
+							.openInformation(
+									getShell(),
+									"No local changes",
+									"No need to commit any more, there are no more changes pending for commit.\n"
+											+ "This may have happened because you rejected your changes in favor for changes "
+											+ "of other users in a merge.");
 					return null;
 				}
 			});
@@ -139,8 +151,10 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 			return false;
 		}
 
-		final CommitDialog commitDialog = new CommitDialog(getShell(), (ChangePackage) changePackage,
-			(ProjectSpace) projectSpace, idToEObjectMapping);
+		final CommitDialog commitDialog = new CommitDialog(getShell(),
+				((ESChangePackageImpl) changePackage).getInternalAPIImpl(),
+				((ESLocalProjectImpl) projectSpace).getInternalAPIImpl(),
+				idToEObjectMapping);
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {
@@ -149,9 +163,9 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 		});
 
 		if (dialogReturnValue == Dialog.OK) {
-			changePackage.setLogMessage(
-				LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
-					projectSpace.getUsersession().getUsername()));
+			changePackage.setLogMessage(LogMessageFactory.INSTANCE
+					.createLogMessage(commitDialog.getLogText(), projectSpace
+							.getUsersession().getUsername()));
 			return true;
 		}
 
@@ -165,10 +179,12 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ESPrimaryVersionSpec doRun(final IProgressMonitor progressMonitor) throws ESException {
+	public ESPrimaryVersionSpec doRun(final IProgressMonitor progressMonitor)
+			throws ESException {
 		try {
-			PrimaryVersionSpec primaryVersionSpec = projectSpace.commit(logMessage, UICommitProjectController.this,
-				progressMonitor);
+			PrimaryVersionSpec primaryVersionSpec = projectSpace
+					.commit(logMessage, UICommitProjectController.this,
+							progressMonitor);
 			return primaryVersionSpec.getAPIImpl();
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
@@ -177,7 +193,8 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 			WorkspaceUtil.logException(e.getMessage(), e);
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					MessageDialog.openError(getShell(), "Commit failed", e.getMessage());
+					MessageDialog.openError(getShell(), "Commit failed",
+							e.getMessage());
 					return null;
 				}
 			});
@@ -194,9 +211,11 @@ public class UICommitProjectController extends AbstractEMFStoreUIController<ESPr
 	 *      org.eclipse.emf.emfstore.internal.server.model.ESPrimaryVersionSpec.versionspecs.IPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor monitor) throws ESException {
-		ESChecksumErrorHandler errorHandler = Configuration.ClIENT_BEHAVIOR.getChecksumErrorHandler();
+	public boolean checksumCheckFailed(ESLocalProject projectSpace,
+			ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+			throws ESException {
+		ESChecksumErrorHandler errorHandler = Configuration.ClIENT_BEHAVIOR
+				.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

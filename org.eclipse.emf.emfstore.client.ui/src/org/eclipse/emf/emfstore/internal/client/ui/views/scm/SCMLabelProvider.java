@@ -25,6 +25,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVi
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
@@ -32,6 +33,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.swt.SWT;
@@ -61,8 +63,9 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	private Image headRevision;
 
 	private ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
-		ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-	private AdapterFactoryLabelProvider adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+	private AdapterFactoryLabelProvider adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
+			adapterFactory);
 	private Project project;
 
 	/**
@@ -76,9 +79,12 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		this.project = project;
 		this.highlighted = new ArrayList<OperationId>();
 
-		baseRevision = Activator.getImageDescriptor("icons/HistoryInfo_base.png").createImage();
-		currentRevision = Activator.getImageDescriptor("icons/HistoryInfo_current.png").createImage();
-		headRevision = Activator.getImageDescriptor("icons/HistoryInfo_head.png").createImage();
+		baseRevision = Activator.getImageDescriptor(
+				"icons/HistoryInfo_base.png").createImage();
+		currentRevision = Activator.getImageDescriptor(
+				"icons/HistoryInfo_current.png").createImage();
+		headRevision = Activator.getImageDescriptor(
+				"icons/HistoryInfo_head.png").createImage();
 	}
 
 	/**
@@ -98,17 +104,22 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		if (element instanceof HistoryInfo) {
 			HistoryInfo historyInfo = (HistoryInfo) element;
 			return getText(historyInfo);
-		} else if (element instanceof AbstractOperation && changePackageVisualizationHelper != null) {
-			ret = changePackageVisualizationHelper.getDescription((AbstractOperation) element);
-		} else if (element instanceof ModelElementId && changePackageVisualizationHelper != null) {
-			EObject modelElement = changePackageVisualizationHelper.getModelElement((ModelElementId) element);
+		} else if (element instanceof AbstractOperation
+				&& changePackageVisualizationHelper != null) {
+			ret = changePackageVisualizationHelper
+					.getDescription((AbstractOperation) element);
+		} else if (element instanceof ModelElementId
+				&& changePackageVisualizationHelper != null) {
+			EObject modelElement = changePackageVisualizationHelper
+					.getModelElement((ModelElementId) element);
 			if (modelElement != null) {
 				ret = adapterFactoryLabelProvider.getText(modelElement);
 			} else {
 				return ELEMENT_NOT_FOUND;
 			}
-		} else if (element instanceof ChangePackage) {
-			ChangePackage changePackage = (ChangePackage) element;
+		} else if (element instanceof ESChangePackage) {
+			ChangePackage changePackage = ((ESChangePackageImpl) element)
+					.getInternalAPIImpl();
 			return getText(changePackage);
 		} else if (element instanceof EObject) {
 			// TODO: rather reference virtual node directly??
@@ -130,7 +141,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Change Package");
 		if (changePackage.getLogMessage() != null) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
+			SimpleDateFormat dateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd, HH:mm");
 			LogMessage logMessage = changePackage.getLogMessage();
 			builder.append(" [");
 			builder.append(logMessage.getAuthor());
@@ -146,21 +158,24 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	}
 
 	/**
-	 * Gets the text for a history info. This may be overriden by subclasses to change the behavior (e.g. if info should
-	 * be distributed across multiply label providers)
+	 * Gets the text for a history info. This may be overriden by subclasses to
+	 * change the behavior (e.g. if info should be distributed across multiply
+	 * label providers)
 	 * 
-	 * @param historyInfo The historInfo the text is retrieved for.
+	 * @param historyInfo
+	 *            The historInfo the text is retrieved for.
 	 * @return The text for the given historyInfo.
 	 */
 	protected String getText(HistoryInfo historyInfo) {
-		if (historyInfo.getPrimarySpec() != null && historyInfo.getPrimarySpec().getIdentifier() == -1) {
+		if (historyInfo.getPrimarySpec() != null
+				&& historyInfo.getPrimarySpec().getIdentifier() == -1) {
 			return LOCAL_REVISION;
 		}
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
 		String baseVersion = "";
-		if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(project).getBaseVersion()
-			.getIdentifier()) {
+		if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider
+				.getProjectSpace(project).getBaseVersion().getIdentifier()) {
 			baseVersion = "*";
 		}
 		StringBuilder builder = new StringBuilder();
@@ -181,7 +196,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 
 		if (historyInfo.getLogMessage() != null) {
 			logMessage = historyInfo.getLogMessage();
-		} else if (historyInfo.getChangePackage() != null && historyInfo.getChangePackage().getLogMessage() != null) {
+		} else if (historyInfo.getChangePackage() != null
+				&& historyInfo.getChangePackage().getLogMessage() != null) {
 			logMessage = historyInfo.getChangePackage().getLogMessage();
 		}
 		if (logMessage != null) {
@@ -220,8 +236,10 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	@Override
 	public Font getFont(Object element) {
 
-		Font italic = JFaceResources.getFontRegistry().getItalic(JFaceResources.DIALOG_FONT);
-		Font bold = JFaceResources.getFontRegistry().getBold(JFaceResources.DIALOG_FONT);
+		Font italic = JFaceResources.getFontRegistry().getItalic(
+				JFaceResources.DIALOG_FONT);
+		Font bold = JFaceResources.getFontRegistry().getBold(
+				JFaceResources.DIALOG_FONT);
 
 		// if (getText(findTopParent((TreeNode)
 		// element)).equals(LOCAL_REVISION)) {
@@ -236,8 +254,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 				return italic;
 			}
 			HistoryInfo historyInfo = (HistoryInfo) element;
-			if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider.getProjectSpace(project)
-				.getBaseVersion().getIdentifier()) {
+			if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider
+					.getProjectSpace(project).getBaseVersion().getIdentifier()) {
 				return bold;
 			}
 		} else if (element instanceof ModelElementId) {
@@ -247,15 +265,20 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		} else if (element instanceof VirtualNode<?>) {
 			return italic;
 		}
-		if (element instanceof EObject && ((EObject) element).eContainer() instanceof AbstractOperation) {
-			AbstractOperation op = (AbstractOperation) ((EObject) element).eContainer();
-			if (element instanceof ModelElementId && element.equals(op.getModelElementId())) {
+		if (element instanceof EObject
+				&& ((EObject) element).eContainer() instanceof AbstractOperation) {
+			AbstractOperation op = (AbstractOperation) ((EObject) element)
+					.eContainer();
+			if (element instanceof ModelElementId
+					&& element.equals(op.getModelElementId())) {
 				return bold;
 			}
 
 			EObject modelElement = (EObject) element;
 			Project project = ModelUtil.getProject(modelElement);
-			if (project != null && project.getModelElementId(modelElement).equals(op.getModelElementId())) {
+			if (project != null
+					&& project.getModelElementId(modelElement).equals(
+							op.getModelElementId())) {
 				return bold;
 			}
 		}
@@ -269,8 +292,9 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	public Image getImage(Object element) {
 
 		if (element instanceof ModelElementId) {
-			return adapterFactoryLabelProvider.getImage(changePackageVisualizationHelper
-				.getModelElement((ModelElementId) element));
+			return adapterFactoryLabelProvider
+					.getImage(changePackageVisualizationHelper
+							.getModelElement((ModelElementId) element));
 		} else if (element instanceof HistoryInfo) {
 			String text = getText(element);
 			if (text.equals(LOCAL_REVISION)) {
@@ -283,13 +307,21 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 				return headRevision;
 			}
 		}
-		if (element instanceof CompositeOperation && ((CompositeOperation) element).getMainOperation() != null) {
-			return changePackageVisualizationHelper.getImage(adapterFactoryLabelProvider,
-				((CompositeOperation) element).getMainOperation());
+		if (element instanceof CompositeOperation
+				&& ((CompositeOperation) element).getMainOperation() != null) {
+			return changePackageVisualizationHelper.getImage(
+					adapterFactoryLabelProvider,
+					((CompositeOperation) element).getMainOperation());
 		}
 
 		if (element instanceof AbstractOperation) {
-			return changePackageVisualizationHelper.getImage(adapterFactoryLabelProvider, (AbstractOperation) element);
+			return changePackageVisualizationHelper.getImage(
+					adapterFactoryLabelProvider, (AbstractOperation) element);
+		}
+		if (element instanceof ESChangePackage) {
+			return adapterFactoryLabelProvider
+					.getImage(((ESChangePackageImpl) element)
+							.getInternalAPIImpl());
 		}
 		return adapterFactoryLabelProvider.getImage(element);
 	}
@@ -298,7 +330,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	 * @param changePackageVisualizationHelper
 	 *            the changePackageVisualizationHelper to set
 	 */
-	public void setChangePackageVisualizationHelper(ChangePackageVisualizationHelper changePackageVisualizationHelper) {
+	public void setChangePackageVisualizationHelper(
+			ChangePackageVisualizationHelper changePackageVisualizationHelper) {
 		this.changePackageVisualizationHelper = changePackageVisualizationHelper;
 	}
 
@@ -314,7 +347,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	 */
 	@Override
 	public String getToolTipText(Object element) {
-		HistoryInfo historyInfo = ModelUtil.getParent(HistoryInfo.class, (EObject) element);
+		HistoryInfo historyInfo = ModelUtil.getParent(HistoryInfo.class,
+				(EObject) element);
 		return getText(historyInfo);
 	}
 
@@ -353,8 +387,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 	}
 
 	/**
-	 * Sets the project that is used to resolve revision numbers that
-	 * are possibly used within the labels.
+	 * Sets the project that is used to resolve revision numbers that are
+	 * possibly used within the labels.
 	 * 
 	 * @param newProject
 	 *            the project to be set

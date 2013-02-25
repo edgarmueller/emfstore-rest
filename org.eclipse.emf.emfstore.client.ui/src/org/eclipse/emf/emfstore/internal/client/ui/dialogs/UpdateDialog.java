@@ -18,7 +18,9 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -35,7 +37,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
-	private List<ChangePackage> changes;
+	private List<ESChangePackage> changes;
 	private ProjectSpace projectSpace;
 	private Image updateImage;
 	private final ESModelElementIdToEObjectMapping idToEObjectMapping;
@@ -52,8 +54,9 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	 * @param idToEObjectMapping
 	 *            a mapping of EObjects to their respective IDs
 	 */
-	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace, List<ChangePackage> changes,
-		ESModelElementIdToEObjectMapping idToEObjectMapping) {
+	public UpdateDialog(Shell parentShell, ProjectSpace projectSpace,
+			List<ESChangePackage> changes,
+			ESModelElementIdToEObjectMapping idToEObjectMapping) {
 		super(parentShell);
 		this.idToEObjectMapping = idToEObjectMapping;
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
@@ -72,26 +75,33 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
 		// changes tree
 		if (changes != null) {
-			TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changes,
-				projectSpace.getProject(), idToEObjectMapping, true);
+			TabbedChangesComposite changesComposite = new TabbedChangesComposite(
+					contents, SWT.BORDER, changes, projectSpace.getProject(),
+					idToEObjectMapping, true);
 			// changesComposite.setReverseNodes(false);
-			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
+					true, true, 2, 1));
 		}
 
 		String projectName = "";
 		// show number of changes on dialog title
-		if (projectSpace.getProjectName() != null && projectSpace.getProjectName().length() > 0) {
-			projectName = " for project \"" + projectSpace.getProjectName() + "\"";
+		if (projectSpace.getProjectName() != null
+				&& projectSpace.getProjectName().length() > 0) {
+			projectName = " for project \"" + projectSpace.getProjectName()
+					+ "\"";
 		}
 		setTitle("Incoming changes from server" + projectName);
 		int operationCount = 0;
 		int rootCount = 0;
-		for (ChangePackage changePackage : changes) {
+		for (ESChangePackage esChangePackage : changes) {
+			ChangePackage changePackage = ((ESChangePackageImpl) esChangePackage)
+					.getInternalAPIImpl();
 			rootCount += changePackage.getOperations().size();
 			operationCount += changePackage.getSize();
 		}
-		setMessage("Number of versions: " + changes.size() + ", Number of composite changes: " + rootCount
-			+ ", Number of overall changes: " + operationCount);
+		setMessage("Number of versions: " + changes.size()
+				+ ", Number of composite changes: " + rootCount
+				+ ", Number of overall changes: " + operationCount);
 
 		return contents;
 
@@ -104,7 +114,8 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Update");
-		updateImage = Activator.getImageDescriptor("icons/arrow_up.png").createImage();
+		updateImage = Activator.getImageDescriptor("icons/arrow_up.png")
+				.createImage();
 		newShell.setImage(updateImage);
 	}
 

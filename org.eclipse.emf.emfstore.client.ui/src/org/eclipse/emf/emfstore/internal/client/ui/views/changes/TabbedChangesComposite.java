@@ -16,8 +16,8 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMLabelProvider;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -28,8 +28,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 /**
- * A composite that contains multiple tabs displaying the operation from a different view - e.g. grouped by model
- * element, or ungrouped.
+ * A composite that contains multiple tabs displaying the operation from a
+ * different view - e.g. grouped by model element, or ungrouped.
  * 
  * @author Shterev
  * @author emueller
@@ -58,8 +58,10 @@ public class TabbedChangesComposite extends Composite {
 	 * @param showRootNodes
 	 *            whether to show root nodes
 	 */
-	public TabbedChangesComposite(Composite parent, int style, List<ChangePackage> changePackages, Project project,
-		ESModelElementIdToEObjectMapping idToEObjectMapping, boolean showRootNodes) {
+	public TabbedChangesComposite(Composite parent, int style,
+			List<ESChangePackage> changePackages, Project project,
+			ESModelElementIdToEObjectMapping idToEObjectMapping,
+			boolean showRootNodes) {
 		super(parent, style);
 		createComposite(style, project, idToEObjectMapping, showRootNodes);
 		tabTreeViewer.setInput(changePackages);
@@ -82,30 +84,37 @@ public class TabbedChangesComposite extends Composite {
 	 * @param showRootNodes
 	 *            whether to show root nodes
 	 */
-	public TabbedChangesComposite(Composite parent, int style, Project project, List<AbstractOperation> operations,
-		ESModelElementIdToEObjectMapping idToEObjectMapping, boolean showRootNodes) {
+	public TabbedChangesComposite(Composite parent, int style, Project project,
+			List<AbstractOperation> operations,
+			ESModelElementIdToEObjectMapping idToEObjectMapping,
+			boolean showRootNodes) {
 		super(parent, style);
 		createComposite(style, project, idToEObjectMapping, showRootNodes);
 		tabTreeViewer.setInput(operations);
 	}
 
-	private void createComposite(int style, Project project, ESModelElementIdToEObjectMapping idToEObjectMapping,
-		boolean showRootNodes) {
+	private void createComposite(int style, Project project,
+			ESModelElementIdToEObjectMapping idToEObjectMapping,
+			boolean showRootNodes) {
 		setLayout(new GridLayout());
 		folder = new TabFolder(this, style);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(folder);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(folder);
 
 		tabComposite = new Composite(folder, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(tabComposite);
 
-		tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL | SWT.V_SCROLL);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
+		tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL
+				| SWT.V_SCROLL);
+		GridDataFactory.fillDefaults().grab(true, true)
+				.applyTo(tabTreeViewer.getControl());
 
 		contentProvider = new SCMContentProvider(idToEObjectMapping);
 		contentProvider.setShowRootNodes(showRootNodes);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
-		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
-			idToEObjectMapping));
+		detailedLabelProvider
+				.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
+						idToEObjectMapping));
 		tabTreeViewer.setContentProvider(contentProvider);
 		tabTreeViewer.setLabelProvider(detailedLabelProvider);
 		tabTreeViewer.expandToLevel(1);
