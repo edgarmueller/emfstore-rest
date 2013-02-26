@@ -31,9 +31,9 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 
 /**
- * The login dialog controller manages a given {@link Usersession} and/or a {@link ServerInfo} to determine
- * when it is necessary to open a {@link LoginDialog} in order to authenticate the user.
- * It does not, however, open a dialog, if the usersession is already logged in.
+ * The login dialog controller manages a given {@link Usersession} and/or a {@link ServerInfo} to determine when it is
+ * necessary to open a {@link LoginDialog} in order to authenticate the user. It does not, however,
+ * open a dialog, if the usersession is already logged in.
  * 
  * @author ovonwesen
  * @author emueller
@@ -51,31 +51,37 @@ public class LoginDialogController implements ILoginDialogController {
 	 */
 	public ESUsersession[] getKnownUsersessions() {
 		HashSet<Object> set = new LinkedHashSet<Object>();
-		List<ESUsersession> mapToAPI = ListUtil.mapToAPI(ESUsersession.class, WorkspaceProvider.getInstance()
-			.getWorkspace().getInternalAPIImpl().getUsersessions());
+		List<ESUsersession> mapToAPI = ListUtil.mapToAPI(ESUsersession.class,
+			WorkspaceProvider.getInstance().getWorkspace()
+				.getInternalAPIImpl().getUsersessions());
 		return mapToAPI.toArray(new ESUsersession[mapToAPI.size()]);
 	}
 
 	private ESUsersession login(final boolean force) throws ESException {
-		return RunInUI.WithException.runWithResult(new Callable<ESUsersession>() {
-			public ESUsersession call() throws Exception {
+		return RunInUI.WithException
+			.runWithResult(new Callable<ESUsersession>() {
+				public ESUsersession call() throws Exception {
 
-				if (server != null && server.getLastUsersession() != null
-					&& server.getLastUsersession().isLoggedIn() && !force) {
-					return server.getLastUsersession();
+					if (server != null
+						&& server.getLastUsersession() != null
+						&& server.getLastUsersession().isLoggedIn()
+						&& !force) {
+						return server.getLastUsersession();
+					}
+
+					LoginDialog dialog = new LoginDialog(Display
+						.getCurrent().getActiveShell(),
+						LoginDialogController.this);
+					dialog.setBlockOnOpen(true);
+
+					if (dialog.open() != Window.OK || usersession == null) {
+						throw new AccessControlException("Couldn't login.");
+					}
+
+					// contract: #validate() sets the usersession;
+					return usersession;
 				}
-
-				LoginDialog dialog = new LoginDialog(Display.getCurrent().getActiveShell(), LoginDialogController.this);
-				dialog.setBlockOnOpen(true);
-
-				if (dialog.open() != Window.OK || usersession == null) {
-					throw new AccessControlException("Couldn't login.");
-				}
-
-				// contract: #validate() sets the usersession;
-				return usersession;
-			}
-		});
+			});
 	}
 
 	/**
@@ -109,7 +115,8 @@ public class LoginDialogController implements ILoginDialogController {
 	 */
 	public void validate(ESUsersession session) throws ESException {
 
-		Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		Usersession usersession = ((ESUsersessionImpl) session)
+			.getInternalAPIImpl();
 
 		// TODO login code
 		usersession.logIn();
@@ -148,19 +155,21 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	/**
-	 * Perform a login using an {@link Usersession} that can be determined
-	 * with the given {@link ServerInfo}.
+	 * Perform a login using an {@link Usersession} that can be determined with
+	 * the given {@link ServerInfo}.
 	 * 
 	 * 
 	 * @param server
-	 *            the server info to be used in order to determine a valid usersession
+	 *            the server info to be used in order to determine a valid
+	 *            usersession
 	 * @param force
 	 *            whether to force requesting the password
 	 * @return a logged-in usersession
 	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public ESUsersession login(ESServer server, boolean force) throws ESException {
+	public ESUsersession login(ESServer server, boolean force)
+		throws ESException {
 		this.server = server;
 		this.usersession = null;
 		return login(force);
@@ -176,19 +185,21 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public void login(ESUsersession usersession, boolean force) throws ESException {
+	public void login(ESUsersession usersession, boolean force)
+		throws ESException {
 		this.server = null;
 		this.usersession = usersession;
 		login(force);
 	}
 
 	/**
-	 * Perform a login using an {@link Usersession} that can be determined
-	 * with the given {@link ServerInfo}.
+	 * Perform a login using an {@link Usersession} that can be determined with
+	 * the given {@link ServerInfo}.
 	 * 
 	 * 
 	 * @param server
-	 *            the server info to be used in order to determine a valid usersession
+	 *            the server info to be used in order to determine a valid
+	 *            usersession
 	 * @return a logged-in usersession
 	 * @throws ESException
 	 *             in case the login fails

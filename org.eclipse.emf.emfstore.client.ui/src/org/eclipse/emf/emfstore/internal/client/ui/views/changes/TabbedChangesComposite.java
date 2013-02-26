@@ -29,8 +29,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 /**
- * A composite that contains multiple tabs displaying the operation from a different view - e.g. grouped by model
- * element, or ungrouped.
+ * A composite that contains multiple tabs displaying the operation from a
+ * different view - e.g. grouped by model element, or ungrouped.
  * 
  * @author Shterev
  * @author emueller
@@ -96,19 +96,23 @@ public class TabbedChangesComposite extends Composite {
 		boolean showRootNodes) {
 		setLayout(new GridLayout());
 		folder = new TabFolder(this, style);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(folder);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+			.grab(true, true).applyTo(folder);
 
 		tabComposite = new Composite(folder, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(tabComposite);
 
-		tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL | SWT.V_SCROLL);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabTreeViewer.getControl());
+		tabTreeViewer = new TreeViewer(tabComposite, SWT.H_SCROLL
+			| SWT.V_SCROLL);
+		GridDataFactory.fillDefaults().grab(true, true)
+			.applyTo(tabTreeViewer.getControl());
 
 		contentProvider = new SCMContentProvider(idToEObjectMapping);
 		contentProvider.setShowRootNodes(showRootNodes);
 		SCMLabelProvider detailedLabelProvider = new SCMLabelProvider(project);
-		detailedLabelProvider.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
-			idToEObjectMapping));
+		detailedLabelProvider
+			.setChangePackageVisualizationHelper(new ChangePackageVisualizationHelper(
+				idToEObjectMapping));
 		tabTreeViewer.setContentProvider(contentProvider);
 		tabTreeViewer.setLabelProvider(detailedLabelProvider);
 		tabTreeViewer.expandToLevel(1);

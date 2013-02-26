@@ -48,7 +48,8 @@ import org.eclipse.swt.widgets.Shell;
  * @author ovonwesen
  * @author emueller
  */
-public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
+public class UIUpdateProjectController extends
+	AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ESUpdateCallback {
 
 	private final ESLocalProject localProject;
@@ -78,7 +79,8 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @param version
 	 *            the version to update to
 	 */
-	public UIUpdateProjectController(Shell shell, ESLocalProject projectSpace, ESVersionSpec version) {
+	public UIUpdateProjectController(Shell shell, ESLocalProject projectSpace,
+		ESVersionSpec version) {
 		super(shell);
 		this.localProject = projectSpace;
 		this.version = version;
@@ -93,8 +95,9 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	public void noChangesOnServer() {
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				MessageDialog.openInformation(getShell(), "No need to update",
-					"Your project is up to date, you do not need to update.");
+				MessageDialog
+					.openInformation(getShell(), "No need to update",
+						"Your project is up to date, you do not need to update.");
 				return null;
 			}
 		});
@@ -111,9 +114,10 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 		// TODO OTS
 		boolean mergeSuccessful = false;
 		try {
-			final ESPrimaryVersionSpec targetVersion = localProject.resolveVersionSpec(ESVersionSpec.FACTORY
-				.createHEAD(localProject
-					.getBaseVersion()), new NullProgressMonitor());
+			final ESPrimaryVersionSpec targetVersion = localProject
+				.resolveVersionSpec(ESVersionSpec.FACTORY
+					.createHEAD(localProject.getBaseVersion()),
+					new NullProgressMonitor());
 			// merge opens up a dialog
 			return localProject.merge(targetVersion, changeConflict,
 				new MergeProjectHandler(), this, progressMonitor);
@@ -129,9 +133,11 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 		return mergeSuccessful;
 	}
 
-	private void handleMergeException(final ESLocalProject projectSpace, ESException e) {
-		WorkspaceUtil.logException(
-			String.format("Exception while merging the project %s!", projectSpace.getProjectName()), e);
+	private void handleMergeException(final ESLocalProject projectSpace,
+		ESException e) {
+		WorkspaceUtil.logException(String.format(
+			"Exception while merging the project %s!",
+			projectSpace.getProjectName()), e);
 		EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 	}
 
@@ -172,18 +178,22 @@ public class UIUpdateProjectController extends AbstractEMFStoreUIController<ESPr
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.MonitoredEMFStoreAction#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor) throws ESException {
+	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor)
+		throws ESException {
 		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
 
-		ESPrimaryVersionSpec resolveVersionSpec = localProject.resolveVersionSpec(ESVersionSpec.FACTORY
-			.createHEAD(oldBaseVersion), new NullProgressMonitor());
+		ESPrimaryVersionSpec resolveVersionSpec = localProject
+			.resolveVersionSpec(
+				ESVersionSpec.FACTORY.createHEAD(oldBaseVersion),
+				new NullProgressMonitor());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();
 			return oldBaseVersion;
 		}
 
-		ESPrimaryVersionSpec newBaseVersion = localProject.update(version, UIUpdateProjectController.this, monitor);
+		ESPrimaryVersionSpec newBaseVersion = localProject.update(version,
+			UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
 	}

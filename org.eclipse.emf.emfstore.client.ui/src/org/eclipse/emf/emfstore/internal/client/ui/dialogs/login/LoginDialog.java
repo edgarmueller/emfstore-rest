@@ -64,7 +64,8 @@ public class LoginDialog extends TitleAreaDialog {
 	 * @param parentShell
 	 *            the parent shell to be used by the dialog
 	 * @param controller
-	 *            the login dialog controller repsonsible for opening up the login dialog
+	 *            the login dialog controller repsonsible for opening up the
+	 *            login dialog
 	 * 
 	 */
 	public LoginDialog(Shell parentShell, ILoginDialogController controller) {
@@ -80,7 +81,8 @@ public class LoginDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		setTitleImage(ResourceManager.getPluginImage("org.eclipse.emf.emfstore.client.ui", "icons/login_icon.png"));
+		setTitleImage(ResourceManager.getPluginImage(
+			"org.eclipse.emf.emfstore.client.ui", "icons/login_icon.png"));
 		setTitle("Log in to " + controller.getServerLabel());
 		setMessage("Please enter your username and password");
 		getShell().setText("Authentication required");
@@ -91,11 +93,13 @@ public class LoginDialog extends TitleAreaDialog {
 
 		Composite loginContainer = new Composite(container, SWT.NONE);
 		loginContainer.setLayout(new GridLayout(3, false));
-		loginContainer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		loginContainer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+			true, 1, 1));
 		loginContainer.setBounds(0, 0, 64, 64);
 
 		Label usernameLabel = new Label(loginContainer, SWT.NONE);
-		GridData gridData = new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1);
+		GridData gridData = new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+			1, 1);
 		gridData.widthHint = 95;
 		usernameLabel.setLayoutData(gridData);
 		usernameLabel.setText("Username");
@@ -153,7 +157,8 @@ public class LoginDialog extends TitleAreaDialog {
 		usernameCombo.setLabelProvider(new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				if (element instanceof Usersession && ((Usersession) element).getUsername() != null) {
+				if (element instanceof Usersession
+					&& ((Usersession) element).getUsername() != null) {
 					return ((Usersession) element).getUsername();
 				}
 				return super.getText(element);
@@ -177,7 +182,8 @@ public class LoginDialog extends TitleAreaDialog {
 			return;
 		}
 
-		selectedUsersession = ((ESUsersessionImpl) usersession).getInternalAPIImpl();
+		selectedUsersession = ((ESUsersessionImpl) usersession)
+			.getInternalAPIImpl();
 
 		// reset fields
 		passwordField.setMessage("");
@@ -186,16 +192,21 @@ public class LoginDialog extends TitleAreaDialog {
 		if (selectedUsersession != null) {
 
 			// check whether text is set correctly
-			if (!usernameCombo.getCombo().getText().equals(selectedUsersession.getUsername())) {
-				usernameCombo.getCombo().setText(selectedUsersession.getUsername());
+			if (!usernameCombo.getCombo().getText()
+				.equals(selectedUsersession.getUsername())) {
+				usernameCombo.getCombo().setText(
+					selectedUsersession.getUsername());
 			}
 
-			if (selectedUsersession.isSavePassword() && selectedUsersession.getPassword() != null) {
-				passwordField.setMessage("<password is saved, reenter to change>");
+			if (selectedUsersession.isSavePassword()
+				&& selectedUsersession.getPassword() != null) {
+				passwordField
+					.setMessage("<password is saved, reenter to change>");
 				passwordField.setText("");
 				savePassword.setSelection(true);
 			}
-			// reset password modified. modified password is only relevant when dealing with saved passwords.
+			// reset password modified. modified password is only relevant when
+			// dealing with saved passwords.
 			passwordModified = false;
 		}
 	}
@@ -215,7 +226,8 @@ public class LoginDialog extends TitleAreaDialog {
 
 			Usersession candidateSession = selectedUsersession;
 
-			// try to find usersession with same username in order to avoid duplicates
+			// try to find usersession with same username in order to avoid
+			// duplicates
 			if (candidateSession == null) {
 				ESUsersession usersessionIfKnown = getUsersessionIfKnown(username);
 				candidateSession = ((ESUsersessionImpl) usersessionIfKnown).getInternalAPIImpl();
@@ -224,7 +236,8 @@ public class LoginDialog extends TitleAreaDialog {
 			if (candidateSession == null) {
 				candidateSession = ModelFactory.eINSTANCE.createUsersession();
 				// TODO: cast
-				candidateSession.setServerInfo((ServerInfo) controller.getServerInfo());
+				candidateSession.setServerInfo((ServerInfo) controller
+					.getServerInfo());
 				candidateSession.setUsername(username);
 			}
 
@@ -257,8 +270,10 @@ public class LoginDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
+			true);
+		createButton(parent, IDialogConstants.CANCEL_ID,
+			IDialogConstants.CANCEL_LABEL, false);
 	}
 
 	/**
@@ -280,19 +295,22 @@ public class LoginDialog extends TitleAreaDialog {
 	}
 
 	/**
-	 * Simple listener for loading the selected usersession if the user changes the selected entry within
-	 * the combo box that contains all known usersessions.
+	 * Simple listener for loading the selected usersession if the user changes
+	 * the selected entry within the combo box that contains all known
+	 * usersessions.
 	 * 
 	 * @author ovonwesen
 	 * 
 	 */
-	private final class ComboListener implements ISelectionChangedListener, ModifyListener {
+	private final class ComboListener implements ISelectionChangedListener,
+		ModifyListener {
 		private String lastText = "";
 
 		public void selectionChanged(SelectionChangedEvent event) {
 			ISelection selection = event.getSelection();
 			if (selection instanceof StructuredSelection) {
-				Object firstElement = ((StructuredSelection) selection).getFirstElement();
+				Object firstElement = ((StructuredSelection) selection)
+					.getFirstElement();
 				if (firstElement instanceof Usersession) {
 					loadUsersession(((Usersession) firstElement).getAPIImpl());
 				}

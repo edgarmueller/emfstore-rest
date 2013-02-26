@@ -54,7 +54,8 @@ import org.eclipse.swt.widgets.Text;
  * @author Hodaie
  * @author Shterev
  */
-public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener {
+public class CommitDialog extends EMFStoreTitleAreaDialog implements
+	KeyListener {
 
 	private Text txtLogMsg;
 	private String logMsg = "";
@@ -93,7 +94,8 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 			"org.eclipse.emf.emfstore.client.ui.commitdialog.tray", true)
 			.getExtensionElements()) {
 			try {
-				CommitDialogTray tray = element.getClass("class", CommitDialogTray.class);
+				CommitDialogTray tray = element.getClass("class",
+					CommitDialogTray.class);
 				String name = element.getAttribute("name");
 				tray.init(CommitDialog.this);
 				trays.put(name, tray);
@@ -113,7 +115,8 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Commit");
-		commitImage = Activator.getImageDescriptor("icons/arrow_right.png").createImage();
+		commitImage = Activator.getImageDescriptor("icons/arrow_right.png")
+			.createImage();
 		newShell.setImage(commitImage);
 	}
 
@@ -147,25 +150,30 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		contents.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		contents.setLayout(new GridLayout(2, false));
 		String projectName = "";
-		if (activeProjectSpace.getProjectName() != null && activeProjectSpace.getProjectName().length() > 0) {
-			projectName = "of project \"" + activeProjectSpace.getProjectName() + "\" ";
+		if (activeProjectSpace.getProjectName() != null
+			&& activeProjectSpace.getProjectName().length() > 0) {
+			projectName = "of project \"" + activeProjectSpace.getProjectName()
+				+ "\" ";
 		}
 		setTitle("Commit your local changes " + projectName + "to the server");
-		setMessage("Number of composite changes: " + changes.getOperations().size() + ", Number of overall changes: "
-			+ numberOfChanges);
+		setMessage("Number of composite changes: "
+			+ changes.getOperations().size()
+			+ ", Number of overall changes: " + numberOfChanges);
 
 		// Log message
 		Label lblLogMsg = new Label(contents, SWT.NONE);
-		lblLogMsg.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false, 2, 1));
+		lblLogMsg.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
+			false, 2, 1));
 		lblLogMsg.setText("Log message:");
 
 		txtLogMsg = new Text(contents, SWT.MULTI | SWT.LEAD | SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).align(SWT.FILL, SWT.TOP).hint(1, 45)
-			.applyTo(txtLogMsg);
+		GridDataFactory.fillDefaults().grab(true, false).span(2, 1)
+			.align(SWT.FILL, SWT.TOP).hint(1, 45).applyTo(txtLogMsg);
 		String logMsg = "";
 		LogMessage logMessage = changes.getLogMessage();
 
-		if (logMessage != null && logMessage.getMessage() != null && !logMessage.getMessage().equals("")) {
+		if (logMessage != null && logMessage.getMessage() != null
+			&& !logMessage.getMessage().equals("")) {
 			// if change package has log message attached to it, use it
 			logMsg = logMessage.getMessage();
 		} else if (oldLogMessages != null && oldLogMessages.size() > 0) {
@@ -181,7 +189,8 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		Label oldLabel = new Label(contents, SWT.NONE);
 		oldLabel.setText("Previous messages:");
 		final Combo oldMsg = new Combo(contents, SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP).grab(true, false).applyTo(oldMsg);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP)
+			.grab(true, false).applyTo(oldMsg);
 
 		ArrayList<String> oldLogMessagesCopy = new ArrayList<String>();
 		oldLogMessagesCopy.addAll(oldLogMessages);
@@ -206,9 +215,11 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 		// ChangesTree
 		ArrayList<ChangePackage> changePackages = new ArrayList<ChangePackage>();
 		changePackages.add(changes);
-		TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changePackages,
-			getActiveProjectSpace().getProject(), idToEObjectMapping, true);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(changesComposite);
+		TabbedChangesComposite changesComposite = new TabbedChangesComposite(
+			contents, SWT.BORDER, changePackages, getActiveProjectSpace()
+				.getProject(), idToEObjectMapping, true);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+			.grab(true, true).span(2, 1).applyTo(changesComposite);
 
 		return contents;
 
@@ -282,33 +293,36 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements KeyListener
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		// final String notifyUsers = "Notify users";
-		for (ESExtensionElement c : new ESExtensionPoint("org.eclipse.emf.emfstore.client.ui.commitdialog.tray")
+		for (ESExtensionElement c : new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.ui.commitdialog.tray")
 			.getExtensionElements()) {
 			final String name = c.getAttribute("name");
 			final CommitDialogTray tray = trays.get(name);
 			if (tray != null) {
-				final Button notificationsButton = createButton(parent, 2138, name + " >>", false);
-				notificationsButton.addSelectionListener(new SelectionAdapter() {
-					private boolean isOpen;
+				final Button notificationsButton = createButton(parent, 2138,
+					name + " >>", false);
+				notificationsButton
+					.addSelectionListener(new SelectionAdapter() {
+						private boolean isOpen;
 
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						if (!isOpen) {
-							openTray(tray);
-							notificationsButton.setText(name + " <<");
-							Rectangle bounds = getShell().getBounds();
-							bounds.x -= 100;
-							getShell().setBounds(bounds);
-						} else {
-							closeTray();
-							notificationsButton.setText(name + " >>");
-							Rectangle bounds = getShell().getBounds();
-							bounds.x += 100;
-							getShell().setBounds(bounds);
+						@Override
+						public void widgetSelected(SelectionEvent e) {
+							if (!isOpen) {
+								openTray(tray);
+								notificationsButton.setText(name + " <<");
+								Rectangle bounds = getShell().getBounds();
+								bounds.x -= 100;
+								getShell().setBounds(bounds);
+							} else {
+								closeTray();
+								notificationsButton.setText(name + " >>");
+								Rectangle bounds = getShell().getBounds();
+								bounds.x += 100;
+								getShell().setBounds(bounds);
+							}
+							isOpen = !isOpen;
 						}
-						isOpen = !isOpen;
-					}
-				});
+					});
 			}
 		}
 		super.createButtonsForButtonBar(parent);

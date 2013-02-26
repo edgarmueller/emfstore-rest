@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.TabbedChangesComposite;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -76,25 +77,32 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
 		// changes tree
 		if (changes != null) {
-			TabbedChangesComposite changesComposite = new TabbedChangesComposite(contents, SWT.BORDER, changes,
-				projectSpace.getProject(), idToEObjectMapping, true);
+			TabbedChangesComposite changesComposite = new TabbedChangesComposite(
+				contents, SWT.BORDER, changes, projectSpace.getProject(),
+				idToEObjectMapping, true);
 			// changesComposite.setReverseNodes(false);
-			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+			changesComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
+				true, true, 2, 1));
 		}
 
 		String projectName = "";
 		// show number of changes on dialog title
-		if (projectSpace.getProjectName() != null && projectSpace.getProjectName().length() > 0) {
-			projectName = " for project \"" + projectSpace.getProjectName() + "\"";
+		if (projectSpace.getProjectName() != null
+			&& projectSpace.getProjectName().length() > 0) {
+			projectName = " for project \"" + projectSpace.getProjectName()
+				+ "\"";
 		}
 		setTitle("Incoming changes from server" + projectName);
 		int operationCount = 0;
 		int rootCount = 0;
-		for (ChangePackage changePackage : changes) {
+		for (ChangePackage esChangePackage : changes) {
+			ChangePackage changePackage = ((ESChangePackageImpl) esChangePackage)
+				.getInternalAPIImpl();
 			rootCount += changePackage.getOperations().size();
 			operationCount += changePackage.getSize();
 		}
-		setMessage("Number of versions: " + changes.size() + ", Number of composite changes: " + rootCount
+		setMessage("Number of versions: " + changes.size()
+			+ ", Number of composite changes: " + rootCount
 			+ ", Number of overall changes: " + operationCount);
 
 		return contents;
@@ -108,7 +116,8 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Update");
-		updateImage = Activator.getImageDescriptor("icons/arrow_up.png").createImage();
+		updateImage = Activator.getImageDescriptor("icons/arrow_up.png")
+			.createImage();
 		newShell.setImage(updateImage);
 	}
 
