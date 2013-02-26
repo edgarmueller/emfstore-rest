@@ -74,7 +74,7 @@
                     ifEmpty="true"
                     operator="and">
                  <instanceof
-                       value="org.eclipse.emf.emfstore.internal.client.model.ProjectSpace">
+                       value="org.eclipse.emf.emfstore.client.ESLocalProject">
                  </instanceof>
                  <test
                        forcePluginActivation="true"

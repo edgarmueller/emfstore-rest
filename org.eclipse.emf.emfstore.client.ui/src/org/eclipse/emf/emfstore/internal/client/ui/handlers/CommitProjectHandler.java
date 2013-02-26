@@ -10,26 +10,30 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICommitProjectController;
 
 /**
- * Handler for commit a project.<br/>
- * It is assumed that the user previously has selected a {@link ProjectSpace} instance.<br/>
- * Alternatively the project space to be committed may also be passed via a constructor.
+ * <p>
+ * Handler for commiting a project.
+ * </p>
+ * <p>
+ * It is assumed that the user previously has selected a {@link ESLocalProject} instance.<br/>
+ * Alternatively, the project to be committed may also be passed via a constructor.
+ * </p>
  * 
  * @author emueller
  * 
  */
 public class CommitProjectHandler extends AbstractEMFStoreHandler {
 
-	private final ProjectSpace projectSpace;
+	private ESLocalProject localProject;
 
 	/**
 	 * Default constructor.
 	 */
 	public CommitProjectHandler() {
-		projectSpace = null;
+		this(null);
 	}
 
 	/**
@@ -38,8 +42,8 @@ public class CommitProjectHandler extends AbstractEMFStoreHandler {
 	 * @param projectSpace
 	 *            the project space to be committed
 	 */
-	public CommitProjectHandler(ProjectSpace projectSpace) {
-		this.projectSpace = projectSpace;
+	public CommitProjectHandler(ESLocalProject localProject) {
+		this.localProject = localProject;
 	}
 
 	/**
@@ -50,11 +54,12 @@ public class CommitProjectHandler extends AbstractEMFStoreHandler {
 	 */
 	@Override
 	public void handle() {
-		if (projectSpace == null) {
-			new UICommitProjectController(getShell(), requireSelection(ProjectSpace.class).getAPIImpl()).execute();
-		} else {
-			new UICommitProjectController(getShell(), projectSpace.getAPIImpl()).execute();
+
+		if (localProject == null) {
+			localProject = requireSelection(ESLocalProject.class);
 		}
+
+		new UICommitProjectController(getShell(), localProject).execute();
 	}
 
 }

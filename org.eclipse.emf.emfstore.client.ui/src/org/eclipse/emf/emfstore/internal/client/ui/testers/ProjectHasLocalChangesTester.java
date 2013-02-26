@@ -7,17 +7,21 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.testers;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.core.expressions.PropertyTester;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 
 /**
  * Property tester to test if a project space has local changes.
  * 
  * @author koegel
+ * @author emueller
  */
 public class ProjectHasLocalChangesTester extends PropertyTester {
 
@@ -27,20 +31,20 @@ public class ProjectHasLocalChangesTester extends PropertyTester {
 	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object, java.lang.String, java.lang.Object[],
 	 *      java.lang.Object)
 	 */
-	public boolean test(Object receiver, String property, Object[] args, final Object expectedValue) {
-		if (receiver instanceof ProjectSpace && expectedValue instanceof Boolean) {
-			final ProjectSpace projectSpace = (ProjectSpace) receiver;
+	public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue) {
 
-			EMFStoreCommandWithResult<Boolean> command = new EMFStoreCommandWithResult<Boolean>() {
-				@Override
-				protected Boolean doRun() {
-					Boolean hasLocalChanges = new Boolean(!projectSpace.getOperations().isEmpty());
+		if (receiver instanceof ESLocalProject && expectedValue instanceof Boolean) {
+
+			final ESLocalProject localProject = (ESLocalProject) receiver;
+
+			return RunESCommand.runWithResult(new Callable<Boolean>() {
+				public Boolean call() throws Exception {
+					Boolean hasLocalChanges = new Boolean(localProject.hasUncommitedChanges());
 					return hasLocalChanges.equals(expectedValue);
 				}
-			};
-
-			return command.run(false);
+			});
 		}
+
 		return false;
 	}
 
