@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
@@ -29,7 +28,8 @@ import org.eclipse.ui.PlatformUI;
  * @author emueller
  * 
  */
-public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Void> {
+public class UIManageOrgUnitsController extends
+		AbstractEMFStoreUIController<Void> {
 
 	private final Usersession session;
 
@@ -56,16 +56,19 @@ public class UIManageOrgUnitsController extends AbstractEMFStoreUIController<Voi
 	public Void doRun(IProgressMonitor progressMonitor) throws ESException {
 		try {
 			// TODO OTS
-			final AdminBroker adminBroker = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
-				.getAdminBroker(session);
-			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay()
-				.getActiveShell(), adminBroker);
+			final AdminBroker adminBroker = WorkspaceProvider.getInstance()
+					.getWorkspace().getInternalAPIImpl()
+					.getAdminBroker(session);
+			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI
+					.getWorkbench().getDisplay().getActiveShell(), adminBroker);
 			dialog.create();
 			dialog.open();
 		} catch (final AccessControlException e) {
-			MessageDialog.openError(getShell(), "Access denied ", e.getMessage());
+			MessageDialog.openError(getShell(), "Access denied ",
+					e.getMessage());
 		} catch (final ESException e) {
-			MessageDialog.openError(getShell(), "Error while retrieving the admin broker", e.getMessage());
+			MessageDialog.openError(getShell(),
+					"Error while retrieving the admin broker", e.getMessage());
 		}
 
 		return null;

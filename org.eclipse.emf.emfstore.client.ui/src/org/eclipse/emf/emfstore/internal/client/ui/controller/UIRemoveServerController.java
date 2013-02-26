@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
@@ -33,7 +32,8 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  * 
  */
-public class UIRemoveServerController extends AbstractEMFStoreUIController<Void> {
+public class UIRemoveServerController extends
+		AbstractEMFStoreUIController<Void> {
 
 	private final ServerInfo serverInfo;
 
@@ -43,7 +43,8 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 	 * @param shell
 	 *            the parent shell that should be used during the delet
 	 * @param serverInfo
-	 *            the server info that contains the information about which server should be removed from the workspace
+	 *            the server info that contains the information about which
+	 *            server should be removed from the workspace
 	 */
 	public UIRemoveServerController(Shell shell, ServerInfo serverInfo) {
 		super(shell);
@@ -59,28 +60,32 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 
-		boolean shouldDelete = MessageDialog.openQuestion(getShell(), "Confirm deletion",
-			String.format("Are you sure you want to delete the server \'%s\'", serverInfo.getName()));
+		boolean shouldDelete = MessageDialog.openQuestion(getShell(),
+				"Confirm deletion", String.format(
+						"Are you sure you want to delete the server \'%s\'",
+						serverInfo.getName()));
 
 		if (!shouldDelete) {
 			return null;
 		}
 
 		// TODO OTS
-		EList<ProjectSpace> projectSpaces = ((Workspace) WorkspaceProvider.getInstance().getWorkspace())
-			.getProjectSpaces();
+		EList<ProjectSpace> projectSpaces = WorkspaceProvider.getInstance()
+				.getWorkspace().getInternalAPIImpl().getProjectSpaces();
 		ArrayList<ProjectSpace> usedSpaces = new ArrayList<ProjectSpace>();
 
 		for (ProjectSpace projectSpace : projectSpaces) {
 			if (projectSpace.getUsersession() != null
-				&& projectSpace.getUsersession().getServerInfo().equals(serverInfo)) {
+					&& projectSpace.getUsersession().getServerInfo()
+							.equals(serverInfo)) {
 				usedSpaces.add(projectSpace);
 			}
 		}
 
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				WorkspaceProvider.getInstance().getWorkspace().getServers().remove(serverInfo);
+				WorkspaceProvider.getInstance().getWorkspace().getServers()
+						.remove(serverInfo);
 				return null;
 			}
 		});
@@ -105,9 +110,14 @@ public class UIRemoveServerController extends AbstractEMFStoreUIController<Void>
 			message.append("\n" + pSpace.getProjectName());
 		}
 
-		MessageDialog.openError(getShell(), "Error while deleting", String.format(
-			"Cannot delete \'%s\' because it is currently used by the following projects: \n" + message.toString(),
-			serverInfo.getName()));
+		MessageDialog
+				.openError(
+						getShell(),
+						"Error while deleting",
+						String.format(
+								"Cannot delete \'%s\' because it is currently used by the following projects: \n"
+										+ message.toString(),
+								serverInfo.getName()));
 
 		return null;
 	}
