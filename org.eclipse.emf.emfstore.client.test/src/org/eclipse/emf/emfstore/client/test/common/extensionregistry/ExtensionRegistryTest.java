@@ -1,5 +1,9 @@
 package org.eclipse.emf.emfstore.client.test.common.extensionregistry;
 
+import static org.junit.Assert.assertEquals;
+
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.junit.Test;
 
 public class ExtensionRegistryTest {
@@ -13,4 +17,8 @@ public class ExtensionRegistryTest {
 		// assertNotNull(sessionProvider);
 	}
 
+	@Test
+	public void testGetDefaultErrorChecksumHandler() {
+		assertEquals(ChecksumErrorHandler.LOG, Configuration.getClientBehavior().getChecksumErrorHandler());
+	}
 }

@@ -38,7 +38,7 @@ public class Behavior {
 
 	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
 
-	private static ESChecksumErrorHandler checksumErrorHandler;
+	private ESChecksumErrorHandler checksumErrorHandler;
 
 	private static Boolean autoSave;
 
@@ -84,7 +84,7 @@ public class Behavior {
 	 * 
 	 * @return the active checksum error handler
 	 */
-	public static ESChecksumErrorHandler getChecksumErrorHandler() {
+	public ESChecksumErrorHandler getChecksumErrorHandler() {
 
 		if (checksumErrorHandler == null) {
 
@@ -99,9 +99,11 @@ public class Behavior {
 
 				if (errorHandler != null) {
 					checksumErrorHandler = errorHandler;
-				} else {
-					checksumErrorHandler = ChecksumErrorHandler.LOG;
 				}
+			}
+
+			if (checksumErrorHandler == null) {
+				checksumErrorHandler = ChecksumErrorHandler.LOG;
 			}
 		}
 
@@ -114,7 +116,7 @@ public class Behavior {
 	 * @param errorHandler
 	 *            the error handler to be set
 	 */
-	public static void setChecksumFailureAction(ESChecksumErrorHandler errorHandler) {
+	public void setChecksumFailureAction(ESChecksumErrorHandler errorHandler) {
 		checksumErrorHandler = errorHandler;
 	}
 
