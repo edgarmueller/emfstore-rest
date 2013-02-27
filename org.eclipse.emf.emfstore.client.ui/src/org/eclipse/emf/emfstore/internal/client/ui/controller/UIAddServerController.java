@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
@@ -28,9 +29,10 @@ import org.eclipse.ui.PlatformUI;
 public class UIAddServerController extends AbstractEMFStoreUIController<Void> {
 
 	/**
+	 * Constructor.
 	 * 
 	 * @param shell
-	 *            the {@link Shell} that will be used during the update
+	 *            the {@link Shell} that will be used to display any UI controls
 	 */
 	public UIAddServerController(Shell shell) {
 		super(shell);
