@@ -11,7 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.swt.widgets.Shell;
@@ -21,7 +23,8 @@ import org.eclipse.swt.widgets.Shell;
  * @author Edgar
  * 
  */
-public class UIUndoLastOperationController extends AbstractEMFStoreUIController<Void> {
+public class UIUndoLastOperationController extends
+		AbstractEMFStoreUIController<Void> {
 
 	private final ProjectSpace projectSpace;
 
@@ -29,13 +32,17 @@ public class UIUndoLastOperationController extends AbstractEMFStoreUIController<
 	 * Constructor.
 	 * 
 	 * @param shell
-	 *            the shell that will be used during the reversal of the operation
+	 *            the shell that will be used during the reversal of the
+	 *            operation
 	 * @param projectSpace
-	 *            the {@link ProjectSpace} upon which to reverse the last operation
+	 *            the {@link ProjectSpace} upon which to reverse the last
+	 *            operation
 	 */
-	public UIUndoLastOperationController(Shell shell, ProjectSpace projectSpace) {
+	public UIUndoLastOperationController(Shell shell,
+			ESLocalProject projectSpace) {
 		super(shell);
-		this.projectSpace = projectSpace;
+		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
+				.getInternalAPIImpl();
 	}
 
 	/**

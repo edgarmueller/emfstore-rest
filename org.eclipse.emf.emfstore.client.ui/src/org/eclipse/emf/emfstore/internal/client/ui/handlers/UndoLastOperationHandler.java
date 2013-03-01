@@ -15,7 +15,8 @@ import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUndoLastOperatio
 
 /**
  * Handler for undoing the latest change on a selected {@link ProjectSpace}.<br/>
- * It is assumed that the user previously has selected a {@link ProjectSpace} instance.
+ * It is assumed that the user previously has selected a {@link ProjectSpace}
+ * instance.
  * 
  * @author emueller
  * 
@@ -30,7 +31,8 @@ public class UndoLastOperationHandler extends AbstractEMFStoreHandler {
 	 */
 	@Override
 	public void handle() {
-		new UIUndoLastOperationController(getShell(), requireSelection(ProjectSpace.class)).execute();
+		new UIUndoLastOperationController(getShell(), requireSelection(
+				ProjectSpace.class).getAPIImpl()).execute();
 	}
 
 }
