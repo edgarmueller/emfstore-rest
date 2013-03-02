@@ -15,8 +15,9 @@ import org.eclipse.emf.emfstore.internal.client.ui.controller.UIManageOrgUnitsCo
 import org.eclipse.emf.emfstore.internal.client.ui.exceptions.RequiredSelectionException;
 
 /**
- * Handler for bringing up the dialog that enables it to managed organizational units.
- * It is assumed that the user previously has selected a {@link ServerInfo} instance.
+ * Handler for bringing up the dialog that enables it to managed organizational
+ * units. It is assumed that the user previously has selected a
+ * {@link ServerInfo} instance.
  * 
  * @author ovonwesen
  * @author emueller
@@ -28,9 +29,11 @@ public class ManageOrgUnitsHandler extends AbstractEMFStoreHandler {
 		ServerInfo serverInfo = requireSelection(ServerInfo.class);
 
 		if (serverInfo.getLastUsersession() == null) {
-			throw new RequiredSelectionException("Usersession not available in selected ServerInfo.");
+			throw new RequiredSelectionException(
+					"Usersession not available in selected ServerInfo.");
 		}
 
-		new UIManageOrgUnitsController(getShell(), serverInfo.getLastUsersession()).execute();
+		new UIManageOrgUnitsController(getShell(), serverInfo
+				.getLastUsersession().getAPIImpl()).execute();
 	}
 }
