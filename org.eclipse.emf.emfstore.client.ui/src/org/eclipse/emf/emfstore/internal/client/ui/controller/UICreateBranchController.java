@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
@@ -31,12 +30,12 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -215,8 +214,7 @@ public class UICreateBranchController extends
 
 	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace)
 			throws ESException {
-		final List<ESBranchInfo> branches = projectSpace.getAPIImpl()
-				.getBranches(new NullProgressMonitor());
+		final List<BranchInfo> branches = projectSpace.getBranches();
 
 		@SuppressWarnings("static-access")
 		String branch = new RunInUI.WithException()

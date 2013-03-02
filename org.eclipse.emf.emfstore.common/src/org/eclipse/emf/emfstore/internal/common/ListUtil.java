@@ -60,5 +60,14 @@ public class ListUtil {
 		}
 		return result;
 	}
-
+	public static <API ,API_IMPL extends InternalAPIDelegator<API_IMPL,INTERNAL_API>,INTERNAL_API extends APIDelegate<API_IMPL>> List<INTERNAL_API> mapToInternalAPI(Class<INTERNAL_API> apiClass, List<API> toCopy) {
+		if(toCopy == null) {
+			return null;
+		}
+		ArrayList<INTERNAL_API> result = new ArrayList<INTERNAL_API>(toCopy.size());
+		for(API element : toCopy) {
+			result.add(((API_IMPL)element).getInternalAPIImpl());
+		}
+		return result;
+	}
 }
