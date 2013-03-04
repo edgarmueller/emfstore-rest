@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
@@ -127,7 +127,7 @@ public class ImportProjectHistoryController extends ServerCall<Void> implements 
 	 */
 	@Override
 	protected Void run() throws ESException {
-		WorkspaceProvider.getInstance().getConnectionManager()
+		ESWorkspaceProviderImpl.getInstance().getConnectionManager()
 			.importProjectHistoryToServer(getUsersession().getSessionId(), projectHistory);
 		return null;
 	}

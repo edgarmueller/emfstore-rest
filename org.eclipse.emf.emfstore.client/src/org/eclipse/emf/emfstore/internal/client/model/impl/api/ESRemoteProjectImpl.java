@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
@@ -123,7 +123,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<BranchInfo>>(server) {
 					@Override
 					protected List<BranchInfo> run() throws ESException {
-						final ConnectionManager connectionManager = WorkspaceProvider.getInstance()
+						final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance()
 							.getConnectionManager();
 						return connectionManager.getBranches(
 																getSessionId(),
@@ -423,7 +423,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				projectSpace.setBaseVersion(primaryVersionSpec);
 				projectSpace.setLastUpdated(new Date());
 				projectSpace.setUsersession(usersession);
-				WorkspaceProvider.getObserverBus().register((ProjectSpaceBase) projectSpace);
+				ESWorkspaceProviderImpl.getObserverBus().register((ProjectSpaceBase) projectSpace);
 				projectSpace.setProject(project);
 				projectSpace.setResourceCount(0);
 				projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
@@ -431,7 +431,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 
 				// progressMonitor.subTask("Initializing resources...");
 				// TODO: OTS cast
-				Workspace workspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+				Workspace workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
 				projectSpace.initResources(workspace.getResourceSet());
 				parent.worked(10);
 
@@ -471,7 +471,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				((WorkspaceBase) workspace).addProjectSpace(projectSpace);
 				// TODO: OTS save
 				workspace.save();
-				WorkspaceProvider.getObserverBus().notify(ESCheckoutObserver.class)
+				ESWorkspaceProviderImpl.getObserverBus().notify(ESCheckoutObserver.class)
 					.checkoutDone(localProject);
 				parent.worked(10);
 				parent.done();

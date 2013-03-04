@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.common.EClassFilter;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVisualizationHelper;
@@ -174,7 +174,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
 		String baseVersion = "";
-		if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider
+		if (historyInfo.getPrimarySpec().getIdentifier() == ESWorkspaceProviderImpl
 				.getProjectSpace(project).getBaseVersion().getIdentifier()) {
 			baseVersion = "*";
 		}
@@ -254,7 +254,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 				return italic;
 			}
 			HistoryInfo historyInfo = (HistoryInfo) element;
-			if (historyInfo.getPrimarySpec().getIdentifier() == WorkspaceProvider
+			if (historyInfo.getPrimarySpec().getIdentifier() == ESWorkspaceProviderImpl
 					.getProjectSpace(project).getBaseVersion().getIdentifier()) {
 				return bold;
 			}

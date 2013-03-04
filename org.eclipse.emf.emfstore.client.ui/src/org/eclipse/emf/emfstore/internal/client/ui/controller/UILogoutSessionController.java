@@ -67,7 +67,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 		}
 
 		// TODO OTS auto save
-		// WorkspaceProvider.getInstance().getWorkspace().save();
+		// ESWorkspaceProviderImpl.getInstance().getWorkspace().save();
 
 		return null;
 	}

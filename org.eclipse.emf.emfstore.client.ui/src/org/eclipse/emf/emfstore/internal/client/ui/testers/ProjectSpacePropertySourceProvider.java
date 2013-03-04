@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -60,7 +60,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 		currentSaveStates = new LinkedHashMap<String, Boolean>();
 		// check if workspace can init, exit otherwise
 		try {
-			WorkspaceProvider.init();
+			ESWorkspaceProviderImpl.init();
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException exception) {
 			// END SUPRESS CATCH EXCEPTION
@@ -77,7 +77,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			}
 
 		};
-		WorkspaceProvider.getObserverBus().register(saveStateChangedObserver);
+		ESWorkspaceProviderImpl.getObserverBus().register(saveStateChangedObserver);
 		PlatformUI.getWorkbench().addWorkbenchListener(new IWorkbenchListener() {
 
 			public boolean preShutdown(IWorkbench workbench, boolean forced) {
@@ -114,7 +114,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 		ArrayContentProvider contentProvider = new ArrayContentProvider();
 		ArrayList<ESProject> inputArray = new ArrayList<ESProject>();
-		for (ESLocalProject project : WorkspaceProvider.getInstance().getWorkspace().getLocalProjects()) {
+		for (ESLocalProject project : ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects()) {
 			if (project.hasUnsavedChanges()) {
 				inputArray.add(project);
 			}
@@ -148,7 +148,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	 */
 	public void dispose() {
 		if (saveStateChangedObserver != null) {
-			WorkspaceProvider.getObserverBus().unregister(saveStateChangedObserver);
+			ESWorkspaceProviderImpl.getObserverBus().unregister(saveStateChangedObserver);
 		}
 
 	}

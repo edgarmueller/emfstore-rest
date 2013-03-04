@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -42,7 +42,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 
 	@AfterClass
 	public static void tearDownClass() {
-		for (final ServerInfo serverInfo : WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl()
+		for (final ServerInfo serverInfo : ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl()
 			.getServerInfos()) {
 			final Usersession lastUsersession = serverInfo.getLastUsersession();
 			RunESCommand.run(new Callable<Void>() {
@@ -57,8 +57,8 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 		}
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().getServerInfos().clear();
-				WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().save();
+				ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().getServerInfos().clear();
+				ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().save();
 				return null;
 			}
 		});
@@ -66,7 +66,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 
 	protected static void deleteRemoteProjects(ESUsersession usersession) throws IOException, FatalESException,
 		ESException {
-		for (ESRemoteProject project : WorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0)
+		for (ESRemoteProject project : ESWorkspaceProviderImpl.INSTANCE.getWorkspace().getServers().get(0)
 			.getRemoteProjects(usersession)) {
 			project.delete(usersession, new NullProgressMonitor());
 		}

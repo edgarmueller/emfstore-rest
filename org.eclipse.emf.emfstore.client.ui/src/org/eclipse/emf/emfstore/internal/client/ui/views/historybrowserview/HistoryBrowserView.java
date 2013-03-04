@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver;
@@ -419,7 +419,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			if (input instanceof ProjectSpace) {
 				this.projectSpace = (ProjectSpace) input;
 			} else if (input != null) {
-				ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+				ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				this.projectSpace = workspace.getInternalAPIImpl().getProjectSpace(ModelUtil.getProject(input));
 			} else {
 				this.projectSpace = null;
@@ -467,7 +467,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 					new ESBrowserLabelProvider());
 				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
 				// TODO OTS
-				ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+				ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				for (ProjectSpace ps : workspace.getInternalAPIImpl().getProjectSpaces()) {
 					if (ps.getUsersession() != null) {
 						relevantProjectSpaces.add(ps);
@@ -495,7 +495,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private void initProjectDeleteListener() {
-		WorkspaceProvider.getObserverBus().register(new DeleteProjectSpaceObserver() {
+		ESWorkspaceProviderImpl.getObserverBus().register(new DeleteProjectSpaceObserver() {
 			public void projectSpaceDeleted(ProjectSpace projectSpace) {
 				if (HistoryBrowserView.this.projectSpace == projectSpace) {
 					setInput((EObject) null);

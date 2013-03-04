@@ -14,7 +14,7 @@ import java.io.File;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -67,7 +67,7 @@ public abstract class FileTransferJob extends Job {
 	 * @throws FileTransferException if there are any null values in the attributes
 	 */
 	protected void getConnectionAttributes() throws FileTransferException {
-		connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
+		connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		projectId = projectSpace.getProjectId();
 		if (projectSpace.getUsersession() == null) {
 			throw new FileTransferException("Session ID is unknown. Please login first!");

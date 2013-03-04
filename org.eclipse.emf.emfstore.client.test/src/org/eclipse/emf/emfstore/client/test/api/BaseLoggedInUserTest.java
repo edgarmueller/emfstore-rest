@@ -6,7 +6,7 @@ import junit.framework.Assert;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
@@ -49,7 +49,7 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 					} catch (ESException e) {
 						setException(e);
 					}
-					WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().getUsersessions().remove(
+					ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().getUsersessions().remove(
 						usersession);
 				}
 				ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);

@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.client.test.server.ServerTests;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -125,7 +125,7 @@ public class PerformanceTest {
 						fail("Usersession could not be logged in.");
 					}
 				}
-				ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+				ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				workspace.getInternalAPIImpl().getUsersessions().add(session);
 				usersession = session;
 			}
@@ -168,7 +168,7 @@ public class PerformanceTest {
 				@Override
 				protected void doRun() {
 					try {
-						WorkspaceProvider.getInstance().getConnectionManager()
+						ESWorkspaceProviderImpl.getInstance().getConnectionManager()
 							.deleteProject(usersession.getSessionId(), projectSpace.getProjectId(), true);
 					} catch (ESException e) {
 						e.printStackTrace();
@@ -178,7 +178,7 @@ public class PerformanceTest {
 		} // for loop with iterations
 		ModelUtil.logInfo("times=" + Arrays.toString(times));
 		usersession = null;
-		WorkspaceProvider.getInstance().reinit();
+		ESWorkspaceProviderImpl.getInstance().reinit();
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class PerformanceTest {
 			@Override
 			protected void doRun() {
 				try {
-					WorkspaceProvider.getInstance().getConnectionManager()
+					ESWorkspaceProviderImpl.getInstance().getConnectionManager()
 						.deleteProject(setupHelper.getUsersession().getSessionId(), projectSpace.getProjectId(), true);
 				} catch (ESException e) {
 					e.printStackTrace();
@@ -367,7 +367,7 @@ public class PerformanceTest {
 				}
 			}.run(false);
 			updateTimes[i] = (System.currentTimeMillis() - time) / 1000.0;
-			ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+			ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 			CleanMemoryTask task = new CleanMemoryTask(workspace.getInternalAPIImpl().getResourceSet());
 			task.run();
 			memDuringUpdate[i] = memoryMeter.stopMeasurements();
@@ -385,7 +385,7 @@ public class PerformanceTest {
 		ModelUtil.logInfo("Mutate model - average=" + average(modelChangeTimes) + ", min=" + min(modelChangeTimes)
 			+ ", max=" + max(modelChangeTimes) + ", mean=" + mean(modelChangeTimes));
 
-		WorkspaceProvider.getInstance().reinit();
+		ESWorkspaceProviderImpl.getInstance().reinit();
 		// new EMFStoreCommand() {
 		// @Override
 		// protected void doRun() {

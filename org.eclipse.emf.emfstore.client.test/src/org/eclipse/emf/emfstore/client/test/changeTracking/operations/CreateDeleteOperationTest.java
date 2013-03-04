@@ -48,7 +48,7 @@ import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -124,7 +124,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				}
 			}
 		};
-		WorkspaceProvider.getObserverBus().register(observer);
+		ESWorkspaceProviderImpl.getObserverBus().register(observer);
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -132,7 +132,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		WorkspaceProvider.getObserverBus().unregister(observer);
+		ESWorkspaceProviderImpl.getObserverBus().unregister(observer);
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 

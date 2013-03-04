@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.ConnectionMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.ResourceFactoryMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
@@ -67,7 +67,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		authMock = new AuthControlMock();
 		emfStore = EMFStoreImpl.createInterface(serverSpace, authMock);
 		connectionMock = new ConnectionMock(emfStore, authMock);
-		WorkspaceProvider.getInstance().setConnectionManager(connectionMock);
+		ESWorkspaceProviderImpl.getInstance().setConnectionManager(connectionMock);
 	}
 
 	private ServerSpace initServerSpace() {
@@ -151,7 +151,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
+					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					ESLocalProject checkout = projectSpace.getAPIImpl().getRemoteProject().checkout(
 						projectSpace.getUsersession().getAPIImpl(),
@@ -170,7 +170,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
+					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					ESLocalProject checkout = remoteProject.checkout(
 						getProjectSpace().getUsersession().getAPIImpl(),

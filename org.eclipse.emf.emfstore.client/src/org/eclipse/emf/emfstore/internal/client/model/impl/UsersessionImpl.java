@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
@@ -560,7 +560,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated NOT
 	 */
 	public void logIn() throws ESException, AccessControlException {
-		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
+		ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		// sanity checks
 		if (getUsername() == null || getPassword() == null) {
 			throw new AccessControlException("Username or Password not set!");
@@ -581,17 +581,17 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		getServerInfo().setLastUsersession(this);
 		this.setSessionId(authenticationInformation.getSessionId());
 		this.setACUser(authenticationInformation.getResolvedACUser());
-		WorkspaceProvider.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this.getAPIImpl());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this.getAPIImpl());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void logout() throws ESException {
-		ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
+		ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
-		WorkspaceProvider.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(getAPIImpl());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(getAPIImpl());
 	}
 
 	// end of custom code

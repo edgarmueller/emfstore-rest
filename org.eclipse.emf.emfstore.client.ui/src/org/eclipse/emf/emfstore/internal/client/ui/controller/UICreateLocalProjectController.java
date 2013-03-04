@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -67,7 +67,7 @@ public class UICreateLocalProjectController extends AbstractEMFStoreUIController
 	}
 
 	private ESLocalProject createLocalProject(final String name) {
-		return WorkspaceProvider.getInstance().getWorkspace().createLocalProject(name);
+		return ESWorkspaceProviderImpl.getInstance().getWorkspace().createLocalProject(name);
 	}
 
 	/**

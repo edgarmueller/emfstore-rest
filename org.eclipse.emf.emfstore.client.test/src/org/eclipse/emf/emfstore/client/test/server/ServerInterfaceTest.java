@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -115,7 +115,7 @@ public class ServerInterfaceTest extends ServerTests {
 
 			@Override
 			protected void doRun() {
-				ESWorkspaceImpl workspaceImpl = WorkspaceProvider.getInstance().getWorkspace();
+				ESWorkspaceImpl workspaceImpl = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				ProjectSpace projectSpace = workspaceImpl.createLocalProject("createEmptyProjectAndDelete")
 					.getInternalAPIImpl();
 				try {
@@ -151,7 +151,7 @@ public class ServerInterfaceTest extends ServerTests {
 
 			@Override
 			protected ProjectSpace doRun() {
-				ESWorkspaceImpl workspaceImpl = WorkspaceProvider.getInstance().getWorkspace();
+				ESWorkspaceImpl workspaceImpl = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				ProjectSpace projectSpace = workspaceImpl.createLocalProject("createEmptyProjectAndDelete")
 					.getInternalAPIImpl();
 				try {

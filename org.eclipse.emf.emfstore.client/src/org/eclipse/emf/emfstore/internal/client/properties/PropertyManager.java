@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType;
@@ -297,7 +297,7 @@ public final class PropertyManager {
 		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>(
 			projectSpace.getChangedSharedProperties());
 
-		List<EMFStoreProperty> rejectedProperties = WorkspaceProvider
+		List<EMFStoreProperty> rejectedProperties = ESWorkspaceProviderImpl
 			.getInstance()
 			.getConnectionManager()
 			.setEMFProperties(this.projectSpace.getUsersession().getSessionId(), changedProperties,
@@ -310,7 +310,7 @@ public final class PropertyManager {
 		projectSpace.getChangedSharedProperties().removeAll(nonRejectedProperties);
 
 		// update properties to reflect current state on server
-		List<EMFStoreProperty> sharedProperties = WorkspaceProvider.getInstance().getConnectionManager()
+		List<EMFStoreProperty> sharedProperties = ESWorkspaceProviderImpl.getInstance().getConnectionManager()
 			.getEMFProperties(this.projectSpace.getUsersession().getSessionId(), this.projectSpace.getProjectId());
 
 		for (EMFStoreProperty prop : sharedProperties) {

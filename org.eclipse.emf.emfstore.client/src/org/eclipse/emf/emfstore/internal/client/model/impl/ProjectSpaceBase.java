@@ -47,7 +47,7 @@ import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
@@ -180,7 +180,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec)
 	 */
 	public void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws ESException {
-		final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
+		final ConnectionManager cm = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		cm.addTag(getUsersession().getSessionId(), getProjectId(), versionSpec, tag);
 	}
 
@@ -410,7 +410,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion)
 		throws InvalidVersionSpecException, ESException {
 		// TODO: is this a server call?
-		final ConnectionManager connectionManager = WorkspaceProvider.getInstance().getConnectionManager();
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		List<ChangePackage> changes = connectionManager.getChanges(getUsersession().getSessionId(), getProjectId(),
 			sourceVersion, targetVersion);
 		return changes;
@@ -626,7 +626,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private void initPropertyMap() {
 		// TODO: deprecated, OrgUnitPropertiy will be removed soon
 		if (getUsersession() != null) {
-			WorkspaceProvider.getObserverBus().register(this, ESLoginObserver.class);
+			ESWorkspaceProviderImpl.getObserverBus().register(this, ESLoginObserver.class);
 			ACUser acUser = getUsersession().getACUser();
 			if (acUser != null) {
 				for (OrgUnitProperty p : acUser.getProperties()) {
@@ -664,7 +664,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resourcePersister.addResource(getLocalChangePackage().eResource());
 			resourcePersister.addResource(getProject().eResource());
 			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
-			WorkspaceProvider.getObserverBus().register(resourcePersister);
+			ESWorkspaceProviderImpl.getObserverBus().register(resourcePersister);
 		}
 	}
 
@@ -745,7 +745,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void delete(IProgressMonitor monitor) throws IOException {
 
-		WorkspaceProvider.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(this);
+		ESWorkspaceProviderImpl.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(this);
 
 		// delete project to notify listeners
 		getProject().delete();
@@ -759,7 +759,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		// TODO: remove project space from workspace, this is not the case if delete
 		// is performed via Workspace#deleteProjectSpace
-		WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().remove(this.getAPIImpl());
+		ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().remove(this.getAPIImpl());
 
 		dispose();
 
@@ -931,7 +931,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return new ServerCall<List<BranchInfo>>(this) {
 			@Override
 			protected List<BranchInfo> run() throws ESException {
-				final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
+				final ConnectionManager cm = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 				return cm.getBranches(getSessionId(), getProjectId());
 			};
 		}.execute();
@@ -943,7 +943,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @generated NOT
 	 */
 	public void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws ESException {
-		final ConnectionManager cm = WorkspaceProvider.getInstance().getConnectionManager();
+		final ConnectionManager cm = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		cm.removeTag(getUsersession().getSessionId(), getProjectId(), versionSpec, tag);
 	}
 
@@ -1080,12 +1080,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				if (changedProperty.getName().equals(property.getName())
 					&& changedProperty.getProject().equals(getProjectId())) {
 					changedProperty.setValue(property.getValue());
-					WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().save();
+					ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().save();
 					return;
 				}
 			}
 			getUsersession().getChangedProperties().add(property);
-			WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl().save();
+			ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().save();
 		}
 	}
 
@@ -1149,7 +1149,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		ListIterator<OrgUnitProperty> iterator = temp.listIterator();
 		while (iterator.hasNext()) {
 			try {
-				WorkspaceProvider
+				ESWorkspaceProviderImpl
 					.getInstance()
 					.getConnectionManager()
 					.transmitProperty(getUsersession().getSessionId(), iterator.next(), getUsersession().getACUser(),
@@ -1263,9 +1263,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		getProject().removeIdEObjectCollectionChangeObserver(operationManager);
 		getProject().removeIdEObjectCollectionChangeObserver(resourcePersister);
 
-		WorkspaceProvider.getObserverBus().unregister(resourcePersister);
-		WorkspaceProvider.getObserverBus().unregister(this, ESLoginObserver.class);
-		WorkspaceProvider.getObserverBus().unregister(this);
+		ESWorkspaceProviderImpl.getObserverBus().unregister(resourcePersister);
+		ESWorkspaceProviderImpl.getObserverBus().unregister(this, ESLoginObserver.class);
+		ESWorkspaceProviderImpl.getObserverBus().unregister(this);
 
 		operationManager.dispose();
 		resourcePersister.dispose();
@@ -1283,12 +1283,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void notifyPreRevertMyChanges(final ChangePackage changePackage) {
-		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class)
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class)
 			.preRevertMyChanges(this.getAPIImpl(), changePackage.getAPIImpl());
 	}
 
 	private void notifyPostRevertMyChanges() {
-		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class).postRevertMyChanges(this.getAPIImpl());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class).postRevertMyChanges(this.getAPIImpl());
 	}
 
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
@@ -1296,12 +1296,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		List<ESChangePackage> copy = ListUtil.copy(mapToInverse);
 		// TODO ASYNC review this cancel
 
-		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class)
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class)
 			.postApplyTheirChanges(this.getAPIImpl(), copy);
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
-		WorkspaceProvider.getObserverBus().notify(ESMergeObserver.class).postApplyMergedChanges(
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class).postApplyMergedChanges(
 			this.getAPIImpl(), changePackage.getAPIImpl());
 	}
 

@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
@@ -50,7 +50,7 @@ public final class EMFStoreClientUtil {
 	 */
 	public static ServerInfo giveServerInfo(String url, int port) {
 
-		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 
 		for (ServerInfo existingServerInfo : workspace.getInternalAPIImpl().getServerInfos()) {
 			if (existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)) {
@@ -107,7 +107,7 @@ public final class EMFStoreClientUtil {
 	 * @return a user session
 	 */
 	public static Usersession createUsersession(String username, String password, String serverUrl, int serverPort) {
-		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		for (Usersession usersession : workspace.getInternalAPIImpl().getUsersessions()) {
 			ServerInfo existingServerInfo = usersession.getServerInfo();
 			if (existingServerInfo != null && existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)

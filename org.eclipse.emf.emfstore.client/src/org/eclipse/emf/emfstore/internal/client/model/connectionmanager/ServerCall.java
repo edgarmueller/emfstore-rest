@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerCallImpl;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
@@ -212,7 +212,7 @@ public abstract class ServerCall<U> implements APIDelegate<ESServerCall> {
 	 * @return the connection manager in use
 	 */
 	protected ConnectionManager getConnectionManager() {
-		return WorkspaceProvider.getInstance().getConnectionManager();
+		return ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 	}
 
 	/**
@@ -264,7 +264,7 @@ public abstract class ServerCall<U> implements APIDelegate<ESServerCall> {
 	 *             in case any exception occurs during execution of the call
 	 */
 	public U execute() throws ESException {
-		WorkspaceProvider.getInstance().getSessionManager().execute(this);
+		ESWorkspaceProviderImpl.getInstance().getSessionManager().execute(this);
 		return ret;
 	}
 

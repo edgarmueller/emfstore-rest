@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledException;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
@@ -49,7 +49,7 @@ public class BasicUISessionProvider extends ESAbstractSessionProvider {
 					// try to retrieve a server info by showing a server info selection dialog
 					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(
 						Display.getCurrent().getActiveShell(),
-						WorkspaceProvider.getInstance().getWorkspace().getServers());
+						ESWorkspaceProviderImpl.getInstance().getWorkspace().getServers());
 					int input = dialog.open();
 					selectedServerInfo = dialog.getResult();
 					return input;

@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
@@ -145,7 +145,7 @@ public abstract class ServerTests extends WorkspaceTest {
 
 		SetupHelper.addUserFileToServer(false);
 
-		setConnectionManager(WorkspaceProvider.getInstance().getConnectionManager());
+		setConnectionManager(ESWorkspaceProviderImpl.getInstance().getConnectionManager());
 		setServerInfo(SetupHelper.createServer());
 		initArguments();
 
@@ -160,7 +160,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	 */
 	protected static void login() throws ESException {
 		SessionId sessionId = login(server.getInternalAPIImpl(), "super", "super").getSessionId();
-		WorkspaceProvider.getInstance().getAdminConnectionManager()
+		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
 			.initConnection(server.getInternalAPIImpl(), sessionId);
 		setSessionId(sessionId);
 	}
@@ -207,7 +207,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws IOException, ESException {
 		SetupHelper.stopServer();
-		WorkspaceProvider.getInstance().dispose();
+		ESWorkspaceProviderImpl.getInstance().dispose();
 		SetupHelper.cleanupServer();
 		SetupHelper.removeServerTestProfile();
 	}

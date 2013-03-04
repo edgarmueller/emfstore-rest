@@ -62,9 +62,9 @@ import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
  * @author Maximilian Koegel
  * @generated NOT
  */
-public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitializable {
+public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IReinitializable {
 
-	private static WorkspaceProvider instance;
+	private static ESWorkspaceProviderImpl instance;
 
 	private Workspace currentWorkspace;
 	private SessionManager sessionManager;
@@ -82,10 +82,10 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	 * @return the workspace manager singleton
 	 * @generated NOT
 	 */
-	public static synchronized WorkspaceProvider getInstance() {
+	public static synchronized ESWorkspaceProviderImpl getInstance() {
 		if (instance == null) {
 			try {
-				instance = new WorkspaceProvider();
+				instance = new ESWorkspaceProviderImpl();
 				instance.initialize();
 				// BEGIN SUPRESS CATCH EXCEPTION
 			} catch (RuntimeException e) {
@@ -115,7 +115,7 @@ public final class WorkspaceProvider implements ESWorkspaceProvider, IReinitiali
 	 * 
 	 * @generated NOT
 	 */
-	private WorkspaceProvider() {
+	private ESWorkspaceProviderImpl() {
 	}
 
 	private void initialize() {

@@ -40,7 +40,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
@@ -134,7 +134,7 @@ public class SetupHelper {
 			seed);
 		Configuration.getClientBehavior().setAutoSave(false);
 		ModelMutator.generateModel(config);
-		ESWorkspaceImpl workspace2 = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace2 = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		testProjectSpace = workspace2.getInternalAPIImpl().importProject(project, "Generated project", "");
 		testProject = testProjectSpace.getProject();
 		projectId = testProjectSpace.getProjectId();
@@ -149,7 +149,7 @@ public class SetupHelper {
 		List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
 		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE
 			.getProject_CutElements());
-		ESWorkspaceImpl workspace2 = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace2 = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		config.setEditingDomain(workspace2.getInternalAPIImpl().getEditingDomain());
 		config.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
 		return config;
@@ -212,7 +212,7 @@ public class SetupHelper {
 	 * @throws ESException in case of failure
 	 */
 	public static ACOrgUnitId createUserOnServer(String username) throws ESException {
-		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		return adminConnectionManager.createUser(sessionId, username);
@@ -225,7 +225,7 @@ public class SetupHelper {
 	 * @throws ESException if deletion fails
 	 */
 	public static void deleteUserOnServer(ACOrgUnitId userId) throws ESException {
-		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		adminConnectionManager.deleteUser(sessionId, userId);
@@ -240,7 +240,7 @@ public class SetupHelper {
 	 * @throws ESException in case of failure
 	 */
 	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws ESException {
-		AdminConnectionManager adminConnectionManager = WorkspaceProvider.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		adminConnectionManager.changeRole(sessionId, projectId, orgUnitId, role);
@@ -338,7 +338,7 @@ public class SetupHelper {
 	public void setupWorkSpace() {
 		LOGGER.log(Level.INFO, "setting up workspace...");
 		CommonUtil.setTesting(true);
-		ESWorkspaceImpl workspace2 = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace2 = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		workSpace = workspace2.getInternalAPIImpl();
 		LOGGER.log(Level.INFO, "workspace initialized");
 
@@ -479,8 +479,8 @@ public class SetupHelper {
 	 * @throws IOException if deletion fails
 	 */
 	public static void cleanupWorkspace() throws IOException {
-		WorkspaceProvider.getInstance().dispose();
-		// final Workspace currentWorkspace = (Workspace) WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceProviderImpl.getInstance().dispose();
+		// final Workspace currentWorkspace = (Workspace) ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		// new EMFStoreCommand() {
 		// @Override
 		// protected void doRun() {
@@ -566,7 +566,7 @@ public class SetupHelper {
 					usersession.setServerInfo(serverInfo);
 					usersession.setUsername("super");
 					usersession.setPassword("super");
-					ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+					ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 					workspace.getInternalAPIImpl().getUsersessions().add(usersession);
 				}
 				try {

@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.client;
 
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 
 /**
  * Central access point to receive the current workspace.
@@ -27,7 +27,7 @@ public interface ESWorkspaceProvider {
 	/**
 	 * Singleton instance of the workspace provider.
 	 */
-	ESWorkspaceProvider INSTANCE = WorkspaceProvider.getInstance();
+	ESWorkspaceProvider INSTANCE = ESWorkspaceProviderImpl.getInstance();
 
 	/**
 	 * Returns the current workspace.

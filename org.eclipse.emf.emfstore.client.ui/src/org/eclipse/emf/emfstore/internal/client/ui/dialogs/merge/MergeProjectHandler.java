@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
@@ -55,7 +55,7 @@ public class MergeProjectHandler extends AbstractConflictResolver implements ESC
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void preDecisionManagerHook() {
-		WorkspaceProvider.getObserverBus().register(getLabelProvider(), MergeLabelProvider.class);
+		ESWorkspaceProviderImpl.getObserverBus().register(getLabelProvider(), MergeLabelProvider.class);
 	}
 
 	@Override

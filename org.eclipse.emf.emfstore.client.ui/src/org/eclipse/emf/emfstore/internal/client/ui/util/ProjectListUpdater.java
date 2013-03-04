@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
@@ -44,7 +44,7 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 */
 	public void workspaceInitComplete(ESWorkspace currentWorkspace) {
 		this.workspace = currentWorkspace;
-		WorkspaceProvider.getObserverBus().register(this);
+		ESWorkspaceProviderImpl.getObserverBus().register(this);
 	}
 
 	/**

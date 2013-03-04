@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserContentProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
@@ -117,9 +117,9 @@ public class ESBrowserView extends ViewPart implements ESLoginObserver {
 	 */
 	public ESBrowserView() {
 		// TODO OTS
-		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		Workspace currentWorkspace = workspace.getInternalAPIImpl();
-		WorkspaceProvider.getObserverBus().register(this);
+		ESWorkspaceProviderImpl.getObserverBus().register(this);
 		for (final ServerInfo serverInfo : currentWorkspace.getServerInfos()) {
 			AdapterImpl serverInfoAdapter = new ServerInfoAdapter(serverInfo);
 			serverInfo.eAdapters().add(serverInfoAdapter);
@@ -142,7 +142,7 @@ public class ESBrowserView extends ViewPart implements ESLoginObserver {
 		viewer.setLabelProvider(new DecoratingLabelProvider(new ESBrowserLabelProvider(), decoratorManager
 			.getLabelDecorator()));
 		viewer.setSorter(new ESBrowserViewerSorter());
-		viewer.setInput(WorkspaceProvider.getInstance().getWorkspace());
+		viewer.setInput(ESWorkspaceProviderImpl.getInstance().getWorkspace());
 		// viewer.addTreeListener(new ITreeViewerListener() {
 		//
 		// /**
@@ -227,10 +227,10 @@ public class ESBrowserView extends ViewPart implements ESLoginObserver {
 	public void dispose() {
 		super.dispose();
 		// TODO OTS
-		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		Workspace currentWorkspace = workspace.getInternalAPIImpl();
 		currentWorkspace.eAdapters().remove(workspaceAdapter);
-		WorkspaceProvider.getObserverBus().unregister(this);
+		ESWorkspaceProviderImpl.getObserverBus().unregister(this);
 		for (ServerInfo s : currentWorkspace.getServerInfos()) {
 			s.eAdapters().remove(serverInfoAdapterMap.get(s));
 		}

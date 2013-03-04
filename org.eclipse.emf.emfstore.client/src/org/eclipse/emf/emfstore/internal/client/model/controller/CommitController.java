@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -128,7 +128,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 		changePackage.setLogMessage(logMessage);
 
-		WorkspaceProvider.getObserverBus().notify(ESCommitObserver.class)
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
 			.inspectChanges(getProjectSpace().getAPIImpl(), changePackage.getAPIImpl(), getProgressMonitor());
 
 		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
@@ -203,7 +203,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProjectSpace().setMergedVersion(null);
 		getProjectSpace().updateDirtyState();
 
-		WorkspaceProvider.getObserverBus().notify(ESCommitObserver.class)
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
 			.commitCompleted(getProjectSpace().getAPIImpl(), newBaseVersion.getAPIImpl(), getProgressMonitor());
 
 		return newBaseVersion;

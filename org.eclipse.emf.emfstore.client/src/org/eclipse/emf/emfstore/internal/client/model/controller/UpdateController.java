@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
@@ -140,7 +140,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			return getProjectSpace().getBaseVersion();
 		}
 
-		WorkspaceProvider
+		ESWorkspaceProviderImpl
 			.getObserverBus()
 			.notify(ESUpdateObserver.class)
 			.inspectChanges(getProjectSpace().getAPIImpl(), copy, getProgressMonitor());
@@ -169,7 +169,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
-		WorkspaceProvider.getObserverBus().notify(ESUpdateObserver.class)
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESUpdateObserver.class)
 			.updateCompleted(getProjectSpace().getAPIImpl(), getProgressMonitor());
 
 		return getProjectSpace().getBaseVersion();

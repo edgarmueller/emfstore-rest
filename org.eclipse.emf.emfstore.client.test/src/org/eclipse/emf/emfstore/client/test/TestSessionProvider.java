@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -35,7 +35,7 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 			server = SetupHelper.createServer();
 		}
 
-		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
+		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		Workspace internalWorkspace = workspace.getInternalAPIImpl();
 		// TODO: contaisn check for server infos
 		if (!internalWorkspace.getServerInfos().contains(server)) {
@@ -55,7 +55,7 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 
 	@Override
 	public ESUsersession provideUsersession(ESServer serverInfo) throws ESException {
-		Workspace internalWorkspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
 		if (session != null && internalWorkspace.getUsersessions().contains(session)) {
 			return session.getAPIImpl();
 		}
@@ -79,7 +79,7 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 	}
 
 	public void clearSession() {
-		Workspace internalWorkspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
 		if (session != null && internalWorkspace.getUsersessions().contains(session)) {
 			internalWorkspace.getUsersessions().remove(session);
 			session = null;

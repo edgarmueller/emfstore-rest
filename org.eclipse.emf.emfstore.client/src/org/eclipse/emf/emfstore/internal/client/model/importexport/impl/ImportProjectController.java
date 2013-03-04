@@ -16,7 +16,7 @@ import java.io.IOException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -93,7 +93,7 @@ public class ImportProjectController implements IExportImportController {
 	 *             in case an error occurs during the import of the project
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		Workspace currentWorkspace = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl();
+		Workspace currentWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
 		ProjectSpace projectSpace = currentWorkspace.importProject(file.getAbsolutePath());
 		projectSpace.setProjectName(projectName);
 		ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());

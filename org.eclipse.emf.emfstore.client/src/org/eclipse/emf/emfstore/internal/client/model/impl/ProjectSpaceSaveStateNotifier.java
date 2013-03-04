@@ -10,7 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.observers.SaveStateChangedObserver;
 
 /**
@@ -39,7 +39,7 @@ public class ProjectSpaceSaveStateNotifier implements IDEObjectCollectionDirtySt
 	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.IDEObjectCollectionDirtyStateListener#notifyAboutDirtyStateChange()
 	 */
 	public void notifyAboutDirtyStateChange() {
-		WorkspaceProvider.getObserverBus().notify(SaveStateChangedObserver.class)
+		ESWorkspaceProviderImpl.getObserverBus().notify(SaveStateChangedObserver.class)
 			.saveStateChanged(projectSpace, projectSpace.hasUnsavedChanges());
 	}
 

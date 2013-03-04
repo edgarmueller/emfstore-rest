@@ -15,7 +15,7 @@ import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -46,7 +46,7 @@ public abstract class TransmissionTests extends ServerTests {
 			@Override
 			protected void doRun() {
 				NullProgressMonitor monitor = new NullProgressMonitor();
-				ESWorkspaceImpl workspaceImpl = WorkspaceProvider.getInstance().getWorkspace();
+				ESWorkspaceImpl workspaceImpl = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				Workspace workspace = workspaceImpl.getInternalAPIImpl();
 				workspace.getServerInfos().add(getServer().getInternalAPIImpl());
 				workspace.getUsersessions().add(usersession1);

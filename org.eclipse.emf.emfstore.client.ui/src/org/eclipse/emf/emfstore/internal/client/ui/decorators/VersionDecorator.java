@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.viewers.IDecoration;
@@ -44,7 +44,7 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	 * Default constructor.
 	 */
 	public VersionDecorator() {
-		WorkspaceProvider.getObserverBus().register(this);
+		ESWorkspaceProviderImpl.getObserverBus().register(this);
 	}
 
 	/**

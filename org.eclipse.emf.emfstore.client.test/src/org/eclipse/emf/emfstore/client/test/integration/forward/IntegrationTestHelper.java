@@ -42,7 +42,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -1118,7 +1118,7 @@ public final class IntegrationTestHelper {
 			}
 		}.run(false);
 
-		List<AbstractOperation> operations = WorkspaceProvider.getProjectSpace(testProject).getOperations();
+		List<AbstractOperation> operations = ESWorkspaceProviderImpl.getProjectSpace(testProject).getOperations();
 		if (operations.size() == 0) {
 			throw new IllegalStateException("No operations recorded");
 		}

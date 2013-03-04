@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -73,7 +73,7 @@ public class UIRemoveServerController extends
 		}
 
 		// TODO OTS
-		ESWorkspaceImpl workspace = WorkspaceProvider.getInstance()
+		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance()
 				.getWorkspace();
 		EList<ProjectSpace> projectSpaces = workspace.getInternalAPIImpl()
 				.getProjectSpaces();
@@ -89,7 +89,7 @@ public class UIRemoveServerController extends
 
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				WorkspaceProvider.getInstance().getWorkspace().getServers()
+				ESWorkspaceProviderImpl.getInstance().getWorkspace().getServers()
 						.remove(serverInfo);
 				return null;
 			}
@@ -102,7 +102,7 @@ public class UIRemoveServerController extends
 				protected void doRun() {
 					EcoreUtil.delete(serverInfo);
 					// TODO OTS auto save;
-					// WorkspaceProvider.getInstance().getWorkspace().save();
+					// ESWorkspaceProviderImpl.getInstance().getWorkspace().save();
 				};
 			}.run(false);
 

@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -111,7 +111,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testAutocorrectErrorHandlerAtCommit() throws ESException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
+		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 
@@ -137,9 +137,9 @@ public class ChecksumTest extends CoreServerTest {
 
 		// re-checkout should be triggered
 		PrimaryVersionSpec commit = commitWithoutCommand(getProjectSpace());
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
+		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Project restoredProject = WorkspaceProvider.getInstance().getWorkspace().getInternalAPIImpl()
+		Project restoredProject = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl()
 			.getProjectSpaces()
 			.get(0).getProject();
 		long computedChecksum = ModelUtil.computeChecksum(restoredProject);
@@ -152,10 +152,10 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testChangeTrackingAfterAutocorrectErrorHandler() throws ESException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
+		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
-		((WorkspaceProvider) WorkspaceProvider.INSTANCE).setConnectionManager(getConnectionMock());
+		((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -220,7 +220,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test(expected = ESException.class)
 	public void testCancelErrorHandlerAtCommit() throws ESException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
+		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 
@@ -246,7 +246,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test(expected = ESException.class)
 	public void testCancelErrorHandlerAtUpdateAfterOneCommit() throws ESException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
+		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 
@@ -292,7 +292,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testCorrectChecksumsAtUpdate() throws ESException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
+		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
 
@@ -332,7 +332,7 @@ public class ChecksumTest extends CoreServerTest {
 	@Test
 	public void testCorruptChecksumsAtUpdateWithLocalOperation() throws ESException, SerializationException {
 
-		Assert.assertEquals(1, WorkspaceProvider.getInstance().getWorkspace().getLocalProjects().size());
+		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
 		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
 
