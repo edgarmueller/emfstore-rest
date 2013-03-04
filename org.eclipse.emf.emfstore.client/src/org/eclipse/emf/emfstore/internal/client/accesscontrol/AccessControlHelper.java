@@ -58,19 +58,18 @@ public class AccessControlHelper {
 	/**
 	 * Check write access for the given project.
 	 * 
-	 * @param globalId
-	 *            the global project id
+	 * @param projectId
+	 *            the ID of a project
 	 * @throws AccessControlException if access is denied
 	 */
-	public void checkWriteAccess(ESGlobalProjectId globalId) throws AccessControlException {
-
-		ProjectId projectId = ((ESGlobalProjectIdImpl) globalId).getInternalAPIImpl();
+	public void checkWriteAccess(ProjectId projectId) throws AccessControlException {
 
 		for (Role role : user.getRoles()) {
 			if (role.canDelete(projectId, null) || role.canCreate(projectId, null) || role.canModify(projectId, null)) {
 				return;
 			}
 		}
+
 		throw new AccessControlException();
 	}
 

@@ -292,8 +292,7 @@ public final class PropertyManager {
 			throw new ESException("Project has not been shared yet.");
 		}
 
-		new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId()
-			.getAPIImpl());
+		new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId());
 
 		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>(
 			projectSpace.getChangedSharedProperties());
@@ -302,7 +301,7 @@ public final class PropertyManager {
 			.getInstance()
 			.getConnectionManager()
 			.setEMFProperties(this.projectSpace.getUsersession().getSessionId(), changedProperties,
-				this.projectSpace.getProjectId());
+								this.projectSpace.getProjectId());
 
 		// setEMFProperties returns us a list of properties as found one the
 		// server,
