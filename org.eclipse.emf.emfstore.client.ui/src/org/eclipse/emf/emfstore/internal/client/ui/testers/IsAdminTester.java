@@ -43,7 +43,7 @@ public class IsAdminTester extends PropertyTester {
 
 						AccessControlHelper accessControlHelper = new AccessControlHelper(usersession);
 						try {
-							accessControlHelper.checkProjectAdminAccess(projectSpace.getProjectId().getAPIImpl());
+							accessControlHelper.checkProjectAdminAccess(projectSpace.getProjectId());
 							isAdmin = true;
 						} catch (AccessControlException e) {
 							isAdmin = false;

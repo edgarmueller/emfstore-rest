@@ -16,8 +16,6 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
-import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 
 /**
  * Helper class for access control checks.
@@ -45,10 +43,9 @@ public class AccessControlHelper {
 	 * @param projectId the project id
 	 * @throws AccessControlException if access is not permitted.
 	 */
-	public void checkReadAccess(ESGlobalProjectId projectId) throws AccessControlException {
-		ESGlobalProjectIdImpl id = (ESGlobalProjectIdImpl) projectId;
+	public void checkReadAccess(ProjectId projectId) throws AccessControlException {
 		for (Role role : user.getRoles()) {
-			if (role.canRead(id.getInternalAPIImpl(), null)) {
+			if (role.canRead(projectId, null)) {
 				return;
 			}
 		}
@@ -79,10 +76,9 @@ public class AccessControlHelper {
 	 * @param projectId the project id
 	 * @throws AccessControlException if access is denied.
 	 */
-	public void checkProjectAdminAccess(ESGlobalProjectId projectId) throws AccessControlException {
-		ESGlobalProjectIdImpl id = (ESGlobalProjectIdImpl) projectId;
+	public void checkProjectAdminAccess(ProjectId projectId) throws AccessControlException {
 		for (Role role : user.getRoles()) {
-			if (role.canAdministrate(id.getInternalAPIImpl())) {
+			if (role.canAdministrate(projectId)) {
 				return;
 			}
 		}

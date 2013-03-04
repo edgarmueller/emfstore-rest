@@ -31,6 +31,6 @@ public interface ESNotificationFilter {
 	 *            is about
 	 * @return true if the notification is to be ignored
 	 */
-	boolean check(NotificationInfo notificationInfo, ESObjectContainer container);
+	boolean check(NotificationInfo notificationInfo, ESObjectContainer<?> container);
 
 }

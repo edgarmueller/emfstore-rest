@@ -131,7 +131,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 			.getExtensionElements()) {
 			try {
 				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
-					currentWorkspace.getAPIImpl());
+																								currentWorkspace
+																									.getAPIImpl());
 			} catch (ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
@@ -233,8 +234,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 
 	private ESEditingDomainProvider getDomainProvider() {
 		// TODO EXPT PRIO
-		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider").getClass("class",
-			ESEditingDomainProvider.class);
+		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider")
+			.getClass("class",
+						ESEditingDomainProvider.class);
 	}
 
 	private Workspace createNewWorkspace(ResourceSet resourceSet, URI fileURI) {
@@ -263,8 +265,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 			resource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
-				"Creating new workspace failed! Delete workspace folder: "
-					+ Configuration.FILE_INFO.getWorkspaceDirectory(), e);
+										"Creating new workspace failed! Delete workspace folder: "
+											+ Configuration.FILE_INFO.getWorkspaceDirectory(), e);
 		}
 		int modelVersionNumber;
 		try {
@@ -287,9 +289,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 			ModelUtil.saveResource(versionResource, WorkspaceUtil.getResourceLogger());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
-				"Version stamping workspace failed! Delete workspace folder: "
-					+ Configuration.FILE_INFO.getWorkspaceDirectory(),
-				e);
+										"Version stamping workspace failed! Delete workspace folder: "
+											+ Configuration.FILE_INFO.getWorkspaceDirectory(),
+										e);
 		}
 	}
 
@@ -308,14 +310,14 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		} else if (workspaceModelVersion.getReleaseNumber() > modelVersionNumber) {
 			backupAndRecreateWorkspace(resourceSet);
 			WorkspaceUtil.logException("Model conforms to a newer version, update client! New workspace was backuped!",
-				new IllegalStateException());
+										new IllegalStateException());
 			return;
 		}
 
 		// we need to migrate
 		if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
 			WorkspaceUtil.logException("Model requires migration, but no migrators are registered!",
-				new IllegalStateException());
+										new IllegalStateException());
 			return;
 		}
 
@@ -372,7 +374,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 
 		try {
 			EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, workspaceModelVersion.getReleaseNumber() - 1,
-				new NullProgressMonitor());
+																new NullProgressMonitor());
 		} catch (EMFStoreMigrationException e) {
 			WorkspaceUtil.logWarning("The migration of the project in the file " + absoluteFilename + " failed!", e);
 		}
@@ -456,7 +458,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		modelURIs.add(projectURI);
 		modelURIs.add(changesURI);
 		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, sourceModelReleaseNumber,
-			new NullProgressMonitor());
+															new NullProgressMonitor());
 	}
 
 	/**
@@ -466,6 +468,10 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 	 */
 	public ESWorkspaceImpl getWorkspace() {
 		return currentWorkspace.getAPIImpl();
+	}
+
+	public Workspace getInternalWorkspace() {
+		return currentWorkspace;
 	}
 
 	/**
