@@ -33,7 +33,6 @@ import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfigurat
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -208,7 +207,6 @@ public class PerformanceTest {
 						// TODO: OTS cast
 						ESLocalProject checkout = projectSpace.getAPIImpl().getRemoteProject().checkout(
 							setupHelper.getUsersession().getAPIImpl(),
-							ESVersionSpec.FACTORY.createHEAD(),
 							new NullProgressMonitor());
 						projectSpace2 = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 					} catch (ESException e) {
@@ -285,7 +283,6 @@ public class PerformanceTest {
 					ESLocalProject checkout = setupHelper.getTestProjectSpace().getAPIImpl().getRemoteProject()
 						.checkout(
 							usersession2.getAPIImpl(),
-							ESVersionSpec.FACTORY.createHEAD(),
 							new NullProgressMonitor());
 					projectSpace2 = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
 				} catch (ESException e) {

@@ -80,7 +80,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	/**
 	 * Constructor.
 	 * 
-	 * @param server
+	 * @param serverInfo
 	 *            the server the remote project is located on
 	 * @param projectInfo
 	 *            information about which project to access
@@ -356,8 +356,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 			public ESLocalProjectImpl call() throws Exception {
 				ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD()
-					.getAPIImpl(),
-																				monitor);
+					.getAPIImpl(), monitor);
 				return checkout(usersession, primaryVersionSpec, monitor);
 			}
 		});
@@ -370,7 +369,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(final ESUsersession session, final ESVersionSpec versionSpec,
+	public ESLocalProjectImpl checkout(final ESUsersession session, final ESPrimaryVersionSpec versionSpec,
 		final IProgressMonitor progressMonitor)
 		throws ESException {
 

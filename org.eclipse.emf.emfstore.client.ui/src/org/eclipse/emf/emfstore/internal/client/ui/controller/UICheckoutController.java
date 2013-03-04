@@ -27,7 +27,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -39,7 +38,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author emueller
  */
 public class UICheckoutController extends
-		AbstractEMFStoreUIController<ESLocalProject> {
+	AbstractEMFStoreUIController<ESLocalProject> {
 
 	private ESUsersession session;
 	private ESPrimaryVersionSpec versionSpec;
@@ -73,7 +72,7 @@ public class UICheckoutController extends
 	 *            happen
 	 */
 	public UICheckoutController(Shell shell, ESRemoteProject remoteProject,
-			boolean askForBranch) {
+		boolean askForBranch) {
 		this(shell, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -90,7 +89,7 @@ public class UICheckoutController extends
 	 *            the {@link ESRemoteProject} to be checked out
 	 */
 	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
-			ESRemoteProject remoteProject) {
+		ESRemoteProject remoteProject) {
 		this(shell, remoteProject);
 		this.versionSpec = versionSpec;
 	}
@@ -110,7 +109,7 @@ public class UICheckoutController extends
 	 *            happen
 	 */
 	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
-			ESRemoteProject remoteProject, boolean askForBranch) {
+		ESRemoteProject remoteProject, boolean askForBranch) {
 		this(shell, versionSpec, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -127,7 +126,7 @@ public class UICheckoutController extends
 	 *            the {@link ESRemoteProject} to be checked out
 	 */
 	public UICheckoutController(Shell shell, ESUsersession session,
-			ESRemoteProject remoteProject) {
+		ESRemoteProject remoteProject) {
 		this(shell, remoteProject);
 		this.session = session;
 	}
@@ -147,7 +146,7 @@ public class UICheckoutController extends
 	 *            happen
 	 */
 	public UICheckoutController(Shell shell, ESUsersession session,
-			ESRemoteProject remoteProject, boolean askForBranch) {
+		ESRemoteProject remoteProject, boolean askForBranch) {
 		this(shell, session, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -167,7 +166,7 @@ public class UICheckoutController extends
 	 *            the {@link ESRemoteProject} to be checked out
 	 */
 	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
-			ESUsersession session, ESRemoteProject remoteProject) {
+		ESUsersession session, ESRemoteProject remoteProject) {
 		this(shell, versionSpec, remoteProject);
 		this.session = session;
 	}
@@ -190,8 +189,8 @@ public class UICheckoutController extends
 	 *            happen
 	 */
 	public UICheckoutController(Shell shell, ESPrimaryVersionSpec versionSpec,
-			ESUsersession session, ESRemoteProject remoteProject,
-			boolean askForBranch) {
+		ESUsersession session, ESRemoteProject remoteProject,
+		boolean askForBranch) {
 		this(shell, versionSpec, session, remoteProject);
 		this.askForBranch = askForBranch;
 	}
@@ -204,7 +203,7 @@ public class UICheckoutController extends
 	 */
 	@Override
 	public ESLocalProject doRun(IProgressMonitor progressMonitor)
-			throws ESException {
+		throws ESException {
 		try {
 
 			if (askForBranch && versionSpec == null) {
@@ -214,20 +213,19 @@ public class UICheckoutController extends
 			if (session != null) {
 				if (versionSpec == null) {
 					return remoteProject
-							.checkout(session,
-									ESVersionSpec.FACTORY.createHEAD(),
+						.checkout(session,
 									progressMonitor);
 				} else {
 					return remoteProject.checkout(session, versionSpec,
-							progressMonitor);
+													progressMonitor);
 				}
 			} else {
 				if (versionSpec == null) {
 					return remoteProject.checkout(progressMonitor);
 				} else {
 					return remoteProject
-							.checkout(remoteProject.getServer()
-									.getLastUsersession(), versionSpec,
+						.checkout(remoteProject.getServer()
+							.getLastUsersession(), versionSpec,
 									progressMonitor);
 				}
 			}
@@ -240,11 +238,11 @@ public class UICheckoutController extends
 				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
 					MessageDialog.openError(
-							getShell(),
-							"Checkout failed",
-							"Checkout of project "
-									+ remoteProject.getProjectName()
-									+ " failed: " + e.getMessage());
+											getShell(),
+											"Checkout failed",
+											"Checkout of project "
+												+ remoteProject.getProjectName()
+												+ " failed: " + e.getMessage());
 					return null;
 				}
 			});
@@ -254,7 +252,7 @@ public class UICheckoutController extends
 	}
 
 	private ESPrimaryVersionSpec branchSelection(ESRemoteProject remoteProject,
-			IProgressMonitor monitor) throws ESException {
+		IProgressMonitor monitor) throws ESException {
 
 		final List<ESBranchInfo> branches;
 
@@ -265,23 +263,23 @@ public class UICheckoutController extends
 		}
 
 		BranchInfo result = RunInUI.WithException
-				.runWithResult(new Callable<BranchInfo>() {
-					public BranchInfo call() throws Exception {
+			.runWithResult(new Callable<BranchInfo>() {
+				public BranchInfo call() throws Exception {
 
-						BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
-								getShell(), ListUtil.mapToInternalAPI(
-										BranchInfo.class, branches));
-						dialog.setBlockOnOpen(true);
+					BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
+						getShell(), ListUtil.mapToInternalAPI(
+																BranchInfo.class, branches));
+					dialog.setBlockOnOpen(true);
 
-						if (dialog.open() != Dialog.OK
-								|| dialog.getResult() == null) {
-							throw new CancelOperationException(
-									"No Branch specified");
-						}
-						return dialog.getResult();
-
+					if (dialog.open() != Dialog.OK
+						|| dialog.getResult() == null) {
+						throw new CancelOperationException(
+							"No Branch specified");
 					}
-				});
+					return dialog.getResult();
+
+				}
+			});
 
 		return result.getAPIImpl().getHead();
 	}

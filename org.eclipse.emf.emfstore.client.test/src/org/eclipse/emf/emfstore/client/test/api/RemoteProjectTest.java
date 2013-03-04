@@ -52,7 +52,6 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testCheckoutSession() {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(usersession,
-				ESVersionSpec.FACTORY.createHEAD(),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
@@ -66,7 +65,6 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testCheckoutSessionProgress() {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(usersession,
-				ESVersionSpec.FACTORY.createHEAD(),
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());

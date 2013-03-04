@@ -15,7 +15,6 @@ import org.eclipse.emf.emfstore.internal.client.configuration.FilePaths;
 import org.eclipse.emf.emfstore.internal.client.configuration.VersioningInfo;
 import org.eclipse.emf.emfstore.internal.client.configuration.XMLRPC;
 
-
 /**
  * Represents the current Workspace Configuration.
  * 
@@ -35,6 +34,10 @@ public final class Configuration {
 
 	public static Behavior getClientBehavior() {
 		return ClIENT_BEHAVIOR;
+	}
+
+	public static FilePaths getFilePaths() {
+		return FILE_INFO;
 	}
 
 }

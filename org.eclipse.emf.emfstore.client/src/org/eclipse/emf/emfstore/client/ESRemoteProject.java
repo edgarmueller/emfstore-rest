@@ -56,6 +56,36 @@ public interface ESRemoteProject extends ESProject {
 
 	/**
 	 * <p>
+	 * Checkouts the project in the HEAD version into the local workspace.
+	 * </p>
+	 * <p>
+	 * The caller must provide the {@link ESUsersession} used for checking out the project, e.g. by specifying the
+	 * session that was lastly used in an {@link ESServer}.
+	 * </p>
+	 * <p>
+	 * The caller also must specify which specific {@link ESVersionSpec} to checkout. If the HEAD version should get
+	 * checked out, the {@link org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory} must be used, which
+	 * can be fetched via {@link ESVersionSpec#FACTORY}.
+	 * </p>
+	 * 
+	 * @param usersession
+	 *            the user session that will be used by the
+	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to checkout the project
+	 * @param monitor
+	 *            the {@link IProgressMonitor} that is used during checkout in order to indicate progress
+	 * 
+	 * @return the checked out project
+	 * 
+	 * @throws ESException in case an error occurs during checkout
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
+	 * @see ESServer#getLastUsersession()
+	 */
+	ESLocalProject checkout(final ESUsersession usersession, IProgressMonitor monitor)
+		throws ESException;
+
+	/**
+	 * <p>
 	 * Checkouts the project in the given version into the local workspace.
 	 * </p>
 	 * <p>
@@ -70,11 +100,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-<<<<<<< HEAD
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to checkout the project
-=======
-	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to checkout the project
->>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 	 * @param versionSpec
 	 *            the version that should be checked out.
 	 * @param monitor
@@ -87,7 +113,7 @@ public interface ESRemoteProject extends ESProject {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
 	 * @see ESServer#getLastUsersession()
 	 */
-	ESLocalProject checkout(final ESUsersession usersession, ESVersionSpec versionSpec, IProgressMonitor monitor)
+	ESLocalProject checkout(final ESUsersession usersession, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 		throws ESException;
 
 	/**
@@ -95,11 +121,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-<<<<<<< HEAD
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to resolve the given
-=======
-	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to resolve the given
->>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
 	 *            {@link ESVersionSpec}
 	 * @param versionSpec
 	 *            the version specifier to resolve
@@ -135,11 +157,8 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-<<<<<<< HEAD
-	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to fetch the history information
-=======
-	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to fetch the history information
->>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
+	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to fetch the history
+	 *            information
 	 * @param query
 	 *            the query to be performed in order to fetch the history information
 	 * @param monitor
@@ -169,11 +188,8 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param usersession
 	 *            the user session that will be used by the
-<<<<<<< HEAD
-	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to delete the remote project
-=======
-	 *            {@link org.eclipse.emf.emfstore.client.provider.ESServerCall} to delete the remote project
->>>>>>> 897c2ca7d066fbf6e610eabfe0a600a2a4512500
+	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to delete the remote
+	 *            project
 	 * @param monitor
 	 *            an {@link IProgressMonitor} used to indicate progress
 	 * 
