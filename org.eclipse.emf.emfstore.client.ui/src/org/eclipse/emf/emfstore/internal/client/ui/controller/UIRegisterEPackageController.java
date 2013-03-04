@@ -14,8 +14,10 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.epackages.EPackageRegistryHelper;
@@ -30,37 +32,43 @@ import org.eclipse.swt.widgets.Shell;
  * 
  * @author Tobias Verhoeven
  */
-public class UIRegisterEPackageController extends AbstractEMFStoreUIController<Void> {
+public class UIRegisterEPackageController extends
+		AbstractEMFStoreUIController<Void> {
 
 	private ServerInfo serverInfo;
 
 	/**
 	 * Instantiates a new UIRegisterPackageController.
 	 * 
-	 * @param shell shell
-	 * @param serverInfo the server info
+	 * @param shell
+	 *            shell
+	 * @param serverInfo
+	 *            the server info
 	 */
-	public UIRegisterEPackageController(Shell shell, ServerInfo serverInfo) {
+	public UIRegisterEPackageController(Shell shell, ESServer serverInfo) {
 		super(shell);
-		this.serverInfo = serverInfo;
+		this.serverInfo = ((ESServerImpl) serverInfo).getInternalAPIImpl();
 	}
 
 	/**
 	 * Register a new EPackage which can be selected with a SelectionDialog.
 	 * 
-	 * @param serverInfo server info
-	 * @throws ESException if any error in the EmfStore occurs
+	 * @param serverInfo
+	 *            server info
+	 * @throws ESException
+	 *             if any error in the EmfStore occurs
 	 */
 	public void registerEPackage(ServerInfo serverInfo) throws ESException {
 		EPackageTreeSelectionDialog dialog = new EPackageTreeSelectionDialog(
-			EPackageRegistryHelper.getAvailablePackages(true));
+				EPackageRegistryHelper.getAvailablePackages(true));
 		dialog.open();
 		final EPackage pkg = dialog.getSelectedEPackage();
 		if (pkg != null) {
 			new ServerCall<Void>(serverInfo.getLastUsersession()) {
 				@Override
 				protected Void run() throws ESException {
-					getConnectionManager().registerEPackage(getSessionId(), pkg);
+					getConnectionManager()
+							.registerEPackage(getSessionId(), pkg);
 					return null;
 				}
 			}.execute();
@@ -76,7 +84,8 @@ public class UIRegisterEPackageController extends AbstractEMFStoreUIController<V
 
 				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
-					MessageDialog.openError(getShell(), "Registration failed", e.getMessage());
+					MessageDialog.openError(getShell(), "Registration failed",
+							e.getMessage());
 					return null;
 				}
 			});

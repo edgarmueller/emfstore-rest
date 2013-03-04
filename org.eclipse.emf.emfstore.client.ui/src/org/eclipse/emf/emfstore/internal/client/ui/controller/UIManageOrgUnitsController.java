@@ -11,9 +11,11 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.ManageOrgUnitsDialog;
@@ -30,7 +32,7 @@ import org.eclipse.ui.PlatformUI;
  * 
  */
 public class UIManageOrgUnitsController extends
-	AbstractEMFStoreUIController<Void> {
+		AbstractEMFStoreUIController<Void> {
 
 	private final Usersession session;
 
@@ -42,9 +44,9 @@ public class UIManageOrgUnitsController extends
 	 * @param session
 	 *            the session to be used for managing the org units
 	 */
-	public UIManageOrgUnitsController(Shell shell, Usersession session) {
+	public UIManageOrgUnitsController(Shell shell, ESUsersession session) {
 		super(shell);
-		this.session = session;
+		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
 	}
 
 	/**
@@ -57,18 +59,20 @@ public class UIManageOrgUnitsController extends
 	public Void doRun(IProgressMonitor progressMonitor) throws ESException {
 		try {
 			// TODO OTS
-			ESWorkspaceImpl workspace = WorkspaceProvider.getInstance().getWorkspace();
-			final AdminBroker adminBroker = workspace.getInternalAPIImpl().getAdminBroker(session);
-			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI.getWorkbench().getDisplay()
-				.getActiveShell(), adminBroker);
+			ESWorkspaceImpl workspace = WorkspaceProvider.getInstance()
+					.getWorkspace();
+			final AdminBroker adminBroker = workspace.getInternalAPIImpl()
+					.getAdminBroker(session);
+			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI
+					.getWorkbench().getDisplay().getActiveShell(), adminBroker);
 			dialog.create();
 			dialog.open();
 		} catch (final AccessControlException e) {
 			MessageDialog.openError(getShell(), "Access denied ",
-				e.getMessage());
+					e.getMessage());
 		} catch (final ESException e) {
 			MessageDialog.openError(getShell(),
-				"Error while retrieving the admin broker", e.getMessage());
+					"Error while retrieving the admin broker", e.getMessage());
 		}
 
 		return null;

@@ -28,6 +28,7 @@ public class RegisterEPackageHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		ServerInfo serverInfo = requireSelection(ServerInfo.class);
-		new UIRegisterEPackageController(getShell(), serverInfo).execute();
+		new UIRegisterEPackageController(getShell(), serverInfo.getAPIImpl())
+				.execute();
 	}
 }
