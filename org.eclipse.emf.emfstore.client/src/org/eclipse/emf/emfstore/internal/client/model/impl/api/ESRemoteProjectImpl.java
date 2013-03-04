@@ -362,6 +362,11 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		});
 	}
 
+	public ESLocalProjectImpl checkout(final Usersession usersession, final IProgressMonitor monitor)
+		throws ESException {
+		return checkout(usersession.getAPIImpl(), monitor);
+	}
+
 	/**
 	 * 
 	 * {@inheritDoc}
