@@ -175,7 +175,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	public ESRemoteProject createRemoteProject(final String projectName, IProgressMonitor monitor) throws ESException {
 		ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
 			.setServer(getInternalAPIImpl()).execute();
-		return new ESRemoteProjectImpl(this, projectInfo);
+		return new ESRemoteProjectImpl(getInternalAPIImpl(), projectInfo);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		ESUsersessionImpl session = (ESUsersessionImpl) validateUsersession(usersession);
 		ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
 			.setUsersession(session.getInternalAPIImpl()).execute();
-		return new ESRemoteProjectImpl(this, projectInfo);
+		return new ESRemoteProjectImpl(getInternalAPIImpl(), projectInfo);
 	}
 
 	/**
@@ -243,7 +243,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	private List<ESRemoteProject> mapToRemoteProject(List<ProjectInfo> projectInfos) {
 		List<ESRemoteProject> remoteProjects = new ArrayList<ESRemoteProject>();
 		for (ProjectInfo projectInfo : projectInfos) {
-			ESRemoteProjectImpl wrapper = new ESRemoteProjectImpl(this, projectInfo);
+			ESRemoteProjectImpl wrapper = new ESRemoteProjectImpl(getInternalAPIImpl(), projectInfo);
 			remoteProjects.add(wrapper);
 		}
 		return remoteProjects;
@@ -295,7 +295,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 			@Override
 			protected ProjectInfo run() throws ESException {
 				return getConnectionManager().createEmptyProject(getSessionId(), projectName, "",
-					createLogmessage(getUsersession(), projectName));
+																	createLogmessage(getUsersession(), projectName));
 			}
 		};
 	}

@@ -36,7 +36,7 @@ public class CheckoutHandler extends AbstractEMFStoreHandler {
 		ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
 
 		new UICheckoutController(getShell(),
-			new ESRemoteProjectImpl(serverInfo.getAPIImpl(), projectInfo)).execute();
+			new ESRemoteProjectImpl(serverInfo, projectInfo)).execute();
 	}
 
 }

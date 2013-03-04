@@ -643,8 +643,7 @@ public class SetupHelper {
 			protected void doRun() {
 
 				try {
-					ESServerImpl serverImpl = usersession.getServerInfo().getAPIImpl();
-					ESRemoteProject remoteProject = new ESRemoteProjectImpl(serverImpl, projectInfo);
+					ESRemoteProject remoteProject = new ESRemoteProjectImpl(usersession.getServerInfo(), projectInfo);
 					ESLocalProject checkout = remoteProject.checkout(new NullProgressMonitor());
 					compareProject = ((ESLocalProjectImpl) checkout).getInternalAPIImpl().getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");

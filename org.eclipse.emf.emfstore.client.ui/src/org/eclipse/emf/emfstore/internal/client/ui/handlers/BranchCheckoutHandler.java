@@ -37,9 +37,7 @@ public class BranchCheckoutHandler extends AbstractEMFStoreHandler implements IH
 
 		new UICheckoutController(
 			getShell(),
-			new ESRemoteProjectImpl(
-				serverInfo.getAPIImpl(),
-				projectInfo),
+			new ESRemoteProjectImpl(serverInfo, projectInfo),
 			true).execute();
 	}
 }

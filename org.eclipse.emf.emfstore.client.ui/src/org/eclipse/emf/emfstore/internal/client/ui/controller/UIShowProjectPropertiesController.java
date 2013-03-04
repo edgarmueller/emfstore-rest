@@ -60,10 +60,10 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 
 		try {
 			ServerInfo serverInfo = (ServerInfo) projectInfo.eContainer();
-			ESRemoteProject remoteProjectImpl = new ESRemoteProjectImpl(serverInfo.getAPIImpl(), projectInfo);
+			ESRemoteProject remoteProjectImpl = new ESRemoteProjectImpl(serverInfo, projectInfo);
 			// TODO: monitor
 			versionSpec = remoteProjectImpl.resolveVersionSpec(ESVersionSpec.FACTORY.createHEAD(),
-				new NullProgressMonitor());
+																new NullProgressMonitor());
 			revision = "" + versionSpec.getIdentifier();
 		} catch (ESException e) {
 			// do nothing

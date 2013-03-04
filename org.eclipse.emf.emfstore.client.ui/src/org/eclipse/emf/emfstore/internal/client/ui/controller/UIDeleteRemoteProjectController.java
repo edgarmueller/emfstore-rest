@@ -17,7 +17,6 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -111,7 +110,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 				deleteRemoteProject(remoteProject, session, monitor);
 				return null;
 			} else {
-				deleteRemoteProject(serverInfo.getAPIImpl(), projectInfo, session, monitor);
+				deleteRemoteProject(serverInfo, projectInfo, session, monitor);
 				return null;
 			}
 
@@ -128,10 +127,10 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 		return null;
 	}
 
-	private void deleteRemoteProject(ESServerImpl server, ProjectInfo projectInfo, ESUsersession session,
+	private void deleteRemoteProject(ServerInfo server, ProjectInfo projectInfo, ESUsersession session,
 		IProgressMonitor monitor) throws ESException {
 		if (confirm("Confirmation",
-			MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {
+					MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {
 			if (session != null) {
 				new ESRemoteProjectImpl(server, projectInfo).delete(session, monitor);
 			} else {
@@ -143,8 +142,9 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	private void deleteRemoteProject(ESRemoteProject remoteProject, ESUsersession session, IProgressMonitor monitor)
 		throws ESException {
 		if (confirm(
-			"Confirmation",
-			MessageFormat.format("Do you really want to delete the remote project {0}?", remoteProject.getProjectName()))) {
+					"Confirmation",
+					MessageFormat.format("Do you really want to delete the remote project {0}?", remoteProject
+						.getProjectName()))) {
 			if (session != null) {
 				remoteProject.delete(session, monitor);
 			} else {

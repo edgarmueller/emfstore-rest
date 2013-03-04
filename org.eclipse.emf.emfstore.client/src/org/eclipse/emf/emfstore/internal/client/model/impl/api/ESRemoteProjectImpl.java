@@ -21,12 +21,12 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
-import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.observer.ESCheckoutObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.WorkspaceProvider;
@@ -75,7 +75,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * The current connection manager used to connect to the server(s).
 	 */
 	private final ProjectInfo projectInfo;
-	private final ESServerImpl server;
+	private final ServerInfo server;
 
 	/**
 	 * Constructor.
@@ -85,8 +85,8 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @param projectInfo
 	 *            information about which project to access
 	 */
-	public ESRemoteProjectImpl(ESServerImpl server, ProjectInfo projectInfo) {
-		this.server = server;
+	public ESRemoteProjectImpl(ServerInfo serverInfo, ProjectInfo projectInfo) {
+		this.server = serverInfo;
 		this.projectInfo = projectInfo;
 	}
 
@@ -120,15 +120,14 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		return new UnknownEMFStoreWorkloadCommand<List<ESBranchInfo>>(monitor) {
 			@Override
 			public List<ESBranchInfo> run(IProgressMonitor monitor) throws ESException {
-				List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<BranchInfo>>(server
-					.getInternalAPIImpl()) {
+				List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<BranchInfo>>(server) {
 					@Override
 					protected List<BranchInfo> run() throws ESException {
 						final ConnectionManager connectionManager = WorkspaceProvider.getInstance()
 							.getConnectionManager();
 						return connectionManager.getBranches(
-							getSessionId(),
-							getGlobalProjectId().getInternalAPIImpl());
+																getSessionId(),
+																getGlobalProjectId().getInternalAPIImpl());
 					};
 				}.execute()));
 				return ListUtil.copy(mapToInverse);
@@ -144,13 +143,12 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<ESBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
-		List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<BranchInfo>>(server
-			.getInternalAPIImpl()) {
+		List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<BranchInfo>>(server) {
 			@Override
 			protected List<BranchInfo> run() throws ESException {
 				return getConnectionManager().getBranches(
-					getSessionId(),
-					getGlobalProjectId().getInternalAPIImpl());
+															getSessionId(),
+															getGlobalProjectId().getInternalAPIImpl());
 			};
 		}.execute()));
 		return ListUtil.copy(mapToInverse);
@@ -168,12 +166,12 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 
 		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
 
-		PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(server.getInternalAPIImpl(), monitor) {
+		PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(server, monitor) {
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(getSessionId(),
-					getGlobalProjectId().getInternalAPIImpl(),
-					versionSpecImpl.getInternalAPIImpl());
+																	getGlobalProjectId().getInternalAPIImpl(),
+																	versionSpecImpl.getInternalAPIImpl());
 			}
 		}.execute();
 
@@ -197,8 +195,8 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(getSessionId(),
-					getGlobalProjectId().getInternalAPIImpl(),
-					versionSpecImpl.getInternalAPIImpl());
+																	getGlobalProjectId().getInternalAPIImpl(),
+																	versionSpecImpl.getInternalAPIImpl());
 			}
 		}.execute();
 
@@ -217,16 +215,16 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 
 		final ESHistoryQueryImpl<ESHistoryQuery, ?> queryImpl = (ESHistoryQueryImpl<ESHistoryQuery, ?>) query;
 
-		List<ESHistoryInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<HistoryInfo>>(server
-			.getInternalAPIImpl(), monitor) {
-			@Override
-			protected List<HistoryInfo> run() throws ESException {
-				return getConnectionManager().getHistoryInfo(
-					getSessionId(),
-					getGlobalProjectId().getInternalAPIImpl(),
-					queryImpl.getInternalAPIImpl());
-			}
-		}.execute()));
+		List<ESHistoryInfoImpl> mapToInverse = ListUtil
+			.mapToInverse((new ServerCall<List<HistoryInfo>>(server, monitor) {
+				@Override
+				protected List<HistoryInfo> run() throws ESException {
+					return getConnectionManager().getHistoryInfo(
+																	getSessionId(),
+																	getGlobalProjectId().getInternalAPIImpl(),
+																	queryImpl.getInternalAPIImpl());
+				}
+			}.execute()));
 		return ListUtil.copy(mapToInverse);
 	}
 
@@ -249,9 +247,9 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			@Override
 			protected List<HistoryInfo> run() throws ESException {
 				return getConnectionManager().getHistoryInfo(
-					getUsersession().getSessionId(),
-					globalProjectIdImpl.getInternalAPIImpl(),
-					queryImpl.getInternalAPIImpl());
+																getUsersession().getSessionId(),
+																globalProjectIdImpl.getInternalAPIImpl(),
+																queryImpl.getInternalAPIImpl());
 			}
 		}.execute();
 
@@ -276,14 +274,14 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 
 		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
-				new ServerCall<Void>(server.getInternalAPIImpl(), monitor) {
+				new ServerCall<Void>(server, monitor) {
 					@Override
 					protected Void run() throws ESException {
 						getConnectionManager().addTag(
-							getUsersession().getSessionId(),
-							globalProjectIdImpl.getInternalAPIImpl(),
-							primaryVersionSpecImpl.getInternalAPIImpl(),
-							tagVersionSpecImpl.getInternalAPIImpl());
+														getUsersession().getSessionId(),
+														globalProjectIdImpl.getInternalAPIImpl(),
+														primaryVersionSpecImpl.getInternalAPIImpl(),
+														tagVersionSpecImpl.getInternalAPIImpl());
 						return null;
 					}
 				}.execute();
@@ -310,14 +308,14 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 
 			public Void call() throws Exception {
-				new ServerCall<Void>(server.getInternalAPIImpl(), monitor) {
+				new ServerCall<Void>(server, monitor) {
 					@Override
 					protected Void run() throws ESException {
 						getConnectionManager().removeTag(
-							getUsersession().getSessionId(),
-							getGlobalProjectId().getInternalAPIImpl(),
-							versionSpecImpl.getInternalAPIImpl(),
-							tagVersionSpecImpl.getInternalAPIImpl());
+															getUsersession().getSessionId(),
+															getGlobalProjectId().getInternalAPIImpl(),
+															versionSpecImpl.getInternalAPIImpl(),
+															tagVersionSpecImpl.getInternalAPIImpl());
 						return null;
 					}
 				}.execute();
@@ -336,7 +334,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	public ESLocalProjectImpl checkout(final IProgressMonitor monitor) throws ESException {
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 			public ESLocalProjectImpl call() throws Exception {
-				return new ServerCall<ESLocalProjectImpl>(server.getInternalAPIImpl()) {
+				return new ServerCall<ESLocalProjectImpl>(server) {
 					@Override
 					protected ESLocalProjectImpl run() throws ESException {
 						return checkout(getUsersession().getAPIImpl(), monitor);
@@ -359,7 +357,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			public ESLocalProjectImpl call() throws Exception {
 				ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD()
 					.getAPIImpl(),
-					monitor);
+																				monitor);
 				return checkout(usersession, primaryVersionSpec, monitor);
 			}
 		});
@@ -399,8 +397,8 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 							@Override
 							protected Project run() throws ESException {
 								return getConnectionManager().getProject(usersession.getSessionId(),
-									projectInfo.getProjectId(),
-									projectInfoCopy.getVersion());
+																			projectInfo.getProjectId(),
+																			projectInfoCopy.getVersion());
 							}
 						}.execute();
 					}
@@ -491,7 +489,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			public Void call() throws Exception {
 				getDeleteProjectServerCall()
 					.setProgressMonitor(monitor)
-					.setServer(server.getInternalAPIImpl())
+					.setServer(server)
 					.execute();
 				return null;
 			}
@@ -524,8 +522,8 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getServer()
 	 */
-	public ESServer getServer() {
-		return server;
+	public ESServerImpl getServer() {
+		return server.getAPIImpl();
 	}
 
 	/**
