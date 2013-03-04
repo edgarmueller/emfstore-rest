@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Model Edit  (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.emfstore.server.model.edit;singleton:=true
-Bundle-Version: 0.9.3.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.emf.emfstore.internal.server.model.provider.ServerEditPlugin$Implementation
 Bundle-Vendor: Eclipse Modeling Project
@@ -17,6 +17,6 @@ Export-Package: org.eclipse.emf.emfstore.internal.server.model.accesscontrol.pro
  org.eclipse.emf.emfstore.internal.server.model.versioning.operations.provider,
  org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.provider,
  org.eclipse.emf.emfstore.internal.server.model.versioning.provider
-Require-Bundle: org.eclipse.emf.emfstore.server.model;visibility:=reexport,
- org.eclipse.emf.emfstore.common.model.edit;visibility:=reexport
+Require-Bundle: org.eclipse.emf.emfstore.server.model;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.common.model.edit;bundle-version="[1.0.0,2.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
