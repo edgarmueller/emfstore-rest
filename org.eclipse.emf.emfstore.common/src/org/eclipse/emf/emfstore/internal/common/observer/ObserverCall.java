@@ -146,8 +146,8 @@ public interface ObserverCall {
 			DEFAULT_VALUES.put("long", Long.valueOf(0));
 			DEFAULT_VALUES.put("float", new Float(0));
 			DEFAULT_VALUES.put("double", new Double(0));
-			DEFAULT_VALUES.put("byte", Byte.MIN_VALUE);
-			DEFAULT_VALUES.put("short", Short.MIN_VALUE);
+			DEFAULT_VALUES.put("byte", new Byte(Byte.MIN_VALUE));
+			DEFAULT_VALUES.put("short", new Short(Short.MIN_VALUE));
 		}
 	}
 }
