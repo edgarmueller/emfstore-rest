@@ -40,4 +40,11 @@ public final class Configuration {
 		return FILE_INFO;
 	}
 
+	public static VersioningInfo getVersioningInfo() {
+		return VERSIONING;
+	}
+
+	public static XMLRPC getXMLRPC() {
+		return XML_RPC;
+	}
 }

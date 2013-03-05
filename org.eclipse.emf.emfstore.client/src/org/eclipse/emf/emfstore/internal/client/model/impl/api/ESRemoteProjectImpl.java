@@ -24,12 +24,12 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.observer.ESCheckoutObserver;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
@@ -365,6 +365,12 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	public ESLocalProjectImpl checkout(final Usersession usersession, final IProgressMonitor monitor)
 		throws ESException {
 		return checkout(usersession.getAPIImpl(), monitor);
+	}
+
+	public ESLocalProjectImpl checkout(final Usersession usersession, final PrimaryVersionSpec versionSpec,
+		final IProgressMonitor monitor)
+		throws ESException {
+		return checkout(usersession.getAPIImpl(), versionSpec.getAPIImpl(), monitor);
 	}
 
 	/**

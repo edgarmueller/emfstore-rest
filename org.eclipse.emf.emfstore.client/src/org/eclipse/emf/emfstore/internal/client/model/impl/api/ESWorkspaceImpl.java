@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
@@ -23,6 +24,8 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithRe
 import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.common.ListUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
  * Mapping between {@link ESWorkspace} and {@link Workspace}.
@@ -36,7 +39,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * Constructor.
 	 * 
 	 * @param workspace
-	 *            the delegate
+	 *            the internal delegate
 	 */
 	public ESWorkspaceImpl(Workspace workspace) {
 		super(workspace);
@@ -107,6 +110,22 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 			public Void call() throws Exception {
 				getInternalAPIImpl().removeServerInfo(serverImpl.getInternalAPIImpl());
 				return null;
+			}
+		});
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getLocalProject(org.eclipse.emf.ecore.EObject)
+	 */
+	public ESLocalProject getLocalProject(final EObject modelElement) {
+		return RunESCommand.runWithResult(new Callable<ESLocalProject>() {
+			public ESLocalProject call() throws Exception {
+				Project project = ModelUtil.getProject(modelElement);
+				ProjectSpace projectSpace = getInternalAPIImpl().getProjectSpace(project);
+				return projectSpace.getAPIImpl();
 			}
 		});
 	}
