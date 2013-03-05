@@ -102,7 +102,7 @@ public interface ESObjectContainer<T> {
 	 *            whether to also include all subclasses of the given {@link Class} in the list
 	 * @return a list of model elements of the given type
 	 */
-	<T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses);
+	<U extends EObject> Set<U> getAllModelElementsByClass(Class<U> modelElementClass, Boolean includeSubclasses);
 
 	/**
 	 * Retrieve a list of all model elements of a certain type in the collection.
@@ -113,5 +113,5 @@ public interface ESObjectContainer<T> {
 	 *            the {@link Class} of the model element(s) to be retrieved
 	 * @return a list of model elements of the given type
 	 */
-	<T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass);
+	<U extends EObject> Set<U> getAllModelElementsByClass(Class<U> modelElementClass);
 }
