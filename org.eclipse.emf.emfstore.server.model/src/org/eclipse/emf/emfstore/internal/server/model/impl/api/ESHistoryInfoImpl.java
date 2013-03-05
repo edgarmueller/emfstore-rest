@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.server.model.impl.api;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.internal.common.ListUtil;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -60,7 +60,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 */
 	public List<ESPrimaryVersionSpec> getNextSpecs() {
 		EList<PrimaryVersionSpec> nextSpec = getInternalAPIImpl().getNextSpec();
-		return ListUtil.mapToAPI(ESPrimaryVersionSpec.class, nextSpec);
+		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, nextSpec);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getMergedFromSpecs()
 	 */
 	public List<ESPrimaryVersionSpec> getMergedFromSpecs() {
-		return ListUtil.mapToAPI(ESPrimaryVersionSpec.class, getInternalAPIImpl().getMergedFrom());
+		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, getInternalAPIImpl().getMergedFrom());
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getMergedToSpecs()
 	 */
 	public List<ESPrimaryVersionSpec> getMergedToSpecs() {
-		return ListUtil.mapToAPI(ESPrimaryVersionSpec.class, getInternalAPIImpl().getMergedTo());
+		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, getInternalAPIImpl().getMergedTo());
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getTagSpecs()
 	 */
 	public List<ESTagVersionSpec> getTagSpecs() {
-		return ListUtil.mapToAPI(ESTagVersionSpec.class, getInternalAPIImpl().getTagSpecs());
+		return APIUtil.mapToAPI(ESTagVersionSpec.class, getInternalAPIImpl().getTagSpecs());
 	}
 
 	public ESChangePackage getChangePackage() {

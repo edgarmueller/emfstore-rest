@@ -32,11 +32,10 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
-import org.eclipse.emf.emfstore.internal.common.ListUtil;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESHistoryQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
@@ -112,7 +111,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		return new UnknownEMFStoreWorkloadCommand<List<ESBranchInfo>>(monitor) {
 			@Override
 			public List<ESBranchInfo> run(IProgressMonitor monitor) throws ESException {
-				List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<BranchInfo>>(server) {
+				return APIUtil.mapToAPI(ESBranchInfo.class, new ServerCall<List<BranchInfo>>(server) {
 					@Override
 					protected List<BranchInfo> run() throws ESException {
 						final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance()
@@ -121,8 +120,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 							getSessionId(),
 							getGlobalProjectId().getInternalAPIImpl());
 					};
-				}.execute()));
-				return ListUtil.copy(mapToInverse);
+				}.execute());
 			}
 		}.execute();
 	}
@@ -135,15 +133,14 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public List<ESBranchInfo> getBranches(ESUsersession usersession, IProgressMonitor monitor) throws ESException {
-		List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse((new ServerCall<List<BranchInfo>>(server) {
+		return APIUtil.mapToAPI(ESBranchInfo.class, new ServerCall<List<BranchInfo>>(server) {
 			@Override
 			protected List<BranchInfo> run() throws ESException {
 				return getConnectionManager().getBranches(
 					getSessionId(),
 					getGlobalProjectId().getInternalAPIImpl());
 			};
-		}.execute()));
-		return ListUtil.copy(mapToInverse);
+		}.execute());
 	}
 
 	/**
@@ -208,7 +205,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		@SuppressWarnings("unchecked")
 		final ESHistoryQueryImpl<ESHistoryQuery, ?> queryImpl = (ESHistoryQueryImpl<ESHistoryQuery, ?>) query;
 
-		return ListUtil.mapToAPI(ESHistoryInfo.class, new ServerCall<List<HistoryInfo>>(server, monitor) {
+		return APIUtil.mapToAPI(ESHistoryInfo.class, new ServerCall<List<HistoryInfo>>(server, monitor) {
 			@Override
 			protected List<HistoryInfo> run() throws ESException {
 				return getConnectionManager().getHistoryInfo(
@@ -243,7 +240,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			}
 		}.execute();
 
-		return ListUtil.mapToAPI(ESHistoryInfo.class, historyInfos);
+		return APIUtil.mapToAPI(ESHistoryInfo.class, historyInfos);
 	}
 
 	/**

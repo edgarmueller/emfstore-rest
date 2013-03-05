@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
-import org.eclipse.emf.emfstore.internal.common.ListUtil;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.window.Window;
@@ -51,7 +51,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 */
 	public ESUsersession[] getKnownUsersessions() {
 		HashSet<Object> set = new LinkedHashSet<Object>();
-		List<ESUsersession> mapToAPI = ListUtil.mapToAPI(ESUsersession.class,
+		List<ESUsersession> mapToAPI = APIUtil.mapToAPI(ESUsersession.class,
 			ESWorkspaceProviderImpl.getInstance().getWorkspace()
 				.getInternalAPIImpl().getUsersessions());
 		return mapToAPI.toArray(new ESUsersession[mapToAPI.size()]);

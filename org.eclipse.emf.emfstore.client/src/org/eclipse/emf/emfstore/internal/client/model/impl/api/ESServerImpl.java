@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
-import static org.eclipse.emf.emfstore.internal.common.ListUtil.copy;
+import static org.eclipse.emf.emfstore.internal.common.APIUtil.copy;
 
 import java.util.ArrayList;
 import java.util.Date;

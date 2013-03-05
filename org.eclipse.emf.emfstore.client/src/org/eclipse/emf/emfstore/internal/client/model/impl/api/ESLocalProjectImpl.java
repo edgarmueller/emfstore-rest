@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
-import static org.eclipse.emf.emfstore.internal.common.ListUtil.copy;
+import static org.eclipse.emf.emfstore.internal.common.APIUtil.copy;
 
 import java.io.IOException;
 import java.util.Date;
@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
-import org.eclipse.emf.emfstore.internal.common.ListUtil;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
@@ -44,7 +44,6 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedEx
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.impl.LocalProjectIdImpl;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESBranchVersionSpecImpl;
@@ -157,9 +156,9 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 						@Override
 						protected PrimaryVersionSpec run() throws ESException {
 							return getConnectionManager().resolveVersionSpec(
-																				getSessionId(),
-																				getInternalAPIImpl().getProjectId(),
-																				versionSpecImpl.getInternalAPIImpl());
+								getSessionId(),
+								getInternalAPIImpl().getProjectId(),
+								versionSpecImpl.getInternalAPIImpl());
 						}
 					}.execute();
 				}
@@ -188,13 +187,12 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 			@Override
 			protected List<BranchInfo> run() throws ESException {
 				return getConnectionManager().getBranches(
-															getSessionId(),
-															getInternalAPIImpl().getProjectId());
+					getSessionId(),
+					getInternalAPIImpl().getProjectId());
 			};
 		}.execute();
 
-		List<ESBranchInfoImpl> mapToInverse = ListUtil.mapToInverse(branchInfos);
-		return ListUtil.copy(mapToInverse);
+		return APIUtil.mapToAPI(ESBranchInfo.class, branchInfos);
 	}
 
 	/**
@@ -230,10 +228,10 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 					@Override
 					protected Void run() throws ESException {
 						getConnectionManager().addTag(
-														getUsersession().getSessionId(),
-														getInternalAPIImpl().getProjectId(),
-														primaryVersionSpec,
-														tagVersionSpec);
+							getUsersession().getSessionId(),
+							getInternalAPIImpl().getProjectId(),
+							primaryVersionSpec,
+							tagVersionSpec);
 						return null;
 					}
 				}.execute();
@@ -264,10 +262,10 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 					@Override
 					protected Void run() throws ESException {
 						getConnectionManager().removeTag(
-															getSessionId(),
-															getInternalAPIImpl().getProjectId(),
-															primaryVersionSpec,
-															tagVersionSpec);
+							getSessionId(),
+							getInternalAPIImpl().getProjectId(),
+							primaryVersionSpec,
+							tagVersionSpec);
 						return null;
 					}
 				}.execute();
@@ -371,13 +369,13 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 */
 	public ESPrimaryVersionSpec commit(final IProgressMonitor monitor) throws ESException {
 		PrimaryVersionSpec versionSpec = RunESCommand.WithException.runWithResult(ESException.class,
-																					new Callable<PrimaryVersionSpec>() {
-																						public PrimaryVersionSpec call()
-																							throws Exception {
-																							return getInternalAPIImpl()
-																								.commit(monitor);
-																						}
-																					});
+			new Callable<PrimaryVersionSpec>() {
+				public PrimaryVersionSpec call()
+					throws Exception {
+					return getInternalAPIImpl()
+						.commit(monitor);
+				}
+			});
 		return versionSpec.getAPIImpl();
 	}
 
@@ -395,24 +393,24 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		checkIsShared();
 
 		PrimaryVersionSpec versionSpec = RunESCommand.WithException.runWithResult(ESException.class,
-																					new Callable<PrimaryVersionSpec>() {
+			new Callable<PrimaryVersionSpec>() {
 
-																						public PrimaryVersionSpec call()
-																							throws Exception {
-																							LogMessage msg = null;
+				public PrimaryVersionSpec call()
+					throws Exception {
+					LogMessage msg = null;
 
-																							if (logMessage != null) {
-																								msg = ((ESLogMessageImpl) logMessage)
-																									.getInternalAPIImpl();
-																							}
+					if (logMessage != null) {
+						msg = ((ESLogMessageImpl) logMessage)
+							.getInternalAPIImpl();
+					}
 
-																							return getInternalAPIImpl()
-																								.commit(
-																										msg,
-																										callback,
-																										monitor);
-																						}
-																					});
+					return getInternalAPIImpl()
+						.commit(
+							msg,
+							callback,
+							monitor);
+				}
+			});
 
 		return versionSpec.getAPIImpl();
 	}
@@ -431,31 +429,31 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		BaseVersionOutdatedException, ESException {
 
 		PrimaryVersionSpec versionSpec = RunESCommand.WithException.runWithResult(ESException.class,
-																					new Callable<PrimaryVersionSpec>() {
+			new Callable<PrimaryVersionSpec>() {
 
-																						public PrimaryVersionSpec call()
-																							throws Exception {
-																							LogMessage msg = null;
-																							BranchVersionSpec versionSpec = null;
+				public PrimaryVersionSpec call()
+					throws Exception {
+					LogMessage msg = null;
+					BranchVersionSpec versionSpec = null;
 
-																							if (logMessage != null) {
-																								msg = ((ESLogMessageImpl) logMessage)
-																									.getInternalAPIImpl();
-																							}
+					if (logMessage != null) {
+						msg = ((ESLogMessageImpl) logMessage)
+							.getInternalAPIImpl();
+					}
 
-																							if (branch != null) {
-																								versionSpec = ((ESBranchVersionSpecImpl) branch)
-																									.getInternalAPIImpl();
-																							}
+					if (branch != null) {
+						versionSpec = ((ESBranchVersionSpecImpl) branch)
+							.getInternalAPIImpl();
+					}
 
-																							return getInternalAPIImpl()
-																								.commitToBranch(
-																												versionSpec,
-																												msg,
-																												callback,
-																												monitor);
-																						}
-																					});
+					return getInternalAPIImpl()
+						.commitToBranch(
+							versionSpec,
+							msg,
+							callback,
+							monitor);
+				}
+			});
 
 		return versionSpec.getAPIImpl();
 	}
@@ -500,9 +498,9 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 
 			public ESPrimaryVersionSpecImpl call() throws Exception {
 				PrimaryVersionSpec primaryVersionSpec = getInternalAPIImpl().update(
-																					version,
-																					callback,
-																					monitor);
+					version,
+					callback,
+					monitor);
 				return primaryVersionSpec.getAPIImpl();
 			}
 		});
@@ -527,11 +525,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				return getInternalAPIImpl().merge(
-													primaryVersionSpecImpl.getInternalAPIImpl(),
-													changeConflict,
-													conflictResolver,
-													callback,
-													monitor);
+					primaryVersionSpecImpl.getInternalAPIImpl(),
+					changeConflict,
+					conflictResolver,
+					callback,
+					monitor);
 			}
 		});
 	}
@@ -552,9 +550,9 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				getInternalAPIImpl().mergeBranch(
-													primaryVersionSpecImpl.getInternalAPIImpl(),
-													conflictResolver,
-													monitor);
+					primaryVersionSpecImpl.getInternalAPIImpl(),
+					conflictResolver,
+					monitor);
 				return null;
 			}
 		});
@@ -589,8 +587,8 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				getInternalAPIImpl().shareProject(
-													usersessionImpl.getInternalAPIImpl(),
-													monitor);
+					usersessionImpl.getInternalAPIImpl(),
+					monitor);
 				return null;
 			}
 		});

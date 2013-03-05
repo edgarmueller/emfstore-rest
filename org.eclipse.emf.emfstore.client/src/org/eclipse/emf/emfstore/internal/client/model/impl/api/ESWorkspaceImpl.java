@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
-import org.eclipse.emf.emfstore.internal.common.ListUtil;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -52,7 +52,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getLocalProjects()
 	 */
 	public List<ESLocalProject> getLocalProjects() {
-		return ListUtil.mapToAPI(ESLocalProject.class, getInternalAPIImpl().getProjectSpaces());
+		return APIUtil.mapToAPI(ESLocalProject.class, getInternalAPIImpl().getProjectSpaces());
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getServers()
 	 */
 	public List<ESServer> getServers() {
-		return ListUtil.mapToAPI(ESServer.class, getInternalAPIImpl().getServerInfos());
+		return APIUtil.mapToAPI(ESServer.class, getInternalAPIImpl().getServerInfos());
 	}
 
 	/**

@@ -24,11 +24,10 @@ import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.common.ListUtil;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
@@ -131,10 +130,9 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		ConflictDetector conflictDetector = new ConflictDetector();
 
-		List<ESChangePackageImpl> mapToInverse = ListUtil.mapToInverse(changes);
-		List<ESChangePackage> copy = ListUtil.copy(mapToInverse);
+		List<ESChangePackage> copy = APIUtil.mapToAPI(ESChangePackage.class, changes);
+
 		// TODO ASYNC review this cancel
-		// TODO casts..
 		if (getProgressMonitor().isCanceled()
 			|| !callback.inspectChanges(getProjectSpace().getAPIImpl(), copy, idToEObjectMapping)) {
 			return getProjectSpace().getBaseVersion();
