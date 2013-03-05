@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.handlers.exportimport;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIExportController;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreHandler;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 
 /**
  * Handler for exporting a {@link Project}.

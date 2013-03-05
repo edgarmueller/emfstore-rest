@@ -14,8 +14,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
 

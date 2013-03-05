@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
  * Controller that forces a revert of version spec.

@@ -12,10 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,18 +23,14 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IDisposable;
-import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ProjectUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ServerUrlResolutionException;
@@ -49,15 +43,9 @@ import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
-import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
-import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment;
 import org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
-import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 
 /**
  * Workspace space base class that contains custom user methods.

@@ -51,8 +51,8 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
 
 /**
  * Allows to hook in for custom conflict treatment.

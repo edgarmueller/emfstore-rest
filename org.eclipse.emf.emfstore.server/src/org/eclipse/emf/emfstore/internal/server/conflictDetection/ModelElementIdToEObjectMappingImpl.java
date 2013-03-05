@@ -20,10 +20,10 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
-import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMappingImpl;
+import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.common.impl.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;

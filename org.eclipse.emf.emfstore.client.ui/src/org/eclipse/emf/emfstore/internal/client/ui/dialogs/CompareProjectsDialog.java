@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESProject;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;

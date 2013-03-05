@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerCallImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.SessionTimedOutException;

@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
+import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
 
 // import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 

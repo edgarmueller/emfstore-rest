@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.importexport;
 
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 
 /**
  * Represents all units that are considered valid to be exported/imported.

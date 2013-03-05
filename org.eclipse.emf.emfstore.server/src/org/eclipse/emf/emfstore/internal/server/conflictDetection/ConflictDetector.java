@@ -16,7 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 

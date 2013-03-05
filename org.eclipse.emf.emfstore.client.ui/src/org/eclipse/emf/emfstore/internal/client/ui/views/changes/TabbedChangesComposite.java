@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMLabelProvider;
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
