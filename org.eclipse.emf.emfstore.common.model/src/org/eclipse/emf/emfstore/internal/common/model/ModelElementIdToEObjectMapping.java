@@ -3,11 +3,10 @@
  * accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html </copyright>
  */
-package org.eclipse.emf.emfstore.internal.common;
+package org.eclipse.emf.emfstore.internal.common.model;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.common.impl.ESModelElementIdToEObjectMappingImpl;
-import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdToEObjectMapping;
 
 /**

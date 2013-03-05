@@ -9,15 +9,14 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.common.impl;
+package org.eclipse.emf.emfstore.internal.common.model.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 
 /**
  * Mapping between {@link ESModelElementIdToEObjectMapping} and {@link ModelElementIdToEObjectMapping}.

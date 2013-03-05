@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.scm;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.ui.common.EClassFilter;
-import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**

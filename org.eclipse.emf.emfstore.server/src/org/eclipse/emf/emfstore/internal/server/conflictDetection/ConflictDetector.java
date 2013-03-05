@@ -16,7 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.internal.common.ModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
@@ -99,12 +99,12 @@ public class ConflictDetector {
 
 		int counter = 0;
 		for (AbstractOperation myOperation : myOperations) {
-			conflictMap.scanOperationReservations(myOperation, counter, true);
+			conflictMap.scanOperationReservations(myOperation, counter, idToEObjectMapping, true);
 			counter++;
 		}
 
 		for (AbstractOperation theirOperation : theirOperations) {
-			conflictMap.scanOperationReservations(theirOperation, counter, false);
+			conflictMap.scanOperationReservations(theirOperation, counter, idToEObjectMapping, false);
 			counter++;
 		}
 		return conflictMap.getConflictBucketCandidates();
