@@ -31,8 +31,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
-import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.CompositeConflict;
@@ -54,6 +52,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.uti
 import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
@@ -90,7 +89,7 @@ public class DecisionManager {
 	private ConflictDetector conflictDetector;
 	private ChangeConflict changeConflict;
 	private Set<AbstractOperation> notInvolvedInConflict;
-	private ESModelElementIdToEObjectMapping<ESModelElementId> mapping;
+	private ModelElementIdToEObjectMapping mapping;
 	private final boolean isBranchMerge;
 	private final Project project;
 
@@ -143,12 +142,15 @@ public class DecisionManager {
 		if (changeConflict != null) {
 			conflictBucketCandidates = changeConflict.getConflictBucketCandidates();
 		} else {
-			conflictBucketCandidates = new ConflictDetector().calculateConflictCandidateBuckets(myChangePackages,
-				theirChangePackages);
+			conflictBucketCandidates = new ConflictDetector()
+				.calculateConflictCandidateBuckets(myChangePackages,
+													theirChangePackages,
+													getProject());
 		}
 
-		Set<ConflictBucket> conflictBucketsSet = conflictDetector.calculateConflictBucketsFromConflictCandidateBuckets(
-			conflictBucketCandidates, notInvolvedInConflict);
+		Set<ConflictBucket> conflictBucketsSet = conflictDetector
+			.calculateConflictBucketsFromConflictCandidateBuckets(
+																	conflictBucketCandidates, notInvolvedInConflict);
 
 		createConflicts(conflictBucketsSet);
 	}
@@ -223,9 +225,10 @@ public class DecisionManager {
 				conflict = notifyConflictHandlers(conflict);
 				addConflict(conflict);
 			} else {
-				WorkspaceUtil.log(
-					"A created conflict has been ignored (does not apply to any existing conflict rule).",
-					IStatus.WARNING);
+				WorkspaceUtil
+					.log(
+							"A created conflict has been ignored (does not apply to any existing conflict rule).",
+							IStatus.WARNING);
 			}
 		}
 	}
@@ -330,10 +333,10 @@ public class DecisionManager {
 	private Conflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
 		if (isCompositeRef(conf.getMyOperation())) {
 			return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
-				Arrays.asList(conf.getTheirOperation()));
+									Arrays.asList(conf.getTheirOperation()));
 		} else {
 			return createRefFromSub(conf, Arrays.asList(conf.getMyOperation()),
-				((CompositeOperation) conf.getTheirOperation()).getSubOperations());
+									((CompositeOperation) conf.getTheirOperation()).getSubOperations());
 		}
 	}
 
@@ -569,7 +572,7 @@ public class DecisionManager {
 	 * @return the model element with the given ID or <code>null</code> if no such model element has been found
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
-		return mapping.get(modelElementId.getAPIImpl());
+		return mapping.get(modelElementId);
 	}
 
 	/**
@@ -735,7 +738,7 @@ public class DecisionManager {
 	 * 
 	 * @return the ID to {@link EObject} mapping
 	 */
-	public ESModelElementIdToEObjectMapping getIdToEObjectMapping() {
+	public ModelElementIdToEObjectMapping getIdToEObjectMapping() {
 		return mapping;
 	}
 

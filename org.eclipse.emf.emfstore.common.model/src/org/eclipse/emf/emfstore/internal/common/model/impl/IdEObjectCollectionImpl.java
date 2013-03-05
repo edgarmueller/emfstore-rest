@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdGenerator;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -88,7 +87,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			.getElementWithHighestPriority();
 		if (element != null) {
 			modelElementIdGenerator = element.getClass(MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE,
-				ESModelElementIdGenerator.class);
+														ESModelElementIdGenerator.class);
 		}
 	}
 
@@ -799,13 +798,12 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public EObject get(ESModelElementId modelElementId) {
-		ModelElementId id = ((ESModelElementIdImpl) modelElementId).getInternalAPIImpl();
-		EObject modelElement = getModelElement(id);
+	public EObject get(ModelElementId modelElementId) {
+		EObject modelElement = getModelElement(modelElementId);
 		if (modelElement != null) {
 			return modelElement;
 		}
-		return getDeletedModelElement(id);
+		return getDeletedModelElement(modelElementId);
 	}
 
 	/**

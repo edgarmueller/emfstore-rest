@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
@@ -53,6 +54,11 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	 * @ordered
 	 */
 	protected EList<EObject> cutElements;
+
+	/**
+	 * @generated NOT
+	 */
+	private ESModelElementIdToEObjectMappingImpl mappingImpl;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -254,5 +260,30 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 		}
 
 		super.initMapping();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * 
+	 * @generated NOT
+	 */
+	public ESModelElementIdToEObjectMappingImpl getAPIImpl() {
+
+		if (mappingImpl == null) {
+			mappingImpl = createAPIImpl();
+		}
+
+		return mappingImpl;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 */
+	public ESModelElementIdToEObjectMappingImpl createAPIImpl() {
+		return new ESModelElementIdToEObjectMappingImpl(this);
 	}
 }

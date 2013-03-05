@@ -42,7 +42,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.grap
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -401,7 +401,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		}
 
 		ChangePackageVisualizationHelper newHelper = new ChangePackageVisualizationHelper(
-			new BasicModelElementIdToEObjectMapping(projectSpace.getProject(), cps));
+			new ModelElementIdToEObjectMappingImpl(projectSpace.getProject(), cps));
 		changeLabel.setProject(projectSpace.getProject());
 		changeLabel.setChangePackageVisualizationHelper(newHelper);
 		commitLabel.setProject(projectSpace.getProject());

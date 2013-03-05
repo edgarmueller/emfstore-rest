@@ -12,10 +12,9 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.changes;
 
 import java.util.List;
 
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
-import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMContentProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.scm.SCMLabelProvider;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -60,7 +59,7 @@ public class TabbedChangesComposite extends Composite {
 	 *            whether to show root nodes
 	 */
 	public TabbedChangesComposite(Composite parent, int style, List<ChangePackage> changePackages, Project project,
-		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping, boolean showRootNodes) {
+		ModelElementIdToEObjectMapping idToEObjectMapping, boolean showRootNodes) {
 		super(parent, style);
 		createComposite(style, project, idToEObjectMapping, showRootNodes);
 		tabTreeViewer.setInput(changePackages);
@@ -84,7 +83,7 @@ public class TabbedChangesComposite extends Composite {
 	 *            whether to show root nodes
 	 */
 	public TabbedChangesComposite(Composite parent, int style, Project project, List<AbstractOperation> operations,
-		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping, boolean showRootNodes) {
+		ModelElementIdToEObjectMapping idToEObjectMapping, boolean showRootNodes) {
 		super(parent, style);
 		createComposite(style, project, idToEObjectMapping, showRootNodes);
 		tabTreeViewer.setInput(operations);
@@ -92,8 +91,9 @@ public class TabbedChangesComposite extends Composite {
 
 	private void createComposite(int style,
 		Project project,
-		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping,
+		ModelElementIdToEObjectMapping idToEObjectMapping,
 		boolean showRootNodes) {
+
 		setLayout(new GridLayout());
 		folder = new TabFolder(this, style);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)

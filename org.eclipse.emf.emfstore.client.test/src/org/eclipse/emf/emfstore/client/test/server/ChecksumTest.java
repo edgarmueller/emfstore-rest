@@ -1,5 +1,6 @@
 package org.eclipse.emf.emfstore.client.test.server;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -15,11 +16,10 @@ import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -34,9 +34,17 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.junit.After;
 import org.junit.Test;
 
 public class ChecksumTest extends CoreServerTest {
+
+	@Override
+	@After
+	public void teardown() throws IOException, SerializationException, ESException {
+		super.teardown();
+		Configuration.getClientBehavior().setChecksumErrorHandler(null);
+	}
 
 	@Test
 	public void testRevert() throws SerializationException {
@@ -113,7 +121,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		Configuration.getClientBehavior().setChecksumErrorHandler(ChecksumErrorHandler.AUTOCORRECT);
 
 		final TestElement testElement = createTestElement();
 		getProject().addModelElement(testElement);
@@ -154,7 +162,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		Configuration.getClientBehavior().setChecksumErrorHandler(ChecksumErrorHandler.AUTOCORRECT);
 		((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
 
 		final TestElement testElement = createTestElement();
@@ -222,7 +230,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
+		Configuration.getClientBehavior().setChecksumErrorHandler(ChecksumErrorHandler.CANCEL);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -248,7 +256,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
+		Configuration.getClientBehavior().setChecksumErrorHandler(ChecksumErrorHandler.CANCEL);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -294,7 +302,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.CANCEL);
+		Configuration.getClientBehavior().setChecksumErrorHandler(ChecksumErrorHandler.CANCEL);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -334,7 +342,7 @@ public class ChecksumTest extends CoreServerTest {
 
 		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Configuration.getClientBehavior().setChecksumFailureAction(ChecksumErrorHandler.AUTOCORRECT);
+		Configuration.getClientBehavior().setChecksumErrorHandler(ChecksumErrorHandler.AUTOCORRECT);
 
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
@@ -410,7 +418,7 @@ public class ChecksumTest extends CoreServerTest {
 	private class MyUpdateCallback implements ESUpdateCallback {
 
 		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
-			ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
+			ESModelElementIdToEObjectMapping idToEObjectMapping) {
 			return ESUpdateCallback.NOCALLBACK.inspectChanges(projectSpace, changes, idToEObjectMapping);
 		}
 

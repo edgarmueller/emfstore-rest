@@ -16,6 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
@@ -89,7 +90,7 @@ public class ConflictDetector {
 	 * @return a set of buckets with potentially conflicting operations
 	 */
 	public Set<ConflictBucketCandidate> calculateConflictCandidateBuckets(List<ChangePackage> myChangePackages,
-		List<ChangePackage> theirChangePackages) {
+		List<ChangePackage> theirChangePackages, ModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		List<AbstractOperation> myOperations = flattenChangepackages(myChangePackages);
 		List<AbstractOperation> theirOperations = flattenChangepackages(theirChangePackages);

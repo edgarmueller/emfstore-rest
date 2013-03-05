@@ -116,7 +116,7 @@ public class Behavior {
 	 * @param errorHandler
 	 *            the error handler to be set
 	 */
-	public void setChecksumFailureAction(ESChecksumErrorHandler errorHandler) {
+	public void setChecksumErrorHandler(ESChecksumErrorHandler errorHandler) {
 		checksumErrorHandler = errorHandler;
 	}
 

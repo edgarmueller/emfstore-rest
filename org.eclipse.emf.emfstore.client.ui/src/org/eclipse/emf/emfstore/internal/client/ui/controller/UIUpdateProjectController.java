@@ -12,7 +12,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -22,8 +21,8 @@ import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -32,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -97,7 +96,7 @@ public class UIUpdateProjectController extends
 			public Void call() throws Exception {
 				MessageDialog
 					.openInformation(getShell(), "No need to update",
-						"Your project is up to date, you do not need to update.");
+										"Your project is up to date, you do not need to update.");
 				return null;
 			}
 		});
@@ -117,10 +116,10 @@ public class UIUpdateProjectController extends
 			final ESPrimaryVersionSpec targetVersion = localProject
 				.resolveVersionSpec(ESVersionSpec.FACTORY
 					.createHEAD(localProject.getBaseVersion()),
-					new NullProgressMonitor());
+									new NullProgressMonitor());
 			// merge opens up a dialog
 			return localProject.merge(targetVersion, changeConflict,
-				new MergeProjectHandler(), this, progressMonitor);
+										new MergeProjectHandler(), this, progressMonitor);
 		} catch (final ESException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
@@ -136,8 +135,8 @@ public class UIUpdateProjectController extends
 	private void handleMergeException(final ESLocalProject projectSpace,
 		ESException e) {
 		WorkspaceUtil.logException(String.format(
-			"Exception while merging the project %s!",
-			projectSpace.getProjectName()), e);
+													"Exception while merging the project %s!",
+													projectSpace.getProjectName()), e);
 		EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 	}
 
@@ -150,19 +149,13 @@ public class UIUpdateProjectController extends
 	 */
 	public boolean inspectChanges(final ESLocalProject localProject,
 		final List<ESChangePackage> changePackages,
-		final ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
-
-		// TODO: provide util method for mapping to internal class
-		final List<ChangePackage> internalChangePackages = new ArrayList<ChangePackage>();
-		for (ESChangePackage changePackage : changePackages) {
-			internalChangePackages.add(((ESChangePackageImpl) changePackage).getInternalAPIImpl());
-		}
+		final ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
-				@SuppressWarnings("unchecked")
 				UpdateDialog updateDialog = new UpdateDialog(getShell(), localProject,
-					internalChangePackages, idToEObjectMapping);
+					APIUtil.mapToInternalAPI(ChangePackage.class, changePackages),
+					((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).getInternalAPIImpl());
 				if (updateDialog.open() == Window.OK) {
 					return true;
 				}
@@ -184,8 +177,8 @@ public class UIUpdateProjectController extends
 
 		ESPrimaryVersionSpec resolveVersionSpec = localProject
 			.resolveVersionSpec(
-				ESVersionSpec.FACTORY.createHEAD(oldBaseVersion),
-				new NullProgressMonitor());
+								ESVersionSpec.FACTORY.createHEAD(oldBaseVersion),
+								new NullProgressMonitor());
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();
@@ -193,7 +186,7 @@ public class UIUpdateProjectController extends
 		}
 
 		ESPrimaryVersionSpec newBaseVersion = localProject.update(version,
-			UIUpdateProjectController.this, monitor);
+																	UIUpdateProjectController.this, monitor);
 
 		return newBaseVersion;
 	}

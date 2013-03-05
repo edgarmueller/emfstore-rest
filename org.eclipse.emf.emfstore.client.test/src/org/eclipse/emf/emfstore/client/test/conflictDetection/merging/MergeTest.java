@@ -168,7 +168,7 @@ public class MergeTest extends ConflictDetectionTest {
 			List<ChangePackage> theirChangePackages = Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true));
 
 			Set<ConflictBucketCandidate> conflictCandidateBuckets = new ConflictDetector()
-				.calculateConflictCandidateBuckets(myChangePackages, theirChangePackages);
+				.calculateConflictCandidateBuckets(myChangePackages, theirChangePackages, getProject());
 			ChangeConflict changeConflict = new ChangeConflict(getProjectSpace(),
 				myChangePackages, theirChangePackages, conflictCandidateBuckets, getProject());
 

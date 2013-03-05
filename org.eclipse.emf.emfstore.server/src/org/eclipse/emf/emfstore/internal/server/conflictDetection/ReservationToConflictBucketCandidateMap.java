@@ -16,6 +16,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
@@ -35,8 +37,25 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Refe
  */
 public class ReservationToConflictBucketCandidateMap {
 
+	private static ReservationSetModifier reservationSetModifier = initCustomReservationModifier();
 	private ReservationSet reservationToConflictMap;
 	private Set<ConflictBucketCandidate> conflictBucketCandidates;
+
+	private static ReservationSetModifier initCustomReservationModifier() {
+
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.conflictDetection");
+		ESExtensionElement first = extensionPoint.getFirst();
+
+		if (first != null) {
+			return first.getClass("class", ReservationSetModifier.class);
+		}
+
+		return new ReservationSetModifier() {
+			public ReservationSet addCustomReservation(AbstractOperation operation, ReservationSet reservationSet) {
+				return reservationSet;
+			}
+		};
+	}
 
 	/**
 	 * Default constructor.
@@ -55,7 +74,9 @@ public class ReservationToConflictBucketCandidateMap {
 			if (reservationSet.hasFullReservation(modelElement)
 				|| reservationToConflictMap.hasFullReservation(modelElement)) {
 				ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
-					reservationToConflictMap.getConflictBucketCandidates(modelElement), currentConflictBucketCandidate);
+																										reservationToConflictMap
+																											.getConflictBucketCandidates(modelElement),
+																										currentConflictBucketCandidate);
 				reservationToConflictMap.addFullReservation(modelElement, mergedConflictBucketCandidates);
 				continue;
 			}
@@ -78,7 +99,7 @@ public class ReservationToConflictBucketCandidateMap {
 					handleFeatureVsFeatureReservation(currentConflictBucketCandidate, modelElement, featureName);
 				} else {
 					handleOppositeVsOppositeReservation(reservationSet, currentConflictBucketCandidate, modelElement,
-						featureName);
+														featureName);
 				}
 
 			}
@@ -90,10 +111,12 @@ public class ReservationToConflictBucketCandidateMap {
 
 		if (reservationToConflictMap.hasFeatureReservation(modelElement, featureName)) {
 
-			Set<ConflictBucketCandidate> existingBuckets = reservationToConflictMap.getConflictBucketCandidates(
-				modelElement, featureName);
-			ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(existingBuckets,
-				currentConflictBucketCandidate);
+			Set<ConflictBucketCandidate> existingBuckets = reservationToConflictMap
+				.getConflictBucketCandidates(
+												modelElement, featureName);
+			ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
+																									existingBuckets,
+																									currentConflictBucketCandidate);
 
 			reservationToConflictMap.addFeatureReservation(modelElement, featureName, mergedConflictBucketCandidates);
 
@@ -112,11 +135,18 @@ public class ReservationToConflictBucketCandidateMap {
 				if (reservationToConflictMap.hasOppositeReservation(modelElement, featureName, oppositeModelElement)) {
 
 					ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
-						reservationToConflictMap.getConflictBucketCandidates(modelElement, featureName,
-							oppositeModelElement), currentConflictBucketCandidate);
+																											reservationToConflictMap
+																												.getConflictBucketCandidates(
+																																				modelElement,
+																																				featureName,
+																																				oppositeModelElement),
+																											currentConflictBucketCandidate);
 
-					reservationToConflictMap.addMultiReferenceWithOppositeReservation(modelElement, featureName,
-						oppositeModelElement, mergedConflictBucketCandidates);
+					reservationToConflictMap.addMultiReferenceWithOppositeReservation(
+																						modelElement,
+																						featureName,
+																						oppositeModelElement,
+																						mergedConflictBucketCandidates);
 				}
 			}
 		} else if (reservationToConflictMap.hasFeatureReservation(modelElement, featureName)) {
@@ -125,8 +155,11 @@ public class ReservationToConflictBucketCandidateMap {
 			Set<String> opposites = reservationSet.getOpposites(modelElement, featureName);
 
 			for (String oppositeModelElement : opposites) {
-				reservationToConflictMap.addMultiReferenceWithOppositeReservation(modelElement, featureName,
-					oppositeModelElement, currentConflictBucketCandidate);
+				reservationToConflictMap.addMultiReferenceWithOppositeReservation(
+																					modelElement,
+																					featureName,
+																					oppositeModelElement,
+																					currentConflictBucketCandidate);
 			}
 		}
 
@@ -153,10 +186,15 @@ public class ReservationToConflictBucketCandidateMap {
 	public void scanOperationReservations(AbstractOperation operation, int priority, boolean isMyOperation) {
 
 		ReservationSet reservationSet = extractReservationFromOperation(operation, new ReservationSet());
+		reservationSet = addCustomReservations(operation, reservationSet);
 		ConflictBucketCandidate conflictBucketCandidate = new ConflictBucketCandidate();
 		conflictBucketCandidates.add(conflictBucketCandidate);
 		conflictBucketCandidate.addOperation(operation, isMyOperation, priority);
 		joinReservationSet(reservationSet, conflictBucketCandidate);
+	}
+
+	private ReservationSet addCustomReservations(AbstractOperation operation, ReservationSet reservationSet) {
+		return reservationSetModifier.addCustomReservation(operation, reservationSet);
 	}
 
 	private ReservationSet extractReservationFromOperation(AbstractOperation operation, ReservationSet reservationSet) {
@@ -211,7 +249,7 @@ public class ReservationToConflictBucketCandidateMap {
 			|| (featureOperation instanceof MultiReferenceSetOperation || featureOperation instanceof MultiReferenceMoveOperation)) {
 			for (ModelElementId otherModelElement : featureOperation.getOtherInvolvedModelElements()) {
 				reservationSet.addMultiReferenceWithOppositeReservation(modelElementId, featureName,
-					otherModelElement.getId());
+																		otherModelElement.getId());
 			}
 		} else {
 			reservationSet.addFeatureReservation(modelElementId, featureName);

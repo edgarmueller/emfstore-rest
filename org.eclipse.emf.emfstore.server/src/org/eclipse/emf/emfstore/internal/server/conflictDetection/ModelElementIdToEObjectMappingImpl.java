@@ -20,30 +20,33 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
-import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMappingImpl;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 
-// import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-
 /**
  * @author emueller
  * @author koegel
  */
-public class BasicModelElementIdToEObjectMapping implements ESModelElementIdToEObjectMapping<ESModelElementId> {
+public class ModelElementIdToEObjectMappingImpl implements ModelElementIdToEObjectMapping,
+	APIDelegate<ESModelElementIdToEObjectMappingImpl> {
 
 	private Map<String, EObject> idToEObjectMapping;
-	private ESModelElementIdToEObjectMapping<ESModelElementId> delegateMapping;
+	private ModelElementIdToEObjectMapping delegateMapping;
+	private ESModelElementIdToEObjectMappingImpl apiImpl;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param mapping
-	 *            an initial mapping from {EObject}s to their {@link ESModelElementId}s
+	 *            an initial mapping from {EObject}s to their {@link ModelElementId}s
 	 */
-	public BasicModelElementIdToEObjectMapping(ESModelElementIdToEObjectMapping<ESModelElementId> mapping) {
+	public ModelElementIdToEObjectMappingImpl(ModelElementIdToEObjectMapping mapping) {
 		this.delegateMapping = mapping;
 		this.idToEObjectMapping = new LinkedHashMap<String, EObject>();
 	}
@@ -52,12 +55,12 @@ public class BasicModelElementIdToEObjectMapping implements ESModelElementIdToEO
 	 * Constructor.
 	 * 
 	 * @param mapping
-	 *            an initial mapping from {EObject}s to their {@link ESModelElementId}s
+	 *            an initial mapping from {EObject}s to their {@link ModelElementId}s
 	 * @param changePackages
 	 *            a list of {@link ChangePackage}s whose involved model elements should
 	 *            be added to the mapping
 	 */
-	public BasicModelElementIdToEObjectMapping(ESModelElementIdToEObjectMapping<ESModelElementId> mapping,
+	public ModelElementIdToEObjectMappingImpl(ModelElementIdToEObjectMapping mapping,
 		List<ChangePackage> changePackages) {
 		this(mapping);
 		for (ChangePackage changePackage : changePackages) {
@@ -74,7 +77,7 @@ public class BasicModelElementIdToEObjectMapping implements ESModelElementIdToEO
 	 *            a {@link ChangePackage}s whose involved model elements should
 	 *            be added to the mapping
 	 */
-	public BasicModelElementIdToEObjectMapping(ESModelElementIdToEObjectMapping<ESModelElementId> mapping,
+	public ModelElementIdToEObjectMappingImpl(ModelElementIdToEObjectMapping mapping,
 		ChangePackage changePackage) {
 		this(mapping);
 		this.put(changePackage);
@@ -107,7 +110,7 @@ public class BasicModelElementIdToEObjectMapping implements ESModelElementIdToEO
 			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
 			for (EObject modelElement : createDeleteOperation.getEObjectToIdMap().keySet()) {
 				idToEObjectMapping.put(createDeleteOperation.getEObjectToIdMap().get(modelElement).toString(),
-					modelElement);
+										modelElement);
 			}
 		}
 	}
@@ -117,7 +120,7 @@ public class BasicModelElementIdToEObjectMapping implements ESModelElementIdToEO
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping#get(org.eclipse.emf.emfstore.internal.common.model.ModelElementId)
 	 */
-	public EObject get(ESModelElementId modelElementId) {
+	public EObject get(ModelElementId modelElementId) {
 		EObject eObject = delegateMapping.get(modelElementId);
 		if (eObject != null) {
 			return eObject;
@@ -126,5 +129,30 @@ public class BasicModelElementIdToEObjectMapping implements ESModelElementIdToEO
 			return null;
 		}
 		return idToEObjectMapping.get(modelElementId.toString());
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 */
+	public ESModelElementIdToEObjectMappingImpl getAPIImpl() {
+
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 */
+	public ESModelElementIdToEObjectMappingImpl createAPIImpl() {
+		return new ESModelElementIdToEObjectMappingImpl(this);
 	}
 }

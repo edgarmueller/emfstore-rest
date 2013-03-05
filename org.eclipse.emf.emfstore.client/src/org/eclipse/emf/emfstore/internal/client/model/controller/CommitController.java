@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
@@ -131,11 +131,13 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
 			.inspectChanges(getProjectSpace().getAPIImpl(), changePackage.getAPIImpl(), getProgressMonitor());
 
-		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
+		ModelElementIdToEObjectMappingImpl idToEObjectMapping = new ModelElementIdToEObjectMappingImpl(
 			getProjectSpace().getProject(), changePackage);
 
 		getProgressMonitor().subTask("Presenting Changes");
-		if (!callback.inspectChanges(getProjectSpace().getAPIImpl(), changePackage.getAPIImpl(), idToEObjectMapping)
+		if (!callback.inspectChanges(getProjectSpace().getAPIImpl(),
+										changePackage.getAPIImpl(),
+										idToEObjectMapping.getAPIImpl())
 			|| getProgressMonitor().isCanceled()) {
 			return getProjectSpace().getBaseVersion();
 		}
@@ -152,8 +154,9 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		// present changes again if update was performed
 		if (updatePerformed) {
 			getProgressMonitor().subTask("Presenting Changes");
-			if (!callback
-				.inspectChanges(getProjectSpace().getAPIImpl(), changePackage.getAPIImpl(), idToEObjectMapping)
+			if (!callback.inspectChanges(getProjectSpace().getAPIImpl(),
+											changePackage.getAPIImpl(),
+											idToEObjectMapping.getAPIImpl())
 				|| getProgressMonitor().isCanceled()) {
 				return getProjectSpace().getBaseVersion();
 			}
@@ -164,9 +167,14 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(getProgressMonitor()) {
 			@Override
 			public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
-				return getConnectionManager().createVersion(getUsersession().getSessionId(),
-					getProjectSpace().getProjectId(), getProjectSpace().getBaseVersion(), changePackage, branch,
-					getProjectSpace().getMergedVersion(), changePackage.getLogMessage());
+				return getConnectionManager().createVersion(
+															getUsersession().getSessionId(),
+															getProjectSpace().getProjectId(),
+															getProjectSpace().getBaseVersion(),
+															changePackage,
+															branch,
+															getProjectSpace().getMergedVersion(),
+															changePackage.getLogMessage());
 			}
 		}.execute();
 
@@ -184,7 +192,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
 		} catch (SerializationException exception) {
 			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
-				getProjectSpace().getProjectName()), exception);
+															getProjectSpace().getProjectName()), exception);
 		}
 
 		if (!validChecksum) {
@@ -240,8 +248,9 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		} else {
 			// check if we need to update first
-			PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(
-				Versions.createHEAD(getProjectSpace().getBaseVersion()), monitor);
+			PrimaryVersionSpec resolvedVersion = getProjectSpace()
+				.resolveVersionSpec(
+									Versions.createHEAD(getProjectSpace().getBaseVersion()), monitor);
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
 				if (!callback.baseVersionOutOfDate(getProjectSpace().getAPIImpl(), getProgressMonitor())) {
 					throw new BaseVersionOutdatedException();

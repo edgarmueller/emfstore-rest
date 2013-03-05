@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ui.ESClassFilter;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
@@ -99,7 +99,7 @@ public final class EClassFilter {
 	 *            the operations to check
 	 * @return true, if the operation only involves types that are considered to be filtered
 	 */
-	public boolean involvesOnlyFilteredEClasses(ESModelElementIdToEObjectMapping idToEObjectMapping,
+	public boolean involvesOnlyFilteredEClasses(ModelElementIdToEObjectMapping idToEObjectMapping,
 		AbstractOperation operation) {
 
 		if (operation instanceof CompositeOperation) {

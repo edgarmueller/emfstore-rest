@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -44,7 +43,7 @@ public interface ESUpdateCallback {
 	 * @return true, if the changes should get applied upon the project space, false otherwise
 	 */
 	boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
-		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping);
+		ESModelElementIdToEObjectMapping idToEObjectMapping);
 
 	/**
 	 * Called when no remote changes are available.
@@ -96,7 +95,7 @@ public interface ESUpdateCallback {
 	ESUpdateCallback NOCALLBACK = new ESUpdateCallback() {
 
 		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
-			ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
+			ESModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 

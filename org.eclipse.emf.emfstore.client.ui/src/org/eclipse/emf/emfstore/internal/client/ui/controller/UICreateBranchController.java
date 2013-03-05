@@ -17,8 +17,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
@@ -51,8 +51,8 @@ import org.eclipse.swt.widgets.Shell;
  * 
  */
 public class UICreateBranchController extends
-		AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
-		ESCommitCallback {
+	AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
+	ESCommitCallback {
 
 	private final ProjectSpace projectSpace;
 	private LogMessage logMessage;
@@ -84,10 +84,10 @@ public class UICreateBranchController extends
 	 *            the branch to be committed
 	 */
 	public UICreateBranchController(Shell shell, ESLocalProject projectSpace,
-			BranchVersionSpec branch) {
+		BranchVersionSpec branch) {
 		super(shell, true, true);
 		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
-				.getInternalAPIImpl();
+			.getInternalAPIImpl();
 		this.branch = branch;
 	}
 
@@ -101,7 +101,7 @@ public class UICreateBranchController extends
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), null,
-						"No local changes in your project. No need to commit.");
+												"No local changes in your project. No need to commit.");
 				return null;
 			}
 		});
@@ -114,20 +114,20 @@ public class UICreateBranchController extends
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#baseVersionOutOfDate(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	public boolean baseVersionOutOfDate(final ESLocalProject projectSpace,
-			final IProgressMonitor progressMonitor) {
+		final IProgressMonitor progressMonitor) {
 
 		final String message = "Your project is outdated, you need to update before branching. Do you want to update now?";
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 
 			public Boolean call() throws Exception {
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(),
-						"Confirmation", message);
+																	"Confirmation", message);
 				if (shouldUpdate) {
 					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace
-							.getBaseVersion().getAPIImpl();
+						.getBaseVersion().getAPIImpl();
 					ESPrimaryVersionSpec version = new UIUpdateProjectController(
-							getShell(), projectSpace)
-							.executeSub(progressMonitor);
+						getShell(), projectSpace)
+						.executeSub(progressMonitor);
 					if (version.equals(baseVersion)) {
 						return false;
 					}
@@ -147,16 +147,17 @@ public class UICreateBranchController extends
 	 */
 
 	public boolean inspectChanges(
-			ESLocalProject localProject,
-			ESChangePackage changePackage,
-			ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
+		ESLocalProject localProject,
+		ESChangePackage changePackage,
+		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		ESChangePackageImpl internalChangePackage = (ESChangePackageImpl) changePackage;
 		ESLocalProjectImpl localProjectImpl = (ESLocalProjectImpl) localProject;
 
 		final CommitDialog commitDialog = new CommitDialog(getShell(),
-				internalChangePackage.getInternalAPIImpl(),
-				localProjectImpl.getInternalAPIImpl(), idToEObjectMapping);
+			internalChangePackage.getInternalAPIImpl(),
+			localProjectImpl.getInternalAPIImpl(),
+			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).getInternalAPIImpl());
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {
@@ -166,8 +167,9 @@ public class UICreateBranchController extends
 
 		if (dialogReturnValue == Dialog.OK) {
 			changePackage.setLogMessage(ESLogMessage.FACTORY.createLogMessage(
-					commitDialog.getLogText(), projectSpace.getUsersession()
-							.getUsername()));
+																				commitDialog.getLogText(), projectSpace
+																					.getUsersession()
+																					.getUsername()));
 			return true;
 		}
 
@@ -182,15 +184,17 @@ public class UICreateBranchController extends
 	 */
 	@Override
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor progressMonitor)
-			throws ESException {
+		throws ESException {
 		try {
 			if (branch == null) {
 				branch = branchSelection(projectSpace);
 			}
 			// TODO OTS
 			PrimaryVersionSpec commitToBranch = projectSpace.commitToBranch(
-					branch, logMessage, UICreateBranchController.this,
-					progressMonitor);
+																			branch,
+																			logMessage,
+																			UICreateBranchController.this,
+																			progressMonitor);
 			return commitToBranch.getAPIImpl();
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
@@ -203,7 +207,7 @@ public class UICreateBranchController extends
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Create Branch failed",
-							"Create Branch failed: " + e.getMessage());
+											"Create Branch failed: " + e.getMessage());
 					return null;
 				}
 			});
@@ -213,28 +217,28 @@ public class UICreateBranchController extends
 	}
 
 	private BranchVersionSpec branchSelection(final ProjectSpace projectSpace)
-			throws ESException {
+		throws ESException {
 		final List<BranchInfo> branches = projectSpace.getBranches();
 
 		@SuppressWarnings("static-access")
 		String branch = new RunInUI.WithException()
-				.runWithResult(new Callable<String>() {
+			.runWithResult(new Callable<String>() {
 
-					public String call() throws Exception {
-						BranchSelectionDialog.Creation dialog = new BranchSelectionDialog.Creation(
-								getShell(), projectSpace.getBaseVersion(),
-								branches);
-						dialog.setBlockOnOpen(true);
+				public String call() throws Exception {
+					BranchSelectionDialog.Creation dialog = new BranchSelectionDialog.Creation(
+						getShell(), projectSpace.getBaseVersion(),
+						branches);
+					dialog.setBlockOnOpen(true);
 
-						if (dialog.open() != Dialog.OK
-								|| dialog.getNewBranch() == null
-								|| dialog.getNewBranch().equals("")) {
-							throw new CancelOperationException(
-									"No Branch specified");
-						}
-						return dialog.getNewBranch();
+					if (dialog.open() != Dialog.OK
+						|| dialog.getNewBranch() == null
+						|| dialog.getNewBranch().equals("")) {
+						throw new CancelOperationException(
+							"No Branch specified");
 					}
-				});
+					return dialog.getNewBranch();
+				}
+			});
 
 		return Versions.createBRANCH(branch);
 	}
@@ -248,10 +252,10 @@ public class UICreateBranchController extends
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean checksumCheckFailed(ESLocalProject projectSpace,
-			ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-			throws ESException {
+		ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+		throws ESException {
 		ESChecksumErrorHandler errorHandler = Configuration.getClientBehavior()
-				.getChecksumErrorHandler();
+			.getChecksumErrorHandler();
 		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

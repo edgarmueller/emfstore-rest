@@ -11,21 +11,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.internal.common.model.util.IdToEObjectMapping;
 
 /**
  * Interface for representing a mapping from EObjects to their respective IDs and vice versa.
  * 
  * @author emueller
  */
-public interface ESModelElementIdToEObjectMapping<T> {
-
-	/**
-	 * Get the {@link EObject} for the given {@link ESModelElementId}, if any.
-	 * 
-	 * @param modelElementId the ID
-	 * @return the object or null if no EObject for the ID is found
-	 */
-	EObject get(T modelElementId);
+public interface ESModelElementIdToEObjectMapping extends IdToEObjectMapping<ESModelElementId> {
 
 }

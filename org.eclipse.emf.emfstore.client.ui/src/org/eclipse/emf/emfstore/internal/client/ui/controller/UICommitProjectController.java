@@ -18,8 +18,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
-import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
@@ -83,7 +83,7 @@ public class UICommitProjectController extends
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), null,
-					"No local changes in your project. No need to commit.");
+												"No local changes in your project. No need to commit.");
 				return null;
 			}
 		});
@@ -103,7 +103,7 @@ public class UICommitProjectController extends
 
 			public Boolean call() throws Exception {
 				return MessageDialog.openConfirm(getShell(), "Confirmation",
-					message);
+													message);
 			}
 		});
 		if (shouldUpdate) {
@@ -127,10 +127,9 @@ public class UICommitProjectController extends
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
 	 */
 	public boolean inspectChanges(
-
 		ESLocalProject localProject,
 		ESChangePackage changePackage,
-		ESModelElementIdToEObjectMapping<ESModelElementId> idToEObjectMapping) {
+		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		ChangePackage internalChangePackage = ((ESChangePackageImpl) changePackage).getInternalAPIImpl();
 		ProjectSpace projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
@@ -140,11 +139,11 @@ public class UICommitProjectController extends
 				public Void call() throws Exception {
 					MessageDialog
 						.openInformation(
-							getShell(),
-							"No local changes",
-							"No need to commit any more, there are no more changes pending for commit.\n"
-								+ "This may have happened because you rejected your changes in favor for changes "
-								+ "of other users in a merge.");
+											getShell(),
+											"No local changes",
+											"No need to commit any more, there are no more changes pending for commit.\n"
+												+ "This may have happened because you rejected your changes in favor for changes "
+												+ "of other users in a merge.");
 					return null;
 				}
 			});
@@ -156,7 +155,7 @@ public class UICommitProjectController extends
 			getShell(),
 			internalChangePackage,
 			projectSpace,
-			idToEObjectMapping);
+			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).getInternalAPIImpl());
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {
@@ -168,7 +167,7 @@ public class UICommitProjectController extends
 
 			internalChangePackage.setLogMessage(
 				LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
-					projectSpace.getUsersession().getUsername()));
+															projectSpace.getUsersession().getUsername()));
 
 			return true;
 		}
@@ -188,9 +187,9 @@ public class UICommitProjectController extends
 		try {
 
 			ESPrimaryVersionSpec primaryVersionSpec = localProject.commit(
-				logMessage,
-				UICommitProjectController.this,
-				progressMonitor);
+																			logMessage,
+																			UICommitProjectController.this,
+																			progressMonitor);
 			return primaryVersionSpec;
 
 		} catch (BaseVersionOutdatedException e) {
@@ -201,7 +200,7 @@ public class UICommitProjectController extends
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Commit failed",
-						e.getMessage());
+											e.getMessage());
 					return null;
 				}
 			});

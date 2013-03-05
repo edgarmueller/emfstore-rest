@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.BasicModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -109,14 +109,14 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			@Override
 			public List<ChangePackage> run(IProgressMonitor monitor) throws ESException {
 				return getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
-					getProjectSpace().getBaseVersion(), resolvedVersion);
+															getProjectSpace().getBaseVersion(), resolvedVersion);
 			}
 		}.execute();
 
 		ChangePackage localChanges = getProjectSpace().getLocalChangePackage(false);
 
 		// build a mapping including deleted and create model elements in local and incoming change packages
-		BasicModelElementIdToEObjectMapping idToEObjectMapping = new BasicModelElementIdToEObjectMapping(
+		ModelElementIdToEObjectMappingImpl idToEObjectMapping = new ModelElementIdToEObjectMappingImpl(
 			getProjectSpace().getProject(), changes);
 		idToEObjectMapping.put(localChanges);
 
@@ -134,7 +134,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		// TODO ASYNC review this cancel
 		if (getProgressMonitor().isCanceled()
-			|| !callback.inspectChanges(getProjectSpace().getAPIImpl(), copy, idToEObjectMapping)) {
+			|| !callback.inspectChanges(getProjectSpace().getAPIImpl(), copy, idToEObjectMapping.getAPIImpl())) {
 			return getProjectSpace().getBaseVersion();
 		}
 
@@ -145,8 +145,9 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		boolean potentialConflictsDetected = false;
 		if (getProjectSpace().getOperations().size() > 0) {
-			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector.calculateConflictCandidateBuckets(
-				Collections.singletonList(localChanges), changes);
+			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector
+				.calculateConflictCandidateBuckets(Collections.singletonList(localChanges), changes, getProjectSpace()
+					.getProject());
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
