@@ -44,4 +44,31 @@ public class ESGlobalProjectIdImpl extends AbstractAPIImpl<ESGlobalProjectIdImpl
 		return getInternalAPIImpl().getId();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object otherObject) {
+
+		if (otherObject instanceof ESGlobalProjectIdImpl) {
+			ESGlobalProjectIdImpl otherId = (ESGlobalProjectIdImpl) otherObject;
+			return otherId.getInternalAPIImpl().equals(getInternalAPIImpl());
+		}
+
+		return false;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return super.hashCode() + getInternalAPIImpl().hashCode();
+	}
 }
