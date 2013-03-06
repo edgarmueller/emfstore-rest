@@ -20,7 +20,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
-import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
@@ -33,8 +32,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Crea
  * @author emueller
  * @author koegel
  */
-public class ModelElementIdToEObjectMappingImpl implements ModelElementIdToEObjectMapping,
-	APIDelegate<ESModelElementIdToEObjectMappingImpl> {
+public class ModelElementIdToEObjectMappingImpl implements ModelElementIdToEObjectMapping {
 
 	private Map<String, EObject> idToEObjectMapping;
 	private ModelElementIdToEObjectMapping delegateMapping;

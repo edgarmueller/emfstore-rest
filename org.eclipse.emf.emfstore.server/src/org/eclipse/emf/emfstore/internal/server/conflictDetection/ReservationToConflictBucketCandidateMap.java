@@ -16,8 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -44,19 +43,17 @@ public class ReservationToConflictBucketCandidateMap {
 
 	private static ReservationSetModifier initCustomReservationModifier() {
 
-		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.conflictDetection");
-		ESExtensionElement first = extensionPoint.getFirst();
-
-		if (first != null) {
-			return first.getClass("class", ReservationSetModifier.class);
-		}
-
-		return new ReservationSetModifier() {
-			public ReservationSet addCustomReservation(AbstractOperation operation, ReservationSet reservationSet,
-				ModelElementIdToEObjectMapping mapping) {
-				return reservationSet;
-			}
-		};
+		return ExtensionRegistry.INSTANCE.get(
+												ReservationSetModifier.ID,
+												ReservationSetModifier.class,
+												new ReservationSetModifier() {
+													public ReservationSet addCustomReservation(
+														AbstractOperation operation, ReservationSet reservationSet,
+														ModelElementIdToEObjectMapping mapping) {
+														return reservationSet;
+													}
+												},
+												true);
 	}
 
 	/**
