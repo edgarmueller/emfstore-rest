@@ -105,7 +105,7 @@ public interface ESServer {
 	 * Returns a list with all remote projects hosted on this server.
 	 * 
 	 * @param usersession
-	 *            the {@link ESUsersession} that should be used to fetch the remote project.<br/>
+	 *            the {@link ESUsersession} that should be used to fetch the remote projects.<br/>
 	 *            If <code>null</code>, the session manager will try to inject a session.
 	 * 
 	 * @return a list with all remote project

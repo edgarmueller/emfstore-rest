@@ -30,12 +30,14 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithException;
 import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 
 /**
  * Mapping between {@link ESServer} and {@link ServerInfo}.
@@ -268,6 +270,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 */
 	public List<ESRemoteProject> getRemoteProjects(ESUsersession usersession)
 		throws ESException {
+
 		final ServerCall<List<ProjectInfo>> serverCall = getRemoteProjectsServerCall()
 			.setUsersession(((ESUsersessionImpl) usersession).getInternalAPIImpl());
 
@@ -278,7 +281,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 				}
 			});
 
-		return copy(mapToRemoteProject(projectInfos));
+		return APIUtil.copy(mapToRemoteProject(projectInfos));
 	}
 
 	private ServerCall<List<ProjectInfo>> getRemoteProjectsServerCall() {
@@ -295,7 +298,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 			@Override
 			protected ProjectInfo run() throws ESException {
 				return getConnectionManager().createEmptyProject(getSessionId(), projectName, "",
-																	createLogmessage(getUsersession(), projectName));
+					createLogmessage(getUsersession(), projectName));
 			}
 		};
 	}
@@ -314,5 +317,49 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 			throw new ESException("Invalid usersession for given server.");
 		}
 		return usersession;
+	}
+
+	/**
+	 * Returns the remote project with the given ID.
+	 * 
+	 * @param projectId
+	 *            the ID of the project
+	 * @return the remote project or {@code null}, if no project with the given ID has been found
+	 * 
+	 * @throws ESException in case an error occurs while retrieving the remote project
+	 */
+	public ESRemoteProject getRemoteProject(final ESGlobalProjectId projectId) throws ESException {
+
+		for (ESRemoteProject remoteProject : getRemoteProjects()) {
+			if (remoteProject.getGlobalProjectId().equals(projectId)) {
+				return remoteProject;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the remote project with the given ID.
+	 * 
+	 * @param usersession
+	 *            the {@link ESUsersession} that should be used to fetch the remote project.<br/>
+	 *            If <code>null</code>, the session manager will try to inject a session.
+	 * @param projectId
+	 *            the ID of the project
+	 * @return the remote project or {@code null}, if no project with the given ID has been found
+	 * 
+	 * @throws ESException in case an error occurs while retrieving the remote project
+	 */
+	public ESRemoteProject getRemoteProject(final ESUsersession usersession,
+		final ESGlobalProjectId projectId) throws ESException {
+
+		for (ESRemoteProject remoteProject : getRemoteProjects(usersession)) {
+			if (remoteProject.getGlobalProjectId().equals(projectId)) {
+				return remoteProject;
+			}
+		}
+
+		return null;
 	}
 }
