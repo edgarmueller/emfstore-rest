@@ -37,7 +37,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class ServerInfoSelectionDialog extends TitleAreaDialog {
 
-	private final java.util.List<ESServer> servers;
+	private final java.util.List<ServerInfo> servers;
 	private ESServer result;
 	private ListViewer listViewer;
 	private ServerInfoLabelProvider labelProvider;
@@ -50,7 +50,7 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 	 * @param servers
 	 *            a list of servers to be displayed
 	 */
-	public ServerInfoSelectionDialog(Shell parentShell, java.util.List<ESServer> servers) {
+	public ServerInfoSelectionDialog(Shell parentShell, java.util.List<ServerInfo> servers) {
 		super(parentShell);
 		this.servers = servers;
 		this.result = null;

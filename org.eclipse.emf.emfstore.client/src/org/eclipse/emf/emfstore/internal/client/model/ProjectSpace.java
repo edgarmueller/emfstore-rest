@@ -109,6 +109,13 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalProjectImpl> {
 
 	/**
+	 * ID of the runnable context option.
+	 * 
+	 * @generated NOT
+	 */
+	public static final String RUNNABLE_CONTEXT_ID = "org.eclipse.emf.emfstore.client.runnableContext";
+
+	/**
 	 * Adds a file to this project space. The file will be uploaded to the
 	 * EMFStore upon a commit. As long as the file is not yet committed, it can
 	 * be removed by first retrieving the {@link FileInformation} via {@link #getFileInfo(FileIdentifier)} and then

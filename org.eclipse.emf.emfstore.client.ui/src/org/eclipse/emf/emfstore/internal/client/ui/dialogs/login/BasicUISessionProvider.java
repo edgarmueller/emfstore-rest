@@ -49,7 +49,7 @@ public class BasicUISessionProvider extends ESAbstractSessionProvider {
 					// try to retrieve a server info by showing a server info selection dialog
 					ServerInfoSelectionDialog dialog = new ServerInfoSelectionDialog(
 						Display.getCurrent().getActiveShell(),
-						ESWorkspaceProviderImpl.getInstance().getWorkspace().getServers());
+						ESWorkspaceProviderImpl.getInstance().getInternalWorkspace().getServerInfos());
 					int input = dialog.open();
 					selectedServerInfo = dialog.getResult();
 					return input;

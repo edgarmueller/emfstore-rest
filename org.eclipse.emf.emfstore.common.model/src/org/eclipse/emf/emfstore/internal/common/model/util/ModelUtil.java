@@ -55,6 +55,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -85,7 +86,7 @@ public final class ModelUtil {
 
 	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.common.model";
 
-	private static final Boolean OPTION_DISCARD_DANGLING_HREF_DEFAULT = false;
+	public static final String DISCARD_DANGLING_HREF_ID = "org.eclipse.emf.emfstore.common.resourceOptions.discardDanglingHREFs";
 
 	private static IResourceLogger resourceLogger = new IResourceLogger() {
 
@@ -114,8 +115,6 @@ public final class ModelUtil {
 	private static Set<ESSingletonIdResolver> singletonIdResolvers;
 	private static HashMap<Object, Object> resourceLoadOptions;
 	private static HashMap<Object, Object> resourceSaveOptions;
-
-	private static Boolean discardDanglingHREFs;
 
 	/**
 	 * Private constructor.
@@ -371,9 +370,11 @@ public final class ModelUtil {
 			resourceSaveOptions.put(XMLResource.OPTION_FLUSH_THRESHOLD, 100000);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_FILE_BUFFER, Boolean.TRUE);
 
-			if (isDiscardDanglingHREFs()) {
+			if (ExtensionRegistry.INSTANCE.get(
+												"org.eclipse.emf.emfstore.resourceOptions.discardDanglingHREFs",
+												Boolean.class, Boolean.FALSE, false)) {
 				resourceSaveOptions.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
-					XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
+										XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 			}
 		}
 		return resourceSaveOptions;
@@ -451,18 +452,6 @@ public final class ModelUtil {
 		}
 
 		return error;
-	}
-
-	private static boolean isDiscardDanglingHREFs() {
-
-		if (discardDanglingHREFs == null) {
-			ESExtensionPoint extensionPoint = new ESExtensionPoint(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL
-				+ ".resourceOptions");
-			discardDanglingHREFs = extensionPoint.getBoolean("discardDanglingHREFs",
-				OPTION_DISCARD_DANGLING_HREF_DEFAULT);
-		}
-
-		return discardDanglingHREFs;
 	}
 
 	private static boolean canHaveInstances(EClass eClass) {
@@ -959,7 +948,7 @@ public final class ModelUtil {
 	public static Set<EObject> getAllContainedModelElements(EObject modelElement, boolean includeTransientContainments,
 		boolean ignoreSingletonDatatypes) {
 		return getAllContainedModelElements(Collections.singletonList(modelElement), includeTransientContainments,
-			ignoreSingletonDatatypes);
+											ignoreSingletonDatatypes);
 	}
 
 	/**
@@ -979,7 +968,7 @@ public final class ModelUtil {
 	public static Set<EObject> getAllContainedModelElements(Resource resource, boolean includeTransientContainments,
 		boolean ignoreSingletonDatatypes) {
 		return getAllContainedModelElements(resource.getContents(), includeTransientContainments,
-			ignoreSingletonDatatypes);
+											ignoreSingletonDatatypes);
 	}
 
 	/**
@@ -1009,7 +998,7 @@ public final class ModelUtil {
 
 				if (!containee.eContainingFeature().isTransient() || includeTransientContainments) {
 					Set<EObject> elements = getAllContainedModelElements(containee, includeTransientContainments,
-						ignoreSingletonDatatypes);
+																			ignoreSingletonDatatypes);
 					result.add(containee);
 					result.addAll(elements);
 				}
@@ -1109,7 +1098,7 @@ public final class ModelUtil {
 		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
 		List<SettingWithReferencedElement> crossReferences = collectOutgoingCrossReferences(collection,
-			allModelElements);
+																							allModelElements);
 		for (SettingWithReferencedElement settingWithReferencedElement : crossReferences) {
 			Setting setting = settingWithReferencedElement.getSetting();
 			if (!settingWithReferencedElement.getSetting().getEStructuralFeature().isMany()) {
@@ -1301,7 +1290,7 @@ public final class ModelUtil {
 		allContainedModelElements.add(originalObject);
 		// EObject copiedElement = ModelUtil.clone(originalObject);
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedObject,
-			false);
+																										false);
 		copiedAllContainedModelElements.add(copiedObject);
 
 		for (int i = 0; i < allContainedModelElements.size(); i++) {

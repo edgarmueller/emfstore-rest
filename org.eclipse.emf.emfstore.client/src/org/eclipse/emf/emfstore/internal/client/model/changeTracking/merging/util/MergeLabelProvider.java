@@ -22,6 +22,11 @@ import org.eclipse.emf.emfstore.internal.common.observer.ESPrioritizedObserver;
 public interface MergeLabelProvider extends ESPrioritizedObserver {
 
 	/**
+	 * ID of the {@link MergeLabelProvider} option.
+	 */
+	String ID = "org.eclipse.emf.emfstore.client.mergeLabelProvider";
+
+	/**
 	 * 
 	 * {@inheritDoc}
 	 * 

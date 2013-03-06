@@ -4,9 +4,7 @@
    <extension-point id="authenticationFactory" name="Authentication Factory" schema="schema/authenticationFactory.exsd"/>
    <extension-point id="locationProvider" name="Location Provider" schema="schema/locationProvider.exsd"/>
    <extension-point id="configurationResource" name="Server Configuration Resources" schema="schema/configurationResource.exsd"/>
-   <extension-point id="computeChecksum" name="Compute Checksum on Commit" schema="schema/computeChecksum.exsd"/>
-   <extension-point id="reservationSetModifier" name="Reservation Set Modifier" schema="schema/reservationSetModifier.exsd"/>
-   
+   <extension-point id="computeChecksum" name="Compute Checksum on Commit" schema="schema/computeChecksum.exsd"/>   
    <extension
          id="application"
          name="EMFStore server"

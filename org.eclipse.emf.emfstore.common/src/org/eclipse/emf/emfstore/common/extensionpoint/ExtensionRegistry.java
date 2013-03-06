@@ -1,80 +1,72 @@
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
-import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ExtensionRegistry {
 
 	public static final ExtensionRegistry INSTANCE = new ExtensionRegistry();
 	
-	private Map<String, List<ESExtensionElement>> extensionElements;
-	private Map<String, ESExtensionPoint> extensionPoints;
+	private Map<String, ESConfigElement> configElements;
 
 	private ExtensionRegistry() {
-		extensionPoints = new LinkedHashMap<String, ESExtensionPoint>();
-		extensionElements = new LinkedHashMap<String, List<ESExtensionElement>>();
+		configElements = new HashMap<String, ExtensionRegistry.ESConfigElement>();
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T get(String id, Class<T> clazz, T defaultInstance, boolean shouldSetDefault) {
+		
+		ESConfigElement configElement = configElements.get(id);
+		T t;
+		
+		if (configElement != null) {
+			t = (T) configElement.get();	
+		} else {
+			t = defaultInstance;
+			if (shouldSetDefault) {
+				set(id, t);
+			}
+		}
+		
+		return t;
 	}
 	
-	public void registerBoolean(String id, String attributeId, boolean defaultValue) {
-		ESExtensionPoint extensionPoint = getExtensionPoint(id);
+	public <T> T get(String id, Class<T> clazz) {
+		return get(id, clazz, null, false);
 	}
 	
-	public boolean getBoolean(String id, String attributeId, boolean defaultValue) {
-		ESExtensionPoint extensionPoint = getExtensionPoint(id);
-		return extensionPoint.getBoolean(attributeId, defaultValue);
+	public <T> void set(String id, T t) {
+		// TODO: if already present?
+		configElements.put(id, new ESConfigElement(id, t));
 	}
 	
-	public <T> void registerClass(String id, String attributeId, T t) {
+	class ESConfigElement {
+		
+		private String id;
+		private Object t;
+
+		public ESConfigElement(String id) {
+			this.id = id;
+		}
+		
+		public ESConfigElement(String id, Object o) {
+			this.id = id;
+			t = o;
+		}
+
+		public Object get() {
+			return t;
+		}
+
+		public void set(Object t) {
+			this.t = t;
+		}
+		
+		
 		
 	}
 
-	public void register(ESExtensionPoint extensionPoint, boolean checkElements) {
-		List<ESExtensionElement> elements = extensionPoint.getExtensionElements();
-
-		if (checkElements && (elements == null || elements.size() == 0)) {
-			throw new IllegalArgumentException(MessageFormat.format(
-				"Extension point {0} to be registered does not own any extension elements.", extensionPoint.getId()));
-		}
-
-		extensionPoints.put(extensionPoint.getId(), extensionPoint);
-		extensionElements.put(extensionPoint.getId(), elements);
-	} 
-
-	public ESExtensionPoint getExtensionPoint(String id) {
-
-		if (extensionPoints.containsKey(id)) {
-			return extensionPoints.get(id);
-		}
-
-		ESExtensionPoint extensionPoint = new ESExtensionPoint(id);
-		register(extensionPoint, false);
-		return extensionPoint;
+	public void remove(String id) {
+		configElements.remove(id);
 	}
-
-	public List<ESExtensionElement> getExtensionElements(String id) throws ExtensionPointNotRegisteredException {
-		if (extensionElements.containsKey(id)) {
-			return extensionElements.get(id);
-		}
-
-		throw new ExtensionPointNotRegisteredException();
-	}
-
-	public ESExtensionElement getElementWithHighestPriority(String id) throws ExtensionPointNotRegisteredException {
-
-		if (extensionElements.containsKey(id)) {
-			return extensionPoints.get(id).getElementWithHighestPriority();
-		}
-
-		throw new ExtensionPointNotRegisteredException();
-	}
-
-	// TODO: throw exception?
-	public <T> T getType(String id, String attributeId, Class<T> clazz) {
-		ESExtensionPoint extensionPoint = getExtensionPoint(id);
-		return extensionPoint.getClass(attributeId, clazz);
-	}
-
-
 }

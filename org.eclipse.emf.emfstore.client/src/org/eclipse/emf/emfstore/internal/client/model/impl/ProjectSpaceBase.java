@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
@@ -41,8 +40,10 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
@@ -109,7 +110,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, ESLoginObserver,
-	IDisposable {
+	ESDisposable {
 
 	private ESLocalProjectImpl esLocalProjectImpl;
 
@@ -138,10 +139,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		ESExtensionElement extensionElement = new ESExtensionPoint("org.eclipse.emf.emfstore.client.runnableContext")
-			.setThrowException(false).getFirst();
-		if (extensionElement != null) {
-			runnableContext = extensionElement.getClass("class", ESRunnableContext.class);
+		ESRunnableContext runnableContext = ExtensionRegistry.INSTANCE
+			.get(RUNNABLE_CONTEXT_ID, ESRunnableContext.class);
+		if (runnableContext != null) {
+			this.runnableContext = runnableContext;
 		} else {
 			runnableContext = new DefaultRunnableContext();
 		}
@@ -1239,7 +1240,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.common.ESDisposable#dispose()
 	 */
 	@SuppressWarnings("unchecked")
 	public void dispose() {

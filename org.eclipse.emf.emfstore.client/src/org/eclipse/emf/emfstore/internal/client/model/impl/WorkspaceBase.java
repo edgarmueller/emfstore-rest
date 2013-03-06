@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.provider.IDisposable;
+import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
@@ -55,7 +55,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @author emueller
  * 
  */
-public abstract class WorkspaceBase extends EObjectImpl implements Workspace, IDisposable,
+public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ESDisposable,
 	DeleteProjectSpaceObserver {
 
 	private ESWorkspaceImpl apiImplClass;
@@ -127,7 +127,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.edit.provider.IDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
@@ -217,7 +217,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ID
 	public ProjectSpace importProject(String absoluteFileName) throws IOException {
 		Project project = ResourceHelper.getElementFromResource(absoluteFileName, Project.class, 0);
 		return importProject(project, absoluteFileName.substring(absoluteFileName.lastIndexOf(File.separatorChar) + 1),
-			"Imported from " + absoluteFileName);
+								"Imported from " + absoluteFileName);
 	}
 
 	/**
