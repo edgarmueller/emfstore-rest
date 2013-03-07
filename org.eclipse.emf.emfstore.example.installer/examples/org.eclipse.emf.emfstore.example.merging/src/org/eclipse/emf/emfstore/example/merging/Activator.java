@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Florian Pirchner
  ******************************************************************************/
 package org.eclipse.emf.emfstore.example.merging;
 
@@ -19,13 +20,13 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	/**
-	 *  The plug-in ID.
+	 * The plug-in ID.
 	 */
-	public static final String PLUGIN_ID = "exampleClient";
+	public static final String PLUGIN_ID = "org.eclipse.emf.emfstore.example.merging";
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor.
 	 */
@@ -48,11 +49,12 @@ public class Activator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
+
 	// END SUPRESS CATCH EXCEPTION
 
 	/**
 	 * Returns the shared instance.
-	 *
+	 * 
 	 * @return the shared instance
 	 */
 	public static Activator getDefault() {

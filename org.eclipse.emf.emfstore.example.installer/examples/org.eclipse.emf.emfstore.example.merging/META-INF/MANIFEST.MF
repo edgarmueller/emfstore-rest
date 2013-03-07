@@ -1,14 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Merging client
+Bundle-Name: Example Merging client
 Bundle-SymbolicName: org.eclipse.emf.emfstore.example.merging;singleton:=true
 Bundle-Version: 0.9.3.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.example.merging.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.emf.emfstore.client;bundle-version="0.9.3",
- org.eclipse.emf.emfstore.examplemodel;bundle-version="0.9.3",
- org.eclipse.emf.emfstore.client.ui;bundle-version="0.9.3"
+Require-Bundle: org.eclipse.emf.emfstore.examplemodel,
+ org.eclipse.emf.emfstore.client.ui,
+ org.eclipse.ui;bundle-version="3.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project
