@@ -19,3 +19,5 @@
 /bundles/org.eclipse.emf.emfstore.client.model.edit/bin
 /bundles/org.eclipse.emf.emfstore.client/bin
 /bundles/org.eclipse.emf.emfstore.perspective/bin
+
+/tests/org.eclipse.emf.emfstore.client.test/bin/
