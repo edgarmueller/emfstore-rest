@@ -90,10 +90,13 @@ public class ShareController extends ServerCall<Void> {
 					.getInstance()
 					.getConnectionManager()
 					.createProject(
-						getUsersession().getSessionId(),
-						getProjectSpace().getProjectName() == null ? "Project@" + new Date() : getProjectSpace()
-							.getProjectName(),
-						"", logMessage, getProjectSpace().getProject());
+									getUsersession().getSessionId(),
+									getProjectSpace().getProjectName() == null ? "Project@" + new Date()
+										: getProjectSpace()
+											.getProjectName(),
+									"",
+									logMessage,
+									getProjectSpace().getProject());
 			}
 		}.execute();
 
@@ -125,6 +128,7 @@ public class ShareController extends ServerCall<Void> {
 		getProjectSpace().updateDirtyState();
 
 		getProgressMonitor().done();
-		ESWorkspaceProviderImpl.getObserverBus().notify(ESShareObserver.class).shareDone(getProjectSpace());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESShareObserver.class)
+			.shareDone(getProjectSpace().getAPIImpl());
 	}
 }
