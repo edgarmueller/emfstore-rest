@@ -10,21 +10,21 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.ESObserver;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
- * Share listeners are added to a project space and informed whenever a share is
- * executed.
+ * Observer that is notified when a share completed successfully.
  * 
- * @author pfeifferc
+ * @author emueller
  */
 public interface ESShareObserver extends ESObserver {
 
 	/**
-	 * Share is executed.
+	 * Called when the share of the passed {@link ESLocalProject} completed successfully.
 	 * 
-	 * @param projectSpace the {@link ProjectSpace} that got shared
+	 * @param localProject
+	 *            the local project that has been shared
 	 */
-	void shareDone(ProjectSpace projectSpace);
+	void shareDone(ESLocalProject localProject);
 }

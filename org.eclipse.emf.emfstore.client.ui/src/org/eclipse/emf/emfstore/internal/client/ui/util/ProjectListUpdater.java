@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.util;
 
 import java.util.concurrent.Callable;
 
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
@@ -19,7 +20,6 @@ import org.eclipse.emf.emfstore.client.observer.ESLogoutObserver;
 import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
 import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
@@ -67,14 +67,14 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESShareObserver#shareDone(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESShareObserver#shareDone(org.eclipse.emf.emfstore.client.ESLocalProject)
 	 */
-	public void shareDone(ProjectSpace projectSpace) {
+	public void shareDone(ESLocalProject localProject) {
 		try {
-			update(projectSpace.getUsersession().getAPIImpl());
+			update(localProject.getUsersession());
 		} catch (ESException e) {
 			// fail silently
-			WorkspaceUtil.logException("Couldn't project infos upon shareDone.", e);
+			WorkspaceUtil.logException("Couldn't update project infos upon shareDone.", e);
 		}
 	}
 
