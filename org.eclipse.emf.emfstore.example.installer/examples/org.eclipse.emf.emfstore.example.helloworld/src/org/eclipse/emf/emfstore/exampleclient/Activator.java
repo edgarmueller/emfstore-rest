@@ -1,4 +1,4 @@
-/**
+/*******************************************************************************
  * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
  * Technische Universitaet Muenchen.
  * All rights reserved. This program and the accompanying materials
@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Florian Pirchner
  ******************************************************************************/
-
 package org.eclipse.emf.emfstore.exampleclient;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -26,7 +26,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor.
 	 */
@@ -49,11 +49,12 @@ public class Activator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
+
 	// END SUPRESS CATCH EXCEPTION
 
 	/**
 	 * Returns the shared instance.
-	 *
+	 * 
 	 * @return the shared instance
 	 */
 	public static Activator getDefault() {

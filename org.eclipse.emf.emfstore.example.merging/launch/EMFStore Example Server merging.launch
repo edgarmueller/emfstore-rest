@@ -11,7 +11,7 @@
 <booleanAttribute key="clearConfig" value="false"/>
 <booleanAttribute key="clearws" value="false"/>
 <booleanAttribute key="clearwslog" value="false"/>
-<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/EMFStore ExampleClient - merging"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/EMFStore Example Server merging"/>
 <booleanAttribute key="default" value="false"/>
 <stringAttribute key="featureDefaultLocation" value="workspace"/>
 <stringAttribute key="featurePluginResolution" value="workspace"/>
@@ -183,7 +183,7 @@
 <setEntry value="org.eclipse.xsd.source:default"/>
 <setEntry value="org.eclipse.xsd:default"/>
 </setAttribute>
-<stringAttribute key="selected_target_plugins" value="org.apache.commons.codec@default:default,org.apache.commons.logging*1.1.1.v201101211721@default:default,org.eclipse.core.contenttype@default:default,org.eclipse.core.expressions@default:default,org.eclipse.core.filesystem.win32.x86_64@default:false,org.eclipse.core.filesystem@default:default,org.eclipse.core.jobs@default:default,org.eclipse.core.resources@default:default,org.eclipse.core.runtime.compatibility.registry@default:false,org.eclipse.core.runtime@default:true,org.eclipse.emf.common@default:default,org.eclipse.emf.ecore.xmi@default:default,org.eclipse.emf.ecore@default:default,org.eclipse.equinox.app@default:default,org.eclipse.equinox.common@2:true,org.eclipse.equinox.preferences@default:default,org.eclipse.equinox.registry@default:default,org.eclipse.osgi@-1:true"/>
+<stringAttribute key="selected_target_plugins" value="javax.transaction@default:false,org.apache.commons.codec@default:default,org.apache.commons.logging*1.1.1.v201101211721@default:default,org.eclipse.ant.core@default:default,org.eclipse.core.contenttype@default:default,org.eclipse.core.expressions@default:default,org.eclipse.core.filesystem.macosx@default:false,org.eclipse.core.filesystem@default:default,org.eclipse.core.jobs@default:default,org.eclipse.core.resources@default:default,org.eclipse.core.runtime.compatibility.registry@default:false,org.eclipse.core.runtime@default:true,org.eclipse.core.variables@default:default,org.eclipse.emf.common*2.8.0.v20130125-0546@default:default,org.eclipse.emf.ecore*2.8.3.v20130125-0546@default:default,org.eclipse.emf.ecore.xmi*2.8.1.v20130125-0546@default:default,org.eclipse.equinox.app@default:default,org.eclipse.equinox.common@2:true,org.eclipse.equinox.preferences@default:default,org.eclipse.equinox.registry@default:default,org.eclipse.osgi@-1:true,org.eclipse.team.core@default:default"/>
 <stringAttribute key="selected_workspace_plugins" value="org.eclipse.emf.emfstore.common.model@default:default,org.eclipse.emf.emfstore.common@default:default,org.eclipse.emf.emfstore.examplemodel@default:default,org.eclipse.emf.emfstore.migration@default:default,org.eclipse.emf.emfstore.server.model@default:default,org.eclipse.emf.emfstore.server@default:default"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>

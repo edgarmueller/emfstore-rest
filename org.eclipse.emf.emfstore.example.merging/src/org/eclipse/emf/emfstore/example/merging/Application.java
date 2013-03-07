@@ -18,21 +18,34 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Player;
+import org.eclipse.emf.emfstore.client.ESChangeConflict;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.common.ConsoleProgressMonitor;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
@@ -42,15 +55,15 @@ import org.eclipse.equinox.app.IApplicationContext;
  * Please note: this is the programmatic way of merging
  * EMFStore also provides a default UI for merging
  * If there is a problem with the connection to the server
- * e.g. a network, a specific EMFStoreException will be thrown
+ * e.g. a network, a specific ESException will be thrown
  */
 public class Application implements IApplication {
 
-	private ProjectSpace project1;
+	private ESLocalProject project1;
 	private League league1;
-	private ProjectSpace project2;
+	private ESLocalProject project2;
 	private League league2;
-	private LogMessage logMessage;
+	private ESLogMessage logMessage;
 
 	/**
 	 * {@inheritDoc}
@@ -59,16 +72,14 @@ public class Application implements IApplication {
 	public Object start(IApplicationContext context) throws Exception {
 		// END SUPRESS CATCH EXCEPTION
 
-		WorkspaceManager.init();
-
 		// Run a client that shows the merging feature of the EMFstore
 		// Please note: this is the programmatic way of merging
 		// EMFStore also provides a default UI for merging
 		// If there is a problem with the connection to the server
-		// e.g. a network, a specific EMFStoreException will be thrown
+		// e.g. a network, a specific ESException will be thrown
 		try {
 			runClient();
-		} catch (EmfStoreException e) {
+		} catch (ESException e) {
 			System.out.println("No connection to server.");
 			System.out.println("Did you start the server? :-)");
 			e.printStackTrace();
@@ -78,7 +89,7 @@ public class Application implements IApplication {
 		return IApplication.EXIT_OK;
 	}
 
-	private void runClient() throws AccessControlException, EmfStoreException {
+	private void runClient() throws ESException {
 		System.out.println("Client starting...");
 		// Sets up the workspace by cleaning all contents
 		// Create a project with some EObjects and two
@@ -95,16 +106,17 @@ public class Application implements IApplication {
 			}
 		}.run(false);
 		new EMFStoreCommand() {
+			@SuppressWarnings("restriction")
 			@Override
 			protected void doRun() {
 				try {
 					project1.commit(logMessage, null, new ConsoleProgressMonitor());
-				} catch (EmfStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
 		}.run(false);
-		
+
 		// Changing the name again value without calling
 		// project2.update() will cause a conflict on commit.
 		// also add one change which is non-conflicting
@@ -117,24 +129,26 @@ public class Application implements IApplication {
 		}.run(false);
 
 		new EMFStoreCommand() {
+			@SuppressWarnings("restriction")
 			@Override
 			protected void doRun() {
 				try {
 					project2.commit(logMessage, null, new ConsoleProgressMonitor());
 				} catch (BaseVersionOutdatedException e) {
 					System.out.println("\nCommit of project 2 failed.");
-			
-					// run update in project 2 with our own updateCallback.			
+
+					// run update in project 2 with our own updateCallback.
 					System.out.println("\nUpdate of project 2 with conflict resolver...");
 					try {
-						project2.update(Versions.createHEAD(), new MyUpdateCallback(), new ConsoleProgressMonitor());
+						project2.update(Versions.createHEAD().getAPIImpl(), new MyUpdateCallback(),
+							new ConsoleProgressMonitor());
 						// commit merge result in project 2
 						System.out.println("\nCommit of project 2 with merge result.");
 						project2.commit(logMessage, null, new ConsoleProgressMonitor());
-					} catch (EmfStoreException e1) {
+					} catch (ESException e1) {
 						throw new RuntimeException(e);
 					}
-				} catch (EmfStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -146,8 +160,8 @@ public class Application implements IApplication {
 			protected void doRun() {
 				try {
 					System.out.println("\nUpdate of project 1 with merge result.");
-					project1.update();
-				} catch (EmfStoreException e) {
+					project1.update(new NullProgressMonitor());
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -160,26 +174,26 @@ public class Application implements IApplication {
 	/**
 	 * Creates a default workspace and deletes all remote projects.
 	 * 
-	 * @throws AccessControlException
-	 * @throws EmfStoreException
+	 * @throws ESException
 	 */
-	private void setupWorkspace() throws AccessControlException, EmfStoreException {
+	@SuppressWarnings("restriction")
+	private void setupWorkspace() throws ESException {
 		// The workspace is the core controler to access
 		// local and remote projects
-		final Workspace workspace = WorkspaceManager.getInstance().getCurrentWorkspace();
+		final ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
 
 		// A user session stores credentials for login
 		// Creates a user session with the default credentials
-		final Usersession usersession = new EMFStoreCommandWithResult<Usersession>() {
+		final ESUsersession usersession = new EMFStoreCommandWithResult<ESUsersession>() {
 			@Override
-			protected Usersession doRun() {
+			protected ESUsersession doRun() {
 				Usersession session = EMFStoreClientUtil.createUsersession();
 				try {
 					session.logIn();
-				} catch (EmfStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
-				return session;
+				return session.getAPIImpl();
 			}
 		}.run(false);
 
@@ -190,24 +204,24 @@ public class Application implements IApplication {
 			@Override
 			protected void doRun() {
 				try {
-					List<ProjectInfo> projectList = workspace.getRemoteProjectList(usersession);
-					for (ProjectInfo projectInfo : projectList) {
-						workspace.deleteRemoteProject(usersession, projectInfo.getProjectId(), true);
+					List<ESRemoteProject> projectList = usersession.getServer().getRemoteProjects();
+					for (ESRemoteProject projectInfo : projectList) {
+						projectInfo.delete(usersession, new NullProgressMonitor());
 					}
-				} catch (EmfStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
 		}.run(false);
 
 		// Create a project, share it with the server
-		project1 = new EMFStoreCommandWithResult<ProjectSpace>() {
+		project1 = new EMFStoreCommandWithResult<ESLocalProject>() {
 			@Override
-			protected ProjectSpace doRun() {
-				ProjectSpace project1 = workspace.createLocalProject("projectNo1", "My project");
+			protected ESLocalProject doRun() {
+				ESLocalProject project1 = workspace.createLocalProject("projectNo1");
 				try {
 					project1.shareProject(usersession, new ConsoleProgressMonitor());
-				} catch (EmfStoreException e) {
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 				return project1;
@@ -224,20 +238,20 @@ public class Application implements IApplication {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				project1.getProject().addModelElement(league1);
+				project1.getModelElements().add(league1);
 			}
 		}.run(false);
 
-		logMessage = new EMFStoreCommandWithResult<LogMessage>() {
+		logMessage = new EMFStoreCommandWithResult<ESLogMessage>() {
 			@Override
-			protected LogMessage doRun() {
+			protected ESLogMessage doRun() {
 				try {
 					LogMessage result = VersioningFactory.eINSTANCE.createLogMessage();
 					result.setMessage("My Message");
-					project1.commit(result, null, new ConsoleProgressMonitor());
+					project1.commit(result.getAPIImpl(), null, new ConsoleProgressMonitor());
 					System.out.println("Project 1 committed!");
-					return result;
-				} catch (EmfStoreException e) {
+					return result.getAPIImpl();
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -245,18 +259,18 @@ public class Application implements IApplication {
 
 		// Check-out a second, independent copy of the project
 		// (simulating a second client)
-		project2 = new EMFStoreCommandWithResult<ProjectSpace>() {
+		project2 = new EMFStoreCommandWithResult<ESLocalProject>() {
 			@Override
-			protected ProjectSpace doRun() {
+			protected ESLocalProject doRun() {
 				try {
-					return workspace.checkout(usersession, project1.getProjectInfo(), new NullProgressMonitor());
-				} catch (EmfStoreException e) {
+					return project1.getRemoteProject().checkout(usersession, new NullProgressMonitor());
+				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
 		}.run(false);
 
-		league2 = (League) project2.getProject().getModelElements().get(0);
+		league2 = (League) project2.getModelElements().get(0);
 	}
 
 	/**
@@ -268,7 +282,6 @@ public class Application implements IApplication {
 	private Player createPlayer(String name) {
 		Player player = BowlingFactory.eINSTANCE.createPlayer();
 		player.setName(String.format("Player %s", name));
-		player.setEMail(String.format("%s@emfstore.org", name));
 		return player;
 	}
 
@@ -277,28 +290,28 @@ public class Application implements IApplication {
 	 */
 	public void stop() {
 	}
-	
+
 	/**
 	 * An UpdateCallback to drive the update and use our own conflict resolver (MyConflictResolver).
 	 */
-	private class MyUpdateCallback implements UpdateCallback {
+	private class MyUpdateCallback implements ESUpdateCallback {
 		public void noChangesOnServer() {
 			// do nothing if there are no changes on the server (in this example we know
 			// there are changes anyway)
 		}
 
-		public boolean inspectChanges(ProjectSpace projectSpace, List<ChangePackage> changes,
+		public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
 			ESModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 
-		public boolean conflictOccurred(ChangeConflictException changeConflictException,
-			IProgressMonitor monitor) {
+		@SuppressWarnings("restriction")
+		public boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor monitor) {
 			// resolve conflicts by merging with our conflict resolver
 			try {
-				project2.merge(project2.resolveVersionSpec(Versions.createHEAD()),
-					changeConflictException, new MyConflictResolver(false), this, monitor);
-			} catch (EmfStoreException e) {
+				project2.merge(project2.resolveVersionSpec(Versions.createHEAD().getAPIImpl(), monitor),
+					changeConflict, new MyConflictResolver(false), this, monitor);
+			} catch (ESException e) {
 				// on any exceptions, declare conflicts as non-resolved
 				return false;
 			}
@@ -306,28 +319,32 @@ public class Application implements IApplication {
 			return true;
 		}
 
-		public boolean checksumCheckFailed(ProjectSpace projectSpace, PrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws EmfStoreException {
+		public boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec,
+			IProgressMonitor monitor) throws ESException {
 			return true;
 		}
 	};
-	
+
 	/**
 	 * The MyConflictResolver will accept the name change of the league of project 2 to "New Name 2"
 	 * reject the name change of project 1 and accept all other changes.
 	 */
+	@SuppressWarnings("restriction")
 	private class MyConflictResolver extends AbstractConflictResolver {
 		/**
 		 * Instantiates a new MyConflictResolver.
-		 *
+		 * 
 		 * @param isBranchMerge the is branch merge
 		 */
 		public MyConflictResolver(boolean isBranchMerge) {
 			super(isBranchMerge);
 		}
 
-		/* (non-Javadoc)
-		 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver#controlDecisionManager(org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager)
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver#controlDecisionManager
+		 * (org.eclipse.emf.emfstore.client.model.changeTracking.merging.DecisionManager)
 		 */
 		@Override
 		protected boolean controlDecisionManager(DecisionManager decisionManager) {
@@ -337,21 +354,15 @@ public class Application implements IApplication {
 		private ChangePackage myChangePackage;
 		private List<ChangePackage> theirChangePackages;
 
-		/* (non-Javadoc)
-		 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.common.model.Project, org.eclipse.emf.emfstore.client.model.exceptions.ChangeConflictException, org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec, org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec)
-		 */
 		@Override
-		public boolean resolveConflicts(Project project, ChangeConflictException conflictException,
-			PrimaryVersionSpec base, PrimaryVersionSpec target) {
-			this.theirChangePackages = conflictException.getNewPackages();
-			this.myChangePackage = conflictException.getMyChangePackages().get(0);
+		public boolean resolveConflicts(Project project, ChangeConflict changeConflict, PrimaryVersionSpec base,
+			PrimaryVersionSpec target) {
+			this.theirChangePackages = changeConflict.getNewPackages();
+			this.myChangePackage = changeConflict.getMyChangePackages().get(0);
 			// declare that resolver will be able to resolve all conflicts
 			return true;
 		}
 
-		/* (non-Javadoc)
-		 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver#getRejectedTheirs()
-		 */
 		@Override
 		public List<AbstractOperation> getRejectedTheirs() {
 			// reject the first change in the change package of project
@@ -360,9 +371,6 @@ public class Application implements IApplication {
 			return Arrays.asList(theirChangePackages.get(0).getOperations().get(0));
 		}
 
-		/* (non-Javadoc)
-		 * @see org.eclipse.emf.emfstore.client.model.changeTracking.merging.AbstractConflictResolver#getAcceptedMine()
-		 */
 		@Override
 		public List<AbstractOperation> getAcceptedMine() {
 			// accept all my operations in project 2, including the name change to "New Name 2"
