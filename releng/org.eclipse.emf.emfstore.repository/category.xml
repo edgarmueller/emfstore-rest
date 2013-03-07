@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="EMFStore (Incubation)" url="http://download.eclipse.org/emf-store/latest">
+      Update Site for the EMFStore
+   </description>
+   <feature id="org.eclipse.emf.ecp.common.feature" version="0.0.0">
+      <category name="org.eclipse.emf.ecp"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.editor.feature" version="0.0.0">
+      <category name="org.eclipse.emf.ecp"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.navigator.feature" version="0.0.0">
+      <category name="org.eclipse.emf.ecp"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.navigatoreditorbridge.feature" version="0.0.0">
+      <category name="org.eclipse.emf.ecp"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.validation.feature" version="0.0.0">
+      <category name="org.eclipse.emf.ecp"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.client.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.client.ui.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.common.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.ecore.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.ecp.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.perspective.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.server.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.client.transaction.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.other"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.example.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.examples"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.common.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.ecp.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.editor.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.ecp.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.navigator.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.ecp.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.navigatoreditorbridge.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.ecp.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.ecp.validation.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.ecp.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.client.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.client.ui.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.common.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.ecore.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.ecp.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.perspective.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.server.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.client.transaction.feature.source" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.sources"/>
+   </feature>
+   <category-def name="org.eclipse.emf.emfstore.core" label="EMFStore Core Features (Install all to get started)">
+      <description>
+         Core Features of EMFStore, a model repository for EMF.
+      </description>
+   </category-def>
+   <category-def name="org.eclipse.emf.ecp" label="EMFClient Platform (Install all to get started)">
+      <description>
+         Core Features of EMF Client Platform, a reflective UI for EMF.
+      </description>
+   </category-def>
+   <category-def name="org.eclipse.emf.emfstore.other" label="EMFStore Additional Features">
+      <description>
+         Addtional Features of EMFStore, a model repository for EMF.
+      </description>
+   </category-def>
+   <category-def name="org.eclipse.emf.emfstore.sources" label="EMFStore Sources">
+      <description>
+         EMFStore Source Features.
+      </description>
+   </category-def>
+   <category-def name="org.eclipse.emf.ecp.sources" label="EMFClient Sources">
+      <description>
+         EMFClient Source Features.
+      </description>
+   </category-def>
+   <category-def name="org.eclipse.emf.emfstore.examples" label="EMFStore Code Examples">
+      <description>
+         EMFStore Code Examples.
+      </description>
+   </category-def>
+</site>
