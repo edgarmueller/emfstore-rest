@@ -164,6 +164,11 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 * @see org.eclipse.emf.emfstore.client.ESServer#getLastUsersession()
 	 */
 	public ESUsersession getLastUsersession() {
+
+		if (getInternalAPIImpl().getLastUsersession() == null) {
+			return null;
+		}
+
 		return getInternalAPIImpl().getLastUsersession().getAPIImpl();
 	}
 
@@ -298,7 +303,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 			@Override
 			protected ProjectInfo run() throws ESException {
 				return getConnectionManager().createEmptyProject(getSessionId(), projectName, "",
-					createLogmessage(getUsersession(), projectName));
+																	createLogmessage(getUsersession(), projectName));
 			}
 		};
 	}
