@@ -5,6 +5,7 @@
 *.swp
 *.out
 
+bin/
 /bundles/org.eclipse.emf.emfstore.server.model.edit/bin
 /bundles/org.eclipse.emf.emfstore.server.model/bin
 /bundles/org.eclipse.emf.emfstore.server/bin
