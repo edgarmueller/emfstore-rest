@@ -22,6 +22,8 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMap
  */
 public interface ConflictHandler {
 
+	String ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler";
+
 	/**
 	 * Called after a conflict has been created and before it is
 	 * added to list of all existing conflicts.

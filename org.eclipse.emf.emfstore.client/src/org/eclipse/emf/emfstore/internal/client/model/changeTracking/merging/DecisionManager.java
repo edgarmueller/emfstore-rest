@@ -31,6 +31,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.CompositeConflict;
@@ -77,7 +78,7 @@ public class DecisionManager {
 
 	private final List<ChangePackage> myChangePackages;
 	private final List<ChangePackage> theirChangePackages;
-	private List<ConflictHandler> conflictHandler;
+	private ConflictHandler conflictHandler;
 
 	private ArrayList<Conflict> conflicts;
 	private ArrayList<AbstractOperation> acceptedMine;
@@ -124,9 +125,17 @@ public class DecisionManager {
 		init();
 	}
 
-	private List<ConflictHandler> initConflictHandlers() {
-		ArrayList<ConflictHandler> result = new ArrayList<ConflictHandler>();
-		return result;
+	private ConflictHandler initConflictHandlers() {
+		return ExtensionRegistry.INSTANCE.get(
+												ConflictHandler.ID,
+												ConflictHandler.class,
+												new ConflictHandler() {
+													public Conflict handle(Conflict conflict,
+														ModelElementIdToEObjectMapping idToEObjectMapping) {
+														return conflict;
+													}
+												},
+												true);
 	}
 
 	private void init() {
@@ -234,11 +243,7 @@ public class DecisionManager {
 	}
 
 	private Conflict notifyConflictHandlers(Conflict conflict) {
-		// pass conflict through all handlers
-		for (ConflictHandler handler : this.conflictHandler) {
-			conflict = handler.handle(conflict, mapping);
-		}
-		return conflict;
+		return conflictHandler.handle(conflict, mapping);
 	}
 
 	private void addConflict(Conflict conflict) {
