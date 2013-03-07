@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
-  <fileset name="all" enabled="true" check-config-name="emfstoreStyle" local="false">
-    <file-match-pattern match-pattern="." include-pattern="true"/>
+<fileset-config file-format-version="1.2.0" simple-config="false" sync-formatter="false">
+  <local-check-config name="maven-checkstyle-plugin" location="file:/Users/admin/git/org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.example.merging/../../org.eclipse.emf.emfstore.core/EMFStoreDeveloper/coding/emfstoreStyle5.x.xml" type="remote" description="maven-checkstyle-plugin configuration">
+    <property name="samedir" value="/Users/admin/git/org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.example.merging/../../org.eclipse.emf.emfstore.core/EMFStoreDeveloper/coding"/>
+    <property name="checkstyle.cache.file" value="${project_loc}/target/checkstyle-cachefile"/>
+    <property name="checkstyle.header.file" value="/Users/admin/git/org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.example.merging/target/checkstyle-header.txt"/>
+  </local-check-config>
+  <fileset name="java-sources" enabled="true" check-config-name="maven-checkstyle-plugin" local="true">
+    <file-match-pattern match-pattern="src/.*/.*\.java" include-pattern="true"/>
   </fileset>
 </fileset-config>
