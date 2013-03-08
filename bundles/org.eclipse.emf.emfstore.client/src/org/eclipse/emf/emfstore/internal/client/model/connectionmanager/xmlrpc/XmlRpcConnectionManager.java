@@ -156,7 +156,7 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
+	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery<?> historyQuery)
 		throws ESException {
 		return getConnectionProxy(sessionId).callWithListResult("getHistoryInfo", HistoryInfo.class, sessionId,
 			projectId, historyQuery);

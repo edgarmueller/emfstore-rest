@@ -185,7 +185,7 @@ public interface EMFStore extends EMFStoreInterface {
 	 *             if any error in the EmfStore occurs
 	 * @generated NOT
 	 */
-	List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
+	List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery<?> historyQuery)
 		throws ESException;
 
 	/**
