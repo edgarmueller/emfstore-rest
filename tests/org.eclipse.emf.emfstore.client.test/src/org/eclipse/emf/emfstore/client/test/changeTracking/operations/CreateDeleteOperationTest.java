@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -26,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.emfstore.client.observer.ESPostCreationObserver;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.document.CompositeSection;
@@ -52,6 +55,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -1710,6 +1714,152 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 		assertFalse(getProject().contains(testElement));
+	}
+
+	@Test
+	public void testRemoveAndAddElementWithSavedSettingsInOneCommand() {
+		final TestElement testElement1 = getTestElement("TestElement1");
+		final TestElement testElement2 = getTestElement("TestElement2");
+		final TestElement testElement3 = getTestElement("TestElement3");
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				getProject().addModelElement(testElement1);
+				getProject().addModelElement(testElement2);
+				getProject().addModelElement(testElement3);
+
+				assertTrue(getProject().contains(testElement1));
+				assertTrue(getProject().contains(testElement2));
+				assertTrue(getProject().contains(testElement3));
+
+				// test with reference as setting
+				testElement2.setReference(testElement1);
+
+				assertEquals(testElement1, testElement2.getReference());
+
+				RemoveCommand.create(
+					AdapterFactoryEditingDomain.getEditingDomainFor(getProject()),
+					getProject(),
+					org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE.getProject_ModelElements(),
+					testElement2).execute();
+
+				assertFalse(getProject().contains(testElement2));
+				assertEquals(testElement1, testElement2.getReference());
+
+				getProject().addModelElement(testElement2);
+
+				assertTrue(getProject().contains(testElement2));
+				assertEquals(testElement1, testElement2.getReference());
+				return null;
+			}
+		});
+	}
+
+	@Test
+	public void testRemoveAndAddElementWithSavedButChangedSettingsInOneCommand() {
+		final UseCase useCase1 = RequirementFactory.eINSTANCE.createUseCase();
+		final UseCase useCase2 = RequirementFactory.eINSTANCE.createUseCase();
+		final Actor actor = RequirementFactory.eINSTANCE.createActor();
+
+		RunESCommand.run(new Callable<Void>() {
+
+			public Void call() throws Exception {
+
+				getProject().addModelElement(useCase1);
+				getProject().addModelElement(useCase2);
+				getProject().addModelElement(actor);
+
+				assertTrue(getProject().contains(useCase1));
+				assertTrue(getProject().contains(useCase2));
+				assertTrue(getProject().contains(actor));
+
+				// test with attribute as setting
+				useCase1.setInitiatingActor(actor);
+
+				assertEquals(actor, useCase1.getInitiatingActor());
+				assertTrue(actor.getInitiatedUseCases().contains(useCase1));
+
+				RemoveCommand.create(AdapterFactoryEditingDomain.getEditingDomainFor(
+					getProject()),
+					getProject(),
+					org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE.getProject_ModelElements(),
+					actor).execute();
+
+				assertFalse(getProject().contains(actor));
+				assertEquals(actor, useCase1.getInitiatingActor());
+				assertTrue(actor.getInitiatedUseCases().contains(useCase1));
+
+				useCase2.setInitiatingActor(actor);
+				getProject().addModelElement(actor);
+
+				assertEquals(actor, useCase1.getInitiatingActor());
+				assertEquals(actor, useCase2.getInitiatingActor());
+				assertTrue(actor.getInitiatedUseCases().contains(useCase1));
+				assertTrue(actor.getInitiatedUseCases().contains(useCase2));
+				assertTrue(getProject().contains(actor));
+
+				return null;
+			}
+		});
+	}
+
+	@Test
+	public void testRemoveAndAddModelElementWithSavedSettingsInTwoCommands() {
+		final TestElement testElement1 = getTestElement("TestElement1");
+		final TestElement testElement2 = getTestElement("TestElement2");
+		final TestElement referencedTestElement = getTestElement("refTestElement");
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				getProject().addModelElement(testElement1);
+				getProject().addModelElement(testElement2);
+				getProject().addModelElement(referencedTestElement);
+
+				testElement1.setReference(referencedTestElement);
+				testElement2.setReference(referencedTestElement);
+				referencedTestElement.setReference(testElement2);
+				return null;
+			}
+		});
+
+		assertTrue(getProject().contains(testElement1));
+		assertTrue(getProject().contains(testElement2));
+		assertTrue(getProject().contains(referencedTestElement));
+		assertEquals(referencedTestElement, testElement1.getReference());
+		assertEquals(referencedTestElement, testElement2.getReference());
+		assertEquals(testElement2, referencedTestElement.getReference());
+
+		AdapterFactoryEditingDomain
+			.getEditingDomainFor(getProject())
+			.getCommandStack()
+			.execute(
+				RemoveCommand.create(
+					AdapterFactoryEditingDomain.getEditingDomainFor(getProject()),
+					getProject(),
+					org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE.getProject_ModelElements(),
+					testElement2));
+
+		assertTrue(getProject().contains(testElement1));
+		assertFalse(getProject().contains(testElement2));
+		assertTrue(getProject().contains(referencedTestElement));
+		assertEquals(referencedTestElement, testElement1.getReference());
+		assertNull(testElement2.getReference());
+		assertNull(referencedTestElement.getReference());
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				testElement2.setReference(referencedTestElement);
+				getProject().addModelElement(testElement2);
+				return null;
+			}
+		});
+
+		assertTrue(getProject().contains(testElement1));
+		assertTrue(getProject().contains(testElement2));
+		assertTrue(getProject().contains(referencedTestElement));
+		assertEquals(referencedTestElement, testElement1.getReference());
+		assertEquals(referencedTestElement, testElement2.getReference());
+		assertNull(referencedTestElement.getReference());
 	}
 
 	// commenting out, too exotic to happen
