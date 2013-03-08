@@ -17,7 +17,7 @@
 	<!-- Properties to enable jacoco code coverage analysis with sonar -->
 	<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 	<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-	<sonar.jacoco.reportPath>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.client.test/target/jacoco.exec</sonar.jacoco.reportPath>
+	<sonar.jacoco.reportPath>../../tests/org.eclipse.emf.emfstore.client.test/target/jacoco.exec</sonar.jacoco.reportPath>
   </properties>
 
   <profiles>
@@ -78,28 +78,28 @@
 
   <modules>
     <!-- EMFStore Core Features -->
-    <module>../org.eclipse.emf.emfstore.common.feature</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.branding</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.common</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.common.model</module>
+    <module>../../features/org.eclipse.emf.emfstore.common.feature</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.branding</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.common</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.common.model</module>
 
-    <module>../org.eclipse.emf.emfstore.server.feature</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.migration</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.server</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.server.model</module>
+    <module>../../features/org.eclipse.emf.emfstore.server.feature</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.migration</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.server</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.server.model</module>
 
-    <module>../org.eclipse.emf.emfstore.client.ui.feature</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.client.model.edit</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.client.ui</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.common.model.edit</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.server.model.edit</module>
+    <module>../../features/org.eclipse.emf.emfstore.client.ui.feature</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.client.model.edit</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.client.ui</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.common.model.edit</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.server.model.edit</module>
 
     <!-- 
     <module>../org.eclipse.emf.emfstore.perspective.feature</module>
     <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.perspective</module>
 
     <module>../org.eclipse.emf.emfstore.ecore.feature</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.ecore</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.ecore</module>
 
     <module>../org.eclipse.emf.emfstore.ecp.feature</module>
     <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.emfstorebridge</module>
@@ -107,12 +107,12 @@
     <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.validation</module>
      -->
 
-    <module>../org.eclipse.emf.emfstore.client.feature</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.client</module>
+    <module>../../features/org.eclipse.emf.emfstore.client.feature</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.client</module>
 
     <!-- EMFStore Additional Features -->
-    <module>../org.eclipse.emf.emfstore.client.transaction.feature</module>
-    <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.client.transaction</module>
+    <module>../../features/org.eclipse.emf.emfstore.client.transaction.feature</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.client.transaction</module>
 
     <!-- EMF Client Platform 
     <module>../../org.eclipse.emf.ecp.releng/org.eclipse.emf.ecp.validation.feature</module>
@@ -133,14 +133,14 @@
     -->
 
     <!-- EMFStore Examples -->
-    <module>../org.eclipse.emf.emfstore.example.feature</module>
+    <module>../../features/org.eclipse.emf.emfstore.example.feature</module>
     <!-- 
-    <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.example.helloworld</module>
-    <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.example.installer</module>
-    <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.example.merging</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.example.helloworld</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.example.installer</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.example.merging</module>
      -->
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.examplemodel</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.examplemodel.edit</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.examplemodel</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.examplemodel.edit</module>
 
     <!-- Update site and products -->
     <module>../org.eclipse.emf.emfstore.p2repository</module>
@@ -152,7 +152,7 @@
     <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.client.backchannel</module>
     <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.server.backchannel</module>
      -->
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.modelmutator</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.modelmutator</module>
 
     <!-- Fuzzy -->
     <!-- 
@@ -167,7 +167,7 @@
 	 -->
 
     <!-- Testing -->
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.client.test</module>
+    <module>../../tests/org.eclipse.emf.emfstore.client.test</module>
     
   </modules>
 
@@ -276,8 +276,8 @@
         <configuration>
           <!-- Checkstyle violations will not fail the whole build -->
           <failOnViolation>false</failOnViolation>
-          <configLocation>${basedir}/../../org.eclipse.emf.emfstore.core/EMFStoreDeveloper/coding/emfstoreStyle5.x.xml</configLocation>
-          <propertyExpansion>samedir=${basedir}/../../org.eclipse.emf.emfstore.core/EMFStoreDeveloper/coding</propertyExpansion>
+          <configLocation>${basedir}/../../EMFStoreDeveloper/coding/emfstoreStyle5.x.xml</configLocation>
+          <propertyExpansion>samedir=${basedir}/../../EMFStoreDeveloper/coding</propertyExpansion>
         </configuration>
       </plugin>
     </plugins>
