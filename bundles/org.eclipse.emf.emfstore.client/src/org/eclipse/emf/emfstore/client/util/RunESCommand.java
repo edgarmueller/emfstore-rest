@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.util;
 
@@ -19,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithRe
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * Utility class for executing {@link Callable}s within the UI Thread.
+ * Utility class for wrapping changes automatically in a commnad.
  * 
  * @author emueller
  * 
@@ -36,14 +37,14 @@ public final class RunESCommand {
 	public static class WithException {
 
 		/**
-		 * Executes the given callable and returns the result.
+		 * Executes the given @link Callable} and returns the result.
 		 * 
 		 * @param callable
 		 *            the callable to be execued
-		 * @return the return value of the {@link Callable}
-		 * @throws ESException in case an error occurs during execution of the callable
+		 * @return the return value of the Callable
+		 * @throws ESException in case an error occurs during execution of the Callable
 		 * 
-		 * @param <T> the return type of the callable
+		 * @param <T> the return type of the Callable
 		 */
 		public static <T, E extends Exception> T runWithResult(final Class<E> exceptionType, final Callable<T> callable)
 			throws E {
@@ -76,11 +77,11 @@ public final class RunESCommand {
 		}
 
 		/**
-		 * Executes the given callable and returns the result.
+		 * Executes the given {@link Callable} and returns the result.
 		 * 
 		 * @param callable
-		 *            the callable to be execued
-		 * @throws T in case an error occurs during execution of the callable
+		 *            the Callable to be executed
+		 * @throws T in case an error occurs during execution of the Callable
 		 */
 		public static <T extends Exception> void run(final Class<T> exceptionType, final Callable<Void> callable)
 			throws T {
@@ -114,7 +115,7 @@ public final class RunESCommand {
 	 * Executes the given {@link Callable} and returns the result.
 	 * 
 	 * @param callable
-	 *            the {@link Callable} to be executed
+	 *            the Callable to be executed
 	 */
 	public static void run(final Callable<Void> callable) {
 		new EMFStoreCommand() {
@@ -130,13 +131,13 @@ public final class RunESCommand {
 	}
 
 	/**
-	 * Executes the given callable and returns the result.
+	 * Executes the given {@link Callable} and returns the result.
 	 * 
 	 * @param callable
-	 *            the callable to be execued
-	 * @return the return value of the {@link Callable}
+	 *            the Callable to be executed
+	 * @return the return value of the Callable
 	 * 
-	 * @param <T> the return type of the callable
+	 * @param <T> the return type of the Callable
 	 */
 	public static <T> T runWithResult(final Callable<T> callable) {
 		return new EMFStoreCommandWithResult<T>() {
