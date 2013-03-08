@@ -25,7 +25,6 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImp
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
-import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;

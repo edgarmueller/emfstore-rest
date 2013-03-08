@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.ui.handlers;
+package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import java.util.concurrent.Callable;
 

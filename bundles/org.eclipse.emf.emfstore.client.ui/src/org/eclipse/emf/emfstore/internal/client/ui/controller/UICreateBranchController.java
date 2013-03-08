@@ -26,7 +26,6 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
-import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
@@ -180,7 +179,7 @@ public class UICreateBranchController extends
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.controller.AbstractEMFStoreUIController#doRun(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor progressMonitor)

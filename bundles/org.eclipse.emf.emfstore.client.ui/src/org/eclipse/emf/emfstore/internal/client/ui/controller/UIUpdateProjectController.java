@@ -29,7 +29,6 @@ import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
-import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;

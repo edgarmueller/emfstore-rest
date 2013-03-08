@@ -23,7 +23,6 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImp
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
-import org.eclipse.emf.emfstore.internal.client.ui.handlers.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
