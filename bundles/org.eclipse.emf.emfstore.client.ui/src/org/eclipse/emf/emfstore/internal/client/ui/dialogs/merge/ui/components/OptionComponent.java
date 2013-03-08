@@ -7,9 +7,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.CustomConflictOption;
@@ -34,7 +36,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 
 /**
- * This component of the decisionbox dynamically displays the possible options.
+ * This component of the decision box dynamically displays the possible options.
  * 
  * @author wesendon
  */
@@ -43,8 +45,6 @@ public class OptionComponent {
 	private Group group;
 	private final Conflict conflict;
 	private DecisionBox dBox;
-
-	// private final DecisionBox parent;
 
 	/**
 	 * Default constructor.
@@ -75,9 +75,9 @@ public class OptionComponent {
 	}
 
 	private String generatePrefix(ConflictOption option) {
-		String result = "";
+		String result = StringUtils.EMPTY;
 		int operationCount = option.getOperations().size();
-		String countInfo = (operationCount > 1) ? "s (" + operationCount + ")" : "";
+		String countInfo = (operationCount > 1) ? "s (" + operationCount + ")" : StringUtils.EMPTY;
 		switch (option.getType()) {
 		case MyOperation:
 			result = dBox.getDecisionManager().isBranchMerge() ? "Incoming Branch: " : "Keep My Change" + countInfo
@@ -96,7 +96,6 @@ public class OptionComponent {
 			}
 			break;
 		default:
-			result = "";
 			break;
 		}
 		return result;
@@ -195,11 +194,11 @@ public class OptionComponent {
 
 		private void setText() {
 			String prefix = generatePrefix(option);
-
 			String result = UIDecisionUtil.cutString(option.getStrippedOptionLabel(), DecisionUtil.OPTION_LENGTH, true);
+
 			styledText.setText(prefix + " " + result);
 
-			if (prefix != null || prefix != "") {
+			if (prefix != "") {
 				StyleRange prefixRange = new StyleRange();
 				prefixRange.start = 0;
 				prefixRange.length = prefix.length();
