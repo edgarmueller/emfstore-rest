@@ -10,6 +10,7 @@
  */
 package org.eclipse.emf.emfstore.bowling;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getEMails <em>EMails</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getNumberOfVictories <em>Number Of Victories</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getPlayedTournamentTypes <em>Played Tournament Types</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getWinLossRatio <em>Win Loss Ratio</em>}</li>
  * </ul>
  * </p>
  *
@@ -200,5 +202,31 @@ public interface Player extends EObject {
 	 * @generated
 	 */
 	EList<TournamentType> getPlayedTournamentTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Win Loss Ratio</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Win Loss Ratio</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Win Loss Ratio</em>' attribute.
+	 * @see #setWinLossRatio(BigDecimal)
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_WinLossRatio()
+	 * @model
+	 * @generated
+	 */
+	BigDecimal getWinLossRatio();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getWinLossRatio <em>Win Loss Ratio</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Win Loss Ratio</em>' attribute.
+	 * @see #getWinLossRatio()
+	 * @generated
+	 */
+	void setWinLossRatio(BigDecimal value);
 
 } // Player

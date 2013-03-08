@@ -138,13 +138,22 @@ public interface BowlingPackage extends EPackage {
 	int PLAYER__PLAYED_TOURNAMENT_TYPES = 6;
 
 	/**
+	 * The feature id for the '<em><b>Win Loss Ratio</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLAYER__WIN_LOSS_RATIO = 7;
+
+	/**
 	 * The number of structural features of the '<em>Player</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYER_FEATURE_COUNT = 7;
+	int PLAYER_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.LeagueImpl <em>League</em>}' class.
@@ -294,13 +303,22 @@ public interface BowlingPackage extends EPackage {
 	int MATCHUP__GAMES = 0;
 
 	/**
+	 * The feature id for the '<em><b>Nr Specators</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHUP__NR_SPECATORS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Matchup</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MATCHUP_FEATURE_COUNT = 1;
+	int MATCHUP_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.GameImpl <em>Game</em>}' class.
@@ -585,6 +603,17 @@ public interface BowlingPackage extends EPackage {
 	EAttribute getPlayer_PlayedTournamentTypes();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Player#getWinLossRatio <em>Win Loss Ratio</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Win Loss Ratio</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Player#getWinLossRatio()
+	 * @see #getPlayer()
+	 * @generated
+	 */
+	EAttribute getPlayer_WinLossRatio();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.League <em>League</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -734,6 +763,17 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMatchup_Games();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Matchup#getNrSpecators <em>Nr Specators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Nr Specators</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Matchup#getNrSpecators()
+	 * @see #getMatchup()
+	 * @generated
+	 */
+	EAttribute getMatchup_NrSpecators();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Game <em>Game</em>}'.
@@ -998,6 +1038,14 @@ public interface BowlingPackage extends EPackage {
 		EAttribute PLAYER__PLAYED_TOURNAMENT_TYPES = eINSTANCE.getPlayer_PlayedTournamentTypes();
 
 		/**
+		 * The meta object literal for the '<em><b>Win Loss Ratio</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PLAYER__WIN_LOSS_RATIO = eINSTANCE.getPlayer_WinLossRatio();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.LeagueImpl <em>League</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1114,6 +1162,14 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MATCHUP__GAMES = eINSTANCE.getMatchup_Games();
+
+		/**
+		 * The meta object literal for the '<em><b>Nr Specators</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MATCHUP__NR_SPECATORS = eINSTANCE.getMatchup_NrSpecators();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.GameImpl <em>Game</em>}' class.

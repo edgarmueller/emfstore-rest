@@ -61,6 +61,7 @@ public class TournamentItemProvider extends ItemProviderAdapter implements IEdit
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addMatchupsPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addPlayersPropertyDescriptor(object);
 			addPriceMoneyPropertyDescriptor(object);
@@ -68,6 +69,28 @@ public class TournamentItemProvider extends ItemProviderAdapter implements IEdit
 			addMatchDaysPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Matchups feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMatchupsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Tournament_matchups_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Tournament_matchups_feature", "_UI_Tournament_type"),
+				 BowlingPackage.Literals.TOURNAMENT__MATCHUPS,
+				 true,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**

@@ -10,6 +10,7 @@
  */
 package org.eclipse.emf.emfstore.bowling.impl;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
@@ -37,6 +38,7 @@ import org.eclipse.emf.emfstore.bowling.TournamentType;
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getEMails <em>EMails</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getNumberOfVictories <em>Number Of Victories</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getPlayedTournamentTypes <em>Played Tournament Types</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getWinLossRatio <em>Win Loss Ratio</em>}</li>
  * </ul>
  * </p>
  *
@@ -162,6 +164,26 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @ordered
 	 */
 	protected EList<TournamentType> playedTournamentTypes;
+
+	/**
+	 * The default value of the '{@link #getWinLossRatio() <em>Win Loss Ratio</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWinLossRatio()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigDecimal WIN_LOSS_RATIO_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getWinLossRatio() <em>Win Loss Ratio</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWinLossRatio()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigDecimal winLossRatio = WIN_LOSS_RATIO_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -316,6 +338,27 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BigDecimal getWinLossRatio() {
+		return winLossRatio;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWinLossRatio(BigDecimal newWinLossRatio) {
+		BigDecimal oldWinLossRatio = winLossRatio;
+		winLossRatio = newWinLossRatio;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__WIN_LOSS_RATIO, oldWinLossRatio, winLossRatio));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -333,6 +376,8 @@ public class PlayerImpl extends EObjectImpl implements Player {
 				return getNumberOfVictories();
 			case BowlingPackage.PLAYER__PLAYED_TOURNAMENT_TYPES:
 				return getPlayedTournamentTypes();
+			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
+				return getWinLossRatio();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -369,6 +414,9 @@ public class PlayerImpl extends EObjectImpl implements Player {
 				getPlayedTournamentTypes().clear();
 				getPlayedTournamentTypes().addAll((Collection<? extends TournamentType>)newValue);
 				return;
+			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
+				setWinLossRatio((BigDecimal)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -402,6 +450,9 @@ public class PlayerImpl extends EObjectImpl implements Player {
 			case BowlingPackage.PLAYER__PLAYED_TOURNAMENT_TYPES:
 				getPlayedTournamentTypes().clear();
 				return;
+			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
+				setWinLossRatio(WIN_LOSS_RATIO_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -428,6 +479,8 @@ public class PlayerImpl extends EObjectImpl implements Player {
 				return numberOfVictories != NUMBER_OF_VICTORIES_EDEFAULT;
 			case BowlingPackage.PLAYER__PLAYED_TOURNAMENT_TYPES:
 				return playedTournamentTypes != null && !playedTournamentTypes.isEmpty();
+			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
+				return WIN_LOSS_RATIO_EDEFAULT == null ? winLossRatio != null : !WIN_LOSS_RATIO_EDEFAULT.equals(winLossRatio);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -456,6 +509,8 @@ public class PlayerImpl extends EObjectImpl implements Player {
 		result.append(numberOfVictories);
 		result.append(", playedTournamentTypes: ");
 		result.append(playedTournamentTypes);
+		result.append(", winLossRatio: ");
+		result.append(winLossRatio);
 		result.append(')');
 		return result.toString();
 	}

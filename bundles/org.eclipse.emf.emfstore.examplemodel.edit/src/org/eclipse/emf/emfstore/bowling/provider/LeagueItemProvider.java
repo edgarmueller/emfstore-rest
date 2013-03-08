@@ -61,6 +61,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addPlayersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -83,6 +84,28 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Players feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPlayersPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_League_players_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_League_players_feature", "_UI_League_type"),
+				 BowlingPackage.Literals.LEAGUE__PLAYERS,
+				 true,
+				 false,
+				 false,
+				 null,
 				 null,
 				 null));
 	}

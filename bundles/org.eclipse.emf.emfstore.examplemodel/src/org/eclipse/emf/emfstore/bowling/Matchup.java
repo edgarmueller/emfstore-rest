@@ -10,6 +10,7 @@
  */
 package org.eclipse.emf.emfstore.bowling;
 
+import java.math.BigInteger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Matchup#getGames <em>Games</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Matchup#getNrSpecators <em>Nr Specators</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,5 +49,31 @@ public interface Matchup extends EObject {
 	 * @generated
 	 */
 	EList<Game> getGames();
+
+	/**
+	 * Returns the value of the '<em><b>Nr Specators</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nr Specators</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nr Specators</em>' attribute.
+	 * @see #setNrSpecators(BigInteger)
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getMatchup_NrSpecators()
+	 * @model
+	 * @generated
+	 */
+	BigInteger getNrSpecators();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Matchup#getNrSpecators <em>Nr Specators</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Nr Specators</em>' attribute.
+	 * @see #getNrSpecators()
+	 * @generated
+	 */
+	void setNrSpecators(BigInteger value);
 
 } // Matchup
