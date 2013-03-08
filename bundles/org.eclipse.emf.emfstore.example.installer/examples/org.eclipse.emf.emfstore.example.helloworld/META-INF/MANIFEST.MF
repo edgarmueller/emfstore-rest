@@ -4,10 +4,10 @@ Bundle-Name: Example Hello World
 Bundle-SymbolicName: org.eclipse.emf.emfstore.example.helloworld;singleton:=true
 Bundle-Version: 0.9.3.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.exampleclient.Activator
-Require-Bundle: org.eclipse.emf.emfstore.examplemodel,
- org.eclipse.emf.emfstore.client.ui,
- org.eclipse.ui;bundle-version="3.5.0",
- org.eclipse.core.runtime
+Require-Bundle: org.eclipse.emf.emfstore.examplemodel;bundle-version="[1.0.0,2.0.0)",
+ org.eclipse.emf.emfstore.client.ui;bundle-version="[1.0.0,2.0.0)",
+ org.eclipse.ui;bundle-version="[3.5.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project
