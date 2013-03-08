@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -27,7 +28,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.observer.ESCheckoutObserver;
+import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
+import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
+import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
@@ -55,6 +61,8 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Controller for workspaces. Workspace Manager is a singleton.
@@ -62,18 +70,18 @@ import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
  * @author Maximilian Koegel
  * @generated NOT
  */
-public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
+public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCommitObserver, ESUpdateObserver,
+	ESShareObserver, ESCheckoutObserver {
 
 	private static ESWorkspaceProviderImpl instance;
 
-	private Workspace currentWorkspace;
-	private SessionManager sessionManager;
-	private ObserverBus observerBus;
-
-	private ConnectionManager connectionManager;
 	private AdminConnectionManager adminConnectionManager;
-
-	private ResourceSet resourceSet;
+	private ConnectionManager connectionManager;
+	private EditingDomain editingDomain;
+	private ObserverBus observerBus;
+	private ResourceSetImpl resourceSet;
+	private SessionManager sessionManager;
+	private Workspace currentWorkspace;
 
 	/**
 	 * Get an instance of the workspace manager. Will create an instance if no
@@ -111,6 +119,28 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 	}
 
 	/**
+	 * Retrieve the editing domain.
+	 * 
+	 * @return the workspace editing domain
+	 */
+	public EditingDomain getEditingDomain() {
+		if (editingDomain == null) {
+			ESWorkspaceProviderImpl.getInstance();
+		}
+		return editingDomain;
+	}
+
+	/**
+	 * Sets the EditingDomain.
+	 * 
+	 * @param editingDomain
+	 *            new domain.
+	 */
+	public void setEditingDomain(EditingDomain editingDomain) {
+		this.editingDomain = editingDomain;
+	}
+
+	/**
 	 * Private constructor.
 	 * 
 	 */
@@ -145,30 +175,26 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 	 */
 	public void load() {
 
-		// TODO: OTS removed dispose check
-
 		resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		((ResourceSetImpl) resourceSet).setURIResourceMap(new LinkedHashMap<URI, Resource>());
+		resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 
 		// register an editing domain on the resource
-		Configuration.getClientBehavior().setEditingDomain(createEditingDomain(resourceSet));
+		setEditingDomain(createEditingDomain(resourceSet));
 
 		URI fileURI = URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
 		File workspaceFile = new File(Configuration.getFileInfo().getWorkspacePath());
 		final Workspace workspace;
 		final Resource resource;
+
 		if (!workspaceFile.exists()) {
-
 			workspace = createNewWorkspace(resourceSet, fileURI);
-
 		} else {
-			// file exists load it
+			// file exists, load it,
 			// check if a migration is needed
 			migrateModel(resourceSet);
 
-			// resource = resourceSet.getResource(fileURI, true);
 			resource = resourceSet.createResource(fileURI);
 
 			try {
@@ -178,7 +204,6 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 			}
 
 			EList<EObject> directContents = resource.getContents();
-			// MK cast
 			workspace = (Workspace) directContents.get(0);
 		}
 
@@ -192,6 +217,15 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 		}.run(true);
 
 		currentWorkspace = workspace;
+
+		getObserverBus().register(this);
+	}
+
+	/**
+	 * Flushes the command stack.
+	 */
+	public void flushCommandStack() {
+		getEditingDomain().getCommandStack().flush();
 	}
 
 	public void migrate(String absoluteFilename) {
@@ -595,5 +629,70 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 		modelURIs.add(changesURI);
 		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, sourceModelReleaseNumber,
 			new NullProgressMonitor());
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCheckoutObserver#checkoutDone(org.eclipse.emf.emfstore.client.ESLocalProject)
+	 */
+	public void checkoutDone(ESLocalProject project) {
+		flushCommandStack();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESShareObserver#shareDone(org.eclipse.emf.emfstore.client.ESLocalProject)
+	 */
+	public void shareDone(ESLocalProject localProject) {
+		flushCommandStack();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages, IProgressMonitor monitor) {
+		return true;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {
+		flushCommandStack();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.ESChangePackage, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor) {
+		return true;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void commitCompleted(ESLocalProject project, ESPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
+		flushCommandStack();
 	}
 }

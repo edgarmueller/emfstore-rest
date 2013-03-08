@@ -3,19 +3,11 @@ package org.eclipse.emf.emfstore.internal.client.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
-import org.eclipse.emf.emfstore.client.observer.ESCheckoutObserver;
-import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
-import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
-import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -23,10 +15,8 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.model.ESChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
-public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObserver, ESCheckoutObserver {
+public class Behavior {
 
 	/**
 	 * The value for enabling debug mode.
@@ -35,7 +25,6 @@ public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObse
 	public static final String DEBUG_SWITCH = "-debug";
 	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
 
-	private static EditingDomain editingDomain;
 	private static Boolean autoSave;
 
 	/**
@@ -49,7 +38,6 @@ public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObse
 	private ESChecksumErrorHandler checksumErrorHandler;
 
 	public Behavior() {
-		ESWorkspaceProviderImpl.getObserverBus().register(this);
 	}
 
 	/**
@@ -74,7 +62,7 @@ public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObse
 		if (autoSave == null) {
 			autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions")
 				.getBoolean(
-							AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, false);
+					AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, false);
 		}
 		return autoSave;
 	}
@@ -107,7 +95,7 @@ public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObse
 			if (elementWithHighestPriority != null) {
 				ESChecksumErrorHandler errorHandler = elementWithHighestPriority
 					.getClass("errorHandler",
-								ESChecksumErrorHandler.class);
+						ESChecksumErrorHandler.class);
 
 				if (errorHandler != null) {
 					checksumErrorHandler = errorHandler;
@@ -148,28 +136,6 @@ public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObse
 	}
 
 	/**
-	 * Retrieve the editing domain.
-	 * 
-	 * @return the workspace editing domain
-	 */
-	public EditingDomain getEditingDomain() {
-		if (editingDomain == null) {
-			ESWorkspaceProviderImpl.getInstance();
-		}
-		return editingDomain;
-	}
-
-	/**
-	 * Sets the EditingDomain.
-	 * 
-	 * @param editingDomain
-	 *            new domain.
-	 */
-	public void setEditingDomain(EditingDomain editingDomain) {
-		this.editingDomain = editingDomain;
-	}
-
-	/**
 	 * Get the default server info.
 	 * 
 	 * @return server info
@@ -178,7 +144,7 @@ public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObse
 		ESClientConfigurationProvider provider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider")
 			.getClass("providerClass",
-						ESClientConfigurationProvider.class);
+				ESClientConfigurationProvider.class);
 		ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();
 		if (provider != null) {
 			List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
@@ -210,72 +176,4 @@ public class Behavior implements ESCommitObserver, ESUpdateObserver, ESShareObse
 		return serverInfo;
 	}
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESCheckoutObserver#checkoutDone(org.eclipse.emf.emfstore.client.ESLocalProject)
-	 */
-	public void checkoutDone(ESLocalProject project) {
-		flushCommandStack();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESShareObserver#shareDone(org.eclipse.emf.emfstore.client.ESLocalProject)
-	 */
-	public void shareDone(ESLocalProject localProject) {
-		flushCommandStack();
-	}
-
-	public void flushCommandStack() {
-		editingDomain.getCommandStack().flush();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
-	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages, IProgressMonitor monitor) {
-		return true;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.ESLocalProject,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {
-		flushCommandStack();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
-	 *      org.eclipse.emf.emfstore.server.model.ESChangePackage, org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor) {
-		return true;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.ESLocalProject,
-	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public void commitCompleted(ESLocalProject project, ESPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
-		flushCommandStack();
-	}
 }

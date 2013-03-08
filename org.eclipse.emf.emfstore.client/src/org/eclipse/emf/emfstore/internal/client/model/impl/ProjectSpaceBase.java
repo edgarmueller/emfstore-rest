@@ -140,9 +140,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void initRunnableContext() {
 		runnableContext = ExtensionRegistry.INSTANCE.get(
-															RUNNABLE_CONTEXT_ID,
-															ESRunnableContext.class,
-															new DefaultRunnableContext(), true);
+			RUNNABLE_CONTEXT_ID,
+			ESRunnableContext.class,
+			new DefaultRunnableContext(), true);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		if (!performChecksumCheck(baseSpec, getProject())) {
 			progressMonitor.subTask("Invalid checksum.  Activating checksum error handler.");
 			boolean errorHandled = callback.checksumCheckFailed(this.getAPIImpl(), baseSpec.getAPIImpl(),
-																progressMonitor);
+				progressMonitor);
 			if (!errorHandled) {
 				// rollback
 				for (int i = incoming.size() - 1; i >= 0; i--) {
@@ -409,7 +409,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// TODO: is this a server call?
 		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		List<ChangePackage> changes = connectionManager.getChanges(getUsersession().getSessionId(), getProjectId(),
-																	sourceVersion, targetVersion);
+			sourceVersion, targetVersion);
 		return changes;
 	}
 
@@ -590,11 +590,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void init() {
 		initCrossReferenceAdapter();
 
-		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getClientBehavior().getEditingDomain()
-			.getCommandStack();
+		EMFStoreCommandStack commandStack = (EMFStoreCommandStack)
+			ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack();
 
 		fileTransferManager = new FileTransferManager(this);
-
 		operationManager = new OperationManager(this);
 
 		initResourcePersister();
@@ -828,7 +827,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public boolean isUpdated() throws ESException {
 		PrimaryVersionSpec headVersion = resolveVersionSpec(Versions.createHEAD(getBaseVersion()),
-															new NullProgressMonitor());
+			new NullProgressMonitor());
 		return getBaseVersion().equals(headVersion);
 	}
 
@@ -872,11 +871,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// merge the conflicts
 		// TODO: review casting of change conflict
 		if (conflictResolver.resolveConflicts(getProject(), ((ESChangeConflictImpl) conflict).getInternalAPIImpl(),
-												getBaseVersion(), target)) {
+			getBaseVersion(), target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
 			applyChanges(target, ((ESChangeConflictImpl) conflict).getInternalAPIImpl().getNewPackages(), mergedResult,
-							callback, progressMonitor);
+				callback, progressMonitor);
 			return true;
 		}
 		return false;
@@ -898,7 +897,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					throw new InvalidVersionSpecException("Can't merge branch with itself.");
 				}
 				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
-																								branchSpec), monitor);
+					branchSpec), monitor);
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
 
@@ -971,9 +970,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(
-																	getSessionId(),
-																	getProjectId(),
-																	versionSpec);
+					getSessionId(),
+					getProjectId(),
+					versionSpec);
 			}
 		}.execute();
 	}
@@ -1039,7 +1038,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			if (resource == null) {
 				if (!isTransient) {
 					WorkspaceUtil.logException("Resources of project space are not properly initialized!",
-												new IllegalProjectSpaceStateException("Resource to save is null"));
+						new IllegalProjectSpaceStateException("Resource to save is null"));
 				}
 				return;
 			}
@@ -1150,7 +1149,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					.getInstance()
 					.getConnectionManager()
 					.transmitProperty(getUsersession().getSessionId(), iterator.next(), getUsersession().getACUser(),
-										getProjectId());
+						getProjectId());
 				iterator.remove();
 			} catch (ESException e) {
 				WorkspaceUtil.logException("Transmission of properties failed with exception", e);
@@ -1252,8 +1251,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			getProject().eAdapters().remove(crossReferenceAdapter);
 		}
 
-		EMFStoreCommandStack commandStack = (EMFStoreCommandStack) Configuration.getClientBehavior().getEditingDomain()
-			.getCommandStack();
+		EMFStoreCommandStack commandStack = (EMFStoreCommandStack)
+			ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack();
 		commandStack.removeCommandStackObserver(operationManager);
 		commandStack.removeCommandStackObserver(resourcePersister);
 
@@ -1297,7 +1296,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class)
 			.postApplyMergedChanges(
-									this.getAPIImpl(), changePackage.getAPIImpl());
+				this.getAPIImpl(), changePackage.getAPIImpl());
 	}
 
 	public ESLocalProjectImpl getAPIImpl() {

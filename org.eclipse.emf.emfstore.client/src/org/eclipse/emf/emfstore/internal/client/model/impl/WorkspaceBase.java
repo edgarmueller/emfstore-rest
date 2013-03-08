@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -217,7 +216,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	public ProjectSpace importProject(String absoluteFileName) throws IOException {
 		Project project = ResourceHelper.getElementFromResource(absoluteFileName, Project.class, 0);
 		return importProject(project, absoluteFileName.substring(absoluteFileName.lastIndexOf(File.separatorChar) + 1),
-								"Imported from " + absoluteFileName);
+			"Imported from " + absoluteFileName);
 	}
 
 	/**
@@ -382,7 +381,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getEditingDomain()
 	 */
 	public EditingDomain getEditingDomain() {
-		return Configuration.getClientBehavior().getEditingDomain();
+		return ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 	}
 
 	/**

@@ -51,7 +51,7 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -89,7 +89,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// copy to clipboard
 		Collection<EObject> toCopy = new ArrayList<EObject>();
@@ -142,13 +142,14 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		Command delete = DeleteCommand.create(Configuration.getClientBehavior().getEditingDomain(), createWorkPackage);
-		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(delete);
+		Command delete = DeleteCommand.create(
+			ESWorkspaceProviderImpl.getInstance().getEditingDomain(),
+			createWorkPackage);
+		ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack().execute(delete);
 
 		assertEquals(0, createComment.getRecipients().size());
 		assertEquals(1, getProjectSpace().getOperations().size());
-		assertEquals(true, getProjectSpace().getOperations().get(0) instanceof CreateDeleteOperation);
-
+		assertTrue(getProjectSpace().getOperations().get(0) instanceof CreateDeleteOperation);
 	}
 
 	/**
@@ -168,7 +169,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// copy
 		CopyCommand.Helper helper = new CopyCommand.Helper();
@@ -212,7 +213,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// copy
 		Command command = CopyToClipboardCommand.create(editingDomain, actor);
@@ -247,7 +248,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// copy
 		Command command = CopyCommand.create(editingDomain, actor);
@@ -291,20 +292,21 @@ public class CommandTest extends WorkspaceTest {
 
 		ModelElementId useCaseId = ModelUtil.getProject(useCase).getModelElementId(useCase);
 
-		Command deleteCommand = DeleteCommand.create(Configuration.getClientBehavior().getEditingDomain(), useCase);
-		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(deleteCommand);
+		Command deleteCommand = DeleteCommand.create(
+			ESWorkspaceProviderImpl.getInstance().getEditingDomain(),
+			useCase);
+		ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack().execute(deleteCommand);
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 
 		assertEquals(1, operations.size());
 		AbstractOperation operation = operations.get(0);
-		assertEquals(true, operation instanceof CreateDeleteOperation);
+		assertTrue(operation instanceof CreateDeleteOperation);
 		CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
 
 		assertEquals(useCaseId, createDeleteOperation.getModelElementId());
-		// assertEquals(useCaseId, modelElemetnId);
 		assertEquals(0, createDeleteOperation.getSubOperations().size());
-		assertEquals(true, createDeleteOperation.isDelete());
+		assertTrue(createDeleteOperation.isDelete());
 	}
 
 	/**
@@ -338,7 +340,7 @@ public class CommandTest extends WorkspaceTest {
 				useCase.setInitiatingActor(oldActor);
 				useCase.getParticipatingActors().add(newActor);
 				useCase.getParticipatingActors().add(otherActor);
-				assertEquals(true, getProject().contains(useCase));
+				assertTrue(getProject().contains(useCase));
 				assertEquals(getProject(), ModelUtil.getProject(useCase));
 				clearOperations();
 			}
@@ -347,19 +349,20 @@ public class CommandTest extends WorkspaceTest {
 		Project project = ModelUtil.getProject(useCase);
 		ModelElementId useCaseId = project.getModelElementId(useCase);
 
-		Command deleteCommand = DeleteCommand.create(Configuration.getClientBehavior().getEditingDomain(), useCase);
-		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(deleteCommand);
+		Command deleteCommand = DeleteCommand.create(
+			ESWorkspaceProviderImpl.getInstance().getEditingDomain(),
+			useCase);
+		ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack().execute(deleteCommand);
 
-		assertEquals(false, getProject().contains(useCase));
-		// assertEquals(null, useCase.eContainer());
+		assertFalse(getProject().contains(useCase));
 
 		List<AbstractOperation> operations = getProjectSpace().getOperations();
 
 		assertEquals(1, operations.size());
 		AbstractOperation operation = operations.get(0);
-		assertEquals(true, operation instanceof CreateDeleteOperation);
+		assertTrue(operation instanceof CreateDeleteOperation);
 		CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
-		assertEquals(true, createDeleteOperation.isDelete());
+		assertTrue(createDeleteOperation.isDelete());
 
 		assertEquals(useCaseId, createDeleteOperation.getModelElementId());
 		EList<ReferenceOperation> subOperations = createDeleteOperation.getSubOperations();
@@ -374,14 +377,14 @@ public class CommandTest extends WorkspaceTest {
 		AbstractOperation suboperation6 = subOperations.get(6);
 		AbstractOperation suboperation7 = subOperations.get(7);
 
-		assertEquals(true, suboperation0 instanceof SingleReferenceOperation);
-		assertEquals(true, suboperation1 instanceof MultiReferenceOperation);
-		assertEquals(true, suboperation2 instanceof SingleReferenceOperation);
-		assertEquals(true, suboperation3 instanceof MultiReferenceOperation);
-		assertEquals(true, suboperation4 instanceof MultiReferenceOperation);
-		assertEquals(true, suboperation5 instanceof MultiReferenceOperation);
-		assertEquals(true, suboperation6 instanceof MultiReferenceOperation);
-		assertEquals(true, suboperation7 instanceof MultiReferenceOperation);
+		assertTrue(suboperation0 instanceof SingleReferenceOperation);
+		assertTrue(suboperation1 instanceof MultiReferenceOperation);
+		assertTrue(suboperation2 instanceof SingleReferenceOperation);
+		assertTrue(suboperation3 instanceof MultiReferenceOperation);
+		assertTrue(suboperation4 instanceof MultiReferenceOperation);
+		assertTrue(suboperation5 instanceof MultiReferenceOperation);
+		assertTrue(suboperation6 instanceof MultiReferenceOperation);
+		assertTrue(suboperation7 instanceof MultiReferenceOperation);
 
 		SingleReferenceOperation mrSuboperation0 = (SingleReferenceOperation) suboperation0;
 		MultiReferenceOperation mrSuboperation1 = (MultiReferenceOperation) suboperation1;
@@ -403,8 +406,8 @@ public class CommandTest extends WorkspaceTest {
 		assertEquals(0, mrSuboperation1.getIndex());
 		assertEquals(sectionId, mrSuboperation1.getModelElementId());
 		assertEquals("leafSection", mrSuboperation1.getOppositeFeatureName());
-		assertEquals(false, mrSuboperation1.isAdd());
-		assertEquals(true, mrSuboperation1.isBidirectional());
+		assertFalse(mrSuboperation1.isAdd());
+		assertTrue(mrSuboperation1.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements3 = mrSuboperation1.getOtherInvolvedModelElements();
 		assertEquals(1, otherInvolvedModelElements3.size());
 		EList<ModelElementId> referencedModelElements3 = mrSuboperation1.getReferencedModelElements();
@@ -418,7 +421,7 @@ public class CommandTest extends WorkspaceTest {
 		assertEquals("initiatingActor", mrSuboperation2.getFeatureName());
 		assertEquals(useCaseId, mrSuboperation2.getModelElementId());
 		assertEquals("initiatedUseCases", mrSuboperation2.getOppositeFeatureName());
-		assertEquals(true, mrSuboperation2.isBidirectional());
+		assertTrue(mrSuboperation2.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements = mrSuboperation2.getOtherInvolvedModelElements();
 		assertEquals(1, otherInvolvedModelElements.size());
 		assertEquals(oldActorId, otherInvolvedModelElements.iterator().next());
@@ -427,8 +430,8 @@ public class CommandTest extends WorkspaceTest {
 		assertEquals(0, mrSuboperation3.getIndex());
 		assertEquals(oldActorId, mrSuboperation3.getModelElementId());
 		assertEquals("initiatingActor", mrSuboperation3.getOppositeFeatureName());
-		assertEquals(false, mrSuboperation3.isAdd());
-		assertEquals(true, mrSuboperation3.isBidirectional());
+		assertFalse(mrSuboperation3.isAdd());
+		assertTrue(mrSuboperation3.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements0 = mrSuboperation3.getOtherInvolvedModelElements();
 		assertEquals(1, otherInvolvedModelElements0.size());
 		EList<ModelElementId> referencedModelElements0 = mrSuboperation3.getReferencedModelElements();
@@ -493,7 +496,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// cut to clipboard
 		Collection<Actor> toCut = new ArrayList<Actor>();
@@ -566,7 +569,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// copy to clipboard
 		Command cutCommand = CutToClipboardCommand.create(editingDomain, leafSection,
@@ -637,7 +640,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		final EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// cut to clipboard
 		Command cutCommand = CutToClipboardCommand.create(editingDomain, leafSection,
@@ -681,7 +684,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		final EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// remove
 		Command removeCommand = RemoveCommand.create(editingDomain, leafSection,
@@ -721,7 +724,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		final EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// remove
 		Collection<Actor> toRemove = new ArrayList<Actor>();
@@ -764,7 +767,7 @@ public class CommandTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		final EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// delete
 		Collection<Actor> toDelete = new ArrayList<Actor>();
@@ -807,7 +810,7 @@ public class CommandTest extends WorkspaceTest {
 		}.run(false);
 
 		assertEquals(0, getProjectSpace().getOperations().size());
-		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		final EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// delete
 		Collection<Actor> toDelete = new ArrayList<Actor>();
@@ -868,13 +871,13 @@ public class CommandTest extends WorkspaceTest {
 		}.run(false);
 		ModelElementId workPackageId = getProject().getModelElementId(workPackage);
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// cut the element
 		Command command = CutToClipboardCommand.create(editingDomain, workPackage);
 		editingDomain.getCommandStack().execute(command);
 
-		assertTrue(Configuration.getClientBehavior().getEditingDomain().getClipboard().contains(workPackage));
+		assertTrue(ESWorkspaceProviderImpl.getInstance().getEditingDomain().getClipboard().contains(workPackage));
 		assertEquals(1, ModelUtil.getAllContainedModelElements(leafSection, false).size());
 
 		assertTrue(getProject().contains(workPackageId));
@@ -906,7 +909,7 @@ public class CommandTest extends WorkspaceTest {
 
 		assertEquals(0, getProjectSpace().getOperations().size());
 
-		EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		EditingDomain domain1 = AdapterFactoryEditingDomain.getEditingDomainFor(actor);
 		assertSame(editingDomain, domain1);
@@ -932,7 +935,7 @@ public class CommandTest extends WorkspaceTest {
 		}.run(false);
 
 		assertEquals(0, getProjectSpace().getOperations().size());
-		final EditingDomain editingDomain = Configuration.getClientBehavior().getEditingDomain();
+		final EditingDomain editingDomain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 
 		// delete
 		editingDomain.getCommandStack().execute(DeleteCommand.create(editingDomain, actor));

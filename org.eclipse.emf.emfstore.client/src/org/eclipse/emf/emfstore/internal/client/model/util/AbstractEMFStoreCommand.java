@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.util;
 
 import org.eclipse.emf.common.command.AbstractCommand;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 
 /**
  * Super class for all commands.
@@ -98,11 +98,13 @@ public abstract class AbstractEMFStoreCommand extends AbstractCommand {
 	/**
 	 * Executes the command on the workspaces editing domain.
 	 * 
-	 * @param ignoreExceptions true if any thrown exception in the execution of the command should be ignored.
+	 * @param ignoreExceptions
+	 *            should be set to {@code true} if any thrown exception in the execution of the command should be
+	 *            ignored
 	 */
 	protected void aRun(boolean ignoreExceptions) {
 		this.ignoreExceptions = ignoreExceptions;
-		Configuration.getClientBehavior().getEditingDomain().getCommandStack().execute(this);
+		ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack().execute(this);
 
 	}
 }

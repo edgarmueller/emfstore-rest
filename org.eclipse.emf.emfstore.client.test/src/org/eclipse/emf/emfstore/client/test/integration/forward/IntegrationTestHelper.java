@@ -223,9 +223,9 @@ public final class IntegrationTestHelper {
 	public static EditingDomain getDomain() {
 
 		if (domain == null) {
-			domain = Configuration.getClientBehavior().getEditingDomain();
-
+			domain = ESWorkspaceProviderImpl.getInstance().getEditingDomain();
 		}
+
 		return domain;
 	}
 
