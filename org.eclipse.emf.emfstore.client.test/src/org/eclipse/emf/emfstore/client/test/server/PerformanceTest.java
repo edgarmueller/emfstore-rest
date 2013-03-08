@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.test.performance;
+package org.eclipse.emf.emfstore.client.test.server;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -19,7 +19,6 @@ import java.util.Arrays;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
-import org.eclipse.emf.emfstore.client.test.server.ServerTests;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -55,7 +54,7 @@ public class PerformanceTest {
 
 	private long lastSeed = seed + 1;
 
-	private static final int NUM_ITERATIONS = 1;
+	private static final int NUM_ITERATIONS = 10;
 	private static final double ACCEPTED_VARIANCE = 1.2;
 	private double memAfterThreshold;
 	double[] times;
