@@ -8,10 +8,14 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.util;
+package org.eclipse.emf.emfstore.client.util;
 
 import java.util.concurrent.Callable;
 
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithException;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
+import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResultAndException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**

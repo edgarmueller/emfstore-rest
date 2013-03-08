@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 
 /**
  * Property tester to test if a project space has local changes.

@@ -17,9 +17,9 @@ import java.util.concurrent.Callable;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESServerFactory;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
-import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
 
 /**
  * Implementation of a factory for creating {@link ESServer} instances.

@@ -11,7 +11,7 @@ import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.util.RunESCommand;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 
 public final class ProjectChangeUtil {
 
