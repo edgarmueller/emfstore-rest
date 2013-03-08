@@ -303,13 +303,13 @@ public interface BowlingPackage extends EPackage {
 	int MATCHUP__GAMES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Nr Specators</b></em>' attribute.
+	 * The feature id for the '<em><b>Nr Spectators</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MATCHUP__NR_SPECATORS = 1;
+	int MATCHUP__NR_SPECTATORS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Matchup</em>' class.
@@ -765,15 +765,15 @@ public interface BowlingPackage extends EPackage {
 	EReference getMatchup_Games();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Matchup#getNrSpecators <em>Nr Specators</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Matchup#getNrSpectators <em>Nr Spectators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Nr Specators</em>'.
-	 * @see org.eclipse.emf.emfstore.bowling.Matchup#getNrSpecators()
+	 * @return the meta object for the attribute '<em>Nr Spectators</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Matchup#getNrSpectators()
 	 * @see #getMatchup()
 	 * @generated
 	 */
-	EAttribute getMatchup_NrSpecators();
+	EAttribute getMatchup_NrSpectators();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Game <em>Game</em>}'.
@@ -1164,12 +1164,12 @@ public interface BowlingPackage extends EPackage {
 		EReference MATCHUP__GAMES = eINSTANCE.getMatchup_Games();
 
 		/**
-		 * The meta object literal for the '<em><b>Nr Specators</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Nr Spectators</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MATCHUP__NR_SPECATORS = eINSTANCE.getMatchup_NrSpecators();
+		EAttribute MATCHUP__NR_SPECTATORS = eINSTANCE.getMatchup_NrSpectators();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.GameImpl <em>Game</em>}' class.

@@ -38,7 +38,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Matchup">
     <eStructuralFeatures xsi:type="ecore:EReference" name="games" lowerBound="2" upperBound="2"
         eType="#//Game" containment="true" eOpposite="#//Game/matchup"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nrSpecators" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nrSpectators" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Game">
     <eStructuralFeatures xsi:type="ecore:EReference" name="matchup" lowerBound="1"

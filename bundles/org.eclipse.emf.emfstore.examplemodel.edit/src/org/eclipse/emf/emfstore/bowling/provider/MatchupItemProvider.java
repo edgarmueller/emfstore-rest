@@ -61,25 +61,25 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNrSpecatorsPropertyDescriptor(object);
+			addNrSpectatorsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Nr Specators feature.
+	 * This adds a property descriptor for the Nr Spectators feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNrSpecatorsPropertyDescriptor(Object object) {
+	protected void addNrSpectatorsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Matchup_nrSpecators_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Matchup_nrSpecators_feature", "_UI_Matchup_type"),
-				 BowlingPackage.Literals.MATCHUP__NR_SPECATORS,
+				 getString("_UI_Matchup_nrSpectators_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Matchup_nrSpectators_feature", "_UI_Matchup_type"),
+				 BowlingPackage.Literals.MATCHUP__NR_SPECTATORS,
 				 true,
 				 false,
 				 false,
@@ -137,7 +137,7 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 	 */
 	@Override
 	public String getText(Object object) {
-		BigInteger labelValue = ((Matchup)object).getNrSpecators();
+		BigInteger labelValue = ((Matchup)object).getNrSpectators();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Matchup_type") :
@@ -156,7 +156,7 @@ public class MatchupItemProvider extends ItemProviderAdapter implements IEditing
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Matchup.class)) {
-			case BowlingPackage.MATCHUP__NR_SPECATORS:
+			case BowlingPackage.MATCHUP__NR_SPECTATORS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BowlingPackage.MATCHUP__GAMES:

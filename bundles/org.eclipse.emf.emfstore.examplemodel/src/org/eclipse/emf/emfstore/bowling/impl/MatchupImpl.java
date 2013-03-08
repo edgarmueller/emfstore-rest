@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.bowling.Matchup;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.MatchupImpl#getGames <em>Games</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.MatchupImpl#getNrSpecators <em>Nr Specators</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.MatchupImpl#getNrSpectators <em>Nr Spectators</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,23 +52,24 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 	protected EList<Game> games;
 
 	/**
-	 * The default value of the '{@link #getNrSpecators() <em>Nr Specators</em>}' attribute.
+	 * The default value of the '{@link #getNrSpectators() <em>Nr Spectators</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNrSpecators()
+	 * @see #getNrSpectators()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger NR_SPECATORS_EDEFAULT = null;
+	protected static final BigInteger NR_SPECTATORS_EDEFAULT = null;
+
 	/**
-	 * The cached value of the '{@link #getNrSpecators() <em>Nr Specators</em>}' attribute.
+	 * The cached value of the '{@link #getNrSpectators() <em>Nr Spectators</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNrSpecators()
+	 * @see #getNrSpectators()
 	 * @generated
 	 * @ordered
 	 */
-	protected BigInteger nrSpecators = NR_SPECATORS_EDEFAULT;
+	protected BigInteger nrSpectators = NR_SPECTATORS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,8 +107,8 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigInteger getNrSpecators() {
-		return nrSpecators;
+	public BigInteger getNrSpectators() {
+		return nrSpectators;
 	}
 
 	/**
@@ -115,11 +116,11 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNrSpecators(BigInteger newNrSpecators) {
-		BigInteger oldNrSpecators = nrSpecators;
-		nrSpecators = newNrSpecators;
+	public void setNrSpectators(BigInteger newNrSpectators) {
+		BigInteger oldNrSpectators = nrSpectators;
+		nrSpectators = newNrSpectators;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.MATCHUP__NR_SPECATORS, oldNrSpecators, nrSpecators));
+			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.MATCHUP__NR_SPECTATORS, oldNrSpectators, nrSpectators));
 	}
 
 	/**
@@ -161,8 +162,8 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 		switch (featureID) {
 			case BowlingPackage.MATCHUP__GAMES:
 				return getGames();
-			case BowlingPackage.MATCHUP__NR_SPECATORS:
-				return getNrSpecators();
+			case BowlingPackage.MATCHUP__NR_SPECTATORS:
+				return getNrSpectators();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -180,8 +181,8 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 				getGames().clear();
 				getGames().addAll((Collection<? extends Game>)newValue);
 				return;
-			case BowlingPackage.MATCHUP__NR_SPECATORS:
-				setNrSpecators((BigInteger)newValue);
+			case BowlingPackage.MATCHUP__NR_SPECTATORS:
+				setNrSpectators((BigInteger)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -198,8 +199,8 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 			case BowlingPackage.MATCHUP__GAMES:
 				getGames().clear();
 				return;
-			case BowlingPackage.MATCHUP__NR_SPECATORS:
-				setNrSpecators(NR_SPECATORS_EDEFAULT);
+			case BowlingPackage.MATCHUP__NR_SPECTATORS:
+				setNrSpectators(NR_SPECTATORS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -215,8 +216,8 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 		switch (featureID) {
 			case BowlingPackage.MATCHUP__GAMES:
 				return games != null && !games.isEmpty();
-			case BowlingPackage.MATCHUP__NR_SPECATORS:
-				return NR_SPECATORS_EDEFAULT == null ? nrSpecators != null : !NR_SPECATORS_EDEFAULT.equals(nrSpecators);
+			case BowlingPackage.MATCHUP__NR_SPECTATORS:
+				return NR_SPECTATORS_EDEFAULT == null ? nrSpectators != null : !NR_SPECTATORS_EDEFAULT.equals(nrSpectators);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -231,8 +232,8 @@ public class MatchupImpl extends EObjectImpl implements Matchup {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (nrSpecators: ");
-		result.append(nrSpecators);
+		result.append(" (nrSpectators: ");
+		result.append(nrSpectators);
 		result.append(')');
 		return result.toString();
 	}

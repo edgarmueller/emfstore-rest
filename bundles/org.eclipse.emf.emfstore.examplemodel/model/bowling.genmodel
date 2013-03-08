@@ -36,7 +36,7 @@
     </genClasses>
     <genClasses ecoreClass="bowling.ecore#//Matchup">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Matchup/games"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Matchup/nrSpecators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Matchup/nrSpectators"/>
     </genClasses>
     <genClasses ecoreClass="bowling.ecore#//Game">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference bowling.ecore#//Game/matchup"/>
