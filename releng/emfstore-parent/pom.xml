@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <tycho-version>0.15.0</tycho-version>
+    <tycho-version>0.16.0</tycho-version>
     <junit-version>4.8.2</junit-version>
     <maven-checkstyle-version>2.9.1</maven-checkstyle-version>
     <jacoco-version>0.5.7.201204190339</jacoco-version>
