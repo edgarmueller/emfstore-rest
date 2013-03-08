@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bowling"
-    nsURI="http://org/eclipse/example/bowling" nsPrefix="org.eclipse.example.bowling">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bowling" nsURI="http://org/eclipse/example/bowling" nsPrefix="org.eclipse.example.bowling">
   <eClassifiers xsi:type="ecore:EClass" name="Player">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfBirth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
@@ -13,6 +11,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfVictories" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="playedTournamentTypes"
         upperBound="-1" eType="#//TournamentType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="winLossRatio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="League">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -39,6 +38,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Matchup">
     <eStructuralFeatures xsi:type="ecore:EReference" name="games" lowerBound="2" upperBound="2"
         eType="#//Game" containment="true" eOpposite="#//Game/matchup"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nrSpecators" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Game">
     <eStructuralFeatures xsi:type="ecore:EReference" name="matchup" lowerBound="1"

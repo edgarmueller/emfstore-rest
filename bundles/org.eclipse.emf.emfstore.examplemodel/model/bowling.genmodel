@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.emf.emfstore.examplemodel/src" modelPluginID="org.eclipse.emf.emfstore.examplemodel"
     modelName="Bowling" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
     complianceLevel="5.0" copyrightFields="false" runtimeVersion="2.5" classNamePattern="">
-  <foreignModel>../../org.eclipse.example.bowlingmodel/model/bowling.ecore</foreignModel>
+  <foreignModel>bowling.ecore</foreignModel>
   <genPackages prefix="Bowling" basePackage="org.eclipse.emf.emfstore" disposableProviderFactory="true"
       ecorePackage="bowling.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="bowling.ecore#//TournamentType">
@@ -18,13 +18,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Player/eMails"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Player/numberOfVictories"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Player/playedTournamentTypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Player/winLossRatio"/>
     </genClasses>
     <genClasses ecoreClass="bowling.ecore#//League">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//League/name"/>
       <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//League/players"/>
     </genClasses>
     <genClasses ecoreClass="bowling.ecore#//Tournament">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Tournament/matchups"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Tournament/matchups"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Tournament/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Tournament/playerPoints"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bowling.ecore#//Tournament/players"/>
@@ -35,6 +36,7 @@
     </genClasses>
     <genClasses ecoreClass="bowling.ecore#//Matchup">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Matchup/games"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Matchup/nrSpecators"/>
     </genClasses>
     <genClasses ecoreClass="bowling.ecore#//Game">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference bowling.ecore#//Game/matchup"/>
