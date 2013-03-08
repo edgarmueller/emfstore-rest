@@ -84,7 +84,7 @@ public class FileTransferCacheManager {
 	 * @return the name of the cache folder
 	 */
 	public static String getCacheFolder(ProjectSpace projectSpace) {
-		return Configuration.FILE_INFO.getWorkspaceDirectory() + Configuration.FILE_INFO.ProjectSpaceDirectoryPrefix
+		return Configuration.getFileInfo().getWorkspaceDirectory() + Configuration.getFileInfo().ProjectSpaceDirectoryPrefix
 			+ projectSpace.getIdentifier()
 			+ File.separatorChar
 			+ "files" + File.separatorChar;

@@ -131,8 +131,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 			.getExtensionElements()) {
 			try {
 				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
-																								currentWorkspace
-																									.getAPIImpl());
+					currentWorkspace
+						.getAPIImpl());
 			} catch (ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
@@ -180,8 +180,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		// register an editing domain on the resource
 		Configuration.getClientBehavior().setEditingDomain(createEditingDomain(resourceSet));
 
-		URI fileURI = URI.createFileURI(Configuration.FILE_INFO.getWorkspacePath());
-		File workspaceFile = new File(Configuration.FILE_INFO.getWorkspacePath());
+		URI fileURI = URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
+		File workspaceFile = new File(Configuration.getFileInfo().getWorkspacePath());
 		final Workspace workspace;
 		final Resource resource;
 		if (!workspaceFile.exists()) {
@@ -236,7 +236,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		// TODO EXPT PRIO
 		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider")
 			.getClass("class",
-						ESEditingDomainProvider.class);
+				ESEditingDomainProvider.class);
 	}
 
 	private Workspace createNewWorkspace(ResourceSet resourceSet, URI fileURI) {
@@ -265,8 +265,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 			resource.save(ModelUtil.getResourceSaveOptions());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
-										"Creating new workspace failed! Delete workspace folder: "
-											+ Configuration.FILE_INFO.getWorkspaceDirectory(), e);
+				"Creating new workspace failed! Delete workspace folder: "
+					+ Configuration.getFileInfo().getWorkspaceDirectory(), e);
 		}
 		int modelVersionNumber;
 		try {
@@ -279,7 +279,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 	}
 
 	private void stampCurrentVersionNumber(int modelReleaseNumber) {
-		URI versionFileUri = URI.createFileURI(Configuration.FILE_INFO.getModelReleaseNumberFileName());
+		URI versionFileUri = URI.createFileURI(Configuration.getFileInfo().getModelReleaseNumberFileName());
 		Resource versionResource = new ResourceSetImpl().createResource(versionFileUri);
 		ModelVersion modelVersion = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createModelVersion();
@@ -289,9 +289,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 			ModelUtil.saveResource(versionResource, WorkspaceUtil.getResourceLogger());
 		} catch (IOException e) {
 			WorkspaceUtil.logException(
-										"Version stamping workspace failed! Delete workspace folder: "
-											+ Configuration.FILE_INFO.getWorkspaceDirectory(),
-										e);
+				"Version stamping workspace failed! Delete workspace folder: "
+					+ Configuration.getFileInfo().getWorkspaceDirectory(),
+				e);
 		}
 	}
 
@@ -310,24 +310,24 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		} else if (workspaceModelVersion.getReleaseNumber() > modelVersionNumber) {
 			backupAndRecreateWorkspace(resourceSet);
 			WorkspaceUtil.logException("Model conforms to a newer version, update client! New workspace was backuped!",
-										new IllegalStateException());
+				new IllegalStateException());
 			return;
 		}
 
 		// we need to migrate
 		if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
 			WorkspaceUtil.logException("Model requires migration, but no migrators are registered!",
-										new IllegalStateException());
+				new IllegalStateException());
 			return;
 		}
 
 		backupWorkspace(false);
-		File workspaceFile = new File(Configuration.FILE_INFO.getWorkspaceDirectory());
+		File workspaceFile = new File(Configuration.getFileInfo().getWorkspaceDirectory());
 		for (File file : workspaceFile.listFiles()) {
-			if (file.getName().startsWith(Configuration.FILE_INFO.getProjectSpaceDirectoryPrefix())) {
+			if (file.getName().startsWith(Configuration.getFileInfo().getProjectSpaceDirectoryPrefix())) {
 				String projectFilePath = file.getAbsolutePath() + File.separatorChar
-					+ Configuration.FILE_INFO.ProjectFolderName + File.separatorChar + 0
-					+ Configuration.FILE_INFO.ProjectFragmentExtension;
+					+ Configuration.getFileInfo().ProjectFolderName + File.separatorChar + 0
+					+ Configuration.getFileInfo().ProjectFragmentExtension;
 				URI projectURI = URI.createFileURI(projectFilePath);
 				String operationsFilePath = null;
 				File[] listFiles = file.listFiles();
@@ -337,7 +337,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 					continue;
 				}
 				for (File subDirFile : listFiles) {
-					if (subDirFile.getName().endsWith(Configuration.FILE_INFO.LocalChangePackageExtension)) {
+					if (subDirFile.getName().endsWith(Configuration.getFileInfo().LocalChangePackageExtension)) {
 						operationsFilePath = subDirFile.getAbsolutePath();
 					}
 				}
@@ -374,7 +374,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 
 		try {
 			EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, workspaceModelVersion.getReleaseNumber() - 1,
-																new NullProgressMonitor());
+				new NullProgressMonitor());
 		} catch (EMFStoreMigrationException e) {
 			WorkspaceUtil.logWarning("The migration of the project in the file " + absoluteFilename + " failed!", e);
 		}
@@ -382,18 +382,18 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 
 	private void backupAndRecreateWorkspace(ResourceSet resourceSet) {
 		backupWorkspace(true);
-		URI fileURI = URI.createFileURI(Configuration.FILE_INFO.getWorkspacePath());
+		URI fileURI = URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
 		createNewWorkspace(resourceSet, fileURI);
 	}
 
 	private void backupWorkspace(boolean move) {
-		String workspaceDirectory = Configuration.FILE_INFO.getWorkspaceDirectory();
+		String workspaceDirectory = Configuration.getFileInfo().getWorkspaceDirectory();
 		File workspacePath = new File(workspaceDirectory);
 
 		// TODO: if you want the date included in the backup folder you should
 		// change the format. the default format
 		// does not work with every os due to : and other characters.
-		String newWorkspaceDirectory = Configuration.FILE_INFO.getLocationProvider().getBackupDirectory()
+		String newWorkspaceDirectory = Configuration.getFileInfo().getLocationProvider().getBackupDirectory()
 			+ "emfstore_backup_"
 			+ System.currentTimeMillis();
 
@@ -411,7 +411,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 
 	private ModelVersion getWorkspaceModelVersion() {
 		// check for legacy workspace
-		File versionFile = new File(Configuration.FILE_INFO.getModelReleaseNumberFileName());
+		File versionFile = new File(Configuration.getFileInfo().getModelReleaseNumberFileName());
 		if (!versionFile.exists()) {
 			int modelVersionNumber;
 			try {
@@ -423,7 +423,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		}
 
 		// check if we need to migrate
-		URI versionFileUri = URI.createFileURI(Configuration.FILE_INFO.getModelReleaseNumberFileName());
+		URI versionFileUri = URI.createFileURI(Configuration.getFileInfo().getModelReleaseNumberFileName());
 		ResourceSet resourceSet = new ResourceSetImpl();
 		try {
 			Resource resource = resourceSet.getResource(versionFileUri, true);
@@ -458,7 +458,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		modelURIs.add(projectURI);
 		modelURIs.add(changesURI);
 		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, sourceModelReleaseNumber,
-															new NullProgressMonitor());
+			new NullProgressMonitor());
 	}
 
 	/**
@@ -467,10 +467,15 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 	 * @return the workspace
 	 */
 	public ESWorkspaceImpl getWorkspace() {
-		return currentWorkspace.getAPIImpl();
+		return getInternalWorkspace().getAPIImpl();
 	}
 
 	public Workspace getInternalWorkspace() {
+
+		if (currentWorkspace == null) {
+			reinit();
+		}
+
 		return currentWorkspace;
 	}
 

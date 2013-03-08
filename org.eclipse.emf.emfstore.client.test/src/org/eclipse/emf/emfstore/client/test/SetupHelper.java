@@ -719,7 +719,7 @@ public class SetupHelper {
 	 */
 	public static void removeServerTestProfile() throws IOException {
 		String serverPath = ServerConfiguration.getServerHome();
-		String clientPath = Configuration.FILE_INFO.getWorkspaceDirectory();
+		String clientPath = Configuration.getFileInfo().getWorkspaceDirectory();
 		File serverDirectory = new File(serverPath);
 		File clientDirectory = new File(clientPath);
 

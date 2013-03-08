@@ -57,8 +57,8 @@ public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLoca
 			parameter = "default";
 			if (CommonUtil.isTesting()) {
 				parameter += "_test";
-			} else if (!Configuration.VERSIONING.isReleaseVersion()) {
-				if (Configuration.VERSIONING.isInternalReleaseVersion()) {
+			} else if (!Configuration.getVersioningInfo().isReleaseVersion()) {
+				if (Configuration.getVersioningInfo().isInternalReleaseVersion()) {
 					parameter += "_internal";
 				} else {
 					parameter += "_dev";

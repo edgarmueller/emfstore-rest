@@ -175,7 +175,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	protected static AuthenticationInformation login(ServerInfo serverInfo, String username, String password)
 		throws ESException {
 		return getConnectionManager().logIn(username, KeyStoreManager.getInstance().encrypt(password, serverInfo),
-			serverInfo, Configuration.VERSIONING.getClientVersion());
+			serverInfo, Configuration.getVersioningInfo().getClientVersion());
 	}
 
 	protected static void initArguments() {

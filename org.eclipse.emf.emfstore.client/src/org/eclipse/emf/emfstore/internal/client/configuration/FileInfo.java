@@ -10,7 +10,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.DefaultWorkspaceLocat
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ESLocationProvider;
 
-public class FilePaths {
+public class FileInfo {
 
 	private static ESLocationProvider locationProvider;
 	private static final String PLUGIN_BASEDIR = "pluginData";

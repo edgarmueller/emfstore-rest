@@ -116,14 +116,14 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		// No changes to exception handling here, due to call nature.
 		if (!keyStoreExists()) {
 			// create directory ~/.emfstore/ if necessary
-			File emfstoreDir = new File(Configuration.FILE_INFO.getWorkspaceDirectory());
+			File emfstoreDir = new File(Configuration.getFileInfo().getWorkspaceDirectory());
 			if (!emfstoreDir.exists()) {
 				emfstoreDir.mkdir();
 			}
 			InputStream inputStream = getClass().getResourceAsStream(KEYSTORENAME);
 			try {
 				// configure file
-				File clientKeyTarget = new File(Configuration.FILE_INFO.getWorkspaceDirectory() + KEYSTORENAME);
+				File clientKeyTarget = new File(Configuration.getFileInfo().getWorkspaceDirectory() + KEYSTORENAME);
 				// copy to destination
 				FileUtil.copyFile(inputStream, clientKeyTarget);
 			} catch (IOException e) {
@@ -370,7 +370,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @return a path
 	 */
 	public String getPathToKeyStore() {
-		return Configuration.FILE_INFO.getWorkspaceDirectory() + KEYSTORENAME;
+		return Configuration.getFileInfo().getWorkspaceDirectory() + KEYSTORENAME;
 	}
 
 	/**
@@ -453,7 +453,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	public String getDefaultCertificate() {
 		if (defaultCertificate != null) {
 			return defaultCertificate;
-		} else if (Configuration.VERSIONING.isDeveloperVersion()) {
+		} else if (Configuration.getVersioningInfo().isDeveloperVersion()) {
 			return DEFAULT_CERTIFICATE;
 		} else {
 			return DEFAULT_CERTIFICATE;

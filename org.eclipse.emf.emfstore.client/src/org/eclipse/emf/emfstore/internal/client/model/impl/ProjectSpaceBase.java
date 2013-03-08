@@ -499,9 +499,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// are not different, then reinitialize operations URI
 		// TODO: first case kills change package
 		if (this.eResource() == eResource) {
-			String localChangePackageFileName = Configuration.FILE_INFO.getWorkspaceDirectory()
-				+ Configuration.FILE_INFO.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
-				+ this.getIdentifier() + Configuration.FILE_INFO.getLocalChangePackageFileExtension();
+			String localChangePackageFileName = Configuration.getFileInfo().getWorkspaceDirectory()
+				+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
+				+ this.getIdentifier() + Configuration.getFileInfo().getLocalChangePackageFileExtension();
 			eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
 		} else {
 			eResource.getContents().remove(0);
@@ -683,21 +683,21 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void initResources(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 		initCompleted = true;
-		String projectSpaceFileNamePrefix = Configuration.FILE_INFO.getWorkspaceDirectory()
-			+ Configuration.FILE_INFO.getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
+		String projectSpaceFileNamePrefix = Configuration.getFileInfo().getWorkspaceDirectory()
+			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
 		String projectSpaceFileName = projectSpaceFileNamePrefix + this.getIdentifier()
-			+ Configuration.FILE_INFO.getProjectSpaceFileExtension();
+			+ Configuration.getFileInfo().getProjectSpaceFileExtension();
 		String localChangePackageFileName = projectSpaceFileNamePrefix + this.getIdentifier()
-			+ Configuration.FILE_INFO.getLocalChangePackageFileExtension();
+			+ Configuration.getFileInfo().getLocalChangePackageFileExtension();
 		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix
-			+ Configuration.FILE_INFO.ProjectFolderName
+			+ Configuration.getFileInfo().ProjectFolderName
 			+ File.separatorChar;
 		URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
 		URI localChangePackageURI = URI.createFileURI(localChangePackageFileName);
 
 		setResourceCount(0);
 		String fileName = projectFragementsFileNamePrefix + getResourceCount()
-			+ Configuration.FILE_INFO.getProjectFragmentFileExtension();
+			+ Configuration.getFileInfo().getProjectFragmentFileExtension();
 		URI fileURI = URI.createFileURI(fileName);
 
 		List<Resource> resources = new ArrayList<Resource>();
@@ -747,8 +747,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// delete project to notify listeners
 		getProject().delete();
 
-		String pathToProject = Configuration.FILE_INFO.getWorkspaceDirectory()
-			+ Configuration.FILE_INFO.ProjectSpaceDirectoryPrefix + getIdentifier();
+		String pathToProject = Configuration.getFileInfo().getWorkspaceDirectory()
+			+ Configuration.getFileInfo().ProjectSpaceDirectoryPrefix + getIdentifier();
 
 		resourceSet.getResources().remove(getProject().eResource());
 		resourceSet.getResources().remove(eResource());

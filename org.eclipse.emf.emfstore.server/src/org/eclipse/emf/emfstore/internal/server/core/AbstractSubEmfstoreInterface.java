@@ -153,7 +153,7 @@ public abstract class AbstractSubEmfstoreInterface {
 			ModelUtil.logWarning("this must not happen, method is not accessible", e);
 			throw new ESException(e);
 		} catch (InvocationTargetException e) {
-			ModelUtil.logWarning("exception on execution", e);
+			ModelUtil.logInfo("exception on execution");
 			if (e.getTargetException() instanceof ESException) {
 				throw (ESException) e.getTargetException();
 			}
