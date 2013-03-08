@@ -61,7 +61,7 @@ public abstract class WorkspaceTest {
 		Configuration.getClientBehavior().setAutoSave(true);
 		CommonUtil.setTesting(true);
 		ESWorkspaceProviderImpl workspaceManager = ESWorkspaceProviderImpl.getInstance();
-		workspaceManager.reinit();
+		workspaceManager.load();
 		// workspace = (Workspace) workspaceManager.getWorkspace();
 	}
 

@@ -47,7 +47,7 @@ public class PersistenceTest extends WorkspaceTest {
 		assertEquals(
 			ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
 		ESWorkspaceProviderImpl.getInstance().dispose();
-		ESWorkspaceProviderImpl.getInstance().reinit();
+		ESWorkspaceProviderImpl.getInstance().load();
 		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
 		Project project = internalWorkspace.getProjectSpaces().get(0).getProject();
 		assertTrue(ModelUtil.areEqual(project, originalProject));

@@ -178,7 +178,7 @@ public class PerformanceTest {
 		} // for loop with iterations
 		ModelUtil.logInfo("times=" + Arrays.toString(times));
 		usersession = null;
-		ESWorkspaceProviderImpl.getInstance().reinit();
+		ESWorkspaceProviderImpl.getInstance().load();
 	}
 
 	/**
@@ -385,7 +385,7 @@ public class PerformanceTest {
 		ModelUtil.logInfo("Mutate model - average=" + average(modelChangeTimes) + ", min=" + min(modelChangeTimes)
 			+ ", max=" + max(modelChangeTimes) + ", mean=" + mean(modelChangeTimes));
 
-		ESWorkspaceProviderImpl.getInstance().reinit();
+		ESWorkspaceProviderImpl.getInstance().load();
 		// new EMFStoreCommand() {
 		// @Override
 		// protected void doRun() {

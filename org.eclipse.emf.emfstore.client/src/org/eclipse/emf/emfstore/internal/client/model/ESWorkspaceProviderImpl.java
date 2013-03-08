@@ -45,7 +45,6 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
-import org.eclipse.emf.emfstore.internal.common.IReinitializable;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -62,7 +61,7 @@ import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
  * @author Maximilian Koegel
  * @generated NOT
  */
-public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IReinitializable {
+public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 
 	private static ESWorkspaceProviderImpl instance;
 
@@ -123,7 +122,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 		this.connectionManager = initConnectionManager();
 		this.adminConnectionManager = initAdminConnectionManager();
 		this.sessionManager = new SessionManager();
-		reinit();
+		load();
 	}
 
 	private void notifyPostWorkspaceInitiators() {
@@ -168,7 +167,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 	 * (Re-)Initializes the workspace. Loads workspace from persistent storage
 	 * if present. There is always one current Workspace.
 	 */
-	public void reinit() {
+	public void load() {
 
 		// TODO: OTS removed dispose check
 
@@ -473,7 +472,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, IRein
 	public Workspace getInternalWorkspace() {
 
 		if (currentWorkspace == null) {
-			reinit();
+			load();
 		}
 
 		return currentWorkspace;
