@@ -17,7 +17,8 @@ Export-Package: org.apache.commons.io,
   x-friends:="org.eclipse.emf.emfstore.server.model,
    org.eclipse.emf.emfstore.client,
    org.eclipse.emf.emfstore.client.test,
-   org.eclipse.emf.emfstore.server",
+   org.eclipse.emf.emfstore.server,
+   org.eclipse.emf.emfstore.client.ui",
  org.eclipse.emf.emfstore.internal.common.api,
  org.eclipse.emf.emfstore.internal.common.observer;x-friends:="org.eclipse.emf.emfstore.client.ui,org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test"
 Bundle-Vendor: Eclipse Modeling Project
