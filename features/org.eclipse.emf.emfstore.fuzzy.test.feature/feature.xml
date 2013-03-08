@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.emf.emfstore.fuzzy.test.feature"
+      label="EMFStore Fuzzy Tests (Incubation)"
+      version="1.0.0.qualifier"
+      provider-name="Eclipse Modeling Project">
+
+   <description url="http://www.example.com/description">
+      This feature contains the integration plugins for EMFStore with fuzzy testing.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.emf.emfstore.fuzzy.emf"/>
+      <import plugin="org.eclipse.emf.emfstore.client.test"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.fuzzy.emf.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

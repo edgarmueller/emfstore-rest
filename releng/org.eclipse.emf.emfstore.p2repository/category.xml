@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="EMFStore (Incubation)" url="http://download.eclipse.org/emf-store/latest">
+      Update Site for the EMFStore
+   </description>
+   <feature id="org.eclipse.emf.emfstore.client.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.client.ui.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.common.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.server.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature id="org.eclipse.emf.emfstore.example.feature" version="0.0.0">
+      <category name="org.eclipse.emf.emfstore.core"/>
+   </feature>
+   <feature url="features/org.eclipse.emf.emfstore.client.transaction.feature_1.0.0.qualifier.jar" id="org.eclipse.emf.emfstore.client.transaction.feature" version="1.0.0.qualifier">
+      <category name="org.eclipse.emf.emfstore.other"/>
+   </feature>
+   <category-def name="org.eclipse.emf.emfstore.core" label="EMFStore Core Features (Install all to get started)">
+      <description>
+         Core Features of EMFStore, a model repository for EMF.
+      </description>
+   </category-def>
+   <category-def name="org.eclipse.emf.emfstore.other" label="EMFStore Additional Features">
+      <description>
+         Additional Features of EMFStore, a model repository for EMF.
+      </description>
+   </category-def>
+</site>
