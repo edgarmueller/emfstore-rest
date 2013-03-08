@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model;
 
@@ -110,57 +111,32 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 	}
 
 	/**
-	 * Default constructor.
+	 * Private constructor.
 	 * 
-	 * @generated NOT
 	 */
 	private ESWorkspaceProviderImpl() {
 	}
 
-	private void initialize() {
-		this.observerBus = new ObserverBus();
-		this.connectionManager = initConnectionManager();
-		this.adminConnectionManager = initAdminConnectionManager();
-		this.sessionManager = new SessionManager();
-		load();
-	}
-
-	private void notifyPostWorkspaceInitiators() {
-		for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", true)
-			.getExtensionElements()) {
-			try {
-				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
-					currentWorkspace
-						.getAPIImpl());
-			} catch (ESExtensionPointException e) {
-				WorkspaceUtil.logException(e.getMessage(), e);
-			}
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
+	 */
+	public void dispose() {
+		if (currentWorkspace != null) {
+			((WorkspaceImpl) currentWorkspace).dispose();
+			currentWorkspace = null;
 		}
 	}
 
 	/**
-	 * Initialize the connection manager of the workspace. The connection
-	 * manager connects the workspace with the emf store.
+	 * Whether the current workspace is disposed.
 	 * 
-	 * @return the connection manager
-	 * @generated NOT
+	 * @return {@code true} if the current workspace is disposed, {@code false} otherwise
 	 */
-	private ConnectionManager initConnectionManager() {
-		KeyStoreManager.getInstance().setupKeys();
-		// return new RMIConnectionManagerImpl();
-		return new XmlRpcConnectionManager();
-	}
-
-	/**
-	 * Initialize the connection manager of the workspace. The connection
-	 * manager connects the workspace with the emf store.
-	 * 
-	 * @return the admin connection manager
-	 * @generated NOT
-	 */
-	private AdminConnectionManager initAdminConnectionManager() {
-		// return new RMIAdminConnectionManagerImpl();
-		return new XmlRpcAdminConnectionManager();
+	public boolean isDisposed() {
+		return currentWorkspace == null;
 	}
 
 	/**
@@ -216,7 +192,188 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 		}.run(true);
 
 		currentWorkspace = workspace;
+	}
 
+	public void migrate(String absoluteFilename) {
+		URI projectURI = URI.createFileURI(absoluteFilename);
+
+		List<URI> modelURIs = new ArrayList<URI>();
+		modelURIs.add(projectURI);
+
+		ModelVersion workspaceModelVersion = getWorkspaceModelVersion();
+		if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
+			ModelUtil.logWarning("No Migrator available to migrate imported file");
+			return;
+		}
+
+		try {
+			EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, workspaceModelVersion.getReleaseNumber() - 1,
+				new NullProgressMonitor());
+		} catch (EMFStoreMigrationException e) {
+			WorkspaceUtil.logWarning("The migration of the project in the file " + absoluteFilename + " failed!", e);
+		}
+	}
+
+	/**
+	 * Get the admin connection manager. Return the admin connection manager for
+	 * this workspace.
+	 * 
+	 * @return the connectionManager
+	 */
+	public AdminConnectionManager getAdminConnectionManager() {
+		return adminConnectionManager;
+	}
+
+	/**
+	 * Retrieve the project space for a model element.
+	 * 
+	 * @param modelElement
+	 *            the model element
+	 * @return the project space
+	 */
+	public static ProjectSpace getProjectSpace(EObject modelElement) {
+
+		if (modelElement == null) {
+			throw new IllegalArgumentException("The model element is null");
+		} else if (modelElement instanceof ProjectSpace) {
+			return (ProjectSpace) modelElement;
+		}
+
+		Project project = ModelUtil.getProject(modelElement);
+
+		if (project == null) {
+			throw new IllegalArgumentException("The model element " + modelElement + " has no project");
+		}
+		return getProjectSpace(project);
+	}
+
+	/**
+	 * Retrieve the project space for a project.
+	 * 
+	 * @param project
+	 *            the project
+	 * @return the project space
+	 */
+	public static ProjectSpace getProjectSpace(Project project) {
+		if (project == null) {
+			throw new IllegalArgumentException("The project is null");
+		}
+		// check if my container is a project space
+		if (ModelPackage.eINSTANCE.getProjectSpace().isInstance(project.eContainer())) {
+			return (ProjectSpace) project.eContainer();
+		} else {
+			throw new IllegalStateException("Project is not contained by any project space");
+		}
+	}
+
+	/**
+	 * Returns the {@link ObserverBus}.
+	 * 
+	 * @return observer bus
+	 */
+	public static ObserverBus getObserverBus() {
+		return getInstance().observerBus;
+	}
+
+	/**
+	 * Returns the {@link SessionManager}.
+	 * 
+	 * @return session manager
+	 */
+	public SessionManager getSessionManager() {
+		return sessionManager;
+	}
+
+	/**
+	 * Get the current workspace. There is always one current workspace.
+	 * 
+	 * @return the workspace
+	 */
+	public ESWorkspaceImpl getWorkspace() {
+		return getInternalWorkspace().getAPIImpl();
+	}
+
+	public Workspace getInternalWorkspace() {
+
+		if (currentWorkspace == null) {
+			load();
+		}
+
+		return currentWorkspace;
+	}
+
+	/**
+	 * Get the connection manager. Return the connection manager for this
+	 * workspace.
+	 * 
+	 * @return the connectionManager
+	 */
+	public ConnectionManager getConnectionManager() {
+		return connectionManager;
+	}
+
+	/**
+	 * Set the connectionmanager.
+	 * 
+	 * @param manager
+	 *            connection manager.
+	 */
+	public void setConnectionManager(ConnectionManager manager) {
+		connectionManager = manager;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see ESWorkspaceProvider#setSessionProvider(ESAbstractSessionProvider)
+	 */
+	public void setSessionProvider(ESAbstractSessionProvider sessionProvider) {
+		getSessionManager().setSessionProvider(sessionProvider);
+	}
+
+	private void initialize() {
+		this.observerBus = new ObserverBus();
+		this.connectionManager = initConnectionManager();
+		this.adminConnectionManager = initAdminConnectionManager();
+		this.sessionManager = new SessionManager();
+		load();
+	}
+
+	private void notifyPostWorkspaceInitiators() {
+		for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", true)
+			.getExtensionElements()) {
+			try {
+				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
+					currentWorkspace
+						.getAPIImpl());
+			} catch (ESExtensionPointException e) {
+				WorkspaceUtil.logException(e.getMessage(), e);
+			}
+		}
+	}
+
+	/**
+	 * Initialize the connection manager of the workspace. The connection
+	 * manager connects the workspace with EMFStore.
+	 * 
+	 * @return the connection manager
+	 */
+	private ConnectionManager initConnectionManager() {
+		KeyStoreManager.getInstance().setupKeys();
+		return new XmlRpcConnectionManager();
+	}
+
+	/**
+	 * Initialize the connection manager of the workspace. The connection
+	 * manager connects the workspace with the emf store.
+	 * 
+	 * @return the admin connection manager
+	 * @generated NOT
+	 */
+	private AdminConnectionManager initAdminConnectionManager() {
+		// return new RMIAdminConnectionManagerImpl();
+		return new XmlRpcAdminConnectionManager();
 	}
 
 	private EditingDomain createEditingDomain(ResourceSet resourceSet) {
@@ -359,26 +516,6 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 		stampCurrentVersionNumber(modelVersionNumber);
 	}
 
-	public void migrate(String absoluteFilename) {
-		URI projectURI = URI.createFileURI(absoluteFilename);
-
-		List<URI> modelURIs = new ArrayList<URI>();
-		modelURIs.add(projectURI);
-
-		ModelVersion workspaceModelVersion = getWorkspaceModelVersion();
-		if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
-			ModelUtil.logWarning("No Migrator available to migrate imported file");
-			return;
-		}
-
-		try {
-			EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, workspaceModelVersion.getReleaseNumber() - 1,
-				new NullProgressMonitor());
-		} catch (EMFStoreMigrationException e) {
-			WorkspaceUtil.logWarning("The migration of the project in the file " + absoluteFilename + " failed!", e);
-		}
-	}
-
 	private void backupAndRecreateWorkspace(ResourceSet resourceSet) {
 		backupWorkspace(true);
 		URI fileURI = URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
@@ -459,148 +596,4 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider {
 		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, sourceModelReleaseNumber,
 			new NullProgressMonitor());
 	}
-
-	/**
-	 * Get the current workspace. There is always one current workspace.
-	 * 
-	 * @return the workspace
-	 */
-	public ESWorkspaceImpl getWorkspace() {
-		return getInternalWorkspace().getAPIImpl();
-	}
-
-	public Workspace getInternalWorkspace() {
-
-		if (currentWorkspace == null) {
-			load();
-		}
-
-		return currentWorkspace;
-	}
-
-	/**
-	 * Get the connection manager. Return the connection manager for this
-	 * workspace.
-	 * 
-	 * @return the connectionManager
-	 */
-	public ConnectionManager getConnectionManager() {
-		return connectionManager;
-	}
-
-	/**
-	 * Set the connectionmanager.
-	 * 
-	 * @param manager
-	 *            connection manager.
-	 */
-	public void setConnectionManager(ConnectionManager manager) {
-		connectionManager = manager;
-	}
-
-	/**
-	 * Get the admin connection manager. Return the admin connection manager for
-	 * this workspace.
-	 * 
-	 * @return the connectionManager
-	 */
-	public AdminConnectionManager getAdminConnectionManager() {
-		return adminConnectionManager;
-	}
-
-	/**
-	 * Retrieve the project space for a model element.
-	 * 
-	 * @param modelElement
-	 *            the model element
-	 * @return the project space
-	 */
-	public static ProjectSpace getProjectSpace(EObject modelElement) {
-
-		if (modelElement == null) {
-			throw new IllegalArgumentException("The model element is null");
-		} else if (modelElement instanceof ProjectSpace) {
-			return (ProjectSpace) modelElement;
-		}
-
-		Project project = ModelUtil.getProject(modelElement);
-
-		if (project == null) {
-			throw new IllegalArgumentException("The model element " + modelElement + " has no project");
-		}
-		return getProjectSpace(project);
-	}
-
-	/**
-	 * Retrieve the project space for a project.
-	 * 
-	 * @param project
-	 *            the project
-	 * @return the project space
-	 */
-	public static ProjectSpace getProjectSpace(Project project) {
-		if (project == null) {
-			throw new IllegalArgumentException("The project is null");
-		}
-		// check if my container is a project space
-		if (ModelPackage.eINSTANCE.getProjectSpace().isInstance(project.eContainer())) {
-			return (ProjectSpace) project.eContainer();
-		} else {
-			throw new IllegalStateException("Project is not contained by any project space");
-		}
-	}
-
-	/**
-	 * Returns the {@link ObserverBus}.
-	 * 
-	 * @return observer bus
-	 */
-	public static ObserverBus getObserverBus() {
-		return getInstance().observerBus;
-	}
-
-	/**
-	 * Returns the {@link SessionManager}.
-	 * 
-	 * @return session manager
-	 */
-	public SessionManager getSessionManager() {
-		return sessionManager;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
-	 */
-	public void dispose() {
-		// TODO: OTS
-		if (currentWorkspace != null) {
-			((WorkspaceImpl) currentWorkspace).dispose();
-			currentWorkspace = null;
-			// instance = null;
-		}
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.IReinitializable#isDisposed()
-	 */
-	public boolean isDisposed() {
-		return currentWorkspace == null;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see ESWorkspaceProvider#setSessionProvider(ESAbstractSessionProvider)
-	 */
-	public void setSessionProvider(ESAbstractSessionProvider sessionProvider) {
-		getSessionManager().setSessionProvider(sessionProvider);
-	}
-
 }
