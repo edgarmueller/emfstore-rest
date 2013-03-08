@@ -42,7 +42,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * Subinterface for EPackage registration.
  * 
  * @author mkoegel
- * 
+ * @author tverhoeven
  */
 public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
@@ -61,9 +61,9 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	/**
 	 * Register and store the given EPackage.
 	 * 
-	 * @param ePackage the package
+	 * @param ePackage
+	 *            the package to be registered
 	 * @throws ESException if registration storage fails
-	 * 
 	 */
 	@EmfStoreMethod(MethodId.REGISTEREPACKAGE)
 	public void registerEPackage(EPackage ePackage) throws ESException {
@@ -109,10 +109,9 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			try {
 				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
 			} catch (IOException e) {
-				if (e.getCause() instanceof DanglingHREFException) {
-					// Ignore, as the referenced elements were either stored earlier or can still be
-					// stored later.
-				} else {
+				// DanglingHREFException may be ignored, as the referenced
+				// elements were either stored earlier or can still be stored later
+				if (!(e.getCause() instanceof DanglingHREFException)) {
 					throw new ESException("Registration failed: Could not persist .ecore!", e);
 				}
 			}
@@ -121,7 +120,6 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				EPackage.Registry.INSTANCE.put(registerPackage.getNsURI(), registerPackage);
 			}
 			ModelUtil.logInfo("EPackage \"" + ePackage.getNsURI() + "\" registered and saved.");
-
 		}
 	}
 }

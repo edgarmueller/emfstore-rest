@@ -28,7 +28,6 @@ import org.eclipse.emf.emfstore.internal.client.model.observers.OperationObserve
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation;
 
 /**
@@ -65,8 +64,10 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 			new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
 				"cutOffIncomingCrossReferences", true));
 		// usage of commands is not forced by default
-		operationRecorder.getConfig().setForceCommands(
-			new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean("forceCommands", false));
+		operationRecorder.getConfig()
+			.setForceCommands(
+				new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean("forceCommands",
+					false));
 		// cut elements are added automatically as regular model elements by default
 		operationRecorder.getConfig().setDenyAddCutElementsToModelElements(
 			new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions").getBoolean(
@@ -121,16 +122,6 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 *            the operation
 	 */
 	void notifyOperationExecuted(AbstractOperation operation) {
-
-		// do not notify on composite start, wait until completion
-		if (operation instanceof CompositeOperation) {
-			// check of automatic composite, if yes then continue
-			if (((CompositeOperation) operation).getMainOperation() == null) {
-				// && ((CompositeOperation) operation).getModelElementId() == null) {
-				// return;
-			}
-		}
-
 		for (OperationObserver operationListener : operationListeners) {
 			operationListener.operationExecuted(operation);
 		}
