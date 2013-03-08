@@ -45,7 +45,7 @@ public class DeleteMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(DeletionConflict.class)
-		// my
+			// my
 			.myIs(AttributeOperation.class).andNoOtherMyOps()
 			// theirs
 			.theirsIs(CreateDeleteOperation.class).andNoOtherTheirOps();
@@ -72,7 +72,7 @@ public class DeleteMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(DeletionConflict.class)
-		// my
+			// my
 			.myIs(MultiAttributeOperation.class).andNoOtherMyOps()
 			// theirs
 			.theirsIs(CreateDeleteOperation.class).andNoOtherTheirOps();
@@ -124,7 +124,7 @@ public class DeleteMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(DeletionConflict.class)
-		// my
+			// my
 			.myIs(SingleReferenceOperation.class).andNoOtherMyOps()
 			// theirs
 			.theirsIs(CreateDeleteOperation.class).andNoOtherTheirOps();
@@ -152,7 +152,7 @@ public class DeleteMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(DeletionConflict.class)
-		// my
+			// my
 			.myIs(MultiReferenceOperation.class).andNoOtherMyOps()
 			// theirs
 			.theirsIs(CreateDeleteOperation.class).andNoOtherTheirOps();
@@ -182,7 +182,7 @@ public class DeleteMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(DeletionConflict.class)
-		// my
+			// my
 			.myIs(CompositeOperation.class).andNoOtherMyOps()
 			// theirs
 			.theirsIs(CreateDeleteOperation.class).andNoOtherTheirOps();
@@ -214,10 +214,10 @@ public class DeleteMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(DeletionConflict.class)
-		// my
+			// my
 			.myIs(AttributeOperation.class).andNoOtherMyOps()
 			// theirs
-			.theirsIs(CreateDeleteOperation.class).andNoOtherTheirOps();
+			.theirsIs(CreateDeleteOperation.class);
 	}
 
 	@Test
@@ -248,9 +248,9 @@ public class DeleteMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(DeletionConflict.class)
-		// my
+			// my
 			.myIs(AttributeOperation.class).andNoOtherMyOps()
 			// theirs
-			.theirsIs(CreateDeleteOperation.class).andNoOtherTheirOps();
+			.theirsIs(CreateDeleteOperation.class);
 	}
 }

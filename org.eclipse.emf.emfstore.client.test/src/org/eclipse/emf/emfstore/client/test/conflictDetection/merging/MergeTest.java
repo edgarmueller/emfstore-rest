@@ -283,7 +283,7 @@ public class MergeTest extends ConflictDetectionTest {
 			HashSet<AbstractOperation> theirs = new LinkedHashSet<AbstractOperation>(currentConflict()
 				.getTheirOperations());
 			theirs.removeAll(theirSeen);
-			assertEquals(theirs.size(), 0);
+			assertEquals(0, theirs.size());
 			return this;
 		}
 

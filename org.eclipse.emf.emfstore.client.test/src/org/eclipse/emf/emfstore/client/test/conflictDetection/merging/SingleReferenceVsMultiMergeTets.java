@@ -13,11 +13,11 @@ package org.eclipse.emf.emfstore.client.test.conflictDetection.merging;
 import static java.util.Arrays.asList;
 
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetSingleConflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.DeletionConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSingleConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
 
@@ -51,7 +51,7 @@ public class SingleReferenceVsMultiMergeTets extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(MultiReferenceSingleConflict.class)
-		// My
+			// My
 			.myIs(SingleReferenceOperation.class).andNoOtherMyOps()
 			// Theirs
 			.theirsIs(MultiReferenceOperation.class).andNoOtherTheirOps();
@@ -108,7 +108,7 @@ public class SingleReferenceVsMultiMergeTets extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(MultiReferenceSingleConflict.class)
-		// My
+			// My
 			.myIs(SingleReferenceOperation.class).andNoOtherMyOps()
 			// Theirs
 			.theirsIs(MultiReferenceOperation.class).andNoOtherTheirOps();
@@ -137,11 +137,11 @@ public class SingleReferenceVsMultiMergeTets extends MergeTest {
 			}
 		}.run(false);
 
-		mc.hasConflict(MultiReferenceSetSingleConflict.class)
-		// My
+		mc.hasConflict(DeletionConflict.class)
+			// My
 			.myIs(SingleReferenceOperation.class).andNoOtherMyOps()
 			// Theirs
-			.theirsIs(MultiReferenceSetOperation.class).andNoOtherTheirOps();
+			.theirsIs(CreateDeleteOperation.class);
 	}
 
 }

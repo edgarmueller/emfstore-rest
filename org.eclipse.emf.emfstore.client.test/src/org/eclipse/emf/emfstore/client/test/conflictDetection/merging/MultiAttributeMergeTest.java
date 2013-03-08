@@ -54,7 +54,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", true)
 			// Theirs
 			.theirsIs(MultiAttributeOperation.class).andReturns("isAdd", false);
@@ -84,7 +84,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", true)
 			// Theirs
 			.theirsIs(MultiAttributeOperation.class).andReturns("isAdd", false);
@@ -114,7 +114,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", true)
 			// Theirs
 			.theirsIs(MultiAttributeOperation.class).andReturns("isAdd", false);
@@ -144,7 +144,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", true)
 			// Theirs
 			.theirsIs(MultiAttributeOperation.class).andReturns("isAdd", false);
@@ -174,7 +174,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", false)
 			// Theirs
 			.theirsIs(MultiAttributeOperation.class).andReturns("isAdd", false);
@@ -231,7 +231,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", false)
 			// Theirs
 			.theirsIs(MultiAttributeOperation.class).andReturns("isAdd", false);
@@ -264,7 +264,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeSetConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", false)
 			// Theirs
 			.theirsIs(MultiAttributeSetOperation.class).andReturns("getIndex", 1).andReturns("getNewValue", "X");
@@ -297,14 +297,14 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeSetConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeOperation.class).andReturns("isAdd", false)
 			// Theirs
 			.theirsIs(MultiAttributeSetOperation.class).andReturns("getIndex", 1).andReturns("getNewValue", "X");
 	}
 
 	/**
-	 * Remove on a higher remove index than Set. That's not a conflict (NC).
+	 * Remove on a higher remove index than Set. That's a conflict.
 	 */
 	@Test
 	public void removeVsSetHigherIndexNC() {
@@ -329,7 +329,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 			}
 		}.run(false);
 
-		mergeCase.hasConflict(null);
+		mergeCase.hasConflict(MultiAttributeSetConflict.class);
 	}
 
 	/**
@@ -465,7 +465,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 			}
 		}.run(false);
 
-		mergeCase.hasConflict(null);
+		mergeCase.hasConflict(MultiAttributeSetConflict.class);
 	}
 
 	@Test
@@ -492,7 +492,7 @@ public class MultiAttributeMergeTest extends MergeTest {
 		}.run(false);
 
 		mergeCase.hasConflict(MultiAttributeSetSetConflict.class)
-		// My
+			// My
 			.myIs(MultiAttributeSetOperation.class).andReturns("getNewValue", "Y")
 			// Theirs
 			.theirsIs(MultiAttributeSetOperation.class).andReturns("getNewValue", "X");
@@ -521,6 +521,6 @@ public class MultiAttributeMergeTest extends MergeTest {
 			}
 		}.run(false);
 
-		mergeCase.hasConflict(null);
+		mergeCase.hasConflict(MultiAttributeSetSetConflict.class);
 	}
 }

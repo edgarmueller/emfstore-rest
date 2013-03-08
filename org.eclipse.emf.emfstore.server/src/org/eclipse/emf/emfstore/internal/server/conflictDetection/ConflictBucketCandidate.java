@@ -18,23 +18,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.ChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
+ * <p>
  * Represents a bucket containing operations that potentially conflict but that do not neccessarily conflict. It also
- * includes the involved model element ids and the priority of each operation. The operation with the highest priority
- * is used to determine which of the operations is used to represent all my and all their operations in a conflict. The
- * operation with the highest priority is selected for representation.
+ * includes the involved model element ids and the priority of each operation.
+ * </p>
+ * <p>
+ * The operation with the highest priority is used to determine which of the operations is used to represent all my and
+ * all their operations in a conflict. The operation with the highest priority is selected for representation.
+ * </p>
  * 
  * @author koegel
  * 
  */
 public class ConflictBucketCandidate {
 
-	private static Integer maxBucketSize = initMaxBucketSize();
-	private static final String MAX_BUCKET_SIZE = "-ConflictDetectionMaxBucketSize";
 	private Set<AbstractOperation> myOperations;
 	private Set<AbstractOperation> theirOperations;
 	private Map<AbstractOperation, Integer> operationToPriorityMap;
@@ -47,19 +47,6 @@ public class ConflictBucketCandidate {
 		myOperations = new LinkedHashSet<AbstractOperation>();
 		theirOperations = new LinkedHashSet<AbstractOperation>();
 		operationToPriorityMap = new LinkedHashMap<AbstractOperation, Integer>();
-	}
-
-	private static Integer initMaxBucketSize() {
-		int result = 1000;
-		String startArgument = ServerConfiguration.getStartArgument(MAX_BUCKET_SIZE);
-		if (startArgument != null) {
-			try {
-				result = Integer.parseInt(startArgument);
-			} catch (NumberFormatException e) {
-				// ignore
-			}
-		}
-		return result;
 	}
 
 	/**
@@ -185,66 +172,9 @@ public class ConflictBucketCandidate {
 			return conflictBucketsSet;
 		}
 
-		// if bucket is too large, it will not be checked manually
-		if (bucketIsTooLarge()) {
-			ConflictBucket newConflictBucket = new ConflictBucket(getMyOperations(), getTheirOperations());
-			conflictBucketsSet.add(newConflictBucket);
-			return selectMyandTheirOperation(conflictBucketsSet);
-		}
-
-		Map<AbstractOperation, ConflictBucket> operationToConflictBucketMap = new LinkedHashMap<AbstractOperation, ConflictBucket>();
-
-		for (AbstractOperation myOperation : getMyOperations()) {
-
-			boolean involved = false;
-
-			for (AbstractOperation theirOperation : getTheirOperations()) {
-
-				if (detector.doConflict(myOperation, theirOperation)) {
-					involved = true;
-					ConflictBucket myConflictBucket = operationToConflictBucketMap.get(myOperation);
-					ConflictBucket theirConflictBucket = operationToConflictBucketMap.get(theirOperation);
-
-					if (myConflictBucket == null && theirConflictBucket == null) {
-						ConflictBucket newConflictBucket = new ConflictBucket(myOperation, theirOperation);
-						operationToConflictBucketMap.put(myOperation, newConflictBucket);
-						operationToConflictBucketMap.put(theirOperation, newConflictBucket);
-						conflictBucketsSet.add(newConflictBucket);
-					} else if (myConflictBucket != null && theirConflictBucket == null) {
-						myConflictBucket.getTheirOperations().add(theirOperation);
-						operationToConflictBucketMap.put(theirOperation, myConflictBucket);
-					} else if (myConflictBucket == null && theirConflictBucket != null) {
-						theirConflictBucket.getMyOperations().add(myOperation);
-						operationToConflictBucketMap.put(myOperation, theirConflictBucket);
-					} else {
-						myConflictBucket.getMyOperations().addAll(theirConflictBucket.getMyOperations());
-						for (AbstractOperation op : theirConflictBucket.getMyOperations()) {
-							operationToConflictBucketMap.put(op, myConflictBucket);
-						}
-						myConflictBucket.getTheirOperations().addAll(theirConflictBucket.getTheirOperations());
-						for (AbstractOperation op : theirConflictBucket.getTheirOperations()) {
-							operationToConflictBucketMap.put(op, myConflictBucket);
-						}
-
-						conflictBucketsSet.remove(theirConflictBucket);
-					}
-				}
-			}
-			if (!involved) {
-				// only not involved my operations have to be recorded
-				myOperationsNonConflictingOperations.add(myOperation);
-			}
-		}
+		ConflictBucket newConflictBucket = new ConflictBucket(getMyOperations(), getTheirOperations());
+		conflictBucketsSet.add(newConflictBucket);
 		return selectMyandTheirOperation(conflictBucketsSet);
-	}
-
-	private boolean bucketIsTooLarge() {
-		int myOperationsSize = ChangePackageImpl.countLeafOperations(myOperations);
-		int theirOperationSize = ChangePackageImpl.countLeafOperations(theirOperations);
-		if (myOperationsSize > maxBucketSize || theirOperationSize > maxBucketSize) {
-			return true;
-		}
-		return (myOperationsSize * theirOperationSize > maxBucketSize);
 	}
 
 	private Set<ConflictBucket> selectMyandTheirOperation(Set<ConflictBucket> conflictBucketsSet) {

@@ -13,14 +13,17 @@ package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 
 import java.util.Set;
 
-
 /**
- * Mapping from model elements to their features. The mapping uses {@link ReservationSet#ALL_FEATURES_NAME} as a magic
- * feature name to represent all features of a
+ * <p>
+ * Mapping from model elements to their features.
+ * </p>
+ * <p>
+ * The mapping uses {@link ReservationSet#ALL_FEATURES_NAME} as a magic feature name to represent all features of a
  * model element. This magic feature name is used also in the singleton set representing the set of all feature,
  * {@link ReservationSet#ALL_FEATURE_NAME_SET}. Furthermore it uses the magic feature name
- * {@link ReservationSet#EXISTENCE_FEATURE_NAME} to represent the feature representing the existence
- * of the model element as such.
+ * {@link ReservationSet#EXISTENCE_FEATURE_NAME} to represent the feature representing the existence of the model
+ * element as such.
+ * </p>
  * 
  * @author mkoegel
  * @author emueller
