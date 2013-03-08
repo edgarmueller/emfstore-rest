@@ -33,6 +33,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 
 /**
  * Represents the main page of the merge wizard.
@@ -61,8 +63,8 @@ public class MergeWizardPage extends WizardPage {
 		setTitle("Merge Conflicts");
 		int countMyOperations = decisionManager.countMyOperations();
 		int countTheirOperations = decisionManager.countTheirOperations();
-		int countMyLeafOperations = decisionManager.countMyOperations();
-		int countTheirLeafOperations = decisionManager.countTheirOperations();
+		int countMyLeafOperations = decisionManager.countMyLeafOperations();
+		int countTheirLeafOperations = decisionManager.countTheirLeafOperations();
 		setDescription("Some of your " + countMyOperations + " composite changes and " + countMyLeafOperations
 			+ " overall changes conflict with " + countTheirOperations + " composite changes and "
 			+ countTheirLeafOperations + " overall changes from the repository."
@@ -92,7 +94,6 @@ public class MergeWizardPage extends WizardPage {
 		decisionBoxes = new ArrayList<DecisionBox>();
 
 		// show only unresolved conflicts
-		// TODO: provide configuration option via ext. point to show pre-selected selection in the merge dialog
 		List<Conflict> unresolvedConflicts = new ArrayList<Conflict>();
 		for (Conflict conflict : decisionManager.getConflicts()) {
 			if (!conflict.isResolved()) {
@@ -104,18 +105,33 @@ public class MergeWizardPage extends WizardPage {
 			decisionBoxes.add(new DecisionBox(client, decisionManager, colorSwitcher.getColor(), conflict));
 		}
 
+		// Listener to check for changes in the width of the client. A changed width can influence the height
+		// of the client. Thus one has to adjust the height of the scrolledComposite accordingly.
+		client.addListener(SWT.Resize, new Listener() {
+			int widthBeforeChange = -1; // initial negative value
+
+			public void handleEvent(Event event) {
+				int widthAfterChange = client.getSize().x;
+				if (widthBeforeChange != widthAfterChange) {
+					scrolledComposite.setMinHeight(client.computeSize(widthAfterChange, SWT.DEFAULT).y);
+					widthBeforeChange = widthAfterChange;
+				}
+			}
+		});
+
 		scrolledComposite.setContent(client);
 
-		Point computeSize = calcParentSize(parent);
+		Point computeSize = calcParentSize(parent, topBar);
 		scrolledComposite.setMinSize(computeSize);
+
 		setControl(scrolledComposite);
 	}
 
-	private Point calcParentSize(final Composite parent) {
+	private Point calcParentSize(final Composite parent, Composite topBar) {
 		Point computeSize = parent.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 		computeSize.x = parent.getBounds().width;
 		// Due to resizing issues give a bit of extra space.
-		computeSize.y = (computeSize.y + 50);
+		computeSize.y = (computeSize.y + topBar.getSize().y + 50);
 		return computeSize;
 	}
 
