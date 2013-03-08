@@ -1,3 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
+ * Maximilian Koegel
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.configuration;
 
 import java.util.ArrayList;
@@ -14,27 +27,28 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
-import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 
+/**
+ * Configuration options that influence the behavior of the client.
+ * This currently includes:
+ * <ul>
+ * <li>checksum error handler</li>
+ * <li>autosave</li>
+ * <li>default server configuration</li>
+ * <li>
+ * 
+ * @author emueller
+ * @author ovonwesen
+ * @author mkoegel
+ */
 public class Behavior {
 
-	/**
-	 * The value for enabling debug mode.
-	 */
-	public static final String DEBUG_SWITCH_ENABLED_VALUE = "enabled";
-	public static final String DEBUG_SWITCH = "-debug";
-	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
-
-	private static Boolean autoSave;
-
-	/**
-	 * The command line option for enabling debug mode.
-	 */
 	/**
 	 * The checksum value that is used in case no checksum should be computed.
 	 */
 	public static final long NO_CHECKSUM = -1;
-
+	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
+	private static Boolean autoSave;
 	private ESChecksumErrorHandler checksumErrorHandler;
 
 	public Behavior() {
@@ -57,8 +71,6 @@ public class Behavior {
 	 * @return true, if auto-save is enabled, false otherwise
 	 */
 	public static boolean isAutoSaveEnabled() {
-		// return ExtensionRegistry.INSTANCE.getBoolean("org.eclipse.emf.emfstore.client.recordingOptions",
-		// AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME, true);
 		if (autoSave == null) {
 			autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions")
 				.getBoolean(
@@ -118,21 +130,6 @@ public class Behavior {
 	 */
 	public void setChecksumErrorHandler(ESChecksumErrorHandler errorHandler) {
 		checksumErrorHandler = errorHandler;
-	}
-
-	/**
-	 * Whether debug mode is enabled.
-	 * 
-	 * @return true, if debug mode is enabled, false otherwise
-	 */
-	public static boolean isDebugMode() {
-		String startArgument = ServerConfiguration.getStartArgument(DEBUG_SWITCH);
-
-		if (startArgument != null && startArgument.equals(DEBUG_SWITCH_ENABLED_VALUE)) {
-			return true;
-		}
-
-		return false;
 	}
 
 	/**

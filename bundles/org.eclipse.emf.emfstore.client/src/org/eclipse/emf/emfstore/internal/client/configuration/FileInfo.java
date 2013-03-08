@@ -1,3 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
+ * Maximilian Koegel
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.configuration;
 
 import java.io.File;
@@ -10,6 +23,14 @@ import org.eclipse.emf.emfstore.internal.client.model.util.DefaultWorkspaceLocat
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ESLocationProvider;
 
+/**
+ * Contains configuration options and information about the workspace related files
+ * used by the client.
+ * 
+ * @author emueller
+ * @author ovonwesen
+ * @author mkoegel
+ */
 public class FileInfo {
 
 	private static ESLocationProvider locationProvider;
@@ -39,6 +60,7 @@ public class FileInfo {
 			} catch (ESExtensionPointException e) {
 				ModelUtil.logInfo(e.getMessage());
 				String message = "Error while instantiating location provider or none configured, switching to default location!";
+				ModelUtil.logInfo(message);
 			}
 
 			if (locationProvider == null) {
@@ -67,7 +89,7 @@ public class FileInfo {
 	}
 
 	/**
-	 * Return the path of the plugin data directory inside the emfstore
+	 * Return the path of the plugin data directory inside the EMFStore
 	 * workspace (trailing file separator included).
 	 * 
 	 * @return the plugin data directory absolute path as string

@@ -1,3 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
+ * Maximilian Koegel
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.configuration;
 
 import org.eclipse.core.runtime.Platform;
@@ -7,13 +20,20 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.osgi.framework.Bundle;
 
+/**
+ * Contains runtime version information about the currently used client.
+ * 
+ * @author emueller
+ * @author ovonwesen
+ * @author mkoegel
+ */
 public class VersioningInfo {
 
 	private static final String CLIENT_NAME = "emfstore eclipse client";
 
 	/**
-	 * Get the client version as in the org.eclipse.emf.emfstore.internal.client manifest
-	 * file.
+	 * Get the client version as specified
+	 * in the org.eclipse.emf.emfstore.internal.client manifest file.
 	 * 
 	 * @return the client version number
 	 */
@@ -44,7 +64,7 @@ public class VersioningInfo {
 	/**
 	 * Determine if this is a release version or not.
 	 * 
-	 * @return true if it is a release version
+	 * @return {@code true} if it is a release version, {@code false} otherwise
 	 */
 	public boolean isReleaseVersion() {
 		return !isInternalReleaseVersion() && !getClientVersion().getVersion().endsWith("qualifier");
@@ -53,7 +73,7 @@ public class VersioningInfo {
 	/**
 	 * Determines if this is an internal release or not.
 	 * 
-	 * @return true if it is an internal release
+	 * @return {@code true} if it is an internal release, {@code false} otherwise
 	 */
 	public boolean isInternalReleaseVersion() {
 		return getClientVersion().getVersion().endsWith("internal");
@@ -62,7 +82,7 @@ public class VersioningInfo {
 	/**
 	 * Determines if this is an developer version or not.
 	 * 
-	 * @return true if it is a developer version
+	 * @return {@code true} if it is a developer version, {@code false} otherwise
 	 */
 	public boolean isDeveloperVersion() {
 		return !isReleaseVersion() && !isInternalReleaseVersion();
