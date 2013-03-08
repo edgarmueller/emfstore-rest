@@ -17,6 +17,7 @@ import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
+import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -24,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * Controller that forces a revert of version spec.
+ * Controller that forces a revert of version specifier.
  * 
  * @author ovonwesen
  * @author emueller
@@ -39,12 +40,14 @@ public class RevertCommitController extends ServerCall<Void> {
 	 * Constructor.
 	 * 
 	 * @param projectSpace
-	 *            the project to be reverted
+	 *            the {@link ProjectSpace} containing the project upon which to revert a commit
 	 * @param versionSpec
 	 *            the target version to revert to
-	 * @param headRevert if true, otherwise just revert individual version
+	 * @param headRevert
+	 *            reverts HEAD if set to {@code true}, otherwise just revert individual version
 	 */
-	public RevertCommitController(ESObjectContainer projectSpace, PrimaryVersionSpec versionSpec, boolean headRevert) {
+	public RevertCommitController(ESObjectContainer<ModelElementId> projectSpace,
+		PrimaryVersionSpec versionSpec, boolean headRevert) {
 		this.projectSpace = (ProjectSpace) projectSpace;
 		this.versionSpec = versionSpec;
 		this.headRevert = headRevert;
@@ -54,20 +57,23 @@ public class RevertCommitController extends ServerCall<Void> {
 		boolean headRevert) throws ESException {
 
 		PrimaryVersionSpec localHead = getConnectionManager()
-			.resolveVersionSpec(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId(),
+			.resolveVersionSpec(
+				projectSpace.getUsersession().getSessionId(),
+				projectSpace.getProjectId(),
 				Versions.createHEAD(baseVersion));
 
 		ESLocalProjectImpl revertSpace = projectSpace.getAPIImpl().getRemoteProject().checkout(
 			projectSpace.getUsersession().getAPIImpl(),
 			getProgressMonitor());
 
-		List<ChangePackage> changes = revertSpace.getInternalAPIImpl().getChanges(baseVersion,
+		List<ChangePackage> changes = revertSpace.getInternalAPIImpl().getChanges(
+			baseVersion,
 			headRevert ? localHead : ModelUtil.clone(baseVersion));
 
 		Collections.reverse(changes);
 
-		for (ChangePackage cp : changes) {
-			cp.reverse().apply(revertSpace.getInternalAPIImpl().getProject(), true);
+		for (ChangePackage changePackage : changes) {
+			changePackage.reverse().apply(revertSpace.getInternalAPIImpl().getProject(), true);
 		}
 	}
 
