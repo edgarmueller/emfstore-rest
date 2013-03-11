@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getNumberOfVictories <em>Number Of Victories</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getPlayedTournamentTypes <em>Played Tournament Types</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getWinLossRatio <em>Win Loss Ratio</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.Player#getGender <em>Gender</em>}</li>
  * </ul>
  * </p>
  *
@@ -228,5 +229,34 @@ public interface Player extends EObject {
 	 * @generated
 	 */
 	void setWinLossRatio(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Gender</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.emf.emfstore.bowling.Gender}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Gender</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Gender</em>' attribute.
+	 * @see org.eclipse.emf.emfstore.bowling.Gender
+	 * @see #setGender(Gender)
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_Gender()
+	 * @model
+	 * @generated
+	 */
+	Gender getGender();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Player#getGender <em>Gender</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Gender</em>' attribute.
+	 * @see org.eclipse.emf.emfstore.bowling.Gender
+	 * @see #getGender()
+	 * @generated
+	 */
+	void setGender(Gender value);
 
 } // Player

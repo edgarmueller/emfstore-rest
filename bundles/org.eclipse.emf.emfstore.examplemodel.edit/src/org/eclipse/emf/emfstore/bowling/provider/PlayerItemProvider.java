@@ -66,6 +66,7 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 			addNumberOfVictoriesPropertyDescriptor(object);
 			addPlayedTournamentTypesPropertyDescriptor(object);
 			addWinLossRatioPropertyDescriptor(object);
+			addGenderPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -247,6 +248,28 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 	}
 
 	/**
+	 * This adds a property descriptor for the Gender feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGenderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Player_gender_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Player_gender_feature", "_UI_Player_type"),
+				 BowlingPackage.Literals.PLAYER__GENDER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Player.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -291,6 +314,7 @@ public class PlayerItemProvider extends ItemProviderAdapter implements IEditingD
 			case BowlingPackage.PLAYER__NUMBER_OF_VICTORIES:
 			case BowlingPackage.PLAYER__PLAYED_TOURNAMENT_TYPES:
 			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
+			case BowlingPackage.PLAYER__GENDER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

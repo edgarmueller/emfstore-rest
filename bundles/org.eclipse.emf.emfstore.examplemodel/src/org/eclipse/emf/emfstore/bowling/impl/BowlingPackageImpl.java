@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.bowling.Area;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
 import org.eclipse.emf.emfstore.bowling.Game;
+import org.eclipse.emf.emfstore.bowling.Gender;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Player;
@@ -105,6 +106,13 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * @generated
 	 */
 	private EEnum tournamentTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum genderEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -245,6 +253,15 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 */
 	public EAttribute getPlayer_WinLossRatio() {
 		return (EAttribute)playerEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPlayer_Gender() {
+		return (EAttribute)playerEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -531,6 +548,15 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getGender() {
+		return genderEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BowlingFactory getBowlingFactory() {
 		return (BowlingFactory)getEFactoryInstance();
 	}
@@ -563,6 +589,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		createEAttribute(playerEClass, PLAYER__NUMBER_OF_VICTORIES);
 		createEAttribute(playerEClass, PLAYER__PLAYED_TOURNAMENT_TYPES);
 		createEAttribute(playerEClass, PLAYER__WIN_LOSS_RATIO);
+		createEAttribute(playerEClass, PLAYER__GENDER);
 
 		leagueEClass = createEClass(LEAGUE);
 		createEAttribute(leagueEClass, LEAGUE__NAME);
@@ -604,6 +631,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 
 		// Create enums
 		tournamentTypeEEnum = createEEnum(TOURNAMENT_TYPE);
+		genderEEnum = createEEnum(GENDER);
 	}
 
 	/**
@@ -645,6 +673,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		initEAttribute(getPlayer_NumberOfVictories(), ecorePackage.getEInt(), "numberOfVictories", null, 0, 1, Player.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPlayer_PlayedTournamentTypes(), this.getTournamentType(), "playedTournamentTypes", null, 0, -1, Player.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPlayer_WinLossRatio(), ecorePackage.getEBigDecimal(), "winLossRatio", null, 0, 1, Player.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPlayer_Gender(), this.getGender(), "gender", null, 0, 1, Player.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(leagueEClass, League.class, "League", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLeague_Name(), ecorePackage.getEString(), "name", null, 0, 1, League.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -688,6 +717,10 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		initEEnum(tournamentTypeEEnum, TournamentType.class, "TournamentType");
 		addEEnumLiteral(tournamentTypeEEnum, TournamentType.PRO);
 		addEEnumLiteral(tournamentTypeEEnum, TournamentType.AMATEUR);
+
+		initEEnum(genderEEnum, Gender.class, "Gender");
+		addEEnumLiteral(genderEEnum, Gender.FEMALE);
+		addEEnumLiteral(genderEEnum, Gender.MALE);
 
 		// Create resource
 		createResource(eNS_URI);

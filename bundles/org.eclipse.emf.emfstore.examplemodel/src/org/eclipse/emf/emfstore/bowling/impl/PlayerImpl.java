@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
+import org.eclipse.emf.emfstore.bowling.Gender;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
 
@@ -39,6 +40,7 @@ import org.eclipse.emf.emfstore.bowling.TournamentType;
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getNumberOfVictories <em>Number Of Victories</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getPlayedTournamentTypes <em>Played Tournament Types</em>}</li>
  *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getWinLossRatio <em>Win Loss Ratio</em>}</li>
+ *   <li>{@link org.eclipse.emf.emfstore.bowling.impl.PlayerImpl#getGender <em>Gender</em>}</li>
  * </ul>
  * </p>
  *
@@ -184,6 +186,26 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @ordered
 	 */
 	protected BigDecimal winLossRatio = WIN_LOSS_RATIO_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGender() <em>Gender</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGender()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Gender GENDER_EDEFAULT = Gender.FEMALE;
+
+	/**
+	 * The cached value of the '{@link #getGender() <em>Gender</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGender()
+	 * @generated
+	 * @ordered
+	 */
+	protected Gender gender = GENDER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -359,6 +381,27 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Gender getGender() {
+		return gender;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGender(Gender newGender) {
+		Gender oldGender = gender;
+		gender = newGender == null ? GENDER_EDEFAULT : newGender;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__GENDER, oldGender, gender));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -378,6 +421,8 @@ public class PlayerImpl extends EObjectImpl implements Player {
 				return getPlayedTournamentTypes();
 			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
 				return getWinLossRatio();
+			case BowlingPackage.PLAYER__GENDER:
+				return getGender();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -417,6 +462,9 @@ public class PlayerImpl extends EObjectImpl implements Player {
 			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
 				setWinLossRatio((BigDecimal)newValue);
 				return;
+			case BowlingPackage.PLAYER__GENDER:
+				setGender((Gender)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -453,6 +501,9 @@ public class PlayerImpl extends EObjectImpl implements Player {
 			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
 				setWinLossRatio(WIN_LOSS_RATIO_EDEFAULT);
 				return;
+			case BowlingPackage.PLAYER__GENDER:
+				setGender(GENDER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -481,6 +532,8 @@ public class PlayerImpl extends EObjectImpl implements Player {
 				return playedTournamentTypes != null && !playedTournamentTypes.isEmpty();
 			case BowlingPackage.PLAYER__WIN_LOSS_RATIO:
 				return WIN_LOSS_RATIO_EDEFAULT == null ? winLossRatio != null : !WIN_LOSS_RATIO_EDEFAULT.equals(winLossRatio);
+			case BowlingPackage.PLAYER__GENDER:
+				return gender != GENDER_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -511,6 +564,8 @@ public class PlayerImpl extends EObjectImpl implements Player {
 		result.append(playedTournamentTypes);
 		result.append(", winLossRatio: ");
 		result.append(winLossRatio);
+		result.append(", gender: ");
+		result.append(gender);
 		result.append(')');
 		return result.toString();
 	}

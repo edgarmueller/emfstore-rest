@@ -147,13 +147,22 @@ public interface BowlingPackage extends EPackage {
 	int PLAYER__WIN_LOSS_RATIO = 7;
 
 	/**
+	 * The feature id for the '<em><b>Gender</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLAYER__GENDER = 8;
+
+	/**
 	 * The number of structural features of the '<em>Player</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYER_FEATURE_COUNT = 8;
+	int PLAYER_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.LeagueImpl <em>League</em>}' class.
@@ -516,6 +525,16 @@ public interface BowlingPackage extends EPackage {
 	int TOURNAMENT_TYPE = 9;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.Gender <em>Gender</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.bowling.Gender
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getGender()
+	 * @generated
+	 */
+	int GENDER = 10;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Player <em>Player</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -612,6 +631,17 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPlayer_WinLossRatio();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Player#getGender <em>Gender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Gender</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Player#getGender()
+	 * @see #getPlayer()
+	 * @generated
+	 */
+	EAttribute getPlayer_Gender();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.League <em>League</em>}'.
@@ -950,6 +980,16 @@ public interface BowlingPackage extends EPackage {
 	EEnum getTournamentType();
 
 	/**
+	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.bowling.Gender <em>Gender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Gender</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Gender
+	 * @generated
+	 */
+	EEnum getGender();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1044,6 +1084,14 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PLAYER__WIN_LOSS_RATIO = eINSTANCE.getPlayer_WinLossRatio();
+
+		/**
+		 * The meta object literal for the '<em><b>Gender</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PLAYER__GENDER = eINSTANCE.getPlayer_Gender();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.LeagueImpl <em>League</em>}' class.
@@ -1310,6 +1358,16 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TOURNAMENT_TYPE = eINSTANCE.getTournamentType();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.Gender <em>Gender</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.bowling.Gender
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getGender()
+		 * @generated
+		 */
+		EEnum GENDER = eINSTANCE.getGender();
 
 	}
 
