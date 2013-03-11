@@ -9,11 +9,11 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.internal.client.importexport.ExportImportControllerExecutor;
+import org.eclipse.emf.emfstore.internal.client.importexport.ExportImportControllerFactory;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportControllerExecutor;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportControllerFactory;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.junit.Test;
 
