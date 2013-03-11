@@ -11,9 +11,10 @@
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -29,10 +30,8 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 public class ImportController {
 
 	private final AdminBroker adminBroker;
-
 	private ImportSource importSource;
-
-	private Hashtable<ACOrgUnitId, ImportItemWrapper> importedUnits;
+	private Map<ACOrgUnitId, ImportItemWrapper> importedUnits;
 
 	/**
 	 * @param adminBroker
@@ -40,7 +39,7 @@ public class ImportController {
 	 */
 	public ImportController(AdminBroker adminBroker) {
 		this.adminBroker = adminBroker;
-		this.importedUnits = new Hashtable<ACOrgUnitId, ImportItemWrapper>();
+		this.importedUnits = new HashMap<ACOrgUnitId, ImportItemWrapper>();
 	}
 
 	/**
