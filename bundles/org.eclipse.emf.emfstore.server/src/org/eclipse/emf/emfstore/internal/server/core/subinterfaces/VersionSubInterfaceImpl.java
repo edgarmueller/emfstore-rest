@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core.subinterfaces;
 
@@ -50,8 +51,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * This subinterfaces implements all version related functionality for the
- * {@link org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl} interface.
+ * This subinterface implements all version related functionality.
  * 
  * @author wesendon
  */
