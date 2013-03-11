@@ -8,38 +8,32 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport.impl;
+package org.eclipse.emf.emfstore.internal.client.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.emfstore.internal.client.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
-import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * Imports a project.
+ * Controller for import a {@link ProjectHistory}.
  * 
  * @author emueller
+ * 
  */
-public class ImportProjectController implements IExportImportController {
+public class ImportProjectHistoryController extends ServerCall<Void> implements IExportImportController {
 
-	private final String projectName;
-
-	/**
-	 * Constructor.
-	 * 
-	 * @param projectName
-	 *            the name that should be used for the imported project
-	 */
-	public ImportProjectController(String projectName) {
-		this.projectName = projectName;
-	}
+	private ProjectHistory projectHistory;
 
 	/**
 	 * 
@@ -48,7 +42,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "project";
+		return "Importing project history";
 	}
 
 	/**
@@ -58,7 +52,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.Project.getExtension() + ")",
+		return new String[] { "EMFStore Project History Files (*" + ExportImportDataUnits.History.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -69,7 +63,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.Project.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.History.getExtension(), "*.*" };
 	}
 
 	/**
@@ -79,7 +73,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.importProjectPath";
+		return "org.eclipse.emf.emfstore.client.ui.importProjectHistoryPath";
 	}
 
 	/**
@@ -88,15 +82,19 @@ public class ImportProjectController implements IExportImportController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 * 
-	 * @throws IOException
-	 *             in case an error occurs during the import of the project
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-		Workspace currentWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
-		ProjectSpace projectSpace = currentWorkspace.importProject(file.getAbsolutePath());
-		projectSpace.setProjectName(projectName);
-		ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
+		ResourceSetImpl resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
+		EList<EObject> directContents = resource.getContents();
+
+		// sanity check
+		if (directContents.size() != 1 && (!(directContents.get(0) instanceof ProjectHistory))) {
+			throw new IOException("File is corrupt, does not contain a ProjectHistory.");
+		}
+
+		projectHistory = (ProjectHistory) directContents.get(0);
+		resource.getContents().remove(projectHistory);
 	}
 
 	/**
@@ -106,6 +104,7 @@ public class ImportProjectController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilename()
 	 */
 	public String getFilename() {
+		// no suggestion
 		return null;
 	}
 
@@ -118,4 +117,18 @@ public class ImportProjectController implements IExportImportController {
 	public boolean isExport() {
 		return false;
 	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall#run()
+	 */
+	@Override
+	protected Void run() throws ESException {
+		ESWorkspaceProviderImpl.getInstance().getConnectionManager()
+			.importProjectHistoryToServer(getUsersession().getSessionId(), projectHistory);
+		return null;
+	}
+
 }

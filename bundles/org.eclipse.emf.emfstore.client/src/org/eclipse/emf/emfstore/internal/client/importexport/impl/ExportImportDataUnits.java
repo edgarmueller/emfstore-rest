@@ -8,8 +8,9 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport;
+package org.eclipse.emf.emfstore.internal.client.importexport.impl;
 
+import org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 

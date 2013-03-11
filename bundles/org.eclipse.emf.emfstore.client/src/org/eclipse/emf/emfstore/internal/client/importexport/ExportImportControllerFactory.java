@@ -9,19 +9,19 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport;
+package org.eclipse.emf.emfstore.internal.client.importexport;
 
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportChangesController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportProjectController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportProjectHistoryController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportProjectSpaceController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportWorkspaceController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ImportChangesController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ImportProjectController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ImportProjectHistoryController;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ImportProjectSpaceController;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportChangesController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportProjectController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportProjectHistoryController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportProjectSpaceController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ExportWorkspaceController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportChangesController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportProjectController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportProjectHistoryController;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.impl.ImportProjectSpaceController;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**

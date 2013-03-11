@@ -8,39 +8,33 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport.impl;
+package org.eclipse.emf.emfstore.internal.client.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 
 /**
- * Exports the whole {@link Workspace}.
+ * Exports a {@link Project}.
  * 
  * @author emueller
  */
-public class ExportWorkspaceController implements IExportImportController {
+public class ExportProjectController extends ProjectSpaceBasedExportController {
 
 	/**
+	 * Constructor.
 	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
+	 * @param projectSpace the {@link ProjectSpace} whose contained {@link Project} should be exported
 	 */
-	public String getLabel() {
-		return "workspace";
+	public ExportProjectController(ProjectSpace projectSpace) {
+		super(projectSpace);
 	}
 
 	/**
@@ -50,7 +44,7 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore Workspace Files (*" + ExportImportDataUnits.Workspace.getExtension() + ")",
+		return new String[] { "EMFStore Project Files (*" + ExportImportDataUnits.Project.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -61,7 +55,17 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.Workspace.getExtension() + ", *.*" };
+		return new String[] { "*" + ExportImportDataUnits.Project.getExtension() + ", *.*" };
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
+	 */
+	public String getLabel() {
+		return "project";
 	}
 
 	/**
@@ -71,7 +75,9 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.impl.IExportController#getFilename()
 	 */
 	public String getFilename() {
-		return "Workspace_" + new Date();
+		PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
+		return getProjectSpace().getProjectName() + "@" + (baseVersion == null ? 0 : baseVersion.getIdentifier())
+			+ ExportImportDataUnits.Project.getExtension();
 	}
 
 	/**
@@ -81,11 +87,10 @@ public class ExportWorkspaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.impl.IExportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.exportWorkSpacePath";
+		return "org.eclipse.emf.emfstore.client.ui.exportProjectPath";
 	}
 
 	/**
-	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
@@ -93,21 +98,12 @@ public class ExportWorkspaceController implements IExportImportController {
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
 
-		if (!FileUtil.getExtension(file).equals(ExportImportDataUnits.Workspace.getExtension())) {
-			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Workspace.getExtension());
+		if (!FileUtil.getExtension(file).equals(ExportImportDataUnits.Project.getExtension())) {
+			file = new File(file.getAbsoluteFile() + ExportImportDataUnits.Project.getExtension());
 		}
 
-		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		Workspace copy = ModelUtil.clone(workspace.getInternalAPIImpl());
-
-		int i = 0;
-
-		for (ProjectSpace copiedProjectSpace : copy.getProjectSpaces()) {
-			Project orgProject = workspace.getInternalAPIImpl().getProjectSpaces().get(i++).getProject();
-			copiedProjectSpace.setProject(ModelUtil.clone(orgProject));
-		}
-
-		ResourceHelper.putWorkspaceIntoNewResource(file.getAbsolutePath(), copy);
+		Project project = ModelUtil.clone(getProjectSpace().getProject());
+		ResourceHelper.putElementIntoNewResource(file.getAbsolutePath(), project);
 	}
 
 	/**

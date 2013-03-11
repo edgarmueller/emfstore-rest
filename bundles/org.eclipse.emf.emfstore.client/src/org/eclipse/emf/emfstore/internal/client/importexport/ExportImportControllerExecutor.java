@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport;
+package org.eclipse.emf.emfstore.internal.client.importexport;
 
 import java.io.File;
 import java.io.IOException;

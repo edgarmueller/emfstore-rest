@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport;
+package org.eclipse.emf.emfstore.internal.client.importexport;
 
 /**
  * Represent a single unit that is considered valid to be exported/imported.

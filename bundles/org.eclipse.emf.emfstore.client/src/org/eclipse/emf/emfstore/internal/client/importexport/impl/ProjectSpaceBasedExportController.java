@@ -8,10 +8,10 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport.impl;
+package org.eclipse.emf.emfstore.internal.client.importexport.impl;
 
+import org.eclipse.emf.emfstore.internal.client.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
 
 /**
  * Exports a entity which is part of a project space.

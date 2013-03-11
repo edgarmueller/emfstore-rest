@@ -8,42 +8,23 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport.impl;
+package org.eclipse.emf.emfstore.internal.client.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.client.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 
 /**
- * A controller for importing changes which then will be applied upon
- * a given {@link ProjectSpaceBase}.
+ * Controller that is capable of import a project space.
  * 
  * @author emueller
  * 
  */
-public class ImportChangesController implements IExportImportController {
-
-	private final ProjectSpaceBase projectSpace;
-
-	/**
-	 * Constructor.
-	 * 
-	 * @param projectSpace
-	 *            the {@link ProjectSpaceBase} upon which to apply the changes being imported
-	 */
-	public ImportChangesController(ProjectSpaceBase projectSpace) {
-		this.projectSpace = projectSpace;
-	}
+public class ImportProjectSpaceController implements IExportImportController {
 
 	/**
 	 * 
@@ -52,7 +33,7 @@ public class ImportChangesController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "changes";
+		return "project space";
 	}
 
 	/**
@@ -62,7 +43,7 @@ public class ImportChangesController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore change package (" + ExportImportDataUnits.Change.getExtension() + ")",
+		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.ProjectSpace.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -73,7 +54,7 @@ public class ImportChangesController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.Change.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.ProjectSpace.getExtension(), "*.*" };
 	}
 
 	/**
@@ -83,7 +64,7 @@ public class ImportChangesController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return null;
+		return "org.eclipse.emf.emfstore.client.ui.importProjectSpacePath";
 	}
 
 	/**
@@ -94,24 +75,8 @@ public class ImportChangesController implements IExportImportController {
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
-
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
-		EList<EObject> directContents = resource.getContents();
-
-		// sanity check
-		if (directContents.size() != 1 && (!(directContents.get(0) instanceof ChangePackage))) {
-			throw new IOException("File is corrupt, does not contain changes.");
-		}
-
-		ChangePackage changePackage = (ChangePackage) directContents.get(0);
-
-		// / TODO
-		// if (!projectSpace.isInitialized()) {
-		// projectSpace.init();
-		// }
-
-		projectSpace.applyOperations(changePackage.getOperations(), true);
+		Workspace currentWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
+		currentWorkspace.importProjectSpace(file.getAbsolutePath());
 	}
 
 	/**
@@ -133,5 +98,4 @@ public class ImportChangesController implements IExportImportController {
 	public boolean isExport() {
 		return false;
 	}
-
 }

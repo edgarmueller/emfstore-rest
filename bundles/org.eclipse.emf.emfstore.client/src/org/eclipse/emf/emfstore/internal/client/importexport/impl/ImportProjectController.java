@@ -8,24 +8,37 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.importexport.impl;
+package org.eclipse.emf.emfstore.internal.client.importexport.impl;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.internal.client.importexport.IExportImportController;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.ExportImportDataUnits;
-import org.eclipse.emf.emfstore.internal.client.model.importexport.IExportImportController;
+import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
- * Controller that is capable of import a project space.
+ * Imports a project.
  * 
  * @author emueller
- * 
  */
-public class ImportProjectSpaceController implements IExportImportController {
+public class ImportProjectController implements IExportImportController {
+
+	private final String projectName;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param projectName
+	 *            the name that should be used for the imported project
+	 */
+	public ImportProjectController(String projectName) {
+		this.projectName = projectName;
+	}
 
 	/**
 	 * 
@@ -34,7 +47,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getLabel()
 	 */
 	public String getLabel() {
-		return "project space";
+		return "project";
 	}
 
 	/**
@@ -44,7 +57,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredNames()
 	 */
 	public String[] getFilteredNames() {
-		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.ProjectSpace.getExtension() + ")",
+		return new String[] { "EMFStore project space (*" + ExportImportDataUnits.Project.getExtension() + ")",
 			"All Files (*.*)" };
 	}
 
@@ -55,7 +68,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getFilteredExtensions()
 	 */
 	public String[] getFilteredExtensions() {
-		return new String[] { "*" + ExportImportDataUnits.ProjectSpace.getExtension(), "*.*" };
+		return new String[] { "*" + ExportImportDataUnits.Project.getExtension(), "*.*" };
 	}
 
 	/**
@@ -65,7 +78,7 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#getParentFolderPropertyKey()
 	 */
 	public String getParentFolderPropertyKey() {
-		return "org.eclipse.emf.emfstore.client.ui.importProjectSpacePath";
+		return "org.eclipse.emf.emfstore.client.ui.importProjectPath";
 	}
 
 	/**
@@ -74,10 +87,15 @@ public class ImportProjectSpaceController implements IExportImportController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController#execute(java.io.File,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * 
+	 * @throws IOException
+	 *             in case an error occurs during the import of the project
 	 */
 	public void execute(File file, IProgressMonitor progressMonitor) throws IOException {
 		Workspace currentWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
-		currentWorkspace.importProjectSpace(file.getAbsolutePath());
+		ProjectSpace projectSpace = currentWorkspace.importProject(file.getAbsolutePath());
+		projectSpace.setProjectName(projectName);
+		ModelUtil.saveResource(projectSpace.eResource(), WorkspaceUtil.getResourceLogger());
 	}
 
 	/**
