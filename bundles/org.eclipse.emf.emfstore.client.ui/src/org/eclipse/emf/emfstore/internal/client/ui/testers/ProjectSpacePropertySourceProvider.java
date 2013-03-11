@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.observers.SaveStateChangedObserver;
+import org.eclipse.emf.emfstore.internal.client.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.swt.widgets.Display;
