@@ -19,10 +19,19 @@ import org.junit.runners.Suite;
  * @author koegel
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ AttributeOperationTest.class, SingleReferenceOperationTest.class,
-	MultiReferenceOperationTest.class, CreateDeleteOperationTest.class, MultiReferenceMoveOperationTest.class,
-	CompositeOperationTest.class, MultiAttributeMoveOperationTest.class, MultiAttributeSetTest.class,
-	MultiAttributeTest.class, MultiReferenceSetOperationTest.class })
+@Suite.SuiteClasses({
+	AttributeOperationTest.class,
+	CompositeOperationTest.class,
+	CreateDeleteOperationTest.class,
+	MultiAttributeTest.class,
+	MultiReferenceMoveOperationTest.class,
+	MultiReferenceOperationTest.class,
+	MultiAttributeSetTest.class,
+	MultiReferenceSetOperationTest.class,
+	MultiAttributeMoveOperationTest.class,
+	SingleReferenceOperationTest.class,
+	SimpleOperationObserverTest.class
+})
 public class AllOperationTests {
 
 }

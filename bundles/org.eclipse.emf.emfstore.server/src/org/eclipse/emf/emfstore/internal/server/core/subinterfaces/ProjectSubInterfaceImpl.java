@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core.subinterfaces;
 
@@ -44,8 +45,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * This subinterfaces implements all project related functionality for the
- * {@link org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl} interface.
+ * This subinterface implements all project related functionality.
  * 
  * @author wesendon
  */
@@ -106,8 +106,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 		synchronized (getMonitor()) {
 
-			PrimaryVersionSpec resolvedVersion = getSubInterface(VersionSubInterfaceImpl.class).resolveVersionSpec(
-				projectId, versionSpec);
+			PrimaryVersionSpec resolvedVersion = getSubInterface(VersionSubInterfaceImpl.class)
+				.resolveVersionSpec(
+									projectId, versionSpec);
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, resolvedVersion);
 			return getProject(version);
 
@@ -174,8 +175,12 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			ProjectHistory projectHistory = null;
 			try {
 				logMessage.setDate(new Date());
-				projectHistory = createEmptyProject(name, description, logMessage,
-					org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
+				projectHistory = createEmptyProject(
+													name,
+													description,
+													logMessage,
+													org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+														.createProject());
 			} catch (FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
@@ -263,8 +268,10 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					try {
 						FileUtil.deleteDirectory(projectFolder, true);
 					} catch (IOException e) {
-						ModelUtil.logException(
-							"Project files couldn't be deleted, but it was deleted from containment tree.", e);
+						ModelUtil
+							.logException(
+											"Project files couldn't be deleted, but it was deleted from containment tree.",
+											e);
 					}
 				}
 			}
@@ -289,12 +296,16 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				getResourceHelper().save(getServerSpace());
 				for (Version version : projectHistory.getVersions()) {
 					if (version.getChanges() != null) {
-						getResourceHelper().createResourceForChangePackage(version.getChanges(),
-							version.getPrimarySpec(), projectHistory.getProjectId());
+						getResourceHelper().createResourceForChangePackage(
+																			version.getChanges(),
+																			version.getPrimarySpec(),
+																			projectHistory.getProjectId());
 					}
 					if (version.getProjectState() != null) {
-						getResourceHelper().createResourceForProject(version.getProjectState(),
-							version.getPrimarySpec(), projectHistory.getProjectId());
+						getResourceHelper().createResourceForProject(
+																		version.getProjectState(),
+																		version.getPrimarySpec(),
+																		projectHistory.getProjectId());
 					}
 					getResourceHelper().createResourceForVersion(version, projectHistory.getProjectId());
 				}
@@ -349,7 +360,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		// .createProject();
 		firstVersion.setProjectState(initialProjectState);
 		getResourceHelper().createResourceForProject(initialProjectState, firstVersion.getPrimarySpec(),
-			projectHistory.getProjectId());
+														projectHistory.getProjectId());
 		projectHistory.getVersions().add(firstVersion);
 
 		// add to serverspace and saved
