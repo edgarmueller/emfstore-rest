@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
+package org.eclipse.emf.emfstore.client.changetracking.merging;
 
 import java.util.List;
 

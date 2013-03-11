@@ -27,11 +27,11 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
+import org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -514,7 +514,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#merge(org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.client.ESChangeConflict,
-	 *      org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver,
+	 *      org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver,
 	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.IUpdateCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -541,7 +541,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#mergeBranch(org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ESConflictResolver,
+	 *      org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void mergeBranch(ESPrimaryVersionSpec branchSpec, final ESConflictResolver conflictResolver,
