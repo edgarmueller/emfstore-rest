@@ -169,9 +169,9 @@ public class DecisionManager {
 	 */
 
 	// BEGIN COMPLEX CODE
-	private void createConflicts(Set<ConflictBucket> ConflictBucket) {
+	private void createConflicts(Set<ConflictBucket> conflictBucket) {
 		// Create Conflicts from ConflictBucket
-		for (ConflictBucket conf : ConflictBucket) {
+		for (ConflictBucket conf : conflictBucket) {
 
 			AbstractOperation my = conf.getMyOperation();
 			AbstractOperation their = conf.getTheirOperation();
