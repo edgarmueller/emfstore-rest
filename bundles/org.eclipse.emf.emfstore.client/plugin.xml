@@ -28,6 +28,7 @@
    <extension-point id="mergeObserver" name="Merge Observer" schema="schema/mergeObserver.exsd"/>
    <extension-point id="checksumErrorHandler" name="Client Checksum Error Handler" schema="schema/checksumErrorHandler.exsd"/>
    <extension-point id="postCreationObserver" name="Post-Creation Observer" schema="schema/postCreationObserver.exsd"/>
+   <extension-point id="shareObserver" name="Share Observer" schema="schema/shareObserver.exsd"/>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/emf/emfstore/client/model" 
@@ -91,5 +92,12 @@
             observerAttributeName="postCreationObserver">
      </observer>
    </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.common.observerBusExtensionPointRegistration">
+     <observer
+           extensionPointName="org.eclipse.emf.emfstore.client.shareObserver"
+           observerAttributeName="shareObserver">
+     </observer>
+  </extension>
 
 </plugin>

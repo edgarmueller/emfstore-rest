@@ -46,6 +46,6 @@ Export-Package: org.eclipse.emf.emfstore.client,
  org.eclipse.emf.emfstore.internal.client.model.filetransfer;x-internal:=true,
  org.eclipse.emf.emfstore.internal.client.model.impl;x-internal:=true,
  org.eclipse.emf.emfstore.internal.client.model.impl.api;x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.model.observers;x-internal:=true,
  org.eclipse.emf.emfstore.internal.client.model.util;x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.observers;x-friends:="org.eclipse.emf.emfstore.client.test",
  org.eclipse.emf.emfstore.internal.client.properties;x-internal:=true

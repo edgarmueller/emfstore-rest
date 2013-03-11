@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.observers.SaveStateChangedObserver;
+import org.eclipse.emf.emfstore.internal.client.observers.SaveStateChangedObserver;
 
 /**
  * Notifies SaveStateChangedObservers about changes of the project space save state.

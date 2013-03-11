@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.observers;
+package org.eclipse.emf.emfstore.internal.client.observers;
 
 import org.eclipse.emf.emfstore.common.ESObserver;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -36,5 +36,5 @@ public interface OperationObserver extends ESObserver {
 	 *            <b>Note</b>: the given operation is not reserved. If you wish to get
 	 *            the reversed operation, call {@link AbstractOperation#reverse()} on {@code operation}
 	 */
-	void operationUnDone(AbstractOperation operation);
+	void operationUndone(AbstractOperation operation);
 }

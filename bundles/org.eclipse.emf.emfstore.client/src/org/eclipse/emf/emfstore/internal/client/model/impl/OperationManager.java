@@ -24,7 +24,7 @@ import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
-import org.eclipse.emf.emfstore.internal.client.model.observers.OperationObserver;
+import org.eclipse.emf.emfstore.internal.client.observers.OperationObserver;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -88,7 +88,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 * @param operationObserver
 	 *            the operation observer to be added
 	 */
-	public void addOperationListener(OperationObserver operationObserver) {
+	public void addOperationObserver(OperationObserver operationObserver) {
 		operationListeners.add(operationObserver);
 	}
 
@@ -111,7 +111,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 */
 	public void notifyOperationUndone(AbstractOperation operation) {
 		for (OperationObserver operationListener : operationListeners) {
-			operationListener.operationUnDone(operation);
+			operationListener.operationUndone(operation);
 		}
 	}
 
