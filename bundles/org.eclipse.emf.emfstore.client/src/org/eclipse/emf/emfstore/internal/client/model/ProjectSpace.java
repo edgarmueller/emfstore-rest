@@ -533,6 +533,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_LocalOperations()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
+	 * @deprecated
 	 */
 	OperationComposite getLocalOperations();
 

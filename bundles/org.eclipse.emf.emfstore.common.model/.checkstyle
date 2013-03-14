@@ -4,7 +4,7 @@
   <local-check-config name="emfstoreStyle" location="http://download.eclipse.org/emf-store/checkstyle/emfstoreStyle.xml" type="remote" description="">
     <additional-data name="cache-file" value="false"/>
   </local-check-config>
-  <fileset name="all" enabled="true" check-config-name="Sun Checks" local="false">
+  <fileset name="all" enabled="true" check-config-name="emfstoreStyle" local="true">
     <file-match-pattern match-pattern="." include-pattern="true"/>
   </fileset>
 </fileset-config>
