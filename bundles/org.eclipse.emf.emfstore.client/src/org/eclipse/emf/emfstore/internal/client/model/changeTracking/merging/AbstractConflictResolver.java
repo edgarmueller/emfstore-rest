@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -22,11 +21,11 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
- * Convenience super class for implementing {@link ESConflictResolver}.
+ * Convenience super class for implementing {@link ConflictResolver}.
  * 
  * @author wesendon
  */
-public abstract class AbstractConflictResolver implements ESConflictResolver {
+public abstract class AbstractConflictResolver implements ConflictResolver {
 
 	private List<AbstractOperation> acceptedMine;
 	private List<AbstractOperation> rejectedTheirs;
@@ -48,7 +47,7 @@ public abstract class AbstractConflictResolver implements ESConflictResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver#getAcceptedMine()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#getAcceptedMine()
 	 */
 	public List<AbstractOperation> getAcceptedMine() {
 		return acceptedMine;
@@ -57,7 +56,7 @@ public abstract class AbstractConflictResolver implements ESConflictResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver#getAcceptedMine()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#getAcceptedMine()
 	 */
 	public List<AbstractOperation> getRejectedTheirs() {
 		return rejectedTheirs;
@@ -67,7 +66,7 @@ public abstract class AbstractConflictResolver implements ESConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
 	 *      java.util.List, java.util.List,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec)
@@ -123,7 +122,7 @@ public abstract class AbstractConflictResolver implements ESConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver#getMergedResult()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#getMergedResult()
 	 */
 	public ChangePackage getMergedResult() {
 		List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>();

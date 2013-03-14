@@ -10,7 +10,6 @@ import static org.junit.Assert.fail;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
@@ -18,10 +17,7 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.test.CommitCallbackAdapter;
-import org.eclipse.emf.emfstore.client.test.UpdateCallbackAdapter;
-import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
@@ -261,67 +257,68 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		checkedoutCopy.commit(monitor);
 	}
 
-	@Test
-	public void testMerge() throws ESException {
-
-		final NullProgressMonitor monitor = new NullProgressMonitor();
-		final Player player = ProjectChangeUtil.addPlayerToProject(localProject);
-		localProject.commit(monitor);
-		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
-		final Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
-
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				player.setName("A");
-				return null;
-			}
-		});
-
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				localProject.commit(monitor);
-				return null;
-			}
-		});
-
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				checkedoutPlayer.setName("B");
-				return null;
-			}
-		});
-
-		checkedoutCopy.commit(null, new CommitCallbackAdapter() {
-			@Override
-			public boolean baseVersionOutOfDate(final ESLocalProject localProject, IProgressMonitor progressMonitor) {
-				ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
-				try {
-					final ESPrimaryVersionSpec version = localProject.resolveVersionSpec(ESVersionSpec.FACTORY
-						.createHEAD(baseVersion), monitor);
-					localProject.update(version, new UpdateCallbackAdapter() {
-						@Override
-						public boolean conflictOccurred(
-							org.eclipse.emf.emfstore.client.ESChangeConflict changeConflict,
-							IProgressMonitor progressMonitor) {
-							try {
-								return localProject.merge(version, changeConflict,
-									new TestConflictResolver(
-										false, 1), null, new NullProgressMonitor());
-							} catch (ESException e) {
-								fail("Merge failed.");
-							}
-							return false;
-						};
-					}, new NullProgressMonitor());
-				} catch (ESException e) {
-					fail("Expected ChangeConflictException");
-				}
-				return true;
-			}
-		}, new NullProgressMonitor());
-		assertEquals("B", checkedoutPlayer.getName());
-		localProject.update(monitor);
-		assertEquals("B", player.getName());
-		assertTrue(EMFStoreClientUtil.areEqual(localProject, checkedoutCopy));
-	}
+	// TODO: API does not support merging currently
+	// @Test
+	// public void testMerge() throws ESException {
+	//
+	// final NullProgressMonitor monitor = new NullProgressMonitor();
+	// final Player player = ProjectChangeUtil.addPlayerToProject(localProject);
+	// localProject.commit(monitor);
+	// ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor);
+	// final Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
+	//
+	// RunESCommand.run(new Callable<Void>() {
+	// public Void call() throws Exception {
+	// player.setName("A");
+	// return null;
+	// }
+	// });
+	//
+	// RunESCommand.run(new Callable<Void>() {
+	// public Void call() throws Exception {
+	// localProject.commit(monitor);
+	// return null;
+	// }
+	// });
+	//
+	// RunESCommand.run(new Callable<Void>() {
+	// public Void call() throws Exception {
+	// checkedoutPlayer.setName("B");
+	// return null;
+	// }
+	// });
+	//
+	// checkedoutCopy.commit(null, new CommitCallbackAdapter() {
+	// @Override
+	// public boolean baseVersionOutOfDate(final ESLocalProject localProject, IProgressMonitor progressMonitor) {
+	// ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
+	// try {
+	// final ESPrimaryVersionSpec version = localProject.resolveVersionSpec(ESVersionSpec.FACTORY
+	// .createHEAD(baseVersion), monitor);
+	// localProject.update(version, new UpdateCallbackAdapter() {
+	// @Override
+	// public boolean conflictOccurred(
+	// org.eclipse.emf.emfstore.client.ESChangeConflict changeConflict,
+	// IProgressMonitor progressMonitor) {
+	// try {
+	// return localProject.merge(version, changeConflict,
+	// new TestConflictResolver(
+	// false, 1), null, new NullProgressMonitor());
+	// } catch (ESException e) {
+	// fail("Merge failed.");
+	// }
+	// return false;
+	// };
+	// }, new NullProgressMonitor());
+	// } catch (ESException e) {
+	// fail("Expected ChangeConflictException");
+	// }
+	// return true;
+	// }
+	// }, new NullProgressMonitor());
+	// assertEquals("B", checkedoutPlayer.getName());
+	// localProject.update(monitor);
+	// assertEquals("B", player.getName());
+	// assertTrue(EMFStoreClientUtil.areEqual(localProject, checkedoutCopy));
+	// }
 }

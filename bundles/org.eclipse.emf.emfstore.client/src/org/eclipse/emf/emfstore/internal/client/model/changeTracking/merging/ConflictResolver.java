@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.changetracking.merging;
+package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @author koegel
  * @author wesendon
  */
-public interface ESConflictResolver {
+public interface ConflictResolver {
 
 	/**
 	 * Resolves all conflicts between the given change packages "theirs" and the

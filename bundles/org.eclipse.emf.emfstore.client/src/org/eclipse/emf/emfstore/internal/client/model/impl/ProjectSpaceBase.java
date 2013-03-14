@@ -33,11 +33,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
-import org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
@@ -53,6 +51,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
@@ -66,7 +65,6 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.PropertyNotFoun
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileInformation;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileTransferManager;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.observers.DeleteProjectSpaceObserver;
@@ -865,16 +863,16 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * {@inheritDoc}
 	 * 
 	 */
-	public boolean merge(PrimaryVersionSpec target, ESChangeConflict conflict,
-		ESConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
+	public boolean merge(PrimaryVersionSpec target, ChangeConflict conflict,
+		ConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
 		throws ESException {
 		// merge the conflicts
 		// TODO: review casting of change conflict
-		if (conflictResolver.resolveConflicts(getProject(), ((ESChangeConflictImpl) conflict).getInternalAPIImpl(),
+		if (conflictResolver.resolveConflicts(getProject(), conflict,
 			getBaseVersion(), target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
 			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges(target, ((ESChangeConflictImpl) conflict).getInternalAPIImpl().getNewPackages(), mergedResult,
+			applyChanges(target, conflict.getNewPackages(), mergedResult,
 				callback, progressMonitor);
 			return true;
 		}
@@ -884,7 +882,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 */
-	public void mergeBranch(final PrimaryVersionSpec branchSpec, final ESConflictResolver conflictResolver,
+	public void mergeBranch(final PrimaryVersionSpec branchSpec, final ConflictResolver conflictResolver,
 		final IProgressMonitor monitor)
 		throws ESException {
 		new ServerCall<Void>(this) {
