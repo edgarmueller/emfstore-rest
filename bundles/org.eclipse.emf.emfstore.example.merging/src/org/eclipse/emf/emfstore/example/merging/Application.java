@@ -26,10 +26,13 @@ import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
@@ -309,8 +312,16 @@ public class Application implements IApplication {
 		public boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor monitor) {
 			// resolve conflicts by merging with our conflict resolver
 			try {
-				project2.merge(project2.resolveVersionSpec(Versions.createHEAD().getAPIImpl(), monitor),
-					changeConflict, new MyConflictResolver(false), this, monitor);
+				// Merging currently is only available on the internal API
+				ProjectSpace projectSpace = ((ESLocalProjectImpl) project2).getInternalAPIImpl();
+				ChangeConflict cc = ((ESChangeConflictImpl) changeConflict).getInternalAPIImpl();
+				
+				projectSpace.merge(
+					projectSpace.resolveVersionSpec(Versions.createHEAD(), monitor),
+					cc,
+					new MyConflictResolver(false), 
+					this, 
+					monitor);
 			} catch (ESException e) {
 				// on any exceptions, declare conflicts as non-resolved
 				return false;

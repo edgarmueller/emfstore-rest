@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
-import org.eclipse.emf.emfstore.client.changetracking.merging.ESConflictResolver;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
@@ -168,7 +167,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param changeConflict
 	 *            the {@link ESChangeConflict} containing the conflicting changes
 	 * @param conflictResolver
-	 *            a {@link ESConflictResolver} for resolving conflicts
+	 *            a {@link ConflictResolver} for resolving conflicts
 	 * @param callback
 	 *            the {@link ESUpdateCallback} that will be called while the update is performing
 	 * @param monitor
@@ -179,8 +178,8 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @throws ESException
 	 *             in case an error occurs while merging the branch
 	 */
-	boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, ESConflictResolver conflictResolver,
-		ESUpdateCallback callback, IProgressMonitor monitor) throws ESException;
+	// boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, ConflictResolver conflictResolver,
+	// ESUpdateCallback callback, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Allows to merge a version from another branch into the current project.
@@ -188,15 +187,15 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param branchSpec
 	 *            the {@link ESPrimaryVersionSpec} which is supposed to be merged
 	 * @param conflictResolver
-	 *            a {@link ESConflictResolver} for resolving conflicts in case any conflicts occur
+	 *            a {@link ConflictResolver} for resolving conflicts in case any conflicts occur
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while merging the branch
 	 * 
 	 * @throws ESException
 	 *             in case an error occurs while merging the branch
 	 */
-	void mergeBranch(ESPrimaryVersionSpec branchSpec, ESConflictResolver conflictResolver, IProgressMonitor monitor)
-		throws ESException;
+	// void mergeBranch(ESPrimaryVersionSpec branchSpec, ConflictResolver conflictResolver, IProgressMonitor monitor)
+	// throws ESException;
 
 	/**
 	 * <p>

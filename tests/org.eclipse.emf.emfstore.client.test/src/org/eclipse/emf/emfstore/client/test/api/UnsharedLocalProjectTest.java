@@ -20,7 +20,6 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
-import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
@@ -158,20 +157,21 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 		fail("Should not be able to check update state of an unshared Project!");
 	}
 
-	@Test(expected = RuntimeException.class)
-	public void testMerge() throws ESException {
-		localProject.mergeBranch(localProject.getBaseVersion(), new TestConflictResolver(false, 0),
-			new NullProgressMonitor());
-		fail("Should not be able to merge with head on an unshared Project!");
-	}
-
-	@Test(expected = RuntimeException.class)
-	public void testMergeBranch() throws ESException {
-		localProject.mergeBranch(localProject.getBaseVersion(),
-			new TestConflictResolver(false, 0), new NullProgressMonitor());
-
-		fail("Should not be able to merge with head on an unshared Project!");
-	}
+	// TODO: API does not support merging currently
+	// @Test(expected = RuntimeException.class)
+	// public void testMerge() throws ESException {
+	// localProject.mergeBranch(localProject.getBaseVersion(), new TestConflictResolver(false, 0),
+	// new NullProgressMonitor());
+	// fail("Should not be able to merge with head on an unshared Project!");
+	// }
+	//
+	// @Test(expected = RuntimeException.class)
+	// public void testMergeBranch() throws ESException {
+	// localProject.mergeBranch(localProject.getBaseVersion(),
+	// new TestConflictResolver(false, 0), new NullProgressMonitor());
+	//
+	// fail("Should not be able to merge with head on an unshared Project!");
+	// }
 
 	@Test(expected = RuntimeException.class)
 	public void testRemoveTag() throws ESException {
