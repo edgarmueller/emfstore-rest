@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Log Message</b></em>'.
  * 
- * @extends ESLogMessage
+ * @extends APIDelegate<ESLogMessageImpl>
  *          <!-- end-user-doc -->
  * 
  *          <p>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
-    nsURI="http://eclipse.org/emf/emfstore/server/model" nsPrefix="org.eclipse.emf.emfstore.internal.server.model">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://eclipse.org/emf/emfstore/server/model"
+    nsPrefix="org.eclipse.emf.emfstore.internal.server.model">
   <eClassifiers xsi:type="ecore:EClass" name="ProjectHistory">
     <eStructuralFeatures xsi:type="ecore:EReference" name="projectId" eType="#//ProjectId"
         containment="true"/>
@@ -93,7 +92,7 @@
           eType="#//versioning/VersionProperty" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HistoryInfo">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="primerySpec" lowerBound="1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primarySpec" lowerBound="1"
           eType="#//versioning/PrimaryVersionSpec" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nextSpec" lowerBound="1"
           upperBound="-1" eType="#//versioning/PrimaryVersionSpec" containment="true"/>

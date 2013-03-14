@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESDat
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Date Version Spec</b></em>'.
  * 
- * @extends ESDateVersionSpecImpl
+ * @extends APIDelegate<ESDateVersionSpecImpl>
  *          <!-- end-user-doc
  *          -->
  * 

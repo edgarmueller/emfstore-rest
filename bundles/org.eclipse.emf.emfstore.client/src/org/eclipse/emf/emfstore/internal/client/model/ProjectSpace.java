@@ -51,56 +51,59 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Container</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject <em> Project</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId
- * <em>Project Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName
- * <em>Project Name</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription
- * <em>Project Description</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession
- * <em>Usersession</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated
- * <em>Last Updated</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion
- * <em>Base Version</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount
- * <em>Resource Count</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getOldLogMessages
- * <em>Old Log Messages</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations
- * <em>Local Operations</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotifications
- * <em>Notifications</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEventComposite
- * <em>Event Composite</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotificationComposite
- * <em>Notification Composite </em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWaitingUploads
- * <em>Waiting Uploads</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProperties
- * <em>Properties</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getChangedSharedProperties
- * <em>Changed Shared Properties</em>}</li>
- * </ul>
- * </p>
+ * @extends APIDelegate<ESLocalProjectImpl>
+ *          <!-- end-user-doc
+ *          -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject <em> Project</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId
+ *          <em>Project Id</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName
+ *          <em>Project Name</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription
+ *          <em>Project Description</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession
+ *          <em>Usersession</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated
+ *          <em>Last Updated</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion
+ *          <em>Base Version</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount
+ *          <em>Resource Count</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getOldLogMessages
+ *          <em>Old Log Messages</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations
+ *          <em>Local Operations</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotifications
+ *          <em>Notifications</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEventComposite
+ *          <em>Event Composite</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotificationComposite
+ *          <em>Notification Composite </em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWaitingUploads
+ *          <em>Waiting Uploads</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProperties
+ *          <em>Properties</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getChangedSharedProperties
+ *          <em>Changed Shared Properties</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace()
  * @model

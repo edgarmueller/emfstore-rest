@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESTag
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Tag Version Spec</b></em>'.
  * 
- * @extends ESTagVersionSpec
+ * @extends APIDelegate<ESTagVersionSpecImpl>
  *          <!-- end-user-doc
  *          -->
  * 

@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'.
  * 
- * @extends ESBranchInfo
+ * @extends APIDelegate<ESBranchInfoImpl>
  *          <!-- end-user-doc -->
  * 
  *          <p>

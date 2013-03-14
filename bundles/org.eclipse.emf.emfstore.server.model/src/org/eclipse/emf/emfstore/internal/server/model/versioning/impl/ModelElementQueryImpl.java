@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * </ul>
  * </p>
  * 
- * @generated
+ * @generated NOT
  */
 public class ModelElementQueryImpl extends RangeQueryImpl<ESModelElementQueryImpl> implements ModelElementQuery {
 

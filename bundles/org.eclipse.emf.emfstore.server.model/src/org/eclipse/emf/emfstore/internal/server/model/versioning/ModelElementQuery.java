@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESModelElem
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getModelElementQuery()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface ModelElementQuery extends RangeQuery<ESModelElementQueryImpl> {
 	/**

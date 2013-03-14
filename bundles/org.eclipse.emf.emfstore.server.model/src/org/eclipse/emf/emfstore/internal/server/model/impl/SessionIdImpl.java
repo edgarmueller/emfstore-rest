@@ -18,9 +18,13 @@ import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESSessionIdImpl;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Session Id</b></em>'. <!-- end-user-doc -->
- * <p>
- * </p>
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Session Id</b></em>'.
+ * 
+ * @implements SessionId
+ * @implements APIDelegate<ESSessionIdImpl>
+ *             <!-- end-user-doc -->
+ *             <p>
+ *             </p>
  * 
  * @generated
  */
@@ -32,7 +36,8 @@ public class SessionIdImpl extends UniqueIdentifierImpl implements SessionId, AP
 	private ESSessionIdImpl apiImpl;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

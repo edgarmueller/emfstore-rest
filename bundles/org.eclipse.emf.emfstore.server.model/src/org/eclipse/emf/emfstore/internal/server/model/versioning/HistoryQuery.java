@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Query</b></em>'.
  * 
- * @extends ESHistoryInfo
+ * @extends APIDelegate<T>
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryQuery()
  * @model abstract="true"
- * @generated
+ * @generated NOT
  */
 public interface HistoryQuery<T extends ESHistoryQuery> extends EObject, APIDelegate<T> {
 	/**

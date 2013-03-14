@@ -19,19 +19,23 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Info</b></em>'.
  * 
- * <!-- end-user-doc -->
+ * @extends APIDelegate<ESServerImpl>
+ *          <!-- end-user-doc -->
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl <em>Url</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort <em>Port</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate Alias</em>}</li>
- * </ul>
- * </p>
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getName <em>Name</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getUrl <em>Url</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getPort <em>Port</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getProjectInfos <em>Project Infos</em>}
+ *          </li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getLastUsersession <em>Last Usersession
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo#getCertificateAlias <em>Certificate
+ *          Alias</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo()
  * @model

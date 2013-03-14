@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Element Id</b></em>'.
  * 
- * @extends ESModelElementId
+ * @extends APIDelegate<ESModelElementIdImpl>
  *          <!-- end-user-doc -->
  * 
  * 

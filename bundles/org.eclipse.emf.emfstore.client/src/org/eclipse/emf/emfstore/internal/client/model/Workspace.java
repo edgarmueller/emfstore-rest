@@ -34,22 +34,24 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Workspace</b></em>'.
  * 
- * @implements IAdaptable <!-- end-user-doc -->
+ * @implements IAdaptable
+ * @extends APIDelegate<ESWorkspaceImpl>
+ *          <!-- end-user-doc -->
  * 
- *             <p>
- *             The following features are supported:
- *             <ul>
- *             <li>
- *             {@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces
- *             <em>Project Spaces</em>}</li>
- *             <li>
- *             {@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos
- *             <em>Server Infos</em>}</li>
- *             <li>
- *             {@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions
- *             <em>Usersessions</em>}</li>
- *             </ul>
- *             </p>
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces
+ *          <em>Project Spaces</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos
+ *          <em>Server Infos</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions
+ *          <em>Usersessions</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace()
  * @model

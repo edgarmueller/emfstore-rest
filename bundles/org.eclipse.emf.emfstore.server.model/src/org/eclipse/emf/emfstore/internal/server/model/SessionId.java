@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESSessionIdImpl;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Session Id</b></em>'.
  * 
- * @extends ESSessionId
+ * @extends APIDelegate<ESSessionIdImpl>
  *          <!-- end-user-doc -->
  * 
  * 

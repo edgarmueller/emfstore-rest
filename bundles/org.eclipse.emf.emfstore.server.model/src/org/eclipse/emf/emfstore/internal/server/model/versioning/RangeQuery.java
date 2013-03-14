@@ -36,7 +36,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQuer
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getRangeQuery()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface RangeQuery<T extends ESRangeQueryImpl> extends HistoryQuery<T> {
 	/**

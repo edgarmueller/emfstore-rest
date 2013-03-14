@@ -23,20 +23,24 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getOperations <em>Operations</em>}
- * </li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getEvents <em>Events</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getLogMessage <em>Log Message
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getVersionProperties <em>Version
- * Properties </em>}</li>
- * </ul>
- * </p>
+ * @extends APIDelegate<ESChangePackageImpl>
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getOperations <em>
+ *          Operations</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getEvents <em>Events
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getLogMessage <em>Log
+ *          Message </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getVersionProperties <em>
+ *          Version Properties </em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getChangePackage()
  * @model

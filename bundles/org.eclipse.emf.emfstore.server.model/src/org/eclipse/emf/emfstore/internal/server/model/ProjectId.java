@@ -13,12 +13,11 @@ package org.eclipse.emf.emfstore.internal.server.model;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
-import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Id</b></em>'.
  * 
- * @extends {@link ESGlobalProjectId} <!-- end-user-doc -->
+ * @extends APIDelegate<ESGlobalProjectIdImpl><!-- end-user-doc -->
  * 
  * 
  * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectId()

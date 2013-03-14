@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESPathQuery
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getPathQuery()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface PathQuery extends HistoryQuery<ESPathQueryImpl> {
 	/**

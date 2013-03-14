@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESAnc
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Ancestor Version Spec</b></em>'.
  * 
- * @extends ESAncestorVersionSpec
+ * @extends APIDelegate<ESAncestorVersionSpecImpl>
  *          <!--
  *          end-user-doc -->
  * 

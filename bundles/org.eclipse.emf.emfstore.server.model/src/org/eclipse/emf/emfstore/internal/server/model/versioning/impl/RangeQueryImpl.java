@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * </ul>
  * </p>
  * 
- * @generated
+ * @generated NOT
  */
 public class RangeQueryImpl<T extends ESRangeQueryImpl<?>> extends HistoryQueryImpl<T> implements RangeQuery<T> {
 

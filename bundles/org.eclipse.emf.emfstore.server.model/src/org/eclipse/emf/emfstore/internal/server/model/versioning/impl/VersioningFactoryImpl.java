@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.*;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
@@ -48,13 +49,16 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	 * @generated
 	 */
 	public static VersioningFactory init() {
-		try {
+		try
+		{
 			VersioningFactory theVersioningFactory = (VersioningFactory) EPackage.Registry.INSTANCE
 				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning");
-			if (theVersioningFactory != null) {
+			if (theVersioningFactory != null)
+			{
 				return theVersioningFactory;
 			}
-		} catch (Exception exception) {
+		} catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new VersioningFactoryImpl();
@@ -78,7 +82,8 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 		case VersioningPackage.TAG_VERSION_SPEC:
 			return createTagVersionSpec();
 		case VersioningPackage.DATE_VERSION_SPEC:

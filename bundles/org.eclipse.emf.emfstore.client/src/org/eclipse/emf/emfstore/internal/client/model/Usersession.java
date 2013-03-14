@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Usersession</b></em>'.
  * 
- * @extends ESUsersession
+ * @extends APIDelegate<ESUsersessionImpl>
  *          <!-- end-user-doc -->
  * 
  *          <p>

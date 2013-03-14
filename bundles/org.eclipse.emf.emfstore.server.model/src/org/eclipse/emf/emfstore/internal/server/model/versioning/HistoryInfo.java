@@ -18,18 +18,18 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Info</b></em>'.
  * 
- * @extends ESHistoryInfo
+ * @extends APIDelegate<ESHistoryInfoImpl>
  *          <!-- end-user-doc -->
  * 
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimerySpec <em>Primery
- *          Spec </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimarySpec <em>Primary
+ *          Spec</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getNextSpec <em>Next Spec
  *          </em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPreviousSpec <em>
- *          Previous Spec </em>}</li>
+ *          Previous Spec</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getMergedFrom <em>Merged
  *          From</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getMergedTo <em>Merged To
@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getVersionProperties <em>
  *          Version Properties</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getChangePackage <em>Change
- *          Package </em>}</li>
+ *          Package</em>}</li>
  *          </ul>
  *          </p>
  * 
@@ -51,17 +51,17 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl
  */
 public interface HistoryInfo extends EObject, APIDelegate<ESHistoryInfoImpl> {
 	/**
-	 * Returns the value of the '<em><b>Primery Spec</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Primary Spec</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Primery Spec</em>' reference isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Primary Spec</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Primery Spec</em>' containment reference.
-	 * @see #setPrimerySpec(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_PrimerySpec()
+	 * @return the value of the '<em>Primary Spec</em>' containment reference.
+	 * @see #setPrimarySpec(PrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getHistoryInfo_PrimarySpec()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
@@ -69,16 +69,16 @@ public interface HistoryInfo extends EObject, APIDelegate<ESHistoryInfoImpl> {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimerySpec
-	 * <em>Primery Spec</em>}' containment reference.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getPrimarySpec
+	 * <em>Primary Spec</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Primery Spec</em>' containment reference.
+	 * @param value the new value of the '<em>Primary Spec</em>' containment reference.
 	 * @see #getPrimarySpec()
 	 * @generated
 	 */
-	void setPrimerySpec(PrimaryVersionSpec value);
+	void setPrimarySpec(PrimaryVersionSpec value);
 
 	/**
 	 * Returns the value of the '<em><b>Next Spec</b></em>' containment reference list.
@@ -183,8 +183,8 @@ public interface HistoryInfo extends EObject, APIDelegate<ESHistoryInfoImpl> {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getLogMessage
-	 * <em>Log Message</em>}' containment reference.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo#getLogMessage <em>Log Message</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 

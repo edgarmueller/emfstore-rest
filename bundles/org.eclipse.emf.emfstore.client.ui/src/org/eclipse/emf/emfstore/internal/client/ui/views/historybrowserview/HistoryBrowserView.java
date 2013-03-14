@@ -380,7 +380,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			localHistoryInfo.setChangePackage(changePackage);
 			PrimaryVersionSpec versionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 			versionSpec.setIdentifier(-1);
-			localHistoryInfo.setPrimerySpec(versionSpec);
+			localHistoryInfo.setPrimarySpec(versionSpec);
 			localHistoryInfo.setPreviousSpec(ModelUtil.clone(projectSpace.getBaseVersion()));
 			revisions.add(localHistoryInfo);
 		}

@@ -35,7 +35,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -76,29 +77,13 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
-			addPrimerySpecPropertyDescriptor(object);
 			addLogMessagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Primery Spec feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addPrimerySpecPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_HistoryInfo_primerySpec_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_HistoryInfo_primerySpec_feature",
-				"_UI_HistoryInfo_type"), VersioningPackage.Literals.HISTORY_INFO__PRIMERY_SPEC, true, false, true,
-			null, null, null));
 	}
 
 	/**
@@ -108,13 +93,20 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addLogMessagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_HistoryInfo_logMessage_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_HistoryInfo_logMessage_feature",
-				"_UI_HistoryInfo_type"), VersioningPackage.Literals.HISTORY_INFO__LOG_MESSAGE, true, false, true, null,
-			null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_HistoryInfo_logMessage_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_HistoryInfo_logMessage_feature",
+					"_UI_HistoryInfo_type"),
+				VersioningPackage.Literals.HISTORY_INFO__LOG_MESSAGE,
+				true,
+				false,
+				true,
+				null,
+				null,
+				null));
 	}
 
 	/**
@@ -127,8 +119,10 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__PRIMARY_SPEC);
 			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC);
 			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC);
 			childrenFeatures.add(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM);
@@ -191,7 +185,9 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(HistoryInfo.class)) {
+		switch (notification.getFeatureID(HistoryInfo.class))
+		{
+		case VersioningPackage.HISTORY_INFO__PRIMARY_SPEC:
 		case VersioningPackage.HISTORY_INFO__NEXT_SPEC:
 		case VersioningPackage.HISTORY_INFO__PREVIOUS_SPEC:
 		case VersioningPackage.HISTORY_INFO__MERGED_FROM:
@@ -216,26 +212,45 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__PRIMARY_SPEC,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__MERGED_TO,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS,
-			VersioningFactory.eINSTANCE.createTagVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__MERGED_TO,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__VERSION_PROPERTIES,
-			VersioningFactory.eINSTANCE.createVersionProperty()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__TAG_SPECS,
+				VersioningFactory.eINSTANCE.createTagVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE,
-			VersioningFactory.eINSTANCE.createChangePackage()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__VERSION_PROPERTIES,
+				VersioningFactory.eINSTANCE.createVersionProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.HISTORY_INFO__CHANGE_PACKAGE,
+				VersioningFactory.eINSTANCE.createChangePackage()));
 	}
 
 	/**
@@ -249,14 +264,17 @@ public class HistoryInfoItemProvider extends ItemProviderAdapter implements IEdi
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC
-			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC
-			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM
-			|| childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_TO;
+		boolean qualify =
+			childFeature == VersioningPackage.Literals.HISTORY_INFO__PRIMARY_SPEC ||
+				childFeature == VersioningPackage.Literals.HISTORY_INFO__NEXT_SPEC ||
+				childFeature == VersioningPackage.Literals.HISTORY_INFO__PREVIOUS_SPEC ||
+				childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_FROM ||
+				childFeature == VersioningPackage.Literals.HISTORY_INFO__MERGED_TO;
 
-		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
-				getFeatureText(childFeature), getTypeText(owner) });
+		if (qualify)
+		{
+			return getString("_UI_CreateChild_text2",
+				new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage
  * @generated
  */
 public interface ModelFactory extends EFactory {

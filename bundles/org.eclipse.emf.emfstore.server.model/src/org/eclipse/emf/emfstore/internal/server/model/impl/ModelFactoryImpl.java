@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.emfstore.internal.server.model.*;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
@@ -30,6 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.VersionInfo;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
+ * 
  * @generated
  */
 public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
@@ -37,16 +39,20 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ModelFactory init() {
-		try {
-			ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/emf/emfstore/server/model"); 
-			if (theModelFactory != null) {
+		try
+		{
+			ModelFactory theModelFactory = (ModelFactory) EPackage.Registry.INSTANCE
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model");
+			if (theModelFactory != null)
+			{
 				return theModelFactory;
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ModelFactoryImpl();
@@ -56,6 +62,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ModelFactoryImpl() {
@@ -64,27 +71,39 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case ModelPackage.PROJECT_HISTORY: return createProjectHistory();
-			case ModelPackage.PROJECT_INFO: return createProjectInfo();
-			case ModelPackage.SESSION_ID: return createSessionId();
-			case ModelPackage.SERVER_SPACE: return createServerSpace();
-			case ModelPackage.PROJECT_ID: return createProjectId();
-			case ModelPackage.VERSION_INFO: return createVersionInfo();
-			case ModelPackage.CLIENT_VERSION_INFO: return createClientVersionInfo();
-			case ModelPackage.FILE_IDENTIFIER: return createFileIdentifier();
-			case ModelPackage.AUTHENTICATION_INFORMATION: return createAuthenticationInformation();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		switch (eClass.getClassifierID())
+		{
+		case ModelPackage.PROJECT_HISTORY:
+			return createProjectHistory();
+		case ModelPackage.PROJECT_INFO:
+			return createProjectInfo();
+		case ModelPackage.SESSION_ID:
+			return createSessionId();
+		case ModelPackage.SERVER_SPACE:
+			return createServerSpace();
+		case ModelPackage.PROJECT_ID:
+			return createProjectId();
+		case ModelPackage.VERSION_INFO:
+			return createVersionInfo();
+		case ModelPackage.CLIENT_VERSION_INFO:
+			return createClientVersionInfo();
+		case ModelPackage.FILE_IDENTIFIER:
+			return createFileIdentifier();
+		case ModelPackage.AUTHENTICATION_INFORMATION:
+			return createAuthenticationInformation();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ProjectHistory createProjectHistory() {
@@ -94,6 +113,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ProjectInfo createProjectInfo() {
@@ -103,6 +123,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public SessionId createSessionId() {
@@ -112,6 +133,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ServerSpace createServerSpace() {
@@ -121,6 +143,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ProjectId createProjectId() {
@@ -130,6 +153,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public VersionInfo createVersionInfo() {
@@ -139,6 +163,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ClientVersionInfo createClientVersionInfo() {
@@ -148,6 +173,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public FileIdentifier createFileIdentifier() {
@@ -157,6 +183,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public AuthenticationInformation createAuthenticationInformation() {
@@ -166,14 +193,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ModelPackage getModelPackage() {
-		return (ModelPackage)getEPackage();
+		return (ModelPackage) getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @deprecated
 	 * @generated
 	 */

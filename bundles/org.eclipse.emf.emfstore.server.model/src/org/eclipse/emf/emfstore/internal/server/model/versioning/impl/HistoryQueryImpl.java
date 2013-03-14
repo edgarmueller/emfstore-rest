@@ -36,7 +36,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * </ul>
  * </p>
  * 
- * @generated
+ * @generated NOT
  */
 public abstract class HistoryQueryImpl<T extends ESHistoryQueryImpl<?, ?>> extends EObjectImpl implements
 	HistoryQuery<T> {

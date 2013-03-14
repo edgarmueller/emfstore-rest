@@ -12,12 +12,11 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESBranchVersionSpecImpl;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Version Spec</b></em>'.
  * 
- * @extends {@link ESBranchVersionSpec} <!--
+ * @extends APIDelegate<ESBranchVersionSpecImpl> <!--
  *          end-user-doc -->
  * 
  * 

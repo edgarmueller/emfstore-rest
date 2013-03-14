@@ -99,7 +99,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createTagVersionSpecAdapter() {
-		if (tagVersionSpecItemProvider == null) {
+		if (tagVersionSpecItemProvider == null)
+		{
 			tagVersionSpecItemProvider = new TagVersionSpecItemProvider(this);
 		}
 
@@ -124,7 +125,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createDateVersionSpecAdapter() {
-		if (dateVersionSpecItemProvider == null) {
+		if (dateVersionSpecItemProvider == null)
+		{
 			dateVersionSpecItemProvider = new DateVersionSpecItemProvider(this);
 		}
 
@@ -142,14 +144,16 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected PrimaryVersionSpecItemProvider primaryVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec} . <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createPrimaryVersionSpecAdapter() {
-		if (primaryVersionSpecItemProvider == null) {
+		if (primaryVersionSpecItemProvider == null)
+		{
 			primaryVersionSpecItemProvider = new PrimaryVersionSpecItemProvider(this);
 		}
 
@@ -174,7 +178,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createLogMessageAdapter() {
-		if (logMessageItemProvider == null) {
+		if (logMessageItemProvider == null)
+		{
 			logMessageItemProvider = new LogMessageItemProvider(this);
 		}
 
@@ -199,7 +204,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createChangePackageAdapter() {
-		if (changePackageItemProvider == null) {
+		if (changePackageItemProvider == null)
+		{
 			changePackageItemProvider = new ChangePackageItemProvider(this);
 		}
 
@@ -224,7 +230,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createHistoryInfoAdapter() {
-		if (historyInfoItemProvider == null) {
+		if (historyInfoItemProvider == null)
+		{
 			historyInfoItemProvider = new HistoryInfoItemProvider(this);
 		}
 
@@ -249,7 +256,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createRangeQueryAdapter() {
-		if (rangeQueryItemProvider == null) {
+		if (rangeQueryItemProvider == null)
+		{
 			rangeQueryItemProvider = new RangeQueryItemProvider(this);
 		}
 
@@ -274,7 +282,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createPathQueryAdapter() {
-		if (pathQueryItemProvider == null) {
+		if (pathQueryItemProvider == null)
+		{
 			pathQueryItemProvider = new PathQueryItemProvider(this);
 		}
 
@@ -292,14 +301,16 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected ModelElementQueryItemProvider modelElementQueryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery}
+	 * . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createModelElementQueryAdapter() {
-		if (modelElementQueryItemProvider == null) {
+		if (modelElementQueryItemProvider == null)
+		{
 			modelElementQueryItemProvider = new ModelElementQueryItemProvider(this);
 		}
 
@@ -307,8 +318,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version}
-	 * instances.
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -323,7 +334,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createVersionAdapter() {
-		if (versionItemProvider == null) {
+		if (versionItemProvider == null)
+		{
 			versionItemProvider = new VersionItemProvider(this);
 		}
 
@@ -348,7 +360,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createHeadVersionSpecAdapter() {
-		if (headVersionSpecItemProvider == null) {
+		if (headVersionSpecItemProvider == null)
+		{
 			headVersionSpecItemProvider = new HeadVersionSpecItemProvider(this);
 		}
 
@@ -373,7 +386,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createVersionPropertyAdapter() {
-		if (versionPropertyItemProvider == null) {
+		if (versionPropertyItemProvider == null)
+		{
 			versionPropertyItemProvider = new VersionPropertyItemProvider(this);
 		}
 
@@ -391,14 +405,16 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected BranchVersionSpecItemProvider branchVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec}
+	 * . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createBranchVersionSpecAdapter() {
-		if (branchVersionSpecItemProvider == null) {
+		if (branchVersionSpecItemProvider == null)
+		{
 			branchVersionSpecItemProvider = new BranchVersionSpecItemProvider(this);
 		}
 
@@ -423,7 +439,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Adapter createBranchInfoAdapter() {
-		if (branchInfoItemProvider == null) {
+		if (branchInfoItemProvider == null)
+		{
 			branchInfoItemProvider = new BranchInfoItemProvider(this);
 		}
 
@@ -441,14 +458,16 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	protected AncestorVersionSpecItemProvider ancestorVersionSpecItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec} . <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createAncestorVersionSpecAdapter() {
-		if (ancestorVersionSpecItemProvider == null) {
+		if (ancestorVersionSpecItemProvider == null)
+		{
 			ancestorVersionSpecItemProvider = new AncestorVersionSpecItemProvider(this);
 		}
 
@@ -503,9 +522,11 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -543,7 +564,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}
