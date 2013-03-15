@@ -16,8 +16,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledException;
-import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -32,7 +30,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UIShareProjectController extends AbstractEMFStoreUIController<Void> {
 
-	private final ProjectSpace projectSpace;
+	private final ESLocalProject localProject;
 
 	/**
 	 * Constructor.
@@ -44,7 +42,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	 */
 	public UIShareProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
-		this.projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
+		this.localProject = localProject;
 	}
 
 	/**
@@ -56,7 +54,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	@Override
 	public Void doRun(final IProgressMonitor progressMonitor) throws ESException {
 		try {
-			((ProjectSpaceImpl) projectSpace).shareProject(null, progressMonitor);
+			localProject.shareProject(null, progressMonitor);
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openInformation(getShell(), "Share succeeded",

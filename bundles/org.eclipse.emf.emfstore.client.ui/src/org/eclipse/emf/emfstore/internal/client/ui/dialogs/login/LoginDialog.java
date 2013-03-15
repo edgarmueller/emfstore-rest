@@ -10,11 +10,16 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
+import java.util.List;
+import java.util.concurrent.Callable;
+
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -56,7 +61,7 @@ public class LoginDialog extends TitleAreaDialog {
 	private final ILoginDialogController controller;
 	private Usersession selectedUsersession;
 	private boolean passwordModified;
-	private ESUsersession[] knownUsersessions;
+	private List<Usersession> knownUsersessions;
 
 	/**
 	 * Create the dialog.
@@ -83,7 +88,7 @@ public class LoginDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		setTitleImage(ResourceManager.getPluginImage(
 			"org.eclipse.emf.emfstore.client.ui", "icons/login_icon.png"));
-		setTitle("Log in to " + controller.getServerLabel());
+		setTitle("Log in to " + controller.getServer().getName());
 		setMessage("Please enter your username and password");
 		getShell().setText("Authentication required");
 		Composite area = (Composite) super.createDialogArea(parent);
@@ -145,9 +150,11 @@ public class LoginDialog extends TitleAreaDialog {
 
 		initData();
 		if (controller.getUsersession() == null) {
-			loadUsersession(controller.getServerInfo().getLastUsersession());
+			ESUsersession lastUsersession = controller.getServer().getLastUsersession();
+			loadUsersession(((ESUsersessionImpl) lastUsersession).getInternalAPIImpl());
 		} else {
-			loadUsersession(controller.getUsersession());
+			ESUsersession usersession = controller.getUsersession();
+			loadUsersession(((ESUsersessionImpl) usersession).getInternalAPIImpl());
 		}
 		return area;
 	}
@@ -165,7 +172,7 @@ public class LoginDialog extends TitleAreaDialog {
 			}
 		});
 
-		knownUsersessions = controller.getKnownUsersessions();
+		knownUsersessions = APIUtil.mapToInternalAPI(Usersession.class, controller.getKnownUsersessions());
 		if (!controller.isUsersessionLocked()) {
 			usernameCombo.setInput(knownUsersessions);
 		}
@@ -177,13 +184,12 @@ public class LoginDialog extends TitleAreaDialog {
 	 * @param usersession
 	 *            the user session to be loaded
 	 */
-	private void loadUsersession(ESUsersession usersession) {
+	private void loadUsersession(Usersession usersession) {
 		if (usersession != null && selectedUsersession == usersession) {
 			return;
 		}
 
-		selectedUsersession = ((ESUsersessionImpl) usersession)
-			.getInternalAPIImpl();
+		selectedUsersession = usersession;
 
 		// reset fields
 		passwordField.setMessage("");
@@ -220,32 +226,44 @@ public class LoginDialog extends TitleAreaDialog {
 	@Override
 	protected void okPressed() {
 		try {
-			String username = usernameCombo.getCombo().getText();
-			String password = passwordField.getText();
-			boolean savePass = savePassword.getSelection();
+			final String username = usernameCombo.getCombo().getText();
+			final String password = passwordField.getText();
+			final boolean savePw = savePassword.getSelection();
 
 			Usersession candidateSession = selectedUsersession;
 
 			// try to find usersession with same username in order to avoid
 			// duplicates
 			if (candidateSession == null) {
-				ESUsersession usersessionIfKnown = getUsersessionIfKnown(username);
-				candidateSession = ((ESUsersessionImpl) usersessionIfKnown).getInternalAPIImpl();
+				candidateSession = getUsersessionIfKnown(username);
 			}
 
 			if (candidateSession == null) {
+				final ESServerImpl serverImpl = (ESServerImpl) controller.getServer();
 				candidateSession = ModelFactory.eINSTANCE.createUsersession();
-				// TODO: cast
-				candidateSession.setServerInfo((ServerInfo) controller
-					.getServerInfo());
-				candidateSession.setUsername(username);
+				final Usersession session = candidateSession;
+				RunESCommand.run(new Callable<Void>() {
+					public Void call() throws Exception {
+						session.setServerInfo(serverImpl.getInternalAPIImpl());
+						session.setUsername(username);
+						return null;
+					}
+				});
 			}
 
-			candidateSession.setSavePassword(savePass);
-			if (passwordModified) {
-				candidateSession.setPassword(password);
-			}
+			final Usersession session = candidateSession;
+			RunESCommand.run(new Callable<Void>() {
+				public Void call() throws Exception {
+					session.setSavePassword(savePw);
+					if (passwordModified) {
+						session.setPassword(password);
+					}
+					return null;
+				}
+			});
+
 			controller.validate(candidateSession.getAPIImpl());
+
 		} catch (ESException e) {
 			setErrorMessage(e.getMessage());
 			return;
@@ -253,8 +271,8 @@ public class LoginDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-	private ESUsersession getUsersessionIfKnown(String username) {
-		for (ESUsersession session : knownUsersessions) {
+	private Usersession getUsersessionIfKnown(String username) {
+		for (Usersession session : knownUsersessions) {
 			if (session.getUsername().equals(username)) {
 				return session;
 			}
@@ -312,7 +330,7 @@ public class LoginDialog extends TitleAreaDialog {
 				Object firstElement = ((StructuredSelection) selection)
 					.getFirstElement();
 				if (firstElement instanceof Usersession) {
-					loadUsersession(((Usersession) firstElement).getAPIImpl());
+					loadUsersession((Usersession) firstElement);
 				}
 			}
 		}

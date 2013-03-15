@@ -10,14 +10,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -49,12 +48,10 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getKnownUsersessions()
 	 */
-	public ESUsersession[] getKnownUsersessions() {
-		HashSet<Object> set = new LinkedHashSet<Object>();
-		List<ESUsersession> mapToAPI = APIUtil.mapToAPI(ESUsersession.class,
-			ESWorkspaceProviderImpl.getInstance().getWorkspace()
-				.getInternalAPIImpl().getUsersessions());
-		return mapToAPI.toArray(new ESUsersession[mapToAPI.size()]);
+	public List<ESUsersession> getKnownUsersessions() {
+		return APIUtil.mapToAPI(
+			ESUsersession.class,
+			ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().getUsersessions());
 	}
 
 	private ESUsersession login(final boolean force) throws ESException {
@@ -104,7 +101,7 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getServerLabel()
 	 */
 	public String getServerLabel() {
-		return getServerInfo().getName();
+		return getServer().getName();
 	}
 
 	/**
@@ -113,20 +110,25 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#validate(org.eclipse.emf.emfstore.internal.client.model.Usersession)
 	 */
-	public void validate(ESUsersession session) throws ESException {
+	public void validate(final ESUsersession session) throws ESException {
 
-		Usersession usersession = ((ESUsersessionImpl) session)
-			.getInternalAPIImpl();
+		final Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		final ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
+		final EList<Usersession> usersessions = workspace.getInternalAPIImpl().getUsersessions();
 
-		// TODO login code
-		usersession.logIn();
-		// if successful, else exception is thrown prior reaching this code
-		// TODO OTS
-		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		EList<Usersession> usersessions = workspace.getInternalAPIImpl().getUsersessions();
-		if (!usersessions.contains(usersession)) {
-			usersessions.add(usersession);
-		}
+		RunESCommand.run(new Callable<Void>() {
+
+			public Void call() throws Exception {
+				// TODO login code
+				usersession.logIn();
+				// if successful, else exception is thrown prior reaching this code
+				if (!usersessions.contains(usersession)) {
+					usersessions.add(usersession);
+				}
+				return null;
+			}
+		});
+
 		this.usersession = session;
 		// TODO OTS auto save
 	}
@@ -145,9 +147,9 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getServerInfo()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getServer()
 	 */
-	public ESServer getServerInfo() {
+	public ESServer getServer() {
 		if (server != null) {
 			return server;
 		}

@@ -587,7 +587,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				getInternalAPIImpl().shareProject(
-					usersessionImpl.getInternalAPIImpl(),
+					usersessionImpl != null ? usersessionImpl.getInternalAPIImpl() : null,
 					monitor);
 				return null;
 			}
@@ -601,11 +601,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#isShared()
 	 */
 	public boolean isShared() {
-		return RunESCommand.runWithResult(new Callable<Boolean>() {
-			public Boolean call() throws Exception {
-				return getInternalAPIImpl().isShared();
-			}
-		});
+		return getInternalAPIImpl().isShared();
 	}
 
 	/**

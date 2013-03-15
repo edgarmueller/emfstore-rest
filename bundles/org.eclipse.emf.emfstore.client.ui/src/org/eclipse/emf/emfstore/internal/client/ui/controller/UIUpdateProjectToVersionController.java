@@ -14,12 +14,10 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
@@ -65,63 +63,58 @@ public class UIUpdateProjectToVersionController extends
 				}
 			}
 			if (historyInfo.size() == 0) {
-				return RunInUI
-					.runWithResult(new Callable<ESPrimaryVersionSpec>() {
-						public ESPrimaryVersionSpec call() throws Exception {
-							return new UIUpdateProjectController(
-								getShell(), projectSpace,
-								ESVersionSpec.FACTORY.createHEAD(projectSpace.getBaseVersion()))
-								.execute();
-						}
-					});
+				return new UIUpdateProjectController(
+					getShell(), projectSpace,
+					ESVersionSpec.FACTORY.createHEAD(projectSpace.getBaseVersion()))
+					.execute();
 			}
 
-			ListDialog listDialog = new ListDialog(getShell());
-			listDialog.setContentProvider(ArrayContentProvider.getInstance());
-			listDialog.setLabelProvider(new LabelProvider() {
-
-				@Override
-				public String getText(Object element) {
-
-					HistoryInfo historyInfo = (HistoryInfo) element;
-
-					StringBuilder sb = new StringBuilder("Version ");
-					sb.append(Integer.toString(historyInfo.getPrimarySpec()
-						.getIdentifier()));
-					sb.append("  -  ");
-					sb.append(historyInfo.getLogMessage().getMessage());
-
-					return sb.toString();
-
-				}
-
-			});
-			listDialog.setInput(historyInfo);
-			listDialog.setTitle("Select a Version to update to");
-			listDialog
-				.setMessage("The project will be updated to the selected Version");
-			listDialog
-				.setInitialSelections(new Object[] { historyInfo.get(0) });
+			ListDialog listDialog = createDialog(historyInfo);
 			int result = listDialog.open();
 			if (Dialog.OK == result) {
 				Object[] selection = listDialog.getResult();
 				final HistoryInfo info = (HistoryInfo) selection[0];
-				return RunInUI
-					.runWithResult(new Callable<ESPrimaryVersionSpec>() {
-						public ESPrimaryVersionSpec call() throws Exception {
-							return new UIUpdateProjectController(
-								getShell(),
-								projectSpace,
-								ESVersionSpec.FACTORY.createPRIMARY(
-									info.getPrimarySpec().getIdentifier()))
-								.execute();
-						}
-					});
+				return new UIUpdateProjectController(
+					getShell(),
+					projectSpace,
+					ESVersionSpec.FACTORY.createPRIMARY(
+						info.getPrimarySpec().getIdentifier()))
+					.execute();
 			}
 		} catch (ESException e) {
 
 		}
 		return null;
+	}
+
+	private ListDialog createDialog(List<ESHistoryInfo> historyInfo) {
+		ListDialog listDialog = new ListDialog(getShell());
+		listDialog.setContentProvider(ArrayContentProvider.getInstance());
+		listDialog.setLabelProvider(new LabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				HistoryInfo historyInfo = (HistoryInfo) element;
+
+				StringBuilder sb = new StringBuilder("Version ");
+				sb.append(Integer.toString(historyInfo.getPrimarySpec()
+					.getIdentifier()));
+				sb.append("  -  ");
+				sb.append(historyInfo.getLogMessage().getMessage());
+
+				return sb.toString();
+
+			}
+
+		});
+		listDialog.setInput(historyInfo);
+		listDialog.setTitle("Select a Version to update to");
+		listDialog
+			.setMessage("The project will be updated to the selected Version");
+		listDialog
+			.setInitialSelections(new Object[] { historyInfo.get(0) });
+		return listDialog;
 	}
 
 }

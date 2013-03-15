@@ -94,7 +94,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements
 			.getExtensionElements()) {
 			try {
 				CommitDialogTray tray = element.getClass("class",
-															CommitDialogTray.class);
+					CommitDialogTray.class);
 				String name = element.getAttribute("name");
 				tray.init(CommitDialog.this);
 				trays.put(name, tray);
@@ -232,18 +232,6 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements
 
 		logMsg = txtLogMsg.getText();
 
-		// suppress duplicates
-		if (!oldLogMessages.contains(logMsg)) {
-			oldLogMessages.add(logMsg);
-		}
-
-		// remove older messages
-		if (oldLogMessages.size() > 10) {
-			// the list can only grow one element at a time,
-			// so only one element should be deleted
-			oldLogMessages.remove(0);
-		}
-
 		for (CommitDialogTray t : trays.values()) {
 			t.okPressed();
 		}
@@ -299,7 +287,7 @@ public class CommitDialog extends EMFStoreTitleAreaDialog implements
 			final CommitDialogTray tray = trays.get(name);
 			if (tray != null) {
 				final Button notificationsButton = createButton(parent, 2138,
-																name + " >>", false);
+					name + " >>", false);
 				notificationsButton
 					.addSelectionListener(new SelectionAdapter() {
 						private boolean isOpen;

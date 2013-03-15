@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
@@ -24,6 +23,7 @@ import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -33,10 +33,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
@@ -56,8 +53,8 @@ public class UIUpdateProjectController extends
 	AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ESUpdateCallback {
 
-	private final ProjectSpace projectSpace;
-	private VersionSpec version;
+	private final ESLocalProject localProject;
+	private ESVersionSpec version;
 
 	/**
 	 * Constructor.
@@ -69,7 +66,7 @@ public class UIUpdateProjectController extends
 	 */
 	public UIUpdateProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
-		this.projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
+		this.localProject = localProject;
 		this.version = null;
 	}
 
@@ -86,9 +83,8 @@ public class UIUpdateProjectController extends
 	public UIUpdateProjectController(Shell shell, ESLocalProject localProject,
 		ESVersionSpec version) {
 		super(shell);
-		this.projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
-		this.version = ((ESVersionSpecImpl<? extends ESVersionSpec, ? extends VersionSpec>) version)
-			.getInternalAPIImpl();
+		this.localProject = localProject;
+		this.version = version;
 	}
 
 	/**
@@ -115,22 +111,24 @@ public class UIUpdateProjectController extends
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException)
 	 */
 	public boolean conflictOccurred(final ESChangeConflict changeConflict,
-		final IProgressMonitor progressMonitor) {
+		final IProgressMonitor monitor) {
 		// TODO OTS
 		boolean mergeSuccessful = false;
 		try {
-			final PrimaryVersionSpec targetVersion = projectSpace.resolveVersionSpec(Versions.createHEAD(),
-				progressMonitor);
+			final ProjectSpace internalProject = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
+			final ChangeConflict internalChangeConflict = ((ESChangeConflictImpl) changeConflict).getInternalAPIImpl();
+
 			// merge opens up a dialog
-			return projectSpace.merge(targetVersion,
-				((ESChangeConflictImpl) changeConflict).getInternalAPIImpl(),
+			return internalProject.merge(
+				internalProject.resolveVersionSpec(Versions.createHEAD(), monitor),
+				internalChangeConflict,
 				new MergeProjectHandler(),
-				this,
-				progressMonitor);
+				UIUpdateProjectController.this,
+				monitor);
 		} catch (final ESException e) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					handleMergeException(projectSpace, e);
+					handleMergeException(e);
 					return null;
 				}
 			});
@@ -139,11 +137,10 @@ public class UIUpdateProjectController extends
 		return mergeSuccessful;
 	}
 
-	private void handleMergeException(final ProjectSpace projectSpace,
-		ESException e) {
+	private void handleMergeException(ESException e) {
 		WorkspaceUtil.logException(String.format(
 			"Exception while merging the project %s!",
-			projectSpace.getProjectName()), e);
+			localProject.getProjectName()), e);
 		EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 	}
 
@@ -180,20 +177,20 @@ public class UIUpdateProjectController extends
 	@Override
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor)
 		throws ESException {
-		PrimaryVersionSpec oldBaseVersion = projectSpace.getBaseVersion();
-		PrimaryVersionSpec resolveVersionSpec = projectSpace.resolveVersionSpec(
-			Versions.createHEAD(oldBaseVersion),
-			new NullProgressMonitor());
+		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
+		ESPrimaryVersionSpec resolveVersionSpec = localProject.resolveVersionSpec(
+			ESVersionSpec.FACTORY.createHEAD(),
+			monitor);
 
 		if (oldBaseVersion.equals(resolveVersionSpec)) {
 			noChangesOnServer();
-			return oldBaseVersion.getAPIImpl();
+			return oldBaseVersion;
 		}
 
-		PrimaryVersionSpec newBaseVersion = projectSpace.update(version,
+		ESPrimaryVersionSpec newBaseVersion = localProject.update(version,
 			UIUpdateProjectController.this, monitor);
 
-		return newBaseVersion.getAPIImpl();
+		return newBaseVersion;
 	}
 
 	/**

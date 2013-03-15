@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -32,7 +33,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessageFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
-import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -54,8 +54,6 @@ public class UICommitProjectController extends
 	ESCommitCallback {
 
 	private final ESLocalProject localProject;
-	// TODO: is never initialized
-	private ESLogMessage logMessage;
 	private int dialogReturnValue;
 
 	/**
@@ -82,7 +80,7 @@ public class UICommitProjectController extends
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), null,
-												"No local changes in your project. No need to commit.");
+					"No local changes in your project. No need to commit.");
 				return null;
 			}
 		});
@@ -98,24 +96,25 @@ public class UICommitProjectController extends
 		IProgressMonitor progressMonitor) {
 
 		final String message = "Your project is outdated, you need to update before commit. Do you want to update now?";
-		boolean shouldUpdate = RunInUI.runWithResult(new Callable<Boolean>() {
 
+		boolean shouldUpdate = RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				return MessageDialog.openConfirm(getShell(), "Confirmation",
-													message);
+					message);
 			}
 		});
+
 		if (shouldUpdate) {
 			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.localProject.getBaseVersion();
 			ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
 				.executeSub(progressMonitor);
+
 			if (version.equals(baseVersion)) {
 				return false;
 			}
-
 		}
-		return shouldUpdate;
 
+		return shouldUpdate;
 	}
 
 	/**
@@ -130,19 +129,19 @@ public class UICommitProjectController extends
 		ESChangePackage changePackage,
 		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
-		ChangePackage internalChangePackage = ((ESChangePackageImpl) changePackage).getInternalAPIImpl();
-		ProjectSpace projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
+		final ChangePackage internalChangePackage = ((ESChangePackageImpl) changePackage).getInternalAPIImpl();
+		final ProjectSpace projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
 
 		if (internalChangePackage.getOperations().isEmpty()) {
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog
 						.openInformation(
-											getShell(),
-											"No local changes",
-											"No need to commit any more, there are no more changes pending for commit.\n"
-												+ "This may have happened because you rejected your changes in favor for changes "
-												+ "of other users in a merge.");
+							getShell(),
+							"No local changes",
+							"No need to commit any more, there are no more changes pending for commit.\n"
+								+ "This may have happened because you rejected your changes in favor for changes "
+								+ "of other users in a merge.");
 					return null;
 				}
 			});
@@ -163,10 +162,27 @@ public class UICommitProjectController extends
 		});
 
 		if (dialogReturnValue == Dialog.OK) {
+			RunESCommand.run(new Callable<Void>() {
+				public Void call() throws Exception {
 
-			internalChangePackage.setLogMessage(
-				LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
-															projectSpace.getUsersession().getUsername()));
+					// suppress duplicates
+					if (!projectSpace.getOldLogMessages().contains(commitDialog.getLogText())) {
+						projectSpace.getOldLogMessages().add(commitDialog.getLogText());
+					}
+
+					// remove older messages
+					if (projectSpace.getOldLogMessages().size() > 10) {
+						// the list can only grow one element at a time,
+						// so only one element should be deleted
+						projectSpace.getOldLogMessages().remove(0);
+					}
+
+					internalChangePackage.setLogMessage(
+						LogMessageFactory.INSTANCE.createLogMessage(commitDialog.getLogText(),
+							projectSpace.getUsersession().getUsername()));
+					return null;
+				}
+			});
 
 			return true;
 		}
@@ -186,9 +202,9 @@ public class UICommitProjectController extends
 		try {
 
 			ESPrimaryVersionSpec primaryVersionSpec = localProject.commit(
-																			logMessage,
-																			UICommitProjectController.this,
-																			progressMonitor);
+				null,
+				UICommitProjectController.this,
+				progressMonitor);
 			return primaryVersionSpec;
 
 		} catch (BaseVersionOutdatedException e) {
@@ -199,7 +215,7 @@ public class UICommitProjectController extends
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Commit failed",
-											e.getMessage());
+						e.getMessage());
 					return null;
 				}
 			});

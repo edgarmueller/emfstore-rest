@@ -137,10 +137,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		runnableContext = ExtensionRegistry.INSTANCE.get(
+		setRunnableContext(ExtensionRegistry.INSTANCE.get(
 			RUNNABLE_CONTEXT_ID,
 			ESRunnableContext.class,
-			new DefaultRunnableContext(), true);
+			new DefaultRunnableContext(), true));
 	}
 
 	/**
@@ -301,7 +301,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            the {@link Runnable} to be executed in the context of this {@link ProjectSpace}
 	 */
 	public void executeRunnable(Runnable runnable) {
-		runnableContext.executeRunnable(runnable);
+		getRunnableContext().executeRunnable(runnable);
 	}
 
 	/**
@@ -867,7 +867,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		ConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
 		throws ESException {
 		// merge the conflicts
-		// TODO: review casting of change conflict
 		if (conflictResolver.resolveConflicts(getProject(), conflict,
 			getBaseVersion(), target)) {
 			progressMonitor.subTask("Conflicts resolved, calculating result");
@@ -1306,5 +1305,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	public ESLocalProjectImpl createAPIImpl() {
 		return new ESLocalProjectImpl(this);
+	}
+
+	public ESRunnableContext getRunnableContext() {
+		return runnableContext;
+	}
+
+	public void setRunnableContext(ESRunnableContext runnableContext) {
+		this.runnableContext = runnableContext;
 	}
 }

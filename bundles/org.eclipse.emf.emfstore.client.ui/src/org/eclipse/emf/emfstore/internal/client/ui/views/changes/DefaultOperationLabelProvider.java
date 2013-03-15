@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.changes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.internal.server.model.provider.AbstractOperationCustomLabelProvider;
+import org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 
@@ -45,7 +45,7 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.provider.AbstractOperationCustomLabelProvider#getDescription(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#getDescription(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	@Override
 	public String getDescription(AbstractOperation operation) {
@@ -66,7 +66,7 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.provider.AbstractOperationCustomLabelProvider#getImage(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#getImage(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	@Override
 	public Object getImage(AbstractOperation operation) {
@@ -77,7 +77,7 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.provider.AbstractOperationCustomLabelProvider#canRender(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#canRender(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	@Override
 	public int canRender(AbstractOperation operation) {
@@ -88,7 +88,7 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.provider.AbstractOperationCustomLabelProvider#getModelElementName(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#getModelElementName(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
 	public String getModelElementName(EObject modelElement) {
@@ -116,7 +116,7 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.provider.AbstractOperationCustomLabelProvider#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#dispose()
 	 */
 	public void dispose() {
 		if (adapterFactory != null) {

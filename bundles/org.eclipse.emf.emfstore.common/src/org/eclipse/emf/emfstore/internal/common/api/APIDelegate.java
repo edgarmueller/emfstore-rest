@@ -7,18 +7,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.api;
 
 /**
- * @author Edgar
- * @param <U>
- * @param <INNER>
- * @param <API_IMPL_CLASS>
- * @param <INNER>
+ * Maps the implementing type onto an externally available API implementation type.
  * 
+ * @author emueller
+ * 
+ * @param <API_IMPL_CLASS> the API implementation class which maps onto this internal type
  */
 public interface APIDelegate<API_IMPL_CLASS> {
 

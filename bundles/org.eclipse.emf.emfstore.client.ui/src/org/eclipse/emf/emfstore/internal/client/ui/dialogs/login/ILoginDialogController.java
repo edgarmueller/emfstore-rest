@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
+import java.util.List;
+
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -53,18 +55,11 @@ public interface ILoginDialogController {
 
 	/**
 	 * Returns the available {@link Usersession}s based on server info object, that is retrieved via
-	 * {@link #getServerInfo()}.
+	 * {@link #getServer()}.
 	 * 
 	 * @return all available user sessions as an array.
 	 */
-	ESUsersession[] getKnownUsersessions();
-
-	/**
-	 * Returns the name of the {@link ServerInfo} that may be retrieved via {@link getServerInfo()}.
-	 * 
-	 * @return the name of the server info
-	 */
-	String getServerLabel();
+	List<ESUsersession> getKnownUsersessions();
 
 	/**
 	 * Returns the {@link ServerInfo} the login dialog controller was assigned to, if any.
@@ -73,5 +68,5 @@ public interface ILoginDialogController {
 	 * 
 	 * @return the server info, if any
 	 */
-	ESServer getServerInfo();
+	ESServer getServer();
 }
