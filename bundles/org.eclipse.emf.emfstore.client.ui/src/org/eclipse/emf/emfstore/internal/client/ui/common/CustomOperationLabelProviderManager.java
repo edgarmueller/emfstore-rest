@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.model.provider;
+package org.eclipse.emf.emfstore.internal.client.ui.common;
 
 import java.util.ArrayList;
 import java.util.List;
