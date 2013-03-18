@@ -86,15 +86,16 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	}
 
 	/**
+	 * Clone a project.
 	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#createLocalProject(java.lang.String)
+	 * @param projectName The name of the new project.
+	 * @param originalProject The project to clone.
+	 * @return The new {@link ProjectSpace} of the cloned {@link Project}.
 	 */
-	public ProjectSpace createLocalProject(String projectName) {
+	public ProjectSpace cloneProject(String projectName, Project originalProject) {
 
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
-		projectSpace.setProject(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
+		projectSpace.setProject(ModelUtil.clone(originalProject));
 		projectSpace.setProjectName(projectName);
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
@@ -104,6 +105,17 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		this.save();
 
 		return projectSpace;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#createLocalProject(java.lang.String)
+	 */
+	public ProjectSpace createLocalProject(String projectName) {
+		return cloneProject(projectName,
+			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
 	}
 
 	/**

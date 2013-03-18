@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -82,11 +83,10 @@ public abstract class WorkspaceTest {
 				setProject(getProjectSpace().getProject());
 
 				if (isCompareAtEnd()) {
-					Project clonedProject = ModelUtil.clone(getProject());
-					ESLocalProjectImpl localProject2 = ESWorkspaceProviderImpl.getInstance()
-						.getWorkspace().createLocalProject("clonedProject");
-					clonedProjectSpace = (ProjectSpaceBase) localProject2.getInternalAPIImpl();
-					clonedProjectSpace.setProject(clonedProject);
+					WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProviderImpl.getInstance().getWorkspace()
+						.getInternalAPIImpl();
+					workspace.cloneProject("clonedProject", getProject());
+					clonedProjectSpace = (ProjectSpaceBase) workspace.cloneProject("clonedProject", getProject());
 					Assert.assertTrue(ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject()));
 				}
 			}
