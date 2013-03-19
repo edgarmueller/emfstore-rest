@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification;
+package org.eclipse.emf.emfstore.internal.common.model.util;
 
 import java.lang.reflect.Field;
 
@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 
 /**
@@ -215,15 +214,13 @@ public class NotificationInfo implements Notification {
 
 			// BEGIN SUPRESS CATCH EXCEPTION
 		} catch (RuntimeException e) {
-			WorkspaceUtil.logException("Access to next field of notification failed.", e);
+			return false;
 			// END SUPRESS CATCH EXCEPTION
 		} catch (IllegalAccessException e) {
-			WorkspaceUtil.logException("Access to next field of notification failed.", e);
+			return false;
 		} catch (NoSuchFieldException e) {
-			WorkspaceUtil.logException("Access to next field of notification failed.", e);
+			return false;
 		}
-		return false;
-
 	}
 
 	/**

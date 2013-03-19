@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificati
 
 import org.eclipse.emf.emfstore.client.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
  * Filter to ignore notifications with the illegal state of having no value for
@@ -29,7 +29,7 @@ public class IgnoreNullFeatureNotificationsFilter implements ESNotificationFilte
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo,
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
 	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {

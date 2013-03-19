@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification;
+package org.eclipse.emf.emfstore.internal.common.model.util;
 
 import java.util.List;
 

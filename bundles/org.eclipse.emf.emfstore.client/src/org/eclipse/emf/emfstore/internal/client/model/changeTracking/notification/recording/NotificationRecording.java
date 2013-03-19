@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.emfstore.internal.client.model.Activator;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
  * A NotificationRecording is basically a list of EMF Notifications.
