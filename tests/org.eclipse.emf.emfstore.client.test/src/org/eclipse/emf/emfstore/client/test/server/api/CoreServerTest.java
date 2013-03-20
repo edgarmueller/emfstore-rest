@@ -39,6 +39,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.junit.Before;
 
 public abstract class CoreServerTest extends WorkspaceTest {
 
@@ -52,8 +53,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 		setCompareAtEnd(false);
 	}
 
-	@Override
-	public void beforeHook() {
+	@Before
+	public void before() {
 		try {
 			initServer();
 		} catch (FatalESException e) {
@@ -151,7 +152,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
+					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE)
+						.setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					ESLocalProject checkout = projectSpace.getAPIImpl().getRemoteProject().checkout(
 						projectSpace.getUsersession().getAPIImpl(),
@@ -170,7 +172,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
+					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE)
+						.setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					ESLocalProject checkout = remoteProject.checkout(
 						getProjectSpace().getUsersession().getAPIImpl(),

@@ -53,6 +53,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 
 /**
@@ -217,8 +218,8 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * 
 	 * @throws ESException in case of failure
 	 */
-	@Override
-	public void beforeHook() {
+	@Before
+	public void before() {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
