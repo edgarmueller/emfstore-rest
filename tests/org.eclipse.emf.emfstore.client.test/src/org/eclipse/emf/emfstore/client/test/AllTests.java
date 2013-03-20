@@ -26,14 +26,14 @@ import org.junit.runners.Suite;
  * @author koegel
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ 
+@Suite.SuiteClasses({
 	AllAPITests.class,
-	AllChangeTrackingTests.class, 
-	AllConflictDetectionTests.class, 
+	AllChangeTrackingTests.class,
+	AllConflictDetectionTests.class,
 	AllCachingTests.class,
 	AllServerTests.class,
 	// AllIntegrationTests.class,
-	AllCommonTests.class, 
+	AllCommonTests.class,
 	AllPersistenceTests.class })
 public class AllTests {
 

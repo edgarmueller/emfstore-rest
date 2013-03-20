@@ -212,7 +212,8 @@ public class SetupHelper {
 	 * @throws ESException in case of failure
 	 */
 	public static ACOrgUnitId createUserOnServer(String username) throws ESException {
-		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance()
+			.getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		return adminConnectionManager.createUser(sessionId, username);
@@ -225,7 +226,8 @@ public class SetupHelper {
 	 * @throws ESException if deletion fails
 	 */
 	public static void deleteUserOnServer(ACOrgUnitId userId) throws ESException {
-		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance()
+			.getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		adminConnectionManager.deleteUser(sessionId, userId);
@@ -240,7 +242,8 @@ public class SetupHelper {
 	 * @throws ESException in case of failure
 	 */
 	public static void setUsersRole(ACOrgUnitId orgUnitId, EClass role, ProjectId projectId) throws ESException {
-		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager();
+		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance()
+			.getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
 		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
 		adminConnectionManager.changeRole(sessionId, projectId, orgUnitId, role);
@@ -338,10 +341,10 @@ public class SetupHelper {
 	public void setupWorkSpace() {
 		LOGGER.log(Level.INFO, "setting up workspace...");
 		CommonUtil.setTesting(true);
-		ESWorkspaceImpl workspace2 = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		workSpace = workspace2.getInternalAPIImpl();
+		ESWorkspaceProviderImpl instance = ESWorkspaceProviderImpl.getInstance();
+		instance.dispose();
+		workSpace = instance.getWorkspace().getInternalAPIImpl();
 		LOGGER.log(Level.INFO, "workspace initialized");
-
 	}
 
 	/**

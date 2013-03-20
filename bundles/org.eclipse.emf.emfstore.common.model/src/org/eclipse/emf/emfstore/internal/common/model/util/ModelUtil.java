@@ -19,6 +19,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -30,6 +31,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -177,33 +179,64 @@ public final class ModelUtil {
 			return null;
 		}
 
-		Resource res;
-		int step = 200;
-		int initialSize = step;
-
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
-		res = resourceSetImpl.createResource(VIRTUAL_URI);
+		XMIResource res = (XMIResource) resourceSetImpl.createResource(VIRTUAL_URI);
 		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 
 		EObject copy;
 		if (object instanceof IdEObjectCollection) {
-			copy = copyIdEObjectCollection((IdEObjectCollection) object, (XMIResource) res);
+			copy = copyIdEObjectCollection((IdEObjectCollection) object, res);
 		} else {
-			copy = copyEObject(ModelUtil.getProject(object), object, (XMIResource) res);
+			copy = copyEObject(ModelUtil.getProject(object), object, res);
 		}
 
-		res.getContents().add(copy);
+		return copiedEObjectToString(copy, res);
+	}
+
+	/**
+	 * Converts the given {@link EObject} to a string.
+	 * 
+	 * @param copy The copied {@link EObject}.
+	 * @param resource The resource for the {@link EObject}.
+	 * @return The string representing the {@link EObject}.
+	 * @throws SerializationException If a serialization problem occurs.
+	 */
+	private static String copiedEObjectToString(EObject copy, XMIResource resource) throws SerializationException {
+		int step = 200;
+		int initialSize = step;
+		resource.getContents().add(copy);
 
 		StringWriter stringWriter = new StringWriter(initialSize);
 		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
 
 		try {
-			res.save(uws, getResourceSaveOptions());
+			resource.save(uws, getResourceSaveOptions());
 		} catch (IOException e) {
 			throw new SerializationException(e);
 		}
 		String result = stringWriter.toString();
 		return result;
+	}
+
+	/**
+	 * Computes the checksum for a given string representing an {@link EObject}.
+	 * 
+	 * @param eObjectString
+	 *            the string representing the {@link EObject}.
+	 * @return the computed checksum
+	 * 
+	 * @throws SerializationException
+	 *             in case any errors occur during computation of the checksum
+	 */
+	private static long computeChecksum(String eObjectString) {
+		long h = 1125899906842597L; // prime
+		int len = eObjectString.length();
+
+		for (int i = 0; i < len; i++) {
+			h = 31 * h + eObjectString.charAt(i);
+		}
+
+		return h;
 	}
 
 	/**
@@ -216,17 +249,8 @@ public final class ModelUtil {
 	 * @throws SerializationException
 	 *             in case any errors occur during computation of the checksum
 	 */
-	private static long computeChecksum(EObject eObject) throws SerializationException {
-		String eObjectString = eObjectToString(eObject);
-
-		long h = 1125899906842597L; // prime
-		int len = eObjectString.length();
-
-		for (int i = 0; i < len; i++) {
-			h = 31 * h + eObjectString.charAt(i);
-		}
-
-		return h;
+	public static long computeChecksum(EObject eObject) throws SerializationException {
+		return (computeChecksum(eObjectToString(eObject)));
 	}
 
 	/**
@@ -243,21 +267,18 @@ public final class ModelUtil {
 	 */
 	public static long computeChecksum(IdEObjectCollection collection) throws SerializationException {
 
-		if (collection.getModelElements().size() > 0) {
-			long checksum = NO_CHECKSUM;
+		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
+		XMIResource res = (XMIResource) resourceSetImpl.createResource(VIRTUAL_URI);
+		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
+		final IdEObjectCollection copy = copyIdEObjectCollection(collection, res);
 
-			for (EObject eObject : collection.getModelElements()) {
-				if (checksum == NO_CHECKSUM) {
-					checksum = computeChecksum(eObject);
-				} else {
-					checksum ^= computeChecksum(eObject);
-				}
+		ECollections.sort(copy.getModelElements(), new Comparator<EObject>() {
+			public int compare(EObject o1, EObject o2) {
+				return copy.getModelElementId(o1).getId().compareTo(copy.getModelElementId(o2).getId());
 			}
+		});
 
-			return checksum;
-		}
-
-		return computeChecksum((EObject) collection);
+		return computeChecksum(copiedEObjectToString(copy, res));
 	}
 
 	/**
@@ -278,7 +299,7 @@ public final class ModelUtil {
 	 *            the resource into which the collection's IDs should be written into
 	 * @return the copied collection
 	 */
-	public static EObject copyIdEObjectCollection(IdEObjectCollection collection, XMIResource res) {
+	public static IdEObjectCollection copyIdEObjectCollection(IdEObjectCollection collection, XMIResource res) {
 		IdEObjectCollection copiedCollection = clone(collection);
 
 		for (EObject modelElement : copiedCollection.getAllModelElements()) {
@@ -303,7 +324,7 @@ public final class ModelUtil {
 
 	// TODO: javadoc
 	private static EObject copyEObject(IdEObjectCollection collection, EObject object, XMIResource res) {
-		IdEObjectCollection copiedCollection = (IdEObjectCollection) copyIdEObjectCollection(collection, res);
+		IdEObjectCollection copiedCollection = copyIdEObjectCollection(collection, res);
 		EObject copiedEObject = copiedCollection.getModelElement(collection.getModelElementId(object));
 		return copiedEObject;
 	}
@@ -371,10 +392,10 @@ public final class ModelUtil {
 			resourceSaveOptions.put(XMLResource.OPTION_USE_FILE_BUFFER, Boolean.TRUE);
 
 			if (ExtensionRegistry.INSTANCE.get(
-												"org.eclipse.emf.emfstore.resourceOptions.discardDanglingHREFs",
-												Boolean.class, Boolean.FALSE, false)) {
+				"org.eclipse.emf.emfstore.resourceOptions.discardDanglingHREFs",
+				Boolean.class, Boolean.FALSE, false)) {
 				resourceSaveOptions.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
-										XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
+					XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 			}
 		}
 		return resourceSaveOptions;
@@ -948,7 +969,7 @@ public final class ModelUtil {
 	public static Set<EObject> getAllContainedModelElements(EObject modelElement, boolean includeTransientContainments,
 		boolean ignoreSingletonDatatypes) {
 		return getAllContainedModelElements(Collections.singletonList(modelElement), includeTransientContainments,
-											ignoreSingletonDatatypes);
+			ignoreSingletonDatatypes);
 	}
 
 	/**
@@ -968,7 +989,7 @@ public final class ModelUtil {
 	public static Set<EObject> getAllContainedModelElements(Resource resource, boolean includeTransientContainments,
 		boolean ignoreSingletonDatatypes) {
 		return getAllContainedModelElements(resource.getContents(), includeTransientContainments,
-											ignoreSingletonDatatypes);
+			ignoreSingletonDatatypes);
 	}
 
 	/**
@@ -998,7 +1019,7 @@ public final class ModelUtil {
 
 				if (!containee.eContainingFeature().isTransient() || includeTransientContainments) {
 					Set<EObject> elements = getAllContainedModelElements(containee, includeTransientContainments,
-																			ignoreSingletonDatatypes);
+						ignoreSingletonDatatypes);
 					result.add(containee);
 					result.addAll(elements);
 				}
@@ -1098,7 +1119,7 @@ public final class ModelUtil {
 		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
 		List<SettingWithReferencedElement> crossReferences = collectOutgoingCrossReferences(collection,
-																							allModelElements);
+			allModelElements);
 		for (SettingWithReferencedElement settingWithReferencedElement : crossReferences) {
 			Setting setting = settingWithReferencedElement.getSetting();
 			if (!settingWithReferencedElement.getSetting().getEStructuralFeature().isMany()) {
@@ -1290,7 +1311,7 @@ public final class ModelUtil {
 		allContainedModelElements.add(originalObject);
 		// EObject copiedElement = ModelUtil.clone(originalObject);
 		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedObject,
-																										false);
+			false);
 		copiedAllContainedModelElements.add(copiedObject);
 
 		for (int i = 0; i < allContainedModelElements.size(); i++) {

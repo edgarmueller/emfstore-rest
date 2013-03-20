@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.test.changeTracking.notification.recording;
+package org.eclipse.emf.emfstore.client.test.changeTracking.notification;
 
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;

@@ -173,6 +173,155 @@
 
         <!-- More suites can be added here -->
         <executions>
+        
+        	<!-- AllPerformanceTests -->  
+        	<execution>      
+		        <configuration>
+		          <testSuite>org.eclipse.emf.emfstore.client.test.performance</testSuite>
+		          <testClass>org.eclipse.emf.emfstore.client.test.performance.AllPerformanceTests</testClass>
+		          <useUIHarness>true</useUIHarness>
+		          <useUIThread>false</useUIThread>
+		          <argLine>${tycho.testArgLine} -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m -DrunPerfTests=${runPerfTests}</argLine>
+		          <testFailureIgnore>true</testFailureIgnore>
+		          <!-- Plugins to be loaded to the osgi runtime -->
+		          <dependencies>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.client.model.edit</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.client.test</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.client</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.common.model.edit</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.common.model</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.common</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.modelmutator</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.examplemodel.edit</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.examplemodel</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.migration</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.server.model.edit</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.server.model</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		            <dependency>
+		              <type>eclipse-plugin</type>
+		              <artifactId>org.eclipse.emf.emfstore.server</artifactId>
+		              <version>0.0.0</version>
+		            </dependency>
+		          </dependencies>
+		
+		          <bundleStartLevel>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.client.model.edit</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.client.test</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.client</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.common.model.edit</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.common.model</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.common</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.modelmutator</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.examplemodel.edit</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.examplemodel</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.migration</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.server.model.edit</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.server.model</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		            <bundle>
+		              <id>org.eclipse.emf.emfstore.server</id>
+		              <level>4</level>
+		              <autoStart>false</autoStart>
+		            </bundle>
+		          </bundleStartLevel>
+		        </configuration>
+	      </execution>
+        
           <!-- AllChangeTrackingTestsWithTransactionalEditingDomain -->
           <!--
           <execution>
@@ -328,7 +477,7 @@
             -->
         </executions>
       </plugin>
-
+      
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>

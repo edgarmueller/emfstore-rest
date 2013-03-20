@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.handler;
 
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
+import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
  * Interface for filtering notifications.

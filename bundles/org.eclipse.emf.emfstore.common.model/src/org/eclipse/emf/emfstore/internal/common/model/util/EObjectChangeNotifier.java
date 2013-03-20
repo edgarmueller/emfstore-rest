@@ -163,6 +163,8 @@ public class EObjectChangeNotifier extends EContentAdapter {
 			return;
 		}
 
+		collection.allowIdAllocation();
+
 		removedModelElements.push(new ArrayList<EObject>());
 		currentNotifications.push(notification);
 		Object feature = notification.getFeature();
@@ -209,6 +211,11 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		for (EObject removedElement : removedModelElements.pop()) {
 			collection.modelElementRemoved(collection, removedElement);
+		}
+
+		collection.forbidIdAllocation();
+		if (!new NotificationInfo(notification).hasNext()) {
+			collection.clearAllocatedCaches();
 		}
 	}
 
