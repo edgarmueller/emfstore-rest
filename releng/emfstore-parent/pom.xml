@@ -98,7 +98,7 @@
     <module>../org.eclipse.emf.emfstore.perspective.feature</module>
     <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.perspective</module>
  -->
-    <module>../org.eclipse.emf.emfstore.ecore.feature</module>
+    <module>../../features/org.eclipse.emf.emfstore.ecore.feature</module>
     <module>../../bundles/org.eclipse.emf.emfstore.ecore</module>
 <!--
     <module>../org.eclipse.emf.emfstore.ecp.feature</module>
