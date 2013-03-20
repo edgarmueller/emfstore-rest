@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.test.changeTracking.notification.recording;
+package org.eclipse.emf.emfstore.client.test.changeTracking.notification;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;

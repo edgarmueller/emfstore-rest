@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.client.test.changeTracking;
 
 import org.eclipse.emf.emfstore.client.test.changeTracking.canonization.AllCanonizationTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.commands.AllCommandTests;
-import org.eclipse.emf.emfstore.client.test.changeTracking.notification.recording.AllNotificationTests;
+import org.eclipse.emf.emfstore.client.test.changeTracking.notification.AllNotificationTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.operations.AllOperationTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.topology.AllTopologyTests;
 import org.junit.runner.RunWith;
