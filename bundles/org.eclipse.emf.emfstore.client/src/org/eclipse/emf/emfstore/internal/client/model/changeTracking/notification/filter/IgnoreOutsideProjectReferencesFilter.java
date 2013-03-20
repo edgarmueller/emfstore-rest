@@ -110,6 +110,9 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	}
 
 	private boolean isOrWasInProject(ESObjectContainer container, EObject referencedElement) {
+		if (ModelUtil.isSingleton(referencedElement)) {
+			return true;
+		}
 		boolean b = container.contains(referencedElement)
 			|| ((IdEObjectCollectionImpl) container).getDeletedModelElementId(referencedElement) != null;
 		return b;

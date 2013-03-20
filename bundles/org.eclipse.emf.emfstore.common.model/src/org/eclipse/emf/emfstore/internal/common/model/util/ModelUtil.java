@@ -64,6 +64,7 @@ import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 
@@ -1215,14 +1216,14 @@ public final class ModelUtil {
 	public static EObject getSingleton(ModelElementId singletonId) {
 
 		// TODO: reactivate
-		// initSingletonIdResolvers();
-		//
-		// for (ESSingletonIdResolver resolver : singletonIdResolvers) {
-		// EObject singleton = resolver.getSingleton(singletonId);
-		// if (singleton != null) {
-		// return singleton;
-		// }
-		// }
+		initSingletonIdResolvers();
+
+		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
+			EObject singleton = resolver.getSingleton(singletonId.getAPIImpl());
+			if (singleton != null) {
+				return singleton;
+			}
+		}
 
 		return null;
 	}
@@ -1241,9 +1242,9 @@ public final class ModelUtil {
 		initSingletonIdResolvers();
 
 		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
-			ModelElementId id = (ModelElementId) resolver.getSingletonModelElementId(singleton);
+			ESModelElementIdImpl id = (ESModelElementIdImpl) resolver.getSingletonModelElementId(singleton);
 			if (id != null) {
-				return clone(id);
+				return clone(id.getInternalAPIImpl());
 			}
 		}
 
