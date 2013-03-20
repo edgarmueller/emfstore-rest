@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
@@ -18,7 +20,6 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
@@ -30,7 +31,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 
 /**
- * The login dialog controller manages a given {@link Usersession} and/or a {@link ServerInfo} to determine when it is
+ * The login dialog controller manages a given {@link ESUsersession} and/or a {@link ESServer} to determine when it is
  * necessary to open a {@link LoginDialog} in order to authenticate the user. It does not, however,
  * open a dialog, if the usersession is already logged in.
  * 
@@ -116,8 +117,7 @@ public class LoginDialogController implements ILoginDialogController {
 		final ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		final EList<Usersession> usersessions = workspace.getInternalAPIImpl().getUsersessions();
 
-		RunESCommand.run(new Callable<Void>() {
-
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				// TODO login code
 				usersession.logIn();
@@ -157,8 +157,8 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	/**
-	 * Perform a login using an {@link Usersession} that can be determined with
-	 * the given {@link ServerInfo}.
+	 * Perform a login using an {@link ESUsersession} that can be determined with
+	 * the given {@link ESServer}.
 	 * 
 	 * 
 	 * @param server
@@ -178,7 +178,7 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	/**
-	 * Perform a login using the given {@link Usersession}.
+	 * Perform a login using the given {@link ESUsersession}.
 	 * 
 	 * @param usersession
 	 *            the usersession to be used during login
@@ -195,8 +195,8 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	/**
-	 * Perform a login using an {@link Usersession} that can be determined with
-	 * the given {@link ServerInfo}.
+	 * Perform a login using an {@link ESUsersession} that can be determined with
+	 * the given {@link ESServer}.
 	 * 
 	 * 
 	 * @param server
@@ -213,7 +213,7 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	/**
-	 * Perform a login using the given {@link Usersession}.
+	 * Perform a login using the given {@link ESUsersession}.
 	 * 
 	 * @param usersession
 	 *            the usersession to be used during login
