@@ -42,6 +42,34 @@ public interface IdEObjectCollection extends EObject, ESObjectContainer<ModelEle
 	void addModelElement(EObject modelElement);
 
 	/**
+	 * Allow the allocation of ids.
+	 */
+	void allowIdAllocation();
+
+	/**
+	 * Forbid the allocation of ids.
+	 */
+	void forbidIdAllocation();
+
+	/**
+	 * Clear allocated caches.
+	 */
+	void clearAllocatedCaches();
+
+	/**
+	 * force to clear allocated caches.
+	 */
+	void forceClearAllocatedCaches();
+
+	/**
+	 * Set the id allocation policy.
+	 * 
+	 * @param alwaysIdAllocation Should the id allocation always be enabled or only within commands? Default is
+	 *            <code>FALSE</code>
+	 */
+	void setAlwaysIdAllocation(boolean alwaysIdAllocation);
+
+	/**
 	 * Allocates certain IDs for the given model elements in the mapping.
 	 * If any {@link EObject} contained in the mapping is added to this collection
 	 * its {@link ModelElementId} will be determined using the ID in the mapping.

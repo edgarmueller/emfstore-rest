@@ -69,6 +69,10 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 
 	private boolean cachesInitialized;
 
+	private boolean alwaysIdAllocation;
+
+	private int allocationAllowedCounter;
+
 	/**
 	 * A {@link ESModelElementIdGenerator} for other plugins to register a special ID generation.
 	 */
@@ -80,6 +84,10 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public IdEObjectCollectionImpl() {
 		eObjectToIdMap = new LinkedHashMap<EObject, String>();
 		idToEObjectMap = new LinkedHashMap<String, EObject>();
+
+		alwaysIdAllocation = false;
+		allocationAllowedCounter = 0;
+
 		allocatedEObjectToIdMap = new LinkedHashMap<EObject, String>();
 		allocatedIdToEObjectMap = new LinkedHashMap<String, EObject>();
 
@@ -87,7 +95,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			.getElementWithHighestPriority();
 		if (element != null) {
 			modelElementIdGenerator = element.getClass(MODELELEMENTID_GENERATOR_CLASS_ATTRIBUTE,
-														ESModelElementIdGenerator.class);
+				ESModelElementIdGenerator.class);
 		}
 	}
 
@@ -668,8 +676,10 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public <T extends IdEObjectCollection> T copy() {
 		Copier copier = new IdEObjectCollectionCopier();
 		T result = (T) copier.copy(this);
+		result.setAlwaysIdAllocation(true);
 		((IdEObjectCollectionImpl) result).cachesInitialized = true;
 		copier.copyReferences();
+		result.setAlwaysIdAllocation(false);
 		return result;
 	}
 
@@ -681,7 +691,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	public void dispose() {
 		eObjectToIdMap.clear();
 		idToEObjectMap.clear();
-		clearAllocatedCaches();
+		forceClearAllocatedCaches();
 		cachesInitialized = false;
 	}
 
@@ -714,8 +724,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		if (isCacheInitialized()) {
 			ModelElementId id = this.getModelElementId(modelElement);
 
-			allocatedEObjectToIdMap.put(modelElement, id.getId());
-			allocatedIdToEObjectMap.put(id.getId(), modelElement);
+			putIntoAllocatedCaches(modelElement, id);
 
 			getEObjectsCache().remove(modelElement);
 			getIdToEObjectCache().remove(id.getId());
@@ -742,8 +751,9 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 			// do this even if the model element is already contained;
 			// this is the case when a copied instance of the model element gets
 			// added again
-			allocatedEObjectToIdMap.put(modelElement, modelElementId.getId());
-			allocatedIdToEObjectMap.put(modelElementId.getId(), modelElement);
+			allowIdAllocation();
+			putIntoAllocatedCaches(modelElement, modelElementId);
+			forbidIdAllocation();
 		}
 	}
 
@@ -761,11 +771,58 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	}
 
 	/**
-	 * Clear all caches.
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#clearAllocatedCaches(boolean)
 	 */
 	public void clearAllocatedCaches() {
+		if (alwaysIdAllocation || isAllocationAllowed()) {
+			return;
+		}
+		forceClearAllocatedCaches();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#forceClearAllocatedCaches()
+	 */
+	public void forceClearAllocatedCaches() {
 		allocatedEObjectToIdMap.clear();
 		allocatedIdToEObjectMap.clear();
+	}
+
+	private boolean isAllocationAllowed() {
+		return allocationAllowedCounter != 0;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#allowIdAllocation()
+	 */
+	public void allowIdAllocation() {
+		allocationAllowedCounter++;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#forbidIdAllocation()
+	 */
+	public void forbidIdAllocation() {
+		if (allocationAllowedCounter == 0) {
+			return;
+		}
+		allocationAllowedCounter--;
+	}
+
+	private void putIntoAllocatedCaches(EObject modelElement, ModelElementId modelElementId) {
+		if (!alwaysIdAllocation && !isAllocationAllowed()) {
+			return;
+		}
+		allocatedEObjectToIdMap.put(modelElement, modelElementId.getId());
+		allocatedIdToEObjectMap.put(modelElementId.getId(), modelElement);
 	}
 
 	/**
@@ -835,5 +892,14 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	public void removeModelElement(EObject modelElement) {
 		getModelElements().remove(modelElement);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#setAlwaysIdAllocation(boolean)
+	 */
+	public void setAlwaysIdAllocation(boolean alwaysIdAllocation) {
+		this.alwaysIdAllocation = alwaysIdAllocation;
 	}
 }

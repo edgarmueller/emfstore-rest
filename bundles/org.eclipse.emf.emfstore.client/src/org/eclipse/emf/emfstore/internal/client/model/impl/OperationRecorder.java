@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -33,14 +34,17 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.client.observer.ESPostCreationObserver;
+import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
+import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.NotificationToOperationConverter;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.NotificationInfo;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.FilterStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MissingCommandException;
@@ -52,6 +56,7 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionIm
 import org.eclipse.emf.emfstore.internal.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 import org.eclipse.emf.emfstore.internal.common.model.util.SettingWithReferencedElement;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
@@ -62,6 +67,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Refe
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Tracks changes on any given {@link IdEObjectCollection}.
@@ -69,7 +76,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.sema
  * @author koegel
  * @author emueller
  */
-public class OperationRecorder implements CommandObserver, IdEObjectCollectionChangeObserver {
+public class OperationRecorder implements CommandObserver, ESCommitObserver, ESUpdateObserver, ESShareObserver,
+	IdEObjectCollectionChangeObserver {
 
 	/**
 	 * Name of unknown creator.
@@ -511,9 +519,10 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 		removedElementsCache.clear();
 		operations.clear();
 
-		commandIsRunning = false;
-
+		collection.forbidIdAllocation();
 		collection.clearAllocatedCaches();
+
+		commandIsRunning = false;
 	}
 
 	private List<AbstractOperation> modifyOperations(List<AbstractOperation> operations, Command command) {
@@ -796,6 +805,7 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;
 		commandIsRunning = true;
+		collection.allowIdAllocation();
 	}
 
 	/**
@@ -936,5 +946,61 @@ public class OperationRecorder implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public ProjectSpace getProjectSpace() {
 		return projectSpace;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages, IProgressMonitor monitor) {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.ESChangePackage, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor) {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#updateCompleted(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {
+		clearAllocatedCaches(project);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESShareObserver#shareDone(org.eclipse.emf.emfstore.client.ESLocalProject)
+	 */
+	public void shareDone(ESLocalProject localProject) {
+		clearAllocatedCaches(localProject);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void commitCompleted(ESLocalProject project, ESPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
+		clearAllocatedCaches(project);
+	}
+
+	private void clearAllocatedCaches(ESLocalProject project) {
+		if (project.equals(collection)) {
+			collection.forceClearAllocatedCaches();
+		}
 	}
 }
