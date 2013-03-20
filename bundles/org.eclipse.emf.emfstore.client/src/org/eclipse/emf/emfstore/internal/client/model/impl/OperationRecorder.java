@@ -881,7 +881,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		}
 
 		// filter unwanted notifications
-		if (FilterStack.DEFAULT.check(new NotificationInfo(notification), collection)) {
+		if (FilterStack.DEFAULT.check(new NotificationInfo(notification).getAPIImpl(), collection)) {
 			return;
 		}
 

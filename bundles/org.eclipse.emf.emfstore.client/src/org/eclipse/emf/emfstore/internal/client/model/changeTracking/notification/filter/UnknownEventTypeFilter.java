@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificati
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.emfstore.client.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
-import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
+import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 
 /**
  * A notification filter that filters all notifications that have an unknow type.
@@ -31,7 +31,7 @@ public class UnknownEventTypeFilter implements ESNotificationFilter {
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
 		return notificationInfo.getEventType() >= Notification.EVENT_TYPE_COUNT;
 	}
 

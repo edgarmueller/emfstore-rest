@@ -216,7 +216,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 
 		// filter unwanted notifications that did not change anything in the
 		// state
-		if (filterStack.check(new NotificationInfo(notification), collection)) {
+		if (filterStack.check(new NotificationInfo(notification).getAPIImpl(), collection)) {
 			return;
 		}
 

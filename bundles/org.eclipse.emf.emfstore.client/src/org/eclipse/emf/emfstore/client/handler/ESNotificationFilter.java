@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.handler;
 
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
-import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
+import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 
 /**
  * Interface for filtering notifications.
@@ -25,12 +25,12 @@ public interface ESNotificationFilter {
 	 * Check a notification if it should be ignored.
 	 * 
 	 * @param notificationInfo
-	 *            the {@link NotificationInfo} to check
+	 *            the {@link ESNotificationInfo} to check
 	 * @param container
 	 *            the collection that holds or did hold the model element the notification
 	 *            is about
 	 * @return true if the notification is to be ignored
 	 */
-	boolean check(NotificationInfo notificationInfo, ESObjectContainer<?> container);
+	boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container);
 
 }
