@@ -28,8 +28,6 @@ import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class SharedProjectTest extends BaseSharedProjectTest {
@@ -42,18 +40,6 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 
 	private boolean conflictOccurred;
 	private boolean noLocalChangesOccurred;
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-	}
-
-	@Override
-	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
-	}
 
 	@Test
 	public void testShare() {

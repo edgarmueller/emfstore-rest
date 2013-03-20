@@ -26,7 +26,6 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 public abstract class BaseEmptyEmfstoreTest {
@@ -62,10 +61,6 @@ public abstract class BaseEmptyEmfstoreTest {
 		} catch (InterruptedException e) {
 			log(e);
 		}
-	}
-
-	@Before
-	public void setUp() throws Exception {
 	}
 
 	@After

@@ -15,23 +15,9 @@ import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class RemoteProjectTest extends BaseServerWithProjectTest {
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-	}
-
-	@Override
-	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
-	}
 
 	@Test
 	public void testGetServer() {
