@@ -48,6 +48,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EM
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.FilterStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MissingCommandException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -124,6 +125,8 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 		config = new OperationRecorderConfig();
 		converter = new NotificationToOperationConverter(collection);
+
+		ESWorkspaceProviderImpl.getObserverBus().register(this);
 	}
 
 	/**
@@ -987,7 +990,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	}
 
 	private void clearAllocatedCaches(ESLocalProject project) {
-		if (project.equals(collection)) {
+		if (((ESLocalProjectImpl) project).toInternalAPI().getProject().equals(collection)) {
 			collection.forceClearAllocatedCaches();
 		}
 	}
