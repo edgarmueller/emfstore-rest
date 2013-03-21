@@ -21,7 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ AllocateIdsPolicyTest.class })
+@SuiteClasses({ AllocateIdsPolicyTest.class, OperationRecorderTest.class })
 public class AllRecordingTests {
 
 }
