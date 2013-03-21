@@ -1215,11 +1215,10 @@ public final class ModelUtil {
 	 */
 	public static EObject getSingleton(ModelElementId singletonId) {
 
-		// TODO: reactivate
 		initSingletonIdResolvers();
 
 		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
-			EObject singleton = resolver.getSingleton(singletonId.getAPIImpl());
+			EObject singleton = resolver.getSingleton(singletonId.toAPI());
 			if (singleton != null) {
 				return singleton;
 			}
@@ -1244,7 +1243,7 @@ public final class ModelUtil {
 		for (ESSingletonIdResolver resolver : singletonIdResolvers) {
 			ESModelElementIdImpl id = (ESModelElementIdImpl) resolver.getSingletonModelElementId(singleton);
 			if (id != null) {
-				return clone(id.getInternalAPIImpl());
+				return clone(id.toInternalAPI());
 			}
 		}
 

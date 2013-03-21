@@ -45,7 +45,7 @@ public class ETypeIdResolver implements ESSingletonIdResolver {
 			// TODO: don't create IDs on the fly rather put them directly into the map
 			ModelElementId id = ModelFactory.eINSTANCE.createModelElementId();
 			id.setId(entry.getKey());
-			return id.getAPIImpl();
+			return id.toAPI();
 		}
 
 		return null;

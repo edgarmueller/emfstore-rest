@@ -39,7 +39,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getStructuralFeature()
 	 */
 	public EStructuralFeature getStructuralFeature() {
-		return getInternalAPIImpl().getStructuralFeature();
+		return toInternalAPI().getStructuralFeature();
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isValid()
 	 */
 	public boolean isValid() {
-		return getInternalAPIImpl().isValid();
+		return toInternalAPI().isValid();
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getValidationMessage()
 	 */
 	public String getValidationMessage() {
-		return getInternalAPIImpl().getValidationMessage();
+		return toInternalAPI().getValidationMessage();
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isAttributeNotification()
 	 */
 	public boolean isAttributeNotification() {
-		return getInternalAPIImpl().isAttributeNotification();
+		return toInternalAPI().isAttributeNotification();
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isReferenceNotification()
 	 */
 	public boolean isReferenceNotification() {
-		return getInternalAPIImpl().isReferenceNotification();
+		return toInternalAPI().isReferenceNotification();
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getAttribute()
 	 */
 	public EAttribute getAttribute() {
-		return getInternalAPIImpl().getAttribute();
+		return toInternalAPI().getAttribute();
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getReference()
 	 */
 	public EReference getReference() {
-		return getInternalAPIImpl().getReference();
+		return toInternalAPI().getReference();
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isTransient()
 	 */
 	public boolean isTransient() {
-		return getInternalAPIImpl().isTransient();
+		return toInternalAPI().isTransient();
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isAddEvent()
 	 */
 	public boolean isAddEvent() {
-		return getInternalAPIImpl().isAddEvent();
+		return toInternalAPI().isAddEvent();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isRemoveEvent()
 	 */
 	public boolean isRemoveEvent() {
-		return getInternalAPIImpl().isRemoveEvent();
+		return toInternalAPI().isRemoveEvent();
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isSetEvent()
 	 */
 	public boolean isSetEvent() {
-		return getInternalAPIImpl().isSetEvent();
+		return toInternalAPI().isSetEvent();
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isAddManyEvent()
 	 */
 	public boolean isAddManyEvent() {
-		return getInternalAPIImpl().isAddManyEvent();
+		return toInternalAPI().isAddManyEvent();
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isRemoveManyEvent()
 	 */
 	public boolean isRemoveManyEvent() {
-		return getInternalAPIImpl().isRemoveManyEvent();
+		return toInternalAPI().isRemoveManyEvent();
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isMoveEvent()
 	 */
 	public boolean isMoveEvent() {
-		return getInternalAPIImpl().isMoveEvent();
+		return toInternalAPI().isMoveEvent();
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#hasNext()
 	 */
 	public boolean hasNext() {
-		return getInternalAPIImpl().hasNext();
+		return toInternalAPI().hasNext();
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getEventType()
 	 */
 	public int getEventType() {
-		return getInternalAPIImpl().getEventType();
+		return toInternalAPI().getEventType();
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getFeature()
 	 */
 	public Object getFeature() {
-		return getInternalAPIImpl().getFeature();
+		return toInternalAPI().getFeature();
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getFeatureID(java.lang.Class)
 	 */
 	public int getFeatureID(Class<?> expectedClass) {
-		return getInternalAPIImpl().getFeatureID(expectedClass);
+		return toInternalAPI().getFeatureID(expectedClass);
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewBooleanValue()
 	 */
 	public boolean getNewBooleanValue() {
-		return getInternalAPIImpl().getNewBooleanValue();
+		return toInternalAPI().getNewBooleanValue();
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewByteValue()
 	 */
 	public byte getNewByteValue() {
-		return getInternalAPIImpl().getNewByteValue();
+		return toInternalAPI().getNewByteValue();
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewCharValue()
 	 */
 	public char getNewCharValue() {
-		return getInternalAPIImpl().getNewCharValue();
+		return toInternalAPI().getNewCharValue();
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewDoubleValue()
 	 */
 	public double getNewDoubleValue() {
-		return getInternalAPIImpl().getNewDoubleValue();
+		return toInternalAPI().getNewDoubleValue();
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewFloatValue()
 	 */
 	public float getNewFloatValue() {
-		return getInternalAPIImpl().getNewFloatValue();
+		return toInternalAPI().getNewFloatValue();
 	}
 
 	/**
@@ -246,7 +246,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewIntValue()
 	 */
 	public int getNewIntValue() {
-		return getInternalAPIImpl().getNewIntValue();
+		return toInternalAPI().getNewIntValue();
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewLongValue()
 	 */
 	public long getNewLongValue() {
-		return getInternalAPIImpl().getNewLongValue();
+		return toInternalAPI().getNewLongValue();
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewShortValue()
 	 */
 	public short getNewShortValue() {
-		return getInternalAPIImpl().getNewShortValue();
+		return toInternalAPI().getNewShortValue();
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewStringValue()
 	 */
 	public String getNewStringValue() {
-		return getInternalAPIImpl().getNewStringValue();
+		return toInternalAPI().getNewStringValue();
 	}
 
 	/**
@@ -282,7 +282,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewValue()
 	 */
 	public Object getNewValue() {
-		return getInternalAPIImpl().getNewValue();
+		return toInternalAPI().getNewValue();
 	}
 
 	/**
@@ -291,7 +291,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNewModelElementValue()
 	 */
 	public EObject getNewModelElementValue() {
-		return getInternalAPIImpl().getNewModelElementValue();
+		return toInternalAPI().getNewModelElementValue();
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNotifier()
 	 */
 	public Object getNotifier() {
-		return getInternalAPIImpl().getNotifier();
+		return toInternalAPI().getNotifier();
 	}
 
 	/**
@@ -309,7 +309,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldBooleanValue()
 	 */
 	public boolean getOldBooleanValue() {
-		return getInternalAPIImpl().getOldBooleanValue();
+		return toInternalAPI().getOldBooleanValue();
 	}
 
 	/**
@@ -318,7 +318,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldByteValue()
 	 */
 	public byte getOldByteValue() {
-		return getInternalAPIImpl().getOldByteValue();
+		return toInternalAPI().getOldByteValue();
 	}
 
 	/**
@@ -327,7 +327,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldCharValue()
 	 */
 	public char getOldCharValue() {
-		return getInternalAPIImpl().getOldCharValue();
+		return toInternalAPI().getOldCharValue();
 	}
 
 	/**
@@ -336,7 +336,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldDoubleValue()
 	 */
 	public double getOldDoubleValue() {
-		return getInternalAPIImpl().getOldDoubleValue();
+		return toInternalAPI().getOldDoubleValue();
 	}
 
 	/**
@@ -345,7 +345,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldFloatValue()
 	 */
 	public float getOldFloatValue() {
-		return getInternalAPIImpl().getOldFloatValue();
+		return toInternalAPI().getOldFloatValue();
 	}
 
 	/**
@@ -354,7 +354,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldIntValue()
 	 */
 	public int getOldIntValue() {
-		return getInternalAPIImpl().getOldIntValue();
+		return toInternalAPI().getOldIntValue();
 	}
 
 	/**
@@ -363,7 +363,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldLongValue()
 	 */
 	public long getOldLongValue() {
-		return getInternalAPIImpl().getOldLongValue();
+		return toInternalAPI().getOldLongValue();
 	}
 
 	/**
@@ -372,7 +372,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldShortValue()
 	 */
 	public short getOldShortValue() {
-		return getInternalAPIImpl().getOldShortValue();
+		return toInternalAPI().getOldShortValue();
 	}
 
 	/**
@@ -381,7 +381,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldStringValue()
 	 */
 	public String getOldStringValue() {
-		return getInternalAPIImpl().getOldStringValue();
+		return toInternalAPI().getOldStringValue();
 	}
 
 	/**
@@ -390,7 +390,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldValue()
 	 */
 	public Object getOldValue() {
-		return getInternalAPIImpl().getOldValue();
+		return toInternalAPI().getOldValue();
 	}
 
 	/**
@@ -399,7 +399,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getOldModelElementValue()
 	 */
 	public EObject getOldModelElementValue() {
-		return getInternalAPIImpl().getOldModelElementValue();
+		return toInternalAPI().getOldModelElementValue();
 	}
 
 	/**
@@ -408,7 +408,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getPosition()
 	 */
 	public int getPosition() {
-		return getInternalAPIImpl().getPosition();
+		return toInternalAPI().getPosition();
 	}
 
 	/**
@@ -417,7 +417,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isReset()
 	 */
 	public boolean isReset() {
-		return getInternalAPIImpl().isReset();
+		return toInternalAPI().isReset();
 	}
 
 	/**
@@ -426,7 +426,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#isTouch()
 	 */
 	public boolean isTouch() {
-		return getInternalAPIImpl().isTouch();
+		return toInternalAPI().isTouch();
 	}
 
 	/**
@@ -435,7 +435,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#wasSet()
 	 */
 	public boolean wasSet() {
-		return getInternalAPIImpl().wasSet();
+		return toInternalAPI().wasSet();
 	}
 
 	/**
@@ -444,7 +444,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNotifierModelElement()
 	 */
 	public EObject getNotifierModelElement() {
-		return getInternalAPIImpl().getNotifierModelElement();
+		return toInternalAPI().getNotifierModelElement();
 	}
 
 	/**
@@ -453,7 +453,7 @@ public class ESNotificationInfoImpl extends AbstractAPIImpl<ESNotificationInfo, 
 	 * @see org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo#getNotificationType()
 	 */
 	public Class<? extends Notification> getNotificationType() {
-		return getInternalAPIImpl().getNotificationType();
+		return toInternalAPI().getNotificationType();
 	}
 
 }
