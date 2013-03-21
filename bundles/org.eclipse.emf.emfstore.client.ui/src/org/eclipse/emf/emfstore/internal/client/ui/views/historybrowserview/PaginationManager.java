@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESHistoryQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -115,8 +114,7 @@ public class PaginationManager {
 		} else {
 			newCenterVersion = currentCenterVersionShown;
 		}
-		HistoryQuery<ESHistoryQueryImpl<ESHistoryQuery, ?>> query = getQuery(newCenterVersion,
-			aboveCenterCount, belowCenterCount);
+		HistoryQuery<ESHistoryQuery> query = getQuery(newCenterVersion, aboveCenterCount, belowCenterCount);
 		// TODO monitor
 		List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(query.toAPI(),
 			new NullProgressMonitor());

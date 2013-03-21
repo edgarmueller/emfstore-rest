@@ -123,7 +123,7 @@ public interface ESProject {
 	 * 
 	 * @throws ESException in case an error occurs while retrieving the history information
 	 */
-	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery<ESHistoryQuery<?>> query, IProgressMonitor monitor)
+	<U extends ESHistoryQuery<?>> List<ESHistoryInfo> getHistoryInfos(U query, IProgressMonitor monitor)
 		throws ESException;
 
 	/**

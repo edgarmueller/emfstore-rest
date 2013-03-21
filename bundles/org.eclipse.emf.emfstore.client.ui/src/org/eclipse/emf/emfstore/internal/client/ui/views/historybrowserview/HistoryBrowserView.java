@@ -57,6 +57,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Comp
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
+import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.action.Action;
@@ -326,8 +328,9 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 										showAllVersions,
 										true);
 									// TODO: proivde util method
-									List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(
-										query.toAPI(), new NullProgressMonitor());
+									ESHistoryQuery<ESModelElementQuery> api = query.toAPI();
+									List<ESHistoryInfo> infos =
+										projectSpace.toAPI().getHistoryInfos(api, new NullProgressMonitor());
 									for (ESHistoryInfo info : infos) {
 										historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
 									}

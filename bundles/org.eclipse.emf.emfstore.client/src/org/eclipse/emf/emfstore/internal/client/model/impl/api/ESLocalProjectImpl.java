@@ -59,7 +59,6 @@ import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
-import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
@@ -201,10 +200,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery<ESHistoryQuery<?>> query, IProgressMonitor monitor)
-		throws ESException {
+	public <U extends org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery<?>>
+		java.util.List<ESHistoryInfo> getHistoryInfos(U query, IProgressMonitor monitor)
+			throws ESException {
 		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query, monitor));
-	}
+	};
 
 	/**
 	 * 
