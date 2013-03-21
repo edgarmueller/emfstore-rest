@@ -20,7 +20,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ AttributeNotificationTest.class, ReferenceNotificationTest.class, MoveNotificationTest.class,
-	MultiReferenceNotificationTest.class, ContainmentNotificationTest.class })
+	MultiReferenceNotificationTest.class, ContainmentNotificationTest.class, NotificationToOperationConverterTest.class })
 public class AllNotificationTests {
 
 }
