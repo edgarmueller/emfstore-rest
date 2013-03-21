@@ -235,6 +235,7 @@ public class LoginDialog extends TitleAreaDialog {
 			final boolean savePw = savePassword.getSelection();
 
 			Usersession candidateSession = selectedUsersession;
+			ESServerImpl server = (ESServerImpl) controller.getServer();
 
 			// try to find usersession with same username in order to avoid
 			// duplicates
@@ -242,7 +243,8 @@ public class LoginDialog extends TitleAreaDialog {
 				candidateSession = getUsersessionIfKnown(username);
 			}
 
-			if (candidateSession == null) {
+			if (candidateSession == null
+				|| !candidateSession.getServerInfo().equals(server.toInternalAPI())) {
 				final ESServerImpl serverImpl = (ESServerImpl) controller.getServer();
 				candidateSession = ModelFactory.eINSTANCE.createUsersession();
 				final Usersession session = candidateSession;

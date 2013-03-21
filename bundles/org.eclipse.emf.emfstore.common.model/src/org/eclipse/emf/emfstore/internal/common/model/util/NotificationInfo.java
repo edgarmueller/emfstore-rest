@@ -541,7 +541,7 @@ public class NotificationInfo implements Notification, APIDelegate<ESNotificatio
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 */
 	public ESNotificationInfo toAPI() {
 		if (apiImpl == null) {

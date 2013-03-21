@@ -140,7 +140,7 @@ public class Application implements IApplication {
 					// run update in project 2 with our own updateCallback.
 					System.out.println("\nUpdate of project 2 with conflict resolver...");
 					try {
-						project2.update(Versions.createHEAD().getAPIImpl(), new MyUpdateCallback(),
+						project2.update(Versions.createHEAD().toAPI(), new MyUpdateCallback(),
 							new ConsoleProgressMonitor());
 						// commit merge result in project 2
 						System.out.println("\nCommit of project 2 with merge result.");
@@ -193,7 +193,7 @@ public class Application implements IApplication {
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
-				return session.getAPIImpl();
+				return session.toAPI();
 			}
 		}.run(false);
 
@@ -248,9 +248,9 @@ public class Application implements IApplication {
 				try {
 					LogMessage result = VersioningFactory.eINSTANCE.createLogMessage();
 					result.setMessage("My Message");
-					project1.commit(result.getAPIImpl(), null, new ConsoleProgressMonitor());
+					project1.commit(result.toAPI(), null, new ConsoleProgressMonitor());
 					System.out.println("Project 1 committed!");
-					return result.getAPIImpl();
+					return result.toAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
@@ -309,7 +309,7 @@ public class Application implements IApplication {
 		public boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor monitor) {
 			// resolve conflicts by merging with our conflict resolver
 			try {
-				project2.merge(project2.resolveVersionSpec(Versions.createHEAD().getAPIImpl(), monitor),
+				project2.merge(project2.resolveVersionSpec(Versions.createHEAD().toAPI(), monitor),
 					changeConflict, new MyConflictResolver(false), this, monitor);
 			} catch (ESException e) {
 				// on any exceptions, declare conflicts as non-resolved

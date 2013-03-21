@@ -526,8 +526,8 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	//
 	// return RunESCommand.WithException.runWithResult(ESException.class, new Callable<Boolean>() {
 	// public Boolean call() throws Exception {
-	// return getInternalAPIImpl().merge(
-	// primaryVersionSpecImpl.getInternalAPIImpl(),
+	// return toInternalAPI().merge(
+	// primaryVersionSpecImpl.toInternalAPI(),
 	// changeConflict,
 	// conflictResolver,
 	// callback,
@@ -551,8 +551,8 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	//
 	// RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 	// public Void call() throws Exception {
-	// getInternalAPIImpl().mergeBranch(
-	// primaryVersionSpecImpl.getInternalAPIImpl(),
+	// toInternalAPI().mergeBranch(
+	// primaryVersionSpecImpl.toInternalAPI(),
 	// conflictResolver,
 	// monitor);
 	// return null;
