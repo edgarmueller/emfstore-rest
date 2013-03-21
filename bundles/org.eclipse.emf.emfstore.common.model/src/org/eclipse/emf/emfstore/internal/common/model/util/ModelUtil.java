@@ -207,7 +207,7 @@ public final class ModelUtil {
 		int initialSize = step;
 		resource.getContents().add(copy);
 
-		StringWriter stringWriter = new StringWriter(initialSize);
+		StringWriter stringWriter = new IgnoreWhitespaceStringWriter(initialSize);
 		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
 
 		try {
