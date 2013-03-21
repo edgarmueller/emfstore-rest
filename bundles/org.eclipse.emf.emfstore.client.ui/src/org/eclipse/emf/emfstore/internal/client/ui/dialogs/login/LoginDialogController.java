@@ -52,7 +52,7 @@ public class LoginDialogController implements ILoginDialogController {
 	public List<ESUsersession> getKnownUsersessions() {
 		return APIUtil.mapToAPI(
 			ESUsersession.class,
-			ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().getUsersessions());
+			ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().getUsersessions());
 	}
 
 	private ESUsersession login(final boolean force) throws ESException {
@@ -113,9 +113,9 @@ public class LoginDialogController implements ILoginDialogController {
 	 */
 	public void validate(final ESUsersession session) throws ESException {
 
-		final Usersession usersession = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		final Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
 		final ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		final EList<Usersession> usersessions = workspace.getInternalAPIImpl().getUsersessions();
+		final EList<Usersession> usersessions = workspace.toInternalAPI().getUsersessions();
 
 		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {

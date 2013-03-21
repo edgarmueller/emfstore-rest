@@ -11,11 +11,12 @@
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
@@ -60,7 +61,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	 */
 	public void createControl(Composite parent) {
 		NewRepositoryWizard wizard = (NewRepositoryWizard) getWizard();
-		ServerInfo serverInfo = wizard.getServerInfo();
+		ESServer server = wizard.getServer();
 
 		GridData gd;
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -111,18 +112,18 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 		gd.horizontalSpan = 1;
 		button.setLayoutData(gd);
 
-		if (serverInfo.getUrl() != null) {
-			name.setText(serverInfo.getName());
-			url.setText(serverInfo.getUrl());
-			port.setSelection(serverInfo.getPort());
-			if (serverInfo.getCertificateAlias() == null) {
+		if (server.getURL() != null) {
+			name.setText(server.getName());
+			url.setText(server.getURL());
+			port.setSelection(server.getPort());
+			if (server.getCertificateAlias() == null) {
 				return;
 			}
 
 			try {
-				if (KeyStoreManager.getInstance().contains(serverInfo.getCertificateAlias())) {
+				if (KeyStoreManager.getInstance().contains(server.getCertificateAlias())) {
 					for (int i = 0; i < cert.getItemCount(); i++) {
-						if (cert.getItem(i).equals(serverInfo.getCertificateAlias())) {
+						if (cert.getItem(i).equals(server.getCertificateAlias())) {
 							cert.select(i);
 							break;
 						}
@@ -146,8 +147,8 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			cert.setItems(aliases);
 
 			NewRepositoryWizard wizard = (NewRepositoryWizard) getWizard();
-			ServerInfo serverInfo = wizard.getServerInfo();
-			String selectedCertificate = serverInfo.getCertificateAlias();
+			ESServer server = wizard.getServer();
+			String selectedCertificate = server.getCertificateAlias();
 			cert.select(certificates.indexOf(selectedCertificate));
 		} catch (ESCertificateStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
@@ -174,17 +175,17 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	 * page
 	 */
 	private void saveDataToModel() {
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				NewRepositoryWizard wizard = (NewRepositoryWizard) getWizard();
-				ServerInfo serverInfo = wizard.getServerInfo();
+				ESServer serverInfo = wizard.getServer();
 				serverInfo.setName(name.getText());
-				serverInfo.setUrl(url.getText());
+				serverInfo.setURL(url.getText());
 				serverInfo.setPort(port.getSelection());
 				serverInfo.setCertificateAlias(cert.getText());
+				return null;
 			}
-		}.run();
+		});
 	}
 
 	/**

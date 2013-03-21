@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
-import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
+import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -27,7 +27,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public class NewRepositoryWizard extends Wizard implements INewWizard {
 
-	private ServerInfo serverInfo;
+	private ESServer server;
 
 	private NewRepositoryWizardPageOne mainPage;
 
@@ -62,7 +62,7 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		if (this.getContainer().getCurrentPage().canFlipToNextPage()) {
-			ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().addServerInfo(serverInfo);
+			ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
 			dispose();
 		} else {
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error",
@@ -73,15 +73,16 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * Getter for the ServerInfo.
+	 * Getter for the server.
 	 * 
-	 * @return the {@link ServerInfo}
+	 * @return the server
 	 */
-	public ServerInfo getServerInfo() {
-		if (serverInfo == null) {
-			serverInfo = ModelFactory.eINSTANCE.createServerInfo();
+	public ESServer getServer() {
+		if (server == null) {
+			// TODO: review or reuse client util
+			server = ESServer.FACTORY.getServer("localhost", 8080, "Generated certificate");
 		}
-		return serverInfo;
+		return server;
 	}
 
 	/**
@@ -90,8 +91,8 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	 * @param serverInfo
 	 *            {@link ServerInfo}
 	 */
-	public void setServerInfo(ServerInfo serverInfo) {
-		this.serverInfo = serverInfo;
+	public void setServerInfo(ESServer server) {
+		this.server = server;
 	}
 
 	/**
