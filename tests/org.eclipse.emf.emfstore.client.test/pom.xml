@@ -176,13 +176,19 @@
         
         	<!-- AllPerformanceTests -->  
         	<execution>      
+	        	<id>AllPerformanceTests</id>
+	            <phase>integration-test</phase>
+	            <goals>
+	              <goal>test</goal>
+	            </goals>
 		        <configuration>
-		          <testSuite>org.eclipse.emf.emfstore.client.test.performance</testSuite>
+		          <testSuite>org.eclipse.emf.emfstore.client.test</testSuite>
 		          <testClass>org.eclipse.emf.emfstore.client.test.performance.AllPerformanceTests</testClass>
 		          <useUIHarness>true</useUIHarness>
 		          <useUIThread>false</useUIThread>
 		          <argLine>${tycho.testArgLine} -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m -DrunPerfTests=${runPerfTests}</argLine>
 		          <testFailureIgnore>true</testFailureIgnore>
+		          <failIfNoTests>false</failIfNoTests>
 		          <!-- Plugins to be loaded to the osgi runtime -->
 		          <dependencies>
 		            <dependency>

@@ -267,7 +267,8 @@ public class EMFStoreController implements IApplication, Runnable {
 		if (!targetFile.exists()) {
 			// check if the custom configuration resources are provided and if,
 			// copy them to place
-			ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.configurationResource");
+			ESExtensionPoint extensionPoint = new ESExtensionPoint(
+				"org.eclipse.emf.emfstore.server.configurationResource");
 			ESExtensionElement element = extensionPoint.getFirst();
 
 			if (element != null) {
@@ -548,7 +549,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		try {
 			run(false);
 		} catch (FatalESException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -564,7 +565,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			throw new FatalESException(e);
 		}
 	}
 }

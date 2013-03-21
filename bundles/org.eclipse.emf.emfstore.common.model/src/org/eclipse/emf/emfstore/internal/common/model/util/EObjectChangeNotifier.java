@@ -251,6 +251,9 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 	private void handleSingleReference(EObject newEObject) {
 		if (!collection.contains(newEObject)) {
+			if (ModelUtil.isSingleton(newEObject)) {
+				return;
+			}
 			collection.addCutElement(newEObject);
 		}
 	}

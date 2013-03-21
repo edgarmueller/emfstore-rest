@@ -22,12 +22,13 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PersistenceTest extends WorkspaceTest {
 
-	@Override
-	public void beforeHook() {
+	@Before
+	public void before() {
 		setCompareAtEnd(false);
 	}
 

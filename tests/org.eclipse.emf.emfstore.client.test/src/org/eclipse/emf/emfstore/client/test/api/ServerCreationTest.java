@@ -5,20 +5,9 @@ import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ServerCreationTest {
-
-	@Before
-	public void setUp() throws Exception {
-
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
 	public void testCreation() {

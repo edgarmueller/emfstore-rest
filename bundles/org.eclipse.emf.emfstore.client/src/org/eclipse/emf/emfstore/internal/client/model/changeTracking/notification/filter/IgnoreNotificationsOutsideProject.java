@@ -12,8 +12,8 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificati
 
 import org.eclipse.emf.emfstore.client.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
+import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
-import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
  * Filter notifications from elements outside of the project.
@@ -28,7 +28,7 @@ public class IgnoreNotificationsOutsideProject implements ESNotificationFilter {
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
 
 		// do not filter notifications from (deleted) elements in project
 		if (container.getModelElementId(notificationInfo.getNotifierModelElement()) != null

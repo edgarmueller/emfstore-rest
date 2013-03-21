@@ -91,15 +91,10 @@ public abstract class WorkspaceTest {
 				}
 			}
 		}.run(false);
-
-		beforeHook();
 	}
 
 	protected void configureCompareAtEnd() {
 		setCompareAtEnd(true);
-	}
-
-	public void beforeHook() {
 	}
 
 	/**

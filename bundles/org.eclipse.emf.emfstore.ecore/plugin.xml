@@ -13,4 +13,10 @@
             type="org.eclipse.emf.ecore.EGenericType">
       </ignoredatatype>
    </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.common.model.singletonIdResolver">
+      <singletonidresolver
+            class="org.eclipse.emf.emfstore.internal.ecore.ETypeIdResolver">
+      </singletonidresolver>
+   </extension>
 </plugin>

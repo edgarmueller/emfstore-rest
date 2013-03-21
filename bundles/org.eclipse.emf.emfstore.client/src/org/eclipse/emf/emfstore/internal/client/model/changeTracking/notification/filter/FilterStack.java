@@ -19,8 +19,8 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
+import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
  * This class filters a notification recording according to predefined stacks of
@@ -74,7 +74,7 @@ public final class FilterStack implements ESNotificationFilter {
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
-	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
 		for (ESNotificationFilter f : filterList) {
 			if (f.check(notificationInfo, container)) {
 				return true;

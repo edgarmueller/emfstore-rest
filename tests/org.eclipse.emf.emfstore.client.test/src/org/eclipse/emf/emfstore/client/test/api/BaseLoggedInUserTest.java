@@ -20,10 +20,8 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 	protected ESServer server;
 	protected ESUsersession usersession;
 
-	@Override
 	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		try {
 			usersession = server.login("super", "super");

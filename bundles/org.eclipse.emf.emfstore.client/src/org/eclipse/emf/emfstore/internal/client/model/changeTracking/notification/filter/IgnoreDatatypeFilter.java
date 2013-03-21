@@ -13,8 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notificati
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
+import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
  * Filters notifications which come from datatypes that should be ignored.
@@ -28,7 +28,7 @@ public class IgnoreDatatypeFilter implements ESNotificationFilter {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo)
 	 */
-	public boolean check(NotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
 
 		Object newValue = notificationInfo.getNewValue();
 		Object oldValue = notificationInfo.getOldValue();

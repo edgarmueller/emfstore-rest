@@ -37,10 +37,8 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	private final ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
 	private ESLocalProject localProject;
 
-	@Override
 	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 		localProject = workspace.createLocalProject("TestProject");
 	}
 

@@ -21,16 +21,9 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ServerCommunicationTest extends BaseLoggedInUserTest {
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-	}
 
 	@Override
 	@After

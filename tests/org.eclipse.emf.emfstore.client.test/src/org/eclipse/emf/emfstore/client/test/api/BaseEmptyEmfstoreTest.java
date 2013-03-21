@@ -19,14 +19,13 @@ import org.eclipse.emf.emfstore.client.test.Activator;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
+import org.eclipse.emf.emfstore.server.ESEMFStoreController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 public abstract class BaseEmptyEmfstoreTest {
@@ -39,7 +38,7 @@ public abstract class BaseEmptyEmfstoreTest {
 	private static void startEMFStore() {
 		ServerConfiguration.setTesting(true);
 		try {
-			EMFStoreController.runAsNewThread();
+			ESEMFStoreController.startEMFStore();
 		} catch (FatalESException e) {
 			log(e);
 		}
@@ -48,24 +47,16 @@ public abstract class BaseEmptyEmfstoreTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		stopEMFStore();
-
 	}
 
 	private static void stopEMFStore() {
-		EMFStoreController server = EMFStoreController.getInstance();
-		if (server != null) {
-			server.stop();
-		}
+		ESEMFStoreController.stopEMFStore();
 		try {
 			// give the server some time to unbind from it's ips. Not the nicest solution ...
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			log(e);
 		}
-	}
-
-	@Before
-	public void setUp() throws Exception {
 	}
 
 	@After

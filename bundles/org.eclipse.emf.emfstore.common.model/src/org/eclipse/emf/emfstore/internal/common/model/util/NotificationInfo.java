@@ -18,7 +18,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.impl.util.ESNotificationInfoImpl;
 
 /**
  * NotificationInfo is a type safe wrapper for EMF Notifications. It wraps a org.eclipse.emf.common.notify.Notification
@@ -27,11 +30,12 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
  * @author chodnick
  */
 
-public class NotificationInfo implements Notification {
+public class NotificationInfo implements Notification, APIDelegate<ESNotificationInfo> {
 
 	private Notification notification;
 	private boolean valid;
 	private String validationMessage;
+	private ESNotificationInfo apiImpl;
 
 	/**
 	 * The constructor needs the notification to wrap.
@@ -532,5 +536,27 @@ public class NotificationInfo implements Notification {
 	 */
 	public Class<? extends Notification> getNotificationType() {
 		return notification.getClass();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 */
+	public ESNotificationInfo getAPIImpl() {
+		if (apiImpl == null) {
+			apiImpl = createAPIImpl();
+		}
+
+		return apiImpl;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 */
+	public ESNotificationInfo createAPIImpl() {
+		return new ESNotificationInfoImpl(this);
 	}
 }
