@@ -48,12 +48,12 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EM
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.FilterStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MissingCommandException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
-import org.eclipse.emf.emfstore.internal.common.model.util.EObjectChangeNotifier;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
@@ -97,7 +97,6 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private ProjectSpaceBase projectSpace;
 	private IdEObjectCollectionImpl collection;
-	private EObjectChangeNotifier changeNotifier;
 
 	private boolean isRecording;
 	private boolean commandIsRunning;
@@ -109,14 +108,11 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 * 
 	 * @param projectSpace
 	 *            the {@link ProjectSpaceBase} the recorder should be attached to
-	 * @param changeNotifier
-	 *            a change notifier that informs clients about changes in the collection
 	 */
 	// TODO: provide ext. point for rollBackInCaseOfCommandFailure
-	public OperationRecorder(ProjectSpaceBase projectSpace, EObjectChangeNotifier changeNotifier) {
+	public OperationRecorder(ProjectSpaceBase projectSpace) {
 		this.projectSpace = projectSpace;
 		this.collection = (IdEObjectCollectionImpl) projectSpace.getProject();
-		this.changeNotifier = changeNotifier;
 
 		operations = new ArrayList<AbstractOperation>();
 		observers = new ArrayList<OperationRecorderListener>();
@@ -124,6 +120,8 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 		config = new OperationRecorderConfig();
 		converter = new NotificationToOperationConverter(collection);
+
+		ESWorkspaceProviderImpl.getObserverBus().register(this);
 	}
 
 	/**
@@ -987,7 +985,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	}
 
 	private void clearAllocatedCaches(ESLocalProject project) {
-		if (project.equals(collection)) {
+		if (((ESLocalProjectImpl) project).toInternalAPI().getProject().equals(collection)) {
 			collection.forceClearAllocatedCaches();
 		}
 	}

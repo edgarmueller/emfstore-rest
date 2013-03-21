@@ -51,7 +51,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 *            the project space the operation manager should be attached to
 	 */
 	public OperationManager(ProjectSpaceBase projectSpace) {
-		operationRecorder = new OperationRecorder(projectSpace, projectSpace.getProject().getChangeNotifier());
+		operationRecorder = new OperationRecorder(projectSpace);
 		operationRecorder.addOperationRecorderListener(this);
 		operationListeners = new ArrayList<OperationObserver>();
 		configureOperationRecorder();
