@@ -45,7 +45,8 @@ public class IgnoreWhitespaceStringWriter extends StringWriter {
 	 */
 	@Override
 	public void write(char[] cbuf, int off, int len) {
-		super.write(removeWhitespaceChars(cbuf), off, len);
+		char[] chars = removeWhitespaceChars(cbuf);
+		super.write(chars, off, chars.length);
 	}
 
 	private char[] removeWhitespaceChars(char[] cbuf) {
