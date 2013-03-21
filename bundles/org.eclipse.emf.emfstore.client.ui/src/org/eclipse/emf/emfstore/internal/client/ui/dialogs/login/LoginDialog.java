@@ -151,10 +151,14 @@ public class LoginDialog extends TitleAreaDialog {
 		initData();
 		if (controller.getUsersession() == null) {
 			ESUsersession lastUsersession = controller.getServer().getLastUsersession();
-			loadUsersession(((ESUsersessionImpl) lastUsersession).getInternalAPIImpl());
+			if (lastUsersession != null) {
+				loadUsersession(((ESUsersessionImpl) lastUsersession).toInternalAPI());
+			} else {
+				loadUsersession(null);
+			}
 		} else {
 			ESUsersession usersession = controller.getUsersession();
-			loadUsersession(((ESUsersessionImpl) usersession).getInternalAPIImpl());
+			loadUsersession(((ESUsersessionImpl) usersession).toInternalAPI());
 		}
 		return area;
 	}
@@ -244,7 +248,7 @@ public class LoginDialog extends TitleAreaDialog {
 				final Usersession session = candidateSession;
 				RunESCommand.run(new Callable<Void>() {
 					public Void call() throws Exception {
-						session.setServerInfo(serverImpl.getInternalAPIImpl());
+						session.setServerInfo(serverImpl.toInternalAPI());
 						session.setUsername(username);
 						return null;
 					}
@@ -262,7 +266,7 @@ public class LoginDialog extends TitleAreaDialog {
 				}
 			});
 
-			controller.validate(candidateSession.getAPIImpl());
+			controller.validate(candidateSession.toAPI());
 
 		} catch (ESException e) {
 			setErrorMessage(e.getMessage());
