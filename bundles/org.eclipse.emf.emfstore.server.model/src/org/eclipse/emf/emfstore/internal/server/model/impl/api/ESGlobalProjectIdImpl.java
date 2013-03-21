@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
  * @author emueller
  * 
  */
-public class ESGlobalProjectIdImpl extends AbstractAPIImpl<ESGlobalProjectIdImpl, ProjectId> implements
+public class ESGlobalProjectIdImpl extends AbstractAPIImpl<ESGlobalProjectId, ProjectId> implements
 	ESGlobalProjectId {
 
 	/**
@@ -41,7 +41,7 @@ public class ESGlobalProjectIdImpl extends AbstractAPIImpl<ESGlobalProjectIdImpl
 	 * @see org.eclipse.emf.emfstore.common.model.ESUniqueIdentifier#getId()
 	 */
 	public String getId() {
-		return getInternalAPIImpl().getId();
+		return toInternalAPI().getId();
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class ESGlobalProjectIdImpl extends AbstractAPIImpl<ESGlobalProjectIdImpl
 
 		if (otherObject instanceof ESGlobalProjectIdImpl) {
 			ESGlobalProjectIdImpl otherId = (ESGlobalProjectIdImpl) otherObject;
-			return otherId.getInternalAPIImpl().equals(getInternalAPIImpl());
+			return otherId.toInternalAPI().equals(toInternalAPI());
 		}
 
 		return false;
@@ -69,6 +69,6 @@ public class ESGlobalProjectIdImpl extends AbstractAPIImpl<ESGlobalProjectIdImpl
 	 */
 	@Override
 	public int hashCode() {
-		return super.hashCode() + getInternalAPIImpl().hashCode();
+		return super.hashCode() + toInternalAPI().hashCode();
 	}
 }

@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESAncestorVersionSpecImpl;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESAncestorVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Ancestor Version Spec</b></em>'.
@@ -36,7 +36,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESAnc
  * @model
  * @generated
  */
-public interface AncestorVersionSpec extends VersionSpec, APIDelegate<ESAncestorVersionSpecImpl> {
+public interface AncestorVersionSpec extends VersionSpec, APIDelegate<ESAncestorVersionSpec> {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -41,7 +41,7 @@ public class UIUndoLastOperationController extends
 			ESLocalProject projectSpace) {
 		super(shell);
 		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
-				.getInternalAPIImpl();
+				.toInternalAPI();
 	}
 
 	/**

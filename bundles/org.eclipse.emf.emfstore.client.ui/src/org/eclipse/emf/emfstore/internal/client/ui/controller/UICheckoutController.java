@@ -213,10 +213,10 @@ public class UICheckoutController extends
 				if (versionSpec == null) {
 					return remoteProject
 						.checkout(session,
-									progressMonitor);
+							progressMonitor);
 				} else {
 					return remoteProject.checkout(session, versionSpec,
-													progressMonitor);
+						progressMonitor);
 				}
 			} else {
 				if (versionSpec == null) {
@@ -225,7 +225,7 @@ public class UICheckoutController extends
 					return remoteProject
 						.checkout(remoteProject.getServer()
 							.getLastUsersession(), versionSpec,
-									progressMonitor);
+							progressMonitor);
 				}
 			}
 
@@ -237,11 +237,11 @@ public class UICheckoutController extends
 				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
 					MessageDialog.openError(
-											getShell(),
-											"Checkout failed",
-											"Checkout of project "
-												+ remoteProject.getProjectName()
-												+ " failed: " + e.getMessage());
+						getShell(),
+						"Checkout failed",
+						"Checkout of project "
+							+ remoteProject.getProjectName()
+							+ " failed: " + e.getMessage());
 					return null;
 				}
 			});
@@ -265,9 +265,10 @@ public class UICheckoutController extends
 			.runWithResult(new Callable<BranchInfo>() {
 				public BranchInfo call() throws Exception {
 
+					List<BranchInfo> internal = APIUtil.toInternal(BranchInfo.class, branches);
+
 					BranchSelectionDialog.CheckoutSelection dialog = new BranchSelectionDialog.CheckoutSelection(
-						getShell(), APIUtil.mapToInternalAPI(
-																BranchInfo.class, branches));
+						getShell(), internal);
 					dialog.setBlockOnOpen(true);
 
 					if (dialog.open() != Dialog.OK
@@ -280,6 +281,6 @@ public class UICheckoutController extends
 				}
 			});
 
-		return result.getAPIImpl().getHead();
+		return result.toAPI().getHead();
 	}
 }

@@ -45,7 +45,7 @@ public class UIManageOrgUnitsController extends
 	 */
 	public UIManageOrgUnitsController(Shell shell, ESUsersession session) {
 		super(shell);
-		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		this.session = ((ESUsersessionImpl) session).toInternalAPI();
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class UIManageOrgUnitsController extends
 			// TODO OTS
 			ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance()
 					.getWorkspace();
-			final AdminBroker adminBroker = workspace.getInternalAPIImpl()
+			final AdminBroker adminBroker = workspace.toInternalAPI()
 					.getAdminBroker(session);
 			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI
 					.getWorkbench().getDisplay().getActiveShell(), adminBroker);

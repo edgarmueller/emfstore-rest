@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
  * @author emueller
  * 
  */
-public class ESTagVersionSpecImpl extends ESVersionSpecImpl<ESTagVersionSpecImpl, TagVersionSpec> implements
+public class ESTagVersionSpecImpl extends ESVersionSpecImpl<ESTagVersionSpec, TagVersionSpec> implements
 	ESTagVersionSpec {
 
 	/**
@@ -40,7 +40,7 @@ public class ESTagVersionSpecImpl extends ESVersionSpecImpl<ESTagVersionSpecImpl
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec#getName()
 	 */
 	public String getName() {
-		return getInternalAPIImpl().getName();
+		return toInternalAPI().getName();
 	}
 
 	@Override
@@ -56,6 +56,6 @@ public class ESTagVersionSpecImpl extends ESVersionSpecImpl<ESTagVersionSpecImpl
 
 	@Override
 	public int hashCode() {
-		return getInternalAPIImpl().hashCode() + super.hashCode() + getName().hashCode();
+		return toInternalAPI().hashCode() + super.hashCode() + getName().hashCode();
 	}
 }

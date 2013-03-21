@@ -40,7 +40,7 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 		EMFStoreCommandWithException<ESException> cmd = new EMFStoreCommandWithException<ESException>() {
 			@Override
 			protected void doRun() {
-				((ESServerImpl) server).getInternalAPIImpl().setLastUsersession(null);
+				((ESServerImpl) server).toInternalAPI().setLastUsersession(null);
 				((ESUsersessionImpl) usersession).setServer(null);
 				// setUp might have failed
 				if (usersession != null && usersession.isLoggedIn()) {
@@ -49,7 +49,7 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 					} catch (ESException e) {
 						setException(e);
 					}
-					ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().getUsersessions().remove(
+					ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().getUsersessions().remove(
 						usersession);
 				}
 				ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);

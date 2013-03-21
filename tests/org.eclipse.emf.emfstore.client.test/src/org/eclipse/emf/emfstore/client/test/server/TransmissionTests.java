@@ -47,8 +47,8 @@ public abstract class TransmissionTests extends ServerTests {
 			protected void doRun() {
 				NullProgressMonitor monitor = new NullProgressMonitor();
 				ESWorkspaceImpl workspaceImpl = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-				Workspace workspace = workspaceImpl.getInternalAPIImpl();
-				workspace.getServerInfos().add(getServer().getInternalAPIImpl());
+				Workspace workspace = workspaceImpl.toInternalAPI();
+				workspace.getServerInfos().add(getServer().toInternalAPI());
 				workspace.getUsersessions().add(usersession1);
 				workspace.getUsersessions().add(usersession2);
 				workspace.save();
@@ -56,12 +56,12 @@ public abstract class TransmissionTests extends ServerTests {
 				try {
 					usersession1.logIn();
 					usersession2.logIn();
-					ESLocalProjectImpl localProjectImpl = getRemoteProject().checkout(usersession1.getAPIImpl(),
+					ESLocalProjectImpl localProjectImpl = getRemoteProject().checkout(usersession1.toAPI(),
 						monitor);
-					ESLocalProjectImpl localProjectImpl2 = getRemoteProject().checkout(usersession2.getAPIImpl(),
+					ESLocalProjectImpl localProjectImpl2 = getRemoteProject().checkout(usersession2.toAPI(),
 						monitor);
-					setProjectSpace1(localProjectImpl.getInternalAPIImpl());
-					setProjectSpace2(localProjectImpl2.getInternalAPIImpl());
+					setProjectSpace1(localProjectImpl.toInternalAPI());
+					setProjectSpace2(localProjectImpl2.toInternalAPI());
 				} catch (AccessControlException e) {
 					throw new RuntimeException(e);
 				} catch (ESException e) {

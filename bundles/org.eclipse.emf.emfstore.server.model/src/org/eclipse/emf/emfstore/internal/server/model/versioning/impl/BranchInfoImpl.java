@@ -395,14 +395,14 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESBranchInfoImpl getAPIImpl() {
+	public ESBranchInfoImpl toAPI() {
 
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -424,11 +424,11 @@ public class BranchInfoImpl extends EObjectImpl implements BranchInfo {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESBranchInfoImpl createAPIImpl() {
+	public ESBranchInfoImpl createAPI() {
 		return new ESBranchInfoImpl(this);
 	}
 

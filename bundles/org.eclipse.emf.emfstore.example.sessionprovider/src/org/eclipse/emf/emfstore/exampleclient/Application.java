@@ -163,7 +163,7 @@ public class Application implements IApplication {
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
-				return session.getAPIImpl();
+				return session.toAPI();
 			}
 		}.run(false);
 

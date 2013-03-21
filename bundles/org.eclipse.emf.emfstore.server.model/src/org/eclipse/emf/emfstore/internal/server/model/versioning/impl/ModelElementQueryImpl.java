@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESModelElementQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
+import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Model Element Query</b></em>'. <!--
@@ -36,7 +37,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * 
  * @generated NOT
  */
-public class ModelElementQueryImpl extends RangeQueryImpl<ESModelElementQueryImpl> implements ModelElementQuery {
+public class ModelElementQueryImpl extends RangeQueryImpl<ESModelElementQuery> implements ModelElementQuery {
 
 	/**
 	 * The cached value of the '{@link #getModelElements() <em>Model Elements</em>}' containment reference list.
@@ -156,7 +157,7 @@ public class ModelElementQueryImpl extends RangeQueryImpl<ESModelElementQueryImp
 	}
 
 	@Override
-	public ESModelElementQueryImpl createAPIImpl() {
+	public ESModelElementQueryImpl createAPI() {
 		return new ESModelElementQueryImpl(this);
 	}
 } // ModelElementQueryImpl

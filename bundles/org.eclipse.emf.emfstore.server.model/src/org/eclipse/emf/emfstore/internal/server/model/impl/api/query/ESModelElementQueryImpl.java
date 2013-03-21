@@ -19,7 +19,6 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
 
 /**
@@ -34,7 +33,8 @@ import org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery;
  * @author emueller
  * 
  */
-public class ESModelElementQueryImpl extends ESRangeQueryImpl<ESModelElementQueryImpl> implements ESModelElementQuery {
+public class ESModelElementQueryImpl extends ESRangeQueryImpl<ESModelElementQuery, ModelElementQuery> implements
+	ESModelElementQuery {
 
 	/**
 	 * Constructor.
@@ -42,8 +42,8 @@ public class ESModelElementQueryImpl extends ESRangeQueryImpl<ESModelElementQuer
 	 * @param rangeQuery
 	 *            the delegate
 	 */
-	public ESModelElementQueryImpl(RangeQuery<ESModelElementQueryImpl> rangeQuery) {
-		super(rangeQuery);
+	public ESModelElementQueryImpl(ModelElementQuery query) {
+		super(query);
 	}
 
 	/**
@@ -55,9 +55,9 @@ public class ESModelElementQueryImpl extends ESRangeQueryImpl<ESModelElementQuer
 	public List<ESModelElementId> getModelElementIds() {
 		// TODO: provide util method
 		List<ESModelElementId> result = new ArrayList<ESModelElementId>();
-		ModelElementQuery query = (ModelElementQuery) getInternalAPIImpl();
+		ModelElementQuery query = toInternalAPI();
 		for (ModelElementId id : query.getModelElements()) {
-			result.add(id.getAPIImpl());
+			result.add(id.toAPI());
 		}
 		return result;
 	}
@@ -70,7 +70,7 @@ public class ESModelElementQueryImpl extends ESRangeQueryImpl<ESModelElementQuer
 	 */
 	public void addModelElementId(ESModelElementId id) {
 		ESModelElementIdImpl idImpl = (ESModelElementIdImpl) id;
-		getQuery().getModelElements().add(idImpl.getInternalAPIImpl());
+		getQuery().getModelElements().add(idImpl.toInternalAPI());
 	}
 
 	/**
@@ -80,11 +80,11 @@ public class ESModelElementQueryImpl extends ESRangeQueryImpl<ESModelElementQuer
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESModelElementQuery#removeModelElementId(org.eclipse.emf.emfstore.common.model.ESModelElementId)
 	 */
 	public void removeModelElementId(ESModelElementId id) {
-		getQuery().getModelElements().remove(((ESModelElementIdImpl) id).getInternalAPIImpl());
+		getQuery().getModelElements().remove(((ESModelElementIdImpl) id).toInternalAPI());
 	}
 
 	private ModelElementQuery getQuery() {
-		ModelElementQuery query = (ModelElementQuery) getInternalAPIImpl();
+		ModelElementQuery query = toInternalAPI();
 		return query;
 	}
 }

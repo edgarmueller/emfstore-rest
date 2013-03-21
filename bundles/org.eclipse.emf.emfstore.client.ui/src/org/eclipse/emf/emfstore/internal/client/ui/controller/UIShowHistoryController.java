@@ -50,7 +50,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 
 	public UIShowHistoryController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
-		this.modelElement = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
+		this.modelElement = ((ESLocalProjectImpl) localProject).toInternalAPI();
 	}
 
 	/**

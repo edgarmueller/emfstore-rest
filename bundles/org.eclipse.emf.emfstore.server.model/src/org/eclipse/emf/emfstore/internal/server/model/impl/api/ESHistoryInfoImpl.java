@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
  * @author emueller
  * 
  */
-public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, HistoryInfo> implements ESHistoryInfo {
+public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfo, HistoryInfo> implements ESHistoryInfo {
 
 	/**
 	 * Constructor.
@@ -49,7 +49,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getPrimarySpec()
 	 */
 	public ESPrimaryVersionSpec getPrimarySpec() {
-		return getInternalAPIImpl().getPrimarySpec().getAPIImpl();
+		return toInternalAPI().getPrimarySpec().toAPI();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getNextSpecs()
 	 */
 	public List<ESPrimaryVersionSpec> getNextSpecs() {
-		EList<PrimaryVersionSpec> nextSpec = getInternalAPIImpl().getNextSpec();
+		EList<PrimaryVersionSpec> nextSpec = toInternalAPI().getNextSpec();
 		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, nextSpec);
 	}
 
@@ -70,7 +70,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getPreviousSpec()
 	 */
 	public ESPrimaryVersionSpec getPreviousSpec() {
-		return getInternalAPIImpl().getPreviousSpec().getAPIImpl();
+		return toInternalAPI().getPreviousSpec().toAPI();
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getMergedFromSpecs()
 	 */
 	public List<ESPrimaryVersionSpec> getMergedFromSpecs() {
-		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, getInternalAPIImpl().getMergedFrom());
+		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, toInternalAPI().getMergedFrom());
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getMergedToSpecs()
 	 */
 	public List<ESPrimaryVersionSpec> getMergedToSpecs() {
-		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, getInternalAPIImpl().getMergedTo());
+		return APIUtil.mapToAPI(ESPrimaryVersionSpec.class, toInternalAPI().getMergedTo());
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getLogMessage()
 	 */
 	public ESLogMessage getLogMessage() {
-		return getInternalAPIImpl().getLogMessage().getAPIImpl();
+		return toInternalAPI().getLogMessage().toAPI();
 	}
 
 	/**
@@ -110,16 +110,16 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfoImpl, Histor
 	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getTagSpecs()
 	 */
 	public List<ESTagVersionSpec> getTagSpecs() {
-		return APIUtil.mapToAPI(ESTagVersionSpec.class, getInternalAPIImpl().getTagSpecs());
+		return APIUtil.mapToAPI(ESTagVersionSpec.class, toInternalAPI().getTagSpecs());
 	}
 
 	public ESChangePackage getChangePackage() {
 
-		if (getInternalAPIImpl().getChangePackage() == null) {
+		if (toInternalAPI().getChangePackage() == null) {
 			return null;
 		}
 
-		return getInternalAPIImpl().getChangePackage().getAPIImpl();
+		return toInternalAPI().getChangePackage().toAPI();
 	}
 
 }

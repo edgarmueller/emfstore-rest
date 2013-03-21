@@ -272,11 +272,11 @@ public abstract class ServerCall<U> implements APIDelegate<ESServerCall> {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 */
-	public ESServerCall getAPIImpl() {
+	public ESServerCall toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 		return apiImpl;
 	}
@@ -285,9 +285,9 @@ public abstract class ServerCall<U> implements APIDelegate<ESServerCall> {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 */
-	public ESServerCall createAPIImpl() {
+	public ESServerCall createAPI() {
 		return new ESServerCallImpl<U>(this);
 	}
 

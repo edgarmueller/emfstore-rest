@@ -65,7 +65,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
 		this.projectSpace = ((ESLocalProjectImpl) localProject)
-			.getInternalAPIImpl();
+			.toInternalAPI();
 	}
 
 	/**

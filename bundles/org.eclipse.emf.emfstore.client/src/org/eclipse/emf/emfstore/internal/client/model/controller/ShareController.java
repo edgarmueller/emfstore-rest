@@ -129,6 +129,6 @@ public class ShareController extends ServerCall<Void> {
 
 		getProgressMonitor().done();
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESShareObserver.class)
-			.shareDone(getProjectSpace().getAPIImpl());
+			.shareDone(getProjectSpace().toAPI());
 	}
 }

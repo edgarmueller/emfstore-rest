@@ -329,13 +329,13 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESAncestorVersionSpecImpl getAPIImpl() {
+	public ESAncestorVersionSpecImpl toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -357,11 +357,11 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESAncestorVersionSpecImpl createAPIImpl() {
+	public ESAncestorVersionSpecImpl createAPI() {
 		return new ESAncestorVersionSpecImpl(this);
 	}
 

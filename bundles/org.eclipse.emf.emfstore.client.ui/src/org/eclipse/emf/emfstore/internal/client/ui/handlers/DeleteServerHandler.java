@@ -32,7 +32,7 @@ public class DeleteServerHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		new UIRemoveServerController(getShell(), requireSelection(
-				ServerInfo.class).getAPIImpl()).execute();
+				ServerInfo.class).toAPI()).execute();
 	}
 
 }

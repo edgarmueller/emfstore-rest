@@ -29,7 +29,7 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 	public ESRangeQuery rangeQuery(ESPrimaryVersionSpec source, int upper, int lower, boolean allVersions,
 		boolean incoming, boolean outgoing, boolean includeChangePackages) {
 
-		PrimaryVersionSpec sourceVersionSpec = ((ESPrimaryVersionSpecImpl) source).getInternalAPIImpl();
+		PrimaryVersionSpec sourceVersionSpec = ((ESPrimaryVersionSpecImpl) source).toInternalAPI();
 
 		RangeQuery<?> rangeQuery = HistoryQueryBuilder.rangeQuery(
 			sourceVersionSpec,
@@ -40,7 +40,7 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 			outgoing,
 			includeChangePackages);
 
-		ESRangeQueryImpl<?> apiImpl = rangeQuery.getAPIImpl();
+		ESRangeQueryImpl<?, ?> apiImpl = (ESRangeQueryImpl<?, ?>) rangeQuery.toAPI();
 		return apiImpl;
 	}
 
@@ -53,14 +53,14 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 	 */
 	public ESPathQuery pathQuery(ESPrimaryVersionSpec source, ESPrimaryVersionSpec target, boolean allVersions,
 		boolean includeChangePackages) {
-		PrimaryVersionSpec sourceVersionSpec = ((ESPrimaryVersionSpecImpl) source).getInternalAPIImpl();
-		PrimaryVersionSpec targetVersionSpec = ((ESPrimaryVersionSpecImpl) target).getInternalAPIImpl();
+		PrimaryVersionSpec sourceVersionSpec = ((ESPrimaryVersionSpecImpl) source).toInternalAPI();
+		PrimaryVersionSpec targetVersionSpec = ((ESPrimaryVersionSpecImpl) target).toInternalAPI();
 		PathQuery pathQuery = HistoryQueryBuilder.pathQuery(
 			sourceVersionSpec,
 			targetVersionSpec,
 			allVersions,
 			includeChangePackages);
-		return pathQuery.getAPIImpl();
+		return pathQuery.toAPI();
 	}
 
 	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<ESModelElementId> modelElements,
@@ -69,10 +69,10 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 		// TODO: provide util method for mapping to internal classes
 		List<ModelElementId> modelElementIds = new ArrayList<ModelElementId>();
 		for (ESModelElementId id : modelElements) {
-			modelElementIds.add(((ESModelElementIdImpl) id).getInternalAPIImpl());
+			modelElementIds.add(((ESModelElementIdImpl) id).toInternalAPI());
 		}
 
-		PrimaryVersionSpec sourcePrimaryVersionSpec = ((ESPrimaryVersionSpecImpl) source).getInternalAPIImpl();
+		PrimaryVersionSpec sourcePrimaryVersionSpec = ((ESPrimaryVersionSpecImpl) source).toInternalAPI();
 
 		ModelElementQuery modelelementQuery = HistoryQueryBuilder.modelelementQuery(
 			sourcePrimaryVersionSpec,
@@ -82,7 +82,7 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 			allVersions,
 			includeChangePackages);
 
-		ESModelElementQueryImpl apiImpl = modelelementQuery.getAPIImpl();
+		ESModelElementQueryImpl apiImpl = (ESModelElementQueryImpl) modelelementQuery.toAPI();
 		return apiImpl;
 	}
 
@@ -90,9 +90,9 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 		int lower,
 		boolean allVersions, boolean includeCp) {
 		ModelElementQuery modelelementQuery = HistoryQueryBuilder.modelelementQuery(
-			((ESPrimaryVersionSpecImpl) source).getInternalAPIImpl(),
-			((ESModelElementIdImpl) id).getInternalAPIImpl(), upper, lower, allVersions, includeCp);
-		return modelelementQuery.getAPIImpl();
+			((ESPrimaryVersionSpecImpl) source).toInternalAPI(),
+			((ESModelElementIdImpl) id).toInternalAPI(), upper, lower, allVersions, includeCp);
+		return modelelementQuery.toAPI();
 	}
 
 }

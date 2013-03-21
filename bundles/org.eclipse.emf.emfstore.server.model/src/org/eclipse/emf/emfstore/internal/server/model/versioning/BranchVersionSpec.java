@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESBranchVersionSpecImpl;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Version Spec</b></em>'.
@@ -24,5 +24,5 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESBra
  * @model
  * @generated
  */
-public interface BranchVersionSpec extends VersionSpec, APIDelegate<ESBranchVersionSpecImpl> {
+public interface BranchVersionSpec extends VersionSpec, APIDelegate<ESBranchVersionSpec> {
 } // BranchVersionSpec

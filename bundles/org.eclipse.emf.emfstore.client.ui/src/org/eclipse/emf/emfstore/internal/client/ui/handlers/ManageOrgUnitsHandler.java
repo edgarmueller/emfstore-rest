@@ -34,6 +34,6 @@ public class ManageOrgUnitsHandler extends AbstractEMFStoreHandler {
 		}
 
 		new UIManageOrgUnitsController(getShell(), serverInfo
-				.getLastUsersession().getAPIImpl()).execute();
+				.getLastUsersession().toAPI()).execute();
 	}
 }

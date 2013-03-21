@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author emueller
  * 
  */
-public class ESPrimaryVersionSpecImpl extends ESVersionSpecImpl<ESPrimaryVersionSpecImpl, PrimaryVersionSpec> implements
+public class ESPrimaryVersionSpecImpl extends ESVersionSpecImpl<ESPrimaryVersionSpec, PrimaryVersionSpec> implements
 	ESPrimaryVersionSpec {
 
 	/**
@@ -40,7 +40,7 @@ public class ESPrimaryVersionSpecImpl extends ESVersionSpecImpl<ESPrimaryVersion
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec#getIdentifier()
 	 */
 	public int getIdentifier() {
-		return getInternalAPIImpl().getIdentifier();
+		return toInternalAPI().getIdentifier();
 	}
 
 	@Override
@@ -58,15 +58,15 @@ public class ESPrimaryVersionSpecImpl extends ESVersionSpecImpl<ESPrimaryVersion
 
 	@Override
 	public int hashCode() {
-		return getInternalAPIImpl().hashCode() + super.hashCode() + getIdentifier();
+		return toInternalAPI().hashCode() + super.hashCode() + getIdentifier();
 	}
 
 	private boolean sameIdentifier(ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl) {
-		return getInternalAPIImpl().getIdentifier() == otherPrimaryVersionSpecImpl.getInternalAPIImpl().getIdentifier();
+		return toInternalAPI().getIdentifier() == otherPrimaryVersionSpecImpl.toInternalAPI().getIdentifier();
 	}
 
 	private boolean sameBranch(ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl) {
-		String branch = getInternalAPIImpl().getBranch();
-		return branch != null && branch == otherPrimaryVersionSpecImpl.getInternalAPIImpl().getBranch();
+		String branch = toInternalAPI().getBranch();
+		return branch != null && branch == otherPrimaryVersionSpecImpl.toInternalAPI().getBranch();
 	}
 }

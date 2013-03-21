@@ -118,12 +118,12 @@ public class PaginationManager {
 		HistoryQuery<ESHistoryQueryImpl<ESHistoryQuery, ?>> query = getQuery(newCenterVersion,
 			aboveCenterCount, belowCenterCount);
 		// TODO monitor
-		List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(query.getAPIImpl(),
+		List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(query.toAPI(),
 			new NullProgressMonitor());
 
 		List<HistoryInfo> historyInfos = new ArrayList<HistoryInfo>();
 		for (ESHistoryInfo info : infos) {
-			historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+			historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
 		}
 
 		if (newCenterVersion != null && !currentCenterVersionShown.equals(newCenterVersion)) {
@@ -409,11 +409,11 @@ public class PaginationManager {
 			aboveCenterCount
 				+ belowCenterCount, aboveCenterCount + belowCenterCount);
 		// TODO: monitor
-		List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(query.getAPIImpl(),
+		List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(query.toAPI(),
 			new NullProgressMonitor());
 		List<HistoryInfo> historyInfos = new ArrayList<HistoryInfo>();
 		for (ESHistoryInfo info : infos) {
-			historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+			historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
 		}
 		int requestedIdPos = findPositionOfId(id, historyInfos, false);
 		boolean contained = containsId(historyInfos, id);

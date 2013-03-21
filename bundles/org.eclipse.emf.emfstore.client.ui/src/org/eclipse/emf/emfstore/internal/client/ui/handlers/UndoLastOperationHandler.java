@@ -32,7 +32,7 @@ public class UndoLastOperationHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		new UIUndoLastOperationController(getShell(), requireSelection(
-				ProjectSpace.class).getAPIImpl()).execute();
+				ProjectSpace.class).toAPI()).execute();
 	}
 
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
+import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Log Message</b></em>'.
@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
  * @model
  * @generated
  */
-public interface LogMessage extends EObject, APIDelegate<ESLogMessageImpl> {
+public interface LogMessage extends EObject, APIDelegate<ESLogMessage> {
 	/**
 	 * Returns the value of the '<em><b>Message</b></em>' attribute. <!--
 	 * begin-user-doc -->

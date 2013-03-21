@@ -71,7 +71,7 @@ public final class TestSessionProvider extends ESAbstractSessionProvider {
 		ESUsersessionImpl login;
 		try {
 			login = (ESUsersessionImpl) server.login("super", "super");
-			usersession = login.getInternalAPIImpl();
+			usersession = login.toInternalAPI();
 		} catch (ESException e) {
 			throw new RuntimeException(e);
 		}
@@ -82,7 +82,7 @@ public final class TestSessionProvider extends ESAbstractSessionProvider {
 		if (!usersession.isLoggedIn()) {
 			usersession.logIn();
 		}
-		return usersession.getAPIImpl();
+		return usersession.toAPI();
 	}
 
 	@Override

@@ -77,7 +77,7 @@ public class IsServerAdminTester extends PropertyTester {
 
 	private ServerInfo findServerInfo(ProjectInfo projectInfo) {
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		for (ServerInfo serverInfo : workspace.getInternalAPIImpl().getServerInfos()) {
+		for (ServerInfo serverInfo : workspace.toInternalAPI().getServerInfos()) {
 			if (projectInfo.eContainer() != null && projectInfo.eContainer().equals(serverInfo)) {
 				return serverInfo;
 			}

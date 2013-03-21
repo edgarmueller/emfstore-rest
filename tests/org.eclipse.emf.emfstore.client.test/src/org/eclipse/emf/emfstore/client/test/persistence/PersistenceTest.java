@@ -34,7 +34,7 @@ public class PersistenceTest extends WorkspaceTest {
 	@Test
 	public void testReinitWorkspace() throws SerializationException {
 		Configuration.getClientBehavior().setAutoSave(false);
-		Project originalProject = ModelUtil.clone(ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl()
+		Project originalProject = ModelUtil.clone(ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI()
 			.getProjectSpaces().get(0).getProject());
 
 		new EMFStoreCommand() {
@@ -48,7 +48,7 @@ public class PersistenceTest extends WorkspaceTest {
 			ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
 		ESWorkspaceProviderImpl.getInstance().dispose();
 		ESWorkspaceProviderImpl.getInstance().load();
-		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
+		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI();
 		Project project = internalWorkspace.getProjectSpaces().get(0).getProject();
 		assertTrue(ModelUtil.areEqual(project, originalProject));
 	}

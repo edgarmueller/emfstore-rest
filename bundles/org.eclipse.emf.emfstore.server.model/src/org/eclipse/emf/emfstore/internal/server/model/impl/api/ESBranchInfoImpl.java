@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author emueller
  * 
  */
-public class ESBranchInfoImpl extends AbstractAPIImpl<ESBranchInfoImpl, BranchInfo> implements ESBranchInfo {
+public class ESBranchInfoImpl extends AbstractAPIImpl<ESBranchInfo, BranchInfo> implements ESBranchInfo {
 
 	/**
 	 * Constructor.
@@ -41,7 +41,7 @@ public class ESBranchInfoImpl extends AbstractAPIImpl<ESBranchInfoImpl, BranchIn
 	 * @see org.eclipse.emf.emfstore.server.model.ESBranchInfo#getName()
 	 */
 	public String getName() {
-		return getInternalAPIImpl().getName();
+		return toInternalAPI().getName();
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class ESBranchInfoImpl extends AbstractAPIImpl<ESBranchInfoImpl, BranchIn
 	 * @see org.eclipse.emf.emfstore.server.model.ESBranchInfo#getHead()
 	 */
 	public ESPrimaryVersionSpec getHead() {
-		return getInternalAPIImpl().getHead().getAPIImpl();
+		return toInternalAPI().getHead().toAPI();
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class ESBranchInfoImpl extends AbstractAPIImpl<ESBranchInfoImpl, BranchIn
 	 * @see org.eclipse.emf.emfstore.server.model.ESBranchInfo#getSource()
 	 */
 	public ESPrimaryVersionSpec getSource() {
-		return getInternalAPIImpl().getSource().getAPIImpl();
+		return toInternalAPI().getSource().toAPI();
 	}
 
 }

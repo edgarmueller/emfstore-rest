@@ -83,7 +83,7 @@ public class ServerInterfaceTest extends ServerTests {
 			protected ProjectSpace doRun() {
 				try {
 					ESLocalProject checkout = getRemoteProject().checkout(new NullProgressMonitor());
-					return ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+					return ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					Assert.fail(e.getMessage());
 					return null;
@@ -117,7 +117,7 @@ public class ServerInterfaceTest extends ServerTests {
 			protected void doRun() {
 				ESWorkspaceImpl workspaceImpl = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				ProjectSpace projectSpace = workspaceImpl.createLocalProject("createEmptyProjectAndDelete")
-					.getInternalAPIImpl();
+					.toInternalAPI();
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
 				} catch (ESException e) {
@@ -153,7 +153,7 @@ public class ServerInterfaceTest extends ServerTests {
 			protected ProjectSpace doRun() {
 				ESWorkspaceImpl workspaceImpl = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 				ProjectSpace projectSpace = workspaceImpl.createLocalProject("createEmptyProjectAndDelete")
-					.getInternalAPIImpl();
+					.toInternalAPI();
 				try {
 					projectSpace.shareProject(new NullProgressMonitor());
 					return projectSpace;
@@ -214,7 +214,7 @@ public class ServerInterfaceTest extends ServerTests {
 		boolean sameVersionSpec = false;
 		for (ESRemoteProject project : remoteProjectList) {
 			PrimaryVersionSpec internalAPIImpl = ((ESPrimaryVersionSpecImpl) project.getHeadVersion(monitor))
-				.getInternalAPIImpl();
+				.toInternalAPI();
 			if (internalAPIImpl.equals(getProjectVersion())) {
 				sameVersionSpec = true;
 			}
@@ -377,8 +377,8 @@ public class ServerInterfaceTest extends ServerTests {
 		}.run(false);
 
 		HistoryQuery<ESHistoryQueryImpl<?, ?>> historyQuery = createHistoryQuery(createdVersion, createdVersion);
-		List<ESHistoryInfo> historyInfos = getProjectSpace().getAPIImpl().getHistoryInfos(
-			historyQuery.getAPIImpl(),
+		List<ESHistoryInfo> historyInfos = getProjectSpace().toAPI().getHistoryInfos(
+			historyQuery.toAPI(),
 			new NullProgressMonitor());
 
 		assertTrue(historyInfos.size() == 1);
@@ -404,8 +404,8 @@ public class ServerInterfaceTest extends ServerTests {
 		// TODO: TQ cast
 		HistoryQuery<ESHistoryQueryImpl<?, ?>> historyQuery = createHistoryQuery(getProjectVersion(),
 			getProjectVersion());
-		List<ESHistoryInfo> historyInfos = getProjectSpace().getAPIImpl().getHistoryInfos(
-			historyQuery.getAPIImpl(),
+		List<ESHistoryInfo> historyInfos = getProjectSpace().toAPI().getHistoryInfos(
+			historyQuery.toAPI(),
 			new NullProgressMonitor());
 		assertTrue(historyInfos.size() == 1);
 
@@ -440,8 +440,8 @@ public class ServerInterfaceTest extends ServerTests {
 
 		HistoryQuery<ESHistoryQueryImpl<?, ?>> historyQuery = createHistoryQuery(getProjectVersion(),
 			getProjectVersion());
-		List<ESHistoryInfo> historyInfos = getProjectSpace().getAPIImpl().getHistoryInfos(
-			historyQuery.getAPIImpl(),
+		List<ESHistoryInfo> historyInfos = getProjectSpace().toAPI().getHistoryInfos(
+			historyQuery.toAPI(),
 			new NullProgressMonitor());
 
 		assertTrue(historyInfos.size() == 1);

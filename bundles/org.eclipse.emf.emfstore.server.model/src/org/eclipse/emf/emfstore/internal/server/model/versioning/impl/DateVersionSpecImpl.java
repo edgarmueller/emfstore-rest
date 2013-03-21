@@ -180,14 +180,14 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESDateVersionSpecImpl getAPIImpl() {
+	public ESDateVersionSpecImpl toAPI() {
 
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -209,11 +209,11 @@ public class DateVersionSpecImpl extends VersionSpecImpl implements DateVersionS
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESDateVersionSpecImpl createAPIImpl() {
+	public ESDateVersionSpecImpl createAPI() {
 		return new ESDateVersionSpecImpl(this);
 	}
 

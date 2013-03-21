@@ -46,9 +46,9 @@ public class ESChangeConflictImpl implements ESChangeConflict, InternalAPIDelega
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator#getInternalAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator#toInternalAPI()
 	 */
-	public ChangeConflict getInternalAPIImpl() {
+	public ChangeConflict toInternalAPI() {
 		return changeConflict;
 	}
 

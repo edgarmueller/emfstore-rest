@@ -112,11 +112,11 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 */
-	public ESChangeConflict getAPIImpl() {
+	public ESChangeConflict toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 		return apiImpl;
 	}
@@ -125,9 +125,9 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 */
-	public ESChangeConflictImpl createAPIImpl() {
+	public ESChangeConflictImpl createAPI() {
 		return new ESChangeConflictImpl(this);
 	}
 

@@ -49,7 +49,7 @@ public final class ServerFactoryImpl implements ESServerFactory {
 	public ESServer getServer(final String url, final int port, final String certificate) {
 
 		final ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
-		final ESServerImpl server = serverInfo.getAPIImpl();
+		final ESServerImpl server = serverInfo.toAPI();
 
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
@@ -72,6 +72,6 @@ public final class ServerFactoryImpl implements ESServerFactory {
 		String certificate) {
 		ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
 		serverInfo.setName(name);
-		return serverInfo.getAPIImpl();
+		return serverInfo.toAPI();
 	}
 }

@@ -133,12 +133,12 @@ public class ModelElementIdToEObjectMappingImpl implements ModelElementIdToEObje
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 */
-	public ESModelElementIdToEObjectMappingImpl getAPIImpl() {
+	public ESModelElementIdToEObjectMappingImpl toAPI() {
 
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -148,9 +148,9 @@ public class ModelElementIdToEObjectMappingImpl implements ModelElementIdToEObje
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 */
-	public ESModelElementIdToEObjectMappingImpl createAPIImpl() {
+	public ESModelElementIdToEObjectMappingImpl createAPI() {
 		return new ESModelElementIdToEObjectMappingImpl(this);
 	}
 }

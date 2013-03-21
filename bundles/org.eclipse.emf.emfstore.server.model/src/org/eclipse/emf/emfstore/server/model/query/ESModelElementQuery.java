@@ -20,10 +20,10 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementId;
  * The model element query is a specialization of the {@link ESRangeQuery}, which allows to additionally
  * alter the results produced by the range query on selected elements.
  * 
- * @author Edgar
+ * @author emueller
  * 
  */
-public interface ESModelElementQuery extends ESRangeQuery {
+public interface ESModelElementQuery extends ESRangeQuery<ESModelElementQuery> {
 
 	/**
 	 * Returns all model element IDs this query is filtering for.

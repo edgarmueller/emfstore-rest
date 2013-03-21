@@ -86,7 +86,7 @@ public class UICreateBranchController extends
 		BranchVersionSpec branch) {
 		super(shell, true, true);
 		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
-			.getInternalAPIImpl();
+			.toInternalAPI();
 		this.branch = branch;
 	}
 
@@ -123,7 +123,7 @@ public class UICreateBranchController extends
 																	"Confirmation", message);
 				if (shouldUpdate) {
 					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace
-						.getBaseVersion().getAPIImpl();
+						.getBaseVersion().toAPI();
 					ESPrimaryVersionSpec version = new UIUpdateProjectController(
 						getShell(), projectSpace)
 						.executeSub(progressMonitor);
@@ -154,9 +154,9 @@ public class UICreateBranchController extends
 		ESLocalProjectImpl localProjectImpl = (ESLocalProjectImpl) localProject;
 
 		final CommitDialog commitDialog = new CommitDialog(getShell(),
-			internalChangePackage.getInternalAPIImpl(),
-			localProjectImpl.getInternalAPIImpl(),
-			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).getInternalAPIImpl());
+			internalChangePackage.toInternalAPI(),
+			localProjectImpl.toInternalAPI(),
+			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).toInternalAPI());
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {
@@ -194,7 +194,7 @@ public class UICreateBranchController extends
 																			logMessage,
 																			UICreateBranchController.this,
 																			progressMonitor);
-			return commitToBranch.getAPIImpl();
+			return commitToBranch.toAPI();
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
 			// ignore

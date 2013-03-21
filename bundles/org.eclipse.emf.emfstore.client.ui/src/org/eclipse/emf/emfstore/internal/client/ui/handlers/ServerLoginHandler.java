@@ -30,7 +30,7 @@ public class ServerLoginHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		ServerInfo serverInfo = requireSelection(ServerInfo.class);
-		new UILoginSessionController(getShell(), serverInfo.getAPIImpl()).execute();
+		new UILoginSessionController(getShell(), serverInfo.toAPI()).execute();
 	}
 
 }

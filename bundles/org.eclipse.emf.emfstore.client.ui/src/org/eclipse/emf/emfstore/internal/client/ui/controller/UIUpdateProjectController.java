@@ -115,8 +115,8 @@ public class UIUpdateProjectController extends
 		// TODO OTS
 		boolean mergeSuccessful = false;
 		try {
-			final ProjectSpace internalProject = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
-			final ChangeConflict internalChangeConflict = ((ESChangeConflictImpl) changeConflict).getInternalAPIImpl();
+			final ProjectSpace internalProject = ((ESLocalProjectImpl) localProject).toInternalAPI();
+			final ChangeConflict internalChangeConflict = ((ESChangeConflictImpl) changeConflict).toInternalAPI();
 
 			// merge opens up a dialog
 			return internalProject.merge(
@@ -157,9 +157,10 @@ public class UIUpdateProjectController extends
 
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
+				List<ChangePackage> internal = APIUtil.toInternal(ChangePackage.class, changePackages);
 				UpdateDialog updateDialog = new UpdateDialog(getShell(), localProject,
-					APIUtil.mapToInternalAPI(ChangePackage.class, changePackages),
-					((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).getInternalAPIImpl());
+					internal,
+					((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).toInternalAPI());
 				if (updateDialog.open() == Window.OK) {
 					return true;
 				}

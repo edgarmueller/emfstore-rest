@@ -52,7 +52,7 @@ public final class EMFStoreClientUtil {
 
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 
-		for (ServerInfo existingServerInfo : workspace.getInternalAPIImpl().getServerInfos()) {
+		for (ServerInfo existingServerInfo : workspace.toInternalAPI().getServerInfos()) {
 			if (existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)) {
 				if (url.equals(existingServerInfo.getUrl()) && port == existingServerInfo.getPort()) {
 					return existingServerInfo;
@@ -60,9 +60,9 @@ public final class EMFStoreClientUtil {
 			}
 		}
 		ServerInfo serverInfo = createServerInfo(url, port, null);
-		workspace.getInternalAPIImpl().getServerInfos().add(serverInfo);
+		workspace.toInternalAPI().getServerInfos().add(serverInfo);
 		// TODO: OTS
-		((WorkspaceBase) workspace.getInternalAPIImpl()).save();
+		((WorkspaceBase) workspace.toInternalAPI()).save();
 		return serverInfo;
 	}
 
@@ -108,7 +108,7 @@ public final class EMFStoreClientUtil {
 	 */
 	public static Usersession createUsersession(String username, String password, String serverUrl, int serverPort) {
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		for (Usersession usersession : workspace.getInternalAPIImpl().getUsersessions()) {
+		for (Usersession usersession : workspace.toInternalAPI().getUsersessions()) {
 			ServerInfo existingServerInfo = usersession.getServerInfo();
 			if (existingServerInfo != null && existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)
 				&& existingServerInfo.getUrl().equals(serverUrl) && existingServerInfo.getPort() == serverPort) {
@@ -122,9 +122,9 @@ public final class EMFStoreClientUtil {
 		usersession.setServerInfo(giveServerInfo(serverUrl, serverPort));
 		usersession.setUsername(username);
 		usersession.setPassword(password);
-		workspace.getInternalAPIImpl().getUsersessions().add(usersession);
+		workspace.toInternalAPI().getUsersessions().add(usersession);
 		// TODO: OTS
-		((WorkspaceBase) workspace.getInternalAPIImpl()).save();
+		((WorkspaceBase) workspace.toInternalAPI()).save();
 		return usersession;
 	}
 
@@ -154,8 +154,8 @@ public final class EMFStoreClientUtil {
 	}
 
 	public static boolean areEqual(ESLocalProject projectA, ESLocalProject projectB) {
-		ProjectSpace projectSpaceA = ((ESLocalProjectImpl) projectA).getInternalAPIImpl();
-		ProjectSpace projectSpaceB = ((ESLocalProjectImpl) projectB).getInternalAPIImpl();
+		ProjectSpace projectSpaceA = ((ESLocalProjectImpl) projectA).toInternalAPI();
+		ProjectSpace projectSpaceB = ((ESLocalProjectImpl) projectB).toInternalAPI();
 
 		return ModelUtil.areEqual(projectSpaceA.getProject(), projectSpaceB.getProject());
 	}

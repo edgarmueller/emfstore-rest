@@ -7,15 +7,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIEditServerPropertiesController;
 
 /**
  * Shows the properties dialog for a selected server.<br/>
- * It is assumed that the user previously has selected a {@link ServerInfo} instance.
+ * It is assumed that the user previously has selected a {@link ESServer} instance.
  * 
  * @author emueller
  * 
@@ -30,7 +31,9 @@ public class ServerPropertiesHandler extends AbstractEMFStoreHandler {
 	 */
 	@Override
 	public void handle() {
-		new UIEditServerPropertiesController(getShell(), requireSelection(ServerInfo.class)).execute();
+		new UIEditServerPropertiesController(
+			getShell(),
+			requireSelection(ESServer.class)).execute();
 	}
 
 }

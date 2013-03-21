@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
  * @author emueller
  * 
  */
-public class ESDateVersionSpecImpl extends ESVersionSpecImpl<ESDateVersionSpecImpl, DateVersionSpec> implements
+public class ESDateVersionSpecImpl extends ESVersionSpecImpl<ESDateVersionSpec, DateVersionSpec> implements
 	ESDateVersionSpec {
 
 	/**
@@ -43,7 +43,7 @@ public class ESDateVersionSpecImpl extends ESVersionSpecImpl<ESDateVersionSpecIm
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESDateVersionSpec#getDate()
 	 */
 	public Date getDate() {
-		return getInternalAPIImpl().getDate();
+		return toInternalAPI().getDate();
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class ESDateVersionSpecImpl extends ESVersionSpecImpl<ESDateVersionSpecIm
 
 		if (object instanceof ESDateVersionSpecImpl) {
 			ESDateVersionSpecImpl dateVersionSpecImpl = (ESDateVersionSpecImpl) object;
-			return getInternalAPIImpl().equals(dateVersionSpecImpl.getInternalAPIImpl());
+			return toInternalAPI().equals(dateVersionSpecImpl.toInternalAPI());
 		}
 
 		return false;
@@ -59,6 +59,6 @@ public class ESDateVersionSpecImpl extends ESVersionSpecImpl<ESDateVersionSpecIm
 
 	@Override
 	public int hashCode() {
-		return getInternalAPIImpl().hashCode() + super.hashCode() + getDate().hashCode();
+		return toInternalAPI().hashCode() + super.hashCode() + getDate().hashCode();
 	}
 }

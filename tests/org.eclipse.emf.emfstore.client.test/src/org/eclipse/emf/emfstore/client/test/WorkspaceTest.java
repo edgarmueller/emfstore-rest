@@ -78,13 +78,13 @@ public abstract class WorkspaceTest {
 			protected void doRun() {
 				ESLocalProjectImpl localProject = ESWorkspaceProviderImpl.getInstance().getWorkspace()
 					.createLocalProject("testProject");
-				ProjectSpace localProjectSpace = localProject.getInternalAPIImpl();
+				ProjectSpace localProjectSpace = localProject.toInternalAPI();
 				setProjectSpace(localProjectSpace);
 				setProject(getProjectSpace().getProject());
 
 				if (isCompareAtEnd()) {
 					WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProviderImpl.getInstance().getWorkspace()
-						.getInternalAPIImpl();
+						.toInternalAPI();
 					workspace.cloneProject("clonedProject", getProject());
 					clonedProjectSpace = (ProjectSpaceBase) workspace.cloneProject("clonedProject", getProject());
 					Assert.assertTrue(ModelUtil.areEqual(projectSpace.getProject(), clonedProjectSpace.getProject()));
@@ -148,7 +148,7 @@ public abstract class WorkspaceTest {
 				try {
 
 					ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.getInternalAPIImpl()
+					for (ProjectSpace projectSpace : new ArrayList<ProjectSpace>(workspace.toInternalAPI()
 						.getProjectSpaces())) {
 						// TODO: monitor
 						projectSpace.delete(new NullProgressMonitor());

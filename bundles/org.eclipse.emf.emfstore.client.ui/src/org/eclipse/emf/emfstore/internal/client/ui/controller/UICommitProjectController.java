@@ -129,8 +129,8 @@ public class UICommitProjectController extends
 		ESChangePackage changePackage,
 		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
-		final ChangePackage internalChangePackage = ((ESChangePackageImpl) changePackage).getInternalAPIImpl();
-		final ProjectSpace projectSpace = ((ESLocalProjectImpl) localProject).getInternalAPIImpl();
+		final ChangePackage internalChangePackage = ((ESChangePackageImpl) changePackage).toInternalAPI();
+		final ProjectSpace projectSpace = ((ESLocalProjectImpl) localProject).toInternalAPI();
 
 		if (internalChangePackage.getOperations().isEmpty()) {
 			RunInUI.run(new Callable<Void>() {
@@ -153,7 +153,7 @@ public class UICommitProjectController extends
 			getShell(),
 			internalChangePackage,
 			projectSpace,
-			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).getInternalAPIImpl());
+			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).toInternalAPI());
 
 		dialogReturnValue = RunInUI.runWithResult(new Callable<Integer>() {
 			public Integer call() throws Exception {

@@ -81,8 +81,8 @@ public class ProjectListUpdater implements ESWorkspaceInitObserver, ESShareObser
 	private void updateACUser(ESUsersession session) {
 		try {
 			ESWorkspaceImpl w = (ESWorkspaceImpl) workspace;
-			Usersession u = ((ESUsersessionImpl) session).getInternalAPIImpl();
-			((WorkspaceBase) w.getInternalAPIImpl()).updateACUser(u);
+			Usersession u = ((ESUsersessionImpl) session).toInternalAPI();
+			((WorkspaceBase) w.toInternalAPI()).updateACUser(u);
 		} catch (ESException e) {
 			// fail silently
 			WorkspaceUtil.logException("Couldn't update ACUser.", e);

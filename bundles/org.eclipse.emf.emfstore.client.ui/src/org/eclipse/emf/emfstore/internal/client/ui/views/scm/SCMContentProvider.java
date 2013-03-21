@@ -190,7 +190,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		} else if (object instanceof ESChangePackage) {
 
 			ChangePackage changePackage = ((ESChangePackageImpl) object)
-				.getInternalAPIImpl();
+				.toInternalAPI();
 
 			filter(changePackage, super.getChildren(object), LogMessage.class);
 

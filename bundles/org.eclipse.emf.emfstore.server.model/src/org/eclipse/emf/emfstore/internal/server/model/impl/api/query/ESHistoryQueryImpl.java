@@ -23,8 +23,8 @@ import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
  * @param <U> a subtype of the API implementation class {@link ESHistoryQueryImpl}
  * @param <T> a subtype of the internal type {@link HistoryQuery}
  */
-public abstract class ESHistoryQueryImpl<U extends ESHistoryQuery, T extends HistoryQuery<U>>
-	extends AbstractAPIImpl<U, T> implements ESHistoryQuery {
+public abstract class ESHistoryQueryImpl<U extends ESHistoryQuery<?>, T extends HistoryQuery<U>>
+	extends AbstractAPIImpl<U, T> implements ESHistoryQuery<U> {
 
 	/**
 	 * Constructor.

@@ -46,7 +46,7 @@ public class UIRegisterEPackageController extends
 	 */
 	public UIRegisterEPackageController(Shell shell, ESServer serverInfo) {
 		super(shell);
-		this.serverInfo = ((ESServerImpl) serverInfo).getInternalAPIImpl();
+		this.serverInfo = ((ESServerImpl) serverInfo).toInternalAPI();
 	}
 
 	/**

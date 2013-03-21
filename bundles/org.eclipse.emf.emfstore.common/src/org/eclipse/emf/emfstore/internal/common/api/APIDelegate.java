@@ -12,15 +12,15 @@
 package org.eclipse.emf.emfstore.internal.common.api;
 
 /**
- * Maps the implementing type onto an externally available API implementation type.
+ * Maps the implementing type onto an externally available API type.
  * 
  * @author emueller
  * 
- * @param <API_IMPL_CLASS> the API implementation class which maps onto this internal type
+ * @param <API> the API class which maps onto this internal type
  */
-public interface APIDelegate<API_IMPL_CLASS> {
+public interface APIDelegate<API> {
 
-	API_IMPL_CLASS getAPIImpl();
+	API toAPI();
 	
-	API_IMPL_CLASS createAPIImpl();
+	API createAPI();
 }

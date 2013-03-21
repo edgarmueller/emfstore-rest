@@ -50,7 +50,7 @@ public class UIRemoveServerController extends
 	 */
 	public UIRemoveServerController(Shell shell, ESServer serverInfo) {
 		super(shell);
-		this.serverInfo = ((ESServerImpl) serverInfo).getInternalAPIImpl();
+		this.serverInfo = ((ESServerImpl) serverInfo).toInternalAPI();
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class UIRemoveServerController extends
 		// TODO OTS
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance()
 				.getWorkspace();
-		EList<ProjectSpace> projectSpaces = workspace.getInternalAPIImpl()
+		EList<ProjectSpace> projectSpaces = workspace.toInternalAPI()
 				.getProjectSpaces();
 		ArrayList<ProjectSpace> usedSpaces = new ArrayList<ProjectSpace>();
 

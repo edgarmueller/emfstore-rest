@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
+import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Range Query</b></em>'. <!-- end-user-doc -->
@@ -35,7 +36,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * 
  * @generated NOT
  */
-public class RangeQueryImpl<T extends ESRangeQueryImpl<?>> extends HistoryQueryImpl<T> implements RangeQuery<T> {
+public class RangeQueryImpl<T extends ESRangeQuery<?>>
+	extends HistoryQueryImpl<T> implements RangeQuery<T> {
 
 	/**
 	 * @generated NOT
@@ -348,13 +350,13 @@ public class RangeQueryImpl<T extends ESRangeQueryImpl<?>> extends HistoryQueryI
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public T getAPIImpl() {
+	public T toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -376,12 +378,12 @@ public class RangeQueryImpl<T extends ESRangeQueryImpl<?>> extends HistoryQueryI
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public T createAPIImpl() {
+	public T createAPI() {
 		// TODO fix type warnings
 		return (T) new ESRangeQueryImpl(this);
 	}

@@ -126,7 +126,7 @@ public class PerformanceTest {
 					}
 				}
 				ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-				workspace.getInternalAPIImpl().getUsersessions().add(session);
+				workspace.toInternalAPI().getUsersessions().add(session);
 				usersession = session;
 			}
 		}.run(false);
@@ -205,10 +205,10 @@ public class PerformanceTest {
 				protected void doRun() {
 					try {
 						// TODO: OTS cast
-						ESLocalProject checkout = projectSpace.getAPIImpl().getRemoteProject().checkout(
-							setupHelper.getUsersession().getAPIImpl(),
+						ESLocalProject checkout = projectSpace.toAPI().getRemoteProject().checkout(
+							setupHelper.getUsersession().toAPI(),
 							new NullProgressMonitor());
-						projectSpace2 = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+						projectSpace2 = ((ESLocalProjectImpl) checkout).toInternalAPI();
 					} catch (ESException e) {
 						e.printStackTrace();
 					}
@@ -280,11 +280,11 @@ public class PerformanceTest {
 					Usersession usersession2 = setupHelper2.getUsersession();
 					setupHelper2.getWorkSpace().getUsersessions().add(usersession2);
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
-					ESLocalProject checkout = setupHelper.getTestProjectSpace().getAPIImpl().getRemoteProject()
+					ESLocalProject checkout = setupHelper.getTestProjectSpace().toAPI().getRemoteProject()
 						.checkout(
-							usersession2.getAPIImpl(),
+							usersession2.toAPI(),
 							new NullProgressMonitor());
-					projectSpace2 = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+					projectSpace2 = ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					e.printStackTrace();
 				}
@@ -368,7 +368,7 @@ public class PerformanceTest {
 			}.run(false);
 			updateTimes[i] = (System.currentTimeMillis() - time) / 1000.0;
 			ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-			CleanMemoryTask task = new CleanMemoryTask(workspace.getInternalAPIImpl().getResourceSet());
+			CleanMemoryTask task = new CleanMemoryTask(workspace.toInternalAPI().getResourceSet());
 			task.run();
 			memDuringUpdate[i] = memoryMeter.stopMeasurements();
 			memAfterUpdate[i] = usedMemory();

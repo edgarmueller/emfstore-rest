@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl;
 import org.eclipse.emf.emfstore.internal.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESSessionIdImpl;
+import org.eclipse.emf.emfstore.server.model.ESSessionId;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Session Id</b></em>'.
@@ -28,7 +29,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESSessionIdImpl;
  * 
  * @generated
  */
-public class SessionIdImpl extends UniqueIdentifierImpl implements SessionId, APIDelegate<ESSessionIdImpl> {
+public class SessionIdImpl extends UniqueIdentifierImpl implements SessionId, APIDelegate<ESSessionId> {
 
 	/**
 	 * @generated NOT
@@ -59,13 +60,13 @@ public class SessionIdImpl extends UniqueIdentifierImpl implements SessionId, AP
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESSessionIdImpl getAPIImpl() {
+	public ESSessionIdImpl toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 		return apiImpl;
 	}
@@ -74,11 +75,11 @@ public class SessionIdImpl extends UniqueIdentifierImpl implements SessionId, AP
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESSessionIdImpl createAPIImpl() {
+	public ESSessionIdImpl createAPI() {
 		return new ESSessionIdImpl(this);
 	}
 

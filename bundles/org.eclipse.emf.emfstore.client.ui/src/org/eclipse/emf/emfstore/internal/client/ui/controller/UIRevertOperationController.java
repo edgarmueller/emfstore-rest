@@ -41,7 +41,7 @@ public class UIRevertOperationController extends
 	public UIRevertOperationController(Shell shell, ESLocalProject projectSpace) {
 		super(shell);
 		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
-				.getInternalAPIImpl();
+				.toInternalAPI();
 	}
 
 	/**

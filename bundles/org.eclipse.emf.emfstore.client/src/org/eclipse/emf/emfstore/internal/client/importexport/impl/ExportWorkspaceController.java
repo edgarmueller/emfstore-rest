@@ -97,12 +97,12 @@ public class ExportWorkspaceController implements IExportImportController {
 		}
 
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		Workspace copy = ModelUtil.clone(workspace.getInternalAPIImpl());
+		Workspace copy = ModelUtil.clone(workspace.toInternalAPI());
 
 		int i = 0;
 
 		for (ProjectSpace copiedProjectSpace : copy.getProjectSpaces()) {
-			Project orgProject = workspace.getInternalAPIImpl().getProjectSpaces().get(i++).getProject();
+			Project orgProject = workspace.toInternalAPI().getProjectSpaces().get(i++).getProject();
 			copiedProjectSpace.setProject(ModelUtil.clone(orgProject));
 		}
 

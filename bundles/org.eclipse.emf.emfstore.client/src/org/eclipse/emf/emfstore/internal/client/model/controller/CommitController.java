@@ -112,7 +112,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		// check if there are any changes. Branch commits are allowed with no changes, whereas normal commits are not.
 		if (!getProjectSpace().isDirty() && branch == null) {
-			callback.noLocalChanges(getProjectSpace().getAPIImpl());
+			callback.noLocalChanges(getProjectSpace().toAPI());
 			return getProjectSpace().getBaseVersion();
 		}
 
@@ -129,15 +129,15 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		changePackage.setLogMessage(logMessage);
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
-			.inspectChanges(getProjectSpace().getAPIImpl(), changePackage.getAPIImpl(), getProgressMonitor());
+			.inspectChanges(getProjectSpace().toAPI(), changePackage.toAPI(), getProgressMonitor());
 
 		ModelElementIdToEObjectMappingImpl idToEObjectMapping = new ModelElementIdToEObjectMappingImpl(
 			getProjectSpace().getProject(), changePackage);
 
 		getProgressMonitor().subTask("Presenting Changes");
-		if (!callback.inspectChanges(getProjectSpace().getAPIImpl(),
-										changePackage.getAPIImpl(),
-										idToEObjectMapping.getAPIImpl())
+		if (!callback.inspectChanges(getProjectSpace().toAPI(),
+										changePackage.toAPI(),
+										idToEObjectMapping.toAPI())
 			|| getProgressMonitor().isCanceled()) {
 			return getProjectSpace().getBaseVersion();
 		}
@@ -154,9 +154,9 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		// present changes again if update was performed
 		if (updatePerformed) {
 			getProgressMonitor().subTask("Presenting Changes");
-			if (!callback.inspectChanges(getProjectSpace().getAPIImpl(),
-											changePackage.getAPIImpl(),
-											idToEObjectMapping.getAPIImpl())
+			if (!callback.inspectChanges(getProjectSpace().toAPI(),
+											changePackage.toAPI(),
+											idToEObjectMapping.toAPI())
 				|| getProgressMonitor().isCanceled()) {
 				return getProjectSpace().getBaseVersion();
 			}
@@ -198,7 +198,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		if (!validChecksum) {
 			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
 			boolean errorHandled = callback
-				.checksumCheckFailed(getProjectSpace().getAPIImpl(), newBaseVersion.getAPIImpl(), getProgressMonitor());
+				.checksumCheckFailed(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
 			if (!errorHandled) {
 				throw new ESException("Commit cancelled by checksum error handler due to invalid checksum.");
 			}
@@ -212,7 +212,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProjectSpace().updateDirtyState();
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
-			.commitCompleted(getProjectSpace().getAPIImpl(), newBaseVersion.getAPIImpl(), getProgressMonitor());
+			.commitCompleted(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
 
 		return newBaseVersion;
 	}
@@ -252,7 +252,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 				.resolveVersionSpec(
 									Versions.createHEAD(getProjectSpace().getBaseVersion()), monitor);
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
-				if (!callback.baseVersionOutOfDate(getProjectSpace().getAPIImpl(), getProgressMonitor())) {
+				if (!callback.baseVersionOutOfDate(getProjectSpace().toAPI(), getProgressMonitor())) {
 					throw new BaseVersionOutdatedException();
 				}
 				return true;

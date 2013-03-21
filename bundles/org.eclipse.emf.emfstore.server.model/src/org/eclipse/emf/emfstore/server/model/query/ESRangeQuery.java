@@ -18,7 +18,7 @@ package org.eclipse.emf.emfstore.server.model.query;
  * @author wesendon
  * @author emueller
  */
-public interface ESRangeQuery extends ESHistoryQuery {
+public interface ESRangeQuery<T extends ESRangeQuery<?>> extends ESHistoryQuery<T> {
 
 	/**
 	 * <p>

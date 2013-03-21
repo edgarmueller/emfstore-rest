@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESHistoryQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * 
  * @generated NOT
  */
-public abstract class HistoryQueryImpl<T extends ESHistoryQueryImpl<?, ?>> extends EObjectImpl implements
+public abstract class HistoryQueryImpl<T extends ESHistoryQuery<?>> extends EObjectImpl implements
 	HistoryQuery<T> {
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.

@@ -52,7 +52,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getLocalProjects()
 	 */
 	public List<ESLocalProject> getLocalProjects() {
-		return APIUtil.mapToAPI(ESLocalProject.class, getInternalAPIImpl().getProjectSpaces());
+		return APIUtil.mapToAPI(ESLocalProject.class, toInternalAPI().getProjectSpaces());
 	}
 
 	/**
@@ -65,8 +65,8 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 		return new EMFStoreCommandWithResult<ESLocalProjectImpl>() {
 			@Override
 			protected ESLocalProjectImpl doRun() {
-				ProjectSpace projectSpace = getInternalAPIImpl().createLocalProject(projectName);
-				return projectSpace.getAPIImpl();
+				ProjectSpace projectSpace = toInternalAPI().createLocalProject(projectName);
+				return projectSpace.toAPI();
 			}
 		}.run(false);
 	}
@@ -78,7 +78,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#getServers()
 	 */
 	public List<ESServer> getServers() {
-		return APIUtil.mapToAPI(ESServer.class, getInternalAPIImpl().getServerInfos());
+		return APIUtil.mapToAPI(ESServer.class, toInternalAPI().getServerInfos());
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 		// TODO: perform contains check?
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				getInternalAPIImpl().addServerInfo(serverImpl.getInternalAPIImpl());
+				toInternalAPI().addServerInfo(serverImpl.toInternalAPI());
 				return null;
 			}
 		});
@@ -108,7 +108,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 		final ESServerImpl serverImpl = (ESServerImpl) server;
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				getInternalAPIImpl().removeServerInfo(serverImpl.getInternalAPIImpl());
+				toInternalAPI().removeServerInfo(serverImpl.toInternalAPI());
 				return null;
 			}
 		});
@@ -124,8 +124,8 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 		return RunESCommand.runWithResult(new Callable<ESLocalProject>() {
 			public ESLocalProject call() throws Exception {
 				Project project = ModelUtil.getProject(modelElement);
-				ProjectSpace projectSpace = getInternalAPIImpl().getProjectSpace(project);
-				return projectSpace.getAPIImpl();
+				ProjectSpace projectSpace = toInternalAPI().getProjectSpace(project);
+				return projectSpace.toAPI();
 			}
 		});
 	}

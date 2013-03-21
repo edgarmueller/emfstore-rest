@@ -75,7 +75,7 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 			IProgressMonitor monitor) throws ESException {
 
 			// TODO: OTS casts
-			ProjectSpace projectSpace = ((ESLocalProjectImpl) project).getInternalAPIImpl();
+			ProjectSpace projectSpace = ((ESLocalProjectImpl) project).toInternalAPI();
 
 			Project fetchedProject = new UnknownEMFStoreWorkloadCommand<Project>(monitor) {
 				@Override
@@ -90,9 +90,9 @@ public enum ChecksumErrorHandler implements ESChecksumErrorHandler {
 						.getInstance()
 						.getConnectionManager()
 						.getProject(
-							sessionIdImpl.getInternalAPIImpl(),
-							globalProjectIdImpl.getInternalAPIImpl(),
-							ModelUtil.clone(versionSpecImpl.getInternalAPIImpl()));
+							sessionIdImpl.toInternalAPI(),
+							globalProjectIdImpl.toInternalAPI(),
+							ModelUtil.clone(versionSpecImpl.toInternalAPI()));
 				}
 			}.execute();
 

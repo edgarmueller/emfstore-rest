@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.server.model;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectIdImpl;
+import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Id</b></em>'.
@@ -24,5 +24,5 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESGlobalProjectId
  * @model
  * @generated
  */
-public interface ProjectId extends UniqueIdentifier, APIDelegate<ESGlobalProjectIdImpl> {
+public interface ProjectId extends UniqueIdentifier, APIDelegate<ESGlobalProjectId> {
 } // ProjectId

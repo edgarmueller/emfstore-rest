@@ -36,7 +36,7 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 		}
 
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		Workspace internalWorkspace = workspace.getInternalAPIImpl();
+		Workspace internalWorkspace = workspace.toInternalAPI();
 		// TODO: contaisn check for server infos
 		if (!internalWorkspace.getServerInfos().contains(server)) {
 			workspace.addServer(server);
@@ -48,16 +48,16 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 		session.setUsername("super");
 		session.setPassword("super");
 		session.setSavePassword(true);
-		session.setServerInfo(((ESServerImpl) server).getInternalAPIImpl());
+		session.setServerInfo(((ESServerImpl) server).toInternalAPI());
 		internalWorkspace.getUsersessions().add(session);
 		internalWorkspace.save();
 	}
 
 	@Override
 	public ESUsersession provideUsersession(ESServer serverInfo) throws ESException {
-		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
+		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI();
 		if (session != null && internalWorkspace.getUsersessions().contains(session)) {
-			return session.getAPIImpl();
+			return session.toAPI();
 		}
 
 		if (serverInfo != null && serverInfo.getLastUsersession() != null) {
@@ -69,7 +69,7 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 			initSession(serverInfo);
 		}
 
-		return session.getAPIImpl();
+		return session.toAPI();
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 	}
 
 	public void clearSession() {
-		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl();
+		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI();
 		if (session != null && internalWorkspace.getUsersessions().contains(session)) {
 			internalWorkspace.getUsersessions().remove(session);
 			session = null;

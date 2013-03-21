@@ -153,11 +153,11 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					ESLocalProject checkout = projectSpace.getAPIImpl().getRemoteProject().checkout(
-						projectSpace.getUsersession().getAPIImpl(),
-						projectSpace.getBaseVersion().getAPIImpl(),
+					ESLocalProject checkout = projectSpace.toAPI().getRemoteProject().checkout(
+						projectSpace.getUsersession().toAPI(),
+						projectSpace.getBaseVersion().toAPI(),
 						new NullProgressMonitor());
-					return ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+					return ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
@@ -173,10 +173,10 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE).setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					ESLocalProject checkout = remoteProject.checkout(
-						getProjectSpace().getUsersession().getAPIImpl(),
-						baseVersion.getAPIImpl(),
+						getProjectSpace().getUsersession().toAPI(),
+						baseVersion.toAPI(),
 						new NullProgressMonitor());
-					return ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+					return ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}

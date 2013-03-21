@@ -44,7 +44,6 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESRangeQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
@@ -58,6 +57,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Comp
 import org.eclipse.emf.emfstore.internal.server.model.versioning.util.HistoryQueryBuilder;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.query.ESRangeQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
@@ -326,24 +326,24 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 										showAllVersions,
 										true);
 									// TODO: proivde util method
-									List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(
-										query.getAPIImpl(), new NullProgressMonitor());
+									List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(
+										query.toAPI(), new NullProgressMonitor());
 									for (ESHistoryInfo info : infos) {
-										historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+										historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
 									}
 								} else {
 									// TODO monitor
-									RangeQuery<ESRangeQueryImpl<ESRangeQueryImpl<?>>> rangeQuery = HistoryQueryBuilder
+									RangeQuery<ESRangeQuery<ESRangeQuery<?>>> rangeQuery = HistoryQueryBuilder
 										.rangeQuery(
 											centerVersion,
 											UPPER_LIMIT,
 											LOWER_LIMIT,
 											showAllVersions, true, true, true);
-									List<ESHistoryInfo> infos = projectSpace.getAPIImpl().getHistoryInfos(
-										rangeQuery.getAPIImpl(),
+									List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(
+										rangeQuery.toAPI(),
 										new NullProgressMonitor());
 									for (ESHistoryInfo info : infos) {
-										historyInfos.add(((ESHistoryInfoImpl) info).getInternalAPIImpl());
+										historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
 									}
 								}
 								monitor.worked(90);
@@ -420,7 +420,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				this.projectSpace = (ProjectSpace) input;
 			} else if (input != null) {
 				ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-				this.projectSpace = workspace.getInternalAPIImpl().getProjectSpace(ModelUtil.getProject(input));
+				this.projectSpace = workspace.toInternalAPI().getProjectSpace(ModelUtil.getProject(input));
 			} else {
 				this.projectSpace = null;
 			}
@@ -468,7 +468,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
 				// TODO OTS
 				ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-				for (ProjectSpace ps : workspace.getInternalAPIImpl().getProjectSpaces()) {
+				for (ProjectSpace ps : workspace.toInternalAPI().getProjectSpaces()) {
 					if (ps.getUsersession() != null) {
 						relevantProjectSpaces.add(ps);
 					}

@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.server.model.ESLogMessage;
  * @author emueller
  * 
  */
-public class ESLogMessageImpl extends AbstractAPIImpl<ESLogMessageImpl, LogMessage> implements ESLogMessage {
+public class ESLogMessageImpl extends AbstractAPIImpl<ESLogMessage, LogMessage> implements ESLogMessage {
 
 	/**
 	 * Constructor.
@@ -42,7 +42,7 @@ public class ESLogMessageImpl extends AbstractAPIImpl<ESLogMessageImpl, LogMessa
 	 * @see org.eclipse.emf.emfstore.server.model.ESLogMessage#getAuthor()
 	 */
 	public String getAuthor() {
-		return getInternalAPIImpl().getAuthor();
+		return toInternalAPI().getAuthor();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class ESLogMessageImpl extends AbstractAPIImpl<ESLogMessageImpl, LogMessa
 	 * @see org.eclipse.emf.emfstore.server.model.ESLogMessage#getClientDate()
 	 */
 	public Date getClientDate() {
-		return getInternalAPIImpl().getClientDate();
+		return toInternalAPI().getClientDate();
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class ESLogMessageImpl extends AbstractAPIImpl<ESLogMessageImpl, LogMessa
 	 * @see org.eclipse.emf.emfstore.server.model.ESLogMessage#getMessage()
 	 */
 	public String getMessage() {
-		return getInternalAPIImpl().getMessage();
+		return toInternalAPI().getMessage();
 	}
 
 }

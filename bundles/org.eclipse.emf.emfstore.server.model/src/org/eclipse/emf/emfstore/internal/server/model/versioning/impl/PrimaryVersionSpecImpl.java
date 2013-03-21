@@ -260,14 +260,14 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESPrimaryVersionSpecImpl getAPIImpl() {
+	public ESPrimaryVersionSpecImpl toAPI() {
 
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -289,11 +289,11 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESPrimaryVersionSpecImpl createAPIImpl() {
+	public ESPrimaryVersionSpecImpl createAPI() {
 		return new ESPrimaryVersionSpecImpl(this);
 	}
 

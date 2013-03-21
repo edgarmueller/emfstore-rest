@@ -59,7 +59,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	 */
 	public UICreateRemoteProjectController(Shell shell, ESUsersession session) {
 		super(shell);
-		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		this.session = ((ESUsersessionImpl) session).toInternalAPI();
 		projectName = null;
 		description = "";
 	}
@@ -78,7 +78,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	 */
 	public UICreateRemoteProjectController(Shell shell, ESUsersession session, String projectName) {
 		super(shell);
-		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		this.session = ((ESUsersessionImpl) session).toInternalAPI();
 		this.projectName = projectName;
 		this.description = description == null ? "" : description;
 	}
@@ -109,7 +109,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 
 	private ESRemoteProject createRemoteProject(final Usersession usersession, final String name,
 		final String description, IProgressMonitor monitor) throws ESException {
-		return usersession.getAPIImpl().getServer().createRemoteProject(name, monitor);
+		return usersession.toAPI().getServer().createRemoteProject(name, monitor);
 	}
 
 	/**

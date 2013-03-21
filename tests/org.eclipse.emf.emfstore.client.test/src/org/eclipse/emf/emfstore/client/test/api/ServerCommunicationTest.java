@@ -42,7 +42,7 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 
 	@AfterClass
 	public static void tearDownClass() {
-		for (final ServerInfo serverInfo : ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl()
+		for (final ServerInfo serverInfo : ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI()
 			.getServerInfos()) {
 			final Usersession lastUsersession = serverInfo.getLastUsersession();
 			RunESCommand.run(new Callable<Void>() {
@@ -57,8 +57,8 @@ public class ServerCommunicationTest extends BaseLoggedInUserTest {
 		}
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().getServerInfos().clear();
-				ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().save();
+				ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().getServerInfos().clear();
+				ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().save();
 				return null;
 			}
 		});

@@ -41,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
@@ -100,7 +101,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public ESRemoteProjectImpl getRemoteProject() throws ESException {
-		ESLocalProjectImpl apiImpl = getProjectSpace().getAPIImpl();
+		ESLocalProjectImpl apiImpl = getProjectSpace().toAPI();
 		return apiImpl.getRemoteProject();
 	}
 
@@ -109,7 +110,9 @@ public abstract class ServerTests extends WorkspaceTest {
 	}
 
 	public PrimaryVersionSpec getProjectVersion() throws ESException {
-		return getRemoteProject().getHeadVersion(new NullProgressMonitor()).getInternalAPIImpl();
+		ESPrimaryVersionSpecImpl headVersion = (ESPrimaryVersionSpecImpl) getRemoteProject().getHeadVersion(
+			new NullProgressMonitor());
+		return headVersion.toInternalAPI();
 	}
 
 	/**
@@ -159,9 +162,9 @@ public abstract class ServerTests extends WorkspaceTest {
 	 * @throws ESException in case of failure
 	 */
 	protected static void login() throws ESException {
-		SessionId sessionId = login(server.getInternalAPIImpl(), "super", "super").getSessionId();
+		SessionId sessionId = login(server.toInternalAPI(), "super", "super").getSessionId();
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
-			.initConnection(server.getInternalAPIImpl(), sessionId);
+			.initConnection(server.toInternalAPI(), sessionId);
 		setSessionId(sessionId);
 	}
 
@@ -286,7 +289,7 @@ public abstract class ServerTests extends WorkspaceTest {
 	public Usersession setUpUsersession(String username, String password) {
 		Usersession usersession = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE
 			.createUsersession();
-		usersession.setServerInfo(server.getInternalAPIImpl());
+		usersession.setServerInfo(server.toInternalAPI());
 		usersession.setUsername(username);
 		usersession.setPassword(password);
 

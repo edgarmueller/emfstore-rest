@@ -51,12 +51,12 @@ public class CheckoutRevisionHandler extends AbstractEMFStoreHandler {
 
 		ESRemoteProjectImpl remoteProject = null;
 		try {
-			remoteProject = view.getProjectSpace().getAPIImpl().getRemoteProject();
+			remoteProject = view.getProjectSpace().toAPI().getRemoteProject();
 		} catch (ESException e) {
 			// TODO: OTS
 		}
 
-		new UICheckoutController(getShell(), versionSpec.getAPIImpl(), remoteProject).execute();
+		new UICheckoutController(getShell(), versionSpec.toAPI(), remoteProject).execute();
 	}
 
 }

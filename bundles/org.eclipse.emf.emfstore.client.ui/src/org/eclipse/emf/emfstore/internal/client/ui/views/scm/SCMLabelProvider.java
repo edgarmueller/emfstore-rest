@@ -119,7 +119,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			}
 		} else if (element instanceof ESChangePackage) {
 			ChangePackage changePackage = ((ESChangePackageImpl) element)
-					.getInternalAPIImpl();
+					.toInternalAPI();
 			return getText(changePackage);
 		} else if (element instanceof EObject) {
 			// TODO: rather reference virtual node directly??
@@ -321,7 +321,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 		if (element instanceof ESChangePackage) {
 			return adapterFactoryLabelProvider
 					.getImage(((ESChangePackageImpl) element)
-							.getInternalAPIImpl());
+							.toInternalAPI());
 		}
 		return adapterFactoryLabelProvider.getImage(element);
 	}

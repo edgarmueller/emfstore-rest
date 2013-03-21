@@ -9,7 +9,7 @@ public class ESLogMessageFactoryImpl implements ESLogMessageFactory {
 
 	public ESLogMessage createLogMessage(String message, String author) {
 		LogMessage logMessage = LogMessageFactory.INSTANCE.createLogMessage(message, author);
-		return logMessage.getAPIImpl();
+		return logMessage.toAPI();
 	}
 
 }

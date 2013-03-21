@@ -15,16 +15,16 @@ package org.eclipse.emf.emfstore.internal.common.api;
  * <p>
  * Interface that is meant to be implemented by all API implementation classes.
  * </p>
- * The interface enables it to navigate from the API implementation type to the internal 
+ * The interface enables it to navigate from the API type to the internal 
  * type in order to delegate the actual work to be done.
  * 
  * @author emueller
  *
- * @param <INTERNAL_TYPE> the internal type the API implementation is mapping to
- * @param <API_IMPL_TYPE> the API implementation type
+ * @param <INTERNAL> the internal type the API is mapping onto
+ * @param <API> the API type
  */
-public interface InternalAPIDelegator<API_IMPL_TYPE, INTERNAL_TYPE extends APIDelegate<? extends API_IMPL_TYPE>> {
+public interface InternalAPIDelegator<API, INTERNAL extends APIDelegate<? extends API>> {
 
-	INTERNAL_TYPE getInternalAPIImpl();
+	INTERNAL toInternalAPI();
 	
 }

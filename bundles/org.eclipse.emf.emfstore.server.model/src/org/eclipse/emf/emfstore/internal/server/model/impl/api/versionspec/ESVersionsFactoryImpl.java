@@ -42,7 +42,7 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory#createPRIMARY(java.lang.String, int)
 	 */
 	public ESPrimaryVersionSpec createPRIMARY(String branch, int index) {
-		return Versions.createPRIMARY(branch, index).getAPIImpl();
+		return Versions.createPRIMARY(branch, index).toAPI();
 	}
 
 	/**
@@ -55,8 +55,8 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	public ESPrimaryVersionSpec createPRIMARY(ESVersionSpec versionSpec, int index) {
 		if (versionSpec instanceof ESVersionSpecImpl<?, ?>) {
 			ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
-			PrimaryVersionSpec primaryVersionSpec = Versions.createPRIMARY(versionSpecImpl.getInternalAPIImpl(), index);
-			return primaryVersionSpec.getAPIImpl();
+			PrimaryVersionSpec primaryVersionSpec = Versions.createPRIMARY(versionSpecImpl.toInternalAPI(), index);
+			return primaryVersionSpec.toAPI();
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -69,7 +69,7 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory#createPRIMARY(int)
 	 */
 	public ESPrimaryVersionSpec createPRIMARY(int i) {
-		return Versions.createPRIMARY(i).getAPIImpl();
+		return Versions.createPRIMARY(i).toAPI();
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec)
 	 */
 	public ESAncestorVersionSpec createANCESTOR(ESPrimaryVersionSpec source, ESPrimaryVersionSpec target) {
-		return Versions.createANCESTOR(((ESPrimaryVersionSpecImpl) source).getInternalAPIImpl(),
-			((ESPrimaryVersionSpecImpl) target).getInternalAPIImpl()).getAPIImpl();
+		return Versions.createANCESTOR(((ESPrimaryVersionSpecImpl) source).toInternalAPI(),
+			((ESPrimaryVersionSpecImpl) target).toInternalAPI()).toAPI();
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory#createHEAD()
 	 */
 	public ESHeadVersionSpec createHEAD() {
-		return Versions.createHEAD().getAPIImpl();
+		return Versions.createHEAD().toAPI();
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory#createHEAD(java.lang.String)
 	 */
 	public ESHeadVersionSpec createHEAD(String branch) {
-		return Versions.createHEAD(branch).getAPIImpl();
+		return Versions.createHEAD(branch).toAPI();
 	}
 
 	/**
@@ -113,8 +113,8 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	public ESHeadVersionSpec createHEAD(ESVersionSpec versionSpec) {
 		if (versionSpec instanceof ESVersionSpecImpl<?, ?>) {
 			ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
-			HeadVersionSpec headVersionSpec = Versions.createHEAD(versionSpecImpl.getInternalAPIImpl());
-			return headVersionSpec.getAPIImpl();
+			HeadVersionSpec headVersionSpec = Versions.createHEAD(versionSpecImpl.toInternalAPI());
+			return headVersionSpec.toAPI();
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -127,7 +127,7 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory#createBRANCH(java.lang.String)
 	 */
 	public ESBranchVersionSpec createBRANCH(String value) {
-		return Versions.createBRANCH(value).getAPIImpl();
+		return Versions.createBRANCH(value).toAPI();
 	}
 
 	/**
@@ -139,8 +139,8 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	public ESBranchVersionSpec createBRANCH(ESVersionSpec versionSpec) {
 		if (versionSpec instanceof ESVersionSpecImpl<?, ?>) {
 			ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
-			BranchVersionSpec branchVersionSpec = Versions.createBRANCH(versionSpecImpl.getInternalAPIImpl());
-			return branchVersionSpec.getAPIImpl();
+			BranchVersionSpec branchVersionSpec = Versions.createBRANCH(versionSpecImpl.toInternalAPI());
+			return branchVersionSpec.toAPI();
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -159,8 +159,8 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 			ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
 			ESVersionSpecImpl<?, ? extends VersionSpec> otherVersionSpecImpl = ((ESVersionSpecImpl<?, ?>) otherVersionSpec);
 			return Versions.isSameBranch(
-				versionSpecImpl.getInternalAPIImpl(),
-				otherVersionSpecImpl.getInternalAPIImpl());
+				versionSpecImpl.toInternalAPI(),
+				otherVersionSpecImpl.toInternalAPI());
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -174,6 +174,6 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 *      java.lang.String)
 	 */
 	public ESTagVersionSpec createTAG(String tag, String branch) {
-		return Versions.createTAG(tag, branch).getAPIImpl();
+		return Versions.createTAG(tag, branch).toAPI();
 	}
 }

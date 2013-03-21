@@ -12,7 +12,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'.
@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESBranchInfoImpl;
  * @model
  * @generated
  */
-public interface BranchInfo extends EObject, APIDelegate<ESBranchInfoImpl> {
+public interface BranchInfo extends EObject, APIDelegate<ESBranchInfo> {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->

@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.server.model.ESSessionId;
  * @author emueller
  * 
  */
-public class ESSessionIdImpl extends AbstractAPIImpl<ESSessionIdImpl, SessionId> implements ESSessionId {
+public class ESSessionIdImpl extends AbstractAPIImpl<ESSessionId, SessionId> implements ESSessionId {
 
 	/**
 	 * Constructor.
@@ -40,7 +40,7 @@ public class ESSessionIdImpl extends AbstractAPIImpl<ESSessionIdImpl, SessionId>
 	 * @see org.eclipse.emf.emfstore.common.model.ESUniqueIdentifier#getId()
 	 */
 	public String getId() {
-		return getInternalAPIImpl().getId();
+		return toInternalAPI().getId();
 	}
 
 }

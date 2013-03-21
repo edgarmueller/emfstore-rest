@@ -96,7 +96,7 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 		if (selection instanceof IStructuredSelection
 			&& ((IStructuredSelection) selection).getFirstElement() instanceof ServerInfo) {
 			ServerInfo serverInfo = (ServerInfo) ((IStructuredSelection) selection).getFirstElement();
-			result = serverInfo.getAPIImpl();
+			result = serverInfo.toAPI();
 		}
 		super.okPressed();
 	}

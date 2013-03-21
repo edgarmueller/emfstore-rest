@@ -50,7 +50,7 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 	public UIMergeController(Shell shell, ESLocalProject localProject) {
 		super(shell);
 		this.projectSpace = ((ESLocalProjectImpl) localProject)
-				.getInternalAPIImpl();
+				.toInternalAPI();
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESPathQuery
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
+import org.eclipse.emf.emfstore.server.model.query.ESPathQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
@@ -32,7 +33,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * 
  * @generated NOT
  */
-public class PathQueryImpl extends HistoryQueryImpl<ESPathQueryImpl> implements PathQuery {
+public class PathQueryImpl extends HistoryQueryImpl<ESPathQuery> implements PathQuery {
 
 	/**
 	 * @generated NOT
@@ -227,13 +228,13 @@ public class PathQueryImpl extends HistoryQueryImpl<ESPathQueryImpl> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESPathQueryImpl getAPIImpl() {
+	public ESPathQueryImpl toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 		return apiImpl;
 	}
@@ -255,11 +256,11 @@ public class PathQueryImpl extends HistoryQueryImpl<ESPathQueryImpl> implements 
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESPathQueryImpl createAPIImpl() {
+	public ESPathQueryImpl createAPI() {
 		return new ESPathQueryImpl(this);
 	}
 

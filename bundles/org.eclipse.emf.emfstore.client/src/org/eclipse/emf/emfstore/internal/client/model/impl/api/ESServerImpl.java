@@ -64,7 +64,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 * @see org.eclipse.emf.emfstore.client.ESServer#getName()
 	 */
 	public String getName() {
-		return getInternalAPIImpl().getName();
+		return toInternalAPI().getName();
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				getInternalAPIImpl().setName(serverName);
+				toInternalAPI().setName(serverName);
 			}
 		}.run(false);
 	}
@@ -89,7 +89,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 * @see org.eclipse.emf.emfstore.client.ESServer#getPort()
 	 */
 	public int getPort() {
-		return getInternalAPIImpl().getPort();
+		return toInternalAPI().getPort();
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				getInternalAPIImpl().setPort(port);
+				toInternalAPI().setPort(port);
 			}
 		}.run(false);
 	}
@@ -114,7 +114,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 * @see org.eclipse.emf.emfstore.client.ESServer#getURL()
 	 */
 	public String getURL() {
-		return getInternalAPIImpl().getUrl();
+		return toInternalAPI().getUrl();
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				getInternalAPIImpl().setUrl(url);
+				toInternalAPI().setUrl(url);
 			}
 		}.run(false);
 	}
@@ -139,7 +139,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 * @see org.eclipse.emf.emfstore.client.ESServer#getCertificateAlias()
 	 */
 	public String getCertificateAlias() {
-		return getInternalAPIImpl().getCertificateAlias();
+		return toInternalAPI().getCertificateAlias();
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				getInternalAPIImpl().setCertificateAlias(alias);
+				toInternalAPI().setCertificateAlias(alias);
 			}
 		}.run(false);
 	}
@@ -165,11 +165,11 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 */
 	public ESUsersession getLastUsersession() {
 
-		if (getInternalAPIImpl().getLastUsersession() == null) {
+		if (toInternalAPI().getLastUsersession() == null) {
 			return null;
 		}
 
-		return getInternalAPIImpl().getLastUsersession().getAPIImpl();
+		return toInternalAPI().getLastUsersession().toAPI();
 	}
 
 	/**
@@ -181,8 +181,8 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 */
 	public ESRemoteProject createRemoteProject(final String projectName, IProgressMonitor monitor) throws ESException {
 		ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
-			.setServer(getInternalAPIImpl()).execute();
-		return new ESRemoteProjectImpl(getInternalAPIImpl(), projectInfo);
+			.setServer(toInternalAPI()).execute();
+		return new ESRemoteProjectImpl(toInternalAPI(), projectInfo);
 	}
 
 	/**
@@ -196,8 +196,8 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		final IProgressMonitor progressMonitor) throws ESException {
 		ESUsersessionImpl session = (ESUsersessionImpl) validateUsersession(usersession);
 		ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
-			.setUsersession(session.getInternalAPIImpl()).execute();
-		return new ESRemoteProjectImpl(getInternalAPIImpl(), projectInfo);
+			.setUsersession(session.toInternalAPI()).execute();
+		return new ESRemoteProjectImpl(toInternalAPI(), projectInfo);
 	}
 
 	/**
@@ -214,14 +214,14 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		final Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setUsername(name);
 		usersession.setPassword(password);
-		usersession.setServerInfo(getInternalAPIImpl());
-		ESUsersessionImpl esSession = usersession.getAPIImpl();
+		usersession.setServerInfo(toInternalAPI());
+		ESUsersessionImpl esSession = usersession.toAPI();
 
 		EMFStoreCommandWithException<ESException> cmd =
 			new EMFStoreCommandWithException<ESException>() {
 				@Override
 				protected void doRun() {
-					workspace.getInternalAPIImpl().getUsersessions().add(usersession);
+					workspace.toInternalAPI().getUsersessions().add(usersession);
 					try {
 						usersession.logIn();
 					} catch (AccessControlException e) {
@@ -242,7 +242,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 			}
 		}
 
-		workspace.getInternalAPIImpl().save();
+		workspace.toInternalAPI().save();
 
 		return esSession;
 	}
@@ -250,7 +250,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	private List<ESRemoteProject> mapToRemoteProject(List<ProjectInfo> projectInfos) {
 		List<ESRemoteProject> remoteProjects = new ArrayList<ESRemoteProject>();
 		for (ProjectInfo projectInfo : projectInfos) {
-			ESRemoteProjectImpl wrapper = new ESRemoteProjectImpl(getInternalAPIImpl(), projectInfo);
+			ESRemoteProjectImpl wrapper = new ESRemoteProjectImpl(toInternalAPI(), projectInfo);
 			remoteProjects.add(wrapper);
 		}
 		return remoteProjects;
@@ -263,7 +263,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 * @see org.eclipse.emf.emfstore.client.ESServer#getRemoteProjects()
 	 */
 	public List<ESRemoteProject> getRemoteProjects() throws ESException {
-		List<ProjectInfo> projectInfos = getRemoteProjectsServerCall().setServer(getInternalAPIImpl()).execute();
+		List<ProjectInfo> projectInfos = getRemoteProjectsServerCall().setServer(toInternalAPI()).execute();
 		return copy(mapToRemoteProject(projectInfos));
 	}
 
@@ -277,7 +277,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		throws ESException {
 
 		final ServerCall<List<ProjectInfo>> serverCall = getRemoteProjectsServerCall()
-			.setUsersession(((ESUsersessionImpl) usersession).getInternalAPIImpl());
+			.setUsersession(((ESUsersessionImpl) usersession).toInternalAPI());
 
 		List<ProjectInfo> projectInfos = RunESCommand.WithException
 			.runWithResult(ESException.class, new Callable<List<ProjectInfo>>() {

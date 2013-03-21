@@ -264,14 +264,14 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESModelElementIdToEObjectMappingImpl getAPIImpl() {
+	public ESModelElementIdToEObjectMappingImpl toAPI() {
 
 		if (mappingImpl == null) {
-			mappingImpl = createAPIImpl();
+			mappingImpl = createAPI();
 		}
 
 		return mappingImpl;
@@ -280,9 +280,9 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 */
-	public ESModelElementIdToEObjectMappingImpl createAPIImpl() {
+	public ESModelElementIdToEObjectMappingImpl createAPI() {
 		return new ESModelElementIdToEObjectMappingImpl(this);
 	}
 }

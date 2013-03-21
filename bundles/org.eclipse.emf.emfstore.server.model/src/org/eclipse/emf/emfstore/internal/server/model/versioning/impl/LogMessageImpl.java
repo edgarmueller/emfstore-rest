@@ -344,13 +344,13 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESLogMessageImpl getAPIImpl() {
+	public ESLogMessageImpl toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -372,11 +372,11 @@ public class LogMessageImpl extends EObjectImpl implements LogMessage {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESLogMessageImpl createAPIImpl() {
+	public ESLogMessageImpl createAPI() {
 		return new ESLogMessageImpl(this);
 	}
 

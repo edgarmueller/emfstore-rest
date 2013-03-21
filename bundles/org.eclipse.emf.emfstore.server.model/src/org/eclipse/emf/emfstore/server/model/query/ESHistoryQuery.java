@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author emueller
  * @author wesendom
  */
-public interface ESHistoryQuery {
+public interface ESHistoryQuery<U extends ESHistoryQuery<?>> {
 
 	/**
 	 * Factory for creating history queries.

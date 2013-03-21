@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author emueller
  * 
  */
-public class ESAncestorVersionSpecImpl extends ESVersionSpecImpl<ESAncestorVersionSpecImpl, AncestorVersionSpec>
+public class ESAncestorVersionSpecImpl extends ESVersionSpecImpl<ESAncestorVersionSpec, AncestorVersionSpec>
 	implements ESAncestorVersionSpec {
 
 	/**
@@ -41,7 +41,7 @@ public class ESAncestorVersionSpecImpl extends ESVersionSpecImpl<ESAncestorVersi
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESAncestorVersionSpec#getTarget()
 	 */
 	public ESPrimaryVersionSpec getTarget() {
-		return getInternalAPIImpl().getTarget().getAPIImpl();
+		return toInternalAPI().getTarget().toAPI();
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class ESAncestorVersionSpecImpl extends ESVersionSpecImpl<ESAncestorVersi
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESAncestorVersionSpec#getSource()
 	 */
 	public ESPrimaryVersionSpec getSource() {
-		return getInternalAPIImpl().getSource().getAPIImpl();
+		return toInternalAPI().getSource().toAPI();
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class ESAncestorVersionSpecImpl extends ESVersionSpecImpl<ESAncestorVersi
 
 		if (object instanceof ESAncestorVersionSpecImpl) {
 			ESAncestorVersionSpecImpl ancestorVersionSpecImpl = (ESAncestorVersionSpecImpl) object;
-			return getInternalAPIImpl().equals(ancestorVersionSpecImpl.getInternalAPIImpl());
+			return toInternalAPI().equals(ancestorVersionSpecImpl.toInternalAPI());
 		}
 
 		return false;
@@ -67,6 +67,6 @@ public class ESAncestorVersionSpecImpl extends ESVersionSpecImpl<ESAncestorVersi
 
 	@Override
 	public int hashCode() {
-		return getInternalAPIImpl().hashCode() + super.hashCode();
+		return toInternalAPI().hashCode() + super.hashCode();
 	}
 }

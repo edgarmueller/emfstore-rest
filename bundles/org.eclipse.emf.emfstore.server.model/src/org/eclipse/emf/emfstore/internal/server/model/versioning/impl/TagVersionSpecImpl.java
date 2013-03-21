@@ -203,13 +203,13 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESTagVersionSpecImpl getAPIImpl() {
+	public ESTagVersionSpecImpl toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -231,11 +231,11 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESTagVersionSpecImpl createAPIImpl() {
+	public ESTagVersionSpecImpl createAPI() {
 		return new ESTagVersionSpecImpl(this);
 	}
 

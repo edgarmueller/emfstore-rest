@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
  * @author emueller
  * 
  */
-public class ESBranchVersionSpecImpl extends ESVersionSpecImpl<ESBranchVersionSpecImpl, BranchVersionSpec> implements
+public class ESBranchVersionSpecImpl extends ESVersionSpecImpl<ESBranchVersionSpec, BranchVersionSpec> implements
 	ESBranchVersionSpec {
 
 	/**
@@ -38,7 +38,7 @@ public class ESBranchVersionSpecImpl extends ESVersionSpecImpl<ESBranchVersionSp
 
 		if (object instanceof ESBranchVersionSpecImpl) {
 			ESBranchVersionSpecImpl branchVersionSpecImpl = (ESBranchVersionSpecImpl) object;
-			return getInternalAPIImpl().equals(branchVersionSpecImpl.getInternalAPIImpl());
+			return toInternalAPI().equals(branchVersionSpecImpl.toInternalAPI());
 		}
 
 		return false;
@@ -46,6 +46,6 @@ public class ESBranchVersionSpecImpl extends ESVersionSpecImpl<ESBranchVersionSp
 
 	@Override
 	public int hashCode() {
-		return getInternalAPIImpl().hashCode() + super.hashCode();
+		return toInternalAPI().hashCode() + super.hashCode();
 	}
 }

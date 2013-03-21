@@ -433,9 +433,9 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		save();
 	}
 
-	public ESWorkspaceImpl getAPIImpl() {
+	public ESWorkspaceImpl toAPI() {
 		if (apiImplClass == null) {
-			apiImplClass = createAPIImpl();
+			apiImplClass = createAPI();
 		}
 		return apiImplClass;
 	}
@@ -444,7 +444,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		apiImplClass = esWorkspaceImpl;
 	}
 
-	public ESWorkspaceImpl createAPIImpl() {
+	public ESWorkspaceImpl createAPI() {
 		return new ESWorkspaceImpl(this);
 	}
 

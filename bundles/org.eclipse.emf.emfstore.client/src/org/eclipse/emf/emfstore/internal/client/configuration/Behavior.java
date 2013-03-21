@@ -147,7 +147,7 @@ public class Behavior {
 			List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
 
 			for (ESServer server : defaultServerInfos) {
-				result.add(((ESServerImpl) server).getInternalAPIImpl());
+				result.add(((ESServerImpl) server).toInternalAPI());
 			}
 
 			return result;

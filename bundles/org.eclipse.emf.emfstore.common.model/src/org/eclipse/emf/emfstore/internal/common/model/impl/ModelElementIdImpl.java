@@ -50,12 +50,12 @@ public class ModelElementIdImpl extends UniqueIdentifierImpl implements ModelEle
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 */
-	public ESModelElementIdImpl getAPIImpl() {
+	public ESModelElementIdImpl toAPI() {
 
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -73,9 +73,9 @@ public class ModelElementIdImpl extends UniqueIdentifierImpl implements ModelEle
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 */
-	public ESModelElementIdImpl createAPIImpl() {
+	public ESModelElementIdImpl createAPI() {
 		return new ESModelElementIdImpl(this);
 	}
 

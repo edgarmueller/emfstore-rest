@@ -118,7 +118,7 @@ public class ESBrowserView extends ViewPart implements ESLoginObserver {
 	public ESBrowserView() {
 		// TODO OTS
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		Workspace currentWorkspace = workspace.getInternalAPIImpl();
+		Workspace currentWorkspace = workspace.toInternalAPI();
 		ESWorkspaceProviderImpl.getObserverBus().register(this);
 		for (final ServerInfo serverInfo : currentWorkspace.getServerInfos()) {
 			AdapterImpl serverInfoAdapter = new ServerInfoAdapter(serverInfo);
@@ -228,7 +228,7 @@ public class ESBrowserView extends ViewPart implements ESLoginObserver {
 		super.dispose();
 		// TODO OTS
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		Workspace currentWorkspace = workspace.getInternalAPIImpl();
+		Workspace currentWorkspace = workspace.toInternalAPI();
 		currentWorkspace.eAdapters().remove(workspaceAdapter);
 		ESWorkspaceProviderImpl.getObserverBus().unregister(this);
 		for (ServerInfo s : currentWorkspace.getServerInfos()) {

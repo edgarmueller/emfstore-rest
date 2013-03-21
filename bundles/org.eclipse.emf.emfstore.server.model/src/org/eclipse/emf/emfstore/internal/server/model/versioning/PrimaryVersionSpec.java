@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Primary Version Spec</b></em>'.
@@ -36,7 +36,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPri
  * @generated
  */
 public interface PrimaryVersionSpec extends VersionSpec, Comparable<PrimaryVersionSpec>,
-	APIDelegate<ESPrimaryVersionSpecImpl> {
+	APIDelegate<ESPrimaryVersionSpec> {
 
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' attribute. <!--

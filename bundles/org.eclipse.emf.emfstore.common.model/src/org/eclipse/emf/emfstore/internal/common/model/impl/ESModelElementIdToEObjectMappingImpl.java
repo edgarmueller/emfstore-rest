@@ -44,7 +44,7 @@ public class ESModelElementIdToEObjectMappingImpl
 	 * @see org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping#get(java.lang.Object)
 	 */
 	public EObject get(ESModelElementId modelElementId) {
-		ModelElementId id = ((ESModelElementIdImpl) modelElementId).getInternalAPIImpl();
-		return getInternalAPIImpl().get(id);
+		ModelElementId id = ((ESModelElementIdImpl) modelElementId).toInternalAPI();
+		return toInternalAPI().get(id);
 	}
 }

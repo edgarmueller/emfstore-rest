@@ -324,7 +324,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 * @return the workspace
 	 */
 	public ESWorkspaceImpl getWorkspace() {
-		return getInternalWorkspace().getAPIImpl();
+		return getInternalWorkspace().toAPI();
 	}
 
 	public Workspace getInternalWorkspace() {
@@ -380,7 +380,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 			try {
 				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
 					currentWorkspace
-						.getAPIImpl());
+						.toAPI());
 			} catch (ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}

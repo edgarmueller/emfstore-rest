@@ -134,14 +134,14 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		// TODO ASYNC review this cancel
 		if (getProgressMonitor().isCanceled()
-			|| !callback.inspectChanges(getProjectSpace().getAPIImpl(), copy, idToEObjectMapping.getAPIImpl())) {
+			|| !callback.inspectChanges(getProjectSpace().toAPI(), copy, idToEObjectMapping.toAPI())) {
 			return getProjectSpace().getBaseVersion();
 		}
 
 		ESWorkspaceProviderImpl
 			.getObserverBus()
 			.notify(ESUpdateObserver.class)
-			.inspectChanges(getProjectSpace().getAPIImpl(), copy, getProgressMonitor());
+			.inspectChanges(getProjectSpace().toAPI(), copy, getProgressMonitor());
 
 		boolean potentialConflictsDetected = false;
 		if (getProjectSpace().getOperations().size() > 0) {
@@ -153,7 +153,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
 				ChangeConflictException conflictException = new ChangeConflictException(new ChangeConflict(
 					getProjectSpace(), Arrays.asList(localChanges), changes, conflictBucketCandidates,
-					idToEObjectMapping).getAPIImpl());
+					idToEObjectMapping).toAPI());
 				if (callback.conflictOccurred(conflictException.getChangeConflict(), getProgressMonitor())) {
 					return getProjectSpace().getBaseVersion();
 				} else {
@@ -169,7 +169,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESUpdateObserver.class)
-			.updateCompleted(getProjectSpace().getAPIImpl(), getProgressMonitor());
+			.updateCompleted(getProjectSpace().toAPI(), getProgressMonitor());
 
 		return getProjectSpace().getBaseVersion();
 	}

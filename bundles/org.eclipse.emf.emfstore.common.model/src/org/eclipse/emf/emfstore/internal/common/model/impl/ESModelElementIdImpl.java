@@ -27,7 +27,7 @@ public class ESModelElementIdImpl extends AbstractAPIImpl<ESModelElementIdImpl, 
 	 * @see org.eclipse.emf.emfstore.common.model.ESUniqueIdentifier#getId()
 	 */
 	public String getId() {
-		return getInternalAPIImpl().getId();
+		return toInternalAPI().getId();
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class ESModelElementIdImpl extends AbstractAPIImpl<ESModelElementIdImpl, 
 		if (!(obj instanceof ESModelElementIdImpl)) {
 			return false;
 		}
-		return getInternalAPIImpl().equals(((ESModelElementIdImpl) obj).getInternalAPIImpl());
+		return toInternalAPI().equals(((ESModelElementIdImpl) obj).toInternalAPI());
 	}
 
 	/**
@@ -50,6 +50,6 @@ public class ESModelElementIdImpl extends AbstractAPIImpl<ESModelElementIdImpl, 
 	 */
 	@Override
 	public int hashCode() {
-		return getInternalAPIImpl().hashCode();
+		return toInternalAPI().hashCode();
 	}
 }

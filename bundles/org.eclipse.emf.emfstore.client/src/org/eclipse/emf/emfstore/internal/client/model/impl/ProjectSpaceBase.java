@@ -231,7 +231,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		progressMonitor.subTask("Computing checksum");
 		if (!performChecksumCheck(baseSpec, getProject())) {
 			progressMonitor.subTask("Invalid checksum.  Activating checksum error handler.");
-			boolean errorHandled = callback.checksumCheckFailed(this.getAPIImpl(), baseSpec.getAPIImpl(),
+			boolean errorHandled = callback.checksumCheckFailed(this.toAPI(), baseSpec.toAPI(),
 				progressMonitor);
 			if (!errorHandled) {
 				// rollback
@@ -835,7 +835,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void loginCompleted(ESUsersession session) {
 		// TODO Implement possibility in observerbus to register only for
 		// certain notifier
-		if (getUsersession() == null || !getUsersession().getAPIImpl().equals(session)) {
+		if (getUsersession() == null || !getUsersession().toAPI().equals(session)) {
 			return;
 		}
 		try {
@@ -1073,12 +1073,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				if (changedProperty.getName().equals(property.getName())
 					&& changedProperty.getProject().equals(getProjectId())) {
 					changedProperty.setValue(property.getValue());
-					ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().save();
+					ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().save();
 					return;
 				}
 			}
 			getUsersession().getChangedProperties().add(property);
-			ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl().save();
+			ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().save();
 		}
 	}
 
@@ -1277,33 +1277,33 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	private void notifyPreRevertMyChanges(final ChangePackage changePackage) {
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class)
-			.preRevertMyChanges(this.getAPIImpl(), changePackage.getAPIImpl());
+			.preRevertMyChanges(this.toAPI(), changePackage.toAPI());
 	}
 
 	private void notifyPostRevertMyChanges() {
-		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class).postRevertMyChanges(this.getAPIImpl());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class).postRevertMyChanges(this.toAPI());
 	}
 
 	private void notifyPostApplyTheirChanges(List<ChangePackage> theirChangePackages) {
 		// TODO ASYNC review this cancel
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class)
-			.postApplyTheirChanges(this.getAPIImpl(), APIUtil.mapToAPI(ESChangePackage.class, theirChangePackages));
+			.postApplyTheirChanges(this.toAPI(), APIUtil.mapToAPI(ESChangePackage.class, theirChangePackages));
 	}
 
 	private void notifyPostApplyMergedChanges(ChangePackage changePackage) {
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESMergeObserver.class)
 			.postApplyMergedChanges(
-				this.getAPIImpl(), changePackage.getAPIImpl());
+				this.toAPI(), changePackage.toAPI());
 	}
 
-	public ESLocalProjectImpl getAPIImpl() {
+	public ESLocalProjectImpl toAPI() {
 		if (esLocalProjectImpl == null) {
-			esLocalProjectImpl = createAPIImpl();
+			esLocalProjectImpl = createAPI();
 		}
 		return esLocalProjectImpl;
 	}
 
-	public ESLocalProjectImpl createAPIImpl() {
+	public ESLocalProjectImpl createAPI() {
 		return new ESLocalProjectImpl(this);
 	}
 

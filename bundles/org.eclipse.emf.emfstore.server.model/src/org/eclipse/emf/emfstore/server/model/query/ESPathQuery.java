@@ -21,7 +21,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author wesendon
  * @author emueller
  */
-public interface ESPathQuery extends ESHistoryQuery {
+public interface ESPathQuery extends ESHistoryQuery<ESPathQuery> {
 
 	/**
 	 * Returns the target {@link ESPrimaryVersionSpec}.

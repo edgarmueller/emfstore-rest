@@ -47,10 +47,10 @@ public class SessionManager {
 	public void execute(ServerCall<?> serverCall) throws ESException {
 		ESUsersessionImpl session = (ESUsersessionImpl) getSessionProvider().provideUsersession(
 			new ESServerCallImpl(serverCall));
-		serverCall.setUsersession(session.getInternalAPIImpl());
+		serverCall.setUsersession(session.toInternalAPI());
 		// TODO OTS
-		loginUsersession(session.getInternalAPIImpl(), false);
-		executeCall(serverCall, session.getInternalAPIImpl(), true);
+		loginUsersession(session.toInternalAPI(), false);
+		executeCall(serverCall, session.toInternalAPI(), true);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class SessionManager {
 					// ignore, session provider should try to login
 				}
 			}
-			getSessionProvider().login(usersession.getAPIImpl());
+			getSessionProvider().login(usersession.toAPI());
 		}
 	}
 

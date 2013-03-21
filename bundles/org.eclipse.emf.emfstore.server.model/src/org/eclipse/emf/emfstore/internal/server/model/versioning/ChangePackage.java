@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'.
@@ -46,7 +46,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @model
  * @generated
  */
-public interface ChangePackage extends EObject, APIDelegate<ESChangePackageImpl> {
+public interface ChangePackage extends EObject, APIDelegate<ESChangePackage> {
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.

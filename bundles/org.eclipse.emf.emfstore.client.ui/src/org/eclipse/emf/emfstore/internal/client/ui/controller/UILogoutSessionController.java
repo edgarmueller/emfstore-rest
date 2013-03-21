@@ -38,7 +38,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 	 */
 	public UILogoutSessionController(Shell shell, ESUsersession session) {
 		super(shell);
-		this.session = ((ESUsersessionImpl) session).getInternalAPIImpl();
+		this.session = ((ESUsersessionImpl) session).toInternalAPI();
 	}
 
 	/**

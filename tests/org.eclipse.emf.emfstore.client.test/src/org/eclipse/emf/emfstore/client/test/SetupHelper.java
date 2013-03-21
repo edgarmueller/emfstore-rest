@@ -135,7 +135,7 @@ public class SetupHelper {
 		Configuration.getClientBehavior().setAutoSave(false);
 		ModelMutator.generateModel(config);
 		ESWorkspaceImpl workspace2 = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		testProjectSpace = workspace2.getInternalAPIImpl().importProject(project, "Generated project", "");
+		testProjectSpace = workspace2.toInternalAPI().importProject(project, "Generated project", "");
 		testProject = testProjectSpace.getProject();
 		projectId = testProjectSpace.getProjectId();
 	}
@@ -150,7 +150,7 @@ public class SetupHelper {
 		eStructuralFeaturesToIgnore.remove(org.eclipse.emf.emfstore.internal.common.model.ModelPackage.eINSTANCE
 			.getProject_CutElements());
 		ESWorkspaceImpl workspace2 = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		config.setEditingDomain(workspace2.getInternalAPIImpl().getEditingDomain());
+		config.setEditingDomain(workspace2.toInternalAPI().getEditingDomain());
 		config.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
 		return config;
 	}
@@ -215,7 +215,7 @@ public class SetupHelper {
 		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance()
 			.getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
-		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
+		adminConnectionManager.initConnection(createServer().toInternalAPI(), sessionId);
 		return adminConnectionManager.createUser(sessionId, username);
 	}
 
@@ -229,7 +229,7 @@ public class SetupHelper {
 		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance()
 			.getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
-		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
+		adminConnectionManager.initConnection(createServer().toInternalAPI(), sessionId);
 		adminConnectionManager.deleteUser(sessionId, userId);
 	}
 
@@ -245,7 +245,7 @@ public class SetupHelper {
 		AdminConnectionManager adminConnectionManager = ESWorkspaceProviderImpl.getInstance()
 			.getAdminConnectionManager();
 		SessionId sessionId = TestSessionProvider.getInstance().getDefaultUsersession().getSessionId();
-		adminConnectionManager.initConnection(createServer().getInternalAPIImpl(), sessionId);
+		adminConnectionManager.initConnection(createServer().toInternalAPI(), sessionId);
 		adminConnectionManager.changeRole(sessionId, projectId, orgUnitId, role);
 	}
 
@@ -303,7 +303,7 @@ public class SetupHelper {
 		if (usersession == null) {
 			usersession = ModelFactory.eINSTANCE.createUsersession();
 
-			ServerInfo serverInfo = createServer().getInternalAPIImpl();
+			ServerInfo serverInfo = createServer().toInternalAPI();
 			usersession.setServerInfo(serverInfo);
 			usersession.setUsername("super");
 			usersession.setPassword("super");
@@ -343,7 +343,7 @@ public class SetupHelper {
 		CommonUtil.setTesting(true);
 		ESWorkspaceProviderImpl instance = ESWorkspaceProviderImpl.getInstance();
 		instance.dispose();
-		workSpace = instance.getWorkspace().getInternalAPIImpl();
+		workSpace = instance.getWorkspace().toInternalAPI();
 		LOGGER.log(Level.INFO, "workspace initialized");
 	}
 
@@ -565,12 +565,12 @@ public class SetupHelper {
 			protected void doRun() {
 				if (usersession == null) {
 					usersession = ModelFactory.eINSTANCE.createUsersession();
-					ServerInfo serverInfo = createServer().getInternalAPIImpl();
+					ServerInfo serverInfo = createServer().toInternalAPI();
 					usersession.setServerInfo(serverInfo);
 					usersession.setUsername("super");
 					usersession.setPassword("super");
 					ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-					workspace.getInternalAPIImpl().getUsersessions().add(usersession);
+					workspace.toInternalAPI().getUsersessions().add(usersession);
 				}
 				try {
 					if (!usersession.isLoggedIn()) {
@@ -648,7 +648,7 @@ public class SetupHelper {
 				try {
 					ESRemoteProject remoteProject = new ESRemoteProjectImpl(usersession.getServerInfo(), projectInfo);
 					ESLocalProject checkout = remoteProject.checkout(new NullProgressMonitor());
-					compareProject = ((ESLocalProjectImpl) checkout).getInternalAPIImpl().getProject();
+					compareProject = ((ESLocalProjectImpl) checkout).toInternalAPI().getProject();
 					LOGGER.log(Level.INFO, "compare project checked out.");
 				} catch (ESException e) {
 					e.printStackTrace();

@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author wesendon
  * @author emueller
  */
-public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQuery> implements ESPathQuery {
+public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQuery, PathQuery> implements ESPathQuery {
 
 	/**
 	 * Constructor.
@@ -48,7 +48,7 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery#getSource()
 	 */
 	public ESPrimaryVersionSpec getSource() {
-		return getInternalAPIImpl().getSource().getAPIImpl();
+		return toInternalAPI().getSource().toAPI();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery#setSource(org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec)
 	 */
 	public void setSource(ESPrimaryVersionSpec versionSpec) {
-		getInternalAPIImpl().setSource(((ESPrimaryVersionSpecImpl) versionSpec).getInternalAPIImpl());
+		toInternalAPI().setSource(((ESPrimaryVersionSpecImpl) versionSpec).toInternalAPI());
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery#setIncludeChangePackages(boolean)
 	 */
 	public void setIncludeChangePackages(boolean includeChangePackages) {
-		getInternalAPIImpl().setIncludeChangePackages(includeChangePackages);
+		toInternalAPI().setIncludeChangePackages(includeChangePackages);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery#isIncludeChangePackages()
 	 */
 	public boolean isIncludeChangePackages() {
-		return getInternalAPIImpl().isIncludeChangePackages();
+		return toInternalAPI().isIncludeChangePackages();
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery#setIncludeAllVersions(boolean)
 	 */
 	public void setIncludeAllVersions(boolean includeAllVersion) {
-		getInternalAPIImpl().setIncludeAllVersions(includeAllVersion);
+		toInternalAPI().setIncludeAllVersions(includeAllVersion);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery#isIncludeAllVersions()
 	 */
 	public boolean isIncludeAllVersions() {
-		return getInternalAPIImpl().isIncludeAllVersions();
+		return toInternalAPI().isIncludeAllVersions();
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESPathQuery#getTarget()
 	 */
 	public ESPrimaryVersionSpec getTarget() {
-		return getInternalAPIImpl().getTarget().getAPIImpl();
+		return toInternalAPI().getTarget().toAPI();
 	}
 
 	/**
@@ -118,6 +118,6 @@ public class ESPathQueryImpl extends ESHistoryQueryImpl<ESPathQueryImpl, PathQue
 	 * @see org.eclipse.emf.emfstore.server.model.query.ESPathQuery#setTarget(org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec)
 	 */
 	public void setTarget(ESPrimaryVersionSpec target) {
-		getInternalAPIImpl().setTarget(((ESPrimaryVersionSpecImpl) target).getInternalAPIImpl());
+		toInternalAPI().setTarget(((ESPrimaryVersionSpecImpl) target).toInternalAPI());
 	}
 }

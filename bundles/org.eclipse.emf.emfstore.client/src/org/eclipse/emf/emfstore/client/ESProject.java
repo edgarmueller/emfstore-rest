@@ -119,11 +119,12 @@ public interface ESProject {
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while fetching the history
 	 *            information
 	 * 
-	 * @return a list containg the history information for the given query
+	 * @return a list containing the history information for the given query
 	 * 
 	 * @throws ESException in case an error occurs while retrieving the history information
 	 */
-	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery query, IProgressMonitor monitor) throws ESException;
+	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery<ESHistoryQuery<?>> query, IProgressMonitor monitor)
+		throws ESException;
 
 	/**
 	 * <p>

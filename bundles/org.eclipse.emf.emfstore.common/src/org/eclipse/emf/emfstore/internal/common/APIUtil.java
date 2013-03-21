@@ -53,6 +53,58 @@ public class APIUtil {
 		
 		return result;
 	}
+	
+	public static <IMPL extends InternalAPIDelegator<API, INT>, INT extends APIDelegate<API>, API> 
+	List<INT> toInternal(List<API> toCopy) {
+		
+		if(toCopy == null) {
+			return null;
+		}
+		
+		ArrayList<INT> result = new ArrayList<INT>(toCopy.size());
+		
+		for(API element : toCopy) {
+			@SuppressWarnings("unchecked")
+			IMPL i = (IMPL) element;
+			result.add(i.toInternalAPI());
+		}
+		
+		return result;
+	}
+	
+	public static <IMPL extends InternalAPIDelegator<API, INT>, INT extends APIDelegate<API>, API, DESIRED> 
+	List<INT> toInternal(Class<DESIRED> cls, List<API> toCopy) {
+		
+		if(toCopy == null) {
+			return null;
+		}
+		
+		ArrayList<INT> result = new ArrayList<INT>(toCopy.size());
+		
+		for(API element : toCopy) {
+			@SuppressWarnings("unchecked")
+			IMPL i = (IMPL) element;
+			result.add(i.toInternalAPI());
+		}
+		
+		return result;
+	}
+	
+	public static <IMPL extends InternalAPIDelegator<API, INT>, INT extends APIDelegate<API>, API> 
+	List<API> toExternal(List<INT> toCopy) {
+		
+		if(toCopy == null) {
+			return null;
+		}
+		
+		ArrayList<API> result = new ArrayList<API>(toCopy.size());
+		
+		for(INT element : toCopy) {
+			result.add(element.toAPI());
+		}
+		
+		return result;
+	}
 
 	/**
 	 * Maps a list of a given internal type to its corresponding API type by copying it. 
@@ -78,7 +130,7 @@ public class APIUtil {
 		ArrayList<V> result = new ArrayList<V>(toCopy.size());
 		
 		for(T element : toCopy) {
-			result.add(element.getAPIImpl());
+			result.add(element.toAPI());
 		}
 		
 		return result;
@@ -109,9 +161,10 @@ public class APIUtil {
 		ArrayList<T> result = new ArrayList<T>(toCopy.size());
 		
 		for(V element : toCopy) {
-			result.add(((U)element).getInternalAPIImpl());
+			result.add(((U)element).toInternalAPI());
 		}
 		
 		return result;
 	}
+
 }

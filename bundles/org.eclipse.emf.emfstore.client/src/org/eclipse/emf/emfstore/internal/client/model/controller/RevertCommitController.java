@@ -62,18 +62,18 @@ public class RevertCommitController extends ServerCall<Void> {
 				projectSpace.getProjectId(),
 				Versions.createHEAD(baseVersion));
 
-		ESLocalProjectImpl revertSpace = projectSpace.getAPIImpl().getRemoteProject().checkout(
-			projectSpace.getUsersession().getAPIImpl(),
+		ESLocalProjectImpl revertSpace = projectSpace.toAPI().getRemoteProject().checkout(
+			projectSpace.getUsersession().toAPI(),
 			getProgressMonitor());
 
-		List<ChangePackage> changes = revertSpace.getInternalAPIImpl().getChanges(
+		List<ChangePackage> changes = revertSpace.toInternalAPI().getChanges(
 			baseVersion,
 			headRevert ? localHead : ModelUtil.clone(baseVersion));
 
 		Collections.reverse(changes);
 
 		for (ChangePackage changePackage : changes) {
-			changePackage.reverse().apply(revertSpace.getInternalAPIImpl().getProject(), true);
+			changePackage.reverse().apply(revertSpace.toInternalAPI().getProject(), true);
 		}
 	}
 

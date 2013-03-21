@@ -30,6 +30,6 @@ public class DeleteProjectHandler extends AbstractEMFStoreHandler {
 	 */
 	@Override
 	public void handle() {
-		new UIDeleteProjectController(getShell(), requireSelection(ProjectSpace.class).getAPIImpl()).execute();
+		new UIDeleteProjectController(getShell(), requireSelection(ProjectSpace.class).toAPI()).execute();
 	}
 }

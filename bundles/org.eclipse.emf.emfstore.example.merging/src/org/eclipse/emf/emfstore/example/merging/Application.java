@@ -143,7 +143,7 @@ public class Application implements IApplication {
 					// run update in project 2 with our own updateCallback.
 					System.out.println("\nUpdate of project 2 with conflict resolver...");
 					try {
-						project2.update(Versions.createHEAD().getAPIImpl(), new MyUpdateCallback(),
+						project2.update(Versions.createHEAD().toAPI(), new MyUpdateCallback(),
 							new ConsoleProgressMonitor());
 						// commit merge result in project 2
 						System.out.println("\nCommit of project 2 with merge result.");
@@ -196,7 +196,7 @@ public class Application implements IApplication {
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
-				return session.getAPIImpl();
+				return session.toAPI();
 			}
 		}.run(false);
 
@@ -251,9 +251,9 @@ public class Application implements IApplication {
 				try {
 					LogMessage result = VersioningFactory.eINSTANCE.createLogMessage();
 					result.setMessage("My Message");
-					project1.commit(result.getAPIImpl(), null, new ConsoleProgressMonitor());
+					project1.commit(result.toAPI(), null, new ConsoleProgressMonitor());
 					System.out.println("Project 1 committed!");
-					return result.getAPIImpl();
+					return result.toAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
@@ -313,8 +313,8 @@ public class Application implements IApplication {
 			// resolve conflicts by merging with our conflict resolver
 			try {
 				// Merging currently is only available on the internal API
-				ProjectSpace projectSpace = ((ESLocalProjectImpl) project2).getInternalAPIImpl();
-				ChangeConflict cc = ((ESChangeConflictImpl) changeConflict).getInternalAPIImpl();
+				ProjectSpace projectSpace = ((ESLocalProjectImpl) project2).toInternalAPI();
+				ChangeConflict cc = ((ESChangeConflictImpl) changeConflict).toInternalAPI();
 				
 				projectSpace.merge(
 					projectSpace.resolveVersionSpec(Versions.createHEAD(), monitor),

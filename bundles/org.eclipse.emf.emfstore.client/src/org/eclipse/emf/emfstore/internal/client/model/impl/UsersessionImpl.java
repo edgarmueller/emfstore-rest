@@ -581,7 +581,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		getServerInfo().setLastUsersession(this);
 		this.setSessionId(authenticationInformation.getSessionId());
 		this.setACUser(authenticationInformation.getResolvedACUser());
-		ESWorkspaceProviderImpl.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this.getAPIImpl());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this.toAPI());
 	}
 
 	/**
@@ -591,7 +591,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
-		ESWorkspaceProviderImpl.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(getAPIImpl());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(toAPI());
 	}
 
 	// end of custom code
@@ -780,13 +780,13 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESUsersessionImpl getAPIImpl() {
+	public ESUsersessionImpl toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 		return apiImpl;
 	}
@@ -795,11 +795,11 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESUsersessionImpl createAPIImpl() {
+	public ESUsersessionImpl createAPI() {
 		return new ESUsersessionImpl(this);
 	}
 

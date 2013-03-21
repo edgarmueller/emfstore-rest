@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.NewRepositoryWizard;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -25,19 +25,19 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UIEditServerPropertiesController extends AbstractEMFStoreUIController<Void> {
 
-	private final ServerInfo serverInfo;
+	private final ESServer server;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param shell
 	 *            the parent {@link Shell}
-	 * @param serverInfo
-	 *            the server info that should be edited
+	 * @param server
+	 *            the server that should be edited
 	 */
-	public UIEditServerPropertiesController(Shell shell, ServerInfo serverInfo) {
+	public UIEditServerPropertiesController(Shell shell, ESServer server) {
 		super(shell);
-		this.serverInfo = serverInfo;
+		this.server = server;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class UIEditServerPropertiesController extends AbstractEMFStoreUIControll
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 		NewRepositoryWizard wizard = new NewRepositoryWizard();
-		wizard.setServerInfo(serverInfo);
+		wizard.setServerInfo(server);
 		WizardDialog dialog = new WizardDialog(getShell(), wizard);
 		dialog.create();
 		dialog.open();

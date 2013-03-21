@@ -147,7 +147,7 @@ public class ChecksumTest extends CoreServerTest {
 		PrimaryVersionSpec commit = commitWithoutCommand(getProjectSpace());
 		Assert.assertEquals(1, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
-		Project restoredProject = ESWorkspaceProviderImpl.getInstance().getWorkspace().getInternalAPIImpl()
+		Project restoredProject = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI()
 			.getProjectSpaces()
 			.get(0).getProject();
 		long computedChecksum = ModelUtil.computeChecksum(restoredProject);
@@ -169,13 +169,13 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		ESLocalProject checkout = getProjectSpace()
-			.getAPIImpl()
+			.toAPI()
 			.getRemoteProject()
 			.checkout(
-				getProjectSpace().getUsersession().getAPIImpl(),
-				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+				getProjectSpace().getUsersession().toAPI(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
 				new NullProgressMonitor());
-		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
 			@Override
@@ -261,12 +261,12 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ESLocalProject checkout = getProjectSpace().getAPIImpl().getRemoteProject()
-			.checkout(getProjectSpace().getUsersession().getAPIImpl(),
-				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
+			.checkout(getProjectSpace().getUsersession().toAPI(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
 
 				new NullProgressMonitor());
-		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
 			@Override
@@ -307,11 +307,11 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ESLocalProject checkout = getProjectSpace().getAPIImpl().getRemoteProject()
-			.checkout(getProjectSpace().getUsersession().getAPIImpl(),
-				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
+			.checkout(getProjectSpace().getUsersession().toAPI(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
 				new NullProgressMonitor());
-		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
 			@Override
@@ -347,11 +347,11 @@ public class ChecksumTest extends CoreServerTest {
 		final TestElement testElement = createTestElement();
 		share(getProjectSpace());
 
-		ESLocalProject checkout = getProjectSpace().getAPIImpl().getRemoteProject()
-			.checkout(getProjectSpace().getUsersession().getAPIImpl(),
-				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).getAPIImpl(),
+		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
+			.checkout(getProjectSpace().getUsersession().toAPI(),
+				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
 				new NullProgressMonitor());
-		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).getInternalAPIImpl();
+		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
 			@Override

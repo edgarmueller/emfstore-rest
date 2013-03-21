@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESTagVersionSpecImpl;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Tag Version Spec</b></em>'.
@@ -33,7 +33,7 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESTag
  * @model
  * @generated
  */
-public interface TagVersionSpec extends VersionSpec, APIDelegate<ESTagVersionSpecImpl> {
+public interface TagVersionSpec extends VersionSpec, APIDelegate<ESTagVersionSpec> {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. <!--
 	 * begin-user-doc -->

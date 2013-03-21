@@ -53,13 +53,13 @@ public class BranchVersionSpecImpl extends VersionSpecImpl implements BranchVers
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#getAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESBranchVersionSpecImpl getAPIImpl() {
+	public ESBranchVersionSpecImpl toAPI() {
 		if (apiImpl == null) {
-			apiImpl = createAPIImpl();
+			apiImpl = createAPI();
 		}
 
 		return apiImpl;
@@ -81,11 +81,11 @@ public class BranchVersionSpecImpl extends VersionSpecImpl implements BranchVers
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT
 	 */
-	public ESBranchVersionSpecImpl createAPIImpl() {
+	public ESBranchVersionSpecImpl createAPI() {
 		return new ESBranchVersionSpecImpl(this);
 	}
 

@@ -45,7 +45,7 @@ public class ESServerCallImpl<U> implements ESServerCall, InternalAPIDelegator<E
 			return null;
 		}
 
-		return serverCall.getUsersession().getAPIImpl();
+		return serverCall.getUsersession().toAPI();
 	}
 
 	public ESLocalProject getLocalProject() {
@@ -54,7 +54,7 @@ public class ESServerCallImpl<U> implements ESServerCall, InternalAPIDelegator<E
 			return null;
 		}
 
-		return serverCall.getProjectSpace().getAPIImpl();
+		return serverCall.getProjectSpace().toAPI();
 	}
 
 	public ESServer getServer() {
@@ -63,16 +63,16 @@ public class ESServerCallImpl<U> implements ESServerCall, InternalAPIDelegator<E
 			return null;
 		}
 
-		return serverCall.getServer().getAPIImpl();
+		return serverCall.getServer().toAPI();
 	}
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator#getInternalAPIImpl()
+	 * @see org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator#toInternalAPI()
 	 */
-	public ServerCall<U> getInternalAPIImpl() {
+	public ServerCall<U> toInternalAPI() {
 		return serverCall;
 	}
 }

@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.server.model.ESLogMessage;
  * @author emueller
  * 
  */
-public class ESChangePackageImpl extends AbstractAPIImpl<ESChangePackageImpl, ChangePackage> implements ESChangePackage {
+public class ESChangePackageImpl extends AbstractAPIImpl<ESChangePackage, ChangePackage> implements ESChangePackage {
 
 	/**
 	 * Constructor.
@@ -41,7 +41,7 @@ public class ESChangePackageImpl extends AbstractAPIImpl<ESChangePackageImpl, Ch
 	 * @see org.eclipse.emf.emfstore.server.model.ESChangePackage#getLogMessage()
 	 */
 	public ESLogMessage getLogMessage() {
-		return getInternalAPIImpl().getLogMessage().getAPIImpl();
+		return toInternalAPI().getLogMessage().toAPI();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class ESChangePackageImpl extends AbstractAPIImpl<ESChangePackageImpl, Ch
 	 */
 	public void setLogMessage(ESLogMessage logMessage) {
 		ESLogMessageImpl logMessageImpl = (ESLogMessageImpl) logMessage;
-		getInternalAPIImpl().setLogMessage(logMessageImpl.getInternalAPIImpl());
+		toInternalAPI().setLogMessage(logMessageImpl.toInternalAPI());
 	}
 
 }

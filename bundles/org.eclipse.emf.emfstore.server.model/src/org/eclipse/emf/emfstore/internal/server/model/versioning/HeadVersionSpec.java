@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESHeadVersionSpecImpl;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESHeadVersionSpec;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Head Version Spec</b></em>'.
@@ -25,5 +25,5 @@ import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESHea
  * @model
  * @generated
  */
-public interface HeadVersionSpec extends VersionSpec, APIDelegate<ESHeadVersionSpecImpl> {
+public interface HeadVersionSpec extends VersionSpec, APIDelegate<ESHeadVersionSpec> {
 } // HeadVersionSpec
