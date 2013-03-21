@@ -50,12 +50,12 @@ public class PerformanceTest {
 	private Usersession usersession;
 	private ProjectSpace projectSpace2;
 	private final String modelKey = "http://org/eclipse/example/bowling";
-	private final int minObjectsCount = 10000;
+	private final int minObjectsCount = 100000;
 	private final long seed = 1234567800;
 
 	private long lastSeed = seed + 1;
 
-	private static final int NUM_ITERATIONS = 1;
+	private static final int NUM_ITERATIONS = 10;
 	private static final double ACCEPTED_VARIANCE = 1.2;
 	private double memAfterThreshold;
 	double[] times;
