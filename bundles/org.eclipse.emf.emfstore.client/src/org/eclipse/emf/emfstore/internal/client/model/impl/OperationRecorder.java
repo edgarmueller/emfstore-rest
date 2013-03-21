@@ -341,18 +341,6 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	}
 
 	/**
-	 * 
-	 * 
-	 * @param notificationDisabled
-	 *            the notificationDisabled to set
-	 */
-	public void disableNotifications(boolean notificationDisabled) {
-		if (this.changeNotifier != null) {
-			this.changeNotifier.disableNotifications(notificationDisabled);
-		}
-	}
-
-	/**
 	 * Stops current recording of changes and adds recorded changes to this
 	 * project spaces changes.
 	 * 
