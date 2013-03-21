@@ -55,7 +55,7 @@ public class PerformanceTest {
 
 	private long lastSeed = seed + 1;
 
-	private static final int NUM_ITERATIONS = 10;
+	private static final int NUM_ITERATIONS = 5;
 	private static final double ACCEPTED_VARIANCE = 1.2;
 	private double memAfterThreshold;
 	double[] times;

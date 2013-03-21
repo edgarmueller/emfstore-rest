@@ -186,7 +186,7 @@
 		          <testClass>org.eclipse.emf.emfstore.client.test.performance.AllPerformanceTests</testClass>
 		          <useUIHarness>true</useUIHarness>
 		          <useUIThread>false</useUIThread>
-		          <argLine>${tycho.testArgLine} -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m -DrunPerfTests=${runPerfTests}</argLine>
+		          <argLine>${tycho.testArgLine} -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx1024m -DrunPerfTests=${runPerfTests}</argLine>
 		          <testFailureIgnore>true</testFailureIgnore>
 		          <failIfNoTests>false</failIfNoTests>
 		          <!-- Plugins to be loaded to the osgi runtime -->
