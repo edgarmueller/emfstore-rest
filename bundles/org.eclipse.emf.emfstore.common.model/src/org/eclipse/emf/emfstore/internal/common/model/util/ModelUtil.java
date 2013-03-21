@@ -207,16 +207,20 @@ public final class ModelUtil {
 		int initialSize = step;
 		resource.getContents().add(copy);
 
-		StringWriter stringWriter = new IgnoreWhitespaceStringWriter(initialSize);
+		StringWriter stringWriter = new StringWriter(initialSize);
 		URIConverter.WriteableOutputStream uws = new URIConverter.WriteableOutputStream(stringWriter, "UTF-8");
 
+		String lineSeparator = System.getProperty("line.separator");
 		try {
+			System.setProperty("line.separator", "\r\n");
 			resource.save(uws, getResourceSaveOptions());
 		} catch (IOException e) {
 			throw new SerializationException(e);
+		} finally {
+			System.setProperty("line.separator", lineSeparator);
 		}
-		String result = stringWriter.toString();
-		return result;
+
+		return stringWriter.toString();
 	}
 
 	/**
