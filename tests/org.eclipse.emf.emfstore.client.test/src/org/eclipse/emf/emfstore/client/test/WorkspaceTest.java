@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.client.test;
 
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,8 +33,10 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithRe
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
+import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
@@ -61,9 +64,22 @@ public abstract class WorkspaceTest {
 		saveState = Configuration.getClientBehavior().isAutoSaveEnabled();
 		Configuration.getClientBehavior().setAutoSave(true);
 		CommonUtil.setTesting(true);
+		ServerConfiguration.setTesting(true);
+
+		cleanEmfstoreFolders();
+
 		ESWorkspaceProviderImpl workspaceManager = ESWorkspaceProviderImpl.getInstance();
 		workspaceManager.load();
 		// workspace = (Workspace) workspaceManager.getWorkspace();
+	}
+
+	private static void cleanEmfstoreFolders() {
+		try {
+			FileUtil.deleteDirectory(new File(Configuration.getFileInfo().getWorkspaceDirectory()), true);
+			FileUtil.deleteDirectory(new File(ServerConfiguration.getLocationProvider().getWorkspaceDirectory()), true);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -133,6 +149,7 @@ public abstract class WorkspaceTest {
 	public static void tearDownAfterClass() throws IOException, ESException {
 		ESWorkspaceProviderImpl.getInstance().dispose();
 		Configuration.getClientBehavior().setAutoSave(saveState);
+		cleanEmfstoreFolders();
 	}
 
 	private void cleanProjects() {
