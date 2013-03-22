@@ -30,7 +30,7 @@ import org.junit.BeforeClass;
 
 public abstract class BaseEmptyEmfstoreTest {
 
-	protected final static int port = 8090;
+	protected final static int port = 8080;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

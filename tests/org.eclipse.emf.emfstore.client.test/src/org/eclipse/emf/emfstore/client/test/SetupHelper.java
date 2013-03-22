@@ -92,7 +92,7 @@ public class SetupHelper {
 	private long seed;
 	private String modelKey;
 
-	public final static int port = 8090;
+	public final static int port = 8080;
 
 	/**
 	 * @param projectTemplate test project to initialize SetupHelper

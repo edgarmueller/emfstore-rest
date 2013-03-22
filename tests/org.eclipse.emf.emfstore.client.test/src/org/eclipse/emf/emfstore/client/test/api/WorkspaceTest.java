@@ -19,7 +19,7 @@ public class WorkspaceTest {
 	private static ESWorkspace workspace;
 	private ESLocalProject localProject;
 
-	public static int port = 8090;
+	public static int port = 8080;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
