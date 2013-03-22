@@ -19,6 +19,8 @@ public class WorkspaceTest {
 	private static ESWorkspace workspace;
 	private ESLocalProject localProject;
 
+	public static int port = 8090;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
@@ -47,7 +49,7 @@ public class WorkspaceTest {
 	@Test
 	public void testServers() {
 		int servers = workspace.getServers().size();
-		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
 		workspace.addServer(server);
 		assertEquals(servers + 1, workspace.getServers().size());
 		workspace.removeServer(server);

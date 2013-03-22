@@ -30,6 +30,8 @@ import org.junit.BeforeClass;
 
 public abstract class BaseEmptyEmfstoreTest {
 
+	protected final static int port = 8090;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		startEMFStore();
@@ -37,6 +39,7 @@ public abstract class BaseEmptyEmfstoreTest {
 
 	private static void startEMFStore() {
 		ServerConfiguration.setTesting(true);
+		ServerConfiguration.getProperties().setProperty(ServerConfiguration.XML_RPC_PORT, String.valueOf(port));
 		try {
 			ESEMFStoreController.startEMFStore();
 		} catch (FatalESException e) {

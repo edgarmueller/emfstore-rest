@@ -92,6 +92,8 @@ public class SetupHelper {
 	private long seed;
 	private String modelKey;
 
+	public final static int port = 8090;
+
 	/**
 	 * @param projectTemplate test project to initialize SetupHelper
 	 */
@@ -326,13 +328,7 @@ public class SetupHelper {
 	 * @return server info
 	 */
 	public static ESServerImpl createServer() {
-
-		ESServerImpl server = (ESServerImpl) ESServer.FACTORY.getServer(
-			"localhost",
-			8080,
-			KeyStoreManager.DEFAULT_CERTIFICATE);
-
-		return server;
+		return (ESServerImpl) ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
 	}
 
 	/**
