@@ -557,13 +557,27 @@ public final class ServerConfiguration {
 	}
 
 	/**
-	 * Sets the server's properties.
+	 * Sets the server's properties. All already contained properties will be set to the values before.
 	 * 
 	 * @param prop
 	 *            properties
 	 */
 	public static void setProperties(Properties prop) {
+		setProperties(prop, true);
+	}
+
+	/**
+	 * Sets the servers properties.
+	 * 
+	 * @param prop The properties to set.
+	 * @param keepExisting Keep already contained properties?
+	 */
+	public static void setProperties(Properties prop, boolean keepExisting) {
+		Properties beforeProperties = properties;
 		properties = prop;
+		if (keepExisting) {
+			properties.putAll(beforeProperties);
+		}
 	}
 
 	/**
