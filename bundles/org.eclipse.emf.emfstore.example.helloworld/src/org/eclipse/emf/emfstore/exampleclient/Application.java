@@ -23,8 +23,6 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESLogMessageFactory;
 import org.eclipse.equinox.app.IApplication;
@@ -41,8 +39,7 @@ public class Application implements IApplication {
 	/**
 	 * {@inheritDoc}
 	 */
-	// BEGIN SUPRESS CATCH EXCEPTION
-	public Object start(IApplicationContext context) throws Exception {
+	public Object start(IApplicationContext context) {
 
 		// Run a client that shows the basic features of the EMFstore
 		// If there is a problem with the connection to the server
@@ -52,13 +49,11 @@ public class Application implements IApplication {
 
 		} catch (ESException e) {
 			System.out.println("No connection to server.");
-			System.out.println("Did you start the server? :-)");
+			System.out.println("Is the server running?");
 		}
 
 		return IApplication.EXIT_OK;
 	}
-
-	// END SUPRESS CATCH EXCEPTION
 
 	private void runClient() throws ESException {
 		System.out.println("Client starting...");
@@ -68,7 +63,7 @@ public class Application implements IApplication {
 
 		// A user session stores credentials for login
 		// Create a user by login in to the local EMFStore server
-		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, "certificate");
 		ESUsersession usersession = server.login("super", "super");
 
 		// Retrieves a list of existing (and accessible) projects on the sever and deletes them permanently (to have a
@@ -79,20 +74,17 @@ public class Application implements IApplication {
 		}
 
 		// Create a project, share it with the server
-		final ESLocalProject projectNo1 = workspace.createLocalProject("projectNo1");
+		ESLocalProject projectNo1 = workspace.createLocalProject("projectNo1");
 		projectNo1.shareProject(usersession, new NullProgressMonitor());
 
 		// Create some EObjects and add them to the project (To the projects containment tree)
-		final League league1 = BowlingFactory.eINSTANCE.createLeague();
+		League league1 = BowlingFactory.eINSTANCE.createLeague();
 		league1.setName("league");
 		league1.getPlayers().add(createPlayer("no. 1"));
 		league1.getPlayers().add(createPlayer("no. 2"));
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				projectNo1.getModelElements().add(league1);
-			}
-		}.run(false);
+		
+		projectNo1.getModelElements().add(league1);
+
 		System.out.println("Project 1: League name is " + league1.getName());
 
 		// commit the changes of the project to the EMFStore including a commit message
@@ -103,16 +95,12 @@ public class Application implements IApplication {
 		ESLocalProject projectNo2 = projectNo1.getRemoteProject().checkout(usersession, new NullProgressMonitor());
 
 		// Get a second copy of the league
-		final League league2 = (League) projectNo2.getModelElements().get(0);
+		League league2 = (League) projectNo2.getModelElements().get(0);
 		System.out.println("Project 2: League name is " + league2.getName());
 
 		// Apply changes in the second copy of the project ...
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				league2.setName("league_changed");
-			}
-		}.run(false);
+		league2.setName("league_changed");
+		
 		// ... and commit them
 		projectNo2.commit(ESLogMessageFactory.INSTANCE.createLogMessage("My message", usersession.getUsername()), null,
 			new NullProgressMonitor());
@@ -131,8 +119,8 @@ public class Application implements IApplication {
 	/**
 	 * Creates a new instance of a player.
 	 * 
-	 * @param name
-	 * @return
+	 * @param name The name of the player
+	 * @return The new player.
 	 */
 	private Player createPlayer(String name) {
 		Player player = BowlingFactory.eINSTANCE.createPlayer();

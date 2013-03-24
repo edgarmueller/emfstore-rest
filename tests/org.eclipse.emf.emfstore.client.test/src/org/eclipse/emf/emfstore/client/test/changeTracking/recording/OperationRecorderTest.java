@@ -15,13 +15,14 @@ import java.util.concurrent.Callable;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
+import org.eclipse.emf.emfstore.internal.client.model.impl.OperationRecorder;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Test some operation recorder functionalities.
+ * Test some {@link OperationRecorder} functionalities.
  * 
  * @author jsommerfeldt
  * 

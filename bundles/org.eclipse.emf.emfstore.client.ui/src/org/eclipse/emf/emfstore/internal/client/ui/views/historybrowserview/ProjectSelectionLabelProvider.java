@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider;
+package org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -22,12 +22,12 @@ import org.eclipse.swt.graphics.Image;
  * @author emueller
  * @author ovonwesend
  */
-public class ESBrowserLabelProvider extends AdapterFactoryLabelProvider {
+public class ProjectSelectionLabelProvider extends AdapterFactoryLabelProvider {
 
 	/**
 	 * Default constructor.
 	 */
-	public ESBrowserLabelProvider() {
+	public ProjectSelectionLabelProvider() {
 		super(Activator.getAdapterFactory());
 	}
 
