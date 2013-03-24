@@ -575,7 +575,7 @@ public final class ServerConfiguration {
 	public static void setProperties(Properties prop, boolean keepExisting) {
 		Properties beforeProperties = properties;
 		properties = prop;
-		if (keepExisting) {
+		if (keepExisting && beforeProperties != null) {
 			properties.putAll(beforeProperties);
 		}
 	}
