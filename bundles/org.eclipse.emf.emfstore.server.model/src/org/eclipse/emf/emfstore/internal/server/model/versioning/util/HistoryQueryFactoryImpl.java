@@ -63,7 +63,7 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 		return pathQuery.toAPI();
 	}
 
-	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<ESModelElementId> modelElements,
+	public ESModelElementQuery modelElementQuery(ESPrimaryVersionSpec source, List<ESModelElementId> modelElements,
 		int upper, int lower, boolean allVersions, boolean includeChangePackages) {
 
 		// TODO: provide util method for mapping to internal classes
@@ -86,7 +86,7 @@ public class HistoryQueryFactoryImpl implements ESHistoryQueryFactory {
 		return apiImpl;
 	}
 
-	public ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, ESModelElementId id, int upper,
+	public ESModelElementQuery modelElementQuery(ESPrimaryVersionSpec source, ESModelElementId id, int upper,
 		int lower,
 		boolean allVersions, boolean includeCp) {
 		ModelElementQuery modelelementQuery = HistoryQueryBuilder.modelelementQuery(

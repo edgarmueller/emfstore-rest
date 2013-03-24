@@ -83,7 +83,7 @@ public interface ESHistoryQueryFactory extends ESFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, List<ESModelElementId> modelElements, int upper,
+	ESModelElementQuery modelElementQuery(ESPrimaryVersionSpec source, List<ESModelElementId> modelElements, int upper,
 		int lower, boolean allVersions, boolean includeChangePackages);
 
 	/**
@@ -103,6 +103,6 @@ public interface ESHistoryQueryFactory extends ESFactory {
 	 *            whether to include change packages
 	 * @return query the constructed model element query
 	 */
-	ESModelElementQuery modelelementQuery(ESPrimaryVersionSpec source, ESModelElementId id,
+	ESModelElementQuery modelElementQuery(ESPrimaryVersionSpec source, ESModelElementId id,
 		int upper, int lower, boolean allVersions, boolean includeChangePackages);
 }

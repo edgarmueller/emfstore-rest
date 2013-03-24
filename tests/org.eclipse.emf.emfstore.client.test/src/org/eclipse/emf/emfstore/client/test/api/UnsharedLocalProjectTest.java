@@ -103,7 +103,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	public void testGetHistoryInfos() throws ESException {
 		Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		ESModelElementId id = localProject.getModelElementId(player);
-		ESHistoryQuery query = ESHistoryQuery.FACTORY.modelelementQuery(localProject.getBaseVersion(), id, 1, 0, true,
+		ESHistoryQuery query = ESHistoryQuery.FACTORY.modelElementQuery(localProject.getBaseVersion(), id, 1, 0, true,
 			true);
 		localProject.getHistoryInfos(query, new NullProgressMonitor());
 		fail("Should not be able to getHistoryInfos from an unshared Project!");
