@@ -34,6 +34,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVisualizationHelper;
+import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.IPlotCommit;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.PlotCommitProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.PlotLane;
@@ -466,7 +467,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 		noProjectHint.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {
 				ElementListSelectionDialog elsd = new ElementListSelectionDialog(parent.getShell(),
-					new ProjectSelectionLabelProvider());
+					new ESBrowserLabelProvider());
 				List<ProjectSpace> relevantProjectSpaces = new ArrayList<ProjectSpace>();
 				// TODO OTS
 				ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();

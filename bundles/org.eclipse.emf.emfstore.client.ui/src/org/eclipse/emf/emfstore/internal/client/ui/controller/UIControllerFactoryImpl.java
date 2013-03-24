@@ -20,7 +20,7 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public ESPrimaryVersionSpec commitProject(Shell shell,
-		ESLocalProject project) {
+			ESLocalProject project) {
 		return new UICommitProjectController(shell, project).execute();
 	}
 
@@ -30,9 +30,33 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public ESPrimaryVersionSpec createBranch(Shell shell, ESProject project,
-		ESBranchVersionSpec branch) {
+			ESBranchVersionSpec branch) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public ESLocalProject createLocalProject(Shell shell) {
+		return new UICreateLocalProjectController(shell).execute();
+	}
+
+	public ESLocalProject createLocalProject(Shell shell, String name) {
+		return new UICreateLocalProjectController(shell, name).execute();
+	}
+
+	public ESRemoteProject createRemoteProject(Shell shell) {
+		return new UICreateRemoteProjectController(shell).execute();
+	}
+
+	public ESRemoteProject createRemoteProject(Shell shell,
+			ESUsersession usersession) {
+		return new UICreateRemoteProjectController(shell, usersession)
+				.execute();
+	}
+
+	public ESRemoteProject createRemoteProject(Shell shell,
+			ESUsersession usersession, String projectName) {
+		return new UICreateRemoteProjectController(shell, usersession,
+				projectName).execute();
 	}
 
 	public void deleteLocalProject(Shell shell, ESLocalProject project) {
@@ -40,9 +64,9 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject,
-		ESUsersession usersession) {
+			ESUsersession usersession) {
 		new UIDeleteRemoteProjectController(shell, usersession, remoteProject)
-			.execute();
+				.execute();
 	}
 
 	public void login(Shell shell, ESServer server) {
@@ -78,17 +102,17 @@ public final class UIControllerFactoryImpl implements ESUIControllerFactory {
 	}
 
 	public ESPrimaryVersionSpec updateProject(Shell shell,
-		ESLocalProject project) {
+			ESLocalProject project) {
 		return new UIUpdateProjectController(shell, project).execute();
 	}
 
 	public ESPrimaryVersionSpec updateProject(Shell shell,
-		ESLocalProject project, ESVersionSpec version) {
+			ESLocalProject project, ESVersionSpec version) {
 		return new UIUpdateProjectController(shell, project, version).execute();
 	}
 
 	public ESPrimaryVersionSpec updateProjectToVersion(Shell shell,
-		ESLocalProject project) {
+			ESLocalProject project) {
 		return new UIUpdateProjectToVersionController(shell, project).execute();
 	}
 

@@ -30,6 +30,8 @@ Export-Package: org.eclipse.emf.emfstore.client.ui;version="1.0.0.qualifier",
  org.eclipse.emf.emfstore.internal.client.ui.handlers.exportimport;version="1.0.0.qualifier",
  org.eclipse.emf.emfstore.internal.client.ui.util;version="1.0.0.qualifier",
  org.eclipse.emf.emfstore.internal.client.ui.views.changes;version="1.0.0.qualifier",
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin;version="1.0.0.qualifier",
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;version="1.0.0.qualifier",
  org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;version="1.0.0.qualifier"
 Import-Package: org.eclipse.core.commands,
  org.eclipse.emf.edit.ui.provider,

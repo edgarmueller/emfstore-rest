@@ -144,6 +144,244 @@
   <extension
         point="org.eclipse.ui.menus">
           <menuContribution
+           locationURI="popup:org.eclipse.emf.emfstore.client.ui.views.RepositoryView?after=additions">
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.Login"
+              icon="icons/serverLogin.png"
+              label="Login"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.testers.serverInfoIsLoggedIn"
+                       value="false">
+                 </test>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.Logout"
+              icon="icons/lock.png"
+              label="Logout"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.testers.serverInfoIsLoggedIn"
+                       value="true">
+                 </test>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectCheckout"
+              icon="icons/checkout.png"
+              label="Checkout"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.BranchCheckout"
+              icon="icons/checkout.png"
+              label="Checkout Branch..."
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.CreateProjectOnServer"
+              icon="icons/projectAdd.png"
+              label="Create new project..."
+              style="push"
+              tooltip="Create new project on the server">
+
+           <visibleWhen
+           		checkEnabled="false">
+				<iterate
+	               ifEmpty="false"
+	               operator="and">
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.testers.isServerAdmin"
+                       value="true">
+                 </test>
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.testers.serverInfoIsLoggedIn"
+                       value="true">
+                 </test>
+                 </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ManageOrgUnits"
+              icon="icons/Group.gif"
+              label="Manage Users/Groups..."
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.testers.isServerAdmin"
+                       value="true">
+                 </test>
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.testers.serverInfoIsLoggedIn"
+                       value="true">
+                 </test>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ExportProjectHistory"
+              icon="icons/database_go.png"
+              label="Export project history"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.commands.isServerAdmin"
+                       value="true">
+                 </test>
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ImportProjectHistory"
+              icon="icons/folder_go.png"
+              label="Import Project History"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.commands.isServerAdmin"
+                       value="true">
+                 </test>
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.DeleteProjectOnServer"
+              icon="icons/delete.gif"
+              label="Delete on server"
+              style="push"
+              tooltip="Delete this project on the server">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <test
+                       forcePluginActivation="true"
+                       property="org.eclipse.emf.emfstore.internal.client.ui.testers.isServerAdmin"
+                       value="true">
+                 </test>
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.RemoveServer"
+              icon="icons/delete.gif"
+              label="Remove repository"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.client.model.ServerInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.AddServer"
+              icon="icons/serverAdd.png"
+              label="New Repository..."
+              style="push"
+              tooltip="Adds a new EMFStore Repository">
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectProperties"
+              icon="icons/info.png"
+              label="Project Properties"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.server.model.ProjectInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ServerProperties"
+              icon="icons/serverEdit.png"
+              label="Server Properties"
+              style="push">
+           <visibleWhen
+                 checkEnabled="false">
+              <iterate
+                    ifEmpty="false"
+                    operator="and">
+                 <instanceof
+                       value="org.eclipse.emf.emfstore.internal.client.model.ServerInfo">
+                 </instanceof>
+              </iterate>
+           </visibleWhen>
+        </command>
+     </menuContribution>
+          <menuContribution
                 locationURI="popup:org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView">
              <command
                    commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.addtag"
@@ -194,6 +432,32 @@
                    label="Revert to this revision"
                    style="push"
                    tooltip="Force to revert, the reversed changes between the previous revision has been applied">
+             </command>
+          </menuContribution>
+          <menuContribution
+                locationURI="popup:org.eclipse.emf.emfstore.client.ui.views.RepositoryView?after=org.eclipse.emf.emfstore.internal.client.ui.repositorybrowser.ManageOrgUnits">
+             <command
+                   commandId="org.eclipse.emf.emfstore.client.ui.repositorybrowser.RegisterEPackage"
+                   icon="icons/arrow_up.png"
+                   label="Register EPackage"
+                   style="push">
+                <visibleWhen
+                      checkEnabled="false">
+                   <iterate
+                         ifEmpty="false"
+                         operator="and">
+                      <test
+                            forcePluginActivation="true"
+                            property="org.eclipse.emf.emfstore.internal.client.ui.testers.isServerAdmin"
+                            value="true">
+                      </test>
+                      <test
+                            forcePluginActivation="true"
+                            property="org.eclipse.emf.emfstore.internal.client.ui.testers.serverInfoIsLoggedIn"
+                            value="true">
+                      </test>
+                   </iterate>
+                </visibleWhen>
              </command>
           </menuContribution>
           <menuContribution
@@ -316,6 +580,13 @@
            <extension
          point="org.eclipse.ui.views">
       <view
+            name="EmfStore Browser" 
+            icon="icons/serverDB.png"
+            category="org.eclipse.emf.emfstore.client.ui.category"
+            class="org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.ESBrowserView"
+            id="org.eclipse.emf.emfstore.client.ui.views.RepositoryView">
+      </view>
+      <view
             allowMultiple="false"
             category="org.eclipse.emf.emfstore.client.ui.category"
             class="org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView"
@@ -383,6 +654,11 @@
             name="Import Projectspace">
       </command>
       <command
+            defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.AddServerHandler"
+            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.AddServer"
+            name="Add Server">
+      </command>
+      <command
             defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.ServerLoginHandler"
             id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.Login"
             name="Login">
@@ -391,6 +667,11 @@
             defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.ChangeSessionHandler"
             id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.Logout"
             name="Logout">
+      </command>
+      <command
+            defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.CreateProjectOnServerHandler"
+            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.CreateProjectOnServer"
+            name="Create Project On Server">
       </command>
       <command
             defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.DeleteProjectOnServerHandler"
@@ -413,9 +694,19 @@
             name=" ImportProject History">
       </command>
       <command
+            defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.ManageOrgUnitsHandler"
+            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ManageOrgUnits"
+            name="Manage OrgUnits">
+      </command>
+      <command
             defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.CheckoutHandler"
             id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ProjectCheckout"
             name="Project Checkout">
+      </command>
+      <command
+            defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.ServerPropertiesHandler"
+            id="org.eclipse.emf.emfstore.client.ui.repositorybrowser.ServerProperties"
+            name="Server Properties">
       </command>
       <command
             defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.ProjectPropertiesHandler"
@@ -489,6 +780,12 @@
            defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.DeleteProjectHandler"
            id="org.eclipse.emf.emfstore.client.ui.deleteProject"
            name="deleteProject">
+     </command>
+     <command
+           categoryId="org.eclipse.emf.emfstore.client.ui.project"
+           defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.CreateLocalProjectHandler"
+           id="org.eclipse.emf.emfstore.client.ui.NewLocalProject"
+           name="NewLocalProject">
      </command>
      <command
            categoryId="org.eclipse.emf.emfstore.client.ui.project"

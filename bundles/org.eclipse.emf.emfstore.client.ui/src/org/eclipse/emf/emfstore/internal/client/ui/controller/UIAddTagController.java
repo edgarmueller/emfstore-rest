@@ -11,25 +11,25 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
-import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
-import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CreateTagDialog;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 
 /**
  * UI controller for creating a tag for a project.
@@ -39,32 +39,23 @@ import org.eclipse.ui.PlatformUI;
  */
 public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 
-	private final HistoryInfo historyInfo;
+	private final ESHistoryInfo historyInfo;
+	private final ESLocalProject localProject;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param shell
 	 *            the shell that will be used to create the tag
+	 * @param localProject
+	 *            the {@link ESLocalProject} for which to create the tag for
 	 * @param historyInfo
-	 *            the {@link HistoryInfo} object that is needed to determine the version for which to create a tag
+	 *            the {@link ESHistoryInfo} object that is needed to determine the version for which to create a tag
 	 */
-	public UIAddTagController(Shell shell, HistoryInfo historyInfo) {
+	public UIAddTagController(Shell shell, ESLocalProject localProject, ESHistoryInfo historyInfo) {
 		super(shell);
+		this.localProject = localProject;
 		this.historyInfo = historyInfo;
-	}
-
-	private HistoryBrowserView getHistoryBrowserViewFromActivePart() {
-		// TODO: controller currently does not work if the active workbench window is not
-		// the history view
-		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-
-		if (activePage == null || !(activePage.getActivePart() instanceof HistoryBrowserView)) {
-			return null;
-		}
-
-		return (HistoryBrowserView) activePage.getActivePart();
 	}
 
 	/**
@@ -76,42 +67,59 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 
-		HistoryBrowserView historyBrowserView = getHistoryBrowserViewFromActivePart();
+		// // TODO: make process of adding tags more user friendly: use one dialog instead of two
+		// InputDialog tagNameDialog = new InputDialog(getShell(), Messages.UIAddTagController_Title,
+		// Messages.UIAddTagController_TagNameLabel, Messages.UIAddTagController_TagNameTextDefault
+		// + new Date(), null);
+		// InputDialog branchNameDialog = new InputDialog(getShell(),
+		//			"Add tag", Messages.UIAddTagController_BranchNameLabel, Messages.UIAddTagController_BranchNameTextDefault, //$NON-NLS-1$
+		// null);
+		//
+		// if (tagNameDialog.open() != Window.OK) {
+		// return null;
+		// }
+		//
+		// if (branchNameDialog.open() != Window.OK) {
+		// return null;
+		// }
 
-		if (historyBrowserView == null) {
+		CreateTagDialog dialog = createDialog(getShell(), historyInfo.getPreviousSpec(),
+			localProject.getBranches(monitor));
+
+		if (dialog.open() != Window.OK) {
 			return null;
 		}
 
-		final PrimaryVersionSpec versionSpec = ModelUtil.clone(historyInfo.getPrimarySpec());
+		final String tagName = dialog.getTagName();
+		final String branchName = dialog.getResult().getName();
 
-		InputDialog inputDialog = new InputDialog(getShell(), "Add tag", "Please enter the tag's name.", "Tag@"
-			+ new Date(), null);
+		if (StringUtils.isNotBlank(tagName) && StringUtils.isNotBlank(branchName)) {
 
-		if (inputDialog.open() != Window.OK) {
-			return null;
-		}
-
-		final String tagName = inputDialog.getValue().trim();
-		final ProjectSpace projectSpace = historyBrowserView.getProjectSpace();
-
-		if (tagName != null && tagName.length() > 0) {
-
-			TagVersionSpec tag = VersioningFactory.eINSTANCE.createTagVersionSpec();
-			tag.setName(tagName);
+			ESPrimaryVersionSpec primaryVersion = historyInfo.getPrimarySpec();
+			ESTagVersionSpec tag = ESVersionSpec.FACTORY.createTAG(tagName, branchName);
 
 			try {
-				// TODO: monitor
-				projectSpace.addTag(versionSpec, tag);
+				localProject.addTag(primaryVersion, tag, monitor);
 			} catch (ESException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
-				MessageDialog.openError(getShell(), "Error", "Could not create tag. Reason: " + e.getMessage());
+				MessageDialog.openError(getShell(), Messages.UIAddTagController_ErrorTitle,
+					Messages.UIAddTagController_ErrorReason + e.getMessage());
 				return null;
 			}
+
 			// also add tag to the selected history info
 			historyInfo.getTagSpecs().add(tag);
-			historyBrowserView.refresh();
 		}
 
 		return null;
 	}
+
+	private CreateTagDialog createDialog(Shell shell, ESPrimaryVersionSpec baseVersionSpec,
+		List<ESBranchInfo> branches) {
+
+		ESPrimaryVersionSpecImpl e = (ESPrimaryVersionSpecImpl) baseVersionSpec;
+		List<BranchInfo> bs = APIUtil.toInternal(branches);
+		return new CreateTagDialog(shell, e.toInternalAPI(), bs);
+	}
+
 }

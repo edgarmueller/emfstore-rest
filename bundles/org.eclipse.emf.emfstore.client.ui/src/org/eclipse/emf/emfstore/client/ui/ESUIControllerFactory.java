@@ -22,6 +22,16 @@ public interface ESUIControllerFactory {
 
 	ESPrimaryVersionSpec createBranch(Shell shell, ESProject project, ESBranchVersionSpec branch);
 
+	ESLocalProject createLocalProject(Shell shell);
+
+	ESLocalProject createLocalProject(Shell shell, String name);
+
+	ESRemoteProject createRemoteProject(Shell shell);
+
+	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession);
+
+	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession, String projectName);
+
 	void deleteLocalProject(Shell shell, ESLocalProject project);
 
 	void deleteRemoteProject(Shell shell, ESRemoteProject remoteProject, ESUsersession usersession);
