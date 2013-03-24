@@ -42,6 +42,7 @@ public class LoginDialogController implements ILoginDialogController {
 
 	private ESUsersession usersession;
 	private ESServer server;
+	private LoginDialog dialog;
 
 	/**
 	 * 
@@ -56,30 +57,47 @@ public class LoginDialogController implements ILoginDialogController {
 	}
 
 	private ESUsersession login(final boolean force) throws ESException {
-		return RunInUI.WithException
-			.runWithResult(new Callable<ESUsersession>() {
-				public ESUsersession call() throws Exception {
 
-					if (server != null
-						&& server.getLastUsersession() != null
-						&& server.getLastUsersession().isLoggedIn()
-						&& !force) {
-						return server.getLastUsersession();
-					}
+		if (server != null
+			&& server.getLastUsersession() != null
+			&& server.getLastUsersession().isLoggedIn()
+			&& !force) {
+			return server.getLastUsersession();
+		}
 
-					LoginDialog dialog = new LoginDialog(Display
-						.getCurrent().getActiveShell(),
-						LoginDialogController.this);
-					dialog.setBlockOnOpen(true);
+		Integer userInput = RunInUI.runWithResult(new Callable<Integer>() {
+			public Integer call() throws Exception {
+				dialog = new LoginDialog(Display
+					.getCurrent().getActiveShell(),
+					LoginDialogController.this);
+				dialog.setBlockOnOpen(true);
+				return dialog.open();
+			}
+		});
 
-					if (dialog.open() != Window.OK || usersession == null) {
-						throw new AccessControlException("Couldn't login.");
-					}
+		if (userInput != Window.OK || usersession == null) {
+			throw new AccessControlException("Couldn't login.");
+		}
 
-					// contract: #validate() sets the usersession;
-					return usersession;
+		final Usersession session = dialog.getSelectedUsersession();
+		final String password = dialog.getPassword();
+		final boolean savePassword = dialog.isSavePassword();
+		final boolean passwordModified = dialog.isPasswordModified();
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				session.setSavePassword(savePassword);
+				if (passwordModified) {
+					session.setPassword(password);
 				}
-			});
+				return null;
+			}
+		});
+
+		validate(session.toAPI());
+
+		// contract: #validate() sets the usersession;
+		return usersession;
 	}
 
 	/**

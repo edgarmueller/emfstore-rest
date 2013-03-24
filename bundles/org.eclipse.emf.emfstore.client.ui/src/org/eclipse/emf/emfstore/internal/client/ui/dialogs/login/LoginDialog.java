@@ -20,7 +20,6 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
-import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -62,6 +61,8 @@ public class LoginDialog extends TitleAreaDialog {
 	private Usersession selectedUsersession;
 	private boolean passwordModified;
 	private List<Usersession> knownUsersessions;
+	private String password;
+	private boolean isSavePassword;
 
 	/**
 	 * Create the dialog.
@@ -189,7 +190,7 @@ public class LoginDialog extends TitleAreaDialog {
 	 *            the user session to be loaded
 	 */
 	private void loadUsersession(Usersession usersession) {
-		if (usersession != null && selectedUsersession == usersession) {
+		if (usersession != null && getSelectedUsersession() == usersession) {
 			return;
 		}
 
@@ -199,17 +200,17 @@ public class LoginDialog extends TitleAreaDialog {
 		passwordField.setMessage("");
 		savePassword.setSelection(false);
 
-		if (selectedUsersession != null) {
+		if (getSelectedUsersession() != null) {
 
 			// check whether text is set correctly
 			if (!usernameCombo.getCombo().getText()
-				.equals(selectedUsersession.getUsername())) {
+				.equals(getSelectedUsersession().getUsername())) {
 				usernameCombo.getCombo().setText(
-					selectedUsersession.getUsername());
+					getSelectedUsersession().getUsername());
 			}
 
-			if (selectedUsersession.isSavePassword()
-				&& selectedUsersession.getPassword() != null) {
+			if (getSelectedUsersession().isSavePassword()
+				&& getSelectedUsersession().getPassword() != null) {
 				passwordField
 					.setMessage("<password is saved, reenter to change>");
 				passwordField.setText("");
@@ -229,51 +230,35 @@ public class LoginDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void okPressed() {
-		try {
-			final String username = usernameCombo.getCombo().getText();
-			final String password = passwordField.getText();
-			final boolean savePw = savePassword.getSelection();
+		final String username = usernameCombo.getCombo().getText();
 
-			Usersession candidateSession = selectedUsersession;
-			ESServerImpl server = (ESServerImpl) controller.getServer();
+		Usersession candidateSession = getSelectedUsersession();
+		ESServerImpl server = (ESServerImpl) controller.getServer();
 
-			// try to find usersession with same username in order to avoid
-			// duplicates
-			if (candidateSession == null) {
-				candidateSession = getUsersessionIfKnown(username);
-			}
+		// try to find usersession with same username in order to avoid
+		// duplicates
+		if (candidateSession == null) {
+			candidateSession = getUsersessionIfKnown(username);
+		}
 
-			if (candidateSession == null
-				|| !candidateSession.getServerInfo().equals(server.toInternalAPI())) {
-				final ESServerImpl serverImpl = (ESServerImpl) controller.getServer();
-				candidateSession = ModelFactory.eINSTANCE.createUsersession();
-				final Usersession session = candidateSession;
-				RunESCommand.run(new Callable<Void>() {
-					public Void call() throws Exception {
-						session.setServerInfo(serverImpl.toInternalAPI());
-						session.setUsername(username);
-						return null;
-					}
-				});
-			}
-
+		if (candidateSession == null
+			|| !candidateSession.getServerInfo().equals(server.toInternalAPI())) {
+			final ESServerImpl serverImpl = (ESServerImpl) controller.getServer();
+			candidateSession = ModelFactory.eINSTANCE.createUsersession();
 			final Usersession session = candidateSession;
+			// TODO
 			RunESCommand.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					session.setSavePassword(savePw);
-					if (passwordModified) {
-						session.setPassword(password);
-					}
+					session.setServerInfo(serverImpl.toInternalAPI());
+					session.setUsername(username);
 					return null;
 				}
 			});
-
-			controller.validate(candidateSession.toAPI());
-
-		} catch (ESException e) {
-			setErrorMessage(e.getMessage());
-			return;
 		}
+
+		password = passwordField.getText();
+		isSavePassword = savePassword.getSelection();
+
 		super.okPressed();
 	}
 
@@ -318,6 +303,10 @@ public class LoginDialog extends TitleAreaDialog {
 		setErrorMessage(null);
 	}
 
+	public Usersession getSelectedUsersession() {
+		return selectedUsersession;
+	}
+
 	/**
 	 * Simple listener for loading the selected usersession if the user changes
 	 * the selected entry within the combo box that contains all known
@@ -351,4 +340,15 @@ public class LoginDialog extends TitleAreaDialog {
 		}
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public boolean isSavePassword() {
+		return isSavePassword;
+	}
+
+	public boolean isPasswordModified() {
+		return passwordModified;
+	}
 }
