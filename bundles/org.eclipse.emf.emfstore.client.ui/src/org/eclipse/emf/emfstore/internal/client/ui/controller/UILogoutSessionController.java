@@ -12,7 +12,6 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESUsersession;
-import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -26,7 +25,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UILogoutSessionController extends AbstractEMFStoreUIController<Void> {
 
-	private Usersession session;
+	private ESUsersessionImpl session;
 
 	/**
 	 * Constructor.
@@ -38,7 +37,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 	 */
 	public UILogoutSessionController(Shell shell, ESUsersession session) {
 		super(shell);
-		this.session = ((ESUsersessionImpl) session).toInternalAPI();
+		this.session = (ESUsersessionImpl) session;
 	}
 
 	/**
@@ -61,7 +60,7 @@ public class UILogoutSessionController extends AbstractEMFStoreUIController<Void
 		}
 
 		// reset the password in the RAM cache
-		if (!session.isSavePassword()) {
+		if (!session.toInternalAPI().isSavePassword()) {
 			session.setPassword(null);
 		}
 

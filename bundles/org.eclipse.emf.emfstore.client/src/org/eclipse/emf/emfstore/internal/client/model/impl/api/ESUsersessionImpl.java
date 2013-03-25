@@ -147,12 +147,12 @@ public class ESUsersessionImpl extends AbstractAPIImpl<ESUsersessionImpl, Userse
 	 *            the new password
 	 */
 	public void setPassword(final String password) {
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				toInternalAPI().setPassword(password);
+				return null;
 			}
-		}.run(false);
+		});
 	}
 
 	/**
