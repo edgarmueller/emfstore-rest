@@ -75,11 +75,16 @@ public class LoginDialogController implements ILoginDialogController {
 			}
 		});
 
-		if (userInput != Window.OK || usersession == null) {
+		if (userInput != Window.OK) {
 			throw new AccessControlException("Couldn't login.");
 		}
 
 		final Usersession session = dialog.getSelectedUsersession();
+
+		if (session == null) {
+			throw new AccessControlException("Couldn't login.");
+		}
+
 		final String password = dialog.getPassword();
 		final boolean savePassword = dialog.isSavePassword();
 		final boolean passwordModified = dialog.isPasswordModified();
