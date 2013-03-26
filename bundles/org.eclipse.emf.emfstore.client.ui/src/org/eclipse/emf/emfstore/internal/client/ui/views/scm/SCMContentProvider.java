@@ -20,13 +20,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
-import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 
 /**
@@ -168,7 +166,7 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		VirtualNode<AbstractOperation> node = new VirtualNode<AbstractOperation>(
 			result.getFilteredOperations());
 		changePackageToNonFilteredMapping.put(changePackage,
-												result.getNonFiltered());
+			result.getNonFiltered());
 		changePackageToFilteredMapping.put(changePackage, node);
 	}
 
@@ -187,14 +185,12 @@ public class SCMContentProvider extends AdapterFactoryContentProvider implements
 		if (object instanceof HistoryInfo) {
 			HistoryInfo historyInfo = (HistoryInfo) object;
 			return getChildren(historyInfo.getChangePackage());
-		} else if (object instanceof ESChangePackage) {
-
-			ChangePackage changePackage = ((ESChangePackageImpl) object)
-				.toInternalAPI();
-
-			filter(changePackage, super.getChildren(object), LogMessage.class);
+		} else if (object instanceof ChangePackage) {
 
 			List<Object> result = new ArrayList<Object>();
+			ChangePackage changePackage = (ChangePackage) object;
+
+			filter(changePackage, super.getChildren(object), LogMessage.class);
 			result.addAll(changePackageToNonFilteredMapping.get(changePackage));
 			VirtualNode<AbstractOperation> node = changePackageToFilteredMapping
 				.get(changePackage);
