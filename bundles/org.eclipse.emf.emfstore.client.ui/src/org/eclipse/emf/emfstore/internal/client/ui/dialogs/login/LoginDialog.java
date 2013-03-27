@@ -263,6 +263,11 @@ public class LoginDialog extends TitleAreaDialog {
 	}
 
 	private Usersession getUsersessionIfKnown(String username) {
+
+		if (getSelectedUsersession() != null && getSelectedUsersession().getUsername().equals(username)) {
+			return getSelectedUsersession();
+		}
+
 		for (Usersession session : knownUsersessions) {
 			if (session.getUsername().equals(username)) {
 				return session;
