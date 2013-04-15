@@ -83,7 +83,8 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory imple
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent} instances.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

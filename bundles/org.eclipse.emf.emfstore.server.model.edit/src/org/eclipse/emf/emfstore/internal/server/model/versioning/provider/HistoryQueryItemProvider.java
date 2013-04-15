@@ -31,7 +31,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery} object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

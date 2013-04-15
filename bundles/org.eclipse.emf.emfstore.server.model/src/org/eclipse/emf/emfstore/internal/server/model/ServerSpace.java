@@ -38,7 +38,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 public interface ServerSpace extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Groups</b></em>' containment reference
-	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup}. <!--
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup}.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Groups</em>' containment reference list isn't clear, there really should be more of a
@@ -72,7 +73,8 @@ public interface ServerSpace extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Open Sessions</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.SessionId}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.SessionId}.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Open Sessions</em>' containment reference list isn't clear, there really should be
@@ -90,7 +92,8 @@ public interface ServerSpace extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Users</b></em>' containment reference
-	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser}. <!--
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser}.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Users</em>' containment reference isn't clear, there really should be more of a

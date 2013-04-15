@@ -192,7 +192,8 @@ public class AccesscontrolItemProviderAdapterFactory extends AccesscontrolAdapte
 	protected OrgUnitPropertyItemProvider orgUnitPropertyItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty} . <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

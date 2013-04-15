@@ -33,8 +33,8 @@ import org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragmen
 import org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment}
- * object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

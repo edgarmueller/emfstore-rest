@@ -75,7 +75,8 @@ public interface ClientVersionInfo extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo#getName <em>Name</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo#getName
+	 * <em>Name</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

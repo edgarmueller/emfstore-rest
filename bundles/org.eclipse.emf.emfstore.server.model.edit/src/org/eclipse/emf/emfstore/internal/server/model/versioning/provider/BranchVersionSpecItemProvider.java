@@ -24,8 +24,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec}
- * object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

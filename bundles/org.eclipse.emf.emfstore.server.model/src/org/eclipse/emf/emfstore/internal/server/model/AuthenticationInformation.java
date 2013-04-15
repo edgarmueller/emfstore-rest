@@ -20,9 +20,10 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getResolvedACUser <em>Resolved AC User
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}
+ * </li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getResolvedACUser <em>Resolved AC
+ * User </em>}</li>
  * </ul>
  * </p>
  * 
@@ -49,7 +50,8 @@ public interface AuthenticationInformation extends EObject {
 	SessionId getSessionId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId
 	 * <em>Session Id</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -78,7 +80,8 @@ public interface AuthenticationInformation extends EObject {
 	ACUser getResolvedACUser();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getResolvedACUser
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getResolvedACUser
 	 * <em>Resolved AC User</em>}' containment reference.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->

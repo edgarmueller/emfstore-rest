@@ -108,8 +108,8 @@ public interface ProjectInfo extends EObject {
 	ProjectId getProjectId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getProjectId <em>Project Id</em>}
-	 * ' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getProjectId
+	 * <em>Project Id</em>} ' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -137,7 +137,8 @@ public interface ProjectInfo extends EObject {
 	PrimaryVersionSpec getVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getVersion <em>Version</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getVersion
+	 * <em>Version</em>}'
 	 * containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->

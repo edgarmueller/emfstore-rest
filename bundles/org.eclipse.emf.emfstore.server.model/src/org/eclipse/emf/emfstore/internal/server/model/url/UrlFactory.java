@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EFactory;
 /**
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
+ * 
  * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage
  * @generated
  */
@@ -26,6 +27,7 @@ public interface UrlFactory extends EFactory {
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	UrlFactory eINSTANCE = org.eclipse.emf.emfstore.internal.server.model.url.impl.UrlFactoryImpl.init();
@@ -34,6 +36,7 @@ public interface UrlFactory extends EFactory {
 	 * Returns a new object of class '<em>Server Url</em>'.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @return a new object of class '<em>Server Url</em>'.
 	 * @generated
 	 */
@@ -70,6 +73,7 @@ public interface UrlFactory extends EFactory {
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the package supported by this factory.
 	 * @generated
 	 */

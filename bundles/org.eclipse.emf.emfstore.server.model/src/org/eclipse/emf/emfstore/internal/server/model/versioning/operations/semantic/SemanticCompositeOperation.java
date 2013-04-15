@@ -16,8 +16,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Comp
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Composite Operation</b></em>'. <!--
  * end-user-doc -->
- *
- *
+ * 
+ * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticPackage#getSemanticCompositeOperation()
  * @model abstract="true"
  * @generated

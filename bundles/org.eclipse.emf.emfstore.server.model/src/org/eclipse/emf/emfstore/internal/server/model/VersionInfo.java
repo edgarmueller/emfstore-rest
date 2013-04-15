@@ -19,8 +19,8 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString <em>Emf Store Version String
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString <em>Emf Store Version
+ * String </em>}</li>
  * </ul>
  * </p>
  * 
@@ -47,7 +47,8 @@ public interface VersionInfo extends EObject {
 	String getEmfStoreVersionString();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
 	 * <em>Emf Store Version String</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,7 +69,8 @@ public interface VersionInfo extends EObject {
 	Version getEmfStoreVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
 	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 

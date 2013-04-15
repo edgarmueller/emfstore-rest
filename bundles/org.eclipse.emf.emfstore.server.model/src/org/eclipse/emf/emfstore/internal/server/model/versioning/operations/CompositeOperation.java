@@ -15,18 +15,24 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Composite Operation</b></em>'. <!--
  * end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getSubOperations <em>Sub Operations</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getMainOperation <em>Main Operation</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeName <em>Composite Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeDescription <em>Composite Description</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#isReversed <em>Reversed</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getSubOperations
+ * <em>Sub Operations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getMainOperation
+ * <em>Main Operation</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeName
+ * <em>Composite Name</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeDescription
+ * <em>Composite Description</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#isReversed <em>
+ * Reversed</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCompositeOperation()
  * @model
  * @generated
@@ -34,13 +40,15 @@ import org.eclipse.emf.common.util.EList;
 public interface CompositeOperation extends AbstractOperation {
 	/**
 	 * Returns the value of the '<em><b>Sub Operations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation}.
+	 * The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sub Operations</em>' containment reference list isn't clear, there really should be
 	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Sub Operations</em>' containment reference list.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCompositeOperation_SubOperations()
 	 * @model containment="true" resolveProxies="true"
@@ -66,9 +74,12 @@ public interface CompositeOperation extends AbstractOperation {
 	AbstractOperation getMainOperation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getMainOperation <em>Main Operation</em>}' reference.
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getMainOperation
+	 * <em>Main Operation</em>}' reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Main Operation</em>' reference.
 	 * @see #getMainOperation()
 	 * @generated
@@ -93,9 +104,12 @@ public interface CompositeOperation extends AbstractOperation {
 	String getCompositeName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeName <em>Composite Name</em>}' attribute.
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeName
+	 * <em>Composite Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Composite Name</em>' attribute.
 	 * @see #getCompositeName()
 	 * @generated
@@ -110,6 +124,7 @@ public interface CompositeOperation extends AbstractOperation {
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Composite Description</em>' attribute.
 	 * @see #setCompositeDescription(String)
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getCompositeOperation_CompositeDescription()
@@ -119,9 +134,12 @@ public interface CompositeOperation extends AbstractOperation {
 	String getCompositeDescription();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeDescription <em>Composite Description</em>}' attribute.
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation#getCompositeDescription
+	 * <em>Composite Description</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Composite Description</em>' attribute.
 	 * @see #getCompositeDescription()
 	 * @generated

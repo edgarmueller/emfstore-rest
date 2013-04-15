@@ -109,7 +109,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation} instances.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -161,7 +162,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation} instances.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -187,7 +189,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -212,7 +215,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -237,7 +241,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation} instances.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -262,7 +267,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -287,7 +293,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation} instances.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -313,7 +320,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -347,7 +355,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	protected OperationIdItemProvider operationIdItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId}.
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -372,7 +381,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	protected OperationGroupItemProvider operationGroupItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup}.
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

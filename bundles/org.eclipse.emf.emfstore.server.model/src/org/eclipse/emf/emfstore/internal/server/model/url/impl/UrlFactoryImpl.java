@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
+ * 
  * @generated
  */
 public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
@@ -52,16 +53,17 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static UrlFactory init() {
 		try {
-			UrlFactory theUrlFactory = (UrlFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/emf/emfstore/server/model/url"); 
+			UrlFactory theUrlFactory = (UrlFactory) EPackage.Registry.INSTANCE
+				.getEFactory("http://eclipse.org/emf/emfstore/server/model/url");
 			if (theUrlFactory != null) {
 				return theUrlFactory;
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new UrlFactoryImpl();
@@ -71,6 +73,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public UrlFactoryImpl() {
@@ -79,22 +82,28 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case UrlPackage.SERVER_URL: return createServerUrl();
-			case UrlPackage.PROJECT_URL_FRAGMENT: return createProjectUrlFragment();
-			case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT: return createModelElementUrlFragment();
-			case UrlPackage.MODEL_ELEMENT_URL: return createModelElementUrl();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		case UrlPackage.SERVER_URL:
+			return createServerUrl();
+		case UrlPackage.PROJECT_URL_FRAGMENT:
+			return createProjectUrlFragment();
+		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT:
+			return createModelElementUrlFragment();
+		case UrlPackage.MODEL_ELEMENT_URL:
+			return createModelElementUrl();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ServerUrl createServerUrl() {
@@ -104,6 +113,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ProjectUrlFragment createProjectUrlFragment() {
@@ -113,6 +123,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ModelElementUrlFragment createModelElementUrlFragment() {
@@ -186,6 +197,7 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ModelElementUrl createModelElementUrl() {
@@ -195,14 +207,16 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public UrlPackage getUrlPackage() {
-		return (UrlPackage)getEPackage();
+		return (UrlPackage) getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @deprecated
 	 * @generated
 	 */

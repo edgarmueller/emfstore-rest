@@ -32,7 +32,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.events.EventsPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event} object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.Event} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

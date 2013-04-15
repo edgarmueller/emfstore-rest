@@ -33,8 +33,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitPrope
 import org.eclipse.emf.emfstore.internal.server.model.provider.ServerEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty}
- * object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

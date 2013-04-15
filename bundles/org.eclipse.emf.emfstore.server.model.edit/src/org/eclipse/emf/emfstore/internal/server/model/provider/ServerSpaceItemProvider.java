@@ -31,7 +31,8 @@ import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace} object.
+ * <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

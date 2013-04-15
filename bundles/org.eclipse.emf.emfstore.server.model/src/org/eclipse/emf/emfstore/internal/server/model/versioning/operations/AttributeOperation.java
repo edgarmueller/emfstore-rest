@@ -13,15 +13,17 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning.operations;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Attribute Operation</b></em>'. <!--
  * end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getOldValue <em>Old Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getNewValue <em>New Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getOldValue <em>
+ * Old Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation#getNewValue <em>
+ * New Value</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getAttributeOperation()
  * @model
  * @generated

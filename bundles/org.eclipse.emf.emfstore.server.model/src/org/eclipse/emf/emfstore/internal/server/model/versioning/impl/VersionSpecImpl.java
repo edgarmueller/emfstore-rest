@@ -22,16 +22,17 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionSpecImpl#getBranch <em>Branch</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionSpecImpl#getBranch <em>Branch</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec {
 	/**
 	 * The default value of the '{@link #getBranch() <em>Branch</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getBranch()
 	 * @generated
 	 * @ordered
@@ -41,6 +42,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 	/**
 	 * The cached value of the '{@link #getBranch() <em>Branch</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getBranch()
 	 * @generated
 	 * @ordered
@@ -49,6 +51,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected VersionSpecImpl() {
@@ -57,6 +60,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -66,6 +70,7 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getBranch() {
@@ -74,76 +79,84 @@ public abstract class VersionSpecImpl extends EObjectImpl implements VersionSpec
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setBranch(String newBranch) {
 		String oldBranch = branch;
 		branch = newBranch;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION_SPEC__BRANCH, oldBranch, branch));
+			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION_SPEC__BRANCH, oldBranch,
+				branch));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VersioningPackage.VERSION_SPEC__BRANCH:
-				return getBranch();
+		case VersioningPackage.VERSION_SPEC__BRANCH:
+			return getBranch();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VersioningPackage.VERSION_SPEC__BRANCH:
-				setBranch((String)newValue);
-				return;
+		case VersioningPackage.VERSION_SPEC__BRANCH:
+			setBranch((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.VERSION_SPEC__BRANCH:
-				setBranch(BRANCH_EDEFAULT);
-				return;
+		case VersioningPackage.VERSION_SPEC__BRANCH:
+			setBranch(BRANCH_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VersioningPackage.VERSION_SPEC__BRANCH:
-				return BRANCH_EDEFAULT == null ? branch != null : !BRANCH_EDEFAULT.equals(branch);
+		case VersioningPackage.VERSION_SPEC__BRANCH:
+			return BRANCH_EDEFAULT == null ? branch != null : !BRANCH_EDEFAULT.equals(branch);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (branch: ");
