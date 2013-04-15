@@ -397,7 +397,7 @@ public final class ModelUtil {
 			resourceSaveOptions.put(XMLResource.OPTION_USE_FILE_BUFFER, Boolean.TRUE);
 
 			if (ExtensionRegistry.INSTANCE.get(
-				"org.eclipse.emf.emfstore.resourceOptions.discardDanglingHREFs",
+				DISCARD_DANGLING_HREF_ID,
 				Boolean.class, Boolean.FALSE, false)) {
 				resourceSaveOptions.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
 					XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
@@ -1293,43 +1293,5 @@ public final class ModelUtil {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Copy an element including its ids from a project.
-	 * 
-	 * @param originalObject the source
-	 * @param copiedObject the target
-	 * @return a map from copied objects to ids.
-	 */
-	public static Map<EObject, ModelElementId> copyModelElement(EObject originalObject, EObject copiedObject) {
-
-		Map<EObject, ModelElementId> idMap = new LinkedHashMap<EObject, ModelElementId>();
-
-		Project project = getProject(originalObject);
-		if (project == null) {
-			throw new IllegalArgumentException("EObject is not contained in a project.");
-		}
-
-		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(originalObject, false);
-		allContainedModelElements.add(originalObject);
-		// EObject copiedElement = ModelUtil.clone(originalObject);
-		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedObject,
-			false);
-		copiedAllContainedModelElements.add(copiedObject);
-
-		for (int i = 0; i < allContainedModelElements.size(); i++) {
-			EObject child = allContainedModelElements.get(i);
-			EObject copiedChild = copiedAllContainedModelElements.get(i);
-			ModelElementId childId = ModelUtil.clone(project.getModelElementId(child));
-
-			if (ModelUtil.isIgnoredDatatype(child)) {
-				continue;
-			}
-
-			idMap.put(copiedChild, childId);
-		}
-
-		return idMap;
 	}
 }

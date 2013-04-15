@@ -24,6 +24,11 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 public interface ESOperationModifier {
 
 	/**
+	 * ID of the {@link ESOperationModifier} option.
+	 */
+	String ID = "org.eclipse.emf.emfstore.client.handler.operationModifier";
+
+	/**
 	 * Allows to modify the operations.
 	 * 
 	 * @param operations recorded operations
