@@ -57,7 +57,8 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addSourcePropertyDescriptor(object);
@@ -74,14 +75,20 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 	 * @generated
 	 */
 	protected void addSourcePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
 				getString("_UI_HistoryQuery_source_feature"),
 				getString("_UI_PropertyDescriptor_description", "_UI_HistoryQuery_source_feature",
-					"_UI_HistoryQuery_type"), VersioningPackage.Literals.HISTORY_QUERY__SOURCE, true, false, true,
-				null, null, null));
+					"_UI_HistoryQuery_type"),
+				VersioningPackage.Literals.HISTORY_QUERY__SOURCE,
+				true,
+				false,
+				true,
+				null,
+				null,
+				null));
 	}
 
 	/**
@@ -91,13 +98,20 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 	 * @generated
 	 */
 	protected void addIncludeChangePackagesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_HistoryQuery_includeChangePackages_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_HistoryQuery_includeChangePackages_feature",
-				"_UI_HistoryQuery_type"), VersioningPackage.Literals.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGES, true,
-			false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_HistoryQuery_includeChangePackages_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_HistoryQuery_includeChangePackages_feature",
+					"_UI_HistoryQuery_type"),
+				VersioningPackage.Literals.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGES,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -107,13 +121,20 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 	 * @generated
 	 */
 	protected void addIncludeAllVersionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_HistoryQuery_includeAllVersions_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_HistoryQuery_includeAllVersions_feature",
-				"_UI_HistoryQuery_type"), VersioningPackage.Literals.HISTORY_QUERY__INCLUDE_ALL_VERSIONS, true, false,
-			false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_HistoryQuery_includeAllVersions_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_HistoryQuery_includeAllVersions_feature",
+					"_UI_HistoryQuery_type"),
+				VersioningPackage.Literals.HISTORY_QUERY__INCLUDE_ALL_VERSIONS,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -152,7 +173,8 @@ public class HistoryQueryItemProvider extends ItemProviderAdapter implements IEd
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(HistoryQuery.class)) {
+		switch (notification.getFeatureID(HistoryQuery.class))
+		{
 		case VersioningPackage.HISTORY_QUERY__INCLUDE_CHANGE_PACKAGES:
 		case VersioningPackage.HISTORY_QUERY__INCLUDE_ALL_VERSIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

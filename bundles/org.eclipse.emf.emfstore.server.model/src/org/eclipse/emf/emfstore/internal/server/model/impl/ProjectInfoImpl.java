@@ -177,14 +177,17 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 * @generated
 	 */
 	public ProjectId getProjectId() {
-		if (projectId != null && projectId.eIsProxy()) {
+		if (projectId != null && projectId.eIsProxy())
+		{
 			InternalEObject oldProjectId = (InternalEObject) projectId;
 			projectId = (ProjectId) eResolveProxy(oldProjectId);
-			if (projectId != oldProjectId) {
+			if (projectId != oldProjectId)
+			{
 				InternalEObject newProjectId = (InternalEObject) projectId;
 				NotificationChain msgs = oldProjectId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- ModelPackage.PROJECT_INFO__PROJECT_ID, null, null);
-				if (newProjectId.eInternalContainer() == null) {
+				if (newProjectId.eInternalContainer() == null)
+				{
 					msgs = newProjectId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- ModelPackage.PROJECT_INFO__PROJECT_ID, null, msgs);
 				}
@@ -215,7 +218,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	public NotificationChain basicSetProjectId(ProjectId newProjectId, NotificationChain msgs) {
 		ProjectId oldProjectId = projectId;
 		projectId = newProjectId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				ModelPackage.PROJECT_INFO__PROJECT_ID, oldProjectId, newProjectId);
 			if (msgs == null)
@@ -232,7 +236,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 * @generated
 	 */
 	public void setProjectIdGen(ProjectId newProjectId) {
-		if (newProjectId != projectId) {
+		if (newProjectId != projectId)
+		{
 			NotificationChain msgs = null;
 			if (projectId != null)
 				msgs = ((InternalEObject) projectId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -255,14 +260,17 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 * @generated
 	 */
 	public PrimaryVersionSpec getVersion() {
-		if (version != null && version.eIsProxy()) {
+		if (version != null && version.eIsProxy())
+		{
 			InternalEObject oldVersion = (InternalEObject) version;
 			version = (PrimaryVersionSpec) eResolveProxy(oldVersion);
-			if (version != oldVersion) {
+			if (version != oldVersion)
+			{
 				InternalEObject newVersion = (InternalEObject) version;
 				NotificationChain msgs = oldVersion.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- ModelPackage.PROJECT_INFO__VERSION, null, null);
-				if (newVersion.eInternalContainer() == null) {
+				if (newVersion.eInternalContainer() == null)
+				{
 					msgs = newVersion.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.PROJECT_INFO__VERSION,
 						null, msgs);
 				}
@@ -293,7 +301,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	public NotificationChain basicSetVersion(PrimaryVersionSpec newVersion, NotificationChain msgs) {
 		PrimaryVersionSpec oldVersion = version;
 		version = newVersion;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				ModelPackage.PROJECT_INFO__VERSION, oldVersion, newVersion);
 			if (msgs == null)
@@ -319,7 +328,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 * @generated
 	 */
 	public void setVersionGen(PrimaryVersionSpec newVersion) {
-		if (newVersion != version) {
+		if (newVersion != version)
+		{
 			NotificationChain msgs = null;
 			if (version != null)
 				msgs = ((InternalEObject) version).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -343,7 +353,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.PROJECT_INFO__PROJECT_ID:
 			return basicSetProjectId(null, msgs);
 		case ModelPackage.PROJECT_INFO__VERSION:
@@ -359,7 +370,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.PROJECT_INFO__NAME:
 			return getName();
 		case ModelPackage.PROJECT_INFO__DESCRIPTION:
@@ -383,7 +395,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.PROJECT_INFO__NAME:
 			setName((String) newValue);
 			return;
@@ -407,7 +420,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.PROJECT_INFO__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -431,7 +445,8 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.PROJECT_INFO__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case ModelPackage.PROJECT_INFO__DESCRIPTION:

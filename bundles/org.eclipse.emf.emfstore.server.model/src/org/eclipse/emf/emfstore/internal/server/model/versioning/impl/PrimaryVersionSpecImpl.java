@@ -155,7 +155,8 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
 			return getIdentifier();
 		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
@@ -171,7 +172,8 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
 			setIdentifier((Integer) newValue);
 			return;
@@ -189,7 +191,8 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
 			setIdentifier(IDENTIFIER_EDEFAULT);
 			return;
@@ -207,7 +210,8 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
 			return identifier != IDENTIFIER_EDEFAULT;
 		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:

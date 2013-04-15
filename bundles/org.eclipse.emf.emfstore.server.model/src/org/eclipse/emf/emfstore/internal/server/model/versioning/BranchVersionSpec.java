@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Version Spec</b></em>'.
  * 
- * @extends APIDelegate<ESBranchVersionSpecImpl> <!--
+ * @extends APIDelegate<ESBranchVersionSpec> <!--
  *          end-user-doc -->
  * 
  * 

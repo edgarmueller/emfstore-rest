@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace()
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getServerSpace()
  * @model
  * @generated
  */

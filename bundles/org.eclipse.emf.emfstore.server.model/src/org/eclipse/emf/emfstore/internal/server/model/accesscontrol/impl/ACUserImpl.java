@@ -161,7 +161,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 * @generated
 	 */
 	public EList<ACGroup> getEffectiveGroups() {
-		if (effectiveGroups == null) {
+		if (effectiveGroups == null)
+		{
 			effectiveGroups = new EObjectContainmentEList.Resolving<ACGroup>(ACGroup.class, this,
 				AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS);
 		}
@@ -175,7 +176,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
 			return ((InternalEList<?>) getEffectiveGroups()).basicRemove(otherEnd, msgs);
 		}
@@ -189,7 +191,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
 			return getFirstName();
 		case AccesscontrolPackage.AC_USER__LAST_NAME:
@@ -208,7 +211,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
 			setFirstName((String) newValue);
 			return;
@@ -230,7 +234,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
 			setFirstName(FIRST_NAME_EDEFAULT);
 			return;
@@ -251,7 +256,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
 			return FIRST_NAME_EDEFAULT == null ? firstName != null : !FIRST_NAME_EDEFAULT.equals(firstName);
 		case AccesscontrolPackage.AC_USER__LAST_NAME:

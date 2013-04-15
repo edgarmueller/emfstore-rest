@@ -178,7 +178,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	 * @generated
 	 */
 	public EList<ModelElementId> getReferencedModelElements() {
-		if (referencedModelElements == null) {
+		if (referencedModelElements == null)
+		{
 			referencedModelElements = new EObjectContainmentEList.Resolving<ModelElementId>(ModelElementId.class, this,
 				OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS);
 		}
@@ -192,7 +193,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS:
 			return ((InternalEList<?>) getReferencedModelElements()).basicRemove(otherEnd, msgs);
 		}
@@ -206,7 +208,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__ADD:
 			return isAdd();
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__INDEX:
@@ -225,7 +228,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__ADD:
 			setAdd((Boolean) newValue);
 			return;
@@ -247,7 +251,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__ADD:
 			setAdd(ADD_EDEFAULT);
 			return;
@@ -268,7 +273,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__ADD:
 			return add != ADD_EDEFAULT;
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__INDEX:

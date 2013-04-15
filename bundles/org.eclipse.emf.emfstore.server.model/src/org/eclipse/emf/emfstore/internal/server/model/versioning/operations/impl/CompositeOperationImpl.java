@@ -210,10 +210,12 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 * @generated
 	 */
 	public AbstractOperation getMainOperation() {
-		if (mainOperation != null && mainOperation.eIsProxy()) {
+		if (mainOperation != null && mainOperation.eIsProxy())
+		{
 			InternalEObject oldMainOperation = (InternalEObject) mainOperation;
 			mainOperation = (AbstractOperation) eResolveProxy(oldMainOperation);
-			if (mainOperation != oldMainOperation) {
+			if (mainOperation != oldMainOperation)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
 						OperationsPackage.COMPOSITE_OPERATION__MAIN_OPERATION, oldMainOperation, mainOperation));
@@ -331,7 +333,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 			return ((InternalEList<?>) getSubOperations()).basicRemove(otherEnd, msgs);
 		}
@@ -345,7 +348,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 			return getSubOperations();
 		case OperationsPackage.COMPOSITE_OPERATION__MAIN_OPERATION:
@@ -370,7 +374,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 			getSubOperations().clear();
 			getSubOperations().addAll((Collection<? extends AbstractOperation>) newValue);
@@ -398,7 +403,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 			getSubOperations().clear();
 			return;
@@ -425,7 +431,8 @@ public class CompositeOperationImpl extends AbstractOperationImpl implements Com
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.COMPOSITE_OPERATION__SUB_OPERATIONS:
 			return subOperations != null && !subOperations.isEmpty();
 		case OperationsPackage.COMPOSITE_OPERATION__MAIN_OPERATION:

@@ -33,13 +33,16 @@ public class SemanticFactoryImpl extends EFactoryImpl implements SemanticFactory
 	 * @generated
 	 */
 	public static SemanticFactory init() {
-		try {
+		try
+		{
 			SemanticFactory theSemanticFactory = (SemanticFactory) EPackage.Registry.INSTANCE
 				.getEFactory("http://eclipse.org/emf/emfstore/server/model/versioning/operations/semantic");
-			if (theSemanticFactory != null) {
+			if (theSemanticFactory != null)
+			{
 				return theSemanticFactory;
 			}
-		} catch (Exception exception) {
+		} catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new SemanticFactoryImpl();
@@ -63,7 +66,8 @@ public class SemanticFactoryImpl extends EFactoryImpl implements SemanticFactory
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

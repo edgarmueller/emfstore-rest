@@ -56,7 +56,8 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -75,12 +76,20 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ProjectInfo_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_name_feature", "_UI_ProjectInfo_type"),
-			ModelPackage.Literals.PROJECT_INFO__NAME, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-			null, null));
+		itemPropertyDescriptors
+			.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ProjectInfo_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_name_feature", "_UI_ProjectInfo_type"),
+				ModelPackage.Literals.PROJECT_INFO__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -90,13 +99,20 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_ProjectInfo_description_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_description_feature",
-				"_UI_ProjectInfo_type"), ModelPackage.Literals.PROJECT_INFO__DESCRIPTION, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ProjectInfo_description_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_description_feature",
+					"_UI_ProjectInfo_type"),
+				ModelPackage.Literals.PROJECT_INFO__DESCRIPTION,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -106,14 +122,20 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addProjectIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
 				getString("_UI_ProjectInfo_projectId_feature"),
 				getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_projectId_feature",
-					"_UI_ProjectInfo_type"), ModelPackage.Literals.PROJECT_INFO__PROJECT_ID, true, false, true, null,
-				null, null));
+					"_UI_ProjectInfo_type"),
+				ModelPackage.Literals.PROJECT_INFO__PROJECT_ID,
+				true,
+				false,
+				true,
+				null,
+				null,
+				null));
 	}
 
 	/**
@@ -123,11 +145,20 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addVersionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ProjectInfo_version_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_version_feature", "_UI_ProjectInfo_type"),
-			ModelPackage.Literals.PROJECT_INFO__VERSION, true, false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ProjectInfo_version_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ProjectInfo_version_feature",
+					"_UI_ProjectInfo_type"),
+				ModelPackage.Literals.PROJECT_INFO__VERSION,
+				true,
+				false,
+				true,
+				null,
+				null,
+				null));
 	}
 
 	/**
@@ -176,7 +207,8 @@ public class ProjectInfoItemProvider extends ItemProviderAdapter implements IEdi
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ProjectInfo.class)) {
+		switch (notification.getFeatureID(ProjectInfo.class))
+		{
 		case ModelPackage.PROJECT_INFO__NAME:
 		case ModelPackage.PROJECT_INFO__DESCRIPTION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

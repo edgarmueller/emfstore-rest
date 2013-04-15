@@ -117,7 +117,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements ModelElementGr
 	 * @generated
 	 */
 	public EList<ModelElementId> getModelElements() {
-		if (modelElements == null) {
+		if (modelElements == null)
+		{
 			modelElements = new EObjectResolvingEList<ModelElementId>(ModelElementId.class, this,
 				OperationsPackage.MODEL_ELEMENT_GROUP__MODEL_ELEMENTS);
 		}
@@ -131,7 +132,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements ModelElementGr
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MODEL_ELEMENT_GROUP__NAME:
 			return getName();
 		case OperationsPackage.MODEL_ELEMENT_GROUP__MODEL_ELEMENTS:
@@ -148,7 +150,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements ModelElementGr
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MODEL_ELEMENT_GROUP__NAME:
 			setName((String) newValue);
 			return;
@@ -167,7 +170,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements ModelElementGr
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MODEL_ELEMENT_GROUP__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -185,7 +189,8 @@ public class ModelElementGroupImpl extends EObjectImpl implements ModelElementGr
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MODEL_ELEMENT_GROUP__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case OperationsPackage.MODEL_ELEMENT_GROUP__MODEL_ELEMENTS:

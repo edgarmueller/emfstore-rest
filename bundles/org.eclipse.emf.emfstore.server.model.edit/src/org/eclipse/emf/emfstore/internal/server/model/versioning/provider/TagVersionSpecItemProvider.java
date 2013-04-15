@@ -54,7 +54,8 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider implemen
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -70,13 +71,20 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider implemen
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_TagVersionSpec_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_TagVersionSpec_name_feature",
-				"_UI_TagVersionSpec_type"), VersioningPackage.Literals.TAG_VERSION_SPEC__NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_TagVersionSpec_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_TagVersionSpec_name_feature",
+					"_UI_TagVersionSpec_type"),
+				VersioningPackage.Literals.TAG_VERSION_SPEC__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -101,8 +109,9 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider implemen
 	@Override
 	public String getText(Object object) {
 		String label = ((TagVersionSpec) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_TagVersionSpec_type")
-			: getString("_UI_TagVersionSpec_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_TagVersionSpec_type") :
+			getString("_UI_TagVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -117,7 +126,8 @@ public class TagVersionSpecItemProvider extends VersionSpecItemProvider implemen
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TagVersionSpec.class)) {
+		switch (notification.getFeatureID(TagVersionSpec.class))
+		{
 		case VersioningPackage.TAG_VERSION_SPEC__NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;

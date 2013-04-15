@@ -108,7 +108,8 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 
 		// Obtain or create and register package
 		ServerPackageImpl theServerPackage = (ServerPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ServerPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new ServerPackageImpl());
+			.get(eNS_URI)
+			: new ServerPackageImpl());
 
 		isInited = true;
 
@@ -139,7 +140,8 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(UrlPackage.eNS_URI)
+			: UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theServerPackage.createPackageContents();

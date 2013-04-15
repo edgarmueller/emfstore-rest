@@ -57,7 +57,8 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements IEdi
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addBranchPropertyDescriptor(object);
@@ -72,12 +73,20 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addBranchPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_VersionSpec_branch_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_VersionSpec_branch_feature", "_UI_VersionSpec_type"),
-			VersioningPackage.Literals.VERSION_SPEC__BRANCH, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_VersionSpec_branch_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_VersionSpec_branch_feature",
+					"_UI_VersionSpec_type"),
+				VersioningPackage.Literals.VERSION_SPEC__BRANCH,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -90,8 +99,9 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements IEdi
 	@Override
 	public String getText(Object object) {
 		String label = ((VersionSpec) object).getBranch();
-		return label == null || label.length() == 0 ? getString("_UI_VersionSpec_type")
-			: getString("_UI_VersionSpec_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_VersionSpec_type") :
+			getString("_UI_VersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -106,7 +116,8 @@ public class VersionSpecItemProvider extends ItemProviderAdapter implements IEdi
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(VersionSpec.class)) {
+		switch (notification.getFeatureID(VersionSpec.class))
+		{
 		case VersioningPackage.VERSION_SPEC__BRANCH:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;

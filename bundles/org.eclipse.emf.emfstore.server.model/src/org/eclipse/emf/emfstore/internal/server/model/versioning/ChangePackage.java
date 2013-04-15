@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Change Package</b></em>'.
  * 
- * @extends APIDelegate<ESChangePackageImpl>
+ * @extends APIDelegate<ESChangePackage>
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -36,9 +36,9 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getEvents <em>Events
  *          </em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getLogMessage <em>Log
- *          Message </em>}</li>
+ *          Message</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage#getVersionProperties <em>
- *          Version Properties </em>}</li>
+ *          Version Properties</em>}</li>
  *          </ul>
  *          </p>
  * 

@@ -38,13 +38,16 @@ public class AccesscontrolFactoryImpl extends EFactoryImpl implements Accesscont
 	 * @generated
 	 */
 	public static AccesscontrolFactory init() {
-		try {
+		try
+		{
 			AccesscontrolFactory theAccesscontrolFactory = (AccesscontrolFactory) EPackage.Registry.INSTANCE
 				.getEFactory("http://eclipse.org/emf/emfstore/server/model/accesscontrol");
-			if (theAccesscontrolFactory != null) {
+			if (theAccesscontrolFactory != null)
+			{
 				return theAccesscontrolFactory;
 			}
-		} catch (Exception exception) {
+		} catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new AccesscontrolFactoryImpl();
@@ -68,7 +71,8 @@ public class AccesscontrolFactoryImpl extends EFactoryImpl implements Accesscont
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 		case AccesscontrolPackage.AC_USER:
 			return createACUser();
 		case AccesscontrolPackage.AC_ORG_UNIT:

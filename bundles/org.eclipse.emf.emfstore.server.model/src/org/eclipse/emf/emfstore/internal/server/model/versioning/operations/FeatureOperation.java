@@ -64,6 +64,36 @@ public interface FeatureOperation extends AbstractOperation {
 	void setFeatureName(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unset</em>' attribute isn't clear, there really should be more of a description
+	 * here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Unset</em>' attribute.
+	 * @see #setUnset(boolean)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getFeatureOperation_Unset()
+	 * @model
+	 * @generated
+	 */
+	boolean isUnset();
+
+	/**
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#isUnset
+	 * <em>Unset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Unset</em>' attribute.
+	 * @see #isUnset()
+	 * @generated
+	 */
+	void setUnset(boolean value);
+
+	/**
 	 * Get the feature from the Eclass of the model element identified by the
 	 * model element of the operation.
 	 * 

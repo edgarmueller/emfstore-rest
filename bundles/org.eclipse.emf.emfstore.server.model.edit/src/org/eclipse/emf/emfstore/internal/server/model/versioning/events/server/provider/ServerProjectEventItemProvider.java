@@ -56,7 +56,8 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider impl
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -73,7 +74,8 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider impl
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ServerPackage.Literals.SERVER_PROJECT_EVENT__PROJECT_ID);
 		}
@@ -104,8 +106,9 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider impl
 	public String getText(Object object) {
 		Date labelValue = ((ServerProjectEvent) object).getTimestamp();
 		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ? getString("_UI_ServerProjectEvent_type")
-			: getString("_UI_ServerProjectEvent_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ServerProjectEvent_type") :
+			getString("_UI_ServerProjectEvent_type") + " " + label;
 	}
 
 	/**
@@ -120,7 +123,8 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider impl
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ServerProjectEvent.class)) {
+		switch (notification.getFeatureID(ServerProjectEvent.class))
+		{
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -139,8 +143,10 @@ public class ServerProjectEventItemProvider extends ServerEventItemProvider impl
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(ServerPackage.Literals.SERVER_PROJECT_EVENT__PROJECT_ID,
-			ModelFactory.eINSTANCE.createProjectId()));
+		newChildDescriptors.add
+			(createChildParameter
+			(ServerPackage.Literals.SERVER_PROJECT_EVENT__PROJECT_ID,
+				ModelFactory.eINSTANCE.createProjectId()));
 	}
 
 }

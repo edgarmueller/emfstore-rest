@@ -85,10 +85,12 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 * @generated
 	 */
 	public EObject getTypedKey() {
-		if (key != null && key.eIsProxy()) {
+		if (key != null && key.eIsProxy())
+		{
 			InternalEObject oldKey = (InternalEObject) key;
 			key = eResolveProxy(oldKey);
-			if (key != oldKey) {
+			if (key != oldKey)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
 						OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY, oldKey, key));
@@ -125,14 +127,17 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 * @generated
 	 */
 	public ModelElementId getTypedValue() {
-		if (value != null && value.eIsProxy()) {
+		if (value != null && value.eIsProxy())
+		{
 			InternalEObject oldValue = (InternalEObject) value;
 			value = (ModelElementId) eResolveProxy(oldValue);
-			if (value != oldValue) {
+			if (value != oldValue)
+			{
 				InternalEObject newValue = (InternalEObject) value;
 				NotificationChain msgs = oldValue.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, null, null);
-				if (newValue.eInternalContainer() == null) {
+				if (newValue.eInternalContainer() == null)
+				{
 					msgs = newValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, null, msgs);
 				}
@@ -163,7 +168,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	public NotificationChain basicSetTypedValue(ModelElementId newValue, NotificationChain msgs) {
 		ModelElementId oldValue = value;
 		value = newValue;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE, oldValue, newValue);
 			if (msgs == null)
@@ -180,7 +186,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 * @generated
 	 */
 	public void setTypedValue(ModelElementId newValue) {
-		if (newValue != value) {
+		if (newValue != value)
+		{
 			NotificationChain msgs = null;
 			if (value != null)
 				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -204,7 +211,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE:
 			return basicSetTypedValue(null, msgs);
 		}
@@ -218,7 +226,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY:
 			if (resolve)
 				return getTypedKey();
@@ -238,7 +247,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY:
 			setTypedKey((EObject) newValue);
 			return;
@@ -256,7 +266,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY:
 			setTypedKey((EObject) null);
 			return;
@@ -274,7 +285,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__KEY:
 			return key != null;
 		case OperationsPackage.EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE:
@@ -296,7 +308,8 @@ public class EObjectToModelElementIdMapImpl extends EObjectImpl implements Basic
 	 * @generated
 	 */
 	public int getHash() {
-		if (hash == -1) {
+		if (hash == -1)
+		{
 			Object theKey = getKey();
 			hash = (theKey == null ? 0 : theKey.hashCode());
 		}

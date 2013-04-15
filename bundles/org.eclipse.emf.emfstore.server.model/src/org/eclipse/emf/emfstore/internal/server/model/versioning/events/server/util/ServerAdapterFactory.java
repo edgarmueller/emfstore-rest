@@ -45,7 +45,8 @@ public class ServerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public ServerAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = ServerPackage.eINSTANCE;
 		}
 	}
@@ -61,10 +62,12 @@ public class ServerAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -76,29 +79,35 @@ public class ServerAdapterFactory extends AdapterFactoryImpl {
 	 * 
 	 * @generated
 	 */
-	protected ServerSwitch<Adapter> modelSwitch = new ServerSwitch<Adapter>() {
+	protected ServerSwitch<Adapter> modelSwitch = new ServerSwitch<Adapter>()
+	{
 		@Override
-		public Adapter caseServerEvent(ServerEvent object) {
+		public Adapter caseServerEvent(ServerEvent object)
+		{
 			return createServerEventAdapter();
 		}
 
 		@Override
-		public Adapter caseServerProjectEvent(ServerProjectEvent object) {
+		public Adapter caseServerProjectEvent(ServerProjectEvent object)
+		{
 			return createServerProjectEventAdapter();
 		}
 
 		@Override
-		public Adapter caseProjectUpdatedEvent(ProjectUpdatedEvent object) {
+		public Adapter caseProjectUpdatedEvent(ProjectUpdatedEvent object)
+		{
 			return createProjectUpdatedEventAdapter();
 		}
 
 		@Override
-		public Adapter caseEvent(Event object) {
+		public Adapter caseEvent(Event object)
+		{
 			return createEventAdapter();
 		}
 
 		@Override
-		public Adapter defaultCase(EObject object) {
+		public Adapter defaultCase(EObject object)
+		{
 			return createEObjectAdapter();
 		}
 	};

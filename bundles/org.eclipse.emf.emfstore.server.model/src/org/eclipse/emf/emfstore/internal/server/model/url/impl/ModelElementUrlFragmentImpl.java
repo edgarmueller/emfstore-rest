@@ -114,14 +114,17 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	 * @generated
 	 */
 	public ModelElementId getModelElementId() {
-		if (modelElementId != null && modelElementId.eIsProxy()) {
+		if (modelElementId != null && modelElementId.eIsProxy())
+		{
 			InternalEObject oldModelElementId = (InternalEObject) modelElementId;
 			modelElementId = (ModelElementId) eResolveProxy(oldModelElementId);
-			if (modelElementId != oldModelElementId) {
+			if (modelElementId != oldModelElementId)
+			{
 				InternalEObject newModelElementId = (InternalEObject) modelElementId;
 				NotificationChain msgs = oldModelElementId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID, null, null);
-				if (newModelElementId.eInternalContainer() == null) {
+				if (newModelElementId.eInternalContainer() == null)
+				{
 					msgs = newModelElementId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID, null, msgs);
 				}
@@ -152,7 +155,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	public NotificationChain basicSetModelElementId(ModelElementId newModelElementId, NotificationChain msgs) {
 		ModelElementId oldModelElementId = modelElementId;
 		modelElementId = newModelElementId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID, oldModelElementId, newModelElementId);
 			if (msgs == null)
@@ -169,7 +173,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	 * @generated
 	 */
 	public void setModelElementId(ModelElementId newModelElementId) {
-		if (newModelElementId != modelElementId) {
+		if (newModelElementId != modelElementId)
+		{
 			NotificationChain msgs = null;
 			if (modelElementId != null)
 				msgs = ((InternalEObject) modelElementId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -193,7 +198,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID:
 			return basicSetModelElementId(null, msgs);
 		}
@@ -207,7 +213,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__NAME:
 			return getName();
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID:
@@ -225,7 +232,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__NAME:
 			setName((String) newValue);
 			return;
@@ -243,7 +251,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -261,7 +270,8 @@ public class ModelElementUrlFragmentImpl extends EObjectImpl implements ModelEle
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case UrlPackage.MODEL_ELEMENT_URL_FRAGMENT__MODEL_ELEMENT_ID:

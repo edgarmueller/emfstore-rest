@@ -58,7 +58,8 @@ public class MultiReferenceOperationItemProvider extends ReferenceOperationItemP
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addAddPropertyDescriptor(object);
@@ -75,13 +76,20 @@ public class MultiReferenceOperationItemProvider extends ReferenceOperationItemP
 	 * @generated
 	 */
 	protected void addAddPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_MultiReferenceOperation_add_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceOperation_add_feature",
-				"_UI_MultiReferenceOperation_type"), OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__ADD, true,
-			false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_MultiReferenceOperation_add_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceOperation_add_feature",
+					"_UI_MultiReferenceOperation_type"),
+				OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__ADD,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -91,13 +99,20 @@ public class MultiReferenceOperationItemProvider extends ReferenceOperationItemP
 	 * @generated
 	 */
 	protected void addIndexPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_MultiReferenceOperation_index_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceOperation_index_feature",
-				"_UI_MultiReferenceOperation_type"), OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__INDEX, true,
-			false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_MultiReferenceOperation_index_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_MultiReferenceOperation_index_feature",
+					"_UI_MultiReferenceOperation_type"),
+				OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__INDEX,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -110,7 +125,8 @@ public class MultiReferenceOperationItemProvider extends ReferenceOperationItemP
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS);
 		}
@@ -191,7 +207,8 @@ public class MultiReferenceOperationItemProvider extends ReferenceOperationItemP
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(MultiReferenceOperation.class)) {
+		switch (notification.getFeatureID(MultiReferenceOperation.class))
+		{
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__ADD:
 		case OperationsPackage.MULTI_REFERENCE_OPERATION__INDEX:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -214,9 +231,10 @@ public class MultiReferenceOperationItemProvider extends ReferenceOperationItemP
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-			OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS,
-			ModelFactory.eINSTANCE.createModelElementId()));
+		newChildDescriptors.add
+			(createChildParameter
+			(OperationsPackage.Literals.MULTI_REFERENCE_OPERATION__REFERENCED_MODEL_ELEMENTS,
+				ModelFactory.eINSTANCE.createModelElementId()));
 	}
 
 }

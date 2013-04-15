@@ -158,7 +158,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case RolesPackage.ROLE__PROJECTS:
 			return ((InternalEList<?>) getProjects()).basicRemove(otherEnd, msgs);
 		}
@@ -173,7 +174,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case RolesPackage.ROLE__PROJECTS:
 			return getProjects();
 		}
@@ -188,7 +190,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case RolesPackage.ROLE__PROJECTS:
 			getProjects().clear();
 			getProjects().addAll((Collection<? extends ProjectId>) newValue);
@@ -204,7 +207,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case RolesPackage.ROLE__PROJECTS:
 			getProjects().clear();
 			return;
@@ -219,7 +223,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case RolesPackage.ROLE__PROJECTS:
 			return projects != null && !projects.isEmpty();
 		}

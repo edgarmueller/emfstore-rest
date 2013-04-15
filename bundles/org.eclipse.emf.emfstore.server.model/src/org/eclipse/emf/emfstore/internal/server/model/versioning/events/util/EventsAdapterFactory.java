@@ -42,7 +42,8 @@ public class EventsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public EventsAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = EventsPackage.eINSTANCE;
 		}
 	}
@@ -58,10 +59,12 @@ public class EventsAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -73,14 +76,17 @@ public class EventsAdapterFactory extends AdapterFactoryImpl {
 	 * 
 	 * @generated
 	 */
-	protected EventsSwitch<Adapter> modelSwitch = new EventsSwitch<Adapter>() {
+	protected EventsSwitch<Adapter> modelSwitch = new EventsSwitch<Adapter>()
+	{
 		@Override
-		public Adapter caseEvent(Event object) {
+		public Adapter caseEvent(Event object)
+		{
 			return createEventAdapter();
 		}
 
 		@Override
-		public Adapter defaultCase(EObject object) {
+		public Adapter defaultCase(EObject object)
+		{
 			return createEObjectAdapter();
 		}
 	};

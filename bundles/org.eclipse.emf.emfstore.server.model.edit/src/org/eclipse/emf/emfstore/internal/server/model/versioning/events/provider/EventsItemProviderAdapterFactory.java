@@ -99,7 +99,8 @@ public class EventsItemProviderAdapterFactory extends EventsAdapterFactory imple
 	 */
 	@Override
 	public Adapter createEventAdapter() {
-		if (eventItemProvider == null) {
+		if (eventItemProvider == null)
+		{
 			eventItemProvider = new EventItemProvider(this);
 		}
 
@@ -154,9 +155,11 @@ public class EventsItemProviderAdapterFactory extends EventsAdapterFactory imple
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -194,7 +197,8 @@ public class EventsItemProviderAdapterFactory extends EventsAdapterFactory imple
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

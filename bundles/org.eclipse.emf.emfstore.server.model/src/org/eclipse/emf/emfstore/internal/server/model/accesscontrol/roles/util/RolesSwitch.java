@@ -49,7 +49,8 @@ public class RolesSwitch<T> {
 	 * @generated
 	 */
 	public RolesSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = RolesPackage.eINSTANCE;
 		}
 	}
@@ -77,10 +78,12 @@ public class RolesSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return eSuperTypes.isEmpty() ?
 				defaultCase(theEObject) :
@@ -98,7 +101,8 @@ public class RolesSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
+		switch (classifierID)
+		{
 		case RolesPackage.ROLE: {
 			Role role = (Role) theEObject;
 			T result = caseRole(role);

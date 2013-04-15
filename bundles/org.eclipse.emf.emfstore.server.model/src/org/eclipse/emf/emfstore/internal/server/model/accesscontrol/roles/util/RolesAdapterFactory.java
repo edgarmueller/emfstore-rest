@@ -46,7 +46,8 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public RolesAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = RolesPackage.eINSTANCE;
 		}
 	}
@@ -62,10 +63,12 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -77,34 +80,41 @@ public class RolesAdapterFactory extends AdapterFactoryImpl {
 	 * 
 	 * @generated
 	 */
-	protected RolesSwitch<Adapter> modelSwitch = new RolesSwitch<Adapter>() {
+	protected RolesSwitch<Adapter> modelSwitch = new RolesSwitch<Adapter>()
+	{
 		@Override
-		public Adapter caseRole(Role object) {
+		public Adapter caseRole(Role object)
+		{
 			return createRoleAdapter();
 		}
 
 		@Override
-		public Adapter caseReaderRole(ReaderRole object) {
+		public Adapter caseReaderRole(ReaderRole object)
+		{
 			return createReaderRoleAdapter();
 		}
 
 		@Override
-		public Adapter caseWriterRole(WriterRole object) {
+		public Adapter caseWriterRole(WriterRole object)
+		{
 			return createWriterRoleAdapter();
 		}
 
 		@Override
-		public Adapter caseProjectAdminRole(ProjectAdminRole object) {
+		public Adapter caseProjectAdminRole(ProjectAdminRole object)
+		{
 			return createProjectAdminRoleAdapter();
 		}
 
 		@Override
-		public Adapter caseServerAdmin(ServerAdmin object) {
+		public Adapter caseServerAdmin(ServerAdmin object)
+		{
 			return createServerAdminAdapter();
 		}
 
 		@Override
-		public Adapter defaultCase(EObject object) {
+		public Adapter defaultCase(EObject object)
+		{
 			return createEObjectAdapter();
 		}
 	};

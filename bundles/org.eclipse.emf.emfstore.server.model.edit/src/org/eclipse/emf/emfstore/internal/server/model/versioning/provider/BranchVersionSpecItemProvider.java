@@ -50,7 +50,8 @@ public class BranchVersionSpecItemProvider extends VersionSpecItemProvider imple
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -79,8 +80,9 @@ public class BranchVersionSpecItemProvider extends VersionSpecItemProvider imple
 	@Override
 	public String getText(Object object) {
 		String label = ((BranchVersionSpec) object).getBranch();
-		return label == null || label.length() == 0 ? getString("_UI_BranchVersionSpec_type")
-			: getString("_UI_BranchVersionSpec_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_BranchVersionSpec_type") :
+			getString("_UI_BranchVersionSpec_type") + " " + label;
 	}
 
 	/**

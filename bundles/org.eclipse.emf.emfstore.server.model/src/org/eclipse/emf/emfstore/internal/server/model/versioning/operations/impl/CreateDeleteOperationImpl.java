@@ -48,7 +48,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Unko
  * <ul>
  * <li>
  * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl#isDelete
- * <em> Delete</em>}</li>
+ * <em>Delete</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl#getModelElement
  * <em>Model Element</em>}</li>
@@ -272,14 +272,17 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 * @generated
 	 */
 	public EObject getModelElement() {
-		if (modelElement != null && modelElement.eIsProxy()) {
+		if (modelElement != null && modelElement.eIsProxy())
+		{
 			InternalEObject oldModelElement = (InternalEObject) modelElement;
 			modelElement = eResolveProxy(oldModelElement);
-			if (modelElement != oldModelElement) {
+			if (modelElement != oldModelElement)
+			{
 				InternalEObject newModelElement = (InternalEObject) modelElement;
 				NotificationChain msgs = oldModelElement.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT, null, null);
-				if (newModelElement.eInternalContainer() == null) {
+				if (newModelElement.eInternalContainer() == null)
+				{
 					msgs = newModelElement.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT, null, msgs);
 				}
@@ -310,7 +313,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	public NotificationChain basicSetModelElement(EObject newModelElement, NotificationChain msgs) {
 		EObject oldModelElement = modelElement;
 		modelElement = newModelElement;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT, oldModelElement, newModelElement);
 			if (msgs == null)
@@ -327,7 +331,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 * @generated
 	 */
 	public void setModelElement(EObject newModelElement) {
-		if (newModelElement != modelElement) {
+		if (newModelElement != modelElement)
+		{
 			NotificationChain msgs = null;
 			if (modelElement != null)
 				msgs = ((InternalEObject) modelElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -338,7 +343,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 			msgs = basicSetModelElement(newModelElement, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 				OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT, newModelElement, newModelElement));
 	}
@@ -349,7 +355,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 * @generated
 	 */
 	public EList<ReferenceOperation> getSubOperations() {
-		if (subOperations == null) {
+		if (subOperations == null)
+		{
 			subOperations = new EObjectContainmentEList.Resolving<ReferenceOperation>(ReferenceOperation.class, this,
 				OperationsPackage.CREATE_DELETE_OPERATION__SUB_OPERATIONS);
 		}
@@ -362,7 +369,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 * @generated
 	 */
 	public EMap<EObject, ModelElementId> getEObjectToIdMap() {
-		if (eObjectToIdMap == null) {
+		if (eObjectToIdMap == null)
+		{
 			eObjectToIdMap = new EcoreEMap<EObject, ModelElementId>(
 				OperationsPackage.Literals.EOBJECT_TO_MODEL_ELEMENT_ID_MAP, EObjectToModelElementIdMapImpl.class, this,
 				OperationsPackage.CREATE_DELETE_OPERATION__EOBJECT_TO_ID_MAP);
@@ -377,7 +385,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT:
 			return basicSetModelElement(null, msgs);
 		case OperationsPackage.CREATE_DELETE_OPERATION__SUB_OPERATIONS:
@@ -395,7 +404,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.CREATE_DELETE_OPERATION__DELETE:
 			return isDelete();
 		case OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT:
@@ -421,7 +431,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.CREATE_DELETE_OPERATION__DELETE:
 			setDelete((Boolean) newValue);
 			return;
@@ -446,7 +457,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.CREATE_DELETE_OPERATION__DELETE:
 			setDelete(DELETE_EDEFAULT);
 			return;
@@ -470,7 +482,8 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.CREATE_DELETE_OPERATION__DELETE:
 			return delete != DELETE_EDEFAULT;
 		case OperationsPackage.CREATE_DELETE_OPERATION__MODEL_ELEMENT:

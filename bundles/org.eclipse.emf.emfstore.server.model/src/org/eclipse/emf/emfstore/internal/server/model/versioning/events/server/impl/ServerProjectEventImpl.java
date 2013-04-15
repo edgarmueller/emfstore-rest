@@ -68,14 +68,17 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	 * @generated
 	 */
 	public ProjectId getProjectId() {
-		if (projectId != null && projectId.eIsProxy()) {
+		if (projectId != null && projectId.eIsProxy())
+		{
 			InternalEObject oldProjectId = (InternalEObject) projectId;
 			projectId = (ProjectId) eResolveProxy(oldProjectId);
-			if (projectId != oldProjectId) {
+			if (projectId != oldProjectId)
+			{
 				InternalEObject newProjectId = (InternalEObject) projectId;
 				NotificationChain msgs = oldProjectId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, null, null);
-				if (newProjectId.eInternalContainer() == null) {
+				if (newProjectId.eInternalContainer() == null)
+				{
 					msgs = newProjectId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, null, msgs);
 				}
@@ -106,7 +109,8 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	public NotificationChain basicSetProjectId(ProjectId newProjectId, NotificationChain msgs) {
 		ProjectId oldProjectId = projectId;
 		projectId = newProjectId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID, oldProjectId, newProjectId);
 			if (msgs == null)
@@ -123,7 +127,8 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	 * @generated
 	 */
 	public void setProjectId(ProjectId newProjectId) {
-		if (newProjectId != projectId) {
+		if (newProjectId != projectId)
+		{
 			NotificationChain msgs = null;
 			if (projectId != null)
 				msgs = ((InternalEObject) projectId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -147,7 +152,8 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
 			return basicSetProjectId(null, msgs);
 		}
@@ -161,7 +167,8 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
 			if (resolve)
 				return getProjectId();
@@ -177,7 +184,8 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
 			setProjectId((ProjectId) newValue);
 			return;
@@ -192,7 +200,8 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
 			setProjectId((ProjectId) null);
 			return;
@@ -207,7 +216,8 @@ public abstract class ServerProjectEventImpl extends ServerEventImpl implements 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.SERVER_PROJECT_EVENT__PROJECT_ID:
 			return projectId != null;
 		}

@@ -16,19 +16,17 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESAncestorVersionSpec;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Ancestor Version Spec</b></em>'.
  * 
- * @extends APIDelegate<ESAncestorVersionSpecImpl>
+ * @extends APIDelegate<ESAncestorVersionSpec>
  *          <!--
  *          end-user-doc -->
  * 
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getTarget
- *          <em>Target</em>}</li>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getSource
- *          <em>Source</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getTarget <em>
+ *          Target</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getSource <em>
+ *          Source</em>}</li>
  *          </ul>
  *          </p>
  * 
@@ -56,8 +54,8 @@ public interface AncestorVersionSpec extends VersionSpec, APIDelegate<ESAncestor
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getTarget
-	 * <em>Target</em>}' containment reference.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getTarget <em>Target</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -86,8 +84,8 @@ public interface AncestorVersionSpec extends VersionSpec, APIDelegate<ESAncestor
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getSource
-	 * <em>Source</em>}' containment reference.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec#getSource <em>Source</em>}'
+	 * containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

@@ -100,7 +100,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createCompositeOperationAdapter() {
-		if (compositeOperationItemProvider == null) {
+		if (compositeOperationItemProvider == null)
+		{
 			compositeOperationItemProvider = new CompositeOperationItemProvider(this);
 		}
 
@@ -127,7 +128,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createCreateDeleteOperationAdapter() {
-		if (createDeleteOperationItemProvider == null) {
+		if (createDeleteOperationItemProvider == null)
+		{
 			createDeleteOperationItemProvider = new CreateDeleteOperationItemProvider(this);
 		}
 
@@ -153,7 +155,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createAttributeOperationAdapter() {
-		if (attributeOperationItemProvider == null) {
+		if (attributeOperationItemProvider == null)
+		{
 			attributeOperationItemProvider = new AttributeOperationItemProvider(this);
 		}
 
@@ -180,7 +183,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createMultiAttributeOperationAdapter() {
-		if (multiAttributeOperationItemProvider == null) {
+		if (multiAttributeOperationItemProvider == null)
+		{
 			multiAttributeOperationItemProvider = new MultiAttributeOperationItemProvider(this);
 		}
 
@@ -206,7 +210,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createMultiAttributeSetOperationAdapter() {
-		if (multiAttributeSetOperationItemProvider == null) {
+		if (multiAttributeSetOperationItemProvider == null)
+		{
 			multiAttributeSetOperationItemProvider = new MultiAttributeSetOperationItemProvider(this);
 		}
 
@@ -232,7 +237,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createMultiAttributeMoveOperationAdapter() {
-		if (multiAttributeMoveOperationItemProvider == null) {
+		if (multiAttributeMoveOperationItemProvider == null)
+		{
 			multiAttributeMoveOperationItemProvider = new MultiAttributeMoveOperationItemProvider(this);
 		}
 
@@ -258,7 +264,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createSingleReferenceOperationAdapter() {
-		if (singleReferenceOperationItemProvider == null) {
+		if (singleReferenceOperationItemProvider == null)
+		{
 			singleReferenceOperationItemProvider = new SingleReferenceOperationItemProvider(this);
 		}
 
@@ -284,7 +291,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createMultiReferenceSetOperationAdapter() {
-		if (multiReferenceSetOperationItemProvider == null) {
+		if (multiReferenceSetOperationItemProvider == null)
+		{
 			multiReferenceSetOperationItemProvider = new MultiReferenceSetOperationItemProvider(this);
 		}
 
@@ -311,7 +319,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createMultiReferenceOperationAdapter() {
-		if (multiReferenceOperationItemProvider == null) {
+		if (multiReferenceOperationItemProvider == null)
+		{
 			multiReferenceOperationItemProvider = new MultiReferenceOperationItemProvider(this);
 		}
 
@@ -337,7 +346,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createMultiReferenceMoveOperationAdapter() {
-		if (multiReferenceMoveOperationItemProvider == null) {
+		if (multiReferenceMoveOperationItemProvider == null)
+		{
 			multiReferenceMoveOperationItemProvider = new MultiReferenceMoveOperationItemProvider(this);
 		}
 
@@ -363,7 +373,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createOperationIdAdapter() {
-		if (operationIdItemProvider == null) {
+		if (operationIdItemProvider == null)
+		{
 			operationIdItemProvider = new OperationIdItemProvider(this);
 		}
 
@@ -389,7 +400,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createOperationGroupAdapter() {
-		if (operationGroupItemProvider == null) {
+		if (operationGroupItemProvider == null)
+		{
 			operationGroupItemProvider = new OperationGroupItemProvider(this);
 		}
 
@@ -415,7 +427,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createModelElementGroupAdapter() {
-		if (modelElementGroupItemProvider == null) {
+		if (modelElementGroupItemProvider == null)
+		{
 			modelElementGroupItemProvider = new ModelElementGroupItemProvider(this);
 		}
 
@@ -440,7 +453,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Adapter createEObjectToModelElementIdMapAdapter() {
-		if (eObjectToModelElementIdMapItemProvider == null) {
+		if (eObjectToModelElementIdMapItemProvider == null)
+		{
 			eObjectToModelElementIdMapItemProvider = new EObjectToModelElementIdMapItemProvider(this);
 		}
 
@@ -495,9 +509,11 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -535,7 +551,8 @@ public class OperationsItemProviderAdapterFactory extends OperationsAdapterFacto
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

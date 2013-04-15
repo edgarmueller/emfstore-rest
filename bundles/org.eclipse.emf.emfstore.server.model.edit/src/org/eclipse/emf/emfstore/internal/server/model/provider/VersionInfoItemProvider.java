@@ -56,7 +56,8 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addEmfStoreVersionStringPropertyDescriptor(object);
@@ -71,13 +72,20 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addEmfStoreVersionStringPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_VersionInfo_emfStoreVersionString_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_VersionInfo_emfStoreVersionString_feature",
-				"_UI_VersionInfo_type"), ModelPackage.Literals.VERSION_INFO__EMF_STORE_VERSION_STRING, true, false,
-			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_VersionInfo_emfStoreVersionString_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_VersionInfo_emfStoreVersionString_feature",
+					"_UI_VersionInfo_type"),
+				ModelPackage.Literals.VERSION_INFO__EMF_STORE_VERSION_STRING,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -101,8 +109,9 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements IEdi
 	@Override
 	public String getText(Object object) {
 		String label = ((VersionInfo) object).getEmfStoreVersionString();
-		return label == null || label.length() == 0 ? getString("_UI_VersionInfo_type")
-			: getString("_UI_VersionInfo_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_VersionInfo_type") :
+			getString("_UI_VersionInfo_type") + " " + label;
 	}
 
 	/**
@@ -117,7 +126,8 @@ public class VersionInfoItemProvider extends ItemProviderAdapter implements IEdi
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(VersionInfo.class)) {
+		switch (notification.getFeatureID(VersionInfo.class))
+		{
 		case ModelPackage.VERSION_INFO__EMF_STORE_VERSION_STRING:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;

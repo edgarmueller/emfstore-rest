@@ -51,7 +51,8 @@ public class ProjectIdItemProvider extends UniqueIdentifierItemProvider implemen
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -79,8 +80,9 @@ public class ProjectIdItemProvider extends UniqueIdentifierItemProvider implemen
 	@Override
 	public String getText(Object object) {
 		String label = ((ProjectId) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_ProjectId_type") : getString("_UI_ProjectId_type")
-			+ " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ProjectId_type") :
+			getString("_UI_ProjectId_type") + " " + label;
 	}
 
 	/**

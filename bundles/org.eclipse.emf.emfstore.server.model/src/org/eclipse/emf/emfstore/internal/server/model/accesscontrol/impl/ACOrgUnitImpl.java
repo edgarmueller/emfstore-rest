@@ -152,7 +152,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 * @generated
 	 */
 	public EList<Role> getRoles() {
-		if (roles == null) {
+		if (roles == null)
+		{
 			roles = new EObjectContainmentEList.Resolving<Role>(Role.class, this,
 				AccesscontrolPackage.AC_ORG_UNIT__ROLES);
 		}
@@ -210,7 +211,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
 			return ((InternalEList<?>) getRoles()).basicRemove(otherEnd, msgs);
 		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
@@ -247,7 +249,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 * @generated
 	 */
 	public EList<OrgUnitProperty> getProperties() {
-		if (properties == null) {
+		if (properties == null)
+		{
 			properties = new EObjectContainmentEList.Resolving<OrgUnitProperty>(OrgUnitProperty.class, this,
 				AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES);
 		}
@@ -261,7 +264,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
 			return getName();
 		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
@@ -282,7 +286,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
 			setName((String) newValue);
 			return;
@@ -308,7 +313,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -332,7 +338,8 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:

@@ -135,7 +135,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	 * @generated
 	 */
 	public EList<Integer> getIndexes() {
-		if (indexes == null) {
+		if (indexes == null)
+		{
 			indexes = new EDataTypeUniqueEList<Integer>(Integer.class, this,
 				OperationsPackage.MULTI_ATTRIBUTE_OPERATION__INDEXES);
 		}
@@ -148,7 +149,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	 * @generated
 	 */
 	public EList<Object> getReferencedValues() {
-		if (referencedValues == null) {
+		if (referencedValues == null)
+		{
 			referencedValues = new EDataTypeEList<Object>(Object.class, this,
 				OperationsPackage.MULTI_ATTRIBUTE_OPERATION__REFERENCED_VALUES);
 		}
@@ -162,7 +164,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__ADD:
 			return isAdd();
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__INDEXES:
@@ -181,7 +184,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__ADD:
 			setAdd((Boolean) newValue);
 			return;
@@ -204,7 +208,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__ADD:
 			setAdd(ADD_EDEFAULT);
 			return;
@@ -225,7 +230,8 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__ADD:
 			return add != ADD_EDEFAULT;
 		case OperationsPackage.MULTI_ATTRIBUTE_OPERATION__INDEXES:

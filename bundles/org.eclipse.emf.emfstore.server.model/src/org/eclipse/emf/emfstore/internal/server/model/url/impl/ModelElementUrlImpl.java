@@ -102,14 +102,17 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	public ServerUrl getServerUrl() {
-		if (serverUrl != null && serverUrl.eIsProxy()) {
+		if (serverUrl != null && serverUrl.eIsProxy())
+		{
 			InternalEObject oldServerUrl = (InternalEObject) serverUrl;
 			serverUrl = (ServerUrl) eResolveProxy(oldServerUrl);
-			if (serverUrl != oldServerUrl) {
+			if (serverUrl != oldServerUrl)
+			{
 				InternalEObject newServerUrl = (InternalEObject) serverUrl;
 				NotificationChain msgs = oldServerUrl.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, null, null);
-				if (newServerUrl.eInternalContainer() == null) {
+				if (newServerUrl.eInternalContainer() == null)
+				{
 					msgs = newServerUrl.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, null, msgs);
 				}
@@ -140,7 +143,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	public NotificationChain basicSetServerUrl(ServerUrl newServerUrl, NotificationChain msgs) {
 		ServerUrl oldServerUrl = serverUrl;
 		serverUrl = newServerUrl;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				UrlPackage.MODEL_ELEMENT_URL__SERVER_URL, oldServerUrl, newServerUrl);
 			if (msgs == null)
@@ -157,7 +161,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	public void setServerUrl(ServerUrl newServerUrl) {
-		if (newServerUrl != serverUrl) {
+		if (newServerUrl != serverUrl)
+		{
 			NotificationChain msgs = null;
 			if (serverUrl != null)
 				msgs = ((InternalEObject) serverUrl).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -180,14 +185,17 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	public ProjectUrlFragment getProjectUrlFragment() {
-		if (projectUrlFragment != null && projectUrlFragment.eIsProxy()) {
+		if (projectUrlFragment != null && projectUrlFragment.eIsProxy())
+		{
 			InternalEObject oldProjectUrlFragment = (InternalEObject) projectUrlFragment;
 			projectUrlFragment = (ProjectUrlFragment) eResolveProxy(oldProjectUrlFragment);
-			if (projectUrlFragment != oldProjectUrlFragment) {
+			if (projectUrlFragment != oldProjectUrlFragment)
+			{
 				InternalEObject newProjectUrlFragment = (InternalEObject) projectUrlFragment;
 				NotificationChain msgs = oldProjectUrlFragment.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, null, null);
-				if (newProjectUrlFragment.eInternalContainer() == null) {
+				if (newProjectUrlFragment.eInternalContainer() == null)
+				{
 					msgs = newProjectUrlFragment.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, null, msgs);
 				}
@@ -218,7 +226,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	public NotificationChain basicSetProjectUrlFragment(ProjectUrlFragment newProjectUrlFragment, NotificationChain msgs) {
 		ProjectUrlFragment oldProjectUrlFragment = projectUrlFragment;
 		projectUrlFragment = newProjectUrlFragment;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT, oldProjectUrlFragment, newProjectUrlFragment);
 			if (msgs == null)
@@ -235,7 +244,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	public void setProjectUrlFragment(ProjectUrlFragment newProjectUrlFragment) {
-		if (newProjectUrlFragment != projectUrlFragment) {
+		if (newProjectUrlFragment != projectUrlFragment)
+		{
 			NotificationChain msgs = null;
 			if (projectUrlFragment != null)
 				msgs = ((InternalEObject) projectUrlFragment).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -258,14 +268,17 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	public ModelElementUrlFragment getModelElementUrlFragment() {
-		if (modelElementUrlFragment != null && modelElementUrlFragment.eIsProxy()) {
+		if (modelElementUrlFragment != null && modelElementUrlFragment.eIsProxy())
+		{
 			InternalEObject oldModelElementUrlFragment = (InternalEObject) modelElementUrlFragment;
 			modelElementUrlFragment = (ModelElementUrlFragment) eResolveProxy(oldModelElementUrlFragment);
-			if (modelElementUrlFragment != oldModelElementUrlFragment) {
+			if (modelElementUrlFragment != oldModelElementUrlFragment)
+			{
 				InternalEObject newModelElementUrlFragment = (InternalEObject) modelElementUrlFragment;
 				NotificationChain msgs = oldModelElementUrlFragment.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, null, null);
-				if (newModelElementUrlFragment.eInternalContainer() == null) {
+				if (newModelElementUrlFragment.eInternalContainer() == null)
+				{
 					msgs = newModelElementUrlFragment.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, null, msgs);
 				}
@@ -298,7 +311,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 		NotificationChain msgs) {
 		ModelElementUrlFragment oldModelElementUrlFragment = modelElementUrlFragment;
 		modelElementUrlFragment = newModelElementUrlFragment;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT, oldModelElementUrlFragment,
 				newModelElementUrlFragment);
@@ -316,7 +330,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 * @generated
 	 */
 	public void setModelElementUrlFragment(ModelElementUrlFragment newModelElementUrlFragment) {
-		if (newModelElementUrlFragment != modelElementUrlFragment) {
+		if (newModelElementUrlFragment != modelElementUrlFragment)
+		{
 			NotificationChain msgs = null;
 			if (modelElementUrlFragment != null)
 				msgs = ((InternalEObject) modelElementUrlFragment).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -341,7 +356,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 			return basicSetServerUrl(null, msgs);
 		case UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT:
@@ -359,7 +375,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 			if (resolve)
 				return getServerUrl();
@@ -383,7 +400,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 			setServerUrl((ServerUrl) newValue);
 			return;
@@ -404,7 +422,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 			setServerUrl((ServerUrl) null);
 			return;
@@ -425,7 +444,8 @@ public class ModelElementUrlImpl extends EObjectImpl implements ModelElementUrl 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 			return serverUrl != null;
 		case UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT:

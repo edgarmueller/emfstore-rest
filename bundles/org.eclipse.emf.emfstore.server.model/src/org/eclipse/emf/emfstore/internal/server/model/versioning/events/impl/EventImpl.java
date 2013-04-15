@@ -100,7 +100,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case EventsPackage.EVENT__TIMESTAMP:
 			return getTimestamp();
 		}
@@ -114,7 +115,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case EventsPackage.EVENT__TIMESTAMP:
 			setTimestamp((Date) newValue);
 			return;
@@ -129,7 +131,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case EventsPackage.EVENT__TIMESTAMP:
 			setTimestamp(TIMESTAMP_EDEFAULT);
 			return;
@@ -144,7 +147,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case EventsPackage.EVENT__TIMESTAMP:
 			return TIMESTAMP_EDEFAULT == null ? timestamp != null : !TIMESTAMP_EDEFAULT.equals(timestamp);
 		}

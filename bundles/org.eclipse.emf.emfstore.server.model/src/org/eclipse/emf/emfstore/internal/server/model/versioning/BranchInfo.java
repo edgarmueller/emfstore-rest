@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Branch Info</b></em>'.
  * 
- * @extends APIDelegate<ESBranchInfoImpl>
+ * @extends APIDelegate<ESBranchInfo>
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -52,8 +52,7 @@ public interface BranchInfo extends EObject, APIDelegate<ESBranchInfo> {
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo#getName
-	 * <em>Name</em>}'
-	 * attribute.
+	 * <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -81,8 +80,7 @@ public interface BranchInfo extends EObject, APIDelegate<ESBranchInfo> {
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo#getHead
-	 * <em>Head</em>}'
-	 * containment reference.
+	 * <em>Head</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

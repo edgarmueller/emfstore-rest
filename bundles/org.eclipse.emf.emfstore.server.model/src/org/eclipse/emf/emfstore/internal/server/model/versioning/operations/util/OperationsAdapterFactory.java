@@ -62,7 +62,8 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public OperationsAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = OperationsPackage.eINSTANCE;
 		}
 	}
@@ -78,10 +79,12 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -93,104 +96,125 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * 
 	 * @generated
 	 */
-	protected OperationsSwitch<Adapter> modelSwitch = new OperationsSwitch<Adapter>() {
+	protected OperationsSwitch<Adapter> modelSwitch = new OperationsSwitch<Adapter>()
+	{
 		@Override
-		public Adapter caseAbstractOperation(AbstractOperation object) {
+		public Adapter caseAbstractOperation(AbstractOperation object)
+		{
 			return createAbstractOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseCompositeOperation(CompositeOperation object) {
+		public Adapter caseCompositeOperation(CompositeOperation object)
+		{
 			return createCompositeOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseFeatureOperation(FeatureOperation object) {
+		public Adapter caseFeatureOperation(FeatureOperation object)
+		{
 			return createFeatureOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseCreateDeleteOperation(CreateDeleteOperation object) {
+		public Adapter caseCreateDeleteOperation(CreateDeleteOperation object)
+		{
 			return createCreateDeleteOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseAttributeOperation(AttributeOperation object) {
+		public Adapter caseAttributeOperation(AttributeOperation object)
+		{
 			return createAttributeOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiAttributeOperation(MultiAttributeOperation object) {
+		public Adapter caseMultiAttributeOperation(MultiAttributeOperation object)
+		{
 			return createMultiAttributeOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiAttributeSetOperation(MultiAttributeSetOperation object) {
+		public Adapter caseMultiAttributeSetOperation(MultiAttributeSetOperation object)
+		{
 			return createMultiAttributeSetOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiAttributeMoveOperation(MultiAttributeMoveOperation object) {
+		public Adapter caseMultiAttributeMoveOperation(MultiAttributeMoveOperation object)
+		{
 			return createMultiAttributeMoveOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseSingleReferenceOperation(SingleReferenceOperation object) {
+		public Adapter caseSingleReferenceOperation(SingleReferenceOperation object)
+		{
 			return createSingleReferenceOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiReferenceSetOperation(MultiReferenceSetOperation object) {
+		public Adapter caseMultiReferenceSetOperation(MultiReferenceSetOperation object)
+		{
 			return createMultiReferenceSetOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiReferenceOperation(MultiReferenceOperation object) {
+		public Adapter caseMultiReferenceOperation(MultiReferenceOperation object)
+		{
 			return createMultiReferenceOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseMultiReferenceMoveOperation(MultiReferenceMoveOperation object) {
+		public Adapter caseMultiReferenceMoveOperation(MultiReferenceMoveOperation object)
+		{
 			return createMultiReferenceMoveOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseReferenceOperation(ReferenceOperation object) {
+		public Adapter caseReferenceOperation(ReferenceOperation object)
+		{
 			return createReferenceOperationAdapter();
 		}
 
 		@Override
-		public Adapter caseOperationId(OperationId object) {
+		public Adapter caseOperationId(OperationId object)
+		{
 			return createOperationIdAdapter();
 		}
 
 		@Override
-		public Adapter caseOperationGroup(OperationGroup object) {
+		public Adapter caseOperationGroup(OperationGroup object)
+		{
 			return createOperationGroupAdapter();
 		}
 
 		@Override
-		public Adapter caseModelElementGroup(ModelElementGroup object) {
+		public Adapter caseModelElementGroup(ModelElementGroup object)
+		{
 			return createModelElementGroupAdapter();
 		}
 
 		@Override
-		public Adapter caseEObjectToModelElementIdMap(Map.Entry<EObject, ModelElementId> object) {
+		public Adapter caseEObjectToModelElementIdMap(Map.Entry<EObject, ModelElementId> object)
+		{
 			return createEObjectToModelElementIdMapAdapter();
 		}
 
 		@Override
-		public Adapter caseIdentifiableElement(IdentifiableElement object) {
+		public Adapter caseIdentifiableElement(IdentifiableElement object)
+		{
 			return createIdentifiableElementAdapter();
 		}
 
 		@Override
-		public Adapter caseUniqueIdentifier(UniqueIdentifier object) {
+		public Adapter caseUniqueIdentifier(UniqueIdentifier object)
+		{
 			return createUniqueIdentifierAdapter();
 		}
 
 		@Override
-		public Adapter defaultCase(EObject object) {
+		public Adapter defaultCase(EObject object)
+		{
 			return createEObjectAdapter();
 		}
 	};

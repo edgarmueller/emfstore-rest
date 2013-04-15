@@ -23,11 +23,11 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}
  * </li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getResolvedACUser <em>Resolved AC
- * User </em>}</li>
+ * User</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getAuthenticationInformation()
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation()
  * @model
  * @generated
  */
@@ -43,7 +43,7 @@ public interface AuthenticationInformation extends EObject {
 	 * 
 	 * @return the value of the '<em>Session Id</em>' containment reference.
 	 * @see #setSessionId(SessionId)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getAuthenticationInformation_SessionId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation_SessionId()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -51,8 +51,8 @@ public interface AuthenticationInformation extends EObject {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId
-	 * <em>Session Id</em>}' containment reference.
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation#getSessionId <em>Session Id</em>}
+	 * ' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -73,7 +73,7 @@ public interface AuthenticationInformation extends EObject {
 	 * 
 	 * @return the value of the '<em>Resolved AC User</em>' containment reference.
 	 * @see #setResolvedACUser(ACUser)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getAuthenticationInformation_ResolvedACUser()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getAuthenticationInformation_ResolvedACUser()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

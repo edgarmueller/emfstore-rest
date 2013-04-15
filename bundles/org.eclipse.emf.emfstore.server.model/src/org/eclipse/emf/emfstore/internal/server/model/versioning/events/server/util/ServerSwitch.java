@@ -48,7 +48,8 @@ public class ServerSwitch<T> {
 	 * @generated
 	 */
 	public ServerSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = ServerPackage.eINSTANCE;
 		}
 	}
@@ -76,10 +77,12 @@ public class ServerSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return eSuperTypes.isEmpty() ?
 				defaultCase(theEObject) :
@@ -97,7 +100,8 @@ public class ServerSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
+		switch (classifierID)
+		{
 		case ServerPackage.SERVER_EVENT: {
 			ServerEvent serverEvent = (ServerEvent) theEObject;
 			T result = caseServerEvent(serverEvent);

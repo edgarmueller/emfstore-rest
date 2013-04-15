@@ -145,7 +145,8 @@ public class VersionPropertyImpl extends EObjectImpl implements VersionProperty 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.VERSION_PROPERTY__NAME:
 			return getName();
 		case VersioningPackage.VERSION_PROPERTY__VALUE:
@@ -161,7 +162,8 @@ public class VersionPropertyImpl extends EObjectImpl implements VersionProperty 
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.VERSION_PROPERTY__NAME:
 			setName((String) newValue);
 			return;
@@ -179,7 +181,8 @@ public class VersionPropertyImpl extends EObjectImpl implements VersionProperty 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.VERSION_PROPERTY__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -197,7 +200,8 @@ public class VersionPropertyImpl extends EObjectImpl implements VersionProperty 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.VERSION_PROPERTY__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case VersioningPackage.VERSION_PROPERTY__VALUE:

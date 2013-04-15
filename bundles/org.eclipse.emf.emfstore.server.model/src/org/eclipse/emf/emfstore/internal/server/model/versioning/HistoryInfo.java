@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>History Info</b></em>'.
  * 
- * @extends APIDelegate<ESHistoryInfoImpl>
+ * @extends APIDelegate<ESHistoryInfo>
  *          <!-- end-user-doc -->
  * 
  *          <p>

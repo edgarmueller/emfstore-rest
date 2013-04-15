@@ -98,7 +98,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Adapter createServerUrlAdapter() {
-		if (serverUrlItemProvider == null) {
+		if (serverUrlItemProvider == null)
+		{
 			serverUrlItemProvider = new ServerUrlItemProvider(this);
 		}
 
@@ -123,7 +124,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Adapter createProjectUrlFragmentAdapter() {
-		if (projectUrlFragmentItemProvider == null) {
+		if (projectUrlFragmentItemProvider == null)
+		{
 			projectUrlFragmentItemProvider = new ProjectUrlFragmentItemProvider(this);
 		}
 
@@ -149,7 +151,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Adapter createModelElementUrlFragmentAdapter() {
-		if (modelElementUrlFragmentItemProvider == null) {
+		if (modelElementUrlFragmentItemProvider == null)
+		{
 			modelElementUrlFragmentItemProvider = new ModelElementUrlFragmentItemProvider(this);
 		}
 
@@ -174,7 +177,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Adapter createModelElementUrlAdapter() {
-		if (modelElementUrlItemProvider == null) {
+		if (modelElementUrlItemProvider == null)
+		{
 			modelElementUrlItemProvider = new ModelElementUrlItemProvider(this);
 		}
 
@@ -229,9 +233,11 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -269,7 +275,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

@@ -45,7 +45,8 @@ public class EventsSwitch<T> {
 	 * @generated
 	 */
 	public EventsSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = EventsPackage.eINSTANCE;
 		}
 	}
@@ -73,10 +74,12 @@ public class EventsSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return eSuperTypes.isEmpty() ?
 				defaultCase(theEObject) :
@@ -94,7 +97,8 @@ public class EventsSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
+		switch (classifierID)
+		{
 		case EventsPackage.EVENT: {
 			Event event = (Event) theEObject;
 			T result = caseEvent(event);

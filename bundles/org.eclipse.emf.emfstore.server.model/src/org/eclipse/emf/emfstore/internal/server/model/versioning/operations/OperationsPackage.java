@@ -287,13 +287,23 @@ public interface OperationsPackage extends EPackage {
 	int FEATURE_OPERATION__FEATURE_NAME = ABSTRACT_OPERATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_OPERATION__UNSET = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Feature Operation</em>' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 1;
+	int FEATURE_OPERATION_FEATURE_COUNT = ABSTRACT_OPERATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '
@@ -449,6 +459,16 @@ public interface OperationsPackage extends EPackage {
 	int ATTRIBUTE_OPERATION__FEATURE_NAME = FEATURE_OPERATION__FEATURE_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_OPERATION__UNSET = FEATURE_OPERATION__UNSET;
+
+	/**
 	 * The feature id for the '<em><b>Old Value</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -532,6 +552,16 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MULTI_ATTRIBUTE_OPERATION__FEATURE_NAME = FEATURE_OPERATION__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_ATTRIBUTE_OPERATION__UNSET = FEATURE_OPERATION__UNSET;
 
 	/**
 	 * The feature id for the '<em><b>Add</b></em>' attribute. <!--
@@ -630,6 +660,16 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_ATTRIBUTE_SET_OPERATION__FEATURE_NAME = FEATURE_OPERATION__FEATURE_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_ATTRIBUTE_SET_OPERATION__UNSET = FEATURE_OPERATION__UNSET;
+
+	/**
 	 * The feature id for the '<em><b>Index</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -723,6 +763,16 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MULTI_ATTRIBUTE_MOVE_OPERATION__FEATURE_NAME = FEATURE_OPERATION__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_ATTRIBUTE_MOVE_OPERATION__UNSET = FEATURE_OPERATION__UNSET;
 
 	/**
 	 * The feature id for the '<em><b>Old Index</b></em>' attribute. <!--
@@ -821,6 +871,16 @@ public interface OperationsPackage extends EPackage {
 	int REFERENCE_OPERATION__FEATURE_NAME = FEATURE_OPERATION__FEATURE_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_OPERATION__UNSET = FEATURE_OPERATION__UNSET;
+
+	/**
 	 * The feature id for the '<em><b>Bidirectional</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -913,6 +973,16 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SINGLE_REFERENCE_OPERATION__FEATURE_NAME = REFERENCE_OPERATION__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SINGLE_REFERENCE_OPERATION__UNSET = REFERENCE_OPERATION__UNSET;
 
 	/**
 	 * The feature id for the '<em><b>Bidirectional</b></em>' attribute. <!--
@@ -1042,6 +1112,16 @@ public interface OperationsPackage extends EPackage {
 	int MULTI_REFERENCE_SET_OPERATION__FEATURE_NAME = REFERENCE_OPERATION__FEATURE_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_REFERENCE_SET_OPERATION__UNSET = REFERENCE_OPERATION__UNSET;
+
+	/**
 	 * The feature id for the '<em><b>Bidirectional</b></em>' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1149,6 +1229,16 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MULTI_REFERENCE_OPERATION__FEATURE_NAME = REFERENCE_OPERATION__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_REFERENCE_OPERATION__UNSET = REFERENCE_OPERATION__UNSET;
 
 	/**
 	 * The feature id for the '<em><b>Bidirectional</b></em>' attribute. <!--
@@ -1272,6 +1362,16 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MULTI_REFERENCE_MOVE_OPERATION__FEATURE_NAME = FEATURE_OPERATION__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Unset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_REFERENCE_MOVE_OPERATION__UNSET = FEATURE_OPERATION__UNSET;
 
 	/**
 	 * The feature id for the '<em><b>Old Index</b></em>' attribute. <!--
@@ -1629,6 +1729,20 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFeatureOperation_FeatureName();
+
+	/**
+	 * Returns the meta object for the attribute '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#isUnset
+	 * <em>Unset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Unset</em>'.
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#isUnset()
+	 * @see #getFeatureOperation()
+	 * @generated
+	 */
+	EAttribute getFeatureOperation_Unset();
 
 	/**
 	 * Returns the meta object for class '
@@ -2409,6 +2523,15 @@ public interface OperationsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FEATURE_OPERATION__FEATURE_NAME = eINSTANCE.getFeatureOperation_FeatureName();
+
+		/**
+		 * The meta object literal for the '<em><b>Unset</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute FEATURE_OPERATION__UNSET = eINSTANCE.getFeatureOperation_Unset();
 
 		/**
 		 * The meta object literal for the '

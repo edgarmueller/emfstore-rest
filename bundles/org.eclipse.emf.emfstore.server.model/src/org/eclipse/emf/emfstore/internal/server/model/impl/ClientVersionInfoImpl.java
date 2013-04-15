@@ -140,7 +140,8 @@ public class ClientVersionInfoImpl extends EObjectImpl implements ClientVersionI
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.CLIENT_VERSION_INFO__VERSION:
 			return getVersion();
 		case ModelPackage.CLIENT_VERSION_INFO__NAME:
@@ -156,7 +157,8 @@ public class ClientVersionInfoImpl extends EObjectImpl implements ClientVersionI
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.CLIENT_VERSION_INFO__VERSION:
 			setVersion((String) newValue);
 			return;
@@ -174,7 +176,8 @@ public class ClientVersionInfoImpl extends EObjectImpl implements ClientVersionI
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.CLIENT_VERSION_INFO__VERSION:
 			setVersion(VERSION_EDEFAULT);
 			return;
@@ -192,7 +195,8 @@ public class ClientVersionInfoImpl extends EObjectImpl implements ClientVersionI
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.CLIENT_VERSION_INFO__VERSION:
 			return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		case ModelPackage.CLIENT_VERSION_INFO__NAME:

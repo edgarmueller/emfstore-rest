@@ -72,6 +72,27 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	protected String featureName = FEATURE_NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isUnset() <em>Unset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #isUnset()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean UNSET_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isUnset() <em>Unset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #isUnset()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean unset = UNSET_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -113,15 +134,44 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean isUnset()
+	{
+		return unset;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setUnset(boolean newUnset)
+	{
+		boolean oldUnset = unset;
+		unset = newUnset;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.FEATURE_OPERATION__UNSET, oldUnset,
+				unset));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.FEATURE_OPERATION__FEATURE_NAME:
 			return getFeatureName();
+		case OperationsPackage.FEATURE_OPERATION__UNSET:
+			return isUnset();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -133,9 +183,13 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.FEATURE_OPERATION__FEATURE_NAME:
 			setFeatureName((String) newValue);
+			return;
+		case OperationsPackage.FEATURE_OPERATION__UNSET:
+			setUnset((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -148,9 +202,13 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.FEATURE_OPERATION__FEATURE_NAME:
 			setFeatureName(FEATURE_NAME_EDEFAULT);
+			return;
+		case OperationsPackage.FEATURE_OPERATION__UNSET:
+			setUnset(UNSET_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -163,9 +221,12 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.FEATURE_OPERATION__FEATURE_NAME:
 			return FEATURE_NAME_EDEFAULT == null ? featureName != null : !FEATURE_NAME_EDEFAULT.equals(featureName);
+		case OperationsPackage.FEATURE_OPERATION__UNSET:
+			return unset != UNSET_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -183,6 +244,8 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (featureName: ");
 		result.append(featureName);
+		result.append(", unset: ");
+		result.append(unset);
 		result.append(')');
 		return result.toString();
 	}

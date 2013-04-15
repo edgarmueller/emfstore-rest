@@ -37,13 +37,16 @@ public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 	 * @generated
 	 */
 	public static RolesFactory init() {
-		try {
+		try
+		{
 			RolesFactory theRolesFactory = (RolesFactory) EPackage.Registry.INSTANCE
 				.getEFactory("http://eclipse.org/emf/emfstore/server/model/roles");
-			if (theRolesFactory != null) {
+			if (theRolesFactory != null)
+			{
 				return theRolesFactory;
 			}
-		} catch (Exception exception) {
+		} catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new RolesFactoryImpl();
@@ -67,7 +70,8 @@ public class RolesFactoryImpl extends EFactoryImpl implements RolesFactory {
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 		case RolesPackage.READER_ROLE:
 			return createReaderRole();
 		case RolesPackage.WRITER_ROLE:

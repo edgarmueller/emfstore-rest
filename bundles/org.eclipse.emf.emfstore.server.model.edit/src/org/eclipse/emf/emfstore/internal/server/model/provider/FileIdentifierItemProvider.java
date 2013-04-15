@@ -51,7 +51,8 @@ public class FileIdentifierItemProvider extends IdentifiableElementItemProvider 
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -80,8 +81,9 @@ public class FileIdentifierItemProvider extends IdentifiableElementItemProvider 
 	@Override
 	public String getText(Object object) {
 		String label = ((FileIdentifier) object).getIdentifier();
-		return label == null || label.length() == 0 ? getString("_UI_FileIdentifier_type")
-			: getString("_UI_FileIdentifier_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_FileIdentifier_type") :
+			getString("_UI_FileIdentifier_type") + " " + label;
 	}
 
 	/**

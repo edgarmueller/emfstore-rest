@@ -57,13 +57,16 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	 * @generated
 	 */
 	public static UrlFactory init() {
-		try {
+		try
+		{
 			UrlFactory theUrlFactory = (UrlFactory) EPackage.Registry.INSTANCE
 				.getEFactory("http://eclipse.org/emf/emfstore/server/model/url");
-			if (theUrlFactory != null) {
+			if (theUrlFactory != null)
+			{
 				return theUrlFactory;
 			}
-		} catch (Exception exception) {
+		} catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new UrlFactoryImpl();
@@ -87,7 +90,8 @@ public class UrlFactoryImpl extends EFactoryImpl implements UrlFactory {
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 		case UrlPackage.SERVER_URL:
 			return createServerUrl();
 		case UrlPackage.PROJECT_URL_FRAGMENT:

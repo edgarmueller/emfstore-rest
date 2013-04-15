@@ -171,14 +171,17 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 * @generated
 	 */
 	public ModelElementId getReferencedModelElementId() {
-		if (referencedModelElementId != null && referencedModelElementId.eIsProxy()) {
+		if (referencedModelElementId != null && referencedModelElementId.eIsProxy())
+		{
 			InternalEObject oldReferencedModelElementId = (InternalEObject) referencedModelElementId;
 			referencedModelElementId = (ModelElementId) eResolveProxy(oldReferencedModelElementId);
-			if (referencedModelElementId != oldReferencedModelElementId) {
+			if (referencedModelElementId != oldReferencedModelElementId)
+			{
 				InternalEObject newReferencedModelElementId = (InternalEObject) referencedModelElementId;
 				NotificationChain msgs = oldReferencedModelElementId.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID, null, null);
-				if (newReferencedModelElementId.eInternalContainer() == null) {
+				if (newReferencedModelElementId.eInternalContainer() == null)
+				{
 					msgs = newReferencedModelElementId.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID, null, msgs);
 				}
@@ -211,7 +214,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 		NotificationChain msgs) {
 		ModelElementId oldReferencedModelElementId = referencedModelElementId;
 		referencedModelElementId = newReferencedModelElementId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID,
 				oldReferencedModelElementId, newReferencedModelElementId);
@@ -229,7 +233,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 * @generated
 	 */
 	public void setReferencedModelElementId(ModelElementId newReferencedModelElementId) {
-		if (newReferencedModelElementId != referencedModelElementId) {
+		if (newReferencedModelElementId != referencedModelElementId)
+		{
 			NotificationChain msgs = null;
 			if (referencedModelElementId != null)
 				msgs = ((InternalEObject) referencedModelElementId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -254,7 +259,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__REFERENCED_MODEL_ELEMENT_ID:
 			return basicSetReferencedModelElementId(null, msgs);
 		}
@@ -268,7 +274,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX:
 			return getOldIndex();
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__NEW_INDEX:
@@ -288,7 +295,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX:
 			setOldIndex((Integer) newValue);
 			return;
@@ -309,7 +317,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX:
 			setOldIndex(OLD_INDEX_EDEFAULT);
 			return;
@@ -330,7 +339,8 @@ public class MultiReferenceMoveOperationImpl extends FeatureOperationImpl implem
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__OLD_INDEX:
 			return oldIndex != OLD_INDEX_EDEFAULT;
 		case OperationsPackage.MULTI_REFERENCE_MOVE_OPERATION__NEW_INDEX:

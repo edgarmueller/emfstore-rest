@@ -57,7 +57,7 @@ public interface ProjectHistory extends EObject {
 	 * 
 	 * @return the value of the '<em>Project Id</em>' containment reference.
 	 * @see #setProjectId(ProjectId)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectHistory_ProjectId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectHistory_ProjectId()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -141,7 +141,7 @@ public interface ProjectHistory extends EObject {
 	 * 
 	 * @return the value of the '<em>Project Description</em>' attribute.
 	 * @see #setProjectDescription(String)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectHistory_ProjectDescription()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectHistory_ProjectDescription()
 	 * @model required="true"
 	 * @generated
 	 */

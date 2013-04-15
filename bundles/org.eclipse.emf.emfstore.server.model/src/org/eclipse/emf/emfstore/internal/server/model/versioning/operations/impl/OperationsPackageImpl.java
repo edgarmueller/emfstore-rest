@@ -231,7 +231,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		// Obtain or create and register package
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new OperationsPackageImpl());
+			.get(eNS_URI)
+			: new OperationsPackageImpl());
 
 		isInited = true;
 
@@ -262,7 +263,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(UrlPackage.eNS_URI)
+			: UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theOperationsPackage.createPackageContents();
@@ -400,6 +402,17 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 */
 	public EAttribute getFeatureOperation_FeatureName() {
 		return (EAttribute) featureOperationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getFeatureOperation_Unset()
+	{
+		return (EAttribute) featureOperationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -896,6 +909,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		featureOperationEClass = createEClass(FEATURE_OPERATION);
 		createEAttribute(featureOperationEClass, FEATURE_OPERATION__FEATURE_NAME);
+		createEAttribute(featureOperationEClass, FEATURE_OPERATION__UNSET);
 
 		createDeleteOperationEClass = createEClass(CREATE_DELETE_OPERATION);
 		createEAttribute(createDeleteOperationEClass, CREATE_DELETE_OPERATION__DELETE);
@@ -1050,6 +1064,9 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		initEClass(featureOperationEClass, FeatureOperation.class, "FeatureOperation", IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFeatureOperation_FeatureName(), ecorePackage.getEString(), "featureName", "", 0, 1,
+			FeatureOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFeatureOperation_Unset(), ecorePackage.getEBoolean(), "unset", null, 0, 1,
 			FeatureOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);
 

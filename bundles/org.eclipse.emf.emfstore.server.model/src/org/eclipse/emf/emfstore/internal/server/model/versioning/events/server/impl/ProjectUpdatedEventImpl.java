@@ -69,14 +69,17 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 * @generated
 	 */
 	public PrimaryVersionSpec getNewVersion() {
-		if (newVersion != null && newVersion.eIsProxy()) {
+		if (newVersion != null && newVersion.eIsProxy())
+		{
 			InternalEObject oldNewVersion = (InternalEObject) newVersion;
 			newVersion = (PrimaryVersionSpec) eResolveProxy(oldNewVersion);
-			if (newVersion != oldNewVersion) {
+			if (newVersion != oldNewVersion)
+			{
 				InternalEObject newNewVersion = (InternalEObject) newVersion;
 				NotificationChain msgs = oldNewVersion.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, null, null);
-				if (newNewVersion.eInternalContainer() == null) {
+				if (newNewVersion.eInternalContainer() == null)
+				{
 					msgs = newNewVersion.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, null, msgs);
 				}
@@ -107,7 +110,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	public NotificationChain basicSetNewVersion(PrimaryVersionSpec newNewVersion, NotificationChain msgs) {
 		PrimaryVersionSpec oldNewVersion = newVersion;
 		newVersion = newNewVersion;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION, oldNewVersion, newNewVersion);
 			if (msgs == null)
@@ -124,7 +128,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 * @generated
 	 */
 	public void setNewVersion(PrimaryVersionSpec newNewVersion) {
-		if (newNewVersion != newVersion) {
+		if (newNewVersion != newVersion)
+		{
 			NotificationChain msgs = null;
 			if (newVersion != null)
 				msgs = ((InternalEObject) newVersion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -148,7 +153,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION:
 			return basicSetNewVersion(null, msgs);
 		}
@@ -162,7 +168,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION:
 			if (resolve)
 				return getNewVersion();
@@ -178,7 +185,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION:
 			setNewVersion((PrimaryVersionSpec) newValue);
 			return;
@@ -193,7 +201,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION:
 			setNewVersion((PrimaryVersionSpec) null);
 			return;
@@ -208,7 +217,8 @@ public class ProjectUpdatedEventImpl extends ServerProjectEventImpl implements P
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION:
 			return newVersion != null;
 		}

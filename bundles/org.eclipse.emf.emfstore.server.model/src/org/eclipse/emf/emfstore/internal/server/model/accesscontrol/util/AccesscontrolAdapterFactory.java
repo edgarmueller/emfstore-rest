@@ -48,7 +48,8 @@ public class AccesscontrolAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public AccesscontrolAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = AccesscontrolPackage.eINSTANCE;
 		}
 	}
@@ -64,10 +65,12 @@ public class AccesscontrolAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -79,44 +82,53 @@ public class AccesscontrolAdapterFactory extends AdapterFactoryImpl {
 	 * 
 	 * @generated
 	 */
-	protected AccesscontrolSwitch<Adapter> modelSwitch = new AccesscontrolSwitch<Adapter>() {
+	protected AccesscontrolSwitch<Adapter> modelSwitch = new AccesscontrolSwitch<Adapter>()
+	{
 		@Override
-		public Adapter caseACUser(ACUser object) {
+		public Adapter caseACUser(ACUser object)
+		{
 			return createACUserAdapter();
 		}
 
 		@Override
-		public Adapter caseACOrgUnit(ACOrgUnit object) {
+		public Adapter caseACOrgUnit(ACOrgUnit object)
+		{
 			return createACOrgUnitAdapter();
 		}
 
 		@Override
-		public Adapter caseACGroup(ACGroup object) {
+		public Adapter caseACGroup(ACGroup object)
+		{
 			return createACGroupAdapter();
 		}
 
 		@Override
-		public Adapter caseACOrgUnitId(ACOrgUnitId object) {
+		public Adapter caseACOrgUnitId(ACOrgUnitId object)
+		{
 			return createACOrgUnitIdAdapter();
 		}
 
 		@Override
-		public Adapter caseOrgUnitProperty(OrgUnitProperty object) {
+		public Adapter caseOrgUnitProperty(OrgUnitProperty object)
+		{
 			return createOrgUnitPropertyAdapter();
 		}
 
 		@Override
-		public Adapter caseIdentifiableElement(IdentifiableElement object) {
+		public Adapter caseIdentifiableElement(IdentifiableElement object)
+		{
 			return createIdentifiableElementAdapter();
 		}
 
 		@Override
-		public Adapter caseUniqueIdentifier(UniqueIdentifier object) {
+		public Adapter caseUniqueIdentifier(UniqueIdentifier object)
+		{
 			return createUniqueIdentifierAdapter();
 		}
 
 		@Override
-		public Adapter defaultCase(EObject object) {
+		public Adapter defaultCase(EObject object)
+		{
 			return createEObjectAdapter();
 		}
 	};

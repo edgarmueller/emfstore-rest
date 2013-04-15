@@ -100,7 +100,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createReaderRoleAdapter() {
-		if (readerRoleItemProvider == null) {
+		if (readerRoleItemProvider == null)
+		{
 			readerRoleItemProvider = new ReaderRoleItemProvider(this);
 		}
 
@@ -126,7 +127,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createWriterRoleAdapter() {
-		if (writerRoleItemProvider == null) {
+		if (writerRoleItemProvider == null)
+		{
 			writerRoleItemProvider = new WriterRoleItemProvider(this);
 		}
 
@@ -152,7 +154,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createProjectAdminRoleAdapter() {
-		if (projectAdminRoleItemProvider == null) {
+		if (projectAdminRoleItemProvider == null)
+		{
 			projectAdminRoleItemProvider = new ProjectAdminRoleItemProvider(this);
 		}
 
@@ -178,7 +181,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createServerAdminAdapter() {
-		if (serverAdminItemProvider == null) {
+		if (serverAdminItemProvider == null)
+		{
 			serverAdminItemProvider = new ServerAdminItemProvider(this);
 		}
 
@@ -233,9 +237,11 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -273,7 +279,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}
