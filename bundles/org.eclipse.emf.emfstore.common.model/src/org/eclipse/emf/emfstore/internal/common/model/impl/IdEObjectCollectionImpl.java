@@ -248,6 +248,13 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	public ModelElementId getModelElementId(EObject eObject) {
 
+		// EObject _is_ project -> assign magic ModelElementId
+		if (this == eObject) {
+			ModelElementId modelElementId = getNewModelElementID();
+			modelElementId.setId("001");
+			return modelElementId;
+		}
+
 		if (!eObjectToIdMap.containsKey(eObject) && !isCacheInitialized()) {
 
 			// EObject contained in project, load ID from resource
