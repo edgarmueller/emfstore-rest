@@ -10,11 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -360,29 +357,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 
 		try {
 			reference = (EReference) this.getFeature(modelElement);
-
-			Map<EObject, ModelElementId> ids = new HashMap<EObject, ModelElementId>();
-			List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(modelElement,
-				false);
-			allContainedModelElements.add(modelElement);
-
-			for (int i = 0; i < allContainedModelElements.size(); i++) {
-				EObject child = allContainedModelElements.get(i);
-				ModelElementId childId = ((IdEObjectCollectionImpl) project).getModelElementId(child);
-				if (child == null) {
-					childId = ((IdEObjectCollectionImpl) project).getDeletedModelElementId(child);
-				}
-
-				if (ModelUtil.isIgnoredDatatype(child)) {
-					continue;
-				}
-
-				ids.put(child, childId);
-			}
-
 			modelElement.eSet(reference, newModelElement);
 
-			project.allocateModelElementIds(ids);
 			// keep elements in the project if they are disconnected, if they
 			// really need to be deleted there will be a
 			// delete operation
