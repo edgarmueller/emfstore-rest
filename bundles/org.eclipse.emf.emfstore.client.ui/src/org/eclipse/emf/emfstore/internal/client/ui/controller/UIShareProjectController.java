@@ -14,6 +14,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.LoginCanceledException;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
@@ -31,6 +32,7 @@ import org.eclipse.swt.widgets.Shell;
 public class UIShareProjectController extends AbstractEMFStoreUIController<Void> {
 
 	private final ESLocalProject localProject;
+	private ESUsersession usersession;
 
 	/**
 	 * Constructor.
@@ -45,6 +47,12 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 		this.localProject = localProject;
 	}
 
+	public UIShareProjectController(Shell shell, ESUsersession usersession, ESLocalProject localProject) {
+		super(shell, true, true);
+		this.usersession = usersession;
+		this.localProject = localProject;
+	}
+
 	/**
 	 * 
 	 * {@inheritDoc}
@@ -54,7 +62,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	@Override
 	public Void doRun(final IProgressMonitor progressMonitor) throws ESException {
 		try {
-			localProject.shareProject(null, progressMonitor);
+			localProject.shareProject(usersession != null ? usersession : null, progressMonitor);
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openInformation(getShell(), "Share succeeded",

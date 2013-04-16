@@ -26,8 +26,6 @@ public interface ESUIControllerFactory {
 
 	ESLocalProject createLocalProject(Shell shell, String name);
 
-	ESRemoteProject createRemoteProject(Shell shell);
-
 	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession);
 
 	ESRemoteProject createRemoteProject(Shell shell, ESUsersession usersession, String projectName);

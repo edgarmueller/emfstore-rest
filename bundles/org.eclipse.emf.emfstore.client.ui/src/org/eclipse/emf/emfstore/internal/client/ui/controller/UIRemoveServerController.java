@@ -44,13 +44,13 @@ public class UIRemoveServerController extends
 	 * 
 	 * @param shell
 	 *            the parent shell that should be used during the delet
-	 * @param serverInfo
+	 * @param server
 	 *            the server info that contains the information about which
 	 *            server should be removed from the workspace
 	 */
-	public UIRemoveServerController(Shell shell, ESServer serverInfo) {
+	public UIRemoveServerController(Shell shell, ESServer server) {
 		super(shell);
-		this.serverInfo = ((ESServerImpl) serverInfo).toInternalAPI();
+		this.serverInfo = ((ESServerImpl) server).toInternalAPI();
 	}
 
 	/**

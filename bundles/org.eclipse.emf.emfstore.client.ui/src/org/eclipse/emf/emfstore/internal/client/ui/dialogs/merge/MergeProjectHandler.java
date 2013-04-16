@@ -12,8 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver;
@@ -31,8 +30,6 @@ import org.eclipse.swt.widgets.Display;
  * @author wesendon
  */
 public class MergeProjectHandler extends AbstractConflictResolver implements ConflictResolver {
-
-	private static MergeLabelProvider labelProvider;
 
 	/**
 	 * Default constructor.
@@ -78,18 +75,8 @@ public class MergeProjectHandler extends AbstractConflictResolver implements Con
 	}
 
 	private MergeLabelProvider getLabelProvider() {
-
-		if (labelProvider == null) {
-			ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.ui.merge.labelprovider");
-			ESExtensionElement element = extensionPoint.getElementWithHighestPriority();
-
-			if (element == null) {
-				labelProvider = new DefaultMergeLabelProvider();
-			} else {
-				labelProvider = element.getClass("class", MergeLabelProvider.class);
-			}
-		}
-
-		return labelProvider;
+		return ExtensionRegistry.INSTANCE.get(
+			MergeLabelProvider.ID,
+			MergeLabelProvider.class, new DefaultMergeLabelProvider(), true);
 	}
 }

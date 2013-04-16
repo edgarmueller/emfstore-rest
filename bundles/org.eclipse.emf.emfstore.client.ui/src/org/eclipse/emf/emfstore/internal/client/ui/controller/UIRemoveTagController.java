@@ -13,9 +13,11 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
@@ -34,7 +36,7 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 // TODO: re-package exception for more sensible error messages
 public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 
-	private final HistoryInfo historyInfo;
+	private final ESHistoryInfoImpl historyInfo;
 
 	/**
 	 * Constructor.
@@ -44,9 +46,9 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 	 * @param historyInfo
 	 *            the {@link HistoryInfo} from which to remove the tag
 	 */
-	public UIRemoveTagController(Shell shell, HistoryInfo historyInfo) {
+	public UIRemoveTagController(Shell shell, ESHistoryInfo historyInfo) {
 		super(shell);
-		this.historyInfo = historyInfo;
+		this.historyInfo = (ESHistoryInfoImpl) historyInfo;
 	}
 
 	/**
@@ -96,7 +98,7 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 				TagVersionSpec tag = (TagVersionSpec) o;
 				try {
 					// TODO: monitor
-					projectSpace.removeTag(historyInfo.getPrimarySpec(), tag);
+					projectSpace.removeTag(historyInfo.toInternalAPI().getPrimarySpec(), tag);
 				} catch (ESException e) {
 					MessageDialog.openError(getShell(), "Remove tag failed", "Remove tag failed: " + e.getMessage());
 				}

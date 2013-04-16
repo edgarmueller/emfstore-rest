@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIRemoveTagController;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 
 /**
  * Handler for removing a tag. Requires a selection of type {@link HistoryInfo}.
@@ -23,7 +24,7 @@ public class RemoveTagHandler extends AbstractEMFStoreHandler {
 
 	@Override
 	public void handle() {
-		new UIRemoveTagController(getShell(), requireSelection(HistoryInfo.class)).execute();
+		new UIRemoveTagController(getShell(), requireSelection(ESHistoryInfo.class)).execute();
 	}
 
 }

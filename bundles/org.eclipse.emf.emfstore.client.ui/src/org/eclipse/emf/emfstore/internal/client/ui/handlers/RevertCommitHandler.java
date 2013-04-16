@@ -11,7 +11,11 @@
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIRevertCommitController;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
+import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * Handler for forcing the revert of a commit.
@@ -30,7 +34,21 @@ public class RevertCommitHandler extends AbstractEMFStoreHandler {
 	 */
 	@Override
 	public void handle() {
-		new UIRevertCommitController(getShell(), requireSelection(HistoryInfo.class)).execute();
+
+		// TODO: remove HistoryBrowserView, switch to API class
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+
+		if (activePage == null || !(activePage.getActivePart() instanceof HistoryBrowserView)) {
+			return;
+		}
+
+		HistoryBrowserView view = (HistoryBrowserView) activePage.getActivePart();
+
+		new UIRevertCommitController(
+			getShell(),
+			requireSelection(ESHistoryInfo.class).getPrimarySpec(),
+			view.getProjectSpace().createAPI()).execute();
 	}
 
 }

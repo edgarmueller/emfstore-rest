@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -80,7 +81,8 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	public ESServer getServer() {
 		if (server == null) {
 			// TODO: review or reuse client util
-			server = ESServer.FACTORY.getServer("localhost", 8080, "Generated certificate");
+			server = ESServer.FACTORY.getServer("localhost", 8080,
+				KeyStoreManager.DEFAULT_CERTIFICATE);
 		}
 		return server;
 	}

@@ -42,7 +42,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	 * @param shell
 	 *            the parent {@link Shell} to be used during the creation of the remote project
 	 */
-	public UICreateRemoteProjectController(Shell shell) {
+	private UICreateRemoteProjectController(Shell shell) {
 		super(shell, true, false);
 		session = null;
 		projectName = null;
@@ -84,12 +84,6 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	}
 
 	private ESRemoteProject createRemoteProject(IProgressMonitor monitor) throws ESException {
-		return createRemoteProject(monitor);
-	}
-
-	private ESRemoteProject createRemoteProject(Usersession usersession, IProgressMonitor monitor)
-		throws ESException {
-
 		String[] ret = RunInUI.runWithResult(new Callable<String[]>() {
 
 			public String[] call() throws Exception {
@@ -104,7 +98,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 		String projectName = ret[0];
 		String description = ret[1];
 
-		return createRemoteProject(usersession, projectName, description, monitor);
+		return createRemoteProject(session, projectName, description, monitor);
 	}
 
 	private ESRemoteProject createRemoteProject(final Usersession usersession, final String name,
@@ -122,15 +116,11 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	public ESRemoteProject doRun(IProgressMonitor monitor) throws ESException {
 		try {
 			if (session == null) {
+				throw new IllegalArgumentException("Session must not be null.");
+			}
+
+			if (projectName == null) {
 				return createRemoteProject(monitor);
-			}
-
-			if (projectName == null) {
-				return createRemoteProject(session, monitor);
-			}
-
-			if (projectName == null) {
-				throw new IllegalArgumentException("Project name must not be null.");
 			}
 
 			return createRemoteProject(session, projectName, description, monitor);

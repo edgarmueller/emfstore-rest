@@ -77,15 +77,15 @@ public class UICreateBranchController extends
 	 * @param shell
 	 *            the parent {@link Shell} that should be used during the
 	 *            creation of the branch
-	 * @param projectSpace
+	 * @param localProject
 	 *            the project space for which to create a branch for
 	 * @param branch
 	 *            the branch to be committed
 	 */
-	public UICreateBranchController(Shell shell, ESLocalProject projectSpace,
+	public UICreateBranchController(Shell shell, ESLocalProject localProject,
 		BranchVersionSpec branch) {
 		super(shell, true, true);
-		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
+		this.projectSpace = ((ESLocalProjectImpl) localProject)
 			.toInternalAPI();
 		this.branch = branch;
 	}
@@ -100,7 +100,7 @@ public class UICreateBranchController extends
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), null,
-												"No local changes in your project. No need to commit.");
+					"No local changes in your project. No need to commit.");
 				return null;
 			}
 		});
@@ -120,7 +120,7 @@ public class UICreateBranchController extends
 
 			public Boolean call() throws Exception {
 				boolean shouldUpdate = MessageDialog.openConfirm(getShell(),
-																	"Confirmation", message);
+					"Confirmation", message);
 				if (shouldUpdate) {
 					ESPrimaryVersionSpec baseVersion = UICreateBranchController.this.projectSpace
 						.getBaseVersion().toAPI();
@@ -166,9 +166,9 @@ public class UICreateBranchController extends
 
 		if (dialogReturnValue == Dialog.OK) {
 			changePackage.setLogMessage(ESLogMessage.FACTORY.createLogMessage(
-																				commitDialog.getLogText(), projectSpace
-																					.getUsersession()
-																					.getUsername()));
+				commitDialog.getLogText(), projectSpace
+					.getUsersession()
+					.getUsername()));
 			return true;
 		}
 
@@ -190,10 +190,10 @@ public class UICreateBranchController extends
 			}
 			// TODO OTS
 			PrimaryVersionSpec commitToBranch = projectSpace.commitToBranch(
-																			branch,
-																			logMessage,
-																			UICreateBranchController.this,
-																			progressMonitor);
+				branch,
+				logMessage,
+				UICreateBranchController.this,
+				progressMonitor);
 			return commitToBranch.toAPI();
 		} catch (BaseVersionOutdatedException e) {
 			// project is out of date and user canceled update
@@ -206,7 +206,7 @@ public class UICreateBranchController extends
 			RunInUI.run(new Callable<Void>() {
 				public Void call() throws Exception {
 					MessageDialog.openError(getShell(), "Create Branch failed",
-											"Create Branch failed: " + e.getMessage());
+						"Create Branch failed: " + e.getMessage());
 					return null;
 				}
 			});
