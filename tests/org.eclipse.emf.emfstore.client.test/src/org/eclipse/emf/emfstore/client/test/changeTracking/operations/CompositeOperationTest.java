@@ -16,6 +16,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
+import org.eclipse.emf.emfstore.client.handler.ESOperationModifier;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
 import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
@@ -24,6 +25,7 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.InvalidHandleException;
@@ -176,8 +178,14 @@ public class CompositeOperationTest extends WorkspaceTest {
 	@Test
 	public void createSmallCompositeAcrossCommandsWithAutoOperationWrapper() {
 
-		this.getProjectSpace().getOperationManager().getRecorderConfig()
-			.setOperationModificator(new AutoOperationWrapper());
+		// TODO: Think about elegant solution to replace the operation modifier during a single test
+		ESOperationModifier operationModifier = ExtensionRegistry.INSTANCE.get(ESOperationModifier.ID,
+			ESOperationModifier.class);
+
+		ExtensionRegistry.INSTANCE.set(
+			ESOperationModifier.ID,
+			new AutoOperationWrapper());
+
 		final LeafSection section = addSection();
 		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
 
@@ -226,6 +234,10 @@ public class CompositeOperationTest extends WorkspaceTest {
 		assertEquals(true, operation instanceof CompositeOperation);
 		CompositeOperation compositeOperation = (CompositeOperation) operation;
 		assertEquals(4, compositeOperation.getSubOperations().size());
+
+		ExtensionRegistry.INSTANCE.set(
+			ESOperationModifier.ID,
+			operationModifier);
 	}
 
 	/**
