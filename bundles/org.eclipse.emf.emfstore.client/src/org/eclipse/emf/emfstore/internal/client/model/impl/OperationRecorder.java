@@ -373,6 +373,9 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 			}
 		}
 
+		// TODO: review, see EObjectChangeNotifier
+		collection.clearAllocatedCaches();
+
 		return ops;
 	}
 

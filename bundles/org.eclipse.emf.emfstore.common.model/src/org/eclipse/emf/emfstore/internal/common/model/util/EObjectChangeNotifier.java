@@ -214,9 +214,10 @@ public class EObjectChangeNotifier extends EContentAdapter {
 		}
 
 		collection.forbidIdAllocation();
-		if (!new NotificationInfo(notification).hasNext()) {
-			collection.clearAllocatedCaches();
-		}
+		// TODO: moved clearing of allocation cache to OperationRecorder#recordingFinshed; review
+		// if (!new NotificationInfo(notification).hasNext()) {
+		// collection.clearAllocatedCaches();
+		// }
 	}
 
 	private boolean hasId(Object notifier) {
