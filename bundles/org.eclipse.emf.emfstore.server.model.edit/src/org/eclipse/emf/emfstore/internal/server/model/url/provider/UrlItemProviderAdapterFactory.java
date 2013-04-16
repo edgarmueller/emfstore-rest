@@ -82,8 +82,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl}
-	 * instances.
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -98,7 +98,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Adapter createServerUrlAdapter() {
-		if (serverUrlItemProvider == null) {
+		if (serverUrlItemProvider == null)
+		{
 			serverUrlItemProvider = new ServerUrlItemProvider(this);
 		}
 
@@ -123,7 +124,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Adapter createProjectUrlFragmentAdapter() {
-		if (projectUrlFragmentItemProvider == null) {
+		if (projectUrlFragmentItemProvider == null)
+		{
 			projectUrlFragmentItemProvider = new ProjectUrlFragmentItemProvider(this);
 		}
 
@@ -141,14 +143,16 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	protected ModelElementUrlFragmentItemProvider modelElementUrlFragmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment} . <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment}
+	 * . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createModelElementUrlFragmentAdapter() {
-		if (modelElementUrlFragmentItemProvider == null) {
+		if (modelElementUrlFragmentItemProvider == null)
+		{
 			modelElementUrlFragmentItemProvider = new ModelElementUrlFragmentItemProvider(this);
 		}
 
@@ -173,7 +177,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Adapter createModelElementUrlAdapter() {
-		if (modelElementUrlItemProvider == null) {
+		if (modelElementUrlItemProvider == null)
+		{
 			modelElementUrlItemProvider = new ModelElementUrlItemProvider(this);
 		}
 
@@ -228,9 +233,11 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -268,7 +275,8 @@ public class UrlItemProviderAdapterFactory extends UrlAdapterFactory implements 
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

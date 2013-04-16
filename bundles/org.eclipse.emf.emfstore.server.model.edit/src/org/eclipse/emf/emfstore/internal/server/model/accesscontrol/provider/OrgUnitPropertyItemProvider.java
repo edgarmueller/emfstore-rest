@@ -33,8 +33,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitPrope
 import org.eclipse.emf.emfstore.internal.server.model.provider.ServerEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty}
- * object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -59,7 +59,8 @@ public class OrgUnitPropertyItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -76,13 +77,20 @@ public class OrgUnitPropertyItemProvider extends ItemProviderAdapter implements 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_OrgUnitProperty_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_OrgUnitProperty_name_feature",
-				"_UI_OrgUnitProperty_type"), AccesscontrolPackage.Literals.ORG_UNIT_PROPERTY__NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_OrgUnitProperty_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_OrgUnitProperty_name_feature",
+					"_UI_OrgUnitProperty_type"),
+				AccesscontrolPackage.Literals.ORG_UNIT_PROPERTY__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -92,13 +100,20 @@ public class OrgUnitPropertyItemProvider extends ItemProviderAdapter implements 
 	 * @generated
 	 */
 	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_OrgUnitProperty_value_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_OrgUnitProperty_value_feature",
-				"_UI_OrgUnitProperty_type"), AccesscontrolPackage.Literals.ORG_UNIT_PROPERTY__VALUE, true, false,
-			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_OrgUnitProperty_value_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_OrgUnitProperty_value_feature",
+					"_UI_OrgUnitProperty_type"),
+				AccesscontrolPackage.Literals.ORG_UNIT_PROPERTY__VALUE,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -111,7 +126,8 @@ public class OrgUnitPropertyItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(AccesscontrolPackage.Literals.ORG_UNIT_PROPERTY__PROJECT);
 		}
@@ -153,8 +169,9 @@ public class OrgUnitPropertyItemProvider extends ItemProviderAdapter implements 
 	@Override
 	public String getText(Object object) {
 		String label = ((OrgUnitProperty) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_OrgUnitProperty_type")
-			: getString("_UI_OrgUnitProperty_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_OrgUnitProperty_type") :
+			getString("_UI_OrgUnitProperty_type") + " " + label;
 	}
 
 	/**
@@ -169,7 +186,8 @@ public class OrgUnitPropertyItemProvider extends ItemProviderAdapter implements 
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(OrgUnitProperty.class)) {
+		switch (notification.getFeatureID(OrgUnitProperty.class))
+		{
 		case AccesscontrolPackage.ORG_UNIT_PROPERTY__NAME:
 		case AccesscontrolPackage.ORG_UNIT_PROPERTY__VALUE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -192,8 +210,10 @@ public class OrgUnitPropertyItemProvider extends ItemProviderAdapter implements 
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(AccesscontrolPackage.Literals.ORG_UNIT_PROPERTY__PROJECT,
-			ModelFactory.eINSTANCE.createProjectId()));
+		newChildDescriptors.add
+			(createChildParameter
+			(AccesscontrolPackage.Literals.ORG_UNIT_PROPERTY__PROJECT,
+				ModelFactory.eINSTANCE.createProjectId()));
 	}
 
 	/**

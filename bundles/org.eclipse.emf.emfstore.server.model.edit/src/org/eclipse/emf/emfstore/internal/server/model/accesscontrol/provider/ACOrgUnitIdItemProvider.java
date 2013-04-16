@@ -27,8 +27,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.provider.ServerEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId}
- * object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -53,7 +53,8 @@ public class ACOrgUnitIdItemProvider extends UniqueIdentifierItemProvider implem
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -81,8 +82,9 @@ public class ACOrgUnitIdItemProvider extends UniqueIdentifierItemProvider implem
 	@Override
 	public String getText(Object object) {
 		String label = ((ACOrgUnitId) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_ACOrgUnitId_type")
-			: getString("_UI_ACOrgUnitId_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ACOrgUnitId_type") :
+			getString("_UI_ACOrgUnitId_type") + " " + label;
 	}
 
 	/**

@@ -31,7 +31,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -56,7 +57,8 @@ public class LogMessageItemProvider extends ItemProviderAdapter implements IEdit
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addAuthorPropertyDescriptor(object);
@@ -74,12 +76,20 @@ public class LogMessageItemProvider extends ItemProviderAdapter implements IEdit
 	 * @generated
 	 */
 	protected void addMessagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_LogMessage_message_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_LogMessage_message_feature", "_UI_LogMessage_type"),
-			VersioningPackage.Literals.LOG_MESSAGE__MESSAGE, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+			.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_LogMessage_message_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_LogMessage_message_feature", "_UI_LogMessage_type"),
+				VersioningPackage.Literals.LOG_MESSAGE__MESSAGE,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -90,12 +100,19 @@ public class LogMessageItemProvider extends ItemProviderAdapter implements IEdit
 	 * @generated
 	 */
 	protected void addDatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_LogMessage_date_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_LogMessage_date_feature", "_UI_LogMessage_type"),
-			VersioningPackage.Literals.LOG_MESSAGE__DATE, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_LogMessage_date_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_LogMessage_date_feature", "_UI_LogMessage_type"),
+				VersioningPackage.Literals.LOG_MESSAGE__DATE,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -105,14 +122,20 @@ public class LogMessageItemProvider extends ItemProviderAdapter implements IEdit
 	 * @generated
 	 */
 	protected void addClientDatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
 				getString("_UI_LogMessage_clientDate_feature"),
 				getString("_UI_PropertyDescriptor_description", "_UI_LogMessage_clientDate_feature",
-					"_UI_LogMessage_type"), VersioningPackage.Literals.LOG_MESSAGE__CLIENT_DATE, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+					"_UI_LogMessage_type"),
+				VersioningPackage.Literals.LOG_MESSAGE__CLIENT_DATE,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -122,12 +145,20 @@ public class LogMessageItemProvider extends ItemProviderAdapter implements IEdit
 	 * @generated
 	 */
 	protected void addAuthorPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_LogMessage_author_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_LogMessage_author_feature", "_UI_LogMessage_type"),
-			VersioningPackage.Literals.LOG_MESSAGE__AUTHOR, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+			.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_LogMessage_author_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_LogMessage_author_feature", "_UI_LogMessage_type"),
+				VersioningPackage.Literals.LOG_MESSAGE__AUTHOR,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -151,8 +182,9 @@ public class LogMessageItemProvider extends ItemProviderAdapter implements IEdit
 	@Override
 	public String getText(Object object) {
 		String label = ((LogMessage) object).getAuthor();
-		return label == null || label.length() == 0 ? getString("_UI_LogMessage_type")
-			: getString("_UI_LogMessage_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_LogMessage_type") :
+			getString("_UI_LogMessage_type") + " " + label;
 	}
 
 	/**
@@ -167,7 +199,8 @@ public class LogMessageItemProvider extends ItemProviderAdapter implements IEdit
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(LogMessage.class)) {
+		switch (notification.getFeatureID(LogMessage.class))
+		{
 		case VersioningPackage.LOG_MESSAGE__AUTHOR:
 		case VersioningPackage.LOG_MESSAGE__MESSAGE:
 		case VersioningPackage.LOG_MESSAGE__DATE:

@@ -30,7 +30,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.Accesscontro
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -55,7 +56,8 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addFirstNamePropertyDescriptor(object);
@@ -71,12 +73,19 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 	 * @generated
 	 */
 	protected void addFirstNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ACUser_firstName_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ACUser_firstName_feature", "_UI_ACUser_type"),
-			AccesscontrolPackage.Literals.AC_USER__FIRST_NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ACUser_firstName_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ACUser_firstName_feature", "_UI_ACUser_type"),
+				AccesscontrolPackage.Literals.AC_USER__FIRST_NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -86,12 +95,19 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 	 * @generated
 	 */
 	protected void addLastNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ACUser_lastName_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ACUser_lastName_feature", "_UI_ACUser_type"),
-			AccesscontrolPackage.Literals.AC_USER__LAST_NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ACUser_lastName_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ACUser_lastName_feature", "_UI_ACUser_type"),
+				AccesscontrolPackage.Literals.AC_USER__LAST_NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -104,7 +120,8 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(AccesscontrolPackage.Literals.AC_USER__EFFECTIVE_GROUPS);
 		}
@@ -145,8 +162,9 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 	@Override
 	public String getText(Object object) {
 		String label = ((ACUser) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_ACUser_type") : getString("_UI_ACUser_type") + " "
-			+ label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ACUser_type") :
+			getString("_UI_ACUser_type") + " " + label;
 	}
 
 	/**
@@ -161,7 +179,8 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ACUser.class)) {
+		switch (notification.getFeatureID(ACUser.class))
+		{
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
 		case AccesscontrolPackage.AC_USER__LAST_NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -184,8 +203,10 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(AccesscontrolPackage.Literals.AC_USER__EFFECTIVE_GROUPS,
-			AccesscontrolFactory.eINSTANCE.createACGroup()));
+		newChildDescriptors.add
+			(createChildParameter
+			(AccesscontrolPackage.Literals.AC_USER__EFFECTIVE_GROUPS,
+				AccesscontrolFactory.eINSTANCE.createACGroup()));
 	}
 
 }

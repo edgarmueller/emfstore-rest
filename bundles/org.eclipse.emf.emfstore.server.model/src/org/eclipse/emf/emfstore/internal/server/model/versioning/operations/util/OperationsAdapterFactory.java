@@ -41,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Sing
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
+ * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage
  * @generated
  */
@@ -48,6 +49,7 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected static OperationsPackage modelPackage;
@@ -56,10 +58,12 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * Creates an instance of the adapter factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public OperationsAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = OperationsPackage.eINSTANCE;
 		}
 	}
@@ -69,16 +73,19 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This implementation returns <code>true</code> if
 	 * the object is either the model's package or is an instance object of the
 	 * model. <!-- end-user-doc -->
+	 * 
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
+		if (object instanceof EObject)
+		{
+			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -89,108 +96,152 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * 
 	 * @generated
 	 */
-	protected OperationsSwitch<Adapter> modelSwitch = new OperationsSwitch<Adapter>() {
-			@Override
-			public Adapter caseAbstractOperation(AbstractOperation object) {
-				return createAbstractOperationAdapter();
-			}
-			@Override
-			public Adapter caseCompositeOperation(CompositeOperation object) {
-				return createCompositeOperationAdapter();
-			}
-			@Override
-			public Adapter caseFeatureOperation(FeatureOperation object) {
-				return createFeatureOperationAdapter();
-			}
-			@Override
-			public Adapter caseCreateDeleteOperation(CreateDeleteOperation object) {
-				return createCreateDeleteOperationAdapter();
-			}
-			@Override
-			public Adapter caseAttributeOperation(AttributeOperation object) {
-				return createAttributeOperationAdapter();
-			}
-			@Override
-			public Adapter caseMultiAttributeOperation(MultiAttributeOperation object) {
-				return createMultiAttributeOperationAdapter();
-			}
-			@Override
-			public Adapter caseMultiAttributeSetOperation(MultiAttributeSetOperation object) {
-				return createMultiAttributeSetOperationAdapter();
-			}
-			@Override
-			public Adapter caseMultiAttributeMoveOperation(MultiAttributeMoveOperation object) {
-				return createMultiAttributeMoveOperationAdapter();
-			}
-			@Override
-			public Adapter caseSingleReferenceOperation(SingleReferenceOperation object) {
-				return createSingleReferenceOperationAdapter();
-			}
-			@Override
-			public Adapter caseMultiReferenceSetOperation(MultiReferenceSetOperation object) {
-				return createMultiReferenceSetOperationAdapter();
-			}
-			@Override
-			public Adapter caseMultiReferenceOperation(MultiReferenceOperation object) {
-				return createMultiReferenceOperationAdapter();
-			}
-			@Override
-			public Adapter caseMultiReferenceMoveOperation(MultiReferenceMoveOperation object) {
-				return createMultiReferenceMoveOperationAdapter();
-			}
-			@Override
-			public Adapter caseReferenceOperation(ReferenceOperation object) {
-				return createReferenceOperationAdapter();
-			}
-			@Override
-			public Adapter caseOperationId(OperationId object) {
-				return createOperationIdAdapter();
-			}
-			@Override
-			public Adapter caseOperationGroup(OperationGroup object) {
-				return createOperationGroupAdapter();
-			}
-			@Override
-			public Adapter caseModelElementGroup(ModelElementGroup object) {
-				return createModelElementGroupAdapter();
-			}
-			@Override
-			public Adapter caseEObjectToModelElementIdMap(Map.Entry<EObject, ModelElementId> object) {
-				return createEObjectToModelElementIdMapAdapter();
-			}
-			@Override
-			public Adapter caseIdentifiableElement(IdentifiableElement object) {
-				return createIdentifiableElementAdapter();
-			}
-			@Override
-			public Adapter caseUniqueIdentifier(UniqueIdentifier object) {
-				return createUniqueIdentifierAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+	protected OperationsSwitch<Adapter> modelSwitch = new OperationsSwitch<Adapter>()
+	{
+		@Override
+		public Adapter caseAbstractOperation(AbstractOperation object)
+		{
+			return createAbstractOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseCompositeOperation(CompositeOperation object)
+		{
+			return createCompositeOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseFeatureOperation(FeatureOperation object)
+		{
+			return createFeatureOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseCreateDeleteOperation(CreateDeleteOperation object)
+		{
+			return createCreateDeleteOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseAttributeOperation(AttributeOperation object)
+		{
+			return createAttributeOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseMultiAttributeOperation(MultiAttributeOperation object)
+		{
+			return createMultiAttributeOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseMultiAttributeSetOperation(MultiAttributeSetOperation object)
+		{
+			return createMultiAttributeSetOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseMultiAttributeMoveOperation(MultiAttributeMoveOperation object)
+		{
+			return createMultiAttributeMoveOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseSingleReferenceOperation(SingleReferenceOperation object)
+		{
+			return createSingleReferenceOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseMultiReferenceSetOperation(MultiReferenceSetOperation object)
+		{
+			return createMultiReferenceSetOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseMultiReferenceOperation(MultiReferenceOperation object)
+		{
+			return createMultiReferenceOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseMultiReferenceMoveOperation(MultiReferenceMoveOperation object)
+		{
+			return createMultiReferenceMoveOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseReferenceOperation(ReferenceOperation object)
+		{
+			return createReferenceOperationAdapter();
+		}
+
+		@Override
+		public Adapter caseOperationId(OperationId object)
+		{
+			return createOperationIdAdapter();
+		}
+
+		@Override
+		public Adapter caseOperationGroup(OperationGroup object)
+		{
+			return createOperationGroupAdapter();
+		}
+
+		@Override
+		public Adapter caseModelElementGroup(ModelElementGroup object)
+		{
+			return createModelElementGroupAdapter();
+		}
+
+		@Override
+		public Adapter caseEObjectToModelElementIdMap(Map.Entry<EObject, ModelElementId> object)
+		{
+			return createEObjectToModelElementIdMapAdapter();
+		}
+
+		@Override
+		public Adapter caseIdentifiableElement(IdentifiableElement object)
+		{
+			return createIdentifiableElementAdapter();
+		}
+
+		@Override
+		public Adapter caseUniqueIdentifier(UniqueIdentifier object)
+		{
+			return createUniqueIdentifierAdapter();
+		}
+
+		@Override
+		public Adapter defaultCase(EObject object)
+		{
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject) target);
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation <em>Abstract Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation
+	 * <em>Abstract Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation
 	 * @generated
@@ -200,11 +251,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation <em>Composite Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation
+	 * <em>Composite Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation
 	 * @generated
@@ -214,11 +268,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation <em>Feature Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation
+	 * <em>Feature Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation
 	 * @generated
@@ -228,11 +285,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation <em>Create Delete Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation
+	 * <em>Create Delete Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation
 	 * @generated
@@ -242,11 +302,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation <em>Attribute Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation
+	 * <em>Attribute Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation
 	 * @generated
@@ -256,11 +319,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation <em>Multi Attribute Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation
+	 * <em>Multi Attribute Operation</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation
 	 * @generated
@@ -270,11 +336,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation <em>Multi Attribute Set Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation
+	 * <em>Multi Attribute Set Operation</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation
 	 * @generated
@@ -284,11 +353,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation <em>Multi Attribute Move Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation
+	 * <em>Multi Attribute Move Operation</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation
 	 * @generated
@@ -298,11 +370,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation <em>Single Reference Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation
+	 * <em>Single Reference Operation</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation
 	 * @generated
@@ -312,11 +387,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation <em>Multi Reference Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation
+	 * <em>Multi Reference Operation</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation
 	 * @generated
@@ -326,11 +404,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation <em>Multi Reference Set Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation
+	 * <em>Multi Reference Set Operation</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation
 	 * @generated
@@ -340,11 +421,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation <em>Multi Reference Move Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation
+	 * <em>Multi Reference Move Operation</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation
 	 * @generated
@@ -354,11 +438,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation <em>Reference Operation</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation
+	 * <em>Reference Operation</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation
 	 * @generated
@@ -368,11 +455,13 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId <em>Operation Id</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId <em>Operation Id</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId
 	 * @generated
@@ -382,11 +471,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup <em>Operation Group</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup
+	 * <em>Operation Group</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup
 	 * @generated
@@ -396,11 +488,14 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup <em>Model Element Group</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup
+	 * <em>Model Element Group</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ModelElementGroup
 	 * @generated
@@ -410,11 +505,13 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>EObject To Model Element Id Map</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry
+	 * <em>EObject To Model Element Id Map</em>}'.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases
 	 * anyway. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see java.util.Map.Entry
 	 * @generated
@@ -424,11 +521,13 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement <em>Identifiable Element</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement <em>Identifiable Element</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement
 	 * @generated
@@ -438,11 +537,13 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier <em>Unique Identifier</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier <em>Unique Identifier</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @see org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier
 	 * @generated
@@ -455,6 +556,7 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * Creates a new adapter for the default case.
 	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
+	 * 
 	 * @return the new adapter.
 	 * @generated
 	 */

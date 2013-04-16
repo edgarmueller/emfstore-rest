@@ -33,7 +33,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.Accesscontro
 import org.eclipse.emf.emfstore.internal.server.model.provider.ServerEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit} object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -58,7 +59,8 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -76,12 +78,19 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ACOrgUnit_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ACOrgUnit_name_feature", "_UI_ACOrgUnit_type"),
-			AccesscontrolPackage.Literals.AC_ORG_UNIT__NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ACOrgUnit_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ACOrgUnit_name_feature", "_UI_ACOrgUnit_type"),
+				AccesscontrolPackage.Literals.AC_ORG_UNIT__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -91,11 +100,19 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	 * @generated
 	 */
 	protected void addRolesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ACOrgUnit_roles_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ACOrgUnit_roles_feature", "_UI_ACOrgUnit_type"),
-			AccesscontrolPackage.Literals.AC_ORG_UNIT__ROLES, true, false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ACOrgUnit_roles_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ACOrgUnit_roles_feature", "_UI_ACOrgUnit_type"),
+				AccesscontrolPackage.Literals.AC_ORG_UNIT__ROLES,
+				true,
+				false,
+				true,
+				null,
+				null,
+				null));
 	}
 
 	/**
@@ -105,12 +122,20 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	 * @generated
 	 */
 	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_ACOrgUnit_description_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ACOrgUnit_description_feature", "_UI_ACOrgUnit_type"),
-			AccesscontrolPackage.Literals.AC_ORG_UNIT__DESCRIPTION, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ACOrgUnit_description_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ACOrgUnit_description_feature",
+					"_UI_ACOrgUnit_type"),
+				AccesscontrolPackage.Literals.AC_ORG_UNIT__DESCRIPTION,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -123,7 +148,8 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(AccesscontrolPackage.Literals.AC_ORG_UNIT__PROPERTIES);
 		}
@@ -164,8 +190,9 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	@Override
 	public String getText(Object object) {
 		String label = ((ACOrgUnit) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_ACOrgUnit_type") : getString("_UI_ACOrgUnit_type")
-			+ " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ACOrgUnit_type") :
+			getString("_UI_ACOrgUnit_type") + " " + label;
 	}
 
 	/**
@@ -180,7 +207,8 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ACOrgUnit.class)) {
+		switch (notification.getFeatureID(ACOrgUnit.class))
+		{
 		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
 		case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -203,8 +231,10 @@ public class ACOrgUnitItemProvider extends IdentifiableElementItemProvider imple
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(AccesscontrolPackage.Literals.AC_ORG_UNIT__PROPERTIES,
-			AccesscontrolFactory.eINSTANCE.createOrgUnitProperty()));
+		newChildDescriptors.add
+			(createChildParameter
+			(AccesscontrolPackage.Literals.AC_ORG_UNIT__PROPERTIES,
+				AccesscontrolFactory.eINSTANCE.createOrgUnitProperty()));
 	}
 
 	/**

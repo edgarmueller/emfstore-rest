@@ -57,7 +57,7 @@ public interface ProjectHistory extends EObject {
 	 * 
 	 * @return the value of the '<em>Project Id</em>' containment reference.
 	 * @see #setProjectId(ProjectId)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectHistory_ProjectId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectHistory_ProjectId()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -77,7 +77,8 @@ public interface ProjectHistory extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Versions</b></em>' containment reference
-	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version}. <!--
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version}.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Versions</em>' containment reference list isn't clear, there really should be more of
@@ -140,14 +141,15 @@ public interface ProjectHistory extends EObject {
 	 * 
 	 * @return the value of the '<em>Project Description</em>' attribute.
 	 * @see #setProjectDescription(String)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectHistory_ProjectDescription()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectHistory_ProjectDescription()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getProjectDescription();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory#getProjectDescription
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory#getProjectDescription
 	 * <em>Project Description</em>}' attribute.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -160,7 +162,8 @@ public interface ProjectHistory extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Shared Properties</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -179,7 +182,8 @@ public interface ProjectHistory extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Branches</b></em>' containment reference
-	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo}. <!--
+	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo}.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Branches</em>' containment reference list isn't clear, there really should be more of

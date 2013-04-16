@@ -30,7 +30,8 @@ import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.internal.server.model.ModelPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo}
+ * object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -55,7 +56,8 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addVersionPropertyDescriptor(object);
@@ -71,13 +73,20 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	 * @generated
 	 */
 	protected void addVersionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_ClientVersionInfo_version_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ClientVersionInfo_version_feature",
-				"_UI_ClientVersionInfo_type"), ModelPackage.Literals.CLIENT_VERSION_INFO__VERSION, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ClientVersionInfo_version_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ClientVersionInfo_version_feature",
+					"_UI_ClientVersionInfo_type"),
+				ModelPackage.Literals.CLIENT_VERSION_INFO__VERSION,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -88,13 +97,20 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_ClientVersionInfo_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ClientVersionInfo_name_feature",
-				"_UI_ClientVersionInfo_type"), ModelPackage.Literals.CLIENT_VERSION_INFO__NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ClientVersionInfo_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ClientVersionInfo_name_feature",
+					"_UI_ClientVersionInfo_type"),
+				ModelPackage.Literals.CLIENT_VERSION_INFO__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -119,8 +135,9 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	@Override
 	public String getText(Object object) {
 		String label = ((ClientVersionInfo) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_ClientVersionInfo_type")
-			: getString("_UI_ClientVersionInfo_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ClientVersionInfo_type") :
+			getString("_UI_ClientVersionInfo_type") + " " + label;
 	}
 
 	/**
@@ -135,7 +152,8 @@ public class ClientVersionInfoItemProvider extends ItemProviderAdapter implement
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ClientVersionInfo.class)) {
+		switch (notification.getFeatureID(ClientVersionInfo.class))
+		{
 		case ModelPackage.CLIENT_VERSION_INFO__VERSION:
 		case ModelPackage.CLIENT_VERSION_INFO__NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

@@ -56,7 +56,8 @@ public class ProjectUpdatedEventItemProvider extends ServerProjectEventItemProvi
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -73,7 +74,8 @@ public class ProjectUpdatedEventItemProvider extends ServerProjectEventItemProvi
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ServerPackage.Literals.PROJECT_UPDATED_EVENT__NEW_VERSION);
 		}
@@ -116,8 +118,9 @@ public class ProjectUpdatedEventItemProvider extends ServerProjectEventItemProvi
 	public String getText(Object object) {
 		Date labelValue = ((ProjectUpdatedEvent) object).getTimestamp();
 		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ? getString("_UI_ProjectUpdatedEvent_type")
-			: getString("_UI_ProjectUpdatedEvent_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ProjectUpdatedEvent_type") :
+			getString("_UI_ProjectUpdatedEvent_type") + " " + label;
 	}
 
 	/**
@@ -132,7 +135,8 @@ public class ProjectUpdatedEventItemProvider extends ServerProjectEventItemProvi
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ProjectUpdatedEvent.class)) {
+		switch (notification.getFeatureID(ProjectUpdatedEvent.class))
+		{
 		case ServerPackage.PROJECT_UPDATED_EVENT__NEW_VERSION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -151,8 +155,10 @@ public class ProjectUpdatedEventItemProvider extends ServerProjectEventItemProvi
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(ServerPackage.Literals.PROJECT_UPDATED_EVENT__NEW_VERSION,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(ServerPackage.Literals.PROJECT_UPDATED_EVENT__NEW_VERSION,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 	}
 
 }

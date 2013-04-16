@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec}
- * object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.AncestorVersionSpec} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -54,7 +54,8 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider imp
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -71,7 +72,8 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider imp
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET);
 			childrenFeatures.add(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE);
@@ -114,8 +116,9 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider imp
 	@Override
 	public String getText(Object object) {
 		String label = ((AncestorVersionSpec) object).getBranch();
-		return label == null || label.length() == 0 ? getString("_UI_AncestorVersionSpec_type")
-			: getString("_UI_AncestorVersionSpec_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_AncestorVersionSpec_type") :
+			getString("_UI_AncestorVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -130,7 +133,8 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider imp
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AncestorVersionSpec.class)) {
+		switch (notification.getFeatureID(AncestorVersionSpec.class))
+		{
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET:
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__SOURCE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -150,11 +154,15 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider imp
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 	}
 
 	/**
@@ -168,12 +176,14 @@ public class AncestorVersionSpecItemProvider extends VersionSpecItemProvider imp
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET
-			|| childFeature == VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE;
+		boolean qualify =
+			childFeature == VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__TARGET ||
+				childFeature == VersioningPackage.Literals.ANCESTOR_VERSION_SPEC__SOURCE;
 
-		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
-				getFeatureText(childFeature), getTypeText(owner) });
+		if (qualify)
+		{
+			return getString("_UI_CreateChild_text2",
+				new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

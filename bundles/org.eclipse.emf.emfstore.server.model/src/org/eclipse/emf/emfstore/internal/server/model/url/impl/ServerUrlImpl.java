@@ -22,17 +22,18 @@ import org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ServerUrlImpl#getHostName <em>Host Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ServerUrlImpl#getPort <em>Port</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ServerUrlImpl#getHostName <em>Host Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.impl.ServerUrlImpl#getPort <em>Port</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	/**
 	 * The default value of the '{@link #getHostName() <em>Host Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getHostName()
 	 * @generated
 	 * @ordered
@@ -42,6 +43,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	/**
 	 * The cached value of the '{@link #getHostName() <em>Host Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getHostName()
 	 * @generated
 	 * @ordered
@@ -51,6 +53,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	/**
 	 * The default value of the '{@link #getPort() <em>Port</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPort()
 	 * @generated
 	 * @ordered
@@ -60,6 +63,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 	/**
 	 * The cached value of the '{@link #getPort() <em>Port</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPort()
 	 * @generated
 	 * @ordered
@@ -68,6 +72,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ServerUrlImpl() {
@@ -76,6 +81,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -85,6 +91,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getHostName() {
@@ -93,17 +100,20 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setHostName(String newHostName) {
 		String oldHostName = hostName;
 		hostName = newHostName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.SERVER_URL__HOST_NAME, oldHostName, hostName));
+			eNotify(new ENotificationImpl(this, Notification.SET, UrlPackage.SERVER_URL__HOST_NAME, oldHostName,
+				hostName));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getPort() {
@@ -112,6 +122,7 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setPort(int newPort) {
@@ -123,75 +134,85 @@ public class ServerUrlImpl extends EObjectImpl implements ServerUrl {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case UrlPackage.SERVER_URL__HOST_NAME:
-				return getHostName();
-			case UrlPackage.SERVER_URL__PORT:
-				return getPort();
+		switch (featureID)
+		{
+		case UrlPackage.SERVER_URL__HOST_NAME:
+			return getHostName();
+		case UrlPackage.SERVER_URL__PORT:
+			return getPort();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case UrlPackage.SERVER_URL__HOST_NAME:
-				setHostName((String)newValue);
-				return;
-			case UrlPackage.SERVER_URL__PORT:
-				setPort((Integer)newValue);
-				return;
+		switch (featureID)
+		{
+		case UrlPackage.SERVER_URL__HOST_NAME:
+			setHostName((String) newValue);
+			return;
+		case UrlPackage.SERVER_URL__PORT:
+			setPort((Integer) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case UrlPackage.SERVER_URL__HOST_NAME:
-				setHostName(HOST_NAME_EDEFAULT);
-				return;
-			case UrlPackage.SERVER_URL__PORT:
-				setPort(PORT_EDEFAULT);
-				return;
+		switch (featureID)
+		{
+		case UrlPackage.SERVER_URL__HOST_NAME:
+			setHostName(HOST_NAME_EDEFAULT);
+			return;
+		case UrlPackage.SERVER_URL__PORT:
+			setPort(PORT_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case UrlPackage.SERVER_URL__HOST_NAME:
-				return HOST_NAME_EDEFAULT == null ? hostName != null : !HOST_NAME_EDEFAULT.equals(hostName);
-			case UrlPackage.SERVER_URL__PORT:
-				return port != PORT_EDEFAULT;
+		switch (featureID)
+		{
+		case UrlPackage.SERVER_URL__HOST_NAME:
+			return HOST_NAME_EDEFAULT == null ? hostName != null : !HOST_NAME_EDEFAULT.equals(hostName);
+		case UrlPackage.SERVER_URL__PORT:
+			return port != PORT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (hostName: ");

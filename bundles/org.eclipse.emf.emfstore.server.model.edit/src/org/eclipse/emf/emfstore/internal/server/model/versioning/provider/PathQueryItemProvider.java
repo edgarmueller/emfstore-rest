@@ -28,7 +28,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -53,7 +54,8 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements I
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -70,7 +72,8 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements I
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(VersioningPackage.Literals.PATH_QUERY__TARGET);
 		}
@@ -126,7 +129,8 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements I
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(PathQuery.class)) {
+		switch (notification.getFeatureID(PathQuery.class))
+		{
 		case VersioningPackage.PATH_QUERY__TARGET:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -145,8 +149,10 @@ public class PathQueryItemProvider extends HistoryQueryItemProvider implements I
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.PATH_QUERY__TARGET,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.PATH_QUERY__TARGET,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 	}
 
 }

@@ -33,7 +33,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -58,7 +59,8 @@ public class BranchInfoItemProvider extends ItemProviderAdapter implements IEdit
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
@@ -74,12 +76,19 @@ public class BranchInfoItemProvider extends ItemProviderAdapter implements IEdit
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-			getString("_UI_BranchInfo_name_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_BranchInfo_name_feature", "_UI_BranchInfo_type"),
-			VersioningPackage.Literals.BRANCH_INFO__NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_BranchInfo_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_BranchInfo_name_feature", "_UI_BranchInfo_type"),
+				VersioningPackage.Literals.BRANCH_INFO__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -92,7 +101,8 @@ public class BranchInfoItemProvider extends ItemProviderAdapter implements IEdit
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(VersioningPackage.Literals.BRANCH_INFO__HEAD);
 			childrenFeatures.add(VersioningPackage.Literals.BRANCH_INFO__SOURCE);
@@ -134,8 +144,9 @@ public class BranchInfoItemProvider extends ItemProviderAdapter implements IEdit
 	@Override
 	public String getText(Object object) {
 		String label = ((BranchInfo) object).getName();
-		return label == null || label.length() == 0 ? getString("_UI_BranchInfo_type")
-			: getString("_UI_BranchInfo_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_BranchInfo_type") :
+			getString("_UI_BranchInfo_type") + " " + label;
 	}
 
 	/**
@@ -150,7 +161,8 @@ public class BranchInfoItemProvider extends ItemProviderAdapter implements IEdit
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BranchInfo.class)) {
+		switch (notification.getFeatureID(BranchInfo.class))
+		{
 		case VersioningPackage.BRANCH_INFO__NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
@@ -173,11 +185,15 @@ public class BranchInfoItemProvider extends ItemProviderAdapter implements IEdit
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.BRANCH_INFO__HEAD,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.BRANCH_INFO__HEAD,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
-		newChildDescriptors.add(createChildParameter(VersioningPackage.Literals.BRANCH_INFO__SOURCE,
-			VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+			(VersioningPackage.Literals.BRANCH_INFO__SOURCE,
+				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 	}
 
 	/**
@@ -191,12 +207,14 @@ public class BranchInfoItemProvider extends ItemProviderAdapter implements IEdit
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == VersioningPackage.Literals.BRANCH_INFO__HEAD
-			|| childFeature == VersioningPackage.Literals.BRANCH_INFO__SOURCE;
+		boolean qualify =
+			childFeature == VersioningPackage.Literals.BRANCH_INFO__HEAD ||
+				childFeature == VersioningPackage.Literals.BRANCH_INFO__SOURCE;
 
-		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] { getTypeText(childObject),
-				getFeatureText(childFeature), getTypeText(owner) });
+		if (qualify)
+		{
+			return getString("_UI_CreateChild_text2",
+				new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

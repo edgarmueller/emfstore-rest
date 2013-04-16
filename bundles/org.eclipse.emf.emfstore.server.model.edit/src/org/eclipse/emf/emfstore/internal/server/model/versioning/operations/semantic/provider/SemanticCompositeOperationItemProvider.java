@@ -35,7 +35,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.sema
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation} object. <!--
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticCompositeOperation}
+ * object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -61,7 +62,8 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -78,8 +80,9 @@ public class SemanticCompositeOperationItemProvider extends CompositeOperationIt
 	@Override
 	public String getText(Object object) {
 		String label = ((SemanticCompositeOperation) object).getCompositeName();
-		return label == null || label.length() == 0 ? getString("_UI_SemanticCompositeOperation_type")
-			: getString("_UI_SemanticCompositeOperation_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_SemanticCompositeOperation_type") :
+			getString("_UI_SemanticCompositeOperation_type") + " " + label;
 	}
 
 	/**

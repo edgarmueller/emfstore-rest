@@ -92,14 +92,16 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	protected ReaderRoleItemProvider readerRoleItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ReaderRole} . <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ReaderRole} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createReaderRoleAdapter() {
-		if (readerRoleItemProvider == null) {
+		if (readerRoleItemProvider == null)
+		{
 			readerRoleItemProvider = new ReaderRoleItemProvider(this);
 		}
 
@@ -117,14 +119,16 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	protected WriterRoleItemProvider writerRoleItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.WriterRole} . <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.WriterRole} . <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createWriterRoleAdapter() {
-		if (writerRoleItemProvider == null) {
+		if (writerRoleItemProvider == null)
+		{
 			writerRoleItemProvider = new WriterRoleItemProvider(this);
 		}
 
@@ -142,14 +146,16 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	protected ProjectAdminRoleItemProvider projectAdminRoleItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ProjectAdminRole}.
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ProjectAdminRole}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createProjectAdminRoleAdapter() {
-		if (projectAdminRoleItemProvider == null) {
+		if (projectAdminRoleItemProvider == null)
+		{
 			projectAdminRoleItemProvider = new ProjectAdminRoleItemProvider(this);
 		}
 
@@ -167,14 +173,16 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	protected ServerAdminItemProvider serverAdminItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin}.
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Adapter createServerAdminAdapter() {
-		if (serverAdminItemProvider == null) {
+		if (serverAdminItemProvider == null)
+		{
 			serverAdminItemProvider = new ServerAdminItemProvider(this);
 		}
 
@@ -229,9 +237,11 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -269,7 +279,8 @@ public class RolesItemProviderAdapterFactory extends RolesAdapterFactory impleme
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

@@ -19,12 +19,12 @@ import org.osgi.framework.Version;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString <em>Emf Store Version String
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString <em>Emf Store Version
+ * String</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getVersionInfo()
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getVersionInfo()
  * @model
  * @generated
  */
@@ -40,14 +40,15 @@ public interface VersionInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Emf Store Version String</em>' attribute.
 	 * @see #setEmfStoreVersionString(String)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getVersionInfo_EmfStoreVersionString()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getVersionInfo_EmfStoreVersionString()
 	 * @model
 	 * @generated
 	 */
 	String getEmfStoreVersionString();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
 	 * <em>Emf Store Version String</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,7 +69,8 @@ public interface VersionInfo extends EObject {
 	Version getEmfStoreVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.VersionInfo#getEmfStoreVersionString
 	 * <em>Emf Store Version String</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 

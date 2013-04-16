@@ -14,15 +14,15 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Url</b></em>'. <!-- end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getHostName <em>Host Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getPort <em>Port</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getHostName <em>Host Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getPort <em>Port</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage#getServerUrl()
  * @model
  * @generated
@@ -74,8 +74,10 @@ public interface ServerUrl extends EObject {
 	int getPort();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getPort <em>Port</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl#getPort <em>Port</em>}
+	 * ' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Port</em>' attribute.
 	 * @see #getPort()
 	 * @generated

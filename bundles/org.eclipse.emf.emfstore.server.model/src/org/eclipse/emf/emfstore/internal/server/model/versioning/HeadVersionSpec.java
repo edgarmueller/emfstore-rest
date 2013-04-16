@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESHeadVersionSpec;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Head Version Spec</b></em>'.
  * 
- * @extends APIDelegate<ESHeadVersionSpecImpl>
+ * @extends APIDelegate<ESHeadVersionSpec>
  *          <!-- end-user-doc
  *          -->
  * 

@@ -28,7 +28,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -53,7 +54,8 @@ public class RangeQueryItemProvider extends HistoryQueryItemProvider implements 
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addUpperLimitPropertyDescriptor(object);
@@ -71,14 +73,20 @@ public class RangeQueryItemProvider extends HistoryQueryItemProvider implements 
 	 * @generated
 	 */
 	protected void addUpperLimitPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
 				getString("_UI_RangeQuery_upperLimit_feature"),
 				getString("_UI_PropertyDescriptor_description", "_UI_RangeQuery_upperLimit_feature",
-					"_UI_RangeQuery_type"), VersioningPackage.Literals.RANGE_QUERY__UPPER_LIMIT, true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+					"_UI_RangeQuery_type"),
+				VersioningPackage.Literals.RANGE_QUERY__UPPER_LIMIT,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -88,14 +96,20 @@ public class RangeQueryItemProvider extends HistoryQueryItemProvider implements 
 	 * @generated
 	 */
 	protected void addLowerLimitPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
 				getString("_UI_RangeQuery_lowerLimit_feature"),
 				getString("_UI_PropertyDescriptor_description", "_UI_RangeQuery_lowerLimit_feature",
-					"_UI_RangeQuery_type"), VersioningPackage.Literals.RANGE_QUERY__LOWER_LIMIT, true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+					"_UI_RangeQuery_type"),
+				VersioningPackage.Literals.RANGE_QUERY__LOWER_LIMIT,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -105,13 +119,20 @@ public class RangeQueryItemProvider extends HistoryQueryItemProvider implements 
 	 * @generated
 	 */
 	protected void addIncludeIncomingPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_RangeQuery_includeIncoming_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_RangeQuery_includeIncoming_feature",
-				"_UI_RangeQuery_type"), VersioningPackage.Literals.RANGE_QUERY__INCLUDE_INCOMING, true, false, false,
-			ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_RangeQuery_includeIncoming_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_RangeQuery_includeIncoming_feature",
+					"_UI_RangeQuery_type"),
+				VersioningPackage.Literals.RANGE_QUERY__INCLUDE_INCOMING,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -121,13 +142,20 @@ public class RangeQueryItemProvider extends HistoryQueryItemProvider implements 
 	 * @generated
 	 */
 	protected void addIncludeOutgoingPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_RangeQuery_includeOutgoing_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_RangeQuery_includeOutgoing_feature",
-				"_UI_RangeQuery_type"), VersioningPackage.Literals.RANGE_QUERY__INCLUDE_OUTGOING, true, false, false,
-			ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_RangeQuery_includeOutgoing_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_RangeQuery_includeOutgoing_feature",
+					"_UI_RangeQuery_type"),
+				VersioningPackage.Literals.RANGE_QUERY__INCLUDE_OUTGOING,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -166,7 +194,8 @@ public class RangeQueryItemProvider extends HistoryQueryItemProvider implements 
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(RangeQuery.class)) {
+		switch (notification.getFeatureID(RangeQuery.class))
+		{
 		case VersioningPackage.RANGE_QUERY__UPPER_LIMIT:
 		case VersioningPackage.RANGE_QUERY__LOWER_LIMIT:
 		case VersioningPackage.RANGE_QUERY__INCLUDE_INCOMING:

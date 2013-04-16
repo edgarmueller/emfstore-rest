@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.server.model.ESSessionId;
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Session Id</b></em>'.
  * 
  * @implements SessionId
- * @implements APIDelegate<ESSessionIdImpl>
+ * @implements APIDelegate<ESSessionId>
  *             <!-- end-user-doc -->
  *             <p>
  *             </p>

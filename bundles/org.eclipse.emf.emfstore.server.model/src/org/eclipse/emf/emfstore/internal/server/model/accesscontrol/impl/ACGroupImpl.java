@@ -24,16 +24,18 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.Accesscontro
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACGroupImpl#getMembers <em>Members</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACGroupImpl#getMembers <em>Members</em>}
+ * </li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ACGroupImpl extends ACOrgUnitImpl implements ACGroup {
 	/**
 	 * The cached value of the '{@link #getMembers() <em>Members</em>}' reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getMembers()
 	 * @generated
 	 * @ordered
@@ -42,6 +44,7 @@ public class ACGroupImpl extends ACOrgUnitImpl implements ACGroup {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ACGroupImpl() {
@@ -50,6 +53,7 @@ public class ACGroupImpl extends ACOrgUnitImpl implements ACGroup {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -86,56 +90,64 @@ public class ACGroupImpl extends ACOrgUnitImpl implements ACGroup {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_GROUP__MEMBERS:
-				return getMembers();
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_GROUP__MEMBERS:
+			return getMembers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_GROUP__MEMBERS:
-				getMembers().clear();
-				getMembers().addAll((Collection<? extends ACOrgUnit>)newValue);
-				return;
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_GROUP__MEMBERS:
+			getMembers().clear();
+			getMembers().addAll((Collection<? extends ACOrgUnit>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_GROUP__MEMBERS:
-				getMembers().clear();
-				return;
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_GROUP__MEMBERS:
+			getMembers().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_GROUP__MEMBERS:
-				return members != null && !members.isEmpty();
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_GROUP__MEMBERS:
+			return members != null && !members.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

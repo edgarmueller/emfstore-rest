@@ -83,7 +83,8 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory imple
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.events.server.ProjectUpdatedEvent} instances.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -100,7 +101,8 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory imple
 	 */
 	@Override
 	public Adapter createProjectUpdatedEventAdapter() {
-		if (projectUpdatedEventItemProvider == null) {
+		if (projectUpdatedEventItemProvider == null)
+		{
 			projectUpdatedEventItemProvider = new ProjectUpdatedEventItemProvider(this);
 		}
 
@@ -155,9 +157,11 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory imple
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -195,7 +199,8 @@ public class ServerItemProviderAdapterFactory extends ServerAdapterFactory imple
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

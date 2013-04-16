@@ -33,13 +33,15 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getRoles <em>Roles</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getProperties <em>Properties</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getRoles <em>Roles</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getDescription <em>
+ * Description</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACOrgUnitImpl#getProperties <em>
+ * Properties</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit {
@@ -47,6 +49,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -56,6 +59,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -65,6 +69,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	/**
 	 * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRoles()
 	 * @generated
 	 * @ordered
@@ -74,6 +79,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDescription()
 	 * @generated
 	 * @ordered
@@ -83,6 +89,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	/**
 	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getDescription()
 	 * @generated
 	 * @ordered
@@ -92,6 +99,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getProperties()
 	 * @generated
 	 * @ordered
@@ -100,6 +108,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ACOrgUnitImpl() {
@@ -108,6 +117,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -117,6 +127,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -125,6 +136,7 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -136,11 +148,14 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Role> getRoles() {
-		if (roles == null) {
-			roles = new EObjectContainmentEList.Resolving<Role>(Role.class, this, AccesscontrolPackage.AC_ORG_UNIT__ROLES);
+		if (roles == null)
+		{
+			roles = new EObjectContainmentEList.Resolving<Role>(Role.class, this,
+				AccesscontrolPackage.AC_ORG_UNIT__ROLES);
 		}
 		return roles;
 	}
@@ -191,21 +206,24 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
-				return ((InternalEList<?>)getRoles()).basicRemove(otherEnd, msgs);
-			case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
-				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
+			return ((InternalEList<?>) getRoles()).basicRemove(otherEnd, msgs);
+		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
+			return ((InternalEList<?>) getProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getDescription() {
@@ -214,120 +232,135 @@ public class ACOrgUnitImpl extends IdentifiableElementImpl implements ACOrgUnit 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION, oldDescription, description));
+			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION,
+				oldDescription, description));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<OrgUnitProperty> getProperties() {
-		if (properties == null) {
-			properties = new EObjectContainmentEList.Resolving<OrgUnitProperty>(OrgUnitProperty.class, this, AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES);
+		if (properties == null)
+		{
+			properties = new EObjectContainmentEList.Resolving<OrgUnitProperty>(OrgUnitProperty.class, this,
+				AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES);
 		}
 		return properties;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_ORG_UNIT__NAME:
-				return getName();
-			case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
-				return getRoles();
-			case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
-				return getDescription();
-			case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
-				return getProperties();
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
+			return getName();
+		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
+			return getRoles();
+		case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
+			return getDescription();
+		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
+			return getProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_ORG_UNIT__NAME:
-				setName((String)newValue);
-				return;
-			case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
-				getRoles().clear();
-				getRoles().addAll((Collection<? extends Role>)newValue);
-				return;
-			case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
-				setDescription((String)newValue);
-				return;
-			case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
-				getProperties().clear();
-				getProperties().addAll((Collection<? extends OrgUnitProperty>)newValue);
-				return;
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
+			setName((String) newValue);
+			return;
+		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
+			getRoles().clear();
+			getRoles().addAll((Collection<? extends Role>) newValue);
+			return;
+		case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
+			setDescription((String) newValue);
+			return;
+		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
+			getProperties().clear();
+			getProperties().addAll((Collection<? extends OrgUnitProperty>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_ORG_UNIT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
-				getRoles().clear();
-				return;
-			case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
-				setDescription(DESCRIPTION_EDEFAULT);
-				return;
-			case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
-				getProperties().clear();
-				return;
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
+			getRoles().clear();
+			return;
+		case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
+			setDescription(DESCRIPTION_EDEFAULT);
+			return;
+		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
+			getProperties().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case AccesscontrolPackage.AC_ORG_UNIT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
-				return roles != null && !roles.isEmpty();
-			case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
-				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-			case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
-				return properties != null && !properties.isEmpty();
+		switch (featureID)
+		{
+		case AccesscontrolPackage.AC_ORG_UNIT__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		case AccesscontrolPackage.AC_ORG_UNIT__ROLES:
+			return roles != null && !roles.isEmpty();
+		case AccesscontrolPackage.AC_ORG_UNIT__DESCRIPTION:
+			return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+		case AccesscontrolPackage.AC_ORG_UNIT__PROPERTIES:
+			return properties != null && !properties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");

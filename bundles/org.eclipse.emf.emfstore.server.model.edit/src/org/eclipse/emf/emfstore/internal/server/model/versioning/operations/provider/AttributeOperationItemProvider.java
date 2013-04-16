@@ -55,7 +55,8 @@ public class AttributeOperationItemProvider extends FeatureOperationItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addOldValuePropertyDescriptor(object);
@@ -71,13 +72,20 @@ public class AttributeOperationItemProvider extends FeatureOperationItemProvider
 	 * @generated
 	 */
 	protected void addOldValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_AttributeOperation_oldValue_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_AttributeOperation_oldValue_feature",
-				"_UI_AttributeOperation_type"), OperationsPackage.Literals.ATTRIBUTE_OPERATION__OLD_VALUE, true, false,
-			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_AttributeOperation_oldValue_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_AttributeOperation_oldValue_feature",
+					"_UI_AttributeOperation_type"),
+				OperationsPackage.Literals.ATTRIBUTE_OPERATION__OLD_VALUE,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -87,13 +95,20 @@ public class AttributeOperationItemProvider extends FeatureOperationItemProvider
 	 * @generated
 	 */
 	protected void addNewValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_AttributeOperation_newValue_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_AttributeOperation_newValue_feature",
-				"_UI_AttributeOperation_type"), OperationsPackage.Literals.ATTRIBUTE_OPERATION__NEW_VALUE, true, false,
-			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_AttributeOperation_newValue_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_AttributeOperation_newValue_feature",
+					"_UI_AttributeOperation_type"),
+				OperationsPackage.Literals.ATTRIBUTE_OPERATION__NEW_VALUE,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	// begin of custom code
@@ -158,7 +173,8 @@ public class AttributeOperationItemProvider extends FeatureOperationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AttributeOperation.class)) {
+		switch (notification.getFeatureID(AttributeOperation.class))
+		{
 		case OperationsPackage.ATTRIBUTE_OPERATION__OLD_VALUE:
 		case OperationsPackage.ATTRIBUTE_OPERATION__NEW_VALUE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

@@ -33,7 +33,8 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory} object.
+ * <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -58,7 +59,8 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addProjectNamePropertyDescriptor(object);
@@ -74,13 +76,20 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 	 * @generated
 	 */
 	protected void addProjectNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_ProjectHistory_projectName_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectHistory_projectName_feature",
-				"_UI_ProjectHistory_type"), ModelPackage.Literals.PROJECT_HISTORY__PROJECT_NAME, true, false, false,
-			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ProjectHistory_projectName_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ProjectHistory_projectName_feature",
+					"_UI_ProjectHistory_type"),
+				ModelPackage.Literals.PROJECT_HISTORY__PROJECT_NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -90,13 +99,20 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 	 * @generated
 	 */
 	protected void addProjectDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_ProjectHistory_projectDescription_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_ProjectHistory_projectDescription_feature",
-				"_UI_ProjectHistory_type"), ModelPackage.Literals.PROJECT_HISTORY__PROJECT_DESCRIPTION, true, false,
-			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ProjectHistory_projectDescription_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ProjectHistory_projectDescription_feature",
+					"_UI_ProjectHistory_type"),
+				ModelPackage.Literals.PROJECT_HISTORY__PROJECT_DESCRIPTION,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -109,7 +125,8 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ModelPackage.Literals.PROJECT_HISTORY__PROJECT_ID);
 			childrenFeatures.add(ModelPackage.Literals.PROJECT_HISTORY__VERSIONS);
@@ -154,8 +171,9 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 	@Override
 	public String getText(Object object) {
 		String label = ((ProjectHistory) object).getProjectName();
-		return label == null || label.length() == 0 ? getString("_UI_ProjectHistory_type")
-			: getString("_UI_ProjectHistory_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ProjectHistory_type") :
+			getString("_UI_ProjectHistory_type") + " " + label;
 	}
 
 	/**
@@ -170,7 +188,8 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ProjectHistory.class)) {
+		switch (notification.getFeatureID(ProjectHistory.class))
+		{
 		case ModelPackage.PROJECT_HISTORY__PROJECT_NAME:
 		case ModelPackage.PROJECT_HISTORY__PROJECT_DESCRIPTION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -196,17 +215,25 @@ public class ProjectHistoryItemProvider extends ItemProviderAdapter implements I
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__PROJECT_ID,
-			ModelFactory.eINSTANCE.createProjectId()));
+		newChildDescriptors.add
+			(createChildParameter
+			(ModelPackage.Literals.PROJECT_HISTORY__PROJECT_ID,
+				ModelFactory.eINSTANCE.createProjectId()));
 
-		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__VERSIONS,
-			VersioningFactory.eINSTANCE.createVersion()));
+		newChildDescriptors.add
+			(createChildParameter
+			(ModelPackage.Literals.PROJECT_HISTORY__VERSIONS,
+				VersioningFactory.eINSTANCE.createVersion()));
 
-		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__SHARED_PROPERTIES,
-			org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty()));
+		newChildDescriptors.add
+			(createChildParameter
+			(ModelPackage.Literals.PROJECT_HISTORY__SHARED_PROPERTIES,
+				org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createEMFStoreProperty()));
 
-		newChildDescriptors.add(createChildParameter(ModelPackage.Literals.PROJECT_HISTORY__BRANCHES,
-			VersioningFactory.eINSTANCE.createBranchInfo()));
+		newChildDescriptors.add
+			(createChildParameter
+			(ModelPackage.Literals.PROJECT_HISTORY__BRANCHES,
+				VersioningFactory.eINSTANCE.createBranchInfo()));
 	}
 
 	/**

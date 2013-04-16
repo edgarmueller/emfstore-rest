@@ -54,7 +54,8 @@ public class OperationIdItemProvider extends UniqueIdentifierItemProvider implem
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -82,8 +83,9 @@ public class OperationIdItemProvider extends UniqueIdentifierItemProvider implem
 	@Override
 	public String getText(Object object) {
 		String label = ((OperationId) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_OperationId_type")
-			: getString("_UI_OperationId_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_OperationId_type") :
+			getString("_UI_OperationId_type") + " " + label;
 	}
 
 	/**

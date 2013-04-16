@@ -16,7 +16,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Primary Version Spec</b></em>'.
  * 
- * @extends Comparable<PrimaryVersionSpec>, ESPrimaryVersionSpec
+ * @extends Comparable<PrimaryVersionSpec>, APIDelegate<ESPrimaryVersionSpec>
  * 
  *          <!-- end-user-doc -->
  * 
@@ -24,10 +24,10 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  *          The following features are supported:
  *          <ul>
  *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getIdentifier <em>
- *          Identifier </em>}</li>
+ *          Identifier</em>}</li>
  *          <li>
  *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec#getProjectStateChecksum
- *          <em> Project State Checksum</em>}</li>
+ *          <em>Project State Checksum</em>}</li>
  *          </ul>
  *          </p>
  * 

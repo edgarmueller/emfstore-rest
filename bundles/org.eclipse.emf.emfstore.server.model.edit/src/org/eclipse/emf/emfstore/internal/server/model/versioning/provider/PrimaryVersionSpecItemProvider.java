@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec}
- * object.
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -54,10 +54,12 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 			addIdentifierPropertyDescriptor(object);
+			addProjectStateChecksumPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -69,13 +71,45 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 	 * @generated
 	 */
 	protected void addIdentifierPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-			((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-			getResourceLocator(),
-			getString("_UI_PrimaryVersionSpec_identifier_feature"),
-			getString("_UI_PropertyDescriptor_description", "_UI_PrimaryVersionSpec_identifier_feature",
-				"_UI_PrimaryVersionSpec_type"), VersioningPackage.Literals.PRIMARY_VERSION_SPEC__IDENTIFIER, true,
-			false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_PrimaryVersionSpec_identifier_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_PrimaryVersionSpec_identifier_feature",
+					"_UI_PrimaryVersionSpec_type"),
+				VersioningPackage.Literals.PRIMARY_VERSION_SPEC__IDENTIFIER,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				null,
+				null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Project State Checksum feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addProjectStateChecksumPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_PrimaryVersionSpec_projectStateChecksum_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_PrimaryVersionSpec_projectStateChecksum_feature",
+					"_UI_PrimaryVersionSpec_type"),
+				VersioningPackage.Literals.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -100,8 +134,9 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 	@Override
 	public String getText(Object object) {
 		String label = ((PrimaryVersionSpec) object).getBranch();
-		return label == null || label.length() == 0 ? getString("_UI_PrimaryVersionSpec_type")
-			: getString("_UI_PrimaryVersionSpec_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_PrimaryVersionSpec_type") :
+			getString("_UI_PrimaryVersionSpec_type") + " " + label;
 	}
 
 	/**
@@ -116,8 +151,10 @@ public class PrimaryVersionSpecItemProvider extends VersionSpecItemProvider impl
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(PrimaryVersionSpec.class)) {
+		switch (notification.getFeatureID(PrimaryVersionSpec.class))
+		{
 		case VersioningPackage.PRIMARY_VERSION_SPEC__IDENTIFIER:
+		case VersioningPackage.PRIMARY_VERSION_SPEC__PROJECT_STATE_CHECKSUM:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

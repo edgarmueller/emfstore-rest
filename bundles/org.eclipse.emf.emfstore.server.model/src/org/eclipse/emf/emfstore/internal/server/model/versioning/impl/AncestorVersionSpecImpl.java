@@ -87,14 +87,17 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 * @generated
 	 */
 	public PrimaryVersionSpec getTarget() {
-		if (target != null && target.eIsProxy()) {
+		if (target != null && target.eIsProxy())
+		{
 			InternalEObject oldTarget = (InternalEObject) target;
 			target = (PrimaryVersionSpec) eResolveProxy(oldTarget);
-			if (target != oldTarget) {
+			if (target != oldTarget)
+			{
 				InternalEObject newTarget = (InternalEObject) target;
 				NotificationChain msgs = oldTarget.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET, null, null);
-				if (newTarget.eInternalContainer() == null) {
+				if (newTarget.eInternalContainer() == null)
+				{
 					msgs = newTarget.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET, null, msgs);
 				}
@@ -125,7 +128,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	public NotificationChain basicSetTarget(PrimaryVersionSpec newTarget, NotificationChain msgs) {
 		PrimaryVersionSpec oldTarget = target;
 		target = newTarget;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET, oldTarget, newTarget);
 			if (msgs == null)
@@ -142,7 +146,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 * @generated
 	 */
 	public void setTarget(PrimaryVersionSpec newTarget) {
-		if (newTarget != target) {
+		if (newTarget != target)
+		{
 			NotificationChain msgs = null;
 			if (target != null)
 				msgs = ((InternalEObject) target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -165,14 +170,17 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 * @generated
 	 */
 	public PrimaryVersionSpec getSource() {
-		if (source != null && source.eIsProxy()) {
+		if (source != null && source.eIsProxy())
+		{
 			InternalEObject oldSource = (InternalEObject) source;
 			source = (PrimaryVersionSpec) eResolveProxy(oldSource);
-			if (source != oldSource) {
+			if (source != oldSource)
+			{
 				InternalEObject newSource = (InternalEObject) source;
 				NotificationChain msgs = oldSource.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- VersioningPackage.ANCESTOR_VERSION_SPEC__SOURCE, null, null);
-				if (newSource.eInternalContainer() == null) {
+				if (newSource.eInternalContainer() == null)
+				{
 					msgs = newSource.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- VersioningPackage.ANCESTOR_VERSION_SPEC__SOURCE, null, msgs);
 				}
@@ -203,7 +211,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	public NotificationChain basicSetSource(PrimaryVersionSpec newSource, NotificationChain msgs) {
 		PrimaryVersionSpec oldSource = source;
 		source = newSource;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				VersioningPackage.ANCESTOR_VERSION_SPEC__SOURCE, oldSource, newSource);
 			if (msgs == null)
@@ -220,7 +229,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 * @generated
 	 */
 	public void setSource(PrimaryVersionSpec newSource) {
-		if (newSource != source) {
+		if (newSource != source)
+		{
 			NotificationChain msgs = null;
 			if (source != null)
 				msgs = ((InternalEObject) source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -244,7 +254,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET:
 			return basicSetTarget(null, msgs);
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__SOURCE:
@@ -260,7 +271,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET:
 			if (resolve)
 				return getTarget();
@@ -280,7 +292,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET:
 			setTarget((PrimaryVersionSpec) newValue);
 			return;
@@ -298,7 +311,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET:
 			setTarget((PrimaryVersionSpec) null);
 			return;
@@ -316,7 +330,8 @@ public class AncestorVersionSpecImpl extends VersionSpecImpl implements Ancestor
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__TARGET:
 			return target != null;
 		case VersioningPackage.ANCESTOR_VERSION_SPEC__SOURCE:

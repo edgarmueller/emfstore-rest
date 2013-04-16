@@ -106,7 +106,8 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.TAG_VERSION_SPEC__NAME:
 			return getName();
 		}
@@ -120,7 +121,8 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.TAG_VERSION_SPEC__NAME:
 			setName((String) newValue);
 			return;
@@ -135,7 +137,8 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.TAG_VERSION_SPEC__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -150,7 +153,8 @@ public class TagVersionSpecImpl extends VersionSpecImpl implements TagVersionSpe
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case VersioningPackage.TAG_VERSION_SPEC__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}

@@ -16,20 +16,19 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Project Info</b></em>'.
  * 
- * @extends IProjectInfo
- *          <!-- end-user-doc -->
+ * <!-- end-user-doc -->
  * 
- *          <p>
- *          The following features are supported:
- *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getName <em>Name</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getDescription <em>Description</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getProjectId <em>Project Id</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getVersion <em>Version</em>}</li>
- *          </ul>
- *          </p>
+ * <p>
+ * The following features are supported:
+ * <ul>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getDescription <em>Description</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getProjectId <em>Project Id</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getVersion <em>Version</em>}</li>
+ * </ul>
+ * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectInfo()
+ * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectInfo()
  * @model
  * @generated
  */
@@ -101,15 +100,15 @@ public interface ProjectInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Project Id</em>' containment reference.
 	 * @see #setProjectId(ProjectId)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectInfo_ProjectId()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectInfo_ProjectId()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	ProjectId getProjectId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getProjectId <em>Project Id</em>}
-	 * ' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getProjectId
+	 * <em>Project Id</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -130,15 +129,15 @@ public interface ProjectInfo extends EObject {
 	 * 
 	 * @return the value of the '<em>Version</em>' containment reference.
 	 * @see #setVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getProjectInfo_Version()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getProjectInfo_Version()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getVersion <em>Version</em>}'
-	 * containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectInfo#getVersion
+	 * <em>Version</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

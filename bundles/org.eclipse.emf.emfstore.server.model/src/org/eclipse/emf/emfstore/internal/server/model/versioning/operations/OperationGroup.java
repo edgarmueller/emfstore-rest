@@ -51,8 +51,11 @@ public interface OperationGroup extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationGroup#getName <em>Name</em>}
+	 * ' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
@@ -61,13 +64,15 @@ public interface OperationGroup extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation}.
+	 * The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operations</em>' reference list isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Operations</em>' reference list.
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getOperationGroup_Operations()
 	 * @model

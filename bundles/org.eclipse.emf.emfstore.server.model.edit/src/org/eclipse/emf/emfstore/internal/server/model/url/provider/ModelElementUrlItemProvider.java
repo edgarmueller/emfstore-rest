@@ -31,7 +31,8 @@ import org.eclipse.emf.emfstore.internal.server.model.url.UrlFactory;
 import org.eclipse.emf.emfstore.internal.server.model.url.UrlPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrl}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -56,7 +57,8 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -73,7 +75,8 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
+		if (childrenFeatures == null)
+		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(UrlPackage.Literals.MODEL_ELEMENT_URL__SERVER_URL);
 			childrenFeatures.add(UrlPackage.Literals.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT);
@@ -131,7 +134,8 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ModelElementUrl.class)) {
+		switch (notification.getFeatureID(ModelElementUrl.class))
+		{
 		case UrlPackage.MODEL_ELEMENT_URL__SERVER_URL:
 		case UrlPackage.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT:
 		case UrlPackage.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT:
@@ -152,14 +156,20 @@ public class ModelElementUrlItemProvider extends ItemProviderAdapter implements 
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(UrlPackage.Literals.MODEL_ELEMENT_URL__SERVER_URL,
-			UrlFactory.eINSTANCE.createServerUrl()));
+		newChildDescriptors.add
+			(createChildParameter
+			(UrlPackage.Literals.MODEL_ELEMENT_URL__SERVER_URL,
+				UrlFactory.eINSTANCE.createServerUrl()));
 
-		newChildDescriptors.add(createChildParameter(UrlPackage.Literals.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
-			UrlFactory.eINSTANCE.createProjectUrlFragment()));
+		newChildDescriptors.add
+			(createChildParameter
+			(UrlPackage.Literals.MODEL_ELEMENT_URL__PROJECT_URL_FRAGMENT,
+				UrlFactory.eINSTANCE.createProjectUrlFragment()));
 
-		newChildDescriptors.add(createChildParameter(UrlPackage.Literals.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
-			UrlFactory.eINSTANCE.createModelElementUrlFragment()));
+		newChildDescriptors.add
+			(createChildParameter
+			(UrlPackage.Literals.MODEL_ELEMENT_URL__MODEL_ELEMENT_URL_FRAGMENT,
+				UrlFactory.eINSTANCE.createModelElementUrlFragment()));
 	}
 
 	/**

@@ -55,7 +55,8 @@ public class ServerEventItemProvider extends EventItemProvider implements IEditi
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -73,8 +74,9 @@ public class ServerEventItemProvider extends EventItemProvider implements IEditi
 	public String getText(Object object) {
 		Date labelValue = ((ServerEvent) object).getTimestamp();
 		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ? getString("_UI_ServerEvent_type")
-			: getString("_UI_ServerEvent_type") + " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_ServerEvent_type") :
+			getString("_UI_ServerEvent_type") + " " + label;
 	}
 
 	/**

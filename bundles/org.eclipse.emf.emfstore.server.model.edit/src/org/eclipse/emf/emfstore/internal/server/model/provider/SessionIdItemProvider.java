@@ -51,7 +51,8 @@ public class SessionIdItemProvider extends UniqueIdentifierItemProvider implemen
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+		if (itemPropertyDescriptors == null)
+		{
 			super.getPropertyDescriptors(object);
 
 		}
@@ -79,8 +80,9 @@ public class SessionIdItemProvider extends UniqueIdentifierItemProvider implemen
 	@Override
 	public String getText(Object object) {
 		String label = ((SessionId) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_SessionId_type") : getString("_UI_SessionId_type")
-			+ " " + label;
+		return label == null || label.length() == 0 ?
+			getString("_UI_SessionId_type") :
+			getString("_UI_SessionId_type") + " " + label;
 	}
 
 	/**
