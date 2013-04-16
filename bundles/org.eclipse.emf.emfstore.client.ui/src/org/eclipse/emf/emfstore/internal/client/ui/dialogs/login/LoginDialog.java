@@ -246,6 +246,7 @@ public class LoginDialog extends TitleAreaDialog {
 			final ESServerImpl serverImpl = (ESServerImpl) controller.getServer();
 			candidateSession = ModelFactory.eINSTANCE.createUsersession();
 			final Usersession session = candidateSession;
+			selectedUsersession = candidateSession;
 			// TODO
 			RunESCommand.run(new Callable<Void>() {
 				public Void call() throws Exception {

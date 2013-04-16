@@ -102,6 +102,7 @@ public class LoginDialogController implements ILoginDialogController {
 		validate(session.toAPI());
 
 		// contract: #validate() sets the usersession;
+		// TODO: validate can simply return the usersession..
 		return usersession;
 	}
 
