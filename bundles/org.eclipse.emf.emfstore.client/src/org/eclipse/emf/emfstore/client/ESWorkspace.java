@@ -57,13 +57,16 @@ public interface ESWorkspace {
 	List<ESServer> getServers();
 
 	/**
-	 * Adds a server to the workspace.
+	 * Adds a server to the workspace. If the server is already contained in the workspace, i.e.
+	 * a server with the given URL and port exists, the latter will be returned instead of the passed one.
+	 * 
 	 * 
 	 * @param server
 	 *            the server to be added to the workspace
-	 * 
+	 * @return the added server instance, or, if a server with the given URL and port already exists in
+	 *         the workspace, the existing server instance
 	 */
-	void addServer(ESServer server);
+	ESServer addServer(ESServer server);
 
 	/**
 	 * Removes a server from the workspace.
