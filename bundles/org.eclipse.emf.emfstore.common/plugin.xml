@@ -2,4 +2,5 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="observerBusExtensionPointRegistration" name="Observer Markup Interface" schema="schema/observerBusExtensionPointRegistration.exsd"/>
+   <extension-point id="discardDanglingHREFs" name="Discard Dangling HREFs" schema="schema/discardDanglingHREFs.exsd"/>
 </plugin>

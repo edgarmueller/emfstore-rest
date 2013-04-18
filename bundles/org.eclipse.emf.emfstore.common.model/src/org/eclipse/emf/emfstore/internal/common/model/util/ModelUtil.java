@@ -57,7 +57,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -89,7 +88,7 @@ public final class ModelUtil {
 
 	private static final String ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL = "org.eclipse.emf.emfstore.common.model";
 
-	public static final String DISCARD_DANGLING_HREF_ID = "org.eclipse.emf.emfstore.common.resourceOptions.discardDanglingHREFs";
+	public static final String DISCARD_DANGLING_HREF_ID = "org.eclipse.emf.emfstore.common.discardDanglingHREFs";
 
 	private static IResourceLogger resourceLogger = new IResourceLogger() {
 
@@ -396,9 +395,9 @@ public final class ModelUtil {
 			resourceSaveOptions.put(XMLResource.OPTION_FLUSH_THRESHOLD, 100000);
 			resourceSaveOptions.put(XMLResource.OPTION_USE_FILE_BUFFER, Boolean.TRUE);
 
-			if (ExtensionRegistry.INSTANCE.get(
-				DISCARD_DANGLING_HREF_ID,
-				Boolean.class, Boolean.FALSE, false)) {
+			ESExtensionPoint extensionPoint = new ESExtensionPoint(DISCARD_DANGLING_HREF_ID);
+			Boolean discardDanglingHREFs = extensionPoint.getBoolean("value", Boolean.FALSE);
+			if (discardDanglingHREFs) {
 				resourceSaveOptions.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
 					XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 			}
