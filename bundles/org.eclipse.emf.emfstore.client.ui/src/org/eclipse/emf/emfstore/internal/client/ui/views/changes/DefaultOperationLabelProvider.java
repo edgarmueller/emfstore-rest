@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.changes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider;
+import org.eclipse.emf.emfstore.internal.client.ui.common.OperationCustomLabelProvider;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Comp
  * @author emueller
  * 
  */
-public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelProvider {
+public class DefaultOperationLabelProvider implements OperationCustomLabelProvider {
 
 	/**
 	 * The label to be shown for unknown element.
@@ -47,7 +47,6 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#getDescription(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
-	@Override
 	public String getDescription(AbstractOperation operation) {
 
 		if (operation instanceof CompositeOperation) {
@@ -68,7 +67,6 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#getImage(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
-	@Override
 	public Object getImage(AbstractOperation operation) {
 		return adapterFactoryLabelProvider.getImage(operation);
 	}
@@ -79,9 +77,8 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#canRender(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
-	@Override
-	public int canRender(AbstractOperation operation) {
-		return CAN_RENDER_DEFAULT;
+	public CanRender canRender(AbstractOperation operation) {
+		return CanRender.Yes;
 	}
 
 	/**
@@ -90,7 +87,6 @@ public class DefaultOperationLabelProvider extends AbstractOperationCustomLabelP
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider#getModelElementName(org.eclipse.emf.ecore.EObject)
 	 */
-	@Override
 	public String getModelElementName(EObject modelElement) {
 
 		if (modelElement == null) {

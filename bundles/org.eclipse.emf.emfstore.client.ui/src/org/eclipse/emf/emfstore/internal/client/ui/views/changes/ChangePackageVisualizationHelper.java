@@ -14,10 +14,9 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
-import org.eclipse.emf.emfstore.internal.client.ui.common.AbstractOperationCustomLabelProvider;
-import org.eclipse.emf.emfstore.internal.client.ui.common.CustomOperationLabelProviderManager;
+import org.eclipse.emf.emfstore.internal.client.ui.common.OperationCustomLabelProvider;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
@@ -43,9 +42,8 @@ import org.eclipse.swt.graphics.Image;
  * @author shterev
  * @author emueller
  */
-public class ChangePackageVisualizationHelper implements ESDisposable {
+public class ChangePackageVisualizationHelper {
 
-	private DefaultOperationLabelProvider defaultOperationLabelProvider;
 	private ModelElementIdToEObjectMapping idToEObjectMapping;
 
 	/**
@@ -56,7 +54,6 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 	 *            as part of the change packages
 	 */
 	public ChangePackageVisualizationHelper(ModelElementIdToEObjectMapping idToEObjectMapping) {
-		defaultOperationLabelProvider = new DefaultOperationLabelProvider();
 		this.idToEObjectMapping = idToEObjectMapping;
 	}
 
@@ -128,8 +125,9 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 	}
 
 	private Image getCustomOperationProviderLabel(AbstractOperation operation) {
-		AbstractOperationCustomLabelProvider customLabelProvider = CustomOperationLabelProviderManager.getInstance()
-			.getCustomLabelProvider(operation);
+		OperationCustomLabelProvider customLabelProvider = ExtensionRegistry.INSTANCE.get(
+			OperationCustomLabelProvider.ID, OperationCustomLabelProvider.class, new DefaultOperationLabelProvider(),
+			true);
 		if (customLabelProvider != null) {
 			try {
 				return (Image) customLabelProvider.getImage(operation);
@@ -152,12 +150,11 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 	public String getDescription(AbstractOperation op) {
 
 		// check of a custom operation label provider can provide a label
-		AbstractOperationCustomLabelProvider customLabelProvider = CustomOperationLabelProviderManager.getInstance()
-			.getCustomLabelProvider(op);
-
-		if (customLabelProvider != null) {
-			return decorate(customLabelProvider, op);
-		}
+		OperationCustomLabelProvider customLabelProvider =
+			ExtensionRegistry.INSTANCE.get(
+				OperationCustomLabelProvider.ID, OperationCustomLabelProvider.class,
+				new DefaultOperationLabelProvider(),
+				true);
 
 		if (op instanceof CompositeOperation) {
 			CompositeOperation compositeOperation = (CompositeOperation) op;
@@ -167,14 +164,15 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 				return getDescription(compositeOperation.getMainOperation());
 			}
 		}
-		return decorate(defaultOperationLabelProvider, op);
+
+		return decorate(customLabelProvider, op);
 	}
 
-	private String decorate(AbstractOperationCustomLabelProvider labelProvider, AbstractOperation op) {
+	private String decorate(OperationCustomLabelProvider labelProvider, AbstractOperation op) {
 		String namesResolved = resolveIds(labelProvider, labelProvider.getDescription(op),
-											AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
+			AbstractOperationItemProvider.NAME_TAG__SEPARATOR, op);
 		String allResolved = resolveIds(labelProvider, namesResolved,
-										AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
+			AbstractOperationItemProvider.NAME_CLASS_TAG_SEPARATOR, op);
 		if (op instanceof ReferenceOperation) {
 			return resolveTypes(allResolved, (ReferenceOperation) op);
 		}
@@ -203,7 +201,7 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 		return unresolvedString.replace(AbstractOperationItemProvider.REFERENCE_TYPE_TAG_SEPARATOR, type);
 	}
 
-	private String resolveIds(AbstractOperationCustomLabelProvider labelProvider, String unresolvedString,
+	private String resolveIds(OperationCustomLabelProvider labelProvider, String unresolvedString,
 		String devider, AbstractOperation op) {
 		String[] strings = unresolvedString.split(devider);
 		StringBuilder stringBuilder = new StringBuilder();
@@ -239,16 +237,5 @@ public class ChangePackageVisualizationHelper implements ESDisposable {
 	 */
 	public EObject getModelElement(ModelElementId modelElementId) {
 		return idToEObjectMapping.get(modelElementId);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
-	 */
-	public void dispose() {
-		defaultOperationLabelProvider.dispose();
-		idToEObjectMapping = null;
 	}
 }

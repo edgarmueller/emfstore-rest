@@ -109,7 +109,6 @@ public class DescriptionComponent extends Composite {
 				String tmp = "";
 				if (obj instanceof AbstractOperation) {
 					tmp = visualHelper.getDescription((AbstractOperation) obj);
-					visualHelper.dispose();
 				} else if (obj instanceof EObject) {
 					tmp = DecisionUtil.getModelElementName((EObject) obj);
 				} else if (obj != null) {

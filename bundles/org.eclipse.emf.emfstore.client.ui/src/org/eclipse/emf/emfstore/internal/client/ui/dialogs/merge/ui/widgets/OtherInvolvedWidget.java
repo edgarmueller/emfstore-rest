@@ -80,7 +80,5 @@ public class OtherInvolvedWidget extends Composite {
 			meLabel.setBackground(parent.getBackground());
 			meLabel.setText("More than " + MAX_OPS_SIZE + " other operations...");
 		}
-
-		visualizationHelper.dispose();
 	}
 }

@@ -391,11 +391,6 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private void resetProviders(List<HistoryInfo> infos) {
-		ChangePackageVisualizationHelper oldHelper = changeLabel.getChangePackageVisualizationHelper();
-		if (oldHelper != null) {
-			oldHelper.dispose();
-		}
-
 		ArrayList<ChangePackage> cps = new ArrayList<ChangePackage>();
 		for (HistoryInfo info : infos) {
 			if (info.getChangePackage() != null) {

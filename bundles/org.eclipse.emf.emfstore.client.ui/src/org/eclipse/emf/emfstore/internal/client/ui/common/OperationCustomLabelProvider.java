@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Michael Kagel
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.common;
 
@@ -20,18 +22,24 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * @author Michael Kagel
  * @author emueller
  */
-public abstract class AbstractOperationCustomLabelProvider implements ESDisposable {
+public interface OperationCustomLabelProvider extends ESDisposable {
 
 	/**
-	 * Constant for render priority meaning this provider does not want to
-	 * render the given element.
+	 * ID of the label provider.
 	 */
-	protected static final int CANNOT_RENDER = 0;
+	String ID = "org.eclipse.emf.emfstore.internal.client.ui.common.operationCustomLabelProvider";
 
-	/**
-	 * Default constant for a renderer that is able to render the given element.
-	 */
-	protected static final int CAN_RENDER_DEFAULT = 1;
+	enum CanRender {
+		/**
+		 * Default constant for a renderer that is able to render the given element.
+		 */
+		Yes,
+		/**
+		 * Constant for render priority meaning this provider does not want to
+		 * render the given element.
+		 */
+		No
+	}
 
 	/**
 	 * Returns the name of the given model element.
@@ -40,7 +48,7 @@ public abstract class AbstractOperationCustomLabelProvider implements ESDisposab
 	 *            the model element whose name should be determined
 	 * @return the name of the given model element
 	 */
-	public abstract String getModelElementName(EObject modelElement);
+	String getModelElementName(EObject modelElement);
 
 	/**
 	 * Returns the description of an operation.
@@ -49,7 +57,7 @@ public abstract class AbstractOperationCustomLabelProvider implements ESDisposab
 	 *            the operation which needs to be visualized by the image
 	 * @return the description of the operation
 	 */
-	public abstract String getDescription(AbstractOperation operation);
+	String getDescription(AbstractOperation operation);
 
 	/**
 	 * Returns the image of an operation.
@@ -58,18 +66,15 @@ public abstract class AbstractOperationCustomLabelProvider implements ESDisposab
 	 *            the operation which needs to be visualized by the image
 	 * @return the image of the operation
 	 */
-	public abstract Object getImage(AbstractOperation operation);
+	Object getImage(AbstractOperation operation);
 
 	/**
 	 * Checks if this provider can render the given operation.
 	 * 
 	 * @param operation
 	 *            the operation which should be checked
-	 * @return a priority for rendering this element. The higher the priority
-	 *         the more likely this provider will render the element. Returning
-	 *         {@link AbstractOperationCustomLabelProvider#CANNOT_RENDER} means
-	 *         this provider does not want to render this element.
+	 * @return whether the label provider can render the given operation
 	 */
-	public abstract int canRender(AbstractOperation operation);
+	CanRender canRender(AbstractOperation operation);
 
 }
