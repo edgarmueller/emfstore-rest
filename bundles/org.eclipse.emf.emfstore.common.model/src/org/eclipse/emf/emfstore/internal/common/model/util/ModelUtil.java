@@ -401,6 +401,11 @@ public final class ModelUtil {
 				resourceSaveOptions.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
 					XMLResource.OPTION_PROCESS_DANGLING_HREF_RECORD);
 			}
+
+			logInfo("Resource save options initialized:");
+			for (Map.Entry<Object, Object> entry : resourceSaveOptions.entrySet()) {
+				logInfo("\t" + entry.getKey() + ": " + entry.getValue());
+			}
 		}
 		return resourceSaveOptions;
 	}
