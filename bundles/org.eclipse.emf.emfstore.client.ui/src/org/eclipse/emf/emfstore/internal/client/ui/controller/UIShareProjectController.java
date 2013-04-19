@@ -43,7 +43,7 @@ public class UIShareProjectController extends AbstractEMFStoreUIController<Void>
 	 *            the {@link ProjectSpace} that should get shared
 	 */
 	public UIShareProjectController(Shell shell, ESLocalProject localProject) {
-		super(shell, true, true);
+		super(shell, true, false);
 		this.localProject = localProject;
 	}
 
