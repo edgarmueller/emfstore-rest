@@ -109,7 +109,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			@Override
 			public List<ChangePackage> run(IProgressMonitor monitor) throws ESException {
 				return getConnectionManager().getChanges(getSessionId(), getProjectSpace().getProjectId(),
-															getProjectSpace().getBaseVersion(), resolvedVersion);
+					getProjectSpace().getBaseVersion(), resolvedVersion);
 			}
 		}.execute();
 
@@ -146,8 +146,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		boolean potentialConflictsDetected = false;
 		if (getProjectSpace().getOperations().size() > 0) {
 			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector
-				.calculateConflictCandidateBuckets(Collections.singletonList(localChanges), changes, getProjectSpace()
-					.getProject());
+				.calculateConflictCandidateBuckets(Collections.singletonList(localChanges), changes, idToEObjectMapping);
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
