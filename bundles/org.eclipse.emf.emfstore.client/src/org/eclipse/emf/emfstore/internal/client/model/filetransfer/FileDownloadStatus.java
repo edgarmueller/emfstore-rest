@@ -17,6 +17,7 @@ import java.util.Observer;
 
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FileNotOnServerException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 
@@ -168,6 +169,10 @@ public final class FileDownloadStatus {
 		return status == Status.FINISHED;
 	}
 
+	public boolean isNotOnServer() {
+		return status == Status.FAILED && getException() instanceof FileNotOnServerException;
+	}
+
 	/**
 	 * Gets the statistics object for this file transfer, which provides useful
 	 * information, especially while the transfer is active. It provides
@@ -191,7 +196,11 @@ public final class FileDownloadStatus {
 	 *             if the file is not yet fully transferred
 	 */
 	public File getTransferredFile() throws FileTransferException {
-		if (!isTransferFinished()) {
+		if (isNotOnServer()) {
+			throw new FileNotOnServerException(MessageFormat.format(
+				"File {0} has not been found on the server",
+				id.getIdentifier()));
+		} else if (!isTransferFinished()) {
 			throw new FileTransferException(MessageFormat.format(
 				"Trying to get transferred file {0} while transfer is not yet finished",
 				id.getIdentifier()));
