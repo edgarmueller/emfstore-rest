@@ -9,17 +9,18 @@
   <packaging>pom</packaging>
 
   <properties>
-    <tycho-version>0.16.0</tycho-version>
+    <tycho-version>0.17.0</tycho-version>
     <junit-version>4.8.2</junit-version>
     <maven-checkstyle-version>2.9.1</maven-checkstyle-version>
     <jacoco-version>0.5.7.201204190339</jacoco-version>
-	
+	<emfstore-version>1.0.0-SNAPSHOT</emfstore-version>
 	<!-- Properties to enable jacoco code coverage analysis with sonar -->
 	<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 	<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 	<sonar.jacoco.reportPath>../../tests/org.eclipse.emf.emfstore.client.test/target/jacoco.exec</sonar.jacoco.reportPath>
   </properties>
 
+<!-- 
   <profiles>
     <profile>
       <id>platform-galileo</id>
@@ -31,6 +32,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/galileo</eclipse-site>
+        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.5</eclipse-platform>
         <platform-version>[3.5,3.6)</platform-version>
       </properties>
     </profile>
@@ -44,6 +46,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/helios</eclipse-site>
+        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.6</eclipse-platform>
         <platform-version>[3.6,3.7)</platform-version>
       </properties>
     </profile>
@@ -58,6 +61,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
+        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.7</eclipse-platform>
         <platform-version>[3.7,3.8)</platform-version>
       </properties>
     </profile>
@@ -75,8 +79,10 @@
       </properties>
     </profile>
   </profiles>
-
+ -->
+ 
   <modules>
+  	<module>../../releng/_target</module>
     <!-- EMFStore Core Features -->
     <module>../../features/org.eclipse.emf.emfstore.common.feature</module>
     <module>../../bundles/org.eclipse.emf.emfstore.branding</module>
@@ -171,14 +177,20 @@
     <module>../../tests/org.eclipse.emf.emfstore.client.test</module>
     
   </modules>
-
+<!-- 
   <repositories>
     <repository>
-      <id>eclipse-platform</id>
+      <id>eclipse</id>
       <layout>p2</layout>
       <url>${eclipse-site}</url>
     </repository>
+    <repository>
+      <id>eclipse-platform</id>
+      <layout>p2</layout>
+      <url>${eclipse-platform}</url>
+    </repository>
   </repositories>
+  -->
 
   <build>
     <!-- Use java/eclipse conventions for src and bin here, because of build.properties -->
@@ -227,14 +239,23 @@
               <arch>x86_64</arch>
             </environment>
           </environments>
+	   <!-- work around Equinox bug 348045 (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=348045) -->
+	   <!-- 
 	    <filters>
-            <!-- work around Equinox bug 348045 (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=348045) -->
             <filter>
               <type>p2-installable-unit</type>
               <id>org.eclipse.equinox.servletbridge.extensionbundle</id>
               <removeAll />
             </filter>
           </filters>
+           -->
+          <target>
+			<artifact>
+				<groupId>org.eclipse.emf.emfstore</groupId>
+  				<artifactId>emfstore</artifactId>
+				<version>${emfstore-version}</version>
+			</artifact>
+		</target>
         </configuration>
       </plugin>
 
