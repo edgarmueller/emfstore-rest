@@ -31,6 +31,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/galileo</eclipse-site>
+        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.5</eclipse-platform>
         <platform-version>[3.5,3.6)</platform-version>
       </properties>
     </profile>
@@ -44,6 +45,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/helios</eclipse-site>
+        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.6</eclipse-platform>
         <platform-version>[3.6,3.7)</platform-version>
       </properties>
     </profile>
@@ -58,6 +60,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
+        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.7</eclipse-platform>
         <platform-version>[3.7,3.8)</platform-version>
       </properties>
     </profile>
@@ -174,9 +177,14 @@
 
   <repositories>
     <repository>
-      <id>eclipse-platform</id>
+      <id>eclipse</id>
       <layout>p2</layout>
       <url>${eclipse-site}</url>
+    </repository>
+    <repository>
+      <id>eclipse-platform</id>
+      <layout>p2</layout>
+      <url>${eclipse-platform}</url>
     </repository>
   </repositories>
 
