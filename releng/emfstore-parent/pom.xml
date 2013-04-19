@@ -177,7 +177,7 @@
     <module>../../tests/org.eclipse.emf.emfstore.client.test</module>
     
   </modules>
-
+<!-- 
   <repositories>
     <repository>
       <id>eclipse</id>
@@ -190,6 +190,7 @@
       <url>${eclipse-platform}</url>
     </repository>
   </repositories>
+  -->
 
   <build>
     <!-- Use java/eclipse conventions for src and bin here, because of build.properties -->
