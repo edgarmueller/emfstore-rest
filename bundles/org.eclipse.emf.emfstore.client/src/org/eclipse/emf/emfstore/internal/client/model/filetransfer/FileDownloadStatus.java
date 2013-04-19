@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -191,7 +192,9 @@ public final class FileDownloadStatus {
 	 */
 	public File getTransferredFile() throws FileTransferException {
 		if (!isTransferFinished()) {
-			throw new FileTransferException("Trying to get a transferred file while transfer is not yet finished");
+			throw new FileTransferException(MessageFormat.format(
+				"Trying to get transferred file {0} while transfer is not yet finished",
+				id.getIdentifier()));
 		}
 		return transferredFile;
 	}

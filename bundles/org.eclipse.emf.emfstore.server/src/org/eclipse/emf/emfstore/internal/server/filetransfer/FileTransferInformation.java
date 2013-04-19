@@ -99,12 +99,8 @@ public class FileTransferInformation implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
-		string.append("File Identifier: ");
 		string.append(fileIdentifier);
-		string.append("\nCurrent Chunk Number: ");
-		string.append(chunkNumber);
-		string.append("\nTotal File (ALL chunks) Size: ");
-		string.append(fileSize);
+		string.append("\nFile size: ");
 		return string.toString();
 	}
 }

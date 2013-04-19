@@ -64,4 +64,31 @@ public class FileManagerTest extends TransmissionTests {
 			fileInputStream2.close();
 		}
 	}
+
+	@Test
+	public void testTransferWithBlocking() throws ESException, IOException, InterruptedException {
+		File file = File.createTempFile("foo", "tmp");
+		file.deleteOnExit();
+		LogMessage msg = VersioningFactory.eINSTANCE.createLogMessage();
+		FileIdentifier id = getProjectSpace1().addFile(file);
+		// dummy change, addFile is not recognized as a change
+		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
+		getProjectSpace1().getProject().addModelElement(useCase);
+		getProjectSpace1().commit(msg, null, null);
+
+		getProjectSpace2().update(new NullProgressMonitor());
+		FileDownloadStatus status = getProjectSpace2().getFile(id);
+		assertTrue(status != null);
+		status.getTransferredFile(true);
+		status.getTransferredFile(true);
+		status.getTransferredFile(true);
+		FileInputStream fileInputStream = new FileInputStream(file);
+		FileInputStream fileInputStream2 = new FileInputStream(status.getTransferredFile(true));
+		try {
+			assertEquals(IOUtils.toByteArray(fileInputStream), IOUtils.toByteArray(fileInputStream2));
+		} finally {
+			fileInputStream.close();
+			fileInputStream2.close();
+		}
+	}
 }
