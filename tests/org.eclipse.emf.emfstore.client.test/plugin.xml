@@ -188,8 +188,20 @@
    <extension
          point="org.eclipse.emf.emfstore.client.usersessionProvider">
       <sessionProvider
-            class="org.eclipse.emf.emfstore.client.test.TestSessionProvider">
+            class="org.eclipse.emf.emfstore.client.test.config.TestSessionProvider">
       </sessionProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.workspaceLocationProvider">
+      <LocationProvider
+            providerClass="org.eclipse.emf.emfstore.client.test.config.ClientLocationProvider">
+      </LocationProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.server.locationProvider">
+      <LocationProvider
+            providerClass="org.eclipse.emf.emfstore.client.test.config.ServerLocationProvider">
+      </LocationProvider>
    </extension>
 
 </plugin>
