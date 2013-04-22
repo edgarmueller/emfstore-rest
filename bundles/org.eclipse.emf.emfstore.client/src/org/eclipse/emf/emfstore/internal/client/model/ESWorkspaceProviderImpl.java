@@ -516,7 +516,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		for (File file : workspaceFile.listFiles()) {
 			if (file.getName().startsWith(Configuration.getFileInfo().getProjectSpaceDirectoryPrefix())) {
 				String projectFilePath = file.getAbsolutePath() + File.separatorChar
-					+ Configuration.getFileInfo().ProjectFolderName + File.separatorChar + 0
+					+ Configuration.getFileInfo().ProjectFragmentFileName
 					+ Configuration.getFileInfo().ProjectFragmentExtension;
 				URI projectURI = URI.createFileURI(projectFilePath);
 				String operationsFilePath = null;

@@ -19,6 +19,7 @@ import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.util.DefaultWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ESLocationProvider;
@@ -38,11 +39,13 @@ public class FileInfo {
 	private static final String ERROR_DIAGNOSIS_DIR_NAME = "errorLog";
 	private static final String MODEL_VERSION_FILENAME = "modelReleaseNumber";
 
-	public final String ProjectSpaceFileExtension = ".ups";
-	public final String LocalChangePackageExtension = ".uoc";
-	public final String ProjectFragmentExtension = ".upf";
+	public final String ProjectSpaceFileName = "projectspace";
+	public final String ProjectSpaceFileExtension = ExportImportDataUnits.ProjectSpace.getExtension();
+	public final String LocalChangePackageFileName = "operations";
+	public final String LocalChangePackageExtension = ".eoc";
+	public final String ProjectFragmentFileName = "project";
+	public final String ProjectFragmentExtension = ExportImportDataUnits.Project.getExtension();
 	public final String ProjectSpaceDirectoryPrefix = "ps-";
-	public final String ProjectFolderName = "project";
 
 	/**
 	 * Returns the registered {@link ESLocationProvider} or if not existent, the
@@ -137,12 +140,30 @@ public class FileInfo {
 	}
 
 	/**
+	 * Return the file name for project space files.
+	 * 
+	 * @return the file name
+	 */
+	public String getProjectSpaceFileName() {
+		return ProjectSpaceFileName;
+	}
+
+	/**
 	 * Return the file extension for project space files.
 	 * 
 	 * @return the file extension
 	 */
 	public String getProjectSpaceFileExtension() {
 		return ProjectSpaceFileExtension;
+	}
+
+	/**
+	 * Return the file name for operation composite files.
+	 * 
+	 * @return the file name
+	 */
+	public String getLocalChangePackageFileName() {
+		return LocalChangePackageFileName;
 	}
 
 	/**
@@ -164,7 +185,16 @@ public class FileInfo {
 	}
 
 	/**
-	 * Return project fragement file extension.
+	 * Return project fragment file name.
+	 * 
+	 * @return the file name
+	 */
+	public String getProjectFragmentFileName() {
+		return ProjectFragmentFileName;
+	}
+
+	/**
+	 * Return project fragment file extension.
 	 * 
 	 * @return the file extension
 	 */

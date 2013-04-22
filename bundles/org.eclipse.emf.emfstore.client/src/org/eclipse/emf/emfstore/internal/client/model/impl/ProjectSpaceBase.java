@@ -499,7 +499,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		if (this.eResource() == eResource) {
 			String localChangePackageFileName = Configuration.getFileInfo().getWorkspaceDirectory()
 				+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
-				+ this.getIdentifier() + Configuration.getFileInfo().getLocalChangePackageFileExtension();
+				+ Configuration.getFileInfo().getLocalChangePackageFileName()
+				+ Configuration.getFileInfo().getLocalChangePackageFileExtension();
 			eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
 		} else {
 			eResource.getContents().remove(0);
@@ -682,18 +683,17 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		initCompleted = true;
 		String projectSpaceFileNamePrefix = Configuration.getFileInfo().getWorkspaceDirectory()
 			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
-		String projectSpaceFileName = projectSpaceFileNamePrefix + this.getIdentifier()
+		String projectSpaceFileName = projectSpaceFileNamePrefix
+			+ Configuration.getFileInfo().getProjectSpaceFileName()
 			+ Configuration.getFileInfo().getProjectSpaceFileExtension();
-		String localChangePackageFileName = projectSpaceFileNamePrefix + this.getIdentifier()
+		String localChangePackageFileName = projectSpaceFileNamePrefix
+			+ Configuration.getFileInfo().getLocalChangePackageFileName()
 			+ Configuration.getFileInfo().getLocalChangePackageFileExtension();
-		String projectFragementsFileNamePrefix = projectSpaceFileNamePrefix
-			+ Configuration.getFileInfo().ProjectFolderName
-			+ File.separatorChar;
 		URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
 		URI localChangePackageURI = URI.createFileURI(localChangePackageFileName);
 
 		setResourceCount(0);
-		String fileName = projectFragementsFileNamePrefix + getResourceCount()
+		String fileName = projectSpaceFileNamePrefix + Configuration.getFileInfo().getProjectFragmentFileName()
 			+ Configuration.getFileInfo().getProjectFragmentFileExtension();
 		URI fileURI = URI.createFileURI(fileName);
 
