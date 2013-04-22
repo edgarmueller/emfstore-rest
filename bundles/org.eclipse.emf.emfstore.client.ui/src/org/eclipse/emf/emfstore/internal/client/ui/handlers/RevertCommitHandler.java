@@ -7,12 +7,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIRevertCommitController;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
-import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -47,8 +49,8 @@ public class RevertCommitHandler extends AbstractEMFStoreHandler {
 
 		new UIRevertCommitController(
 			getShell(),
-			requireSelection(ESHistoryInfo.class).getPrimarySpec(),
-			view.getProjectSpace().createAPI()).execute();
+			requireSelection(HistoryInfo.class).toAPI().getPrimarySpec(),
+			view.getProjectSpace().toAPI()).execute();
 	}
 
 }

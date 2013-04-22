@@ -30,7 +30,6 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class RevertCommitController extends ServerCall<Void> {
 
-	private ProjectSpace projectSpace;
 	private PrimaryVersionSpec versionSpec;
 	private final boolean headRevert;
 
@@ -46,7 +45,7 @@ public class RevertCommitController extends ServerCall<Void> {
 	 */
 	public RevertCommitController(ProjectSpace projectSpace,
 		PrimaryVersionSpec versionSpec, boolean headRevert) {
-		this.projectSpace = projectSpace;
+		super(projectSpace);
 		this.versionSpec = versionSpec;
 		this.headRevert = headRevert;
 	}
@@ -82,7 +81,7 @@ public class RevertCommitController extends ServerCall<Void> {
 	 */
 	@Override
 	protected Void run() throws ESException {
-		checkoutHeadAndReverseCommit(projectSpace, versionSpec, headRevert);
+		checkoutHeadAndReverseCommit(getProjectSpace(), versionSpec, headRevert);
 		return null;
 	}
 }
