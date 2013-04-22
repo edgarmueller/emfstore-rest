@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server;
 
@@ -14,7 +15,7 @@ import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.Abs
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
- * Factory interface for creating authenticationcontroller.
+ * Factory interface for creating authentication controller.
  * 
  * @author wesendon
  */
@@ -23,7 +24,7 @@ public interface AuthenticationControlFactory {
 	/**
 	 * Creates an authentication controller.
 	 * 
-	 * @return controller
+	 * @return the created authentication controller
 	 * @throws FatalESException in case of failure
 	 */
 	AbstractAuthenticationControl createAuthenticationControl() throws FatalESException;
