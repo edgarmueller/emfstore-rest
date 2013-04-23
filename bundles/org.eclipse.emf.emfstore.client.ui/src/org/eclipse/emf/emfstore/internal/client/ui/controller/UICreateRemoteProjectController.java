@@ -89,7 +89,7 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 			public String[] call() throws Exception {
 				CreateProjectDialog dialog = new CreateProjectDialog(getShell());
 				if (dialog.open() == Dialog.OK) {
-					return new String[] { dialog.getName(), dialog.getDescription() };
+					return new String[] { dialog.getName() };
 				}
 				return null;
 			}

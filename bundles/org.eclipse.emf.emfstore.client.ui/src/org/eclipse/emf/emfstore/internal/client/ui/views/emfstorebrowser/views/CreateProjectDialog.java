@@ -7,9 +7,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Aleksander Shterev
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.LayoutConstants;
@@ -26,15 +29,14 @@ import org.eclipse.swt.widgets.Text;
  * Create project dialog.
  * 
  * @author shterev
+ * @author emueller
  */
 // TODO: remove description
 public class CreateProjectDialog extends TitleAreaDialog {
 
 	private Text txtProjectName;
-	private Text txtProjectDesc;
-
 	private String name;
-	private String description;
+	private String labelText;
 
 	/**
 	 * Default constructor.
@@ -44,8 +46,20 @@ public class CreateProjectDialog extends TitleAreaDialog {
 	 */
 	public CreateProjectDialog(Shell parent) {
 		super(parent);
-		name = "";
-		description = "";
+		name = StringUtils.EMPTY;
+	}
+
+	/**
+	 * Default constructor.
+	 * 
+	 * @param parent
+	 *            the parent shell
+	 * @param labelText
+	 *            the text that will be shown as part of the dialog
+	 */
+	public CreateProjectDialog(Shell parent, String labelText) {
+		this(parent);
+		this.labelText = labelText;
 	}
 
 	/**
@@ -57,17 +71,17 @@ public class CreateProjectDialog extends TitleAreaDialog {
 		contents.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		setTitle("Create new project");
-		setMessage("Enter the name and the description of the project");
+
+		if (labelText != null) {
+			setMessage(labelText);
+		} else {
+			setMessage("Enter the name and the description of the project");
+		}
 
 		Label name = new Label(contents, SWT.NULL);
 		name.setText("Name:");
 		txtProjectName = new Text(contents, SWT.SINGLE | SWT.BORDER);
 		txtProjectName.setSize(150, 20);
-
-		Label desc = new Label(contents, SWT.NULL);
-		desc.setText("Description:");
-		txtProjectDesc = new Text(contents, SWT.MULTI | SWT.BORDER);
-		txtProjectDesc.setSize(150, 60);
 
 		Point defaultMargins = LayoutConstants.getMargins();
 		GridLayoutFactory.fillDefaults().numColumns(2).margins(defaultMargins.x, defaultMargins.y)
@@ -79,17 +93,7 @@ public class CreateProjectDialog extends TitleAreaDialog {
 	@Override
 	protected void okPressed() {
 		name = txtProjectName.getText();
-		description = txtProjectName.getText();
 		super.okPressed();
-	}
-
-	/**
-	 * Returns the description of the project as entered by the user.
-	 * 
-	 * @return the description of the project that is going to be created
-	 */
-	public String getDescription() {
-		return description;
 	}
 
 	/**
