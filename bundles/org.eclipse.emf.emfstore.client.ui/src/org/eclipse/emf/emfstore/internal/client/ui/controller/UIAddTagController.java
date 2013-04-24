@@ -19,7 +19,6 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CreateTagDialog;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
@@ -67,59 +66,52 @@ public class UIAddTagController extends AbstractEMFStoreUIController<Void> {
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 
-		// // TODO: make process of adding tags more user friendly: use one dialog instead of two
-		// InputDialog tagNameDialog = new InputDialog(getShell(), Messages.UIAddTagController_Title,
-		// Messages.UIAddTagController_TagNameLabel, Messages.UIAddTagController_TagNameTextDefault
-		// + new Date(), null);
-		// InputDialog branchNameDialog = new InputDialog(getShell(),
-		//			"Add tag", Messages.UIAddTagController_BranchNameLabel, Messages.UIAddTagController_BranchNameTextDefault, //$NON-NLS-1$
-		// null);
-		//
-		// if (tagNameDialog.open() != Window.OK) {
-		// return null;
-		// }
-		//
-		// if (branchNameDialog.open() != Window.OK) {
-		// return null;
-		// }
+		CreateTagDialog dialog = createDialog(getShell(), localProject.getBranches(monitor));
 
-		CreateTagDialog dialog = createDialog(getShell(), historyInfo.getPreviousSpec(),
-			localProject.getBranches(monitor));
+		String tagName = StringUtils.EMPTY;
+		BranchInfo branchInfo = null;
 
-		if (dialog.open() != Window.OK) {
-			return null;
-		}
+		while (StringUtils.isBlank(tagName) || branchInfo == null) {
 
-		final String tagName = dialog.getTagName();
-		final String branchName = dialog.getResult().getName();
-
-		if (StringUtils.isNotBlank(tagName) && StringUtils.isNotBlank(branchName)) {
-
-			ESPrimaryVersionSpec primaryVersion = historyInfo.getPrimarySpec();
-			ESTagVersionSpec tag = ESVersionSpec.FACTORY.createTAG(tagName, branchName);
-
-			try {
-				localProject.addTag(primaryVersion, tag, monitor);
-			} catch (ESException e) {
-				WorkspaceUtil.logException(e.getMessage(), e);
-				MessageDialog.openError(getShell(), Messages.UIAddTagController_ErrorTitle,
-					Messages.UIAddTagController_ErrorReason + e.getMessage());
+			if (dialog.open() != Window.OK) {
+				// cancel pressed
 				return null;
 			}
 
-			// also add tag to the selected history info
-			historyInfo.getTagSpecs().add(tag);
+			tagName = dialog.getTagName();
+			branchInfo = dialog.getResult();
+
+			if (branchInfo == null) {
+				MessageDialog.openWarning(getShell(), "No branch selected",
+					"No branch has been selected. Please select the branch should be tagged.");
+			} else if (StringUtils.isBlank(tagName)) {
+				MessageDialog.openWarning(getShell(), "Empty tag name",
+					"No tag name has been given. Please enter the name of the tag.");
+			}
 		}
+
+		String branchName = branchInfo.getName();
+		ESPrimaryVersionSpec primaryVersion = historyInfo.getPrimarySpec();
+		ESTagVersionSpec tag = ESVersionSpec.FACTORY.createTAG(tagName, branchName);
+
+		try {
+			localProject.addTag(primaryVersion, tag, monitor);
+		} catch (ESException e) {
+			WorkspaceUtil.logException(e.getMessage(), e);
+			MessageDialog.openError(getShell(), Messages.UIAddTagController_ErrorTitle,
+				Messages.UIAddTagController_ErrorReason + e.getMessage());
+			return null;
+		}
+
+		// also add tag to the selected history info
+		historyInfo.getTagSpecs().add(tag);
 
 		return null;
 	}
 
-	private CreateTagDialog createDialog(Shell shell, ESPrimaryVersionSpec baseVersionSpec,
-		List<ESBranchInfo> branches) {
-
-		ESPrimaryVersionSpecImpl e = (ESPrimaryVersionSpecImpl) baseVersionSpec;
-		List<BranchInfo> bs = APIUtil.toInternal(branches);
-		return new CreateTagDialog(shell, e.toInternalAPI(), bs);
+	private CreateTagDialog createDialog(Shell shell, List<ESBranchInfo> branches) {
+		List<BranchInfo> internalBranches = APIUtil.toInternal(branches);
+		return new CreateTagDialog(shell, internalBranches);
 	}
 
 }
