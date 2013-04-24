@@ -7,13 +7,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -58,11 +59,6 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	private BranchInfo result;
 
 	/**
-	 * Access for subclasses.
-	 */
-	private final PrimaryVersionSpec baseVersion;
-
-	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
@@ -72,10 +68,8 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 * @param branches
 	 *            list of branches
 	 */
-	public BranchSelectionDialog(Shell parentShell,
-		PrimaryVersionSpec baseVersion, List<BranchInfo> branches) {
+	public BranchSelectionDialog(Shell parentShell, List<BranchInfo> branches) {
 		super(parentShell);
-		this.baseVersion = baseVersion;
 		this.branches = branches;
 	}
 
@@ -196,15 +190,6 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	}
 
 	/**
-	 * Returns the base version.
-	 * 
-	 * @return the base version
-	 */
-	protected PrimaryVersionSpec getBaseVersion() {
-		return baseVersion;
-	}
-
-	/**
 	 * Returns the branches.
 	 * 
 	 * @return the branches
@@ -259,7 +244,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		 *            list of branches
 		 */
 		public CheckoutSelection(Shell parentShell, List<BranchInfo> branches) {
-			super(parentShell, null, branches);
+			super(parentShell, branches);
 		}
 
 		@Override
@@ -283,7 +268,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	public static class Creation extends BranchSelectionDialog {
 
 		private Text text;
-		private String newName = "";
+		private String newName = StringUtils.EMPTY;
 
 		/**
 		 * Default constructor.
@@ -295,9 +280,9 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		 * @param branches
 		 *            list of branches
 		 */
-		public Creation(Shell parentShell, PrimaryVersionSpec baseVersion,
+		public Creation(Shell parentShell,
 			java.util.List<BranchInfo> branches) {
-			super(parentShell, baseVersion, branches);
+			super(parentShell, branches);
 		}
 
 		@Override

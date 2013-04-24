@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.ui.controller.Messages;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -18,8 +17,8 @@ public class CreateTagDialog extends BranchSelectionDialog {
 	private Field tagNameField;
 	private String tagName;
 
-	public CreateTagDialog(Shell parentShell, PrimaryVersionSpec baseVersion, List<BranchInfo> branches) {
-		super(parentShell, baseVersion, branches);
+	public CreateTagDialog(Shell parentShell, List<BranchInfo> branches) {
+		super(parentShell, branches);
 	}
 
 	@Override

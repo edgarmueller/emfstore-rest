@@ -50,17 +50,17 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 	public UIMergeController(Shell shell, ESLocalProject localProject) {
 		super(shell);
 		this.projectSpace = ((ESLocalProjectImpl) localProject)
-				.toInternalAPI();
+			.toInternalAPI();
 	}
 
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 		if (!projectSpace.getOperations().isEmpty()) {
 			MessageDialog
-					.openError(
-							getShell(),
-							"Merge not possible",
-							"There are pending changes. Please revert or commit first. Merging with local changes is currently not supported.");
+				.openError(
+					getShell(),
+					"Merge not possible",
+					"There are pending changes. Please revert or commit first. Merging with local changes is currently not supported.");
 			return null;
 		}
 
@@ -69,13 +69,13 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 		if (selectedVersionSpec != null) {
 			// TODO: monitor
 			projectSpace.mergeBranch(selectedVersionSpec,
-					new MergeProjectHandler(true), new NullProgressMonitor());
+				new MergeProjectHandler(true), new NullProgressMonitor());
 		}
 		return null;
 	}
 
 	private PrimaryVersionSpec branchSelection(final ProjectSpace projectSpace)
-			throws ESException {
+		throws ESException {
 
 		// OTS: progress monitor
 		final List<BranchInfo> branches = projectSpace.getBranches();
@@ -83,29 +83,29 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 		while (iterator.hasNext()) {
 			BranchInfo current = iterator.next();
 			if (current.getName().equals(
-					projectSpace.getBaseVersion().getBranch())) {
+				projectSpace.getBaseVersion().getBranch())) {
 				iterator.remove();
 			}
 		}
 
 		BranchInfo result = RunInUI.WithException
-				.runWithResult(new Callable<BranchInfo>() {
-					public BranchInfo call() throws Exception {
+			.runWithResult(new Callable<BranchInfo>() {
+				public BranchInfo call() throws Exception {
 
-						BranchSelectionDialog dialog = new BranchSelectionDialog(
-								getShell(), projectSpace.getBaseVersion(),
-								branches);
-						dialog.setBlockOnOpen(true);
+					BranchSelectionDialog dialog = new BranchSelectionDialog(
+						getShell(),
+						branches);
+					dialog.setBlockOnOpen(true);
 
-						if (dialog.open() != Dialog.OK
-								|| dialog.getResult() == null) {
-							throw new CancelOperationException(
-									"No Branch specified");
-						}
-						return dialog.getResult();
-
+					if (dialog.open() != Dialog.OK
+						|| dialog.getResult() == null) {
+						throw new CancelOperationException(
+							"No Branch specified");
 					}
-				});
+					return dialog.getResult();
+
+				}
+			});
 		return result.getHead();
 	}
 }
