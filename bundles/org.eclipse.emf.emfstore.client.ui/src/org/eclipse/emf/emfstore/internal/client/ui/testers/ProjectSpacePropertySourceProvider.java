@@ -111,7 +111,15 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 
 	private boolean handlePreShutdownOfWorkbench() {
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
-			ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE)) {
+			@Override
+			public String getColumnText(Object object, int columnIndex) {
+				if (object instanceof ESLocalProject) {
+					return ((ESLocalProject) object).getProjectName();
+				}
+				return super.getColumnText(object, columnIndex);
+			}
+		};
 		ArrayContentProvider contentProvider = new ArrayContentProvider();
 		ArrayList<ESProject> inputArray = new ArrayList<ESProject>();
 		for (ESLocalProject project : ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects()) {
