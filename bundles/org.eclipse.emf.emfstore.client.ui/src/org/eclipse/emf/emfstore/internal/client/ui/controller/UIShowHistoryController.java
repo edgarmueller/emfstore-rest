@@ -49,7 +49,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	}
 
 	public UIShowHistoryController(Shell shell, ESLocalProject localProject) {
-		super(shell, true, true);
+		super(shell, false, true);
 		this.modelElement = ((ESLocalProjectImpl) localProject).toInternalAPI();
 	}
 
@@ -62,25 +62,31 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 
-		RunInUI.run(new Callable<Void>() {
-			public Void call() throws Exception {
+		final HistoryBrowserView view = RunInUI.runWithResult(new Callable<HistoryBrowserView>() {
+			public HistoryBrowserView call() throws Exception {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-				HistoryBrowserView historyBrowserView = null;
+
 				// TODO: remove hard-coded reference
 				String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
 
 				try {
-					historyBrowserView = (HistoryBrowserView) page.showView(viewId);
+					return (HistoryBrowserView) page.showView(viewId);
 				} catch (PartInitException e) {
 					EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
-				}
-
-				if (historyBrowserView != null) {
-					historyBrowserView.setInput(modelElement);
 				}
 				return null;
 			}
 		});
+
+		if (view != null) {
+			try {
+
+				view.setInput(modelElement);
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 
 		return null;
 	}
