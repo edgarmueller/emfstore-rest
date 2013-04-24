@@ -38,7 +38,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testCheckoutSession() {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(usersession,
-				new NullProgressMonitor());
+				new NullProgressMonitor(), "testCheckout");
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {
@@ -51,7 +51,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testCheckoutSessionProgress() {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(usersession,
-				new NullProgressMonitor());
+				new NullProgressMonitor(), "testCheckout");
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {
@@ -65,7 +65,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
-				new NullProgressMonitor());
+				new NullProgressMonitor(), "testCheckout");
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {
@@ -79,7 +79,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
-				new NullProgressMonitor());
+				new NullProgressMonitor(), "testCheckout");
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {

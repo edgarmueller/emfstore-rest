@@ -158,7 +158,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					ESLocalProject checkout = projectSpace.toAPI().getRemoteProject().checkout(
 						projectSpace.getUsersession().toAPI(),
 						projectSpace.getBaseVersion().toAPI(),
-						new NullProgressMonitor());
+						new NullProgressMonitor(),
+						"testCheckout");
 					return ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
@@ -178,7 +179,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					ESLocalProject checkout = remoteProject.checkout(
 						getProjectSpace().getUsersession().toAPI(),
 						baseVersion.toAPI(),
-						new NullProgressMonitor());
+						new NullProgressMonitor(),
+						"testCheckout");
 					return ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);

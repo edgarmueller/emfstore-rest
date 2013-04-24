@@ -92,7 +92,8 @@ public class Application implements IApplication {
 			new NullProgressMonitor());
 
 		// Check-out a second, independent copy of the project (simulating a second client)
-		ESLocalProject projectNo2 = projectNo1.getRemoteProject().checkout(usersession, new NullProgressMonitor());
+		ESLocalProject projectNo2 = projectNo1.getRemoteProject().checkout(
+			usersession, new NullProgressMonitor(), "My checkout");
 
 		// Get a second copy of the league
 		League league2 = (League) projectNo2.getModelElements().get(0);

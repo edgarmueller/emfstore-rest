@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -21,6 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperation
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
+import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.CreateProjectDialog;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -28,6 +30,7 @@ import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -53,7 +56,7 @@ public class UICheckoutController extends
 	 *            the {@link ESRemoteProject} to be checked out
 	 */
 	public UICheckoutController(Shell shell, ESRemoteProject remoteProject) {
-		super(shell, true, true);
+		super(shell, false, true);
 		this.remoteProject = remoteProject;
 		this.askForBranch = false;
 		this.versionSpec = null;
@@ -205,6 +208,22 @@ public class UICheckoutController extends
 		throws ESException {
 		try {
 
+			String checkedoutProjectName = RunInUI.runWithResult(new Callable<String>() {
+				public String call() throws Exception {
+					CreateProjectDialog projectDialog = new CreateProjectDialog(getShell(),
+						MessageFormat.format("Please provide a name for the checkout of the project '{0}'",
+							remoteProject.getProjectName()));
+					if (projectDialog.open() != Window.OK) {
+						return null;
+					}
+					return projectDialog.getName();
+				}
+			});
+
+			if (checkedoutProjectName == null) {
+				return null;
+			}
+
 			if (askForBranch && versionSpec == null) {
 				versionSpec = branchSelection(remoteProject, progressMonitor);
 			}
@@ -212,20 +231,19 @@ public class UICheckoutController extends
 			if (session != null) {
 				if (versionSpec == null) {
 					return remoteProject
-						.checkout(session,
-							progressMonitor);
+						.checkout(session, progressMonitor, checkedoutProjectName);
 				} else {
 					return remoteProject.checkout(session, versionSpec,
-						progressMonitor);
+						progressMonitor, checkedoutProjectName);
 				}
 			} else {
 				if (versionSpec == null) {
-					return remoteProject.checkout(progressMonitor);
+					return remoteProject.checkout(progressMonitor, checkedoutProjectName);
 				} else {
 					return remoteProject
 						.checkout(remoteProject.getServer()
 							.getLastUsersession(), versionSpec,
-							progressMonitor);
+							progressMonitor, checkedoutProjectName);
 				}
 			}
 

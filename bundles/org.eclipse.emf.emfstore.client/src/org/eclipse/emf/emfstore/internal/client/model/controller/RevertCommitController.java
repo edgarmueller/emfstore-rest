@@ -32,6 +32,7 @@ public class RevertCommitController extends ServerCall<Void> {
 
 	private PrimaryVersionSpec versionSpec;
 	private final boolean headRevert;
+	private String checkedoutCopyName;
 
 	/**
 	 * Constructor.
@@ -44,10 +45,11 @@ public class RevertCommitController extends ServerCall<Void> {
 	 *            reverts HEAD if set to {@code true}, otherwise just revert individual version
 	 */
 	public RevertCommitController(ProjectSpace projectSpace,
-		PrimaryVersionSpec versionSpec, boolean headRevert) {
+		PrimaryVersionSpec versionSpec, boolean headRevert, String checkedoutCopyName) {
 		super(projectSpace);
 		this.versionSpec = versionSpec;
 		this.headRevert = headRevert;
+		this.checkedoutCopyName = checkedoutCopyName;
 	}
 
 	private void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec baseVersion,
@@ -61,7 +63,8 @@ public class RevertCommitController extends ServerCall<Void> {
 
 		ESLocalProjectImpl revertSpace = projectSpace.toAPI().getRemoteProject().checkout(
 			projectSpace.getUsersession().toAPI(),
-			getProgressMonitor());
+			getProgressMonitor(),
+			checkedoutCopyName);
 
 		List<ChangePackage> changes = revertSpace.toInternalAPI().getChanges(
 			baseVersion,

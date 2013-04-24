@@ -174,7 +174,8 @@ public class ChecksumTest extends CoreServerTest {
 			.checkout(
 				getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-				new NullProgressMonitor());
+				new NullProgressMonitor(),
+				"testCheckout");
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
@@ -264,8 +265,8 @@ public class ChecksumTest extends CoreServerTest {
 		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
 			.checkout(getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-
-				new NullProgressMonitor());
+				new NullProgressMonitor(),
+				"testCheckout");
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
@@ -310,7 +311,8 @@ public class ChecksumTest extends CoreServerTest {
 		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
 			.checkout(getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-				new NullProgressMonitor());
+				new NullProgressMonitor(),
+				"testCheckout");
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
@@ -350,7 +352,8 @@ public class ChecksumTest extends CoreServerTest {
 		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
 			.checkout(getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-				new NullProgressMonitor());
+				new NullProgressMonitor(),
+				"testCheckout");
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {

@@ -47,12 +47,14 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param monitor
 	 *            the progress monitor that is used during checkout in order to indicate progress
+	 * @param checkedoutCopyName
+	 *            the name of the copy being created during the checkout
 	 * 
 	 * @return the checked out project
 	 * 
 	 * @throws ESException in case an error occurs during checkout
 	 */
-	ESLocalProject checkout(IProgressMonitor monitor) throws ESException;
+	ESLocalProject checkout(IProgressMonitor monitor, String checkedoutCopyName) throws ESException;
 
 	/**
 	 * <p>
@@ -73,6 +75,8 @@ public interface ESRemoteProject extends ESProject {
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to checkout the project
 	 * @param monitor
 	 *            the {@link IProgressMonitor} that is used during checkout in order to indicate progress
+	 * @param checkedOutCopyName
+	 *            the name of the copy being created during the checkout
 	 * 
 	 * @return the checked out project
 	 * 
@@ -81,7 +85,7 @@ public interface ESRemoteProject extends ESProject {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
 	 * @see ESServer#getLastUsersession()
 	 */
-	ESLocalProject checkout(final ESUsersession usersession, IProgressMonitor monitor)
+	ESLocalProject checkout(final ESUsersession usersession, IProgressMonitor monitor, String checkedOutCopyName)
 		throws ESException;
 
 	/**
@@ -105,6 +109,8 @@ public interface ESRemoteProject extends ESProject {
 	 *            the version that should be checked out.
 	 * @param monitor
 	 *            the {@link IProgressMonitor} that is used during checkout in order to indicate progress
+	 * @param checkedoutCopyName
+	 *            the name of the copy being created during the checkout
 	 * 
 	 * @return the checked out project
 	 * 
@@ -113,7 +119,8 @@ public interface ESRemoteProject extends ESProject {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
 	 * @see ESServer#getLastUsersession()
 	 */
-	ESLocalProject checkout(final ESUsersession usersession, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+	ESLocalProject checkout(final ESUsersession usersession, ESPrimaryVersionSpec versionSpec,
+		IProgressMonitor monitor, String checkedoutCopyName)
 		throws ESException;
 
 	/**

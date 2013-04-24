@@ -316,13 +316,14 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(final IProgressMonitor monitor) throws ESException {
+	public ESLocalProjectImpl checkout(final IProgressMonitor monitor, final String checkedoutCopyName)
+		throws ESException {
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 			public ESLocalProjectImpl call() throws Exception {
 				return new ServerCall<ESLocalProjectImpl>(getServerInfo()) {
 					@Override
 					protected ESLocalProjectImpl run() throws ESException {
-						return checkout(getUsersession().toAPI(), monitor);
+						return checkout(getUsersession().toAPI(), monitor, checkedoutCopyName);
 					}
 				}.execute();
 			}
@@ -336,26 +337,28 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(final ESUsersession usersession, final IProgressMonitor monitor)
+	public ESLocalProjectImpl checkout(final ESUsersession usersession,
+		final IProgressMonitor monitor, final String checkedoutCopyName)
 		throws ESException {
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 			public ESLocalProjectImpl call() throws Exception {
 				ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD()
 					.toAPI(), monitor);
-				return checkout(usersession, primaryVersionSpec, monitor);
+				return checkout(usersession, primaryVersionSpec, monitor, checkedoutCopyName);
 			}
 		});
 	}
 
-	public ESLocalProjectImpl checkout(final Usersession usersession, final IProgressMonitor monitor)
+	public ESLocalProjectImpl checkout(final Usersession usersession, final IProgressMonitor monitor,
+		String checkedoutCopyName)
 		throws ESException {
-		return checkout(usersession.toAPI(), monitor);
+		return checkout(usersession.toAPI(), monitor, checkedoutCopyName);
 	}
 
 	public ESLocalProjectImpl checkout(final Usersession usersession, final PrimaryVersionSpec versionSpec,
-		final IProgressMonitor monitor)
+		final IProgressMonitor monitor, String checkedoutCopyName)
 		throws ESException {
-		return checkout(usersession.toAPI(), versionSpec.toAPI(), monitor);
+		return checkout(usersession.toAPI(), versionSpec.toAPI(), monitor, checkedoutCopyName);
 	}
 
 	/**
@@ -366,7 +369,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ESLocalProjectImpl checkout(final ESUsersession session, final ESPrimaryVersionSpec versionSpec,
-		final IProgressMonitor progressMonitor)
+		final IProgressMonitor progressMonitor, final String checkedoutCopyName)
 		throws ESException {
 
 		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, "Checkout", 100);
@@ -408,7 +411,9 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				ProjectSpaceBase projectSpace = (ProjectSpaceBase) initProjectSpace(
 					usersession,
 					projectInfoCopy,
-					project);
+					project,
+					checkedoutCopyName);
+
 				ESWorkspaceProviderImpl.getObserverBus().register(projectSpace);
 				parentMonitor.worked(30);
 
@@ -422,13 +427,13 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 			}
 
 			private ProjectSpace initProjectSpace(final Usersession usersession, final ProjectInfo projectInfoCopy,
-				Project project) {
+				Project project, String projectName) {
 
 				WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProviderImpl.getInstance().getInternalWorkspace();
 
 				ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 				projectSpace.setProjectId(projectInfoCopy.getProjectId());
-				projectSpace.setProjectName(projectInfoCopy.getName());
+				projectSpace.setProjectName(projectName);
 				projectSpace.setProjectDescription(projectInfoCopy.getDescription());
 				projectSpace.setBaseVersion(projectInfoCopy.getVersion());
 				projectSpace.setLastUpdated(new Date());
