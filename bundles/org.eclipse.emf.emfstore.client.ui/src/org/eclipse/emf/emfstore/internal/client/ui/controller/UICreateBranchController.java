@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -147,7 +148,7 @@ public class UICreateBranchController extends
 
 	public boolean inspectChanges(
 		ESLocalProject localProject,
-		ESChangePackage changePackage,
+		final ESChangePackage changePackage,
 		ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		ESChangePackageImpl internalChangePackage = (ESChangePackageImpl) changePackage;
@@ -165,10 +166,15 @@ public class UICreateBranchController extends
 		});
 
 		if (dialogReturnValue == Dialog.OK) {
-			changePackage.setLogMessage(ESLogMessage.FACTORY.createLogMessage(
-				commitDialog.getLogText(), projectSpace
-					.getUsersession()
-					.getUsername()));
+			RunESCommand.run(new Callable<Void>() {
+				public Void call() throws Exception {
+					changePackage.setLogMessage(ESLogMessage.FACTORY.createLogMessage(
+						commitDialog.getLogText(), projectSpace
+							.getUsersession()
+							.getUsername()));
+					return null;
+				}
+			});
 			return true;
 		}
 
@@ -225,8 +231,7 @@ public class UICreateBranchController extends
 
 				public String call() throws Exception {
 					BranchSelectionDialog.Creation dialog = new BranchSelectionDialog.Creation(
-						getShell(), projectSpace.getBaseVersion(),
-						branches);
+						getShell(), branches);
 					dialog.setBlockOnOpen(true);
 
 					if (dialog.open() != Dialog.OK

@@ -10,7 +10,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
+import java.util.concurrent.Callable;
+
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -68,7 +71,7 @@ public class SessionManager {
 	 * @throws ESException
 	 *             In case
 	 */
-	private void loginUsersession(Usersession usersession, boolean forceLogin) throws ESException {
+	private void loginUsersession(final Usersession usersession, boolean forceLogin) throws ESException {
 		if (usersession == null) {
 			// TODO create exception
 			throw new RuntimeException("Ouch.");
@@ -78,13 +81,23 @@ public class SessionManager {
 				&& usersession.getPassword() != null) {
 				try {
 					// if login fails, let the session provider handle the rest
-					usersession.logIn();
+					RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+						public Void call() throws Exception {
+							usersession.logIn();
+							return null;
+						}
+					});
 					return;
 				} catch (ESException e) {
 					// ignore, session provider should try to login
 				}
 			}
-			getSessionProvider().login(usersession.toAPI());
+			RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+				public Void call() throws Exception {
+					getSessionProvider().login(usersession.toAPI());
+					return null;
+				}
+			});
 		}
 	}
 

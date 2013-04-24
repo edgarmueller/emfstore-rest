@@ -12,12 +12,14 @@ package org.eclipse.emf.emfstore.internal.client.model.controller;
 
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.concurrent.Callable;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
@@ -99,7 +101,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		return commit(this.logMessage, this.branch);
 	}
 
-	private PrimaryVersionSpec commit(LogMessage logMessage, final BranchVersionSpec branch)
+	private PrimaryVersionSpec commit(final LogMessage logMessage, final BranchVersionSpec branch)
 		throws InvalidVersionSpecException, BaseVersionOutdatedException, ESException {
 
 		if (!getProjectSpace().isShared()) {
@@ -126,7 +128,13 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Gathering changes");
 
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
-		changePackage.setLogMessage(logMessage);
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				changePackage.setLogMessage(logMessage);
+				return null;
+			}
+		});
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
 			.inspectChanges(getProjectSpace().toAPI(), changePackage.toAPI(), getProgressMonitor());
@@ -136,9 +144,10 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Presenting Changes");
 		if (!callback.inspectChanges(getProjectSpace().toAPI(),
-										changePackage.toAPI(),
-										idToEObjectMapping.toAPI())
+			changePackage.toAPI(),
+			idToEObjectMapping.toAPI())
 			|| getProgressMonitor().isCanceled()) {
+
 			return getProjectSpace().getBaseVersion();
 		}
 
@@ -155,26 +164,26 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		if (updatePerformed) {
 			getProgressMonitor().subTask("Presenting Changes");
 			if (!callback.inspectChanges(getProjectSpace().toAPI(),
-											changePackage.toAPI(),
-											idToEObjectMapping.toAPI())
+				changePackage.toAPI(),
+				idToEObjectMapping.toAPI())
 				|| getProgressMonitor().isCanceled()) {
 				return getProjectSpace().getBaseVersion();
 			}
 		}
 
 		// Branching case: branch specifier added
-		PrimaryVersionSpec newBaseVersion;
-		newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(getProgressMonitor()) {
+		final PrimaryVersionSpec newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(
+			getProgressMonitor()) {
 			@Override
 			public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
 				return getConnectionManager().createVersion(
-															getUsersession().getSessionId(),
-															getProjectSpace().getProjectId(),
-															getProjectSpace().getBaseVersion(),
-															changePackage,
-															branch,
-															getProjectSpace().getMergedVersion(),
-															changePackage.getLogMessage());
+					getUsersession().getSessionId(),
+					getProjectSpace().getProjectId(),
+					getProjectSpace().getBaseVersion(),
+					changePackage,
+					branch,
+					getProjectSpace().getMergedVersion(),
+					changePackage.getLogMessage());
 			}
 		}.execute();
 
@@ -192,7 +201,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
 		} catch (SerializationException exception) {
 			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
-															getProjectSpace().getProjectName()), exception);
+				getProjectSpace().getProjectName()), exception);
 		}
 
 		if (!validChecksum) {
@@ -206,10 +215,15 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Finalizing commit");
 
-		getProjectSpace().setBaseVersion(newBaseVersion);
-		getProjectSpace().getOperations().clear();
-		getProjectSpace().setMergedVersion(null);
-		getProjectSpace().updateDirtyState();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				getProjectSpace().setBaseVersion(newBaseVersion);
+				getProjectSpace().getOperations().clear();
+				getProjectSpace().setMergedVersion(null);
+				getProjectSpace().updateDirtyState();
+				return null;
+			}
+		});
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
 			.commitCompleted(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
@@ -250,7 +264,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			// check if we need to update first
 			PrimaryVersionSpec resolvedVersion = getProjectSpace()
 				.resolveVersionSpec(
-									Versions.createHEAD(getProjectSpace().getBaseVersion()), monitor);
+					Versions.createHEAD(getProjectSpace().getBaseVersion()), monitor);
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
 				if (!callback.baseVersionOutOfDate(getProjectSpace().toAPI(), getProgressMonitor())) {
 					throw new BaseVersionOutdatedException();
