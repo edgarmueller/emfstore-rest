@@ -211,7 +211,7 @@ public class UICheckoutController extends
 			String checkedoutProjectName = RunInUI.runWithResult(new Callable<String>() {
 				public String call() throws Exception {
 					CreateProjectDialog projectDialog = new CreateProjectDialog(getShell(),
-						MessageFormat.format("Please provide a name for the checkout of the project '{0}'",
+						MessageFormat.format("Please provide a name for the checkout of the project {0}",
 							remoteProject.getProjectName()));
 					if (projectDialog.open() != Window.OK) {
 						return null;

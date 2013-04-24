@@ -69,8 +69,8 @@ public class CreateProjectDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		Composite contents = new Composite(parent, SWT.NONE);
 		contents.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
 		setTitle("Create new project");
+		getShell().setText("Create new project");
 
 		if (labelText != null) {
 			setMessage(labelText);
