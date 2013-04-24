@@ -7,17 +7,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESHistoryInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
@@ -74,7 +76,7 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 		final LabelProvider tagLabelProvider = new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((TagVersionSpec) element).getName();
+				return ((ESTagVersionSpec) element).getName();
 			}
 		};
 
@@ -94,11 +96,11 @@ public class UIRemoveTagController extends AbstractEMFStoreUIController<Void> {
 		Object[] result = dlg.getResult();
 
 		for (Object o : result) {
-			if (o instanceof TagVersionSpec) {
-				TagVersionSpec tag = (TagVersionSpec) o;
+			if (o instanceof ESTagVersionSpec) {
+				ESTagVersionSpec tag = (ESTagVersionSpec) o;
 				try {
 					// TODO: monitor
-					projectSpace.removeTag(historyInfo.toInternalAPI().getPrimarySpec(), tag);
+					projectSpace.toAPI().removeTag(historyInfo.getPrimarySpec(), tag, new NullProgressMonitor());
 				} catch (ESException e) {
 					MessageDialog.openError(getShell(), "Remove tag failed", "Remove tag failed: " + e.getMessage());
 				}
