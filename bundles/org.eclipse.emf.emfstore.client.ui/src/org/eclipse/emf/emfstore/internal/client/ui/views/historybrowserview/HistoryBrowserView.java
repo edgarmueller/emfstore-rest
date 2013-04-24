@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -31,6 +32,7 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ProjectSpaceContainer;
 import org.eclipse.emf.emfstore.internal.client.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
+import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVisualizationHelper;
@@ -86,6 +88,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
@@ -263,7 +266,12 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	 * Reloads the view with the current parameters.
 	 */
 	public void refresh() {
-		setDescription();
+		RunInUI.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				setDescription();
+				return null;
+			}
+		});
 		resetExpandCollapse();
 		if (projectSpace == null || modelElement == null) {
 			viewer.setInput(Collections.EMPTY_LIST);
@@ -305,60 +313,81 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private List<HistoryInfo> getHistoryInfos() {
-		// TODO dudes, this wrapping is crazy!
-		List<HistoryInfo> result = new AbstractEMFStoreUIController<List<HistoryInfo>>(getViewSite().getShell(), true,
+		Shell shell =
+			getViewSite().getShell();
+
+		List<HistoryInfo> result = new AbstractEMFStoreUIController<List<HistoryInfo>>(shell, true,
 			false) {
 			@Override
 			public List<HistoryInfo> doRun(final IProgressMonitor monitor) throws ESException {
 				return new UnknownEMFStoreWorkloadCommand<List<HistoryInfo>>(monitor) {
 					@Override
 					public List<HistoryInfo> run(final IProgressMonitor monitor) throws ESException {
-						return new ServerCall<List<HistoryInfo>>(projectSpace) {
-							@Override
-							protected List<HistoryInfo> run() throws ESException {
-								monitor.beginTask("Fetching history form server", 100);
-								List<HistoryInfo> historyInfos = getLocalChanges();
-								monitor.worked(10);
-								if (projectSpace != modelElement) {
-									ModelElementQuery query = HistoryQueryBuilder.modelelementQuery(
-										centerVersion,
-										Arrays.asList(ModelUtil.getModelElementId(modelElement)),
-										UPPER_LIMIT,
-										LOWER_LIMIT,
-										showAllVersions,
-										true);
-									// TODO: proivde util method
-									ESHistoryQuery<ESModelElementQuery> api = query.toAPI();
-									List<ESHistoryInfo> infos =
-										projectSpace.toAPI().getHistoryInfos(api, new NullProgressMonitor());
-									for (ESHistoryInfo info : infos) {
-										historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
-									}
-								} else {
-									// TODO monitor
-									RangeQuery<ESRangeQuery<ESRangeQuery<?>>> rangeQuery = HistoryQueryBuilder
-										.rangeQuery(
-											centerVersion,
-											UPPER_LIMIT,
-											LOWER_LIMIT,
-											showAllVersions, true, true, true);
-									List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(
-										rangeQuery.toAPI(),
-										new NullProgressMonitor());
-									for (ESHistoryInfo info : infos) {
-										historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
-									}
-								}
-								monitor.worked(90);
-								return historyInfos;
-							}
-						}.execute();
+						List<HistoryInfo> historyInfosFromServer = getHistoryInfosFromServer(monitor);
+						return historyInfosFromServer;
 					}
-				}.execute();
+				}.execute(); // UnknownEMFStoreWorkloadCommand
 			}
-		}.execute();
+		}.execute(); // AbstractEMFStoreUIController
 
 		return (result != null) ? result : new ArrayList<HistoryInfo>();
+	}
+
+	private List<HistoryInfo> getHistoryInfosFromServer(final IProgressMonitor monitor)
+		throws ESException {
+
+		return new ServerCall<List<HistoryInfo>>(projectSpace) {
+			@Override
+			protected List<HistoryInfo> run() throws ESException {
+				monitor.beginTask("Fetching history form server", 100);
+				List<HistoryInfo> historyInfos = getLocalChanges();
+				monitor.worked(10);
+				if (projectSpace != modelElement) {
+					List<ESHistoryInfo> infos = modelElementQuery();
+					for (ESHistoryInfo info : infos) {
+						historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
+					}
+				} else {
+					// TODO monitor
+					List<ESHistoryInfo> infos = rangeQuery();
+					for (ESHistoryInfo info : infos) {
+						historyInfos.add(((ESHistoryInfoImpl) info).toInternalAPI());
+					}
+				}
+				monitor.worked(90);
+				return historyInfos;
+			}
+
+		}.execute(); // ServerCall
+
+	}
+
+	private List<ESHistoryInfo> modelElementQuery() throws ESException {
+		ModelElementQuery query = HistoryQueryBuilder.modelelementQuery(
+			centerVersion,
+			Arrays.asList(ModelUtil.getModelElementId(modelElement)),
+			UPPER_LIMIT,
+			LOWER_LIMIT,
+			showAllVersions,
+			true);
+		// TODO: proivde util method
+		ESHistoryQuery<ESModelElementQuery> api = query.toAPI();
+		List<ESHistoryInfo> infos =
+			projectSpace.toAPI().getHistoryInfos(api, new NullProgressMonitor());
+		return infos;
+	}
+
+	private List<ESHistoryInfo> rangeQuery() throws ESException {
+		RangeQuery<ESRangeQuery<ESRangeQuery<?>>> rangeQuery = HistoryQueryBuilder
+			.rangeQuery(
+				centerVersion,
+				UPPER_LIMIT,
+				LOWER_LIMIT,
+				showAllVersions, true, true, true);
+		List<ESHistoryInfo> infos = projectSpace.toAPI().getHistoryInfos(
+			rangeQuery.toAPI(),
+			new NullProgressMonitor());
+		return infos;
 	}
 
 	private List<HistoryInfo> getLocalChanges() {
