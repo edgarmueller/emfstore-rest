@@ -10,6 +10,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.util.Date;
+
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.controller.RevertCommitController;
@@ -20,7 +25,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.IInputValidator;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
@@ -59,15 +65,30 @@ public class UIRevertCommitController extends AbstractEMFStoreUIController<Void>
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 
-		MessageDialog dialog = new MessageDialog(null, "Confirmation", null,
-			"Do you really want to force to revert changes of this version on project "
-				+ localProject.toInternalAPI().getProjectName(), MessageDialog.QUESTION, new String[] { "Yes", "No" },
-			0);
-		int result = dialog.open();
-		if (result == Window.OK) {
+		InputDialog dialog = new InputDialog(null, "Confirmation", MessageFormat.format(
+			"The changes to be reverted will be applied upon a fresh checkout of the project {0}.\n"
+				+ "Please provide a name for this checkout.",
+			localProject.getProjectName()),
+			createDefaultProjectName(localProject),
+			new IInputValidator() {
+				public String isValid(String newText) {
+					if (StringUtils.isNotBlank(newText)) {
+						return null;
+					}
+					return "Invalid project name";
+				}
+			});
+
+		if (dialog.open() == Window.OK) {
+
 			PrimaryVersionSpec primaryVersionSpec = ModelUtil.clone(versionSpec.toInternalAPI());
+			String checkoutName = dialog.getValue();
+
 			try {
-				new RevertCommitController(localProject.toInternalAPI(), primaryVersionSpec, true).execute();
+				new RevertCommitController(localProject.toInternalAPI(),
+					primaryVersionSpec,
+					true,
+					checkoutName).execute();
 			} catch (ESException e) {
 				e.printStackTrace();
 				// TODO: no error handling?
@@ -75,4 +96,10 @@ public class UIRevertCommitController extends AbstractEMFStoreUIController<Void>
 		}
 		return null;
 	}
+
+	private String createDefaultProjectName(ESLocalProject project) {
+		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		return project.getProjectName() + "@" + format.format(new Date());
+	}
+
 }
