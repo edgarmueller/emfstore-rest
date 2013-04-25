@@ -156,10 +156,10 @@ public abstract class CoreServerTest extends WorkspaceTest {
 						.setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					ESLocalProject checkout = projectSpace.toAPI().getRemoteProject().checkout(
+						"testCheckout",
 						projectSpace.getUsersession().toAPI(),
 						projectSpace.getBaseVersion().toAPI(),
-						new NullProgressMonitor(),
-						"testCheckout");
+						new NullProgressMonitor());
 					return ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);
@@ -177,10 +177,10 @@ public abstract class CoreServerTest extends WorkspaceTest {
 						.setConnectionManager(getConnectionMock());
 					// TODO: TQ
 					ESLocalProject checkout = remoteProject.checkout(
+						"testCheckout",
 						getProjectSpace().getUsersession().toAPI(),
 						baseVersion.toAPI(),
-						new NullProgressMonitor(),
-						"testCheckout");
+						new NullProgressMonitor());
 					return ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					throw new RuntimeException(e);

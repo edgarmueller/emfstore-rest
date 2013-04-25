@@ -266,8 +266,8 @@ public class Application implements IApplication {
 			@Override
 			protected ESLocalProject doRun() {
 				try {
-					return project1.getRemoteProject().checkout(
-						usersession, new NullProgressMonitor(), "My checkout");
+					return project1.getRemoteProject().checkout( "My checkout",
+						usersession, new NullProgressMonitor());
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}

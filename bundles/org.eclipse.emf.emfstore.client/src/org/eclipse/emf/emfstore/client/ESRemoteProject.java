@@ -45,16 +45,16 @@ public interface ESRemoteProject extends ESProject {
 	 * The {@link ESUsersession} used for checking out the project will be injected.
 	 * </p>
 	 * 
+	 * @param name
+	 *            the name of the copy being created during the checkout
 	 * @param monitor
 	 *            the progress monitor that is used during checkout in order to indicate progress
-	 * @param checkedoutCopyName
-	 *            the name of the copy being created during the checkout
 	 * 
 	 * @return the checked out project
 	 * 
 	 * @throws ESException in case an error occurs during checkout
 	 */
-	ESLocalProject checkout(IProgressMonitor monitor, String checkedoutCopyName) throws ESException;
+	ESLocalProject checkout(String name, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * <p>
@@ -70,13 +70,13 @@ public interface ESRemoteProject extends ESProject {
 	 * can be fetched via {@link ESVersionSpec#FACTORY}.
 	 * </p>
 	 * 
+	 * @param name
+	 *            the name of the copy being created during the checkout
 	 * @param usersession
 	 *            the user session that will be used by the
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to checkout the project
 	 * @param monitor
 	 *            the {@link IProgressMonitor} that is used during checkout in order to indicate progress
-	 * @param checkedOutCopyName
-	 *            the name of the copy being created during the checkout
 	 * 
 	 * @return the checked out project
 	 * 
@@ -85,7 +85,7 @@ public interface ESRemoteProject extends ESProject {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
 	 * @see ESServer#getLastUsersession()
 	 */
-	ESLocalProject checkout(final ESUsersession usersession, IProgressMonitor monitor, String checkedOutCopyName)
+	ESLocalProject checkout(final String name, final ESUsersession usersession, IProgressMonitor monitor)
 		throws ESException;
 
 	/**
@@ -102,6 +102,8 @@ public interface ESRemoteProject extends ESProject {
 	 * can be fetched via {@link ESVersionSpec#FACTORY}.
 	 * </p>
 	 * 
+	 * @param name
+	 *            the name of the copy being created during the checkout
 	 * @param usersession
 	 *            the user session that will be used by the
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to checkout the project
@@ -109,8 +111,6 @@ public interface ESRemoteProject extends ESProject {
 	 *            the version that should be checked out.
 	 * @param monitor
 	 *            the {@link IProgressMonitor} that is used during checkout in order to indicate progress
-	 * @param checkedoutCopyName
-	 *            the name of the copy being created during the checkout
 	 * 
 	 * @return the checked out project
 	 * 
@@ -119,8 +119,8 @@ public interface ESRemoteProject extends ESProject {
 	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory
 	 * @see ESServer#getLastUsersession()
 	 */
-	ESLocalProject checkout(final ESUsersession usersession, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor monitor, String checkedoutCopyName)
+	ESLocalProject checkout(final String name, final ESUsersession usersession, final ESPrimaryVersionSpec versionSpec,
+		final IProgressMonitor monitor)
 		throws ESException;
 
 	/**

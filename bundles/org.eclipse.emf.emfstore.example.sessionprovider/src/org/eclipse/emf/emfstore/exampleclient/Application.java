@@ -97,8 +97,8 @@ public class Application implements IApplication {
 			 * Now lets checkout the same project twice, modify the element and
 			 * commit the changes to the server.
 			 */
-			ESLocalProject project2 = project1.getRemoteProject().checkout(
-				usersession, new NullProgressMonitor(), "My checkout");
+			ESLocalProject project2 = project1.getRemoteProject().checkout("My checkout",
+				usersession, new NullProgressMonitor());
 			League league2 = (League) project2.getModelElements().get(0);
 			System.out.println(String.format("Project 2: League \"%s\" was checked out twice!", league1.getName()));
 			league2.setName("league no. 1 - changed");

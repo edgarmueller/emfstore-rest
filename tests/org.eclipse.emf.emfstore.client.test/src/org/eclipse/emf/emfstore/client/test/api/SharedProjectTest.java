@@ -222,7 +222,7 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		NullProgressMonitor monitor = new NullProgressMonitor();
 		final Player player = ProjectChangeUtil.addPlayerToProject(localProject);
 		localProject.commit(monitor);
-		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout(monitor, "testCheckout");
+		ESLocalProject checkedoutCopy = localProject.getRemoteProject().checkout("testCheckout", monitor);
 		final Player checkedoutPlayer = (Player) checkedoutCopy.getModelElements().get(0);
 
 		RunESCommand.run(new Callable<Void>() {

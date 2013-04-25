@@ -206,9 +206,9 @@ public class PerformanceTest {
 					try {
 						// TODO: OTS cast
 						ESLocalProject checkout = projectSpace.toAPI().getRemoteProject().checkout(
+							"testCheckout",
 							setupHelper.getUsersession().toAPI(),
-							new NullProgressMonitor(),
-							"testCheckout");
+							new NullProgressMonitor());
 						projectSpace2 = ((ESLocalProjectImpl) checkout).toInternalAPI();
 					} catch (ESException e) {
 						e.printStackTrace();
@@ -283,9 +283,9 @@ public class PerformanceTest {
 					// projectSpace2 = usersession2.checkout(setupHelper1.getTestProjectSpace().getProjectInfo());
 					ESLocalProject checkout = setupHelper.getTestProjectSpace().toAPI().getRemoteProject()
 						.checkout(
+							"testCheckout",
 							usersession2.toAPI(),
-							new NullProgressMonitor(),
-							"testCheckout");
+							new NullProgressMonitor());
 					projectSpace2 = ((ESLocalProjectImpl) checkout).toInternalAPI();
 				} catch (ESException e) {
 					e.printStackTrace();

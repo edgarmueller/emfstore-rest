@@ -56,10 +56,14 @@ public abstract class TransmissionTests extends ServerTests {
 				try {
 					usersession1.logIn();
 					usersession2.logIn();
-					ESLocalProjectImpl localProjectImpl = getRemoteProject().checkout(usersession1.toAPI(),
-						monitor, "testCheckout");
-					ESLocalProjectImpl localProjectImpl2 = getRemoteProject().checkout(usersession2.toAPI(),
-						monitor, "testCheckout");
+					ESLocalProjectImpl localProjectImpl = getRemoteProject().checkout(
+						"testCheckout",
+						usersession1.toAPI(),
+						monitor);
+					ESLocalProjectImpl localProjectImpl2 = getRemoteProject().checkout(
+						"testCheckout",
+						usersession2.toAPI(),
+						monitor);
 					setProjectSpace1(localProjectImpl.toInternalAPI());
 					setProjectSpace2(localProjectImpl2.toInternalAPI());
 				} catch (AccessControlException e) {

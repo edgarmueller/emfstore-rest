@@ -37,8 +37,10 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSession() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout(usersession,
-				new NullProgressMonitor(), "testCheckout");
+			ESLocalProject localProject = remoteProject.checkout(
+				"testCheckout",
+				usersession,
+				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {
@@ -50,8 +52,8 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgress() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout(usersession,
-				new NullProgressMonitor(), "testCheckout");
+			ESLocalProject localProject = remoteProject.checkout("testCheckout", usersession,
+				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {
@@ -63,9 +65,11 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgressNoFetch() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout(usersession,
+			ESLocalProject localProject = remoteProject.checkout(
+				"testCheckout",
+				usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
-				new NullProgressMonitor(), "testCheckout");
+				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {
@@ -77,9 +81,10 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgressFetch() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout(usersession,
+			ESLocalProject localProject = remoteProject.checkout("testCheckout",
+				usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
-				new NullProgressMonitor(), "testCheckout");
+				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
 		} catch (ESException e) {

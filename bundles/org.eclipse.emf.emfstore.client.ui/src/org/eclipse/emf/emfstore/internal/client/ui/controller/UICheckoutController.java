@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
@@ -231,19 +233,19 @@ public class UICheckoutController extends
 			if (session != null) {
 				if (versionSpec == null) {
 					return remoteProject
-						.checkout(session, progressMonitor, checkedoutProjectName);
+						.checkout(checkedoutProjectName, session, progressMonitor);
 				} else {
-					return remoteProject.checkout(session, versionSpec,
-						progressMonitor, checkedoutProjectName);
+					return remoteProject.checkout(checkedoutProjectName, session, versionSpec,
+						progressMonitor);
 				}
 			} else {
 				if (versionSpec == null) {
-					return remoteProject.checkout(progressMonitor, checkedoutProjectName);
+					return remoteProject.checkout(checkedoutProjectName, progressMonitor);
 				} else {
 					return remoteProject
-						.checkout(remoteProject.getServer()
+						.checkout(checkedoutProjectName, remoteProject.getServer()
 							.getLastUsersession(), versionSpec,
-							progressMonitor, checkedoutProjectName);
+							progressMonitor);
 				}
 			}
 

@@ -172,10 +172,10 @@ public class ChecksumTest extends CoreServerTest {
 			.toAPI()
 			.getRemoteProject()
 			.checkout(
+				"testCheckout",
 				getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-				new NullProgressMonitor(),
-				"testCheckout");
+				new NullProgressMonitor());
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
@@ -263,10 +263,11 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
-			.checkout(getProjectSpace().getUsersession().toAPI(),
+			.checkout(
+				"testCheckout",
+				getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-				new NullProgressMonitor(),
-				"testCheckout");
+				new NullProgressMonitor());
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
@@ -309,10 +310,11 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
-			.checkout(getProjectSpace().getUsersession().toAPI(),
+			.checkout(
+				"testCheckout",
+				getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-				new NullProgressMonitor(),
-				"testCheckout");
+				new NullProgressMonitor());
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {
@@ -350,10 +352,11 @@ public class ChecksumTest extends CoreServerTest {
 		share(getProjectSpace());
 
 		ESLocalProject checkout = getProjectSpace().toAPI().getRemoteProject()
-			.checkout(getProjectSpace().getUsersession().toAPI(),
+			.checkout(
+				"testCheckout",
+				getProjectSpace().getUsersession().toAPI(),
 				getProjectSpace().resolveVersionSpec(Versions.createHEAD(), new NullProgressMonitor()).toAPI(),
-				new NullProgressMonitor(),
-				"testCheckout");
+				new NullProgressMonitor());
 		final ProjectSpace checkedOutProjectSpace = ((ESLocalProjectImpl) checkout).toInternalAPI();
 
 		new EMFStoreCommand() {

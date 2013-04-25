@@ -314,16 +314,17 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(java.lang.String,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(final IProgressMonitor monitor, final String checkedoutCopyName)
+	public ESLocalProjectImpl checkout(final String name, final IProgressMonitor monitor)
 		throws ESException {
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 			public ESLocalProjectImpl call() throws Exception {
 				return new ServerCall<ESLocalProjectImpl>(getServerInfo()) {
 					@Override
 					protected ESLocalProjectImpl run() throws ESException {
-						return checkout(getUsersession().toAPI(), monitor, checkedoutCopyName);
+						return checkout(name, getUsersession().toAPI(), monitor);
 					}
 				}.execute();
 			}
@@ -334,42 +335,33 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(java.lang.String,
+	 *      org.eclipse.emf.emfstore.client.ESUsersession, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(final ESUsersession usersession,
-		final IProgressMonitor monitor, final String checkedoutCopyName)
+	public ESLocalProjectImpl checkout(final String name, final ESUsersession usersession,
+		final IProgressMonitor monitor)
 		throws ESException {
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 			public ESLocalProjectImpl call() throws Exception {
 				ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD()
 					.toAPI(), monitor);
-				return checkout(usersession, primaryVersionSpec, monitor, checkedoutCopyName);
+				return checkout(name, usersession, primaryVersionSpec, monitor);
 			}
 		});
-	}
-
-	public ESLocalProjectImpl checkout(final Usersession usersession, final IProgressMonitor monitor,
-		String checkedoutCopyName)
-		throws ESException {
-		return checkout(usersession.toAPI(), monitor, checkedoutCopyName);
-	}
-
-	public ESLocalProjectImpl checkout(final Usersession usersession, final PrimaryVersionSpec versionSpec,
-		final IProgressMonitor monitor, String checkedoutCopyName)
-		throws ESException {
-		return checkout(usersession.toAPI(), versionSpec.toAPI(), monitor, checkedoutCopyName);
 	}
 
 	/**
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(org.eclipse.emf.emfstore.client.ESUsersession,
-	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec, org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(java.lang.String,
+	 *      org.eclipse.emf.emfstore.client.ESUsersession,
+	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(final ESUsersession session, final ESPrimaryVersionSpec versionSpec,
-		final IProgressMonitor progressMonitor, final String checkedoutCopyName)
+	public ESLocalProjectImpl checkout(final String name, final ESUsersession session,
+		final ESPrimaryVersionSpec versionSpec,
+		final IProgressMonitor progressMonitor)
 		throws ESException {
 
 		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, "Checkout", 100);
@@ -412,7 +404,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 					usersession,
 					projectInfoCopy,
 					project,
-					checkedoutCopyName);
+					name);
 
 				ESWorkspaceProviderImpl.getObserverBus().register(projectSpace);
 				parentMonitor.worked(30);
@@ -425,31 +417,30 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 
 				return projectSpace.toAPI();
 			}
-
-			private ProjectSpace initProjectSpace(final Usersession usersession, final ProjectInfo projectInfoCopy,
-				Project project, String projectName) {
-
-				WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProviderImpl.getInstance().getInternalWorkspace();
-
-				ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
-				projectSpace.setProjectId(projectInfoCopy.getProjectId());
-				projectSpace.setProjectName(projectName);
-				projectSpace.setProjectDescription(projectInfoCopy.getDescription());
-				projectSpace.setBaseVersion(projectInfoCopy.getVersion());
-				projectSpace.setLastUpdated(new Date());
-				projectSpace.setUsersession(usersession);
-				projectSpace.setProject(project);
-				projectSpace.setResourceCount(0);
-				projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
-				projectSpace.initResources(workspace.getResourceSet());
-
-				workspace.addProjectSpace(projectSpace);
-				workspace.save();
-
-				return projectSpace;
-			}
 		});
+	}
 
+	private ProjectSpace initProjectSpace(final Usersession usersession, final ProjectInfo projectInfoCopy,
+		Project project, String projectName) {
+
+		WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProviderImpl.getInstance().getInternalWorkspace();
+
+		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
+		projectSpace.setProjectId(projectInfoCopy.getProjectId());
+		projectSpace.setProjectName(projectName);
+		projectSpace.setProjectDescription(projectInfoCopy.getDescription());
+		projectSpace.setBaseVersion(projectInfoCopy.getVersion());
+		projectSpace.setLastUpdated(new Date());
+		projectSpace.setUsersession(usersession);
+		projectSpace.setProject(project);
+		projectSpace.setResourceCount(0);
+		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
+		projectSpace.initResources(workspace.getResourceSet());
+
+		workspace.addProjectSpace(projectSpace);
+		workspace.save();
+
+		return projectSpace;
 	}
 
 	/**
