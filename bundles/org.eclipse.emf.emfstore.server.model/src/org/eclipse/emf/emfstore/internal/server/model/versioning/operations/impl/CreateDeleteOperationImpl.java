@@ -72,15 +72,10 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 				return;
 			}
 
-			Set<ModelElementId> disallocatedIds = new LinkedHashSet<ModelElementId>();
 			EObject localModelElement = collection.getModelElement(getModelElementId());
 			List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(localModelElement,
 				false);
 			allContainedModelElements.add(localModelElement);
-
-			for (EObject modelElement : allContainedModelElements) {
-				disallocatedIds.add(collection.getModelElementId(modelElement));
-			}
 
 			for (AbstractOperation op : getSubOperations()) {
 				op.apply(collection);
@@ -97,7 +92,7 @@ public class CreateDeleteOperationImpl extends AbstractOperationImpl implements 
 				}
 			}
 
-			collection.disallocateModelElementIds(disallocatedIds);
+			collection.clearAllocatedCaches();
 		} else {
 			if (collection.contains(getModelElementId())) {
 				// silently fail
