@@ -74,4 +74,35 @@
     <eLiterals name="Female"/>
     <eLiterals name="Male" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fan">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfBirth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasSeasonTicket" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eMails" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//Gender"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="favouritePlayer" eType="#//Player"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fanMerchandise" upperBound="-1"
+        eType="#//Merchandise" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="favouriteMerchandise" eType="#//Merchandise"
+        unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visitedTournaments" upperBound="-1"
+        eType="#//Tournament" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfTournamentsVisited"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="moneySpentOnTickets" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Merchandise">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serialNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        unsettable="true"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -83,6 +83,8 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 			case BowlingPackage.REFEREE: return createReferee();
 			case BowlingPackage.REFEREE_TO_GAMES_MAP: return (EObject)createRefereeToGamesMap();
 			case BowlingPackage.AREA: return createArea();
+			case BowlingPackage.FAN: return createFan();
+			case BowlingPackage.MERCHANDISE: return createMerchandise();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -210,6 +212,26 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	public Area createArea() {
 		AreaImpl area = new AreaImpl();
 		return area;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Fan createFan() {
+		FanImpl fan = new FanImpl();
+		return fan;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Merchandise createMerchandise() {
+		MerchandiseImpl merchandise = new MerchandiseImpl();
+		return merchandise;
 	}
 
 	/**
