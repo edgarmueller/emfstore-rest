@@ -35,6 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Mult
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Multi Reference Operation</b></em>'. <!--
@@ -331,55 +332,67 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 		Object object = modelElement.eGet(reference);
 		@SuppressWarnings("unchecked")
 		EList<EObject> list = (EList<EObject>) object;
-		if (isAdd()) {
-			if (index < list.size() && index > -1) {
-				int i = index;
-				for (EObject m : referencedModelElements) {
 
-					if (i < list.size()) {
-						if (list.contains(m)) {
-							list.move(i, m);
+		switch (getUnset().getValue()) {
+		case UnsetType.IS_UNSET_VALUE:
+			modelElement.eUnset(reference);
+			// Fall-through because we only want to set the unset-flag of the list. The reference itself shall be
+			// treated as before. If no fall-through the reference will always be removed from the project by unset, but
+			// this is not intended.
+			// $FALL-THROUGH$
+		case UnsetType.NONE_VALUE:
+		case UnsetType.WAS_UNSET_VALUE:
+			if (isAdd()) {
+				if (index < list.size() && index > -1) {
+					int i = index;
+					for (EObject m : referencedModelElements) {
+
+						if (i < list.size()) {
+							if (list.contains(m)) {
+								list.move(i, m);
+							} else {
+								list.add(i, m);
+							}
 						} else {
-							list.add(i, m);
+							// index grows out of bounds
+							if (list.contains(m)) {
+								// if element already in list, move to the end
+								list.move(list.size() - 1, m);
+								i--;
+							} else {
+								// if element not in list, just append
+								list.add(m);
+							}
 						}
-					} else {
-						// index grows out of bounds
+
+						i++;
+					}
+					// list.addAll(getIndex(), referencedModelElements);
+				} else {
+					// if index is out of range ignore index
+					for (EObject m : referencedModelElements) {
 						if (list.contains(m)) {
-							// if element already in list, move to the end
+							// move to end
 							list.move(list.size() - 1, m);
-							i--;
 						} else {
-							// if element not in list, just append
+							// append
 							list.add(m);
 						}
 					}
-
-					i++;
 				}
-				// list.addAll(getIndex(), referencedModelElements);
 			} else {
-				// if index is out of range ignore index
-				for (EObject m : referencedModelElements) {
-					if (list.contains(m)) {
-						// move to end
-						list.move(list.size() - 1, m);
-					} else {
-						// append
-						list.add(m);
+				for (EObject me : referencedModelElements) {
+					if (list.contains(me)) {
+						list.remove(me);
+					}
+				}
+				for (EObject currentElement : referencedModelElements) {
+					if (reference.isContainment()) {
+						project.addModelElement(currentElement);
 					}
 				}
 			}
-		} else {
-			for (EObject me : referencedModelElements) {
-				if (list.contains(me)) {
-					list.remove(me);
-				}
-			}
-			for (EObject currentElement : referencedModelElements) {
-				if (reference.isContainment()) {
-					project.addModelElement(currentElement);
-				}
-			}
+			break;
 		}
 	}
 
@@ -394,6 +407,9 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 			copiedReferencedModelElements.add(ModelUtil.clone(modelElementId));
 		}
 		multiReferenceOperation.setIndex(getIndex());
+
+		setUnsetForReverseOperation(multiReferenceOperation);
+
 		return multiReferenceOperation;
 	}
 

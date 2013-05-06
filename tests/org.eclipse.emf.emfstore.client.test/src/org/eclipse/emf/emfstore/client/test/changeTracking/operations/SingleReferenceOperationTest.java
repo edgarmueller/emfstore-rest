@@ -19,6 +19,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.emfstore.bowling.BowlingFactory;
+import org.eclipse.emf.emfstore.bowling.Fan;
+import org.eclipse.emf.emfstore.bowling.Merchandise;
+import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.document.DocumentFactory;
 import org.eclipse.emf.emfstore.client.test.model.document.LeafSection;
@@ -40,6 +44,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Crea
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.MultiReferenceOperationImpl;
 import org.junit.Test;
 
@@ -480,5 +485,426 @@ public class SingleReferenceOperationTest extends WorkspaceTest {
 		Set<ModelElementId> otherInvolvedModelElements = singleReferenceOperation.getOtherInvolvedModelElements();
 		assertEquals(1, otherInvolvedModelElements.size());
 		assertEquals(true, otherInvolvedModelElements.contains(issueId));
+	}
+
+	@Test
+	public void unsetSingleReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Player favPlayer = BowlingFactory.eINSTANCE.createPlayer();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(favPlayer);
+				fan.setFavouritePlayer(favPlayer);
+
+			}
+		}.run(false);
+
+		assertEquals(favPlayer, fan.getFavouritePlayer());
+		assertEquals(true, fan.isSetFavouritePlayer());
+
+		clearOperations();
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFavouritePlayer();
+			}
+		}.run(false);
+
+		assertFalse(favPlayer.equals(fan.getFavouritePlayer()));
+		assertEquals(null, fan.getFavouritePlayer());
+		assertTrue(getProject().getAllModelElements().contains(favPlayer));
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof SingleReferenceOperation);
+		SingleReferenceOperation singleRefOp = (SingleReferenceOperation) operation;
+
+		ModelElementId playerId = ModelUtil.getProject(favPlayer).getModelElementId(favPlayer);
+		assertEquals(playerId, singleRefOp.getOldValue());
+		assertEquals(null, singleRefOp.getNewValue());
+		assertEquals(true, singleRefOp.getUnset() == UnsetType.IS_UNSET);
+		assertEquals("favouritePlayer", singleRefOp.getFeatureName());
+
+		// apply operation to copy of initial project
+		singleRefOp.apply(secondProject);
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseUnsetSingleReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Player favPlayer = BowlingFactory.eINSTANCE.createPlayer();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(favPlayer);
+				fan.setFavouritePlayer(favPlayer);
+
+			}
+		}.run(false);
+
+		assertEquals(favPlayer, fan.getFavouritePlayer());
+		assertEquals(true, fan.isSetFavouritePlayer());
+
+		clearOperations();
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFavouritePlayer();
+			}
+		}.run(false);
+
+		assertFalse(favPlayer.equals(fan.getFavouritePlayer()));
+		assertEquals(null, fan.getFavouritePlayer());
+		assertTrue(getProject().getAllModelElements().contains(favPlayer));
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof SingleReferenceOperation);
+		final SingleReferenceOperation singleRefOp = (SingleReferenceOperation) operation;
+
+		ModelElementId playerId = ModelUtil.getProject(favPlayer).getModelElementId(favPlayer);
+		assertEquals(playerId, singleRefOp.getOldValue());
+		assertEquals(null, singleRefOp.getNewValue());
+		assertEquals(true, singleRefOp.getUnset() == UnsetType.IS_UNSET);
+		assertEquals("favouritePlayer", singleRefOp.getFeatureName());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				singleRefOp.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(favPlayer, fan.getFavouritePlayer());
+		assertEquals(true, fan.isSetFavouritePlayer());
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void doubleReverseUnsetSingleReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Player favPlayer = BowlingFactory.eINSTANCE.createPlayer();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(favPlayer);
+				fan.setFavouritePlayer(favPlayer);
+
+			}
+		}.run(false);
+
+		assertEquals(favPlayer, fan.getFavouritePlayer());
+		assertEquals(true, fan.isSetFavouritePlayer());
+
+		clearOperations();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFavouritePlayer();
+			}
+		}.run(false);
+
+		assertFalse(favPlayer.equals(fan.getFavouritePlayer()));
+		assertEquals(null, fan.getFavouritePlayer());
+		assertTrue(getProject().getAllModelElements().contains(favPlayer));
+
+		Project secondProject = ModelUtil.clone(getProject());
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof SingleReferenceOperation);
+		final SingleReferenceOperation singleRefOp = (SingleReferenceOperation) operation;
+
+		ModelElementId playerId = ModelUtil.getProject(favPlayer).getModelElementId(favPlayer);
+		assertEquals(playerId, singleRefOp.getOldValue());
+		assertEquals(null, singleRefOp.getNewValue());
+		assertEquals(true, singleRefOp.getUnset() == UnsetType.IS_UNSET);
+		assertEquals("favouritePlayer", singleRefOp.getFeatureName());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				singleRefOp.reverse().reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertFalse(favPlayer.equals(fan.getFavouritePlayer()));
+		assertEquals(null, fan.getFavouritePlayer());
+		assertTrue(getProject().getAllModelElements().contains(favPlayer));
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseSetOfUnsettedSingleReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Player favPlayer = BowlingFactory.eINSTANCE.createPlayer();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(favPlayer);
+			}
+		}.run(false);
+
+		assertEquals(false, fan.isSetFavouritePlayer());
+
+		clearOperations();
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.setFavouritePlayer(favPlayer);
+			}
+		}.run(false);
+
+		assertTrue(favPlayer.equals(fan.getFavouritePlayer()));
+		assertEquals(favPlayer, fan.getFavouritePlayer());
+		assertTrue(getProject().getAllModelElements().contains(favPlayer));
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof SingleReferenceOperation);
+		final SingleReferenceOperation singleRefOp = (SingleReferenceOperation) operation;
+
+		ModelElementId playerId = ModelUtil.getProject(favPlayer).getModelElementId(favPlayer);
+		assertEquals(null, singleRefOp.getOldValue());
+		assertEquals(playerId, singleRefOp.getNewValue());
+		assertEquals("favouritePlayer", singleRefOp.getFeatureName());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				singleRefOp.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(null, fan.getFavouritePlayer());
+		assertEquals(false, fan.isSetFavouritePlayer());
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void unsetSingleContainmentReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch = BowlingFactory.eINSTANCE.createMerchandise();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch);
+				fan.setFavouriteMerchandise(merch);
+
+			}
+		}.run(false);
+
+		assertEquals(merch, fan.getFavouriteMerchandise());
+		assertEquals(true, fan.isSetFavouriteMerchandise());
+
+		clearOperations();
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFavouriteMerchandise();
+			}
+		}.run(false);
+
+		assertFalse(merch.equals(fan.getFavouriteMerchandise()));
+		assertEquals(null, fan.getFavouriteMerchandise());
+		assertFalse(getProject().getAllModelElements().contains(merch));
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof CreateDeleteOperation);
+		CreateDeleteOperation creaDelOp = (CreateDeleteOperation) operation;
+
+		// apply operation to copy of initial project
+		creaDelOp.apply(secondProject);
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void doubleReverseUnsetSingleContainmentReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch = BowlingFactory.eINSTANCE.createMerchandise();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch);
+				fan.setFavouriteMerchandise(merch);
+
+			}
+		}.run(false);
+
+		assertEquals(merch, fan.getFavouriteMerchandise());
+		assertEquals(true, fan.isSetFavouriteMerchandise());
+
+		clearOperations();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFavouriteMerchandise();
+			}
+		}.run(false);
+
+		assertFalse(merch.equals(fan.getFavouriteMerchandise()));
+		assertEquals(null, fan.getFavouriteMerchandise());
+		assertFalse(getProject().getAllModelElements().contains(merch));
+
+		Project secondProject = ModelUtil.clone(getProject());
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp = (CreateDeleteOperation) operation;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				creaDelOp.reverse().reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertFalse(merch.equals(fan.getFavouriteMerchandise()));
+		assertEquals(null, fan.getFavouriteMerchandise());
+		assertFalse(getProject().getAllModelElements().contains(merch));
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseUnsetSingleContainmentReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch = BowlingFactory.eINSTANCE.createMerchandise();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch);
+				fan.setFavouriteMerchandise(merch);
+
+			}
+		}.run(false);
+
+		assertEquals(merch, fan.getFavouriteMerchandise());
+		assertEquals(true, fan.isSetFavouriteMerchandise());
+
+		clearOperations();
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFavouriteMerchandise();
+			}
+		}.run(false);
+
+		assertFalse(merch.equals(fan.getFavouriteMerchandise()));
+		assertEquals(null, fan.getFavouriteMerchandise());
+		assertFalse(getProject().getAllModelElements().contains(merch));
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp = (CreateDeleteOperation) operation;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				creaDelOp.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(merch.getName(), fan.getFavouriteMerchandise().getName());
+		assertEquals(merch.getPrice(), fan.getFavouriteMerchandise().getPrice());
+		assertEquals(merch.getSerialNumber(), fan.getFavouriteMerchandise().getSerialNumber());
+		assertEquals(true, fan.isSetFavouriteMerchandise());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseSetOfUnsettedSingleContainmentReference() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch = BowlingFactory.eINSTANCE.createMerchandise();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch);
+				assertEquals(null, fan.getFavouriteMerchandise());
+				assertEquals(false, fan.isSetFavouriteMerchandise());
+			}
+		}.run(false);
+
+		clearOperations();
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.setFavouriteMerchandise(merch);
+				assertEquals(merch, fan.getFavouriteMerchandise());
+				assertEquals(true, fan.isSetFavouriteMerchandise());
+			}
+		}.run(false);
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof SingleReferenceOperation);
+		final SingleReferenceOperation singleRefOp = (SingleReferenceOperation) operation;
+
+		ModelElementId merchId = ModelUtil.getProject(merch).getModelElementId(merch);
+		assertEquals(null, singleRefOp.getOldValue());
+		assertEquals(merchId, singleRefOp.getNewValue());
+		assertEquals("favouriteMerchandise", singleRefOp.getFeatureName());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				singleRefOp.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(null, fan.getFavouriteMerchandise());
+		assertEquals(false, fan.isSetFavouriteMerchandise());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
 	}
 }

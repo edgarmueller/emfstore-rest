@@ -16,6 +16,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.emf.emfstore.bowling.BowlingFactory;
+import org.eclipse.emf.emfstore.bowling.Fan;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
@@ -26,6 +28,7 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationsCanonizer;
 import org.junit.Test;
 
@@ -268,4 +271,230 @@ public class AttributeOperationTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(loadedProject, expectedProject));
 	}
 
+	@Test
+	public void unsetAttribute() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				fan.setName("Fan");
+				clearOperations();
+			}
+		}.run(false);
+
+		Project secondProject = ModelUtil.clone(getProject());
+
+		// Test unsetting name
+		assertEquals(true, fan.isSetName());
+		assertEquals("Fan", fan.getName());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetName();
+			}
+		}.run(false);
+
+		assertEquals(false, fan.isSetName());
+		assertEquals(null, fan.getName());
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof AttributeOperation);
+		AttributeOperation attributeOperation = (AttributeOperation) operation;
+
+		assertEquals("Fan", attributeOperation.getOldValue());
+		assertEquals(null, attributeOperation.getNewValue());
+		assertEquals("name", attributeOperation.getFeatureName());
+		assertEquals(true, attributeOperation.getUnset() == UnsetType.IS_UNSET);
+
+		attributeOperation.apply(secondProject);
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+
+		// test setting name to default value
+		clearOperations();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.setName(null);
+			}
+		}.run(false);
+
+		assertEquals(true, fan.isSetName());
+		assertEquals(null, fan.getName());
+
+		operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		operation = operations.get(0);
+		assertEquals(true, operation instanceof AttributeOperation);
+		attributeOperation = (AttributeOperation) operation;
+
+		assertEquals(null, attributeOperation.getOldValue());
+		assertEquals(null, attributeOperation.getNewValue());
+		assertEquals("name", attributeOperation.getFeatureName());
+		assertEquals(false, attributeOperation.getUnset() == UnsetType.IS_UNSET);
+	}
+
+	@Test
+	public void unsetAttributeReverse() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				fan.setName("Fan");
+				clearOperations();
+			}
+		}.run(false);
+
+		assertEquals("Fan", fan.getName());
+		assertEquals(true, fan.isSetName());
+
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetName();
+			}
+		}.run(false);
+
+		assertEquals(false, fan.isSetName());
+		assertEquals(null, fan.getName());
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof AttributeOperation);
+		final AttributeOperation attributeOperation = (AttributeOperation) operation;
+
+		assertEquals("Fan", attributeOperation.getOldValue());
+		assertEquals(null, attributeOperation.getNewValue());
+		assertEquals("name", attributeOperation.getFeatureName());
+		assertEquals(true, attributeOperation.getUnset() == UnsetType.IS_UNSET);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				attributeOperation.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals("Fan", fan.getName());
+		assertEquals(true, fan.isSetName());
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void unsetAttributeDoubleReverse() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				fan.setName("Fan");
+				clearOperations();
+			}
+		}.run(false);
+
+		assertEquals("Fan", fan.getName());
+		assertEquals(true, fan.isSetName());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetName();
+			}
+		}.run(false);
+
+		Project secondProject = ModelUtil.clone(getProject());
+
+		assertEquals(false, fan.isSetName());
+		assertEquals(null, fan.getName());
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof AttributeOperation);
+		final AttributeOperation attributeOperation = (AttributeOperation) operation;
+
+		assertEquals("Fan", attributeOperation.getOldValue());
+		assertEquals(null, attributeOperation.getNewValue());
+		assertEquals("name", attributeOperation.getFeatureName());
+		assertEquals(true, attributeOperation.getUnset() == UnsetType.IS_UNSET);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				attributeOperation.reverse().reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(null, fan.getName());
+		assertEquals(false, fan.isSetName());
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void setOfUnsettedAttributeReverse() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				clearOperations();
+			}
+		}.run(false);
+
+		assertEquals(null, fan.getName());
+		assertEquals(false, fan.isSetName());
+
+		Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.setName("Fan");
+			}
+		}.run(false);
+
+		assertEquals(true, fan.isSetName());
+		assertEquals("Fan", fan.getName());
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof AttributeOperation);
+		final AttributeOperation attributeOperation = (AttributeOperation) operation;
+
+		assertEquals(null, attributeOperation.getOldValue());
+		assertEquals("Fan", attributeOperation.getNewValue());
+		assertEquals("name", attributeOperation.getFeatureName());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				attributeOperation.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(null, fan.getName());
+		assertEquals(false, fan.isSetName());
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
 }

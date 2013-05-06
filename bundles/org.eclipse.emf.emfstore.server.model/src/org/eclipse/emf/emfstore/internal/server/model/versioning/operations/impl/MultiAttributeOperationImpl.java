@@ -25,6 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Multi Attribute Operation</b></em>'. <!--
@@ -285,28 +286,36 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 			EAttribute feature = (EAttribute) getFeature(modelElement);
 			EList<Object> list = (EList<Object>) modelElement.eGet(feature);
 
-			if (isAdd()) {
+			switch (getUnset().getValue()) {
+			case UnsetType.IS_UNSET_VALUE:
+				modelElement.eUnset(feature);
+				break;
+			case UnsetType.NONE_VALUE:
+			case UnsetType.WAS_UNSET_VALUE:
+				if (isAdd()) {
 
-				for (int i = 0; i < getReferencedValues().size(); i++) {
-					Object value = getReferencedValues().get(i);
-					int index = getIndexes().get(i);
-					if (feature.isUnique() && list.contains(value)) {
-						// silently skip adding value since it is already contained, but should be unique
-						continue;
+					for (int i = 0; i < getReferencedValues().size(); i++) {
+						Object value = getReferencedValues().get(i);
+						int index = getIndexes().get(i);
+						if (feature.isUnique() && list.contains(value)) {
+							// silently skip adding value since it is already contained, but should be unique
+							continue;
+						}
+						if (index > -1 && list.size() >= index) {
+							list.add(index, value);
+						} else {
+							list.add(value);
+						}
 					}
-					if (index > -1 && list.size() >= index) {
-						list.add(index, value);
-					} else {
-						list.add(value);
+				} else {
+					for (int i = getIndexes().size() - 1; i >= 0; i--) {
+						int index = getIndexes().get(i);
+						if (index >= 0 && list.size() > index) {
+							list.remove(index);
+						}
 					}
 				}
-			} else {
-				for (int i = getIndexes().size() - 1; i >= 0; i--) {
-					int index = getIndexes().get(i);
-					if (index >= 0 && list.size() > index) {
-						list.remove(index);
-					}
-				}
+				break;
 			}
 
 		} catch (UnkownFeatureException e) {
@@ -326,6 +335,9 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 		operation.setAdd(!isAdd());
 		operation.getReferencedValues().addAll(getReferencedValues());
 		operation.getIndexes().addAll(getIndexes());
+
+		setUnsetForReverseOperation(operation);
+
 		return operation;
 	}
 

@@ -51,6 +51,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Oper
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.SemanticPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic.impl.SemanticPackageImpl;
 
@@ -181,6 +182,14 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	private EClass eObjectToModelElementIdMapEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EEnum unsetTypeEEnum = null;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -231,8 +240,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		// Obtain or create and register package
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI)
-			: new OperationsPackageImpl());
+			.get(eNS_URI) : new OperationsPackageImpl());
 
 		isInited = true;
 
@@ -263,8 +271,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UrlPackage.eNS_URI)
-			: UrlPackage.eINSTANCE);
+			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theOperationsPackage.createPackageContents();
@@ -857,6 +864,17 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EEnum getUnsetType()
+	{
+		return unsetTypeEEnum;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -975,6 +993,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		createEReference(eObjectToModelElementIdMapEClass, EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE);
 
 		// Create enums
+		unsetTypeEEnum = createEEnum(UNSET_TYPE);
 		containmentTypeEEnum = createEEnum(CONTAINMENT_TYPE);
 	}
 
@@ -1066,9 +1085,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		initEAttribute(getFeatureOperation_FeatureName(), ecorePackage.getEString(), "featureName", "", 0, 1,
 			FeatureOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFeatureOperation_Unset(), ecorePackage.getEBoolean(), "unset", null, 0, 1,
-			FeatureOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFeatureOperation_Unset(), this.getUnsetType(), "unset", null, 0, 1, FeatureOperation.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(createDeleteOperationEClass, CreateDeleteOperation.class, "CreateDeleteOperation", !IS_ABSTRACT,
 			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1218,6 +1236,11 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
+		initEEnum(unsetTypeEEnum, UnsetType.class, "UnsetType");
+		addEEnumLiteral(unsetTypeEEnum, UnsetType.NONE);
+		addEEnumLiteral(unsetTypeEEnum, UnsetType.IS_UNSET);
+		addEEnumLiteral(unsetTypeEEnum, UnsetType.WAS_UNSET);
+
 		initEEnum(containmentTypeEEnum, ContainmentType.class, "ContainmentType");
 		addEEnumLiteral(containmentTypeEEnum, ContainmentType.NONE);
 		addEEnumLiteral(containmentTypeEEnum, ContainmentType.CONTAINER);

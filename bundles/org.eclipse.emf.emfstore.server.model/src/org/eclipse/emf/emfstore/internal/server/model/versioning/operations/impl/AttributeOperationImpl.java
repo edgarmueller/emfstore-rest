@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Attr
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Attribute Operation</b></em>'. <!--
@@ -245,7 +246,17 @@ public class AttributeOperationImpl extends FeatureOperationImpl implements Attr
 		EAttribute attribute;
 		try {
 			attribute = (EAttribute) this.getFeature(object);
-			object.eSet(attribute, this.getNewValue());
+			switch (getUnset().getValue()) {
+			case UnsetType.IS_UNSET_VALUE:
+				object.eUnset(attribute);
+				break;
+			case UnsetType.NONE_VALUE:
+				object.eSet(attribute, this.getNewValue());
+				break;
+			case UnsetType.WAS_UNSET_VALUE:
+				object.eSet(attribute, this.getNewValue());
+				break;
+			}
 		} catch (UnkownFeatureException e) {
 			// fail silently
 			return;
@@ -259,6 +270,9 @@ public class AttributeOperationImpl extends FeatureOperationImpl implements Attr
 		// swap old and new value
 		attributeOperation.setNewValue(getOldValue());
 		attributeOperation.setOldValue(getNewValue());
+
+		setUnsetForReverseOperation(attributeOperation);
+
 		return attributeOperation;
 	}
 

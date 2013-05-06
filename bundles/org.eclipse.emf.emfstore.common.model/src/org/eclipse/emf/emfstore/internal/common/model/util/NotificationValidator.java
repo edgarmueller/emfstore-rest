@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * Validates an EMF notification. Optionally generates a status message, describing potential problems.
@@ -139,8 +140,11 @@ final class NotificationValidator {
 	}
 
 	private void handleUnsetNotification(NotificationInfo n) {
-		n.setValid(false);
-		n.setValidationMessage("Cannot handle UNSET notifications");
+		if (!((EStructuralFeature) n.getFeature()).isUnsettable()) {
+			n.setValidationMessage("Feature cannot be unset");
+			n.setValid(false);
+			return;
+		}
 	}
 
 	private void handleRemoveManyNotification(NotificationInfo n) {

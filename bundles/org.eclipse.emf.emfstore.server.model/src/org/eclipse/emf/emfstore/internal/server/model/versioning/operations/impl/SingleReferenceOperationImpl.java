@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Oper
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Single Reference Operation</b></em>'. <!--
@@ -94,14 +95,17 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 * @generated
 	 */
 	public ModelElementId getOldValue() {
-		if (oldValue != null && oldValue.eIsProxy()) {
+		if (oldValue != null && oldValue.eIsProxy())
+		{
 			InternalEObject oldOldValue = (InternalEObject) oldValue;
 			oldValue = (ModelElementId) eResolveProxy(oldOldValue);
-			if (oldValue != oldOldValue) {
+			if (oldValue != oldOldValue)
+			{
 				InternalEObject newOldValue = (InternalEObject) oldValue;
 				NotificationChain msgs = oldOldValue.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE, null, null);
-				if (newOldValue.eInternalContainer() == null) {
+				if (newOldValue.eInternalContainer() == null)
+				{
 					msgs = newOldValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE, null, msgs);
 				}
@@ -132,7 +136,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	public NotificationChain basicSetOldValue(ModelElementId newOldValue, NotificationChain msgs) {
 		ModelElementId oldOldValue = oldValue;
 		oldValue = newOldValue;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE, oldOldValue, newOldValue);
 			if (msgs == null)
@@ -149,7 +154,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 * @generated
 	 */
 	public void setOldValue(ModelElementId newOldValue) {
-		if (newOldValue != oldValue) {
+		if (newOldValue != oldValue)
+		{
 			NotificationChain msgs = null;
 			if (oldValue != null)
 				msgs = ((InternalEObject) oldValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -172,14 +178,17 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 * @generated
 	 */
 	public ModelElementId getNewValue() {
-		if (newValue != null && newValue.eIsProxy()) {
+		if (newValue != null && newValue.eIsProxy())
+		{
 			InternalEObject oldNewValue = (InternalEObject) newValue;
 			newValue = (ModelElementId) eResolveProxy(oldNewValue);
-			if (newValue != oldNewValue) {
+			if (newValue != oldNewValue)
+			{
 				InternalEObject newNewValue = (InternalEObject) newValue;
 				NotificationChain msgs = oldNewValue.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- OperationsPackage.SINGLE_REFERENCE_OPERATION__NEW_VALUE, null, null);
-				if (newNewValue.eInternalContainer() == null) {
+				if (newNewValue.eInternalContainer() == null)
+				{
 					msgs = newNewValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 						- OperationsPackage.SINGLE_REFERENCE_OPERATION__NEW_VALUE, null, msgs);
 				}
@@ -210,7 +219,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	public NotificationChain basicSetNewValue(ModelElementId newNewValue, NotificationChain msgs) {
 		ModelElementId oldNewValue = newValue;
 		newValue = newNewValue;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				OperationsPackage.SINGLE_REFERENCE_OPERATION__NEW_VALUE, oldNewValue, newNewValue);
 			if (msgs == null)
@@ -227,7 +237,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 * @generated
 	 */
 	public void setNewValue(ModelElementId newNewValue) {
-		if (newNewValue != newValue) {
+		if (newNewValue != newValue)
+		{
 			NotificationChain msgs = null;
 			if (newValue != null)
 				msgs = ((InternalEObject) newValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -251,7 +262,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE:
 			return basicSetOldValue(null, msgs);
 		case OperationsPackage.SINGLE_REFERENCE_OPERATION__NEW_VALUE:
@@ -267,7 +279,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE:
 			if (resolve)
 				return getOldValue();
@@ -287,7 +300,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE:
 			setOldValue((ModelElementId) newValue);
 			return;
@@ -305,7 +319,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE:
 			setOldValue((ModelElementId) null);
 			return;
@@ -323,7 +338,8 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case OperationsPackage.SINGLE_REFERENCE_OPERATION__OLD_VALUE:
 			return oldValue != null;
 		case OperationsPackage.SINGLE_REFERENCE_OPERATION__NEW_VALUE:
@@ -357,7 +373,17 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 
 		try {
 			reference = (EReference) this.getFeature(modelElement);
-			modelElement.eSet(reference, newModelElement);
+			switch (getUnset().getValue()) {
+			case UnsetType.IS_UNSET_VALUE:
+				modelElement.eUnset(reference);
+				break;
+			case UnsetType.NONE_VALUE:
+				modelElement.eSet(reference, newModelElement);
+				break;
+			case UnsetType.WAS_UNSET_VALUE:
+				modelElement.eSet(reference, newModelElement);
+				break;
+			}
 
 			// keep elements in the project if they are disconnected, if they
 			// really need to be deleted there will be a
@@ -385,6 +411,9 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 		if (getNewValue() != null) {
 			singleReferenceOperation.setOldValue(ModelUtil.clone(getNewValue()));
 		}
+
+		setUnsetForReverseOperation(singleReferenceOperation);
+
 		return singleReferenceOperation;
 	}
 

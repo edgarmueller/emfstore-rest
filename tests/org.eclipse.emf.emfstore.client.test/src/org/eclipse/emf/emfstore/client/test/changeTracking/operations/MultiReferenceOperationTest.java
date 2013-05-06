@@ -18,6 +18,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.emfstore.bowling.BowlingFactory;
+import org.eclipse.emf.emfstore.bowling.Fan;
+import org.eclipse.emf.emfstore.bowling.Merchandise;
+import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.model.requirement.Actor;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
@@ -25,9 +29,11 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.junit.Test;
@@ -399,6 +405,600 @@ public class MultiReferenceOperationTest extends WorkspaceTest {
 		assertEquals(true, otherInvolvedModelElements.contains(useCase2Id));
 		assertEquals(true, otherInvolvedModelElements.contains(useCase3Id));
 
+	}
+
+	@Test
+	public void unsetMultiReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Tournament tournament1 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament2 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament3 = BowlingFactory.eINSTANCE.createTournament();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(tournament1);
+				getProject().addModelElement(tournament2);
+				getProject().addModelElement(tournament3);
+				fan.getVisitedTournaments().add(tournament1);
+				fan.getVisitedTournaments().add(tournament2);
+				fan.getVisitedTournaments().add(tournament3);
+				assertEquals(3, fan.getVisitedTournaments().size());
+				assertTrue(fan.isSetVisitedTournaments());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetVisitedTournaments();
+				assertEquals(0, fan.getVisitedTournaments().size());
+				assertTrue(!fan.isSetVisitedTournaments());
+				assertTrue(getProject().getAllModelElements().contains(tournament1));
+				assertTrue(getProject().getAllModelElements().contains(tournament2));
+				assertTrue(getProject().getAllModelElements().contains(tournament3));
+			}
+		}.run(false);
+
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(2, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				operations.get(0).apply(secondProject);
+				operations.get(1).apply(secondProject);
+			}
+		}.run(false);
+
+		assertEquals(0, ((Fan) secondProject.getModelElements().get(0)).getVisitedTournaments().size());
+		assertTrue(!((Fan) secondProject.getModelElements().get(0)).isSetVisitedTournaments());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseUnsetMultiReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Tournament tournament1 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament2 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament3 = BowlingFactory.eINSTANCE.createTournament();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(tournament1);
+				getProject().addModelElement(tournament2);
+				getProject().addModelElement(tournament3);
+				fan.getVisitedTournaments().add(tournament1);
+				fan.getVisitedTournaments().add(tournament2);
+				fan.getVisitedTournaments().add(tournament3);
+				assertEquals(3, fan.getVisitedTournaments().size());
+				assertTrue(fan.isSetVisitedTournaments());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetVisitedTournaments();
+				assertEquals(0, fan.getVisitedTournaments().size());
+				assertTrue(!fan.isSetVisitedTournaments());
+				assertTrue(getProject().getAllModelElements().contains(tournament1));
+				assertTrue(getProject().getAllModelElements().contains(tournament2));
+				assertTrue(getProject().getAllModelElements().contains(tournament3));
+			}
+		}.run(false);
+
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(2, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				mrop2.reverse().apply(getProject());
+				mrop1.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(3, fan.getVisitedTournaments().size());
+		assertTrue(fan.getVisitedTournaments().contains(tournament1));
+		assertTrue(fan.getVisitedTournaments().contains(tournament2));
+		assertTrue(fan.getVisitedTournaments().contains(tournament3));
+		assertTrue(fan.isSetVisitedTournaments());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void doubleReverseUnsetMultiReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Tournament tournament1 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament2 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament3 = BowlingFactory.eINSTANCE.createTournament();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(tournament1);
+				getProject().addModelElement(tournament2);
+				getProject().addModelElement(tournament3);
+				fan.getVisitedTournaments().add(tournament1);
+				fan.getVisitedTournaments().add(tournament2);
+				fan.getVisitedTournaments().add(tournament3);
+				assertEquals(3, fan.getVisitedTournaments().size());
+				assertTrue(fan.isSetVisitedTournaments());
+			}
+		}.run(false);
+
+		clearOperations();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetVisitedTournaments();
+				assertEquals(0, fan.getVisitedTournaments().size());
+				assertTrue(!fan.isSetVisitedTournaments());
+				assertTrue(getProject().getAllModelElements().contains(tournament1));
+				assertTrue(getProject().getAllModelElements().contains(tournament2));
+				assertTrue(getProject().getAllModelElements().contains(tournament3));
+			}
+		}.run(false);
+
+		final Project secondProject = ModelUtil.clone(getProject());
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(2, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				mrop1.reverse().reverse().apply(getProject());
+				mrop2.reverse().reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(0, fan.getVisitedTournaments().size());
+		assertTrue(!fan.isSetVisitedTournaments());
+		assertTrue(getProject().getAllModelElements().contains(tournament1));
+		assertTrue(getProject().getAllModelElements().contains(tournament2));
+		assertTrue(getProject().getAllModelElements().contains(tournament3));
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseSetOfUnsettedMultiReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Tournament tournament1 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament2 = BowlingFactory.eINSTANCE.createTournament();
+		final Tournament tournament3 = BowlingFactory.eINSTANCE.createTournament();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(tournament1);
+				getProject().addModelElement(tournament2);
+				getProject().addModelElement(tournament3);
+				assertEquals(0, fan.getVisitedTournaments().size());
+				assertTrue(!fan.isSetVisitedTournaments());
+				assertTrue(getProject().getAllModelElements().contains(tournament1));
+				assertTrue(getProject().getAllModelElements().contains(tournament2));
+				assertTrue(getProject().getAllModelElements().contains(tournament3));
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.getVisitedTournaments().add(tournament1);
+				fan.getVisitedTournaments().add(tournament2);
+				fan.getVisitedTournaments().add(tournament3);
+				assertEquals(3, fan.getVisitedTournaments().size());
+				assertTrue(fan.isSetVisitedTournaments());
+			}
+		}.run(false);
+
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(3, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		AbstractOperation operation3 = operations.get(2);
+		assertEquals(true, operation3 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop3 = (MultiReferenceOperation) operation3;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+		assertEquals(fanId, mrop3.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				mrop3.reverse().apply(getProject());
+				mrop2.reverse().apply(getProject());
+				mrop1.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(0, fan.getVisitedTournaments().size());
+		assertTrue(!fan.isSetVisitedTournaments());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void unsetMultiContainmentReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch1 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch2 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch3 = BowlingFactory.eINSTANCE.createMerchandise();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch1);
+				getProject().addModelElement(merch2);
+				getProject().addModelElement(merch3);
+				fan.getFanMerchandise().add(merch1);
+				fan.getFanMerchandise().add(merch2);
+				fan.getFanMerchandise().add(merch3);
+				assertEquals(3, fan.getFanMerchandise().size());
+				assertTrue(fan.isSetFanMerchandise());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFanMerchandise();
+				assertEquals(0, fan.getFanMerchandise().size());
+				assertTrue(!fan.isSetFanMerchandise());
+				assertTrue(!getProject().getAllModelElements().contains(merch1));
+				assertTrue(!getProject().getAllModelElements().contains(merch2));
+				assertTrue(!getProject().getAllModelElements().contains(merch3));
+			}
+		}.run(false);
+
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(5, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		AbstractOperation operation3 = operations.get(2);
+		assertEquals(true, operation3 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp1 = (CreateDeleteOperation) operation3;
+
+		AbstractOperation operation4 = operations.get(3);
+		assertEquals(true, operation4 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp2 = (CreateDeleteOperation) operation4;
+
+		AbstractOperation operation5 = operations.get(4);
+		assertEquals(true, operation5 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp3 = (CreateDeleteOperation) operation5;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				mrop1.apply(secondProject);
+				mrop2.apply(secondProject);
+				creaDelOp1.apply(secondProject);
+				creaDelOp2.apply(secondProject);
+				creaDelOp3.apply(secondProject);
+			}
+		}.run(false);
+
+		assertEquals(0, ((Fan) secondProject.getModelElements().get(0)).getFanMerchandise().size());
+		assertTrue(!((Fan) secondProject.getModelElements().get(0)).isSetFanMerchandise());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseUnsetMultiContainmentReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch1 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch2 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch3 = BowlingFactory.eINSTANCE.createMerchandise();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch1);
+				getProject().addModelElement(merch2);
+				getProject().addModelElement(merch3);
+				fan.getFanMerchandise().add(merch1);
+				fan.getFanMerchandise().add(merch2);
+				fan.getFanMerchandise().add(merch3);
+				assertEquals(3, fan.getFanMerchandise().size());
+				assertTrue(fan.isSetFanMerchandise());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFanMerchandise();
+				assertEquals(0, fan.getFanMerchandise().size());
+				assertTrue(!fan.isSetFanMerchandise());
+				assertTrue(!getProject().getAllModelElements().contains(merch1));
+				assertTrue(!getProject().getAllModelElements().contains(merch2));
+				assertTrue(!getProject().getAllModelElements().contains(merch3));
+			}
+		}.run(false);
+
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(5, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		AbstractOperation operation3 = operations.get(2);
+		assertEquals(true, operation3 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp1 = (CreateDeleteOperation) operation3;
+
+		AbstractOperation operation4 = operations.get(3);
+		assertEquals(true, operation4 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp2 = (CreateDeleteOperation) operation4;
+
+		AbstractOperation operation5 = operations.get(4);
+		assertEquals(true, operation5 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp3 = (CreateDeleteOperation) operation5;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				creaDelOp3.reverse().apply(getProject());
+				creaDelOp2.reverse().apply(getProject());
+				creaDelOp1.reverse().apply(getProject());
+				mrop2.reverse().apply(getProject());
+				mrop1.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(3, fan.getFanMerchandise().size());
+		assertTrue(fan.isSetFanMerchandise());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void doubleReverseUnsetMultiContainmentReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch1 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch2 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch3 = BowlingFactory.eINSTANCE.createMerchandise();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch1);
+				getProject().addModelElement(merch2);
+				getProject().addModelElement(merch3);
+				fan.getFanMerchandise().add(merch1);
+				fan.getFanMerchandise().add(merch2);
+				fan.getFanMerchandise().add(merch3);
+				assertEquals(3, fan.getFanMerchandise().size());
+				assertTrue(fan.isSetFanMerchandise());
+			}
+		}.run(false);
+
+		clearOperations();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.unsetFanMerchandise();
+				assertEquals(0, fan.getFanMerchandise().size());
+				assertTrue(!fan.isSetFanMerchandise());
+				assertTrue(!getProject().getAllModelElements().contains(merch1));
+				assertTrue(!getProject().getAllModelElements().contains(merch2));
+				assertTrue(!getProject().getAllModelElements().contains(merch3));
+			}
+		}.run(false);
+
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(5, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		AbstractOperation operation3 = operations.get(2);
+		assertEquals(true, operation3 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp1 = (CreateDeleteOperation) operation3;
+
+		AbstractOperation operation4 = operations.get(3);
+		assertEquals(true, operation4 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp2 = (CreateDeleteOperation) operation4;
+
+		AbstractOperation operation5 = operations.get(4);
+		assertEquals(true, operation5 instanceof CreateDeleteOperation);
+		final CreateDeleteOperation creaDelOp3 = (CreateDeleteOperation) operation5;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				mrop1.reverse().reverse().apply(getProject());
+				mrop2.reverse().reverse().apply(getProject());
+				creaDelOp1.reverse().reverse().apply(getProject());
+				creaDelOp2.reverse().reverse().apply(getProject());
+				creaDelOp3.reverse().reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(0, fan.getFanMerchandise().size());
+		assertTrue(!fan.isSetFanMerchandise());
+		assertTrue(!getProject().getAllModelElements().contains(merch1));
+		assertTrue(!getProject().getAllModelElements().contains(merch2));
+		assertTrue(!getProject().getAllModelElements().contains(merch3));
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
+	@Test
+	public void reverseSetOfUnsettedMultiContainmentReferenceTest() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+		final Merchandise merch1 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch2 = BowlingFactory.eINSTANCE.createMerchandise();
+		final Merchandise merch3 = BowlingFactory.eINSTANCE.createMerchandise();
+		merch1.setName("M1");
+		merch2.setName("M2");
+		merch3.setName("M3");
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				getProject().addModelElement(merch1);
+				getProject().addModelElement(merch2);
+				getProject().addModelElement(merch3);
+				assertEquals(0, fan.getFanMerchandise().size());
+				assertTrue(!fan.isSetFanMerchandise());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.getFanMerchandise().add(merch1);
+				fan.getFanMerchandise().add(merch2);
+				fan.getFanMerchandise().add(merch3);
+				assertEquals(3, fan.getFanMerchandise().size());
+				assertTrue(fan.isSetFanMerchandise());
+			}
+		}.run(false);
+
+		final List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(3, operations.size());
+
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop1 = (MultiReferenceOperation) operation;
+
+		AbstractOperation operation2 = operations.get(1);
+		assertEquals(true, operation2 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop2 = (MultiReferenceOperation) operation2;
+
+		AbstractOperation operation3 = operations.get(2);
+		assertEquals(true, operation3 instanceof MultiReferenceOperation);
+		final MultiReferenceOperation mrop3 = (MultiReferenceOperation) operation3;
+
+		ModelElementId fanId = ModelUtil.getProject(fan).getModelElementId(fan);
+		assertEquals(fanId, mrop1.getModelElementId());
+		assertEquals(fanId, mrop2.getModelElementId());
+		assertEquals(fanId, mrop3.getModelElementId());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				mrop3.reverse().apply(getProject());
+				mrop2.reverse().apply(getProject());
+				mrop1.reverse().apply(getProject());
+			}
+		}.run(false);
+
+		assertEquals(0, fan.getFanMerchandise().size());
+		assertTrue(!fan.isSetFanMerchandise());
+		assertEquals(secondProject.getModelElements().size(), getProject().getModelElements().size());
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
 	}
 
 	// /**

@@ -73,6 +73,11 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	}
 
 	private boolean checkSingleReference(ESNotificationInfo notificationInfo, ESObjectContainer container) {
+		if (notificationInfo.getEventType() == Notification.UNSET) {
+			// do NOT filter unset notifications although old and new value are not in project
+			return false;
+		}
+
 		// if new value is in project then do NOT filter
 		if (notificationInfo.getOldValue() != null && !notificationInfo.isMoveEvent()
 			&& isOrWasInProject(container, notificationInfo.getOldModelElementValue())) {

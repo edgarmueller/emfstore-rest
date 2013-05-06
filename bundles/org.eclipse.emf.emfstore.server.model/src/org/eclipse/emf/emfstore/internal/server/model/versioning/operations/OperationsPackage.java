@@ -1565,6 +1565,18 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType <em>Unset Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getUnsetType()
+	 * @generated
+	 */
+	int UNSET_TYPE = 17;
+
+	/**
+	 * The meta object id for the '
 	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType
 	 * <em>Containment Type</em>}' enum.
 	 * <!-- begin-user-doc --> <!--
@@ -1574,7 +1586,7 @@ public interface OperationsPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getContainmentType()
 	 * @generated
 	 */
-	int CONTAINMENT_TYPE = 17;
+	int CONTAINMENT_TYPE = 18;
 
 	/**
 	 * Returns the meta object for class '
@@ -1732,13 +1744,13 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#isUnset
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getUnset
 	 * <em>Unset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Unset</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#isUnset()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getUnset()
 	 * @see #getFeatureOperation()
 	 * @generated
 	 */
@@ -2378,6 +2390,18 @@ public interface OperationsPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for enum '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType <em>Unset Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for enum '<em>Unset Type</em>'.
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType
+	 * @generated
+	 */
+	EEnum getUnsetType();
+
+	/**
+	 * Returns the meta object for enum '
 	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType
 	 * <em>Containment Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
@@ -3005,6 +3029,19 @@ public interface OperationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE = eINSTANCE.getEObjectToModelElementIdMap_Value();
+
+		/**
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType <em>Unset Type</em>}'
+		 * enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.OperationsPackageImpl#getUnsetType()
+		 * @generated
+		 */
+		EEnum UNSET_TYPE = eINSTANCE.getUnsetType();
 
 		/**
 		 * The meta object literal for the '
