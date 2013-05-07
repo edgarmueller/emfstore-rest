@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -33,6 +32,8 @@ import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -44,17 +45,20 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * UI controller for updating a project.
+ * UI controller for performing a paged update.
  * 
- * @author ovonwesen
  * @author emueller
+ * 
  */
 public class UIUpdateProjectController extends
 	AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ESUpdateCallback {
 
+	protected final static int ALL_CHANGES = -1;
+
 	private final ESLocalProject localProject;
 	private ESVersionSpec version;
+	private final int maxChanges;
 
 	/**
 	 * Constructor.
@@ -67,7 +71,7 @@ public class UIUpdateProjectController extends
 	public UIUpdateProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
 		this.localProject = localProject;
-		this.version = null;
+		this.maxChanges = ALL_CHANGES;
 	}
 
 	/**
@@ -77,14 +81,30 @@ public class UIUpdateProjectController extends
 	 *            the {@link Shell} that will be used during the update
 	 * @param localProject
 	 *            the {@link ESLocalProject} that should get updated
-	 * @param version
+	 * @param maxChanges
+	 *            the number of maximally allowed changes
+	 */
+	public UIUpdateProjectController(Shell shell, ESLocalProject localProject, int maxChanges) {
+		super(shell, true, true);
+		this.localProject = localProject;
+		this.maxChanges = maxChanges;
+	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the {@link Shell} that will be used during the update
+	 * @param localProject
+	 *            the {@link ESLocalProject} that should get updated
+	 * @param versionSpec
 	 *            the version to update to
 	 */
-	public UIUpdateProjectController(Shell shell, ESLocalProject localProject,
-		ESVersionSpec version) {
-		super(shell);
+	public UIUpdateProjectController(Shell shell, ESLocalProject localProject, ESVersionSpec versionSpec) {
+		super(shell, true, true);
 		this.localProject = localProject;
-		this.version = version;
+		this.version = versionSpec;
+		this.maxChanges = ALL_CHANGES;
 	}
 
 	/**
@@ -178,18 +198,53 @@ public class UIUpdateProjectController extends
 	@Override
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor)
 		throws ESException {
+
 		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
-		ESPrimaryVersionSpec resolveVersionSpec = localProject.resolveVersionSpec(
+		ESPrimaryVersionSpec resolvedVersion;
+		ESPrimaryVersionSpec newBaseVersion;
+
+		ESPrimaryVersionSpec headVersion = localProject.resolveVersionSpec(
 			ESVersionSpec.FACTORY.createHEAD(),
 			monitor);
 
-		if (oldBaseVersion.equals(resolveVersionSpec)) {
+		if (maxChanges == ALL_CHANGES) {
+			resolvedVersion = headVersion;
+		} else {
+			ESPrimaryVersionSpecImpl oldBaseVersionImpl = (ESPrimaryVersionSpecImpl) oldBaseVersion;
+			resolvedVersion = localProject.resolveVersionSpec(
+				ESVersionSpec.FACTORY.createPAGEDUPDATE(ModelUtil.clone(oldBaseVersionImpl.toInternalAPI()).toAPI(),
+					maxChanges),
+				monitor);
+		}
+
+		if (oldBaseVersion.equals(resolvedVersion)) {
 			noChangesOnServer();
 			return oldBaseVersion;
 		}
 
-		ESPrimaryVersionSpec newBaseVersion = localProject.update(version,
-			UIUpdateProjectController.this, monitor);
+		if (version != null) {
+			newBaseVersion = localProject.update(version,
+				UIUpdateProjectController.this, monitor);
+		} else {
+			newBaseVersion = localProject.update(resolvedVersion,
+				UIUpdateProjectController.this, monitor);
+		}
+
+		if (maxChanges != ALL_CHANGES && !newBaseVersion.equals(headVersion)) {
+			boolean yes = RunInUI.runWithResult(new Callable<Boolean>() {
+				public Boolean call() throws Exception {
+					return MessageDialog.openConfirm(getShell(), "More updates available",
+						"There are more updates available on the server.  Do you want to fetch and apply them now?");
+				}
+			});
+			if (yes) {
+				return RunInUI.WithException.runWithResult(new Callable<ESPrimaryVersionSpec>() {
+					public ESPrimaryVersionSpec call() throws Exception {
+						return new UIUpdateProjectController(getShell(), localProject, maxChanges).executeSub(monitor);
+					}
+				});
+			}
+		}
 
 		return newBaseVersion;
 	}

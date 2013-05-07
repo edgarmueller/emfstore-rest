@@ -130,4 +130,15 @@ public interface ESVersionFactory extends ESFactory {
 	 * @return version spec
 	 */
 	ESTagVersionSpec createTAG(String tag, String branch);
+
+	/**
+	 * Creates an {@link ESPagedUpdateVersionSpec}.
+	 * 
+	 * @param baseVersion
+	 *            the base version from which on to count the maximally allowed changes
+	 * @param maxChanges
+	 *            the number of maximally allowed changes
+	 * @return the created version spec
+	 */
+	ESPagedUpdateVersionSpec createPAGEDUPDATE(ESPrimaryVersionSpec baseVersion, int maxChanges);
 }

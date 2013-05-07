@@ -15,8 +15,11 @@ import static org.eclipse.emf.emfstore.client.test.server.api.HistoryAPITests.ve
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -89,5 +92,38 @@ public class VersionSpecTests extends CoreServerTest {
 		ProjectSpace history = createHistory(this);
 
 		history.resolveVersionSpec(Versions.createBRANCH("foobar"), new NullProgressMonitor());
+	}
+
+	@Test
+	public void resolvePagedUpdateVersionSpec() throws ESException {
+		ProjectSpace ps = createHistory(this);
+		PrimaryVersionSpec primary = Versions.createPRIMARY(1);
+		ps.update(primary);
+		// generate two changes
+		TestElement testElement = getTestElement("element");
+		ps.getProject().addModelElement(testElement);
+		testElement.setName("other name");
+
+		// TODO:
+		TestElement testElement2 = getTestElement("element 2");
+		testElement2.setName("yet another element");
+		testElement2.setDescription("this is a description");
+		ps.getProject().addModelElement(testElement2);
+		ps.commit(new NullProgressMonitor());
+
+		PagedUpdateVersionSpec pagedUpdateVersionSpec = Versions.createPAGEDUPDATE(Versions.createPRIMARY(0), 3);
+		PrimaryVersionSpec resolveVersionSpec = ps.resolveVersionSpec(pagedUpdateVersionSpec,
+			new NullProgressMonitor());
+		assertEquals(3, resolveVersionSpec.getIdentifier());
+
+		pagedUpdateVersionSpec = Versions.createPAGEDUPDATE(Versions.createPRIMARY(0), 10);
+		resolveVersionSpec = ps.resolveVersionSpec(pagedUpdateVersionSpec,
+			new NullProgressMonitor());
+		assertEquals(7, resolveVersionSpec.getIdentifier());
+
+		pagedUpdateVersionSpec = Versions.createPAGEDUPDATE(Versions.createPRIMARY(7), 1);
+		resolveVersionSpec = ps.resolveVersionSpec(pagedUpdateVersionSpec,
+			new NullProgressMonitor());
+		assertEquals(8, resolveVersionSpec.getIdentifier());
 	}
 }

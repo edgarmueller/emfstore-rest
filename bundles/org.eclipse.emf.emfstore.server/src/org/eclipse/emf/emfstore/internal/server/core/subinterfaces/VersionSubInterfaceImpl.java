@@ -42,6 +42,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HeadVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
@@ -126,6 +127,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 				return resolveAncestorVersionSpec(projectHistory, (AncestorVersionSpec) versionSpec);
 
+			} else if (versionSpec instanceof PagedUpdateVersionSpec) {
+				return resolvePagedUpdateVersionSpec(projectHistory, (PagedUpdateVersionSpec) versionSpec);
 			}
 			throw new InvalidVersionSpecException();
 		}
@@ -646,5 +649,43 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			throw new InvalidVersionSpecException("Couldn't determine next version in history.");
 		}
 		return currentVersion;
+	}
+
+	private PrimaryVersionSpec resolvePagedUpdateVersionSpec(ProjectHistory projectHistory,
+		PagedUpdateVersionSpec versionSpec) {
+
+		int changes = 0;
+		PrimaryVersionSpec resolvedSpec = versionSpec.getBaseVersionSpec();
+		int maxChanges = versionSpec.getMaxChanges();
+
+		ChangePackage cp = null;
+		int i = resolvedSpec.getIdentifier() + 1;
+
+		while (cp == null) {
+			cp = projectHistory.getVersions().get(i).getChanges();
+		}
+
+		// pull at least one change package
+		if (cp.getSize() > maxChanges) {
+			maxChanges = cp.getSize();
+		}
+
+		while (changes < maxChanges && i < projectHistory.getVersions().size()) {
+			resolvedSpec = projectHistory.getVersions().get(i).getPrimarySpec();
+			Version version = projectHistory.getVersions().get(i);
+			ChangePackage changePackage = version.getChanges();
+			if (changePackage != null) {
+				int size = changePackage.getSize();
+				if (changes + size > maxChanges) {
+					resolvedSpec = projectHistory.getVersions().get(i - 1).getPrimarySpec();
+					break;
+				} else {
+					changes += size;
+				}
+			}
+			i += 1;
+		}
+
+		return resolvedSpec;
 	}
 }

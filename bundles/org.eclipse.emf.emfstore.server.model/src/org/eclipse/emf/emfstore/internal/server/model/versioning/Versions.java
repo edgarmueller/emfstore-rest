@@ -163,4 +163,20 @@ public final class Versions {
 		tagSpec.setName(tag);
 		return tagSpec;
 	}
+
+	/**
+	 * Creates a {@link PagedUpdateVersionSpec}.
+	 * 
+	 * @param baseVersion
+	 *            the base version from which on to count the changes
+	 * @param maxChanges
+	 *            the maximally allowed changes
+	 * @return the created version specification
+	 */
+	public static PagedUpdateVersionSpec createPAGEDUPDATE(PrimaryVersionSpec baseVersion, int maxChanges) {
+		PagedUpdateVersionSpec versionSpec = VersioningFactory.eINSTANCE.createPagedUpdateVersionSpec();
+		versionSpec.setBaseVersionSpec(baseVersion);
+		versionSpec.setMaxChanges(maxChanges);
+		return versionSpec;
+	}
 }
