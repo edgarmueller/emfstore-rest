@@ -120,8 +120,6 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 		config = new OperationRecorderConfig();
 		converter = new NotificationToOperationConverter(collection);
-
-		ESWorkspaceProviderImpl.getObserverBus().register(this);
 	}
 
 	/**

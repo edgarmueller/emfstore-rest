@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
@@ -52,6 +53,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 */
 	public OperationManager(ProjectSpaceBase projectSpace) {
 		operationRecorder = new OperationRecorder(projectSpace);
+		ESWorkspaceProviderImpl.getObserverBus().register(operationRecorder);
 		operationRecorder.addOperationRecorderListener(this);
 		operationListeners = new ArrayList<OperationObserver>();
 		configureOperationRecorder();
@@ -191,6 +193,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
+		ESWorkspaceProviderImpl.getObserverBus().unregister(operationRecorder);
 		operationRecorder.removeOperationRecorderListener(this);
 	}
 
