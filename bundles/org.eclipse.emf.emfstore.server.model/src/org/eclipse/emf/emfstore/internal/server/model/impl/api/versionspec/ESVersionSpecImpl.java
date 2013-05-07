@@ -37,6 +37,12 @@ public class ESVersionSpecImpl<U extends ESVersionSpec, T extends VersionSpec & 
 		super(versionSpec);
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec#getBranch()
+	 */
 	public String getBranch() {
 		return toInternalAPI().getBranch();
 	}

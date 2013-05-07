@@ -28,7 +28,6 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
  * Mapping between {@link ESHistoryInfo} and {@link HistoryInfo}.
  * 
  * @author emueller
- * 
  */
 public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfo, HistoryInfo> implements ESHistoryInfo {
 
@@ -113,6 +112,12 @@ public class ESHistoryInfoImpl extends AbstractAPIImpl<ESHistoryInfo, HistoryInf
 		return APIUtil.mapToAPI(ESTagVersionSpec.class, toInternalAPI().getTagSpecs());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.ESHistoryInfo#getChangePackage()
+	 */
 	public ESChangePackage getChangePackage() {
 
 		if (toInternalAPI().getChangePackage() == null) {

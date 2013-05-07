@@ -15,10 +15,9 @@ import java.util.Date;
 
 import org.eclipse.emf.emfstore.internal.server.model.versioning.DateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESDateVersionSpec;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
- * Mapping between {@link ESDateVersionSpecImpl} and {@link ESVersionSpec}.
+ * Mapping between {@link ESDateVersionSpecImpl} and {@link DateVersionSpec}.
  * 
  * @author emueller
  * 

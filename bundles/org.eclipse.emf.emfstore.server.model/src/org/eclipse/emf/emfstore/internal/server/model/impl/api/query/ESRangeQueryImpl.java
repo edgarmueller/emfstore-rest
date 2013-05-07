@@ -21,7 +21,8 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * 
  * @author emueller
  * 
- * @param <T> a subtype of {@link ESRangeQueryImpl}
+ * @param <T> a sub-type of {@link ESRangeQueryImpl}
+ * @param <U> a sub-type of {@link RangeQuery}
  */
 public class ESRangeQueryImpl<T extends ESRangeQuery<?>, U extends RangeQuery<T>> extends
 	ESHistoryQueryImpl<T, U> implements ESRangeQuery<T> {

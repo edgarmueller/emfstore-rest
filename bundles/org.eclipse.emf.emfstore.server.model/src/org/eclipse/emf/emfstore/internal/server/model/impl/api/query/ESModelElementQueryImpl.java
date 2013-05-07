@@ -7,7 +7,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.impl.api.query;
@@ -39,7 +38,7 @@ public class ESModelElementQueryImpl extends ESRangeQueryImpl<ESModelElementQuer
 	/**
 	 * Constructor.
 	 * 
-	 * @param rangeQuery
+	 * @param query
 	 *            the delegate
 	 */
 	public ESModelElementQueryImpl(ModelElementQuery query) {

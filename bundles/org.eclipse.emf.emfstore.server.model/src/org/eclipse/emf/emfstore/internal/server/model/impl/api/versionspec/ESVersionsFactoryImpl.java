@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESAncestorVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESHeadVersionSpec;
+import org.eclipse.emf.emfstore.server.model.versionspec.ESPagedUpdateVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory;
@@ -33,6 +34,9 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
  */
 public class ESVersionsFactoryImpl implements ESVersionFactory {
 
+	/**
+	 * The factory instance.
+	 */
 	public static final ESVersionsFactoryImpl INSTANCE = new ESVersionsFactoryImpl();
 
 	/**
@@ -175,5 +179,17 @@ public class ESVersionsFactoryImpl implements ESVersionFactory {
 	 */
 	public ESTagVersionSpec createTAG(String tag, String branch) {
 		return Versions.createTAG(tag, branch).toAPI();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.model.versionspec.ESVersionFactory#createPAGEDUPDATE(org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
+	 *      int)
+	 */
+	public ESPagedUpdateVersionSpec createPAGEDUPDATE(ESPrimaryVersionSpec baseVersion, int maxChanges) {
+		PrimaryVersionSpec primaryVersionSpec = ((ESPrimaryVersionSpecImpl) baseVersion).toInternalAPI();
+		return Versions.createPAGEDUPDATE(primaryVersionSpec, maxChanges).toAPI();
 	}
 }
