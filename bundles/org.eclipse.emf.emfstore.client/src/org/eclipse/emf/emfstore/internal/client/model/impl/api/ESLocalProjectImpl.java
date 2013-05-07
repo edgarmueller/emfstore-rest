@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.internal.server.model.impl.LocalProjectIdImpl;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLocalProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESBranchVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
@@ -774,7 +774,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#getLocalProjectId()
 	 */
 	public ESLocalProjectId getLocalProjectId() {
-		return new LocalProjectIdImpl(toInternalAPI().getIdentifier());
+		return new ESLocalProjectIdImpl(toInternalAPI().getIdentifier());
 	}
 
 	private void checkIsShared() {

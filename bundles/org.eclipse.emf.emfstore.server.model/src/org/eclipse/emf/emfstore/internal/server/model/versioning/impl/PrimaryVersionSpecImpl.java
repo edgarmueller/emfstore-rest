@@ -281,18 +281,6 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#setAPIImpl(java.lang.Object)
-	 * 
-	 * @generated NOT
-	 */
-	public void setAPIImpl(ESPrimaryVersionSpecImpl esPrimaryVersionSpecImpl) {
-		apiImpl = esPrimaryVersionSpecImpl;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 * 
 	 * @generated NOT

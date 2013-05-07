@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
@@ -32,10 +33,9 @@ import org.eclipse.swt.widgets.Shell;
  * UI controller for removing a server from the workspace.
  * 
  * @author emueller
- * 
  */
 public class UIRemoveServerController extends
-		AbstractEMFStoreUIController<Void> {
+	AbstractEMFStoreUIController<Void> {
 
 	private final ServerInfo serverInfo;
 
@@ -63,9 +63,9 @@ public class UIRemoveServerController extends
 	public Void doRun(IProgressMonitor monitor) throws ESException {
 
 		boolean shouldDelete = MessageDialog.openQuestion(getShell(),
-				"Confirm deletion", String.format(
-						"Are you sure you want to delete the server \'%s\'",
-						serverInfo.getName()));
+			"Confirm deletion", String.format(
+				"Are you sure you want to delete the server \'%s\'",
+				serverInfo.getName()));
 
 		if (!shouldDelete) {
 			return null;
@@ -73,15 +73,15 @@ public class UIRemoveServerController extends
 
 		// TODO OTS
 		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance()
-				.getWorkspace();
+			.getWorkspace();
 		EList<ProjectSpace> projectSpaces = workspace.toInternalAPI()
-				.getProjectSpaces();
+			.getProjectSpaces();
 		ArrayList<ProjectSpace> usedSpaces = new ArrayList<ProjectSpace>();
 
 		for (ProjectSpace projectSpace : projectSpaces) {
 			if (projectSpace.getUsersession() != null
-					&& projectSpace.getUsersession().getServerInfo()
-							.equals(serverInfo)) {
+				&& projectSpace.getUsersession().getServerInfo()
+					.equals(serverInfo)) {
 				usedSpaces.add(projectSpace);
 			}
 		}
@@ -89,7 +89,7 @@ public class UIRemoveServerController extends
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				ESWorkspaceProviderImpl.getInstance().getWorkspace().getServers()
-						.remove(serverInfo);
+					.remove(serverInfo);
 				return null;
 			}
 		});
@@ -115,13 +115,13 @@ public class UIRemoveServerController extends
 		}
 
 		MessageDialog
-				.openError(
-						getShell(),
-						"Error while deleting",
-						String.format(
-								"Cannot delete \'%s\' because it is currently used by the following projects: \n"
-										+ message.toString(),
-								serverInfo.getName()));
+			.openError(
+				getShell(),
+				"Error while deleting",
+				String.format(
+					"Cannot delete \'%s\' because it is currently used by the following projects: \n"
+						+ message.toString(),
+					serverInfo.getName()));
 
 		return null;
 	}
