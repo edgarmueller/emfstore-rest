@@ -171,6 +171,16 @@ public interface VersioningFactory extends EFactory {
 	AncestorVersionSpec createAncestorVersionSpec();
 
 	/**
+	 * Returns a new object of class '<em>Paged Update Version Spec</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Paged Update Version Spec</em>'.
+	 * @generated
+	 */
+	PagedUpdateVersionSpec createPagedUpdateVersionSpec();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

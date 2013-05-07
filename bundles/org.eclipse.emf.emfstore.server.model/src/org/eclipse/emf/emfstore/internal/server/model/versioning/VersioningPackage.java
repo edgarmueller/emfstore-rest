@@ -1044,6 +1044,59 @@ public interface VersioningPackage extends EPackage {
 	int ANCESTOR_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PagedUpdateVersionSpecImpl
+	 * <em>Paged Update Version Spec</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PagedUpdateVersionSpecImpl
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersioningPackageImpl#getPagedUpdateVersionSpec()
+	 * @generated
+	 */
+	int PAGED_UPDATE_VERSION_SPEC = 17;
+
+	/**
+	 * The feature id for the '<em><b>Branch</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PAGED_UPDATE_VERSION_SPEC__BRANCH = VERSION_SPEC__BRANCH;
+
+	/**
+	 * The feature id for the '<em><b>Max Changes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PAGED_UPDATE_VERSION_SPEC__MAX_CHANGES = VERSION_SPEC_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Base Version Spec</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PAGED_UPDATE_VERSION_SPEC__BASE_VERSION_SPEC = VERSION_SPEC_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Paged Update Version Spec</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PAGED_UPDATE_VERSION_SPEC_FEATURE_COUNT = VERSION_SPEC_FEATURE_COUNT + 2;
+
+	/**
 	 * Returns the meta object for class '
 	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec
 	 * <em>Tag Version Spec</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
@@ -1855,6 +1908,47 @@ public interface VersioningPackage extends EPackage {
 	EReference getAncestorVersionSpec_Source();
 
 	/**
+	 * Returns the meta object for class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec
+	 * <em>Paged Update Version Spec</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Paged Update Version Spec</em>'.
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec
+	 * @generated
+	 */
+	EClass getPagedUpdateVersionSpec();
+
+	/**
+	 * Returns the meta object for the attribute '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec#getMaxChanges
+	 * <em>Max Changes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Max Changes</em>'.
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec#getMaxChanges()
+	 * @see #getPagedUpdateVersionSpec()
+	 * @generated
+	 */
+	EAttribute getPagedUpdateVersionSpec_MaxChanges();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec#getBaseVersionSpec
+	 * <em>Base Version Spec</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Base Version Spec</em>'.
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec#getBaseVersionSpec()
+	 * @see #getPagedUpdateVersionSpec()
+	 * @generated
+	 */
+	EReference getPagedUpdateVersionSpec_BaseVersionSpec();
+
+	/**
 	 * Returns the factory that creates the instances of the model. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -2507,6 +2601,37 @@ public interface VersioningPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANCESTOR_VERSION_SPEC__SOURCE = eINSTANCE.getAncestorVersionSpec_Source();
+
+		/**
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PagedUpdateVersionSpecImpl
+		 * <em>Paged Update Version Spec</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.impl.PagedUpdateVersionSpecImpl
+		 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersioningPackageImpl#getPagedUpdateVersionSpec()
+		 * @generated
+		 */
+		EClass PAGED_UPDATE_VERSION_SPEC = eINSTANCE.getPagedUpdateVersionSpec();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Changes</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PAGED_UPDATE_VERSION_SPEC__MAX_CHANGES = eINSTANCE.getPagedUpdateVersionSpec_MaxChanges();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Version Spec</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PAGED_UPDATE_VERSION_SPEC__BASE_VERSION_SPEC = eINSTANCE.getPagedUpdateVersionSpec_BaseVersionSpec();
 
 	}
 

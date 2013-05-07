@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
@@ -250,6 +251,15 @@ public class VersioningSwitch<T> {
 			T result = caseAncestorVersionSpec(ancestorVersionSpec);
 			if (result == null)
 				result = caseVersionSpec(ancestorVersionSpec);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case VersioningPackage.PAGED_UPDATE_VERSION_SPEC: {
+			PagedUpdateVersionSpec pagedUpdateVersionSpec = (PagedUpdateVersionSpec) theEObject;
+			T result = casePagedUpdateVersionSpec(pagedUpdateVersionSpec);
+			if (result == null)
+				result = caseVersionSpec(pagedUpdateVersionSpec);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -528,6 +538,23 @@ public class VersioningSwitch<T> {
 	 * @generated
 	 */
 	public T caseAncestorVersionSpec(AncestorVersionSpec object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Paged Update Version Spec</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Paged Update Version Spec</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePagedUpdateVersionSpec(PagedUpdateVersionSpec object)
+	{
 		return null;
 	}
 

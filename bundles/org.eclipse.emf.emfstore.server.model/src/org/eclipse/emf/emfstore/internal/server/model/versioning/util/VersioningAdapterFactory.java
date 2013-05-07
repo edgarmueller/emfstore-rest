@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
@@ -194,6 +195,12 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 		public Adapter caseAncestorVersionSpec(AncestorVersionSpec object)
 		{
 			return createAncestorVersionSpecAdapter();
+		}
+
+		@Override
+		public Adapter casePagedUpdateVersionSpec(PagedUpdateVersionSpec object)
+		{
+			return createPagedUpdateVersionSpecAdapter();
 		}
 
 		@Override
@@ -490,6 +497,24 @@ public class VersioningAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAncestorVersionSpecAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec
+	 * <em>Paged Update Version Spec</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec
+	 * @generated
+	 */
+	public Adapter createPagedUpdateVersionSpecAdapter()
+	{
 		return null;
 	}
 

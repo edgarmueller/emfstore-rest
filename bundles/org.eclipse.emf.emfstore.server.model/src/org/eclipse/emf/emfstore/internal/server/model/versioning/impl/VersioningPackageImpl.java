@@ -33,6 +33,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
@@ -176,6 +177,14 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * @generated
 	 */
 	private EClass ancestorVersionSpecEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass pagedUpdateVersionSpecEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -884,6 +893,39 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getPagedUpdateVersionSpec()
+	{
+		return pagedUpdateVersionSpecEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getPagedUpdateVersionSpec_MaxChanges()
+	{
+		return (EAttribute) pagedUpdateVersionSpecEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getPagedUpdateVersionSpec_BaseVersionSpec()
+	{
+		return (EReference) pagedUpdateVersionSpecEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -995,6 +1037,10 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		ancestorVersionSpecEClass = createEClass(ANCESTOR_VERSION_SPEC);
 		createEReference(ancestorVersionSpecEClass, ANCESTOR_VERSION_SPEC__TARGET);
 		createEReference(ancestorVersionSpecEClass, ANCESTOR_VERSION_SPEC__SOURCE);
+
+		pagedUpdateVersionSpecEClass = createEClass(PAGED_UPDATE_VERSION_SPEC);
+		createEAttribute(pagedUpdateVersionSpecEClass, PAGED_UPDATE_VERSION_SPEC__MAX_CHANGES);
+		createEReference(pagedUpdateVersionSpecEClass, PAGED_UPDATE_VERSION_SPEC__BASE_VERSION_SPEC);
 	}
 
 	/**
@@ -1045,6 +1091,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		headVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 		branchVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 		ancestorVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
+		pagedUpdateVersionSpecEClass.getESuperTypes().add(this.getVersionSpec());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(tagVersionSpecEClass, TagVersionSpec.class, "TagVersionSpec", !IS_ABSTRACT, !IS_INTERFACE,
@@ -1232,6 +1279,15 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		initEReference(getAncestorVersionSpec_Source(), this.getPrimaryVersionSpec(), null, "source", null, 0, 1,
 			AncestorVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pagedUpdateVersionSpecEClass, PagedUpdateVersionSpec.class, "PagedUpdateVersionSpec", !IS_ABSTRACT,
+			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPagedUpdateVersionSpec_MaxChanges(), ecorePackage.getEInt(), "maxChanges", null, 0, 1,
+			PagedUpdateVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPagedUpdateVersionSpec_BaseVersionSpec(), this.getPrimaryVersionSpec(), null,
+			"baseVersionSpec", null, 0, 1, PagedUpdateVersionSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } // VersioningPackageImpl

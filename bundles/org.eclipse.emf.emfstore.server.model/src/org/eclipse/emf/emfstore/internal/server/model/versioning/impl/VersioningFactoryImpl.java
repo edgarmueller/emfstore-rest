@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.HeadVersionSpec
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ModelElementQuery;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PathQuery;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.RangeQuery;
@@ -113,6 +114,8 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 			return createBranchInfo();
 		case VersioningPackage.ANCESTOR_VERSION_SPEC:
 			return createAncestorVersionSpec();
+		case VersioningPackage.PAGED_UPDATE_VERSION_SPEC:
+			return createPagedUpdateVersionSpec();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -267,6 +270,18 @@ public class VersioningFactoryImpl extends EFactoryImpl implements VersioningFac
 	public AncestorVersionSpec createAncestorVersionSpec() {
 		AncestorVersionSpecImpl ancestorVersionSpec = new AncestorVersionSpecImpl();
 		return ancestorVersionSpec;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public PagedUpdateVersionSpec createPagedUpdateVersionSpec()
+	{
+		PagedUpdateVersionSpecImpl pagedUpdateVersionSpec = new PagedUpdateVersionSpecImpl();
+		return pagedUpdateVersionSpec;
 	}
 
 	/**

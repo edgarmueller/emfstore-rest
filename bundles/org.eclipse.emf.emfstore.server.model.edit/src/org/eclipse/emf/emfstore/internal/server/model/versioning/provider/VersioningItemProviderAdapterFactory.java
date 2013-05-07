@@ -475,6 +475,35 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected PagedUpdateVersionSpecItemProvider pagedUpdateVersionSpecItemProvider;
+
+	/**
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.PagedUpdateVersionSpec}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createPagedUpdateVersionSpecAdapter()
+	{
+		if (pagedUpdateVersionSpecItemProvider == null)
+		{
+			pagedUpdateVersionSpecItemProvider = new PagedUpdateVersionSpecItemProvider(this);
+		}
+
+		return pagedUpdateVersionSpecItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -607,6 +636,8 @@ public class VersioningItemProviderAdapterFactory extends VersioningAdapterFacto
 			branchInfoItemProvider.dispose();
 		if (ancestorVersionSpecItemProvider != null)
 			ancestorVersionSpecItemProvider.dispose();
+		if (pagedUpdateVersionSpecItemProvider != null)
+			pagedUpdateVersionSpecItemProvider.dispose();
 	}
 
 }
