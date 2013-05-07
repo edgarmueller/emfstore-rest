@@ -21,10 +21,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.emfstore.bowling.Area;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
+import org.eclipse.emf.emfstore.bowling.Fan;
 import org.eclipse.emf.emfstore.bowling.Game;
 import org.eclipse.emf.emfstore.bowling.Gender;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
+import org.eclipse.emf.emfstore.bowling.Merchandise;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Referee;
 import org.eclipse.emf.emfstore.bowling.Tournament;
@@ -99,6 +101,20 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * @generated
 	 */
 	private EClass areaEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fanEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass merchandiseEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -539,6 +555,150 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFan() {
+		return fanEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFan_Name() {
+		return (EAttribute)fanEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFan_DateOfBirth() {
+		return (EAttribute)fanEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFan_HasSeasonTicket() {
+		return (EAttribute)fanEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFan_EMails() {
+		return (EAttribute)fanEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFan_Gender() {
+		return (EAttribute)fanEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFan_FavouritePlayer() {
+		return (EReference)fanEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFan_VisitedTournaments() {
+		return (EReference)fanEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFan_NumberOfTournamentsVisited() {
+		return (EAttribute)fanEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFan_MoneySpentOnTickets() {
+		return (EAttribute)fanEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFan_FanMerchandise() {
+		return (EReference)fanEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFan_FavouriteMerchandise() {
+		return (EReference)fanEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMerchandise() {
+		return merchandiseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMerchandise_Name() {
+		return (EAttribute)merchandiseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMerchandise_Price() {
+		return (EAttribute)merchandiseEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMerchandise_SerialNumber() {
+		return (EAttribute)merchandiseEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTournamentType() {
 		return tournamentTypeEEnum;
 	}
@@ -629,6 +789,24 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		createEReference(areaEClass, AREA__AREAS);
 		createEReference(areaEClass, AREA__TOURNAMENTS);
 
+		fanEClass = createEClass(FAN);
+		createEAttribute(fanEClass, FAN__NAME);
+		createEAttribute(fanEClass, FAN__DATE_OF_BIRTH);
+		createEAttribute(fanEClass, FAN__HAS_SEASON_TICKET);
+		createEAttribute(fanEClass, FAN__EMAILS);
+		createEAttribute(fanEClass, FAN__GENDER);
+		createEReference(fanEClass, FAN__FAVOURITE_PLAYER);
+		createEReference(fanEClass, FAN__FAN_MERCHANDISE);
+		createEReference(fanEClass, FAN__FAVOURITE_MERCHANDISE);
+		createEReference(fanEClass, FAN__VISITED_TOURNAMENTS);
+		createEAttribute(fanEClass, FAN__NUMBER_OF_TOURNAMENTS_VISITED);
+		createEAttribute(fanEClass, FAN__MONEY_SPENT_ON_TICKETS);
+
+		merchandiseEClass = createEClass(MERCHANDISE);
+		createEAttribute(merchandiseEClass, MERCHANDISE__NAME);
+		createEAttribute(merchandiseEClass, MERCHANDISE__PRICE);
+		createEAttribute(merchandiseEClass, MERCHANDISE__SERIAL_NUMBER);
+
 		// Create enums
 		tournamentTypeEEnum = createEEnum(TOURNAMENT_TYPE);
 		genderEEnum = createEEnum(GENDER);
@@ -712,6 +890,24 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		initEClass(areaEClass, Area.class, "Area", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArea_Areas(), this.getArea(), null, "areas", null, 0, -1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArea_Tournaments(), this.getTournament(), null, "tournaments", null, 0, -1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fanEClass, Fan.class, "Fan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFan_Name(), ecorePackage.getEString(), "name", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFan_DateOfBirth(), ecorePackage.getEDate(), "dateOfBirth", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFan_HasSeasonTicket(), ecorePackage.getEBoolean(), "hasSeasonTicket", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFan_EMails(), ecorePackage.getEString(), "eMails", null, 0, -1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFan_Gender(), this.getGender(), "gender", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFan_FavouritePlayer(), this.getPlayer(), null, "favouritePlayer", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFan_FanMerchandise(), this.getMerchandise(), null, "fanMerchandise", null, 0, -1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFan_FavouriteMerchandise(), this.getMerchandise(), null, "favouriteMerchandise", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFan_VisitedTournaments(), this.getTournament(), null, "visitedTournaments", null, 0, -1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFan_NumberOfTournamentsVisited(), ecorePackage.getEInt(), "numberOfTournamentsVisited", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFan_MoneySpentOnTickets(), ecorePackage.getEDouble(), "moneySpentOnTickets", null, 0, 1, Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(merchandiseEClass, Merchandise.class, "Merchandise", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMerchandise_Name(), ecorePackage.getEString(), "name", null, 0, 1, Merchandise.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMerchandise_Price(), ecorePackage.getEBigDecimal(), "price", null, 0, 1, Merchandise.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMerchandise_SerialNumber(), ecorePackage.getEBigInteger(), "serialNumber", null, 0, 1, Merchandise.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(tournamentTypeEEnum, TournamentType.class, "TournamentType");

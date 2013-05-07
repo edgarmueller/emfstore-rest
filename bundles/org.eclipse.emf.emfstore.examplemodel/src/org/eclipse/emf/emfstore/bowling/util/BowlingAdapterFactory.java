@@ -119,6 +119,14 @@ public class BowlingAdapterFactory extends AdapterFactoryImpl {
 				return createAreaAdapter();
 			}
 			@Override
+			public Adapter caseFan(Fan object) {
+				return createFanAdapter();
+			}
+			@Override
+			public Adapter caseMerchandise(Merchandise object) {
+				return createMerchandiseAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -260,6 +268,34 @@ public class BowlingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAreaAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.Fan <em>Fan</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan
+	 * @generated
+	 */
+	public Adapter createFanAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.Merchandise <em>Merchandise</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.Merchandise
+	 * @generated
+	 */
+	public Adapter createMerchandiseAdapter() {
 		return null;
 	}
 

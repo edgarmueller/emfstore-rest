@@ -93,6 +93,24 @@ public interface BowlingFactory extends EFactory {
 	Area createArea();
 
 	/**
+	 * Returns a new object of class '<em>Fan</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Fan</em>'.
+	 * @generated
+	 */
+	Fan createFan();
+
+	/**
+	 * Returns a new object of class '<em>Merchandise</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Merchandise</em>'.
+	 * @generated
+	 */
+	Merchandise createMerchandise();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

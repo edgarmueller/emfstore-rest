@@ -205,7 +205,12 @@
           eSuperTypes="#//versioning/operations/AbstractOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
             defaultValueLiteral=""/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="unset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="unset" eType="#//versioning/operations/UnsetType"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="UnsetType">
+        <eLiterals name="NONE"/>
+        <eLiterals name="IS_UNSET" value="1"/>
+        <eLiterals name="WAS_UNSET" value="2" literal=""/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CreateDeleteOperation" eSuperTypes="#//versioning/operations/AbstractOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="delete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

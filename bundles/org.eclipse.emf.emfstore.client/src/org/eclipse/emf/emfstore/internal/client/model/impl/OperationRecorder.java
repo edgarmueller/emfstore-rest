@@ -373,9 +373,6 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 			}
 		}
 
-		// TODO: review, see EObjectChangeNotifier
-		collection.clearAllocatedCaches();
-
 		return ops;
 	}
 
@@ -443,6 +440,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		if (isRecording) {
 			if (!commandIsRunning) {
 				handleElementDelete(modelElement);
+				collection.clearAllocatedCaches();
 			} else {
 				Set<EObject> allModelElements = new LinkedHashSet<EObject>();
 				allModelElements.add(modelElement);
@@ -508,7 +506,6 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		removedElementsCache.clear();
 		operations.clear();
 
-		collection.forbidIdAllocation();
 		collection.clearAllocatedCaches();
 
 		commandIsRunning = false;
@@ -794,7 +791,6 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;
 		commandIsRunning = true;
-		collection.allowIdAllocation();
 	}
 
 	/**
@@ -989,7 +985,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private void clearAllocatedCaches(ESLocalProject project) {
 		if (((ESLocalProjectImpl) project).toInternalAPI().getProject().equals(collection)) {
-			collection.forceClearAllocatedCaches();
+			collection.clearAllocatedCaches();
 		}
 	}
 }

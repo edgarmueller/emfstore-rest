@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Mult
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Multi Attribute Set Operation</b></em>'. <!--
@@ -307,14 +308,23 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 		EAttribute feature;
 		try {
 			feature = (EAttribute) getFeature(modelElement);
-			EList<Object> list = (EList<Object>) modelElement.eGet(feature);
-			if (feature.isUnique() && list.contains(getNewValue())) {
-				// silently skip setting value since it is already contained, but should be unique
-				return;
-			}
-			int i = getIndex();
-			if ((i >= 0 && i < list.size())) {
-				list.set(i, getNewValue());
+
+			switch (getUnset().getValue()) {
+			case UnsetType.IS_UNSET_VALUE:
+				modelElement.eUnset(feature);
+				break;
+			case UnsetType.NONE_VALUE:
+			case UnsetType.WAS_UNSET_VALUE:
+				EList<Object> list = (EList<Object>) modelElement.eGet(feature);
+				if (feature.isUnique() && list.contains(getNewValue())) {
+					// silently skip setting value since it is already contained, but should be unique
+					return;
+				}
+				int i = getIndex();
+				if ((i >= 0 && i < list.size())) {
+					list.set(i, getNewValue());
+				}
+				break;
 			}
 		} catch (UnkownFeatureException e) {
 		}
@@ -328,6 +338,9 @@ public class MultiAttributeSetOperationImpl extends FeatureOperationImpl impleme
 		// swap old and new value
 		attributeOperation.setNewValue(getOldValue());
 		attributeOperation.setOldValue(getNewValue());
+
+		setUnsetForReverseOperation(attributeOperation);
+
 		return attributeOperation;
 	}
 

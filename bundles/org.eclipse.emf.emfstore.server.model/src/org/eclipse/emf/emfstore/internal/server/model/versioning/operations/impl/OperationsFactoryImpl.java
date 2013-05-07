@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.*;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType;
@@ -128,6 +129,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID())
 		{
+		case OperationsPackage.UNSET_TYPE:
+			return createUnsetTypeFromString(eDataType, initialValue);
 		case OperationsPackage.CONTAINMENT_TYPE:
 			return createContainmentTypeFromString(eDataType, initialValue);
 		default:
@@ -144,6 +147,8 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID())
 		{
+		case OperationsPackage.UNSET_TYPE:
+			return convertUnsetTypeToString(eDataType, instanceValue);
 		case OperationsPackage.CONTAINMENT_TYPE:
 			return convertContainmentTypeToString(eDataType, instanceValue);
 		default:
@@ -289,6 +294,32 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	public Map.Entry<EObject, ModelElementId> createEObjectToModelElementIdMap() {
 		EObjectToModelElementIdMapImpl eObjectToModelElementIdMap = new EObjectToModelElementIdMapImpl();
 		return eObjectToModelElementIdMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public UnsetType createUnsetTypeFromString(EDataType eDataType, String initialValue)
+	{
+		UnsetType result = UnsetType.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
+				+ eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertUnsetTypeToString(EDataType eDataType, Object instanceValue)
+	{
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

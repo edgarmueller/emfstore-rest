@@ -153,6 +153,18 @@ public class BowlingSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BowlingPackage.FAN: {
+				Fan fan = (Fan)theEObject;
+				T result = caseFan(fan);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BowlingPackage.MERCHANDISE: {
+				Merchandise merchandise = (Merchandise)theEObject;
+				T result = caseMerchandise(merchandise);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -289,6 +301,36 @@ public class BowlingSwitch<T> {
 	 * @generated
 	 */
 	public T caseArea(Area object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Fan</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Fan</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFan(Fan object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Merchandise</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Merchandise</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMerchandise(Merchandise object) {
 		return null;
 	}
 

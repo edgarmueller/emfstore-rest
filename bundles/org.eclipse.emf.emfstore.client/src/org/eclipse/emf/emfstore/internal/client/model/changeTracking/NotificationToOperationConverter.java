@@ -26,6 +26,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation;
@@ -35,6 +36,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Mult
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * Converts an EMF notification to an Operation.
@@ -77,6 +79,13 @@ public final class NotificationToOperationConverter {
 				return handleSetAttribute(n);
 			} else {
 				return handleSetReference(n);
+			}
+
+		case Notification.UNSET:
+			if (n.isAttributeNotification()) {
+				return handleUnsetAttribute(n);
+			} else {
+				return handleUnsetReference(n);
 			}
 
 		case Notification.ADD:
@@ -171,6 +180,10 @@ public final class NotificationToOperationConverter {
 			}
 		}
 
+		if (!n.wasSet()) {
+			operation.setUnset(UnsetType.WAS_UNSET);
+		}
+
 		return operation;
 	}
 
@@ -197,9 +210,15 @@ public final class NotificationToOperationConverter {
 		}
 
 		boolean isAdd = n.isAddEvent() || n.isAddManyEvent();
-
-		return createMultiReferenceOperation(project, n.getNotifierModelElement(), n.getReference(), list, isAdd,
+		MultiReferenceOperation multiRefOp = createMultiReferenceOperation(project, n.getNotifierModelElement(),
+			n.getReference(), list, isAdd,
 			n.getPosition());
+
+		if (!n.wasSet()) {
+			multiRefOp.setUnset(UnsetType.WAS_UNSET);
+		}
+
+		return multiRefOp;
 	}
 
 	/**
@@ -280,6 +299,10 @@ public final class NotificationToOperationConverter {
 			op.setFeatureName(n.getAttribute().getName());
 			op.setNewValue(n.getNewValue());
 			op.setOldValue(n.getOldValue());
+
+			if (!n.wasSet()) {
+				op.setUnset(UnsetType.WAS_UNSET);
+			}
 			return op;
 		} else {
 
@@ -289,6 +312,10 @@ public final class NotificationToOperationConverter {
 			setOperation.setNewValue(n.getNewValue());
 			setOperation.setOldValue(n.getOldValue());
 			setOperation.setIndex(n.getPosition());
+
+			if (!n.wasSet()) {
+				setOperation.setUnset(UnsetType.WAS_UNSET);
+			}
 
 			return setOperation;
 		}
@@ -337,8 +364,16 @@ public final class NotificationToOperationConverter {
 		}
 
 		if (!n.getReference().isMany()) {
-			return createSingleReferenceOperation(project, oldModelElementId, newModelElementId, n.getReference(),
+			SingleReferenceOperation singleRefOperation = createSingleReferenceOperation(project, oldModelElementId,
+				newModelElementId, n.getReference(),
 				n.getNotifierModelElement());
+
+			if (!n.wasSet()) {
+				singleRefOperation.setUnset(UnsetType.WAS_UNSET);
+			}
+
+			return singleRefOperation;
+
 		} else {
 			MultiReferenceSetOperation setOperation = OperationsFactory.eINSTANCE.createMultiReferenceSetOperation();
 			setCommonValues(project, setOperation, (EObject) n.getNotifier());
@@ -353,6 +388,10 @@ public final class NotificationToOperationConverter {
 
 			if (n.getNewValue() != null) {
 				setOperation.setNewValue(newModelElementId);
+			}
+
+			if (!n.wasSet()) {
+				setOperation.setUnset(UnsetType.WAS_UNSET);
 			}
 
 			return setOperation;
@@ -387,6 +426,23 @@ public final class NotificationToOperationConverter {
 		if (reference.isContainment()) {
 			referenceOperation.setContainmentType(ContainmentType.CONTAINMENT);
 		}
+	}
+
+	private AbstractOperation handleUnsetAttribute(NotificationInfo n) {
+		FeatureOperation op = (FeatureOperation) handleSetAttribute(n);
+		op.setUnset(UnsetType.IS_UNSET);
+		return op;
+	}
+
+	private AbstractOperation handleUnsetReference(NotificationInfo n) {
+		FeatureOperation op;
+		if (!n.getReference().isMany()) {
+			op = (FeatureOperation) handleSetReference(n);
+		} else {
+			op = (FeatureOperation) handleMultiReference(n);
+		}
+		op.setUnset(UnsetType.IS_UNSET);
+		return op;
 	}
 
 }

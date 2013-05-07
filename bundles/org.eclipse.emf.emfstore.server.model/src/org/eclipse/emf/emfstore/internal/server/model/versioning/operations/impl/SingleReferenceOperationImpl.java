@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Oper
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Single Reference Operation</b></em>'. <!--
@@ -372,7 +373,17 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 
 		try {
 			reference = (EReference) this.getFeature(modelElement);
-			modelElement.eSet(reference, newModelElement);
+			switch (getUnset().getValue()) {
+			case UnsetType.IS_UNSET_VALUE:
+				modelElement.eUnset(reference);
+				break;
+			case UnsetType.NONE_VALUE:
+				modelElement.eSet(reference, newModelElement);
+				break;
+			case UnsetType.WAS_UNSET_VALUE:
+				modelElement.eSet(reference, newModelElement);
+				break;
+			}
 
 			// keep elements in the project if they are disconnected, if they
 			// really need to be deleted there will be a
@@ -400,6 +411,9 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 		if (getNewValue() != null) {
 			singleReferenceOperation.setOldValue(ModelUtil.clone(getNewValue()));
 		}
+
+		setUnsetForReverseOperation(singleReferenceOperation);
+
 		return singleReferenceOperation;
 	}
 

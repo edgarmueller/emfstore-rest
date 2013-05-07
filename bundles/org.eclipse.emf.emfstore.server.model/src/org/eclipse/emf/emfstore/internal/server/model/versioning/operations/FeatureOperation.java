@@ -65,6 +65,8 @@ public interface FeatureOperation extends AbstractOperation {
 
 	/**
 	 * Returns the value of the '<em><b>Unset</b></em>' attribute.
+	 * The literals are from the enumeration
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Unset</em>' attribute isn't clear, there really should be more of a description
@@ -73,25 +75,27 @@ public interface FeatureOperation extends AbstractOperation {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Unset</em>' attribute.
-	 * @see #setUnset(boolean)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType
+	 * @see #setUnset(UnsetType)
 	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getFeatureOperation_Unset()
 	 * @model
 	 * @generated
 	 */
-	boolean isUnset();
+	UnsetType getUnset();
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#isUnset
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation#getUnset
 	 * <em>Unset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Unset</em>' attribute.
-	 * @see #isUnset()
+	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType
+	 * @see #getUnset()
 	 * @generated
 	 */
-	void setUnset(boolean value);
+	void setUnset(UnsetType value);
 
 	/**
 	 * Get the feature from the Eclass of the model element identified by the

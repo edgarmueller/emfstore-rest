@@ -103,6 +103,7 @@ public class OperationRecorderTest extends WorkspaceTest {
 		project.addModelElement(source);
 		ModelElementId connectionId = project.getModelElementId(connection);
 
+		clonedProjectSpace.getOperationManager().stopChangeRecording();
 		ChangePackage cp = VersioningFactory.eINSTANCE.createChangePackage();
 		cp.getOperations().addAll(getProjectSpace().getOperations());
 		cp.apply(clonedProjectSpace.getProject());

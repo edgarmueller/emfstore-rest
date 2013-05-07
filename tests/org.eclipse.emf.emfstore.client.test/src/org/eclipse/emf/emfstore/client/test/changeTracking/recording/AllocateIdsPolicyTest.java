@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.client.test.changeTracking.recording;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 
@@ -56,8 +55,7 @@ public class AllocateIdsPolicyTest extends ServerTests {
 	 */
 	@SuppressWarnings("restriction")
 	@Test
-	public void clearAfterServerActionWithAlwaysIdAllocation() throws ESException {
-		collection.setAlwaysIdAllocation(true);
+	public void clearAfterServerAction() throws ESException {
 		TestElement element = getTestElement();
 
 		addRemoveObject(element);
@@ -72,40 +70,26 @@ public class AllocateIdsPolicyTest extends ServerTests {
 	private void addRemoveObject(EObject object) {
 		collection.addModelElement(object);
 		collection.deleteModelElement(object);
-		assertNotNull(collection.getDeletedModelElementId(object));
-	}
-
-	/**
-	 * Test using the always id allocation policy.
-	 */
-	@Test
-	public void alwaysIdAllocation() {
-		EqualComparator ecomp = new EqualComparator();
-		removeAddWithCommand(true, ecomp);
-		removeAddWithCommands(true, ecomp);
-		removeAddWithoutCommand(true, ecomp);
+		assertNull(collection.getDeletedModelElementId(object));
 	}
 
 	/**
 	 * Test using the command id policy.
 	 */
-	// TODO: reactivate @Test
+	@Test
 	public void commandIdAllocation() {
-		removeAddWithCommand(false, new EqualComparator());
-		removeAddWithCommands(false, new NotEqualComparator());
-		removeAddWithoutCommand(false, new NotEqualComparator());
-		removeAddWithoutCommand2(false, new NotEqualComparator());
+		removeAddWithCommand(new EqualComparator());
+		removeAddWithCommands(new NotEqualComparator());
+		removeAddWithoutCommand(new NotEqualComparator());
+		removeAddWithoutCommand2(new NotEqualComparator());
 	}
 
 	/**
 	 * Remove and add objects wihtin one command.
 	 * 
-	 * @param alwaysIdAllocation the allocate id policy.
 	 * @param comparator The {@link IdComparator} to compare ids.
 	 */
-	public void removeAddWithCommand(boolean alwaysIdAllocation, IdComparator comparator) {
-		collection.setAlwaysIdAllocation(alwaysIdAllocation);
-
+	public void removeAddWithCommand(IdComparator comparator) {
 		final Matchup matchup = BowlingFactory.eINSTANCE.createMatchup();
 		Game game = BowlingFactory.eINSTANCE.createGame();
 		collection.addModelElement(matchup);
@@ -130,13 +114,9 @@ public class AllocateIdsPolicyTest extends ServerTests {
 	/**
 	 * Remove and add objects within several commands.
 	 * 
-	 * @param alwaysIdAllocation the allocate id policy.
 	 * @param comparator The {@link IdComparator} to compare ids.
 	 */
-	public void removeAddWithCommands(boolean alwaysIdAllocation, IdComparator comparator) {
-
-		collection.setAlwaysIdAllocation(alwaysIdAllocation);
-
+	public void removeAddWithCommands(IdComparator comparator) {
 		final Matchup matchup = BowlingFactory.eINSTANCE.createMatchup();
 		Game game = BowlingFactory.eINSTANCE.createGame();
 		collection.addModelElement(matchup);
@@ -167,11 +147,9 @@ public class AllocateIdsPolicyTest extends ServerTests {
 	/**
 	 * Remove and add objects without commands.
 	 * 
-	 * @param alwaysIdAllocation the allocate id policy.
 	 * @param comparator The {@link IdComparator} to compare ids.
 	 */
-	public void removeAddWithoutCommand(boolean alwaysIdAllocation, IdComparator comparator) {
-		collection.setAlwaysIdAllocation(alwaysIdAllocation);
+	public void removeAddWithoutCommand(IdComparator comparator) {
 		Matchup matchup = BowlingFactory.eINSTANCE.createMatchup();
 		Game game = BowlingFactory.eINSTANCE.createGame();
 		collection.addModelElement(matchup);
@@ -187,26 +165,27 @@ public class AllocateIdsPolicyTest extends ServerTests {
 		comparator.compare(gameId1, collection.getModelElementId(game));
 	}
 
-	public void removeAddWithoutCommand2(boolean alwaysIdAllocation, IdComparator comparator) {
-		collection.setAlwaysIdAllocation(alwaysIdAllocation);
+	/**
+	 * Remove an element by setting the reference to null and add it again- All without commands.
+	 * 
+	 * @param comparator The {@link IdComparator} to compare ids.
+	 */
+	public void removeAddWithoutCommand2(IdComparator comparator) {
 		Matchup matchup = BowlingFactory.eINSTANCE.createMatchup();
 		Game game = BowlingFactory.eINSTANCE.createGame();
 		collection.addModelElement(matchup);
-		ModelElementId matchupId1 = collection.getModelElementId(matchup);
 		matchup.getGames().add(game);
 		ModelElementId gameId1 = collection.getModelElementId(game);
 
 		// remove and add matchup without command
-		// collection.deleteModelElement(matchup);
 		game.setMatchup(null);
-		// collection.addModelElement(matchup);
 		matchup.getGames().add(game);
 
 		comparator.compare(gameId1, collection.getModelElementId(game));
 	}
 
 	/**
-	 * Internal interface for comparation.
+	 * Internal interface for comparison.
 	 * 
 	 * @author jsommerfeldt
 	 * 

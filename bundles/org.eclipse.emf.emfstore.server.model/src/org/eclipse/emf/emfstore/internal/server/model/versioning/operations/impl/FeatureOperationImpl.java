@@ -24,6 +24,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnsetType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Feature Operation</b></em>'. <!-- end-user-doc
@@ -72,25 +73,25 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	protected String featureName = FEATURE_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isUnset() <em>Unset</em>}' attribute.
+	 * The default value of the '{@link #getUnset() <em>Unset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see #isUnset()
+	 * @see #getUnset()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean UNSET_EDEFAULT = false;
+	protected static final UnsetType UNSET_EDEFAULT = UnsetType.NONE;
 	/**
-	 * The cached value of the '{@link #isUnset() <em>Unset</em>}' attribute.
+	 * The cached value of the '{@link #getUnset() <em>Unset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @see #isUnset()
+	 * @see #getUnset()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean unset = UNSET_EDEFAULT;
+	protected UnsetType unset = UNSET_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -139,7 +140,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 * 
 	 * @generated
 	 */
-	public boolean isUnset()
+	public UnsetType getUnset()
 	{
 		return unset;
 	}
@@ -150,10 +151,10 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 	 * 
 	 * @generated
 	 */
-	public void setUnset(boolean newUnset)
+	public void setUnset(UnsetType newUnset)
 	{
-		boolean oldUnset = unset;
-		unset = newUnset;
+		UnsetType oldUnset = unset;
+		unset = newUnset == null ? UNSET_EDEFAULT : newUnset;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OperationsPackage.FEATURE_OPERATION__UNSET, oldUnset,
 				unset));
@@ -171,7 +172,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 		case OperationsPackage.FEATURE_OPERATION__FEATURE_NAME:
 			return getFeatureName();
 		case OperationsPackage.FEATURE_OPERATION__UNSET:
-			return isUnset();
+			return getUnset();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -189,7 +190,7 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 			setFeatureName((String) newValue);
 			return;
 		case OperationsPackage.FEATURE_OPERATION__UNSET:
-			setUnset((Boolean) newValue);
+			setUnset((UnsetType) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -301,6 +302,26 @@ public abstract class FeatureOperationImpl extends AbstractOperationImpl impleme
 			}
 		}
 		throw new UnkownFeatureException(modelElement.eClass(), getFeatureName());
+	}
+
+	/**
+	 * Sets the unset field of the reverse operation accordingly.
+	 * 
+	 * @param operation The reverse operation
+	 * @generated NOT
+	 */
+	protected void setUnsetForReverseOperation(FeatureOperation operation) {
+		switch (getUnset().getValue()) {
+		case UnsetType.IS_UNSET_VALUE:
+			operation.setUnset(UnsetType.WAS_UNSET);
+			break;
+		case UnsetType.NONE_VALUE:
+			operation.setUnset(UnsetType.NONE);
+			break;
+		case UnsetType.WAS_UNSET_VALUE:
+			operation.setUnset(UnsetType.IS_UNSET);
+			break;
+		}
 	}
 
 } // FeatureOperationImpl

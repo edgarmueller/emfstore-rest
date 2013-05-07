@@ -515,6 +515,170 @@ public interface BowlingPackage extends EPackage {
 	int AREA_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl <em>Fan</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.bowling.impl.FanImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getFan()
+	 * @generated
+	 */
+	int FAN = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Date Of Birth</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__DATE_OF_BIRTH = 1;
+
+	/**
+	 * The feature id for the '<em><b>Has Season Ticket</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__HAS_SEASON_TICKET = 2;
+
+	/**
+	 * The feature id for the '<em><b>EMails</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__EMAILS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Gender</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__GENDER = 4;
+
+	/**
+	 * The feature id for the '<em><b>Favourite Player</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__FAVOURITE_PLAYER = 5;
+
+	/**
+	 * The feature id for the '<em><b>Fan Merchandise</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__FAN_MERCHANDISE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Favourite Merchandise</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__FAVOURITE_MERCHANDISE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Visited Tournaments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__VISITED_TOURNAMENTS = 8;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Tournaments Visited</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__NUMBER_OF_TOURNAMENTS_VISITED = 9;
+
+	/**
+	 * The feature id for the '<em><b>Money Spent On Tickets</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__MONEY_SPENT_ON_TICKETS = 10;
+
+	/**
+	 * The number of structural features of the '<em>Fan</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAN_FEATURE_COUNT = 11;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.MerchandiseImpl <em>Merchandise</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.emfstore.bowling.impl.MerchandiseImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getMerchandise()
+	 * @generated
+	 */
+	int MERCHANDISE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERCHANDISE__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Price</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERCHANDISE__PRICE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Serial Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERCHANDISE__SERIAL_NUMBER = 2;
+
+	/**
+	 * The number of structural features of the '<em>Merchandise</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERCHANDISE_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.TournamentType <em>Tournament Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -522,7 +686,7 @@ public interface BowlingPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getTournamentType()
 	 * @generated
 	 */
-	int TOURNAMENT_TYPE = 9;
+	int TOURNAMENT_TYPE = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.Gender <em>Gender</em>}' enum.
@@ -532,7 +696,7 @@ public interface BowlingPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 10;
+	int GENDER = 12;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Player <em>Player</em>}'.
@@ -970,6 +1134,180 @@ public interface BowlingPackage extends EPackage {
 	EReference getArea_Tournaments();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Fan <em>Fan</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Fan</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan
+	 * @generated
+	 */
+	EClass getFan();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Fan#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getName()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EAttribute getFan_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date Of Birth</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EAttribute getFan_DateOfBirth();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket <em>Has Season Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Has Season Ticket</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EAttribute getFan_HasSeasonTicket();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.emf.emfstore.bowling.Fan#getEMails <em>EMails</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>EMails</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getEMails()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EAttribute getFan_EMails();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Fan#getGender <em>Gender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Gender</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getGender()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EAttribute getFan_Gender();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Favourite Player</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EReference getFan_FavouritePlayer();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments <em>Visited Tournaments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Visited Tournaments</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EReference getFan_VisitedTournaments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited <em>Number Of Tournaments Visited</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Number Of Tournaments Visited</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EAttribute getFan_NumberOfTournamentsVisited();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets <em>Money Spent On Tickets</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Money Spent On Tickets</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EAttribute getFan_MoneySpentOnTickets();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Fan Merchandise</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EReference getFan_FanMerchandise();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise <em>Favourite Merchandise</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Favourite Merchandise</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EReference getFan_FavouriteMerchandise();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Merchandise <em>Merchandise</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Merchandise</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Merchandise
+	 * @generated
+	 */
+	EClass getMerchandise();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Merchandise#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Merchandise#getName()
+	 * @see #getMerchandise()
+	 * @generated
+	 */
+	EAttribute getMerchandise_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Merchandise#getPrice <em>Price</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Price</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Merchandise#getPrice()
+	 * @see #getMerchandise()
+	 * @generated
+	 */
+	EAttribute getMerchandise_Price();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Merchandise#getSerialNumber <em>Serial Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Serial Number</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Merchandise#getSerialNumber()
+	 * @see #getMerchandise()
+	 * @generated
+	 */
+	EAttribute getMerchandise_SerialNumber();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.bowling.TournamentType <em>Tournament Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1348,6 +1686,138 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference AREA__TOURNAMENTS = eINSTANCE.getArea_Tournaments();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl <em>Fan</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.bowling.impl.FanImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getFan()
+		 * @generated
+		 */
+		EClass FAN = eINSTANCE.getFan();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAN__NAME = eINSTANCE.getFan_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Date Of Birth</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAN__DATE_OF_BIRTH = eINSTANCE.getFan_DateOfBirth();
+
+		/**
+		 * The meta object literal for the '<em><b>Has Season Ticket</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAN__HAS_SEASON_TICKET = eINSTANCE.getFan_HasSeasonTicket();
+
+		/**
+		 * The meta object literal for the '<em><b>EMails</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAN__EMAILS = eINSTANCE.getFan_EMails();
+
+		/**
+		 * The meta object literal for the '<em><b>Gender</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAN__GENDER = eINSTANCE.getFan_Gender();
+
+		/**
+		 * The meta object literal for the '<em><b>Favourite Player</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FAN__FAVOURITE_PLAYER = eINSTANCE.getFan_FavouritePlayer();
+
+		/**
+		 * The meta object literal for the '<em><b>Visited Tournaments</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FAN__VISITED_TOURNAMENTS = eINSTANCE.getFan_VisitedTournaments();
+
+		/**
+		 * The meta object literal for the '<em><b>Number Of Tournaments Visited</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAN__NUMBER_OF_TOURNAMENTS_VISITED = eINSTANCE.getFan_NumberOfTournamentsVisited();
+
+		/**
+		 * The meta object literal for the '<em><b>Money Spent On Tickets</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAN__MONEY_SPENT_ON_TICKETS = eINSTANCE.getFan_MoneySpentOnTickets();
+
+		/**
+		 * The meta object literal for the '<em><b>Fan Merchandise</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FAN__FAN_MERCHANDISE = eINSTANCE.getFan_FanMerchandise();
+
+		/**
+		 * The meta object literal for the '<em><b>Favourite Merchandise</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FAN__FAVOURITE_MERCHANDISE = eINSTANCE.getFan_FavouriteMerchandise();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.MerchandiseImpl <em>Merchandise</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.emfstore.bowling.impl.MerchandiseImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getMerchandise()
+		 * @generated
+		 */
+		EClass MERCHANDISE = eINSTANCE.getMerchandise();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MERCHANDISE__NAME = eINSTANCE.getMerchandise_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Price</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MERCHANDISE__PRICE = eINSTANCE.getMerchandise_Price();
+
+		/**
+		 * The meta object literal for the '<em><b>Serial Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MERCHANDISE__SERIAL_NUMBER = eINSTANCE.getMerchandise_SerialNumber();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.TournamentType <em>Tournament Type</em>}' enum.
