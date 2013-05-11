@@ -652,18 +652,23 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private PrimaryVersionSpec resolvePagedUpdateVersionSpec(ProjectHistory projectHistory,
-		PagedUpdateVersionSpec versionSpec) {
+		PagedUpdateVersionSpec baseVersion) {
 
 		int changes = 0;
-		PrimaryVersionSpec resolvedSpec = versionSpec.getBaseVersionSpec();
-		int maxChanges = versionSpec.getMaxChanges();
+		PrimaryVersionSpec resolvedSpec = baseVersion.getBaseVersionSpec();
+		int maxChanges = baseVersion.getMaxChanges();
 
-		ChangePackage cp = null;
-		int i = resolvedSpec.getIdentifier() + 1;
+		int i = resolvedSpec.getIdentifier();
 
-		while (cp == null) {
-			cp = projectHistory.getVersions().get(i).getChanges();
+		ChangePackage cp = projectHistory.getVersions().get(i).getChanges();
+
+		if (i == projectHistory.getVersions().size() - 1) {
+			return projectHistory.getVersions().get(i).getPrimarySpec();
 		}
+
+		do {
+			cp = projectHistory.getVersions().get(++i).getChanges();
+		} while (cp == null && i < projectHistory.getVersions().size());
 
 		// pull at least one change package
 		if (cp.getSize() > maxChanges) {
@@ -676,8 +681,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			ChangePackage changePackage = version.getChanges();
 			if (changePackage != null) {
 				int size = changePackage.getSize();
-				if (changes + size > maxChanges) {
-					resolvedSpec = projectHistory.getVersions().get(i - 1).getPrimarySpec();
+				if (changes + size >= maxChanges) {
+					resolvedSpec = projectHistory.getVersions().get(i).getPrimarySpec();
 					break;
 				} else {
 					changes += size;

@@ -119,9 +119,14 @@ public class VersionSpecTests extends CoreServerTest {
 		pagedUpdateVersionSpec = Versions.createPAGEDUPDATE(Versions.createPRIMARY(0), 10);
 		resolveVersionSpec = ps.resolveVersionSpec(pagedUpdateVersionSpec,
 			new NullProgressMonitor());
-		assertEquals(7, resolveVersionSpec.getIdentifier());
+		assertEquals(8, resolveVersionSpec.getIdentifier());
 
 		pagedUpdateVersionSpec = Versions.createPAGEDUPDATE(Versions.createPRIMARY(7), 1);
+		resolveVersionSpec = ps.resolveVersionSpec(pagedUpdateVersionSpec,
+			new NullProgressMonitor());
+		assertEquals(8, resolveVersionSpec.getIdentifier());
+
+		pagedUpdateVersionSpec = Versions.createPAGEDUPDATE(Versions.createPRIMARY(8), 1);
 		resolveVersionSpec = ps.resolveVersionSpec(pagedUpdateVersionSpec,
 			new NullProgressMonitor());
 		assertEquals(8, resolveVersionSpec.getIdentifier());

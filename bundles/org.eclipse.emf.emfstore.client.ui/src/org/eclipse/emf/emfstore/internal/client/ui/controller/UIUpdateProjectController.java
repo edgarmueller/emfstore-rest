@@ -17,8 +17,10 @@ import java.util.concurrent.Callable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESPagedUpdateConfig;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
+import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -35,7 +37,6 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEOb
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -48,17 +49,19 @@ import org.eclipse.swt.widgets.Shell;
  * UI controller for performing a paged update.
  * 
  * @author emueller
- * 
  */
 public class UIUpdateProjectController extends
 	AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ESUpdateCallback {
 
 	protected final static int ALL_CHANGES = -1;
+	protected static boolean DO_NOT_USE_PAGED_UPDATE = true;
 
 	private final ESLocalProject localProject;
 	private ESVersionSpec version;
-	private final int maxChanges;
+	private int maxChanges;
+
+	private ESPrimaryVersionSpec resolvedVersion;
 
 	/**
 	 * Constructor.
@@ -72,6 +75,25 @@ public class UIUpdateProjectController extends
 		super(shell, true, true);
 		this.localProject = localProject;
 		this.maxChanges = ALL_CHANGES;
+		initPagedUpdateSize();
+	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the {@link Shell} that will be used during the update
+	 * @param localProject
+	 *            the {@link ESLocalProject} that should get updated
+	 * @param versionSpec
+	 *            the version to update to
+	 */
+	public UIUpdateProjectController(Shell shell, ESLocalProject localProject, ESVersionSpec versionSpec) {
+		super(shell, true, true);
+		this.localProject = localProject;
+		this.version = versionSpec;
+		this.maxChanges = ALL_CHANGES;
+		initPagedUpdateSize();
 	}
 
 	/**
@@ -90,21 +112,15 @@ public class UIUpdateProjectController extends
 		this.maxChanges = maxChanges;
 	}
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param shell
-	 *            the {@link Shell} that will be used during the update
-	 * @param localProject
-	 *            the {@link ESLocalProject} that should get updated
-	 * @param versionSpec
-	 *            the version to update to
-	 */
-	public UIUpdateProjectController(Shell shell, ESLocalProject localProject, ESVersionSpec versionSpec) {
-		super(shell, true, true);
-		this.localProject = localProject;
-		this.version = versionSpec;
-		this.maxChanges = ALL_CHANGES;
+	private void initPagedUpdateSize() {
+		ESPagedUpdateConfig pagedUpdateConfig = ExtensionRegistry.INSTANCE.get(
+			ESPagedUpdateConfig.ID,
+			ESPagedUpdateConfig.class);
+
+		if (pagedUpdateConfig != null) {
+			maxChanges = pagedUpdateConfig.getNumberOfAllowedChanges();
+			DO_NOT_USE_PAGED_UPDATE = false;
+		}
 	}
 
 	/**
@@ -140,7 +156,7 @@ public class UIUpdateProjectController extends
 
 			// merge opens up a dialog
 			return internalProject.merge(
-				internalProject.resolveVersionSpec(Versions.createHEAD(), monitor),
+				((ESPrimaryVersionSpecImpl) resolvedVersion).toInternalAPI(),
 				internalChangeConflict,
 				new MergeProjectHandler(),
 				UIUpdateProjectController.this,
@@ -200,21 +216,18 @@ public class UIUpdateProjectController extends
 		throws ESException {
 
 		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
-		ESPrimaryVersionSpec resolvedVersion;
 		ESPrimaryVersionSpec newBaseVersion;
 
 		ESPrimaryVersionSpec headVersion = localProject.resolveVersionSpec(
 			ESVersionSpec.FACTORY.createHEAD(),
 			monitor);
 
-		if (maxChanges == ALL_CHANGES) {
+		if (DO_NOT_USE_PAGED_UPDATE) {
 			resolvedVersion = headVersion;
 		} else {
 			ESPrimaryVersionSpecImpl oldBaseVersionImpl = (ESPrimaryVersionSpecImpl) oldBaseVersion;
-			resolvedVersion = localProject.resolveVersionSpec(
-				ESVersionSpec.FACTORY.createPAGEDUPDATE(ModelUtil.clone(oldBaseVersionImpl.toInternalAPI()).toAPI(),
-					maxChanges),
-				monitor);
+			resolvedVersion = resolveVersionByChanges(maxChanges, ModelUtil.clone(oldBaseVersionImpl.toInternalAPI())
+				.toAPI(), monitor);
 		}
 
 		if (oldBaseVersion.equals(resolvedVersion)) {
@@ -230,7 +243,7 @@ public class UIUpdateProjectController extends
 				UIUpdateProjectController.this, monitor);
 		}
 
-		if (maxChanges != ALL_CHANGES && !newBaseVersion.equals(headVersion)) {
+		if (!DO_NOT_USE_PAGED_UPDATE && !newBaseVersion.equals(headVersion) && !newBaseVersion.equals(oldBaseVersion)) {
 			boolean yes = RunInUI.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
 					return MessageDialog.openConfirm(getShell(), "More updates available",
@@ -247,6 +260,13 @@ public class UIUpdateProjectController extends
 		}
 
 		return newBaseVersion;
+	}
+
+	private ESPrimaryVersionSpec resolveVersionByChanges(int maxChanges, ESPrimaryVersionSpec baseVersion,
+		IProgressMonitor monitor) throws ESException {
+		return localProject.resolveVersionSpec(
+			ESVersionSpec.FACTORY.createPAGEDUPDATE(baseVersion, maxChanges),
+			monitor);
 	}
 
 	/**

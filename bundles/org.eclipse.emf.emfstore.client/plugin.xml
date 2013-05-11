@@ -29,6 +29,7 @@
    <extension-point id="checksumErrorHandler" name="Client Checksum Error Handler" schema="schema/checksumErrorHandler.exsd"/>
    <extension-point id="postCreationObserver" name="Post-Creation Observer" schema="schema/postCreationObserver.exsd"/>
    <extension-point id="shareObserver" name="Share Observer" schema="schema/shareObserver.exsd"/>
+   <extension-point id="pagedUpdate" name="Paged Update Configuration" schema="schema/pagedUpdate.exsd"/>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/emf/emfstore/client/model" 

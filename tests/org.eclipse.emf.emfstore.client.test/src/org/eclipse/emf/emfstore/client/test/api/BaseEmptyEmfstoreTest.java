@@ -37,7 +37,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		startEMFStore();
 	}
 
-	private static void startEMFStore() {
+	protected static void startEMFStore() {
 		ServerConfiguration.setTesting(true);
 		ServerConfiguration.getProperties().setProperty(ServerConfiguration.XML_RPC_PORT, String.valueOf(port));
 		try {
@@ -52,7 +52,7 @@ public abstract class BaseEmptyEmfstoreTest {
 		stopEMFStore();
 	}
 
-	private static void stopEMFStore() {
+	protected static void stopEMFStore() {
 		ESEMFStoreController.stopEMFStore();
 		try {
 			// give the server some time to unbind from it's ips. Not the nicest solution ...
