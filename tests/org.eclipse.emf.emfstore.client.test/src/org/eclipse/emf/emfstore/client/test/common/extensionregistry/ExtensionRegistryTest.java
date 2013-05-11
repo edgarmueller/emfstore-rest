@@ -1,10 +1,12 @@
 package org.eclipse.emf.emfstore.client.test.common.extensionregistry;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
+import org.eclipse.emf.emfstore.server.ESLocationProvider;
 import org.junit.After;
 import org.junit.Test;
 
@@ -49,5 +51,13 @@ public class ExtensionRegistryTest {
 		Bar defaultBar = ExtensionRegistry.INSTANCE.get("foo.bar", Bar.class, bar, true);
 		assertEquals(bar, defaultBar);
 		assertEquals(bar, ExtensionRegistry.INSTANCE.get("foo.bar", Bar.class));
+	}
+
+	@Test
+	public void testGetExtensionElement() {
+		ESLocationProvider locationProvider = ExtensionRegistry.INSTANCE.get(
+			"org.eclipse.emf.emfstore.server.locationProvider.providerClass",
+			ESLocationProvider.class);
+		assertNotNull(locationProvider);
 	}
 }

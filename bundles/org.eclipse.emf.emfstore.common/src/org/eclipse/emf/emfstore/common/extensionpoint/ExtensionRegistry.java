@@ -1,6 +1,7 @@
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ExtensionRegistry {
@@ -16,8 +17,14 @@ public class ExtensionRegistry {
 	@SuppressWarnings("unchecked")
 	public <T> T get(String id, Class<T> clazz, T defaultInstance, boolean shouldSetDefault) {
 		
+		T extensionPointInstnace = getExtensionElement(id, clazz);
+		
+		if (extensionPointInstnace != null) {
+			return extensionPointInstnace;
+		}
+		
 		ESConfigElement configElement = configElements.get(id);
-		T t;
+		T t;		
 		
 		if (configElement != null) {
 			t = (T) configElement.get();	
@@ -38,6 +45,21 @@ public class ExtensionRegistry {
 	public <T> void set(String id, T t) {
 		// TODO: if already present?
 		configElements.put(id, new ESConfigElement(id, t));
+	}
+	
+	private <T> T getExtensionElement(String id, Class<T> t) {
+		
+		int idx = id.lastIndexOf('.');
+		String extensionPointId = id.substring(0, idx);
+		String attributeName = id.substring(idx + 1, id.length());
+		
+		ESExtensionPoint extensionPoint = new ESExtensionPoint(extensionPointId);
+		
+		if (extensionPoint.getFirst() == null) {
+			return null;
+		}
+		
+		return extensionPoint.getFirst().getClass(attributeName, t);
 	}
 	
 	class ESConfigElement {
@@ -61,9 +83,6 @@ public class ExtensionRegistry {
 		public void set(Object t) {
 			this.t = t;
 		}
-		
-		
-		
 	}
 
 	public void remove(String id) {
