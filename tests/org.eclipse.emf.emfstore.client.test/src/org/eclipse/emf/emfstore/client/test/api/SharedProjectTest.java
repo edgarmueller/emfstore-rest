@@ -11,9 +11,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Player;
+import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.test.CommitCallbackAdapter;
@@ -241,6 +244,38 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 			}
 		});
 		checkedoutCopy.commit(monitor);
+	}
+
+	@Test
+	public void testMoveElementViaReference() throws ESException {
+
+		League league = ProjectChangeUtil.createLeague("Canadian bowling league");
+		Player player = ProjectChangeUtil.createPlayer("Joe");
+		league.getPlayers().add(player);
+		localProject.getModelElements().add(league);
+		assertTrue(localProject.contains(league));
+
+		ESLocalProject secondProject = workspace.createLocalProject("SecondTestProject");
+		secondProject.shareProject(new NullProgressMonitor());
+
+		// tournament does not contain players
+		Tournament tournament = ProjectChangeUtil.createTournament(false);
+		secondProject.getModelElements().add(tournament);
+		tournament.getPlayers().add(player);
+
+		localProject.save();
+		secondProject.save();
+
+		assertTrue(secondProject.contains(player));
+		stopEMFStore();
+		startEMFStore();
+
+		for (ESLocalProject localProject : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
+			if (localProject.getProjectName().equals("SecondTestProject")) {
+				tournament = (Tournament) localProject.getModelElements().get(0);
+				assertEquals(tournament.getPlayers().size(), 1);
+			}
+		}
 	}
 
 	// TODO: API does not support merging currently
