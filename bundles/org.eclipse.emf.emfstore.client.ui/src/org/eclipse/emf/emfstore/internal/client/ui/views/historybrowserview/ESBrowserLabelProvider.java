@@ -8,7 +8,7 @@
  * 
  * Contributors:
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider;
+package org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;

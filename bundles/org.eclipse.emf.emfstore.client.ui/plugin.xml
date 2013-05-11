@@ -580,13 +580,6 @@
            <extension
          point="org.eclipse.ui.views">
       <view
-            name="EmfStore Browser" 
-            icon="icons/serverDB.png"
-            category="org.eclipse.emf.emfstore.client.ui.category"
-            class="org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views.ESBrowserView"
-            id="org.eclipse.emf.emfstore.client.ui.views.RepositoryView">
-      </view>
-      <view
             allowMultiple="false"
             category="org.eclipse.emf.emfstore.client.ui.category"
             class="org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.HistoryBrowserView"

@@ -36,7 +36,6 @@ import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.AbstractEMFStoreUIController;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVisualizationHelper;
-import org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.provider.ESBrowserLabelProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.IPlotCommit;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.PlotCommitProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph.PlotLane;
