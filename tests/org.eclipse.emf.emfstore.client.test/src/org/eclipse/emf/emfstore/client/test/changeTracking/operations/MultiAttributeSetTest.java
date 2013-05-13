@@ -418,4 +418,48 @@ public class MultiAttributeSetTest extends WorkspaceTest {
 		assertTrue(!fan.isSetEMails());
 		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
 	}
+
+	@Test
+	public void setUnsetMultiAttributeToEmpty() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				assertEquals(0, fan.getEMails().size());
+				assertTrue(!fan.isSetEMails());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.getEMails().clear();
+				assertEquals(0, fan.getEMails().size());
+				assertTrue(fan.isSetEMails());
+			}
+		}.run(false);
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiAttributeOperation);
+		final MultiAttributeOperation multAttOp = (MultiAttributeOperation) operation;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				multAttOp.apply(secondProject);
+				assertEquals(0, fan.getEMails().size());
+				assertTrue(fan.isSetEMails());
+			}
+		}.run(false);
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
 }

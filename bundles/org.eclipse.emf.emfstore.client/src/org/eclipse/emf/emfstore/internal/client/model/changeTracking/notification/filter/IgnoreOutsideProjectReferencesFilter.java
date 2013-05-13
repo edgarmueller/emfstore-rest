@@ -35,6 +35,7 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
+	@SuppressWarnings("rawtypes")
 	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
 
 		// if notification is from an element disconnected from the project?s containment tree we will not try to filter
@@ -64,8 +65,17 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 			return checkNewValueList(notificationInfo, container);
 			// notification is about removing elements => check removed elements
 		} else if (notificationInfo.getOldValue() != null && notificationInfo.getOldValue() instanceof List) {
+			if (!notificationInfo.wasSet() && ((List) notificationInfo.getOldValue()).size() == 0) {
+				// do not filter remove notifications on empty list when unset before
+				return false;
+			}
 			return checkOldValueList(notificationInfo, container);
 		} else {
+			if (!notificationInfo.wasSet()
+				&& notificationInfo.getNewValue() == notificationInfo.getStructuralFeature().getDefaultValue()) {
+				// do not filter notification when unset before and new value is null
+				return false;
+			}
 			// check single reference notification
 			return checkSingleReference(notificationInfo, container);
 		}
@@ -99,6 +109,7 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 				return false;
 			}
 		}
+
 		// all referenced elements are NOT in the project
 		return true;
 	}

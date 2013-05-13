@@ -314,6 +314,9 @@ public class MultiAttributeOperationImpl extends FeatureOperationImpl implements
 							list.remove(index);
 						}
 					}
+					if (getIndexes().size() == 0 && getUnset().getValue() == UnsetType.WAS_UNSET_VALUE) {
+						modelElement.eSet(feature, list);
+					}
 				}
 				break;
 			}

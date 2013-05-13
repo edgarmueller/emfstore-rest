@@ -391,6 +391,9 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 						project.addModelElement(currentElement);
 					}
 				}
+				if (referencedModelElements.size() == 0 && getUnset().getValue() == UnsetType.WAS_UNSET_VALUE) {
+					modelElement.eSet(reference, list);
+				}
 			}
 			break;
 		}

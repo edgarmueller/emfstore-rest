@@ -907,4 +907,46 @@ public class SingleReferenceOperationTest extends WorkspaceTest {
 		assertEquals(false, fan.isSetFavouriteMerchandise());
 		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
 	}
+
+	@Test
+	public void setUnsetSingleReferenceToNull() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				assertEquals(null, fan.getFavouritePlayer());
+				assertTrue(!fan.isSetFavouritePlayer());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.setFavouritePlayer(null);
+				assertEquals(null, fan.getFavouritePlayer());
+				assertTrue(fan.isSetFavouritePlayer());
+			}
+		}.run(false);
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof SingleReferenceOperation);
+		final SingleReferenceOperation singleRefOp = (SingleReferenceOperation) operation;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				singleRefOp.apply(secondProject);
+			}
+		}.run(false);
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
 }

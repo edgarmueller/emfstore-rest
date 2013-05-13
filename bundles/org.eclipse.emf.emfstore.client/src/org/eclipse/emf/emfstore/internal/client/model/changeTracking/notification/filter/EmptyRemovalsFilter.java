@@ -35,6 +35,6 @@ public class EmptyRemovalsFilter implements ESNotificationFilter {
 
 		return notificationInfo.isRemoveManyEvent() && notificationInfo.getNewValue() == null
 			&& notificationInfo.getOldValue() instanceof Collection<?>
-			&& ((Collection<?>) notificationInfo.getOldValue()).isEmpty();
+			&& ((Collection<?>) notificationInfo.getOldValue()).isEmpty() && notificationInfo.wasSet();
 	}
 }

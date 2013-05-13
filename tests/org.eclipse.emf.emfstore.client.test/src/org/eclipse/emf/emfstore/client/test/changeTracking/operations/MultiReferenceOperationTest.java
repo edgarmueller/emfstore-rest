@@ -1001,6 +1001,48 @@ public class MultiReferenceOperationTest extends WorkspaceTest {
 		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
 	}
 
+	@Test
+	public void setUnsetMultiReferenceToEmpty() {
+		final Fan fan = BowlingFactory.eINSTANCE.createFan();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(fan);
+				assertEquals(0, fan.getVisitedTournaments().size());
+				assertTrue(!fan.isSetVisitedTournaments());
+			}
+		}.run(false);
+
+		clearOperations();
+		final Project secondProject = ModelUtil.clone(getProject());
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				fan.getVisitedTournaments().clear();
+				assertEquals(0, fan.getVisitedTournaments().size());
+				assertTrue(fan.isSetVisitedTournaments());
+			}
+		}.run(false);
+
+		List<AbstractOperation> operations = getProjectSpace().getOperations();
+
+		assertEquals(1, operations.size());
+		AbstractOperation operation = operations.get(0);
+		assertEquals(true, operation instanceof MultiReferenceOperation);
+		final MultiReferenceOperation multRefOp = (MultiReferenceOperation) operation;
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				multRefOp.apply(secondProject);
+			}
+		}.run(false);
+
+		assertTrue(ModelUtil.areEqual(getProject(), secondProject));
+	}
+
 	// /**
 	// * Checks whether the elist contains list works correctly.
 	// *
