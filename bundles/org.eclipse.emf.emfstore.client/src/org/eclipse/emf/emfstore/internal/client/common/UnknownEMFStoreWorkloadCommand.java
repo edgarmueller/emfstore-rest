@@ -86,6 +86,9 @@ public abstract class UnknownEMFStoreWorkloadCommand<T> {
 				throw new ESException("Workload command got interrupted", e);
 			} catch (ExecutionException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
+				if (e.getCause() instanceof ESException) {
+					throw (ESException) e.getCause();
+				}
 				throw new ESException(e.getCause().getMessage());
 			} catch (TimeoutException e) {
 				// do nothing
