@@ -25,7 +25,6 @@ import org.eclipse.emf.emfstore.internal.client.ui.views.changes.ChangePackageVi
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
@@ -33,7 +32,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId;
-import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.swt.SWT;
@@ -117,9 +115,8 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			} else {
 				return ELEMENT_NOT_FOUND;
 			}
-		} else if (element instanceof ESChangePackage) {
-			ChangePackage changePackage = ((ESChangePackageImpl) element)
-				.toInternalAPI();
+		} else if (element instanceof ChangePackage) {
+			ChangePackage changePackage = (ChangePackage) element;
 			return getText(changePackage);
 		} else if (element instanceof EObject) {
 			// TODO: rather reference virtual node directly??
@@ -318,11 +315,7 @@ public class SCMLabelProvider extends ColumnLabelProvider {
 			return changePackageVisualizationHelper.getImage(
 				adapterFactoryLabelProvider, (AbstractOperation) element);
 		}
-		if (element instanceof ESChangePackage) {
-			return adapterFactoryLabelProvider
-				.getImage(((ESChangePackageImpl) element)
-					.toInternalAPI());
-		}
+
 		return adapterFactoryLabelProvider.getImage(element);
 	}
 
