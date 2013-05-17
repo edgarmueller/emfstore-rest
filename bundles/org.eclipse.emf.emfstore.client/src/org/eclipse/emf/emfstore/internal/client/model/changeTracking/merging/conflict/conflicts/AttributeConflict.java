@@ -7,12 +7,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk
+ * Edgar Mueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
@@ -21,11 +28,13 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
 
 /**
  * Conflict for two attribute operations.
  * 
  * @author wesendon
+ * @author emueller
  */
 public class AttributeConflict extends Conflict {
 
@@ -73,7 +82,8 @@ public class AttributeConflict extends Conflict {
 	 * @param withMerge true, if merge text option ({@link MergeTextOption}) should be added
 	 */
 	protected void initOptionsWithOutMerge(List<ConflictOption> options, boolean withMerge) {
-		ConflictOption myOption = new ConflictOption(getMyOperation(AttributeOperation.class).getNewValue(),
+		AttributeOperation attributeOperation = getMyOperation(AttributeOperation.class);
+		ConflictOption myOption = new ConflictOption(attributeOperation.getNewValue(),
 			ConflictOption.OptionType.MyOperation);
 		myOption.setDetailProvider(DecisionUtil.WIDGET_MULTILINE);
 		myOption.addOperations(getMyOperations());
@@ -85,11 +95,33 @@ public class AttributeConflict extends Conflict {
 		theirOption.addOperations(getTheirOperations());
 		options.add(theirOption);
 
-		if (withMerge && DecisionUtil.detailsNeeded(this)) {
+		EObject eObject = getDecisionManager().getModelElement(attributeOperation.getModelElementId());
+		EStructuralFeature feature;
+		boolean isMultiline = false;
+		try {
+			feature = attributeOperation.getFeature(eObject);
+			isMultiline = isMultiline(eObject, feature);
+		} catch (UnkownFeatureException e) {
+			// ignore
+		}
+
+		if (withMerge && DecisionUtil.detailsNeeded(this) && isMultiline) {
 			MergeTextOption mergeOption = new MergeTextOption();
 			mergeOption.add(myOption);
 			mergeOption.add(theirOption);
 			options.add(mergeOption);
 		}
+	}
+
+	private boolean isMultiline(EObject eObject, EStructuralFeature attribute) {
+		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		AdapterFactoryItemDelegator adapterFactoryItemDelegator = new AdapterFactoryItemDelegator(
+			composedAdapterFactory);
+		IItemPropertyDescriptor propertyDescriptor = adapterFactoryItemDelegator
+			.getPropertyDescriptor(eObject, attribute);
+		boolean isMultiLine = propertyDescriptor.isMultiLine(eObject);
+		composedAdapterFactory.dispose();
+		return isMultiLine;
 	}
 }
