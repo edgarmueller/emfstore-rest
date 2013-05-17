@@ -86,8 +86,9 @@ public final class TestSessionProvider extends ESAbstractSessionProvider {
 	}
 
 	@Override
-	public void login(ESUsersession usersession) throws ESException {
+	public ESUsersession login(ESUsersession usersession) throws ESException {
 		usersession.getServer().login(usersession.getUsername(), usersession.getPassword());
+		return usersession;
 	}
 
 }

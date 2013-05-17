@@ -62,6 +62,8 @@ public class LoginDialogController implements ILoginDialogController {
 			&& server.getLastUsersession() != null
 			&& server.getLastUsersession().isLoggedIn()
 			&& !force) {
+			// session seems to be valid, renew just in case the session timed out
+			server.getLastUsersession().renew();
 			return server.getLastUsersession();
 		}
 
@@ -241,12 +243,13 @@ public class LoginDialogController implements ILoginDialogController {
 	 * 
 	 * @param usersession
 	 *            the usersession to be used during login
+	 * @return
 	 * @throws ESException
 	 *             in case the login fails
 	 */
-	public void login(ESUsersession usersession) throws ESException {
+	public ESUsersession login(ESUsersession usersession) throws ESException {
 		this.server = null;
 		this.usersession = usersession;
-		login(false);
+		return login(false);
 	}
 }

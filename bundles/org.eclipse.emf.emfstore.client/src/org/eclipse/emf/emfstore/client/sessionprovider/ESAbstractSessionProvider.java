@@ -106,13 +106,19 @@ public abstract class ESAbstractSessionProvider {
 	public abstract ESUsersession provideUsersession(ESServer server) throws ESException;
 
 	/**
-	 * This method is called by the SessionManager in order to login a given user session. Either you are able to
-	 * login the given session or you should throw an exception.
+	 * <p>
+	 * This method is called by the SessionManager in order to login a given user session. If the given session can not
+	 * be logged in, it is the provider's responsibility to either throw an exception or to provide another valid
+	 * session, e.g. by means of calling a login hdialog that will create a new session.
+	 * </p>
 	 * 
 	 * @param usersession
 	 *            the session to be logged in
 	 * 
+	 * @return a logged in user session, possibly another one as the one passed in. It is the provider's responsibility
+	 *         to determine whether the passed in session and the one that is returned need to differ
+	 * 
 	 * @throws ESException in case an exception occurred while logging in the given session
 	 */
-	public abstract void login(ESUsersession usersession) throws ESException;
+	public abstract ESUsersession login(ESUsersession usersession) throws ESException;
 }

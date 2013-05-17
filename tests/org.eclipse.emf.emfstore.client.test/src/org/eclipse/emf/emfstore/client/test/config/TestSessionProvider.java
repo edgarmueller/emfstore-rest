@@ -74,9 +74,9 @@ public class TestSessionProvider extends ESAbstractSessionProvider {
 	}
 
 	@Override
-	public void login(ESUsersession usersession) throws ESException {
-		// do nothing
+	public ESUsersession login(ESUsersession usersession) throws ESException {
 		session.logIn();
+		return session.toAPI();
 	}
 
 	public void clearSession() {

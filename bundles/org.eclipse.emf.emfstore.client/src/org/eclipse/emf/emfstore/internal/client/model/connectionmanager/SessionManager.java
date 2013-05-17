@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import java.util.concurrent.Callable;
 
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
@@ -52,8 +53,8 @@ public class SessionManager {
 			new ESServerCallImpl(serverCall));
 		serverCall.setUsersession(session.toInternalAPI());
 		// TODO OTS
-		loginUsersession(session.toInternalAPI(), false);
-		executeCall(serverCall, session.toInternalAPI(), true);
+		Usersession loginUsersession = loginUsersession(session.toInternalAPI(), false);
+		executeCall(serverCall, loginUsersession, true);
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class SessionManager {
 	 * @throws ESException
 	 *             In case
 	 */
-	private void loginUsersession(final Usersession usersession, boolean forceLogin) throws ESException {
+	private Usersession loginUsersession(final Usersession usersession, boolean forceLogin) throws ESException {
 		if (usersession == null) {
 			// TODO create exception
 			throw new RuntimeException("Ouch.");
@@ -87,18 +88,22 @@ public class SessionManager {
 							return null;
 						}
 					});
-					return;
+					return usersession;
 				} catch (ESException e) {
 					// ignore, session provider should try to login
 				}
 			}
-			RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
-				public Void call() throws Exception {
-					getSessionProvider().login(usersession.toAPI());
-					return null;
-				}
-			});
+			// TODO: ugly
+			ESUsersession session = RunESCommand.WithException.runWithResult(ESException.class,
+				new Callable<ESUsersession>() {
+					public ESUsersession call() throws Exception {
+						return getSessionProvider().login(usersession.toAPI());
+					}
+				});
+			return ((ESUsersessionImpl) session).toInternalAPI();
 		}
+
+		return usersession;
 	}
 
 	private boolean isLoggedIn(Usersession usersession) {

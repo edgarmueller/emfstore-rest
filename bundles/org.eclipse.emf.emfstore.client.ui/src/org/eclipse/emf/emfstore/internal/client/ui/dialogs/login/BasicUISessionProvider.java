@@ -87,9 +87,10 @@ public class BasicUISessionProvider extends ESAbstractSessionProvider {
 	}
 
 	@Override
-	public void login(ESUsersession usersession) throws ESException {
+	public ESUsersession login(ESUsersession usersession) throws ESException {
 		if (usersession != null) {
-			new LoginDialogController().login(usersession);
+			return new LoginDialogController().login(usersession);
 		}
+		return null;
 	}
 }

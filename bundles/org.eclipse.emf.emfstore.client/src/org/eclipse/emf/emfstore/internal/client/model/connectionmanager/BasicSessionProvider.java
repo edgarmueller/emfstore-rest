@@ -43,7 +43,7 @@ public class BasicSessionProvider extends ESAbstractSessionProvider {
 	 * @see org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider#login(org.eclipse.emf.emfstore.client.ESUsersession)
 	 */
 	@Override
-	public void login(ESUsersession usersession) throws ESException {
+	public ESUsersession login(ESUsersession usersession) throws ESException {
 		throw new ESException("Usersession not logged in. Login first.");
 	}
 }
