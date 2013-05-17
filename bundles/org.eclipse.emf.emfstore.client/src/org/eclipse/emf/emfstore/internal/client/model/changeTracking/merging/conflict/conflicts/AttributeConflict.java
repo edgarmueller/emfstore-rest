@@ -120,7 +120,10 @@ public class AttributeConflict extends Conflict {
 			composedAdapterFactory);
 		IItemPropertyDescriptor propertyDescriptor = adapterFactoryItemDelegator
 			.getPropertyDescriptor(eObject, attribute);
-		boolean isMultiLine = propertyDescriptor.isMultiLine(eObject);
+		boolean isMultiLine = false;
+		if (propertyDescriptor != null) {
+			isMultiLine = propertyDescriptor.isMultiLine(eObject);
+		}
 		composedAdapterFactory.dispose();
 		return isMultiLine;
 	}
