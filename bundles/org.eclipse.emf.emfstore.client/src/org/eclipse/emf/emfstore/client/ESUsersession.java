@@ -61,7 +61,7 @@ public interface ESUsersession {
 	 * @throws ESException in case renewal of the session failed
 	 */
 	// TODO: mention how long an user session valid
-	void renew() throws ESException;
+	void refresh() throws ESException;
 
 	/**
 	 * Logs out the user session.

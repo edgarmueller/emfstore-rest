@@ -63,7 +63,7 @@ public class LoginDialogController implements ILoginDialogController {
 			&& server.getLastUsersession().isLoggedIn()
 			&& !force) {
 			// session seems to be valid, renew just in case the session timed out
-			server.getLastUsersession().renew();
+			server.getLastUsersession().refresh();
 			return server.getLastUsersession();
 		}
 

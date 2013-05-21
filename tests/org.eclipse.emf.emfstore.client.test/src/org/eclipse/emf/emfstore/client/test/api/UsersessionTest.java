@@ -48,7 +48,7 @@ public class UsersessionTest extends BaseLoggedInUserTest {
 		assertTrue(usersession.isLoggedIn());
 		usersession.logout();
 		assertFalse(usersession.isLoggedIn());
-		usersession.renew();
+		usersession.refresh();
 		assertTrue(usersession.isLoggedIn());
 	}
 
