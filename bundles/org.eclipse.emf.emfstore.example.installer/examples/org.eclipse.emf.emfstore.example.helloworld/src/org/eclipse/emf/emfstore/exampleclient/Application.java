@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.exampleclient;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
@@ -23,6 +24,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -49,7 +51,6 @@ public class Application implements IApplication {
 		// e.g. a network, a specific EMFStoreException will be thrown
 		try {
 			runClient();
-
 		} catch (ESException e) {
 			System.out.println("No connection to server.");
 			System.out.println("Did you start the server? :-)");
@@ -100,19 +101,19 @@ public class Application implements IApplication {
 			new NullProgressMonitor());
 
 		// Check-out a second, independent copy of the project (simulating a second client)
-		ESLocalProject projectNo2 = projectNo1.getRemoteProject().checkout(usersession, new NullProgressMonitor());
+		ESLocalProject projectNo2 = projectNo1.getRemoteProject().checkout("Example Checkout", usersession, new NullProgressMonitor());
 
 		// Get a second copy of the league
 		final League league2 = (League) projectNo2.getModelElements().get(0);
 		System.out.println("Project 2: League name is " + league2.getName());
 
 		// Apply changes in the second copy of the project ...
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				league2.setName("league_changed");
+				return null;
 			}
-		}.run(false);
+		});
 		// ... and commit them
 		projectNo2.commit(ESLogMessageFactory.INSTANCE.createLogMessage("My message", usersession.getUsername()), null,
 			new NullProgressMonitor());
