@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.server.ESLocationProvider;
@@ -333,12 +334,12 @@ public final class ServerConfiguration {
 	/**
 	 * File extension for main file: emfstore project state.
 	 */
-	public static final String FILE_EXTENSION_PROJECTSTATE = ".ups";
+	public static final String FILE_EXTENSION_PROJECTSTATE = VersionImpl.FILE_EXTENSION_PROJECTSTATE; // ".ups";
 
 	/**
 	 * File extension for main file: emfstore change package.
 	 */
-	public static final String FILE_EXTENSION_CHANGEPACKAGE = ".ucp";
+	public static final String FILE_EXTENSION_CHANGEPACKAGE = VersionImpl.FILE_EXTENSION_CHANGEPACKAGE;// ".ucp";
 
 	/*
 	 * FILE PREFIXES
@@ -347,12 +348,12 @@ public final class ServerConfiguration {
 	/**
 	 * File prefix for file: changepackage.
 	 */
-	public static final String FILE_PREFIX_CHANGEPACKAGE = "changepackage-";
+	public static final String FILE_PREFIX_CHANGEPACKAGE = VersionImpl.FILE_PREFIX_CHANGEPACKAGE;// "changepackage-";
 
 	/**
 	 * File prefix for file: projectstate.
 	 */
-	public static final String FILE_PREFIX_PROJECTSTATE = "projectstate-";
+	public static final String FILE_PREFIX_PROJECTSTATE = VersionImpl.FILE_PREFIX_PROJECTSTATE; // "projectstate-";
 
 	/**
 	 * File prefix for file: version.
@@ -378,11 +379,6 @@ public final class ServerConfiguration {
 	 * Whether user names should be matched case insensitively.
 	 */
 	public static final String AUTHENTICATION_MATCH_USERS_IGNORE_CASE = "emfstore.accesscontrol.authentication.matchusers.ignorecase";
-
-	/**
-	 * Whether to perform the clean memory task.
-	 */
-	public static final String PERFORM_CLEAN_MEMORY_TASK = "emfstore.cleanmemorytask";
 
 	/**
 	 * Default value for {@link #PERFORM_CLEAN_MEMORY_TASK}.

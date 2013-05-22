@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
-    nsURI="http://eclipse.org/emf/emfstore/server/model" nsPrefix="org.eclipse.emf.emfstore.internal.server.model">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://eclipse.org/emf/emfstore/server/model"
+    nsPrefix="org.eclipse.emf.emfstore.internal.server.model">
   <eClassifiers xsi:type="ecore:EClass" name="ProjectHistory">
     <eStructuralFeatures xsi:type="ecore:EReference" name="projectId" eType="#//ProjectId"
         containment="true"/>
@@ -135,8 +134,6 @@
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Version">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="projectState" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//Project"
-          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="primarySpec" lowerBound="1"
           eType="#//versioning/PrimaryVersionSpec" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="tagSpecs" upperBound="-1"
@@ -145,8 +142,6 @@
           eOpposite="#//versioning/Version/previousVersion"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="previousVersion" eType="#//versioning/Version"
           eOpposite="#//versioning/Version/nextVersion"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="changes" eType="#//versioning/ChangePackage"
-          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="logMessage" eType="#//versioning/LogMessage"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ancestorVersion" eType="#//versioning/Version"
@@ -177,11 +172,6 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//versioning/PrimaryVersionSpec"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PagedUpdateVersionSpec" eSuperTypes="#//versioning/VersionSpec">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxChanges" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersionSpec" eType="#//versioning/PrimaryVersionSpec"
-          containment="true"/>
-    </eClassifiers>
     <eSubpackages name="operations" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning/operations"
         nsPrefix="org.eclipse.emf.emfstore.internal.server.model.versioning.operations">
       <eClassifiers xsi:type="ecore:EClass" name="AbstractOperation" abstract="true"
@@ -205,12 +195,6 @@
           eSuperTypes="#//versioning/operations/AbstractOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
             defaultValueLiteral=""/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="unset" eType="#//versioning/operations/UnsetType"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="UnsetType">
-        <eLiterals name="NONE"/>
-        <eLiterals name="IS_UNSET" value="1"/>
-        <eLiterals name="WAS_UNSET" value="2" literal=""/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CreateDeleteOperation" eSuperTypes="#//versioning/operations/AbstractOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="delete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

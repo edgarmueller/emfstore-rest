@@ -10,6 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning.impl;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,16 +23,19 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -45,8 +51,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl#getProjectState <em>Project
- * State</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl#getPrimarySpec <em>Primary Spec
  * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl#getTagSpecs <em>Tag Specs</em>}
@@ -55,7 +59,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl#getPreviousVersion <em>Previous
  * Version</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl#getChanges <em>Changes</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl#getLogMessage <em>Log Message
  * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl#getAncestorVersion <em>Ancestor
@@ -72,16 +75,32 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPacka
  * @generated
  */
 public class VersionImpl extends EObjectImpl implements Version {
+
 	/**
-	 * The cached value of the '{@link #getProjectState() <em>Project State</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @see #getProjectState()
-	 * @generated
-	 * @ordered
+	 * File extension for main file: emfstore project state.
 	 */
-	protected Project projectState;
+	public static final String FILE_EXTENSION_PROJECTSTATE = ".ups";
+
+	/**
+	 * File extension for main file: emfstore change package.
+	 */
+	public static final String FILE_EXTENSION_CHANGEPACKAGE = ".ucp";
+
+	/**
+	 * File prefix for file: changepackage.
+	 */
+	public static final String FILE_PREFIX_CHANGEPACKAGE = "changepackage-";
+
+	/**
+	 * File prefix for file: projectstate.
+	 */
+	public static final String FILE_PREFIX_PROJECTSTATE = "projectstate-";
+
+	// SoftReferences acting as a simple cache for project state and ChangePackage
+	private SoftReference<Resource> projectStateResource = new SoftReference<Resource>(null);
+	private SoftReference<Resource> changePackageResource = new SoftReference<Resource>(null);
+
+	private static ResourceFactoryRegistry resourceFactoryRegistry = new ResourceFactoryRegistry();
 
 	/**
 	 * The cached value of the '{@link #getPrimarySpec() <em>Primary Spec</em>}' containment reference.
@@ -123,16 +142,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @ordered
 	 */
 	protected Version previousVersion;
-
-	/**
-	 * The cached value of the '{@link #getChanges() <em>Changes</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getChanges()
-	 * @generated
-	 * @ordered
-	 */
-	protected ChangePackage changes;
 
 	/**
 	 * The cached value of the '{@link #getLogMessage() <em>Log Message</em>}' containment reference.
@@ -205,127 +214,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	@Override
 	protected EClass eStaticClass() {
 		return VersioningPackage.Literals.VERSION;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public Project getProjectStateGen() {
-		if (projectState != null && projectState.eIsProxy())
-		{
-			InternalEObject oldProjectState = (InternalEObject) projectState;
-			projectState = (Project) eResolveProxy(oldProjectState);
-			if (projectState != oldProjectState)
-			{
-				InternalEObject newProjectState = (InternalEObject) projectState;
-				NotificationChain msgs = oldProjectState.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- VersioningPackage.VERSION__PROJECT_STATE, null, null);
-				if (newProjectState.eInternalContainer() == null)
-				{
-					msgs = newProjectState.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-						- VersioningPackage.VERSION__PROJECT_STATE, null, msgs);
-				}
-				if (msgs != null)
-					msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VersioningPackage.VERSION__PROJECT_STATE,
-						oldProjectState, projectState));
-			}
-		}
-		return projectState;
-	}
-
-	// begin of custom code
-	/**
-	 * Retrieve the corresponding project state and init its ids. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the project representing this version or null if there is no full
-	 *         representation at this version (will not recalculate the state
-	 *         from previous versions)
-	 * @generated NOT
-	 */
-	public Project getProjectState() {
-		if ((projectState != null && projectState.eIsProxy())) {
-			ProjectImpl project = (ProjectImpl) getProjectStateGen();
-
-			Resource resource = project.eResource();
-			if (resource instanceof XMIResource) {
-				Set<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElements(project, false);
-				EMap<EObject, String> eObjectToIdMap = loadIdsFromResourceForEObjects(allContainedModelElements,
-					(XMIResource) resource);
-
-				// create reverse mapping
-				Map<String, EObject> idToEObjectMap = new LinkedHashMap<String, EObject>(eObjectToIdMap.size());
-
-				for (Map.Entry<EObject, String> entry : eObjectToIdMap.entrySet()) {
-					idToEObjectMap.put(entry.getValue(), entry.getKey());
-				}
-
-				project.initMapping(eObjectToIdMap.map(), idToEObjectMap);
-			}
-
-			return project;
-		}
-
-		return getProjectStateGen();
-	}
-
-	// end of custom code
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public Project basicGetProjectState() {
-		return projectState;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public NotificationChain basicSetProjectState(Project newProjectState, NotificationChain msgs) {
-		Project oldProjectState = projectState;
-		projectState = newProjectState;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				VersioningPackage.VERSION__PROJECT_STATE, oldProjectState, newProjectState);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public void setProjectState(Project newProjectState) {
-		if (newProjectState != projectState)
-		{
-			NotificationChain msgs = null;
-			if (projectState != null)
-				msgs = ((InternalEObject) projectState).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- VersioningPackage.VERSION__PROJECT_STATE, null, msgs);
-			if (newProjectState != null)
-				msgs = ((InternalEObject) newProjectState).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- VersioningPackage.VERSION__PROJECT_STATE, null, msgs);
-			msgs = basicSetProjectState(newProjectState, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION__PROJECT_STATE,
-				newProjectState, newProjectState));
 	}
 
 	/**
@@ -571,36 +459,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 				newPreviousVersion, newPreviousVersion));
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public ChangePackage getChanges() {
-		if (changes != null && changes.eIsProxy())
-		{
-			InternalEObject oldChanges = (InternalEObject) changes;
-			changes = (ChangePackage) eResolveProxy(oldChanges);
-			if (changes != oldChanges)
-			{
-				InternalEObject newChanges = (InternalEObject) changes;
-				NotificationChain msgs = oldChanges.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- VersioningPackage.VERSION__CHANGES, null, null);
-				if (newChanges.eInternalContainer() == null)
-				{
-					msgs = newChanges.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VersioningPackage.VERSION__CHANGES,
-						null, msgs);
-				}
-				if (msgs != null)
-					msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VersioningPackage.VERSION__CHANGES,
-						oldChanges, changes));
-			}
-		}
-		return changes;
-	}
-
 	// begin of custom code
 	/**
 	 * Loads the XMI IDs from the given resource and returns them in a map
@@ -633,59 +491,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	}
 
 	// end of custom code
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public ChangePackage basicGetChanges() {
-		return changes;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public NotificationChain basicSetChanges(ChangePackage newChanges, NotificationChain msgs) {
-		ChangePackage oldChanges = changes;
-		changes = newChanges;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				VersioningPackage.VERSION__CHANGES, oldChanges, newChanges);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public void setChanges(ChangePackage newChanges) {
-		if (newChanges != changes)
-		{
-			NotificationChain msgs = null;
-			if (changes != null)
-				msgs = ((InternalEObject) changes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- VersioningPackage.VERSION__CHANGES, null, msgs);
-			if (newChanges != null)
-				msgs = ((InternalEObject) newChanges).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- VersioningPackage.VERSION__CHANGES, null, msgs);
-			msgs = basicSetChanges(newChanges, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VersioningPackage.VERSION__CHANGES, newChanges,
-				newChanges));
-	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -930,8 +735,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-		case VersioningPackage.VERSION__PROJECT_STATE:
-			return basicSetProjectState(null, msgs);
 		case VersioningPackage.VERSION__PRIMARY_SPEC:
 			return basicSetPrimarySpec(null, msgs);
 		case VersioningPackage.VERSION__TAG_SPECS:
@@ -940,8 +743,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 			return basicSetNextVersion(null, msgs);
 		case VersioningPackage.VERSION__PREVIOUS_VERSION:
 			return basicSetPreviousVersion(null, msgs);
-		case VersioningPackage.VERSION__CHANGES:
-			return basicSetChanges(null, msgs);
 		case VersioningPackage.VERSION__LOG_MESSAGE:
 			return basicSetLogMessage(null, msgs);
 		case VersioningPackage.VERSION__ANCESTOR_VERSION:
@@ -965,10 +766,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-		case VersioningPackage.VERSION__PROJECT_STATE:
-			if (resolve)
-				return getProjectState();
-			return basicGetProjectState();
 		case VersioningPackage.VERSION__PRIMARY_SPEC:
 			if (resolve)
 				return getPrimarySpec();
@@ -983,10 +780,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 			if (resolve)
 				return getPreviousVersion();
 			return basicGetPreviousVersion();
-		case VersioningPackage.VERSION__CHANGES:
-			if (resolve)
-				return getChanges();
-			return basicGetChanges();
 		case VersioningPackage.VERSION__LOG_MESSAGE:
 			if (resolve)
 				return getLogMessage();
@@ -1015,9 +808,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-		case VersioningPackage.VERSION__PROJECT_STATE:
-			setProjectState((Project) newValue);
-			return;
 		case VersioningPackage.VERSION__PRIMARY_SPEC:
 			setPrimarySpec((PrimaryVersionSpec) newValue);
 			return;
@@ -1030,9 +820,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 			return;
 		case VersioningPackage.VERSION__PREVIOUS_VERSION:
 			setPreviousVersion((Version) newValue);
-			return;
-		case VersioningPackage.VERSION__CHANGES:
-			setChanges((ChangePackage) newValue);
 			return;
 		case VersioningPackage.VERSION__LOG_MESSAGE:
 			setLogMessage((LogMessage) newValue);
@@ -1065,9 +852,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-		case VersioningPackage.VERSION__PROJECT_STATE:
-			setProjectState((Project) null);
-			return;
 		case VersioningPackage.VERSION__PRIMARY_SPEC:
 			setPrimarySpec((PrimaryVersionSpec) null);
 			return;
@@ -1079,9 +863,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 			return;
 		case VersioningPackage.VERSION__PREVIOUS_VERSION:
 			setPreviousVersion((Version) null);
-			return;
-		case VersioningPackage.VERSION__CHANGES:
-			setChanges((ChangePackage) null);
 			return;
 		case VersioningPackage.VERSION__LOG_MESSAGE:
 			setLogMessage((LogMessage) null);
@@ -1111,8 +892,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-		case VersioningPackage.VERSION__PROJECT_STATE:
-			return projectState != null;
 		case VersioningPackage.VERSION__PRIMARY_SPEC:
 			return primarySpec != null;
 		case VersioningPackage.VERSION__TAG_SPECS:
@@ -1121,8 +900,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 			return nextVersion != null;
 		case VersioningPackage.VERSION__PREVIOUS_VERSION:
 			return previousVersion != null;
-		case VersioningPackage.VERSION__CHANGES:
-			return changes != null;
 		case VersioningPackage.VERSION__LOG_MESSAGE:
 			return logMessage != null;
 		case VersioningPackage.VERSION__ANCESTOR_VERSION:
@@ -1135,6 +912,163 @@ public class VersionImpl extends EObjectImpl implements Version {
 			return mergedFromVersion != null && !mergedFromVersion.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	public Project getProjectState() {
+		Resource resource = getProjectStateResource();
+		if (resource == null) {
+			return null;
+		}
+		Project project = (Project) resource.getContents().get(0);
+		return project;
+	}
+
+	public ChangePackage getChanges() {
+		Resource resource = getChangePackageResource();
+		if (resource == null) {
+			return null;
+		}
+		ChangePackage changePackage = (ChangePackage) resource.getContents().get(0);
+		return changePackage;
+	}
+
+	/**
+	 * Returns a resource containing the associated project state. If a resource is not in memory one will be loaded.
+	 * 
+	 * @return the resource
+	 */
+	private Resource getProjectStateResource() {
+		Resource result = projectStateResource.get();
+		if (projectStateResource.get() == null || !projectStateResource.get().isLoaded()) {
+			try {
+				result = loadResourceForURI(getProjectURI());
+			} catch (IOException ioe) {
+				if (!(ioe instanceof FileNotFoundException) || this.getPrimarySpec().getIdentifier() == 0) {
+					ModelUtil.logException(ioe);
+				}
+			}
+
+			if (result != null) {
+				Project project = (Project) result.getContents().get(0);
+				initProjectStateAfterLoad((ProjectImpl) project);
+			}
+
+			setProjectStateResource(result);
+		}
+		return result;
+	}
+
+	// builds the idToEObjectMap after a project state is loaded
+	private void initProjectStateAfterLoad(ProjectImpl project) {
+		Resource resource = project.eResource();
+		if (resource instanceof XMIResource) {
+			Set<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElements(project, false);
+			EMap<EObject, String> eObjectToIdMap = loadIdsFromResourceForEObjects(allContainedModelElements,
+				(XMIResource) resource);
+
+			// create reverse mapping
+			Map<String, EObject> idToEObjectMap = new LinkedHashMap<String, EObject>(eObjectToIdMap.size());
+
+			for (Map.Entry<EObject, String> entry : eObjectToIdMap.entrySet()) {
+				idToEObjectMap.put(entry.getValue(), entry.getKey());
+			}
+
+			project.initMapping(eObjectToIdMap.map(), idToEObjectMap);
+		}
+	}
+
+	/**
+	 * Returns a resource containing the associated ChangePackage. If a resource is not in memory one will be loaded.
+	 * 
+	 * @return the resource
+	 */
+	private Resource getChangePackageResource() {
+		Resource result = changePackageResource.get();
+		if (changePackageResource.get() == null || !changePackageResource.get().isLoaded()) {
+			try {
+				result = loadResourceForURI(getChangePackageURI());
+			} catch (IOException e) {
+				if (this.getPrimarySpec().getIdentifier() > 0) {
+					ModelUtil.logException(e);
+				}
+			}
+			setChangeResource(result);
+		}
+		return result;
+	}
+
+	/**
+	 * Loads a resource for the given URI.
+	 * 
+	 * @param uri the URI
+	 * @return the loaded resource
+	 * @throws IOException - in case the resource could not be read.
+	 */
+	private Resource loadResourceForURI(URI uri) throws IOException {
+		Resource resource = resourceFactoryRegistry.createResource(uri);
+		resource.load(ModelUtil.getResourceLoadOptions());
+		return resource;
+	}
+
+	/**
+	 * allows to retrieve the URI for the resource containing the project state associated with this version.
+	 * 
+	 * @return the uri for the project state resource
+	 */
+	private URI getProjectURI() {
+		String projectFragment = FILE_PREFIX_PROJECTSTATE + this.getPrimarySpec().getIdentifier()
+			+ FILE_EXTENSION_PROJECTSTATE;
+		return getBaseURI() == null ? null : getBaseURI().appendSegment(projectFragment);
+	}
+
+	/**
+	 * allows to retrieve the URI for the resource containing the ChangePackege associated with this version.
+	 * 
+	 * @return the uri for the ChangePackage resource
+	 */
+	private URI getChangePackageURI() {
+		String changePackageFragment = FILE_PREFIX_CHANGEPACKAGE
+			+ this.getPrimarySpec().getIdentifier()
+			+ FILE_EXTENSION_CHANGEPACKAGE;
+		return getBaseURI() == null ? null : getBaseURI().appendSegment(changePackageFragment);
+	}
+
+	/**
+	 * allows to retrieve the Base-URI of this version, i.e. the URI of the resource
+	 * containing the version trimmed by its last segment.
+	 * 
+	 * @return the base URI
+	 */
+	private URI getBaseURI() {
+		return this.eResource() == null ? null : this.eResource().getURI().trimSegments(1);
+	}
+
+	public void setChangeResource(Resource resource) {
+		if (resource == null) {
+			changePackageResource = new SoftReference<Resource>(null);
+		} else {
+			ResourceSet resourceSet = resource.getResourceSet();
+			if (resourceSet != null) {
+				// remove the resource from its containing resourceSet in order
+				// to remove the strong referencing.
+				resourceSet.getResources().remove(resource);
+			}
+			changePackageResource = new SoftReference<Resource>(resource);
+		}
+	}
+
+	public void setProjectStateResource(Resource resource) {
+		if (resource == null) {
+			projectStateResource = new SoftReference<Resource>(null);
+		} else {
+			ResourceSet resourceSet = resource.getResourceSet();
+			if (resourceSet != null) {
+				// remove the resource from its containing resourceSet in order
+				// to remove the strong referencing.
+				resourceSet.getResources().remove(resource);
+			}
+			projectStateResource = new SoftReference<Resource>(resource);
+		}
 	}
 
 } // VersionImpl

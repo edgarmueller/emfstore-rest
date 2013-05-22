@@ -688,7 +688,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_ProjectState() {
+	public EReference getVersion_PrimarySpec() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -697,7 +697,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_PrimarySpec() {
+	public EReference getVersion_TagSpecs() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -706,7 +706,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_TagSpecs() {
+	public EReference getVersion_NextVersion() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -715,7 +715,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_NextVersion() {
+	public EReference getVersion_PreviousVersion() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -724,7 +724,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_PreviousVersion() {
+	public EReference getVersion_LogMessage() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -733,7 +733,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_Changes() {
+	public EReference getVersion_AncestorVersion() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -742,7 +742,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_LogMessage() {
+	public EReference getVersion_BranchedVersions() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -751,7 +751,7 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_AncestorVersion() {
+	public EReference getVersion_MergedToVersion() {
 		return (EReference) versionEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -760,26 +760,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 	 * 
 	 * @generated
 	 */
-	public EReference getVersion_BranchedVersions() {
-		return (EReference) versionEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EReference getVersion_MergedToVersion() {
-		return (EReference) versionEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public EReference getVersion_MergedFromVersion() {
-		return (EReference) versionEClass.getEStructuralFeatures().get(10);
+		return (EReference) versionEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1007,12 +989,10 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		createEReference(modelElementQueryEClass, MODEL_ELEMENT_QUERY__MODEL_ELEMENTS);
 
 		versionEClass = createEClass(VERSION);
-		createEReference(versionEClass, VERSION__PROJECT_STATE);
 		createEReference(versionEClass, VERSION__PRIMARY_SPEC);
 		createEReference(versionEClass, VERSION__TAG_SPECS);
 		createEReference(versionEClass, VERSION__NEXT_VERSION);
 		createEReference(versionEClass, VERSION__PREVIOUS_VERSION);
-		createEReference(versionEClass, VERSION__CHANGES);
 		createEReference(versionEClass, VERSION__LOG_MESSAGE);
 		createEReference(versionEClass, VERSION__ANCESTOR_VERSION);
 		createEReference(versionEClass, VERSION__BRANCHED_VERSIONS);
@@ -1210,9 +1190,6 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(versionEClass, Version.class, "Version", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVersion_ProjectState(), theModelPackage.getProject(), null, "projectState", null, 0, 1,
-			Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVersion_PrimarySpec(), this.getPrimaryVersionSpec(), null, "primarySpec", null, 1, 1,
 			Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1225,9 +1202,6 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 		initEReference(getVersion_PreviousVersion(), this.getVersion(), this.getVersion_NextVersion(),
 			"previousVersion", null, 0, 1, Version.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVersion_Changes(), this.getChangePackage(), null, "changes", null, 0, 1, Version.class,
-			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-			!IS_DERIVED, IS_ORDERED);
 		initEReference(getVersion_LogMessage(), this.getLogMessage(), null, "logMessage", null, 0, 1, Version.class,
 			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);

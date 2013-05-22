@@ -26,7 +26,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.provider.ServerEditPlugin;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
@@ -223,10 +222,8 @@ public class VersionItemProvider extends ItemProviderAdapter implements IEditing
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(VersioningPackage.Literals.VERSION__PROJECT_STATE);
 			childrenFeatures.add(VersioningPackage.Literals.VERSION__PRIMARY_SPEC);
 			childrenFeatures.add(VersioningPackage.Literals.VERSION__TAG_SPECS);
-			childrenFeatures.add(VersioningPackage.Literals.VERSION__CHANGES);
 			childrenFeatures.add(VersioningPackage.Literals.VERSION__LOG_MESSAGE);
 		}
 		return childrenFeatures;
@@ -282,10 +279,8 @@ public class VersionItemProvider extends ItemProviderAdapter implements IEditing
 
 		switch (notification.getFeatureID(Version.class))
 		{
-		case VersioningPackage.VERSION__PROJECT_STATE:
 		case VersioningPackage.VERSION__PRIMARY_SPEC:
 		case VersioningPackage.VERSION__TAG_SPECS:
-		case VersioningPackage.VERSION__CHANGES:
 		case VersioningPackage.VERSION__LOG_MESSAGE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -306,11 +301,6 @@ public class VersionItemProvider extends ItemProviderAdapter implements IEditing
 
 		newChildDescriptors.add
 			(createChildParameter
-			(VersioningPackage.Literals.VERSION__PROJECT_STATE,
-				ModelFactory.eINSTANCE.createProject()));
-
-		newChildDescriptors.add
-			(createChildParameter
 			(VersioningPackage.Literals.VERSION__PRIMARY_SPEC,
 				VersioningFactory.eINSTANCE.createPrimaryVersionSpec()));
 
@@ -318,11 +308,6 @@ public class VersionItemProvider extends ItemProviderAdapter implements IEditing
 			(createChildParameter
 			(VersioningPackage.Literals.VERSION__TAG_SPECS,
 				VersioningFactory.eINSTANCE.createTagVersionSpec()));
-
-		newChildDescriptors.add
-			(createChildParameter
-			(VersioningPackage.Literals.VERSION__CHANGES,
-				VersioningFactory.eINSTANCE.createChangePackage()));
 
 		newChildDescriptors.add
 			(createChildParameter

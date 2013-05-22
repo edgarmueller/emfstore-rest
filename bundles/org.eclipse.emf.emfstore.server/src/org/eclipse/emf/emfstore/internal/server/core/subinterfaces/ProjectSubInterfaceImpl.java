@@ -108,7 +108,7 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 			PrimaryVersionSpec resolvedVersion = getSubInterface(VersionSubInterfaceImpl.class)
 				.resolveVersionSpec(
-									projectId, versionSpec);
+					projectId, versionSpec);
 			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, resolvedVersion);
 			return getProject(version);
 
@@ -176,11 +176,11 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			try {
 				logMessage.setDate(new Date());
 				projectHistory = createEmptyProject(
-													name,
-													description,
-													logMessage,
-													org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
-														.createProject());
+					name,
+					description,
+					logMessage,
+					org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+						.createProject());
 			} catch (FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
@@ -270,8 +270,8 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					} catch (IOException e) {
 						ModelUtil
 							.logException(
-											"Project files couldn't be deleted, but it was deleted from containment tree.",
-											e);
+								"Project files couldn't be deleted, but it was deleted from containment tree.",
+								e);
 					}
 				}
 			}
@@ -297,15 +297,15 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				for (Version version : projectHistory.getVersions()) {
 					if (version.getChanges() != null) {
 						getResourceHelper().createResourceForChangePackage(
-																			version.getChanges(),
-																			version.getPrimarySpec(),
-																			projectHistory.getProjectId());
+							version.getChanges(),
+							version.getPrimarySpec(),
+							projectHistory.getProjectId());
 					}
 					if (version.getProjectState() != null) {
 						getResourceHelper().createResourceForProject(
-																		version.getProjectState(),
-																		version.getPrimarySpec(),
-																		projectHistory.getProjectId());
+							version.getProjectState(),
+							version.getPrimarySpec(),
+							projectHistory.getProjectId());
 					}
 					getResourceHelper().createResourceForVersion(version, projectHistory.getProjectId());
 				}
@@ -358,9 +358,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		// Project project =
 		// org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 		// .createProject();
-		firstVersion.setProjectState(initialProjectState);
+		// firstVersion.setProjectState(initialProjectState);
 		getResourceHelper().createResourceForProject(initialProjectState, firstVersion.getPrimarySpec(),
-														projectHistory.getProjectId());
+			projectHistory.getProjectId());
 		projectHistory.getVersions().add(firstVersion);
 
 		// add to serverspace and saved
@@ -368,6 +368,8 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		getResourceHelper().createResourceForProjectHistory(projectHistory);
 		getServerSpace().getProjects().add(projectHistory);
 		save(getServerSpace());
+
+		firstVersion.setProjectStateResource(initialProjectState.eResource());
 
 		return projectHistory;
 	}

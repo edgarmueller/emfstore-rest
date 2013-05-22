@@ -159,14 +159,14 @@ public class ResourceHelper {
 		Resource projectResource = version.getProjectState().eResource();
 
 		File file = new File(getProjectFolder(projectId) + getProjectFile(lastVersion));
-		version.setProjectState(null);
+		// version.setProjectState(null);
 		file.delete();
 
 		if (projectResource.isLoaded()) {
 			projectResource.unload();
 		}
 
-		projectResource.getResourceSet().getResources().remove(projectResource);
+		// projectResource.getResourceSet().getResources().remove(projectResource);
 	}
 
 	/**

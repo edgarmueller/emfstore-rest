@@ -12,13 +12,16 @@ package org.eclipse.emf.emfstore.internal.server.startup;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.FeatureNotFoundException;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -122,9 +125,28 @@ public class EmfStoreValidator {
 		for (Resource currentResource : resources) {
 			errors.addAll(currentResource.getErrors());
 		}
+		removeAcceptedErrors(errors);
 		errors(errors);
 		stop();
 		return errors.size() == 0;
+	}
+
+	private void removeAcceptedErrors(EList<Diagnostic> errors) {
+		Iterator<Diagnostic> iterator = errors.iterator();
+		while (iterator.hasNext()) {
+			Resource.Diagnostic diagnostic = iterator.next();
+
+			// removes errors for projectState and changePackage references in versions.
+			if (diagnostic instanceof FeatureNotFoundException) {
+				FeatureNotFoundException featureNotFoundException = (FeatureNotFoundException) diagnostic;
+				if (featureNotFoundException.getObject() instanceof Version) {
+					if (featureNotFoundException.getName().equals("projectState")
+						|| featureNotFoundException.getName().equals("changes")) {
+						iterator.remove();
+					}
+				}
+			}
+		}
 	}
 
 	/**

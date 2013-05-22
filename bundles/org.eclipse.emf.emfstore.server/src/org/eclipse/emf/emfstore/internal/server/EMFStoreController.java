@@ -24,7 +24,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-import java.util.Timer;
 
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
@@ -82,7 +81,6 @@ public class EMFStoreController implements IApplication, Runnable {
 	/**
 	 * The period of time in seconds between executing the clean memory task.
 	 */
-	private static final int CLEAN_MEMORY_TASK_PERIOD = 60;
 	private static EMFStoreController instance;
 
 	private EMFStore emfStore;
@@ -152,12 +150,6 @@ public class EMFStoreController implements IApplication, Runnable {
 			"Failed to copy keystore.", "Keystore was copied to server workspace.");
 
 		connectionHandlers = initConnectionHandlers();
-
-		if (Boolean.parseBoolean(ServerConfiguration.getProperties().getProperty(
-			ServerConfiguration.PERFORM_CLEAN_MEMORY_TASK, ServerConfiguration.PERFORM_CLEAN_MEMORY_TASK_DEFAULT))) {
-			new Timer().schedule(new CleanMemoryTask(serverSpace.eResource().getResourceSet()),
-				CLEAN_MEMORY_TASK_PERIOD * 1000, CLEAN_MEMORY_TASK_PERIOD * 1000);
-		}
 
 		handlePostStartupListener();
 
@@ -318,6 +310,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 		resource = resourceSet.createResource(resourceUri);
+
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());
 

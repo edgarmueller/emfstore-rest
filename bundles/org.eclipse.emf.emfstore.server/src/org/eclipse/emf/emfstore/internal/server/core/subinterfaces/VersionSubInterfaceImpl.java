@@ -279,6 +279,11 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			Version newVersion = null;
 			BranchInfo newBranch = null;
 
+			// copy project and apply changes
+			Project newProjectState = ((ProjectImpl) getSubInterface(ProjectSubInterfaceImpl.class).getProject(
+				baseVersion)).copy();
+			changePackage.apply(newProjectState);
+
 			// normal commit
 			if (targetBranch == null || (baseVersion.getPrimarySpec().getBranch().equals(targetBranch.getBranch()))) {
 
@@ -287,7 +292,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				if (!baseVersionSpec.equals(isHeadOfBranch(projectHistory, baseVersion.getPrimarySpec()))) {
 					throw new BaseVersionOutdatedException();
 				}
-				newVersion = createVersion(projectHistory, changePackage, logMessage, user, baseVersion);
+				newVersion = createVersion(projectHistory, newProjectState, logMessage, user, baseVersion);
 				newVersion.setPreviousVersion(baseVersion);
 				baseBranch.setHead(ModelUtil.clone(newVersion.getPrimarySpec()));
 
@@ -301,7 +306,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 						+ "' must not be used.");
 				}
 				// when branch does NOT exist, create new branch
-				newVersion = createVersion(projectHistory, changePackage, logMessage, user, baseVersion);
+				newVersion = createVersion(projectHistory, newProjectState, logMessage, user, baseVersion);
 				newBranch = createNewBranch(projectHistory, baseVersion.getPrimarySpec(), newVersion.getPrimarySpec(),
 					targetBranch);
 				newVersion.setAncestorVersion(baseVersion);
@@ -318,11 +323,15 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// try to save
 			try {
 				try {
-					getResourceHelper().createResourceForProject(newVersion.getProjectState(),
+					getResourceHelper().createResourceForProject(newProjectState,
 						newVersion.getPrimarySpec(), projectHistory.getProjectId());
 					getResourceHelper().createResourceForChangePackage(changePackage, newVersion.getPrimarySpec(),
 						projectId);
 					getResourceHelper().createResourceForVersion(newVersion, projectHistory.getProjectId());
+
+					newVersion.setProjectStateResource(newProjectState.eResource());
+					newVersion.setChangeResource(changePackage.eResource());
+
 				} catch (FatalESException e) {
 					// try to roll back. removing version is necessary in all cases
 					projectHistory.getVersions().remove(newVersion);
@@ -378,21 +387,15 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return branchInfo;
 	}
 
-	private Version createVersion(ProjectHistory projectHistory, ChangePackage changePackage, LogMessage logMessage,
+	private Version createVersion(ProjectHistory projectHistory, Project projectState, LogMessage logMessage,
 		ACUser user, Version previousVersion) throws ESException {
 		Version newVersion = VersioningFactory.eINSTANCE.createVersion();
-
-		// copy project and apply changes
-		Project newProjectState = ((ProjectImpl) getSubInterface(ProjectSubInterfaceImpl.class).getProject(
-			previousVersion)).copy();
-		changePackage.apply(newProjectState);
-		newVersion.setProjectState(newProjectState);
 
 		long computedChecksum = ModelUtil.NO_CHECKSUM;
 
 		try {
 			if (ServerConfiguration.isComputeChecksumOnCommitActive()) {
-				computedChecksum = ModelUtil.computeChecksum(newProjectState);
+				computedChecksum = ModelUtil.computeChecksum(projectState);
 			}
 		} catch (SerializationException exception) {
 			// TODO: clarify what to do in case checksum computation fails + provide ext. point
@@ -400,7 +403,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				projectHistory.getProjectName()), exception);
 		}
 
-		newVersion.setChanges(changePackage);
+		// newVersion.setChanges(changePackage);
 
 		logMessage.setDate(new Date());
 		logMessage.setAuthor(user.getName());

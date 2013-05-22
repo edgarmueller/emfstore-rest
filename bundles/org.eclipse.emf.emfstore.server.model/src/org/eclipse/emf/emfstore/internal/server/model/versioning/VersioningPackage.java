@@ -737,22 +737,13 @@ public interface VersioningPackage extends EPackage {
 	int VERSION = 11;
 
 	/**
-	 * The feature id for the '<em><b>Project State</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int VERSION__PROJECT_STATE = 0;
-
-	/**
 	 * The feature id for the '<em><b>Primary Spec</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__PRIMARY_SPEC = 1;
+	int VERSION__PRIMARY_SPEC = 0;
 
 	/**
 	 * The feature id for the '<em><b>Tag Specs</b></em>' containment reference list.
@@ -761,7 +752,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__TAG_SPECS = 2;
+	int VERSION__TAG_SPECS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Next Version</b></em>' reference. <!--
@@ -770,7 +761,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__NEXT_VERSION = 3;
+	int VERSION__NEXT_VERSION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Previous Version</b></em>' reference. <!--
@@ -779,16 +770,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__PREVIOUS_VERSION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Changes</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int VERSION__CHANGES = 5;
+	int VERSION__PREVIOUS_VERSION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Log Message</b></em>' containment reference.
@@ -797,7 +779,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__LOG_MESSAGE = 6;
+	int VERSION__LOG_MESSAGE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Ancestor Version</b></em>' reference. <!--
@@ -806,7 +788,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__ANCESTOR_VERSION = 7;
+	int VERSION__ANCESTOR_VERSION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Branched Versions</b></em>' reference list.
@@ -815,7 +797,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__BRANCHED_VERSIONS = 8;
+	int VERSION__BRANCHED_VERSIONS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Merged To Version</b></em>' reference list.
@@ -824,7 +806,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__MERGED_TO_VERSION = 9;
+	int VERSION__MERGED_TO_VERSION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Merged From Version</b></em>' reference list.
@@ -833,7 +815,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION__MERGED_FROM_VERSION = 10;
+	int VERSION__MERGED_FROM_VERSION = 8;
 
 	/**
 	 * The number of structural features of the '<em>Version</em>' class. <!--
@@ -842,7 +824,7 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VERSION_FEATURE_COUNT = 11;
+	int VERSION_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '
@@ -1627,19 +1609,6 @@ public interface VersioningPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getProjectState <em>Project State</em>}
-	 * '.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Project State</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getProjectState()
-	 * @see #getVersion()
-	 * @generated
-	 */
-	EReference getVersion_ProjectState();
-
-	/**
-	 * Returns the meta object for the containment reference '
 	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getPrimarySpec <em>Primary Spec</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1686,18 +1655,6 @@ public interface VersioningPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVersion_PreviousVersion();
-
-	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getChanges <em>Changes</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Changes</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getChanges()
-	 * @see #getVersion()
-	 * @generated
-	 */
-	EReference getVersion_Changes();
 
 	/**
 	 * Returns the meta object for the containment reference '
@@ -2390,15 +2347,6 @@ public interface VersioningPackage extends EPackage {
 		EClass VERSION = eINSTANCE.getVersion();
 
 		/**
-		 * The meta object literal for the '<em><b>Project State</b></em>' containment reference feature.
-		 * <!-- begin-user-doc --> <!--
-		 * end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference VERSION__PROJECT_STATE = eINSTANCE.getVersion_ProjectState();
-
-		/**
 		 * The meta object literal for the '<em><b>Primary Spec</b></em>' containment reference feature.
 		 * <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
@@ -2431,14 +2379,6 @@ public interface VersioningPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VERSION__PREVIOUS_VERSION = eINSTANCE.getVersion_PreviousVersion();
-
-		/**
-		 * The meta object literal for the '<em><b>Changes</b></em>' containment reference feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference VERSION__CHANGES = eINSTANCE.getVersion_Changes();
 
 		/**
 		 * The meta object literal for the '<em><b>Log Message</b></em>' containment reference feature.

@@ -31,7 +31,6 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
-import org.eclipse.emf.emfstore.internal.server.CleanMemoryTask;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -370,8 +369,7 @@ public class PerformanceTest {
 			}.run(false);
 			updateTimes[i] = (System.currentTimeMillis() - time) / 1000.0;
 			ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-			CleanMemoryTask task = new CleanMemoryTask(workspace.toInternalAPI().getResourceSet());
-			task.run();
+
 			memDuringUpdate[i] = memoryMeter.stopMeasurements();
 			memAfterUpdate[i] = usedMemory();
 			ModelUtil.logInfo("update project - iteration #" + (i + 1) + ": time=" + updateTimes[i]

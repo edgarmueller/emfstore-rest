@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 
 /**
@@ -20,13 +21,11 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getProjectState <em>Project State</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getPrimarySpec <em>Primary Spec</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getTagSpecs <em>Tag Specs</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getNextVersion <em>Next Version</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getPreviousVersion <em>Previous Version
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getChanges <em>Changes</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getLogMessage <em>Log Message</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getAncestorVersion <em>Ancestor Version
  * </em>}</li>
@@ -44,35 +43,6 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
  * @generated
  */
 public interface Version extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Project State</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Project State</em>' reference isn't clear, there really should be more of a
-	 * description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Project State</em>' containment reference.
-	 * @see #setProjectState(Project)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getVersion_ProjectState()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	Project getProjectState();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getProjectState
-	 * <em>Project State</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Project State</em>' containment reference.
-	 * @see #getProjectState()
-	 * @generated
-	 */
-	void setProjectState(Project value);
-
 	/**
 	 * Returns the value of the '<em><b>Primary Spec</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -184,35 +154,6 @@ public interface Version extends EObject {
 	 * @generated
 	 */
 	void setPreviousVersion(Version value);
-
-	/**
-	 * Returns the value of the '<em><b>Changes</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Changes</em>' reference isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Changes</em>' containment reference.
-	 * @see #setChanges(ChangePackage)
-	 * @see org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage#getVersion_Changes()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	ChangePackage getChanges();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.versioning.Version#getChanges
-	 * <em>Changes</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Changes</em>' containment reference.
-	 * @see #getChanges()
-	 * @generated
-	 */
-	void setChanges(ChangePackage value);
 
 	/**
 	 * Returns the value of the '<em><b>Log Message</b></em>' containment reference.
@@ -339,5 +280,35 @@ public interface Version extends EObject {
 	 * @generated
 	 */
 	EList<Version> getMergedFromVersion();
+
+	/**
+	 * Allows to retrieve the ChangePackage associated with this version.
+	 * 
+	 * @return the changes
+	 */
+	ChangePackage getChanges();
+
+	/**
+	 * Allows to retrieve the project state associated with this version.
+	 * 
+	 * @return the project state
+	 */
+	Project getProjectState();
+
+	/**
+	 * Allows for setting the resource containing the changePackage the getChanges()-method is to return.
+	 * The resource will be removed from its resourceSet if it is contained in one.
+	 * 
+	 * @param resource the new change resource
+	 */
+	void setChangeResource(Resource resource);
+
+	/**
+	 * Allows for setting the resource containing the project state the getProjectState()-method is to return.
+	 * The resource will be removed from its resourceSet if it is contained in one.
+	 * 
+	 * @param resource the new project state resource
+	 */
+	void setProjectStateResource(Resource resource);
 
 } // Version
