@@ -1,12 +1,16 @@
 package org.eclipse.emf.emfstore.client.test.api;
 
 import static org.junit.Assert.fail;
+
+import java.util.Iterator;
+
 import junit.framework.Assert;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
@@ -47,8 +51,14 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 					} catch (ESException e) {
 						setException(e);
 					}
-					ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().getUsersessions().remove(
-						usersession);
+
+					Iterator<Usersession> iter = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI()
+						.getUsersessions().iterator();
+					while (iter.hasNext()) {
+						if (iter.next().getServerInfo() == ((ESServerImpl) server).toInternalAPI()) {
+							iter.remove();
+						}
+					}
 				}
 				ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
 			}

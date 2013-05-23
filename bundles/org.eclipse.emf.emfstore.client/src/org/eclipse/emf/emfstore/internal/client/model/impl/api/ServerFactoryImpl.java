@@ -49,16 +49,15 @@ public final class ServerFactoryImpl implements ESServerFactory {
 	public ESServer getServer(final String url, final int port, final String certificate) {
 
 		final ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
-		final ESServerImpl server = serverInfo.toAPI();
+		final ESServer server = serverInfo.toAPI();
 
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
-				return null;
+		ESServer result = RunESCommand.runWithResult(new Callable<ESServer>() {
+			public ESServer call() throws Exception {
+				return ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
 			}
 		});
 
-		return server;
+		return result;
 	}
 
 	/**

@@ -16,12 +16,6 @@ public class ServerCreationTest {
 	}
 
 	@Test
-	public void testNameGenerated() {
-		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
-		assertEquals("EMFStore (generated entry)", server.getName());
-	}
-
-	@Test
 	public void testNameSet() {
 		ESServer server = ESServer.FACTORY
 			.getServer("MyServer", "localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);

@@ -78,7 +78,7 @@ public class RunningEMFStoreRule extends ExternalResource {
 		workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
 		server = ESServer.FACTORY.getServer("RunningEMFStoreRuleStore", "localhost", 8080,
 			KeyStoreManager.DEFAULT_CERTIFICATE);
-		workspace.addServer(server);
+		server = workspace.addServer(server);
 
 		startEMFStore();
 		session = server.login("super", "super");
