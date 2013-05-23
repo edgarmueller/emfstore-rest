@@ -943,6 +943,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			try {
 				result = loadResourceForURI(getProjectURI());
 			} catch (IOException ioe) {
+				result = null;
 				if (!(ioe instanceof FileNotFoundException) || this.getPrimarySpec().getIdentifier() == 0) {
 					ModelUtil.logException(ioe);
 				}
@@ -988,6 +989,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			try {
 				result = loadResourceForURI(getChangePackageURI());
 			} catch (IOException e) {
+				result = null;
 				if (this.getPrimarySpec().getIdentifier() > 0) {
 					ModelUtil.logException(e);
 				}
