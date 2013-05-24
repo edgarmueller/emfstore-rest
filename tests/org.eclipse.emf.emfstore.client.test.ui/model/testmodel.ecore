@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="testmodel"
+    nsURI="http://eclipse.org/emf/emfstore/client/test/testmodel" nsPrefix="org.eclipse.emf.emfstore.internal.client.test">
+  <eClassifiers xsi:type="ecore:EClass" name="TestElement" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strings" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//TestElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedElements" upperBound="-1"
+        eType="#//TestElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//TestElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedElement" eType="#//TestElement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="otherReference" eType="#//TestElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedElements2" upperBound="-1"
+        eType="#//TestElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//TestElementContainer"
+        eOpposite="#//TestElementContainer/elements"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementMap" upperBound="-1"
+        eType="#//TestElementToTestElementMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stringToStringMap" upperBound="-1"
+        eType="#//StringToStringMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementToStringMap" upperBound="-1"
+        eType="#//TestElementToStringMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stringToElementMap" upperBound="-1"
+        eType="#//StringToTestElementMap" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestElementContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//TestElement" containment="true" eOpposite="#//TestElement/container"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestElementToStringMap" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//TestElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringToStringMap" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestElementToTestElementMap" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//TestElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//TestElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringToTestElementMap" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//TestElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
