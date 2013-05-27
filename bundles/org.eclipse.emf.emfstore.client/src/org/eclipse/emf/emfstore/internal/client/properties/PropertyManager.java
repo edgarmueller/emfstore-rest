@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.accesscontrol.AccessControlHelper;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.EMFStorePropertiesOutdatedException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceImpl;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType;

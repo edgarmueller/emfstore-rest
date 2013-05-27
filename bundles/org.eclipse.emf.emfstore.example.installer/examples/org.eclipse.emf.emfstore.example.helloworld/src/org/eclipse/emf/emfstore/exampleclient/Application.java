@@ -26,7 +26,6 @@ import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESLogMessageFactory;
 import org.eclipse.equinox.app.IApplication;
@@ -88,12 +87,12 @@ public class Application implements IApplication {
 		league1.setName("league");
 		league1.getPlayers().add(createPlayer("no. 1"));
 		league1.getPlayers().add(createPlayer("no. 2"));
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				projectNo1.getModelElements().add(league1);
+				return null;
 			}
-		}.run(false);
+		});
 		System.out.println("Project 1: League name is " + league1.getName());
 
 		// commit the changes of the project to the EMFStore including a commit message
