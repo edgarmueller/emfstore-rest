@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.alltests;
 
+import org.eclipse.emf.emfstore.client.test.AllTests;
 import org.eclipse.emf.emfstore.client.test.performance.AllPerformanceTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
