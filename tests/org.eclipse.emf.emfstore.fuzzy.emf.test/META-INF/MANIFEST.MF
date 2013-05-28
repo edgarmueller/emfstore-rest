@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests for EMFDataprovider (Incubation)
+Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy.emf.test;singleton:=true
+Bundle-Version: 0.9.3.qualifier
+Require-Bundle: org.eclipse.emf.emfstore.fuzzy.emf;visibility:=reexport,
+ org.eclipse.emf.emfstore.client.test;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: .
+Bundle-Vendor: Eclipse Modeling Project
