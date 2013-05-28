@@ -31,12 +31,14 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
+import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
-import org.junit.ClassRule;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -45,7 +47,6 @@ import org.junit.Test;
  * 
  * @author Tobias Verhoeven
  */
-@SuppressWarnings("restriction")
 public class MemoryLoadTest {
 
 	private final String modelKey = "http://org/eclipse/example/bowling";
@@ -58,15 +59,33 @@ public class MemoryLoadTest {
 	private static final ConsoleProgressMonitor MONITOR = new ConsoleProgressMonitor();
 
 	/** Class Rule for starting an EMFStore-Server. */
-	// CHECKSTYLE:OFF
-	@ClassRule
-	public static RunningEMFStoreRule runningEMFStoreRule = new RunningEMFStoreRule();
+	// @ClassRule
+	private static RunningEMFStoreRule runningEMFStoreRule = new RunningEMFStoreRule();
 
 	/** Rule for deleting all remote projects. */
 	@Rule
 	public NoRemoteProjectRule noRemoteProjectRule = new NoRemoteProjectRule(runningEMFStoreRule);
 
-	// CHECKSTYLE:ON
+	/**
+	 * Starts the EMFstore.
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws FatalESException the fatal es exception
+	 * @throws ESException the eS exception
+	 */
+	@BeforeClass
+	public static void before() throws IOException, FatalESException, ESException {
+		runningEMFStoreRule.before();
+	}
+
+	/**
+	 * Stops the EMFStore.
+	 */
+	@AfterClass
+	public static void after() {
+		runningEMFStoreRule.after();
+	}
+
 	/**
 	 * Test for solely sharing projects.
 	 * 
