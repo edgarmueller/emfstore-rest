@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2008-2012 EclipseSource Muenchen GmbH.&#xD;&#xA;&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:"
+    modelDirectory="/org.eclipse.emf.emfstore.fuzzy.emf/src" modelPluginID="org.eclipse.emf.emfstore.fuzzy.emf"
+    modelName="Config" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false" runtimeVersion="2.5">
+  <foreignModel>config.ecore</foreignModel>
+  <genPackages prefix="Config" basePackage="org.eclipse.emf.emfstore.fuzzy.emf" disposableProviderFactory="true"
+      fileExtensions="fuzzy" ecorePackage="config.ecore#/">
+    <genClasses ecoreClass="config.ecore#//TestConfig">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestConfig/seed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestConfig/count"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestConfig/testClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestConfig/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference config.ecore#//TestConfig/mutatorConfig"/>
+    </genClasses>
+    <genClasses ecoreClass="config.ecore#//TestRun">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference config.ecore#//TestRun/config"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestRun/time"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference config.ecore#//TestRun/results"/>
+    </genClasses>
+    <genClasses ecoreClass="config.ecore#//TestResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestResult/seedCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestResult/testName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestResult/error"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestResult/failure"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestResult/executionTime"/>
+    </genClasses>
+    <genClasses ecoreClass="config.ecore#//TestDiff">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//TestDiff/lastUpdate"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference config.ecore#//TestDiff/config"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference config.ecore#//TestDiff/oldResult"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference config.ecore#//TestDiff/newResult"/>
+    </genClasses>
+    <genClasses ecoreClass="config.ecore#//DiffReport">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference config.ecore#//DiffReport/diffs"/>
+    </genClasses>
+    <genClasses ecoreClass="config.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference config.ecore#//Root/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="config.ecore#//MutatorConfig">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference config.ecore#//MutatorConfig/rootEClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//MutatorConfig/minObjectsCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//MutatorConfig/ignoreAndLog"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//MutatorConfig/doNotGenerateRoot"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//MutatorConfig/useEcoreUtilDelete"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference config.ecore#//MutatorConfig/eClassesToIgnore"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference config.ecore#//MutatorConfig/eStructuralFeaturesToIgnore"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference config.ecore#//MutatorConfig/ePackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute config.ecore#//MutatorConfig/maxDeleteCount"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

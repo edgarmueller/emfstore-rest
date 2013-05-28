@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFDataProvider for FuzzyTestRunner (Incubation)
+Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy.emf;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: .,
+ lib/dom4j-1.6.1.jar
+Bundle-Localization: plugin
+Export-Package: org.eclipse.emf.emfstore.fuzzy.emf,
+ org.eclipse.emf.emfstore.fuzzy.emf.config,
+ org.eclipse.emf.emfstore.fuzzy.emf.config.util,
+ org.eclipse.emf.emfstore.fuzzy.emf.diff
+Require-Bundle: org.eclipse.emf.emfstore.modelmutator;visibility:=reexport,
+ org.eclipse.emf.emfstore.fuzzy;visibility:=reexport,
+ org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
+ org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)";visibility:=reexport,
+ org.eclipse.emf.edit;bundle-version="[2.5.0,3.0.0)";visibility:=reexport
+Bundle-Vendor: Eclipse Modeling Project

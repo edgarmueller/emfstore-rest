@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.eclipse.emf.emfstore.fuzzy.emf.config="http://org/eclipse/emf/emfstore/fuzzy/emf/config">
+  <org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig seed="1" count="10" testClass="org.eclipse.emf.emfstore.fuzzy.emf.test.OperationApplyTest" id="_sLQasYvPEeG1B5HDFm-I-w">
+    <mutatorConfig minObjectsCount="10">
+      <rootEClass href="http://eclipse.org/emf/emfstore/common/model#//Project"/>
+      <eStructuralFeaturesToIgnore xsi:type="ecore:EReference" href="http://eclipse.org/emf/emfstore/common/model#//Project/cutElements"/>
+      <ePackages href="http://org/eclipse/example/bowling#/"/>
+    </mutatorConfig>
+  </org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig>
+  <org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig seed="1" count="10" testClass="org.eclipse.emf.emfstore.fuzzy.emf.test.OperationReverseTest" id="_sLQasYvPEeG1B5HDFm-I-w">
+    <mutatorConfig minObjectsCount="100">
+      <rootEClass href="http://eclipse.org/emf/emfstore/common/model#//Project"/>
+      <eStructuralFeaturesToIgnore xsi:type="ecore:EReference" href="http://eclipse.org/emf/emfstore/common/model#//Project/cutElements"/>
+      <ePackages href="http://org/eclipse/example/bowling#/"/>
+    </mutatorConfig>
+  </org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig>
+  <org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig seed="1" count="10" testClass="org.eclipse.emf.emfstore.fuzzy.emf.test.SerializationTest" id="_c24GhIvSEeGC3oFJZ-5j24">
+    <mutatorConfig minObjectsCount="100">
+      <rootEClass href="http://eclipse.org/emf/emfstore/common/model#//Project"/>
+      <eStructuralFeaturesToIgnore xsi:type="ecore:EReference" href="http://eclipse.org/emf/emfstore/common/model#//Project/cutElements"/>
+      <ePackages href="http://org/eclipse/example/bowling#/"/>
+    </mutatorConfig>
+  </org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig>
+  <org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig seed="1" count="10" testClass="org.eclipse.emf.emfstore.fuzzy.emf.test.ServerTest" id="_SCHGhIvSEeGC3oFJZ-5KUS">
+    <mutatorConfig minObjectsCount="100">
+      <rootEClass href="http://eclipse.org/emf/emfstore/common/model#//Project"/>
+      <eStructuralFeaturesToIgnore xsi:type="ecore:EReference" href="http://eclipse.org/emf/emfstore/common/model#//Project/cutElements"/>
+      <ePackages href="http://org/eclipse/example/bowling#/"/>
+    </mutatorConfig>
+  </org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig>
+  <org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig seed="1" count="5000" testClass="org.eclipse.emf.emfstore.fuzzy.emf.test.MutatorTest" id="_C11qUIvSEeGC3oFJZ-5VgQ">
+    <mutatorConfig>
+      <ePackages href="http://org/eclipse/example/bowling#/"/>
+    </mutatorConfig>
+  </org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig>
+  <org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig seed="2" count="1" testClass="org.eclipse.emf.emfstore.fuzzy.emf.test.BigMutationTest" id="_X34zhIvSEeGC3oFJZ-5VzL">
+    <mutatorConfig minObjectsCount="100000">
+      <ePackages href="http://org/eclipse/example/bowling#/"/>
+    </mutatorConfig>
+  </org.eclipse.emf.emfstore.fuzzy.emf.config:TestConfig>   
+</xmi:XMI>

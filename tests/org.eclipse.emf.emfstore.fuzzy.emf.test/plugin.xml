@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.emf.emfstore.client.inverseCrossReferenceCache">
+      <useInverseCrossReferenceCache
+            activated="true">
+      </useInverseCrossReferenceCache>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.common.model.modelelementIdGenerator">
+      <idgenerator
+            class="org.eclipse.emf.emfstore.fuzzy.emf.test.FuzzyModelElementIdGenerator">
+      </idgenerator>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.changeRecordingOptions">
+      <RecordingOptions
+            cutOffIncomingCrossReferences="true">
+      </RecordingOptions>
+   </extension>
+
+</plugin>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.eclipse.emf.emfstore</groupId>
+    <artifactId>emfstore-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../../releng/emfstore-parent/</relativePath>
+  </parent>
+  <groupId>org.eclipse.emf.emfstore</groupId>
+  <artifactId>org.eclipse.emf.emfstore.fuzzy.emf.test</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>eclipse-test-plugin</packaging>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <version>${tycho-version}</version>
+
+        <configuration>
+                   
+          <testSuite>org.eclipse.emf.emfstore.fuzzy.emf.test</testSuite>
+          <testClass>org.eclipse.emf.emfstore.fuzzy.emf.test.AllFuzzyTests</testClass>
+          <useUIHarness>true</useUIHarness>
+          <useUIThread>false</useUIThread>
+          
+          <argLine>-Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m -DrunFuzzyTests=${runFuzzyTests} -DfilterTests=${filterTests}</argLine>
+          <failIfNoTests>false</failIfNoTests>
+          <testFailureIgnore>true</testFailureIgnore>
+          
+          <dependencies> 
+          	<dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>org.eclipse.emf.emfstore.fuzzy.emf</artifactId>
+              <version>0.0.0</version>
+            </dependency>   
+            <dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>org.eclipse.emf.emfstore.fuzzy</artifactId>
+              <version>0.0.0</version>
+            </dependency>        
+            <dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>org.eclipse.emf.emfstore.client.model.edit</artifactId>
+              <version>0.0.0</version>
+            </dependency>
+            <dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>org.eclipse.emf.emfstore.client.test</artifactId>
+              <version>0.0.0</version>
+            </dependency>
+            <dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>org.eclipse.emf.emfstore.client</artifactId>
+              <version>0.0.0</version>
+            </dependency>            
+            <dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>org.eclipse.emf.emfstore.modelmutator</artifactId>
+              <version>0.0.0</version>
+            </dependency>            
+            <dependency>
+              <type>eclipse-plugin</type>
+              <artifactId>org.eclipse.emf.emfstore.examplemodel.edit</artifactId>
+              <version>0.0.0</version>
+            </dependency>           
+          </dependencies>
+
+          <bundleStartLevel>  
+          	<bundle>
+              <id>org.eclipse.emf.emfstore.fuzzy.emf</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>
+            <bundle>
+              <id>org.eclipse.emf.emfstore.fuzzy</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>          
+            <bundle>
+              <id>org.eclipse.emf.emfstore.client.model.edit</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>
+            <bundle>
+              <id>org.eclipse.emf.emfstore.client.test</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>
+            <bundle>
+              <id>org.eclipse.emf.emfstore.client</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>        
+            <bundle>
+              <id>org.eclipse.emf.emfstore.modelmutator</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>           
+            <bundle>
+              <id>org.eclipse.emf.emfstore.examplemodel.edit</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>
+            <bundle>
+              <id>org.eclipse.emf.emfstore.examplemodel</id>
+              <level>4</level>
+              <autoStart>false</autoStart>
+            </bundle>            
+          </bundleStartLevel> 
+        </configuration>
+       
+      </plugin>
+	</plugins>
+   </build>
+</project>

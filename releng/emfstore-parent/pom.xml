@@ -161,18 +161,16 @@
     <module>../../bundles/org.eclipse.emf.emfstore.modelmutator</module>
     <module>../../features/org.eclipse.emf.emfstore.modelmutator.feature</module>
         
-    <!-- Fuzzy -->
-    <!-- 
-    <module>../org.eclipse.emf.emfstore.fuzzy.feature</module>
-    <module>../org.eclipse.emf.emfstore.fuzzy.test.feature</module>
-	<module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.fuzzy</module>
-	<module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.fuzzy.emf</module>
-	<module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.fuzzy.emf.edit</module>
-	<module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.fuzzy.emf.editor</module>
-	<module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.fuzzy.emf.example</module>
-	<module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.fuzzy.emf.test</module>
-	 -->
-
+    <!-- Fuzzy -->    
+    <module>../../features/org.eclipse.emf.emfstore.fuzzy.feature</module>
+    <module>../../features/org.eclipse.emf.emfstore.fuzzy.test.feature</module>
+	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy</module>
+	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf</module>
+	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.edit</module>
+	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.editor</module>
+	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.example</module>
+	<module>../../tests/org.eclipse.emf.emfstore.fuzzy.emf.test</module>
+	
     <!-- Testing -->
     <module>../../tests/org.eclipse.emf.emfstore.client.test</module>
 	<module>../../tests/org.eclipse.emf.emfstore.client.test.ui</module>
