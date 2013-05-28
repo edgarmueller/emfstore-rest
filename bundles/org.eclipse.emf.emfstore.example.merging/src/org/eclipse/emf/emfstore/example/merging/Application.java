@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.example.merging;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -25,6 +26,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
@@ -34,8 +36,6 @@ import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.common.ConsoleProgressMonitor;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
@@ -101,45 +101,44 @@ public class Application implements IApplication {
 		setupWorkspace();
 
 		// Change the name of the league in project 1,add a new player and commit the change
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				league1.setName("New Name 1");
 				league1.getPlayers().add(createPlayer("Player no. 4"));
+				return null;
 			}
-		}.run(false);
-		new EMFStoreCommand() {
-			@SuppressWarnings("restriction")
-			@Override
-			protected void doRun() {
+		});
+		
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				try {
 					project1.commit(logMessage, null, new ConsoleProgressMonitor());
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
+				return null;
 			}
-		}.run(false);
+		});
 
 		// Changing the name again value without calling
 		// project2.update() will cause a conflict on commit.
 		// also add one change which is non-conflicting
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				league2.setName("New Name 2");
 				league2.getPlayers().remove(0);
+				return null;
 			}
-		}.run(false);
-
-		new EMFStoreCommand() {
-			@SuppressWarnings("restriction")
-			@Override
-			protected void doRun() {
+		});
+		
+		
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				try {
 					project2.commit(logMessage, null, new ConsoleProgressMonitor());
 				} catch (BaseVersionOutdatedException e) {
 					System.out.println("\nCommit of project 2 failed.");
-
+					
 					// run update in project 2 with our own updateCallback.
 					System.out.println("\nUpdate of project 2 with conflict resolver...");
 					try {
@@ -154,21 +153,22 @@ public class Application implements IApplication {
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
+				return null;
 			}
-		}.run(false);
-
+		});
+	
 		// After having merged the two projects update local project 1
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				try {
 					System.out.println("\nUpdate of project 1 with merge result.");
 					project1.update(new NullProgressMonitor());
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
+				return null;
 			}
-		}.run(false);
+		});
 
 		System.out.println("\nLeague name in project 1 is now:" + league1.getName());
 		System.out.println("Client run completed.");
@@ -187,25 +187,24 @@ public class Application implements IApplication {
 
 		// A user session stores credentials for login
 		// Creates a user session with the default credentials
-		final ESUsersession usersession = new EMFStoreCommandWithResult<ESUsersession>() {
-			@Override
-			protected ESUsersession doRun() {
-				Usersession session = EMFStoreClientUtil.createUsersession();
-				try {
-					session.logIn();
-				} catch (ESException e) {
-					throw new RuntimeException(e);
+		final ESUsersession usersession = RunESCommand.runWithResult(new Callable<ESUsersession>() {
+				public ESUsersession call() throws Exception {
+					Usersession session = EMFStoreClientUtil.createUsersession();
+					try {
+						session.logIn();
+					} catch (ESException e) {
+						throw new RuntimeException(e);
+					}
+					return session.toAPI();
 				}
-				return session.toAPI();
-			}
-		}.run(false);
+			});
 
 		// Retrieves a list of existing (and accessible) projects
 		// on the sever and deletes them permanently (to have a
 		// clean set-up)
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				try {
 					List<ESRemoteProject> projectList = usersession.getServer().getRemoteProjects();
 					for (ESRemoteProject projectInfo : projectList) {
@@ -214,13 +213,14 @@ public class Application implements IApplication {
 				} catch (ESException e) {
 					throw new RuntimeException(e);
 				}
+				return null;
 			}
-		}.run(false);
+		});
 
 		// Create a project, share it with the server
-		project1 = new EMFStoreCommandWithResult<ESLocalProject>() {
-			@Override
-			protected ESLocalProject doRun() {
+		project1 = RunESCommand.runWithResult(new Callable<ESLocalProject>() {
+
+			public ESLocalProject call() throws Exception {
 				ESLocalProject project1 = workspace.createLocalProject("projectNo1");
 				try {
 					project1.shareProject(usersession, new ConsoleProgressMonitor());
@@ -229,7 +229,7 @@ public class Application implements IApplication {
 				}
 				return project1;
 			}
-		}.run(false);
+		});
 
 		// Create some EObjects and add them to the project
 		// (To the projects containment tree)
@@ -238,16 +238,15 @@ public class Application implements IApplication {
 		league1.getPlayers().add(createPlayer("no. 1"));
 		league1.getPlayers().add(createPlayer("no. 2"));
 
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
 				project1.getModelElements().add(league1);
+				return null;
 			}
-		}.run(false);
-
-		logMessage = new EMFStoreCommandWithResult<ESLogMessage>() {
-			@Override
-			protected ESLogMessage doRun() {
+		});
+		
+		logMessage = RunESCommand.runWithResult(new Callable<ESLogMessage>() {
+			public ESLogMessage call() throws Exception {
 				try {
 					LogMessage result = VersioningFactory.eINSTANCE.createLogMessage();
 					result.setMessage("My Message");
@@ -258,13 +257,12 @@ public class Application implements IApplication {
 					throw new RuntimeException(e);
 				}
 			}
-		}.run(false);
+		}); 
 
 		// Check-out a second, independent copy of the project
 		// (simulating a second client)
-		project2 = new EMFStoreCommandWithResult<ESLocalProject>() {
-			@Override
-			protected ESLocalProject doRun() {
+		project2 = RunESCommand.runWithResult(new Callable<ESLocalProject>() {
+			public ESLocalProject call() throws Exception {
 				try {
 					return project1.getRemoteProject().checkout( "My checkout",
 						usersession, new NullProgressMonitor());
@@ -272,7 +270,7 @@ public class Application implements IApplication {
 					throw new RuntimeException(e);
 				}
 			}
-		}.run(false);
+		});
 
 		league2 = (League) project2.getModelElements().get(0);
 	}

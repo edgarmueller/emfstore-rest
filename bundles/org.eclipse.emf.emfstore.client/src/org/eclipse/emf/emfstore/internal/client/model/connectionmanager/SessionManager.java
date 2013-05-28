@@ -117,8 +117,8 @@ public class SessionManager {
 		} catch (ESException e) {
 			if (retry && (e instanceof SessionTimedOutException || e instanceof UnknownSessionException)) {
 				// login & retry
-				loginUsersession(usersession, true);
-				executeCall(serverCall, usersession, false);
+				Usersession loginUsersession = loginUsersession(usersession, true);
+				executeCall(serverCall, loginUsersession, false);
 			} else {
 				throw e;
 			}

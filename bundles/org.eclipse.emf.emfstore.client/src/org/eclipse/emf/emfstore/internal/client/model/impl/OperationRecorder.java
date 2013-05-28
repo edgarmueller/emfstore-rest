@@ -835,6 +835,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	public void endCompositeOperation() {
 		bufferOrRecordOperation(compositeOperation);
 		this.compositeOperation = null;
+		notificationRecorder.stopRecording();
 	}
 
 	/**

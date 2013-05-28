@@ -345,4 +345,55 @@ public class CompositeOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 	}
+
+	/**
+	 * Test ending and starting composite operations subsequently.
+	 */
+	@Test
+	public void beginSubsequentCompositeOperations() {
+		getProjectSpace().beginCompositeOperation();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+			}
+		}.run(false);
+
+		getProjectSpace().getOperationManager().endCompositeOperation();
+
+		assertTrue(getProjectSpace().getOperationManager().getNotificationRecorder().isRecordingComplete());
+
+		getProjectSpace().beginCompositeOperation();
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+			}
+		}.run(false);
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+				getProject().addModelElement(DocumentFactory.eINSTANCE.createLeafSection());
+			}
+		}.run(false);
+
+		getProjectSpace().getOperationManager().endCompositeOperation();
+
+		assertTrue(getProjectSpace().getOperationManager().getNotificationRecorder().isRecordingComplete());
+	}
+
 }
