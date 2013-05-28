@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Fuzzy JUnit Testing Framework (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy;singleton:=true
-Bundle-Version: 0.9.3.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
