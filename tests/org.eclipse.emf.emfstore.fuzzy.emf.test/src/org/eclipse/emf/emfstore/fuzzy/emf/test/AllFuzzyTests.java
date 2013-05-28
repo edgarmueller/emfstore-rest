@@ -10,7 +10,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
 
-import org.eclipse.emf.emfstore.fuzzy.emf.FilteredSuite;
+import org.eclipse.emf.emfstore.client.test.FilteredSuite;
+import org.eclipse.emf.emfstore.client.test.FilteredSuite.FilteredSuiteParameter;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -21,6 +22,7 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(FilteredSuite.class)
+@FilteredSuiteParameter({ "runFuzzyTests" })
 @Suite.SuiteClasses({ OperationApplyTest.class })
 public class AllFuzzyTests {
 
