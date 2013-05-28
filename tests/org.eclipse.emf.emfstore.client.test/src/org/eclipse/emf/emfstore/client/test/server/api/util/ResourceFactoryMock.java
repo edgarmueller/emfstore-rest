@@ -13,6 +13,8 @@ package org.eclipse.emf.emfstore.client.test.server.api.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -24,9 +26,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 public class ResourceFactoryMock extends XMIResourceFactoryImpl implements Registry {
 
+	private List<Resource> resources = new LinkedList<Resource>();
+
 	@Override
 	public Resource createResource(URI uri) {
-		return new ResourceImpl() {
+		Resource result = new ResourceImpl() {
 			@Override
 			protected void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 			}
@@ -52,6 +56,9 @@ public class ResourceFactoryMock extends XMIResourceFactoryImpl implements Regis
 				return uri;
 			}
 		};
+
+		resources.add(result);
+		return result;
 	}
 
 	public Map<String, Object> getContentTypeToFactoryMap() {

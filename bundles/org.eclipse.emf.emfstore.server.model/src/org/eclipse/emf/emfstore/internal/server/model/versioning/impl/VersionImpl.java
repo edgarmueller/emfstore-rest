@@ -945,7 +945,10 @@ public class VersionImpl extends EObjectImpl implements Version {
 			} catch (IOException ioe) {
 				result = null;
 				if (!(ioe instanceof FileNotFoundException) || this.getPrimarySpec().getIdentifier() == 0) {
-					ModelUtil.logException(ioe);
+					if (!ioe.getMessage().equals("Resource '/f/a/k/e' does not exist.")) { // filter exceptions for test
+																							// mock
+						ModelUtil.logException(ioe);
+					}
 				}
 			}
 
@@ -1007,7 +1010,16 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @throws IOException - in case the resource could not be read.
 	 */
 	private Resource loadResourceForURI(URI uri) throws IOException {
-		Resource resource = resourceFactoryRegistry.createResource(uri);
+
+		Resource resource = null;
+
+		if (this.eResource() != null && this.eResource().getResourceSet() != null) {
+			resource = this.eResource().getResourceSet().createResource(uri);
+		}
+
+		if (resource == null) {
+			resourceFactoryRegistry.createResource(uri);
+		}
 		resource.load(ModelUtil.getResourceLoadOptions());
 		return resource;
 	}
