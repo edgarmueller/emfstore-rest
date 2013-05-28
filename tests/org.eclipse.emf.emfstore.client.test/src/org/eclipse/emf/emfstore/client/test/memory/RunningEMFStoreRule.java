@@ -30,7 +30,6 @@ import org.junit.rules.ExternalResource;
 /**
  * The JUnit Rule for running an EMFStore.
  */
-@SuppressWarnings("restriction")
 public class RunningEMFStoreRule extends ExternalResource {
 
 	private ESServer server;
