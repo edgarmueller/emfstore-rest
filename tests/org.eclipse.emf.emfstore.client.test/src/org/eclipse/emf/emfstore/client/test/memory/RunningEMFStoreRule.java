@@ -95,7 +95,9 @@ public class RunningEMFStoreRule extends ExternalResource {
 		stopEMFStore();
 		((ESWorkspaceImpl) workspace).toInternalAPI().getUsersessions()
 			.remove(((ESUsersessionImpl) session).toInternalAPI());
-		workspace.removeServer(server);
+		if (server.getName().equals("RunningEMFStoreRuleStore")) {
+			workspace.removeServer(server);
+		}
 	}
 
 	private static void startEMFStore() {
