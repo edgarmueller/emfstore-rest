@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server.api.util;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -45,6 +46,11 @@ public class ResourceFactoryMock extends XMIResourceFactoryImpl implements Regis
 
 			@Override
 			public void save(Map<?, ?> options) throws IOException {
+			}
+
+			@Override
+			public void load(Map<?, ?> options) throws IOException {
+				throw new FileNotFoundException("Mock Resource does not support loading");
 			}
 
 			@Override
