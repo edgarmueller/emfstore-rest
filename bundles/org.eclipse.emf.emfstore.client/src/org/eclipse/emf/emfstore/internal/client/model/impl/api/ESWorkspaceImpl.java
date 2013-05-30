@@ -106,6 +106,12 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 		return serverImpl;
 	}
 
+	public boolean serverExists(ESServer server) {
+		final ESServerImpl serverImpl = (ESServerImpl) server;
+		ESServerImpl existingServer = getExistingServer(serverImpl);
+		return existingServer != null;
+	}
+
 	/**
 	 * Returns the server with the same URL and port as the given one, if there's any.
 	 * 

@@ -48,8 +48,7 @@ public class UIEditServerPropertiesController extends AbstractEMFStoreUIControll
 	 */
 	@Override
 	public Void doRun(IProgressMonitor monitor) throws ESException {
-		NewRepositoryWizard wizard = new NewRepositoryWizard();
-		wizard.setServerInfo(server);
+		NewRepositoryWizard wizard = new NewRepositoryWizard(server);
 		WizardDialog dialog = new WizardDialog(getShell(), wizard);
 		dialog.create();
 		dialog.open();

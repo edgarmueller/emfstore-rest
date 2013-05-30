@@ -11,11 +11,9 @@
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
-import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -45,7 +43,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	private Text name;
 	private Text url;
 	private Spinner port;
-	private Combo cert;
+	private Combo certificateCombo;
 
 	/**
 	 * Default constructor.
@@ -96,11 +94,11 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 
 		// Certificate
 		new Label(composite, SWT.NONE).setText("Certificate:");
-		cert = new Combo(composite, SWT.BORDER);
+		certificateCombo = new Combo(composite, SWT.BORDER);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = ncol - 2;
-		cert.setLayoutData(gd);
-		cert.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+		certificateCombo.setLayoutData(gd);
+		certificateCombo.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		initCombo();
 
 		// Choose Certificate, Opens Dialogue
@@ -122,17 +120,17 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 
 			try {
 				if (KeyStoreManager.getInstance().contains(server.getCertificateAlias())) {
-					for (int i = 0; i < cert.getItemCount(); i++) {
-						if (cert.getItem(i).equals(server.getCertificateAlias())) {
-							cert.select(i);
+					for (int i = 0; i < certificateCombo.getItemCount(); i++) {
+						if (certificateCombo.getItem(i).equals(server.getCertificateAlias())) {
+							certificateCombo.select(i);
 							break;
 						}
 					}
 				} else {
-					cert.setText("");
+					certificateCombo.setText("");
 				}
 			} catch (ESCertificateStoreException e1) {
-				cert.setText("");
+				certificateCombo.setText("");
 			}
 		}
 	}
@@ -140,16 +138,12 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	private void initCombo() {
 		try {
 			ArrayList<String> certificates = KeyStoreManager.getInstance().getCertificates();
-			String[] aliases = new String[certificates.size()];
-			for (int i = 0; i < certificates.size(); i++) {
-				aliases[i] = certificates.get(i);
-			}
-			cert.setItems(aliases);
+			certificateCombo.setItems(certificates.toArray(new String[certificates.size()]));
 
 			NewRepositoryWizard wizard = (NewRepositoryWizard) getWizard();
 			ESServer server = wizard.getServer();
 			String selectedCertificate = server.getCertificateAlias();
-			cert.select(certificates.indexOf(selectedCertificate));
+			certificateCombo.select(certificates.indexOf(selectedCertificate));
 		} catch (ESCertificateStoreException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 		}
@@ -164,7 +158,6 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			return false;
 		}
 		if (isTextNonEmpty(name.getText()) && isTextNonEmpty(url.getText()) && isComboNotEmpty()) {
-			saveDataToModel();
 			return true;
 		}
 		return false;
@@ -173,19 +166,14 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	/**
 	 * Saves the uses choices from this page to the model. Called on exit of the
 	 * page
+	 * 
+	 * @return
 	 */
-	private void saveDataToModel() {
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				NewRepositoryWizard wizard = (NewRepositoryWizard) getWizard();
-				ESServer serverInfo = wizard.getServer();
-				serverInfo.setName(name.getText());
-				serverInfo.setURL(url.getText());
-				serverInfo.setPort(port.getSelection());
-				serverInfo.setCertificateAlias(cert.getText());
-				return null;
-			}
-		});
+	public ESServer getServer() {
+		return ESServer.FACTORY.getServer(name.getText(),
+			url.getText(),
+			port.getSelection(),
+			certificateCombo.getText());
 	}
 
 	/**
@@ -202,7 +190,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	}
 
 	private boolean isComboNotEmpty() {
-		String s = cert.getItem(cert.getSelectionIndex());
+		String s = certificateCombo.getItem(certificateCombo.getSelectionIndex());
 		return isTextNonEmpty(s);
 	}
 
@@ -251,10 +239,10 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			csd.open();
 			if (csd.getReturnCode() == Window.OK) {
 				initCombo();
-				for (int i = 0; i < cert.getItemCount(); i++) {
-					String item = cert.getItem(i);
+				for (int i = 0; i < certificateCombo.getItemCount(); i++) {
+					String item = certificateCombo.getItem(i);
 					if (item.equals(csd.getCertificateAlias())) {
-						cert.select(i);
+						certificateCombo.select(i);
 						break;
 					}
 				}

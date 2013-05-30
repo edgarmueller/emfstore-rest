@@ -10,10 +10,14 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
+import java.text.MessageFormat;
+import java.util.concurrent.Callable;
+
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -32,11 +36,18 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 
 	private NewRepositoryWizardPageOne mainPage;
 
+	private boolean isEdit;
+
 	/**
 	 * Default constructor.
 	 */
 	public NewRepositoryWizard() {
 		super();
+	}
+
+	public NewRepositoryWizard(ESServer server) {
+		this.server = server;
+		isEdit = true;
 	}
 
 	/**
@@ -62,8 +73,30 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	 */
 	@Override
 	public boolean performFinish() {
-		if (this.getContainer().getCurrentPage().canFlipToNextPage()) {
-			ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
+		if (mainPage.canFlipToNextPage()) {
+			ESWorkspaceImpl workspace = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
+			final ESServer editedServer = mainPage.getServer();
+
+			if (isEdit) {
+				RunESCommand.run(new Callable<Void>() {
+					public Void call() throws Exception {
+						server.setCertificateAlias(editedServer.getCertificateAlias());
+						server.setName(editedServer.getName());
+						server.setPort(editedServer.getPort());
+						server.setURL(editedServer.getURL());
+						return null;
+					}
+				});
+
+			} else {
+				if (workspace.serverExists(editedServer)) {
+					MessageDialog.openInformation(getShell(), "Server already exists",
+						MessageFormat.format("The server {0} you entered already exists.",
+							server.getName() + ":" + server.getPort()));
+				} else {
+					workspace.addServer(editedServer);
+				}
+			}
 			dispose();
 		} else {
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error",
@@ -85,16 +118,6 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 				KeyStoreManager.DEFAULT_CERTIFICATE);
 		}
 		return server;
-	}
-
-	/**
-	 * Sets the ServerInfo.
-	 * 
-	 * @param serverInfo
-	 *            {@link ServerInfo}
-	 */
-	public void setServerInfo(ESServer server) {
-		this.server = server;
 	}
 
 	/**
