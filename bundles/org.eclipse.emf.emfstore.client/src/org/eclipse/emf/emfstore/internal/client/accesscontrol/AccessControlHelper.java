@@ -25,7 +25,6 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Server
 public class AccessControlHelper {
 
 	private ACUser user;
-	private Usersession usersession;
 
 	/**
 	 * Default constructor.
@@ -33,7 +32,6 @@ public class AccessControlHelper {
 	 * @param usersession the user session that needs to be checked
 	 */
 	public AccessControlHelper(Usersession usersession) {
-		this.usersession = usersession;
 		this.user = usersession.getACUser();
 	}
 
@@ -97,12 +95,5 @@ public class AccessControlHelper {
 			}
 		}
 		throw new AccessControlException();
-	}
-
-	/**
-	 * @return usersession
-	 */
-	public Usersession getUsersession() {
-		return usersession;
 	}
 }
