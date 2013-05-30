@@ -12,6 +12,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -24,7 +25,6 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
-import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.window.Window;
@@ -51,9 +51,16 @@ public class LoginDialogController implements ILoginDialogController {
 	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#getKnownUsersessions()
 	 */
 	public List<ESUsersession> getKnownUsersessions() {
-		return APIUtil.mapToAPI(
-			ESUsersession.class,
-			ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().getUsersessions());
+		EList<Usersession> usersessions = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI()
+			.getUsersessions();
+		List<ESUsersession> knownSessions = new ArrayList<ESUsersession>();
+		for (Usersession session : usersessions) {
+			if (session.getServerInfo().toAPI() == server) {
+				knownSessions.add(session.toAPI());
+			}
+		}
+
+		return knownSessions;
 	}
 
 	private ESUsersession login(final boolean force) throws ESException {
@@ -156,7 +163,7 @@ public class LoginDialogController implements ILoginDialogController {
 		});
 
 		this.usersession = session;
-		// TODO OTS auto save
+		ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI().save();
 	}
 
 	/**
