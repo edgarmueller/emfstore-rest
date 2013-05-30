@@ -945,10 +945,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			} catch (IOException ioe) {
 				result = null;
 				if (!(ioe instanceof FileNotFoundException) || this.getPrimarySpec().getIdentifier() == 0) {
-					if (!ioe.getMessage().equals("Resource '/f/a/k/e' does not exist.")) { // filter exceptions for test
-																							// mock
-						ModelUtil.logException(ioe);
-					}
+					ModelUtil.logException(ioe);
 				}
 			}
 
