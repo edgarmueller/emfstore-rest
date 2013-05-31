@@ -6,7 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
+ * Contributors: 
+ * Shterev
+ * Hodaie
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
 

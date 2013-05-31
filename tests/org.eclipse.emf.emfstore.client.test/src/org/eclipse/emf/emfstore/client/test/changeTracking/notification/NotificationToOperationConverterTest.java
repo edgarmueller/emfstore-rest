@@ -7,15 +7,18 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * jsommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.notification;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.NotificationToOperationConverter;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
@@ -49,14 +52,24 @@ public class NotificationToOperationConverterTest extends NotificationTest {
 	 */
 	@Test
 	public void removeAllAttributes() {
-		TestElement element = getTestElement();
+		final TestElement element = getTestElement();
 		List<String> children = new ArrayList<String>();
 		children.add("eclipse");
 		children.add("hudson");
 		element.getStrings().addAll(children);
-		getProject().addModelElement(element);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				getProject().addModelElement(element);
+				return null;
+			}
+		});
 
-		element.getStrings().clear();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				element.getStrings().clear();
+				return null;
+			}
+		});
 
 		AbstractOperation operation = getProjectSpace().getOperations().get(1);
 		Assert.assertTrue(operation instanceof MultiAttributeOperation);

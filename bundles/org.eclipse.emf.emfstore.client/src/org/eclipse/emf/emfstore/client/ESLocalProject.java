@@ -198,6 +198,13 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	// throws ESException;
 
 	/**
+	 * Add an existing {@link ESLocalProject} to the workspace.
+	 * 
+	 * @param progressMonitor the {@link IProgressMonitor} is used during adding to workspace.
+	 */
+	void addToWorkspace(final IProgressMonitor progressMonitor);
+
+	/**
 	 * <p>
 	 * Shares this project.
 	 * </p>

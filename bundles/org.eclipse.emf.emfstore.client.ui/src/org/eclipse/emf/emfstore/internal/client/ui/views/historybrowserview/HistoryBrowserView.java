@@ -6,7 +6,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
+ * Contributors: 
+ * wesendon
+ * Shterev
+ * Hodaie
+ * Aumann
+ * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;
 
@@ -244,7 +249,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private TreeViewerColumn createColumn(String label, int width) {
-		TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.NONE);
+		TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.MULTI);
 		column.getColumn().setText(label);
 		column.getColumn().setWidth(width);
 		return column;
@@ -804,7 +809,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	 */
 	private final class TreeViewerWithModelElementSelectionProvider extends TreeViewer {
 		private TreeViewerWithModelElementSelectionProvider(Composite parent) {
-			super(parent, SWT.NONE);
+			super(parent, SWT.MULTI);
 		}
 
 		@Override

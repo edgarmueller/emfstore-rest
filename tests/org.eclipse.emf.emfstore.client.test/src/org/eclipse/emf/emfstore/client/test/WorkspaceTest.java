@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test;
 
@@ -15,12 +16,14 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -147,9 +150,14 @@ public abstract class WorkspaceTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws IOException, ESException {
-		ESWorkspaceProviderImpl.getInstance().dispose();
-		Configuration.getClientBehavior().setAutoSave(saveState);
-		cleanEmfstoreFolders();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				ESWorkspaceProviderImpl.getInstance().dispose();
+				Configuration.getClientBehavior().setAutoSave(saveState);
+				cleanEmfstoreFolders();
+				return null;
+			}
+		});
 	}
 
 	private void cleanProjects() {
@@ -242,13 +250,20 @@ public abstract class WorkspaceTest {
 	 * Clear all operations from project space.
 	 */
 	protected void clearOperations() {
-		if (isCompareAtEnd()) {
-			clonedProjectSpace.applyOperations(getProjectSpace().getOperations(), false);
-			clonedProjectSpace.applyOperations(getProjectSpace().getOperationManager().clearOperations(), false);
-		} else {
-			getProjectSpace().getOperationManager().clearOperations();
-		}
-		getProjectSpace().getOperations().clear();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				if (isCompareAtEnd()) {
+					clonedProjectSpace.applyOperations(getProjectSpace().getOperations(), false);
+					clonedProjectSpace
+						.applyOperations(getProjectSpace().getOperationManager().clearOperations(), false);
+				} else {
+					getProjectSpace().getOperationManager().clearOperations();
+				}
+				getProjectSpace().getOperations().clear();
+				return null;
+			}
+		});
+
 	}
 
 	/**

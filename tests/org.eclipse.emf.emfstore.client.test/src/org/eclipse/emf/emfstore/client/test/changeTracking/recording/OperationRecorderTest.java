@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * jsommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.recording;
 
@@ -67,11 +68,10 @@ public class OperationRecorderTest extends WorkspaceTest {
 
 		element1.getReferences().add(element2);
 
-		project.addModelElement(element2);
-
 		RunESCommand.run(new Callable<Void>() {
 
 			public Void call() throws Exception {
+				project.addModelElement(element2);
 				project.deleteModelElement(element2);
 				project.addModelElement(element1);
 				Assert.assertNotNull(((IdEObjectCollectionImpl) project).getDeletedModelElementId(element2));
@@ -100,15 +100,30 @@ public class OperationRecorderTest extends WorkspaceTest {
 		connection.setContainer(source);
 		target.getReferences().add(connection);
 
-		project.addModelElement(source);
+		RunESCommand.run(new Callable<Void>() {
+
+			public Void call() throws Exception {
+				project.addModelElement(source);
+				return null;
+			}
+		});
+
 		ModelElementId connectionId = project.getModelElementId(connection);
 
 		clonedProjectSpace.getOperationManager().stopChangeRecording();
-		ChangePackage cp = VersioningFactory.eINSTANCE.createChangePackage();
-		cp.getOperations().addAll(getProjectSpace().getOperations());
-		cp.apply(clonedProjectSpace.getProject());
+		ChangePackage cp = RunESCommand.runWithResult(new Callable<ChangePackage>() {
+
+			public ChangePackage call() throws Exception {
+				ChangePackage cp = VersioningFactory.eINSTANCE.createChangePackage();
+				cp.getOperations().addAll(getProjectSpace().getOperations());
+				cp.apply(clonedProjectSpace.getProject());
+				return cp;
+			}
+		});
 
 		// do not use commands since we only have them on client side
+		// FIXME: if not wrapped in command fails with transactional editing domain, if wrapped in command assert fails,
+		// see comment above
 		connection.setContainer(null);
 
 		List<AbstractOperation> ops = getProjectSpace().getOperations();

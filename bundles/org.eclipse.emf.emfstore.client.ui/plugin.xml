@@ -3,6 +3,7 @@
 <plugin>
   <extension-point id="disableSaveControls" name="Disable save controls contributed by EMFStore" schema="schema/disableSaveControls.exsd"/>
   <extension-point id="filteredTypes" name="Filtered Types" schema="schema/filteredTypes.exsd"/>
+  <extension-point id="historyBrowserComparator" name="HistoryBrowserComparator" schema="schema/historyBrowserComparator.exsd"/>
   <extension
         point="org.eclipse.ui.handlers">
       <handler
@@ -433,6 +434,34 @@
                    style="push"
                    tooltip="Force to revert, the reversed changes between the previous revision has been applied">
              </command>
+             <command
+                   commandId="org.eclipse.emf.emfstore.client.ui.historybrowserview.compareRevisions"
+                   label="Compare Revisions"
+                   style="push">
+                <visibleWhen
+                      checkEnabled="true">
+                   <and>
+                      <with
+                            variable="selection">
+                         <count
+                               value="2">
+                         </count>
+                      </with>
+                      <iterate
+                            ifEmpty="false"
+                            operator="and">
+                         <instanceof
+                               value="org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo">
+                         </instanceof>
+                         <test
+                               forcePluginActivation="true"
+                               property="org.eclipse.emf.emfstore.client.ui.testers.historyCompareEnabled"
+                               value="true">
+                         </test>
+                      </iterate>
+                   </and>
+                </visibleWhen>
+             </command>
           </menuContribution>
           <menuContribution
                 locationURI="popup:org.eclipse.emf.emfstore.client.ui.views.RepositoryView?after=org.eclipse.emf.emfstore.internal.client.ui.repositorybrowser.ManageOrgUnits">
@@ -573,6 +602,13 @@
               id="org.eclipse.emf.emfstore.client.ui.testers.isAutoSaveEnabled"
               namespace="org.eclipse.emf.emfstore.internal.client.ui.testers"
               properties="isAutoSaveEnabled"
+              type="java.lang.Object">
+        </propertyTester>
+        <propertyTester
+              class="org.eclipse.emf.emfstore.internal.client.ui.testers.HistoryCompareEnabledTester"
+              id="org.eclipse.emf.emfstore.client.ui.testers.historyCompareEnabled"
+              namespace="org.eclipse.emf.emfstore.client.ui.testers"
+              properties="historyCompareEnabled"
               type="java.lang.Object">
         </propertyTester>
      </extension>
@@ -804,6 +840,11 @@
            id="org.eclipse.emf.emfstore.client.ui.mergeBranch"
            name="mergeBranch">
      </command>
+     <command
+           defaultHandler="org.eclipse.emf.emfstore.internal.client.ui.handlers.CompareRevisionsHandler"
+           id="org.eclipse.emf.emfstore.client.ui.historybrowserview.compareRevisions"
+           name="CompareRevisions">
+     </command>
       
    </extension>
    <extension
@@ -821,5 +862,12 @@
       <sessionProvider
             class="org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.BasicUISessionProvider">
       </sessionProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.ui.historyBrowserComparator">
+      <Comparator
+            comparator="org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.EMFCompareComparator"
+            name="org.eclipse.emf.emfstore.client.ui.EMFStoreComparator">
+      </Comparator>
    </extension>
 </plugin>
