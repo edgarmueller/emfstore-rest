@@ -29,9 +29,12 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
+import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
@@ -559,6 +562,30 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	// }
 	// });
 	// }
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#addToWorkspace(org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public void addToWorkspace(final IProgressMonitor progressMonitor) {
+		RunESCommand.run(new Callable<Void>() {
+
+			public Void call() throws Exception {
+				ProjectSpaceBase projectSpace = (ProjectSpaceBase) ESLocalProjectImpl.this.toInternalAPI();
+
+				WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProviderImpl.getInstance().getInternalWorkspace();
+				projectSpace.initResources(workspace.getResourceSet());
+				workspace.addProjectSpace(projectSpace);
+				workspace.save();
+
+				ESWorkspaceProviderImpl.getObserverBus().register(projectSpace);
+
+				return null;
+			}
+		});
+	}
 
 	/**
 	 * 

@@ -38,6 +38,25 @@ public interface ESRemoteProject extends ESProject {
 	ESServer getServer();
 
 	/**
+	 * 
+	 * @param name
+	 *            the name of the copy being created during the fetch
+	 * @param usersession
+	 *            the user session that will be used by the
+	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to fetch the project
+	 * @param versionSpec
+	 *            the version that should be fetched.
+	 * @param monitor
+	 *            the {@link IProgressMonitor} that is used during checkout in order to indicate progress
+	 * 
+	 * @return the fetched project
+	 * 
+	 * @throws ESException in case an error occurs during fetch
+	 */
+	ESLocalProject fetch(String name, ESUsersession session, ESPrimaryVersionSpec versionSpec,
+		IProgressMonitor progressMonitor) throws ESException;
+
+	/**
 	 * <p>
 	 * Checkouts the project in its HEAD version into the local workspace.
 	 * </p>

@@ -13,11 +13,16 @@
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.observer.ESCheckoutObserver;
@@ -30,8 +35,6 @@ import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -354,17 +357,14 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(java.lang.String,
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#fetch(java.lang.String,
 	 *      org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESLocalProjectImpl checkout(final String name, final ESUsersession session,
-		final ESPrimaryVersionSpec versionSpec,
-		final IProgressMonitor progressMonitor)
-		throws ESException {
-
-		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, "Checkout", 100);
+	public ESLocalProjectImpl fetch(final String name, final ESUsersession session,
+		final ESPrimaryVersionSpec versionSpec, final IProgressMonitor progressMonitor) throws ESException {
+		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, "Fetch", 100);
 
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 
@@ -399,31 +399,33 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 					throw new ESException("Server returned a null project!");
 				}
 
-				parentMonitor.subTask("Initializing local project...");
-				ProjectSpaceBase projectSpace = (ProjectSpaceBase) initProjectSpace(
-					usersession,
-					projectInfoCopy,
-					project,
-					name);
-
-				ESWorkspaceProviderImpl.getObserverBus().register(projectSpace);
-				parentMonitor.worked(30);
-
-				parentMonitor.subTask("Finishing checkout...");
-				ESWorkspaceProviderImpl.getObserverBus().notify(ESCheckoutObserver.class)
-					.checkoutDone(projectSpace.toAPI());
-				parentMonitor.worked(30);
-				parentMonitor.done();
-
-				return projectSpace.toAPI();
+				return initProjectSpace(usersession, projectInfoCopy, project, name).toAPI();
 			}
 		});
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#checkout(java.lang.String,
+	 *      org.eclipse.emf.emfstore.client.ESUsersession,
+	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public ESLocalProjectImpl checkout(final String name, final ESUsersession session,
+		final ESPrimaryVersionSpec versionSpec, final IProgressMonitor progressMonitor)
+		throws ESException {
+		ESLocalProjectImpl project = fetch(name, session, versionSpec, progressMonitor);
+		project.addToWorkspace(progressMonitor);
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESCheckoutObserver.class)
+			.checkoutDone(project);
+
+		return project;
+	}
+
 	private ProjectSpace initProjectSpace(final Usersession usersession, final ProjectInfo projectInfoCopy,
 		Project project, String projectName) {
-
-		WorkspaceBase workspace = (WorkspaceBase) ESWorkspaceProviderImpl.getInstance().getInternalWorkspace();
 
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProjectId(projectInfoCopy.getProjectId());
@@ -435,10 +437,13 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		projectSpace.setProject(project);
 		projectSpace.setResourceCount(0);
 		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
-		projectSpace.initResources(workspace.getResourceSet());
 
-		workspace.addProjectSpace(projectSpace);
-		workspace.save();
+		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
+		XMIResource res = (XMIResource) resourceSetImpl.createResource(ModelUtil.VIRTUAL_URI);
+		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
+		res.getContents().add(project);
+
+		projectSpace.setResourceSet(resourceSetImpl);
 
 		return projectSpace;
 	}
