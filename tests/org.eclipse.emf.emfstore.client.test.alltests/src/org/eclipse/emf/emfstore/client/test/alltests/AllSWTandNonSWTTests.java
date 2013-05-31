@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.alltests;
 
 import org.eclipse.emf.emfstore.client.test.AllTests;
+import org.eclipse.emf.emfstore.client.test.ui.AllUITests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -22,8 +23,8 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ AllTests.class, 
-//	AllPerformanceTests.class 
+@SuiteClasses({ AllTests.class, AllUITests.class
+// , AllPerformanceTests.class
 })
 public class AllSWTandNonSWTTests {
 
