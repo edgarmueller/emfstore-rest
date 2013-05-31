@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2013 EclipseSource Muenchen GmbH.
- * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors: 
- ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
 import static org.junit.Assert.assertEquals;
@@ -16,8 +6,12 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
@@ -45,10 +39,30 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	}
 
 	@Test
+	public void testFetchAndAddToWorkspace() {
+		try {
+			ESLocalProject localProject = remoteProject.fetch(remoteProject.getProjectName(),
+				usersession,
+				remoteProject.getHeadVersion(new NullProgressMonitor()),
+				new NullProgressMonitor());
+
+			ESWorkspace ws = ESWorkspaceProvider.INSTANCE.getWorkspace();
+			Assert.assertTrue(ws.getLocalProjects().isEmpty());
+
+			localProject.addToWorkspace(new NullProgressMonitor());
+
+			Assert.assertEquals(ws.getLocalProjects().size(), 1);
+		} catch (ESException e) {
+			log(e);
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
 	public void testCheckoutSession() {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(
-				"testCheckout",
+				remoteProject.getProjectName(),
 				usersession,
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
@@ -62,7 +76,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgress() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout("testCheckout", usersession,
+			ESLocalProject localProject = remoteProject.checkout(remoteProject.getProjectName(), usersession,
 				new NullProgressMonitor());
 			assertEquals(remoteProject.getProjectName(), localProject.getProjectName());
 			assertEquals(remoteProject.getGlobalProjectId(), localProject.getRemoteProject().getGlobalProjectId());
@@ -76,7 +90,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	public void testCheckoutSessionProgressNoFetch() {
 		try {
 			ESLocalProject localProject = remoteProject.checkout(
-				"testCheckout",
+				remoteProject.getProjectName(),
 				usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
@@ -91,7 +105,7 @@ public class RemoteProjectTest extends BaseServerWithProjectTest {
 	@Test
 	public void testCheckoutSessionProgressFetch() {
 		try {
-			ESLocalProject localProject = remoteProject.checkout("testCheckout",
+			ESLocalProject localProject = remoteProject.checkout(remoteProject.getProjectName(),
 				usersession,
 				remoteProject.getHeadVersion(new NullProgressMonitor()),
 				new NullProgressMonitor());
