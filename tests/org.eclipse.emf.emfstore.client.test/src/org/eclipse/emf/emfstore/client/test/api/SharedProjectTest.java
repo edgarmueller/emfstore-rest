@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
@@ -259,19 +259,29 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 	@Test
 	public void testMoveElementViaReference() throws ESException {
 
-		League league = ProjectChangeUtil.createLeague("Canadian bowling league");
-		Player player = ProjectChangeUtil.createPlayer("Joe");
-		league.getPlayers().add(player);
-		localProject.getModelElements().add(league);
+		final League league = ProjectChangeUtil.createLeague("Canadian bowling league");
+		final Player player = ProjectChangeUtil.createPlayer("Joe");
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				league.getPlayers().add(player);
+				localProject.getModelElements().add(league);
+				return null;
+			}
+		});
 		assertTrue(localProject.contains(league));
 
-		ESLocalProject secondProject = workspace.createLocalProject("SecondTestProject");
+		final ESLocalProject secondProject = workspace.createLocalProject("SecondTestProject");
 		secondProject.shareProject(new NullProgressMonitor());
 
 		// tournament does not contain players
-		Tournament tournament = ProjectChangeUtil.createTournament(false);
-		secondProject.getModelElements().add(tournament);
-		tournament.getPlayers().add(player);
+		final Tournament tournament = ProjectChangeUtil.createTournament(false);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				secondProject.getModelElements().add(tournament);
+				tournament.getPlayers().add(player);
+				return null;
+			}
+		});
 
 		localProject.save();
 		secondProject.save();
@@ -282,12 +292,11 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 
 		for (ESLocalProject localProject : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
 			if (localProject.getProjectName().equals("SecondTestProject")) {
-				tournament = (Tournament) localProject.getModelElements().get(0);
-				assertEquals(tournament.getPlayers().size(), 1);
+				Tournament t = (Tournament) localProject.getModelElements().get(0);
+				assertEquals(t.getPlayers().size(), 1);
 			}
 		}
 	}
-
 	// TODO: API does not support merging currently
 	// @Test
 	// public void testMerge() throws ESException {

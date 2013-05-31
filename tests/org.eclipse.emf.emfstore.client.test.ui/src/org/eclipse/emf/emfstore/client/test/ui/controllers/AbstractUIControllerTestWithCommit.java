@@ -6,9 +6,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
+
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Player;
@@ -17,6 +19,7 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.test.api.ProjectChangeUtil;
 import org.eclipse.emf.emfstore.client.test.ui.AllUITests;
 import org.eclipse.emf.emfstore.client.ui.ESUIControllerFactory;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUpdateProjectController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -34,16 +37,26 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 	private ESLocalProject checkedoutCopy;
 
 	protected void createTournamentAndCommit() {
-		Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final Tournament tournament = ProjectChangeUtil.createTournament(true);
 		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
-		localProject.getModelElements().add(tournament);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(tournament);
+				return null;
+			};
+		});
 		commit(baseVersion);
 	}
 
 	protected void createLeagueAndCommit() {
-		League league = ProjectChangeUtil.createLeague("L");
+		final League league = ProjectChangeUtil.createLeague("L");
 		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
-		localProject.getModelElements().add(league);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(league);
+				return null;
+			}
+		});
 		commit(baseVersion);
 	}
 

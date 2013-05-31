@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * jsommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.recording;
@@ -68,9 +68,14 @@ public class AllocateIdsPolicyTest extends ServerTests {
 		assertNull(collection.getDeletedModelElementId(element));
 	}
 
-	private void addRemoveObject(EObject object) {
-		collection.addModelElement(object);
-		collection.deleteModelElement(object);
+	private void addRemoveObject(final EObject object) {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				collection.addModelElement(object);
+				collection.deleteModelElement(object);
+				return null;
+			}
+		});
 		assertNull(collection.getDeletedModelElementId(object));
 	}
 
