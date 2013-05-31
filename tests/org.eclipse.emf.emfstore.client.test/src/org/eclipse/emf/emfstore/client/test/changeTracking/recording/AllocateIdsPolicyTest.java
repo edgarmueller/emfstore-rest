@@ -64,7 +64,7 @@ public class AllocateIdsPolicyTest extends ServerTests {
 		assertNull(collection.getDeletedModelElementId(element));
 
 		addRemoveObject(element);
-		getProjectSpace().shareProject(new NullProgressMonitor());
+		getProjectSpace().toAPI().shareProject(new NullProgressMonitor());
 		assertNull(collection.getDeletedModelElementId(element));
 	}
 
@@ -97,10 +97,21 @@ public class AllocateIdsPolicyTest extends ServerTests {
 	 */
 	public void removeAddWithCommand(IdComparator comparator) {
 		final Matchup matchup = BowlingFactory.eINSTANCE.createMatchup();
-		Game game = BowlingFactory.eINSTANCE.createGame();
-		collection.addModelElement(matchup);
+		final Game game = BowlingFactory.eINSTANCE.createGame();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				collection.addModelElement(matchup);
+				return null;
+			}
+		});
 		ModelElementId matchupId1 = collection.getModelElementId(matchup);
-		matchup.getGames().add(game);
+
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				matchup.getGames().add(game);
+				return null;
+			}
+		});
 		ModelElementId gameId1 = collection.getModelElementId(game);
 
 		// remove and add matchup in different commands

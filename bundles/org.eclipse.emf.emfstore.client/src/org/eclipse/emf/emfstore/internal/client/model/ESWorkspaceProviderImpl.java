@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -39,6 +40,7 @@ import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
@@ -157,7 +159,12 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 */
 	public void dispose() {
 		if (currentWorkspace != null) {
-			((WorkspaceImpl) currentWorkspace).dispose();
+			RunESCommand.run(new Callable<Void>() {
+				public Void call() throws Exception {
+					((WorkspaceImpl) currentWorkspace).dispose();
+					return null;
+				}
+			});
 			currentWorkspace = null;
 		}
 	}
