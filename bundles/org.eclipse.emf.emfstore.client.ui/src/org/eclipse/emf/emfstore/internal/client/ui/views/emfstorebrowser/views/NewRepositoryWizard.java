@@ -16,8 +16,10 @@ import java.util.concurrent.Callable;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
+import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -74,7 +76,7 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		if (mainPage.canFlipToNextPage()) {
-			ESWorkspaceImpl workspace = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
+			final ESWorkspaceImpl workspace = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
 			final ESServer editedServer = mainPage.getServer();
 
 			if (isEdit) {
@@ -84,7 +86,21 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 						server.setName(editedServer.getName());
 						server.setPort(editedServer.getPort());
 						server.setURL(editedServer.getURL());
+
+						// invalidate all sessions
+						invalidateSessions(workspace);
+
 						return null;
+					}
+
+					private void invalidateSessions(final ESWorkspaceImpl workspace) throws ESException {
+						for (Usersession session : workspace.toInternalAPI().getUsersessions()) {
+							if (session.getServerInfo() == server) {
+								session.logout();
+							}
+						}
+
+						workspace.toInternalAPI().save();
 					}
 				});
 
