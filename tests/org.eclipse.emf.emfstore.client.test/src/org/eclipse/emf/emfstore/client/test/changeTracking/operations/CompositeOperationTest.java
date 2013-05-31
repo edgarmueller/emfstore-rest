@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.operations;
@@ -16,6 +16,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.handler.ESOperationModifier;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
@@ -26,6 +27,7 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.client.test.model.task.ActionItem;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskFactory;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -370,7 +372,12 @@ public class CompositeOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		getProjectSpace().getOperationManager().endCompositeOperation();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				getProjectSpace().getOperationManager().endCompositeOperation();
+				return null;
+			}
+		});
 
 		assertTrue(getProjectSpace().getOperationManager().getNotificationRecorder().isRecordingComplete());
 
@@ -392,7 +399,12 @@ public class CompositeOperationTest extends WorkspaceTest {
 			}
 		}.run(false);
 
-		getProjectSpace().getOperationManager().endCompositeOperation();
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				getProjectSpace().getOperationManager().endCompositeOperation();
+				return null;
+			}
+		});
 
 		assertTrue(getProjectSpace().getOperationManager().getNotificationRecorder().isRecordingComplete());
 	}
