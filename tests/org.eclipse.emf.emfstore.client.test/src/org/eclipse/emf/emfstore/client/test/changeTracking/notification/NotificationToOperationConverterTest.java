@@ -6,7 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
+ * Contributors: 
+ * jsommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.notification;
 
