@@ -114,10 +114,6 @@ public class LoginDialog extends TitleAreaDialog {
 		ComboListener comboListener = new ComboListener();
 		usernameCombo.addPostSelectionChangedListener(comboListener);
 		Combo combo = usernameCombo.getCombo();
-		// if (controller.isUsersessionLocked()) {
-		// combo.setEnabled(false);
-		// // combo.setText(controller.getUsersession().getUsername());
-		// }
 		combo.addModifyListener(comboListener);
 		gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gridData.widthHint = 235;
@@ -131,7 +127,6 @@ public class LoginDialog extends TitleAreaDialog {
 		passwordLabel.setText("Password");
 
 		passwordField = new Text(loginContainer, SWT.BORDER | SWT.PASSWORD);
-		// passwordField.setText("password");
 		gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gridData.widthHint = 250;
 		passwordField.setLayoutData(gridData);
@@ -178,9 +173,7 @@ public class LoginDialog extends TitleAreaDialog {
 		});
 
 		knownUsersessions = APIUtil.mapToInternalAPI(Usersession.class, controller.getKnownUsersessions());
-		if (!controller.isUsersessionLocked()) {
-			usernameCombo.setInput(knownUsersessions);
-		}
+		usernameCombo.setInput(knownUsersessions);
 	}
 
 	/**

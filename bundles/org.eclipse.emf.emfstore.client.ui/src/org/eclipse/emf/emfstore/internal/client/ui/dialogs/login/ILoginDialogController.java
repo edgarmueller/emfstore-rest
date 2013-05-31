@@ -40,13 +40,6 @@ public interface ILoginDialogController {
 	void validate(ESUsersession usersession) throws ESException;
 
 	/**
-	 * Whether the login controller has an {@link Usersession} assigned.
-	 * 
-	 * @return true, if the login controller has an user session assigned, false otherwise
-	 */
-	boolean isUsersessionLocked();
-
-	/**
 	 * Returns the {@link Usersession} the login dialog controller was assigned to, if any.
 	 * 
 	 * @return the assigned user session or <code>null</code>, if none exists

@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
@@ -55,7 +56,10 @@ public class LoginDialogController implements ILoginDialogController {
 			.getUsersessions();
 		List<ESUsersession> knownSessions = new ArrayList<ESUsersession>();
 		for (Usersession session : usersessions) {
-			if (session.getServerInfo().toAPI() == server) {
+			ServerInfo serverInfo = session.getServerInfo();
+			// server info should never be null, but in case it is (whatever the reason may be)
+			// make sure it does not kill the initialization of the login dialog
+			if (serverInfo != null && serverInfo.toAPI() == server) {
 				knownSessions.add(session.toAPI());
 			}
 		}
@@ -113,19 +117,6 @@ public class LoginDialogController implements ILoginDialogController {
 		// contract: #validate() sets the usersession;
 		// TODO: validate can simply return the usersession..
 		return usersession;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.ILoginDialogController#isUsersessionLocked()
-	 */
-	public boolean isUsersessionLocked() {
-		if (getUsersession() == null) {
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -255,8 +246,8 @@ public class LoginDialogController implements ILoginDialogController {
 	 *             in case the login fails
 	 */
 	public ESUsersession login(ESUsersession usersession) throws ESException {
-		this.server = null;
 		this.usersession = usersession;
+		this.server = usersession.getServer();
 		return login(false);
 	}
 }
