@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
- * Technische Universitaet Muenchen.
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -249,7 +249,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	}
 
 	private TreeViewerColumn createColumn(String label, int width) {
-		TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.MULTI);
+		TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.NONE);
 		column.getColumn().setText(label);
 		column.getColumn().setWidth(width);
 		return column;
@@ -809,7 +809,7 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 	 */
 	private final class TreeViewerWithModelElementSelectionProvider extends TreeViewer {
 		private TreeViewerWithModelElementSelectionProvider(Composite parent) {
-			super(parent, SWT.MULTI);
+			super(parent, SWT.NONE);
 		}
 
 		@Override
