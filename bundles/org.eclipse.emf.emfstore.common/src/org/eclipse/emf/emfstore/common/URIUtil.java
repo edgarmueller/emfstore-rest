@@ -9,7 +9,7 @@
  * Contributors:
  * Johannes Faltermeier
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.common;
+package org.eclipse.emf.emfstore.common;
 
 import org.eclipse.emf.common.util.URI;
 
@@ -23,20 +23,26 @@ public final class URIUtil {
 	// TODO introduce name for multiple clients
 	// .. workspaces/<name>/ ..
 
-	// TODO add examples to javadoc with hilighting
+	// TODO missing example uris
 
 	/**
 	 * The EMFStore URI scheme.
+	 * <p />
+	 * Example URI: <b>emfstore</b>:/workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
 	public static final String SCHEME = "emfstore";
 
 	/**
 	 * The EMFStore URI segment for client workspaces.
+	 * <p />
+	 * Example URI: emfstore:/<b>workspaces</b>/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
 	public static final String CLIENT_SEGMENT = "workspaces";
 
 	/**
 	 * The EMFStore URI segment for projectspaces.
+	 * <p />
+	 * Example URI: emfstore:/workspaces/0/<b>projectspaces</b>/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
 	public static final String PROJECTSPACES_SEGMENT = "projectspaces";
 
@@ -47,16 +53,22 @@ public final class URIUtil {
 
 	/**
 	 * The EMFStore URI segment for a project.
+	 * <p />
+	 * Example URI: emfstore:/workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/<b>project</b>
 	 */
 	public static final String PROJECT_SEGMENT = "project";
 
 	/**
 	 * The EMFStore URI segment for a projectspace.
+	 * <p />
+	 * Example URI: emfstore:/workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/<b>projectspace</b>
 	 */
 	public static final String PROJECTSPACE_SEGMENT = "projectspace";
 
 	/**
 	 * The EMFStore URI segment for a project's operations.
+	 * <p />
+	 * Example URI: emfstore:/workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/<b>operations</b>
 	 */
 	public static final String OPERATIONS_SEGMENT = "operations";
 
@@ -110,6 +122,8 @@ public final class URIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing the project fragment of a projectspace.
+	 * <p />
+	 * Example URI: emfstore:/workspaces/0/projectspaces/<i>identifier</i>/project
 	 * 
 	 * @param identifier the projectspace's id
 	 * @return the EMFStore URI
@@ -120,6 +134,8 @@ public final class URIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing the operations of a projectspace.
+	 * <p />
+	 * Example URI: emfstore:/workspaces/0/projectspaces/<i>identifier</i>/operations
 	 * 
 	 * @param identifier the projectspace's id
 	 * @return the EMFStore URI
@@ -130,6 +146,8 @@ public final class URIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing the projectspace fragment of a project.
+	 * <p />
+	 * Example URI: emfstore:/workspaces/0/projectspaces/<i>identifier</i>/projectspace
 	 * 
 	 * @param identifier the project's id
 	 * @return the EMFStore URI
