@@ -9,22 +9,27 @@
  * Contributors:
  * Johannes Faltermeier
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.provider;
+package org.eclipse.emf.emfstore.client.mongodb;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider;
 
 /**
- * Interface for resource set provider.
+ * MongoDB ResourceSet provider for EMFStore Client.
  * 
  * @author jfaltermeier
  * 
  */
-public interface ESResourceSetProvider {
+public class MongoDBResourceSetProvider implements ESResourceSetProvider {
 
 	/**
-	 * Returns fully configured ResourceSet.
+	 * {@inheritDoc}
 	 * 
-	 * @return the ResourceSet
+	 * @see org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider#getResourceSet()
 	 */
-	ResourceSet getResourceSet();
+	public ResourceSet getResourceSet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
