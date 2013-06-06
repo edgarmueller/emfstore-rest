@@ -41,6 +41,7 @@ import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
+import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
@@ -190,22 +191,22 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 		resourceSet = resourceSetProvider.getResourceSet();
 
+		// TODO register editing domain in extension point
 		// register an editing domain on the resource
 		setEditingDomain(createEditingDomain(resourceSet));
 
-		URI fileURI = URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
-		File workspaceFile = new File(Configuration.getFileInfo().getWorkspacePath());
+		URI workspaceURI = URIUtil.createWorkspaceURI();
 		final Workspace workspace;
 		final Resource resource;
 
-		if (!workspaceFile.exists()) {
-			workspace = createNewWorkspace(resourceSet, fileURI);
+		if (!resourceSet.getURIConverter().exists(workspaceURI, null)) {
+			workspace = createNewWorkspace(resourceSet, workspaceURI);
 		} else {
 			// file exists, load it,
 			// check if a migration is needed
 			migrateModel(resourceSet);
 
-			resource = resourceSet.createResource(fileURI);
+			resource = resourceSet.createResource(workspaceURI);
 
 			try {
 				resource.load(ModelUtil.getResourceLoadOptions());
