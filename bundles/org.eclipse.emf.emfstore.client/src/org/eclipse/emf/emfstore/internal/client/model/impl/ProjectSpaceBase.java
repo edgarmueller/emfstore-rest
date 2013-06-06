@@ -735,6 +735,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(this);
 
+		deleteResource(getProject().eResource());
+		deleteResource(eResource());
+		deleteResource(getLocalChangePackage().eResource());
+
 		// delete project to notify listeners
 		getProject().delete();
 
@@ -747,10 +751,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		ESWorkspaceProviderImpl.getInstance().getInternalWorkspace().getProjectSpaces().remove(this);
 
 		dispose();
-
-		deleteResource(getProject().eResource());
-		deleteResource(eResource());
-		deleteResource(getLocalChangePackage().eResource());
 	}
 
 	private void deleteResource(Resource resource) throws IOException {
