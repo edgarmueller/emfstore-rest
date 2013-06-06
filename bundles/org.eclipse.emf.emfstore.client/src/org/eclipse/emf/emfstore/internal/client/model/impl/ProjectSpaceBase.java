@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  * emueller
  * koegel
@@ -43,6 +43,7 @@ import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
 import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
@@ -77,7 +78,6 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
-import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
@@ -684,24 +684,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void initResources(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 		initCompleted = true;
-		String projectSpaceFileNamePrefix = Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
-		String projectSpaceFileName = projectSpaceFileNamePrefix
-			+ Configuration.getFileInfo().getProjectSpaceFileName()
-			+ Configuration.getFileInfo().getProjectSpaceFileExtension();
-		String localChangePackageFileName = projectSpaceFileNamePrefix
-			+ Configuration.getFileInfo().getLocalChangePackageFileName()
-			+ Configuration.getFileInfo().getLocalChangePackageFileExtension();
-		URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
-		URI localChangePackageURI = URI.createFileURI(localChangePackageFileName);
+
+		URI projectSpaceURI = URIUtil.createProjectSpaceURI(getIdentifier());
+		URI operationsURI = URIUtil.createOperationsURI(getIdentifier());
+		URI projectURI = URIUtil.createProjectURI(getIdentifier());
 
 		setResourceCount(0);
-		String fileName = projectSpaceFileNamePrefix + Configuration.getFileInfo().getProjectFragmentFileName()
-			+ Configuration.getFileInfo().getProjectFragmentFileExtension();
-		URI fileURI = URI.createFileURI(fileName);
 
 		List<Resource> resources = new ArrayList<Resource>();
-		Resource resource = resourceSet.createResource(fileURI);
+		Resource resource = resourceSet.createResource(projectURI);
 		// if resource splitting fails, we need a reference to the old resource
 		resource.getContents().add(this.getProject());
 		resources.add(resource);
@@ -711,7 +702,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
 		}
 
-		Resource localChangePackageResource = resourceSet.createResource(localChangePackageURI);
+		Resource localChangePackageResource = resourceSet.createResource(operationsURI);
 		if (this.getLocalChangePackage() == null) {
 			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 		}
@@ -747,9 +738,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// delete project to notify listeners
 		getProject().delete();
 
-		String pathToProject = Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().ProjectSpaceDirectoryPrefix + getIdentifier();
-
 		resourceSet.getResources().remove(getProject().eResource());
 		resourceSet.getResources().remove(eResource());
 		resourceSet.getResources().remove(getLocalChangePackage().eResource());
@@ -763,9 +751,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		deleteResource(getProject().eResource());
 		deleteResource(eResource());
 		deleteResource(getLocalChangePackage().eResource());
-
-		// delete folder of project space
-		FileUtil.deleteDirectory(new File(pathToProject), true);
 	}
 
 	private void deleteResource(Resource resource) throws IOException {
