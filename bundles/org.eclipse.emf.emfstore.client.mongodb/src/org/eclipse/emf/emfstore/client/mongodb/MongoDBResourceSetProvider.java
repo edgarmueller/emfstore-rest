@@ -13,9 +13,12 @@ package org.eclipse.emf.emfstore.client.mongodb;
 
 import java.util.LinkedHashMap;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
@@ -29,7 +32,7 @@ import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
  */
 public class MongoDBResourceSetProvider implements ESResourceSetProvider {
 
-	private IResourceSetFactory resourceSetFactory;
+	private static IResourceSetFactory resourceSetFactory;
 
 	/**
 	 * {@inheritDoc}
@@ -39,17 +42,18 @@ public class MongoDBResourceSetProvider implements ESResourceSetProvider {
 	public ResourceSet getResourceSet() {
 		ResourceSetImpl resourceSet = (ResourceSetImpl) resourceSetFactory.createResourceSet();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		resourceSet.setURIConverter(new MongoURIConverter());
+		resourceSet.setURIConverter(createURIConverter(resourceSet));
 		resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
 		return resourceSet;
 	}
 
-	// TODO activate needed?
-	/**
-	 * ??
-	 */
-	public void activate() {
-		System.out.println("Reached");
+	private URIConverter createURIConverter(ResourceSetImpl resourceSet) {
+		// reuse uri handlers set up by resourcesetfactory
+		EList<URIHandler> uriHandler = resourceSet.getURIConverter().getURIHandlers();
+		URIConverter uriConverter = new MongoURIConverter();
+		uriConverter.getURIHandlers().clear();
+		uriConverter.getURIHandlers().addAll(uriHandler);
+		return uriConverter;
 	}
 
 	/**

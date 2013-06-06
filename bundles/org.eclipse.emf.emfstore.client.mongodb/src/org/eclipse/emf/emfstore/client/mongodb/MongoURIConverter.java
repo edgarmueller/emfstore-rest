@@ -26,7 +26,7 @@ public class MongoURIConverter extends AbstractESClientURIConverter {
 
 	@Override
 	protected URI normalizeWorkspaceURI(URI uri) {
-		return URI.createURI(getMongoURIPrefix() + "workspace/workspace" + uri.segment(0));
+		return URI.createURI(getMongoURIPrefix() + "workspace/workspace" + uri.segment(1));
 	}
 
 	@Override

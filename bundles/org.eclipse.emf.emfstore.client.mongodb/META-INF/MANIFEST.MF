@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.emf.emfstore.client;bundle-version="[1.0.0,2.0.0)",
 Import-Package: org.osgi.service.cm
 Service-Component: OSGI-INF/config.xml,
  OSGI-INF/provider.xml
+Bundle-ActivationPolicy: lazy
