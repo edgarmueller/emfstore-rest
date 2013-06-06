@@ -14,7 +14,6 @@ package org.eclipse.emf.emfstore.internal.client.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -39,6 +38,7 @@ import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
 import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
+import org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
@@ -56,7 +56,6 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
-import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
@@ -83,7 +82,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	private ConnectionManager connectionManager;
 	private EditingDomain editingDomain;
 	private ObserverBus observerBus;
-	private ResourceSetImpl resourceSet;
+	private ResourceSet resourceSet;
 	private SessionManager sessionManager;
 	private Workspace currentWorkspace;
 
@@ -184,10 +183,12 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 */
 	public void load() {
 
-		resourceSet = new ResourceSetImpl();
-		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
-		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
+		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.resourceSetProvider")
+			.getClass("class",
+				ESResourceSetProvider.class);
+
+		resourceSet = resourceSetProvider.getResourceSet();
 
 		// register an editing domain on the resource
 		setEditingDomain(createEditingDomain(resourceSet));
