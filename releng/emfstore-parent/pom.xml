@@ -119,6 +119,8 @@
     <!-- EMFStore Additional Features -->
     <module>../../features/org.eclipse.emf.emfstore.client.transaction.feature</module>
     <module>../../bundles/org.eclipse.emf.emfstore.client.transaction</module>
+	<module>../../bundles/org.eclipse.emf.emfstore.client.ui.historybrowsercomparator.feature</module>
+	<module>../../bundles/org.eclipse.emf.emfstore.client.ui.historybrowsercomparator</module>
 
     <!-- EMF Client Platform 
     <module>../../org.eclipse.emf.ecp.releng/org.eclipse.emf.ecp.validation.feature</module>
