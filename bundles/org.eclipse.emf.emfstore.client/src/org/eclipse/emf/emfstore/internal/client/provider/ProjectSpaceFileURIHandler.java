@@ -18,7 +18,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl;
-import org.eclipse.emf.emfstore.common.URIUtil;
+import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 
 /**
  * Handler for projectspace file URIs. Adds functionality for successfully deleting temp folders.
@@ -30,7 +30,10 @@ public class ProjectSpaceFileURIHandler extends FileURIHandlerImpl {
 
 	@Override
 	public boolean canHandle(URI uri) {
-		if (uri.segment(2).equals(URIUtil.PROJECTSPACES_SEGMENT)) {
+		String extension = "." + uri.fileExtension();
+		if (extension.equals(Configuration.getFileInfo().getLocalChangePackageFileExtension()) ||
+			extension.equals(Configuration.getFileInfo().getProjectFragmentFileExtension()) ||
+			extension.equals(Configuration.getFileInfo().getProjectSpaceFileExtension())) {
 			return true;
 		}
 		return false;
