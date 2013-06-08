@@ -735,16 +735,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(DeleteProjectSpaceObserver.class).projectSpaceDeleted(this);
 
-		deleteResource(getProject().eResource());
-		deleteResource(eResource());
-		deleteResource(getLocalChangePackage().eResource());
-
 		// delete project to notify listeners
 		getProject().delete();
 
-		resourceSet.getResources().remove(getProject().eResource());
-		resourceSet.getResources().remove(eResource());
-		resourceSet.getResources().remove(getLocalChangePackage().eResource());
+		// remove resources from resource set and delete them
+		deleteResource(getProject().eResource());
+		deleteResource(eResource());
+		deleteResource(getLocalChangePackage().eResource());
 
 		// TODO: remove project space from workspace, this is not the case if delete
 		// is performed via Workspace#deleteProjectSpace
