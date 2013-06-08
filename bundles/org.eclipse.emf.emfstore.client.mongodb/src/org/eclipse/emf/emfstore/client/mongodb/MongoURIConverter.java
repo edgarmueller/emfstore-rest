@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.client.mongodb;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
 
 /**
  * Converts from EMFStore to mongoDB URIs.

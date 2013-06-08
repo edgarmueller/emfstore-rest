@@ -11,8 +11,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.provider;
 
+import java.util.LinkedHashMap;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider;
+import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
  * This is the default resource set provider of EMFStore which will be used if no extension is offered.
@@ -28,8 +35,12 @@ public class ESDefaultXMIResourceSetProvider implements ESResourceSetProvider {
 	 * @see org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider#getResourceSet()
 	 */
 	public ResourceSet getResourceSet() {
-		// TODO Auto-generated method stub
-		return null;
+		ResourceSetImpl resourceSet = new ResourceSetImpl();
+		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
+		resourceSet.setURIConverter(new DefaultESClientXMIURIConverter());
+		resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
+		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
+		return resourceSet;
 	}
 
 }
