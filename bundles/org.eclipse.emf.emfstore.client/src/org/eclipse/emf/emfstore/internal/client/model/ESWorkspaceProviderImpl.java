@@ -573,6 +573,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 			}
 		}
 
+		// TODO delete if new migration works
 		// // start migrations
 		// File workspaceFile = new File(Configuration.getFileInfo().getWorkspaceDirectory());
 		// for (File file : workspaceFile.listFiles()) {

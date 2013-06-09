@@ -42,12 +42,13 @@ public class ProjectSpaceFileURIHandler extends FileURIHandlerImpl {
 	@Override
 	public void delete(URI uri, Map<?, ?> options) throws IOException
 	{
+		// TODO check options
 		File file = new File(uri.toFileString());
 		File parent = file.getParentFile();
 		file.delete();
 
-		if (parent != null && parent.listFiles().length == 1) {
-			// if there is only one child left, it's the temp folder.
+		if (parent != null && parent.listFiles().length == 1 && parent.listFiles()[0].isDirectory()) {
+			// if there is only one directory left, it's the temp folder.
 			FileUtils.deleteDirectory(parent);
 		}
 	}

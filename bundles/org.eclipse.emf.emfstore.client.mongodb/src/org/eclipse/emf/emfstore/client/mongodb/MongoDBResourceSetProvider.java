@@ -62,7 +62,7 @@ public class MongoDBResourceSetProvider implements ESResourceSetProvider {
 	 * @param resourceSetFactory the resource set factory
 	 */
 	void bindResourceSetFactory(IResourceSetFactory resourceSetFactory) {
-		this.resourceSetFactory = resourceSetFactory;
+		MongoDBResourceSetProvider.resourceSetFactory = resourceSetFactory;
 	}
 
 }

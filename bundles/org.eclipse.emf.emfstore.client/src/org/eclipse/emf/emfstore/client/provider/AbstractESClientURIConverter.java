@@ -44,7 +44,6 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 			}
 		}
 
-		// TODO maybe throw exception?
 		// unexpected
 		return super.normalize(uri);
 	}
