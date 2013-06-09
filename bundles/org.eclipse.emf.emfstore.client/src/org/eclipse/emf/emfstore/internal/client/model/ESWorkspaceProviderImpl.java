@@ -536,40 +536,79 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		}
 
 		backupWorkspace(false);
-		File workspaceFile = new File(Configuration.getFileInfo().getWorkspaceDirectory());
-		for (File file : workspaceFile.listFiles()) {
-			if (file.getName().startsWith(Configuration.getFileInfo().getProjectSpaceDirectoryPrefix())) {
-				String projectFilePath = file.getAbsolutePath() + File.separatorChar
-					+ Configuration.getFileInfo().ProjectFragmentFileName
-					+ Configuration.getFileInfo().ProjectFragmentExtension;
-				URI projectURI = URI.createFileURI(projectFilePath);
-				String operationsFilePath = null;
-				File[] listFiles = file.listFiles();
-				if (listFiles == null) {
-					WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
-						+ " failed!", new IllegalStateException("Broken projectSpace!"));
-					continue;
-				}
-				for (File subDirFile : listFiles) {
-					if (subDirFile.getName().endsWith(Configuration.getFileInfo().LocalChangePackageExtension)) {
-						operationsFilePath = subDirFile.getAbsolutePath();
-					}
-				}
-				if (operationsFilePath == null) {
-					WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
-						+ " failed!", new IllegalStateException("Broken workspace!"));
-					backupAndRecreateWorkspace(resourceSet);
-				}
-				URI operationsURI = URI.createFileURI(operationsFilePath);
-				try {
-					migrate(projectURI, operationsURI, workspaceModelVersion.getReleaseNumber());
-				} catch (EMFStoreMigrationException e) {
-					WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
-						+ " failed!", e);
-					backupAndRecreateWorkspace(resourceSet);
-				}
+
+		// ////////// start migration
+		// load workspace in new resourceset
+		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.resourceSetProvider")
+			.getClass("class",
+				ESResourceSetProvider.class);
+
+		if (resourceSetProvider == null) {
+			// use default xmi implementation
+			resourceSetProvider = new ESDefaultXMIResourceSetProvider();
+		}
+
+		ResourceSet migrationResourceSet = resourceSetProvider.getResourceSet();
+		Resource resource = migrationResourceSet.createResource(URIUtil.createWorkspaceURI());
+
+		try {
+			resource.load(ModelUtil.getResourceLoadOptions());
+		} catch (IOException e) {
+			WorkspaceUtil.logException("Error while loading workspace.", e);
+		}
+
+		EList<EObject> directContents = resource.getContents();
+		Workspace workspace = (Workspace) directContents.get(0);
+		for (ProjectSpace ps : workspace.getProjectSpaces()) {
+			// TODO test this
+			URI projectURI = ps.getProject().eResource().getURI();
+			URI operationsURI = ps.getLocalChangePackage().eResource().getURI();
+			try {
+				migrate(projectURI, operationsURI, workspaceModelVersion.getReleaseNumber());
+			} catch (EMFStoreMigrationException e) {
+				WorkspaceUtil.logException("The migration of the project in projectspace at " + ps.eResource().getURI()
+					+ " failed!", e);
+				backupAndRecreateWorkspace(resourceSet);
 			}
 		}
+
+		// // start migrations
+		// File workspaceFile = new File(Configuration.getFileInfo().getWorkspaceDirectory());
+		// for (File file : workspaceFile.listFiles()) {
+		// if (file.getName().startsWith(Configuration.getFileInfo().getProjectSpaceDirectoryPrefix())) {
+		// String projectFilePath = file.getAbsolutePath() + File.separatorChar
+		// + Configuration.getFileInfo().ProjectFragmentFileName
+		// + Configuration.getFileInfo().ProjectFragmentExtension;
+		// URI projectURI = URI.createFileURI(projectFilePath);
+		// String operationsFilePath = null;
+		// File[] listFiles = file.listFiles();
+		// if (listFiles == null) {
+		// WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
+		// + " failed!", new IllegalStateException("Broken projectSpace!"));
+		// continue;
+		// }
+		// for (File subDirFile : listFiles) {
+		// if (subDirFile.getName().endsWith(Configuration.getFileInfo().LocalChangePackageExtension)) {
+		// operationsFilePath = subDirFile.getAbsolutePath();
+		// }
+		// }
+		// if (operationsFilePath == null) {
+		// WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
+		// + " failed!", new IllegalStateException("Broken workspace!"));
+		// backupAndRecreateWorkspace(resourceSet);
+		// }
+		// URI operationsURI = URI.createFileURI(operationsFilePath);
+		// try {
+		// migrate(projectURI, operationsURI, workspaceModelVersion.getReleaseNumber());
+		// } catch (EMFStoreMigrationException e) {
+		// WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
+		// + " failed!", e);
+		// backupAndRecreateWorkspace(resourceSet);
+		// }
+		// }
+		// }
+		// // end migration
 
 		stampCurrentVersionNumber(modelVersionNumber);
 	}
