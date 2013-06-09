@@ -500,11 +500,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// are not different, then reinitialize operations URI
 		// TODO: first case kills change package
 		if (this.eResource() == eResource) {
-			String localChangePackageFileName = Configuration.getFileInfo().getWorkspaceDirectory()
-				+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
-				+ Configuration.getFileInfo().getLocalChangePackageFileName()
-				+ Configuration.getFileInfo().getLocalChangePackageFileExtension();
-			eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
+			eResource = resourceSet.createResource(URIUtil.createOperationsURI(getIdentifier()));
 		} else {
 			eResource.getContents().remove(0);
 		}
