@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EMFStore Client mongoDB
-Bundle-SymbolicName: org.eclipse.emf.emfstore.client.mongodb;singleton:=true
+Bundle-Name: EMFStore mongoDB
+Bundle-SymbolicName: org.eclipse.emf.emfstore.mongodb;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project

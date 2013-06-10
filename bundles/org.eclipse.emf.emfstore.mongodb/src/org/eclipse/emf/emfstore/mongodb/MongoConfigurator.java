@@ -9,7 +9,7 @@
  * Contributors:
  * Johannes Faltermeier
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.mongodb;
+package org.eclipse.emf.emfstore.mongodb;
 
 import java.io.IOException;
 import java.util.Dictionary;

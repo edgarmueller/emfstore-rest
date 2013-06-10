@@ -9,7 +9,7 @@
  * Contributors:
  * Johannes Faltermeier
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.mongodb;
+package org.eclipse.emf.emfstore.mongodb.server;
 
 import java.util.LinkedHashMap;
 
@@ -25,14 +25,23 @@ import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 
 /**
- * MongoDB ResourceSet provider for EMFStore Client.
+ * MongoDB ResourceSet provider for EMFStore Server.
  * 
  * @author jfaltermeier
  * 
  */
-public class MongoDBResourceSetProvider implements ESResourceSetProvider {
+public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
 
 	private static IResourceSetFactory resourceSetFactory;
+
+	/**
+	 * Sets the resource set factory.
+	 * 
+	 * @param factory the factory
+	 */
+	public static void setResourceSetFactory(IResourceSetFactory factory) {
+		MongoDBServerResourceSetProvider.resourceSetFactory = factory;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -50,19 +59,10 @@ public class MongoDBResourceSetProvider implements ESResourceSetProvider {
 	private URIConverter createURIConverter(ResourceSetImpl resourceSet) {
 		// reuse uri handlers set up by resourcesetfactory
 		EList<URIHandler> uriHandler = resourceSet.getURIConverter().getURIHandlers();
-		URIConverter uriConverter = new MongoURIConverter();
+		URIConverter uriConverter = new MongoServerURIConverter();
 		uriConverter.getURIHandlers().clear();
 		uriConverter.getURIHandlers().addAll(uriHandler);
 		return uriConverter;
-	}
-
-	/**
-	 * Binds the resource set factory.
-	 * 
-	 * @param resourceSetFactory the resource set factory
-	 */
-	void bindResourceSetFactory(IResourceSetFactory resourceSetFactory) {
-		MongoDBResourceSetProvider.resourceSetFactory = resourceSetFactory;
 	}
 
 }

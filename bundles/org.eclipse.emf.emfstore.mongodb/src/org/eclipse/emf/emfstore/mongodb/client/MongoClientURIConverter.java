@@ -9,7 +9,7 @@
  * Contributors:
  * Johannes Faltermeier
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.mongodb;
+package org.eclipse.emf.emfstore.mongodb.client;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
  * @author jfaltermeier
  * 
  */
-public class MongoURIConverter extends AbstractESClientURIConverter {
+public class MongoClientURIConverter extends AbstractESClientURIConverter {
 
 	@Override
 	protected URI normalizeWorkspaceURI(URI uri) {
@@ -46,7 +46,7 @@ public class MongoURIConverter extends AbstractESClientURIConverter {
 	}
 
 	private String getMongoURIPrefix() {
-		return "mongodb://localhost/emfstore/";
+		return "mongodb://localhost/emfstoreclient/";
 	}
 
 }
