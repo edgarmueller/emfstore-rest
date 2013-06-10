@@ -26,23 +26,23 @@ import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
 public class MongoClientURIConverter extends AbstractESClientURIConverter {
 
 	@Override
-	protected URI normalizeWorkspaceURI(URI uri) {
-		return URI.createURI(getMongoURIPrefix() + "workspace/workspace" + uri.segment(1));
+	protected URI normalizeWorkspaceURI() {
+		return URI.createURI(getMongoURIPrefix() + "workspace/workspace");
 	}
 
 	@Override
-	protected URI normalizeProjectURI(URI uri) {
-		return URI.createURI(getMongoURIPrefix() + "project/" + uri.segment(3));
+	protected URI normalizeProjectURI(String projectId) {
+		return URI.createURI(getMongoURIPrefix() + "project/" + projectId);
 	}
 
 	@Override
-	protected URI normalizeOperationsURI(URI uri) {
-		return URI.createURI(getMongoURIPrefix() + "operations/" + uri.segment(3));
+	protected URI normalizeOperationsURI(String projectId) {
+		return URI.createURI(getMongoURIPrefix() + "operations/" + projectId);
 	}
 
 	@Override
-	protected URI normalizeProjectSpaceURI(URI uri) {
-		return URI.createURI(getMongoURIPrefix() + "projectspace/" + uri.segment(3));
+	protected URI normalizeProjectSpaceURI(String projectId) {
+		return URI.createURI(getMongoURIPrefix() + "projectspace/" + projectId);
 	}
 
 	private String getMongoURIPrefix() {

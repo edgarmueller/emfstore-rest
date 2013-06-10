@@ -34,7 +34,7 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 
 				// emfstore:/workspaces/0/workspace
 				if (uri.segment(2).equals(URIUtil.WORKSPACE_SEGMENT)) {
-					return normalizeWorkspaceURI(uri);
+					return normalizeWorkspaceURI();
 				}
 
 				// emfstore:/workspaces/0/projectspaces/<identifier>
@@ -51,17 +51,17 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 	private URI normalizeProjectSpaces(URI uri) {
 		// emfstore:/workspaces/0/projectspaces/<identifier>/project
 		if (uri.segment(4).equals(URIUtil.PROJECT_SEGMENT)) {
-			return normalizeProjectURI(uri);
+			return normalizeProjectURI(uri.segment(3));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/operations
 		else if (uri.segment(4).equals(URIUtil.OPERATIONS_SEGMENT)) {
-			return normalizeOperationsURI(uri);
+			return normalizeOperationsURI(uri.segment(3));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/projectspace
 		else if (uri.segment(4).equals(URIUtil.PROJECTSPACE_SEGMENT)) {
-			return normalizeProjectSpaceURI(uri);
+			return normalizeProjectSpaceURI(uri.segment(3));
 		}
 
 		// unexpected
@@ -73,33 +73,32 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 	/**
 	 * Normalizes an EMFStore workspace URI.
 	 * 
-	 * @param uri the EMFStore URI
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeWorkspaceURI(URI uri);
+	protected abstract URI normalizeWorkspaceURI();
 
 	/**
 	 * Normalizes an EMFStore project URI.
 	 * 
-	 * @param uri the EMFStore URI
+	 * @param projectId the project's id
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeProjectURI(URI uri);
+	protected abstract URI normalizeProjectURI(String projectId);
 
 	/**
 	 * Normalizes an EMFStore operations URI.
 	 * 
-	 * @param uri the EMFStore URI
+	 * @param projectId the project's id
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeOperationsURI(URI uri);
+	protected abstract URI normalizeOperationsURI(String projectId);
 
 	/**
 	 * Normalizes an EMFStore projectspace URI.
 	 * 
-	 * @param uri the EMFStore URI
+	 * @param projectId the project's id
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeProjectSpaceURI(URI uri);
+	protected abstract URI normalizeProjectSpaceURI(String projectId);
 
 }

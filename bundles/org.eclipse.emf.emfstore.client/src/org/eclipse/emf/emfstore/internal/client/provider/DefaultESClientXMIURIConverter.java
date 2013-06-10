@@ -34,34 +34,34 @@ public class DefaultESClientXMIURIConverter extends AbstractESClientURIConverter
 	}
 
 	@Override
-	protected URI normalizeWorkspaceURI(URI uri) {
+	protected URI normalizeWorkspaceURI() {
 		return URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
 	}
 
 	@Override
-	protected URI normalizeProjectURI(URI uri) {
-		return URI.createFileURI(getProjectSpaceDirectory(uri)
+	protected URI normalizeProjectURI(String projectId) {
+		return URI.createFileURI(getProjectSpaceDirectory(projectId)
 			+ Configuration.getFileInfo().getProjectFragmentFileName()
 			+ Configuration.getFileInfo().getProjectFragmentFileExtension());
 	}
 
 	@Override
-	protected URI normalizeOperationsURI(URI uri) {
-		return URI.createFileURI(getProjectSpaceDirectory(uri)
+	protected URI normalizeOperationsURI(String projectId) {
+		return URI.createFileURI(getProjectSpaceDirectory(projectId)
 			+ Configuration.getFileInfo().getLocalChangePackageFileName()
 			+ Configuration.getFileInfo().getLocalChangePackageFileExtension());
 	}
 
 	@Override
-	protected URI normalizeProjectSpaceURI(URI uri) {
-		return URI.createFileURI(getProjectSpaceDirectory(uri)
+	protected URI normalizeProjectSpaceURI(String projectId) {
+		return URI.createFileURI(getProjectSpaceDirectory(projectId)
 			+ Configuration.getFileInfo().getProjectSpaceFileName()
 			+ Configuration.getFileInfo().getProjectSpaceFileExtension());
 	}
 
-	private String getProjectSpaceDirectory(URI uri) {
+	private String getProjectSpaceDirectory(String projectId) {
 		return Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + uri.segment(3)
+			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + projectId
 			+ File.separatorChar;
 	}
 
