@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core.helper;
@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -67,9 +68,8 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalESException {
-		String fileName = getProjectFolder(projectHistory.getProjectId()) + "projectHistory"
-			+ ServerConfiguration.FILE_EXTENSION_PROJECTHISTORY;
-		saveInResource(projectHistory, fileName);
+		URI projectHistoryURI = URIUtil.createProjectHistoryURI(projectHistory.getProjectId().getId());
+		saveInResource(projectHistory, projectHistoryURI);
 	}
 
 	/**
@@ -227,8 +227,8 @@ public class ResourceHelper {
 			+ ServerConfiguration.FILE_EXTENSION_CHANGEPACKAGE;
 	}
 
-	private void saveInResource(EObject obj, String fileName) throws FatalESException {
-		Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
+	private void saveInResource(EObject obj, URI resourceURI) throws FatalESException {
+		Resource resource = serverSpace.eResource().getResourceSet().createResource(resourceURI);
 		resource.getContents().add(obj);
 		save(obj);
 	}
