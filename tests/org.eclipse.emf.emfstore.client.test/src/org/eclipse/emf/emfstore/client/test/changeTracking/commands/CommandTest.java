@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.commands;
@@ -528,13 +528,7 @@ public class CommandTest extends WorkspaceTest {
 
 		editingDomain.getCommandStack().execute(pasteCommand);
 
-		Actor pastedActor = (Actor) leafSection.getModelElements().get(0);
-
-		ModelElementId actorId = ModelUtil.getProject(actor).getModelElementId(actor);
-		ModelElementId pastedActorId = ModelUtil.getProject(pastedActor).getModelElementId(pastedActor);
-
 		// assert that the ids are not equal
-		assertTrue(actorId.equals(pastedActorId));
 		assertEquals(1, leafSection.getModelElements().size());
 
 		// undo the paste command
@@ -545,11 +539,6 @@ public class CommandTest extends WorkspaceTest {
 		// redo the paste command
 		editingDomain.getCommandStack().redo();
 
-		Actor pastedActor2 = (Actor) leafSection.getModelElements().get(0);
-		// TODO: we do not guarantee anymore that the ID will be the same
-		// ModelElementId pastedActor2Id = ModelUtil.getProject(pastedActor2).getModelElementId(pastedActor2);
-
-		// assertTrue(actorId.equals(pastedActor2Id));
 		assertEquals(1, leafSection.getModelElements().size());
 	}
 
@@ -599,12 +588,6 @@ public class CommandTest extends WorkspaceTest {
 
 		if (pasteCommand.canExecute()) {
 			editingDomain.getCommandStack().execute(pasteCommand);
-
-			Actor pastedActor = (Actor) leafSection.getModelElements().get(0);
-			ModelElementId actorId = ModelUtil.getProject(actor).getModelElementId(actor);
-			ModelElementId pastedActorId = ModelUtil.getProject(pastedActor).getModelElementId(pastedActor);
-
-			assertTrue(actorId.equals(pastedActorId));
 			assertEquals(1, leafSection.getModelElements().size());
 		} else {
 			fail("Command not executable");
@@ -616,10 +599,6 @@ public class CommandTest extends WorkspaceTest {
 
 		// redo the paste command
 		editingDomain.getCommandStack().redo();
-		Actor pastedActor = (Actor) leafSection.getModelElements().get(0);
-		ModelElementId actorId = ModelUtil.getProject(actor).getModelElementId(actor);
-		ModelElementId pastedActorId = ModelUtil.getProject(pastedActor).getModelElementId(pastedActor);
-		assertTrue(actorId.equals(pastedActorId));
 		assertEquals(1, leafSection.getModelElements().size());
 
 	}
