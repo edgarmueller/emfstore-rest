@@ -66,7 +66,7 @@ public class UICommitProjectController extends
 	 *            that should get committed
 	 */
 	public UICommitProjectController(Shell shell, ESLocalProject localProject) {
-		super(shell, true, true);
+		super(shell, false, true);
 		this.localProject = localProject;
 	}
 

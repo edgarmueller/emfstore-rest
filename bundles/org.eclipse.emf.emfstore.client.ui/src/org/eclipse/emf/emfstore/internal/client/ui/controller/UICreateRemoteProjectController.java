@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -85,19 +85,16 @@ public class UICreateRemoteProjectController extends AbstractEMFStoreUIControlle
 	}
 
 	private ESRemoteProject createRemoteProject(IProgressMonitor monitor) throws ESException {
-		String[] ret = RunInUI.runWithResult(new Callable<String[]>() {
+		String projectName = RunInUI.runWithResult(new Callable<String>() {
 
-			public String[] call() throws Exception {
+			public String call() throws Exception {
 				CreateProjectDialog dialog = new CreateProjectDialog(getShell());
 				if (dialog.open() == Dialog.OK) {
-					return new String[] { dialog.getName() };
+					return dialog.getName();
 				}
 				return null;
 			}
 		});
-
-		String projectName = ret[0];
-		String description = ret[1];
 
 		return createRemoteProject(session, projectName, description, monitor);
 	}
