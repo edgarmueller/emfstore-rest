@@ -18,7 +18,7 @@ import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 
 /**
- * The default URI converter of EMFStore. Normalizes EMFStore URIs to file URIs.
+ * The default URI converter of EMFStore Client. Normalizes EMFStore URIs to file URIs.
  * 
  * @author jfaltermeier
  * 
