@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.internal.server.core.helper;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -119,7 +120,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForChangePackage(ChangePackage changePackage, PrimaryVersionSpec versionId,
 		ProjectId projectId) throws FatalESException {
-		String filename = getProjectFolder(projectId) + getChangePackageFile(versionId.getIdentifier());
+		URI changePackageURI = URIUtil.createChangePackageURI(projectId.getId(), versionId.getIdentifier());
 		List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
 
 		for (AbstractOperation op : changePackage.getOperations()) {
@@ -142,7 +143,7 @@ public class ResourceHelper {
 			}
 		}
 
-		saveInResource(changePackage, filename);
+		saveInResource(changePackage, changePackageURI);
 	}
 
 	/**
@@ -155,18 +156,12 @@ public class ResourceHelper {
 	 *            the ID of the project to be deleted
 	 */
 	public void deleteProjectState(Version version, ProjectId projectId) {
-		int lastVersion = version.getPrimarySpec().getIdentifier();
-		Resource projectResource = version.getProjectState().eResource();
-
-		File file = new File(getProjectFolder(projectId) + getProjectFile(lastVersion));
-		// version.setProjectState(null);
-		file.delete();
-
-		if (projectResource.isLoaded()) {
-			projectResource.unload();
+		try {
+			version.getProjectState().eResource().delete(null);
+		} catch (IOException e) {
+			ModelUtil.logWarning("Could not delete project state with id " + projectId.getId() + " and version "
+				+ version.getPrimarySpec().getIdentifier() + ".", e);
 		}
-
-		// projectResource.getResourceSet().getResources().remove(projectResource);
 	}
 
 	/**
@@ -214,16 +209,6 @@ public class ResourceHelper {
 	public String getProjectFolder(ProjectId projectId) {
 		return ServerConfiguration.getServerHome() + ServerConfiguration.FILE_PREFIX_PROJECTFOLDER + projectId.getId()
 			+ File.separatorChar;
-	}
-
-	private String getProjectFile(int versionNumber) {
-		return ServerConfiguration.FILE_PREFIX_PROJECTSTATE + versionNumber
-			+ ServerConfiguration.FILE_EXTENSION_PROJECTSTATE;
-	}
-
-	private String getChangePackageFile(int versionNumber) {
-		return ServerConfiguration.FILE_PREFIX_CHANGEPACKAGE + versionNumber
-			+ ServerConfiguration.FILE_EXTENSION_CHANGEPACKAGE;
 	}
 
 	private void saveInResource(EObject obj, URI resourceURI) throws FatalESException {
