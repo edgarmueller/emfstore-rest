@@ -44,7 +44,7 @@ public class XMLStorage implements ResourceStorage {
 				ESResourceSetProvider.class);
 
 		if (resourceSetProvider == null) {
-			// TODO use default xmi implementation
+			resourceSetProvider = new ESServerXMIResourceSetProvider();
 		}
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();

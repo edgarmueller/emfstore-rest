@@ -67,6 +67,7 @@ import org.eclipse.emf.emfstore.internal.server.startup.EmfStoreValidator;
 import org.eclipse.emf.emfstore.internal.server.startup.MigrationManager;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
+import org.eclipse.emf.emfstore.internal.server.storage.ESServerXMIResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.server.storage.ResourceStorage;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -309,18 +310,13 @@ public class EMFStoreController implements IApplication, Runnable {
 		ResourceStorage storage = initStorage();
 		URI resourceUri = storage.init(properties);
 
-		// TODO remove old resourceset
-		// ResourceSet resourceSet = new ResourceSetImpl();
-		// resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		// resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
-
 		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.server.resourceSetProvider")
 			.getClass("class",
 				ESResourceSetProvider.class);
 
 		if (resourceSetProvider == null) {
-			// TODO use default xmi implementation
+			resourceSetProvider = new ESServerXMIResourceSetProvider();
 		}
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();

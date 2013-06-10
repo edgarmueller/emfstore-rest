@@ -22,12 +22,12 @@ import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
 /**
- * This is the default resource set provider of EMFStore which will be used if no extension is offered.
+ * This is the default resource set provider of EMFStore client which will be used if no extension is offered.
  * 
  * @author jfaltermeier
  * 
  */
-public class ESDefaultXMIResourceSetProvider implements ESResourceSetProvider {
+public class ESClientXMIResourceSetProvider implements ESResourceSetProvider {
 
 	/**
 	 * {@inheritDoc}

@@ -56,7 +56,7 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.client.provider.ESDefaultXMIResourceSetProvider;
+import org.eclipse.emf.emfstore.internal.client.provider.ESClientXMIResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -192,7 +192,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 		if (resourceSetProvider == null) {
 			// use default xmi implementation
-			resourceSetProvider = new ESDefaultXMIResourceSetProvider();
+			resourceSetProvider = new ESClientXMIResourceSetProvider();
 		}
 
 		resourceSet = resourceSetProvider.getResourceSet();
@@ -546,7 +546,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 		if (resourceSetProvider == null) {
 			// use default xmi implementation
-			resourceSetProvider = new ESDefaultXMIResourceSetProvider();
+			resourceSetProvider = new ESClientXMIResourceSetProvider();
 		}
 
 		ResourceSet migrationResourceSet = resourceSetProvider.getResourceSet();
