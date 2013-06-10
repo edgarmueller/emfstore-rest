@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendonk
  * koegel
  ******************************************************************************/
@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControlImpl;
@@ -308,9 +308,23 @@ public class EMFStoreController implements IApplication, Runnable {
 	private ServerSpace initServerSpace() throws FatalESException {
 		ResourceStorage storage = initStorage();
 		URI resourceUri = storage.init(properties);
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
+
+		// TODO remove old resourceset
+		// ResourceSet resourceSet = new ResourceSetImpl();
+		// resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
+		// resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
+
+		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.server.resourceSetProvider")
+			.getClass("class",
+				ESResourceSetProvider.class);
+
+		if (resourceSetProvider == null) {
+			// TODO use default xmi implementation
+		}
+
+		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
+
 		resource = resourceSet.createResource(resourceUri);
 
 		try {
