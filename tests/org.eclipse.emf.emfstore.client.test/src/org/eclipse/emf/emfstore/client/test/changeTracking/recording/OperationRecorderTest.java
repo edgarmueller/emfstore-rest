@@ -23,6 +23,8 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.impl.OperationRecorder;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -86,58 +88,62 @@ public class OperationRecorderTest extends WorkspaceTest {
 	@Test
 	public void rescueElementAndDeleteIt() {
 
-		setCompareAtEnd(false);
-		// ExtensionRegistry.INSTANCE.set(ESOperationModifier.ID, new AutoOperationWrapper());
+		if (ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack() instanceof EMFStoreBasicCommandStack) {
 
-		final Project project = getProject();
+			setCompareAtEnd(false);
+			// ExtensionRegistry.INSTANCE.set(ESOperationModifier.ID, new AutoOperationWrapper());
 
-		// final TestElement source = getTestElement("source");
-		final TestElement target = getTestElement("target");
-		final TestElement connection = getTestElement("connection");
-		final TestElementContainer source = TestmodelFactory.eINSTANCE.createTestElementContainer();
+			final Project project = getProject();
 
-		source.getElements().add(connection);
-		connection.setContainer(source);
-		target.getReferences().add(connection);
+			// final TestElement source = getTestElement("source");
+			final TestElement target = getTestElement("target");
+			final TestElement connection = getTestElement("connection");
+			final TestElementContainer source = TestmodelFactory.eINSTANCE.createTestElementContainer();
 
-		RunESCommand.run(new Callable<Void>() {
+			source.getElements().add(connection);
+			connection.setContainer(source);
+			target.getReferences().add(connection);
 
-			public Void call() throws Exception {
-				project.addModelElement(source);
-				return null;
-			}
-		});
+			RunESCommand.run(new Callable<Void>() {
 
-		ModelElementId connectionId = project.getModelElementId(connection);
+				public Void call() throws Exception {
+					project.addModelElement(source);
+					return null;
+				}
+			});
 
-		clonedProjectSpace.getOperationManager().stopChangeRecording();
-		ChangePackage cp = RunESCommand.runWithResult(new Callable<ChangePackage>() {
+			ModelElementId connectionId = project.getModelElementId(connection);
 
-			public ChangePackage call() throws Exception {
-				ChangePackage cp = VersioningFactory.eINSTANCE.createChangePackage();
-				cp.getOperations().addAll(getProjectSpace().getOperations());
-				cp.apply(clonedProjectSpace.getProject());
-				return cp;
-			}
-		});
+			clonedProjectSpace.getOperationManager().stopChangeRecording();
+			ChangePackage cp = RunESCommand.runWithResult(new Callable<ChangePackage>() {
 
-		// do not use commands since we only have them on client side
-		// FIXME: if not wrapped in command fails with transactional editing domain, if wrapped in command assert fails,
-		// see comment above
-		connection.setContainer(null);
+				public ChangePackage call() throws Exception {
+					ChangePackage cp = VersioningFactory.eINSTANCE.createChangePackage();
+					cp.getOperations().addAll(getProjectSpace().getOperations());
+					cp.apply(clonedProjectSpace.getProject());
+					return cp;
+				}
+			});
 
-		List<AbstractOperation> ops = getProjectSpace().getOperations();
-		assertEquals(2, ops.size());
-		assertThat(ops.get(0), instanceOf(CompositeOperation.class));
-		assertThat(ops.get(1), instanceOf(CreateDeleteOperation.class));
+			// do not use commands since we only have them on client side
+			// FIXME: if not wrapped in command fails with transactional editing domain, if wrapped in command assert
+			// fails,
+			// see comment above
+			connection.setContainer(null);
 
-		// apply via change package, because change package does not start a command in contrast
-		// to projectSpace#applyOperations
-		cp = VersioningFactory.eINSTANCE.createChangePackage();
-		cp.getOperations().addAll(ops);
-		cp.apply(clonedProjectSpace.getProject());
+			List<AbstractOperation> ops = getProjectSpace().getOperations();
+			assertEquals(2, ops.size());
+			assertThat(ops.get(0), instanceOf(CompositeOperation.class));
+			assertThat(ops.get(1), instanceOf(CreateDeleteOperation.class));
 
-		// in case the connection could not be deleted because of a changed ID, we would expect 2 model elements
-		Assert.assertEquals(1, clonedProjectSpace.getProject().getModelElements().size());
+			// apply via change package, because change package does not start a command in contrast
+			// to projectSpace#applyOperations
+			cp = VersioningFactory.eINSTANCE.createChangePackage();
+			cp.getOperations().addAll(ops);
+			cp.apply(clonedProjectSpace.getProject());
+
+			// in case the connection could not be deleted because of a changed ID, we would expect 2 model elements
+			Assert.assertEquals(1, clonedProjectSpace.getProject().getModelElements().size());
+		}
 	}
 }
