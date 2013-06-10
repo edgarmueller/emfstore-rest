@@ -9,7 +9,7 @@
  * Contributors:
  * Johannes Faltermeier
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.provider;
+package org.eclipse.emf.emfstore.common.extensionpoint;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 

@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
@@ -32,7 +32,7 @@ public class ESDefaultXMIResourceSetProvider implements ESResourceSetProvider {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider#getResourceSet()
+	 * @see org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider#getResourceSet()
 	 */
 	public ResourceSet getResourceSet() {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
