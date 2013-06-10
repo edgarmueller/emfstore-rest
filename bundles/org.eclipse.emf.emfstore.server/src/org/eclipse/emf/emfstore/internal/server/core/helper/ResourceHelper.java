@@ -83,9 +83,8 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalESException {
-		String fileName = getProjectFolder(projectId) + ServerConfiguration.FILE_PREFIX_VERSION
-			+ version.getPrimarySpec().getIdentifier() + ServerConfiguration.FILE_EXTENSION_VERSION;
-		saveInResource(version, fileName);
+		URI versionURI = URIUtil.createVersionURI(projectId.getId(), version.getPrimarySpec().getIdentifier());
+		saveInResource(version, versionURI);
 	}
 
 	/**
