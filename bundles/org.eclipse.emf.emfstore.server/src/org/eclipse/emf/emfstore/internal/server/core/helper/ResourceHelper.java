@@ -101,8 +101,8 @@ public class ResourceHelper {
 	 */
 	public void createResourceForProject(Project project, PrimaryVersionSpec versionId, ProjectId projectId)
 		throws FatalESException {
-		String filename = getProjectFolder(projectId) + getProjectFile(versionId.getIdentifier());
-		saveInResourceWithProject(project, filename, project);
+		URI projectStateURI = URIUtil.createProjectStateURI(projectId.getId(), versionId.getIdentifier());
+		saveInResourceWithProject(project, projectStateURI, project);
 	}
 
 	/**
@@ -232,8 +232,8 @@ public class ResourceHelper {
 		save(obj);
 	}
 
-	private void saveInResourceWithProject(EObject obj, String fileName, Project project) throws FatalESException {
-		Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
+	private void saveInResourceWithProject(EObject obj, URI resourceURI, Project project) throws FatalESException {
+		Resource resource = serverSpace.eResource().getResourceSet().createResource(resourceURI);
 		resource.getContents().add(obj);
 
 		if (resource instanceof XMIResource) {
