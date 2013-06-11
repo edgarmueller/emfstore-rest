@@ -1057,7 +1057,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			if (resourceSet != null) {
 				// remove the resource from its containing resourceSet in order
 				// to remove the strong referencing.
-				resourceSet.getResources().remove(resource);
+				// resourceSet.getResources().remove(resource);
 			}
 			changePackageResource = new SoftReference<Resource>(resource);
 		}
@@ -1071,7 +1071,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			if (resourceSet != null) {
 				// remove the resource from its containing resourceSet in order
 				// to remove the strong referencing.
-				resourceSet.getResources().remove(resource);
+				// resourceSet.getResources().remove(resource);
 			}
 			projectStateResource = new SoftReference<Resource>(resource);
 		}
