@@ -1028,9 +1028,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return the uri for the project state resource
 	 */
 	private URI getProjectURI() {
-		String projectFragment = FILE_PREFIX_PROJECTSTATE + this.getPrimarySpec().getIdentifier()
-			+ FILE_EXTENSION_PROJECTSTATE;
-		return getBaseURI() == null ? null : getBaseURI().appendSegment(projectFragment);
+		return URIUtil.createProjectStateURI(getProjectIdFromURI(), this.getPrimarySpec().getIdentifier());
 	}
 
 	/**
@@ -1049,16 +1047,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private String getProjectIdFromURI() {
 		return this.eResource().getURI().segment(3);
-	}
-
-	/**
-	 * allows to retrieve the Base-URI of this version, i.e. the URI of the resource
-	 * containing the version trimmed by its last segment.
-	 * 
-	 * @return the base URI
-	 */
-	private URI getBaseURI() {
-		return this.eResource() == null ? null : this.eResource().getURI().trimSegments(1);
 	}
 
 	public void setChangeResource(Resource resource) {
