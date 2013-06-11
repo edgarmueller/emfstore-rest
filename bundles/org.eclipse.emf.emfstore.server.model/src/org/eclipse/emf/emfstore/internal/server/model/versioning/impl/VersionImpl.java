@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
@@ -1038,10 +1039,16 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return the uri for the ChangePackage resource
 	 */
 	private URI getChangePackageURI() {
-		String changePackageFragment = FILE_PREFIX_CHANGEPACKAGE
-			+ this.getPrimarySpec().getIdentifier()
-			+ FILE_EXTENSION_CHANGEPACKAGE;
-		return getBaseURI() == null ? null : getBaseURI().appendSegment(changePackageFragment);
+		return URIUtil.createChangePackageURI(getProjectIdFromURI(), this.getPrimarySpec().getIdentifier());
+	}
+
+	/**
+	 * Returns the segment identifying the project id from the version's uri.
+	 * 
+	 * @return the project id
+	 */
+	private String getProjectIdFromURI() {
+		return this.eResource().getURI().segment(3);
 	}
 
 	/**
