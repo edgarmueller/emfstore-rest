@@ -19,7 +19,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -68,7 +67,7 @@ import org.eclipse.emf.emfstore.internal.server.startup.MigrationManager;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.internal.server.storage.ESServerXMIResourceSetProvider;
-import org.eclipse.emf.emfstore.internal.server.storage.ResourceStorage;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
@@ -307,9 +306,6 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	private ServerSpace initServerSpace() throws FatalESException {
-		ResourceStorage storage = initStorage();
-		URI resourceUri = storage.init(properties);
-
 		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.server.resourceSetProvider")
 			.getClass("class",
@@ -321,7 +317,17 @@ public class EMFStoreController implements IApplication, Runnable {
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 
-		resource = resourceSet.createResource(resourceUri);
+		URI serverspaceURI = ServerURIUtil.createServerSpaceURI();
+		if (!resourceSet.getURIConverter().exists(serverspaceURI, null)) {
+			try {
+				resource = resourceSet.createResource(serverspaceURI);
+				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
+			} catch (IOException e) {
+				throw new FatalESException("Could not init XMLRessource", e);
+			}
+		} else {
+			resource = resourceSet.createResource(serverspaceURI);
+		}
 
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());
@@ -391,40 +397,6 @@ public class EMFStoreController implements IApplication, Runnable {
 	 */
 	public static EMFStoreController getInstance() {
 		return instance;
-	}
-
-	private ResourceStorage initStorage() throws FatalESException {
-		String className = properties.getProperty(ServerConfiguration.RESOURCE_STORAGE,
-			ServerConfiguration.RESOURCE_STORAGE_DEFAULT);
-
-		ResourceStorage resourceStorage;
-		final String failMessage = "Failed loading ressource storage!";
-		try {
-			ModelUtil.logInfo("Using RessourceStorage \"" + className + "\".");
-			resourceStorage = (ResourceStorage) Class.forName(className).getConstructor().newInstance();
-			return resourceStorage;
-		} catch (IllegalArgumentException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (SecurityException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (InstantiationException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (IllegalAccessException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (InvocationTargetException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (NoSuchMethodException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (ClassNotFoundException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		}
 	}
 
 	private AccessControlImpl initAccessControl(ServerSpace serverSpace) throws FatalESException {

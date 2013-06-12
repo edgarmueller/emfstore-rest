@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendonk
  * koegel
  ******************************************************************************/
@@ -44,17 +44,6 @@ public final class ServerConfiguration {
 	 * Constant for boolean false string.
 	 */
 	public static final String FALSE = "false";
-
-	/**
-	 * Constant for the name of the Resource Storage Property.
-	 */
-	public static final String RESOURCE_STORAGE = "emfstore.persistence.resourceStorage";
-
-	/**
-	 * Constant for the Default Resource Storage.
-	 */
-	// TODO: OTS
-	public static final String RESOURCE_STORAGE_DEFAULT = "org.eclipse.emf.emfstore.internal.server.storage.XMLStorage";
 
 	/**
 	 * RMI encryption property, possible values are true and false.
