@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -37,6 +36,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
  * Helper for creating resources etc.
@@ -69,7 +69,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalESException {
-		URI projectHistoryURI = URIUtil.createProjectHistoryURI(projectHistory.getProjectId().getId());
+		URI projectHistoryURI = ServerURIUtil.createProjectHistoryURI(projectHistory.getProjectId().getId());
 		saveInResource(projectHistory, projectHistoryURI);
 	}
 
@@ -84,7 +84,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalESException {
-		URI versionURI = URIUtil.createVersionURI(projectId.getId(), version.getPrimarySpec().getIdentifier());
+		URI versionURI = ServerURIUtil.createVersionURI(projectId.getId(), version.getPrimarySpec().getIdentifier());
 		saveInResource(version, versionURI);
 	}
 
@@ -102,7 +102,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForProject(Project project, PrimaryVersionSpec versionId, ProjectId projectId)
 		throws FatalESException {
-		URI projectStateURI = URIUtil.createProjectStateURI(projectId.getId(), versionId.getIdentifier());
+		URI projectStateURI = ServerURIUtil.createProjectStateURI(projectId.getId(), versionId.getIdentifier());
 		saveInResourceWithProject(project, projectStateURI, project);
 	}
 
@@ -120,7 +120,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForChangePackage(ChangePackage changePackage, PrimaryVersionSpec versionId,
 		ProjectId projectId) throws FatalESException {
-		URI changePackageURI = URIUtil.createChangePackageURI(projectId.getId(), versionId.getIdentifier());
+		URI changePackageURI = ServerURIUtil.createChangePackageURI(projectId.getId(), versionId.getIdentifier());
 		List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
 
 		for (AbstractOperation op : changePackage.getOperations()) {

@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.server;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.eclipse.emf.emfstore.common.URIUtil;
 
 /**
  * Abstract URIConverter for normalizing EMFStore URIs on server side. Delegates normalizing to specialized methods
@@ -27,18 +26,18 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 	@Override
 	public URI normalize(URI uri) {
 		// emfstore:
-		if (uri.scheme() != null && uri.scheme().equals(URIUtil.SCHEME)) {
+		if (uri.scheme() != null && uri.scheme().equals(ServerURIUtil.SCHEME)) {
 
 			// emfstore:/serverspaces/0
-			if (uri.segment(0).equals(URIUtil.SERVER_SEGMENT)) {
+			if (uri.segment(0).equals(ServerURIUtil.SERVER_SEGMENT)) {
 
 				// emfstore:/serverspaces/0/serverspace
-				if (uri.segment(2).equals(URIUtil.SERVERSPACE_SEGMENT)) {
+				if (uri.segment(2).equals(ServerURIUtil.SERVERSPACE_SEGMENT)) {
 					return normalizeServerSpaceURI();
 				}
 
 				// emfstore:/serverspaces/0/projects/<identifier>
-				else if (uri.segment(2).equals(URIUtil.PROJECTS_SEGMENT)) {
+				else if (uri.segment(2).equals(ServerURIUtil.PROJECTS_SEGMENT)) {
 					return normalizeProjects(uri);
 				}
 			}
@@ -50,22 +49,22 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 
 	private URI normalizeProjects(URI uri) {
 		// emfstore:/serverspaces/0/projects/<identifier>/projecthistory
-		if (uri.segment(4).equals(URIUtil.PROJECTHISTORY_SEGMENT)) {
+		if (uri.segment(4).equals(ServerURIUtil.PROJECTHISTORY_SEGMENT)) {
 			return normalizeProjectHistoryURI(uri.segment(3));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/versions/<nr>
-		else if (uri.segment(4).equals(URIUtil.VERSIONS_SEGMENT)) {
+		else if (uri.segment(4).equals(ServerURIUtil.VERSIONS_SEGMENT)) {
 			return normalizeVersionURI(uri.segment(3), Integer.valueOf(uri.segment(5)));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/changepackages/<nr>
-		else if (uri.segment(4).equals(URIUtil.CHANGEPACKAGES_SEGMENT)) {
+		else if (uri.segment(4).equals(ServerURIUtil.CHANGEPACKAGES_SEGMENT)) {
 			return normalizeChangePackageURI(uri.segment(3), Integer.valueOf(uri.segment(5)));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/projectstates/<nr>
-		else if (uri.segment(4).equals(URIUtil.PROJECTSTATES_SEGMENT)) {
+		else if (uri.segment(4).equals(ServerURIUtil.PROJECTSTATES_SEGMENT)) {
 			return normalizeProjectStateURI(uri.segment(3), Integer.valueOf(uri.segment(5)));
 		}
 

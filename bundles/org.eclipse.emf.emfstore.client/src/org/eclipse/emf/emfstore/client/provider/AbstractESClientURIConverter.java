@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.provider;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.eclipse.emf.emfstore.common.URIUtil;
+import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
 
 /**
  * Abstract URIConverter for normalizing EMFStore URIs on client side. Delegates normalizing to specialized methods
@@ -27,18 +27,18 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 	@Override
 	public URI normalize(URI uri) {
 		// emfstore:
-		if (uri.scheme() != null && uri.scheme().equals(URIUtil.SCHEME)) {
+		if (uri.scheme() != null && uri.scheme().equals(ClientURIUtil.SCHEME)) {
 
 			// emfstore:/workspaces/0
-			if (uri.segment(0).equals(URIUtil.CLIENT_SEGMENT)) {
+			if (uri.segment(0).equals(ClientURIUtil.CLIENT_SEGMENT)) {
 
 				// emfstore:/workspaces/0/workspace
-				if (uri.segment(2).equals(URIUtil.WORKSPACE_SEGMENT)) {
+				if (uri.segment(2).equals(ClientURIUtil.WORKSPACE_SEGMENT)) {
 					return normalizeWorkspaceURI();
 				}
 
 				// emfstore:/workspaces/0/projectspaces/<identifier>
-				else if (uri.segment(2).equals(URIUtil.PROJECTSPACES_SEGMENT)) {
+				else if (uri.segment(2).equals(ClientURIUtil.PROJECTSPACES_SEGMENT)) {
 					return normalizeProjectSpaces(uri);
 				}
 			}
@@ -50,17 +50,17 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 
 	private URI normalizeProjectSpaces(URI uri) {
 		// emfstore:/workspaces/0/projectspaces/<identifier>/project
-		if (uri.segment(4).equals(URIUtil.PROJECT_SEGMENT)) {
+		if (uri.segment(4).equals(ClientURIUtil.PROJECT_SEGMENT)) {
 			return normalizeProjectURI(uri.segment(3));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/operations
-		else if (uri.segment(4).equals(URIUtil.OPERATIONS_SEGMENT)) {
+		else if (uri.segment(4).equals(ClientURIUtil.OPERATIONS_SEGMENT)) {
 			return normalizeOperationsURI(uri.segment(3));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/projectspace
-		else if (uri.segment(4).equals(URIUtil.PROJECTSPACE_SEGMENT)) {
+		else if (uri.segment(4).equals(ClientURIUtil.PROJECTSPACE_SEGMENT)) {
 			return normalizeProjectSpaceURI(uri.segment(3));
 		}
 

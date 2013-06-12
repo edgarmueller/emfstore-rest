@@ -42,8 +42,8 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
+import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
 import org.eclipse.emf.emfstore.common.ESDisposable;
-import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
@@ -500,7 +500,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// are not different, then reinitialize operations URI
 		// TODO: first case kills change package
 		if (this.eResource() == eResource) {
-			eResource = resourceSet.createResource(URIUtil.createOperationsURI(getIdentifier()));
+			eResource = resourceSet.createResource(ClientURIUtil.createOperationsURI(getIdentifier()));
 		} else {
 			eResource.getContents().remove(0);
 		}
@@ -681,9 +681,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		this.resourceSet = resourceSet;
 		initCompleted = true;
 
-		URI projectSpaceURI = URIUtil.createProjectSpaceURI(getIdentifier());
-		URI operationsURI = URIUtil.createOperationsURI(getIdentifier());
-		URI projectURI = URIUtil.createProjectURI(getIdentifier());
+		URI projectSpaceURI = ClientURIUtil.createProjectSpaceURI(getIdentifier());
+		URI operationsURI = ClientURIUtil.createOperationsURI(getIdentifier());
+		URI projectURI = ClientURIUtil.createProjectURI(getIdentifier());
 
 		setResourceCount(0);
 

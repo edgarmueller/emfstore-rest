@@ -9,17 +9,16 @@
  * Contributors:
  * Johannes Faltermeier
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common;
+package org.eclipse.emf.emfstore.client.util;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
- * Helper class for creating EMFStore URIs and accessing segments.
- * 
- * @author jfaltermeier
+ * Helper class for creatinrmeier
  * 
  */
-public final class URIUtil {
+public final class ClientURIUtil {
 	// TODO introduce name for multiple clients
 	// .. workspaces/<name>/ ..
 
@@ -30,7 +29,7 @@ public final class URIUtil {
 	 * <p />
 	 * Example URI: <b>emfstore</b>:/workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
-	public static final String SCHEME = "emfstore";
+	public static final String SCHEME = ServerURIUtil.SCHEME;
 
 	/**
 	 * The EMFStore URI segment for client workspaces.
@@ -72,42 +71,7 @@ public final class URIUtil {
 	 */
 	public static final String OPERATIONS_SEGMENT = "operations";
 
-	/**
-	 * The EMFStore URI segment for serverspaces.
-	 */
-	public static final String SERVER_SEGMENT = "serverspaces";
-
-	/**
-	 * The EMFStore URI segment for projects.
-	 */
-	public static final String PROJECTS_SEGMENT = "projects";
-
-	/**
-	 * The EMFStore URI segment for a version.
-	 */
-	public static final String VERSIONS_SEGMENT = "versions";
-
-	/**
-	 * The EMFStore URI segment for a changepackage.
-	 */
-	public static final String CHANGEPACKAGES_SEGMENT = "changepackages";
-
-	/**
-	 * The EMFStore URI segment for a projectstate.
-	 */
-	public static final String PROJECTSTATES_SEGMENT = "projectstates";
-
-	/**
-	 * The EMFStore URI segment for the serverspace.
-	 */
-	public static final String SERVERSPACE_SEGMENT = "serverspace";
-
-	/**
-	 * The EMFStore URI segment for a project's history.
-	 */
-	public static final String PROJECTHISTORY_SEGMENT = "projecthistory";
-
-	private URIUtil() {
+	private ClientURIUtil() {
 		// private constructor
 	}
 
@@ -156,72 +120,12 @@ public final class URIUtil {
 		return URI.createURI(getProjectspacesPrefix(identifier) + PROJECTSPACE_SEGMENT);
 	}
 
-	/**
-	 * Creates an EMFStore URI for addressing the serverspace.
-	 * 
-	 * @return the EMFStore URI
-	 */
-	public static URI createServerSpaceURI() {
-		return URI.createURI(getServerPrefix() + SERVERSPACE_SEGMENT);
-	}
-
-	/**
-	 * Creates an EMFStore URI for addressing the history of a project.
-	 * 
-	 * @param identifier the project's id
-	 * @return the EMFStore URI
-	 */
-	public static URI createProjectHistoryURI(String identifier) {
-		return URI.createURI(getProjectsPrefix(identifier) + PROJECTHISTORY_SEGMENT);
-	}
-
-	/**
-	 * Creates an EMFStore URI for addressing a specific version of a project.
-	 * 
-	 * @param identifier the project's id
-	 * @param nr the version number
-	 * @return the EMFStore URI
-	 */
-	public static URI createVersionURI(String identifier, int nr) {
-		return URI.createURI(getProjectsPrefix(identifier) + VERSIONS_SEGMENT + "/" + nr);
-	}
-
-	/**
-	 * Creates an EMFStore URI for addressing a specific changepackage of a project.
-	 * 
-	 * @param identifier the project's id
-	 * @param nr the changepackage number
-	 * @return the EMFStore URI
-	 */
-	public static URI createChangePackageURI(String identifier, int nr) {
-		return URI.createURI(getProjectsPrefix(identifier) + CHANGEPACKAGES_SEGMENT + "/" + nr);
-	}
-
-	/**
-	 * Creates an EMFStore URI for addressing a specific state of a project.
-	 * 
-	 * @param identifier the project's id
-	 * @param nr the projectstate number
-	 * @return the EMFStore URI
-	 */
-	public static URI createProjectStateURI(String identifier, int nr) {
-		return URI.createURI(getProjectsPrefix(identifier) + PROJECTSTATES_SEGMENT + "/" + nr);
-	}
-
 	private static String getClientPrefix() {
-		return SCHEME + ":/" + CLIENT_SEGMENT + "/0/";
+		return SCHEME + ":/" + CLIENT_SEGMENT + "/" + ServerURIUtil.getProfile() + "/";
 	}
 
 	private static String getProjectspacesPrefix(String identifier) {
 		return getClientPrefix() + PROJECTSPACES_SEGMENT + "/" + identifier + "/";
-	}
-
-	private static String getServerPrefix() {
-		return SCHEME + ":/" + SERVER_SEGMENT + "/0/";
-	}
-
-	private static String getProjectsPrefix(String identifier) {
-		return getServerPrefix() + PROJECTS_SEGMENT + "/" + identifier + "/";
 	}
 
 }

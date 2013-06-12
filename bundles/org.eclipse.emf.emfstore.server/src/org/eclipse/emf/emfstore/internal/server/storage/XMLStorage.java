@@ -17,11 +17,11 @@ import java.util.Properties;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
  * Implementation of a {@link ResourceStorage} backed by an XMLResource.
@@ -49,7 +49,7 @@ public class XMLStorage implements ResourceStorage {
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 
-		URI serverspaceURI = URIUtil.createServerSpaceURI();
+		URI serverspaceURI = ServerURIUtil.createServerSpaceURI();
 		if (!resourceSet.getURIConverter().exists(serverspaceURI, null)) {
 			try {
 				Resource resource = resourceSet.createResource(serverspaceURI);

@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.URIUtil;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
@@ -96,6 +95,16 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * File prefix for file: projectstate.
 	 */
 	public static final String FILE_PREFIX_PROJECTSTATE = "projectstate-";
+
+	/**
+	 * The EMFStore URI segment for a changepackage.
+	 */
+	public static final String CHANGEPACKAGES_SEGMENT = "changepackages";
+
+	/**
+	 * The EMFStore URI segment for a projectstate.
+	 */
+	public static final String PROJECTSTATES_SEGMENT = "projectstates";
 
 	// SoftReferences acting as a simple cache for project state and ChangePackage
 	private SoftReference<Resource> projectStateResource = new SoftReference<Resource>(null);
@@ -1028,7 +1037,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return the uri for the project state resource
 	 */
 	private URI getProjectURI() {
-		return URIUtil.createProjectStateURI(getProjectIdFromURI(), this.getPrimarySpec().getIdentifier());
+		return getBaseURI() == null ? null : getBaseURI().appendSegment(PROJECTSTATES_SEGMENT).appendSegment(
+			Integer.toString(this.getPrimarySpec().getIdentifier()));
 	}
 
 	/**
@@ -1037,16 +1047,18 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return the uri for the ChangePackage resource
 	 */
 	private URI getChangePackageURI() {
-		return URIUtil.createChangePackageURI(getProjectIdFromURI(), this.getPrimarySpec().getIdentifier());
+		return getBaseURI() == null ? null : getBaseURI().appendSegment(CHANGEPACKAGES_SEGMENT).appendSegment(
+			Integer.toString(this.getPrimarySpec().getIdentifier()));
 	}
 
 	/**
-	 * Returns the segment identifying the project id from the version's uri.
+	 * allows to retrieve the Base-URI of this version, i.e. the URI of the resource
+	 * containing the version trimmed by its last segment.
 	 * 
-	 * @return the project id
+	 * @return the base URI
 	 */
-	private String getProjectIdFromURI() {
-		return this.eResource().getURI().segment(3);
+	private URI getBaseURI() {
+		return this.eResource() == null ? null : this.eResource().getURI().trimSegments(2);
 	}
 
 	public void setChangeResource(Resource resource) {
