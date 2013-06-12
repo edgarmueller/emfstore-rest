@@ -11,7 +11,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
+import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 
 /**
  * Interface for resource set provider.
@@ -22,7 +25,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 public interface ESResourceSetProvider {
 
 	/**
-	 * Returns fully configured ResourceSet.
+	 * Returns ResourceSet with load and save options configured and including a {@link CommandStack},
+	 * {@link ResourceFactoryRegistry} and {@link URIConverter}
 	 * 
 	 * @return the ResourceSet
 	 */
