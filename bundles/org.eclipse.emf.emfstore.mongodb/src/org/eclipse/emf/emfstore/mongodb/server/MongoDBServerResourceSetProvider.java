@@ -49,6 +49,14 @@ public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
 	 * @see org.eclipse.emf.emfstore.client.provider.ESResourceSetProvider#getResourceSet()
 	 */
 	public ResourceSet getResourceSet() {
+		// resourceSetFactory may not be binded yet
+		while (resourceSetFactory == null) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// do nothing
+			}
+		}
 		ResourceSetImpl resourceSet = (ResourceSetImpl) resourceSetFactory.createResourceSet();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		resourceSet.setURIConverter(createURIConverter(resourceSet));

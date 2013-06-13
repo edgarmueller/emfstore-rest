@@ -31,10 +31,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
@@ -949,7 +952,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private Resource getProjectStateResource() {
 		Resource result = projectStateResource.get();
-		if (projectStateResource.get() == null || !projectStateResource.get().isLoaded()) {
+		if (projectStateResource.get() == null || !projectStateResource.get().isLoaded()
+			|| projectStateResource.get().getResourceSet() == null) {
 			try {
 				result = loadResourceForURI(getProjectURI());
 			} catch (IOException ioe) {
@@ -1018,15 +1022,33 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private Resource loadResourceForURI(URI uri) throws IOException {
 
-		Resource resource = null;
+		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.server.resourceSetProvider")
+			.getClass("class",
+				ESResourceSetProvider.class);
 
-		if (this.eResource() != null && this.eResource().getResourceSet() != null) {
-			resource = this.eResource().getResourceSet().createResource(uri);
+		ResourceSet resourceSet;
+
+		if (resourceSetProvider == null) {
+			resourceSet = new ResourceSetImpl();
+			resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
+			resourceSet.setURIConverter(this.eResource().getResourceSet().getURIConverter());
+			((ResourceSetImpl) resourceSet).setURIResourceMap(new LinkedHashMap<URI, Resource>());
+			resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
+		} else {
+			resourceSet = resourceSetProvider.getResourceSet();
 		}
 
-		if (resource == null) {
-			resourceFactoryRegistry.createResource(uri);
-		}
+		Resource resource = resourceSet.createResource(uri);
+
+		// if (this.eResource() != null && this.eResource().getResourceSet() != null) {
+		// resource = this.eResource().getResourceSet().createResource(uri);
+		// }
+		//
+		// if (resource == null) {
+		// resourceFactoryRegistry.createResource(uri);
+		// }
+
 		resource.load(ModelUtil.getResourceLoadOptions());
 		return resource;
 	}
@@ -1066,10 +1088,10 @@ public class VersionImpl extends EObjectImpl implements Version {
 			changePackageResource = new SoftReference<Resource>(null);
 		} else {
 			ResourceSet resourceSet = resource.getResourceSet();
-			if (resourceSet != null) {
+			if (resourceSet != null && resourceSet == this.eResource().getResourceSet()) {
 				// remove the resource from its containing resourceSet in order
 				// to remove the strong referencing.
-				// resourceSet.getResources().remove(resource);
+				resourceSet.getResources().remove(resource);
 			}
 			changePackageResource = new SoftReference<Resource>(resource);
 		}
@@ -1080,10 +1102,10 @@ public class VersionImpl extends EObjectImpl implements Version {
 			projectStateResource = new SoftReference<Resource>(null);
 		} else {
 			ResourceSet resourceSet = resource.getResourceSet();
-			if (resourceSet != null) {
+			if (resourceSet != null && resourceSet == this.eResource().getResourceSet()) {
 				// remove the resource from its containing resourceSet in order
 				// to remove the strong referencing.
-				// resourceSet.getResources().remove(resource);
+				resourceSet.getResources().remove(resource);
 			}
 			projectStateResource = new SoftReference<Resource>(resource);
 		}
