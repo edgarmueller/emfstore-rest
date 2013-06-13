@@ -39,8 +39,8 @@ import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
-import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
@@ -562,8 +562,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		Workspace workspace = (Workspace) directContents.get(0);
 		for (ProjectSpace ps : workspace.getProjectSpaces()) {
 			// TODO test this
-			URI projectURI = ps.getProject().eResource().getURI();
-			URI operationsURI = ps.getLocalChangePackage().eResource().getURI();
+			URI projectURI = migrationResourceSet.getURIConverter().normalize(ps.getProject().eResource().getURI());
+			URI operationsURI = migrationResourceSet.getURIConverter()
+				.normalize(ps.getLocalChangePackage().eResource().getURI());
 			try {
 				migrate(projectURI, operationsURI, workspaceModelVersion.getReleaseNumber());
 			} catch (EMFStoreMigrationException e) {
