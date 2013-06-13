@@ -306,6 +306,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	private ServerSpace initServerSpace() throws FatalESException {
+
 		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.server.resourceSetProvider")
 			.getClass("class",
@@ -318,9 +319,12 @@ public class EMFStoreController implements IApplication, Runnable {
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 
 		URI serverspaceURI = ServerURIUtil.createServerSpaceURI();
+
 		if (!resourceSet.getURIConverter().exists(serverspaceURI, null)) {
 			try {
 				resource = resourceSet.createResource(serverspaceURI);
+				ServerSpace serverspace = ModelFactory.eINSTANCE.createServerSpace();
+				resource.getContents().add(serverspace);
 				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
 			} catch (IOException e) {
 				throw new FatalESException("Could not init XMLRessource", e);
