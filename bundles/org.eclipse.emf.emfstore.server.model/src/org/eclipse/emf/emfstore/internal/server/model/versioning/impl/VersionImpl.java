@@ -999,7 +999,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private Resource getChangePackageResource() {
 		Resource result = changePackageResource.get();
-		if (changePackageResource.get() == null || !changePackageResource.get().isLoaded()) {
+		if (changePackageResource.get() == null || !changePackageResource.get().isLoaded()
+			|| changePackageResource.get().getResourceSet() == null) {
 			try {
 				result = loadResourceForURI(getChangePackageURI());
 			} catch (IOException e) {
