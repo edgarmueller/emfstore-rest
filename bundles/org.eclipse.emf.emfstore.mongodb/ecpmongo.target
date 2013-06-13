@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="ECP RCP" sequenceNumber="216">
+<?pde version="3.8"?><target name="ECP RCP" sequenceNumber="217">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.8.3.v20130125-0826"/>
@@ -54,6 +54,11 @@
 <unit id="org.eclipse.emf.edapt.runtime.sdk.feature.feature.group" version="0.3.0.201205312242"/>
 <unit id="org.eclipse.emf.edapt.recorder.sdk.feature.feature.group" version="0.3.0.201205312242"/>
 <repository location="http://download.eclipse.org/edapt/update-site/"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.ocl.all.sdk.feature.group" version="4.0.2.v20130130-1128"/>
+<unit id="org.eclipse.ocl.examples.feature.group" version="3.2.2.v20130130-1128"/>
+<repository location="http://download.eclipse.org/releases/juno/"/>
 </location>
 </locations>
 </target>
