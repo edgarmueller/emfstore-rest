@@ -35,7 +35,7 @@ import org.junit.runners.Suite;
 	AllUIControllerTests.class })
 public class AllUITests {
 
-	public static final int TIMEOUT = 15000;
+	public static final int TIMEOUT = 60000;
 
 	private static void startEMFStore() {
 		ServerConfiguration.setTesting(true);

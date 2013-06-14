@@ -61,9 +61,14 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 	}
 
 	protected void createPlayerAndCommit() {
-		Player player = ProjectChangeUtil.createPlayer(PLAYER_NAME);
+		final Player player = ProjectChangeUtil.createPlayer(PLAYER_NAME);
 		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
-		localProject.getModelElements().add(player);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(player);
+				return null;
+			}
+		});
 		commit(baseVersion);
 	}
 
