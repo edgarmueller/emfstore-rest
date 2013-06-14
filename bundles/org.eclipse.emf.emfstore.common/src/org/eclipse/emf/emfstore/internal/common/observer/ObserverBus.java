@@ -88,22 +88,6 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
  */
 public class ObserverBus {
 
-	/**
-	 * Initializes the singleton instance statically.
-	 */
-	private static class SingletonHolder {
-		public static final ObserverBus INSTANCE = new ObserverBus();
-	}
-
-	/**
-	 * Static ObserverBus singleton. Use of singleton is optional, for that reason the constructor is public.
-	 * 
-	 * @return Static instance of the observerbus
-	 */
-	public static ObserverBus getInstance() {
-		return SingletonHolder.INSTANCE;
-	}
-
 	private final transient Map<Class<? extends ESObserver>, List<ESObserver>> observerMap;
 
 	/**
