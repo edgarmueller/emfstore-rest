@@ -929,7 +929,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	public Project getProjectState() {
 		Resource resource = getProjectStateResource();
-		if (resource == null) {
+		if (resource == null || resource.getContents().size() < 1) {
 			return null;
 		}
 		Project project = (Project) resource.getContents().get(0);
@@ -938,7 +938,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	public ChangePackage getChanges() {
 		Resource resource = getChangePackageResource();
-		if (resource == null) {
+		if (resource == null || resource.getContents().size() < 1) {
 			return null;
 		}
 		ChangePackage changePackage = (ChangePackage) resource.getContents().get(0);
@@ -963,7 +963,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 				}
 			}
 
-			if (result != null) {
+			if (result != null && result.getContents().size() > 1) {
 				Project project = (Project) result.getContents().get(0);
 				initProjectStateAfterLoad((ProjectImpl) project);
 			}
