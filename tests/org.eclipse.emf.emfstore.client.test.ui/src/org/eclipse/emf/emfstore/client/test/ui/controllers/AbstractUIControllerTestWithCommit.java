@@ -132,8 +132,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 	protected ESPrimaryVersionSpec update() {
 
-		final ESPrimaryVersionSpec baseVersion = getCheckedoutCopy().getBaseVersion();
-
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
@@ -143,11 +141,13 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			}
 		});
 
-		bot.button("OK").click();
+		SWTBotButton buttonWithLabel = bot.button(0);
+		buttonWithLabel.click();
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
-				return baseVersion.getIdentifier() != localProject.getBaseVersion().getIdentifier();
+				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
+				localProject.getBaseVersion().getIdentifier();
 			}
 
 			public String getFailureMessage() {
@@ -158,4 +158,45 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		return getCheckedoutCopy().getBaseVersion();
 	}
 
+	protected ESPrimaryVersionSpec pagedUpdate() {
+
+		UIThreadRunnable.asyncExec(new VoidResult() {
+			public void run() {
+				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
+					bot.getDisplay().getActiveShell(),
+					getCheckedoutCopy());
+				updateProjectController.execute();
+			}
+		});
+
+		SWTBotButton buttonWithLabel = bot.button(0);
+		buttonWithLabel.click();
+
+		bot.waitUntil(new DefaultCondition() {
+			public boolean test() throws Exception {
+				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
+				localProject.getBaseVersion().getIdentifier() - 1;
+			}
+
+			public String getFailureMessage() {
+				return "Paged Update did not succeed.";
+			}
+		}, timeout());
+
+		bot.button(0).click(); // update notification hint
+		bot.button(0).click(); // inspect changes on update
+
+		bot.waitUntil(new DefaultCondition() {
+			public boolean test() throws Exception {
+				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
+				localProject.getBaseVersion().getIdentifier();
+			}
+
+			public String getFailureMessage() {
+				return "Paged Update did not succeed.";
+			}
+		}, timeout());
+
+		return getCheckedoutCopy().getBaseVersion();
+	}
 }

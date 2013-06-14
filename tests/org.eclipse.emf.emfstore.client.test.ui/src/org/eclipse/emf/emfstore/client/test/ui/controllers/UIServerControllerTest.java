@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -18,9 +18,17 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
+import org.junit.Before;
 import org.junit.Test;
 
 public class UIServerControllerTest extends AbstractUIControllerTest {
+
+	@Override
+	@Before
+	public void setUp() throws Exception {
+		ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(
+			ESWorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0));
+	}
 
 	@Override
 	@Test

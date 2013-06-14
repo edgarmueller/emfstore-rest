@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui;
@@ -35,7 +35,7 @@ import org.junit.runners.Suite;
 	AllUIControllerTests.class })
 public class AllUITests {
 
-	public static final int TIMEOUT = 10000;
+	public static final int TIMEOUT = 15000;
 
 	private static void startEMFStore() {
 		ServerConfiguration.setTesting(true);

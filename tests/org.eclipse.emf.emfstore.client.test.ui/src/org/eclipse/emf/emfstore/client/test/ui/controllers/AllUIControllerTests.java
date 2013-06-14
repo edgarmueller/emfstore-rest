@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * Edgar
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
@@ -21,15 +21,15 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	// UIAddTagControllerTest.class,
-	// UICreateBranchControllerTest.class,
-	// UICreateRemoteProjectControllerTest.class,
-	// UIDeleteRemoteProjectControllerTest.class,
+	UIAddTagControllerTest.class,
+	UICreateBranchControllerTest.class,
+	UICreateRemoteProjectControllerTest.class,
+	UIDeleteRemoteProjectControllerTest.class,
 	// UIRevertCommitControllerTest.class,
 	// UIServerControllerTest.class,
-	// UISessionControllerTest.class,
-	// UIShareProjectControllerTest.class,
-	// UIUpdateProjectControllerTest.class
+	UISessionControllerTest.class,
+	UIShareProjectControllerTest.class,
+	UIUpdateProjectControllerTest.class,
 	UIPagedUpdateProjectControllerTest.class
 })
 public class AllUIControllerTests {

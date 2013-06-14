@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * Edgar
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
@@ -30,9 +30,6 @@ public class UIUpdateProjectControllerTest extends AbstractUIControllerTestWithC
 	public void testController() throws ESException {
 
 		checkout();
-
-		bot.text().setText("foo");
-		bot.button("OK").click();
 
 		createPlayerAndCommit();
 		update();

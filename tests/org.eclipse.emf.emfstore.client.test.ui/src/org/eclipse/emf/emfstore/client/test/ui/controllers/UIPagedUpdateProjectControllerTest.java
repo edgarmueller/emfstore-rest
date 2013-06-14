@@ -6,14 +6,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
 import org.eclipse.emf.emfstore.client.ESPagedUpdateConfig;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
-import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.junit.Test;
 
 public class UIPagedUpdateProjectControllerTest extends AbstractUIControllerTestWithCommit {
@@ -39,23 +37,8 @@ public class UIPagedUpdateProjectControllerTest extends AbstractUIControllerTest
 		createTournamentAndCommit();
 		createLeagueAndCommit();
 
-		ESPrimaryVersionSpec update = update();
-		bot.button("OK").click();
-		bot.button("OK").click();
+		pagedUpdate();
 
-		// assertFalse(update.getIdentifier() == localProject.getBaseVersion().getIdentifier());
-		// final ESPrimaryVersionSpec update2 = update();
-		bot.waitUntil(new DefaultCondition() {
-
-			public boolean test() throws Exception {
-				return getCheckedoutCopy().getBaseVersion().getIdentifier() == localProject.getBaseVersion()
-					.getIdentifier();
-			}
-
-			public String getFailureMessage() {
-				return "Update did not succeed";
-			}
-		}, timeout());
 		assertTrue(getCheckedoutCopy().getBaseVersion().getIdentifier() == localProject.getBaseVersion()
 			.getIdentifier());
 
