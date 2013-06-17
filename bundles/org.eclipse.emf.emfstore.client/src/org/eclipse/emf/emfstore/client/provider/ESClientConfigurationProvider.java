@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.provider;
@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.client.provider;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 
 /**
  * This provider allows to set the default {@link ESServer} and initialize the {@link ESKeyStoreManager} with necessary
@@ -25,6 +26,9 @@ public interface ESClientConfigurationProvider {
 
 	/**
 	 * Returns a list of default {@link ESServer}s.
+	 * This method is called during workspace initialization, i.e. you must <b>NOT</b>
+	 * use {@link ESWorkspaceProvider#INSTANCE} in the scope of this method. This
+	 * means you must not create a session while creating the default server information.
 	 * 
 	 * @return a list of default server entries
 	 */

@@ -10,6 +10,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
+import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
+import static org.eclipse.swtbot.swt.finder.waits.Conditions.waitForShell;
+
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.bowling.League;
@@ -24,10 +27,12 @@ import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutControll
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUpdateProjectController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
+import org.hamcrest.Matcher;
 
 public abstract class AbstractUIControllerTestWithCommit extends AbstractUIControllerTest {
 
@@ -188,6 +193,8 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			}
 		}, timeout());
 
+		Matcher<Shell> matcher = withText("More updates available");
+		bot.waitUntil(waitForShell(matcher));
 		bot.button(0).click(); // update notification hint
 		bot.button(0).click(); // inspect changes on update
 
