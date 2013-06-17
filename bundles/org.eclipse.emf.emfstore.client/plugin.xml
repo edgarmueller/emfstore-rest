@@ -101,5 +101,12 @@
            observerAttributeName="shareObserver">
      </observer>
   </extension>
+  <extension
+        point="org.eclipse.emf.emfstore.client.resourceSetProvider">
+     <resourceSetProvider
+           class="org.eclipse.emf.emfstore.internal.client.provider.ESClientXMIResourceSetProvider"
+           priority="0">
+     </resourceSetProvider>
+  </extension>
 
 </plugin>

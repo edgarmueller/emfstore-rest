@@ -17,7 +17,7 @@
          </appInfo>
       </annotation>
       <complexType>
-         <sequence>
+         <sequence minOccurs="1" maxOccurs="unbounded">
             <element ref="resourceSetProvider"/>
          </sequence>
          <attribute name="point" type="string" use="required">
@@ -57,6 +57,13 @@
                <appInfo>
                   <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider"/>
                </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="priority" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
             </annotation>
          </attribute>
       </complexType>

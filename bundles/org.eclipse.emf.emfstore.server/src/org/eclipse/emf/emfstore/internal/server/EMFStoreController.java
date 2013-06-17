@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -66,7 +67,6 @@ import org.eclipse.emf.emfstore.internal.server.startup.EmfStoreValidator;
 import org.eclipse.emf.emfstore.internal.server.startup.MigrationManager;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
-import org.eclipse.emf.emfstore.internal.server.storage.ESServerXMIResourceSetProvider;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -307,14 +307,13 @@ public class EMFStoreController implements IApplication, Runnable {
 
 	private ServerSpace initServerSpace() throws FatalESException {
 
-		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.server.resourceSetProvider")
-			.getClass("class",
-				ESResourceSetProvider.class);
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+			true);
+		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		extensionPoint.reload();
 
-		if (resourceSetProvider == null) {
-			resourceSetProvider = new ESServerXMIResourceSetProvider();
-		}
+		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
+			ESResourceSetProvider.class);
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 

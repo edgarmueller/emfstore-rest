@@ -44,6 +44,7 @@ import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
@@ -56,7 +57,6 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
-import org.eclipse.emf.emfstore.internal.client.provider.ESClientXMIResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -185,15 +185,13 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 */
 	public void load() {
 
-		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.resourceSetProvider")
-			.getClass("class",
-				ESResourceSetProvider.class);
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
+			true);
+		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		extensionPoint.reload();
 
-		if (resourceSetProvider == null) {
-			// use default xmi implementation
-			resourceSetProvider = new ESClientXMIResourceSetProvider();
-		}
+		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
+			ESResourceSetProvider.class);
 
 		resourceSet = resourceSetProvider.getResourceSet();
 
@@ -539,15 +537,13 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 		// ////////// start migration
 		// load workspace in new resourceset
-		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.resourceSetProvider")
-			.getClass("class",
-				ESResourceSetProvider.class);
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
+			true);
+		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		extensionPoint.reload();
 
-		if (resourceSetProvider == null) {
-			// use default xmi implementation
-			resourceSetProvider = new ESClientXMIResourceSetProvider();
-		}
+		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
+			ESResourceSetProvider.class);
 
 		ResourceSet migrationResourceSet = resourceSetProvider.getResourceSet();
 		Resource resource = migrationResourceSet.createResource(ClientURIUtil.createWorkspaceURI());

@@ -34,4 +34,11 @@
          </property>
       </product>
    </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.server.resourceSetProvider">
+      <resourceSetProvider
+            class="org.eclipse.emf.emfstore.internal.server.storage.ESServerXMIResourceSetProvider"
+            priority="0">
+      </resourceSetProvider>
+   </extension>
 </plugin>

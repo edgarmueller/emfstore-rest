@@ -31,12 +31,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -1023,22 +1023,15 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private Resource loadResourceForURI(URI uri) throws IOException {
 
-		ESResourceSetProvider resourceSetProvider = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.server.resourceSetProvider")
-			.getClass("class",
-				ESResourceSetProvider.class);
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+			true);
+		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		extensionPoint.reload();
 
-		ResourceSet resourceSet;
+		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
+			ESResourceSetProvider.class);
 
-		if (resourceSetProvider == null) {
-			resourceSet = new ResourceSetImpl();
-			resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-			resourceSet.setURIConverter(this.eResource().getResourceSet().getURIConverter());
-			((ResourceSetImpl) resourceSet).setURIResourceMap(new LinkedHashMap<URI, Resource>());
-			resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
-		} else {
-			resourceSet = resourceSetProvider.getResourceSet();
-		}
+		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 
 		Resource resource = resourceSet.createResource(uri);
 
