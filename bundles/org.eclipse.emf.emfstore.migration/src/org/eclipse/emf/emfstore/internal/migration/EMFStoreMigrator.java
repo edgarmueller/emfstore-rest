@@ -33,9 +33,10 @@ public interface EMFStoreMigrator {
 	 * 
 	 * @throws EMFStoreMigrationException if the migration fails.
 	 */
-	void migrate(List<URI> resources, int sourceModelReleaseNumber, IProgressMonitor monitor)
+	void migrate(List<URI> resources, int remove, IProgressMonitor monitor)
 		throws EMFStoreMigrationException;
 	
-	//TODO canHandle
-	//TODO canMigrate
+	boolean canHandle(URI uri);
+	
+	boolean needsMigration(URI uri);
 }
