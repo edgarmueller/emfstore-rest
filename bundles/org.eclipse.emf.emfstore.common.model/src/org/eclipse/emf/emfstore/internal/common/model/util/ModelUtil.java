@@ -57,6 +57,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -698,7 +700,36 @@ public final class ModelUtil {
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T loadEObjectFromResource(EClass eClass, URI resourceURI, boolean checkConstraints)
 		throws IOException {
-		ResourceSet resourceSet = new ResourceSetImpl();
+
+		ResourceSet resourceSet = null;
+
+		if (resourceURI != null && resourceURI.scheme().equals("emfstore")) {
+			ESExtensionPoint extensionPoint = null;
+			if (resourceURI.segment(0).equals("workspaces")) {
+				extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
+					false);
+			} else {
+				extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+					false);
+			}
+
+			extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+			extensionPoint.reload();
+
+			ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
+				"class",
+				ESResourceSetProvider.class);
+
+			if (resourceSetProvider == null) {
+				resourceSet = new ResourceSetImpl();
+			} else {
+				resourceSet = resourceSetProvider.getResourceSet();
+			}
+
+		} else {
+			resourceSet = new ResourceSetImpl();
+		}
+
 		Resource resource;
 
 		if (checkConstraints) {
