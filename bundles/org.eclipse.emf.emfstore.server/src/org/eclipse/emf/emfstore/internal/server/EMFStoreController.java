@@ -335,11 +335,12 @@ public class EMFStoreController implements IApplication, Runnable {
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());
 
-			if (properties.getProperty(ServerConfiguration.VALIDATE_SERVERSPACE_ON_SERVERSTART, "true").equals("true")) {
-				ModelUtil.logInfo("Validating serverspace ...");
-				validateServerSpace(resource);
-				ModelUtil.logInfo("Validation complete.");
-			}
+			// if (properties.getProperty(ServerConfiguration.VALIDATE_SERVERSPACE_ON_SERVERSTART,
+			// "true").equals("true")) {
+			// ModelUtil.logInfo("Validating serverspace ...");
+			// validateServerSpace(resource);
+			// ModelUtil.logInfo("Validation complete.");
+			// }
 		} catch (IOException e) {
 			throw new FatalESException(StorageException.NOLOAD, e);
 		}
