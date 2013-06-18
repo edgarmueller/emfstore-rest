@@ -47,7 +47,7 @@ public class ProjectSpaceFileURIHandler extends FileURIHandlerImpl {
 		File parent = file.getParentFile();
 		file.delete();
 
-		if (parent != null && parent.listFiles().length == 1 && parent.listFiles()[0].isDirectory()) {
+		if (parent != null && parent.exists() && parent.listFiles().length == 1 && parent.listFiles()[0].isDirectory()) {
 			// if there is only one directory left, it's the temp folder.
 			FileUtils.deleteDirectory(parent);
 		}
