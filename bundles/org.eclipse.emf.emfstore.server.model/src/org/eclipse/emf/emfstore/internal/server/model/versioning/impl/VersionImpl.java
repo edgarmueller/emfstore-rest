@@ -952,8 +952,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private Resource getProjectStateResource() {
 		Resource result = projectStateResource.get();
-		if (projectStateResource.get() == null || !projectStateResource.get().isLoaded()
-			|| projectStateResource.get().getResourceSet() == null) {
+		if (projectStateResource.get() == null || !projectStateResource.get().isLoaded()) {
 			try {
 				result = loadResourceForURI(getProjectURI());
 			} catch (IOException ioe) {
@@ -970,6 +969,12 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 			setProjectStateResource(result);
 		}
+
+		// make sure resource has all needed handlers
+		if (result != null && result.getResourceSet() == null) {
+			addResourceToResourceSet(result);
+		}
+
 		return result;
 	}
 
@@ -999,8 +1004,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private Resource getChangePackageResource() {
 		Resource result = changePackageResource.get();
-		if (changePackageResource.get() == null || !changePackageResource.get().isLoaded()
-			|| changePackageResource.get().getResourceSet() == null) {
+		if (changePackageResource.get() == null || !changePackageResource.get().isLoaded()) {
 			try {
 				result = loadResourceForURI(getChangePackageURI());
 			} catch (IOException e) {
@@ -1011,6 +1015,12 @@ public class VersionImpl extends EObjectImpl implements Version {
 			}
 			setChangeResource(result);
 		}
+
+		// make sure resource has all needed handlers
+		if (result != null && result.getResourceSet() == null) {
+			addResourceToResourceSet(result);
+		}
+
 		return result;
 	}
 
@@ -1023,6 +1033,23 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private Resource loadResourceForURI(URI uri) throws IOException {
 
+		Resource resource = null;
+
+		if (this.eResource() != null && this.eResource().getResourceSet() != null) {
+			resource = this.eResource().getResourceSet().createResource(uri);
+		}
+
+		if (resource == null) {
+			resourceFactoryRegistry.createResource(uri);
+		}
+		resource.load(ModelUtil.getResourceLoadOptions());
+		return resource;
+	}
+
+	/**
+	 * Adds a resource to a new ResourceSet which can handle EMFStore URIs.
+	 */
+	private void addResourceToResourceSet(Resource resource) {
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
 			true);
 		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
@@ -1032,19 +1059,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			ESResourceSetProvider.class);
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
-
-		Resource resource = resourceSet.createResource(uri);
-
-		// if (this.eResource() != null && this.eResource().getResourceSet() != null) {
-		// resource = this.eResource().getResourceSet().createResource(uri);
-		// }
-		//
-		// if (resource == null) {
-		// resourceFactoryRegistry.createResource(uri);
-		// }
-
-		resource.load(ModelUtil.getResourceLoadOptions());
-		return resource;
+		resourceSet.getResources().add(resource);
 	}
 
 	/**
