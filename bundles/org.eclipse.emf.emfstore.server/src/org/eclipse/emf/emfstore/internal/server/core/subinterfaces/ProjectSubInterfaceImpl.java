@@ -11,7 +11,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core.subinterfaces;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface;
@@ -261,19 +259,6 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				}
 			} catch (IOException e) {
 				throw new StorageException("Project resource files couldn't be deleted.", e);
-			} finally {
-				// delete project files
-				if (deleteFiles) {
-					File projectFolder = new File(getResourceHelper().getProjectFolder(projectId));
-					try {
-						FileUtil.deleteDirectory(projectFolder, true);
-					} catch (IOException e) {
-						ModelUtil
-							.logException(
-								"Project files couldn't be deleted, but it was deleted from containment tree.",
-								e);
-					}
-				}
 			}
 		}
 	}

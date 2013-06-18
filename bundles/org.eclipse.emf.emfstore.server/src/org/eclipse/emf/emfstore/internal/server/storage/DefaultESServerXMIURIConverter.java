@@ -25,6 +25,14 @@ import org.eclipse.emf.emfstore.server.AbstractESServerURIConverter;
  */
 public class DefaultESServerXMIURIConverter extends AbstractESServerURIConverter {
 
+	/**
+	 * Creates an instance including all needed URIHandlers.
+	 */
+	public DefaultESServerXMIURIConverter() {
+		super();
+		getURIHandlers().add(0, new ServerSpaceFileURIHandler());
+	}
+
 	@Override
 	protected URI normalizeServerSpaceURI() {
 		return URI.createFileURI(ServerConfiguration.getServerMainFile());
