@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.migration;
@@ -69,10 +69,8 @@ public final class EMFStoreMigratorUtil {
 		try {
 			return extensionPoint.getFirst().getClass(MIGRATOR_CLASS, EMFStoreMigrator.class);
 		} catch (ESExtensionPointException e) {
-			String message = "Error while instantiating EMFStore Migrator";
-			ModelUtil.logWarning(message, e);
+			throw new EMFStoreMigrationException("No EMFStore migrator registered.");
 		}
-		throw new EMFStoreMigrationException("No EMFStore migrator registered.");
 	}
 
 }

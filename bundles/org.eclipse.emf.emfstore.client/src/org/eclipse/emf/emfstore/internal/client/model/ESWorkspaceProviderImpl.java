@@ -513,7 +513,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		try {
 			migrator = EMFStoreMigratorUtil.getEMFStoreMigrator();
 		} catch (EMFStoreMigrationException e2) {
-			WorkspaceUtil.logException("Migration not possible.", e2);
+			WorkspaceUtil.logWarning(e2.getMessage(), null);
 			return;
 		}
 

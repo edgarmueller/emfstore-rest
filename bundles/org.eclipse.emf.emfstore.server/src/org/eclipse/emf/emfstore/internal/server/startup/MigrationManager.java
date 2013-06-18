@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  * koegel
  ******************************************************************************/
@@ -217,7 +217,7 @@ public class MigrationManager {
 		for (URI changeURI : changesURIs) {
 			modelURIs.add(changeURI);
 		}
-		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, sourceModelReleaseNumber,
+		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs,
 			new ConsoleProgressMonitor());
 	}
 
