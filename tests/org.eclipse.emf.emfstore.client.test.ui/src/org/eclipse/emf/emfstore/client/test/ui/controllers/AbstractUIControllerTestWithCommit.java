@@ -209,6 +209,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 			public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages,
 				IProgressMonitor monitor) {
+				System.out.println("Inspecting changes");
 				return true;
 			}
 		};

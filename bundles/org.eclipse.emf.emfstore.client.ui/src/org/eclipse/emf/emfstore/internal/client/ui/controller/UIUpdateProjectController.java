@@ -216,11 +216,9 @@ public class UIUpdateProjectController extends
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor)
 		throws ESException {
 
-		System.out.println("Resolving base version");
 		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
 		ESPrimaryVersionSpec newBaseVersion;
 
-		System.out.println("Resolving head version");
 		ESPrimaryVersionSpec headVersion = localProject.resolveVersionSpec(
 			ESVersionSpec.FACTORY.createHEAD(),
 			monitor);
@@ -229,34 +227,32 @@ public class UIUpdateProjectController extends
 			resolvedVersion = headVersion;
 		} else {
 			ESPrimaryVersionSpecImpl oldBaseVersionImpl = (ESPrimaryVersionSpecImpl) oldBaseVersion;
-			System.out.println("Resolving version by changes");
 			resolvedVersion = resolveVersionByChanges(maxChanges, ModelUtil.clone(oldBaseVersionImpl.toInternalAPI())
 				.toAPI(), monitor);
 		}
 
 		if (oldBaseVersion.equals(resolvedVersion)) {
-			System.out.println("Found out there are no changes");
 			noChangesOnServer();
 			return oldBaseVersion;
 		}
 
 		if (version != null) {
-			System.out.println("Updating to specified version..");
 			newBaseVersion = localProject.update(version,
 				UIUpdateProjectController.this, monitor);
 		} else {
-			System.out.println("Updating to specified resolved version..");
 			newBaseVersion = localProject.update(resolvedVersion,
 				UIUpdateProjectController.this, monitor);
 		}
 
 		if (!DO_NOT_USE_PAGED_UPDATE && !newBaseVersion.equals(headVersion) && !newBaseVersion.equals(oldBaseVersion)) {
+			System.out.println("Notifying about more updates");
 			boolean yes = RunInUI.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
 					return MessageDialog.openConfirm(getShell(), "More updates available",
 						"There are more updates available on the server.  Do you want to fetch and apply them now?");
 				}
 			});
+			System.out.println("Yes w'd like moar updates!");
 			if (yes) {
 				return RunInUI.WithException.runWithResult(new Callable<ESPrimaryVersionSpec>() {
 					public ESPrimaryVersionSpec call() throws Exception {
