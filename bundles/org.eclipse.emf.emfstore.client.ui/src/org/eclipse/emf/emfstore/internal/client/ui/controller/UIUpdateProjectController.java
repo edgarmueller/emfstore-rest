@@ -216,9 +216,11 @@ public class UIUpdateProjectController extends
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor)
 		throws ESException {
 
+		System.out.println("Resolving base version");
 		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
 		ESPrimaryVersionSpec newBaseVersion;
 
+		System.out.println("Resolving head version");
 		ESPrimaryVersionSpec headVersion = localProject.resolveVersionSpec(
 			ESVersionSpec.FACTORY.createHEAD(),
 			monitor);
@@ -227,19 +229,23 @@ public class UIUpdateProjectController extends
 			resolvedVersion = headVersion;
 		} else {
 			ESPrimaryVersionSpecImpl oldBaseVersionImpl = (ESPrimaryVersionSpecImpl) oldBaseVersion;
+			System.out.println("Resolving version by changes");
 			resolvedVersion = resolveVersionByChanges(maxChanges, ModelUtil.clone(oldBaseVersionImpl.toInternalAPI())
 				.toAPI(), monitor);
 		}
 
 		if (oldBaseVersion.equals(resolvedVersion)) {
+			System.out.println("Found out there are no changes");
 			noChangesOnServer();
 			return oldBaseVersion;
 		}
 
 		if (version != null) {
+			System.out.println("Updating to specified version..");
 			newBaseVersion = localProject.update(version,
 				UIUpdateProjectController.this, monitor);
 		} else {
+			System.out.println("Updating to specified resolved version..");
 			newBaseVersion = localProject.update(resolvedVersion,
 				UIUpdateProjectController.this, monitor);
 		}
