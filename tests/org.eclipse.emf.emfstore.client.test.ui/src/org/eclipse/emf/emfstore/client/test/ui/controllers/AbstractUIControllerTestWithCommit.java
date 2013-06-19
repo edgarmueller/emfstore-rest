@@ -13,19 +13,24 @@ package org.eclipse.emf.emfstore.client.test.ui.controllers;
 import static org.eclipse.swtbot.swt.finder.matchers.WidgetMatcherFactory.withText;
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.waitForShell;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.test.api.ProjectChangeUtil;
 import org.eclipse.emf.emfstore.client.test.ui.AllUITests;
 import org.eclipse.emf.emfstore.client.ui.ESUIControllerFactory;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUpdateProjectController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -38,6 +43,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 	public static final String PLAYER_NAME = "A";
 	public static final String LEAGUE_NAME = "L";
+	protected boolean didUpdate;
 
 	protected void createTournamentAndCommit() {
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
@@ -140,6 +146,11 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 	protected ESPrimaryVersionSpec update() {
 
+		didUpdate = false;
+
+		ESUpdateObserver updateObserver = createUpdateObserver();
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().register(updateObserver);
+
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
@@ -155,8 +166,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
-				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
-				localProject.getBaseVersion().getIdentifier();
+				return didUpdate;
 			}
 
 			public String getFailureMessage() {
@@ -164,7 +174,23 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			}
 		}, timeout());
 
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
+
 		return getCheckedoutCopy().getBaseVersion();
+	}
+
+	private ESUpdateObserver createUpdateObserver() {
+		return new ESUpdateObserver() {
+
+			public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {
+				didUpdate = true;
+			}
+
+			public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages,
+				IProgressMonitor monitor) {
+				return true;
+			}
+		};
 	}
 
 	protected ESPrimaryVersionSpec pagedUpdate() {
