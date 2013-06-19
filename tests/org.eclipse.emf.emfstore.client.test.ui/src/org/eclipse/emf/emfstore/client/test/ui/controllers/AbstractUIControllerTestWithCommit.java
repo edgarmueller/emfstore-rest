@@ -164,16 +164,33 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		bot.waitUntil(waitForShell(matcher));
 		bot.button(0).click();
 
-		bot.waitUntil(new DefaultCondition() {
-			public boolean test() throws Exception {
-				return didUpdate;
-			}
+		// bot.waitUntil(new DefaultCondition() {
+		// public boolean test() throws Exception {
+		// return didUpdate;
+		// }
+		//
+		// public String getFailureMessage() {
+		// return "Update did not succeed.";
+		// }
+		// }, timeout());
 
-			public String getFailureMessage() {
-				return "Update did not succeed.";
-			}
-		}, timeout());
-
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			// Do NOT catch all Exceptions ("catch (Exception e)")
+			// Log AND handle Exceptions if possible
+			//
+			// You can just uncomment one of the lines below to log an exception:
+			// logException will show the logged excpetion to the user
+			// ModelUtil.logException(e);
+			// ModelUtil.logException("YOUR MESSAGE HERE", e);
+			// logWarning will only add the message to the error log
+			// ModelUtil.logWarning("YOUR MESSAGE HERE", e);
+			// ModelUtil.logWarning("YOUR MESSAGE HERE");
+			//
+			// If handling is not possible declare and rethrow Exception
+		}
 		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
 
 		return getCheckedoutCopy().getBaseVersion();
