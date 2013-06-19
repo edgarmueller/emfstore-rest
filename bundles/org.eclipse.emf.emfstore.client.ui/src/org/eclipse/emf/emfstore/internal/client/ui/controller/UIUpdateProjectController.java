@@ -191,12 +191,13 @@ public class UIUpdateProjectController extends
 		final List<ESChangePackage> changePackages,
 		final ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
+		List<ChangePackage> internal = APIUtil.toInternal(ChangePackage.class, changePackages);
+		final UpdateDialog updateDialog = new UpdateDialog(getShell(), localProject,
+			internal,
+			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).toInternalAPI());
+
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
-				List<ChangePackage> internal = APIUtil.toInternal(ChangePackage.class, changePackages);
-				UpdateDialog updateDialog = new UpdateDialog(getShell(), localProject,
-					internal,
-					((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).toInternalAPI());
 				if (updateDialog.open() == Window.OK) {
 					return true;
 				}
