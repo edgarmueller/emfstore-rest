@@ -151,6 +151,9 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		ESUpdateObserver updateObserver = createUpdateObserver();
 		ESWorkspaceProviderImpl.getInstance().getObserverBus().register(updateObserver);
 
+		System.out.println("Updating copy:" + getCheckedoutCopy().getProjectName() + "("
+			+ getCheckedoutCopy().getBaseVersion().getIdentifier() + ")");
+
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
@@ -201,6 +204,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 			public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {
 				didUpdate = true;
+				System.out.println("Update complete");
 			}
 
 			public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages,
