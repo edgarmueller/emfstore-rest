@@ -39,8 +39,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 	public static final String PLAYER_NAME = "A";
 	public static final String LEAGUE_NAME = "L";
 
-	private ESLocalProject checkedoutCopy;
-
 	protected void createTournamentAndCommit() {
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
 		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();

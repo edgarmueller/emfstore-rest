@@ -549,7 +549,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	/**
-	 * starts the server a new thread.
+	 * Starts the server in a new thread.
 	 * 
 	 * @throws FatalESException
 	 *             in case of failure
