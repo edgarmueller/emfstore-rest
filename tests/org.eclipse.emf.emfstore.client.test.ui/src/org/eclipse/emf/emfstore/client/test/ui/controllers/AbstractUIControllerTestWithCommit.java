@@ -35,6 +35,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.hamcrest.Matcher;
@@ -145,7 +146,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 	}
 
 	protected ESPrimaryVersionSpec update() {
-
+		SWTBotPreferences.PLAYBACK_DELAY = 100;
 		didUpdate = false;
 
 		ESUpdateObserver updateObserver = createUpdateObserver();
@@ -164,7 +165,9 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		});
 
 		Matcher<Shell> matcher = withText("Update");
+		wait(3000);
 		bot.waitUntil(waitForShell(matcher));
+		wait(3000);
 		bot.button(0).click();
 
 		// bot.waitUntil(new DefaultCondition() {
@@ -177,8 +180,15 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		// }
 		// }, timeout());
 
+		wait(3000);
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
+
+		return getCheckedoutCopy().getBaseVersion();
+	}
+
+	private void wait(int time) {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(time);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			// Do NOT catch all Exceptions ("catch (Exception e)")
@@ -194,9 +204,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			//
 			// If handling is not possible declare and rethrow Exception
 		}
-		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
-
-		return getCheckedoutCopy().getBaseVersion();
 	}
 
 	private ESUpdateObserver createUpdateObserver() {

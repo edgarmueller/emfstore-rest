@@ -499,9 +499,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 			version = versionSpecImpl.toInternalAPI();
 		}
 
+		System.out.println("Running update command");
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESPrimaryVersionSpec>() {
 
 			public ESPrimaryVersionSpec call() throws Exception {
+				System.out.println("Now within update command");
 				PrimaryVersionSpec primaryVersionSpec = toInternalAPI().update(
 					version,
 					callback,
