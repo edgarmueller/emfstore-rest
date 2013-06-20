@@ -233,7 +233,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			}
 		});
 
-		SWTBotButton buttonWithLabel = bot.button(0);
+		SWTBotButton buttonWithLabel = bot.button("OK");
 		buttonWithLabel.click();
 
 		bot.waitUntil(new DefaultCondition() {
