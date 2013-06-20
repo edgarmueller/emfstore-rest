@@ -141,9 +141,11 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		// TODO ASYNC review this cancel
 		if (getProgressMonitor().isCanceled()
 			|| !callback.inspectChanges(getProjectSpace().toAPI(), copy, idToEObjectMapping.toAPI())) {
+			System.out.println("Canceled update");
 			return getProjectSpace().getBaseVersion();
 		}
 
+		System.out.println("Notifying about inspecting changes");
 		ESWorkspaceProviderImpl
 			.getObserverBus()
 			.notify(ESUpdateObserver.class)
@@ -155,6 +157,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 				.calculateConflictCandidateBuckets(Collections.singletonList(localChanges), changes, idToEObjectMapping);
 			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
 			if (potentialConflictsDetected) {
+				System.out.println("Connflict detected");
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
 				ChangeConflictException conflictException = new ChangeConflictException(new ChangeConflict(
 					getProjectSpace(), Arrays.asList(localChanges), changes, conflictBucketCandidates,

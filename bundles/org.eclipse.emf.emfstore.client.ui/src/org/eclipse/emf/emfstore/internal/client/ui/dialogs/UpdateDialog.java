@@ -59,7 +59,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 		ESLocalProject localProject,
 		List<ChangePackage> changes,
 		ModelElementIdToEObjectMapping idToEObjectMapping) {
-		
+
 		super(parentShell);
 		this.idToEObjectMapping = idToEObjectMapping;
 		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
@@ -79,6 +79,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
 		// changes tree
 		if (changes != null) {
+			System.out.println("init changed composite");
 			TabbedChangesComposite changesComposite = new TabbedChangesComposite(
 				contents, SWT.BORDER, changes, projectSpace.getProject(),
 				idToEObjectMapping, true);
@@ -97,6 +98,7 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 		setTitle("Incoming changes from server" + projectName);
 		int operationCount = 0;
 		int rootCount = 0;
+		System.out.println("iterating changes");
 		for (ChangePackage esChangePackage : changes) {
 			ChangePackage changePackage = esChangePackage;
 			rootCount += changePackage.getOperations().size();

@@ -199,8 +199,10 @@ public class UIUpdateProjectController extends
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				if (updateDialog.open() == Window.OK) {
+					System.out.println("Confirmed update dialog");
 					return true;
 				}
+				System.out.println("Cancelled update dialog");
 				return false;
 			}
 		});
