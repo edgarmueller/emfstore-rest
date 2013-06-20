@@ -168,7 +168,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		wait(3000);
 		bot.waitUntil(waitForShell(matcher));
 		wait(3000);
-		bot.button(0).click();
+		bot.button("OK").click();
 
 		// bot.waitUntil(new DefaultCondition() {
 		// public boolean test() throws Exception {
@@ -249,8 +249,8 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		Matcher<Shell> matcher = withText("More updates available");
 		bot.waitUntil(waitForShell(matcher));
-		bot.button(0).click(); // update notification hint
-		bot.button(0).click(); // inspect changes on update
+		bot.button("OK").click(); // update notification hint
+		bot.button("OK").click(); // inspect changes on update
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
