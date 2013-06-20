@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * ovonwesen
  * emueller
  ******************************************************************************/
@@ -96,17 +96,20 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().beginTask("Updating Project...", 100);
 		getProgressMonitor().worked(1);
 		getProgressMonitor().subTask("Resolving new version");
+		System.out.println("Resolving new version");
 		final PrimaryVersionSpec resolvedVersion = getProjectSpace().resolveVersionSpec(version, getProgressMonitor());
 		if (resolvedVersion.compareTo(getProjectSpace().getBaseVersion()) == 0) {
 			return resolvedVersion;
 		}
 		getProgressMonitor().worked(5);
 
+		System.out.println("Checking cancel");
 		if (getProgressMonitor().isCanceled()) {
 			return getProjectSpace().getBaseVersion();
 		}
 
 		getProgressMonitor().subTask("Fetching changes from server");
+		System.out.println("Fetching changes");
 		List<ChangePackage> changes = new UnknownEMFStoreWorkloadCommand<List<ChangePackage>>(getProgressMonitor()) {
 			@Override
 			public List<ChangePackage> run(IProgressMonitor monitor) throws ESException {
@@ -129,6 +132,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		}
 
 		getProgressMonitor().subTask("Checking for conflicts");
+		System.out.println("Checking for conflicts");
 
 		ConflictDetector conflictDetector = new ConflictDetector();
 
@@ -166,6 +170,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().worked(15);
 
 		getProgressMonitor().subTask("Applying changes");
+		System.out.println("Applying changes");
 
 		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
 

@@ -245,14 +245,12 @@ public class UIUpdateProjectController extends
 		}
 
 		if (!DO_NOT_USE_PAGED_UPDATE && !newBaseVersion.equals(headVersion) && !newBaseVersion.equals(oldBaseVersion)) {
-			System.out.println("Notifying about more updates");
 			boolean yes = RunInUI.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
 					return MessageDialog.openConfirm(getShell(), "More updates available",
 						"There are more updates available on the server.  Do you want to fetch and apply them now?");
 				}
 			});
-			System.out.println("Yes w'd like moar updates!");
 			if (yes) {
 				return RunInUI.WithException.runWithResult(new Callable<ESPrimaryVersionSpec>() {
 					public ESPrimaryVersionSpec call() throws Exception {
