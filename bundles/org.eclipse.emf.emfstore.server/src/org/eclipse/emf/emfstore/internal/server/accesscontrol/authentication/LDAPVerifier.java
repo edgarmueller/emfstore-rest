@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * Wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
@@ -106,6 +106,8 @@ public class LDAPVerifier extends AbstractAuthenticationControl {
 		props.put("java.naming.ldap.version", "3");
 		props.put(Context.INITIAL_CONTEXT_FACTORY, DEFAULT_CTX);
 		props.put(Context.PROVIDER_URL, ldapUrl);
+		props.put("java.naming.ldap.factory.socket",
+			"org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.LDAPSSLSocketFactory");
 
 		if (useSSL()) {
 			props.put(Context.SECURITY_PROTOCOL, "ssl");
@@ -122,7 +124,6 @@ public class LDAPVerifier extends AbstractAuthenticationControl {
 		Properties bind = anonymousBind();
 
 		bind.put(Context.SECURITY_AUTHENTICATION, "simple");
-		bind.put(Context.SECURITY_PRINCIPAL, principal + ", " + ldapBase);
 		bind.put(Context.SECURITY_CREDENTIALS, credentials);
 
 		return bind;
@@ -164,4 +165,5 @@ public class LDAPVerifier extends AbstractAuthenticationControl {
 		}
 		return resolvedName;
 	}
+
 }
