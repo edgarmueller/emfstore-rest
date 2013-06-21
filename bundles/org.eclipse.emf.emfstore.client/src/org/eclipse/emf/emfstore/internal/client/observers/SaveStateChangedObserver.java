@@ -6,13 +6,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * mkoegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.observers;
 
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.ESObserver;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Listener for changes to the save state (project is fully saved or still dirty) of a project space.
@@ -28,5 +28,5 @@ public interface SaveStateChangedObserver extends ESObserver {
 	 * @param projectSpace the project space the notification is about
 	 * @param hasUnsavedChangesNow the new save state, true if there are unsaved changes now
 	 */
-	void saveStateChanged(ProjectSpace projectSpace, boolean hasUnsavedChangesNow);
+	void saveStateChanged(ESLocalProject localProject, boolean hasUnsavedChangesNow);
 }

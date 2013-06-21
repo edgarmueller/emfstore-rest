@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * mkoegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.testers;
@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.client.ESProject;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -34,13 +33,15 @@ import org.eclipse.ui.IWorkbenchListener;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 
+// import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+
 /**
  * Source provider for properties of ProjectSpace.
  * 
  * @author mkoegel
  * 
  */
-public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
+public class ESLocalProjectPropertySourceProvider extends AbstractSourceProvider {
 
 	/**
 	 * Name of the property defining the save state of the currently selected project space.
@@ -56,7 +57,7 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 	/**
 	 * Default constructor.
 	 */
-	public ProjectSpacePropertySourceProvider() {
+	public ESLocalProjectPropertySourceProvider() {
 
 		currentSaveStates = new LinkedHashMap<String, Boolean>();
 		// check if workspace can init, exit otherwise
@@ -71,9 +72,9 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			return;
 		}
 		saveStateChangedObserver = new SaveStateChangedObserver() {
-			public void saveStateChanged(ProjectSpace projectSpace, boolean hasUnsavedChangesNow) {
+			public void saveStateChanged(ESLocalProject localProject, boolean hasUnsavedChangesNow) {
 				Boolean newValue = new Boolean(hasUnsavedChangesNow);
-				currentSaveStates.put(projectSpace.getIdentifier(), newValue);
+				currentSaveStates.put(localProject.getLastUpdated().toString(), newValue);
 				fireSourceChanged(ISources.WORKBENCH, CURRENT_SAVE_STATE_PROPERTY, newValue);
 			}
 
@@ -141,10 +142,10 @@ public class ProjectSpacePropertySourceProvider extends AbstractSourceProvider {
 			return false;
 		}
 		Object[] selectedObjects = listselectionDialog.getResult();
-		for (Object projectSpaceObject : selectedObjects) {
-			if (projectSpaceObject instanceof ProjectSpace) {
-				ProjectSpace projectSpace = (ProjectSpace) projectSpaceObject;
-				projectSpace.save();
+		for (Object selectedObject : selectedObjects) {
+			if (selectedObject instanceof ESLocalProject) {
+				ESLocalProject localProject = (ESLocalProject) selectedObject;
+				localProject.save();
 			}
 		}
 		return true;

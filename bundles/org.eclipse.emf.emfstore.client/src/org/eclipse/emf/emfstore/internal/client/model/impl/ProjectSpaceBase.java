@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  * emueller
  * koegel
@@ -661,7 +661,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resourcePersister.addResource(this.eResource());
 			resourcePersister.addResource(getLocalChangePackage().eResource());
 			resourcePersister.addResource(getProject().eResource());
-			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
+			resourcePersister.addDirtyStateChangeLister(new ESLocalProjectSaveStateNotifier(toAPI()));
 			ESWorkspaceProviderImpl.getObserverBus().register(resourcePersister);
 		}
 	}

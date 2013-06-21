@@ -6,31 +6,32 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * mkoegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
+import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.observers.SaveStateChangedObserver;
 
 /**
- * Notifies SaveStateChangedObservers about changes of the project space save state.
+ * Notifies {@link ESLocalProjectSaveStateNotifier} about changes of the {@link ESLocalProject} save state.
  * 
  * @author mkoegel
  * 
  */
-public class ProjectSpaceSaveStateNotifier implements IDEObjectCollectionDirtyStateListener {
+public class ESLocalProjectSaveStateNotifier implements IDEObjectCollectionDirtyStateListener {
 
-	private final ProjectSpaceBase projectSpace;
+	private final ESLocalProject localProject;
 
 	/**
 	 * Default constructor.
 	 * 
 	 * @param projectSpace the project space to notify for
 	 */
-	public ProjectSpaceSaveStateNotifier(ProjectSpaceBase projectSpace) {
-		this.projectSpace = projectSpace;
+	public ESLocalProjectSaveStateNotifier(ESLocalProject localProject) {
+		this.localProject = localProject;
 
 	}
 
@@ -41,7 +42,7 @@ public class ProjectSpaceSaveStateNotifier implements IDEObjectCollectionDirtySt
 	 */
 	public void notifyAboutDirtyStateChange() {
 		ESWorkspaceProviderImpl.getObserverBus().notify(SaveStateChangedObserver.class)
-			.saveStateChanged(projectSpace, projectSpace.hasUnsavedChanges());
+			.saveStateChanged(localProject, localProject.hasUnsavedChanges());
 	}
 
 }
