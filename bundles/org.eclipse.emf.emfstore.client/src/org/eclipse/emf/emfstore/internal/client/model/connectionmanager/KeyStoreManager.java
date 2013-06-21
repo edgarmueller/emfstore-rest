@@ -142,6 +142,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		System.setProperty("javax.net.ssl.trustStore", getPathToKeyStore());
 		System.setProperty("javax.net.ssl.keyStore", getPathToKeyStore());
 		System.setProperty("javax.net.ssl.keyStorePassword", KEYSTOREPASSWORD);
+		System.setProperty("javax.net.ssl.trustStorePassword", KEYSTOREPASSWORD);
 	}
 
 	/**
