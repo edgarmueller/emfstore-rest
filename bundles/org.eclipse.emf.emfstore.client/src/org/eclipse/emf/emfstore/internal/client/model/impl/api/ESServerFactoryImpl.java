@@ -12,12 +12,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
-import java.util.concurrent.Callable;
-
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESServerFactory;
-import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
 
@@ -47,17 +43,8 @@ public final class ESServerFactoryImpl implements ESServerFactory {
 	 * @see org.eclipse.emf.emfstore.client.ESServerFactory#createServer(java.lang.String, int, java.lang.String)
 	 */
 	public ESServer createServer(final String url, final int port, final String certificate) {
-
 		final ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
-		final ESServer server = serverInfo.toAPI();
-
-		ESServer result = RunESCommand.runWithResult(new Callable<ESServer>() {
-			public ESServer call() throws Exception {
-				return ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
-			}
-		});
-
-		return result;
+		return serverInfo.toAPI();
 	}
 
 	/**

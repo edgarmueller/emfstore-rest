@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
@@ -66,7 +66,7 @@ public class WorkspaceTest {
 		assertEquals(servers, workspace.getServers().size());
 
 		workspace.removeServer(server);
-		assertEquals(servers, workspace.getServers().size() + 1);
+		assertEquals(servers - 1, workspace.getServers().size());
 	}
 
 	@Test

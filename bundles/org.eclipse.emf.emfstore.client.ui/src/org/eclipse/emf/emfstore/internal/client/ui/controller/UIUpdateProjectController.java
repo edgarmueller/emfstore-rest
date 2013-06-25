@@ -54,8 +54,8 @@ public class UIUpdateProjectController extends
 	AbstractEMFStoreUIController<ESPrimaryVersionSpec> implements
 	ESUpdateCallback {
 
-	protected final static int ALL_CHANGES = -1;
-	protected static boolean DO_NOT_USE_PAGED_UPDATE = true;
+	protected static final int ALL_CHANGES = -1;
+	private static boolean doNotUsePagedUpdate = true;
 
 	private final ESLocalProject localProject;
 	private ESVersionSpec version;
@@ -119,7 +119,7 @@ public class UIUpdateProjectController extends
 
 		if (pagedUpdateConfig != null) {
 			maxChanges = pagedUpdateConfig.getNumberOfAllowedChanges();
-			DO_NOT_USE_PAGED_UPDATE = false;
+			doNotUsePagedUpdate = false;
 		}
 	}
 
@@ -199,10 +199,8 @@ public class UIUpdateProjectController extends
 		return RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				if (updateDialog.open() == Window.OK) {
-					System.out.println("Confirmed update dialog");
 					return true;
 				}
-				System.out.println("Cancelled update dialog");
 				return false;
 			}
 		});
@@ -225,7 +223,7 @@ public class UIUpdateProjectController extends
 			ESVersionSpec.FACTORY.createHEAD(),
 			monitor);
 
-		if (DO_NOT_USE_PAGED_UPDATE) {
+		if (doNotUsePagedUpdate) {
 			resolvedVersion = headVersion;
 		} else {
 			ESPrimaryVersionSpecImpl oldBaseVersionImpl = (ESPrimaryVersionSpecImpl) oldBaseVersion;
@@ -246,7 +244,7 @@ public class UIUpdateProjectController extends
 				UIUpdateProjectController.this, monitor);
 		}
 
-		if (!DO_NOT_USE_PAGED_UPDATE && !newBaseVersion.equals(headVersion) && !newBaseVersion.equals(oldBaseVersion)) {
+		if (!doNotUsePagedUpdate && !newBaseVersion.equals(headVersion) && !newBaseVersion.equals(oldBaseVersion)) {
 			boolean yes = RunInUI.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
 					return MessageDialog.openConfirm(getShell(), "More updates available",

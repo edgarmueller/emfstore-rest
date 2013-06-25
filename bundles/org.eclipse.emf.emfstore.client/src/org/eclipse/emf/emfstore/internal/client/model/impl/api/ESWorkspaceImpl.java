@@ -140,9 +140,10 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 */
 	public void removeServer(final ESServer server) {
 		final ESServerImpl serverImpl = (ESServerImpl) server;
+		final ESServerImpl existingServer = getExistingServer(serverImpl);
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				toInternalAPI().removeServerInfo(serverImpl.toInternalAPI());
+				toInternalAPI().removeServerInfo(existingServer.toInternalAPI());
 				return null;
 			}
 		});
