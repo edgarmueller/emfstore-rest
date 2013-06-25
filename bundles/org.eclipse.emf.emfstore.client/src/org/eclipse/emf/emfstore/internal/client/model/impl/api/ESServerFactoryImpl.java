@@ -27,17 +27,17 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreClientUtil;
  * @author wesendon
  * @author emueller
  */
-public final class ServerFactoryImpl implements ESServerFactory {
+public final class ESServerFactoryImpl implements ESServerFactory {
 
 	/**
 	 * The factory instance.
 	 */
-	public static final ServerFactoryImpl INSTANCE = new ServerFactoryImpl();
+	public static final ESServerFactoryImpl INSTANCE = new ESServerFactoryImpl();
 
 	/**
 	 * Private constructor.
 	 */
-	private ServerFactoryImpl() {
+	private ESServerFactoryImpl() {
 	}
 
 	/**

@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.client;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ServerFactoryImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerFactoryImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -30,7 +30,7 @@ public interface ESServer {
 	/**
 	 * Factory for creating ESServer instances.
 	 */
-	ESServerFactory FACTORY = ServerFactoryImpl.INSTANCE;
+	ESServerFactory FACTORY = ESServerFactoryImpl.INSTANCE;
 
 	/**
 	 * Returns the local name of the server.
