@@ -47,7 +47,7 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		server = ESServer.FACTORY.createServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		server = ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
 		try {
 			usersession = server.login("super", "super");

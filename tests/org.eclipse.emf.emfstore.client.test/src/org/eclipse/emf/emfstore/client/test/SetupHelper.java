@@ -329,7 +329,7 @@ public class SetupHelper {
 	 * @return server info
 	 */
 	public static ESServerImpl createServer() {
-		return (ESServerImpl) ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		return (ESServerImpl) ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
 	}
 
 	/**

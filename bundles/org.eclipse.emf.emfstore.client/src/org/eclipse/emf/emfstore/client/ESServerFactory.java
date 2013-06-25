@@ -34,7 +34,7 @@ public interface ESServerFactory extends ESFactory {
 	 * 
 	 * @return an {@link ESServer} instance representing the remote server
 	 */
-	ESServer getServer(String url, int port, String certificate);
+	ESServer createServer(String url, int port, String certificate);
 
 	/**
 	 * Creates a server with a local name.
@@ -50,6 +50,6 @@ public interface ESServerFactory extends ESFactory {
 	 * 
 	 * @return an {@link ESServer} instance representing the remote server
 	 */
-	ESServer getServer(String name, String url, int port, String certificate);
+	ESServer createServer(String name, String url, int port, String certificate);
 
 }

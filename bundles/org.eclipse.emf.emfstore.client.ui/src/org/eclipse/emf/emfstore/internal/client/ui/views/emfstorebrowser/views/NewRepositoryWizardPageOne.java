@@ -172,7 +172,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	 * @return
 	 */
 	public ESServer getServer() {
-		return ESServer.FACTORY.getServer(name.getText(),
+		return ESServer.FACTORY.createServer(name.getText(),
 			url.getText(),
 			port.getSelection(),
 			certificateCombo.getText());

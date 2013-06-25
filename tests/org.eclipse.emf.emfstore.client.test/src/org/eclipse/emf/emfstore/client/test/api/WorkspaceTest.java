@@ -58,10 +58,10 @@ public class WorkspaceTest {
 
 	@Test
 	public void testAddExistingServer() {
-		ESServer server = ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
 		workspace.addServer(server);
 		int servers = workspace.getServers().size();
-		server = ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		server = ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
 		workspace.addServer(server);
 		assertEquals(servers, workspace.getServers().size());
 
@@ -72,7 +72,7 @@ public class WorkspaceTest {
 	@Test
 	public void testAddServer() {
 		int servers = workspace.getServers().size();
-		ESServer server = ESServer.FACTORY.getServer("foo.net", 1234, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY.createServer("foo.net", 1234, KeyStoreManager.DEFAULT_CERTIFICATE);
 		workspace.addServer(server);
 		assertEquals(servers + 1, workspace.getServers().size());
 		workspace.removeServer(server);

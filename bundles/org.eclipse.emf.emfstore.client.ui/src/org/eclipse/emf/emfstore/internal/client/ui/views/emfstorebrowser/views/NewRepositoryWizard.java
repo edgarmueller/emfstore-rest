@@ -131,7 +131,7 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	public ESServer getServer() {
 		if (server == null) {
 			// TODO: review or reuse client util
-			server = ESServer.FACTORY.getServer("localhost", 8080,
+			server = ESServer.FACTORY.createServer("localhost", 8080,
 				KeyStoreManager.DEFAULT_CERTIFICATE);
 		}
 		return server;

@@ -36,7 +36,7 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 
 	@Before
 	public void setUp() throws Exception {
-		server = ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		server = ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
 		try {
 			usersession = server.login("super", "super");
 		} catch (ESException e) {

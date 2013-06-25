@@ -44,9 +44,9 @@ public final class ServerFactoryImpl implements ESServerFactory {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESServerFactory#getServer(java.lang.String, int, java.lang.String)
+	 * @see org.eclipse.emf.emfstore.client.ESServerFactory#createServer(java.lang.String, int, java.lang.String)
 	 */
-	public ESServer getServer(final String url, final int port, final String certificate) {
+	public ESServer createServer(final String url, final int port, final String certificate) {
 
 		final ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
 		final ESServer server = serverInfo.toAPI();
@@ -64,10 +64,10 @@ public final class ServerFactoryImpl implements ESServerFactory {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESServerFactory#getServer(java.lang.String, java.lang.String, int,
+	 * @see org.eclipse.emf.emfstore.client.ESServerFactory#createServer(java.lang.String, java.lang.String, int,
 	 *      java.lang.String)
 	 */
-	public ESServer getServer(String name, String url, int port,
+	public ESServer createServer(String name, String url, int port,
 		String certificate) {
 		ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
 		serverInfo.setName(name);

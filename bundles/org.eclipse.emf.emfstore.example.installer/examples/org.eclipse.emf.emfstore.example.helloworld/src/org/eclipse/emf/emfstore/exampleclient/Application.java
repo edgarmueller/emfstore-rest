@@ -68,7 +68,7 @@ public class Application implements IApplication {
 
 		// A user session stores credentials for login
 		// Create a user by login in to the local EMFStore server
-		ESServer server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServer server = ESServer.FACTORY.createServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		ESUsersession usersession = server.login("super", "super");
 
 		// Retrieves a list of existing (and accessible) projects on the sever and deletes them permanently (to have a
