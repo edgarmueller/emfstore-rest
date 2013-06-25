@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
@@ -63,7 +62,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.internal.server.startup.EmfStoreValidator;
 import org.eclipse.emf.emfstore.internal.server.startup.MigrationManager;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
@@ -89,7 +87,6 @@ public class EMFStoreController implements IApplication, Runnable {
 	private AdminEmfStore adminEmfStore;
 	private AccessControlImpl accessControl;
 	private Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers;
-	private Properties properties;
 	private ServerSpace serverSpace;
 	private Resource resource;
 
@@ -130,7 +127,7 @@ public class EMFStoreController implements IApplication, Runnable {
 			"Couldn't copy es.properties file to config folder.",
 			"Default es.properties file was copied to config folder.");
 
-		properties = initProperties();
+		initProperties();
 
 		logGeneralInformation();
 
@@ -334,13 +331,6 @@ public class EMFStoreController implements IApplication, Runnable {
 
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());
-
-			// if (properties.getProperty(ServerConfiguration.VALIDATE_SERVERSPACE_ON_SERVERSTART,
-			// "true").equals("true")) {
-			// ModelUtil.logInfo("Validating serverspace ...");
-			// validateServerSpace(resource);
-			// ModelUtil.logInfo("Validation complete.");
-			// }
 		} catch (IOException e) {
 			throw new FatalESException(StorageException.NOLOAD, e);
 		}
@@ -372,26 +362,6 @@ public class EMFStoreController implements IApplication, Runnable {
 		}
 
 		return result;
-	}
-
-	private void validateServerSpace(Resource resource) throws FatalESException {
-		EList<EObject> contents = resource.getContents();
-		for (EObject object : contents) {
-			if (object instanceof ServerSpace) {
-				EmfStoreValidator emfStoreValidator = new EmfStoreValidator((ServerSpace) object);
-				String[] excludedProjects = ServerConfiguration.getSplittedProperty(
-					ServerConfiguration.VALIDATION_PROJECT_EXCLUDE,
-					ServerConfiguration.VALIDATION_PROJECT_EXCLUDE_DEFAULT);
-				emfStoreValidator.setExcludedProjects(Arrays.asList(excludedProjects));
-				try {
-					String level = ServerConfiguration.getProperties().getProperty(
-						ServerConfiguration.VALIDATION_LEVEL, ServerConfiguration.VALIDATION_LEVEL_DEFAULT);
-					emfStoreValidator.validate(Integer.parseInt(level));
-				} catch (NumberFormatException e) {
-					emfStoreValidator.validate(Integer.parseInt(ServerConfiguration.VALIDATION_LEVEL_DEFAULT));
-				}
-			}
-		}
 	}
 
 	/**
@@ -431,7 +401,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		ModelUtil.logInfo("added superuser " + superuser);
 	}
 
-	private Properties initProperties() {
+	private void initProperties() {
 		File propertyFile = new File(ServerConfiguration.getConfFile());
 		Properties properties = new Properties();
 		FileInputStream fis = null;
@@ -451,8 +421,6 @@ public class EMFStoreController implements IApplication, Runnable {
 				ModelUtil.logWarning("Closing of properties file failed.", e);
 			}
 		}
-
-		return properties;
 	}
 
 	/**

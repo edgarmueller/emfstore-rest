@@ -240,39 +240,6 @@ public final class ServerConfiguration {
 	public static final String AUTHENTICATION_SPFV_FILEPATH = "emfstore.accesscontrol.authentication.spfv";
 
 	/**
-	 * Property to validate server on start up.
-	 */
-	public static final String VALIDATE_SERVERSPACE_ON_SERVERSTART = "emfstore.validation";
-
-	/**
-	 * Sets the level of validation. The level is set via bitmask, use the
-	 * values
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#RESOLVEALL} ,
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#MODELELEMENTID}
-	 * and
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#PROJECTGENERATION}
-	 * . E.g.:
-	 * If you want to resolve all elements and check use the
-	 * modelelement id validation, you have to set the level to <code>1 | 2</code>, which is 3.
-	 */
-	public static final String VALIDATION_LEVEL = "emfstore.validation.level";
-
-	/**
-	 * Default validation level.
-	 */
-	public static final String VALIDATION_LEVEL_DEFAULT = "7";
-
-	/**
-	 * Exclude projects from validation, use {@link #MULTI_PROPERTY_SEPERATOR} to seperate them.
-	 */
-	public static final String VALIDATION_PROJECT_EXCLUDE = "emfstore.validation.exclude";
-
-	/**
-	 * By default, no project is excluded.
-	 */
-	public static final String VALIDATION_PROJECT_EXCLUDE_DEFAULT = "";
-
-	/**
 	 * Property for loading startup listeners from extension point.
 	 */
 	public static final String LOAD_STARTUP_LISTENER = "emfstore.startup.loadlistener";
