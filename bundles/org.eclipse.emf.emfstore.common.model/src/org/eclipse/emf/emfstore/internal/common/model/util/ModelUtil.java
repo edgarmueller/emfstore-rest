@@ -875,29 +875,6 @@ public final class ModelUtil {
 	}
 
 	/**
-	 * Retrieve the current model version number.
-	 * 
-	 * @return an integer identifing the current model version
-	 * @throws MalformedModelVersionException
-	 *             if there is no well formed or defined model version
-	 */
-	public static int getModelVersionNumber() throws MalformedModelVersionException {
-		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.ommon.model.modelVersion",
-			true);
-		if (extensionPoint.size() != 1) {
-			String message = "There is " + extensionPoint.size()
-				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";
-			logInfo(message);
-			return 0;
-		}
-		try {
-			return extensionPoint.getFirst().getInteger("versionIdentifier");
-		} catch (ESExtensionPointException e) {
-			throw new MalformedModelVersionException("Version identifier was malformed, it must be an integer.", e);
-		}
-	}
-
-	/**
 	 * Get Project that contains a model element.
 	 * 
 	 * @param modelElement

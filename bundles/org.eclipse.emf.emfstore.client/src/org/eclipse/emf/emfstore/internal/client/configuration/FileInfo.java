@@ -37,7 +37,6 @@ public class FileInfo {
 	private static ESLocationProvider locationProvider;
 	private static final String PLUGIN_BASEDIR = "pluginData";
 	private static final String ERROR_DIAGNOSIS_DIR_NAME = "errorLog";
-	private static final String MODEL_VERSION_FILENAME = "modelReleaseNumber";
 
 	public final String ProjectSpaceFileName = "projectspace";
 	public final String ProjectSpaceFileExtension = ExportImportDataUnits.ProjectSpace.getExtension();
@@ -127,16 +126,6 @@ public class FileInfo {
 		}
 
 		return errorDiagnosisDir.getAbsolutePath();
-	}
-
-	/**
-	 * Return the name of the model release number file. This file identifies
-	 * the release number of the model in the workspace.
-	 * 
-	 * @return the file name
-	 */
-	public String getModelReleaseNumberFileName() {
-		return getWorkspaceDirectory() + MODEL_VERSION_FILENAME;
 	}
 
 	/**

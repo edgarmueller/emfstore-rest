@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.internal.common.ConsoleProgressMonitor;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
-import org.eclipse.emf.emfstore.internal.common.model.util.MalformedModelVersionException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
@@ -51,12 +50,12 @@ public class MigrationManager {
 	 * @throws FatalESException in case of failure
 	 */
 	public void migrateModel() throws FatalESException {
-		int modelVersionNumber;
-		try {
-			modelVersionNumber = ModelUtil.getModelVersionNumber();
-		} catch (MalformedModelVersionException e1) {
-			throw new FatalESException(e1);
-		}
+		int modelVersionNumber = 0;
+		// try {
+		// modelVersionNumber = ModelUtil.getModelVersionNumber();
+		// } catch (MalformedModelVersionException e1) {
+		// throw new FatalESException(e1);
+		// }
 
 		// check for legacy server space
 		File versionFile = new File(ServerConfiguration.getModelReleaseNumberFileName());
