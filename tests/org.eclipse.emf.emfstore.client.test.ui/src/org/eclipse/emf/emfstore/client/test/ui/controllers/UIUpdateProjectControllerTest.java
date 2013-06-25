@@ -13,7 +13,9 @@ package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests:
@@ -23,6 +25,7 @@ import org.junit.Test;
  * @author Edgar
  * 
  */
+@RunWith(SWTBotJunit4ClassRunner.class)
 public class UIUpdateProjectControllerTest extends AbstractUIControllerTestWithCommit {
 
 	@Override

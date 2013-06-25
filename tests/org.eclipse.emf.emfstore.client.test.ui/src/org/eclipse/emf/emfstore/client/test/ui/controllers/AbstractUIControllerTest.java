@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -40,6 +40,7 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 
 	protected ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
 	protected ESLocalProject localProject;
+	protected ESLocalProject checkedoutCopy;
 	protected ESServer server;
 	protected ESUsersession usersession;
 
@@ -61,6 +62,8 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 
 	@Override
 	protected void tearDown() throws Exception {
+		localProject = null;
+		checkedoutCopy = null;
 		deleteRemoteProjects(usersession);
 		deleteLocalProjects();
 		super.tearDown();
