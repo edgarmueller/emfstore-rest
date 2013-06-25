@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.changeTracking.operations;
@@ -76,6 +76,17 @@ import org.junit.Test;
  * @author koegel
  */
 public class CreateDeleteOperationTest extends WorkspaceTest {
+
+	private static final String REFERENCE_TEST_ELEMENT = "referenceTestElement";
+	private static final String SECOND_TEST_ELEMENT = "secondTestElement";
+	private static final String TEST_ELEMENT = "testElement";
+	private static final String PARENT_TEST_ELEMENT = "parentTestElement";
+	private static final String LEAF_SECTION = "leafSection";
+	private static final String MODEL_ELEMENTS = "modelElements";
+	private static final String PARTICIPATING_ACTORS = "participatingActors";
+	private static final String PARTICIPATED_USE_CASES = "participatedUseCases";
+	private static final String INITIATING_ACTOR = "initiatingActor";
+	private static final String INITIATED_USE_CASES = "initiatedUseCases";
 
 	/**
 	 * Test element creation tracking.
@@ -319,7 +330,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		SingleReferenceOperation srSubOperation6 = checkAndCast(subOperations.get(6), SingleReferenceOperation.class);
 		MultiReferenceOperation mrSubOperation7 = checkAndCast(subOperations.get(7), MultiReferenceOperation.class);
 
-		assertEquals("initiatedUseCases", mrSubOperation0.getFeatureName());
+		assertEquals(INITIATED_USE_CASES, mrSubOperation0.getFeatureName());
 		assertEquals(0, mrSubOperation0.getIndex());
 
 		ModelElementId oldActorId = ModelUtil.getProject(oldActor).getModelElementId(oldActor);
@@ -328,7 +339,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		ModelElementId sectionId = ModelUtil.getProject(section).getModelElementId(section);
 
 		assertEquals(oldActorId, mrSubOperation0.getModelElementId());
-		assertEquals("initiatingActor", mrSubOperation0.getOppositeFeatureName());
+		assertEquals(INITIATING_ACTOR, mrSubOperation0.getOppositeFeatureName());
 		assertEquals(false, mrSubOperation0.isAdd());
 		assertEquals(true, mrSubOperation0.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements0 = mrSubOperation0.getOtherInvolvedModelElements();
@@ -339,36 +350,36 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 		assertEquals(oldActorId, srSubOperation1.getOldValue());
 		assertEquals(null, srSubOperation1.getNewValue());
-		assertEquals("initiatingActor", srSubOperation1.getFeatureName());
+		assertEquals(INITIATING_ACTOR, srSubOperation1.getFeatureName());
 		assertEquals(useCaseId, srSubOperation1.getModelElementId());
-		assertEquals("initiatedUseCases", srSubOperation1.getOppositeFeatureName());
+		assertEquals(INITIATED_USE_CASES, srSubOperation1.getOppositeFeatureName());
 		assertEquals(true, srSubOperation1.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements = srSubOperation1.getOtherInvolvedModelElements();
 		assertEquals(1, otherInvolvedModelElements.size());
 		assertEquals(oldActorId, otherInvolvedModelElements.iterator().next());
 
 		assertEquals(newActorId, mrSubOperation2.getModelElementId());
-		assertEquals("participatedUseCases", mrSubOperation2.getFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation2.getFeatureName());
 		assertEquals(false, mrSubOperation2.isAdd());
 		assertEquals(1, mrSubOperation2.getReferencedModelElements().size());
 		assertEquals(useCaseId, mrSubOperation2.getReferencedModelElements().get(0));
 
 		assertEquals(useCaseId, mrSubOperation3.getModelElementId());
-		assertEquals("participatingActors", mrSubOperation3.getFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation3.getFeatureName());
 		assertEquals(false, mrSubOperation3.isAdd());
 		assertEquals(1, mrSubOperation3.getReferencedModelElements().size());
 		assertEquals(newActorId, mrSubOperation3.getReferencedModelElements().get(0));
 
 		assertEquals(otherActorId, mrSubOperation4.getModelElementId());
-		assertEquals("participatedUseCases", mrSubOperation4.getFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation4.getFeatureName());
 		assertEquals(false, mrSubOperation4.isAdd());
 		assertEquals(1, mrSubOperation4.getReferencedModelElements().size());
 		assertEquals(useCaseId, mrSubOperation4.getReferencedModelElements().get(0));
 
-		assertEquals("participatingActors", mrSubOperation5.getFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation5.getFeatureName());
 		assertEquals(0, mrSubOperation5.getIndex());
 		assertEquals(useCaseId, mrSubOperation5.getModelElementId());
-		assertEquals("participatedUseCases", mrSubOperation5.getOppositeFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation5.getOppositeFeatureName());
 		assertEquals(false, mrSubOperation5.isAdd());
 		assertEquals(true, mrSubOperation5.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements2 = mrSubOperation5.getOtherInvolvedModelElements();
@@ -378,14 +389,14 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(otherActorId, referencedModelElements.get(0));
 
 		assertEquals(useCaseId, srSubOperation6.getModelElementId());
-		assertEquals("leafSection", srSubOperation6.getFeatureName());
+		assertEquals(LEAF_SECTION, srSubOperation6.getFeatureName());
 		assertEquals(sectionId, srSubOperation6.getOldValue());
 		assertEquals(null, srSubOperation6.getNewValue());
 
-		assertEquals("modelElements", mrSubOperation7.getFeatureName());
+		assertEquals(MODEL_ELEMENTS, mrSubOperation7.getFeatureName());
 		assertEquals(0, mrSubOperation7.getIndex());
 		assertEquals(sectionId, mrSubOperation7.getModelElementId());
-		assertEquals("leafSection", mrSubOperation7.getOppositeFeatureName());
+		assertEquals(LEAF_SECTION, mrSubOperation7.getOppositeFeatureName());
 		assertEquals(false, mrSubOperation7.isAdd());
 		assertEquals(true, mrSubOperation7.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements3 = mrSubOperation7.getOtherInvolvedModelElements();
@@ -418,11 +429,11 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		srSubOperation6 = checkAndCast(subOperations.get(6), SingleReferenceOperation.class);
 		mrSubOperation7 = checkAndCast(subOperations.get(7), MultiReferenceOperation.class);
 
-		assertEquals("initiatedUseCases", mrSubOperation0.getFeatureName());
+		assertEquals(INITIATED_USE_CASES, mrSubOperation0.getFeatureName());
 		assertEquals(0, mrSubOperation0.getIndex());
 
 		assertEquals(oldActorId, mrSubOperation0.getModelElementId());
-		assertEquals("initiatingActor", mrSubOperation0.getOppositeFeatureName());
+		assertEquals(INITIATING_ACTOR, mrSubOperation0.getOppositeFeatureName());
 		assertEquals(false, mrSubOperation0.isAdd());
 		assertEquals(true, mrSubOperation0.isBidirectional());
 		otherInvolvedModelElements0 = mrSubOperation0.getOtherInvolvedModelElements();
@@ -433,30 +444,30 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 		assertEquals(oldActorId, srSubOperation1.getOldValue());
 		assertEquals(null, srSubOperation1.getNewValue());
-		assertEquals("initiatingActor", srSubOperation1.getFeatureName());
+		assertEquals(INITIATING_ACTOR, srSubOperation1.getFeatureName());
 		assertEquals(useCaseId, srSubOperation1.getModelElementId());
-		assertEquals("initiatedUseCases", srSubOperation1.getOppositeFeatureName());
+		assertEquals(INITIATED_USE_CASES, srSubOperation1.getOppositeFeatureName());
 		assertEquals(true, srSubOperation1.isBidirectional());
 		otherInvolvedModelElements = srSubOperation1.getOtherInvolvedModelElements();
 		assertEquals(1, otherInvolvedModelElements.size());
 		assertEquals(oldActorId, otherInvolvedModelElements.iterator().next());
 
 		assertEquals(newActorId, mrSubOperation2.getModelElementId());
-		assertEquals("participatedUseCases", mrSubOperation2.getFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation2.getFeatureName());
 		assertEquals(false, mrSubOperation2.isAdd());
 		assertEquals(1, mrSubOperation2.getReferencedModelElements().size());
 		assertEquals(useCaseId, mrSubOperation2.getReferencedModelElements().get(0));
 
 		assertEquals(useCaseId, mrSubOperation3.getModelElementId());
-		assertEquals("participatingActors", mrSubOperation3.getFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation3.getFeatureName());
 		assertEquals(false, mrSubOperation3.isAdd());
 		assertEquals(1, mrSubOperation3.getReferencedModelElements().size());
 		assertEquals(newActorId, mrSubOperation3.getReferencedModelElements().get(0));
 
-		assertEquals("participatedUseCases", mrSubOperation4.getFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation4.getFeatureName());
 		assertEquals(0, mrSubOperation4.getIndex());
 		assertEquals(otherActorId, mrSubOperation4.getModelElementId());
-		assertEquals("participatingActors", mrSubOperation4.getOppositeFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation4.getOppositeFeatureName());
 		assertEquals(false, mrSubOperation4.isAdd());
 		assertEquals(true, mrSubOperation4.isBidirectional());
 		otherInvolvedModelElements2 = mrSubOperation4.getOtherInvolvedModelElements();
@@ -465,10 +476,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(1, referencedModelElements.size());
 		assertEquals(useCaseId, referencedModelElements.get(0));
 
-		assertEquals("participatingActors", mrSubOperation5.getFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation5.getFeatureName());
 		assertEquals(0, mrSubOperation5.getIndex());
 		assertEquals(useCaseId, mrSubOperation5.getModelElementId());
-		assertEquals("participatedUseCases", mrSubOperation5.getOppositeFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation5.getOppositeFeatureName());
 		assertEquals(false, mrSubOperation5.isAdd());
 		assertEquals(true, mrSubOperation5.isBidirectional());
 		otherInvolvedModelElements2 = mrSubOperation5.getOtherInvolvedModelElements();
@@ -478,14 +489,14 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(otherActorId, referencedModelElements.get(0));
 
 		assertEquals(useCaseId, srSubOperation6.getModelElementId());
-		assertEquals("leafSection", srSubOperation6.getFeatureName());
+		assertEquals(LEAF_SECTION, srSubOperation6.getFeatureName());
 		assertEquals(sectionId, srSubOperation6.getOldValue());
 		assertEquals(null, srSubOperation6.getNewValue());
 
-		assertEquals("modelElements", mrSubOperation7.getFeatureName());
+		assertEquals(MODEL_ELEMENTS, mrSubOperation7.getFeatureName());
 		assertEquals(0, mrSubOperation7.getIndex());
 		assertEquals(sectionId, mrSubOperation7.getModelElementId());
-		assertEquals("leafSection", mrSubOperation7.getOppositeFeatureName());
+		assertEquals(LEAF_SECTION, mrSubOperation7.getOppositeFeatureName());
 		assertEquals(false, mrSubOperation7.isAdd());
 		assertEquals(true, mrSubOperation7.isBidirectional());
 		otherInvolvedModelElements3 = mrSubOperation7.getOtherInvolvedModelElements();
@@ -599,10 +610,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		ModelElementId otherActorId = ModelUtil.getProject(otherActor).getModelElementId(otherActor);
 		ModelElementId sectionId = ModelUtil.getProject(section).getModelElementId(section);
 
-		assertEquals("initiatedUseCases", mrSubOperation0.getFeatureName());
+		assertEquals(INITIATED_USE_CASES, mrSubOperation0.getFeatureName());
 		assertEquals(0, mrSubOperation0.getIndex());
 		assertEquals(oldActorId, mrSubOperation0.getModelElementId());
-		assertEquals("initiatingActor", mrSubOperation0.getOppositeFeatureName());
+		assertEquals(INITIATING_ACTOR, mrSubOperation0.getOppositeFeatureName());
 		assertEquals(true, mrSubOperation0.isAdd());
 		assertEquals(true, mrSubOperation0.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements0 = mrSubOperation0.getOtherInvolvedModelElements();
@@ -613,30 +624,30 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 		assertEquals(oldActorId, mrSubOperation1.getNewValue());
 		assertEquals(null, mrSubOperation1.getOldValue());
-		assertEquals("initiatingActor", mrSubOperation1.getFeatureName());
+		assertEquals(INITIATING_ACTOR, mrSubOperation1.getFeatureName());
 		assertEquals(useCaseId, mrSubOperation1.getModelElementId());
-		assertEquals("initiatedUseCases", mrSubOperation1.getOppositeFeatureName());
+		assertEquals(INITIATED_USE_CASES, mrSubOperation1.getOppositeFeatureName());
 		assertEquals(true, mrSubOperation1.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements = mrSubOperation1.getOtherInvolvedModelElements();
 		assertEquals(1, otherInvolvedModelElements.size());
 		assertEquals(oldActorId, otherInvolvedModelElements.iterator().next());
 
 		assertEquals(newActorId, mrSubOperation2.getModelElementId());
-		assertEquals("participatedUseCases", mrSubOperation2.getFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation2.getFeatureName());
 		assertEquals(true, mrSubOperation2.isAdd());
 		assertEquals(1, mrSubOperation2.getReferencedModelElements().size());
 		assertEquals(useCaseId, mrSubOperation2.getReferencedModelElements().get(0));
 
 		assertEquals(useCaseId, mrSubOperation3.getModelElementId());
-		assertEquals("participatingActors", mrSubOperation3.getFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation3.getFeatureName());
 		assertEquals(true, mrSubOperation3.isAdd());
 		assertEquals(1, mrSubOperation3.getReferencedModelElements().size());
 		assertEquals(newActorId, mrSubOperation3.getReferencedModelElements().get(0));
 
-		assertEquals("participatedUseCases", mrSubOperation4.getFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation4.getFeatureName());
 		assertEquals(0, mrSubOperation4.getIndex());
 		assertEquals(otherActorId, mrSubOperation4.getModelElementId());
-		assertEquals("participatingActors", mrSubOperation4.getOppositeFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation4.getOppositeFeatureName());
 		assertEquals(true, mrSubOperation4.isAdd());
 		assertEquals(true, mrSubOperation4.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements2 = mrSubOperation4.getOtherInvolvedModelElements();
@@ -645,10 +656,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(1, referencedModelElements.size());
 		assertEquals(useCaseId, referencedModelElements.get(0));
 
-		assertEquals("participatingActors", mrSubOperation5.getFeatureName());
+		assertEquals(PARTICIPATING_ACTORS, mrSubOperation5.getFeatureName());
 		assertEquals(0, mrSubOperation5.getIndex());
 		assertEquals(useCaseId, mrSubOperation5.getModelElementId());
-		assertEquals("participatedUseCases", mrSubOperation5.getOppositeFeatureName());
+		assertEquals(PARTICIPATED_USE_CASES, mrSubOperation5.getOppositeFeatureName());
 		assertEquals(true, mrSubOperation5.isAdd());
 		assertEquals(true, mrSubOperation5.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements3 = mrSubOperation5.getOtherInvolvedModelElements();
@@ -658,14 +669,14 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 		assertEquals(otherActorId, referencedModelElements2.get(0));
 
 		assertEquals(useCaseId, mrSubOperation6.getModelElementId());
-		assertEquals("leafSection", mrSubOperation6.getFeatureName());
+		assertEquals(LEAF_SECTION, mrSubOperation6.getFeatureName());
 		assertEquals(sectionId, mrSubOperation6.getNewValue());
 		assertEquals(null, mrSubOperation6.getOldValue());
 
-		assertEquals("modelElements", mrSubOperation7.getFeatureName());
+		assertEquals(MODEL_ELEMENTS, mrSubOperation7.getFeatureName());
 		assertEquals(0, mrSubOperation7.getIndex());
 		assertEquals(sectionId, mrSubOperation7.getModelElementId());
-		assertEquals("leafSection", mrSubOperation7.getOppositeFeatureName());
+		assertEquals(LEAF_SECTION, mrSubOperation7.getOppositeFeatureName());
 		assertEquals(true, mrSubOperation7.isAdd());
 		assertEquals(true, mrSubOperation7.isBidirectional());
 		Set<ModelElementId> otherInvolvedModelElements4 = mrSubOperation7.getOtherInvolvedModelElements();
@@ -1146,8 +1157,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	@Test
 	public void testCreateWithReferencesAndChildrenComplex() {
 
-		final TestElement parentTestElement = getTestElement("parentTestElement");
-		final TestElement testElement = getTestElement("testElement");
+		final TestElement parentTestElement = getTestElement(PARENT_TEST_ELEMENT);
+		final TestElement testElement = getTestElement(TEST_ELEMENT);
 		final TestElement newTestElement = getTestElement("newTestElement");
 		final TestElement newChildElement1 = getTestElement("newChildElement1");
 		final TestElement newChildElement2 = getTestElement("newChildElement2");
@@ -1265,8 +1276,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 	@Test
 	public void testClearContainmentTree() {
-		final TestElement parentTestElement = getTestElement("parentTestElement");
-		final TestElement testElement = getTestElement("testElement");
+		final TestElement parentTestElement = getTestElement(PARENT_TEST_ELEMENT);
+		final TestElement testElement = getTestElement(TEST_ELEMENT);
 		final TestElement subTestElement = getTestElement("subTestElement");
 
 		new EMFStoreCommand() {
@@ -1345,8 +1356,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 	@Test
 	public void testClearContainmentTreeReverse() {
-		final TestElement parentTestElement = getTestElement("parentTestElement");
-		final TestElement testElement = getTestElement("testElement");
+		final TestElement parentTestElement = getTestElement(PARENT_TEST_ELEMENT);
+		final TestElement testElement = getTestElement(TEST_ELEMENT);
 		final TestElement subTestElement = getTestElement("subTestElement");
 
 		new EMFStoreCommand() {
@@ -1514,11 +1525,11 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	@Test
 	public void testReferenceMapDeletion() {
 
-		final TestElement testElement = getTestElement("testElement");
-		final TestElement secondTestElement = getTestElement("secondTestElement");
-		final TestElement parentTestElement = getTestElement("parentTestElement");
+		final TestElement testElement = getTestElement(TEST_ELEMENT);
+		final TestElement secondTestElement = getTestElement(SECOND_TEST_ELEMENT);
+		final TestElement parentTestElement = getTestElement(PARENT_TEST_ELEMENT);
 		final TestElement keyRefeferenceTestElement = getTestElement("keyRefeferenceTestElement");
-		final TestElement referenceTestElement = getTestElement("referenceTestElement");
+		final TestElement referenceTestElement = getTestElement(REFERENCE_TEST_ELEMENT);
 
 		new EMFStoreCommand() {
 			@Override
@@ -1588,10 +1599,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	@Test
 	public void testAttributeToReferenceMapDeletion() {
 
-		final TestElement testElement = getTestElement("testElement");
-		final TestElement secondTestElement = getTestElement("secondTestElement");
-		final TestElement parentTestElement = getTestElement("parentTestElement");
-		final TestElement referenceTestElement = getTestElement("referenceTestElement");
+		final TestElement testElement = getTestElement(TEST_ELEMENT);
+		final TestElement secondTestElement = getTestElement(SECOND_TEST_ELEMENT);
+		final TestElement parentTestElement = getTestElement(PARENT_TEST_ELEMENT);
+		final TestElement referenceTestElement = getTestElement(REFERENCE_TEST_ELEMENT);
 
 		new EMFStoreCommand() {
 			@Override
@@ -1601,7 +1612,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				getProject().addModelElement(parentTestElement);
 
 				parentTestElement.setContainedElement(secondTestElement);
-				testElement.getStringToElementMap().put("secondTestElement", secondTestElement);
+				testElement.getStringToElementMap().put(SECOND_TEST_ELEMENT, secondTestElement);
 				testElement.getStringToElementMap().put("referencedTestElement", referenceTestElement);
 
 			}
@@ -1621,8 +1632,8 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 		assertTrue(getProject().contains(testElement));
 		assertFalse(getProject().contains(secondTestElement));
-		assertNull(testElement.getStringToElementMap().get("secondTestElement"));
-		assertTrue(testElement.getStringToElementMap().containsKey("secondTestElement"));
+		assertNull(testElement.getStringToElementMap().get(SECOND_TEST_ELEMENT));
+		assertTrue(testElement.getStringToElementMap().containsKey(SECOND_TEST_ELEMENT));
 		assertTrue(getProject().contains(parentTestElement));
 
 		new EMFStoreCommand() {
@@ -1650,10 +1661,10 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 	@Test
 	public void testReferenceToAttributeMapDeletion() {
 
-		final TestElement testElement = getTestElement("testElement");
-		final TestElement secondTestElement = getTestElement("secondTestElement");
-		final TestElement parentTestElement = getTestElement("parentTestElement");
-		final TestElement referenceKeyTestElement = getTestElement("referenceTestElement");
+		final TestElement testElement = getTestElement(TEST_ELEMENT);
+		final TestElement secondTestElement = getTestElement(SECOND_TEST_ELEMENT);
+		final TestElement parentTestElement = getTestElement(PARENT_TEST_ELEMENT);
+		final TestElement referenceKeyTestElement = getTestElement(REFERENCE_TEST_ELEMENT);
 
 		new EMFStoreCommand() {
 			@Override
@@ -1663,7 +1674,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 				getProject().addModelElement(parentTestElement);
 
 				parentTestElement.setContainedElement(secondTestElement);
-				testElement.getElementToStringMap().put(secondTestElement, "secondTestElement");
+				testElement.getElementToStringMap().put(secondTestElement, SECOND_TEST_ELEMENT);
 				testElement.getElementToStringMap().put(referenceKeyTestElement, "referencedTestElement");
 
 			}
@@ -1692,7 +1703,7 @@ public class CreateDeleteOperationTest extends WorkspaceTest {
 
 	@Test
 	public void testAttributeMapDeletion() {
-		final TestElement testElement = getTestElement("testElement");
+		final TestElement testElement = getTestElement(TEST_ELEMENT);
 
 		new EMFStoreCommand() {
 			@Override
