@@ -6,13 +6,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * Edgar
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
+import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICreateLocalProjectController;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIShareProjectController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -32,6 +34,7 @@ import org.junit.Test;
 public class UIShareProjectControllerTest extends AbstractUIControllerTest {
 
 	private ESLocalProject localProject;
+	protected boolean didShare;
 
 	@Override
 	@Test
@@ -42,6 +45,9 @@ public class UIShareProjectControllerTest extends AbstractUIControllerTest {
 	}
 
 	private void shareProject() {
+		ESShareObserver observer = createShareObserver();
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().register(observer);
+
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				UIShareProjectController shareProjectController = new UIShareProjectController(
@@ -50,9 +56,10 @@ public class UIShareProjectControllerTest extends AbstractUIControllerTest {
 				shareProjectController.execute();
 			}
 		});
+
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
-				return localProject.isShared();
+				return didShare;
 			}
 
 			public String getFailureMessage() {
@@ -61,6 +68,15 @@ public class UIShareProjectControllerTest extends AbstractUIControllerTest {
 		}, timeout());
 		SWTBotButton confirmButton = bot.button("OK");
 		confirmButton.click();
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(observer);
+	}
+
+	private ESShareObserver createShareObserver() {
+		return new ESShareObserver() {
+			public void shareDone(ESLocalProject localProject) {
+				didShare = true;
+			}
+		};
 	}
 
 	private void createLocalProject() {

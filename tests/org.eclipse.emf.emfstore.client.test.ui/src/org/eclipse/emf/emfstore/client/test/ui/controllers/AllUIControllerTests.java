@@ -25,11 +25,12 @@ import org.junit.runners.Suite;
 	UICreateBranchControllerTest.class,
 	UICreateRemoteProjectControllerTest.class,
 	UIDeleteRemoteProjectControllerTest.class,
-	// UIRevertCommitControllerTest.class,
-	// UIServerControllerTest.class,
+	UIRevertCommitControllerTest.class,
+	UIServerControllerTest.class,
 	UISessionControllerTest.class,
 	UIShareProjectControllerTest.class,
 	UIUpdateProjectControllerTest.class,
+	UIUpdateProjectToVersionControllerTest.class,
 	UIPagedUpdateProjectControllerTest.class
 })
 public class AllUIControllerTests {

@@ -29,6 +29,7 @@ import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUpdateProjectController;
+import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUpdateProjectToVersionController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -152,9 +153,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		ESUpdateObserver updateObserver = createUpdateObserver();
 		ESWorkspaceProviderImpl.getInstance().getObserverBus().register(updateObserver);
 
-		System.out.println("Updating copy:" + getCheckedoutCopy().getProjectName() + "("
-			+ getCheckedoutCopy().getBaseVersion().getIdentifier() + ")");
-
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
@@ -165,45 +163,61 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		});
 
 		Matcher<Shell> matcher = withText("Update");
-		wait(3000);
 		bot.waitUntil(waitForShell(matcher));
-		wait(3000);
 		bot.button("OK").click();
 
-		// bot.waitUntil(new DefaultCondition() {
-		// public boolean test() throws Exception {
-		// return didUpdate;
-		// }
-		//
-		// public String getFailureMessage() {
-		// return "Update did not succeed.";
-		// }
-		// }, timeout());
+		bot.waitUntil(new DefaultCondition() {
+			public boolean test() throws Exception {
+				return didUpdate;
+			}
 
-		wait(3000);
+			public String getFailureMessage() {
+				return "Update did not succeed.";
+			}
+		}, timeout());
+
 		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
 
 		return getCheckedoutCopy().getBaseVersion();
 	}
 
-	private void wait(int time) {
-		try {
-			Thread.sleep(time);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			// Do NOT catch all Exceptions ("catch (Exception e)")
-			// Log AND handle Exceptions if possible
-			//
-			// You can just uncomment one of the lines below to log an exception:
-			// logException will show the logged excpetion to the user
-			// ModelUtil.logException(e);
-			// ModelUtil.logException("YOUR MESSAGE HERE", e);
-			// logWarning will only add the message to the error log
-			// ModelUtil.logWarning("YOUR MESSAGE HERE", e);
-			// ModelUtil.logWarning("YOUR MESSAGE HERE");
-			//
-			// If handling is not possible declare and rethrow Exception
-		}
+	protected ESPrimaryVersionSpec updateToVersion() {
+		SWTBotPreferences.PLAYBACK_DELAY = 100;
+		didUpdate = false;
+
+		ESUpdateObserver updateObserver = createUpdateObserver();
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().register(updateObserver);
+
+		UIThreadRunnable.asyncExec(new VoidResult() {
+			public void run() {
+				UIUpdateProjectToVersionController updateProjectController = new UIUpdateProjectToVersionController(
+					bot.getDisplay().getActiveShell(),
+					getCheckedoutCopy());
+				updateProjectController.execute();
+			}
+		});
+
+		Matcher<Shell> matcher = withText("Select a Version to update to");
+		bot.waitUntil(waitForShell(matcher));
+		bot.button("OK").click();
+
+		matcher = withText("Update");
+		bot.waitUntil(waitForShell(matcher));
+		bot.button("OK").click();
+
+		bot.waitUntil(new DefaultCondition() {
+			public boolean test() throws Exception {
+				return didUpdate;
+			}
+
+			public String getFailureMessage() {
+				return "Update to version did not succeed.";
+			}
+		}, 600000);
+
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
+
+		return getCheckedoutCopy().getBaseVersion();
 	}
 
 	private ESUpdateObserver createUpdateObserver() {
@@ -211,12 +225,10 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 			public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {
 				didUpdate = true;
-				System.out.println("Update complete");
 			}
 
 			public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages,
 				IProgressMonitor monitor) {
-				System.out.println("Inspecting changes");
 				return true;
 			}
 		};
