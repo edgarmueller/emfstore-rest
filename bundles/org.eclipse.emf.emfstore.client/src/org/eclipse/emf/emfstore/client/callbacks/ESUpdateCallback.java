@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * ovonwesen
  * emueller
  ******************************************************************************/
@@ -83,16 +83,9 @@ public interface ESUpdateCallback {
 		throws ESException;
 
 	/**
-	 * A default implementation of an update callback that does nothing and defaults
-	 * <<<<<<<
-	 * HEAD:org.eclipse.emf.emfstore.client/src/org/eclipse/emf/emfstore/internal/client/model/controller/callbacks
-	 * /IUpdateCallback.java {@link IUpdateCallback#conflictOccurred(ESChangeConflictImpl)} to false and
-	 * {@link IUpdateCallback#inspectChanges(ESLocalProject, List)} to true.
-	 * ======= {@link ESUpdateCallback#conflictOccurred(ESChangeConflict)} to false and
-	 * {@link ESUpdateCallback#inspectChanges(ESLocalProject, List)} to true.
-	 * >>>>>>>
-	 * 897c2ca7d066fbf6e610eabfe0a600a2a4512500:org.eclipse.emf.emfstore.client/src/org/eclipse/emf/emfstore/client
-	 * /callbacks/ESUpdateCallback.java
+	 * A default implementation of an update callback that does nothing and defaults {@link
+	 * this#conflictOccurred(ESChangeConflict, IProgressMonitor)} to false
+	 * and {@link this#checksumCheckFailed(ESLocalProject, ESPrimaryVersionSpec, IProgressMonitor)} to true.
 	 */
 	ESUpdateCallback NOCALLBACK = new ESUpdateCallback() {
 
