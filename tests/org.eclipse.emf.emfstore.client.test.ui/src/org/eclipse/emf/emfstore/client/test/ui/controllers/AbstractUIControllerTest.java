@@ -55,6 +55,8 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 			fail(e.getMessage());
 		}
 		Assert.assertEquals(usersession, server.getLastUsersession());
+		deleteLocalProjects();
+		deleteRemoteProjects(usersession);
 
 		localProject = workspace.createLocalProject("TestProject");
 		localProject.shareProject(usersession, new NullProgressMonitor());
@@ -64,8 +66,6 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 	protected void tearDown() throws Exception {
 		localProject = null;
 		checkedoutCopy = null;
-		deleteRemoteProjects(usersession);
-		deleteLocalProjects();
 		super.tearDown();
 	}
 

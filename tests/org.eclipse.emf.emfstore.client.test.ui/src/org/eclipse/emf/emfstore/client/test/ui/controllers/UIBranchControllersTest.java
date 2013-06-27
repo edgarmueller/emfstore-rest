@@ -6,11 +6,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICreateBranchController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
@@ -19,7 +22,7 @@ import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.junit.Test;
 
-public class UICreateBranchControllerTest extends AbstractUIControllerTest {
+public class UIBranchControllersTest extends AbstractUIControllerTestWithCommit {
 
 	@Override
 	@Test
@@ -40,6 +43,7 @@ public class UICreateBranchControllerTest extends AbstractUIControllerTest {
 		shell.bot().button("OK").click();
 		SWTBotShell commitDialogShell = bot.shell("Commit");
 		commitDialogShell.bot().button("OK").click();
+
 		bot.waitUntil(new DefaultCondition() {
 
 			public boolean test() throws Exception {
@@ -49,8 +53,47 @@ public class UICreateBranchControllerTest extends AbstractUIControllerTest {
 			public String getFailureMessage() {
 				return "Create branch did not succeed.";
 			}
-		}, 20000);
+		}, timeout());
 		assertEquals(branchesSize + 1, localProject.getBranches(monitor).size());
+
+		UIThreadRunnable.asyncExec(new VoidResult() {
+			public void run() {
+				try {
+					UICheckoutController checkoutController = new UICheckoutController(bot.getDisplay()
+						.getActiveShell(),
+						localProject.getRemoteProject(), true);
+					checkoutController.execute();
+				} catch (ESException e) {
+					fail(e.getMessage());
+				}
+			}
+		});
+
+		bot.text(0).setText("branch-checkout");
+		bot.button("OK").click();
+
+		bot.shell("Checkout Branch");
+		bot.table().select(0);
+		bot.button("OK").click();
+
+		bot.waitUntil(new DefaultCondition() {
+
+			public boolean test() throws Exception {
+				for (ESLocalProject localProject : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
+					if (localProject.getProjectName().equals("branch-checkout")) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			public String getFailureMessage() {
+				return "Branch checkout did not succeed";
+			}
+		});
+
+		assertEquals(2, ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects().size());
+
 	}
 
 }
