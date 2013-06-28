@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
-import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -76,12 +75,12 @@ public class RevertCommitController extends ServerCall<Void> {
 		Collections.reverse(changes);
 
 		// TODO: find out why applying the reversed changes causes IDs to get lost
-		((IdEObjectCollectionImpl) revertSpace.toInternalAPI().getProject()).lockAllocation();
+		// ((IdEObjectCollectionImpl) revertSpace.toInternalAPI().getProject()).lockAllocation();
 		for (ChangePackage changePackage : changes) {
 			changePackage.reverse().apply(revertSpace.toInternalAPI().getProject(), true);
 		}
-		((IdEObjectCollectionImpl) revertSpace.toInternalAPI().getProject()).unlockAllocation();
-		((IdEObjectCollectionImpl) revertSpace.toInternalAPI().getProject()).clearAllocatedCaches();
+		// ((IdEObjectCollectionImpl) revertSpace.toInternalAPI().getProject()).unlockAllocation();
+		// ((IdEObjectCollectionImpl) revertSpace.toInternalAPI().getProject()).clearAllocatedCaches();
 
 	}
 

@@ -74,8 +74,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 */
 	private ESModelElementIdGenerator modelElementIdGenerator;
 
-	private boolean lock;
-
 	/**
 	 * Constructor.
 	 */
@@ -774,9 +772,6 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 * @see org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection#forceClearAllocatedCaches()
 	 */
 	public void clearAllocatedCaches() {
-		if (lock) {
-			return;
-		}
 		allocatedEObjectToIdMap.clear();
 		allocatedIdToEObjectMap.clear();
 	}
@@ -855,17 +850,4 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 		getModelElements().remove(modelElement);
 	}
 
-	/**
-	 * 
-	 */
-	public void lockAllocation() {
-		lock = true;
-	}
-
-	/**
-	 * 
-	 */
-	public void unlockAllocation() {
-		lock = false;
-	}
 }

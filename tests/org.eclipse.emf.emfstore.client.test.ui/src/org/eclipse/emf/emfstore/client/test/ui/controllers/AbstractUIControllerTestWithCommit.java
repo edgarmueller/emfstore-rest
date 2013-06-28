@@ -83,7 +83,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		commit(baseVersion);
 	}
 
-	private void commit(final ESPrimaryVersionSpec baseVersion) {
+	protected void commit(final ESPrimaryVersionSpec baseVersion) {
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				ESUIControllerFactory.INSTANCE.commitProject(
@@ -108,7 +108,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		assertEquals(baseVersion.getIdentifier() + 1,
 			localProject.getBaseVersion().getIdentifier());
-		System.out.println("commit succeeded");
 	}
 
 	protected void checkout() {

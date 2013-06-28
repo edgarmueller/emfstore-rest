@@ -56,6 +56,7 @@ public class UIRevertCommitControllerTest extends AbstractUIControllerTestWithCo
 				return "Revert did not succeed.";
 			}
 		}, timeout());
+
 		assertEquals(0, clonedProject.getModelElements().size());
 	}
 

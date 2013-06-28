@@ -27,6 +27,7 @@ import org.junit.runners.Suite;
 	UICreateRemoteProjectControllerTest.class,
 	UIDeleteRemoteProjectControllerTest.class,
 	UIRevertCommitControllerTest.class,
+	UIRevertCommitControllerTest2.class,
 	UIServerControllerTest.class,
 	UISessionControllerTest.class,
 	UIShareProjectControllerTest.class,
