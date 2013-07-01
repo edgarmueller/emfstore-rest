@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerNotFoundException;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
@@ -96,7 +97,11 @@ public class RunningEMFStoreRule extends ExternalResource {
 		((ESWorkspaceImpl) workspace).toInternalAPI().getUsersessions()
 			.remove(((ESUsersessionImpl) session).toInternalAPI());
 		if (server.getName().equals("RunningEMFStoreRuleStore")) {
-			workspace.removeServer(server);
+			try {
+				workspace.removeServer(server);
+			} catch (ESServerNotFoundException e) {
+				// ignore
+			}
 		}
 	}
 

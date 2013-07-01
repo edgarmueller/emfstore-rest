@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
@@ -19,6 +19,7 @@ import junit.framework.Assert;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerNotFoundException;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
@@ -70,7 +71,11 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 						}
 					}
 				}
-				ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
+				try {
+					ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
+				} catch (ESServerNotFoundException e) {
+					fail(e.getMessage());
+				}
 			}
 		};
 

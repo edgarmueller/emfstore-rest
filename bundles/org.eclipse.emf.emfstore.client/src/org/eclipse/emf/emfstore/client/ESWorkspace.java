@@ -15,6 +15,7 @@ package org.eclipse.emf.emfstore.client;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerNotFoundException;
 
 /**
  * Container for all local projects and available servers.
@@ -73,6 +74,9 @@ public interface ESWorkspace {
 	 * 
 	 * @param server
 	 *            the server to be removed from the workspace
+	 * 
+	 * @throws ESServerNotFoundException
+	 *             in case the server couldn't be found in the workspace
 	 */
-	void removeServer(ESServer server);
+	void removeServer(ESServer server) throws ESServerNotFoundException;
 }

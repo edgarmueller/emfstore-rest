@@ -11,6 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -18,9 +19,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerNotFoundException;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
@@ -105,8 +106,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	}
 
 	public boolean serverExists(ESServer server) {
-		final ESServerImpl serverImpl = (ESServerImpl) server;
-		ESServerImpl existingServer = getExistingServer(serverImpl);
+		ESServer existingServer = getExistingServer(server);
 		return existingServer != null;
 	}
 
@@ -117,14 +117,11 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 *            the server for which to retrieve an already existing server instance
 	 * @return the server with the same URL and port as the given one, or <code>null</code> if no such server exists.
 	 */
-	private ESServerImpl getExistingServer(ESServerImpl server) {
-		ServerInfo serverInfo = server.toInternalAPI();
+	private ESServer getExistingServer(ESServer server) {
 
-		for (ServerInfo info : toInternalAPI().getServerInfos()) {
-			if (info.getUrl().equals(serverInfo.getUrl())
-				&& info.getPort() == serverInfo.getPort()
-				&& info.getName().equals(serverInfo.getName())) {
-				return info.toAPI();
+		for (ESServer s : getServers()) {
+			if (s == server) {
+				return s;
 			}
 		}
 
@@ -137,9 +134,15 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#removeServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
-	public void removeServer(final ESServer server) {
+	public void removeServer(final ESServer server) throws ESServerNotFoundException {
 		final ESServerImpl serverImpl = (ESServerImpl) server;
-		final ESServerImpl existingServer = getExistingServer(serverImpl);
+		final ESServerImpl existingServer = (ESServerImpl) getExistingServer(serverImpl);
+
+		if (existingServer == null) {
+			throw new ESServerNotFoundException(MessageFormat.format(
+				"The server {0} could not be found", server));
+		}
+
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				toInternalAPI().removeServerInfo(existingServer.toInternalAPI());
