@@ -58,8 +58,8 @@ import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
  * 
  * @author wesendon
  */
-public final class KeyStoreManager implements ESKeyStoreManager {
 
+public final class KeyStoreManager implements ESKeyStoreManager {
 	/**
 	 * Name of keyStore file.
 	 */
@@ -224,6 +224,22 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		}
 	}
 
+	// TODO: rename exception?
+	public void removeCertificate(String alias) throws ESCertificateStoreException {
+		try {
+			keyStore.deleteEntry(alias);
+			storeKeyStore();
+		} catch (KeyStoreException e) {
+			String message = "Keystore has not been initialized, or entry cannot be removed.";
+			WorkspaceUtil.logException(message, e);
+			throw new ESCertificateStoreException(message, e);
+		} catch (ESCertificateStoreException e) {
+			String message = "Storing certificate failed!";
+			WorkspaceUtil.logException(message, e);
+			throw new ESCertificateStoreException(message, e);
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -253,7 +269,9 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	private void storeKeyStore() throws ESCertificateStoreException {
 		loadKeyStore();
 		try {
-			keyStore.store(new FileOutputStream(getPathToKeyStore()), KEYSTOREPASSWORD.toCharArray());
+			FileOutputStream fileOutputStream = new FileOutputStream(getPathToKeyStore());
+			keyStore.store(fileOutputStream, KEYSTOREPASSWORD.toCharArray());
+			fileOutputStream.close();
 		} catch (KeyStoreException e) {
 			String message = "Storing certificate failed!";
 			WorkspaceUtil.logWarning(message, e);

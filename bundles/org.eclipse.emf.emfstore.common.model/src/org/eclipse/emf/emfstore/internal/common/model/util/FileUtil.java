@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.util;
@@ -52,7 +52,7 @@ public final class FileUtil {
 	}
 
 	/**
-	 * This method copies a single file.
+	 * This method copies a single file and closes the given stream.
 	 * 
 	 * @param source the source input stream
 	 * @param destination the destination

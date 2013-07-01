@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendonk
  * koegel
  ******************************************************************************/
@@ -452,7 +452,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		try {
 			fis = new FileInputStream(propertyFile);
 			properties.load(fis);
-			ServerConfiguration.setProperties(properties);
+			ServerConfiguration.setProperties(properties, false);
 			ModelUtil.logInfo("Property file read. (" + propertyFile.getAbsolutePath() + ")");
 		} catch (IOException e) {
 			ModelUtil.logWarning("Property initialization failed, using default properties.", e);
@@ -476,8 +476,12 @@ public class EMFStoreController implements IApplication, Runnable {
 	 */
 	public void stop() {
 		wakeForTermination();
-		for (ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
-			handler.stop(false);
+		// connection handlers may be null in case an exception has been thrown
+		// while starting
+		if (connectionHandlers != null) {
+			for (ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
+				handler.stop(false);
+			}
 		}
 		ModelUtil.logInfo("Server was stopped.");
 		instance = null;
@@ -493,10 +497,12 @@ public class EMFStoreController implements IApplication, Runnable {
 	 */
 	public void shutdown(FatalESException exception) {
 		ModelUtil.logWarning("Stopping all connection handlers...");
-		for (ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
-			ModelUtil.logWarning("Stopping connection handler \"" + handler.getName() + "\".");
-			handler.stop(true);
-			ModelUtil.logWarning("Connection handler \"" + handler.getName() + "\" stopped.");
+		if (connectionHandlers != null) {
+			for (ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
+				ModelUtil.logWarning("Stopping connection handler \"" + handler.getName() + "\".");
+				handler.stop(true);
+				ModelUtil.logWarning("Connection handler \"" + handler.getName() + "\" stopped.");
+			}
 		}
 		ModelUtil.logException("Server was forcefully stopped.", exception);
 		ModelUtil.logException("Cause for server shutdown: ", exception.getCause());

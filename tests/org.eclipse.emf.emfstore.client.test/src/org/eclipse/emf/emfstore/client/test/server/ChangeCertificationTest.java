@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.KeyStoreException;
 import java.security.cert.Certificate;
-import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.emfstore.client.ESUsersession;
@@ -20,14 +19,18 @@ import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.client.test.Activator;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.connection.ServerKeyStoreManager;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ChangeCertificationTest extends ServerTests {
 
 	@Override
+	@Before
 	public void before() {
 		SetupHelper.stopServer();
 		try {
@@ -50,19 +53,64 @@ public class ChangeCertificationTest extends ServerTests {
 		SetupHelper.startSever();
 	}
 
+	@Override
+	@After
+	public void teardown() throws IOException, SerializationException, ESException {
+		super.teardown();
+		try {
+			unsetKeystoreField();
+		} catch (IllegalArgumentException e) {
+			fail(e.getMessage());
+		} catch (SecurityException e) {
+			fail(e.getMessage());
+		} catch (IllegalAccessException e) {
+			fail(e.getMessage());
+		} catch (NoSuchFieldException e) {
+			fail(e.getMessage());
+		}
+		try {
+			KeyStoreManager.getInstance().removeCertificate("testAlias");
+		} catch (ESCertificateStoreException e) {
+			fail(e.getMessage());
+		}
+		KeyStoreManager.getInstance().setDefaultCertificate("emfstore test certificate (do not use in production!)");
+	}
+
 	private void unsetKeystoreField() throws IllegalArgumentException, IllegalAccessException, SecurityException,
 		NoSuchFieldException {
-		java.lang.reflect.Field privateKeystoreField = ServerKeyStoreManager.class.getDeclaredField("keyStore");
+		unsetPrivateFieldOnServerKeyStoreManager("keyStore");
+	}
+
+	private void unsetPrivateFieldOnServerKeyStoreManager(String field) throws IllegalArgumentException,
+		IllegalAccessException, SecurityException,
+		NoSuchFieldException {
+		java.lang.reflect.Field privateKeystoreField = ServerKeyStoreManager.class.getDeclaredField(field);
+		privateKeystoreField.setAccessible(true);
+		privateKeystoreField.set(ServerKeyStoreManager.getInstance(), null);
+	}
+
+	private void unsetPrivateFieldOnKeyStoreManager(String field) throws IllegalArgumentException,
+		IllegalAccessException, SecurityException,
+		NoSuchFieldException {
+		java.lang.reflect.Field privateKeystoreField = KeyStoreManager.class.getDeclaredField(field);
 		privateKeystoreField.setAccessible(true);
 		privateKeystoreField.set(ServerKeyStoreManager.getInstance(), null);
 	}
 
 	private void replaceKeystore() throws IOException {
-		FileUtils.copyInputStreamToFile(getResource("sampleFiles/emfstoreServer.keystore"),
+
+		InputStream stream = getResource("sampleFiles/emfstoreServer.keystore");
+		FileUtils.copyInputStreamToFile(stream,
 			new File(ServerConfiguration.getServerKeyStorePath()));
-		Properties properties = new Properties();
-		properties.load(getResource("sampleFiles/es.properties"));
-		ServerConfiguration.setProperties(properties, false);
+		stream.close();
+
+		stream = getResource("sampleFiles/es.properties");
+		FileUtils.copyInputStreamToFile(stream,
+			new File(ServerConfiguration.getConfDirectory() + File.separatorChar + "es.properties"));
+		stream.close();
+		// Properties properties = new Properties();
+		// properties.load(getResource("sampleFiles/es.properties"));
+		// ServerConfiguration.setProperties(properties, false);
 	}
 
 	private InputStream getResource(String resource) throws IOException {
@@ -79,9 +127,9 @@ public class ChangeCertificationTest extends ServerTests {
 	}
 
 	private void importCertificate() throws ESInvalidCertificateException, ESCertificateStoreException, IOException {
-		KeyStoreManager.getInstance().addCertificate("testAlias",
-			getResource("sampleFiles/server.public-key"));
-
+		InputStream stream = getResource("sampleFiles/server.public-key");
+		KeyStoreManager.getInstance().addCertificate("testAlias", stream);
+		stream.close();
 	}
 
 	@Test

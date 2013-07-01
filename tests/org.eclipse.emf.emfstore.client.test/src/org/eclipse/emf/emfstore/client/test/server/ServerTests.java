@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
@@ -228,8 +228,6 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					// getProjectSpace().setUsersession(getServerInfo().getLastUsersession());
-					// getProjectSpace().getUsersession().logIn();
 					getProjectSpace().shareProject(new NullProgressMonitor());
 				} catch (ESException e) {
 					Assert.fail();
