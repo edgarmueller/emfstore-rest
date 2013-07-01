@@ -103,6 +103,8 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 			}
 		});
 
+		toInternalAPI().save();
+
 		return serverImpl;
 	}
 
@@ -147,6 +149,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 				return null;
 			}
 		});
+		toInternalAPI().save();
 	}
 
 	/**

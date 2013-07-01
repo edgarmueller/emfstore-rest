@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * hodaie
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test;
@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -329,7 +330,10 @@ public class SetupHelper {
 	 * @return server info
 	 */
 	public static ESServerImpl createServer() {
-		return (ESServerImpl) ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServerImpl server = (ESServerImpl) ESServer.FACTORY.createServer(
+			"localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
+		return server;
 	}
 
 	/**

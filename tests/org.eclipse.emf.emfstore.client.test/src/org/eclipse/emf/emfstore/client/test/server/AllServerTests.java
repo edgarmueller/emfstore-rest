@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
@@ -21,7 +21,8 @@ import org.junit.runners.Suite;
  * @author wesendon
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ServerInterfaceTest.class, InvalidArgumentsTest.class, // InvalidAuthenticationTest.class,
+@Suite.SuiteClasses({ ServerInterfaceTest.class, InvalidArgumentsTest.class,
+	ChangeCertificationTest.class,
 	PropertiesTest.class, FileManagerTest.class, AllServerAPITests.class, ChecksumTest.class })
 public class AllServerTests {
 

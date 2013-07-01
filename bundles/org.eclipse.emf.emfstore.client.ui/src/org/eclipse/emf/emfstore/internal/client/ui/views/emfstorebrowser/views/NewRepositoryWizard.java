@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * shterev
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
@@ -71,6 +71,16 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 		return true;
 	}
 
+	private void invalidateSessions(final ESWorkspaceImpl workspace) throws ESException {
+		for (Usersession session : workspace.toInternalAPI().getUsersessions()) {
+			if (session.getServerInfo() == server) {
+				session.logout();
+			}
+		}
+
+		workspace.toInternalAPI().save();
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -88,21 +98,15 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 						server.setPort(editedServer.getPort());
 						server.setURL(editedServer.getURL());
 
-						// invalidate all sessions
 						invalidateSessions(workspace);
+
+						// set default certificate
+						KeyStoreManager.getInstance().setDefaultCertificate(
+							editedServer.getCertificateAlias());
 
 						return null;
 					}
 
-					private void invalidateSessions(final ESWorkspaceImpl workspace) throws ESException {
-						for (Usersession session : workspace.toInternalAPI().getUsersessions()) {
-							if (session.getServerInfo() == server) {
-								session.logout();
-							}
-						}
-
-						workspace.toInternalAPI().save();
-					}
 				});
 
 			} else {
