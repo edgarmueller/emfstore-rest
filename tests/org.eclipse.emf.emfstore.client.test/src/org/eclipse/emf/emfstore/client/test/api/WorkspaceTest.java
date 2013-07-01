@@ -59,23 +59,6 @@ public class WorkspaceTest {
 	}
 
 	@Test
-	public void testAddExistingServer() {
-		ESServer server = ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
-		workspace.addServer(server);
-		int servers = workspace.getServers().size();
-		server = ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
-		workspace.addServer(server);
-		assertEquals(servers, workspace.getServers().size());
-
-		try {
-			workspace.removeServer(server);
-		} catch (ESServerNotFoundException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(servers - 1, workspace.getServers().size());
-	}
-
-	@Test
 	public void testAddServer() {
 		int servers = workspace.getServers().size();
 		ESServer server = ESServer.FACTORY.createServer("foo.net", 1234, KeyStoreManager.DEFAULT_CERTIFICATE);
