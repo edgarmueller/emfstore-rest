@@ -6,32 +6,40 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * pfeifferc
+ * Contributors:
+ * Card Pfeiffer - initial API and implementation
+ * Edgar Mueller - renaming & javadoc
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.exceptions;
 
 /**
- * ESCertificateStoreException is thrown when problems arise with the KeyStoreManager.
+ * Thrown in case problems arise with the KeyStoreManager.
  * 
  * @author pfeifferc
  */
-public class ESCertificateStoreException extends Exception {
+public class ESCertificateException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @param message exception message
-	 * @param cause reason for exception
+	 * Constructor.
+	 * 
+	 * @param message
+	 *            the detailed error message
+	 * @param cause
+	 *            the cause for this exception
 	 */
-	public ESCertificateStoreException(String message, Throwable cause) {
+	public ESCertificateException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
 	/**
-	 * @param message exception message
+	 * Constructor.
+	 * 
+	 * @param message
+	 *            the detailed error message
 	 */
-	public ESCertificateStoreException(String message) {
+	public ESCertificateException(String message) {
 		super(message);
 	}
 

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.provider;
 
 import java.io.InputStream;
 
-import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateException;
 import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 
 /**
@@ -32,12 +32,12 @@ public interface ESKeyStoreManager {
 	 *            path to the certificate file
 	 * @throws ESInvalidCertificateException
 	 *             certificate cannot be found, accessed or identified
-	 * @throws ESCertificateStoreException
+	 * @throws ESCertificateException
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations.
 	 */
 	void addCertificate(String alias, String path) throws ESInvalidCertificateException,
-		ESCertificateStoreException;
+		ESCertificateException;
 
 	/**
 	 * Adds a certificate to the KeyStore.
@@ -49,12 +49,12 @@ public interface ESKeyStoreManager {
 	 *            {@link java.security.cert.CertificateFactory#generateCertificate(InputStream)}.
 	 * @throws ESInvalidCertificateException
 	 *             certificate cannot be found, accessed or identified
-	 * @throws ESCertificateStoreException
+	 * @throws ESCertificateException
 	 *             is thrown when problems occur with the CertificateStore, i.e.
 	 *             illegal operations
 	 */
 	void addCertificate(String alias, InputStream certificate) throws ESInvalidCertificateException,
-		ESCertificateStoreException;
+		ESCertificateException;
 
 	/**
 	 * Returns the default certificate alias.
@@ -77,8 +77,8 @@ public interface ESKeyStoreManager {
 	 * @param alias
 	 *            the alias which needs to be check
 	 * @return {@code true} if a certificate with the given alias exists, {@code false otherwise}
-	 * @throws ESCertificateStoreException in case of failure
+	 * @throws ESCertificateException in case of failure
 	 */
-	boolean certificateExists(String alias) throws ESCertificateStoreException;
+	boolean certificateExists(String alias) throws ESCertificateException;
 
 }

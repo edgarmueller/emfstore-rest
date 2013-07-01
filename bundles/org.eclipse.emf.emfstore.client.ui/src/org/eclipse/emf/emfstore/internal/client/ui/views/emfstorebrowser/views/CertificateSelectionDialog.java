@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 import java.security.cert.X509Certificate;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateException;
 import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -141,7 +141,7 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 					try {
 						KeyStoreManager.getInstance().deleteCertificate(alias);
 						setListElements(KeyStoreManager.getInstance().getCertificates().toArray());
-					} catch (ESCertificateStoreException e1) {
+					} catch (ESCertificateException e1) {
 						setErrorMessage(e1.getMessage());
 					}
 				}
@@ -204,7 +204,7 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 					}
 					certAlias.setText(alias);
 					certDetails.setText(tmp);
-				} catch (ESCertificateStoreException e1) {
+				} catch (ESCertificateException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 			}
@@ -247,12 +247,12 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 					KeyStoreManager.getInstance().addCertificate(alias, location);
 				} catch (final ESInvalidCertificateException e1) {
 					setErrorMessage("Invalid certificate!");
-				} catch (ESCertificateStoreException e1) {
+				} catch (ESCertificateException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 				try {
 					setListElements(KeyStoreManager.getInstance().getCertificates().toArray());
-				} catch (ESCertificateStoreException e1) {
+				} catch (ESCertificateException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 			}
