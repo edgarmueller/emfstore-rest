@@ -89,12 +89,8 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 * @see org.eclipse.emf.emfstore.client.ESWorkspace#addServer(org.eclipse.emf.emfstore.client.ESServer)
 	 */
 	public ESServerImpl addServer(ESServer server) {
-		final ESServerImpl serverImpl = (ESServerImpl) server;
-		final ESServerImpl existingServer = getExistingServer(serverImpl);
 
-		if (existingServer != null) {
-			return existingServer;
-		}
+		final ESServerImpl serverImpl = (ESServerImpl) server;
 
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
@@ -115,7 +111,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	}
 
 	/**
-	 * Returns the server with the same URL and port as the given one, if there's any.
+	 * Returns the server with the same name, URL and port as the given one, if there's any.
 	 * 
 	 * @param server
 	 *            the server for which to retrieve an already existing server instance
@@ -126,7 +122,8 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 
 		for (ServerInfo info : toInternalAPI().getServerInfos()) {
 			if (info.getUrl().equals(serverInfo.getUrl())
-				&& info.getPort() == serverInfo.getPort()) {
+				&& info.getPort() == serverInfo.getPort()
+				&& info.getName().equals(serverInfo.getName())) {
 				return info.toAPI();
 			}
 		}
