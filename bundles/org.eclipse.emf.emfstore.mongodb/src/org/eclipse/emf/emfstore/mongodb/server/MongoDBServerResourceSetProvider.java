@@ -11,11 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.mongodb.server;
 
-import java.util.LinkedHashMap;
-
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
@@ -60,7 +56,7 @@ public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
 		ResourceSetImpl resourceSet = (ResourceSetImpl) resourceSetFactory.createResourceSet();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		resourceSet.setURIConverter(createURIConverter(resourceSet));
-		resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
+		// resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
 		return resourceSet;
 	}
 
