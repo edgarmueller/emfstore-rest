@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * shterev
+ * Aleksandar Shterev - initial API and implementation
+ * Edgar Mueller - Refactorings due to new API, invalidation of existing sessions
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
@@ -29,16 +30,22 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Wizard for adding a new repository.
+ * Wizard for adding or creating a new repository.
+ * 
+ * 
  * 
  * @author shterev
+ * @author emueller
  */
 public class NewRepositoryWizard extends Wizard implements INewWizard {
 
 	private ESServer server;
-
 	private NewRepositoryWizardPageOne mainPage;
 
+	/**
+	 * Whether we use this page to edit an existing server
+	 * or to create a new one.
+	 */
 	private boolean isEdit;
 
 	/**
