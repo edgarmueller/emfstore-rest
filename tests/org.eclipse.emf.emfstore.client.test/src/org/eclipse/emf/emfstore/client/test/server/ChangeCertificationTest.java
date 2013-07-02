@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * Edgar Mueller - initial API and implementation
+ ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
 
 import static org.junit.Assert.assertFalse;
@@ -89,14 +100,6 @@ public class ChangeCertificationTest extends ServerTests {
 		privateKeystoreField.set(ServerKeyStoreManager.getInstance(), null);
 	}
 
-	private void unsetPrivateFieldOnKeyStoreManager(String field) throws IllegalArgumentException,
-		IllegalAccessException, SecurityException,
-		NoSuchFieldException {
-		java.lang.reflect.Field privateKeystoreField = KeyStoreManager.class.getDeclaredField(field);
-		privateKeystoreField.setAccessible(true);
-		privateKeystoreField.set(ServerKeyStoreManager.getInstance(), null);
-	}
-
 	private void replaceKeystore() throws IOException {
 
 		InputStream stream = getResource("sampleFiles/emfstoreServer.keystore");
@@ -108,9 +111,6 @@ public class ChangeCertificationTest extends ServerTests {
 		FileUtils.copyInputStreamToFile(stream,
 			new File(ServerConfiguration.getConfDirectory() + File.separatorChar + "es.properties"));
 		stream.close();
-		// Properties properties = new Properties();
-		// properties.load(getResource("sampleFiles/es.properties"));
-		// ServerConfiguration.setProperties(properties, false);
 	}
 
 	private InputStream getResource(String resource) throws IOException {
