@@ -20,8 +20,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal#getPendingOperations <em>Pending
- * Operations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingProposal#getPendingOperations <em>
+ * Pending Operations</em>}</li>
  * </ul>
  * </p>
  * 

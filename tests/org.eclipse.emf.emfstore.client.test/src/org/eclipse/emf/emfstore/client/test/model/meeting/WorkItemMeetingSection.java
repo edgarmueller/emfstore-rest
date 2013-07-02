@@ -19,8 +19,8 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection#getIncludedWorkItems <em>
- * Included Work Items</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection#getIncludedWorkItems
+ * <em> Included Work Items</em>}</li>
  * </ul>
  * </p>
  * 

@@ -78,7 +78,8 @@ public class MeetingItemProviderAdapterFactory extends MeetingAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +103,8 @@ public class MeetingItemProviderAdapterFactory extends MeetingAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection} instances. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection} instances. <!--
+	 * begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +112,8 @@ public class MeetingItemProviderAdapterFactory extends MeetingAdapterFactory imp
 	protected CompositeMeetingSectionItemProvider compositeMeetingSectionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection}.
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,7 +129,8 @@ public class MeetingItemProviderAdapterFactory extends MeetingAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection} instances. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +138,8 @@ public class MeetingItemProviderAdapterFactory extends MeetingAdapterFactory imp
 	protected IssueMeetingSectionItemProvider issueMeetingSectionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection}.
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -150,7 +155,8 @@ public class MeetingItemProviderAdapterFactory extends MeetingAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection} instances. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection} instances. <!--
+	 * begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -158,7 +164,8 @@ public class MeetingItemProviderAdapterFactory extends MeetingAdapterFactory imp
 	protected WorkItemMeetingSectionItemProvider workItemMeetingSectionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection}.
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

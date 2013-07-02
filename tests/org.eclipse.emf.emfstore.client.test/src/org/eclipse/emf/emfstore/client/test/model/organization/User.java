@@ -21,8 +21,8 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getEmail <em>Email</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getFirstName <em>First Name</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getLastName <em>Last Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getWorkItemsToReview <em>Work Items To Review
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User#getWorkItemsToReview <em>Work Items
+ * To Review </em>}</li>
  * </ul>
  * </p>
  * 
@@ -111,8 +111,9 @@ public interface User extends OrgUnit {
 
 	/**
 	 * Returns the value of the '<em><b>Work Items To Review</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getReviewer <em>Reviewer</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getReviewer <em>Reviewer</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Work Items To Review</em>' reference list isn't clear, there really should be more of

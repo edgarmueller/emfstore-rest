@@ -16,7 +16,8 @@ package org.eclipse.emf.emfstore.client.test.model.profile;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple#getType <em>Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple#getType <em>Type
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -42,7 +43,8 @@ public interface StereotypeAttributeSimple extends StereotypeAttribute {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple#getType <em>Type</em>}'
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple#getType
+	 * <em>Type</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Type</em>' attribute.

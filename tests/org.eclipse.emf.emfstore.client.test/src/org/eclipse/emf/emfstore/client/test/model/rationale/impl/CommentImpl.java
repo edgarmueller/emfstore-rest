@@ -33,9 +33,10 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage;
  * The following features are implemented:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl#getSender <em>Sender</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl#getRecipients <em>Recipients</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl#getCommentedElement <em>Commented
- * Element</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl#getRecipients <em>
+ * Recipients</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.impl.CommentImpl#getCommentedElement <em>
+ * Commented Element</em>}</li>
  * </ul>
  * </p>
  * 

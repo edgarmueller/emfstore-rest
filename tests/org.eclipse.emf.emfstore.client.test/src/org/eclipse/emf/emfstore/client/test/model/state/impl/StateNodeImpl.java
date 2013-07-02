@@ -28,10 +28,10 @@ import org.eclipse.emf.emfstore.client.test.model.state.Transition;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl#getOutgoingTransitions <em>Outgoing
- * Transitions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl#getIncomingTransitions <em>Incoming
- * Transitions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl#getOutgoingTransitions <em>
+ * Outgoing Transitions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateNodeImpl#getIncomingTransitions <em>
+ * Incoming Transitions</em>}</li>
  * </ul>
  * </p>
  * 

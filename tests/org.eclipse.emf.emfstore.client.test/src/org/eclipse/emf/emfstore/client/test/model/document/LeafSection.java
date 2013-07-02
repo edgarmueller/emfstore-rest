@@ -18,9 +18,10 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getModelElements <em>Model Elements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getReferencedModelElements <em>Referenced
- * Model Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getModelElements <em>Model
+ * Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection#getReferencedModelElements <em>
+ * Referenced Model Elements</em>}</li>
  * </ul>
  * </p>
  * 
@@ -31,8 +32,10 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
 public interface LeafSection extends Section {
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its opposite
-	 * is '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getLeafSection <em>Leaf Section</em>}'.
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its
+	 * opposite
+	 * is '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getLeafSection
+	 * <em>Leaf Section</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Model Elements</em>' containment reference list isn't clear, there really should be
@@ -51,7 +54,8 @@ public interface LeafSection extends Section {
 
 	/**
 	 * Returns the value of the '<em><b>Referenced Model Elements</b></em>' reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its opposite
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its
+	 * opposite
 	 * is '{@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getIncomingDocumentReferences
 	 * <em>Incoming Document References</em>}'. <!-- begin-user-doc -->
 	 * <p>

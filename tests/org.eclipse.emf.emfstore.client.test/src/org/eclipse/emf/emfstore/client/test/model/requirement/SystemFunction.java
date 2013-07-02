@@ -20,11 +20,15 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getInput <em>Input</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getOutput <em>Output</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException <em>Exception</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement <em>Non
- * Functional Requirement</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getUsecases <em>Usecases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace <em>Workspace</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException <em>Exception
+ * </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement
+ * <em>Non Functional Requirement</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getUsecases <em>Usecases
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace <em>Workspace
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -50,7 +54,8 @@ public interface SystemFunction extends UnicaseModelElement {
 	String getInput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getInput
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getInput
 	 * <em>Input</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Input</em>' attribute.
@@ -76,7 +81,8 @@ public interface SystemFunction extends UnicaseModelElement {
 	String getOutput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getOutput
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getOutput
 	 * <em>Output</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Output</em>' attribute.
@@ -102,7 +108,8 @@ public interface SystemFunction extends UnicaseModelElement {
 	String getException();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getException
 	 * <em>Exception</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Exception</em>' attribute.
@@ -144,8 +151,8 @@ public interface SystemFunction extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Usecases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions
 	 * <em>System Functions</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Usecases</em>' reference list isn't clear, there really should be more of a
@@ -181,7 +188,8 @@ public interface SystemFunction extends UnicaseModelElement {
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace
 	 * <em>Workspace</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Workspace</em>' reference.

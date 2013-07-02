@@ -20,11 +20,12 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAcOrgId <em>Ac Org Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getGroupMemberships <em>Group Memberships
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getGroupMemberships <em>Group
+ * Memberships </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAssignments <em>Assignments
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAssignments <em>Assignments</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getParticipations <em>Participations</em>}
- * </li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getParticipations <em>
+ * Participations</em>}</li>
  * </ul>
  * </p>
  * 
@@ -50,7 +51,8 @@ public interface OrgUnit extends UnicaseModelElement {
 	String getAcOrgId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAcOrgId
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAcOrgId
 	 * <em>Ac Org Id</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Ac Org Id</em>' attribute.
@@ -61,8 +63,9 @@ public interface OrgUnit extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Group Memberships</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group#getOrgUnits <em>Org Units</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.Group#getOrgUnits
+	 * <em>Org Units</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Group Memberships</em>' reference list isn't clear, there really should be more of a
@@ -80,8 +83,9 @@ public interface OrgUnit extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Assignments</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getAssignee <em>Assignee</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getAssignee <em>Assignee</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Assignments</em>' reference list isn't clear, there really should be more of a
@@ -99,8 +103,9 @@ public interface OrgUnit extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participations</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getParticipants <em>Participants</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getParticipants
+	 * <em>Participants</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Participations</em>' reference list isn't clear, there really should be more of a

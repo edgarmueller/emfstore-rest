@@ -25,7 +25,8 @@ import org.eclipse.emf.emfstore.client.test.model.state.Transition;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl#getCondition <em>Condition</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl#getCondition <em>Condition
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl#getSource <em>Source</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  * </ul>

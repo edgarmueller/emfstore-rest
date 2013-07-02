@@ -19,20 +19,20 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getInstantiationType <em>Instantiation Type</em>}
- * </li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getParticipatedUseCases <em>Participated Use
- * Cases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getInstantiationType <em>Instantiation
+ * Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getParticipatedUseCases <em>Participated
+ * Use Cases</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSuperClasses <em>Super Classes</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSubClasses <em>Sub Classes</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getIncomingAssociations <em>Incoming Associations
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getOutgoingAssociations <em>Outgoing Associations
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getIncomingAssociations <em>Incoming
+ * Associations </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getOutgoingAssociations <em>Outgoing
+ * Associations </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getAttributes <em>Attributes</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getMethods <em>Methods</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getDemoParticipations <em>Demo Participations
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getDemoParticipations <em>Demo
+ * Participations </em>}</li>
  * </ul>
  * </p>
  * 
@@ -60,7 +60,8 @@ public interface Class extends PackageElement {
 	InstantiationType getInstantiationType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getInstantiationType
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getInstantiationType
 	 * <em>Instantiation Type</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Instantiation Type</em>' attribute.
@@ -72,7 +73,8 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participated Use Cases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIdentifiedClasses
 	 * <em>Identified Classes</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -91,8 +93,9 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Super Classes</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSubClasses <em>Sub Classes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSubClasses <em>Sub Classes</em>}
+	 * '. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Super Classes</em>' reference list isn't clear, there really should be more of a
@@ -110,8 +113,9 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Sub Classes</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSuperClasses <em>Super Classes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getSuperClasses
+	 * <em>Super Classes</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sub Classes</em>' reference list isn't clear, there really should be more of a
@@ -129,8 +133,9 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Incoming Associations</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTarget <em>Target</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTarget
+	 * <em>Target</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Incoming Associations</em>' reference list isn't clear, there really should be more of
@@ -148,8 +153,9 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Outgoing Associations</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSource <em>Source</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSource
+	 * <em>Source</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Outgoing Associations</em>' reference list isn't clear, there really should be more of
@@ -167,8 +173,9 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getDefiningClass <em>Defining Class</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getDefiningClass
+	 * <em>Defining Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear, there really should be more
@@ -187,8 +194,9 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Methods</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass <em>Defining Class</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass
+	 * <em>Defining Class</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Methods</em>' containment reference list isn't clear, there really should be more of a
@@ -207,7 +215,8 @@ public interface Class extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Demo Participations</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingClasses
 	 * <em>Participating Classes</em>}'. <!-- begin-user-doc -->
 	 * <p>

@@ -17,11 +17,15 @@ import org.eclipse.emf.emfstore.client.test.model.Attachment;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName <em>File Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash <em>File Hash</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName <em>File Name
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash <em>File Hash
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileID <em>File ID</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize <em>File Size</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType <em>File Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize <em>File Size
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType <em>File Type
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -47,7 +51,8 @@ public interface FileAttachment extends Attachment {
 	String getFileName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileName
 	 * <em>File Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Name</em>' attribute.
@@ -73,7 +78,8 @@ public interface FileAttachment extends Attachment {
 	String getFileHash();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileHash
 	 * <em>File Hash</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Hash</em>' attribute.
@@ -99,7 +105,8 @@ public interface FileAttachment extends Attachment {
 	String getFileID();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileID
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileID
 	 * <em>File ID</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File ID</em>' attribute.
@@ -125,7 +132,8 @@ public interface FileAttachment extends Attachment {
 	long getFileSize();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileSize
 	 * <em>File Size</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Size</em>' attribute.
@@ -136,7 +144,8 @@ public interface FileAttachment extends Attachment {
 
 	/**
 	 * Returns the value of the '<em><b>File Type</b></em>' attribute. The literals are from the enumeration
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachmentType}. <!-- begin-user-doc
+	 * -->
 	 * <p>
 	 * If the meaning of the '<em>File Type</em>' attribute isn't clear, there really should be more of a description
 	 * here...
@@ -153,7 +162,8 @@ public interface FileAttachment extends Attachment {
 	FileAttachmentType getFileType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.FileAttachment#getFileType
 	 * <em>File Type</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>File Type</em>' attribute.

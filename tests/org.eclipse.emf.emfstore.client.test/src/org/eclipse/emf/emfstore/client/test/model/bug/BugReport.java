@@ -20,7 +20,8 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getSeverity <em>Severity</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolution <em>Resolution</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType <em>Resolution Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType <em>Resolution Type
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#isDone <em>Done</em>}</li>
  * </ul>
  * </p>
@@ -104,7 +105,8 @@ public interface BugReport extends WorkItem, Checkable {
 	ResolutionType getResolutionType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#getResolutionType
 	 * <em>Resolution Type</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Resolution Type</em>' attribute.
@@ -130,7 +132,8 @@ public interface BugReport extends WorkItem, Checkable {
 	boolean isDone();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#isDone <em>Done</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport#isDone
+	 * <em>Done</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Done</em>' attribute.

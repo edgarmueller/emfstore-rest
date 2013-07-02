@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection#getSubsections <em>Subsections
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.CompositeMeetingSection#getSubsections <em>
+ * Subsections </em>}</li>
  * </ul>
  * </p>
  * 

@@ -24,22 +24,24 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static TestmodelFactory init() {
 		try {
-			TestmodelFactory theTestmodelFactory = (TestmodelFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/emf/emfstore/client/test/testmodel"); 
+			TestmodelFactory theTestmodelFactory = (TestmodelFactory) EPackage.Registry.INSTANCE
+				.getEFactory("http://eclipse.org/emf/emfstore/client/test/testmodel");
 			if (theTestmodelFactory != null) {
 				return theTestmodelFactory;
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new TestmodelFactoryImpl();
@@ -48,6 +50,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	/**
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TestmodelFactoryImpl() {
@@ -56,24 +59,32 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TestmodelPackage.TEST_ELEMENT: return createTestElement();
-			case TestmodelPackage.TEST_ELEMENT_CONTAINER: return createTestElementContainer();
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP: return (EObject)createTestElementToStringMap();
-			case TestmodelPackage.STRING_TO_STRING_MAP: return (EObject)createStringToStringMap();
-			case TestmodelPackage.TEST_ELEMENT_TO_TEST_ELEMENT_MAP: return (EObject)createTestElementToTestElementMap();
-			case TestmodelPackage.STRING_TO_TEST_ELEMENT_MAP: return (EObject)createStringToTestElementMap();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		case TestmodelPackage.TEST_ELEMENT:
+			return createTestElement();
+		case TestmodelPackage.TEST_ELEMENT_CONTAINER:
+			return createTestElementContainer();
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP:
+			return (EObject) createTestElementToStringMap();
+		case TestmodelPackage.STRING_TO_STRING_MAP:
+			return (EObject) createStringToStringMap();
+		case TestmodelPackage.TEST_ELEMENT_TO_TEST_ELEMENT_MAP:
+			return (EObject) createTestElementToTestElementMap();
+		case TestmodelPackage.STRING_TO_TEST_ELEMENT_MAP:
+			return (EObject) createStringToTestElementMap();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TestElement createTestElement() {
@@ -84,6 +95,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TestElementContainer createTestElementContainer() {
@@ -94,6 +106,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<TestElement, String> createTestElementToStringMap() {
@@ -104,6 +117,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<String, String> createStringToStringMap() {
@@ -114,6 +128,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<TestElement, TestElement> createTestElementToTestElementMap() {
@@ -124,6 +139,7 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<String, TestElement> createStringToTestElementMap() {
@@ -133,14 +149,16 @@ public class TestmodelFactoryImpl extends EFactoryImpl implements TestmodelFacto
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TestmodelPackage getTestmodelPackage() {
-		return (TestmodelPackage)getEPackage();
+		return (TestmodelPackage) getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @deprecated
 	 * @generated
 	 */

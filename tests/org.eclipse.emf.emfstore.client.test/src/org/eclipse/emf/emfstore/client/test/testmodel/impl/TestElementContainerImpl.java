@@ -30,10 +30,11 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementContainerImpl#getElements <em>Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementContainerImpl#getElements <em>
+ * Elements</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TestElementContainerImpl extends EObjectImpl implements TestElementContainer {
@@ -41,6 +42,7 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getElements()
 	 * @generated
 	 * @ordered
@@ -50,6 +52,7 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TestElementContainerImpl() {
@@ -59,6 +62,7 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -69,11 +73,13 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<TestElement> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentWithInverseEList<TestElement>(TestElement.class, this, TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS, TestmodelPackage.TEST_ELEMENT__CONTAINER);
+			elements = new EObjectContainmentWithInverseEList<TestElement>(TestElement.class, this,
+				TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS, TestmodelPackage.TEST_ELEMENT__CONTAINER);
 		}
 		return elements;
 	}
@@ -81,14 +87,15 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getElements()).basicAdd(otherEnd, msgs);
+		case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -96,13 +103,14 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
-				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+		case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
+			return ((InternalEList<?>) getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -110,13 +118,14 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
-				return getElements();
+		case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
+			return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -124,16 +133,17 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
-				getElements().clear();
-				getElements().addAll((Collection<? extends TestElement>)newValue);
-				return;
+		case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
+			getElements().clear();
+			getElements().addAll((Collection<? extends TestElement>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -141,14 +151,15 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
-				getElements().clear();
-				return;
+		case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
+			getElements().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -156,15 +167,16 @@ public class TestElementContainerImpl extends EObjectImpl implements TestElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
-				return elements != null && !elements.isEmpty();
+		case TestmodelPackage.TEST_ELEMENT_CONTAINER__ELEMENTS:
+			return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //TestElementContainerImpl
+} // TestElementContainerImpl

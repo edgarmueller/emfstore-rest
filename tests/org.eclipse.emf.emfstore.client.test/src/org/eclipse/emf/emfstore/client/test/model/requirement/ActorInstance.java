@@ -18,12 +18,12 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInitiatedScenarios <em>Initiated
- * Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getParticipatedScenarios <em>
- * Participated Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInstantiatedActor <em>Instantiated
- * Actor</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInitiatedScenarios <em>
+ * Initiated Scenarios</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getParticipatedScenarios
+ * <em> Participated Scenarios</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInstantiatedActor <em>
+ * Instantiated Actor</em>}</li>
  * </ul>
  * </p>
  * 
@@ -34,7 +34,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
 public interface ActorInstance extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Initiated Scenarios</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInitiatingActorInstance
 	 * <em>Initiating Actor Instance</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -53,7 +54,8 @@ public interface ActorInstance extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participated Scenarios</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingActorInstances
 	 * <em>Participating Actor Instances</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -73,7 +75,8 @@ public interface ActorInstance extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Instantiated Actor</b></em>' reference. It is bidirectional and its opposite is
-	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInstances <em>Instances</em>}'. <!--
+	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInstances <em>Instances</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Instantiated Actor</em>' reference isn't clear, there really should be more of a

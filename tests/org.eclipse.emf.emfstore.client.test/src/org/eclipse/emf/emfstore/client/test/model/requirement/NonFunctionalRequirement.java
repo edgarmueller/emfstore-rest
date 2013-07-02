@@ -19,14 +19,17 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.Criterion;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedScenarios
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedScenarios
  * <em>Restricted Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedUseCases <em>
- * Restricted Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions <em>
- * System Functions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getUserTasks <em>User
- * Tasks</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedUseCases
+ * <em> Restricted Use Cases</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getSystemFunctions
+ * <em> System Functions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getUserTasks <em>
+ * User Tasks</em>}</li>
  * </ul>
  * </p>
  * 
@@ -37,7 +40,8 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.Criterion;
 public interface NonFunctionalRequirement extends Criterion {
 	/**
 	 * Returns the value of the '<em><b>Restricted Scenarios</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getNonFunctionalRequirements
 	 * <em>Non Functional Requirements</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -56,7 +60,8 @@ public interface NonFunctionalRequirement extends Criterion {
 
 	/**
 	 * Returns the value of the '<em><b>Restricted Use Cases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getNonFunctionalRequirements
 	 * <em>Non Functional Requirements</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -75,7 +80,8 @@ public interface NonFunctionalRequirement extends Criterion {
 
 	/**
 	 * Returns the value of the '<em><b>System Functions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. It is bidirectional and its
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. It is bidirectional and
+	 * its
 	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getNonFunctionalRequirement
 	 * <em>Non Functional Requirement</em>}'. <!-- begin-user-doc -->
@@ -95,7 +101,8 @@ public interface NonFunctionalRequirement extends Criterion {
 
 	/**
 	 * Returns the value of the '<em><b>User Tasks</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getNonFunctionalRequirements
 	 * <em>Non Functional Requirements</em>}'. <!-- begin-user-doc -->
 	 * <p>

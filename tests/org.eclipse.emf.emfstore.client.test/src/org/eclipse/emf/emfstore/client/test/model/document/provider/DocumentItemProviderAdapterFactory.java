@@ -78,7 +78,8 @@ public class DocumentItemProviderAdapterFactory extends DocumentAdapterFactory i
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -86,7 +87,8 @@ public class DocumentItemProviderAdapterFactory extends DocumentAdapterFactory i
 	protected LeafSectionItemProvider leafSectionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.document.LeafSection}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +104,8 @@ public class DocumentItemProviderAdapterFactory extends DocumentAdapterFactory i
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection} instances. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +113,8 @@ public class DocumentItemProviderAdapterFactory extends DocumentAdapterFactory i
 	protected CompositeSectionItemProvider compositeSectionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection}. <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

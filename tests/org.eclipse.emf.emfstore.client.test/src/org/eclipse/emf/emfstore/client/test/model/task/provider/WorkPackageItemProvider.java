@@ -36,7 +36,8 @@ import org.eclipse.emf.emfstore.client.test.model.task.TaskPackage;
 import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

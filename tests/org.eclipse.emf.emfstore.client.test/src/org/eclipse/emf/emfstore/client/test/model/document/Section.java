@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
 public interface Section extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Parent</b></em>' container reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections <em>Subsections</em>}
-	 * '. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections
+	 * <em>Subsections</em>} '. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent</em>' container reference isn't clear, there really should be more of a
 	 * description here...

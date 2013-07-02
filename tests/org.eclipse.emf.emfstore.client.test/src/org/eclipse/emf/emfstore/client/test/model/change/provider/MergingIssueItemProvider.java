@@ -31,8 +31,9 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.provider.IssueItemPr
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue} object. <!-- begin-user-doc --> <!--
+ * end-user-doc -->
  * 
  * @generated
  */

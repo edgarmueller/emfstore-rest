@@ -15,9 +15,11 @@ package org.eclipse.emf.emfstore.client.test.model.state;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions <em>Exit Conditions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getExitConditions <em>Exit Conditions
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getActivities <em>Activities</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions <em>Entry Conditions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.State#getEntryConditions <em>Entry Conditions
+ * </em>}</li>
  * </ul>
  * </p>
  * 

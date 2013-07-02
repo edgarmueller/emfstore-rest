@@ -17,8 +17,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection#getAllocatedTime <em>Allocated Time
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection#getAllocatedTime <em>Allocated
+ * Time </em>}</li>
  * </ul>
  * </p>
  * 
@@ -45,7 +45,8 @@ public interface MeetingSection extends UnicaseModelElement {
 	int getAllocatedTime();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection#getAllocatedTime
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.MeetingSection#getAllocatedTime
 	 * <em>Allocated Time</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Allocated Time</em>' attribute.

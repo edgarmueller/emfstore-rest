@@ -42,23 +42,27 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.RationalePackage;
  * The following features are implemented:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getName <em>Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getDescription <em>Description
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getAnnotations <em>Annotations
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getAttachments <em>Attachments
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getIncomingDocumentReferences <em>
- * Incoming Document References</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getLeafSection <em>Leaf Section
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getDescription <em>
+ * Description </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getAnnotations <em>
+ * Annotations </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getAttachments <em>
+ * Attachments </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getIncomingDocumentReferences
+ * <em> Incoming Document References</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getLeafSection <em>Leaf
+ * Section </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getState <em>State</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getAppliedStereotypeInstances <em>
- * Applied Stereotype Instances</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getComments <em>Comments</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getCreationDate <em>Creation Date
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getAppliedStereotypeInstances
+ * <em> Applied Stereotype Instances</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getComments <em>Comments
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getCreator <em>Creator</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getCreationDate <em>
+ * Creation Date </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.UnicaseModelElementImpl#getCreator <em>Creator
+ * </em>}</li>
  * </ul>
  * </p>
  * 

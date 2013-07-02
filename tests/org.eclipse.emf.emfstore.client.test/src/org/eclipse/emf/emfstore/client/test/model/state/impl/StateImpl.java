@@ -21,11 +21,12 @@ import org.eclipse.emf.emfstore.client.test.model.state.StatePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl#getExitConditions <em>Exit Conditions
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl#getExitConditions <em>Exit
+ * Conditions </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl#getActivities <em>Activities
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl#getActivities <em>Activities</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl#getEntryConditions <em>Entry Conditions
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.state.impl.StateImpl#getEntryConditions <em>Entry
+ * Conditions </em>}</li>
  * </ul>
  * </p>
  * 

@@ -25,10 +25,10 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl#getBaseVersion <em>Base Version
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl#getTargetVersion <em>Target
- * Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl#getBaseVersion <em>Base
+ * Version </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.impl.MergingIssueImpl#getTargetVersion <em>
+ * Target Version</em>}</li>
  * </ul>
  * </p>
  * 

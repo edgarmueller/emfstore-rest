@@ -24,8 +24,10 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * Multiplicity</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetMultiplicity <em>Target
  * Multiplicity</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole <em>Source Role</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole <em>Target Role</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole <em>Source Role
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole <em>Target Role
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#isTransient <em>Transient</em>}</li>
  * </ul>
  * </p>
@@ -195,7 +197,8 @@ public interface Association extends UnicaseModelElement {
 	String getSourceRole();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getSourceRole
 	 * <em>Source Role</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source Role</em>' attribute.
@@ -221,7 +224,8 @@ public interface Association extends UnicaseModelElement {
 	String getTargetRole();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#getTargetRole
 	 * <em>Target Role</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target Role</em>' attribute.
@@ -247,7 +251,8 @@ public interface Association extends UnicaseModelElement {
 	boolean isTransient();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#isTransient
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Association#isTransient
 	 * <em>Transient</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Transient</em>' attribute.

@@ -41,7 +41,7 @@ public class SingleReferenceMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(SingleReferenceConflict.class)
-		// My
+			// My
 			.myIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(myLink)).andNoOtherMyOps()
 			// Theirs
 			.theirsIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(theirLink)).andNoOtherTheirOps();
@@ -99,7 +99,7 @@ public class SingleReferenceMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(SingleReferenceConflict.class)
-		// My
+			// My
 			.myIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(myLink)).andNoOtherMyOps()
 			// Theirs
 			.theirsIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(theirLink)).andNoOtherTheirOps();
@@ -132,7 +132,7 @@ public class SingleReferenceMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(SingleReferenceConflict.class)
-		// My
+			// My
 			.myIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(myLink)).andNoOtherMyOps()
 			// Theirs
 			.theirsIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(theirLink)).andNoOtherTheirOps();
@@ -161,7 +161,7 @@ public class SingleReferenceMergeTest extends MergeTest {
 		}.run(false);
 
 		mc.hasConflict(SingleReferenceConflict.class)
-		//
+			//
 			.myIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(child)).andNoOtherMyOps()
 			// Theirs
 			.theirsIs(SingleReferenceOperation.class).andReturns("getNewValue", getId(child)).andNoOtherTheirOps();

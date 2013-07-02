@@ -78,7 +78,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Issue} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +103,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +112,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 	protected ProposalItemProvider proposalItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,7 +129,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +138,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 	protected SolutionItemProvider solutionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Solution}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -150,7 +155,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -158,7 +164,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 	protected CriterionItemProvider criterionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Criterion}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -174,7 +181,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -182,7 +190,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 	protected AssessmentItemProvider assessmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Assessment}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -198,7 +207,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Comment} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -222,7 +232,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -230,7 +241,8 @@ public class RationaleItemProviderAdapterFactory extends RationaleAdapterFactory
 	protected AudioCommentItemProvider audioCommentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

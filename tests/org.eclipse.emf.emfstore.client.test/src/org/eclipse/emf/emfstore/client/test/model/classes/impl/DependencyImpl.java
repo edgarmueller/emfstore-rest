@@ -25,8 +25,10 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl#getSource <em>Source</em>}
+ * </li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.DependencyImpl#getTarget <em>Target</em>}
+ * </li>
  * </ul>
  * </p>
  * 

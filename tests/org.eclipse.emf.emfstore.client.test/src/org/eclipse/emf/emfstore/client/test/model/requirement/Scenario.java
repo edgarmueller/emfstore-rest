@@ -20,20 +20,20 @@ import org.eclipse.emf.emfstore.client.test.model.classes.Method;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getSteps <em>Steps</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInitiatingActorInstance <em>Initiating
- * Actor Instance</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingActorInstances <em>
- * Participating Actor Instances</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInstantiatedUseCases <em>Instantiated
- * Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getFunctionalRequirements <em>Functional
- * Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getNonFunctionalRequirements <em>Non
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInitiatingActorInstance <em>
+ * Initiating Actor Instance</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingActorInstances
+ * <em> Participating Actor Instances</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInstantiatedUseCases <em>
+ * Instantiated Use Cases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getFunctionalRequirements <em>
  * Functional Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingMethods <em>Participating
- * Methods</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingClasses <em>Participating
- * Classes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getNonFunctionalRequirements <em>
+ * Non Functional Requirements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingMethods <em>
+ * Participating Methods</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingClasses <em>
+ * Participating Classes</em>}</li>
  * </ul>
  * </p>
  * 
@@ -60,7 +60,8 @@ public interface Scenario extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Initiating Actor Instance</b></em>' reference. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInitiatedScenarios
+	 * opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInitiatedScenarios
 	 * <em>Initiated Scenarios</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Initiating Actor Instance</em>' reference isn't clear, there really should be more of
@@ -90,7 +91,8 @@ public interface Scenario extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participating Actor Instances</b></em>' reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance}. It is bidirectional and its
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance}. It is bidirectional
+	 * and its
 	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getParticipatedScenarios
 	 * <em>Participated Scenarios</em>}'. <!-- begin-user-doc -->
@@ -110,8 +112,9 @@ public interface Scenario extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Instantiated Use Cases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getScenarios <em>Scenarios</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getScenarios
+	 * <em>Scenarios</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Instantiated Use Cases</em>' reference list isn't clear, there really should be more
@@ -129,8 +132,10 @@ public interface Scenario extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Functional Requirements</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getScenarios
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement}. It is
+	 * bidirectional and its
+	 * opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getScenarios
 	 * <em>Scenarios</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Functional Requirements</em>' reference list isn't clear, there really should be more
@@ -148,7 +153,8 @@ public interface Scenario extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Non Functional Requirements</b></em>' reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. It is bidirectional
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. It is
+	 * bidirectional
 	 * and its opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedScenarios
 	 * <em>Restricted Scenarios</em>}'. <!-- begin-user-doc -->
@@ -168,8 +174,8 @@ public interface Scenario extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participating Methods</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDemoParticipations
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDemoParticipations
 	 * <em>Demo Participations</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Participating Methods</em>' reference list isn't clear, there really should be more of
@@ -187,8 +193,8 @@ public interface Scenario extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participating Classes</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getDemoParticipations
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getDemoParticipations
 	 * <em>Demo Participations</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Participating Classes</em>' reference list isn't clear, there really should be more of

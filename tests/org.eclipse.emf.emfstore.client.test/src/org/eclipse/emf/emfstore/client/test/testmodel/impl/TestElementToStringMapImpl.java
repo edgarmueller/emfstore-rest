@@ -28,18 +28,21 @@ import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedKey <em>Key</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedValue <em>
+ * Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.impl.TestElementToStringMapImpl#getTypedKey <em>
+ * Key</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
-public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap.Entry<TestElement,String> {
+public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap.Entry<TestElement, String> {
 	/**
 	 * The default value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -50,6 +53,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -60,6 +64,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
@@ -69,6 +74,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TestElementToStringMapImpl() {
@@ -78,6 +84,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -88,6 +95,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getTypedValue() {
@@ -97,27 +105,31 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE,
+				oldValue, value));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TestElement getTypedKey() {
 		if (key != null && key.eIsProxy()) {
-			InternalEObject oldKey = (InternalEObject)key;
-			key = (TestElement)eResolveProxy(oldKey);
+			InternalEObject oldKey = (InternalEObject) key;
+			key = (TestElement) eResolveProxy(oldKey);
 			if (key != oldKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY, oldKey, key));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY, oldKey, key));
 			}
 		}
 		return key;
@@ -126,6 +138,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TestElement basicGetTypedKey() {
@@ -135,28 +148,32 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypedKey(TestElement newKey) {
 		TestElement oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY, oldKey, key));
+			eNotify(new ENotificationImpl(this, Notification.SET, TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY,
+				oldKey, key));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
-				return getTypedValue();
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
-				if (resolve) return getTypedKey();
-				return basicGetTypedKey();
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
+			return getTypedValue();
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
+			if (resolve)
+				return getTypedKey();
+			return basicGetTypedKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -164,17 +181,18 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
-				setTypedValue((String)newValue);
-				return;
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
-				setTypedKey((TestElement)newValue);
-				return;
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
+			setTypedValue((String) newValue);
+			return;
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
+			setTypedKey((TestElement) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -182,17 +200,18 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
-				setTypedValue(VALUE_EDEFAULT);
-				return;
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
-				setTypedKey((TestElement)null);
-				return;
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
+			setTypedValue(VALUE_EDEFAULT);
+			return;
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
+			setTypedKey((TestElement) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -200,15 +219,16 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
-				return key != null;
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__VALUE:
+			return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+		case TestmodelPackage.TEST_ELEMENT_TO_STRING_MAP__KEY:
+			return key != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -216,11 +236,13 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (value: ");
@@ -232,6 +254,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected int hash = -1;
@@ -239,6 +262,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getHash() {
@@ -252,6 +276,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setHash(int hash) {
@@ -261,6 +286,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TestElement getKey() {
@@ -270,6 +296,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKey(TestElement key) {
@@ -279,6 +306,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getValue() {
@@ -288,6 +316,7 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String setValue(String value) {
@@ -299,12 +328,13 @@ public class TestElementToStringMapImpl extends EObjectImpl implements BasicEMap
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	public EMap<TestElement, String> getEMap() {
 		EObject container = eContainer();
-		return container == null ? null : (EMap<TestElement, String>)container.eGet(eContainmentFeature());
+		return container == null ? null : (EMap<TestElement, String>) container.eGet(eContainmentFeature());
 	}
 
-} //TestElementToStringMapImpl
+} // TestElementToStringMapImpl

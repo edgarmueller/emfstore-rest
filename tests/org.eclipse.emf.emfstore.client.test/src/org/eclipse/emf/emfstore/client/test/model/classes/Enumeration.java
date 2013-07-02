@@ -18,7 +18,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getLiterals <em>Literals</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getAttributes <em>Attributes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getAttributes <em>Attributes</em>}
+ * </li>
  * </ul>
  * </p>
  * 
@@ -29,8 +30,9 @@ import org.eclipse.emf.common.util.EList;
 public interface Enumeration extends PackageElement {
 	/**
 	 * Returns the value of the '<em><b>Literals</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getEnumeration <em>Enumeration</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Literal#getEnumeration
+	 * <em>Enumeration</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Literals</em>' containment reference list isn't clear, there really should be more of
@@ -48,7 +50,8 @@ public interface Enumeration extends PackageElement {
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute}. It is bidirectional and its
+	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Attribute#getImplementationEnumeration
 	 * <em>Implementation Enumeration</em>}'. <!-- begin-user-doc -->
 	 * <p>

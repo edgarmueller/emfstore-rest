@@ -18,30 +18,33 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor <em>Initiating Actor
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor <em>Initiating
+ * Actor </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getParticipatingActors <em>
+ * Participating Actors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask <em>Realized
+ * User Task </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPrecondition <em>Precondition
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getParticipatingActors <em>Participating
- * Actors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask <em>Realized User Task
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps <em>Use Case Steps
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPrecondition <em>Precondition</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getUseCaseSteps <em>Use Case Steps</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPostcondition <em>Postcondition</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPostcondition <em>Postcondition
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRules <em>Rules</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getException <em>Exception</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getScenarios <em>Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getFunctionalRequirements <em>Functional
- * Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getNonFunctionalRequirements <em>Non
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getFunctionalRequirements <em>
  * Functional Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIdentifiedClasses <em>Identified Classes
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIncludedUseCases <em>Included Use Cases
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getExtendedUseCases <em>Extended Use Cases
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions <em>System Functions
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getNonFunctionalRequirements <em>
+ * Non Functional Requirements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIdentifiedClasses <em>
+ * Identified Classes </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getIncludedUseCases <em>Included
+ * Use Cases </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getExtendedUseCases <em>Extended
+ * Use Cases </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getSystemFunctions <em>System
+ * Functions </em>}</li>
  * </ul>
  * </p>
  * 
@@ -70,7 +73,8 @@ public interface UseCase extends UnicaseModelElement {
 	Actor getInitiatingActor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor
 	 * <em>Initiating Actor</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Initiating Actor</em>' reference.
@@ -81,7 +85,8 @@ public interface UseCase extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participating Actors</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor}. It is bidirectional and its
+	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUseCases
 	 * <em>Participated Use Cases</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -118,7 +123,8 @@ public interface UseCase extends UnicaseModelElement {
 	UserTask getRealizedUserTask();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask
 	 * <em>Realized User Task</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Realized User Task</em>' reference.
@@ -144,7 +150,8 @@ public interface UseCase extends UnicaseModelElement {
 	String getPrecondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPrecondition
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPrecondition
 	 * <em>Precondition</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Precondition</em>' attribute.
@@ -155,7 +162,8 @@ public interface UseCase extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Use Case Steps</b></em>' containment reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step}. It is bidirectional and its opposite is
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step#getUseCase <em>Use Case</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -190,7 +198,8 @@ public interface UseCase extends UnicaseModelElement {
 	String getPostcondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPostcondition
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getPostcondition
 	 * <em>Postcondition</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Postcondition</em>' attribute.
@@ -243,7 +252,8 @@ public interface UseCase extends UnicaseModelElement {
 	String getException();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getException
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getException
 	 * <em>Exception</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Exception</em>' attribute.
@@ -254,7 +264,8 @@ public interface UseCase extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Scenarios</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getInstantiatedUseCases
 	 * <em>Instantiated Use Cases</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -273,8 +284,10 @@ public interface UseCase extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Functional Requirements</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement}. It is
+	 * bidirectional and its
+	 * opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getUseCases
 	 * <em>Use Cases</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Functional Requirements</em>' reference list isn't clear, there really should be more
@@ -292,7 +305,8 @@ public interface UseCase extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Non Functional Requirements</b></em>' reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. It is bidirectional
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. It is
+	 * bidirectional
 	 * and its opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getRestrictedUseCases
 	 * <em>Restricted Use Cases</em>}'. <!-- begin-user-doc -->
@@ -312,8 +326,8 @@ public interface UseCase extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Identified Classes</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getParticipatedUseCases
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getParticipatedUseCases
 	 * <em>Participated Use Cases</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Identified Classes</em>' reference list isn't clear, there really should be more of a
@@ -363,7 +377,8 @@ public interface UseCase extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>System Functions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. It is bidirectional and its
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. It is bidirectional and
+	 * its
 	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getUsecases
 	 * <em>Usecases</em>}'. <!-- begin-user-doc -->
 	 * <p>

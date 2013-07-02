@@ -27,7 +27,8 @@ import org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPacka
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl#getOrgUnits <em>Org Units</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.impl.GroupImpl#getOrgUnits <em>Org Units
+ * </em>}</li>
  * </ul>
  * </p>
  * 

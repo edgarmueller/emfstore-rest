@@ -29,7 +29,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
 public interface Literal extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference. It is bidirectional and its opposite
-	 * is '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getLiterals <em>Literals</em>}'. <!--
+	 * is '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Enumeration#getLiterals <em>Literals</em>}
+	 * '. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Enumeration</em>' container reference isn't clear, there really should be more of a

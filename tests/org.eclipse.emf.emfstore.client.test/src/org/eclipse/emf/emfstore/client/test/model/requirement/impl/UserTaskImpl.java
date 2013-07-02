@@ -32,14 +32,15 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UserTask;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getInitiatingActor <em>Initiating
- * Actor</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getParticipatingActors <em>
- * Participating Actors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getRealizingUseCases <em>
- * Realizing Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getNonFunctionalRequirements <em>
- * Non Functional Requirements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getInitiatingActor <em>
+ * Initiating Actor</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getParticipatingActors
+ * <em> Participating Actors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getRealizingUseCases
+ * <em> Realizing Use Cases</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.UserTaskImpl#getNonFunctionalRequirements
+ * <em> Non Functional Requirements</em>}</li>
  * </ul>
  * </p>
  * 

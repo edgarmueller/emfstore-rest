@@ -18,10 +18,12 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeInstance <em>
- * Stereotype Instance</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeAttribute <em>
- * Stereotype Attribute</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeInstance
+ * <em> Stereotype Instance</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstance#getStereotypeAttribute
+ * <em> Stereotype Attribute</em>}</li>
  * </ul>
  * </p>
  * 

@@ -18,10 +18,10 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getIncomingTransitions <em>Incoming
- * Transitions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getOutgoingTransitions <em>Outgoing
- * Transitions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getIncomingTransitions <em>
+ * Incoming Transitions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityObject#getOutgoingTransitions <em>
+ * Outgoing Transitions</em>}</li>
  * </ul>
  * </p>
  * 
@@ -32,8 +32,9 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
 public interface ActivityObject extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Incoming Transitions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getTarget <em>Target</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getTarget
+	 * <em>Target</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Incoming Transitions</em>' reference list isn't clear, there really should be more of
@@ -51,8 +52,9 @@ public interface ActivityObject extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Outgoing Transitions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getSource <em>Source</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getSource
+	 * <em>Source</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Outgoing Transitions</em>' reference list isn't clear, there really should be more of

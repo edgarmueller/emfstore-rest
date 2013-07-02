@@ -24,15 +24,16 @@ import org.eclipse.emf.emfstore.client.test.model.impl.AttachmentImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileName <em>File Name
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileHash <em>File Hash
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileID <em>File ID</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileSize <em>File Size
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileType <em>File Type
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileName <em>
+ * File Name </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileHash <em>
+ * File Hash </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileID <em>File
+ * ID</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileSize <em>
+ * File Size </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.FileAttachmentImpl#getFileType <em>
+ * File Type </em>}</li>
  * </ul>
  * </p>
  * 

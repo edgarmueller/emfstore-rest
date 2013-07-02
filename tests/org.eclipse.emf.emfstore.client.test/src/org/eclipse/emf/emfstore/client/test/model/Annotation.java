@@ -17,8 +17,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation#getAnnotatedModelElements <em>Annotated Model
- * Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation#getAnnotatedModelElements <em>Annotated
+ * Model Elements</em>}</li>
  * </ul>
  * </p>
  * 
@@ -29,8 +29,9 @@ import org.eclipse.emf.common.util.EList;
 public interface Annotation extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Annotated Model Elements</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAnnotations <em>Annotations</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAnnotations
+	 * <em>Annotations</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Annotated Model Elements</em>' reference list isn't clear, there really should be more

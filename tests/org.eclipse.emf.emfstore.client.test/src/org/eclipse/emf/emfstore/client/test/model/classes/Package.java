@@ -17,8 +17,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getContainedPackageElements <em>Contained
- * Package Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getContainedPackageElements <em>
+ * Contained Package Elements</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Package#getFacadeClass <em>Facade Class</em>}</li>
  * </ul>
  * </p>

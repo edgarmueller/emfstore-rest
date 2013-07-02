@@ -28,8 +28,9 @@ import org.eclipse.emf.emfstore.client.test.model.meeting.MeetingSection;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.CompositeMeetingSectionImpl#getSubsections <em>
- * Subsections</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.CompositeMeetingSectionImpl#getSubsections
+ * <em> Subsections</em>}</li>
  * </ul>
  * </p>
  * 

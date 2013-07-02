@@ -19,11 +19,12 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getPackages <em>Packages</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getOfferedServices <em>Offered Services
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getConsumedServices <em>Consumed Services
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getSubsystems <em>Subsystems</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getOfferedServices <em>Offered
+ * Services </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getConsumedServices <em>Consumed
+ * Services </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getSubsystems <em>Subsystems</em>}
+ * </li>
  * </ul>
  * </p>
  * 
@@ -50,8 +51,10 @@ public interface Component extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Offered Services</b></em>' containment reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getOfferingComponent
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService}. It is bidirectional
+	 * and its
+	 * opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getOfferingComponent
 	 * <em>Offering Component</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Offered Services</em>' containment reference list isn't clear, there really should be
@@ -69,8 +72,10 @@ public interface Component extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Consumed Services</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getConsumingComponents
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService}. It is bidirectional and
+	 * its
+	 * opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getConsumingComponents
 	 * <em>Consuming Components</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Consumed Services</em>' reference list isn't clear, there really should be more of a

@@ -26,7 +26,8 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.LiteralImpl#getEnumeration <em>Enumeration</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.LiteralImpl#getEnumeration <em>
+ * Enumeration</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.LiteralImpl#getLiteral <em>Literal</em>}</li>
  * </ul>
  * </p>

@@ -18,14 +18,14 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getInitiatingActor <em>Initiating Actor
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getParticipatingActors <em>Participating
- * Actors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getRealizingUseCases <em>Realizing Use
- * Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getNonFunctionalRequirements <em>Non
- * Functional Requirements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getInitiatingActor <em>Initiating
+ * Actor </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getParticipatingActors <em>
+ * Participating Actors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getRealizingUseCases <em>
+ * Realizing Use Cases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getNonFunctionalRequirements <em>
+ * Non Functional Requirements</em>}</li>
  * </ul>
  * </p>
  * 
@@ -54,7 +54,8 @@ public interface UserTask extends UnicaseModelElement {
 	Actor getInitiatingActor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getInitiatingActor
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getInitiatingActor
 	 * <em>Initiating Actor</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Initiating Actor</em>' reference.
@@ -65,7 +66,8 @@ public interface UserTask extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participating Actors</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor}. It is bidirectional and its
+	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUserTasks
 	 * <em>Participated User Tasks</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -84,8 +86,8 @@ public interface UserTask extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Realizing Use Cases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getRealizedUserTask
 	 * <em>Realized User Task</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Realizing Use Cases</em>' reference list isn't clear, there really should be more of a
@@ -103,7 +105,8 @@ public interface UserTask extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Non Functional Requirements</b></em>' reference list. The list contents are of
-	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. It is bidirectional
+	 * type {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. It is
+	 * bidirectional
 	 * and its opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement#getUserTasks
 	 * <em>User Tasks</em>}'. <!-- begin-user-doc -->

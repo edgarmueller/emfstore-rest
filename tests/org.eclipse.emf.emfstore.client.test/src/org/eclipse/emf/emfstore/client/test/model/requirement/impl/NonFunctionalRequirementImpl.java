@@ -41,8 +41,9 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UserTask;
  * <li>
  * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getSystemFunctions
  * <em>System Functions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getUserTasks <em>
- * User Tasks</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.NonFunctionalRequirementImpl#getUserTasks
+ * <em> User Tasks</em>}</li>
  * </ul>
  * </p>
  * 

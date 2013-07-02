@@ -28,7 +28,8 @@ import org.eclipse.emf.emfstore.client.test.model.organization.OrganizationPacka
 import org.eclipse.emf.emfstore.client.test.model.organization.User;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.User}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
