@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  * emueller
  * koegel
@@ -15,8 +15,10 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -433,6 +435,20 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 
 	public void removeServerInfo(ServerInfo serverInfo) {
 		getServerInfos().remove(serverInfo);
+
+		List<Usersession> deletables = new ArrayList<Usersession>();
+		for (Usersession session : getUsersessions()) {
+			if (session.getServerInfo() == serverInfo) {
+				try {
+					session.logout();
+				} catch (ESException e) {
+					// ignore, will be deleted anyways
+				}
+				deletables.add(session);
+			}
+		}
+
+		getUsersessions().removeAll(deletables);
 		save();
 	}
 
