@@ -34,29 +34,29 @@ public class DefaultESServerXMIURIConverter extends AbstractESServerURIConverter
 	}
 
 	@Override
-	protected URI normalizeServerSpaceURI() {
+	protected URI normalizeServerSpaceURI(String profile) {
 		return URI.createFileURI(ServerConfiguration.getServerMainFile());
 	}
 
 	@Override
-	protected URI normalizeProjectHistoryURI(String projectId) {
+	protected URI normalizeProjectHistoryURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectFolder(projectId) + "projectHistory"
 			+ ServerConfiguration.FILE_EXTENSION_PROJECTHISTORY);
 	}
 
 	@Override
-	protected URI normalizeVersionURI(String projectId, int version) {
+	protected URI normalizeVersionURI(String profile, String projectId, int version) {
 		return URI.createFileURI(getProjectFolder(projectId) + ServerConfiguration.FILE_PREFIX_VERSION
 			+ version + ServerConfiguration.FILE_EXTENSION_VERSION);
 	}
 
 	@Override
-	protected URI normalizeChangePackageURI(String projectId, int version) {
+	protected URI normalizeChangePackageURI(String profile, String projectId, int version) {
 		return URI.createFileURI(getProjectFolder(projectId) + getChangePackageFile(version));
 	}
 
 	@Override
-	protected URI normalizeProjectStateURI(String projectId, int version) {
+	protected URI normalizeProjectStateURI(String profile, String projectId, int version) {
 		return URI.createFileURI(getProjectFolder(projectId) + getProjectFile(version));
 	}
 

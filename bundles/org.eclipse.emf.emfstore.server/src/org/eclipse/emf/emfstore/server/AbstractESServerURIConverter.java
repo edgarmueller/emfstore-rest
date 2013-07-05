@@ -33,7 +33,7 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 
 				// emfstore:/serverspaces/0/serverspace
 				if (uri.segment(2).equals(ServerURIUtil.SERVERSPACE_SEGMENT)) {
-					return normalizeServerSpaceURI();
+					return normalizeServerSpaceURI(uri.segment(1));
 				}
 
 				// emfstore:/serverspaces/0/projects/<identifier>
@@ -50,22 +50,22 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 	private URI normalizeProjects(URI uri) {
 		// emfstore:/serverspaces/0/projects/<identifier>/projecthistory
 		if (uri.segment(4).equals(ServerURIUtil.PROJECTHISTORY_SEGMENT)) {
-			return normalizeProjectHistoryURI(uri.segment(3));
+			return normalizeProjectHistoryURI(uri.segment(1), uri.segment(3));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/versions/<nr>
 		else if (uri.segment(4).equals(ServerURIUtil.VERSIONS_SEGMENT)) {
-			return normalizeVersionURI(uri.segment(3), Integer.valueOf(uri.segment(5)));
+			return normalizeVersionURI(uri.segment(1), uri.segment(3), Integer.valueOf(uri.segment(5)));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/changepackages/<nr>
 		else if (uri.segment(4).equals(ServerURIUtil.CHANGEPACKAGES_SEGMENT)) {
-			return normalizeChangePackageURI(uri.segment(3), Integer.valueOf(uri.segment(5)));
+			return normalizeChangePackageURI(uri.segment(1), uri.segment(3), Integer.valueOf(uri.segment(5)));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/projectstates/<nr>
 		else if (uri.segment(4).equals(ServerURIUtil.PROJECTSTATES_SEGMENT)) {
-			return normalizeProjectStateURI(uri.segment(3), Integer.valueOf(uri.segment(5)));
+			return normalizeProjectStateURI(uri.segment(1), uri.segment(3), Integer.valueOf(uri.segment(5)));
 		}
 
 		// unexpected
@@ -77,43 +77,48 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 	/**
 	 * Normalizes an EMFStore serverspace URI.
 	 * 
+	 * @param profile the selected profile
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeServerSpaceURI();
+	protected abstract URI normalizeServerSpaceURI(String profile);
 
 	/**
 	 * Normalizes an EMFStore projecthistory URI.
 	 * 
+	 * @param profile the selected profile
 	 * @param projectId the project's id
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeProjectHistoryURI(String projectId);
+	protected abstract URI normalizeProjectHistoryURI(String profile, String projectId);
 
 	/**
 	 * Normalizes an EMFStore version URI.
 	 * 
+	 * @param profile the selected profile
 	 * @param projectId the project's id
 	 * @param version the version
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeVersionURI(String projectId, int version);
+	protected abstract URI normalizeVersionURI(String profile, String projectId, int version);
 
 	/**
 	 * Normalizes an EMFStore changepackage URI.
 	 * 
+	 * @param profile the selected profile
 	 * @param projectId the project's id
 	 * @param version the version
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeChangePackageURI(String projectId, int version);
+	protected abstract URI normalizeChangePackageURI(String profile, String projectId, int version);
 
 	/**
 	 * Normalizes an EMFStore projectstate URI.
 	 * 
+	 * @param profile the selected profile
 	 * @param projectId the project's id
 	 * @param version the version
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeProjectStateURI(String projectId, int version);
+	protected abstract URI normalizeProjectStateURI(String profile, String projectId, int version);
 
 }

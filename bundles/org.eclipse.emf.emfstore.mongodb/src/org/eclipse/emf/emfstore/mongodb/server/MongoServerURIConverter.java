@@ -26,32 +26,32 @@ import org.eclipse.emf.emfstore.server.AbstractESServerURIConverter;
 public class MongoServerURIConverter extends AbstractESServerURIConverter {
 
 	@Override
-	protected URI normalizeServerSpaceURI() {
-		return URI.createURI(getMongoURIPrefix() + "serverspaces/serverspace");
+	protected URI normalizeServerSpaceURI(String profile) {
+		return URI.createURI(getMongoURIPrefix(profile) + "serverspaces/serverspace");
 	}
 
 	@Override
-	protected URI normalizeProjectHistoryURI(String projectId) {
-		return URI.createURI(getMongoURIPrefix() + "projecthistory/" + projectId);
+	protected URI normalizeProjectHistoryURI(String profile, String projectId) {
+		return URI.createURI(getMongoURIPrefix(profile) + "projecthistory/" + projectId);
 	}
 
 	@Override
-	protected URI normalizeVersionURI(String projectId, int version) {
-		return URI.createURI(getMongoURIPrefix() + "version/" + projectId + "-v" + version);
+	protected URI normalizeVersionURI(String profile, String projectId, int version) {
+		return URI.createURI(getMongoURIPrefix(profile) + "version/" + projectId + "-v" + version);
 	}
 
 	@Override
-	protected URI normalizeChangePackageURI(String projectId, int version) {
-		return URI.createURI(getMongoURIPrefix() + "changepackage/" + projectId + "-v" + version);
+	protected URI normalizeChangePackageURI(String profile, String projectId, int version) {
+		return URI.createURI(getMongoURIPrefix(profile) + "changepackage/" + projectId + "-v" + version);
 	}
 
 	@Override
-	protected URI normalizeProjectStateURI(String projectId, int version) {
-		return URI.createURI(getMongoURIPrefix() + "projectstate/" + projectId + "-v" + version);
+	protected URI normalizeProjectStateURI(String profile, String projectId, int version) {
+		return URI.createURI(getMongoURIPrefix(profile) + "projectstate/" + projectId + "-v" + version);
 	}
 
-	private String getMongoURIPrefix() {
-		return "mongodb://localhost/emfstoreserver/";
+	private String getMongoURIPrefix(String profile) {
+		return "mongodb://localhost/esserver-" + profile + "/";
 	}
 
 }

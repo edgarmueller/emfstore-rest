@@ -26,27 +26,27 @@ import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
 public class MongoClientURIConverter extends AbstractESClientURIConverter {
 
 	@Override
-	protected URI normalizeWorkspaceURI() {
-		return URI.createURI(getMongoURIPrefix() + "workspace/workspace");
+	protected URI normalizeWorkspaceURI(String profile) {
+		return URI.createURI(getMongoURIPrefix(profile) + "workspace/workspace");
 	}
 
 	@Override
-	protected URI normalizeProjectURI(String projectId) {
-		return URI.createURI(getMongoURIPrefix() + "project/" + projectId);
+	protected URI normalizeProjectURI(String profile, String projectId) {
+		return URI.createURI(getMongoURIPrefix(profile) + "project/" + projectId);
 	}
 
 	@Override
-	protected URI normalizeOperationsURI(String projectId) {
-		return URI.createURI(getMongoURIPrefix() + "operations/" + projectId);
+	protected URI normalizeOperationsURI(String profile, String projectId) {
+		return URI.createURI(getMongoURIPrefix(profile) + "operations/" + projectId);
 	}
 
 	@Override
-	protected URI normalizeProjectSpaceURI(String projectId) {
-		return URI.createURI(getMongoURIPrefix() + "projectspace/" + projectId);
+	protected URI normalizeProjectSpaceURI(String profile, String projectId) {
+		return URI.createURI(getMongoURIPrefix(profile) + "projectspace/" + projectId);
 	}
 
-	private String getMongoURIPrefix() {
-		return "mongodb://localhost/emfstoreclient/";
+	private String getMongoURIPrefix(String profile) {
+		return "mongodb://localhost/esclient-" + profile + "/";
 	}
 
 }

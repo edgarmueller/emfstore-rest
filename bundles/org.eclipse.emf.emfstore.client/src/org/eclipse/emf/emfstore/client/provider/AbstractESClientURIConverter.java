@@ -34,7 +34,7 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 
 				// emfstore:/workspaces/0/workspace
 				if (uri.segment(2).equals(ClientURIUtil.WORKSPACE_SEGMENT)) {
-					return normalizeWorkspaceURI();
+					return normalizeWorkspaceURI(uri.segment(1));
 				}
 
 				// emfstore:/workspaces/0/projectspaces/<identifier>
@@ -51,17 +51,17 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 	private URI normalizeProjectSpaces(URI uri) {
 		// emfstore:/workspaces/0/projectspaces/<identifier>/project
 		if (uri.segment(4).equals(ClientURIUtil.PROJECT_SEGMENT)) {
-			return normalizeProjectURI(uri.segment(3));
+			return normalizeProjectURI(uri.segment(1), uri.segment(3));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/operations
 		else if (uri.segment(4).equals(ClientURIUtil.OPERATIONS_SEGMENT)) {
-			return normalizeOperationsURI(uri.segment(3));
+			return normalizeOperationsURI(uri.segment(1), uri.segment(3));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/projectspace
 		else if (uri.segment(4).equals(ClientURIUtil.PROJECTSPACE_SEGMENT)) {
-			return normalizeProjectSpaceURI(uri.segment(3));
+			return normalizeProjectSpaceURI(uri.segment(1), uri.segment(3));
 		}
 
 		// unexpected
@@ -73,32 +73,36 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 	/**
 	 * Normalizes an EMFStore workspace URI.
 	 * 
+	 * @param profile the selected profile
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeWorkspaceURI();
+	protected abstract URI normalizeWorkspaceURI(String profile);
 
 	/**
 	 * Normalizes an EMFStore project URI.
 	 * 
+	 * @param profile the selected profile
 	 * @param projectId the project's id
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeProjectURI(String projectId);
+	protected abstract URI normalizeProjectURI(String profile, String projectId);
 
 	/**
 	 * Normalizes an EMFStore operations URI.
 	 * 
+	 * @param profile the selected profile
 	 * @param projectId the project's id
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeOperationsURI(String projectId);
+	protected abstract URI normalizeOperationsURI(String profile, String projectId);
 
 	/**
 	 * Normalizes an EMFStore projectspace URI.
 	 * 
+	 * @param profile the selected profile
 	 * @param projectId the project's id
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeProjectSpaceURI(String projectId);
+	protected abstract URI normalizeProjectSpaceURI(String profile, String projectId);
 
 }

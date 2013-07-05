@@ -34,26 +34,26 @@ public class DefaultESClientXMIURIConverter extends AbstractESClientURIConverter
 	}
 
 	@Override
-	protected URI normalizeWorkspaceURI() {
+	protected URI normalizeWorkspaceURI(String profile) {
 		return URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
 	}
 
 	@Override
-	protected URI normalizeProjectURI(String projectId) {
+	protected URI normalizeProjectURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectSpaceDirectory(projectId)
 			+ Configuration.getFileInfo().getProjectFragmentFileName()
 			+ Configuration.getFileInfo().getProjectFragmentFileExtension());
 	}
 
 	@Override
-	protected URI normalizeOperationsURI(String projectId) {
+	protected URI normalizeOperationsURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectSpaceDirectory(projectId)
 			+ Configuration.getFileInfo().getLocalChangePackageFileName()
 			+ Configuration.getFileInfo().getLocalChangePackageFileExtension());
 	}
 
 	@Override
-	protected URI normalizeProjectSpaceURI(String projectId) {
+	protected URI normalizeProjectSpaceURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectSpaceDirectory(projectId)
 			+ Configuration.getFileInfo().getProjectSpaceFileName()
 			+ Configuration.getFileInfo().getProjectSpaceFileExtension());
