@@ -22,10 +22,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImp
  * 
  */
 public final class ServerURIUtil {
-	// TODO introduce name for multiple clients
-	// .. workspaces/<name>/ ..
-
-	// TODO missing example uris
 
 	/**
 	 * The EMFStore URI scheme.
@@ -36,36 +32,50 @@ public final class ServerURIUtil {
 
 	/**
 	 * The EMFStore URI segment for serverspaces.
+	 * <p />
+	 * Example URI: emfstore:/<b>serverspaces</b>/<i>profile</i>/serverspace
 	 */
 	public static final String SERVER_SEGMENT = "serverspaces";
 
 	/**
 	 * The EMFStore URI segment for projects.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/<b>projects</b>/<i>identifier</i>/versions/<i>nr</i>
 	 */
 	public static final String PROJECTS_SEGMENT = "projects";
 
 	/**
 	 * The EMFStore URI segment for a version.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>versions</b>/<i>nr</i>
 	 */
 	public static final String VERSIONS_SEGMENT = "versions";
 
 	/**
 	 * The EMFStore URI segment for a changepackage.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>changepackages</b>/<i>nr</i>
 	 */
 	public static final String CHANGEPACKAGES_SEGMENT = VersionImpl.CHANGEPACKAGES_SEGMENT;
 
 	/**
 	 * The EMFStore URI segment for a projectstate.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>projectstates</b>/<i>nr</i>
 	 */
 	public static final String PROJECTSTATES_SEGMENT = VersionImpl.PROJECTSTATES_SEGMENT;
 
 	/**
 	 * The EMFStore URI segment for the serverspace.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/<b>serverspace</b>
 	 */
 	public static final String SERVERSPACE_SEGMENT = "serverspace";
 
 	/**
 	 * The EMFStore URI segment for a project's history.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>projecthistory</b>
 	 */
 	public static final String PROJECTHISTORY_SEGMENT = "projecthistory";
 
@@ -75,6 +85,8 @@ public final class ServerURIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing the serverspace.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/serverspace
 	 * 
 	 * @return the EMFStore URI
 	 */
@@ -84,6 +96,8 @@ public final class ServerURIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing the history of a project.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/projecthistory
 	 * 
 	 * @param identifier the project's id
 	 * @return the EMFStore URI
@@ -94,6 +108,8 @@ public final class ServerURIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing a specific version of a project.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/versions/<i>nr</i>
 	 * 
 	 * @param identifier the project's id
 	 * @param nr the version number
@@ -105,6 +121,8 @@ public final class ServerURIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing a specific changepackage of a project.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/changepackages/<i>nr</i>
 	 * 
 	 * @param identifier the project's id
 	 * @param nr the changepackage number
@@ -116,6 +134,8 @@ public final class ServerURIUtil {
 
 	/**
 	 * Creates an EMFStore URI for addressing a specific state of a project.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/projectstates/<i>nr</i>
 	 * 
 	 * @param identifier the project's id
 	 * @param nr the projectstate number
@@ -127,6 +147,8 @@ public final class ServerURIUtil {
 
 	/**
 	 * Returns the used profile.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<b><i>profile</i></b>/projects/<i>identifier</i>/versions/<i>nr</i>
 	 * 
 	 * @return the profile
 	 */
