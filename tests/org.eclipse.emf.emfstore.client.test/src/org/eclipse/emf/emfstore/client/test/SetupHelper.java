@@ -476,7 +476,6 @@ public class SetupHelper {
 			ServerSpace serverspace = (ServerSpace) mainResource.getContents().get(0);
 			try {
 				for (ProjectHistory project : serverspace.getProjects()) {
-					project.eResource().delete(null);
 					for (Version version : project.getVersions()) {
 						ChangePackage changes = version.getChanges();
 						if (changes != null) {
@@ -487,6 +486,9 @@ public class SetupHelper {
 							projectState.eResource().delete(null);
 						}
 						version.eResource().delete(null);
+					}
+					if (project.eResource() != null) {
+						project.eResource().delete(null);
 					}
 				}
 				mainResource.delete(null);

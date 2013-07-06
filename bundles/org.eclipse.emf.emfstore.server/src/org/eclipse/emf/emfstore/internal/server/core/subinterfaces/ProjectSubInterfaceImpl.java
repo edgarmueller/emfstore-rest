@@ -240,7 +240,6 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					throw new StorageException(StorageException.NOSAVE);
 				} finally {
 					// delete resources
-					project.eResource().delete(null);
 					for (Version version : project.getVersions()) {
 						ChangePackage changes = version.getChanges();
 						if (changes != null) {
@@ -251,6 +250,9 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 							projectState.eResource().delete(null);
 						}
 						version.eResource().delete(null);
+					}
+					if (project.eResource() != null) {
+						project.eResource().delete(null);
 					}
 				}
 			} catch (InvalidProjectIdException e) {
