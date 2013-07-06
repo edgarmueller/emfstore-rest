@@ -46,12 +46,17 @@ public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
 	 */
 	public ResourceSet getResourceSet() {
 		// resourceSetFactory may not be binded yet
+		int runs = 0;
 		while (resourceSetFactory == null) {
 			try {
+				if (runs == 20) {
+					return null;
+				}
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// do nothing
 			}
+			runs++;
 		}
 		ResourceSetImpl resourceSet = (ResourceSetImpl) resourceSetFactory.createResourceSet();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
