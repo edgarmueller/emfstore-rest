@@ -12,7 +12,6 @@
 package org.eclipse.emf.emfstore.client.test;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.security.AccessControlException;
 import java.util.ArrayList;
@@ -27,14 +26,20 @@ import junit.framework.Assert;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
@@ -60,13 +65,18 @@ import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -449,26 +459,42 @@ public class SetupHelper {
 	 * Cleans server up.
 	 */
 	public static void cleanupServer() {
-		String serverPath = ServerConfiguration.getServerHome();
-		File serverDirectory = new File(serverPath);
-		FileFilter serverFileFilter = new FileFilter() {
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+			true);
+		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		extensionPoint.reload();
 
-			public boolean accept(File pathname) {
-				return pathname.getName().startsWith("project-");
-			}
+		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
+			ESResourceSetProvider.class);
 
-		};
-		File[] filesToDeleteOnServer = serverDirectory.listFiles(serverFileFilter);
-		for (int i = 0; i < filesToDeleteOnServer.length; i++) {
+		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
+
+		URI serverspaceURI = ServerURIUtil.createServerSpaceURI();
+
+		if (resourceSet.getURIConverter().exists(serverspaceURI, null)) {
+			Resource mainResource = resourceSet.getResource(serverspaceURI, true);
+			ServerSpace serverspace = (ServerSpace) mainResource.getContents().get(0);
 			try {
-				FileUtil.deleteDirectory(filesToDeleteOnServer[i], true);
+				for (ProjectHistory project : serverspace.getProjects()) {
+					project.eResource().delete(null);
+					for (Version version : project.getVersions()) {
+						ChangePackage changes = version.getChanges();
+						if (changes != null) {
+							changes.eResource().delete(null);
+						}
+						Project projectState = version.getProjectState();
+						if (projectState != null) {
+							projectState.eResource().delete(null);
+						}
+						version.eResource().delete(null);
+					}
+				}
+				mainResource.delete(null);
 			} catch (IOException e) {
-
 				e.printStackTrace();
 			}
 		}
 
-		new File(serverPath + "storage.uss").delete();
 		LOGGER.log(Level.INFO, "serverspce cleaned.");
 
 	}
@@ -718,6 +744,9 @@ public class SetupHelper {
 	 * @throws IOException if deletion fails
 	 */
 	public static void removeServerTestProfile() throws IOException {
+		cleanupWorkspace();
+		cleanupServer();
+
 		String serverPath = ServerConfiguration.getServerHome();
 		String clientPath = Configuration.getFileInfo().getWorkspaceDirectory();
 		File serverDirectory = new File(serverPath);
