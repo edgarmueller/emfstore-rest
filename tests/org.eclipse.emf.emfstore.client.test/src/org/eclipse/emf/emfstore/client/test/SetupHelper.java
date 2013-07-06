@@ -37,6 +37,7 @@ import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
+import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
@@ -508,6 +509,29 @@ public class SetupHelper {
 	 */
 	public static void cleanupWorkspace() throws IOException {
 		ESWorkspaceProviderImpl.getInstance().dispose();
+
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
+			true);
+		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		extensionPoint.reload();
+
+		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
+			ESResourceSetProvider.class);
+
+		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
+
+		URI workspaceURI = ClientURIUtil.createWorkspaceURI();
+
+		if (resourceSet.getURIConverter().exists(workspaceURI, null)) {
+			Resource mainResource = resourceSet.getResource(workspaceURI, true);
+			Workspace workspace = (Workspace) mainResource.getContents().get(0);
+			for (ProjectSpace ps : workspace.getProjectSpaces()) {
+				ps.getProject().eResource().delete(null);
+				ps.getLocalChangePackage().eResource().delete(null);
+				ps.eResource().delete(null);
+			}
+			mainResource.delete(null);
+		}
 		// final Workspace currentWorkspace = (Workspace) ESWorkspaceProviderImpl.getInstance().getWorkspace();
 		// new EMFStoreCommand() {
 		// @Override
