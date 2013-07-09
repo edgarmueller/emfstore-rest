@@ -11,7 +11,6 @@
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ExtensionRegistry {

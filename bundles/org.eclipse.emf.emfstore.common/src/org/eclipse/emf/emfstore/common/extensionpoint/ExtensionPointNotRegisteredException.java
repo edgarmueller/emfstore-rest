@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
+@SuppressWarnings("serial")
 public class ExtensionPointNotRegisteredException extends Exception {
 
 }
