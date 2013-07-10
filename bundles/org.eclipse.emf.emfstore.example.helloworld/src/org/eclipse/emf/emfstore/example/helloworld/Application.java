@@ -28,9 +28,9 @@ import org.eclipse.emf.emfstore.client.exceptions.ESServerNotFoundException;
 import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.common.ESSystemOutProgressMonitor;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.emf.emfstore.server.model.ESLogMessageFactory;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+
 
 /**
  * An application that runs the demo.<br>
@@ -154,8 +154,7 @@ public class Application implements IApplication {
 		league.getPlayers().add(player2);
 
 		// To synchronize the local changes of the client with the server, we will commit the project.
-		demoProject.commit(ESLogMessageFactory.INSTANCE.createLogMessage("My message", usersession.getUsername()),
-			null,
+		demoProject.commit("My message", null,
 			new ESSystemOutProgressMonitor());
 		// The server is now up-to-date, but we still need to synchronize the copy of the project we checked out
 		// earlier.
