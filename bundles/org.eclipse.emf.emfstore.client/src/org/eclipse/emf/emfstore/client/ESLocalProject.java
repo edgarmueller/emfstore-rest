@@ -22,8 +22,8 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
+import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESLogMessage;
@@ -74,7 +74,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * successful or not. This enables the the headless execution of the commit.
 	 * 
 	 * @param logMessage
-	 *            a {@link ESLogMessage} describing the changes being committed
+	 *            a message describing the changes being committed
 	 * @param callback
 	 *            an optional {@link ESCommitCallback}
 	 * @param monitor
@@ -82,11 +82,11 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
-	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
+	 * @throws ESUpdateRequiredException in case the local working copy is outdated
 	 * @throws ESException in case any other error occurs during commit
 	 */
-	ESPrimaryVersionSpec commit(ESLogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
-		throws BaseVersionOutdatedException, ESException;
+	ESPrimaryVersionSpec commit(String logMessage, ESCommitCallback callback, IProgressMonitor monitor)
+		throws ESUpdateRequiredException, ESException;
 
 	/**
 	 * <p>
@@ -103,7 +103,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param branch
 	 *            the {@link ESBranchVersionSpec} indicating the branch to commit to
 	 * @param logMessage
-	 *            a {@link ESLogMessage} describing the changes being committed
+	 *            a message describing the changes being committed
 	 * @param callback
 	 *            a optional {@link ESCommitCallback}
 	 * @param monitor
@@ -112,11 +112,11 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
 	 * @throws InvalidVersionSpecException in case the given {@link ESBranchVersionSpec} could not be resolved
-	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
+	 * @throws ESUpdateRequiredException in case the local working copy is outdated
 	 * @throws ESException in case any other error occurs during commit
 	 */
-	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, ESLogMessage logMessage, ESCommitCallback callback,
-		IProgressMonitor monitor) throws InvalidVersionSpecException, BaseVersionOutdatedException, ESException;
+	ESPrimaryVersionSpec commitToBranch(ESBranchVersionSpec branch, String logMessage, ESCommitCallback callback,
+		IProgressMonitor monitor) throws InvalidVersionSpecException, ESUpdateRequiredException, ESException;
 
 	/**
 	 * <p>
@@ -165,7 +165,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param target
 	 *            the {@link ESPrimaryVersionSpec} which is supposed to be merged
 	 * @param changeConflict
-	 *            the {@link ESChangeConflict} containing the conflicting changes
+	 *            the {@link ESConflictSet} containing the conflicting changes
 	 * @param conflictResolver
 	 *            a {@link ConflictResolver} for resolving conflicts
 	 * @param callback
@@ -178,7 +178,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @throws ESException
 	 *             in case an error occurs while merging the branch
 	 */
-	// boolean merge(ESPrimaryVersionSpec target, ESChangeConflict changeConflict, ConflictResolver conflictResolver,
+	// boolean merge(ESPrimaryVersionSpec target, ESConflictSet changeConflict, ConflictResolver conflictResolver,
 	// ESUpdateCallback callback, IProgressMonitor monitor) throws ESException;
 
 	/**
@@ -228,10 +228,11 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that is used to indicate progress while sharing the project
 	 * 
+	 * @return the corresponding remote project of a successful share
 	 * @throws ESException
 	 *             in case an error occurs while sharing the project
 	 */
-	void shareProject(ESUsersession session, IProgressMonitor monitor) throws ESException;
+	ESRemoteProject shareProject(ESUsersession session, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Whether this project has been shared.

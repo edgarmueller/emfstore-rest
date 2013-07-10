@@ -215,21 +215,22 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	private void initLogging() {
-		Platform.getLog(Platform.getBundle("org.eclipse.emf.emfstore.common.model")).addLogListener(new ILogListener() {
+		Platform.getLog(Platform.getBundle("org.eclipse.emf.emfstore.common.model")).addLogListener(new
+			ILogListener() {
 
-			public void logging(IStatus status, String plugin) {
-				if (status.getSeverity() == IStatus.INFO) {
-					System.out.println(status.getMessage());
-				} else if (!status.isOK()) {
-					System.err.println(status.getMessage());
-					Throwable exception = status.getException();
-					if (exception != null) {
-						exception.printStackTrace(System.err);
+				public void logging(IStatus status, String plugin) {
+					if (status.getSeverity() == IStatus.INFO) {
+						System.out.println(status.getMessage());
+					} else if (!status.isOK()) {
+						System.err.println(status.getMessage());
+						Throwable exception = status.getException();
+						if (exception != null) {
+							exception.printStackTrace(System.err);
+						}
 					}
 				}
-			}
 
-		});
+			});
 	}
 
 	private void handleStartupListener() {
@@ -557,16 +558,19 @@ public class EMFStoreController implements IApplication, Runnable {
 	/**
 	 * Starts the server in a new thread.
 	 * 
+	 * @return an controller for the running EMFStore
 	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public static void runAsNewThread() throws FatalESException {
-		Thread thread = new Thread(new EMFStoreController());
+	public static EMFStoreController runAsNewThread() throws FatalESException {
+		EMFStoreController emfStoreController = new EMFStoreController();
+		Thread thread = new Thread(emfStoreController);
 		thread.start();
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
 			throw new FatalESException(e);
 		}
+		return emfStoreController;
 	}
 }

@@ -6,18 +6,28 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
+ * Contributors: 
+ * koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.model.versioning.operations;
+package org.eclipse.emf.emfstore.server.exceptions;
+
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Diagram Layout Operation</b></em>'. <!--
- * end-user-doc -->
+ * Represents an exception because the base version of a project space is not up to date.
  * 
- * 
- * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getDiagramLayoutOperation()
- * @model
- * @generated
+ * @author koegel
  */
-public interface DiagramLayoutOperation extends AttributeOperation {
-} // DiagramLayoutOperation
+// MK: move to workspace
+@SuppressWarnings("serial")
+public class ESUpdateRequiredException extends ESException {
+
+	private static final String MESSAGE = "BaseVersion outdated, please update before commit.";
+
+	/**
+	 * Default constructor.
+	 */
+	public ESUpdateRequiredException() {
+		super(MESSAGE);
+	}
+
+}

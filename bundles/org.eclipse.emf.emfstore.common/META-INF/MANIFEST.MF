@@ -22,6 +22,7 @@ Export-Package: org.apache.commons.io,
    org.eclipse.emf.emfstore.example.merging",
  org.eclipse.emf.emfstore.internal.common.api;
   x-friends:="org.eclipse.emf.emfstore.client.ui,
+   org.eclipse.emf.emfstore.server,
    org.eclipse.emf.emfstore.server.model,
    org.eclipse.emf.emfstore.client,
    org.eclipse.emf.emfstore.client.test,

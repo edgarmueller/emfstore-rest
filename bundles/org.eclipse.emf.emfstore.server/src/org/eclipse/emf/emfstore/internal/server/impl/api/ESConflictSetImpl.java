@@ -9,28 +9,32 @@
  * Contributors:
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.impl.api;
+package org.eclipse.emf.emfstore.internal.server.impl.api;
 
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
+import java.util.Set;
+
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
+import org.eclipse.emf.emfstore.server.ESConflict;
+import org.eclipse.emf.emfstore.server.ESConflictSet;
 
 /**
  * <p>
- * Mapping between {@link ESChangeConflict} and {@link ChangeConflict}.
+ * Mapping between {@link ESConflictSet} and {@link ChangeConflictSet}.
  * </p>
  * <p>
- * Note that this class does not inherit from {@link AbstractAPIImpl} since {@link ChangeConflict} is not a modeled
+ * Note that this class does not inherit from {@link AbstractAPIImpl} since {@link ChangeConflictSet} is not a modeled
  * class.
  * </p>
  * 
  * @author emueller
  * 
  */
-public class ESChangeConflictImpl implements ESChangeConflict, InternalAPIDelegator<ESChangeConflict, ChangeConflict> {
+public class ESConflictSetImpl implements ESConflictSet, InternalAPIDelegator<ESConflictSet, ChangeConflictSet> {
 
-	private ChangeConflict changeConflict;
+	private ChangeConflictSet changeConflict;
 
 	/**
 	 * Constructor.
@@ -38,7 +42,7 @@ public class ESChangeConflictImpl implements ESChangeConflict, InternalAPIDelega
 	 * @param changeConflict
 	 *            the delegate
 	 */
-	public ESChangeConflictImpl(ChangeConflict changeConflict) {
+	public ESConflictSetImpl(ChangeConflictSet changeConflict) {
 		this.changeConflict = changeConflict;
 	}
 
@@ -48,8 +52,14 @@ public class ESChangeConflictImpl implements ESChangeConflict, InternalAPIDelega
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator#toInternalAPI()
 	 */
-	public ChangeConflict toInternalAPI() {
+	public ChangeConflictSet toInternalAPI() {
 		return changeConflict;
 	}
 
+	public Set<ESConflict> getConflicts() {
+		Set<ESConflict> conflicts = APIUtil
+			.toExternal(toInternalAPI().getConflictBuckets());
+		return conflicts;
+
+	}
 }

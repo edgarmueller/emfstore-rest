@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection.merging;
@@ -28,11 +28,10 @@ import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionT
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -168,12 +167,10 @@ public class MergeTest extends ConflictDetectionTest {
 			List<ChangePackage> myChangePackages = Arrays.asList(getProjectSpace().getLocalChangePackage(true));
 			List<ChangePackage> theirChangePackages = Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true));
 
-			Set<ConflictBucketCandidate> conflictCandidateBuckets = new ConflictDetector()
-				.calculateConflictCandidateBuckets(myChangePackages, theirChangePackages, getProject());
-			ChangeConflict changeConflict = new ChangeConflict(getProjectSpace(),
-				myChangePackages, theirChangePackages, conflictCandidateBuckets, getProject());
+			ChangeConflictSet changeConflictSet = new ConflictDetector().calculateConflicts(myChangePackages,
+				theirChangePackages, getProject());
 
-			DecisionManager manager = new DecisionManager(getProject(), changeConflict, spec, spec, false);
+			DecisionManager manager = new DecisionManager(getProject(), changeConflictSet, false);
 
 			return manager;
 		}

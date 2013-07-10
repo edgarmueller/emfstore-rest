@@ -13,7 +13,9 @@
 package org.eclipse.emf.emfstore.internal.common;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator;
@@ -98,6 +100,22 @@ public class APIUtil {
 		}
 		
 		ArrayList<API> result = new ArrayList<API>(toCopy.size());
+		
+		for(INT element : toCopy) {
+			result.add(element.toAPI());
+		}
+		
+		return result;
+	}
+	
+	public static <IMPL extends InternalAPIDelegator<API, INT>, INT extends APIDelegate<API>, API> 
+	Set<API> toExternal(Set<INT> toCopy) {
+		
+		if(toCopy == null) {
+			return null;
+		}
+		
+		LinkedHashSet<API> result = new LinkedHashSet<API>(toCopy.size());
 		
 		for(INT element : toCopy) {
 			result.add(element.toAPI());

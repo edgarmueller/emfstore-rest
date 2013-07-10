@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
@@ -26,6 +25,7 @@ import org.eclipse.emf.emfstore.client.test.api.ProjectChangeUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIRevertCommitController;
+import org.eclipse.emf.emfstore.server.ESConflictSet;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -151,15 +151,9 @@ public class UIRevertCommitControllerTest2 extends AbstractUIControllerTestWithC
 			ESUpdateCallback.NOCALLBACK.noChangesOnServer();
 		}
 
-		public boolean conflictOccurred(ESChangeConflict changeConflictException,
+		public boolean conflictOccurred(ESConflictSet changeConflictException,
 			IProgressMonitor progressMonitor) {
 			return ESUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
-		}
-
-		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws ESException {
-			fail("Checksum error occurred");
-			return false;
 		}
 	}
 

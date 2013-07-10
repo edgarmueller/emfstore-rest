@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -58,10 +61,10 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.Con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.UpdateController;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.IllegalProjectSpaceStateException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.PropertyNotFoundException;
@@ -80,7 +83,8 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -198,7 +202,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges)
 		throws ESException {
-		applyChanges(baseSpec, incoming, myChanges, ESUpdateCallback.NOCALLBACK, new NullProgressMonitor());
+		applyChanges(baseSpec, incoming, myChanges, new NullProgressMonitor());
 	}
 
 	/**
@@ -220,7 +224,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *             also failed
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges,
-		ESUpdateCallback callback, IProgressMonitor progressMonitor) throws ESException {
+		IProgressMonitor progressMonitor) throws ESException {
 
 		// revert local changes
 		notifyPreRevertMyChanges(getLocalChangePackage());
@@ -234,8 +238,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		progressMonitor.subTask("Computing checksum");
 		if (!performChecksumCheck(baseSpec, getProject())) {
 			progressMonitor.subTask("Invalid checksum.  Activating checksum error handler.");
-			boolean errorHandled = callback.checksumCheckFailed(this.toAPI(), baseSpec.toAPI(),
-				progressMonitor);
+			boolean errorHandled = Configuration.getClientBehavior().getChecksumErrorHandler()
+				.execute(this.toAPI(), baseSpec.toAPI(),
+					progressMonitor);
 			if (!errorHandled) {
 				// rollback
 				for (int i = incoming.size() - 1; i >= 0; i--) {
@@ -344,7 +349,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec commit(LogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
+	public PrimaryVersionSpec commit(String logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws ESException {
 		return new CommitController(this, logMessage, callback, monitor).execute();
 	}
@@ -352,7 +357,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 */
-	public PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage,
+	public PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, String logMessage,
 		ESCommitCallback callback,
 		IProgressMonitor monitor) throws ESException {
 		return new CommitController(this, branch, logMessage, callback, monitor).execute();
@@ -445,7 +450,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			AbstractOperation copy = ModelUtil.clone(abstractOperation);
 			changePackage.getOperations().add(copy);
 		}
-
+		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
+		logMessage.setAuthor(getUsersession().getUsername());
+		logMessage.setClientDate(new Date());
+		changePackage.setLogMessage(logMessage);
 		return changePackage;
 	}
 
@@ -864,25 +872,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 */
-	public boolean merge(PrimaryVersionSpec target, ChangeConflict conflict,
-		ConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws ESException {
-		// merge the conflicts
-		if (conflictResolver.resolveConflicts(getProject(), conflict,
-			getBaseVersion(), target)) {
-			progressMonitor.subTask("Conflicts resolved, calculating result");
-			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges(target, conflict.getNewPackages(), mergedResult,
-				callback, progressMonitor);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
 	 */
 	public void mergeBranch(final PrimaryVersionSpec branchSpec, final ConflictResolver conflictResolver,
 		final IProgressMonitor monitor)
@@ -901,21 +890,72 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
 				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
 
-				Set<ConflictBucketCandidate> calculateConflictCandidateBuckets = new ConflictDetector()
-					.calculateConflictCandidateBuckets(branchChanges, baseChanges, getProject());
+				ChangeConflictSet conflictSet = new ConflictDetector().calculateConflicts(branchChanges,
+					baseChanges, getProject());
 
-				ChangeConflict conflictException = new ChangeConflict(ProjectSpaceBase.this,
-					branchChanges, baseChanges, calculateConflictCandidateBuckets, ProjectSpaceBase.this.getProject());
-
-				if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(), null)) {
+				if (conflictResolver.resolveConflicts(getProject(), conflictSet)) {
 					// TODO: do we need to care about checksum errors here?
-					applyChanges(getBaseVersion(), baseChanges, conflictResolver.getMergedResult());
+					ChangePackage resolvedConflicts = mergeResolvedConflicts(conflictSet, branchChanges, baseChanges);
+					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts);
 					setMergedVersion(ModelUtil.clone(branchSpec));
 				}
 
 				return null;
 			}
 		}.execute();
+	}
+
+	public ChangePackage mergeResolvedConflicts(ChangeConflictSet conflictSet,
+		List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages)
+		throws ChangeConflictException {
+
+		Set<AbstractOperation> accceptedMineSet = new LinkedHashSet<AbstractOperation>();
+		Set<AbstractOperation> rejectedTheirsSet = new LinkedHashSet<AbstractOperation>();
+
+		for (ConflictBucket conflict : conflictSet.getConflictBuckets()) {
+			if (!conflict.isResolved()) {
+				throw new ChangeConflictException(
+					"Conflict during update occured and callback failed to resolve all conflicts!",
+					conflictSet);
+			}
+			accceptedMineSet.addAll(conflict.getAcceptedLocalOperations());
+			rejectedTheirsSet.addAll(conflict.getRejectedRemoteOperations());
+		}
+
+		List<AbstractOperation> acceptedMineList = new LinkedList<AbstractOperation>();
+		for (ChangePackage locChangePackage : myChangePackages) {
+			for (AbstractOperation myOp : locChangePackage.getOperations()) {
+				if (conflictSet.getNotInvolvedInConflict().contains(myOp)) {
+					acceptedMineList.add(myOp);
+				} else if (accceptedMineSet.contains(myOp)) {
+					acceptedMineList.add(myOp);
+				}
+				accceptedMineSet.remove(myOp);
+			}
+		}
+		// add all remaining operations in acceptedMineSet (they have been generated during merge)
+		accceptedMineSet.addAll(accceptedMineSet);
+
+		List<AbstractOperation> rejectedTheirsList = new LinkedList<AbstractOperation>();
+		for (ChangePackage theirCP : theirChangePackages) {
+			for (AbstractOperation theirOp : theirCP.getOperations()) {
+				if (rejectedTheirsSet.contains(theirOp)) {
+					rejectedTheirsList.add(theirOp);
+				}
+			}
+		}
+
+		List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>(rejectedTheirsList.size()
+			+ acceptedMineList.size());
+		for (AbstractOperation operationToReverse : rejectedTheirsList) {
+			mergeResult.add(0, operationToReverse.reverse());
+		}
+
+		mergeResult.addAll(acceptedMineList);
+		ChangePackage result = VersioningFactory.eINSTANCE.createChangePackage();
+		result.getOperations().addAll(mergeResult);
+
+		return result;
 	}
 
 	/**
@@ -1091,8 +1131,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#shareProject()
 	 */
-	public void shareProject(IProgressMonitor monitor) throws ESException {
-		shareProject(null, monitor);
+	public ProjectInfo shareProject(IProgressMonitor monitor) throws ESException {
+		return shareProject(null, monitor);
 	}
 
 	/**
@@ -1102,8 +1142,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#shareProject(org.eclipse.emf.emfstore.client.model.Usersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void shareProject(Usersession session, IProgressMonitor monitor) throws ESException {
-		new ShareController(this, session, monitor).execute();
+	public ProjectInfo shareProject(Usersession session, IProgressMonitor monitor) throws ESException {
+		return new ShareController(this, session, monitor).execute();
 	}
 
 	/**

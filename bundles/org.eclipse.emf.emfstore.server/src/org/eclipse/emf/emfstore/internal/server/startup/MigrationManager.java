@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.emfstore.internal.common.ConsoleProgressMonitor;
+import org.eclipse.emf.emfstore.common.ESSystemOutProgressMonitor;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.util.MalformedModelVersionException;
@@ -218,7 +218,7 @@ public class MigrationManager {
 			modelURIs.add(changeURI);
 		}
 		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, sourceModelReleaseNumber,
-			new ConsoleProgressMonitor());
+			new ESSystemOutProgressMonitor());
 	}
 
 	private void stampCurrentVersionNumber(int modelReleaseNumber) {

@@ -6,13 +6,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
@@ -21,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil;
 
@@ -42,10 +41,9 @@ public class CompositeConflict extends Conflict {
 	 * @param decisionManager decisionmanager
 	 * @param meCausing true, if composite caused by merging user
 	 */
-	public CompositeConflict(Set<AbstractOperation> composite, Set<AbstractOperation> other,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+	public CompositeConflict(ConflictBucket conflictBucket, DecisionManager decisionManager,
 		boolean meCausing) {
-		super(composite, other, leftOperation, rightOperation, decisionManager, meCausing, false);
+		super(conflictBucket, decisionManager, meCausing, false);
 		init();
 	}
 

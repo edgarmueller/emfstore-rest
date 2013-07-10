@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
@@ -34,6 +33,7 @@ import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -43,7 +43,6 @@ import org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragmen
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
@@ -197,7 +196,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec commit(LogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
+	PrimaryVersionSpec commit(String logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws ESException;
 
 	/**
@@ -218,7 +217,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * @throws ESException
 	 *             in case of an exception
 	 */
-	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, ESCommitCallback callback,
+	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, String logMessage, ESCommitCallback callback,
 		IProgressMonitor monitor) throws ESException;
 
 	/**
@@ -234,6 +233,10 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 */
 	void mergeBranch(PrimaryVersionSpec branchSpec, ConflictResolver conflictResolver, IProgressMonitor monitor)
 		throws ESException;
+
+	ChangePackage mergeResolvedConflicts(ChangeConflictSet conflictSet,
+		List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages)
+		throws ChangeConflictException;
 
 	/**
 	 * Returns a list of branches of the current project. Every call triggers a
@@ -812,34 +815,6 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	void makeTransient();
 
 	/**
-	 * Merge the changes from current base version to given target version with
-	 * the local operations.
-	 * 
-	 * @param target
-	 *            a target version
-	 * @param conflictException
-	 *            a {@link ChangeConflictException} containing the changes to be merged
-	 * @param conflictResolver
-	 *            a {@link ConflictResolver} that will actually perform the conflict
-	 *            resolution
-	 * @param callback
-	 *            the {@link UpdateCallback} that is called in case the checksum comparison fails
-	 * @param progressMonitor
-	 *            an {@link IProgressMonitor} to report on progress
-	 * 
-	 * @throws ESException
-	 *             if the connection to the server fails
-	 * @return true, if merge was successful, false otherwise
-	 * 
-	 * @see UpdateCallback#checksumCheckFailed(ProjectSpace, PrimaryVersionSpec, IProgressMonitor)
-	 * 
-	 * @generated NOT
-	 */
-	boolean merge(PrimaryVersionSpec target, ChangeConflict conflict,
-		ConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws ESException;
-
-	/**
 	 * Removes a tag to the specified version of this project.
 	 * 
 	 * @param versionSpec
@@ -1037,10 +1012,12 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	/**
 	 * Shares this project space.
 	 * 
+	 * @return the project info of the created project
+	 * 
 	 * @throws ESException
 	 *             if an error occurs during the sharing of the project
 	 */
-	public void shareProject(IProgressMonitor monitor) throws ESException;
+	public ProjectInfo shareProject(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Shares this project space.
@@ -1050,11 +1027,12 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 *            project
 	 * @param monitor
 	 *            an instance of an {@link IProgressMonitor}
+	 * @return the project info of the remote project
 	 * 
 	 * @throws ESException
 	 *             if an error occurs during the sharing of the project
 	 */
-	public void shareProject(Usersession session, IProgressMonitor monitor) throws ESException;
+	public ProjectInfo shareProject(Usersession session, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Transmit the OrgUnitproperties to the server.

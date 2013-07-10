@@ -15,13 +15,10 @@ package org.eclipse.emf.emfstore.client.callbacks;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
-import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.ESConflictSet;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Callback interface for updating a project space.
@@ -56,31 +53,13 @@ public interface ESUpdateCallback {
 	 * Called when local and remote changes overlap.
 	 * 
 	 * @param changeConflict
-	 *            the {@link ESChangeConflictImpl} containing the changes that led to the conflict
+	 *            the {@link org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl} containing
+	 *            the changes that led to the conflict
 	 * @param monitor
 	 *            an {@link IProgressMonitor} to report on progress
 	 * @return {@code true}, if the conflict has been resolved, {@code false} otherwise
 	 */
-	boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor monitor);
-
-	/**
-	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
-	 * 
-	 * @param project
-	 *            the {@link ESLocalProject} that is corrupt
-	 * @param versionSpec
-	 *            the version specifier containing the correct checksum received from the server
-	 * @param monitor
-	 *            an {@link IProgressMonitor} to report on progress
-	 * 
-	 * @return {@code true}, if the checksum error has been handled successfully, {@code false}
-	 * 
-	 * @throws ESException in case any error occurs during the execution of the checksum error handler
-	 * 
-	 */
-	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor monitor)
-		throws ESException;
+	boolean conflictOccurred(ESConflictSet changeConflict, IProgressMonitor monitor);
 
 	/**
 	 * A default implementation of an update callback that does nothing and defaults {@link
@@ -97,13 +76,8 @@ public interface ESUpdateCallback {
 		public void noChangesOnServer() {
 		}
 
-		public boolean conflictOccurred(ESChangeConflict changeConflict, IProgressMonitor progressMonitor) {
+		public boolean conflictOccurred(ESConflictSet changeConflict, IProgressMonitor progressMonitor) {
 			return false;
-		}
-
-		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws ESException {
-			return true;
 		}
 	};
 }

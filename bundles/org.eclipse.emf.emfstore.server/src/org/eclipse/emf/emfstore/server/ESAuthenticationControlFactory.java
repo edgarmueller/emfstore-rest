@@ -19,7 +19,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
  * 
  * @author wesendon
  */
-public interface AuthenticationControlFactory {
+public interface ESAuthenticationControlFactory {
 
 	/**
 	 * Creates an authentication controller.

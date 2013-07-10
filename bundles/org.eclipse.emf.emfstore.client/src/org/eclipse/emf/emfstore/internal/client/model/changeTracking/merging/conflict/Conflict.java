@@ -6,13 +6,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Set;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation;
 
@@ -46,32 +48,26 @@ public abstract class Conflict extends Observable {
 	 */
 	private Set<AbstractOperation> leftOperations;
 	private Set<AbstractOperation> rightOperations;
-	private boolean leftIsMy;
+	protected boolean leftIsMy;
 	private AbstractOperation rightOperation;
 	private AbstractOperation leftOperation;
+	private ConflictBucket conflictBucket;
 
-	/**
-	 * Default constructor for conflicts. Many conflicts only need one operation
-	 * for my and their side. But in order to use a suitable upper class for all
-	 * conflicts, conflicts requires a list of operations. opsA ~ myOperations,
-	 * opsB ~ theirOperations, but again, to keep it general, it's called A and
-	 * B. These fields are protected so the implementing Conflict should create
-	 * it's own getter method.
-	 * 
-	 * @param leftOperations
-	 *            first list of operations (often: myOperations)
-	 * @param rightOperations
-	 *            second list of operations (often: theirOperations)
-	 * @param leftOperation an operation representing all left operations
-	 * @param rightOperation an operation representing all right operations
-	 * @param decisionManager
-	 *            decision manager
-	 */
-	public Conflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
-		this(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, true, true);
-		this.leftOperation = leftOperation;
-		this.rightOperation = rightOperation;
+	public Conflict(ConflictBucket conflictBucket, AbstractOperation leftOperation, AbstractOperation rightOperation,
+		DecisionManager decisionManager,
+		boolean leftIsMy, boolean init) {
+		this(set(leftOperation), set(rightOperation), leftOperation, rightOperation, decisionManager, leftIsMy, init);
+		this.conflictBucket = conflictBucket;
+	}
+
+	public Conflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
+		this(conflictBucket, decisionManager, true, true);
+	}
+
+	public Conflict(ConflictBucket conflictBucket, DecisionManager decisionManager, boolean isLeftMy, boolean init) {
+		this(conflictBucket.getMyOperations(), conflictBucket.getTheirOperations(), conflictBucket.getMyOperation(),
+			conflictBucket.getTheirOperation(), decisionManager, isLeftMy, init);
+		this.conflictBucket = conflictBucket;
 	}
 
 	/**
@@ -92,7 +88,7 @@ public abstract class Conflict extends Observable {
 	 *            allows to deactivate initialization, has to be done manually
 	 *            otherwise.
 	 */
-	public Conflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
+	private Conflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
 		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
 		boolean leftIsMy, boolean init) {
 		this.leftOperation = leftOperation;
@@ -105,6 +101,12 @@ public abstract class Conflict extends Observable {
 		if (init) {
 			init();
 		}
+	}
+
+	private static <T> Set<T> set(T object) {
+		Set<T> set = new LinkedHashSet<T>();
+		set.add(object);
+		return set;
 	}
 
 	/**
@@ -397,4 +399,7 @@ public abstract class Conflict extends Observable {
 		return (T) getTheirOperation();
 	}
 
+	public void resolve() {
+		conflictBucket.resolveConflict(getAcceptedMine(), getRejectedTheirs());
+	}
 }

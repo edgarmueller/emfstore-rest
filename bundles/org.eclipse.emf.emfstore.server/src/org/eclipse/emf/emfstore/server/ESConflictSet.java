@@ -10,37 +10,19 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.server.model;
+package org.eclipse.emf.emfstore.server;
 
-import java.util.Date;
+import java.util.Set;
 
 /**
- * A log message that is used to describe any changes done by a user.
+ * Represents conflicting changes on model objects.
+ * 
+ * Currently no further information is provided.
  * 
  * @author emueller
  * @author wesendon
  */
-public interface ESLogMessage {
+public interface ESConflictSet {
 
-	/**
-	 * Returns the actual log message.
-	 * 
-	 * @return the message
-	 */
-	String getMessage();
-
-	/**
-	 * Returns the author that wrote the log message.
-	 * 
-	 * @return the author of the log message
-	 */
-	String getAuthor();
-
-	/**
-	 * Gets the client date this log message was created.
-	 * 
-	 * @return the client date of the log message
-	 */
-	Date getClientDate();
-
+	Set<ESConflict> getConflicts();
 }

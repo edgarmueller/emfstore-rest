@@ -20,7 +20,7 @@ import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.Sim
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.VerifierChain;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidPropertyException;
-import org.eclipse.emf.emfstore.server.AuthenticationControlFactory;
+import org.eclipse.emf.emfstore.server.ESAuthenticationControlFactory;
 
 /**
  * Default authentication control factory.
@@ -28,12 +28,12 @@ import org.eclipse.emf.emfstore.server.AuthenticationControlFactory;
  * @author wesendon
  */
 // TODO: internal
-public class AuthenticationControlFactoryImpl implements AuthenticationControlFactory {
+public class AuthenticationControlFactoryImpl implements ESAuthenticationControlFactory {
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.AuthenticationControlFactory#createAuthenticationControl()
+	 * @see org.eclipse.emf.emfstore.server.ESAuthenticationControlFactory#createAuthenticationControl()
 	 */
 	public AbstractAuthenticationControl createAuthenticationControl() throws FatalESException {
 

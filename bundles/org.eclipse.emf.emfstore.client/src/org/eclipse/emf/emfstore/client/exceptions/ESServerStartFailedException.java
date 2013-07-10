@@ -7,19 +7,26 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client;
+package org.eclipse.emf.emfstore.client.exceptions;
 
 /**
- * Represents conflicting changes on model objects.
+ * Represents a failure to start an EMFStore Server.
  * 
- * Currently no further information is provided.
+ * @author mkoegel
  * 
- * @author emueller
- * @author wesendon
  */
-public interface ESChangeConflict {
+public class ESServerStartFailedException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Default constructor.
+	 * 
+	 * @param cause causing exception
+	 */
+	public ESServerStartFailedException(Throwable cause) {
+		super("Server start failed!", cause);
+	}
 }

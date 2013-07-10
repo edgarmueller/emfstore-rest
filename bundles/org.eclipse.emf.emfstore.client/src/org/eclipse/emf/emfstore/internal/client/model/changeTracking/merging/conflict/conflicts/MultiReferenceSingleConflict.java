@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
@@ -14,7 +14,6 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import static org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
@@ -23,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 
 /**
@@ -41,10 +40,9 @@ public class MultiReferenceSingleConflict extends Conflict {
 	 * @param decisionManager decision maanger
 	 * @param multiLeft multi is lef
 	 */
-	public MultiReferenceSingleConflict(Set<AbstractOperation> leftOperations, Set<AbstractOperation> rightOperations,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+	public MultiReferenceSingleConflict(ConflictBucket conflictBucket, DecisionManager decisionManager,
 		boolean multiLeft) {
-		super(leftOperations, rightOperations, leftOperation, rightOperation, decisionManager, multiLeft, true);
+		super(conflictBucket, decisionManager, multiLeft, true);
 	}
 
 	/**

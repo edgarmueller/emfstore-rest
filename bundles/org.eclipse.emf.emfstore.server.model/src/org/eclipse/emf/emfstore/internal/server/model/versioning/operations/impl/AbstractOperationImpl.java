@@ -22,10 +22,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESOperationImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
+import org.eclipse.emf.emfstore.server.model.ESOperation;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Abstract Operation</b></em>'. <!--
@@ -48,6 +50,20 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Oper
  * @generated
  */
 public abstract class AbstractOperationImpl extends IdentifiableElementImpl implements AbstractOperation {
+
+	private ESOperation apiImpl;
+
+	public ESOperation toAPI() {
+		if (apiImpl == null) {
+			apiImpl = createAPI();
+		}
+		return apiImpl;
+	}
+
+	public ESOperation createAPI() {
+		return new ESOperationImpl(this);
+	}
+
 	/**
 	 * The cached value of the '{@link #getModelElementId() <em>Model Element Id</em>}' containment reference.
 	 * <!-- begin-user-doc

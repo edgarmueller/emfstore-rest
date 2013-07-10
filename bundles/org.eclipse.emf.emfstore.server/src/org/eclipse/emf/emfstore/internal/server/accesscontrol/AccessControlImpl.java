@@ -43,7 +43,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
-import org.eclipse.emf.emfstore.server.AuthenticationControlFactory;
+import org.eclipse.emf.emfstore.server.ESAuthenticationControlFactory;
 
 /**
  * A simple implementation of Authentication and Authorization Control.
@@ -107,10 +107,10 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 		authenticationControl = getAuthenticationFactory().createAuthenticationControl();
 	}
 
-	private AuthenticationControlFactory getAuthenticationFactory() {
+	private ESAuthenticationControlFactory getAuthenticationFactory() {
 		for (ESExtensionElement e : new ESExtensionPoint("org.eclipse.emf.emfstore.server.authenticationFactory")
 			.getExtensionElements()) {
-			AuthenticationControlFactory factory = e.getClass("class", AuthenticationControlFactory.class);
+			ESAuthenticationControlFactory factory = e.getClass("class", ESAuthenticationControlFactory.class);
 			if (factory != null) {
 				return factory;
 			}

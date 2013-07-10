@@ -14,34 +14,39 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.server.model.ESOperation;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Abstract Operation</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Abstract Operation</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>
- * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getModelElementId
- * <em>Model Element Id</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#isAccepted
- * <em>Accepted</em>}</li>
- * <li>
- * {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getClientDate
- * <em>Client Date</em>}</li>
- * </ul>
- * </p>
+ * @extends APIDelegate<ESLogMessage>
+ *          <!-- end-user-doc
+ *          -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getModelElementId
+ *          <em>Model Element Id</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#isAccepted
+ *          <em>Accepted</em>}</li>
+ *          <li>
+ *          {@link org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation#getClientDate
+ *          <em>Client Date</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage#getAbstractOperation()
  * @model abstract="true"
  * @generated
  */
-public interface AbstractOperation extends IdentifiableElement {
+public interface AbstractOperation extends IdentifiableElement, ESOperation, APIDelegate<ESOperation> {
 	/**
 	 * Returns the value of the '<em><b>Model Element Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

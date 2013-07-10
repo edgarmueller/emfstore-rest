@@ -16,7 +16,6 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 //
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
@@ -24,14 +23,13 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 
 public class MultiAttributeMoveSetConflict extends Conflict {
 
-	public MultiAttributeMoveSetConflict(Set<AbstractOperation> opsA, Set<AbstractOperation> opsB,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+	public MultiAttributeMoveSetConflict(ConflictBucket conflictBucket, DecisionManager decisionManager,
 		boolean isMySet) {
-		super(opsA, opsB, leftOperation, rightOperation, decisionManager, isMySet, true);
+		super(conflictBucket, decisionManager, isMySet, true);
 	}
 
 	/**

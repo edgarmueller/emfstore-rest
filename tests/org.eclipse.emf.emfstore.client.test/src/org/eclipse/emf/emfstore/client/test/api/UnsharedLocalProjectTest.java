@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
 
@@ -34,7 +34,6 @@ import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -92,7 +91,7 @@ public class UnsharedLocalProjectTest extends BaseEmptyEmfstoreTest {
 	@Test(expected = ESProjectNotSharedException.class)
 	public void testCommit2() throws ESException {
 		// can not commit an unshared project
-		localProject.commit(ESLogMessage.FACTORY.createLogMessage("test", "super"), null, new NullProgressMonitor());
+		localProject.commit("SomeLogMessage", null, new NullProgressMonitor());
 		fail("Should not be able to commit an unshared Project!");
 	}
 
