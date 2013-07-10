@@ -7,6 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Julian Sommerfeldt - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui;
 
@@ -21,18 +23,18 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ESCompare {
 	/**
-	 * Compares two EObjects to each other
+	 * Compares two EObjects to each other.
 	 * 
 	 * @param e1
-	 *            EObject one
+	 *            first EObject
 	 * @param e2
-	 *            EObject two
+	 *            second EObject
 	 */
-	public void compare(EObject e1, EObject e2);
+	void compare(EObject e1, EObject e2);
 
 	/**
 	 * Displays the compare result. This method is called if {@link #compare(EObject e1, EObject e2)} has been called
 	 * before and only then.
 	 */
-	public void display();
+	void display();
 }

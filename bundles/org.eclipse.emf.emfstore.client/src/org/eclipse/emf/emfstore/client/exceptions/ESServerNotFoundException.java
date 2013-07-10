@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller - initial API and implementation
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.exceptions;
 
@@ -15,11 +16,15 @@ package org.eclipse.emf.emfstore.client.exceptions;
  * Represents an error that states that an server could not be found in the
  * {@link org.eclipse.emf.emfstore.client.ESWorkspace} .
  * 
+ * @author ovonwesen
  * @author emueller
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class ESServerNotFoundException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5346143778435394717L;
 
 	/**
 	 * Constructor.

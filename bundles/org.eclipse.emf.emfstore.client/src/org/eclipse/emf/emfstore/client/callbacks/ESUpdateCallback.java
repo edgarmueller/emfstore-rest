@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * ovonwesen
- * emueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.callbacks;
 
@@ -24,10 +24,12 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
- * Callback interface for updating a project space.
+ * Callback interface for updating a {@link ESLocalProject}.
  * 
  * @author ovonwesen
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESUpdateCallback {
 
@@ -84,8 +86,8 @@ public interface ESUpdateCallback {
 
 	/**
 	 * A default implementation of an update callback that does nothing and defaults {@link
-	 * this#conflictOccurred(ESChangeConflict, IProgressMonitor)} to false
-	 * and {@link this#checksumCheckFailed(ESLocalProject, ESPrimaryVersionSpec, IProgressMonitor)} to true.
+	 * this#conflictOccurred(ESChangeConflict, IProgressMonitor)} to {@code false} and {@link
+	 * this#checksumCheckFailed(ESLocalProject, ESPrimaryVersionSpec, IProgressMonitor)} to {@code true}.
 	 */
 	ESUpdateCallback NOCALLBACK = new ESUpdateCallback() {
 

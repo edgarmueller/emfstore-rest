@@ -6,8 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * emueller
+ * Contributors:
+ * Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
@@ -18,6 +19,8 @@ import org.eclipse.emf.emfstore.common.ESObserver;
  * Observer that is notified when a share completed successfully.
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESShareObserver extends ESObserver {
 
@@ -26,6 +29,8 @@ public interface ESShareObserver extends ESObserver {
 	 * 
 	 * @param localProject
 	 *            the local project that has been shared
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void shareDone(ESLocalProject localProject);
 }

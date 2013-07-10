@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.util;
 
@@ -20,13 +20,17 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithRe
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * Utility class for wrapping changes automatically in a commnad.
+ * Utility class for automatically wrapping changes against a model element
+ * in a command within an EMFStore project.
  * 
  * @author emueller
  * 
- */
+ **/
 public final class RunESCommand {
 
+	/**
+	 * Private constructor.
+	 */
 	private RunESCommand() {
 
 	}
@@ -55,7 +59,7 @@ public final class RunESCommand {
 						return callable.call();
 					} catch (Exception e) {
 						if (exceptionType.isInstance(e)) {
-							setExcpetion(exceptionType.cast(e));
+							setException(exceptionType.cast(e));
 						} else if (e instanceof RuntimeException) {
 							throw (RuntimeException) e;
 						} else {
@@ -80,8 +84,8 @@ public final class RunESCommand {
 		 * Executes the given {@link Callable} and returns the result.
 		 * 
 		 * @param callable
-		 *            the Callable to be executed
-		 * @throws T in case an error occurs during execution of the Callable
+		 *            the callable to be executed
+		 * @throws T in case an error occurs during execution of the callable
 		 */
 		public static <T extends Exception> void run(final Class<T> exceptionType, final Callable<Void> callable)
 			throws T {
@@ -115,7 +119,7 @@ public final class RunESCommand {
 	 * Executes the given {@link Callable} and returns the result.
 	 * 
 	 * @param callable
-	 *            the Callable to be executed
+	 *            the callable to be executed
 	 */
 	public static void run(final Callable<Void> callable) {
 		new EMFStoreCommand() {
@@ -134,10 +138,10 @@ public final class RunESCommand {
 	 * Executes the given {@link Callable} and returns the result.
 	 * 
 	 * @param callable
-	 *            the Callable to be executed
-	 * @return the return value of the Callable
+	 *            the callable to be executed
+	 * @return the return value of the callable
 	 * 
-	 * @param <T> the return type of the Callable
+	 * @param <T> the return type of the callable
 	 */
 	public static <T> T runWithResult(final Callable<T> callable) {
 		return new EMFStoreCommandWithResult<T>() {
@@ -152,5 +156,4 @@ public final class RunESCommand {
 			}
 		}.run(false);
 	}
-
 }

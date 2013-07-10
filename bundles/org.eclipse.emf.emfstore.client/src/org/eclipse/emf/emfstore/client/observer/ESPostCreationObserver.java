@@ -6,30 +6,37 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * emueller
+ * Contributors:
+ * Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
- * Enables the modification of attributes of newly created model elements.<br>
- * <b>IMPORTANT</b>: do not modify any references. This interfaces is only
- * intended to modify attributes of model elements like creation date/creator
- * and the like.
+ * <p>
+ * Enables the modification of attributes of newly created model elements.
+ * </p>
+ * <b>IMPORTANT</b>: do not modify any references in the {@link this#onCreation(EObject)} method.
+ * This interfaces is only intended to modify {@link EAttribute}s of a model element.
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESPostCreationObserver extends ESObserver {
 
 	/**
-	 * Called when a new model element has been created. Use this method to to
-	 * modify attributes of a newly created model element.
+	 * Called when a new model element has been created. Use this method to
+	 * modify {@link EAttribute}s of a newly created model element.
 	 * 
 	 * @param modelElement
 	 *            the model element that has been created
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void onCreation(EObject modelElement);
 }

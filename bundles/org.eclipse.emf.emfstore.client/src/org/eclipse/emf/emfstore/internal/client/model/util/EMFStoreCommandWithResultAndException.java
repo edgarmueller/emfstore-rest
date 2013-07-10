@@ -25,7 +25,7 @@ public abstract class EMFStoreCommandWithResultAndException<T, E> extends EMFSto
 		return excpetion;
 	}
 
-	public void setExcpetion(E excpetion) {
+	public void setException(E excpetion) {
 		this.excpetion = excpetion;
 	}
 

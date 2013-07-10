@@ -7,15 +7,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.handler;
 
+import org.eclipse.emf.emfstore.client.ESLocalProject;
+
 /**
+ * <p>
  * Provides a context in which a {@link Runnable} is executed.
+ * </p>
+ * <p>
+ * This may be used to provide a context while applying operations on a {@link ESLocalProject}.
+ * </p>
  * 
  * @author emueller
  * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESRunnableContext {
 
@@ -24,6 +33,8 @@ public interface ESRunnableContext {
 	 * 
 	 * @param runnable
 	 *            the {@link Runnable} to be executed
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void executeRunnable(Runnable runnable);
 }

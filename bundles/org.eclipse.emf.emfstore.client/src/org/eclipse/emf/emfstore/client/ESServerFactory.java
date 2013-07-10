@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
@@ -19,6 +20,9 @@ import org.eclipse.emf.emfstore.common.model.ESFactory;
  * 
  * @author wesendon
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESServerFactory extends ESFactory {
 

@@ -6,9 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * ovonwesen
- * emueller
+ * Contributors:
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.callbacks;
 
@@ -25,6 +25,8 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * 
  * @author ovonwesen
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESCommitCallback {
 
@@ -40,7 +42,7 @@ public interface ESCommitCallback {
 	 *            the project being out of date
 	 * @param monitor
 	 *            the currently used {@link IProgressMonitor}
-	 * @return {@code true}, if the caller is willing to update the project space, {@code false} otherwise
+	 * @return {@code true}, if the caller is willing to update the project, {@code false} otherwise
 	 */
 	boolean baseVersionOutOfDate(ESLocalProject project, IProgressMonitor monitor);
 

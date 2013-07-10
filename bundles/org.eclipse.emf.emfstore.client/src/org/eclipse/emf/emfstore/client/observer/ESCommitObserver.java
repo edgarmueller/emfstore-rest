@@ -7,8 +7,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Aleksandar Shterev
- * Edgar Mueller
+ * Aleksandar Shterev - initial API and implementation
+ * Edgar Mueller - API changes, Javadoc
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
@@ -23,6 +24,8 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * 
  * @author shterev
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESCommitObserver extends ESObserver {
 
@@ -38,6 +41,8 @@ public interface ESCommitObserver extends ESObserver {
 	 *            an {@link IProgressMonitor} instance that may be used by clients to inform
 	 *            about progress
 	 * @return true if the changes have been confirmed, false - otherwise.
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor);
 
@@ -51,6 +56,8 @@ public interface ESCommitObserver extends ESObserver {
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that may be used by clients to inform
 	 *            about progress
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void commitCompleted(ESLocalProject project, ESPrimaryVersionSpec newRevision, IProgressMonitor monitor);
 }

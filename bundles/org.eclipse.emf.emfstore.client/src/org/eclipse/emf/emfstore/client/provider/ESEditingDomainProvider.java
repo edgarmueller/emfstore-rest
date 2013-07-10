@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
+ * Otto von Wesendonk - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.provider;
 
@@ -15,17 +16,23 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
 /**
- * Interface for editing domain provider.
+ * Interface for providing an {@link EditingDomain}.
  * 
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESEditingDomainProvider {
 
 	/**
-	 * Returns EditingDomain.
+	 * Returns an {@link EditingDomain}.
 	 * 
-	 * @param resourceSet resource set
-	 * @return domain
+	 * @param resourceSet
+	 *            the {@link ResourceSet} for which to retrieve an {@link EditingDomain}
+	 * 
+	 * @return the editing domain for the given resource set
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	EditingDomain getEditingDomain(ResourceSet resourceSet);
 }

@@ -7,19 +7,21 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.provider;
 
 import java.io.InputStream;
 
 import org.eclipse.emf.emfstore.client.exceptions.ESCertificateException;
-import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 
 /**
  * The EMFStore key store manager that is used to managed certificates and their aliases.
  * 
  * @author mkoegel
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESKeyStoreManager {
 
@@ -30,14 +32,12 @@ public interface ESKeyStoreManager {
 	 *            alias for the certificate
 	 * @param path
 	 *            path to the certificate file
-	 * @throws ESInvalidCertificateException
-	 *             certificate cannot be found, accessed or identified
 	 * @throws ESCertificateException
-	 *             is thrown when problems occur with the CertificateStore, i.e.
-	 *             illegal operations.
+	 *             if problems occur with storing, accessing or identifying the certificate
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	void addCertificate(String alias, String path) throws ESInvalidCertificateException,
-		ESCertificateException;
+	void addCertificate(String alias, String path) throws ESCertificateException;
 
 	/**
 	 * Adds a certificate to the KeyStore.
@@ -45,21 +45,21 @@ public interface ESKeyStoreManager {
 	 * @param alias
 	 *            alias for the certificate
 	 * @param certificate
-	 *            inputstream delivering the certificate. Stream is used by
+	 *            {@link InputStream} delivering the certificate. Stream is used by
 	 *            {@link java.security.cert.CertificateFactory#generateCertificate(InputStream)}.
-	 * @throws ESInvalidCertificateException
-	 *             certificate cannot be found, accessed or identified
 	 * @throws ESCertificateException
-	 *             is thrown when problems occur with the CertificateStore, i.e.
-	 *             illegal operations
+	 *             if problems occur with storing, accessing or identifying the certificate
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	void addCertificate(String alias, InputStream certificate) throws ESInvalidCertificateException,
-		ESCertificateException;
+	void addCertificate(String alias, InputStream certificate) throws ESCertificateException;
 
 	/**
 	 * Returns the default certificate alias.
 	 * 
-	 * @return alias
+	 * @return the alias of the default certificate
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	String getDefaultCertificate();
 
@@ -67,7 +67,9 @@ public interface ESKeyStoreManager {
 	 * Sets the alias for the default certificate.
 	 * 
 	 * @param defaultCertificate
-	 *            certificate alias, use null to unset
+	 *            certificate alias, use null to unset the currently set default certificate
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void setDefaultCertificate(String defaultCertificate);
 
@@ -76,8 +78,12 @@ public interface ESKeyStoreManager {
 	 * 
 	 * @param alias
 	 *            the alias which needs to be check
-	 * @return {@code true} if a certificate with the given alias exists, {@code false otherwise}
+	 * 
+	 * @return {@code true} if a certificate with the given alias exists, {@code false} otherwise
+	 * 
 	 * @throws ESCertificateException in case of failure
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	boolean certificateExists(String alias) throws ESCertificateException;
 

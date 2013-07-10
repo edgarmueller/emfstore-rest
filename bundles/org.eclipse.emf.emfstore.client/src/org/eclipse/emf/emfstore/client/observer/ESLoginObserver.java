@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Aleksander Shterev
- * Carl Pfeiffer
+ * Aleksander Shterev, Carl Pfeiffer - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
@@ -16,10 +16,12 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
- * Observer interface for logging in.
+ * Observes a login of a session.
  * 
  * @author pfeifferc
  * @author shterev
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESLoginObserver extends ESObserver {
 
@@ -27,7 +29,9 @@ public interface ESLoginObserver extends ESObserver {
 	 * To be called when login is completed.
 	 * 
 	 * @param session
-	 *            the usersession which was logged in
+	 *            the {@link ESUsersession} which has been logged in
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void loginCompleted(ESUsersession session);
 

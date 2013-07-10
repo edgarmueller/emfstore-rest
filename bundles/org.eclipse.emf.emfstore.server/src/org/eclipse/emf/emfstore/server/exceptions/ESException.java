@@ -6,8 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * MaximilianKoegel
+ * Contributors:
+ * Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.exceptions;
 
@@ -16,18 +17,22 @@ package org.eclipse.emf.emfstore.server.exceptions;
  * processing the requested operation. There are subclasses of EmfStore that can be caught to get a more detailed
  * picture of what went wrong and to be able react more specific to different conditions.
  * 
- * @author Maximilian Koegel
- * @generated NOT
+ * @author mkoegel
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@SuppressWarnings("serial")
 public class ESException extends Exception {
+
+	private static final long serialVersionUID = 4258038406861950412L;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param message the message
-	 * @param cause the causing exception
-	 * @generated NOT
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the causing exception
 	 */
 	public ESException(String message, Throwable cause) {
 		super(message, cause);
@@ -36,8 +41,8 @@ public class ESException extends Exception {
 	/**
 	 * Constructor.
 	 * 
-	 * @param message the message
-	 * @generated NOT
+	 * @param message
+	 *            the message
 	 */
 	public ESException(String message) {
 		super(message);
@@ -46,7 +51,8 @@ public class ESException extends Exception {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param cause the causing exception
+	 * @param cause
+	 *            the causing exception
 	 */
 	public ESException(Throwable cause) {
 		super(cause);

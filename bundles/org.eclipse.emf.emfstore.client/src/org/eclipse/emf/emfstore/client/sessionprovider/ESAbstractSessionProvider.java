@@ -6,8 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * wesendon
+ * Contributors:
+ * Otto von Wesendonk - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.sessionprovider;
 
@@ -18,8 +19,8 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * <p>
- * This is the abstract super class for SessionProviders. All SessionProvider should extend this class. SessionProvider
- * derives a user session for a given server request (ESServerCall). When overriding
+ * This is the abstract super class for SessionProviders. All session providers should extend this class.
+ * SessionProvider derives a user session for a given server request ({@link ESServerCall}). When overriding
  * {@link #provideUsersession(ESServerCall)} , it is possible to gain more context for the {@link ESUsersession}
  * selection.
  * </p>
@@ -30,7 +31,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * </p>
  * 
  * <p>
- * <b>Note</b>: Implementations of SessionProviders must not assume that they are executed within the UI-Thread.
+ * <b>NOTE</b>: Implementations of SessionProviders must not assume that they are executed within the UI-Thread.
  * </p>
  * 
  * @author wesendon
@@ -57,6 +58,8 @@ public abstract class ESAbstractSessionProvider {
 	 * @return an user session. It is not specified whether this session is logged in or logged out.
 	 * 
 	 * @throws ESException in case an exception occurred while obtaining the user session
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public ESUsersession provideUsersession(ESServerCall serverCall) throws ESException {
 
@@ -74,11 +77,13 @@ public abstract class ESAbstractSessionProvider {
 	}
 
 	/**
-	 * Tries to obtain a user session from a given {@link ESLocalProject}.
+	 * Tries to obtain an {@link ESUsersession} from a given {@link ESLocalProject}.
 	 * 
 	 * @param project
 	 *            the local project to obtain the user session from
 	 * @return the user session associated with the project or {@code null}, if no session is available
+	 * 
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 */
 	protected ESUsersession getUsersessionFromProject(ESLocalProject project) {
 
@@ -97,12 +102,14 @@ public abstract class ESAbstractSessionProvider {
 	 * </p>
 	 * 
 	 * @param server
-	 *            This parameter is a hint from the {@link ESServer}. For that reason it can be null. A common
+	 *            This parameter is a hint from the {@link ESServer}. For that reason it can be {@code null}. A common
 	 *            example is share, where the user first has to select the server before logging in. If {@link ESServer}
 	 *            is set you should allow the user to select the account for the given server.
 	 * 
 	 * @return an user session. It is not specified whether this session is logged in or logged out.
 	 * @throws ESException in case an exception occurred while obtaining the user session
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public abstract ESUsersession provideUsersession(ESServer server) throws ESException;
 
@@ -120,6 +127,8 @@ public abstract class ESAbstractSessionProvider {
 	 *         to determine whether the passed in session and the one that is returned need to differ
 	 * 
 	 * @throws ESException in case an exception occurred while logging in the given session
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public abstract ESUsersession login(ESUsersession usersession) throws ESException;
 }

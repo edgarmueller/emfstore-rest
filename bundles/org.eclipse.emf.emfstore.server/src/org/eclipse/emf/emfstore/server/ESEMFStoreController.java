@@ -6,8 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * jsommerfeldt
+ * Contributors:
+ * Julian Sommerfeldt - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server;
 
@@ -19,9 +20,13 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
  * 
  * @author jsommerfeldt
  * 
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public final class ESEMFStoreController {
 
+	/**
+	 * Private constructor.
+	 */
 	private ESEMFStoreController() {
 
 	}

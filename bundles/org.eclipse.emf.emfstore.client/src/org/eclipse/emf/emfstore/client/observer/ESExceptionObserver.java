@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
@@ -17,14 +18,19 @@ import org.eclipse.emf.emfstore.common.ESObserver;
  * Observes exceptions and tries to handle them.
  * 
  * @author koegel
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESExceptionObserver extends ESObserver {
 
 	/**
-	 * Handle the exception.
+	 * Handles the given {@link RuntimeException}.
 	 * 
-	 * @param exception the exception
-	 * @return true if exception was successfully handled
+	 * @param exception
+	 *            the exception to be handled
+	 * @return {@code true} if exception was successfully handled, {@code false} otherwise
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	boolean handleError(RuntimeException exception);
 }

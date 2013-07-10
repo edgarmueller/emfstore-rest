@@ -43,7 +43,6 @@ import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.commons.codec.binary.Base64;
 import org.eclipse.emf.emfstore.client.exceptions.ESCertificateException;
-import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.client.provider.ESClientConfigurationProvider;
 import org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
@@ -201,8 +200,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @see org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager#addCertificate(java.lang.String,
 	 *      java.lang.String)
 	 */
-	public void addCertificate(String alias, String path) throws ESInvalidCertificateException,
-		ESCertificateException {
+	public void addCertificate(String alias, String path) throws ESCertificateException {
 		FileInputStream fileInputStream = null;
 		try {
 			fileInputStream = new FileInputStream(path);
@@ -246,8 +244,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 * @see org.eclipse.emf.emfstore.client.provider.ESKeyStoreManager#addCertificate(java.lang.String,
 	 *      java.io.InputStream)
 	 */
-	public void addCertificate(String alias, InputStream certificate) throws ESInvalidCertificateException,
-		ESCertificateException {
+	public void addCertificate(String alias, InputStream certificate) throws ESCertificateException {
 		if (!isDefaultCertificate(alias)) {
 			loadKeyStore();
 			try {
@@ -257,7 +254,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 				storeKeyStore();
 			} catch (CertificateException e) {
 				String message = "Please choose a valid certificate!";
-				throw new ESInvalidCertificateException(message);
+				throw new ESCertificateException(message);
 			} catch (KeyStoreException e) {
 				String message = "Storing certificate failed!";
 				WorkspaceUtil.logException(message, e);
