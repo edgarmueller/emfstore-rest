@@ -14,6 +14,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.Abs
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 
 public class TestConflictResolver extends AbstractConflictResolver {
 
@@ -25,7 +26,7 @@ public class TestConflictResolver extends AbstractConflictResolver {
 	}
 
 	@Override
-	protected boolean controlDecisionManager(DecisionManager decisionManager) {
+	protected boolean controlDecisionManager(DecisionManager decisionManager, ChangeConflictSet changeConflictSet) {
 		int counter = 0;
 		for (Conflict conflict : decisionManager.getConflicts()) {
 			conflict.setSolution(conflict.getOptionOfType(OptionType.MyOperation));

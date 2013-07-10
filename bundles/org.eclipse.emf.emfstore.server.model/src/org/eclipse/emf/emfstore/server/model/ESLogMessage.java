@@ -22,9 +22,6 @@ import java.util.Date;
  */
 public interface ESLogMessage {
 
-	/** Factory for creating ILogMessages. */
-	ESLogMessageFactory FACTORY = ESLogMessageFactory.INSTANCE;
-
 	/**
 	 * Returns the actual log message.
 	 * 

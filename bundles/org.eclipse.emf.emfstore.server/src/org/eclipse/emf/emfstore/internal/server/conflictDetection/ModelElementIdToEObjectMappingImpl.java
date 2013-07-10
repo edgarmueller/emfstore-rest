@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isCreateDelete;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -76,8 +78,14 @@ public class ModelElementIdToEObjectMappingImpl implements ModelElementIdToEObje
 	 *            be added to the mapping
 	 */
 	public ModelElementIdToEObjectMappingImpl(ModelElementIdToEObjectMapping mapping,
-		ChangePackage changePackage) {
+		List<AbstractOperation> operationsList1, List<AbstractOperation> operationsList2) {
 		this(mapping);
+		this.put(operationsList1);
+		this.put(operationsList2);
+	}
+
+	public ModelElementIdToEObjectMappingImpl(Project project, ChangePackage changePackage) {
+		this(project);
 		this.put(changePackage);
 	}
 
@@ -88,8 +96,25 @@ public class ModelElementIdToEObjectMappingImpl implements ModelElementIdToEObje
 	 * @param changePackage
 	 *            the {@link ChangePackage} whose model elements should be added to the mapping
 	 */
+	public void put(List<ChangePackage> changePackages) {
+		for (ChangePackage changePackage : changePackages) {
+			put(changePackage);
+		}
+	}
+
+	/**
+	 * Adds all model elements that are involved in operations contained in the {@link ChangePackage} and their
+	 * respective IDs into the mapping.
+	 * 
+	 * @param changePackage
+	 *            the {@link ChangePackage} whose model elements should be added to the mapping
+	 */
 	public void put(ChangePackage changePackage) {
-		for (AbstractOperation op : changePackage.getOperations()) {
+		put(changePackage.getOperations());
+	}
+
+	public void put(Collection<AbstractOperation> operations) {
+		for (AbstractOperation op : operations) {
 			scanOperationIntoMapping(op);
 		}
 	}

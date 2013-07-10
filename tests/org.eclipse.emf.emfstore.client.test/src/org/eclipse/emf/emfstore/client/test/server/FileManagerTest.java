@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * mkoegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.server;
@@ -25,8 +25,6 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus.Status;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.Test;
 
@@ -42,12 +40,11 @@ public class FileManagerTest extends TransmissionTests {
 	public void testTransfer() throws ESException, IOException, InterruptedException {
 		File file = File.createTempFile("foo", "tmp");
 		file.deleteOnExit();
-		LogMessage msg = VersioningFactory.eINSTANCE.createLogMessage();
 		FileIdentifier id = getProjectSpace1().addFile(file);
 		// dummy change, addFile is not recognized as a change
 		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
 		getProjectSpace1().getProject().addModelElement(useCase);
-		getProjectSpace1().commit(msg, null, null);
+		getProjectSpace1().commit("SomeCommitMessage", null, null);
 
 		getProjectSpace2().update(new NullProgressMonitor());
 		FileDownloadStatus status = getProjectSpace2().getFile(id);
@@ -70,12 +67,11 @@ public class FileManagerTest extends TransmissionTests {
 	public void testTransferWithBlocking() throws ESException, IOException, InterruptedException {
 		File file = File.createTempFile("foo", "tmp");
 		file.deleteOnExit();
-		LogMessage msg = VersioningFactory.eINSTANCE.createLogMessage();
 		FileIdentifier id = getProjectSpace1().addFile(file);
 		// dummy change, addFile is not recognized as a change
 		final UseCase useCase = RequirementFactory.eINSTANCE.createUseCase();
 		getProjectSpace1().getProject().addModelElement(useCase);
-		getProjectSpace1().commit(msg, null, null);
+		getProjectSpace1().commit("SomeCommitMessage", null, null);
 
 		getProjectSpace2().update(new NullProgressMonitor());
 		FileDownloadStatus status = getProjectSpace2().getFile(id);

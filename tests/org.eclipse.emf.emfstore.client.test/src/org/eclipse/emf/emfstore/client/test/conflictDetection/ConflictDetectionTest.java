@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * chodnick
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
@@ -22,8 +22,6 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.IndexSensitiveConflictDetectionStrategy;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -53,16 +51,6 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	}
 
 	/**
-	 * Returns a conflict detection strategy to use.
-	 * 
-	 * @return a conflict detection strategy
-	 */
-
-	public ConflictDetectionStrategy getConflictDetectionStrategy() {
-		return new IndexSensitiveConflictDetectionStrategy();
-	}
-
-	/**
 	 * Convenience to get an operation by type.
 	 * 
 	 * @param clazz class of operation
@@ -85,7 +73,8 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	 * @return boolean
 	 */
 	protected boolean doConflict(AbstractOperation opA, AbstractOperation opB) {
-		return getConflictDetectionStrategy().doConflict(opB, opA);
+		// MKCD
+		return true;
 	}
 
 	public <T extends AbstractOperation> AbstractOperation myCheckAndGetOperation(

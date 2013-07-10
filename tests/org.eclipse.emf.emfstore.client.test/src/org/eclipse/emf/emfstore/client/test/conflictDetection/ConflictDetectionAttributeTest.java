@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * chodnick
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
@@ -75,7 +75,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
 		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
 
@@ -122,7 +122,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
 		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
 		// should not conflict, the same change happens on both sides
@@ -173,7 +173,7 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
 		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
 

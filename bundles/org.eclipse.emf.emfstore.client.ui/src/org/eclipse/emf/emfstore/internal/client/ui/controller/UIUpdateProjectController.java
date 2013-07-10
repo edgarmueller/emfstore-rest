@@ -15,28 +15,24 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESPagedUpdateConfig;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
-import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
-import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
-import org.eclipse.emf.emfstore.internal.client.ui.dialogs.EMFStoreMessageDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.UpdateDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.MergeProjectHandler;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
+import org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.server.ESConflictSet;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
@@ -146,38 +142,12 @@ public class UIUpdateProjectController extends
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException)
 	 */
-	public boolean conflictOccurred(final ESChangeConflict changeConflict,
+	public boolean conflictOccurred(final ESConflictSet changeConflict,
 		final IProgressMonitor monitor) {
 		// TODO OTS
-		boolean mergeSuccessful = false;
-		try {
-			final ProjectSpace internalProject = ((ESLocalProjectImpl) localProject).toInternalAPI();
-			final ChangeConflict internalChangeConflict = ((ESChangeConflictImpl) changeConflict).toInternalAPI();
-
-			// merge opens up a dialog
-			return internalProject.merge(
-				((ESPrimaryVersionSpecImpl) resolvedVersion).toInternalAPI(),
-				internalChangeConflict,
-				new MergeProjectHandler(),
-				UIUpdateProjectController.this,
-				monitor);
-		} catch (final ESException e) {
-			RunInUI.run(new Callable<Void>() {
-				public Void call() throws Exception {
-					handleMergeException(e);
-					return null;
-				}
-			});
-		}
-
-		return mergeSuccessful;
-	}
-
-	private void handleMergeException(ESException e) {
-		WorkspaceUtil.logException(String.format(
-			"Exception while merging the project %s!",
-			localProject.getProjectName()), e);
-		EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
+		final ProjectSpace internalProject = ((ESLocalProjectImpl) localProject).toInternalAPI();
+		final ChangeConflictSet internalChangeConflict = ((ESConflictSetImpl) changeConflict).toInternalAPI();
+		return new MergeProjectHandler(false).resolveConflicts(internalProject.getProject(), internalChangeConflict);
 	}
 
 	/**
@@ -268,19 +238,5 @@ public class UIUpdateProjectController extends
 		return localProject.resolveVersionSpec(
 			ESVersionSpec.FACTORY.createPAGEDUPDATE(baseVersion, maxChanges),
 			monitor);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#checksumCheckFailed(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor monitor) throws ESException {
-		ESChecksumErrorHandler errorHandler = Configuration.getClientBehavior().getChecksumErrorHandler();
-		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

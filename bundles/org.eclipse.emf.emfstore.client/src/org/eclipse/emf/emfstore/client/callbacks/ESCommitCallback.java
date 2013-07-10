@@ -15,9 +15,7 @@ package org.eclipse.emf.emfstore.client.callbacks;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Callback interface for implementors that are interested in influencing the
@@ -76,23 +74,6 @@ public interface ESCommitCallback {
 	void noLocalChanges(ESLocalProject project);
 
 	/**
-	 * Called when the checksum computed for a local project differs from the one calculated on the server side.
-	 * 
-	 * @param project
-	 *            the {@link ESLocalProject} containing the corrupted project
-	 * @param versionSpec
-	 *            the version specifier containing the correct checksum received from the server
-	 * @param monitor
-	 *            an {@link IProgressMonitor} to inform about the progress
-	 * 
-	 * @return whether the commit should be continued, {@code true}, if so, {@code false} otherwise
-	 * 
-	 * @throws ESException in case any error occurs during the execution of the checksum error handler
-	 */
-	boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-		throws ESException;
-
-	/**
 	 * <p>
 	 * Default implementation of a callback interface for commit.
 	 * </p>
@@ -115,11 +96,6 @@ public interface ESCommitCallback {
 
 		public void noLocalChanges(ESLocalProject project) {
 			// do nothing
-		}
-
-		public boolean checksumCheckFailed(ESLocalProject project, ESPrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) {
-			return true;
 		}
 	};
 }

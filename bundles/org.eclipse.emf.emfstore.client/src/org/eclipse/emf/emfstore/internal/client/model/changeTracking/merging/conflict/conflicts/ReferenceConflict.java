@@ -6,20 +6,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
-import java.util.Set;
 
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 
 /**
  * Container for {@link MultiReferenceConflict} and {@link SingleReferenceConflict}.
@@ -39,14 +41,29 @@ public class ReferenceConflict extends Conflict {
 	 * @param leftOperation the operation representing all left operations
 	 * @param rightOperation the operation representing all right operations
 	 */
-	public ReferenceConflict(Conflict conflict, Set<AbstractOperation> myOps, Set<AbstractOperation> theirOps,
-		AbstractOperation leftOperation, AbstractOperation rightOperation) {
-		super(myOps, theirOps, leftOperation, rightOperation, conflict.getDecisionManager(), conflict.isLeftMy(), false);
-		if (!(conflict instanceof SingleReferenceConflict || conflict instanceof MultiReferenceConflict)) {
-			throw new IllegalStateException("Only reference conflicts allowed.");
+	public ReferenceConflict(boolean underlyingSingleConflict, ConflictBucket conf, DecisionManager decisionManager) {
+		super(conf, decisionManager, true, false);
+		if (underlyingSingleConflict) {
+			this.conflict = new SingleReferenceConflict(conf, conf.getMyOperation(), conf.getTheirOperation(),
+				decisionManager);
 		}
-		this.conflict = conflict;
+		else {
+			this.conflict = createMultiMultiConflict(conf, conf.getMyOperation(), conf.getTheirOperation(),
+				decisionManager);
+			this.leftIsMy = ((MultiReferenceOperation) conf.getMyOperation()).isAdd();
+
+		}
 		init();
+	}
+
+	private Conflict createMultiMultiConflict(ConflictBucket conflictBucket, AbstractOperation my,
+		AbstractOperation their,
+		DecisionManager decisionManager) {
+		if (((MultiReferenceOperation) my).isAdd()) {
+			return new MultiReferenceConflict(conflictBucket, my, their, decisionManager, true);
+		} else {
+			return new MultiReferenceConflict(conflictBucket, their, my, decisionManager, false);
+		}
 	}
 
 	/**

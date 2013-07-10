@@ -17,7 +17,6 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import static org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
@@ -26,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation;
 
@@ -42,10 +41,9 @@ public class MultiReferenceSetConflict extends Conflict {
 	 * @param decisionManager decisionmanager
 	 * @param myMultiRef is my multireference
 	 */
-	public MultiReferenceSetConflict(Set<AbstractOperation> multiRef, Set<AbstractOperation> multiRefSet,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+	public MultiReferenceSetConflict(ConflictBucket conf, DecisionManager decisionManager,
 		boolean myMultiRef) {
-		super(multiRef, multiRefSet, leftOperation, rightOperation, decisionManager, myMultiRef, false);
+		super(conf, decisionManager, myMultiRef, false);
 		containmentConflict = ((MultiReferenceOperation) getLeftOperation()).isAdd()
 			&& !getLeftOperation().getModelElementId().equals(getRightOperation().getModelElementId());
 		init();

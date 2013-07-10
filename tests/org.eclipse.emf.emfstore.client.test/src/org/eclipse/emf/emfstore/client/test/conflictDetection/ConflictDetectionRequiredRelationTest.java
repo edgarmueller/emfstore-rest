@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * chodnick
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
@@ -64,13 +64,13 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation createActor = ops.get(0);
 		AbstractOperation addActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, addActor).size());
 		assertSame(cd.getRequired(ops, addActor).get(0), createActor);
 
-		assertEquals(1, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
+		assertEquals(1, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
 
 	}
 
@@ -102,18 +102,18 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(1);
 		AbstractOperation removeActor = ops.get(2);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, removeActor).size());
 		assertSame(cd.getRequired(ops, removeActor).get(0), createActor);
 
-		assertEquals(0, cd.getRequiring(ops, removeActor).size());
+		assertEquals(0, cd.getRequired(ops, removeActor).size());
 
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
-		assertEquals(2, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createActor).get(1), removeActor);
+		assertEquals(2, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
+		assertSame(cd.getRequired(ops, createActor).get(1), removeActor);
 
 	}
 
@@ -147,20 +147,20 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(1);
 		AbstractOperation moveActor = ops.get(2);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(2, cd.getRequired(ops, moveActor).size());
 		assertSame(cd.getRequired(ops, moveActor).get(0), createActor);
 		assertSame(cd.getRequired(ops, moveActor).get(1), addActor);
 
-		assertEquals(0, cd.getRequiring(ops, moveActor).size());
+		assertEquals(0, cd.getRequired(ops, moveActor).size());
 
-		assertEquals(1, cd.getRequiring(ops, addActor).size());
-		assertSame(cd.getRequiring(ops, addActor).get(0), moveActor);
+		assertEquals(1, cd.getRequired(ops, addActor).size());
+		assertSame(cd.getRequired(ops, addActor).get(0), moveActor);
 
-		assertEquals(2, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createActor).get(1), moveActor);
+		assertEquals(2, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
+		assertSame(cd.getRequired(ops, createActor).get(1), moveActor);
 
 	}
 
@@ -192,18 +192,18 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(1);
 		AbstractOperation nameActor = ops.get(2);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, nameActor).size());
 		assertSame(cd.getRequired(ops, nameActor).get(0), createActor);
 
-		assertEquals(0, cd.getRequiring(ops, nameActor).size());
+		assertEquals(0, cd.getRequired(ops, nameActor).size());
 
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
-		assertEquals(2, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createActor).get(1), nameActor);
+		assertEquals(2, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
+		assertSame(cd.getRequired(ops, createActor).get(1), nameActor);
 
 	}
 
@@ -237,18 +237,18 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(1);
 		AbstractOperation taskActor = ops.get(2);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, taskActor).size());
 		assertSame(cd.getRequired(ops, taskActor).get(0), createActor);
 
-		assertEquals(0, cd.getRequiring(ops, taskActor).size());
+		assertEquals(0, cd.getRequired(ops, taskActor).size());
 
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
-		assertEquals(2, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createActor).get(1), taskActor);
+		assertEquals(2, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
+		assertSame(cd.getRequired(ops, createActor).get(1), taskActor);
 
 	}
 
@@ -282,18 +282,18 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(1);
 		AbstractOperation caseActor = ops.get(2);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, caseActor).size());
 		assertSame(cd.getRequired(ops, caseActor).get(0), createActor);
 
-		assertEquals(0, cd.getRequiring(ops, caseActor).size());
+		assertEquals(0, cd.getRequired(ops, caseActor).size());
 
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
-		assertEquals(2, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createActor).get(1), caseActor);
+		assertEquals(2, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
+		assertSame(cd.getRequired(ops, createActor).get(1), caseActor);
 
 	}
 
@@ -329,12 +329,12 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation setSolution1 = ops.get(1);
 		AbstractOperation setSolution2 = ops.get(2);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, setSolution2).size());
-		assertEquals(3, cd.getRequiring(ops, createSolution1).size());
-		assertSame(cd.getRequiring(ops, createSolution1).get(0), setSolution1);
-		assertSame(cd.getRequiring(ops, createSolution1).get(1), setSolution2);
+		assertEquals(3, cd.getRequired(ops, createSolution1).size());
+		assertSame(cd.getRequired(ops, createSolution1).get(0), setSolution1);
+		assertSame(cd.getRequired(ops, createSolution1).get(1), setSolution2);
 
 	}
 
@@ -368,7 +368,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation nameActor = ops.get(2);
 		AbstractOperation deleteActor = ops.get(3);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, deleteActor).size());
 		assertSame(cd.getRequired(ops, deleteActor).get(0), createActor);
@@ -379,10 +379,10 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		assertEquals(1, cd.getRequired(ops, addActor).size());
 		assertSame(cd.getRequired(ops, addActor).get(0), createActor);
 
-		assertEquals(3, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createActor).get(1), nameActor);
-		assertSame(cd.getRequiring(ops, createActor).get(2), deleteActor);
+		assertEquals(3, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
+		assertSame(cd.getRequired(ops, createActor).get(1), nameActor);
+		assertSame(cd.getRequired(ops, createActor).get(2), deleteActor);
 
 	}
 
@@ -417,7 +417,7 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation nameActor = ops.get(3);
 		AbstractOperation deleteSection = ops.get(4);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(0, cd.getRequired(ops, createSection).size());
 		assertEquals(0, cd.getRequired(ops, createActor).size());
@@ -432,9 +432,9 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		assertEquals(1, cd.getRequired(ops, deleteSection).size());
 		assertSame(cd.getRequired(ops, deleteSection).get(0), createSection);
 
-		assertEquals(2, cd.getRequiring(ops, createSection).size());
-		assertSame(cd.getRequiring(ops, createSection).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createSection).get(1), deleteSection);
+		assertEquals(2, cd.getRequired(ops, createSection).size());
+		assertSame(cd.getRequired(ops, createSection).get(0), addActor);
+		assertSame(cd.getRequired(ops, createSection).get(1), deleteSection);
 
 	}
 
@@ -470,15 +470,15 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation moveActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, moveActor).size());
 		assertSame(cd.getRequired(ops, moveActor).get(0), addActor);
 
-		assertEquals(0, cd.getRequiring(ops, moveActor).size());
+		assertEquals(0, cd.getRequired(ops, moveActor).size());
 
-		assertEquals(1, cd.getRequiring(ops, addActor).size());
-		assertSame(cd.getRequiring(ops, addActor).get(0), moveActor);
+		assertEquals(1, cd.getRequired(ops, addActor).size());
+		assertSame(cd.getRequired(ops, addActor).get(0), moveActor);
 
 	}
 
@@ -512,14 +512,14 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation removeActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		// the remove does not required an add, as per specification
 		assertEquals(0, cd.getRequired(ops, removeActor).size());
-		assertEquals(0, cd.getRequiring(ops, removeActor).size());
+		assertEquals(0, cd.getRequired(ops, removeActor).size());
 
 		assertEquals(0, cd.getRequired(ops, addActor).size());
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
 	}
 
@@ -554,13 +554,13 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation relocateActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(0, cd.getRequired(ops, relocateActor).size());
-		assertEquals(0, cd.getRequiring(ops, relocateActor).size());
+		assertEquals(0, cd.getRequired(ops, relocateActor).size());
 
 		assertEquals(0, cd.getRequired(ops, addActor).size());
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
 	}
 
@@ -596,13 +596,13 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation relocateActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(0, cd.getRequired(ops, relocateActor).size());
-		assertEquals(0, cd.getRequiring(ops, relocateActor).size());
+		assertEquals(0, cd.getRequired(ops, relocateActor).size());
 
 		assertEquals(0, cd.getRequired(ops, addActor).size());
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
 	}
 
@@ -635,14 +635,14 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation removeActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		// the remove does not need the add as per spec
 		assertEquals(0, cd.getRequired(ops, removeActor).size());
-		assertEquals(0, cd.getRequiring(ops, removeActor).size());
+		assertEquals(0, cd.getRequired(ops, removeActor).size());
 
 		assertEquals(0, cd.getRequired(ops, addActor).size());
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 	}
 
 	/**
@@ -677,15 +677,15 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation moveActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, moveActor).size());
 		assertSame(cd.getRequired(ops, moveActor).get(0), addActor);
 
-		assertEquals(0, cd.getRequiring(ops, moveActor).size());
+		assertEquals(0, cd.getRequired(ops, moveActor).size());
 
-		assertEquals(1, cd.getRequiring(ops, addActor).size());
-		assertSame(cd.getRequiring(ops, addActor).get(0), moveActor);
+		assertEquals(1, cd.getRequired(ops, addActor).size());
+		assertSame(cd.getRequired(ops, addActor).get(0), moveActor);
 
 	}
 
@@ -732,15 +732,15 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation moveActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(1, cd.getRequired(ops, moveActor).size());
 		assertSame(cd.getRequired(ops, moveActor).get(0), addActor);
 
-		assertEquals(0, cd.getRequiring(ops, moveActor).size());
+		assertEquals(0, cd.getRequired(ops, moveActor).size());
 
-		assertEquals(1, cd.getRequiring(ops, addActor).size());
-		assertSame(cd.getRequiring(ops, addActor).get(0), moveActor);
+		assertEquals(1, cd.getRequired(ops, addActor).size());
+		assertSame(cd.getRequired(ops, addActor).get(0), moveActor);
 
 	}
 
@@ -788,13 +788,13 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation relocateActor = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(0, cd.getRequired(ops, relocateActor).size());
-		assertEquals(0, cd.getRequiring(ops, relocateActor).size());
+		assertEquals(0, cd.getRequired(ops, relocateActor).size());
 
 		assertEquals(0, cd.getRequired(ops, addActor).size());
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
 	}
 
@@ -844,13 +844,13 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation addActor2 = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(0, cd.getRequired(ops, addActor).size());
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
 		assertEquals(0, cd.getRequired(ops, addActor2).size());
-		assertEquals(0, cd.getRequiring(ops, addActor2).size());
+		assertEquals(0, cd.getRequired(ops, addActor2).size());
 
 	}
 
@@ -889,13 +889,13 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation addActor = ops.get(0);
 		AbstractOperation addActor2 = ops.get(1);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(0, cd.getRequired(ops, addActor).size());
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
 		assertEquals(0, cd.getRequired(ops, addActor2).size());
-		assertEquals(0, cd.getRequiring(ops, addActor2).size());
+		assertEquals(0, cd.getRequired(ops, addActor2).size());
 
 	}
 
@@ -958,68 +958,68 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		AbstractOperation moveActor = ops.get(15);
 		AbstractOperation deleteSection = ops.get(16);
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(0, cd.getRequired(ops, createSection).size());
-		assertEquals(5, cd.getRequiring(ops, createSection).size());
-		assertSame(cd.getRequiring(ops, createSection).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createSection).get(1), nameSection);
-		assertSame(cd.getRequiring(ops, createSection).get(2), addSection2);
-		assertSame(cd.getRequiring(ops, createSection).get(3), relocateActor);
-		assertSame(cd.getRequiring(ops, createSection).get(4), deleteSection);
+		assertEquals(5, cd.getRequired(ops, createSection).size());
+		assertSame(cd.getRequired(ops, createSection).get(0), addActor);
+		assertSame(cd.getRequired(ops, createSection).get(1), nameSection);
+		assertSame(cd.getRequired(ops, createSection).get(2), addSection2);
+		assertSame(cd.getRequired(ops, createSection).get(3), relocateActor);
+		assertSame(cd.getRequired(ops, createSection).get(4), deleteSection);
 
 		assertEquals(0, cd.getRequired(ops, createSection2).size());
-		assertEquals(3, cd.getRequiring(ops, createSection2).size());
-		assertSame(cd.getRequiring(ops, createSection2).get(0), addSection2);
-		assertSame(cd.getRequiring(ops, createSection2).get(1), addActor2);
-		assertSame(cd.getRequiring(ops, createSection2).get(2), relocateActor);
+		assertEquals(3, cd.getRequired(ops, createSection2).size());
+		assertSame(cd.getRequired(ops, createSection2).get(0), addSection2);
+		assertSame(cd.getRequired(ops, createSection2).get(1), addActor2);
+		assertSame(cd.getRequired(ops, createSection2).get(2), relocateActor);
 
 		assertEquals(0, cd.getRequired(ops, createActor).size());
-		assertEquals(6, cd.getRequiring(ops, createActor).size());
-		assertSame(cd.getRequiring(ops, createActor).get(0), addActor);
-		assertSame(cd.getRequiring(ops, createActor).get(1), nameActor);
-		assertSame(cd.getRequiring(ops, createActor).get(2), relocateActor);
-		assertSame(cd.getRequiring(ops, createActor).get(3), taskActor);
-		assertSame(cd.getRequiring(ops, createActor).get(4), caseActor);
-		assertSame(cd.getRequiring(ops, createActor).get(5), moveActor);
+		assertEquals(6, cd.getRequired(ops, createActor).size());
+		assertSame(cd.getRequired(ops, createActor).get(0), addActor);
+		assertSame(cd.getRequired(ops, createActor).get(1), nameActor);
+		assertSame(cd.getRequired(ops, createActor).get(2), relocateActor);
+		assertSame(cd.getRequired(ops, createActor).get(3), taskActor);
+		assertSame(cd.getRequired(ops, createActor).get(4), caseActor);
+		assertSame(cd.getRequired(ops, createActor).get(5), moveActor);
 
 		assertEquals(0, cd.getRequired(ops, createActor2).size());
-		assertEquals(2, cd.getRequiring(ops, createActor2).size());
-		assertSame(cd.getRequiring(ops, createActor2).get(0), addActor2);
-		assertSame(cd.getRequiring(ops, createActor2).get(1), caseActor2);
+		assertEquals(2, cd.getRequired(ops, createActor2).size());
+		assertSame(cd.getRequired(ops, createActor2).get(0), addActor2);
+		assertSame(cd.getRequired(ops, createActor2).get(1), caseActor2);
 
 		assertEquals(0, cd.getRequired(ops, createUseCase).size());
-		assertEquals(3, cd.getRequiring(ops, createUseCase).size());
-		assertSame(cd.getRequiring(ops, createUseCase).get(0), caseActor);
-		assertSame(cd.getRequiring(ops, createUseCase).get(1), caseActor2);
-		assertSame(cd.getRequiring(ops, createUseCase).get(2), moveActor);
+		assertEquals(3, cd.getRequired(ops, createUseCase).size());
+		assertSame(cd.getRequired(ops, createUseCase).get(0), caseActor);
+		assertSame(cd.getRequired(ops, createUseCase).get(1), caseActor2);
+		assertSame(cd.getRequired(ops, createUseCase).get(2), moveActor);
 
 		assertEquals(0, cd.getRequired(ops, createTask).size());
-		assertEquals(1, cd.getRequiring(ops, createTask).size());
-		assertSame(cd.getRequiring(ops, createTask).get(0), taskActor);
+		assertEquals(1, cd.getRequired(ops, createTask).size());
+		assertSame(cd.getRequired(ops, createTask).get(0), taskActor);
 
 		assertEquals(2, cd.getRequired(ops, addActor).size());
 		assertSame(cd.getRequired(ops, addActor).get(0), createSection);
 		assertSame(cd.getRequired(ops, addActor).get(1), createActor);
-		assertEquals(0, cd.getRequiring(ops, addActor).size());
+		assertEquals(0, cd.getRequired(ops, addActor).size());
 
 		assertEquals(1, cd.getRequired(ops, nameActor).size());
 		assertSame(cd.getRequired(ops, nameActor).get(0), createActor);
-		assertEquals(0, cd.getRequiring(ops, nameActor).size());
+		assertEquals(0, cd.getRequired(ops, nameActor).size());
 
 		assertEquals(1, cd.getRequired(ops, nameSection).size());
 		assertSame(cd.getRequired(ops, nameSection).get(0), createSection);
-		assertEquals(0, cd.getRequiring(ops, nameSection).size());
+		assertEquals(0, cd.getRequired(ops, nameSection).size());
 
 		assertEquals(2, cd.getRequired(ops, addSection2).size());
 		assertSame(cd.getRequired(ops, addSection2).get(0), createSection);
 		assertSame(cd.getRequired(ops, addSection2).get(1), createSection2);
-		assertEquals(0, cd.getRequiring(ops, addSection2).size());
+		assertEquals(0, cd.getRequired(ops, addSection2).size());
 
 		assertEquals(2, cd.getRequired(ops, addActor2).size());
 		assertSame(cd.getRequired(ops, addActor2).get(0), createSection2);
 		assertSame(cd.getRequired(ops, addActor2).get(1), createActor2);
-		assertEquals(0, cd.getRequiring(ops, addActor2).size());
+		assertEquals(0, cd.getRequired(ops, addActor2).size());
 
 		assertEquals(3, cd.getRequired(ops, relocateActor).size());
 		// note, section create is required, because the relocation goes from
@@ -1028,33 +1028,33 @@ public class ConflictDetectionRequiredRelationTest extends ConflictDetectionTest
 		assertSame(cd.getRequired(ops, relocateActor).get(0), createSection);
 		assertSame(cd.getRequired(ops, relocateActor).get(1), createSection2);
 		assertSame(cd.getRequired(ops, relocateActor).get(2), createActor);
-		assertEquals(0, cd.getRequiring(ops, relocateActor).size());
+		assertEquals(0, cd.getRequired(ops, relocateActor).size());
 
 		assertEquals(2, cd.getRequired(ops, taskActor).size());
 		assertSame(cd.getRequired(ops, taskActor).get(0), createActor);
 		assertSame(cd.getRequired(ops, taskActor).get(1), createTask);
-		assertEquals(0, cd.getRequiring(ops, taskActor).size());
+		assertEquals(0, cd.getRequired(ops, taskActor).size());
 
 		assertEquals(2, cd.getRequired(ops, caseActor).size());
 		assertSame(cd.getRequired(ops, caseActor).get(0), createActor);
 		assertSame(cd.getRequired(ops, caseActor).get(1), createUseCase);
-		assertEquals(1, cd.getRequiring(ops, caseActor).size());
-		assertSame(cd.getRequiring(ops, caseActor).get(0), moveActor);
+		assertEquals(1, cd.getRequired(ops, caseActor).size());
+		assertSame(cd.getRequired(ops, caseActor).get(0), moveActor);
 
 		assertEquals(2, cd.getRequired(ops, caseActor2).size());
 		assertSame(cd.getRequired(ops, caseActor2).get(0), createActor2);
 		assertSame(cd.getRequired(ops, caseActor2).get(1), createUseCase);
-		assertEquals(0, cd.getRequiring(ops, caseActor2).size());
+		assertEquals(0, cd.getRequired(ops, caseActor2).size());
 
 		assertEquals(3, cd.getRequired(ops, moveActor).size());
 		assertSame(cd.getRequired(ops, moveActor).get(0), createActor);
 		assertSame(cd.getRequired(ops, moveActor).get(1), createUseCase);
 		assertSame(cd.getRequired(ops, moveActor).get(2), caseActor);
-		assertEquals(0, cd.getRequiring(ops, moveActor).size());
+		assertEquals(0, cd.getRequired(ops, moveActor).size());
 
 		assertEquals(1, cd.getRequired(ops, deleteSection).size());
 		assertSame(cd.getRequired(ops, deleteSection).get(0), createSection);
-		assertEquals(0, cd.getRequiring(ops, deleteSection).size());
+		assertEquals(0, cd.getRequired(ops, deleteSection).size());
 	}
 	// END COMPLEX CODE
 

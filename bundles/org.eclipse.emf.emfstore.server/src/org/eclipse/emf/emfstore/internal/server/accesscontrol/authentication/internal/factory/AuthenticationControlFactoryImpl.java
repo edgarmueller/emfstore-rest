@@ -27,7 +27,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidPropertyExcept
  * @author wesendon
  */
 // TODO: internal
-public class AuthenticationControlFactoryImpl implements AuthenticationControlFactory {
+public class AuthenticationControlFactoryImpl implements ESAuthenticationControlFactory {
 
 	/**
 	 * {@inheritDoc}

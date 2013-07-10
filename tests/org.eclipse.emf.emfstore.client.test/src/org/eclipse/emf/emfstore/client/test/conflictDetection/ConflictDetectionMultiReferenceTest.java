@@ -71,7 +71,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -125,7 +125,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -167,7 +167,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		// index conflicts expected: op from project1 index-conflicts with both ops from clonedProject
 		assertEquals(2, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
@@ -205,7 +205,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		// no index conflict expected: the operations are perfect opposites
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -246,7 +246,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		// no index conflict expected: operations are identical
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -289,7 +289,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(2, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
 		assertEquals(1, cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size());
@@ -329,7 +329,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		assertEquals(2, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
 		assertEquals(1, cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size());
@@ -367,7 +367,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -415,7 +415,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -457,7 +457,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -500,7 +500,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
 			.size());
@@ -540,7 +540,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -581,7 +581,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		assertEquals(cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size(), cd
 			.getConflictingIndexIntegrity(ops1, oclonedProjectSpace)
 			.size());
@@ -621,7 +621,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -665,7 +665,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -709,7 +709,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -746,7 +746,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -789,7 +789,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -829,7 +829,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -873,7 +873,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -917,7 +917,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
 		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
@@ -963,7 +963,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 
 		// no index conflict
 		Set<AbstractOperation> indexConflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
@@ -1013,7 +1013,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1056,7 +1056,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1105,7 +1105,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1158,7 +1158,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// index conflict expected, implicitly actor gets a new parent in each copy
 		// since that op has no index
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
@@ -1207,7 +1207,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1256,7 +1256,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1303,7 +1303,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1348,7 +1348,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1394,7 +1394,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1442,7 +1442,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1492,7 +1492,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1540,7 +1540,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
@@ -1588,7 +1588,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1635,7 +1635,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1681,7 +1681,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1724,7 +1724,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1770,7 +1770,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1815,7 +1815,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1858,7 +1858,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1906,7 +1906,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -1955,7 +1955,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2002,7 +2002,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2049,7 +2049,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2097,7 +2097,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2145,7 +2145,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2195,7 +2195,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2243,7 +2243,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2290,7 +2290,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2337,7 +2337,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2384,7 +2384,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2434,7 +2434,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		// two reasons to conflict: 1. two competing adds by parent, 2. add and move might (actually do) affect the same
 		// index
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), 2);
@@ -2480,7 +2480,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2527,7 +2527,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2574,7 +2574,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2623,7 +2623,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2673,7 +2673,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2721,7 +2721,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2770,7 +2770,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
@@ -2818,10 +2818,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), conflicts
 			.size());
 		// index-integrity conflict: result dependent on serialization
 		assertEquals(1, conflicts.size());
@@ -2866,7 +2865,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
+		ConflictDetector cd = new ConflictDetector();
 		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
 		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
 			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)

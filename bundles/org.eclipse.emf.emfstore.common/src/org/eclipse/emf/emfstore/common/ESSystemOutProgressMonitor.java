@@ -7,19 +7,18 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors: 
- * koegel
+ * Maximilian Koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.common;
+package org.eclipse.emf.emfstore.common;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
- * Progress Monitor with console output.
+ * Progress Monitor with output to System.out.
  * 
  * @author koegel
  */
-// TODO: internal
-public class ConsoleProgressMonitor implements IProgressMonitor {
+public class ESSystemOutProgressMonitor implements IProgressMonitor {
 
 	/**
 	 * Indicates whether cancel has been requested.

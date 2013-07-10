@@ -13,6 +13,7 @@
 package org.eclipse.emf.emfstore.client;
 
 import org.eclipse.emf.ecore.xmi.DanglingHREFException;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.common.model.ESFactory;
 
 /**
@@ -66,4 +67,21 @@ public interface ESServerFactory extends ESFactory {
 	 */
 	ESServer createServer(String name, String url, int port, String certificate);
 
+	/**
+	 * Creates a server with a local name and launches a server process locally. Blocks until server is fully running.
+	 * Only one local server can be started at any point in time. Calling this method with a serve already running will
+	 * not launch another server, but just return a new ESServer.
+	 * The created server is not automatically added to the workspace, i.e.
+	 * most users will call {@link org.eclipse.emf.emfstore.client.ESWorkspace#addServer(ESServer)} in order to
+	 * to avoid {@link DanglingHREFException}s upon saving.
+	 * 
+	 * @return an {@link ESServer} instance representing the local server on the client side.
+	 * @throws ESServerStartFailedException if starting the server fails
+	 */
+	ESServer createAndStartLocalServer() throws ESServerStartFailedException;
+
+	/**
+	 * Stop the local server iff it has been started. Blocks until server has stopped fully.
+	 */
+	void stopLocalServer();
 }

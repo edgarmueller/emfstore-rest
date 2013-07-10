@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util;
@@ -15,7 +15,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.DiagramLayoutOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeMoveOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeSetOperation;
@@ -156,17 +155,6 @@ public final class OperationUtil {
 	 */
 	public static boolean isMultiAttMove(AbstractOperation operation) {
 		return operation instanceof MultiAttributeMoveOperation;
-	}
-
-	/**
-	 * Checks whether given operation is diagram operation.
-	 * 
-	 * @param operation
-	 *            operation
-	 * @return true if correct
-	 */
-	public static boolean isDiagramLayout(AbstractOperation operation) {
-		return operation instanceof DiagramLayoutOperation;
 	}
 
 	/**

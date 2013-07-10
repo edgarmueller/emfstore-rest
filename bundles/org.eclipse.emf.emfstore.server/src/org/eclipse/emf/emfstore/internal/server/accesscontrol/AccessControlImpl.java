@@ -107,10 +107,10 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 		authenticationControl = getAuthenticationFactory().createAuthenticationControl();
 	}
 
-	private AuthenticationControlFactory getAuthenticationFactory() {
+	private ESAuthenticationControlFactory getAuthenticationFactory() {
 		for (ESExtensionElement e : new ESExtensionPoint("org.eclipse.emf.emfstore.server.authenticationFactory")
 			.getExtensionElements()) {
-			AuthenticationControlFactory factory = e.getClass("class", AuthenticationControlFactory.class);
+			ESAuthenticationControlFactory factory = e.getClass("class", ESAuthenticationControlFactory.class);
 			if (factory != null) {
 				return factory;
 			}

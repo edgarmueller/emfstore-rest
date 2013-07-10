@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * ovonwesen
  * emueller
  ******************************************************************************/
@@ -22,6 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
@@ -33,7 +34,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @author ovonwesen
  * @author emueller
  */
-public class ShareController extends ServerCall<Void> {
+public class ShareController extends ServerCall<ProjectInfo> {
 
 	/**
 	 * Constructor.
@@ -54,13 +55,12 @@ public class ShareController extends ServerCall<Void> {
 	}
 
 	@Override
-	protected Void run() throws ESException {
-		doRun();
-		return null;
+	protected ProjectInfo run() throws ESException {
+		return doRun();
 	}
 
 	@SuppressWarnings("unchecked")
-	private void doRun() throws ESException {
+	private ProjectInfo doRun() throws ESException {
 
 		getProgressMonitor().beginTask("Sharing Project", 100);
 		getProgressMonitor().worked(1);
@@ -92,13 +92,13 @@ public class ShareController extends ServerCall<Void> {
 					.getInstance()
 					.getConnectionManager()
 					.createProject(
-									getUsersession().getSessionId(),
-									getProjectSpace().getProjectName() == null ? "Project@" + new Date()
-										: getProjectSpace()
-											.getProjectName(),
-									"",
-									logMessage,
-									getProjectSpace().getProject());
+						getUsersession().getSessionId(),
+						getProjectSpace().getProjectName() == null ? "Project@" + new Date()
+							: getProjectSpace()
+								.getProjectName(),
+						"",
+						logMessage,
+						getProjectSpace().getProject());
 			}
 		}.execute();
 
@@ -112,9 +112,9 @@ public class ShareController extends ServerCall<Void> {
 
 		getProjectSpace().save();
 		getProjectSpace().startChangeRecording();
-		getProjectSpace().setBaseVersion(createdProject.getVersion());
+		getProjectSpace().setBaseVersion(ModelUtil.clone(createdProject.getVersion()));
 		getProjectSpace().setLastUpdated(new Date());
-		getProjectSpace().setProjectId(createdProject.getProjectId());
+		getProjectSpace().setProjectId(ModelUtil.clone(createdProject.getProjectId()));
 		getProjectSpace().setUsersession(getUsersession());
 		getProjectSpace().saveProjectSpaceOnly();
 
@@ -132,5 +132,6 @@ public class ShareController extends ServerCall<Void> {
 		getProgressMonitor().done();
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESShareObserver.class)
 			.shareDone(getProjectSpace().toAPI());
+		return createdProject;
 	}
 }

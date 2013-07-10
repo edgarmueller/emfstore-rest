@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
@@ -41,27 +42,24 @@ import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLocalProjectIdImpl;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLogMessageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESBranchVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESTagVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
-import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
@@ -392,8 +390,8 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESPrimaryVersionSpec commit(final ESLogMessage logMessage, final ESCommitCallback callback,
-		final IProgressMonitor monitor) throws BaseVersionOutdatedException, ESException {
+	public ESPrimaryVersionSpec commit(final String logMessage, final ESCommitCallback callback,
+		final IProgressMonitor monitor) throws ESUpdateRequiredException, ESException {
 
 		checkIsShared();
 
@@ -402,16 +400,9 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 
 				public PrimaryVersionSpec call()
 					throws Exception {
-					LogMessage msg = null;
-
-					if (logMessage != null) {
-						msg = ((ESLogMessageImpl) logMessage)
-							.toInternalAPI();
-					}
-
 					return toInternalAPI()
 						.commit(
-							msg,
+							logMessage,
 							callback,
 							monitor);
 				}
@@ -429,23 +420,16 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 *      org.eclipse.emf.emfstore.internal.client.model.controller.callbacks.ICommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public ESPrimaryVersionSpec commitToBranch(final ESBranchVersionSpec branch, final ESLogMessage logMessage,
+	public ESPrimaryVersionSpec commitToBranch(final ESBranchVersionSpec branch, final String logMessage,
 		final ESCommitCallback callback, final IProgressMonitor monitor) throws InvalidVersionSpecException,
-		BaseVersionOutdatedException, ESException {
+		ESUpdateRequiredException, ESException {
 
 		PrimaryVersionSpec versionSpec = RunESCommand.WithException.runWithResult(ESException.class,
 			new Callable<PrimaryVersionSpec>() {
 
 				public PrimaryVersionSpec call()
 					throws Exception {
-					LogMessage msg = null;
 					BranchVersionSpec versionSpec = null;
-
-					if (logMessage != null) {
-						msg = ((ESLogMessageImpl) logMessage)
-							.toInternalAPI();
-					}
-
 					if (branch != null) {
 						versionSpec = ((ESBranchVersionSpecImpl) branch)
 							.toInternalAPI();
@@ -454,7 +438,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 					return toInternalAPI()
 						.commitToBranch(
 							versionSpec,
-							msg,
+							logMessage,
 							callback,
 							monitor);
 				}
@@ -609,16 +593,17 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#shareProject(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void shareProject(final ESUsersession session, final IProgressMonitor monitor) throws ESException {
+	public ESRemoteProject shareProject(final ESUsersession session, final IProgressMonitor monitor) throws ESException {
 
 		final ESUsersessionImpl usersessionImpl = (ESUsersessionImpl) session;
 
-		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
-			public Void call() throws Exception {
-				toInternalAPI().shareProject(
+		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESRemoteProject>() {
+			public ESRemoteProject call() throws Exception {
+				ProjectInfo projectInfo = toInternalAPI().shareProject(
 					usersessionImpl != null ? usersessionImpl.toInternalAPI() : null,
 					monitor);
-				return null;
+				return new ESRemoteProjectImpl(getUsersession().toInternalAPI().getServerInfo(), projectInfo);
+
 			}
 		});
 	}

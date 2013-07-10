@@ -10,43 +10,33 @@
  * Otto von Wesendonk
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.model.controller;
+package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.server.ESConflictSet;
 
 /**
- * The actual implementation of an {@link ESChangeConflictImpl} containing
+ * The actual implementation of an {@link ESConflictSetImpl} containing
  * the changes that caused the conflict.
  * 
  * @author wesendon
  * @author emueller
  */
-public class ChangeConflict implements APIDelegate<ESChangeConflict> {
+public class ChangeConflictSet implements APIDelegate<ESConflictSet> {
 
-	private List<ChangePackage> myChangePackages;
-	private List<ChangePackage> newPackages;
-	private ProjectSpace projectSpace;
-	private Set<ConflictBucketCandidate> conflictBucketCandidates;
 	private final ModelElementIdToEObjectMapping idToEObjectMapping;
-	private ESChangeConflictImpl apiImpl;
-
-	/**
-	 * Retrieve the list of change packages that caused the exception.
-	 * 
-	 * @return the list
-	 */
-	public List<ChangePackage> getNewPackages() {
-		return newPackages;
-	}
+	private ESConflictSetImpl apiImpl;
+	private Set<ConflictBucket> conflictBuckets;
+	private Set<AbstractOperation> notInvolvedInConflict;
+	private List<ChangePackage> leftChanges;
+	private List<ChangePackage> rightChanges;
 
 	/**
 	 * Constructor.
@@ -65,36 +55,14 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	 *            Contains all IDs of model elements involved in the {@link ChangePackage}s
 	 *            as well as those contained by the project in the {@link ProjectSpace}
 	 */
-	public ChangeConflict(ProjectSpace projectSpace, List<ChangePackage> myChangePackages,
-		List<ChangePackage> newPackages, Set<ConflictBucketCandidate> conflictBucketCandidates,
-		ModelElementIdToEObjectMapping idToEObjectMapping) {
-
-		this.myChangePackages = myChangePackages;
-		this.newPackages = newPackages;
-		this.projectSpace = projectSpace;
-		this.conflictBucketCandidates = conflictBucketCandidates;
+	public ChangeConflictSet(Set<ConflictBucket> conflictBuckets, Set<AbstractOperation> notInvolvedInConflict,
+		ModelElementIdToEObjectMapping idToEObjectMapping, List<ChangePackage> leftChanges,
+		List<ChangePackage> rightChanges) {
+		this.conflictBuckets = conflictBuckets;
+		this.notInvolvedInConflict = notInvolvedInConflict;
 		this.idToEObjectMapping = idToEObjectMapping;
-	}
-
-	/**
-	 * @return the ProjectSpace.
-	 */
-	public ProjectSpace getProjectSpace() {
-		return projectSpace;
-	}
-
-	/**
-	 * @return the conflict candidates
-	 */
-	public Set<ConflictBucketCandidate> getConflictBucketCandidates() {
-		return conflictBucketCandidates;
-	}
-
-	/**
-	 * @return my change package
-	 */
-	public List<ChangePackage> getMyChangePackages() {
-		return myChangePackages;
+		this.leftChanges = leftChanges;
+		this.rightChanges = rightChanges;
 	}
 
 	/**
@@ -114,7 +82,7 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 */
-	public ESChangeConflict toAPI() {
+	public ESConflictSet toAPI() {
 		if (apiImpl == null) {
 			apiImpl = createAPI();
 		}
@@ -127,8 +95,23 @@ public class ChangeConflict implements APIDelegate<ESChangeConflict> {
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
 	 */
-	public ESChangeConflictImpl createAPI() {
-		return new ESChangeConflictImpl(this);
+	public ESConflictSetImpl createAPI() {
+		return new ESConflictSetImpl(this);
 	}
 
+	public Set<AbstractOperation> getNotInvolvedInConflict() {
+		return notInvolvedInConflict;
+	}
+
+	public Set<ConflictBucket> getConflictBuckets() {
+		return conflictBuckets;
+	}
+
+	public List<ChangePackage> getLeftChanges() {
+		return leftChanges;
+	}
+
+	public List<ChangePackage> getRightChanges() {
+		return rightChanges;
+	}
 }

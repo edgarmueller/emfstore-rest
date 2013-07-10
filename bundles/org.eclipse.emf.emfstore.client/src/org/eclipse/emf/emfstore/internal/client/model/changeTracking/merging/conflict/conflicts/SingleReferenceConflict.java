@@ -6,13 +6,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -23,6 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
@@ -43,9 +43,14 @@ public class SingleReferenceConflict extends Conflict {
 	 * @param rightOperation the operation representing all right operations
 	 * @param decisionManager decisionmanager
 	 */
-	public SingleReferenceConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
-		super(myOperations, theirOperations, leftOperation, rightOperation, decisionManager);
+	public SingleReferenceConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
+		super(conflictBucket, decisionManager);
+	}
+
+	public SingleReferenceConflict(ConflictBucket conflictBucket, AbstractOperation leftOperation,
+		AbstractOperation rightOperation,
+		DecisionManager decisionManager) {
+		super(conflictBucket, leftOperation, rightOperation, decisionManager, true, true);
 	}
 
 	/**

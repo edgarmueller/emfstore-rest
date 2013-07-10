@@ -592,7 +592,6 @@ public class SetupHelper {
 	 * Commits the changes to server.
 	 */
 	public void commitChanges() {
-		final LogMessage logMessage = createLogMessage(usersession.getUsername(), "some message");
 		new EMFStoreCommand() {
 
 			@Override
@@ -601,7 +600,7 @@ public class SetupHelper {
 					.getChangePackage(getTestProjectSpace().getOperations(), true, false).getOperations().size()
 					+ " operations.");
 				try {
-					getTestProjectSpace().commit(logMessage, null, new NullProgressMonitor());
+					getTestProjectSpace().commit("SomeCommitMessage", null, new NullProgressMonitor());
 					System.out.println("commit successful!");
 				} catch (ESException e) {
 					e.printStackTrace();

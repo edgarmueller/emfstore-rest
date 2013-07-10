@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
@@ -18,8 +18,6 @@ import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementFactory;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.FineGrainedConflictDetectionStrategy;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsFactory;
 import org.junit.Test;
@@ -46,8 +44,6 @@ public class AttributeConflictTest extends ConflictDetectionTest {
 		}.run(false);
 
 		String featureName = "same Feature";
-		ConflictDetectionStrategy conflictDetectionStrategy = new FineGrainedConflictDetectionStrategy();
-
 		AttributeOperation attributeOperation1 = OperationsFactory.eINSTANCE.createAttributeOperation();
 		attributeOperation1.setClientDate(new Date());
 		attributeOperation1.setFeatureName(featureName);
@@ -65,15 +61,15 @@ public class AttributeConflictTest extends ConflictDetectionTest {
 		attributeOperation2.setOldValue("oldValue");
 		attributeOperation2.setNewValue("oldeValue");
 
-		assertEquals(false, conflictDetectionStrategy.doConflict(attributeOperation1, attributeOperation2));
+		assertEquals(false, doConflict(attributeOperation1, attributeOperation2));
 
 		attributeOperation2.setModelElementId(getProject().getModelElementId(modelElement));
 		attributeOperation2.setFeatureName(featureName + "2");
 
-		assertEquals(false, conflictDetectionStrategy.doConflict(attributeOperation1, attributeOperation2));
+		assertEquals(false, doConflict(attributeOperation1, attributeOperation2));
 
 		attributeOperation2.setFeatureName(featureName);
 
-		assertEquals(true, conflictDetectionStrategy.doConflict(attributeOperation1, attributeOperation2));
+		assertEquals(true, doConflict(attributeOperation1, attributeOperation2));
 	}
 }

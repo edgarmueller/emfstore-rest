@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
@@ -23,8 +23,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ AttributeConflictTest.class, ConflictDetectionAttributeTest.class,
 	ConflictDetectionReferenceTest.class, ConflictDetectionDeleteTest.class, ConflictDetectionMultiReferenceTest.class,
-	ConflictDetectionRequiredRelationTest.class, ConflictDetectionMultiAttributeTest.class,
-	ConflictDetectionSelectiveCommitSpecialCases.class, AllMergeTests.class
+	ConflictDetectionRequiredRelationTest.class, ConflictDetectionMultiAttributeTest.class, AllMergeTests.class
 
 })
 public class AllConflictDetectionTests {
