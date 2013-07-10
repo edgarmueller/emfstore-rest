@@ -115,7 +115,7 @@ public class Behavior {
 			}
 
 			if (checksumErrorHandler == null) {
-				checksumErrorHandler = ChecksumErrorHandler.LOG;
+				checksumErrorHandler = ChecksumErrorHandler.CANCEL;
 			}
 		}
 
