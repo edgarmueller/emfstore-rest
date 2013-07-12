@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.api;
@@ -28,7 +28,8 @@ import org.junit.runners.Suite;
 	SharedProjectTest.class,
 	UsersessionTest.class,
 	WorkspaceTest.class,
-	RemoteProjectTest.class
+	RemoteProjectTest.class,
+	ClientUtilitiesTest.class
 })
 public class AllAPITests {
 
