@@ -191,8 +191,6 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 		resourceSet = resourceSetProvider.getResourceSet();
 
-		// TODO register editing domain in resource set provider
-		// register an editing domain on the resource
 		setEditingDomain(createEditingDomain(resourceSet));
 
 		URI workspaceURI = ClientURIUtil.createWorkspaceURI();
