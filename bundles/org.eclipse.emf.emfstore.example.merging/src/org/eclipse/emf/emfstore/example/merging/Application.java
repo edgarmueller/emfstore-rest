@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.example.merging;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -27,20 +25,10 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.common.ESSystemOutProgressMonitor;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
-import org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.ESConflict;
 import org.eclipse.emf.emfstore.server.ESConflictSet;
-import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.equinox.app.IApplication;
@@ -109,54 +97,60 @@ public class Application implements IApplication {
 		try {
 			demoProjectCopy.commit(new ESSystemOutProgressMonitor());
 		} catch (ESUpdateRequiredException e) {
+			// The commit failed since the other demoProject was committed first and therefore demoProjectCopy needs an
+			// update
 			System.out.println("\nCommit of demoProjectCopy failed.");
 
-			// run update in demoProjectCopy with an UpdateCallback to handle conflicts
+			// We run update in demoProjectCopy with an UpdateCallback to handle conflicts
 			System.out.println("\nUpdate of demoProjectCopy with conflict resolver...");
-			demoProjectCopy.update(ESVersionSpec.FACTORY.createHEAD(), new MyUpdateCallback(),
-				new ESSystemOutProgressMonitor());
+			demoProjectCopy.update(ESVersionSpec.FACTORY.createHEAD(), new ESUpdateCallback() {
+				public void noChangesOnServer() {
+					// do nothing if there are no changes on the server (in this example we know
+					// there are changes anyway)
+				}
+
+				public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
+					ESModelElementIdToEObjectMapping idToEObjectMapping) {
+					// allow update to proceed, here we could also add some UI
+					return true;
+				}
+
+				public boolean conflictOccurred(ESConflictSet changeConflictSet, IProgressMonitor monitor) {
+
+					// One or more conflicts have occured, they are delivered in a change conflict set
+					// We know there is only one conflict so we grab it
+					ESConflict conflict = changeConflictSet.getConflicts().iterator().next();
+
+					// We resolve the conflict by accepting all of the conflicting local operations and rejecting all of
+					// the remote
+					// operations. This means that we revert the league name change of demoProject and accept the league
+					// name change of demoProjectCopy. The player name change in demoProject is accepted also since it
+					// was not conflicting with any other change.
+					conflict.resolveConflict(conflict.getLocalOperations(), conflict.getRemoteOperations());
+					//Finally we claim to have resolved all conflicts so update will try to proceed.
+					return true;
+				}
+			}, new ESSystemOutProgressMonitor());
+
 			// commit merge result in project 2
-			System.out.println("\nCommit of project 2 with merge result.");
+			System.out.println("\nCommit of merge result of demoProjectCopy");
 			demoProjectCopy.commit(new ESSystemOutProgressMonitor());
 
 			// After having merged the two projects update local project 1
-			System.out.println("\nUpdate of project 1 with merge result.");
+			System.out.println("\nUpdate of demoProject");
 			demoProject.update(new NullProgressMonitor());
 
-			System.out.println("\nLeague name in project 1 is now:" + league.getName());
-			System.out.println("Client run completed.");
+			//Finally we print the league and player names of both projects
+			System.out.println("\nLeague name in demoProject  is now: " + league.getName());
+			System.out.println("\nLeague name in demoProjectCopy  is now: " + leagueCopy.getName());
+			System.out.println("\nPlayer name in demoProject is now: " + league.getPlayers().get(0).getName());			
+			System.out.println("\nPlayer name in demoProjectCopy is now: " + leagueCopy.getPlayers().get(0).getName());
+			
 		}
 	}
 
 	public void stop() {
-		// TODO Auto-generated method stub
-
+		// do nothing
 	}
 }
-
-/**
- * An UpdateCallback to drive the update and use our own conflict resolver (MyConflictResolver).
- */
-class MyUpdateCallback implements ESUpdateCallback {
-	public void noChangesOnServer() {
-		// do nothing if there are no changes on the server (in this example we know
-		// there are changes anyway)
-	}
-
-	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changes,
-		ESModelElementIdToEObjectMapping idToEObjectMapping) {
-		// allow update to proceed
-		return true;
-	}
-
-	public boolean conflictOccurred(ESConflictSet changeConflictSet, IProgressMonitor monitor) {
-
-		ESConflict conflict = changeConflictSet.getConflicts().iterator().next();
-
-		// resolve the conflict by accepting all of the conflicting local operations and rejecting all of the remote
-		// operations. This means that we revert all changes of the server that conflict with changes on the client.
-		conflict.resolveConflict(conflict.getLocalOperations(), conflict.getRemoteOperations());
-		return true;
-	}
-};
 

@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.ESConflict;
 import org.eclipse.emf.emfstore.server.model.ESOperation;
 
@@ -38,21 +39,10 @@ public class ESConflictImpl extends AbstractAPIImpl<ESConflict, ConflictBucket> 
 	}
 
 	public void resolveConflict(Set<ESOperation> acceptedLocalOperations, Set<ESOperation> rejectedRemoteOperations) {
-		this.acceptedLocalOperations = acceptedLocalOperations;
-		this.rejectedRemoteOperations = rejectedRemoteOperations;
-		this.isResolved = true;
-	}
-
-	public Set<ESOperation> getAcceptedLocalOperations() {
-		return acceptedLocalOperations;
-	}
-
-	public Set<ESOperation> getRejectedRemoteOperations() {
-		return rejectedRemoteOperations;
-	}
-
-	public boolean isResolved() {
-		return isResolved;
+		Set<AbstractOperation> internalAcceptedLocalOperations = APIUtil.toInternal(acceptedLocalOperations);
+		Set<AbstractOperation> internalRejectedRemoteOperations = APIUtil.toInternal(rejectedRemoteOperations);
+		toInternalAPI().resolveConflict(internalAcceptedLocalOperations,
+			internalRejectedRemoteOperations);
 	}
 
 }
