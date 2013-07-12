@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  * koegel
  ******************************************************************************/
@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationPr
 /**
  * Interface for workspace location providers. Implementing classes provide a location for the workspace - or server
  * workspace - files to store models and other files. You may subclass {@link DefaultServerWorkspaceLocationProvider} in
- * order to ease your implementation. By convention, every path should end with an folder seperator char.
+ * order to ease your implementation. By convention, every path should end with an folder separator char.
  * 
  * @author koegel
  * @author wesendon
@@ -26,7 +26,7 @@ public interface ESLocationProvider {
 
 	/**
 	 * Get the path to the workspace directory, where the model data is stored to. This method is called only once on
-	 * workspace startup to retrieve path. If you want to use profilese look at
+	 * workspace startup to retrieve path. If you want to use profiles look at
 	 * {@link DefaultServerWorkspaceLocationProvider} and it's subclasses .
 	 * 
 	 * @return a string representing the path
