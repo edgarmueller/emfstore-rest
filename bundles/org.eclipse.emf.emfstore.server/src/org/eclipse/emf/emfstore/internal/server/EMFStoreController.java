@@ -62,7 +62,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.internal.server.startup.MigrationManager;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
@@ -133,7 +132,8 @@ public class EMFStoreController implements IApplication, Runnable {
 
 		this.loadDynamicModels();
 
-		new MigrationManager().migrateModel();
+		// FIXME: JF
+		// new MigrationManager().migrateModel();
 		this.serverSpace = initServerSpace();
 
 		initializeBranchesIfRequired(serverSpace);
