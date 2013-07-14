@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
@@ -28,9 +28,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Mult
  * 
  * @author wesendon
  */
-public class ReferenceConflict extends Conflict {
+public class ReferenceConflict extends VisualConflict {
 
-	private final Conflict conflict;
+	private final VisualConflict conflict;
 
 	/**
 	 * Default constructor.
@@ -56,7 +56,7 @@ public class ReferenceConflict extends Conflict {
 		init();
 	}
 
-	private Conflict createMultiMultiConflict(ConflictBucket conflictBucket, AbstractOperation my,
+	private VisualConflict createMultiMultiConflict(ConflictBucket conflictBucket, AbstractOperation my,
 		AbstractOperation their,
 		DecisionManager decisionManager) {
 		if (((MultiReferenceOperation) my).isAdd()) {

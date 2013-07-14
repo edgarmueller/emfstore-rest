@@ -18,14 +18,14 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 
-public class MultiAttributeSetSetConflict extends Conflict {
+public class MultiAttributeSetSetConflict extends VisualConflict {
 
 	public MultiAttributeSetSetConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
 		super(conflictBucket, decisionManager);
@@ -34,7 +34,7 @@ public class MultiAttributeSetSetConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictDescription()
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictDescription()
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {

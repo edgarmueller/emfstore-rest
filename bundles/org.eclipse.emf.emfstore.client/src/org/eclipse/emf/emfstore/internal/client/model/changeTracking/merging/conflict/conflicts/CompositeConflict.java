@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
@@ -29,7 +29,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util
  * 
  * @author wesendon
  */
-public class CompositeConflict extends Conflict {
+public class CompositeConflict extends VisualConflict {
 
 	/**
 	 * Default constructor.

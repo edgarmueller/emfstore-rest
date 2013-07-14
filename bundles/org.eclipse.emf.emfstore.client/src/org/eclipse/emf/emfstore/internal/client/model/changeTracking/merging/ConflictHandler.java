@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 
 /**
@@ -30,12 +30,12 @@ public interface ConflictHandler {
 	 * added to list of all existing conflicts.
 	 * 
 	 * @param conflict
-	 *            a {@link Conflict} instance that has been created by a {@link DecisionManager}
+	 *            a {@link VisualConflict} instance that has been created by a {@link DecisionManager}
 	 * @param idToEObjectMapping
 	 *            mapping from IDs to EObjects
 	 * 
 	 * @return the possibly modified conflict instance that will be
 	 *         added to the list of conflicts
 	 */
-	Conflict handle(Conflict conflict, ModelElementIdToEObjectMapping idToEObjectMapping);
+	VisualConflict handle(VisualConflict conflict, ModelElementIdToEObjectMapping idToEObjectMapping);
 }

@@ -69,14 +69,6 @@ public class ConflictDetector {
 		return calculateConflictCandidateBuckets(idToEObjectMapping, myOperations, theirOperations);
 	}
 
-	private Set<ConflictBucketCandidate> calculateConflictCandidateBuckets(Project project,
-		List<AbstractOperation> myOperations, List<AbstractOperation> theirOperations) {
-		ModelElementIdToEObjectMappingImpl idToEObjectMappingImpl = new ModelElementIdToEObjectMappingImpl(project,
-			myOperations, theirOperations);
-		return calculateConflictCandidateBuckets(idToEObjectMappingImpl, myOperations, theirOperations);
-
-	}
-
 	private Set<ConflictBucketCandidate> calculateConflictCandidateBuckets(
 		ModelElementIdToEObjectMapping idToEObjectMapping,
 		List<AbstractOperation> myOperations, List<AbstractOperation> theirOperations) {
@@ -124,21 +116,5 @@ public class ConflictDetector {
 			}
 		}
 		return conflictBucketsSet;
-	}
-
-	public Set<AbstractOperation> getConflicting(List<AbstractOperation> ops1, List<AbstractOperation> ops2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Set<AbstractOperation> getConflictingIndexIntegrity(List<AbstractOperation> ops1,
-		List<AbstractOperation> ops2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<AbstractOperation> getRequired(List<AbstractOperation> ops, AbstractOperation addActor) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

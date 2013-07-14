@@ -12,7 +12,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components.ContextComponent;
@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Control;
  */
 public class DecisionBox extends Composite {
 
-	private final Conflict conflict;
+	private final VisualConflict conflict;
 	private final DecisionManager decisionManager;
 	private OptionComponent optionComponent;
 
@@ -50,7 +50,7 @@ public class DecisionBox extends Composite {
 	 * @param conflict
 	 *            the conflict
 	 */
-	public DecisionBox(Composite parent, DecisionManager decisionManager, Color color, Conflict conflict) {
+	public DecisionBox(Composite parent, DecisionManager decisionManager, Color color, VisualConflict conflict) {
 		super(parent, SWT.BORDER);
 		this.decisionManager = decisionManager;
 		this.conflict = conflict;
@@ -118,7 +118,7 @@ public class DecisionBox extends Composite {
 	 * 
 	 * @return conflict
 	 */
-	public Conflict getConflict() {
+	public VisualConflict getConflict() {
 		return conflict;
 	}
 }

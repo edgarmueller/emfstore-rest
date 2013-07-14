@@ -14,7 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.common.ESDisposable;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
@@ -44,7 +44,7 @@ public class ContextComponent extends Composite implements ESDisposable {
 	 * @param conflict
 	 *            conflict
 	 */
-	public ContextComponent(DecisionBox parent, Conflict conflict) {
+	public ContextComponent(DecisionBox parent, VisualConflict conflict) {
 		super(parent, SWT.NONE);
 
 		ConflictContext context = conflict.getConflictContext();

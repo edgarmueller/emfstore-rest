@@ -451,7 +451,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			changePackage.getOperations().add(copy);
 		}
 		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
-		logMessage.setAuthor(getUsersession().getUsername());
+		if (getUsersession() != null) {
+			logMessage.setAuthor(getUsersession().getUsername());
+		}
+		else {
+			logMessage.setAuthor("<Unkown>");
+		}
 		logMessage.setClientDate(new Date());
 		changePackage.setLogMessage(logMessage);
 		return changePackage;

@@ -16,7 +16,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
 
@@ -123,7 +123,7 @@ public final class DecisionUtil {
 	 *            conflict
 	 * @return true, if so
 	 */
-	public static boolean detailsNeeded(Conflict conflict) {
+	public static boolean detailsNeeded(VisualConflict conflict) {
 		if (!conflict.hasDetails()) {
 			return false;
 		}
