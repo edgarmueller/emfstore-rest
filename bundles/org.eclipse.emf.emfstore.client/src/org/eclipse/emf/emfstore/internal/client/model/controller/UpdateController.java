@@ -168,7 +168,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Applying changes");
 
-		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, getProgressMonitor());
+		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, getProgressMonitor(), true);
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESUpdateObserver.class)
 			.updateCompleted(getProjectSpace().toAPI(), getProgressMonitor());

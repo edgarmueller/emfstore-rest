@@ -196,25 +196,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            changes from the current branch
 	 * @param myChanges
 	 *            merged changes
-	 * 
-	 * @throws ESException in case the checksum comparison failed and the activated IChecksumErrorHandler
-	 *             also failed
-	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges)
-		throws ESException {
-		applyChanges(baseSpec, incoming, myChanges, new NullProgressMonitor());
-	}
-
-	/**
-	 * Helper method which applies merged changes on the ProjectSpace. This
-	 * method is used by merge mechanisms in update as well as branch merging.
-	 * 
-	 * @param baseSpec
-	 *            new base version
-	 * @param incoming
-	 *            changes from the current branch
-	 * @param myChanges
-	 *            merged changes
 	 * @param progressMonitor
 	 *            an {@link IProgressMonitor} to inform about the progress of the UpdateCallback in case it is called
 	 * 
@@ -222,7 +203,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *             also failed
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges,
-		IProgressMonitor progressMonitor) throws ESException {
+		IProgressMonitor progressMonitor, boolean runChecksumTestOnBaseSpec) throws ESException {
 
 		// revert local changes
 		notifyPreRevertMyChanges(getLocalChangePackage());
@@ -233,6 +214,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		applyChangePackages(incoming, false);
 		notifyPostApplyTheirChanges(incoming);
 
+		if (runChecksumTestOnBaseSpec) {
+			runChecksumTests(baseSpec, incoming, progressMonitor);
+		}
+		// reapply local changes
+		applyOperations(myChanges.getOperations(), true);
+		notifyPostApplyMergedChanges(myChanges);
+
+		setBaseVersion(baseSpec);
+		saveProjectSpaceOnly();
+	}
+
+	private void runChecksumTests(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming,
+		IProgressMonitor progressMonitor)
+		throws ESException {
 		progressMonitor.subTask("Computing checksum");
 		if (!performChecksumCheck(baseSpec, getProject())) {
 			progressMonitor.subTask("Invalid checksum.  Activating checksum error handler.");
@@ -249,13 +244,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				throw new ESException("Update cancelled by checksum error handler due to invalid checksum.");
 			}
 		}
-
-		// reapply local changes
-		applyOperations(myChanges.getOperations(), true);
-		notifyPostApplyMergedChanges(myChanges);
-
-		setBaseVersion(baseSpec);
-		saveProjectSpaceOnly();
 	}
 
 	private void applyChangePackage(ChangePackage changePackage, boolean addOperations) {
@@ -864,9 +852,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					baseChanges, getProject());
 
 				if (conflictResolver.resolveConflicts(getProject(), conflictSet)) {
-					// TODO: do we need to care about checksum errors here?
 					ChangePackage resolvedConflicts = mergeResolvedConflicts(conflictSet, branchChanges, baseChanges);
-					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts);
+					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts, monitor, false);
 					setMergedVersion(ModelUtil.clone(branchSpec));
 				}
 
