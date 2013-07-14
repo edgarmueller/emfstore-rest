@@ -303,7 +303,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 			@Override
 			protected ProjectInfo run() throws ESException {
 				return getConnectionManager().createEmptyProject(getSessionId(), projectName, "",
-																	createLogmessage(getUsersession(), projectName));
+					createLogmessage(getUsersession(), projectName));
 			}
 		};
 	}

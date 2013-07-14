@@ -532,8 +532,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		for (File file : workspaceFile.listFiles()) {
 			if (file.getName().startsWith(Configuration.getFileInfo().getProjectSpaceDirectoryPrefix())) {
 				String projectFilePath = file.getAbsolutePath() + File.separatorChar
-					+ Configuration.getFileInfo().ProjectFragmentFileName
-					+ Configuration.getFileInfo().ProjectFragmentExtension;
+					+ Configuration.getFileInfo().PROJECT_FILE_NAME
+					+ Configuration.getFileInfo().PROJECT_FILE_EXTENSION;
 				URI projectURI = URI.createFileURI(projectFilePath);
 				String operationsFilePath = null;
 				File[] listFiles = file.listFiles();
@@ -543,7 +543,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 					continue;
 				}
 				for (File subDirFile : listFiles) {
-					if (subDirFile.getName().endsWith(Configuration.getFileInfo().LocalChangePackageExtension)) {
+					if (subDirFile.getName().endsWith(Configuration.getFileInfo().LOCAL_CHANGEPACKAGE_EXTENSION)) {
 						operationsFilePath = subDirFile.getAbsolutePath();
 					}
 				}

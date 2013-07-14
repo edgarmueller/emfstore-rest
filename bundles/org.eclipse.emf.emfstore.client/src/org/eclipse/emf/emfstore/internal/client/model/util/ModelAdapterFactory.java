@@ -15,7 +15,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.internal.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -28,7 +27,7 @@ import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage
+ * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage
  * @generated
  */
 public class ModelAdapterFactory extends AdapterFactoryImpl {
@@ -48,7 +47,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public ModelAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = ModelPackage.eINSTANCE;
 		}
 	}
@@ -64,10 +64,12 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -79,44 +81,47 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * 
 	 * @generated
 	 */
-	protected ModelSwitch<Adapter> modelSwitch = new ModelSwitch<Adapter>() {
+	protected ModelSwitch<Adapter> modelSwitch = new ModelSwitch<Adapter>()
+	{
 		@Override
-		public Adapter caseWorkspace(Workspace object) {
+		public Adapter caseWorkspace(Workspace object)
+		{
 			return createWorkspaceAdapter();
 		}
 
 		@Override
-		public Adapter caseServerInfo(ServerInfo object) {
+		public Adapter caseServerInfo(ServerInfo object)
+		{
 			return createServerInfoAdapter();
 		}
 
 		@Override
-		public Adapter caseUsersession(Usersession object) {
+		public Adapter caseUsersession(Usersession object)
+		{
 			return createUsersessionAdapter();
 		}
 
 		@Override
-		public Adapter caseProjectSpace(ProjectSpace object) {
+		public Adapter caseProjectSpace(ProjectSpace object)
+		{
 			return createProjectSpaceAdapter();
 		}
 
 		@Override
-		public Adapter caseOperationComposite(OperationComposite object) {
-			return createOperationCompositeAdapter();
-		}
-
-		@Override
-		public Adapter casePendingFileTransfer(PendingFileTransfer object) {
+		public Adapter casePendingFileTransfer(PendingFileTransfer object)
+		{
 			return createPendingFileTransferAdapter();
 		}
 
 		@Override
-		public Adapter caseIdentifiableElement(IdentifiableElement object) {
+		public Adapter caseIdentifiableElement(IdentifiableElement object)
+		{
 			return createIdentifiableElementAdapter();
 		}
 
 		@Override
-		public Adapter defaultCase(EObject object) {
+		public Adapter defaultCase(EObject object)
+		{
 			return createEObjectAdapter();
 		}
 	};
@@ -199,24 +204,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite
-	 * <em>Operation Composite</em>}'.
-	 * <!-- begin-user-doc --> This default
-	 * implementation returns null so that we can easily ignore cases; it's
-	 * useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.client.model.OperationComposite
-	 * @generated
-	 */
-	public Adapter createOperationCompositeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer
-	 * <em>Pending File Transfer</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer <em>Pending File Transfer</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -231,15 +220,15 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdentifiableElement
-	 * <em>Identifiable Element</em>}'.
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement <em>Identifiable Element</em>}'.
 	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdentifiableElement
+	 * @see org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement
 	 * @generated
 	 */
 	public Adapter createIdentifiableElementAdapter() {

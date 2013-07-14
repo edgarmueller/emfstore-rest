@@ -436,7 +436,6 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		projectSpace.setUsersession(usersession);
 		projectSpace.setProject(project);
 		projectSpace.setResourceCount(0);
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		XMIResource res = (XMIResource) resourceSetImpl.createResource(ModelUtil.VIRTUAL_URI);

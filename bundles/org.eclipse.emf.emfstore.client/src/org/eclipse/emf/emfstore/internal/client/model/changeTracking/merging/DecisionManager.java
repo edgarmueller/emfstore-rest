@@ -76,7 +76,6 @@ public class DecisionManager {
 
 	private ConflictDetector conflictDetector;
 	private ChangeConflictSet changeConflictSet;
-	private Set<AbstractOperation> notInvolvedInConflict;
 	private ModelElementIdToEObjectMapping mapping;
 	private final boolean isBranchMerge;
 	private final Project project;
@@ -88,10 +87,6 @@ public class DecisionManager {
 	 *            the related project
 	 * @param changeConflict
 	 *            the {@link ChangechangeConflict} containing the changes leading to a potential conflict
-	 * @param baseVersion
-	 *            the base version
-	 * @param targetVersion
-	 *            new target version
 	 * @param isBranchMerge
 	 *            allows to specify whether two branches are merged, opposed to
 	 *            changes from the same branch. Has an effect on the wording of
@@ -109,7 +104,7 @@ public class DecisionManager {
 
 	private ConflictHandler initConflictHandlers() {
 		return ExtensionRegistry.INSTANCE.get(
-			ConflictHandler.ID,
+			ConflictHandler.EXTENSION_POINT_ID,
 			ConflictHandler.class,
 			new ConflictHandler() {
 				public VisualConflict handle(VisualConflict conflict,
@@ -304,18 +299,16 @@ public class DecisionManager {
 		List<AbstractOperation> theirOperations) {
 
 		for (AbstractOperation myOp : myOperations) {
-			for (AbstractOperation theirOp : theirOperations) {
-				if (isSingleRef(myOp)) {
+			if (isSingleRef(myOp)) {
 
-					return new ReferenceConflict(true, conf, this);
+				return new ReferenceConflict(true, conf, this);
 
-				} else if (isMultiRef(myOp)) {
+			} else if (isMultiRef(myOp)) {
 
-					return new ReferenceConflict(false, conf, this);
+				return new ReferenceConflict(false, conf, this);
 
-				} else {
-					return null;
-				}
+			} else {
+				return null;
 			}
 		}
 		return null;

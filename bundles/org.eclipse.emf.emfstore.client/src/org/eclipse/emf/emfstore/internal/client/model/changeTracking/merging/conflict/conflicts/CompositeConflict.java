@@ -14,11 +14,11 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
@@ -34,10 +34,7 @@ public class CompositeConflict extends VisualConflict {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param composite list of operations, with leading conflicting {@link CompositeOperation}
-	 * @param other list operations which conflict with composite
-	 * @param leftOperation the operation representing all left operations
-	 * @param rightOperation the operation representing all right operations
+	 * @param conflictBucket the conflict
 	 * @param decisionManager decisionmanager
 	 * @param meCausing true, if composite caused by merging user
 	 */

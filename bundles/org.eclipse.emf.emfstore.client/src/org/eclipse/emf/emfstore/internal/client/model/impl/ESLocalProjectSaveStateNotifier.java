@@ -28,7 +28,7 @@ public class ESLocalProjectSaveStateNotifier implements IDEObjectCollectionDirty
 	/**
 	 * Default constructor.
 	 * 
-	 * @param projectSpace the project space to notify for
+	 * @param localProject the local project to notify for
 	 */
 	public ESLocalProjectSaveStateNotifier(ESLocalProject localProject) {
 		this.localProject = localProject;

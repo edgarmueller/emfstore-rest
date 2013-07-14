@@ -14,11 +14,11 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
@@ -36,10 +36,8 @@ public class ReferenceConflict extends VisualConflict {
 	 * Default constructor.
 	 * 
 	 * @param conflict underlying conflict, {@link MultiReferenceConflict} or {@link SingleReferenceConflict}
-	 * @param myOps list of my operations
-	 * @param theirOps list of their operations
-	 * @param leftOperation the operation representing all left operations
-	 * @param rightOperation the operation representing all right operations
+	 * @param conflictBucket the conflict
+	 * @param decisionManager decisionmanager
 	 */
 	public ReferenceConflict(boolean underlyingSingleConflict, ConflictBucket conf, DecisionManager decisionManager) {
 		super(conf, decisionManager, true, false);
@@ -50,7 +48,7 @@ public class ReferenceConflict extends VisualConflict {
 		else {
 			this.conflict = createMultiMultiConflict(conf, conf.getMyOperation(), conf.getTheirOperation(),
 				decisionManager);
-			this.leftIsMy = ((MultiReferenceOperation) conf.getMyOperation()).isAdd();
+			this.setLeftIsMy(((MultiReferenceOperation) conf.getMyOperation()).isAdd());
 
 		}
 		init();

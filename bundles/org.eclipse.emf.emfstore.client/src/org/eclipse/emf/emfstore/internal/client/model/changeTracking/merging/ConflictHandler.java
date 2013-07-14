@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMap
  */
 public interface ConflictHandler {
 
-	String ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler";
+	String EXTENSION_POINT_ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler";
 
 	/**
 	 * Called after a conflict has been created and before it is

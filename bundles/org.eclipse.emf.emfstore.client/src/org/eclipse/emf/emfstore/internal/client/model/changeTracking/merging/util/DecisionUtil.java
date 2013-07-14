@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util;
@@ -16,9 +16,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 
 /**
  * Class offering common methods for the merge dialog.
@@ -200,7 +200,8 @@ public final class DecisionUtil {
 			return StringUtils.EMPTY;
 		}
 
-		MergeLabelProvider labelProvider = ESWorkspaceProviderImpl.getObserverBus().notify(MergeLabelProvider.class, true);
+		MergeLabelProvider labelProvider = ESWorkspaceProviderImpl.getObserverBus().notify(MergeLabelProvider.class,
+			true);
 		if (labelProvider == null) {
 			return modelElement.toString();
 		}

@@ -97,7 +97,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createWorkspaceAdapter() {
-		if (workspaceItemProvider == null) {
+		if (workspaceItemProvider == null)
+		{
 			workspaceItemProvider = new WorkspaceItemProvider(this);
 		}
 
@@ -105,8 +106,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo}
-	 * instances.
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -122,7 +123,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createServerInfoAdapter() {
-		if (serverInfoItemProvider == null) {
+		if (serverInfoItemProvider == null)
+		{
 			serverInfoItemProvider = new ServerInfoItemProvider(this);
 		}
 
@@ -130,8 +132,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.model.Usersession}
-	 * instances.
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Usersession} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -147,7 +149,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createUsersessionAdapter() {
-		if (usersessionItemProvider == null) {
+		if (usersessionItemProvider == null)
+		{
 			usersessionItemProvider = new UsersessionItemProvider(this);
 		}
 
@@ -155,8 +158,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace}
-	 * instances.
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -172,35 +175,12 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createProjectSpaceAdapter() {
-		if (projectSpaceItemProvider == null) {
+		if (projectSpaceItemProvider == null)
+		{
 			projectSpaceItemProvider = new ProjectSpaceItemProvider(this);
 		}
 
 		return projectSpaceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite}
-	 * instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected OperationCompositeItemProvider operationCompositeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.model.OperationComposite}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Override
-	public Adapter createOperationCompositeAdapter() {
-		if (operationCompositeItemProvider == null) {
-			operationCompositeItemProvider = new OperationCompositeItemProvider(this);
-		}
-
-		return operationCompositeItemProvider;
 	}
 
 	/**
@@ -221,7 +201,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	@Override
 	public Adapter createPendingFileTransferAdapter() {
-		if (pendingFileTransferItemProvider == null) {
+		if (pendingFileTransferItemProvider == null)
+		{
 			pendingFileTransferItemProvider = new PendingFileTransferItemProvider(this);
 		}
 
@@ -277,9 +258,11 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
+		if (isFactoryForType(type))
+		{
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
+			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter)))
+			{
 				return adapter;
 			}
 		}
@@ -317,7 +300,8 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
+		if (parentAdapterFactory != null)
+		{
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}
@@ -337,8 +321,6 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 			usersessionItemProvider.dispose();
 		if (projectSpaceItemProvider != null)
 			projectSpaceItemProvider.dispose();
-		if (operationCompositeItemProvider != null)
-			operationCompositeItemProvider.dispose();
 		if (pendingFileTransferItemProvider != null)
 			pendingFileTransferItemProvider.dispose();
 	}

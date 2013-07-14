@@ -17,10 +17,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
@@ -38,10 +38,7 @@ public class MultiReferenceConflict extends VisualConflict {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param addingOperation list of operations, with leading adding multiref operation
-	 * @param removingOperation list of operations, with leading removing multiref operation
-	 * @param leftOperation the operation representing all left operations
-	 * @param rightOperation the operation representing all right operations
+	 * @param conflictBucket the conflict
 	 * @param decisionManager decisionmanager
 	 * @param meAdding true, if merging user has adding multiref
 	 */
@@ -53,6 +50,16 @@ public class MultiReferenceConflict extends VisualConflict {
 		init();
 	}
 
+	/**
+	 * Construct conflict from designated left and right operation.
+	 * 
+	 * 
+	 * @param conflictBucket the conflict
+	 * @param leftOperation the left operation
+	 * @param rightOperation the right operation
+	 * @param decisionManager decisionmanager
+	 * @param meAdding true, if merging user has adding multiref
+	 */
 	public MultiReferenceConflict(ConflictBucket conflictBucket, AbstractOperation leftOperation,
 		AbstractOperation rightOperation,
 		DecisionManager decisionManager,

@@ -11,7 +11,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.provider;
 
-
 /**
  * Determines the version identifier of the client component.
  * 

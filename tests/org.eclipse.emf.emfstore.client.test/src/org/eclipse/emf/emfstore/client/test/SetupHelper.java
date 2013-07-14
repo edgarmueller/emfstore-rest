@@ -361,7 +361,6 @@ public class SetupHelper {
 					.createProject());
 				projectSpace.setProjectName("Testproject");
 				projectSpace.setProjectDescription("Test description");
-				projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
 				projectSpace.initResources(workSpace.eResource().getResourceSet());
 				// TODO: OTS

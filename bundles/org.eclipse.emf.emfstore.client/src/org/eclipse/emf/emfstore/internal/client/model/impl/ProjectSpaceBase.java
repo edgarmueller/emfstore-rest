@@ -215,8 +215,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            changes from the current branch
 	 * @param myChanges
 	 *            merged changes
-	 * @param callback
-	 *            a {@link ESUpdateCallback} that is used to handle a possibly occurring checksum error
 	 * @param progressMonitor
 	 *            an {@link IProgressMonitor} to inform about the progress of the UpdateCallback in case it is called
 	 * 
@@ -492,40 +490,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 			localChangePackage = getLocalChangePackage();
 		}
-
-		if (getLocalOperations() != null) {
-			migrateOperations(localChangePackage);
-		}
-
 		return localChangePackage.getOperations();
-	}
-
-	private void migrateOperations(ChangePackage localChangePackage) {
-
-		if (getLocalOperations() == null || getLocalOperations().getOperations().size() == 0 || isTransient()) {
-			return;
-		}
-
-		localChangePackage.getOperations().addAll(getLocalOperations().getOperations());
-
-		Resource eResource = getLocalOperations().eResource();
-		// if for some reason the resource of project space and operations
-		// are not different, then reinitialize operations URI
-		// TODO: first case kills change package
-		if (this.eResource() == eResource) {
-			String localChangePackageFileName = Configuration.getFileInfo().getWorkspaceDirectory()
-				+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
-				+ Configuration.getFileInfo().getLocalChangePackageFileName()
-				+ Configuration.getFileInfo().getLocalChangePackageFileExtension();
-			eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
-		} else {
-			eResource.getContents().remove(0);
-		}
-		setLocalOperations(null);
-		eResource.getContents().add(localChangePackage);
-		saveResource(eResource);
-		save();
-
 	}
 
 	/**
@@ -761,7 +726,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		getProject().delete();
 
 		String pathToProject = Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().ProjectSpaceDirectoryPrefix + getIdentifier();
+			+ Configuration.getFileInfo().PROJECT_SPACE_DIR_PREFIX + getIdentifier();
 
 		resourceSet.getResources().remove(getProject().eResource());
 		resourceSet.getResources().remove(eResource());

@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.caching;
@@ -38,7 +38,6 @@ public abstract class CachingTest {
 		projectSpace.setBaseVersion(VersioningFactory.eINSTANCE.createPrimaryVersionSpec());
 		projectSpace.setIdentifier("testProjectSpace");
 		projectSpace.setLastUpdated(new Date());
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 		projectSpace.setProjectDescription("ps description");
 		projectSpace.setProjectId(org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
 			.createProjectId());

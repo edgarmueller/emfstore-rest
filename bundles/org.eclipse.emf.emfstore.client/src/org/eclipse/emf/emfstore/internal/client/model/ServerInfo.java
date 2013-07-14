@@ -37,7 +37,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo()
+ * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getServerInfo()
  * @model
  * @generated
  */
@@ -52,7 +52,7 @@ public interface ServerInfo extends EObject, APIDelegate<ESServerImpl> {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo_Name()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getServerInfo_Name()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -79,7 +79,7 @@ public interface ServerInfo extends EObject, APIDelegate<ESServerImpl> {
 	 * 
 	 * @return the value of the '<em>Url</em>' attribute.
 	 * @see #setUrl(String)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo_Url()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getServerInfo_Url()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -106,7 +106,7 @@ public interface ServerInfo extends EObject, APIDelegate<ESServerImpl> {
 	 * 
 	 * @return the value of the '<em>Port</em>' attribute.
 	 * @see #setPort(int)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo_Port()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getServerInfo_Port()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -134,7 +134,7 @@ public interface ServerInfo extends EObject, APIDelegate<ESServerImpl> {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Project Infos</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo_ProjectInfos()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getServerInfo_ProjectInfos()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -151,7 +151,7 @@ public interface ServerInfo extends EObject, APIDelegate<ESServerImpl> {
 	 * 
 	 * @return the value of the '<em>Last Usersession</em>' reference.
 	 * @see #setLastUsersession(Usersession)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo_LastUsersession()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getServerInfo_LastUsersession()
 	 * @model
 	 * @generated
 	 */
@@ -179,7 +179,7 @@ public interface ServerInfo extends EObject, APIDelegate<ESServerImpl> {
 	 * 
 	 * @return the value of the '<em>Certificate Alias</em>' attribute.
 	 * @see #setCertificateAlias(String)
-	 * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage#getServerInfo_CertificateAlias()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getServerInfo_CertificateAlias()
 	 * @model required="true"
 	 * @generated
 	 */

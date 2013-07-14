@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * jfinis
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
@@ -85,7 +85,8 @@ public class FileTransferCacheManager {
 	 * @return the name of the cache folder
 	 */
 	public static String getCacheFolder(ProjectSpace projectSpace) {
-		return Configuration.getFileInfo().getWorkspaceDirectory() + Configuration.getFileInfo().ProjectSpaceDirectoryPrefix
+		return Configuration.getFileInfo().getWorkspaceDirectory()
+			+ Configuration.getFileInfo().PROJECT_SPACE_DIR_PREFIX
 			+ projectSpace.getIdentifier()
 			+ File.separatorChar
 			+ "files" + File.separatorChar;

@@ -48,18 +48,37 @@ public abstract class VisualConflict extends Observable {
 	 */
 	private Set<AbstractOperation> leftOperations;
 	private Set<AbstractOperation> rightOperations;
-	protected boolean leftIsMy;
+	private boolean leftIsMy;
 	private AbstractOperation rightOperation;
 	private AbstractOperation leftOperation;
 	private ConflictBucket conflictBucket;
 
-	public VisualConflict(ConflictBucket conflictBucket, AbstractOperation leftOperation, AbstractOperation rightOperation,
+	/**
+	 * Construct conflict from given specific left and right operation.
+	 * 
+	 * @param conflictBucket the underlying conflict
+	 * @param leftOperation the left operation
+	 * @param rightOperation the right operation
+	 * @param decisionManager the decision manager
+	 * @param leftIsMy true if left operation is my operation
+	 * @param init true if conflict should be initialized on construction
+	 */
+	public VisualConflict(ConflictBucket conflictBucket, AbstractOperation leftOperation,
+		AbstractOperation rightOperation,
 		DecisionManager decisionManager,
 		boolean leftIsMy, boolean init) {
 		this(set(leftOperation), set(rightOperation), leftOperation, rightOperation, decisionManager, leftIsMy, init);
 		this.conflictBucket = conflictBucket;
 	}
 
+	/**
+	 * Construct conflict from given specific left and right operation.
+	 * 
+	 * @param conflictBucket the underlying conflict
+	 * @param leftOperation the left operation
+	 * @param rightOperation the right operation
+	 * @param decisionManager the decision manager
+	 */
 	public VisualConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
 		this(conflictBucket, decisionManager, true, true);
 	}
@@ -404,5 +423,13 @@ public abstract class VisualConflict extends Observable {
 
 	public void resolve() {
 		conflictBucket.resolveConflict(getAcceptedMine(), getRejectedTheirs());
+	}
+
+	public boolean isLeftIsMy() {
+		return leftIsMy;
+	}
+
+	public void setLeftIsMy(boolean leftIsMy) {
+		this.leftIsMy = leftIsMy;
 	}
 }

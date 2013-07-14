@@ -102,7 +102,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProject(ModelUtil.clone(originalProject));
 		projectSpace.setProjectName(projectName);
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
 		projectSpace.initResources(getResourceSet());
 
@@ -215,8 +214,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		projectSpace.setProject(project);
 		projectSpace.setProjectName(name);
 		projectSpace.setProjectDescription(description);
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
-
 		projectSpace.initResources(this.workspaceResourceSet);
 
 		addProjectSpace(projectSpace);
