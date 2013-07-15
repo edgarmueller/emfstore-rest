@@ -21,17 +21,26 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Test Config</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Test Config</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getSeed <em>Seed</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getCount <em>Count</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getTestClass <em>Test Class</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getId <em>Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getMutatorConfig <em>Mutator Config</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getSeed
+ * <em>Seed</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getCount
+ * <em>Count</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getTestClass
+ * <em>Test Class</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getId
+ * <em>Id</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl#getMutatorConfig
+ * <em>Mutator Config</em>}</li>
  * </ul>
  * </p>
  * 
@@ -40,8 +49,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig;
 public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	/**
 	 * The default value of the '{@link #getSeed() <em>Seed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSeed()
 	 * @generated
@@ -51,8 +59,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 
 	/**
 	 * The cached value of the '{@link #getSeed() <em>Seed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getSeed()
 	 * @generated
@@ -62,8 +69,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 
 	/**
 	 * The default value of the '{@link #getCount() <em>Count</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getCount()
 	 * @generated
@@ -73,8 +79,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 
 	/**
 	 * The cached value of the '{@link #getCount() <em>Count</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getCount()
 	 * @generated
@@ -83,9 +88,8 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	protected int count = COUNT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTestClass() <em>Test Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTestClass() <em>Test Class</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getTestClass()
 	 * @generated
@@ -94,9 +98,8 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	protected Class<?> testClass;
 
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getId()
 	 * @generated
@@ -105,9 +108,8 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	protected static final String ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getId()
 	 * @generated
@@ -116,8 +118,8 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	protected String id = ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getMutatorConfig() <em>Mutator Config</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getMutatorConfig()
+	 * <em>Mutator Config</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #getMutatorConfig()
@@ -127,8 +129,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	protected MutatorConfig mutatorConfig;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -137,8 +138,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -148,8 +148,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -158,8 +157,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -167,12 +165,12 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		long oldSeed = seed;
 		seed = newSeed;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.TEST_CONFIG__SEED, oldSeed, seed));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ConfigPackage.TEST_CONFIG__SEED, oldSeed, seed));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -181,8 +179,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -190,12 +187,12 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		int oldCount = count;
 		count = newCount;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.TEST_CONFIG__COUNT, oldCount, count));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ConfigPackage.TEST_CONFIG__COUNT, oldCount, count));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -204,8 +201,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -213,13 +209,13 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		Class<?> oldTestClass = testClass;
 		testClass = newTestClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.TEST_CONFIG__TEST_CLASS, oldTestClass,
-				testClass));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ConfigPackage.TEST_CONFIG__TEST_CLASS, oldTestClass,
+					testClass));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -228,8 +224,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -237,12 +232,12 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.TEST_CONFIG__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ConfigPackage.TEST_CONFIG__ID, oldId, id));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -251,17 +246,19 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	public NotificationChain basicSetMutatorConfig(MutatorConfig newMutatorConfig, NotificationChain msgs) {
+	public NotificationChain basicSetMutatorConfig(
+			MutatorConfig newMutatorConfig, NotificationChain msgs) {
 		MutatorConfig oldMutatorConfig = mutatorConfig;
 		mutatorConfig = newMutatorConfig;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-				ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG, oldMutatorConfig, newMutatorConfig);
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET,
+					ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+					oldMutatorConfig, newMutatorConfig);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -271,8 +268,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -280,27 +276,32 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		if (newMutatorConfig != mutatorConfig) {
 			NotificationChain msgs = null;
 			if (mutatorConfig != null)
-				msgs = ((InternalEObject) mutatorConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG, null, msgs);
+				msgs = ((InternalEObject) mutatorConfig).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE
+								- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+						null, msgs);
 			if (newMutatorConfig != null)
-				msgs = ((InternalEObject) newMutatorConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG, null, msgs);
+				msgs = ((InternalEObject) newMutatorConfig).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE
+								- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+						null, msgs);
 			msgs = basicSetMutatorConfig(newMutatorConfig, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
-				newMutatorConfig, newMutatorConfig));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+					newMutatorConfig, newMutatorConfig));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG:
 			return basicSetMutatorConfig(null, msgs);
@@ -309,8 +310,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -332,8 +332,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -360,8 +359,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -388,8 +386,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -411,8 +408,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

@@ -18,8 +18,9 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 
 /**
- * Implementation of {@link ModelElementIdGenerator} which increments the ModelElementId for each
- * new modelelement for each IdEObjectCollection starting with 0.
+ * Implementation of {@link ModelElementIdGenerator} which increments the
+ * ModelElementId for each new modelelement for each IdEObjectCollection
+ * starting with 0.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -32,7 +33,10 @@ public class FuzzyModelElementIdGenerator {
 	/**
 	 * Generates a new {@link ModelElementId}.
 	 * 
-	 * @param collection The {@link org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection} for which to create a new {@link ModelElementId}.
+	 * @param collection
+	 *            The
+	 *            {@link org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection}
+	 *            for which to create a new {@link ModelElementId}.
 	 * @return A new {@link ModelElementId}.
 	 */
 	public ModelElementId generateModelElementId(Object collection) {
@@ -40,7 +44,8 @@ public class FuzzyModelElementIdGenerator {
 		if (id == null) {
 			id = new Integer(0);
 		}
-		ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
+		ModelElementId modelElementId = ModelFactory.eINSTANCE
+				.createModelElementId();
 		modelElementId.setId(String.valueOf(id));
 		collectionsToIds.put(collection, id + 1);
 		return modelElementId;

@@ -71,7 +71,8 @@ public interface ModelPackage extends EPackage {
 	ModelPackage eINSTANCE = org.eclipse.emf.emfstore.internal.common.model.impl.ModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl <em>Project</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl
+	 * <em>Project</em>}'
 	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -209,7 +210,8 @@ public interface ModelPackage extends EPackage {
 	int MODEL_ELEMENT_ID_FEATURE_COUNT = UNIQUE_IDENTIFIER_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl <em>Version</em>}'
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl
+	 * <em>Version</em>}'
 	 * class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -433,7 +435,8 @@ public interface ModelPackage extends EPackage {
 	int EMF_STORE_PROPERTY_TYPE = 10;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.Project <em>Project</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.Project
+	 * <em>Project</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -482,7 +485,8 @@ public interface ModelPackage extends EPackage {
 	EClass getUniqueIdentifier();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier#getId
+	 * Returns the meta object for the attribute '
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier#getId
 	 * <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -532,7 +536,8 @@ public interface ModelPackage extends EPackage {
 	EClass getModelElementId();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion <em>Version</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion
+	 * <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -592,7 +597,8 @@ public interface ModelPackage extends EPackage {
 	EClass getEMFStoreProperty();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getKey
+	 * Returns the meta object for the attribute '
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getKey
 	 * <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -618,7 +624,8 @@ public interface ModelPackage extends EPackage {
 	EReference getEMFStoreProperty_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getType
+	 * Returns the meta object for the attribute '
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getType
 	 * <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -772,7 +779,8 @@ public interface ModelPackage extends EPackage {
 		EReference PROJECT__CUT_ELEMENTS = eINSTANCE.getProject_CutElements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.common.model.impl.UniqueIdentifierImpl
 		 * <em>Unique Identifier</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -793,7 +801,8 @@ public interface ModelPackage extends EPackage {
 		EAttribute UNIQUE_IDENTIFIER__ID = eINSTANCE.getUniqueIdentifier_Id();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl
 		 * <em>Identifiable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -814,7 +823,8 @@ public interface ModelPackage extends EPackage {
 		EAttribute IDENTIFIABLE_ELEMENT__IDENTIFIER = eINSTANCE.getIdentifiableElement_Identifier();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelElementIdImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelElementIdImpl
 		 * <em>Element Id</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -859,7 +869,8 @@ public interface ModelPackage extends EPackage {
 		EClass NON_DOMAIN_ELEMENT = eINSTANCE.getNonDomainElement();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement
 		 * <em>Association Class Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -871,7 +882,8 @@ public interface ModelPackage extends EPackage {
 		EClass ASSOCIATION_CLASS_ELEMENT = eINSTANCE.getAssociationClassElement();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.common.model.impl.EMFStorePropertyImpl
 		 * <em>EMF Store Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -919,7 +931,8 @@ public interface ModelPackage extends EPackage {
 		EAttribute EMF_STORE_PROPERTY__VERSION = eINSTANCE.getEMFStoreProperty_Version();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyMapEntryImpl
 		 * <em>Property Map Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -949,7 +962,8 @@ public interface ModelPackage extends EPackage {
 		EReference PROPERTY_MAP_ENTRY__VALUE = eINSTANCE.getPropertyMapEntry_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyStringValueImpl
+		 * The meta object literal for the '
+		 * {@link org.eclipse.emf.emfstore.internal.common.model.impl.PropertyStringValueImpl
 		 * <em>Property String Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

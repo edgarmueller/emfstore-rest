@@ -6,11 +6,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
-
 
 /**
  * Exception thrown by the {@link ESExtensionPoint} wrapper.
@@ -37,8 +36,8 @@ public class ESExtensionPointException extends RuntimeException {
 	/**
 	 * Default configuration.
 	 * 
-	 * @param message 
-	 * 			the exception message
+	 * @param message
+	 *            the exception message
 	 */
 	public ESExtensionPointException(final String message) {
 		super(message);

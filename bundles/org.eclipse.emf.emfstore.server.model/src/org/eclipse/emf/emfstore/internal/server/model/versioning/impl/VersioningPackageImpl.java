@@ -230,7 +230,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 
 		// Obtain or create and register package
 		VersioningPackageImpl theVersioningPackage = (VersioningPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof VersioningPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new VersioningPackageImpl());
+			.get(eNS_URI)
+			: new VersioningPackageImpl());
 
 		isInited = true;
 
@@ -261,7 +262,8 @@ public class VersioningPackageImpl extends EPackageImpl implements VersioningPac
 			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(UrlPackage.eNS_URI)
+			: UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theVersioningPackage.createPackageContents();

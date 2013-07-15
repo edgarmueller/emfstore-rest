@@ -21,6 +21,6 @@ package org.eclipse.emf.emfstore.internal.common.api;
 public interface APIDelegate<API> {
 
 	API toAPI();
-	
+
 	API createAPI();
 }

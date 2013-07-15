@@ -36,14 +36,17 @@ import org.junit.runner.RunWith;
 public class SerializationTest extends FuzzyProjectTest {
 
 	/**
-	 * Load and save a {@link ProjectSpace} via {@link WorkspaceManager} and compare them.
+	 * Load and save a {@link ProjectSpace} via {@link WorkspaceManager} and
+	 * compare them.
 	 */
 	@Test
 	public void loadAndSaveToResource() {
 
-		// mutate already saved (through importing) projectSpace and save it again
+		// mutate already saved (through importing) projectSpace and save it
+		// again
 		ProjectSpace projectSpace = getProjectSpace();
-		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace.getProject());
+		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace
+				.getProject());
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -56,19 +59,23 @@ public class SerializationTest extends FuzzyProjectTest {
 		// dispose and reinit WorkspaceManager
 		((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE).dispose();
 		((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE).init();
-		
+
 		// reload projectSpaces and check for valid state
-		EList<ProjectSpace> projectSpaces = ((WorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace()).getProjectSpaces();
+		EList<ProjectSpace> projectSpaces = ((WorkspaceImpl) ESWorkspaceProvider.INSTANCE
+				.getWorkspace()).getProjectSpaces();
 		if (projectSpaces.size() != 1) {
-			throw new IllegalStateException("There must be exactly one projectSpace in the workspace! Current value: "
-				+ projectSpaces.size());
+			throw new IllegalStateException(
+					"There must be exactly one projectSpace in the workspace! Current value: "
+							+ projectSpaces.size());
 		}
 
 		// compare
 		ProjectSpace reloadedProjectSpace = projectSpaces.get(0);
 		try {
-			if (!ModelUtil.areEqual(reloadedProjectSpace.getProject(), projectSpace.getProject())) {
-				fail(reloadedProjectSpace.getProject(), projectSpace.getProject());
+			if (!ModelUtil.areEqual(reloadedProjectSpace.getProject(),
+					projectSpace.getProject())) {
+				fail(reloadedProjectSpace.getProject(),
+						projectSpace.getProject());
 			}
 		} finally {
 			// set projectSpace to the reloaded one to ensure correct cleanup

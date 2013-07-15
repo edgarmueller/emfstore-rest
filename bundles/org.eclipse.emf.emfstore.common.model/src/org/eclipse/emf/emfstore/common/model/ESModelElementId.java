@@ -12,7 +12,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
-
 /**
  * Represents a unique model element ID that is used to identify
  * model elements within EMFStore.

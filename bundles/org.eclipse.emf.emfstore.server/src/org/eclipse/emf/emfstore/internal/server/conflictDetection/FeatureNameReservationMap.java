@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
 public class FeatureNameReservationMap extends LinkedHashMapWithConflictBucketCandidate<OppositeReservationMap> {
 
 	public static final String EXISTENCE_FEATURE = "+existence";

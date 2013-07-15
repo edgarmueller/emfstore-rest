@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util;
@@ -99,7 +99,8 @@ public final class UIDecisionConfig {
 	}
 
 	/**
-	 * Color 1 for {@link org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox} . Every other box has this
+	 * Color 1 for {@link org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox} . Every other box
+	 * has this
 	 * background color.
 	 * 
 	 * @return color
@@ -109,7 +110,8 @@ public final class UIDecisionConfig {
 	}
 
 	/**
-	 * Color 2 for {@link org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox} . Every other box has this
+	 * Color 2 for {@link org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox} . Every other box
+	 * has this
 	 * background color
 	 * 
 	 * @return color

@@ -12,7 +12,8 @@
 package org.eclipse.emf.emfstore.fuzzy;
 
 /**
- * Marker Interface for utility classes in test classes using the {@link FuzzyRunner}.
+ * Marker Interface for utility classes in test classes using the
+ * {@link FuzzyRunner}.
  * 
  * @author Julian Sommerfeldt
  */

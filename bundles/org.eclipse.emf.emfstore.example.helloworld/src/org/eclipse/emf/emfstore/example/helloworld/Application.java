@@ -31,7 +31,6 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
-
 /**
  * An application that runs the demo.<br>
  * Run a client and local server that demo the basic features of EMFStore.
@@ -62,7 +61,8 @@ public class Application implements IApplication {
 
 	/**
 	 * Run an EMFStore Client connecting to the given server.
-	 * @param server the server 
+	 * 
+	 * @param server the server
 	 * @throws ESException if the server connection fails
 	 */
 	public static void runClient(ESServer server) throws ESException {
@@ -73,7 +73,8 @@ public class Application implements IApplication {
 		// To get started, we obtain the current workspace of the client.
 		ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
 
-		// The workspace stores all available servers that have been configured. We add the local server that has already
+		// The workspace stores all available servers that have been configured. We add the local server that has
+		// already
 		// been started on the workspace.
 		workspace.addServer(server);
 		// Next, we remove all other existing servers
@@ -103,7 +104,8 @@ public class Application implements IApplication {
 			}
 		}
 
-		// Next, we create a user session by logging in to the local EMFStore server with default super user credentials.
+		// Next, we create a user session by logging in to the local EMFStore server with default super user
+		// credentials.
 		ESUsersession usersession = server.login("super", "super");
 
 		// Now we can share the created local project to our server.
@@ -127,9 +129,9 @@ public class Application implements IApplication {
 
 		// We start working now with the local project and later we will synchronize it with the copy of the project we
 		// just checked out.
-		// We create some EObjects and add them to the project, that is, to project’s containment tree. Everything that
+		// We create some EObjects and add them to the project, that is, to projectï¿½s containment tree. Everything that
 		// is
-		// in the project’s containment tree (spanning tree on containment references) is considered part of the
+		// in the projectï¿½s containment tree (spanning tree on containment references) is considered part of the
 		// project. We will use an example model about bowling.
 
 		// First we add a league and set the league name.
@@ -161,23 +163,24 @@ public class Application implements IApplication {
 		demoProjectCopy.update(new ESSystemOutProgressMonitor());
 
 		// We will now retrieve the copy of the league from the copy of the project and assert its name and player count
-		// are equal with the name of the project’s league.
+		// are equal with the name of the projectï¿½s league.
 		League leagueCopy = (League) demoProjectCopy.getModelElements().get(0);
 		if (league.getName().equals(leagueCopy.getName()) &&
-			league.getPlayers().size()==leagueCopy.getPlayers().size()) {
+			league.getPlayers().size() == leagueCopy.getPlayers().size()) {
 			System.out.println("Leagues names and player count are equal.");
 		}
-		
-		// Of course, we can also change something in the project copy and synchronize it back to the project. 
+
+		// Of course, we can also change something in the project copy and synchronize it back to the project.
 		// We change the league name to correct the type and then commit and update accordingly.
-		// This time, we use the IDs assigned to every EObject of a project to identify the copy of league in the project’s copy.
+		// This time, we use the IDs assigned to every EObject of a project to identify the copy of league in the
+		// projectï¿½s copy.
 		leagueCopy = (League) demoProjectCopy.getModelElement(demoProject.getModelElementId(league));
 		league.setName("Superbowling League");
 		demoProject.commit(new ESSystemOutProgressMonitor());
 		demoProjectCopy.update(new ESSystemOutProgressMonitor());
-		
+
 		if (league.getName().equals(leagueCopy.getName()) &&
-			league.getPlayers().size()==leagueCopy.getPlayers().size()) {
+			league.getPlayers().size() == leagueCopy.getPlayers().size()) {
 			System.out.println("Leagues names and player count are still equal.");
 		}
 	}

@@ -40,7 +40,8 @@ public class MutateUtil implements Util {
 	/**
 	 * For internal use.
 	 * 
-	 * @param dataProvider The {@link EMFDataProvider} of the test.
+	 * @param dataProvider
+	 *            The {@link EMFDataProvider} of the test.
 	 */
 	public MutateUtil(EMFDataProvider dataProvider) {
 		this.dataProvider = dataProvider;
@@ -54,7 +55,8 @@ public class MutateUtil implements Util {
 	}
 
 	/**
-	 * @return The minimum objects count of the current {@link ModelMutatorConfiguration} of the {@link EMFDataProvider}
+	 * @return The minimum objects count of the current
+	 *         {@link ModelMutatorConfiguration} of the {@link EMFDataProvider}
 	 *         .
 	 */
 	public int getMinObjectsCount() {
@@ -76,23 +78,28 @@ public class MutateUtil implements Util {
 	}
 
 	/**
-	 * @return The EClasses to ignore in the current {@link ModelMutatorConfiguration}.
+	 * @return The EClasses to ignore in the current
+	 *         {@link ModelMutatorConfiguration}.
 	 */
 	public Collection<EClass> getEClassesToIgnore() {
-		return dataProvider.getModelMutatorConfiguration().geteClassesToIgnore();
+		return dataProvider.getModelMutatorConfiguration()
+				.geteClassesToIgnore();
 	}
 
 	/**
-	 * @return The {@link EStructuralFeature}s to ignore in the current {@link ModelMutatorConfiguration}.
+	 * @return The {@link EStructuralFeature}s to ignore in the current
+	 *         {@link ModelMutatorConfiguration}.
 	 */
 	public Collection<EStructuralFeature> getEStructuralFeaturesToIgnore() {
-		return dataProvider.getModelMutatorConfiguration().geteStructuralFeaturesToIgnore();
+		return dataProvider.getModelMutatorConfiguration()
+				.geteStructuralFeaturesToIgnore();
 	}
 
 	/**
 	 * Mutate with a {@link ModelMutatorConfiguration}.
 	 * 
-	 * @param mmc The {@link ModelMutatorConfiguration} to use for mutation.
+	 * @param mmc
+	 *            The {@link ModelMutatorConfiguration} to use for mutation.
 	 */
 	public void mutate(final ModelMutatorConfiguration mmc) {
 		ModelMutator.changeModel(mmc);
@@ -101,7 +108,8 @@ public class MutateUtil implements Util {
 	/**
 	 * @see #saveEObject(EObject, String)
 	 * 
-	 * @param obj The {@link EObject} to save.
+	 * @param obj
+	 *            The {@link EObject} to save.
 	 */
 	public void saveEObject(EObject obj) {
 		saveEObject(obj, null, true);
@@ -114,18 +122,25 @@ public class MutateUtil implements Util {
 	 * 
 	 * The file name is always: COUNT_SUFFIX.xml so e.g. 3_testFile.xml
 	 * 
-	 * @param obj The EObject to save.
-	 * @param suffix The suffix of the file: e.g. testFile. <code>null</code> permitted.
-	 * @param discardDanglingHREF Should the save ignore dangling hrefs?
+	 * @param obj
+	 *            The EObject to save.
+	 * @param suffix
+	 *            The suffix of the file: e.g. testFile. <code>null</code>
+	 *            permitted.
+	 * @param discardDanglingHREF
+	 *            Should the save ignore dangling hrefs?
 	 */
-	public void saveEObject(EObject obj, String suffix, boolean discardDanglingHREF) {
-		Resource resource = FuzzyUtil.createResource(getRunResourcePath(suffix));
+	public void saveEObject(EObject obj, String suffix,
+			boolean discardDanglingHREF) {
+		Resource resource = FuzzyUtil
+				.createResource(getRunResourcePath(suffix));
 		resource.getContents().add(obj);
 
 		try {
 			Map<Object, Object> options = new HashMap<Object, Object>();
 			if (discardDanglingHREF) {
-				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+						XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 			}
 			resource.save(options);
 		} catch (IOException e) {
@@ -134,18 +149,25 @@ public class MutateUtil implements Util {
 	}
 
 	/**
-	 * @param suffix The suffix for the file: e.g. testFile. <code>null</code> permitted.
+	 * @param suffix
+	 *            The suffix for the file: e.g. testFile. <code>null</code>
+	 *            permitted.
 	 * @return A file path to the current run folder.
 	 */
 	public String getRunResourcePath(String suffix) {
-		String toAdd = (suffix == null || "".equals(suffix)) ? "" : "_" + suffix;
-		return FuzzyUtil.ROOT_FOLDER + FuzzyUtil.RUN_FOLDER + dataProvider.getConfig().getId() + "/"
-			+ dataProvider.getCurrentSeedCount() + toAdd + FuzzyUtil.FILE_SUFFIX;
+		String toAdd = (suffix == null || "".equals(suffix)) ? "" : "_"
+				+ suffix;
+		return FuzzyUtil.ROOT_FOLDER + FuzzyUtil.RUN_FOLDER
+				+ dataProvider.getConfig().getId() + "/"
+				+ dataProvider.getCurrentSeedCount() + toAdd
+				+ FuzzyUtil.FILE_SUFFIX;
 	}
 
 	/**
 	 * 
-	 * @param suffix The suffix for the file: e.g. testFile. <code>null</code> permitted.
+	 * @param suffix
+	 *            The suffix for the file: e.g. testFile. <code>null</code>
+	 *            permitted.
 	 * @return A file {@link URI} to the current run folder.
 	 */
 	public URI getRunResourceURI(String suffix) {

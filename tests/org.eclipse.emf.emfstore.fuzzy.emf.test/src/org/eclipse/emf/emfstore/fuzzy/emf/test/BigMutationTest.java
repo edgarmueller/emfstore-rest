@@ -25,7 +25,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Test to run bigger {@link org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration}s.
+ * Test to run bigger
+ * {@link org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration}s.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -47,7 +48,8 @@ public class BigMutationTest {
 
 		System.out.println("CHANGE");
 
-		ModelMutatorConfiguration config = new ModelMutatorConfiguration(util.getEPackages(), root, 1L);
+		ModelMutatorConfiguration config = new ModelMutatorConfiguration(
+				util.getEPackages(), root, 1L);
 		config.setMinObjectsCount(util.getMinObjectsCount());
 		ModelMutator.changeModel(config);
 

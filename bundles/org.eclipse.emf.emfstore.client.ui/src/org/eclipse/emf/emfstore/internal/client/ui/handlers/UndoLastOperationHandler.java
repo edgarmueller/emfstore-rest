@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.handlers;
@@ -16,8 +16,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUndoLastOperatio
 
 /**
  * Handler for undoing the latest change on a selected {@link ProjectSpace}.<br/>
- * It is assumed that the user previously has selected a {@link ProjectSpace}
- * instance.
+ * It is assumed that the user previously has selected a {@link ProjectSpace} instance.
  * 
  * @author emueller
  * 
@@ -33,7 +32,7 @@ public class UndoLastOperationHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		new UIUndoLastOperationController(getShell(), requireSelection(
-				ProjectSpace.class).toAPI()).execute();
+			ProjectSpace.class).toAPI()).execute();
 	}
 
 }

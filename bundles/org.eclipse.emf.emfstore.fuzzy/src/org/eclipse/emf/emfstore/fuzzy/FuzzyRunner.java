@@ -30,23 +30,27 @@ import org.junit.runners.model.FrameworkField;
 import org.junit.runners.model.InitializationError;
 
 /**
- * A {@link Runner} for JUnit, to realize multiple runs with different values for a data field. <br/>
+ * A {@link Runner} for JUnit, to realize multiple runs with different values
+ * for a data field. <br/>
  * <br/>
- * Activate with the {@link org.junit.runner.RunWith} annotation: <code>@RunWith(FuzzyRunner.class)</code>. <br/>
+ * Activate with the {@link org.junit.runner.RunWith} annotation:
+ * <code>@RunWith(FuzzyRunner.class)</code>. <br/>
  * <br/>
- * The test class must have a field, which is not static and annotated with {@link Data}, e.g.<br/>
+ * The test class must have a field, which is not static and annotated with
+ * {@link Data}, e.g.<br/>
  * <br/>
  * <code>@Data<br/>private Integer i;</code> <br/>
  * <br/>
- * To provide data an implementation of {@link FuzzyDataProvider} can be set via the {@link DataProvider} annotation,
- * e.g.<br/>
+ * To provide data an implementation of {@link FuzzyDataProvider} can be set via
+ * the {@link DataProvider} annotation, e.g.<br/>
  * <br/>
  * <code>@DataProvider(IntDataProvider.class)</code><br/>
  * <br/>
- * This class must implement the interface {@link FuzzyDataProvider}. The default value is the example implementation:
- * {@link IntDataProvider}.<br/>
+ * This class must implement the interface {@link FuzzyDataProvider}. The
+ * default value is the example implementation: {@link IntDataProvider}.<br/>
  * <br/>
- * The {@link MyTest} class illustrates an example usage of the {@link FuzzyRunner}.
+ * The {@link MyTest} class illustrates an example usage of the
+ * {@link FuzzyRunner}.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -65,8 +69,10 @@ public class FuzzyRunner extends Suite {
 	/**
 	 * Default constructor, called by JUnit.
 	 * 
-	 * @param clazz The root class of the suite.
-	 * @throws InitializationError If there
+	 * @param clazz
+	 *            The root class of the suite.
+	 * @throws InitializationError
+	 *             If there
 	 */
 	public FuzzyRunner(Class<?> clazz) throws InitializationError {
 		super(clazz, Collections.<Runner> emptyList());
@@ -78,8 +84,9 @@ public class FuzzyRunner extends Suite {
 		FrameworkField optionsField = getOptionsField();
 		org.eclipse.emf.emfstore.fuzzy.Util util = dataProvider.getUtil();
 		for (int i = 0; i < dataProvider.size(); i++) {
-			FuzzyTestClassRunner runner = new FuzzyTestClassRunner(clazz, dataProvider, dataField, utilField,
-				optionsField, util, i + 1);
+			FuzzyTestClassRunner runner = new FuzzyTestClassRunner(clazz,
+					dataProvider, dataField, utilField, optionsField, util,
+					i + 1);
 			if (runner.getChildren().size() > 0) {
 				runners.add(runner);
 			}
@@ -87,9 +94,11 @@ public class FuzzyRunner extends Suite {
 	}
 
 	/*
-	 * Override to add RunListeners of the FuzzyDataProvider
-	 * (non-Javadoc)
-	 * @see org.junit.runners.ParentRunner#run(org.junit.runner.notification.RunNotifier)
+	 * Override to add RunListeners of the FuzzyDataProvider (non-Javadoc)
+	 * 
+	 * @see
+	 * org.junit.runners.ParentRunner#run(org.junit.runner.notification.RunNotifier
+	 * )
 	 */
 	@Override
 	public void run(final RunNotifier notifier) {
@@ -104,7 +113,8 @@ public class FuzzyRunner extends Suite {
 
 	/**
 	 * @return The field annotated with {@link Util}.
-	 * @throws Exception If there is are more than one fitting fields.
+	 * @throws Exception
+	 *             If there is are more than one fitting fields.
 	 */
 	private FrameworkField getUtilField() {
 		return getSingleStaticFrameworkField(Util.class);
@@ -114,13 +124,16 @@ public class FuzzyRunner extends Suite {
 		return getSingleStaticFrameworkField(Options.class);
 	}
 
-	private FrameworkField getSingleStaticFrameworkField(Class<? extends Annotation> annotation) {
-		List<FrameworkField> fields = getTestClass().getAnnotatedFields(annotation);
+	private FrameworkField getSingleStaticFrameworkField(
+			Class<? extends Annotation> annotation) {
+		List<FrameworkField> fields = getTestClass().getAnnotatedFields(
+				annotation);
 
 		// Check if there are more than one Data field in the class
 		if (fields.size() > 1) {
-			throw new RuntimeException("Only one field annotated with " + annotation.getSimpleName() + " permitted: "
-				+ getTestClass().getName() + " contains " + fields.size());
+			throw new RuntimeException("Only one field annotated with "
+					+ annotation.getSimpleName() + " permitted: "
+					+ getTestClass().getName() + " contains " + fields.size());
 		}
 
 		// get the field and check modifiers
@@ -137,23 +150,29 @@ public class FuzzyRunner extends Suite {
 	/**
 	 * @return The field annotated with {@link Data}.
 	 * @throws InitializationError
-	 * @throws Exception If there is not exact one fitting field.
+	 * @throws Exception
+	 *             If there is not exact one fitting field.
 	 */
 	private FrameworkField getDataField() throws InitializationError {
 		FrameworkField field = getSingleStaticFrameworkField(Data.class);
 
 		if (field == null) {
-			throw new InitializationError("No non-static model field anntoted with " + Data.class.getSimpleName()
-				+ " in class " + getTestClass().getName());
+			throw new InitializationError(
+					"No non-static model field anntoted with "
+							+ Data.class.getSimpleName() + " in class "
+							+ getTestClass().getName());
 		}
 
 		return field;
 	}
 
 	/**
-	 * @return The {@link FuzzyDataProvider} defined by the {@link DataProvider} annotation or the default one.
+	 * @return The {@link FuzzyDataProvider} defined by the {@link DataProvider}
+	 *         annotation or the default one.
 	 * @throws InitializationError
-	 * @throws Exception If the data provider does not implement the {@link FuzzyDataProvider} interface.
+	 * @throws Exception
+	 *             If the data provider does not implement the
+	 *             {@link FuzzyDataProvider} interface.
 	 */
 	private FuzzyDataProvider<?> getDataProvider() throws InitializationError {
 		// Get the DataProvider Annotation
@@ -166,31 +185,41 @@ public class FuzzyRunner extends Suite {
 		for (Annotation annotation : annotations) {
 			if (annotation instanceof DataProvider) {
 
-				// Check if the given class is an implementation of FuzzyDataProvider
+				// Check if the given class is an implementation of
+				// FuzzyDataProvider
 				dataProviderClass = ((DataProvider) annotation).value();
-				if (!FuzzyDataProvider.class.isAssignableFrom(dataProviderClass)) {
-					throw new InitializationError(dataProviderClass + " is not an implementation of "
-						+ FuzzyDataProvider.class.getSimpleName());
+				if (!FuzzyDataProvider.class
+						.isAssignableFrom(dataProviderClass)) {
+					throw new InitializationError(dataProviderClass
+							+ " is not an implementation of "
+							+ FuzzyDataProvider.class.getSimpleName());
 				}
 			}
 		}
 
-		// create a new instance of the DataProvider		
+		// create a new instance of the DataProvider
 		try {
-			return (FuzzyDataProvider<?>) dataProviderClass.getConstructor().newInstance();
+			return (FuzzyDataProvider<?>) dataProviderClass.getConstructor()
+					.newInstance();
 		} catch (InstantiationException e) {
-			throw new InitializationError("The DataProvider must have a zero-parameter constructor!");
+			throw new InitializationError(
+					"The DataProvider must have a zero-parameter constructor!");
 		} catch (IllegalAccessException e) {
-			throw new InitializationError("The DataProvider must have a zero-parameter constructor!");
+			throw new InitializationError(
+					"The DataProvider must have a zero-parameter constructor!");
 		} catch (IllegalArgumentException e) {
-			throw new InitializationError("The DataProvider must have a zero-parameter constructor!");
+			throw new InitializationError(
+					"The DataProvider must have a zero-parameter constructor!");
 		} catch (InvocationTargetException e) {
-			throw new InitializationError("The DataProvider must have a zero-parameter constructor!");
+			throw new InitializationError(
+					"The DataProvider must have a zero-parameter constructor!");
 		} catch (NoSuchMethodException e) {
-			throw new InitializationError("The DataProvider must have a zero-parameter constructor!");
+			throw new InitializationError(
+					"The DataProvider must have a zero-parameter constructor!");
 		} catch (SecurityException e) {
-			throw new InitializationError("The DataProvider must have a zero-parameter constructor!");
-		}		 
+			throw new InitializationError(
+					"The DataProvider must have a zero-parameter constructor!");
+		}
 	}
 
 	@Override

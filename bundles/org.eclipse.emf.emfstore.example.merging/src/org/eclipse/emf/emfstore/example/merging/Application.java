@@ -127,7 +127,7 @@ public class Application implements IApplication {
 					// name change of demoProjectCopy. The player name change in demoProject is accepted also since it
 					// was not conflicting with any other change.
 					conflict.resolveConflict(conflict.getLocalOperations(), conflict.getRemoteOperations());
-					//Finally we claim to have resolved all conflicts so update will try to proceed.
+					// Finally we claim to have resolved all conflicts so update will try to proceed.
 					return true;
 				}
 			}, new ESSystemOutProgressMonitor());
@@ -140,12 +140,12 @@ public class Application implements IApplication {
 			System.out.println("\nUpdate of demoProject");
 			demoProject.update(new NullProgressMonitor());
 
-			//Finally we print the league and player names of both projects
+			// Finally we print the league and player names of both projects
 			System.out.println("\nLeague name in demoProject  is now: " + league.getName());
 			System.out.println("\nLeague name in demoProjectCopy  is now: " + leagueCopy.getName());
-			System.out.println("\nPlayer name in demoProject is now: " + league.getPlayers().get(0).getName());			
+			System.out.println("\nPlayer name in demoProject is now: " + league.getPlayers().get(0).getName());
 			System.out.println("\nPlayer name in demoProjectCopy is now: " + leagueCopy.getPlayers().get(0).getName());
-			
+
 		}
 	}
 
@@ -153,4 +153,3 @@ public class Application implements IApplication {
 		// do nothing
 	}
 }
-

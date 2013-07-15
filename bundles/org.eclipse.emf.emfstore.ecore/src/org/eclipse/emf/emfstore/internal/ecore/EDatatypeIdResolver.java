@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.ecore;
@@ -96,8 +96,8 @@ public class EDatatypeIdResolver implements ESSingletonIdResolver {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @return the {@link ESModelElementId} of the the singleton object or <code>null</code> if the given {@link EObject}
-	 *         is not a singleton, is not an instance of {@link EDataType} or is <code>null</code>
+	 * @return the {@link ESModelElementId} of the the singleton object or <code>null</code> if the given
+	 *         {@link EObject} is not a singleton, is not an instance of {@link EDataType} or is <code>null</code>
 	 */
 	public ESModelElementId getSingletonModelElementId(EObject singleton) {
 

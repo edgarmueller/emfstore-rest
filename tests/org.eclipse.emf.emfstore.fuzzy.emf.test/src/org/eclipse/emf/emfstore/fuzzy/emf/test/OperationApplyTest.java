@@ -22,8 +22,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Test which mutates a project and then applies its changes to another (copied) project.
- * Then compares the two mutated projects.
+ * Test which mutates a project and then applies its changes to another (copied)
+ * project. Then compares the two mutated projects.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -37,7 +37,8 @@ public class OperationApplyTest extends FuzzyProjectTest {
 	public void applyTest() {
 
 		final ProjectSpace projectSpace = getProjectSpace();
-		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace.getProject());
+		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace
+				.getProject());
 
 		new EMFStoreCommand() {
 			@Override
@@ -51,10 +52,12 @@ public class OperationApplyTest extends FuzzyProjectTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				((ProjectSpaceBase) copyProjectSpace).applyOperations(projectSpace.getOperations(), false);
+				((ProjectSpaceBase) copyProjectSpace).applyOperations(
+						projectSpace.getOperations(), false);
 			}
 		}.run(false);
 
-		compareIgnoreOrder(projectSpace.getProject(), copyProjectSpace.getProject());
+		compareIgnoreOrder(projectSpace.getProject(),
+				copyProjectSpace.getProject());
 	}
 }

@@ -65,12 +65,15 @@ public class MutatorTest {
 		ModelMutator.changeModel(getConfig(project1));
 		ModelMutator.changeModel(getConfig(project2));
 
-		Iterator<EObject> project1Iterator = project1.getAllModelElements().iterator();
-		Iterator<EObject> project2Iterator = project2.getAllModelElements().iterator();
+		Iterator<EObject> project1Iterator = project1.getAllModelElements()
+				.iterator();
+		Iterator<EObject> project2Iterator = project2.getAllModelElements()
+				.iterator();
 
 		while (project1Iterator.hasNext()) {
 			EObject modelElement = project1Iterator.next();
-			ModelElementId modelElementId = project1.getModelElementId(modelElement);
+			ModelElementId modelElementId = project1
+					.getModelElementId(modelElement);
 			if (!project2.contains(modelElementId)) {
 				failed(project1, project2);
 			}
@@ -84,9 +87,11 @@ public class MutatorTest {
 				failed(project1, project2);
 			}
 			EObject modelElement = allContentsProject1.next();
-			ModelElementId modelElementId = project1.getModelElementId(modelElement);
+			ModelElementId modelElementId = project1
+					.getModelElementId(modelElement);
 			EObject modelElement2 = allContentsProject2.next();
-			ModelElementId modelElementId2 = project2.getModelElementId(modelElement2);
+			ModelElementId modelElementId2 = project2
+					.getModelElementId(modelElement2);
 			if (!modelElementId.equals(modelElementId2)) {
 				failed(project1, project2);
 			}
@@ -97,8 +102,10 @@ public class MutatorTest {
 
 		while (project1Iterator.hasNext()) {
 			EObject modelElement = project1Iterator.next();
-			ModelElementId modelElementId = project1.getModelElementId(modelElement);
-			ModelElementId modelElementId2 = project2.getModelElementId(project2Iterator.next());
+			ModelElementId modelElementId = project1
+					.getModelElementId(modelElement);
+			ModelElementId modelElementId2 = project2
+					.getModelElementId(project2Iterator.next());
 			if (!modelElementId.equals(modelElementId2)) {
 				failed(project1, project2);
 			}
@@ -112,9 +119,11 @@ public class MutatorTest {
 	}
 
 	private ModelMutatorConfiguration getConfig(Project root) {
-		ModelMutatorConfiguration mmc = new ModelMutatorConfiguration(util.getEPackages(), root, util.getSeed());
+		ModelMutatorConfiguration mmc = new ModelMutatorConfiguration(
+				util.getEPackages(), root, util.getSeed());
 		Collection<EStructuralFeature> eStructuralFeaturesToIgnore = new HashSet<EStructuralFeature>();
-		eStructuralFeaturesToIgnore.add(ModelPackage.Literals.PROJECT__CUT_ELEMENTS);
+		eStructuralFeaturesToIgnore
+				.add(ModelPackage.Literals.PROJECT__CUT_ELEMENTS);
 		mmc.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
 		mmc.setMinObjectsCount(util.getMinObjectsCount());
 		return mmc;

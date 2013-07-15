@@ -22,7 +22,8 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl#getReleaseNumber <em>Release Number</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.ModelVersionImpl#getReleaseNumber <em>Release Number
+ * </em>}</li>
  * </ul>
  * </p>
  * 

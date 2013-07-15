@@ -19,7 +19,8 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun;
 
 /**
- * Abstract TestRunProvider to provide the {@link TestRun}s needed in the {@link DiffGenerator}.
+ * Abstract TestRunProvider to provide the {@link TestRun}s needed in the
+ * {@link DiffGenerator}.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -32,20 +33,24 @@ public abstract class TestRunProvider {
 	private TestConfig config;
 
 	/**
-	 * @return The two {@link TestRun}s specified by the config and this provider.
-	 * @throws IOException If there is an error reading the {@link TestRun}s.
+	 * @return The two {@link TestRun}s specified by the config and this
+	 *         provider.
+	 * @throws IOException
+	 *             If there is an error reading the {@link TestRun}s.
 	 */
 	public abstract TestRun[] getTestRuns() throws IOException;
 
 	/**
-	 * @param config The new {@link TestConfig} to use.
+	 * @param config
+	 *            The new {@link TestConfig} to use.
 	 */
 	public void setConfig(TestConfig config) {
 		this.config = config;
 	}
 
 	/**
-	 * @param resource The {@link Resource} where to get a {@link TestRun} out.
+	 * @param resource
+	 *            The {@link Resource} where to get a {@link TestRun} out.
 	 * @return The {@link TestRun} out of the {@link Resource}.
 	 */
 	protected TestRun getTestRun(Resource resource) {

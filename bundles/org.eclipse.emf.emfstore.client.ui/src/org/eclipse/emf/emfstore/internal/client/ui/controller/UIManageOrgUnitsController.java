@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -32,7 +32,7 @@ import org.eclipse.ui.PlatformUI;
  * 
  */
 public class UIManageOrgUnitsController extends
-		AbstractEMFStoreUIController<Void> {
+	AbstractEMFStoreUIController<Void> {
 
 	private final Usersession session;
 
@@ -60,19 +60,19 @@ public class UIManageOrgUnitsController extends
 		try {
 			// TODO OTS
 			ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance()
-					.getWorkspace();
+				.getWorkspace();
 			final AdminBroker adminBroker = workspace.toInternalAPI()
-					.getAdminBroker(session);
+				.getAdminBroker(session);
 			ManageOrgUnitsDialog dialog = new ManageOrgUnitsDialog(PlatformUI
-					.getWorkbench().getDisplay().getActiveShell(), adminBroker);
+				.getWorkbench().getDisplay().getActiveShell(), adminBroker);
 			dialog.create();
 			dialog.open();
 		} catch (final AccessControlException e) {
 			MessageDialog.openError(getShell(), "Access denied ",
-					e.getMessage());
+				e.getMessage());
 		} catch (final ESException e) {
 			MessageDialog.openError(getShell(),
-					"Error while retrieving the admin broker", e.getMessage());
+				"Error while retrieving the admin broker", e.getMessage());
 		}
 
 		return null;

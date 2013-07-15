@@ -35,6 +35,7 @@ import org.eclipse.emf.emfstore.bowling.League;
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.bowling.League} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class LeagueItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -43,6 +44,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public LeagueItemProvider(AdapterFactory adapterFactory) {
@@ -53,6 +55,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -70,44 +73,46 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_League_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_League_name_feature", "_UI_League_type"),
-				 BowlingPackage.Literals.LEAGUE__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_League_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_League_name_feature", "_UI_League_type"),
+				BowlingPackage.Literals.LEAGUE__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Players feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addPlayersPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_League_players_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_League_players_feature", "_UI_League_type"),
-				 BowlingPackage.Literals.LEAGUE__PLAYERS,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_League_players_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_League_players_feature", "_UI_League_type"),
+				BowlingPackage.Literals.LEAGUE__PLAYERS,
+				true,
+				false,
+				false,
+				null,
+				null,
+				null));
 	}
 
 	/**
@@ -116,6 +121,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -130,6 +136,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -144,6 +151,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This returns League.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -155,11 +163,12 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((League)object).getName();
+		String label = ((League) object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_League_type") :
 			getString("_UI_League_type") + " " + label;
@@ -170,6 +179,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -177,12 +187,12 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(League.class)) {
-			case BowlingPackage.LEAGUE__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case BowlingPackage.LEAGUE__PLAYERS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case BowlingPackage.LEAGUE__NAME:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
+		case BowlingPackage.LEAGUE__PLAYERS:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -192,6 +202,7 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -200,14 +211,15 @@ public class LeagueItemProvider extends ItemProviderAdapter implements IEditingD
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BowlingPackage.Literals.LEAGUE__PLAYERS,
-				 BowlingFactory.eINSTANCE.createPlayer()));
+			(BowlingPackage.Literals.LEAGUE__PLAYERS,
+				BowlingFactory.eINSTANCE.createPlayer()));
 	}
 
 	/**
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

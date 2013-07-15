@@ -6,16 +6,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
 import java.util.Comparator;
 
-
 /**
- * A comparator for {@link ESExtensionElement}. This allows to sort the elements in the {@link ESExtensionPoint} in order to
+ * A comparator for {@link ESExtensionElement}. This allows to sort the elements in the {@link ESExtensionPoint} in
+ * order to
  * represent priority of registed elements.
  * 
  * This comparator by default uses a field priority, which is expected to hold an priority number and then sorty by this
@@ -64,7 +64,8 @@ public class ESPriorityComparator implements Comparator<ESExtensionElement> {
 		try {
 			element1.setThrowException(true);
 			element2.setThrowException(true);
-			return element1.getInteger(this.fieldname).compareTo(element2.getInteger(this.fieldname)) * ((desc) ? -1 : 1);
+			return element1.getInteger(this.fieldname).compareTo(element2.getInteger(this.fieldname))
+				* ((desc) ? -1 : 1);
 		} catch (ESExtensionPointException e) {
 			return 0;
 		}

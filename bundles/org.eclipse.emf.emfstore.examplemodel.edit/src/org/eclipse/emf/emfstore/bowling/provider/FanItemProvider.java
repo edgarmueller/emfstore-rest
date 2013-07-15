@@ -2,7 +2,6 @@
  */
 package org.eclipse.emf.emfstore.bowling.provider;
 
-
 import java.util.Collection;
 import java.util.List;
 
@@ -28,20 +27,22 @@ import org.eclipse.emf.emfstore.bowling.Fan;
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.bowling.Fan} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class FanItemProvider
 	extends ItemProviderAdapter
 	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	IEditingDomainItemProvider,
+	IStructuredItemContentProvider,
+	ITreeItemContentProvider,
+	IItemLabelProvider,
+	IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public FanItemProvider(AdapterFactory adapterFactory) {
@@ -52,6 +53,7 @@ public class FanItemProvider
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -76,198 +78,208 @@ public class FanItemProvider
 	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_name_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_name_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_name_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Date Of Birth feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addDateOfBirthPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_dateOfBirth_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_dateOfBirth_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__DATE_OF_BIRTH,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_dateOfBirth_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_dateOfBirth_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__DATE_OF_BIRTH,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Has Season Ticket feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addHasSeasonTicketPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_hasSeasonTicket_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_hasSeasonTicket_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__HAS_SEASON_TICKET,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_hasSeasonTicket_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_hasSeasonTicket_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__HAS_SEASON_TICKET,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the EMails feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addEMailsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_eMails_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_eMails_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__EMAILS,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_eMails_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_eMails_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__EMAILS,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Gender feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addGenderPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_gender_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_gender_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__GENDER,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_gender_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_gender_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__GENDER,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Favourite Player feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addFavouritePlayerPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_favouritePlayer_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_favouritePlayer_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__FAVOURITE_PLAYER,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_favouritePlayer_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_favouritePlayer_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__FAVOURITE_PLAYER,
+				true,
+				false,
+				true,
+				null,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Visited Tournaments feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addVisitedTournamentsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_visitedTournaments_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_visitedTournaments_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__VISITED_TOURNAMENTS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_visitedTournaments_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_visitedTournaments_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__VISITED_TOURNAMENTS,
+				true,
+				false,
+				true,
+				null,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Number Of Tournaments Visited feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNumberOfTournamentsVisitedPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_numberOfTournamentsVisited_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_numberOfTournamentsVisited_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__NUMBER_OF_TOURNAMENTS_VISITED,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_numberOfTournamentsVisited_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_numberOfTournamentsVisited_feature",
+					"_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__NUMBER_OF_TOURNAMENTS_VISITED,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Money Spent On Tickets feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addMoneySpentOnTicketsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Fan_moneySpentOnTickets_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Fan_moneySpentOnTickets_feature", "_UI_Fan_type"),
-				 BowlingPackage.Literals.FAN__MONEY_SPENT_ON_TICKETS,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
-				 null,
-				 null));
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Fan_moneySpentOnTickets_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Fan_moneySpentOnTickets_feature", "_UI_Fan_type"),
+				BowlingPackage.Literals.FAN__MONEY_SPENT_ON_TICKETS,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -276,6 +288,7 @@ public class FanItemProvider
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -291,6 +304,7 @@ public class FanItemProvider
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -305,6 +319,7 @@ public class FanItemProvider
 	 * This returns Fan.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -316,11 +331,12 @@ public class FanItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Fan)object).getName();
+		String label = ((Fan) object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Fan_type") :
 			getString("_UI_Fan_type") + " " + label;
@@ -331,6 +347,7 @@ public class FanItemProvider
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -338,19 +355,19 @@ public class FanItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Fan.class)) {
-			case BowlingPackage.FAN__NAME:
-			case BowlingPackage.FAN__DATE_OF_BIRTH:
-			case BowlingPackage.FAN__HAS_SEASON_TICKET:
-			case BowlingPackage.FAN__EMAILS:
-			case BowlingPackage.FAN__GENDER:
-			case BowlingPackage.FAN__NUMBER_OF_TOURNAMENTS_VISITED:
-			case BowlingPackage.FAN__MONEY_SPENT_ON_TICKETS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case BowlingPackage.FAN__FAN_MERCHANDISE:
-			case BowlingPackage.FAN__FAVOURITE_MERCHANDISE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case BowlingPackage.FAN__NAME:
+		case BowlingPackage.FAN__DATE_OF_BIRTH:
+		case BowlingPackage.FAN__HAS_SEASON_TICKET:
+		case BowlingPackage.FAN__EMAILS:
+		case BowlingPackage.FAN__GENDER:
+		case BowlingPackage.FAN__NUMBER_OF_TOURNAMENTS_VISITED:
+		case BowlingPackage.FAN__MONEY_SPENT_ON_TICKETS:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
+		case BowlingPackage.FAN__FAN_MERCHANDISE:
+		case BowlingPackage.FAN__FAVOURITE_MERCHANDISE:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -360,6 +377,7 @@ public class FanItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -368,19 +386,20 @@ public class FanItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BowlingPackage.Literals.FAN__FAN_MERCHANDISE,
-				 BowlingFactory.eINSTANCE.createMerchandise()));
+			(BowlingPackage.Literals.FAN__FAN_MERCHANDISE,
+				BowlingFactory.eINSTANCE.createMerchandise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BowlingPackage.Literals.FAN__FAVOURITE_MERCHANDISE,
-				 BowlingFactory.eINSTANCE.createMerchandise()));
+			(BowlingPackage.Literals.FAN__FAVOURITE_MERCHANDISE,
+				BowlingFactory.eINSTANCE.createMerchandise()));
 	}
 
 	/**
 	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -390,12 +409,11 @@ public class FanItemProvider
 
 		boolean qualify =
 			childFeature == BowlingPackage.Literals.FAN__FAN_MERCHANDISE ||
-			childFeature == BowlingPackage.Literals.FAN__FAVOURITE_MERCHANDISE;
+				childFeature == BowlingPackage.Literals.FAN__FAVOURITE_MERCHANDISE;
 
 		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+			return getString("_UI_CreateChild_text2",
+				new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
@@ -404,6 +422,7 @@ public class FanItemProvider
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

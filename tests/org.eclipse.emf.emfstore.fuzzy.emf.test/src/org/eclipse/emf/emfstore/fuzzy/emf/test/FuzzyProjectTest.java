@@ -72,7 +72,9 @@ public abstract class FuzzyProjectTest {
 	@Options
 	private Map<String, Object> options = new HashMap<String, Object>() {
 		{
-			put(EMFDataProvider.MUTATOR_EDITINGDOMAIN, ((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE).getEditingDomain());
+			put(EMFDataProvider.MUTATOR_EDITINGDOMAIN,
+					((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE)
+							.getEditingDomain());
 		}
 	};
 
@@ -100,14 +102,18 @@ public abstract class FuzzyProjectTest {
 		// which leads to a very slow performance
 		Configuration.getClientBehavior().setAutoSave(false);
 
-		// import projects		
+		// import projects
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				ESWorkspaceImpl esWorkspaceImpl = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
-				projectSpace = ((ESLocalProjectImpl) esWorkspaceImpl.createLocalProject("")).toInternalAPI();
+				ESWorkspaceImpl esWorkspaceImpl = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE
+						.getWorkspace();
+				projectSpace = ((ESLocalProjectImpl) esWorkspaceImpl
+						.createLocalProject("")).toInternalAPI();
 				if (projectSpaceCopyNeeded()) {
-					copyProjectSpace = ((WorkspaceBase) esWorkspaceImpl.toInternalAPI()).cloneProject("", projectSpace.getProject());
+					copyProjectSpace = ((WorkspaceBase) esWorkspaceImpl
+							.toInternalAPI()).cloneProject("",
+							projectSpace.getProject());
 				}
 			}
 		}.run(false);
@@ -117,15 +123,19 @@ public abstract class FuzzyProjectTest {
 	@After
 	@SuppressWarnings("restriction")
 	public void tearDown() {
-		RunESCommand.run(new Callable<Void>() {			
+		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				try {
-					WorkspaceImpl currentWorkspace = (WorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
-					EList<ProjectSpace> projectSpaces = currentWorkspace.getProjectSpaces();
-					if (projectSpace != null && projectSpaces.contains(projectSpace)) {
+					WorkspaceImpl currentWorkspace = (WorkspaceImpl) ESWorkspaceProvider.INSTANCE
+							.getWorkspace();
+					EList<ProjectSpace> projectSpaces = currentWorkspace
+							.getProjectSpaces();
+					if (projectSpace != null
+							&& projectSpaces.contains(projectSpace)) {
 						projectSpace.delete(new NullProgressMonitor());
 					}
-					if (copyProjectSpace != null && projectSpaces.contains(copyProjectSpace)) {
+					if (copyProjectSpace != null
+							&& projectSpaces.contains(copyProjectSpace)) {
 						copyProjectSpace.delete(new NullProgressMonitor());
 					}
 				} catch (FileNotFoundException e) {
@@ -133,7 +143,7 @@ public abstract class FuzzyProjectTest {
 				} catch (IOException e) {
 					// do nothing
 				} finally {
-					
+
 				}
 				return null;
 			}
@@ -141,34 +151,46 @@ public abstract class FuzzyProjectTest {
 	}
 
 	/**
-	 * Constructs a new {@link ModelMutatorConfiguration} based on the existing one and the given project.
+	 * Constructs a new {@link ModelMutatorConfiguration} based on the existing
+	 * one and the given project.
 	 * 
-	 * @param project The root object of the {@link ModelMutatorConfiguration}.
+	 * @param project
+	 *            The root object of the {@link ModelMutatorConfiguration}.
 	 * @return The new {@link ModelMutatorConfiguration}.
 	 */
 	@SuppressWarnings("restriction")
-	public ModelMutatorConfiguration getModelMutatorConfiguration(Project project) {
+	public ModelMutatorConfiguration getModelMutatorConfiguration(
+			Project project) {
 		return getModelMutatorConfiguration(project, util);
 	}
 
 	/**
-	 * Constructs a new {@link ModelMutatorConfiguration} based on the given {@link MutateUtil} and the given project.
+	 * Constructs a new {@link ModelMutatorConfiguration} based on the given
+	 * {@link MutateUtil} and the given project.
 	 * 
-	 * @param project The root object of the {@link ModelMutatorConfiguration}.
-	 * @param util The {@link MutateUtil} connected to the {@link EMFDataProvider}.
+	 * @param project
+	 *            The root object of the {@link ModelMutatorConfiguration}.
+	 * @param util
+	 *            The {@link MutateUtil} connected to the
+	 *            {@link EMFDataProvider}.
 	 * @return The new {@link ModelMutatorConfiguration}.
 	 */
-	public static ModelMutatorConfiguration getModelMutatorConfiguration(Project project, MutateUtil util) {
-		final ModelMutatorConfiguration mmc = new ModelMutatorConfiguration(util.getEPackages(), project, 1L);
-		mmc.seteStructuralFeaturesToIgnore(util.getEStructuralFeaturesToIgnore());
+	public static ModelMutatorConfiguration getModelMutatorConfiguration(
+			Project project, MutateUtil util) {
+		final ModelMutatorConfiguration mmc = new ModelMutatorConfiguration(
+				util.getEPackages(), project, 1L);
+		mmc.seteStructuralFeaturesToIgnore(util
+				.getEStructuralFeaturesToIgnore());
 		mmc.seteClassesToIgnore(util.getEClassesToIgnore());
-		mmc.setEditingDomain(((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE).getEditingDomain());
+		mmc.setEditingDomain(((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE)
+				.getEditingDomain());
 		mmc.setMinObjectsCount(util.getMinObjectsCount());
 		return mmc;
 	}
 
 	/**
-	 * Can be overridden by subclasses to modify behavior. Default is <code>true</code>.
+	 * Can be overridden by subclasses to modify behavior. Default is
+	 * <code>true</code>.
 	 * 
 	 * @return Should this class handle/provide also a copy of the projectSpace?
 	 */
@@ -179,8 +201,10 @@ public abstract class FuzzyProjectTest {
 	/**
 	 * Notify that a test has failed. Saves the projects for later comparison.
 	 * 
-	 * @param project1 The first {@link Project}.
-	 * @param project2 The second {@link Project}.
+	 * @param project1
+	 *            The first {@link Project}.
+	 * @param project2
+	 *            The second {@link Project}.
 	 */
 	public void fail(Project project1, Project project2) {
 		fail(project1, project2, util);
@@ -189,9 +213,13 @@ public abstract class FuzzyProjectTest {
 	/**
 	 * Notify that a test has failed. Saves the projects for later comparison.
 	 * 
-	 * @param project1 The first {@link Project}.
-	 * @param project2 The second {@link Project}.
-	 * @param util The {@link MutateUtil} connected to the {@link EMFDataProvider}.
+	 * @param project1
+	 *            The first {@link Project}.
+	 * @param project2
+	 *            The second {@link Project}.
+	 * @param util
+	 *            The {@link MutateUtil} connected to the
+	 *            {@link EMFDataProvider}.
 	 */
 	public static void fail(Project project1, Project project2, MutateUtil util) {
 		save(project1, project2, util);
@@ -201,21 +229,28 @@ public abstract class FuzzyProjectTest {
 	/**
 	 * Saves the projects for e.g. later comparison.
 	 * 
-	 * @param project1 The first {@link Project}.
-	 * @param project2 The second {@link Project}.
-	 * @param util The {@link MutateUtil} connected to the {@link EMFDataProvider}.
+	 * @param project1
+	 *            The first {@link Project}.
+	 * @param project2
+	 *            The second {@link Project}.
+	 * @param util
+	 *            The {@link MutateUtil} connected to the
+	 *            {@link EMFDataProvider}.
 	 */
-	public static void save(final Project project1, final Project project2, final MutateUtil util) {
+	public static void save(final Project project1, final Project project2,
+			final MutateUtil util) {
 		final Map<Object, Object> options = new HashMap<Object, Object>();
-		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
+				XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
 				try {
-					ModelUtil.saveEObjectToResource(Arrays.asList(project1), util.getRunResourceURI("original"),
-						options);
-					ModelUtil.saveEObjectToResource(Arrays.asList(project2), util.getRunResourceURI("copy"), options);
+					ModelUtil.saveEObjectToResource(Arrays.asList(project1),
+							util.getRunResourceURI("original"), options);
+					ModelUtil.saveEObjectToResource(Arrays.asList(project2),
+							util.getRunResourceURI("copy"), options);
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
@@ -226,8 +261,10 @@ public abstract class FuzzyProjectTest {
 	/**
 	 * Compare two projects but ignore the order of the elements.
 	 * 
-	 * @param project1 The first {@link Project}.
-	 * @param project2 The second {@link Project}.
+	 * @param project1
+	 *            The first {@link Project}.
+	 * @param project2
+	 *            The second {@link Project}.
 	 */
 	public void compareIgnoreOrder(Project project1, Project project2) {
 		compareIgnoreOrder(project1, project2, util);
@@ -236,21 +273,30 @@ public abstract class FuzzyProjectTest {
 	/**
 	 * Compare two projects but ignore the order of the elements.
 	 * 
-	 * @param project1 The first {@link Project}.
-	 * @param project2 The second {@link Project}.
-	 * @param util The {@link MutateUtil} connected to the {@link EMFDataProvider}.
+	 * @param project1
+	 *            The first {@link Project}.
+	 * @param project2
+	 *            The second {@link Project}.
+	 * @param util
+	 *            The {@link MutateUtil} connected to the
+	 *            {@link EMFDataProvider}.
 	 */
-	public static void compareIgnoreOrder(Project project1, Project project2, MutateUtil util) {
-		if (project1.getModelElements().size() != project2.getModelElements().size()) {
+	public static void compareIgnoreOrder(Project project1, Project project2,
+			MutateUtil util) {
+		if (project1.getModelElements().size() != project2.getModelElements()
+				.size()) {
 			fail(project1, project2, util);
 		}
 
 		int index = 0;
-		// sort elements in modelElement reference of projects to avoid differences only in indices.
+		// sort elements in modelElement reference of projects to avoid
+		// differences only in indices.
 		for (EObject eObject1 : project1.getModelElements()) {
-			ModelElementId modelElementId1 = project1.getModelElementId(eObject1);
+			ModelElementId modelElementId1 = project1
+					.getModelElementId(eObject1);
 			EObject eObject2 = project2.getModelElement(modelElementId1);
-			if (eObject2 == null || !project2.getModelElements().contains(eObject2)) {
+			if (eObject2 == null
+					|| !project2.getModelElements().contains(eObject2)) {
 				fail(project1, project2, util);
 			}
 			project2.getModelElements().move(index, eObject2);
@@ -263,7 +309,8 @@ public abstract class FuzzyProjectTest {
 	}
 
 	/**
-	 * @return The {@link MutateUtil} connected with the {@link EMFDataProvider}.
+	 * @return The {@link MutateUtil} connected with the {@link EMFDataProvider}
+	 *         .
 	 */
 	public MutateUtil getUtil() {
 		return util;
@@ -277,7 +324,8 @@ public abstract class FuzzyProjectTest {
 	}
 
 	/**
-	 * @param projectSpace The {@link ProjectSpace} of the test.
+	 * @param projectSpace
+	 *            The {@link ProjectSpace} of the test.
 	 */
 	public void setProjectSpace(ProjectSpace projectSpace) {
 		this.projectSpace = projectSpace;
@@ -285,22 +333,28 @@ public abstract class FuzzyProjectTest {
 
 	/**
 	 * @return The {@link ProjectSpace} copied from the original one.
-	 * @throws IllegalStateException When {@link #projectSpaceCopyNeeded()} returns false.
+	 * @throws IllegalStateException
+	 *             When {@link #projectSpaceCopyNeeded()} returns false.
 	 */
 	public ProjectSpace getCopyProjectSpace() throws IllegalStateException {
 		if (!projectSpaceCopyNeeded()) {
-			throw new IllegalStateException("This test does not have a copied projectSpace!");
+			throw new IllegalStateException(
+					"This test does not have a copied projectSpace!");
 		}
 		return copyProjectSpace;
 	}
 
 	/**
-	 * @param copyProjectSpace The {@link ProjectSpace} copied from the original one.
-	 * @throws IllegalStateException When {@link #projectSpaceCopyNeeded()} returns false.
+	 * @param copyProjectSpace
+	 *            The {@link ProjectSpace} copied from the original one.
+	 * @throws IllegalStateException
+	 *             When {@link #projectSpaceCopyNeeded()} returns false.
 	 */
-	public void setCopyProjectSpace(ProjectSpace copyProjectSpace) throws IllegalStateException {
+	public void setCopyProjectSpace(ProjectSpace copyProjectSpace)
+			throws IllegalStateException {
 		if (!projectSpaceCopyNeeded()) {
-			throw new IllegalStateException("This test does not have a copied projectSpace!");
+			throw new IllegalStateException(
+					"This test does not have a copied projectSpace!");
 		}
 		this.copyProjectSpace = copyProjectSpace;
 	}

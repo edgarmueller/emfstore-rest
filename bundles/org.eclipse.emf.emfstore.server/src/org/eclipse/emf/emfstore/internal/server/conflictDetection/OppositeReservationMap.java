@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
 public class OppositeReservationMap extends LinkedHashMapWithConflictBucketCandidate<ConflictBucketCandidate> {
 
 	private boolean hasOpposites;

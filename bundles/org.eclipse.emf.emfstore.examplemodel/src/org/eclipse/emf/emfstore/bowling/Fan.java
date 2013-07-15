@@ -11,24 +11,25 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Fan</b></em>'.
  * <!-- end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket <em>Has Season Ticket</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getEMails <em>EMails</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getGender <em>Gender</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise <em>Favourite Merchandise</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments <em>Visited Tournaments</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited <em>Number Of Tournaments Visited</em>}</li>
- *   <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets <em>Money Spent On Tickets</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getName <em>Name</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket <em>Has Season Ticket</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getEMails <em>EMails</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getGender <em>Gender</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise <em>Favourite Merchandise</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments <em>Visited Tournaments</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited <em>Number Of Tournaments Visited</em>}
+ * </li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets <em>Money Spent On Tickets</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getFan()
  * @model
  * @generated
@@ -38,10 +39,10 @@ public interface Fan extends EObject {
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #isSetName()
 	 * @see #unsetName()
@@ -56,6 +57,7 @@ public interface Fan extends EObject {
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #isSetName()
 	 * @see #unsetName()
@@ -68,6 +70,7 @@ public interface Fan extends EObject {
 	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetName()
 	 * @see #getName()
 	 * @see #setName(String)
@@ -76,9 +79,11 @@ public interface Fan extends EObject {
 	void unsetName();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getName <em>Name</em>}' attribute is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getName <em>Name</em>}' attribute
+	 * is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Name</em>' attribute is set.
 	 * @see #unsetName()
 	 * @see #getName()
@@ -91,10 +96,11 @@ public interface Fan extends EObject {
 	 * Returns the value of the '<em><b>Date Of Birth</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Date Of Birth</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Date Of Birth</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Date Of Birth</em>' attribute.
 	 * @see #isSetDateOfBirth()
 	 * @see #unsetDateOfBirth()
@@ -106,9 +112,11 @@ public interface Fan extends EObject {
 	Date getDateOfBirth();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Date Of Birth</em>' attribute.
 	 * @see #isSetDateOfBirth()
 	 * @see #unsetDateOfBirth()
@@ -118,9 +126,11 @@ public interface Fan extends EObject {
 	void setDateOfBirth(Date value);
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}' attribute.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetDateOfBirth()
 	 * @see #getDateOfBirth()
 	 * @see #setDateOfBirth(Date)
@@ -129,9 +139,11 @@ public interface Fan extends EObject {
 	void unsetDateOfBirth();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth <em>Date Of Birth</em>}' attribute is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getDateOfBirth
+	 * <em>Date Of Birth</em>}' attribute is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Date Of Birth</em>' attribute is set.
 	 * @see #unsetDateOfBirth()
 	 * @see #getDateOfBirth()
@@ -144,10 +156,11 @@ public interface Fan extends EObject {
 	 * Returns the value of the '<em><b>Has Season Ticket</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Has Season Ticket</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Has Season Ticket</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Has Season Ticket</em>' attribute.
 	 * @see #isSetHasSeasonTicket()
 	 * @see #unsetHasSeasonTicket()
@@ -159,9 +172,11 @@ public interface Fan extends EObject {
 	boolean isHasSeasonTicket();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket <em>Has Season Ticket</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket <em>Has Season Ticket</em>}'
+	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Has Season Ticket</em>' attribute.
 	 * @see #isSetHasSeasonTicket()
 	 * @see #unsetHasSeasonTicket()
@@ -171,9 +186,11 @@ public interface Fan extends EObject {
 	void setHasSeasonTicket(boolean value);
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket <em>Has Season Ticket</em>}' attribute.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket
+	 * <em>Has Season Ticket</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetHasSeasonTicket()
 	 * @see #isHasSeasonTicket()
 	 * @see #setHasSeasonTicket(boolean)
@@ -182,9 +199,11 @@ public interface Fan extends EObject {
 	void unsetHasSeasonTicket();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket <em>Has Season Ticket</em>}' attribute is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#isHasSeasonTicket
+	 * <em>Has Season Ticket</em>}' attribute is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Has Season Ticket</em>' attribute is set.
 	 * @see #unsetHasSeasonTicket()
 	 * @see #isHasSeasonTicket()
@@ -198,10 +217,11 @@ public interface Fan extends EObject {
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>EMails</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>EMails</em>' attribute list isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>EMails</em>' attribute list.
 	 * @see #isSetEMails()
 	 * @see #unsetEMails()
@@ -215,6 +235,7 @@ public interface Fan extends EObject {
 	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getEMails <em>EMails</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetEMails()
 	 * @see #getEMails()
 	 * @generated
@@ -222,9 +243,11 @@ public interface Fan extends EObject {
 	void unsetEMails();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getEMails <em>EMails</em>}' attribute list is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getEMails <em>EMails</em>}'
+	 * attribute list is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>EMails</em>' attribute list is set.
 	 * @see #unsetEMails()
 	 * @see #getEMails()
@@ -237,10 +260,11 @@ public interface Fan extends EObject {
 	 * The literals are from the enumeration {@link org.eclipse.emf.emfstore.bowling.Gender}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Gender</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Gender</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Gender</em>' attribute.
 	 * @see org.eclipse.emf.emfstore.bowling.Gender
 	 * @see #isSetGender()
@@ -256,6 +280,7 @@ public interface Fan extends EObject {
 	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getGender <em>Gender</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Gender</em>' attribute.
 	 * @see org.eclipse.emf.emfstore.bowling.Gender
 	 * @see #isSetGender()
@@ -269,6 +294,7 @@ public interface Fan extends EObject {
 	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getGender <em>Gender</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetGender()
 	 * @see #getGender()
 	 * @see #setGender(Gender)
@@ -277,9 +303,11 @@ public interface Fan extends EObject {
 	void unsetGender();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getGender <em>Gender</em>}' attribute is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getGender <em>Gender</em>}'
+	 * attribute is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Gender</em>' attribute is set.
 	 * @see #unsetGender()
 	 * @see #getGender()
@@ -292,10 +320,11 @@ public interface Fan extends EObject {
 	 * Returns the value of the '<em><b>Favourite Player</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Favourite Player</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Favourite Player</em>' reference isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Favourite Player</em>' reference.
 	 * @see #isSetFavouritePlayer()
 	 * @see #unsetFavouritePlayer()
@@ -307,9 +336,11 @@ public interface Fan extends EObject {
 	Player getFavouritePlayer();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}'
+	 * reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Favourite Player</em>' reference.
 	 * @see #isSetFavouritePlayer()
 	 * @see #unsetFavouritePlayer()
@@ -319,9 +350,11 @@ public interface Fan extends EObject {
 	void setFavouritePlayer(Player value);
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}' reference.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer
+	 * <em>Favourite Player</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetFavouritePlayer()
 	 * @see #getFavouritePlayer()
 	 * @see #setFavouritePlayer(Player)
@@ -330,9 +363,11 @@ public interface Fan extends EObject {
 	void unsetFavouritePlayer();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}' reference is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer
+	 * <em>Favourite Player</em>}' reference is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Favourite Player</em>' reference is set.
 	 * @see #unsetFavouritePlayer()
 	 * @see #getFavouritePlayer()
@@ -346,10 +381,11 @@ public interface Fan extends EObject {
 	 * The list contents are of type {@link org.eclipse.emf.emfstore.bowling.Tournament}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Visited Tournaments</em>' reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Visited Tournaments</em>' reference list isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Visited Tournaments</em>' reference list.
 	 * @see #isSetVisitedTournaments()
 	 * @see #unsetVisitedTournaments()
@@ -360,9 +396,11 @@ public interface Fan extends EObject {
 	EList<Tournament> getVisitedTournaments();
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments <em>Visited Tournaments</em>}' reference list.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments
+	 * <em>Visited Tournaments</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetVisitedTournaments()
 	 * @see #getVisitedTournaments()
 	 * @generated
@@ -370,9 +408,11 @@ public interface Fan extends EObject {
 	void unsetVisitedTournaments();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments <em>Visited Tournaments</em>}' reference list is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments
+	 * <em>Visited Tournaments</em>}' reference list is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Visited Tournaments</em>' reference list is set.
 	 * @see #unsetVisitedTournaments()
 	 * @see #getVisitedTournaments()
@@ -384,10 +424,11 @@ public interface Fan extends EObject {
 	 * Returns the value of the '<em><b>Number Of Tournaments Visited</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Number Of Tournaments Visited</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Number Of Tournaments Visited</em>' attribute isn't clear, there really should be more
+	 * of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Number Of Tournaments Visited</em>' attribute.
 	 * @see #isSetNumberOfTournamentsVisited()
 	 * @see #unsetNumberOfTournamentsVisited()
@@ -399,9 +440,11 @@ public interface Fan extends EObject {
 	int getNumberOfTournamentsVisited();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited <em>Number Of Tournaments Visited</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited
+	 * <em>Number Of Tournaments Visited</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Number Of Tournaments Visited</em>' attribute.
 	 * @see #isSetNumberOfTournamentsVisited()
 	 * @see #unsetNumberOfTournamentsVisited()
@@ -411,9 +454,11 @@ public interface Fan extends EObject {
 	void setNumberOfTournamentsVisited(int value);
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited <em>Number Of Tournaments Visited</em>}' attribute.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited
+	 * <em>Number Of Tournaments Visited</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetNumberOfTournamentsVisited()
 	 * @see #getNumberOfTournamentsVisited()
 	 * @see #setNumberOfTournamentsVisited(int)
@@ -422,9 +467,11 @@ public interface Fan extends EObject {
 	void unsetNumberOfTournamentsVisited();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited <em>Number Of Tournaments Visited</em>}' attribute is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited
+	 * <em>Number Of Tournaments Visited</em>}' attribute is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Number Of Tournaments Visited</em>' attribute is set.
 	 * @see #unsetNumberOfTournamentsVisited()
 	 * @see #getNumberOfTournamentsVisited()
@@ -437,10 +484,11 @@ public interface Fan extends EObject {
 	 * Returns the value of the '<em><b>Money Spent On Tickets</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Money Spent On Tickets</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Money Spent On Tickets</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Money Spent On Tickets</em>' attribute.
 	 * @see #isSetMoneySpentOnTickets()
 	 * @see #unsetMoneySpentOnTickets()
@@ -452,9 +500,11 @@ public interface Fan extends EObject {
 	double getMoneySpentOnTickets();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets <em>Money Spent On Tickets</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets
+	 * <em>Money Spent On Tickets</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Money Spent On Tickets</em>' attribute.
 	 * @see #isSetMoneySpentOnTickets()
 	 * @see #unsetMoneySpentOnTickets()
@@ -464,9 +514,11 @@ public interface Fan extends EObject {
 	void setMoneySpentOnTickets(double value);
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets <em>Money Spent On Tickets</em>}' attribute.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets
+	 * <em>Money Spent On Tickets</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetMoneySpentOnTickets()
 	 * @see #getMoneySpentOnTickets()
 	 * @see #setMoneySpentOnTickets(double)
@@ -475,9 +527,11 @@ public interface Fan extends EObject {
 	void unsetMoneySpentOnTickets();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets <em>Money Spent On Tickets</em>}' attribute is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getMoneySpentOnTickets
+	 * <em>Money Spent On Tickets</em>}' attribute is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Money Spent On Tickets</em>' attribute is set.
 	 * @see #unsetMoneySpentOnTickets()
 	 * @see #getMoneySpentOnTickets()
@@ -491,10 +545,11 @@ public interface Fan extends EObject {
 	 * The list contents are of type {@link org.eclipse.emf.emfstore.bowling.Merchandise}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Fan Merchandise</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Fan Merchandise</em>' containment reference list isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Fan Merchandise</em>' containment reference list.
 	 * @see #isSetFanMerchandise()
 	 * @see #unsetFanMerchandise()
@@ -505,9 +560,11 @@ public interface Fan extends EObject {
 	EList<Merchandise> getFanMerchandise();
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}' containment reference list.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}'
+	 * containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetFanMerchandise()
 	 * @see #getFanMerchandise()
 	 * @generated
@@ -515,9 +572,11 @@ public interface Fan extends EObject {
 	void unsetFanMerchandise();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}' containment reference list is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise
+	 * <em>Fan Merchandise</em>}' containment reference list is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Fan Merchandise</em>' containment reference list is set.
 	 * @see #unsetFanMerchandise()
 	 * @see #getFanMerchandise()
@@ -529,10 +588,11 @@ public interface Fan extends EObject {
 	 * Returns the value of the '<em><b>Favourite Merchandise</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Favourite Merchandise</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Favourite Merchandise</em>' containment reference isn't clear, there really should be
+	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Favourite Merchandise</em>' containment reference.
 	 * @see #isSetFavouriteMerchandise()
 	 * @see #unsetFavouriteMerchandise()
@@ -544,9 +604,11 @@ public interface Fan extends EObject {
 	Merchandise getFavouriteMerchandise();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise <em>Favourite Merchandise</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise
+	 * <em>Favourite Merchandise</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @param value the new value of the '<em>Favourite Merchandise</em>' containment reference.
 	 * @see #isSetFavouriteMerchandise()
 	 * @see #unsetFavouriteMerchandise()
@@ -556,9 +618,11 @@ public interface Fan extends EObject {
 	void setFavouriteMerchandise(Merchandise value);
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise <em>Favourite Merchandise</em>}' containment reference.
+	 * Unsets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise
+	 * <em>Favourite Merchandise</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #isSetFavouriteMerchandise()
 	 * @see #getFavouriteMerchandise()
 	 * @see #setFavouriteMerchandise(Merchandise)
@@ -567,9 +631,11 @@ public interface Fan extends EObject {
 	void unsetFavouriteMerchandise();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise <em>Favourite Merchandise</em>}' containment reference is set.
+	 * Returns whether the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise
+	 * <em>Favourite Merchandise</em>}' containment reference is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return whether the value of the '<em>Favourite Merchandise</em>' containment reference is set.
 	 * @see #unsetFavouriteMerchandise()
 	 * @see #getFavouriteMerchandise()

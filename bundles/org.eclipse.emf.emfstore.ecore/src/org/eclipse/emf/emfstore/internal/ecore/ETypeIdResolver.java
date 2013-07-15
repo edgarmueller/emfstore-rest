@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.ecore;
 
@@ -41,7 +41,7 @@ public class ETypeIdResolver implements ESSingletonIdResolver {
 	}
 
 	public ESModelElementId getSingletonModelElementId(EObject singleton) {
-		if (!(singleton instanceof EClass||EStructuralFeature.class.isInstance(singleton)) || singleton == null) {
+		if (!(singleton instanceof EClass || EStructuralFeature.class.isInstance(singleton)) || singleton == null) {
 			return null;
 		}
 
@@ -61,7 +61,7 @@ public class ETypeIdResolver implements ESSingletonIdResolver {
 	}
 
 	public boolean isSingleton(EObject eDataType) {
-		return EClass.class.isInstance(eDataType)||EStructuralFeature.class.isInstance(eDataType);
+		return EClass.class.isInstance(eDataType) || EStructuralFeature.class.isInstance(eDataType);
 	}
 
 }

@@ -14,7 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
 public class ModelElementIdReservationMap extends LinkedHashMap<String, FeatureNameReservationMap> {
 
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates(String modelElementId) {

@@ -29,6 +29,7 @@ public class Activator extends Plugin {
 	private static Activator plugin;
 
 	private final transient LogAdapter logAdapter;
+
 	/**
 	 * The constructor.
 	 */

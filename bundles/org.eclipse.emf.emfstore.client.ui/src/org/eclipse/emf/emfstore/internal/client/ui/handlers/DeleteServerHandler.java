@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * ovonwesen
  * emueller
  ******************************************************************************/
@@ -17,8 +17,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.controller.UIRemoveServerCont
 
 /**
  * Handler for removing a server/repository.<br/>
- * It is assumed that the user previously has selected a {@link ServerInfo}
- * instance.<br/>
+ * It is assumed that the user previously has selected a {@link ServerInfo} instance.<br/>
  * 
  * @author ovonwesen
  * @author emueller
@@ -34,7 +33,7 @@ public class DeleteServerHandler extends AbstractEMFStoreHandler {
 	@Override
 	public void handle() {
 		new UIRemoveServerController(getShell(), requireSelection(
-				ServerInfo.class).toAPI()).execute();
+			ServerInfo.class).toAPI()).execute();
 	}
 
 }

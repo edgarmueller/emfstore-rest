@@ -47,12 +47,13 @@ import org.junit.runner.notification.RunListener;
 import org.junit.runners.model.TestClass;
 
 /**
- * This implementation of a {@link FuzzyDataProvider} provides generated models using the functionality of
- * {@link ModelMutator}. <br>
+ * This implementation of a {@link FuzzyDataProvider} provides generated models
+ * using the functionality of {@link ModelMutator}. <br>
  * <br>
  * The run of a test is based on a {@link TestConfig}, defining model etc. <br>
  * <br>
- * During the run it records {@link TestResult}s to create a {@link TestRun} for reporting purpose.
+ * During the run it records {@link TestResult}s to create a {@link TestRun} for
+ * reporting purpose.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -89,18 +90,20 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 	public static final String PROP_EMFDATAPROVIDER = ".emfdataprovider";
 
 	/**
-	 * Property specifying the path to the config file for the {@link EMFDataProvider}.
+	 * Property specifying the path to the config file for the
+	 * {@link EMFDataProvider}.
 	 */
 	public static final String PROP_CONFIGS_FILE = ".configsFile";
 
 	/**
-	 * Options constant for the exception log set for the mutator.
-	 * Has to be filled with a <code>Set</code> of <code>RuntimeException</code>.
+	 * Options constant for the exception log set for the mutator. Has to be
+	 * filled with a <code>Set</code> of <code>RuntimeException</code>.
 	 */
 	public static final String MUTATOR_EXC_LOG = "mutatorExcLog";
 
 	/**
-	 * Options constant for the {@link EditingDomain} for the {@link ModelMutator}.
+	 * Options constant for the {@link EditingDomain} for the
+	 * {@link ModelMutator}.
 	 */
 	public static final String MUTATOR_EDITINGDOMAIN = "mutatorEditingDomain";
 
@@ -137,12 +140,17 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 			rootEClass = ConfigPackage.Literals.ROOT;
 		}
 		modelMutatorConfig = new ModelMutatorConfiguration();
-		modelMutatorConfig.setMinObjectsCount(mutatorConfig.getMinObjectsCount());
-		modelMutatorConfig.setDoNotGenerateRoot(mutatorConfig.isDoNotGenerateRoot());
-		modelMutatorConfig.seteClassesToIgnore(mutatorConfig.getEClassesToIgnore());
-		modelMutatorConfig.seteStructuralFeaturesToIgnore(mutatorConfig.getEStructuralFeaturesToIgnore());
+		modelMutatorConfig.setMinObjectsCount(mutatorConfig
+				.getMinObjectsCount());
+		modelMutatorConfig.setDoNotGenerateRoot(mutatorConfig
+				.isDoNotGenerateRoot());
+		modelMutatorConfig.seteClassesToIgnore(mutatorConfig
+				.getEClassesToIgnore());
+		modelMutatorConfig.seteStructuralFeaturesToIgnore(mutatorConfig
+				.getEStructuralFeaturesToIgnore());
 		modelMutatorConfig.setIgnoreAndLog(mutatorConfig.isIgnoreAndLog());
-		modelMutatorConfig.setUseEcoreUtilDelete(mutatorConfig.isUseEcoreUtilDelete());
+		modelMutatorConfig.setUseEcoreUtilDelete(mutatorConfig
+				.isUseEcoreUtilDelete());
 		modelMutatorConfig.setMaxDeleteCount(mutatorConfig.getMaxDeleteCount());
 		modelMutatorConfig.setModelPackages(mutatorConfig.getEPackages());
 
@@ -156,7 +164,8 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 	 * Add the config to the file containing all configs.
 	 */
 	private void addToConfigFile() {
-		Resource resource = FuzzyUtil.createResource(FuzzyUtil.ROOT_FOLDER + FuzzyUtil.TEST_CONFIG_FILE);
+		Resource resource = FuzzyUtil.createResource(FuzzyUtil.ROOT_FOLDER
+				+ FuzzyUtil.TEST_CONFIG_FILE);
 		try {
 			if (FuzzyUtil.resourceExists(resource)) {
 				resource.load(null);
@@ -173,7 +182,8 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 	/**
 	 * See {@link FuzzyDataProvider}.
 	 * 
-	 * @param count Which run is it?
+	 * @param count
+	 *            Which run is it?
 	 * @return The new {@link EObject}.
 	 */
 	public EObject get(int count) {
@@ -212,18 +222,21 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 	}
 
 	/**
-	 * Call finish as last action of the {@link EMFDataProvider}. Used for saving the results.
+	 * Call finish as last action of the {@link EMFDataProvider}. Used for
+	 * saving the results.
 	 */
 	public void finish() {
 		// create run resource
-		Resource runResource = FuzzyUtil.createResource(FuzzyUtil.ROOT_FOLDER + FuzzyUtil.RUN_FOLDER + config.getId()
-			+ FuzzyUtil.FILE_SUFFIX);
+		Resource runResource = FuzzyUtil
+				.createResource(FuzzyUtil.ROOT_FOLDER + FuzzyUtil.RUN_FOLDER
+						+ config.getId() + FuzzyUtil.FILE_SUFFIX);
 		runResource.getContents().add(testRun);
 
 		try {
 			runResource.save(null);
 		} catch (IOException e) {
-			throw new RuntimeException("Could not save the run result after running!", e);
+			throw new RuntimeException(
+					"Could not save the run result after running!", e);
 		}
 	}
 
@@ -235,7 +248,8 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 	}
 
 	/**
-	 * @param testClass The {@link TestClass} of this run.
+	 * @param testClass
+	 *            The {@link TestClass} of this run.
 	 */
 	public void setTestClass(TestClass testClass) {
 		this.testClass = testClass;
@@ -245,7 +259,8 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 	 * @return The {@link RunListener} of this {@link EMFDataProvider}.
 	 */
 	public List<RunListener> getListener() {
-		return Arrays.asList(new RunListener[] { new EMFRunListener(this, testRun) });
+		return Arrays.asList(new RunListener[] { new EMFRunListener(this,
+				testRun) });
 	}
 
 	/**
@@ -276,7 +291,8 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 				for (TestDiff diff : ((DiffReport) obj).getDiffs()) {
 					if (diff.getConfig().getId().equals(config.getId())) {
 						TestResult result = FuzzyUtil.getValidTestResult(diff);
-						tests.add(new Test(result.getTestName(), result.getSeedCount()));
+						tests.add(new Test(result.getTestName(), result
+								.getSeedCount()));
 					}
 				}
 			}
@@ -313,7 +329,8 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 		} else {
 			this.filterTests = Boolean.parseBoolean(filterTests);
 		}
-		configFile = FuzzyUtil.getProperty(PROP_EMFDATAPROVIDER + PROP_CONFIGS_FILE, FuzzyUtil.TEST_CONFIG_PATH);
+		configFile = FuzzyUtil.getProperty(PROP_EMFDATAPROVIDER
+				+ PROP_CONFIGS_FILE, FuzzyUtil.TEST_CONFIG_PATH);
 	}
 
 	/**
@@ -333,7 +350,8 @@ public class EMFDataProvider implements FuzzyDataProvider<EObject> {
 	/**
 	 * Set the options for the {@link EMFDataProvider}.
 	 * 
-	 * @param options the options.
+	 * @param options
+	 *            the options.
 	 */
 	@SuppressWarnings("unchecked")
 	public void setOptions(Map<String, Object> options) {

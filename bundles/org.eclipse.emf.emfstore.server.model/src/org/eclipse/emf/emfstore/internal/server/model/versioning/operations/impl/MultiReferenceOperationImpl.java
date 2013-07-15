@@ -323,7 +323,8 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 		for (ModelElementId refrencedModelElementId : referencedModelElementIds) {
 			EObject referencedModelElement = project.getModelElement(refrencedModelElementId);
 			if (referencedModelElement == null) {
-				referencedModelElement = ((IdEObjectCollectionImpl) project).getDeletedModelElement(refrencedModelElementId);
+				referencedModelElement = ((IdEObjectCollectionImpl) project)
+					.getDeletedModelElement(refrencedModelElementId);
 			}
 			if (referencedModelElement != null) {
 				referencedModelElements.add(referencedModelElement);

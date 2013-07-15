@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.observer;
@@ -199,7 +199,8 @@ public class ObserverBus {
 	}
 
 	private boolean isPrioritizedObserver(Class<?> clazz, Method method) {
-		// Only prioritize if requested class extends ESPrioritizedObserver and method is part of this class and not part
+		// Only prioritize if requested class extends ESPrioritizedObserver and method is part of this class and not
+		// part
 		// of some super class
 		if (!clazz.equals(method.getDeclaringClass())) {
 			return false;
@@ -344,7 +345,8 @@ public class ObserverBus {
 	 * Pulls observers from an extension point and registers them.
 	 */
 	public void collectionExtensionPoints() {
-		for (ESExtensionElement outer : new ESExtensionPoint("org.eclipse.emf.emfstore.common.observerBusExtensionPointRegistration", true)
+		for (ESExtensionElement outer : new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.common.observerBusExtensionPointRegistration", true)
 			.getExtensionElements()) {
 			try {
 				for (ESExtensionElement inner : new ESExtensionPoint(outer.getAttribute("extensionPointName"), true)

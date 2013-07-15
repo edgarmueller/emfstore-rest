@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-
 public abstract class LinkedHashMapWithConflictBucketCandidate<V> extends LinkedHashMap<String, V> {
 
 	private ConflictBucketCandidate conflictBucketCandidate;
