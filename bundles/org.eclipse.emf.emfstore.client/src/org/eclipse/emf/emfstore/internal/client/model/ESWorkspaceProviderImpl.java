@@ -155,7 +155,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
+	 * @see org.org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		if (currentWorkspace != null) {

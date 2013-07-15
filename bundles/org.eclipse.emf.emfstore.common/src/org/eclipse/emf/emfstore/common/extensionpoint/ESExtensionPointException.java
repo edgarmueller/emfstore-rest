@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
@@ -16,12 +16,10 @@ package org.eclipse.emf.emfstore.common.extensionpoint;
  * 
  * @author wesendon
  * 
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class ESExtensionPointException extends RuntimeException {
+public final class ESExtensionPointException extends RuntimeException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3805244685057014578L;
 
 	/**

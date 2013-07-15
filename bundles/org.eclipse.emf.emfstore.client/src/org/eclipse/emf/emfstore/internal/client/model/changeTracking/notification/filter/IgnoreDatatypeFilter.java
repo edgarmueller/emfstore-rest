@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -29,7 +29,7 @@ public class IgnoreDatatypeFilter implements ESNotificationFilter {
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo)
 	 */
-	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 
 		Object newValue = notificationInfo.getNewValue();
 		Object oldValue = notificationInfo.getOldValue();

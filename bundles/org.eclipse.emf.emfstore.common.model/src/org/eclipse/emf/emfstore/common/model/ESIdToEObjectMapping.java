@@ -7,21 +7,27 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk, Edgar Mueller - initial API and implementation
- * Edgar Mueller - API annotations
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
- * Represents a unique model element ID that is used to identify
- * model elements within EMFStore.
+ * Common interface for mapping {@link EObject}s to an ID type.
  * 
  * @author emueller
- * @author wesendon
  * 
- * @noextend This interface is not intended to be extended by clients.
- * @noimplement This interface is not intended to be implemented by clients.
+ * @param <T>
+ *            the type of the ID being used
  */
-public interface ESModelElementId extends ESUniqueIdentifier {
+public interface ESIdToEObjectMapping<ID> {
 
+	/**
+	 * Get the {@link EObject} for the given {@link ESModelElementId}, if any.
+	 * 
+	 * @param modelElementId the ID
+	 * @return the object or null if no EObject for the ID is found
+	 */
+	EObject get(ID modelElementId);
 }

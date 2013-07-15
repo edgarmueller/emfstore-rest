@@ -15,6 +15,7 @@ import java.util.Set;
 
 public class OppositeReservationMap extends LinkedHashMapWithConflictBucketCandidate<ConflictBucketCandidate> {
 
+	private static final long serialVersionUID = 2688817784490600252L;
 	private boolean hasOpposites;
 
 	public OppositeReservationMap(boolean hasOpposites) {

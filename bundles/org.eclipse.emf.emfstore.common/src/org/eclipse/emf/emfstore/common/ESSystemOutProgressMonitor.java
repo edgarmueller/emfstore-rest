@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common;
 
@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * 
  * @author koegel
  */
-public class ESSystemOutProgressMonitor implements IProgressMonitor {
+public final class ESSystemOutProgressMonitor implements IProgressMonitor {
 
 	/**
 	 * Indicates whether cancel has been requested.
@@ -50,7 +50,6 @@ public class ESSystemOutProgressMonitor implements IProgressMonitor {
 	 */
 	public void internalWorked(double work) {
 		// do nothing
-
 	}
 
 	/**

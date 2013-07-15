@@ -19,7 +19,6 @@ package org.eclipse.emf.emfstore.client.exceptions;
  * @author emueller
  * 
  * @noextend This class is not intended to be subclassed by clients.
- * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class ESCertificateException extends Exception {
 

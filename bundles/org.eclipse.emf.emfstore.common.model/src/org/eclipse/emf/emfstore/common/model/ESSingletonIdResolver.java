@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Edgar Mueller - initial API and implementation, API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
@@ -17,6 +17,9 @@ import org.eclipse.emf.ecore.EObject;
  * Interface for mapping {@link ESModelElementId}s to singleton objects and vice versa.
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESSingletonIdResolver {
 
@@ -41,7 +44,7 @@ public interface ESSingletonIdResolver {
 	 * Determines whether the given {@link EObject} is a singleton.
 	 * 
 	 * @param eObject the EObject to check
-	 * @return true, iff the given {@link EObject} is a singleton
+	 * @return {@code true}, if the given {@link EObject} is a singleton
 	 */
 	boolean isSingleton(EObject eObject);
 }

@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * JulianSommerfeldt
- * mkoegel
+ * Julian Sommerfeldt, Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
@@ -17,8 +17,11 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 /**
  * Allows clients to return a custom ID for new model elements.
  * 
- * @author Julian Sommerfeldt
+ * @author jsommerfeldt
  * @author mkoegel
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESModelElementIdGenerator {
 
@@ -28,6 +31,6 @@ public interface ESModelElementIdGenerator {
 	 * @param container The {@link ESObjectContainer} for which a new {@link ModelElementId} should be created.
 	 * @return The next {@link ModelElementId} for the given {@link ESObjectContainer}.
 	 */
-	ModelElementId generateModelElementId(ESObjectContainer container);
+	ESModelElementId generateModelElementId(ESObjectContainer<?> container);
 
 }

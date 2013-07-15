@@ -217,6 +217,12 @@ public final class ModelUtil {
 			throw new SerializationException(e);
 		} finally {
 			System.setProperty("line.separator", lineSeparator);
+			try {
+				stringWriter.close();
+				uws.close();
+			} catch (IOException e) {
+				throw new SerializationException(e);
+			}
 		}
 
 		return stringWriter.toString();

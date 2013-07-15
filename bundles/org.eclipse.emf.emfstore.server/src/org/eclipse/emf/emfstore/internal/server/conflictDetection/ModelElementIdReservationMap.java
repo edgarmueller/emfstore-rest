@@ -16,6 +16,8 @@ import java.util.Set;
 
 public class ModelElementIdReservationMap extends LinkedHashMap<String, FeatureNameReservationMap> {
 
+	private static final long serialVersionUID = -7135830923364954134L;
+
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates(String modelElementId) {
 		FeatureNameReservationMap featureNameReservationMap = get(modelElementId);
 		if (featureNameReservationMap == null) {

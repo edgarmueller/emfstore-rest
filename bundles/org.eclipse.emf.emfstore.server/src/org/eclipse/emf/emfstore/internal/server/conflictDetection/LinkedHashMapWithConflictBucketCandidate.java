@@ -15,6 +15,7 @@ import java.util.Set;
 
 public abstract class LinkedHashMapWithConflictBucketCandidate<V> extends LinkedHashMap<String, V> {
 
+	private static final long serialVersionUID = -6885405442204079582L;
 	private ConflictBucketCandidate conflictBucketCandidate;
 
 	public ConflictBucketCandidate getConflictBucketCandidate() {

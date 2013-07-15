@@ -7,17 +7,18 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation, API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
-
-import org.eclipse.emf.emfstore.internal.common.model.util.IdToEObjectMapping;
 
 /**
  * Interface for representing a mapping from EObjects to their respective IDs and vice versa.
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface ESModelElementIdToEObjectMapping extends IdToEObjectMapping<ESModelElementId> {
+public interface ESModelElementIdToEObjectMapping extends ESIdToEObjectMapping<ESModelElementId> {
 
 }

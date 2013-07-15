@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Maximilian Koegel, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.impl;
 
@@ -31,10 +31,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdGenerator;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
@@ -44,6 +44,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
  * Implementation of an ID based storage mechanism for {@link EObject}s.
  * 
  * @author emueller
+ * @author mkoegel
  */
 public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdEObjectCollection, ESDisposable {
 
@@ -799,7 +800,9 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	private ModelElementId getNewModelElementID() {
 		// if there is registered modelElementIdGenerator, use it
 		if (modelElementIdGenerator != null) {
-			return modelElementIdGenerator.generateModelElementId(this);
+			ESModelElementIdImpl modelElementId =
+				(ESModelElementIdImpl) modelElementIdGenerator.generateModelElementId(this);
+			return modelElementId.toInternalAPI();
 		}
 
 		// else create it via ModelFactory

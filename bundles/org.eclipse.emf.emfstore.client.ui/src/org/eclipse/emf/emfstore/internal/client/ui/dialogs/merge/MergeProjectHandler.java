@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge;
 
 import java.util.concurrent.Callable;
 
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.AbstractConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
@@ -22,6 +21,7 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.uti
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.OperationAuthorProvider;
 import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.DefaultMergeLabelProvider;
+import org.eclipse.emf.emfstore.internal.common.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardDialog;

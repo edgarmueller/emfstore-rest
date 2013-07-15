@@ -59,7 +59,7 @@ public class LDAPSSLSocketFactory extends SSLSocketFactory {
 		}
 	}
 
-	public static SocketFactory getDefault() {
+	public synchronized static SocketFactory getDefault() {
 		return new LDAPSSLSocketFactory();
 	}
 

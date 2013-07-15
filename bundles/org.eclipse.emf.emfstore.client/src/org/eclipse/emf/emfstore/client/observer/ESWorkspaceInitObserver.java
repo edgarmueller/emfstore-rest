@@ -13,6 +13,7 @@
 package org.eclipse.emf.emfstore.client.observer;
 
 import org.eclipse.emf.emfstore.client.ESWorkspace;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
  * Called when the workspace is initiated.
@@ -21,9 +22,10 @@ import org.eclipse.emf.emfstore.client.ESWorkspace;
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
-// TODO: check whether we can re-use the ObserverBus
-public interface ESWorkspaceInitObserver {
+public interface ESWorkspaceInitObserver extends ESObserver {
 
 	/**
 	 * Is called when the workspace is initiated.

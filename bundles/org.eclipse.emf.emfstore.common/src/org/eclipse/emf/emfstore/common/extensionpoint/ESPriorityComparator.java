@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
@@ -23,8 +23,9 @@ import java.util.Comparator;
  * 
  * @author wesendon
  * 
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class ESPriorityComparator implements Comparator<ESExtensionElement> {
+public final class ESPriorityComparator implements Comparator<ESExtensionElement> {
 
 	private final String fieldname;
 	private final boolean desc;
@@ -48,17 +49,20 @@ public class ESPriorityComparator implements Comparator<ESExtensionElement> {
 	/**
 	 * Constructor allows to config fieldname and ordering.
 	 * 
-	 * @param fieldname the attribute id of the priority field
-	 * @param descending if true, priorities are sorted in descending order, ascending otherwise
+	 * @param fieldname 
+	 * 				the attribute id of the priority field
+	 * @param descending 
+	 * 				if true, priorities are sorted in descending order, ascending otherwise
 	 */
 	public ESPriorityComparator(final String fieldname, final boolean descending) {
 		this.fieldname = fieldname;
 		this.desc = descending;
-
 	}
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public int compare(ESExtensionElement element1, ESExtensionElement element2) {
 		try {

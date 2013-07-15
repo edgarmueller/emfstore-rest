@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.query;
 
@@ -21,7 +21,10 @@ import org.eclipse.emf.emfstore.common.model.ESModelElementId;
  * alter the results produced by the range query on selected elements.
  * 
  * @author emueller
+ * @author ovonwesen
  * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESModelElementQuery extends ESRangeQuery<ESModelElementQuery> {
 

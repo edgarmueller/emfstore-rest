@@ -47,6 +47,9 @@ public final class FileUtil {
 	 * @param destination the destination
 	 * @throws IOException copy problem
 	 */
+	@SuppressWarnings("resource")
+	// created input stream is closed by copyFile
+	// TODO: refactor
 	public static void copyFile(File source, File destination) throws IOException {
 		copyFile(new FileInputStream(source), destination);
 	}

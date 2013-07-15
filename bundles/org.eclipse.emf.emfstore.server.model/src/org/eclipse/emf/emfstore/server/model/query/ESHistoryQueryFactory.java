@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.query;
 
@@ -23,6 +23,9 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * 
  * @author wesendon
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESHistoryQueryFactory extends ESFactory {
 
@@ -42,7 +45,7 @@ public interface ESHistoryQueryFactory extends ESFactory {
 	 * @param outgoing
 	 *            whether to include include outgoing versions
 	 * @param includeChangePackages
-	 *            whether to include change packges
+	 *            whether to include change packages
 	 * @return query the constructed range query
 	 */
 	ESRangeQuery<?> rangeQuery(ESPrimaryVersionSpec source, int upper, int lower,
@@ -60,7 +63,7 @@ public interface ESHistoryQueryFactory extends ESFactory {
 	 * @param allVersions
 	 *            whether to include all versions, from all branches
 	 * @param includeChangePackages
-	 *            whether to include change packges
+	 *            whether to include change packages
 	 * @return query the constructed path query
 	 */
 	ESPathQuery pathQuery(ESPrimaryVersionSpec source, ESPrimaryVersionSpec target,

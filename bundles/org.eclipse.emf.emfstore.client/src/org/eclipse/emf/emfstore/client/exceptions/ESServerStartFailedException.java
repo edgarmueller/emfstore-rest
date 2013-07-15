@@ -16,10 +16,12 @@ package org.eclipse.emf.emfstore.client.exceptions;
  * 
  * @author mkoegel
  * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class ESServerStartFailedException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3134589375199519491L;
 
 	/**
 	 * Default constructor.

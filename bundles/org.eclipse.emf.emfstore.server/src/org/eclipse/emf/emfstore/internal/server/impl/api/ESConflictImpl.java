@@ -22,10 +22,6 @@ import org.eclipse.emf.emfstore.server.model.ESOperation;
 
 public class ESConflictImpl extends AbstractAPIImpl<ESConflict, ConflictBucket> implements ESConflict {
 
-	private Set<ESOperation> acceptedLocalOperations;
-	private Set<ESOperation> rejectedRemoteOperations;
-	private boolean isResolved;
-
 	public ESConflictImpl(ConflictBucket internalType) {
 		super(internalType);
 	}

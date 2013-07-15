@@ -7,13 +7,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common;
+package org.eclipse.emf.emfstore.internal.common;
 
 /**
- * Disposable interface for marking classes that need to perform clean up tasks when
- * de-initialized.
+ * Disposable interface for marking classes that need to perform clean up tasks.
  * 
  * @author emueller
  */

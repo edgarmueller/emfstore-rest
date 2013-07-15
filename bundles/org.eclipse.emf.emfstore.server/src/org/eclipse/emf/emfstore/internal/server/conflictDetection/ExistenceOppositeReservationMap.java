@@ -15,6 +15,8 @@ import java.util.Set;
 
 public class ExistenceOppositeReservationMap extends OppositeReservationMap {
 
+	private static final long serialVersionUID = 6226587689609391089L;
+
 	private Set<ConflictBucketCandidate> candidates;
 
 	public ExistenceOppositeReservationMap() {

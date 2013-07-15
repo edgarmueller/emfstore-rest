@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
@@ -27,8 +27,8 @@ import org.eclipse.emf.emfstore.internal.common.Activator;
  * 
  * @author wesendon
  */
-
-public class ESExtensionPoint {
+public final class ESExtensionPoint {
+	
 	private List<ESExtensionElement> elements;
 	private final String id;
 	private boolean exceptionInsteadOfNull;

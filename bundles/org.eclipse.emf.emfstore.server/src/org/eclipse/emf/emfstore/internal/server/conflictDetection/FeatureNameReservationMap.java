@@ -15,6 +15,8 @@ import java.util.Set;
 
 public class FeatureNameReservationMap extends LinkedHashMapWithConflictBucketCandidate<OppositeReservationMap> {
 
+	private static final long serialVersionUID = -908068067539831820L;
+
 	public static final String EXISTENCE_FEATURE = "+existence";
 
 	public static final String CONTAINER_FEATURE = "+container";

@@ -78,6 +78,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * initialized.
 	 */
 	protected void preDecisionManagerHook() {
+		// do nothing by default
 	}
 
 	/**
@@ -85,6 +86,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * finished.
 	 */
 	protected void postDecisionManagerHook() {
+		// do nothing by default
 	}
 
 	/**

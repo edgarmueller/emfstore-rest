@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.UIDecisionUtil;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;

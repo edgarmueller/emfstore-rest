@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model.versionspec;
 
@@ -17,6 +17,9 @@ package org.eclipse.emf.emfstore.server.model.versionspec;
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESAncestorVersionSpec extends ESVersionSpec {
 

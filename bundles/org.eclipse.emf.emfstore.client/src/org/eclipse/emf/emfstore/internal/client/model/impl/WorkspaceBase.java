@@ -27,7 +27,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportProjectSpaceController;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportWorkspaceController;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
@@ -44,6 +43,7 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectEx
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.client.observers.DeleteProjectSpaceObserver;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
@@ -142,7 +142,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.ESDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		for (ProjectSpace projectSpace : getProjectSpaces()) {

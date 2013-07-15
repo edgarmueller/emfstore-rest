@@ -94,6 +94,7 @@ public class SingleReferenceConflict extends VisualConflict {
 				return true;
 			}
 		} catch (UnkownFeatureException e) {
+			// ignore
 		}
 		return false;
 	}

@@ -5,15 +5,15 @@
  */
 package org.eclipse.emf.emfstore.internal.common.model;
 
+import org.eclipse.emf.emfstore.common.model.ESIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
-import org.eclipse.emf.emfstore.internal.common.model.util.IdToEObjectMapping;
 
 /**
  * @author Edgar
  * 
  */
 public interface ModelElementIdToEObjectMapping
-	extends IdToEObjectMapping<ModelElementId>, APIDelegate<ESModelElementIdToEObjectMappingImpl> {
+	extends ESIdToEObjectMapping<ModelElementId>, APIDelegate<ESModelElementIdToEObjectMappingImpl> {
 
 }

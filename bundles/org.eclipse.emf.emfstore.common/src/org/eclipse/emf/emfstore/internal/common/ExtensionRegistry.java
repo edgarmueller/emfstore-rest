@@ -7,12 +7,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.common.extensionpoint;
+package org.eclipse.emf.emfstore.internal.common;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+
+/**
+ * The extension registry may be used as simple replacement for the extension
+ * point mechanism in case one does not want to expose internal types.
+ * 
+ * It is capable of retrieving actual extension point information, but currently
+ * does not support contributing such.
+ * 
+ * @author emueller
+ */
 public class ExtensionRegistry {
 
 	public static final ExtensionRegistry INSTANCE = new ExtensionRegistry();
@@ -53,7 +65,7 @@ public class ExtensionRegistry {
 
 	public <T> void set(String id, T t) {
 		// TODO: if already present?
-		configElements.put(id, new ESConfigElement(id, t));
+		configElements.put(id, new ESConfigElement(t));
 	}
 
 	private <T> T getExtensionElement(String id, Class<T> t) {
@@ -73,15 +85,10 @@ public class ExtensionRegistry {
 
 	class ESConfigElement {
 
-		private String id;
 		private Object t;
 
-		public ESConfigElement(String id) {
-			this.id = id;
-		}
 
-		public ESConfigElement(String id, Object o) {
-			this.id = id;
+		public ESConfigElement(Object o) {
 			t = o;
 		}
 

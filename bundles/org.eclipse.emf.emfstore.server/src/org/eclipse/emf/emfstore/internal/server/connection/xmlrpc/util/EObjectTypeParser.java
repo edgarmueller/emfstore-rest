@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementatin
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.util;
 
@@ -37,16 +37,21 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.SerializationExceptio
 /**
  * Parser for EObjects.
  * 
+ * @author ovonwesen
  * @author emueller
  */
 public class EObjectTypeParser extends ByteArrayParser {
 
+	private static final String COULDN_T_PARSE_E_OBJECT_TEXT = "Couldn't parse EObject: ";
+	private static final String FAILED_TO_READ_RESULT_OBJECT_TEXT = "Failed to read result object: ";
+
 	@Override
 	public Object getResult() throws XmlRpcException {
+		BufferedReader reader = null;
 		try {
 			byte[] res = (byte[]) super.getResult();
 			ByteArrayInputStream bais = new ByteArrayInputStream(res);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(bais, CommonUtil.getEncoding()));
+			reader = new BufferedReader(new InputStreamReader(bais, CommonUtil.getEncoding()));
 			URIConverter.ReadableInputStream ris = new URIConverter.ReadableInputStream(reader,
 				CommonUtil.getEncoding());
 			try {
@@ -55,16 +60,29 @@ public class EObjectTypeParser extends ByteArrayParser {
 				resource.load(ris, ModelUtil.getResourceLoadOptions());
 				return getResultfromResource(resource);
 			} catch (UnsupportedEncodingException e) {
-				throw new XmlRpcException("Couldn't parse EObject: " + e.getMessage(), e);
+				throw new XmlRpcException(COULDN_T_PARSE_E_OBJECT_TEXT + e.getMessage(), e);
 			} catch (IOException e) {
-				throw new XmlRpcException("Couldn't parse EObject: " + e.getMessage(), e);
+				throw new XmlRpcException(COULDN_T_PARSE_E_OBJECT_TEXT + e.getMessage(), e);
 			} catch (SerializationException e) {
-				throw new XmlRpcException("Couldn't parse EObject: " + e.getMessage(), e);
+				throw new XmlRpcException(COULDN_T_PARSE_E_OBJECT_TEXT + e.getMessage(), e);
 			} finally {
 				ris.close();
 			}
 		} catch (IOException e) {
-			throw new XmlRpcException("Failed to read result object: " + e.getMessage(), e);
+			try {
+				reader.close();
+			} catch (IOException e1) {
+				throw new XmlRpcException(FAILED_TO_READ_RESULT_OBJECT_TEXT + e1.getMessage(), e1);
+			}
+			throw new XmlRpcException(FAILED_TO_READ_RESULT_OBJECT_TEXT + e.getMessage(), e);
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					throw new XmlRpcException(FAILED_TO_READ_RESULT_OBJECT_TEXT + e.getMessage(), e);
+				}
+			}
 		}
 	}
 
