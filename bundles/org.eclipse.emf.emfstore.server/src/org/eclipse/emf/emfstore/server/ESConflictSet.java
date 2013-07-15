@@ -30,5 +30,10 @@ import java.util.Set;
  */
 public interface ESConflictSet {
 
+	/**
+	 * Get the conflicts of the conflict set.
+	 * 
+	 * @return a set of conflicts
+	 */
 	Set<ESConflict> getConflicts();
 }

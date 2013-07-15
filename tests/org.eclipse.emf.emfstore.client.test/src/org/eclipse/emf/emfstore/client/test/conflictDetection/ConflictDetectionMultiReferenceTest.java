@@ -30,7 +30,6 @@ import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.junit.Test;
 
@@ -71,13 +70,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// same operations going on in both working copies, no conflicts expected
-		assertEquals(conflicts.size(), 0);
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -125,259 +123,11 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// same operations going on in both working copies, no conflicts expected
-		assertEquals(conflicts.size(), 0);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictAddAddSameObjectDifferentIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				section1.getModelElements().add(actor1);
-				section2.getModelElements().add(dummy2);
-				section2.getModelElements().add(actor2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-
-		// index conflicts expected: op from project1 index-conflicts with both ops from clonedProject
-		assertEquals(2, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
-		assertEquals(1, cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetAddSameObjectSameIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId sectionId = createLeafSection();
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				section1.getModelElements().add(actor1);
-				actor2.setLeafSection(section2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-
-		// no index conflict expected: the operations are perfect opposites
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		assertEquals(0, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetParentSetSameObjectSameIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId sectionId = createLeafSection();
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				actor1.setLeafSection(section1);
-				actor2.setLeafSection(section2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-
-		// no index conflict expected: operations are identical
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		assertEquals(0, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetAddSameObjectDifferentIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				section1.getModelElements().add(actor1);
-				section2.getModelElements().add(dummy2);
-				actor2.setLeafSection(section2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-
-		assertEquals(2, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
-		assertEquals(1, cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetParentSetSameObjectDifferentIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				actor1.setLeafSection(section1);
-				section2.getModelElements().add(dummy2);
-				actor2.setLeafSection(section2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-
-		assertEquals(2, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
-		assertEquals(1, cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size());
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictAddAddDifferentObjectSameIndex() {
-
-		ModelElementId actor1Id = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actor1Id);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				section1.getModelElements().add(actor1);
-				section2.getModelElements().add(dummy2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// obviously an index-integrity conflict
-		assertEquals(conflicts.size(), 1);
-
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
-			.size());
-		assertEquals(0, cd.getConflicting(oclonedProjectSpace, ops1).size());
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -415,177 +165,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// obviously an index-integrity conflict
 		assertEquals(conflicts.size(), 1);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetAddDifferentObjectSameIndex() {
-
-		ModelElementId actor1Id = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actor1Id);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				actor1.setLeafSection(section1);
-				section2.getModelElements().add(dummy2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		assertEquals(conflicts.size(), 1);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetAddDifferentObjectDifferentIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				actor1.setLeafSection(section1);
-				section2.getModelElements().add(actor2);
-				section2.getModelElements().add(dummy2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		assertEquals(1, cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetParentSetDifferentObjectSameIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				actor1.setLeafSection(section1);
-				dummy2.setLeafSection(section2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// obviously an index-integrity conflict
-		assertEquals(conflicts.size(), 1);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetParentSetDifferentObjectDifferentIndex() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId dummyId = createActor();
-		ModelElementId sectionId = createLeafSection(true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-
-		final LeafSection section1 = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				actor1.setLeafSection(section1);
-				section2.getModelElements().add(actor2);
-				section2.getModelElements().add(dummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		assertEquals(cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size(), cd
-			.getConflictingIndexIntegrity(ops1, oclonedProjectSpace)
-			.size());
-		assertEquals(1, cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size());
 
 	}
 
@@ -621,10 +206,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -665,10 +249,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -709,10 +292,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -746,10 +328,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -789,10 +370,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -829,10 +409,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -873,10 +452,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -917,10 +495,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// hard conflict between add and remove, serialization matters
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 1);
@@ -963,64 +540,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-
-		// no index conflict
-		Set<AbstractOperation> indexConflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		assertEquals(0, indexConflicts.size());
 		// no hard conflict
-		Set<AbstractOperation> hardConflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> hardConflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(1, hardConflicts.size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictRemoveRemoveIndirectlySameObject() {
-
-		ModelElementId actorId = createActor();
-		ModelElementId sectionId = createLeafSection();
-		ModelElementId otherSectionId = createLeafSection();
-
-		final Actor actor = (Actor) getProject().getModelElement(actorId);
-		final LeafSection section = (LeafSection) getProject().getModelElement(sectionId);
-
-		setLeafSection(actor, section, true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final LeafSection otherSection2 = (LeafSection) clonedProject.getModelElement(otherSectionId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				section.getModelElements().remove(actor);
-				otherSection2.getModelElements().add(actor2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		assertEquals(0, conflicts.size());
 
 	}
 
@@ -1056,11 +581,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(conflicts.size(), 0);
@@ -1105,116 +628,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		assertEquals(conflicts.size(), 0);
-
 		// a hard conflict, though. serialization matters
-		Set<AbstractOperation> hardConflicts = cd.getConflicting(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflicting(ops1, oclonedProjectSpace).size(), cd.getConflicting(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> hardConflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(), getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		assertEquals(hardConflicts.size(), 1);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictRemoveIndirectlyRemoveIndirectlySameObject() {
-
-		ModelElementId sectionId = createLeafSection();
-		ModelElementId otherSectionId = createLeafSection();
-		ModelElementId actorId = createActor();
-
-		final Actor actor = (Actor) getProject().getModelElement(actorId);
-		final LeafSection section = (LeafSection) getProject().getModelElement(sectionId);
-		final LeafSection otherSection = (LeafSection) getProject().getModelElement(otherSectionId);
-
-		setLeafSection(actor, section, true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final LeafSection otherSection2 = (LeafSection) clonedProject.getModelElement(otherSectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				otherSection.getModelElements().add(actor);
-				otherSection2.getModelElements().add(actor2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// index conflict expected, implicitly actor gets a new parent in each copy
-		// since that op has no index
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		assertEquals(conflicts.size(), 0);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetRemoveRemoveSameObject() {
-
-		ModelElementId sectionId = createLeafSection();
-		ModelElementId otherSectionId = createLeafSection();
-		ModelElementId actorId = createActor();
-
-		final LeafSection section = (LeafSection) getProject().getModelElement(sectionId);
-		final Actor actor = (Actor) getProject().getModelElement(actorId);
-
-		setLeafSection(actor, section, true);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor1 = (Actor) getProject().getModelElement(actorId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-
-		final LeafSection otherSection1 = (LeafSection) getProject().getModelElement(otherSectionId);
-		final LeafSection otherSection2 = (LeafSection) clonedProject.getModelElement(otherSectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				actor1.setLeafSection(otherSection1);
-				otherSection2.getModelElements().remove(actor2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		assertEquals(conflicts.size(), 0);
 
 	}
 
@@ -1256,11 +675,10 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		// index conflict arises: if the add happens before the move, the move will work
@@ -1303,156 +721,15 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		// index conflict arises: if the add happens before the move, the move will work
 		// if it does after the move, the move could be ineffective
 		assertEquals(conflicts.size(), 1);
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictRemoveMoveSameObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-
-		addToSection(section, true, dummy, actor);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				section.getModelElements().remove(actor);
-				section2.getModelElements().move(0, actor2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		// no index conflict arises: the element is gone in any serialization
-		assertEquals(conflicts.size(), 0);
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetRemoveMoveSameObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId otherSectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor(true);
-
-		final LeafSection section = getModelElement(sectionId);
-		final LeafSection otherSection = getModelElement(otherSectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-
-		addToSection(section, true, dummy, actor);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				actor.setLeafSection(otherSection);
-				section2.getModelElements().move(0, actor2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		// no index conflict arises: if the section change happens before the move, the move will work
-		// if it does after the move, the move could be ineffective. In either case the item is gone.
-		assertEquals(conflicts.size(), 0);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictRemoveIndirectlyMoveSameObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId otherSectionId = createLeafSection();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId actorId = createActor();
-
-		final LeafSection otherSection = getModelElement(otherSectionId);
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-
-		addToSection(section, true, dummy, actor);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				otherSection.getModelElements().add(actor);
-				section2.getModelElements().move(0, actor2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		// no index conflict arises: if the section change happens before the move, the move will work
-		// if it does after the move, the move could be ineffective. In either case the change is gone.
-		assertEquals(conflicts.size(), 0);
-
 	}
 
 	/**
@@ -1492,156 +769,14 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
 		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 
 		// an index conflict arises: result depends on which move comes last
 		assertEquals(conflicts.size(), 1);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictMoveMoveSameObjectSameIndex() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-
-		addToSection(section, true, dummy, otherDummy, actor);
-
-		assertEquals(section.getModelElements().get(2), actor);
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				section.getModelElements().move(1, actor);
-				section2.getModelElements().move(1, actor2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// no index conflict
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-
-		// no index conflict arises: operations are identical
-		assertEquals(conflicts.size(), 0);
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictAddRemoveDifferentObject() {
-
-		final ModelElementId useCaseId = createUseCase();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final UseCase useCase = getModelElement(useCaseId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final Actor anotherDummy = getModelElement(anotherDummyId);
-
-		addToUseCase(useCase, true, dummy, otherDummy, anotherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final UseCase useCase2 = (UseCase) clonedProject.getModelElement(useCaseId);
-		final Actor otherDummy2 = (Actor) clonedProject.getModelElement(otherDummyId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				useCase.getParticipatingActors().add(2, actor);
-				useCase2.getParticipatingActors().remove(otherDummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// an index-integrity conflict (the remove index:1 is smaller than the add index:2, thus the added item
-		// ends up somewhere else, depending on serialization)
-		assertEquals(1, conflicts.size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void noConflictAddRemoveDifferentObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-
-		addToSection(section, true, otherDummy, dummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		ModelElementId dummy2Id = clonedProject.getModelElementId(dummy);
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummy2Id);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				section.getModelElements().add(0, actor);
-				section2.getModelElements().remove(dummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// no index-integrity conflict (the change happens at the boundary)
-		assertEquals(conflicts.size(), 0);
 
 	}
 
@@ -1681,10 +816,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		assertEquals(conflicts.size(), 0);
 	}
@@ -1724,10 +858,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict (the change happens at the boundary)
 		assertEquals(conflicts.size(), 0);
@@ -1770,10 +903,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict (outcome does not depend on serialization)
 		assertEquals(conflicts.size(), 0);
@@ -1815,10 +947,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict (outcome does not depend on serialization)
 		assertEquals(conflicts.size(), 0);
@@ -1858,111 +989,13 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict (outcome does not depend on serialization)
 		assertEquals(conflicts.size(), 0);
 
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void nnoConflictAddParentSetRemoveDifferentObject() {
-
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId otherSectionId = createLeafSection();
-
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final LeafSection section = getModelElement(sectionId);
-
-		addToSection(section, true, otherDummy, dummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-		final LeafSection otherSection2 = (LeafSection) clonedProject.getModelElement(otherSectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				section.getModelElements().add(actor);
-				dummy2.setLeafSection(otherSection2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// potential index-integrity conflict: it is unknown where dummy was located, worst case (before actor1
-		// insertion point) anticipated
-		assertEquals(1, conflicts.size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void noConflictAddRemoveIndirectlyDifferentObject() {
-
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId otherSectionId = createLeafSection();
-
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final LeafSection section = getModelElement(sectionId);
-
-		addToSection(section, true, otherDummy, dummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor dummy2 = (Actor) clonedProject.getModelElement(dummyId);
-		final LeafSection otherSection2 = (LeafSection) clonedProject.getModelElement(otherSectionId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				section.getModelElements().add(actor);
-				otherSection2.getModelElements().add(dummy2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// potential index-integrity conflict: it is unknown where dummy was located, worst case (before actor1
-		// insertion point) anticipated
-		assertEquals(conflicts.size(), 1);
 	}
 
 	/**
@@ -2002,10 +1035,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
@@ -2049,10 +1081,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
@@ -2097,10 +1128,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
@@ -2145,10 +1175,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
@@ -2195,10 +1224,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
@@ -2243,60 +1271,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictAddMoveDifferentObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final Actor anotherDummy = getModelElement(anotherDummyId);
-
-		addToSection(section, true, dummy, otherDummy, anotherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor anotherDummy2 = (Actor) clonedProject.getModelElement(anotherDummyId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				section.getModelElements().add(1, actor);
-				section2.getModelElements().move(1, anotherDummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// index-integrity conflict: result dependent on serialization
-		assertEquals(conflicts.size(), 1);
 
 	}
 
@@ -2337,157 +1317,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetAddMoveDifferentObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final Actor anotherDummy = getModelElement(anotherDummyId);
-
-		addToSection(section, true, dummy, otherDummy, anotherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor anotherDummy2 = getModelElement(clonedProject, anotherDummyId);
-		final LeafSection section2 = getModelElement(clonedProject, sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				actor.setLeafSection(section);
-				section2.getModelElements().move(1, anotherDummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// potential index-integrity conflict: if the move went to the index where actor1 ends up in
-		// there would be a problem. The index is unknown, since the single ref op does not save it.
-		// Since relation of these indices cannot be found prior to looking at the feature, a conflict is assumed
-		assertEquals(conflicts.size(), 1);
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictParentSetAddMoveDifferentObjectBoundary() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-
-		addToSection(section, true, actor, otherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor actor2 = (Actor) clonedProject.getModelElement(actorId);
-		final Actor anotherDummy2 = (Actor) clonedProject.getModelElement(anotherDummyId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				dummy.setLeafSection(section);
-				anotherDummy2.setLeafSection(section2);
-				section2.getModelElements().move(section2.getModelElements().size() - 1, actor2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		// two reasons to conflict: 1. two competing adds by parent, 2. add and move might (actually do) affect the same
-		// index
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), 2);
-		assertEquals(cd.getConflictingIndexIntegrity(oclonedProjectSpace, ops1).size(), 1);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictRemoveMoveDifferentObject() {
-
-		final ModelElementId useCaseId = createUseCase();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final UseCase useCase = getModelElement(useCaseId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final Actor anotherDummy = getModelElement(anotherDummyId);
-
-		addToUseCase(useCase, true, actor, dummy, otherDummy, anotherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final UseCase useCase2 = (UseCase) clonedProject.getModelElement(useCaseId);
-		final Actor anotherDummy2 = (Actor) clonedProject.getModelElement(anotherDummyId);
-
-		new EMFStoreCommand() {
-
-			@Override
-			protected void doRun() {
-				useCase.getParticipatingActors().remove(actor);
-				useCase2.getParticipatingActors().move(1, anotherDummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// index-integrity conflict: result dependent on serialization
-		assertEquals(1, conflicts.size());
-
 	}
 
 	/**
@@ -2527,10 +1362,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
@@ -2574,10 +1408,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
@@ -2623,63 +1456,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void noConflictParentSetRemoveMoveDifferentObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId otherSectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final LeafSection otherSection = getModelElement(otherSectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final Actor anotherDummy = getModelElement(anotherDummyId);
-
-		addToSection(section, true, actor, dummy, otherDummy, anotherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor anotherDummy2 = (Actor) clonedProject.getModelElement(anotherDummyId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				actor.setLeafSection(otherSection);
-				section2.getModelElements().move(1, anotherDummy2);
-
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// index-integrity conflict: result dependent of serialization (anotherDummy could end up on 1 or on 0)
-		assertEquals(1, conflicts.size());
 
 	}
 
@@ -2721,109 +1503,12 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictRemoveIndirectlyMoveDifferentObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		final ModelElementId otherSectionId = createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final LeafSection otherSection = getModelElement(otherSectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final Actor anotherDummy = getModelElement(anotherDummyId);
-
-		addToSection(section, true, actor, dummy, otherDummy, anotherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor anotherDummy2 = (Actor) clonedProject.getModelElement(anotherDummyId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				otherSection.getModelElements().add(actor);
-				section2.getModelElements().move(1, anotherDummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
-			.size());
-		// index-integrity conflict: result dependent on serialization
-		assertEquals(1, conflicts.size());
-
-	}
-
-	/**
-	 * Tests if manipulating multi-features is detected as a conflict.
-	 */
-	@Test
-	public void conflictMoveMoveDifferentObject() {
-
-		final ModelElementId sectionId = createLeafSection();
-		createLeafSection();
-		final ModelElementId actorId = createActor();
-		final ModelElementId dummyId = createActor();
-		final ModelElementId otherDummyId = createActor();
-		final ModelElementId anotherDummyId = createActor();
-
-		final LeafSection section = getModelElement(sectionId);
-		final Actor actor = getModelElement(actorId);
-		final Actor dummy = getModelElement(dummyId);
-		final Actor otherDummy = getModelElement(otherDummyId);
-		final Actor anotherDummy = getModelElement(anotherDummyId);
-
-		addToSection(section, true, actor, dummy, otherDummy, anotherDummy);
-
-		ProjectSpace clonedProjectSpace = cloneProjectSpace(getProjectSpace());
-		Project clonedProject = clonedProjectSpace.getProject();
-
-		final Actor anotherDummy2 = (Actor) clonedProject.getModelElement(anotherDummyId);
-		final LeafSection section2 = (LeafSection) clonedProject.getModelElement(sectionId);
-
-		new EMFStoreCommand() {
-			@Override
-			protected void doRun() {
-				section.getModelElements().move(1, actor);
-				section2.getModelElements().move(1, anotherDummy2);
-			}
-		}.run(false);
-
-		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
-
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), conflicts
-			.size());
-		// index-integrity conflict: result dependent on serialization
-		assertEquals(1, conflicts.size());
 
 	}
 
@@ -2865,10 +1550,9 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> oclonedProjectSpace = clonedProjectSpace.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace);
-		assertEquals(cd.getConflictingIndexIntegrity(ops1, oclonedProjectSpace).size(), cd
-			.getConflictingIndexIntegrity(oclonedProjectSpace, ops1)
+		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
+		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
+			getConflicts(oclonedProjectSpace, ops1)
 			.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(0, conflicts.size());
@@ -2974,5 +1658,10 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 				return null;
 			}
 		});
+	}
+
+	@Override
+	protected void configureCompareAtEnd() {
+		setCompareAtEnd(false);
 	}
 }

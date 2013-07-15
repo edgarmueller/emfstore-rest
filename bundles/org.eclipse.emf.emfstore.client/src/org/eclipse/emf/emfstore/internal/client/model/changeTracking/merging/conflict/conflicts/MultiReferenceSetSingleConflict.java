@@ -17,10 +17,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
@@ -28,15 +28,12 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Sing
 /**
  * @author wesendon
  */
-public class MultiReferenceSetSingleConflict extends Conflict {
+public class MultiReferenceSetSingleConflict extends VisualConflict {
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param leftOperations multi set ref
-	 * @param rightOperations single ref
-	 * @param leftOperation the operation representing all left operations
-	 * @param rightOperation the operation representing all right operations
+	 * @param conflictBucket the conflict
 	 * @param decisionManager decisionmanager
 	 * @param setLeft multi set ref is left
 	 */
@@ -52,7 +49,7 @@ public class MultiReferenceSetSingleConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictDescription(org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.ConflictDescription)
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictDescription(org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.ConflictDescription)
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
@@ -69,7 +66,7 @@ public class MultiReferenceSetSingleConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictOptions(java.util.List)
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictOptions(java.util.List)
 	 */
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {

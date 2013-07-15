@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
@@ -14,13 +14,12 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
-import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Basic implementation of {@link ESAbstractSessionProvider}. It's intended for when using EMFStore headless. The UI
  * counterpart of this would open the login dialog, this implementation throws an exceptions and requires you to login
- * the {@link Usersession} first.
+ * the {@link org.eclipse.emf.emfstore.internal.client.model.Usersession} first.
  * 
  * @author wesendon
  */

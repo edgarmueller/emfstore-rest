@@ -39,13 +39,13 @@ public class FileInfo {
 	private static final String ERROR_DIAGNOSIS_DIR_NAME = "errorLog";
 	private static final String MODEL_VERSION_FILENAME = "modelReleaseNumber";
 
-	public final String ProjectSpaceFileName = "projectspace";
-	public final String ProjectSpaceFileExtension = ExportImportDataUnits.ProjectSpace.getExtension();
-	public final String LocalChangePackageFileName = "operations";
-	public final String LocalChangePackageExtension = ".eoc";
-	public final String ProjectFragmentFileName = "project";
-	public final String ProjectFragmentExtension = ExportImportDataUnits.Project.getExtension();
-	public final String ProjectSpaceDirectoryPrefix = "ps-";
+	public static final String PROJECT_SPACE_FILE_NAME = "projectspace";
+	public static final String PROJECT_SPCAE_FILE_EXTENSION = ExportImportDataUnits.ProjectSpace.getExtension();
+	public static final String LOCAL_CHANGEPACKAGE_NAME = "operations";
+	public static final String LOCAL_CHANGEPACKAGE_EXTENSION = ".eoc";
+	public static final String PROJECT_FILE_NAME = "project";
+	public static final String PROJECT_FILE_EXTENSION = ExportImportDataUnits.Project.getExtension();
+	public static final String PROJECT_SPACE_DIR_PREFIX = "ps-";
 
 	/**
 	 * Returns the registered {@link ESLocationProvider} or if not existent, the
@@ -145,7 +145,7 @@ public class FileInfo {
 	 * @return the file name
 	 */
 	public String getProjectSpaceFileName() {
-		return ProjectSpaceFileName;
+		return PROJECT_SPACE_FILE_NAME;
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class FileInfo {
 	 * @return the file extension
 	 */
 	public String getProjectSpaceFileExtension() {
-		return ProjectSpaceFileExtension;
+		return PROJECT_SPCAE_FILE_EXTENSION;
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class FileInfo {
 	 * @return the file name
 	 */
 	public String getLocalChangePackageFileName() {
-		return LocalChangePackageFileName;
+		return LOCAL_CHANGEPACKAGE_NAME;
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class FileInfo {
 	 * @return the file extension
 	 */
 	public String getLocalChangePackageFileExtension() {
-		return LocalChangePackageExtension;
+		return LOCAL_CHANGEPACKAGE_EXTENSION;
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class FileInfo {
 	 * @return the prefix
 	 */
 	public String getProjectSpaceDirectoryPrefix() {
-		return ProjectSpaceDirectoryPrefix;
+		return PROJECT_SPACE_DIR_PREFIX;
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class FileInfo {
 	 * @return the file name
 	 */
 	public String getProjectFragmentFileName() {
-		return ProjectFragmentFileName;
+		return PROJECT_FILE_NAME;
 	}
 
 	/**
@@ -199,6 +199,6 @@ public class FileInfo {
 	 * @return the file extension
 	 */
 	public String getProjectFragmentFileExtension() {
-		return ProjectFragmentExtension;
+		return PROJECT_FILE_EXTENSION;
 	}
 }

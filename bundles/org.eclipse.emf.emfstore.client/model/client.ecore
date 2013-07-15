@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
-    nsURI="http://eclipse.org/emf/emfstore/client/model" nsPrefix="org.eclipse.emfstore.client.model">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://eclipse.org/emf/emfstore/client/model"
+    nsPrefix="org.eclipse.emfstore.client.model">
   <eClassifiers xsi:type="ecore:EClass" name="Workspace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="projectSpaces" upperBound="-1"
         eType="#//ProjectSpace" containment="true" eOpposite="#//ProjectSpace/workspace"
@@ -57,8 +56,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dirty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldLogMessages" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="localOperations" eType="#//OperationComposite"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="waitingUploads" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//FileIdentifier"
         containment="true"/>
@@ -72,11 +69,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="localChangePackage" eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/ChangePackage"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mergedVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationComposite">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/operations/AbstractOperation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PendingFileTransfer">

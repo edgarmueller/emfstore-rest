@@ -75,9 +75,9 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 1);
 
@@ -122,11 +122,11 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 		// should not conflict, the same change happens on both sides
-		assertEquals(conflicts.size(), 0);
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -173,12 +173,17 @@ public class ConflictDetectionAttributeTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 0);
 
+	}
+
+	@Override
+	protected void configureCompareAtEnd() {
+		setCompareAtEnd(false);
 	}
 
 }

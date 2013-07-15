@@ -6,12 +6,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 
 /**
@@ -23,19 +23,19 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMap
  */
 public interface ConflictHandler {
 
-	String ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler";
+	String EXTENSION_POINT_ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler";
 
 	/**
 	 * Called after a conflict has been created and before it is
 	 * added to list of all existing conflicts.
 	 * 
 	 * @param conflict
-	 *            a {@link Conflict} instance that has been created by a {@link DecisionManager}
+	 *            a {@link VisualConflict} instance that has been created by a {@link DecisionManager}
 	 * @param idToEObjectMapping
 	 *            mapping from IDs to EObjects
 	 * 
 	 * @return the possibly modified conflict instance that will be
 	 *         added to the list of conflicts
 	 */
-	Conflict handle(Conflict conflict, ModelElementIdToEObjectMapping idToEObjectMapping);
+	VisualConflict handle(VisualConflict conflict, ModelElementIdToEObjectMapping idToEObjectMapping);
 }

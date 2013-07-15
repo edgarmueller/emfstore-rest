@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.ESObserver;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
 /**

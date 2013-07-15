@@ -222,7 +222,12 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		}
 	}
 
-	// TODO: rename exception?
+	/**
+	 * Remove certificate with the given alias.
+	 * 
+	 * @param alias the certificate alias
+	 * @throws ESCertificateException if removal fails
+	 */
 	public void removeCertificate(String alias) throws ESCertificateException {
 		try {
 			keyStore.deleteEntry(alias);

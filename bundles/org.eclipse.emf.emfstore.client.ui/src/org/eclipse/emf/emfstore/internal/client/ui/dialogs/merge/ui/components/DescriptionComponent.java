@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.UIDecisionUtil;
@@ -48,7 +48,7 @@ public class DescriptionComponent extends Composite {
 	 * @param conflict
 	 *            conflict
 	 */
-	public DescriptionComponent(DecisionBox parent, Conflict conflict) {
+	public DescriptionComponent(DecisionBox parent, VisualConflict conflict) {
 		super(parent, SWT.NONE);
 		GridLayout layout = new GridLayout(2, false);
 		layout.horizontalSpacing = 20;

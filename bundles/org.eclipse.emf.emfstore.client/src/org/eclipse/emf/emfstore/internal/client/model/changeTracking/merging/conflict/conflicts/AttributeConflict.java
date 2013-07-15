@@ -20,9 +20,9 @@ import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.options.MergeTextOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
@@ -35,15 +35,12 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Unko
  * @author wesendon
  * @author emueller
  */
-public class AttributeConflict extends Conflict {
+public class AttributeConflict extends VisualConflict {
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param myOperations myOperations, with leading {@link AttributeOperation}
-	 * @param theirOperations theirOperations, with leading {@link AttributeOperation}
-	 * @param leftOperation the operation representing all left operations
-	 * @param rightOperation the operation representing all right operations
+	 * @param conflictBucket the conflict
 	 * @param decisionManager decisionmanager
 	 */
 	public AttributeConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {

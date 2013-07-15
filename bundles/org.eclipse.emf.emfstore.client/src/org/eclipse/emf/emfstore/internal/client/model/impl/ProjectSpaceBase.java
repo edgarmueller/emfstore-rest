@@ -196,27 +196,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            changes from the current branch
 	 * @param myChanges
 	 *            merged changes
-	 * 
-	 * @throws ESException in case the checksum comparison failed and the activated IChecksumErrorHandler
-	 *             also failed
-	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges)
-		throws ESException {
-		applyChanges(baseSpec, incoming, myChanges, new NullProgressMonitor());
-	}
-
-	/**
-	 * Helper method which applies merged changes on the ProjectSpace. This
-	 * method is used by merge mechanisms in update as well as branch merging.
-	 * 
-	 * @param baseSpec
-	 *            new base version
-	 * @param incoming
-	 *            changes from the current branch
-	 * @param myChanges
-	 *            merged changes
-	 * @param callback
-	 *            a {@link ESUpdateCallback} that is used to handle a possibly occurring checksum error
 	 * @param progressMonitor
 	 *            an {@link IProgressMonitor} to inform about the progress of the UpdateCallback in case it is called
 	 * 
@@ -224,7 +203,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *             also failed
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges,
-		IProgressMonitor progressMonitor) throws ESException {
+		IProgressMonitor progressMonitor, boolean runChecksumTestOnBaseSpec) throws ESException {
 
 		// revert local changes
 		notifyPreRevertMyChanges(getLocalChangePackage());
@@ -235,6 +214,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		applyChangePackages(incoming, false);
 		notifyPostApplyTheirChanges(incoming);
 
+		if (runChecksumTestOnBaseSpec) {
+			runChecksumTests(baseSpec, incoming, progressMonitor);
+		}
+		// reapply local changes
+		applyOperations(myChanges.getOperations(), true);
+		notifyPostApplyMergedChanges(myChanges);
+
+		setBaseVersion(baseSpec);
+		saveProjectSpaceOnly();
+	}
+
+	private void runChecksumTests(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming,
+		IProgressMonitor progressMonitor)
+		throws ESException {
 		progressMonitor.subTask("Computing checksum");
 		if (!performChecksumCheck(baseSpec, getProject())) {
 			progressMonitor.subTask("Invalid checksum.  Activating checksum error handler.");
@@ -251,13 +244,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				throw new ESException("Update cancelled by checksum error handler due to invalid checksum.");
 			}
 		}
-
-		// reapply local changes
-		applyOperations(myChanges.getOperations(), true);
-		notifyPostApplyMergedChanges(myChanges);
-
-		setBaseVersion(baseSpec);
-		saveProjectSpaceOnly();
 	}
 
 	private void applyChangePackage(ChangePackage changePackage, boolean addOperations) {
@@ -451,7 +437,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			changePackage.getOperations().add(copy);
 		}
 		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
-		logMessage.setAuthor(getUsersession().getUsername());
+		if (getUsersession() != null) {
+			logMessage.setAuthor(getUsersession().getUsername());
+		}
+		else {
+			logMessage.setAuthor("<Unkown>");
+		}
 		logMessage.setClientDate(new Date());
 		changePackage.setLogMessage(logMessage);
 		return changePackage;
@@ -487,40 +478,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 			localChangePackage = getLocalChangePackage();
 		}
-
-		if (getLocalOperations() != null) {
-			migrateOperations(localChangePackage);
-		}
-
 		return localChangePackage.getOperations();
-	}
-
-	private void migrateOperations(ChangePackage localChangePackage) {
-
-		if (getLocalOperations() == null || getLocalOperations().getOperations().size() == 0 || isTransient()) {
-			return;
-		}
-
-		localChangePackage.getOperations().addAll(getLocalOperations().getOperations());
-
-		Resource eResource = getLocalOperations().eResource();
-		// if for some reason the resource of project space and operations
-		// are not different, then reinitialize operations URI
-		// TODO: first case kills change package
-		if (this.eResource() == eResource) {
-			String localChangePackageFileName = Configuration.getFileInfo().getWorkspaceDirectory()
-				+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar
-				+ Configuration.getFileInfo().getLocalChangePackageFileName()
-				+ Configuration.getFileInfo().getLocalChangePackageFileExtension();
-			eResource = resourceSet.createResource(URI.createFileURI(localChangePackageFileName));
-		} else {
-			eResource.getContents().remove(0);
-		}
-		setLocalOperations(null);
-		eResource.getContents().add(localChangePackage);
-		saveResource(eResource);
-		save();
-
 	}
 
 	/**
@@ -756,7 +714,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		getProject().delete();
 
 		String pathToProject = Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().ProjectSpaceDirectoryPrefix + getIdentifier();
+			+ Configuration.getFileInfo().PROJECT_SPACE_DIR_PREFIX + getIdentifier();
 
 		resourceSet.getResources().remove(getProject().eResource());
 		resourceSet.getResources().remove(eResource());
@@ -894,9 +852,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 					baseChanges, getProject());
 
 				if (conflictResolver.resolveConflicts(getProject(), conflictSet)) {
-					// TODO: do we need to care about checksum errors here?
 					ChangePackage resolvedConflicts = mergeResolvedConflicts(conflictSet, branchChanges, baseChanges);
-					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts);
+					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts, monitor, false);
 					setMergedVersion(ModelUtil.clone(branchSpec));
 				}
 

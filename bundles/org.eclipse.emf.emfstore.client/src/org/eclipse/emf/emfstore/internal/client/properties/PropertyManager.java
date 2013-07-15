@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * haunolder
  * emueller
  ******************************************************************************/
@@ -304,7 +304,7 @@ public final class PropertyManager {
 			.getInstance()
 			.getConnectionManager()
 			.setEMFProperties(this.projectSpace.getUsersession().getSessionId(), changedProperties,
-								this.projectSpace.getProjectId());
+				this.projectSpace.getProjectId());
 
 		// setEMFProperties returns us a list of properties as found one the
 		// server,

@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * chodnick
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.conflictDetection;
@@ -90,9 +90,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 1);
 
@@ -145,11 +145,11 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
-		assertEquals(0, conflicts.size());
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -201,9 +201,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 0);
 
@@ -254,9 +254,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(1, conflicts.size());
 
@@ -306,11 +306,11 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
-		assertEquals(0, conflicts.size());
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -360,9 +360,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(0, conflicts.size());
 
@@ -415,9 +415,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(1, conflicts.size());
 
@@ -470,11 +470,11 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
-		assertEquals(0, conflicts.size());
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -523,9 +523,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 0);
 
@@ -578,9 +578,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(1, conflicts.size());
 
@@ -632,11 +632,11 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
-		assertEquals(0, conflicts.size());
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -689,9 +689,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(0, conflicts.size());
 
@@ -744,9 +744,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(1, conflicts.size());
 
@@ -798,11 +798,11 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
-		assertEquals(0, conflicts.size());
+		assertEquals(1, conflicts.size());
 
 	}
 
@@ -853,9 +853,9 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector();
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 0);
 	}
@@ -964,5 +964,10 @@ public class ConflictDetectionReferenceTest extends ConflictDetectionTest {
 
 		assertEquals(true, doConflict(set, remove));
 		assertEquals(true, doConflict(remove, set));
+	}
+
+	@Override
+	protected void configureCompareAtEnd() {
+		setCompareAtEnd(false);
 	}
 }

@@ -185,4 +185,22 @@ public class APIUtil {
 		return result;
 	}
 
+	public static <IMPL extends InternalAPIDelegator<API, INT>, INT extends APIDelegate<API>, API> 
+	Set<INT> toInternal(Set<API> toCopy) {
+		
+		if(toCopy == null) {
+			return null;
+		}
+		
+		Set<INT> result = new LinkedHashSet<INT>(toCopy.size());
+		
+		for(API element : toCopy) {
+			@SuppressWarnings("unchecked")
+			IMPL i = (IMPL) element;
+			result.add(i.toInternalAPI());
+		}
+		
+		return result;
+	}
+
 }

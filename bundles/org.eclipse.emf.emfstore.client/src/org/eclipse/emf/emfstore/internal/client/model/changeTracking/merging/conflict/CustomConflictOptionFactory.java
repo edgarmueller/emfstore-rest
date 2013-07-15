@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict;
@@ -26,16 +26,17 @@ public interface CustomConflictOptionFactory {
 	 *            to check
 	 * @return true if applicable
 	 */
-	boolean isApplicableConflict(Conflict conflict);
+	boolean isApplicableConflict(VisualConflict conflict);
 
 	/**
-	 * Creates the custom option. This method is called if {@link #isApplicableConflict(Conflict)} has returned true and
+	 * Creates the custom option. This method is called if {@link #isApplicableConflict(VisualConflict)} has returned
+	 * true and
 	 * only then.
 	 * 
 	 * @param conflict
 	 *            parent conflict
 	 * @return custom option
 	 */
-	CustomConflictOption createCustomConflictOption(Conflict conflict);
+	CustomConflictOption createCustomConflictOption(VisualConflict conflict);
 
 }

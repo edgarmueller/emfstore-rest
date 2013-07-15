@@ -41,19 +41,14 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces
- *          <em>Project Spaces</em>}</li>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.Workspace#getServerInfos
- *          <em>Server Infos</em>}</li>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.Workspace#getUsersessions
- *          <em>Usersessions</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces <em>Project Spaces
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getServerInfos <em>Server Infos</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getUsersessions <em>Usersessions</em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace()
+ * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getWorkspace()
  * @model
  * @generated
  */
@@ -170,22 +165,21 @@ public interface Workspace extends EObject, IAdaptable, APIDelegate<ESWorkspaceI
 	ProjectSpace getProjectSpace(Project project) throws UnkownProjectException;
 
 	/**
-	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.client.model.ProjectSpace}. It is
-	 * bidirectional and its opposite is ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
-	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Project Spaces</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace}.
+	 * It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace <em>Workspace</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Spaces</em>' reference list isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Project Spaces</em>' containment reference
-	 *         list.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getWorkspace_ProjectSpaces()
-	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
-	 * @model opposite="workspace" containment="true" resolveProxies="true"
-	 *        keys="identifier"
+	 * @return the value of the '<em>Project Spaces</em>' containment reference list.
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getWorkspace_ProjectSpaces()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace
+	 * @model opposite="workspace" containment="true" resolveProxies="true" keys="identifier"
 	 * @generated
 	 */
 	EList<ProjectSpace> getProjectSpaces();

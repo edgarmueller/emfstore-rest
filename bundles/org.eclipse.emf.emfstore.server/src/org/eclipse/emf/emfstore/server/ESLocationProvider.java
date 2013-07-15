@@ -16,7 +16,8 @@ import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationPr
 
 /**
  * Interface for workspace location providers. Implementing classes provide a location for the workspace - or server
- * workspace - files to store models and other files. You may subclass {@link DefaultServerWorkspaceLocationProvider} in
+ * workspace - files to store models and other files. You may subclass
+ * {@link org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider} in
  * order to ease your implementation. By convention, every path should end with an folder separator char.
  * 
  * @author koegel

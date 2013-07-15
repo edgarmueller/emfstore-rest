@@ -18,14 +18,14 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 
-public class MultiAttributeMoveSetConflict extends Conflict {
+public class MultiAttributeMoveSetConflict extends VisualConflict {
 
 	public MultiAttributeMoveSetConflict(ConflictBucket conflictBucket, DecisionManager decisionManager,
 		boolean isMySet) {
@@ -39,7 +39,7 @@ public class MultiAttributeMoveSetConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictDescription()
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictDescription()
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
@@ -58,7 +58,7 @@ public class MultiAttributeMoveSetConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictOptions(java.util.List)
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictOptions(java.util.List)
 	 */
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {

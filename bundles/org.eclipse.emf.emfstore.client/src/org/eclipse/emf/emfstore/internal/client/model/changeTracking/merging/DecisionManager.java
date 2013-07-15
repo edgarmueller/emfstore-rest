@@ -31,7 +31,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.CompositeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.DeletionConflict;
@@ -72,11 +72,10 @@ public class DecisionManager {
 
 	private ConflictHandler conflictHandler;
 
-	private ArrayList<Conflict> conflicts;
+	private ArrayList<VisualConflict> conflicts;
 
 	private ConflictDetector conflictDetector;
 	private ChangeConflictSet changeConflictSet;
-	private Set<AbstractOperation> notInvolvedInConflict;
 	private ModelElementIdToEObjectMapping mapping;
 	private final boolean isBranchMerge;
 	private final Project project;
@@ -88,10 +87,6 @@ public class DecisionManager {
 	 *            the related project
 	 * @param changeConflict
 	 *            the {@link ChangechangeConflict} containing the changes leading to a potential conflict
-	 * @param baseVersion
-	 *            the base version
-	 * @param targetVersion
-	 *            new target version
 	 * @param isBranchMerge
 	 *            allows to specify whether two branches are merged, opposed to
 	 *            changes from the same branch. Has an effect on the wording of
@@ -109,10 +104,10 @@ public class DecisionManager {
 
 	private ConflictHandler initConflictHandlers() {
 		return ExtensionRegistry.INSTANCE.get(
-			ConflictHandler.ID,
+			ConflictHandler.EXTENSION_POINT_ID,
 			ConflictHandler.class,
 			new ConflictHandler() {
-				public Conflict handle(Conflict conflict,
+				public VisualConflict handle(VisualConflict conflict,
 					ModelElementIdToEObjectMapping idToEObjectMapping) {
 					return conflict;
 				}
@@ -122,7 +117,7 @@ public class DecisionManager {
 
 	private void init() {
 
-		conflicts = new ArrayList<Conflict>();
+		conflicts = new ArrayList<VisualConflict>();
 
 		Set<ConflictBucket> conflictBuckets;
 
@@ -142,7 +137,7 @@ public class DecisionManager {
 
 			AbstractOperation my = conf.getMyOperation();
 			AbstractOperation their = conf.getTheirOperation();
-			Conflict conflict = null;
+			VisualConflict conflict = null;
 
 			if (isAttribute(my) && isAttribute(their)) {
 				conflict = createAttributeAttributeDecision(conf);
@@ -206,11 +201,11 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict notifyConflictHandlers(Conflict conflict) {
+	private VisualConflict notifyConflictHandlers(VisualConflict conflict) {
 		return conflictHandler.handle(conflict, mapping);
 	}
 
-	private void addConflict(Conflict conflict) {
+	private void addConflict(VisualConflict conflict) {
 		if (conflict == null) {
 			return;
 		}
@@ -218,7 +213,7 @@ public class DecisionManager {
 	}
 
 	// END COMPLEX CODE
-	private Conflict createMultiRefMultiSet(ConflictBucket conf) {
+	private VisualConflict createMultiRefMultiSet(ConflictBucket conf) {
 		if (isMultiRef(conf.getMyOperation())) {
 			return new MultiReferenceSetConflict(conf, this, true);
 		} else {
@@ -226,7 +221,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createMultiSetSingle(ConflictBucket conf) {
+	private VisualConflict createMultiSetSingle(ConflictBucket conf) {
 		if (isMultiRefSet(conf.getMyOperation())) {
 			return new MultiReferenceSetSingleConflict(conf, this, true);
 		} else {
@@ -234,7 +229,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createMultiSingle(ConflictBucket conf) {
+	private VisualConflict createMultiSingle(ConflictBucket conf) {
 		if (isMultiRef(conf.getMyOperation())) {
 			return new MultiReferenceSingleConflict(conf, this, true);
 		} else {
@@ -242,15 +237,15 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createMultiRefSetSet(ConflictBucket conf) {
+	private VisualConflict createMultiRefSetSet(ConflictBucket conf) {
 		return new MultiReferenceSetSetConflict(conf, this);
 	}
 
-	private Conflict createMultiAttSetSet(ConflictBucket conf) {
+	private VisualConflict createMultiAttSetSet(ConflictBucket conf) {
 		return new MultiAttributeSetSetConflict(conf, this);
 	}
 
-	private Conflict createMultiAtt(ConflictBucket conf) {
+	private VisualConflict createMultiAtt(ConflictBucket conf) {
 		if (((MultiAttributeOperation) conf.getMyOperation()).isAdd()) {
 			return new MultiAttributeConflict(conf, this, true);
 		} else {
@@ -259,7 +254,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createMultiAttSet(ConflictBucket conf) {
+	private VisualConflict createMultiAttSet(ConflictBucket conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
 			return new MultiAttributeSetConflict(conf, this, true);
 		} else {
@@ -267,7 +262,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createMultiAttMove(ConflictBucket conf) {
+	private VisualConflict createMultiAttMove(ConflictBucket conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
 			return new MultiAttributeMoveConflict(conf, this, true);
 		} else {
@@ -275,7 +270,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createMultiAttMoveSet(ConflictBucket conf) {
+	private VisualConflict createMultiAttMoveSet(ConflictBucket conf) {
 		if (isMultiAttSet(conf.getMyOperation())) {
 			return new MultiAttributeMoveSetConflict(conf, this, true);
 		} else {
@@ -283,7 +278,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
+	private VisualConflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
 		if (isCompositeRef(conf.getMyOperation())) {
 			return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
 				Arrays.asList(conf.getTheirOperation()));
@@ -293,43 +288,41 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createReferenceConflict(ConflictBucket conf) {
+	private VisualConflict createReferenceConflict(ConflictBucket conf) {
 		EList<AbstractOperation> myOperations = ((CompositeOperation) conf.getMyOperation()).getSubOperations();
 		EList<AbstractOperation> theirOperations = ((CompositeOperation) conf.getTheirOperation()).getSubOperations();
 
 		return createRefFromSub(conf, myOperations, theirOperations);
 	}
 
-	private Conflict createRefFromSub(ConflictBucket conf, List<AbstractOperation> myOperations,
+	private VisualConflict createRefFromSub(ConflictBucket conf, List<AbstractOperation> myOperations,
 		List<AbstractOperation> theirOperations) {
 
 		for (AbstractOperation myOp : myOperations) {
-			for (AbstractOperation theirOp : theirOperations) {
-				if (isSingleRef(myOp)) {
+			if (isSingleRef(myOp)) {
 
-					return new ReferenceConflict(true, conf, this);
+				return new ReferenceConflict(true, conf, this);
 
-				} else if (isMultiRef(myOp)) {
+			} else if (isMultiRef(myOp)) {
 
-					return new ReferenceConflict(false, conf, this);
+				return new ReferenceConflict(false, conf, this);
 
-				} else {
-					return null;
-				}
+			} else {
+				return null;
 			}
 		}
 		return null;
 	}
 
-	private Conflict createAttributeAttributeDecision(ConflictBucket conf) {
+	private VisualConflict createAttributeAttributeDecision(ConflictBucket conf) {
 		return new AttributeConflict(conf, this);
 	}
 
-	private Conflict createSingleSingleConflict(ConflictBucket conf) {
+	private VisualConflict createSingleSingleConflict(ConflictBucket conf) {
 		return new SingleReferenceConflict(conf, this);
 	}
 
-	private Conflict createMultiMultiConflict(ConflictBucket conf) {
+	private VisualConflict createMultiMultiConflict(ConflictBucket conf) {
 		if (((MultiReferenceOperation) conf.getMyOperation()).isAdd()) {
 			return new MultiReferenceConflict(conf, this, true);
 		} else {
@@ -337,7 +330,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createDeleteOtherConflict(ConflictBucket conf) {
+	private VisualConflict createDeleteOtherConflict(ConflictBucket conf) {
 		if (isDelete(conf.getMyOperation())) {
 			return new DeletionConflict(conf, true, this);
 		} else {
@@ -345,7 +338,7 @@ public class DecisionManager {
 		}
 	}
 
-	private Conflict createCompositeConflict(ConflictBucket conf) {
+	private VisualConflict createCompositeConflict(ConflictBucket conf) {
 		if (isComposite(conf.getMyOperation())) {
 			return new CompositeConflict(conf, this, true);
 		} else {
@@ -362,7 +355,7 @@ public class DecisionManager {
 	 * 
 	 * @return list of conflicts.
 	 */
-	public ArrayList<Conflict> getConflicts() {
+	public ArrayList<VisualConflict> getConflicts() {
 		return conflicts;
 	}
 
@@ -373,7 +366,7 @@ public class DecisionManager {
 	 */
 	public boolean isResolved() {
 		boolean isResolved = true;
-		for (Conflict conflict : conflicts) {
+		for (VisualConflict conflict : conflicts) {
 			isResolved = isResolved && conflict.isResolved();
 		}
 		return isResolved;
@@ -388,7 +381,7 @@ public class DecisionManager {
 			return;
 		}
 
-		for (Conflict conflict : conflicts) {
+		for (VisualConflict conflict : conflicts) {
 			conflict.resolve();
 		}
 	}
@@ -498,7 +491,7 @@ public class DecisionManager {
 		int myLeafCount = 0;
 		int theirCount = 0;
 		int theirLeafCount = 0;
-		for (Conflict conflict : conflicts) {
+		for (VisualConflict conflict : conflicts) {
 			myCount += conflict.getLeftOperations().size();
 			myLeafCount += ChangePackageImpl.countLeafOperations(conflict.getMyOperations());
 			theirCount += conflict.getRightOperations().size();

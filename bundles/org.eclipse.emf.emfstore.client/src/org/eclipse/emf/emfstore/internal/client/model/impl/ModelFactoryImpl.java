@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.internal.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -39,13 +38,15 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public static ModelFactory init() {
-		try {
-			ModelFactory theModelFactory = (ModelFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://eclipse.org/emf/emfstore/client/model");
-			if (theModelFactory != null) {
+		try
+		{
+			ModelFactory theModelFactory = (ModelFactory) EPackage.Registry.INSTANCE.getEFactory(ModelPackage.eNS_URI);
+			if (theModelFactory != null)
+			{
 				return theModelFactory;
 			}
-		} catch (Exception exception) {
+		} catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ModelFactoryImpl();
@@ -69,7 +70,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 		case ModelPackage.WORKSPACE:
 			return createWorkspace();
 		case ModelPackage.SERVER_INFO:
@@ -78,8 +80,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			return createUsersession();
 		case ModelPackage.PROJECT_SPACE:
 			return createProjectSpace();
-		case ModelPackage.OPERATION_COMPOSITE:
-			return createOperationComposite();
 		case ModelPackage.PENDING_FILE_TRANSFER:
 			return createPendingFileTransfer();
 		default:
@@ -125,16 +125,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ProjectSpace createProjectSpace() {
 		ProjectSpaceImpl projectSpace = new ProjectSpaceImpl();
 		return projectSpace;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public OperationComposite createOperationComposite() {
-		OperationCompositeImpl operationComposite = new OperationCompositeImpl();
-		return operationComposite;
 	}
 
 	/**

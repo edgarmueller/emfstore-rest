@@ -34,11 +34,6 @@ public interface ConflictResolver {
 	 *            version plus local operations
 	 * @param changeConflict
 	 *            the {@link ChangeConflictSet} that needs to be resolved
-	 * @param baseVersion
-	 *            baseVersion of project space and source version of changes from
-	 *            server
-	 * @param targetVersion
-	 *            the version to which is updated
 	 * @return true if the merge can proceed, false if it has to be cancelled
 	 */
 	boolean resolveConflicts(Project project, ChangeConflictSet changeConflict);

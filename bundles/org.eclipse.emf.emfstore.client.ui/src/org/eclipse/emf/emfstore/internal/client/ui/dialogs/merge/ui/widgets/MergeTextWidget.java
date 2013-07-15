@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.options.MergeTextOption;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components.DetailsComponent;
@@ -173,7 +173,7 @@ public class MergeTextWidget implements Observer {
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	public void update(Observable o, Object arg) {
-		Conflict conflict = decisionBox.getConflict();
+		VisualConflict conflict = decisionBox.getConflict();
 		if (conflict != null && conflict == o) {
 			ConflictOption solution = conflict.getSolution();
 			if (solution instanceof MergeTextOption) {

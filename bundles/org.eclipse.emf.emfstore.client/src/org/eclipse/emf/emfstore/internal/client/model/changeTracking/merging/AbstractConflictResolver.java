@@ -92,6 +92,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * 
 	 * @param decisionManager
 	 *            initialized {@link DecisionManager}
+	 * @param changeConflictSet the conflict set to be resolved
 	 * @return true, if all conflicts could be resolved
 	 */
 	protected abstract boolean controlDecisionManager(DecisionManager decisionManager,
