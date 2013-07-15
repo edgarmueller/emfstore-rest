@@ -155,7 +155,7 @@ public interface Player extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EMails</em>' attribute list.
 	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getPlayer_EMails()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	EList<String> getEMails();

@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory;
@@ -26,8 +26,7 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidPropertyExcept
  * 
  * @author wesendon
  */
-// TODO: internal
-public class AuthenticationControlFactoryImpl implements ESAuthenticationControlFactory {
+public class AuthenticationControlFactoryImpl implements AuthenticationControlFactory {
 
 	/**
 	 * {@inheritDoc}
@@ -35,9 +34,6 @@ public class AuthenticationControlFactoryImpl implements ESAuthenticationControl
 	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactory#createAuthenticationControl()
 	 */
 	public AbstractAuthenticationControl createAuthenticationControl() throws FatalESException {
-
-		// under construction
-		// this factory reproduces the legacy behavior of unicase until new config is implemented
 
 		String property = ServerConfiguration.getProperties().getProperty(ServerConfiguration.AUTHENTICATION_POLICY,
 			ServerConfiguration.AUTHENTICATION_POLICY_DEFAULT);

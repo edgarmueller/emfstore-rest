@@ -26,7 +26,6 @@ import java.security.cert.Certificate;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.exceptions.ESCertificateException;
-import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
 import org.eclipse.emf.emfstore.client.test.Activator;
 import org.eclipse.emf.emfstore.client.test.SetupHelper;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
@@ -126,7 +125,7 @@ public class ChangeCertificationTest extends ServerTests {
 		return null;
 	}
 
-	private void importCertificate() throws ESInvalidCertificateException, ESCertificateException, IOException {
+	private void importCertificate() throws ESCertificateException, IOException {
 		InputStream stream = getResource("sampleFiles/server.public-key");
 		KeyStoreManager.getInstance().addCertificate("testAlias", stream);
 		stream.close();
@@ -134,7 +133,7 @@ public class ChangeCertificationTest extends ServerTests {
 
 	@Test
 	public void exchangeCertificateAndLogin()
-		throws ESInvalidCertificateException, ESCertificateException, ESException, KeyStoreException, IOException {
+		throws ESCertificateException, ESException, KeyStoreException, IOException {
 		importCertificate();
 		assertFalse(KeyStoreManager.getInstance().isDefaultCertificate("testAlias"));
 		KeyStoreManager.getInstance().setDefaultCertificate("testAlias");

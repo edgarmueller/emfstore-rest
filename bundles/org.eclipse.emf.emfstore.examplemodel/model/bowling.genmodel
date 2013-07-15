@@ -63,5 +63,23 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Area/areas"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Area/tournaments"/>
     </genClasses>
+    <genClasses ecoreClass="bowling.ecore#//Fan">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Fan/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Fan/dateOfBirth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Fan/hasSeasonTicket"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Fan/eMails"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Fan/gender"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bowling.ecore#//Fan/favouritePlayer"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Fan/fanMerchandise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bowling.ecore#//Fan/favouriteMerchandise"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference bowling.ecore#//Fan/visitedTournaments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Fan/numberOfTournamentsVisited"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Fan/moneySpentOnTickets"/>
+    </genClasses>
+    <genClasses ecoreClass="bowling.ecore#//Merchandise">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Merchandise/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Merchandise/price"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bowling.ecore#//Merchandise/serialNumber"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendonk
  * koegel
  ******************************************************************************/
@@ -107,10 +107,10 @@ public class AccessControlImpl implements AuthenticationControl, AuthorizationCo
 		authenticationControl = getAuthenticationFactory().createAuthenticationControl();
 	}
 
-	private ESAuthenticationControlFactory getAuthenticationFactory() {
+	private AuthenticationControlFactory getAuthenticationFactory() {
 		for (ESExtensionElement e : new ESExtensionPoint("org.eclipse.emf.emfstore.server.authenticationFactory")
 			.getExtensionElements()) {
-			ESAuthenticationControlFactory factory = e.getClass("class", ESAuthenticationControlFactory.class);
+			AuthenticationControlFactory factory = e.getClass("class", AuthenticationControlFactory.class);
 			if (factory != null) {
 				return factory;
 			}
