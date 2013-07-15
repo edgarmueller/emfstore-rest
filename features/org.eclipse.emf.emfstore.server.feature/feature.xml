@@ -4,7 +4,7 @@
       label="EMFStore Server (Incubation)"
       version="1.0.0.qualifier"
       provider-name="Eclipse Modeling Project"
-      plugin="org.eclipse.emf.emfstore.branding">
+      plugin="org.eclipse.emf.emfstore.server">
 
    <description url="http://emfstore.org">
       This feature contains all plugins to run the EMFStore server.
@@ -229,13 +229,6 @@ litigation.
 
    <plugin
          id="org.eclipse.emf.emfstore.server"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.emfstore.branding"
          download-size="0"
          install-size="0"
          version="0.0.0"

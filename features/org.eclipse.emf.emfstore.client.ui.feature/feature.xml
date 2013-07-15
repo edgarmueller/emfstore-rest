@@ -4,7 +4,7 @@
       label="EMFStore Client UI (Incubation)"
       version="1.0.0.qualifier"
       provider-name="Eclipse Modeling Project"
-      plugin="org.eclipse.emf.emfstore.branding">
+      plugin="org.eclipse.emf.emfstore.client.ui">
 
    <description url="http://emfstore.org">
       This feature contains all plugins to provide user interfaces
@@ -232,13 +232,6 @@ litigation.
       <import plugin="org.eclipse.emf.emfstore.common.model"/>
       <import plugin="org.eclipse.emf.edit"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.emf.emfstore.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.eclipse.emf.emfstore.server.model.edit"

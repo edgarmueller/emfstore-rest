@@ -4,7 +4,7 @@
       label="Model Mutator (Incubation)"
       version="1.0.0.qualifier"
       provider-name="Eclipse Modeling Project"
-      plugin="org.eclipse.emf.emfstore.branding">
+      plugin="org.eclipse.emf.emfstore.modelmutator">
 
    <description url="http://emfstore.org">
       Contains a set of plugins that may be used to alter existing
