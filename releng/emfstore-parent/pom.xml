@@ -142,11 +142,11 @@
 
     <!-- EMFStore Examples -->
     <module>../../features/org.eclipse.emf.emfstore.example.feature</module>
-    <!-- 
+    
     <module>../../bundles/org.eclipse.emf.emfstore.example.helloworld</module>
     <module>../../bundles/org.eclipse.emf.emfstore.example.installer</module>
     <module>../../bundles/org.eclipse.emf.emfstore.example.merging</module>
-     -->
+    
     <module>../../bundles/org.eclipse.emf.emfstore.examplemodel</module>
     <module>../../bundles/org.eclipse.emf.emfstore.examplemodel.edit</module>
 
