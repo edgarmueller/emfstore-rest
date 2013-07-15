@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.client.util;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
@@ -90,11 +91,11 @@ public final class ClientURIUtil {
 	 * <p />
 	 * Example URI: emfstore:/workspaces/<i>profile</i>/projectspaces/<i>identifier</i>/project
 	 * 
-	 * @param identifier the projectspace's id
+	 * @param projectSpace the ProjectSpace
 	 * @return the EMFStore URI
 	 */
-	public static URI createProjectURI(String identifier) {
-		return URI.createURI(getProjectspacesPrefix(identifier) + PROJECT_SEGMENT);
+	public static URI createProjectURI(IdentifiableElement projectSpace) {
+		return URI.createURI(getProjectspacesPrefix(projectSpace) + PROJECT_SEGMENT);
 	}
 
 	/**
@@ -102,11 +103,11 @@ public final class ClientURIUtil {
 	 * <p />
 	 * Example URI: emfstore:/workspaces/<i>profile</i>/projectspaces/<i>identifier</i>/operations
 	 * 
-	 * @param identifier the projectspace's id
+	 * @param projectSpace the ProjectSpace
 	 * @return the EMFStore URI
 	 */
-	public static URI createOperationsURI(String identifier) {
-		return URI.createURI(getProjectspacesPrefix(identifier) + OPERATIONS_SEGMENT);
+	public static URI createOperationsURI(IdentifiableElement projectSpace) {
+		return URI.createURI(getProjectspacesPrefix(projectSpace) + OPERATIONS_SEGMENT);
 	}
 
 	/**
@@ -114,19 +115,19 @@ public final class ClientURIUtil {
 	 * <p />
 	 * Example URI: emfstore:/workspaces/<i>profile</i>/projectspaces/<i>identifier</i>/projectspace
 	 * 
-	 * @param identifier the project's id
+	 * @param projectSpace the ProjectSpace
 	 * @return the EMFStore URI
 	 */
-	public static URI createProjectSpaceURI(String identifier) {
-		return URI.createURI(getProjectspacesPrefix(identifier) + PROJECTSPACE_SEGMENT);
+	public static URI createProjectSpaceURI(IdentifiableElement projectSpace) {
+		return URI.createURI(getProjectspacesPrefix(projectSpace) + PROJECTSPACE_SEGMENT);
 	}
 
 	private static String getClientPrefix() {
 		return SCHEME + ":/" + CLIENT_SEGMENT + "/" + ServerURIUtil.getProfile() + "/";
 	}
 
-	private static String getProjectspacesPrefix(String identifier) {
-		return getClientPrefix() + PROJECTSPACES_SEGMENT + "/" + identifier + "/";
+	private static String getProjectspacesPrefix(IdentifiableElement projectSpace) {
+		return getClientPrefix() + PROJECTSPACES_SEGMENT + "/" + projectSpace.getIdentifier() + "/";
 	}
 
 }

@@ -13,6 +13,8 @@ package org.eclipse.emf.emfstore.server;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
 
 /**
@@ -99,11 +101,11 @@ public final class ServerURIUtil {
 	 * <p />
 	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/projecthistory
 	 * 
-	 * @param identifier the project's id
+	 * @param projectId the project id
 	 * @return the EMFStore URI
 	 */
-	public static URI createProjectHistoryURI(String identifier) {
-		return URI.createURI(getProjectsPrefix(identifier) + PROJECTHISTORY_SEGMENT);
+	public static URI createProjectHistoryURI(ProjectId projectId) {
+		return URI.createURI(getProjectsPrefix(projectId) + PROJECTHISTORY_SEGMENT);
 	}
 
 	/**
@@ -111,12 +113,13 @@ public final class ServerURIUtil {
 	 * <p />
 	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/versions/<i>nr</i>
 	 * 
-	 * @param identifier the project's id
-	 * @param nr the version number
+	 * @param projectId the project id
+	 * @param versionId the version id
 	 * @return the EMFStore URI
 	 */
-	public static URI createVersionURI(String identifier, int nr) {
-		return URI.createURI(getProjectsPrefix(identifier) + VERSIONS_SEGMENT + "/" + nr);
+	public static URI createVersionURI(ProjectId projectId, PrimaryVersionSpec versionId) {
+		return URI.createURI(getProjectsPrefix(projectId) + VERSIONS_SEGMENT + "/"
+			+ versionId.getIdentifier());
 	}
 
 	/**
@@ -124,12 +127,12 @@ public final class ServerURIUtil {
 	 * <p />
 	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/changepackages/<i>nr</i>
 	 * 
-	 * @param identifier the project's id
-	 * @param nr the changepackage number
+	 * @param projectId the project id
+	 * @param versionId the version id
 	 * @return the EMFStore URI
 	 */
-	public static URI createChangePackageURI(String identifier, int nr) {
-		return URI.createURI(getProjectsPrefix(identifier) + CHANGEPACKAGES_SEGMENT + "/" + nr);
+	public static URI createChangePackageURI(ProjectId projectId, PrimaryVersionSpec versionId) {
+		return URI.createURI(getProjectsPrefix(projectId) + CHANGEPACKAGES_SEGMENT + "/" + versionId.getIdentifier());
 	}
 
 	/**
@@ -137,12 +140,12 @@ public final class ServerURIUtil {
 	 * <p />
 	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/projectstates/<i>nr</i>
 	 * 
-	 * @param identifier the project's id
-	 * @param nr the projectstate number
+	 * @param projectId the project id
+	 * @param versionId the version id
 	 * @return the EMFStore URI
 	 */
-	public static URI createProjectStateURI(String identifier, int nr) {
-		return URI.createURI(getProjectsPrefix(identifier) + PROJECTSTATES_SEGMENT + "/" + nr);
+	public static URI createProjectStateURI(ProjectId projectId, PrimaryVersionSpec versionId) {
+		return URI.createURI(getProjectsPrefix(projectId) + PROJECTSTATES_SEGMENT + "/" + versionId.getIdentifier());
 	}
 
 	/**
@@ -173,8 +176,8 @@ public final class ServerURIUtil {
 		return SCHEME + ":/" + SERVER_SEGMENT + "/" + getProfile() + "/";
 	}
 
-	private static String getProjectsPrefix(String identifier) {
-		return getServerPrefix() + PROJECTS_SEGMENT + "/" + identifier + "/";
+	private static String getProjectsPrefix(ProjectId projectId) {
+		return getServerPrefix() + PROJECTS_SEGMENT + "/" + projectId.getId() + "/";
 	}
 
 }

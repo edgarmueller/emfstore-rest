@@ -500,7 +500,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// are not different, then reinitialize operations URI
 		// TODO: first case kills change package
 		if (this.eResource() == eResource) {
-			eResource = resourceSet.createResource(ClientURIUtil.createOperationsURI(getIdentifier()));
+			eResource = resourceSet.createResource(ClientURIUtil.createOperationsURI(this));
 		} else {
 			eResource.getContents().remove(0);
 		}
@@ -681,9 +681,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		this.resourceSet = resourceSet;
 		initCompleted = true;
 
-		URI projectSpaceURI = ClientURIUtil.createProjectSpaceURI(getIdentifier());
-		URI operationsURI = ClientURIUtil.createOperationsURI(getIdentifier());
-		URI projectURI = ClientURIUtil.createProjectURI(getIdentifier());
+		URI projectSpaceURI = ClientURIUtil.createProjectSpaceURI(this);
+		URI operationsURI = ClientURIUtil.createOperationsURI(this);
+		URI projectURI = ClientURIUtil.createProjectURI(this);
 
 		setResourceCount(0);
 

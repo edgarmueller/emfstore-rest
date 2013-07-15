@@ -69,7 +69,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalESException {
-		URI projectHistoryURI = ServerURIUtil.createProjectHistoryURI(projectHistory.getProjectId().getId());
+		URI projectHistoryURI = ServerURIUtil.createProjectHistoryURI(projectHistory.getProjectId());
 		saveInResource(projectHistory, projectHistoryURI);
 	}
 
@@ -84,7 +84,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalESException {
-		URI versionURI = ServerURIUtil.createVersionURI(projectId.getId(), version.getPrimarySpec().getIdentifier());
+		URI versionURI = ServerURIUtil.createVersionURI(projectId, version.getPrimarySpec());
 		saveInResource(version, versionURI);
 	}
 
@@ -102,7 +102,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForProject(Project project, PrimaryVersionSpec versionId, ProjectId projectId)
 		throws FatalESException {
-		URI projectStateURI = ServerURIUtil.createProjectStateURI(projectId.getId(), versionId.getIdentifier());
+		URI projectStateURI = ServerURIUtil.createProjectStateURI(projectId, versionId);
 		saveInResourceWithProject(project, projectStateURI, project);
 	}
 
@@ -120,7 +120,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForChangePackage(ChangePackage changePackage, PrimaryVersionSpec versionId,
 		ProjectId projectId) throws FatalESException {
-		URI changePackageURI = ServerURIUtil.createChangePackageURI(projectId.getId(), versionId.getIdentifier());
+		URI changePackageURI = ServerURIUtil.createChangePackageURI(projectId, versionId);
 		List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
 
 		for (AbstractOperation op : changePackage.getOperations()) {
