@@ -29,7 +29,8 @@ import org.junit.runners.Suite;
 	UsersessionTest.class,
 	WorkspaceTest.class,
 	RemoteProjectTest.class,
-	ClientUtilitiesTest.class
+	ClientUtilitiesTest.class,
+	APIUsedInExampleTest.class
 })
 public class AllAPITests {
 

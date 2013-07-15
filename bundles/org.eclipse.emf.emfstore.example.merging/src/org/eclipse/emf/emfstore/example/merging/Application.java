@@ -72,7 +72,7 @@ public class Application implements IApplication {
 		return IApplication.EXIT_OK;
 	}
 
-	private void runClient(ESServer server) throws ESException {
+	public static void runClient(ESServer server) throws ESException {
 		System.out.println("Client starting...");
 
 		ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
