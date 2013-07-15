@@ -13,12 +13,13 @@ package org.eclipse.emf.emfstore.internal.client.provider;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 
 /**
  * Handler for projectspace file URIs. Adds functionality for successfully deleting temp folders.
@@ -28,15 +29,21 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
  */
 public class ProjectSpaceFileURIHandler extends FileURIHandlerImpl {
 
+	private Set<String> extensions;
+
+	/**
+	 * Constructor for {@link ProjectSpaceFileURIHandler}.
+	 * 
+	 * @param extensions set of all file extensions this handler should handle.
+	 */
+	public ProjectSpaceFileURIHandler(HashSet<String> extensions) {
+		this.extensions = extensions;
+	}
+
 	@Override
 	public boolean canHandle(URI uri) {
 		String extension = "." + uri.fileExtension();
-		if (extension.equals(Configuration.getFileInfo().getLocalChangePackageFileExtension()) ||
-			extension.equals(Configuration.getFileInfo().getProjectFragmentFileExtension()) ||
-			extension.equals(Configuration.getFileInfo().getProjectSpaceFileExtension())) {
-			return true;
-		}
-		return false;
+		return extensions.contains(extension);
 	}
 
 	@Override

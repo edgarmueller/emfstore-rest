@@ -12,9 +12,11 @@
 package org.eclipse.emf.emfstore.internal.client.provider;
 
 import java.io.File;
+import java.util.HashSet;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 
 /**
@@ -25,44 +27,56 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
  */
 public class DefaultESClientXMIURIConverter extends AbstractESClientURIConverter {
 
+	private final String projectSpaceFileName = "projectspace";
+	private final String projectSpaceFileExtension = ExportImportDataUnits.ProjectSpace.getExtension();
+	private final String localChangePackageFileName = "operations";
+	private final String localChangePackageExtension = ".eoc";
+	private final String projectFragmentFileName = "project";
+	private final String projectFragmentExtension = ExportImportDataUnits.Project.getExtension();
+
 	/**
 	 * Creates an instance including all needed URIHandlers.
 	 */
 	public DefaultESClientXMIURIConverter() {
 		super();
-		getURIHandlers().add(0, new ProjectSpaceFileURIHandler());
+		getURIHandlers().add(0, new ProjectSpaceFileURIHandler(getExtensionsMap()));
 	}
 
 	@Override
 	protected URI normalizeWorkspaceURI(String profile) {
-		return URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
+		return URI.createFileURI(Configuration.getFileInfo().getWorkspaceDirectory() + "workspace.ucw");
 	}
 
 	@Override
 	protected URI normalizeProjectURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectSpaceDirectory(projectId)
-			+ Configuration.getFileInfo().getProjectFragmentFileName()
-			+ Configuration.getFileInfo().getProjectFragmentFileExtension());
+			+ projectFragmentFileName + projectFragmentExtension);
 	}
 
 	@Override
 	protected URI normalizeOperationsURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectSpaceDirectory(projectId)
-			+ Configuration.getFileInfo().getLocalChangePackageFileName()
-			+ Configuration.getFileInfo().getLocalChangePackageFileExtension());
+			+ localChangePackageFileName + localChangePackageExtension);
 	}
 
 	@Override
 	protected URI normalizeProjectSpaceURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectSpaceDirectory(projectId)
-			+ Configuration.getFileInfo().getProjectSpaceFileName()
-			+ Configuration.getFileInfo().getProjectSpaceFileExtension());
+			+ projectSpaceFileName + projectSpaceFileExtension);
 	}
 
 	private String getProjectSpaceDirectory(String projectId) {
 		return Configuration.getFileInfo().getWorkspaceDirectory()
 			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + projectId
 			+ File.separatorChar;
+	}
+
+	private HashSet<String> getExtensionsMap() {
+		HashSet<String> extensions = new HashSet<String>();
+		extensions.add(projectSpaceFileExtension);
+		extensions.add(localChangePackageExtension);
+		extensions.add(projectFragmentExtension);
+		return extensions;
 	}
 
 }

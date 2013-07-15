@@ -19,7 +19,6 @@ import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
-import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.util.DefaultWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.ESLocationProvider;
@@ -31,6 +30,7 @@ import org.eclipse.emf.emfstore.server.ESLocationProvider;
  * @author emueller
  * @author ovonwesen
  * @author mkoegel
+ * @author jfaltermeier
  */
 public class FileInfo {
 
@@ -38,13 +38,7 @@ public class FileInfo {
 	private static final String PLUGIN_BASEDIR = "pluginData";
 	private static final String ERROR_DIAGNOSIS_DIR_NAME = "errorLog";
 
-	public final String ProjectSpaceFileName = "projectspace";
-	public final String ProjectSpaceFileExtension = ExportImportDataUnits.ProjectSpace.getExtension();
-	public final String LocalChangePackageFileName = "operations";
-	public final String LocalChangePackageExtension = ".eoc";
-	public final String ProjectFragmentFileName = "project";
-	public final String ProjectFragmentExtension = ExportImportDataUnits.Project.getExtension();
-	public final String ProjectSpaceDirectoryPrefix = "ps-";
+	private final String projectSpaceDirectoryPrefix = "ps-";
 
 	/**
 	 * Returns the registered {@link ESLocationProvider} or if not existent, the
@@ -101,15 +95,6 @@ public class FileInfo {
 	}
 
 	/**
-	 * Get the Workspace file path.
-	 * 
-	 * @return the workspace file path string
-	 */
-	public String getWorkspacePath() {
-		return getWorkspaceDirectory() + "workspace.ucw";
-	}
-
-	/**
 	 * Returns the directory that is used for error logging.<br/>
 	 * If the directory does not exist it will be created. Upon exit of the JVM it will be deleted.
 	 * 
@@ -129,65 +114,11 @@ public class FileInfo {
 	}
 
 	/**
-	 * Return the file name for project space files.
-	 * 
-	 * @return the file name
-	 */
-	public String getProjectSpaceFileName() {
-		return ProjectSpaceFileName;
-	}
-
-	/**
-	 * Return the file extension for project space files.
-	 * 
-	 * @return the file extension
-	 */
-	public String getProjectSpaceFileExtension() {
-		return ProjectSpaceFileExtension;
-	}
-
-	/**
-	 * Return the file name for operation composite files.
-	 * 
-	 * @return the file name
-	 */
-	public String getLocalChangePackageFileName() {
-		return LocalChangePackageFileName;
-	}
-
-	/**
-	 * Return the file extension for operation composite files.
-	 * 
-	 * @return the file extension
-	 */
-	public String getLocalChangePackageFileExtension() {
-		return LocalChangePackageExtension;
-	}
-
-	/**
 	 * Return the prefix of the project space directory.
 	 * 
 	 * @return the prefix
 	 */
 	public String getProjectSpaceDirectoryPrefix() {
-		return ProjectSpaceDirectoryPrefix;
-	}
-
-	/**
-	 * Return project fragment file name.
-	 * 
-	 * @return the file name
-	 */
-	public String getProjectFragmentFileName() {
-		return ProjectFragmentFileName;
-	}
-
-	/**
-	 * Return project fragment file extension.
-	 * 
-	 * @return the file extension
-	 */
-	public String getProjectFragmentFileExtension() {
-		return ProjectFragmentExtension;
+		return projectSpaceDirectoryPrefix;
 	}
 }
