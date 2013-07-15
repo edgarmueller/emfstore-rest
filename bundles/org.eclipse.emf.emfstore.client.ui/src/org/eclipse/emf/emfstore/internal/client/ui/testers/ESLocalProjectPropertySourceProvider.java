@@ -11,27 +11,15 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.testers;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.ESProject;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.AbstractSourceProvider;
 import org.eclipse.ui.ISources;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchListener;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.dialogs.ListSelectionDialog;
 
 // import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
@@ -51,8 +39,6 @@ public class ESLocalProjectPropertySourceProvider extends AbstractSourceProvider
 	private SaveStateChangedObserver saveStateChangedObserver;
 
 	private Map<String, Boolean> currentSaveStates;
-
-	private boolean saveDisabled;
 
 	/**
 	 * Default constructor.
@@ -80,75 +66,6 @@ public class ESLocalProjectPropertySourceProvider extends AbstractSourceProvider
 
 		};
 		ESWorkspaceProviderImpl.getObserverBus().register(saveStateChangedObserver);
-		PlatformUI.getWorkbench().addWorkbenchListener(new IWorkbenchListener() {
-
-			public boolean preShutdown(IWorkbench workbench, boolean forced) {
-				if (saveDisabled) {
-					return true;
-				}
-				return handlePreShutdownOfWorkbench();
-			}
-
-			public void postShutdown(IWorkbench workbench) {
-				// do nothing
-			}
-		});
-		saveDisabled = initExtensionPoint();
-	}
-
-	// TODO: quick fix, duplicate code in IsAutoSaveEnabledTester
-	// TODO: provide extension point registry? discuss
-	private static boolean initExtensionPoint() {
-		ESExtensionPoint extensionPoint = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.ui.disableSaveControls");
-		ESExtensionElement element = extensionPoint.getFirst();
-
-		if (element == null) {
-			// default
-			return false;
-		}
-
-		return element.getBoolean("enabled", false);
-	}
-
-	private boolean handlePreShutdownOfWorkbench() {
-		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(new ComposedAdapterFactory(
-			ComposedAdapterFactory.Descriptor.Registry.INSTANCE)) {
-			@Override
-			public String getColumnText(Object object, int columnIndex) {
-				if (object instanceof ESLocalProject) {
-					return ((ESLocalProject) object).getProjectName();
-				}
-				return super.getColumnText(object, columnIndex);
-			}
-		};
-		ArrayContentProvider contentProvider = new ArrayContentProvider();
-		ArrayList<ESProject> inputArray = new ArrayList<ESProject>();
-		for (ESLocalProject project : ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects()) {
-			if (project.hasUnsavedChanges()) {
-				inputArray.add(project);
-			}
-		}
-		if (inputArray.size() < 1) {
-			return true;
-		}
-		ListSelectionDialog listselectionDialog = new ListSelectionDialog(Display.getCurrent().getActiveShell(),
-			inputArray, contentProvider, labelProvider,
-			"Which of the following projects with pending changes do you want to save?");
-		listselectionDialog.setTitle("Pending changes on exit");
-		listselectionDialog.setHelpAvailable(false);
-		int result = listselectionDialog.open();
-		if (result == ListSelectionDialog.CANCEL) {
-			return false;
-		}
-		Object[] selectedObjects = listselectionDialog.getResult();
-		for (Object selectedObject : selectedObjects) {
-			if (selectedObject instanceof ESLocalProject) {
-				ESLocalProject localProject = (ESLocalProject) selectedObject;
-				localProject.save();
-			}
-		}
-		return true;
 	}
 
 	/**
