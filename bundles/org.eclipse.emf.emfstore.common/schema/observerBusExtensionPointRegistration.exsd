@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.common" id="observerBusExtensionPointRegistration" name="Observer Markup Interface"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         This is an meta-extension point that enables additinal observers to be defined via an extension point.
       </documentation>
    </annotation>
 
@@ -71,7 +71,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         1.0
       </documentation>
    </annotation>
 
@@ -102,5 +102,18 @@
       </documentation>
    </annotation>
 
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2011-2013 EclipseSource Muenchen GmbH and others.&lt;br/&gt;
+
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+      </documentation>
+   </annotation>
 
 </schema>

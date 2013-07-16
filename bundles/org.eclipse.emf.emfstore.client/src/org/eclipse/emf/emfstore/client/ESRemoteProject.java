@@ -198,7 +198,8 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @throws ESException in case an error occurs while retrieving the history information
 	 */
-	List<ESHistoryInfo> getHistoryInfos(ESUsersession usersession, ESHistoryQuery<?> query, IProgressMonitor monitor)
+	List<ESHistoryInfo> getHistoryInfos(ESUsersession usersession,
+		final ESHistoryQuery<? extends ESHistoryQuery<?>> query, IProgressMonitor monitor)
 		throws ESException;
 
 	/**

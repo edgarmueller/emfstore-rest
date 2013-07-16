@@ -126,7 +126,7 @@ public interface ESProject {
 	 * 
 	 * @throws ESException in case an error occurs while retrieving the history information
 	 */
-	<Q extends ESHistoryQuery<?>> List<ESHistoryInfo> getHistoryInfos(Q query, IProgressMonitor monitor)
+	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery<? extends ESHistoryQuery<?>> query, IProgressMonitor monitor)
 		throws ESException;
 
 	/**

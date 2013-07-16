@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EObject;
  * 
  * @author groeber
  * @author jsommerfeldt
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESCompare {
 	/**

@@ -122,7 +122,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 						return connectionManager.getBranches(
 							getSessionId(),
 							projectInfo.getProjectId());
-					};
+					}
 				}.execute());
 			}
 		}.execute();
@@ -142,7 +142,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				return getConnectionManager().getBranches(
 					getSessionId(),
 					projectInfo.getProjectId());
-			};
+			}
 		}.execute());
 	}
 
@@ -202,11 +202,13 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<ESHistoryInfo> getHistoryInfos(final ESHistoryQuery query, IProgressMonitor monitor)
+	public List<ESHistoryInfo> getHistoryInfos(final ESHistoryQuery<? extends ESHistoryQuery<?>> query,
+		IProgressMonitor monitor)
 		throws ESException {
 
 		@SuppressWarnings("unchecked")
-		final ESHistoryQueryImpl<ESHistoryQuery, ?> queryImpl = (ESHistoryQueryImpl<ESHistoryQuery, ?>) query;
+		final ESHistoryQueryImpl<ESHistoryQuery<? extends ESHistoryQuery<?>>, ?> queryImpl =
+			(ESHistoryQueryImpl<ESHistoryQuery<? extends ESHistoryQuery<?>>, ?>) query;
 
 		return APIUtil.mapToAPI(ESHistoryInfo.class, new ServerCall<List<HistoryInfo>>(getServerInfo(), monitor) {
 			@Override
@@ -226,7 +228,8 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 * @see org.eclipse.emf.emfstore.client.ESRemoteProject#getHistoryInfos(org.eclipse.emf.emfstore.client.ESUsersession,
 	 *      org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public List<ESHistoryInfo> getHistoryInfos(ESUsersession session, final ESHistoryQuery query,
+	public List<ESHistoryInfo> getHistoryInfos(ESUsersession session,
+		final ESHistoryQuery<? extends ESHistoryQuery<?>> query,
 		IProgressMonitor monitor) throws ESException {
 
 		Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
@@ -310,7 +313,6 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				return null;
 			}
 		});
-		;
 	}
 
 	/**

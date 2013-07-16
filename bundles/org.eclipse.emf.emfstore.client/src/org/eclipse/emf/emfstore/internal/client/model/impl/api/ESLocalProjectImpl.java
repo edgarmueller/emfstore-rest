@@ -60,6 +60,7 @@ import org.eclipse.emf.emfstore.server.model.ESBranchInfo;
 import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
+import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
@@ -188,24 +189,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 				return getConnectionManager().getBranches(
 					getSessionId(),
 					toInternalAPI().getProjectId());
-			};
+			}
 		}.execute();
 
 		return APIUtil.mapToAPI(ESBranchInfo.class, branchInfos);
 	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public <U extends org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery<?>>
-		java.util.List<ESHistoryInfo> getHistoryInfos(U query, IProgressMonitor monitor)
-			throws ESException {
-		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query, monitor));
-	};
 
 	/**
 	 * 
@@ -793,6 +781,18 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		if (!isShared()) {
 			throw new ESProjectNotSharedException();
 		}
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESProject#getHistoryInfos(org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	public List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery<? extends ESHistoryQuery<?>> query,
+		IProgressMonitor monitor) throws ESException {
+		return copy(getRemoteProject().getHistoryInfos(getUsersession(), query, monitor));
 	}
 
 }

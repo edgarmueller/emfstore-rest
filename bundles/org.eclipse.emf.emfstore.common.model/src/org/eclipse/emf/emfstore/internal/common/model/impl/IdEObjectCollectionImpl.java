@@ -73,7 +73,7 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	/**
 	 * A {@link ESModelElementIdGenerator} for other plugins to register a special ID generation.
 	 */
-	private ESModelElementIdGenerator modelElementIdGenerator;
+	private ESModelElementIdGenerator<ModelElementId> modelElementIdGenerator;
 
 	/**
 	 * Constructor.

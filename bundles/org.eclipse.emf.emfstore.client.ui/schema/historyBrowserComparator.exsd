@@ -6,8 +6,8 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client.ui" id="historyBrowserComparator" name="HistoryBrowserCompare"/>
       </appInfo>
       <documentation>
-         [This extension point is used to provide different comparators to the history browser. 
-Thus the historybrowser can compare different versions independet of the Compare algorithm]
+         This extension point is used to provide different comparators to the history browser. 
+Thus the historybrowser can compare different versions independet of the Compare algorithm
       </documentation>
    </annotation>
 
@@ -75,7 +75,7 @@ Thus the historybrowser can compare different versions independet of the Compare
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         1.0
       </documentation>
    </annotation>
 
@@ -106,5 +106,18 @@ Thus the historybrowser can compare different versions independet of the Compare
       </documentation>
    </annotation>
 
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         Copyright (c) 2011-2013 EclipseSource Muenchen GmbH and others.&lt;br/&gt;
+
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+      </documentation>
+   </annotation>
 
 </schema>
