@@ -65,6 +65,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
+import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
@@ -579,8 +580,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		// TODO: if you want the date included in the backup folder you should
 		// change the format. the default format
 		// does not work with every os due to : and other characters.
-		String newWorkspaceDirectory = Configuration.getFileInfo().getLocationProvider().getBackupDirectory()
-			+ "emfstore_backup_"
+		String newWorkspaceDirectory = ((DefaultServerWorkspaceLocationProvider) Configuration.getFileInfo()
+			.getLocationProvider()).getBackupDirectory() + "emfstore_backup_"
 			+ System.currentTimeMillis();
 
 		File workspacebackupPath = new File(newWorkspaceDirectory);

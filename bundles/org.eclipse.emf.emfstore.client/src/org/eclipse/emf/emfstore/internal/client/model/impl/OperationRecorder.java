@@ -36,11 +36,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
-import org.eclipse.emf.emfstore.client.observer.ESPostCreationObserver;
 import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
 import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
-import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.NotificationToOperationConverter;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
@@ -171,7 +169,6 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 		// notify Post Creation Listeners with change tracking switched off since only attribute changes are allowd
 		stopChangeRecording();
-		ESWorkspaceProviderImpl.getObserverBus().notify(ESPostCreationObserver.class).onCreation(modelElement);
 		startChangeRecording();
 
 		Set<EObject> allModelElements = new LinkedHashSet<EObject>();

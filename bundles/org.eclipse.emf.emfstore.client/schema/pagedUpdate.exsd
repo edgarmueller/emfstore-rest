@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.client" id="pagedUpdate" name="Paged Update Configuration"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Allows configuration of the paged update mechanism.
       </documentation>
    </annotation>
 

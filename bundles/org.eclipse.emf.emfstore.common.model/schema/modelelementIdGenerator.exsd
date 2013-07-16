@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.common.model.ModelElementIdGenerator"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.internal.common.model.ESModelElementIdGenerator"/>
                </appinfo>
             </annotation>
          </attribute>

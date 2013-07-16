@@ -22,8 +22,11 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
  * 
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
+ * 
+ * @param <ID>
+ *            the type of the ID being used
  */
-public interface ESModelElementIdGenerator {
+public interface ESModelElementIdGenerator<ID> {
 
 	/**
 	 * Generates the next {@link ModelElementId} for the {@link ESObjectContainer}.
@@ -31,6 +34,6 @@ public interface ESModelElementIdGenerator {
 	 * @param container The {@link ESObjectContainer} for which a new {@link ModelElementId} should be created.
 	 * @return The next {@link ModelElementId} for the given {@link ESObjectContainer}.
 	 */
-	ESModelElementId generateModelElementId(ESObjectContainer<?> container);
+	ID generateModelElementId(ESObjectContainer<ID> container);
 
 }

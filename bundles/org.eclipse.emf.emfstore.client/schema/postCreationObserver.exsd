@@ -6,7 +6,9 @@
          <meta.schema plugin="org.eclipse.emf.emfstore.common" id="postCreationObserver" name="Post-Creation Observers"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         An observer that is called whenever a model element has been added to the local project. 
+Callers may modify attributes of the created object within the observer, but must not alter references.
+The performed changes won&apos;t be recored, but instead will be treated as if the model element already did have the state when it has been added to the project initially.
       </documentation>
    </annotation>
 

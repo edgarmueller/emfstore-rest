@@ -14,6 +14,8 @@ package org.eclipse.emf.emfstore.fuzzy.emf.test;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.emfstore.common.model.ESModelElementIdGenerator;
+import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 
@@ -26,7 +28,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
  * 
  */
 @SuppressWarnings("restriction")
-public class FuzzyModelElementIdGenerator {
+public class FuzzyModelElementIdGenerator implements ESModelElementIdGenerator<ModelElementId> {
 
 	private Map<Object, Integer> collectionsToIds = new HashMap<Object, Integer>();
 
@@ -39,7 +41,7 @@ public class FuzzyModelElementIdGenerator {
 	 *            for which to create a new {@link ModelElementId}.
 	 * @return A new {@link ModelElementId}.
 	 */
-	public ModelElementId generateModelElementId(Object collection) {
+	public ModelElementId generateModelElementId(ESObjectContainer<ModelElementId> collection) {
 		Integer id = collectionsToIds.get(collection);
 		if (id == null) {
 			id = new Integer(0);

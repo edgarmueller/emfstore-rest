@@ -35,12 +35,4 @@ public interface ESLocationProvider {
 	 */
 	String getWorkspaceDirectory();
 
-	/**
-	 * Returns the path to a folder which holds backups of the workspaces. For example this is used to backup a
-	 * workspace prior to migration.
-	 * 
-	 * @return a string representing the path
-	 */
-	String getBackupDirectory();
-
 }
