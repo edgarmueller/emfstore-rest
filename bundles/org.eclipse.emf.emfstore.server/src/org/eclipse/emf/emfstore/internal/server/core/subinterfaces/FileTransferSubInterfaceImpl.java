@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * pfeifferc
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core.subinterfaces;
@@ -30,6 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FilePartitionerUtil;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
+import org.eclipse.emf.emfstore.internal.server.storage.DefaultESServerXMIURIConverter;
 
 /**
  * The file transfer subinterface.
@@ -180,7 +181,8 @@ public class FileTransferSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private String getProjectAttachmentFolder(ProjectId projectId) {
-		return ServerConfiguration.getServerHome() + ServerConfiguration.FILE_PREFIX_PROJECTFOLDER + projectId.getId()
+		return ServerConfiguration.getServerHome() + DefaultESServerXMIURIConverter.FILE_PREFIX_PROJECTFOLDER
+			+ projectId.getId()
 			+ File.separator + ATTACHMENT_FOLDER;
 	}
 

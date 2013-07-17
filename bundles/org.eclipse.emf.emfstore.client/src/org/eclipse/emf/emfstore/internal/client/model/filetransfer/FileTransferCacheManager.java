@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.provider.DefaultESClientXMIURIConverter;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
@@ -86,7 +87,7 @@ public class FileTransferCacheManager {
 	 */
 	public static String getCacheFolder(ProjectSpace projectSpace) {
 		return Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix()
+			+ DefaultESClientXMIURIConverter.PROJECT_SAPCE_DIRECTORY_PREFIX
 			+ projectSpace.getIdentifier()
 			+ File.separatorChar
 			+ "files" + File.separatorChar;

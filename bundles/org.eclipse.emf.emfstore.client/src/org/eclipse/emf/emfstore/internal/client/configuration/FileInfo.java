@@ -38,8 +38,6 @@ public class FileInfo {
 	private static final String PLUGIN_BASEDIR = "pluginData";
 	private static final String ERROR_DIAGNOSIS_DIR_NAME = "errorLog";
 
-	private final String projectSpaceDirectoryPrefix = "ps-";
-
 	/**
 	 * Returns the registered {@link ESLocationProvider} or if not existent, the
 	 * {@link DefaultWorkspaceLocationProvider}.
@@ -111,14 +109,5 @@ public class FileInfo {
 		}
 
 		return errorDiagnosisDir.getAbsolutePath();
-	}
-
-	/**
-	 * Return the prefix of the project space directory.
-	 * 
-	 * @return the prefix
-	 */
-	public String getProjectSpaceDirectoryPrefix() {
-		return projectSpaceDirectoryPrefix;
 	}
 }

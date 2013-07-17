@@ -12,9 +12,11 @@
 package org.eclipse.emf.emfstore.internal.server.storage;
 
 import java.io.File;
+import java.util.HashSet;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
 import org.eclipse.emf.emfstore.server.AbstractESServerURIConverter;
 
 /**
@@ -26,28 +28,73 @@ import org.eclipse.emf.emfstore.server.AbstractESServerURIConverter;
 public class DefaultESServerXMIURIConverter extends AbstractESServerURIConverter {
 
 	/**
+	 * File prefix for folder: project.
+	 */
+	public static final String FILE_PREFIX_PROJECTFOLDER = "project-";
+
+	/**
+	 * File prefix for file: changepackage.
+	 */
+	private static final String FILE_PREFIX_CHANGEPACKAGE = VersionImpl.FILE_PREFIX_CHANGEPACKAGE;// "changepackage-";
+
+	/**
+	 * File prefix for file: projectstate.
+	 */
+	private static final String FILE_PREFIX_PROJECTSTATE = VersionImpl.FILE_PREFIX_PROJECTSTATE; // "projectstate-";
+
+	/**
+	 * File prefix for file: version.
+	 */
+	private static final String FILE_PREFIX_VERSION = "version-";
+
+	/**
+	 * File extension for main file: emfstore server storage.
+	 */
+	private static final String FILE_EXTENSION_MAINSTORAGE = ".uss";
+
+	/**
+	 * File extension for main file: emfstore project historyF.
+	 */
+	private static final String FILE_EXTENSION_PROJECTHISTORY = ".uph";
+
+	/**
+	 * File extension for main file: emfstore project version.
+	 */
+	private static final String FILE_EXTENSION_VERSION = ".upv";
+
+	/**
+	 * File extension for main file: emfstore project state.
+	 */
+	private static final String FILE_EXTENSION_PROJECTSTATE = VersionImpl.FILE_EXTENSION_PROJECTSTATE; // ".ups";
+
+	/**
+	 * File extension for main file: emfstore change package.
+	 */
+	private static final String FILE_EXTENSION_CHANGEPACKAGE = VersionImpl.FILE_EXTENSION_CHANGEPACKAGE;// ".ucp";
+
+	/**
 	 * Creates an instance including all needed URIHandlers.
 	 */
 	public DefaultESServerXMIURIConverter() {
 		super();
-		getURIHandlers().add(0, new ServerSpaceFileURIHandler());
+		getURIHandlers().add(0, new ServerSpaceFileURIHandler(getExtensionsMap()));
 	}
 
 	@Override
 	protected URI normalizeServerSpaceURI(String profile) {
-		return URI.createFileURI(ServerConfiguration.getServerMainFile());
+		return URI.createFileURI(ServerConfiguration.getServerHome() + "storage" + FILE_EXTENSION_MAINSTORAGE);
 	}
 
 	@Override
 	protected URI normalizeProjectHistoryURI(String profile, String projectId) {
 		return URI.createFileURI(getProjectFolder(projectId) + "projectHistory"
-			+ ServerConfiguration.FILE_EXTENSION_PROJECTHISTORY);
+			+ FILE_EXTENSION_PROJECTHISTORY);
 	}
 
 	@Override
 	protected URI normalizeVersionURI(String profile, String projectId, int version) {
-		return URI.createFileURI(getProjectFolder(projectId) + ServerConfiguration.FILE_PREFIX_VERSION
-			+ version + ServerConfiguration.FILE_EXTENSION_VERSION);
+		return URI.createFileURI(getProjectFolder(projectId) + FILE_PREFIX_VERSION
+			+ version + FILE_EXTENSION_VERSION);
 	}
 
 	@Override
@@ -61,18 +108,27 @@ public class DefaultESServerXMIURIConverter extends AbstractESServerURIConverter
 	}
 
 	private String getProjectFolder(String projectId) {
-		return ServerConfiguration.getServerHome() + ServerConfiguration.FILE_PREFIX_PROJECTFOLDER + projectId
+		return ServerConfiguration.getServerHome() + FILE_PREFIX_PROJECTFOLDER + projectId
 			+ File.separatorChar;
 	}
 
 	private String getProjectFile(int versionNumber) {
-		return ServerConfiguration.FILE_PREFIX_PROJECTSTATE + versionNumber
-			+ ServerConfiguration.FILE_EXTENSION_PROJECTSTATE;
+		return FILE_PREFIX_PROJECTSTATE + versionNumber
+			+ FILE_EXTENSION_PROJECTSTATE;
 	}
 
 	private String getChangePackageFile(int versionNumber) {
-		return ServerConfiguration.FILE_PREFIX_CHANGEPACKAGE + versionNumber
-			+ ServerConfiguration.FILE_EXTENSION_CHANGEPACKAGE;
+		return FILE_PREFIX_CHANGEPACKAGE + versionNumber
+			+ FILE_EXTENSION_CHANGEPACKAGE;
+	}
+
+	private HashSet<String> getExtensionsMap() {
+		HashSet<String> extensions = new HashSet<String>();
+		extensions.add(FILE_EXTENSION_CHANGEPACKAGE);
+		extensions.add(FILE_EXTENSION_PROJECTHISTORY);
+		extensions.add(FILE_EXTENSION_PROJECTSTATE);
+		extensions.add(FILE_EXTENSION_VERSION);
+		return extensions;
 	}
 
 }

@@ -27,6 +27,11 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
  */
 public class DefaultESClientXMIURIConverter extends AbstractESClientURIConverter {
 
+	/**
+	 * The prefix of project space directories.
+	 */
+	public static final String PROJECT_SAPCE_DIRECTORY_PREFIX = "ps-";
+
 	private final String projectSpaceFileName = "projectspace";
 	private final String projectSpaceFileExtension = ExportImportDataUnits.ProjectSpace.getExtension();
 	private final String localChangePackageFileName = "operations";
@@ -67,7 +72,7 @@ public class DefaultESClientXMIURIConverter extends AbstractESClientURIConverter
 
 	private String getProjectSpaceDirectory(String projectId) {
 		return Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + projectId
+			+ PROJECT_SAPCE_DIRECTORY_PREFIX + projectId
 			+ File.separatorChar;
 	}
 

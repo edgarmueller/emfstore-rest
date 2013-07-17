@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.server.ESLocationProvider;
@@ -270,64 +269,6 @@ public final class ServerConfiguration {
 	 */
 	public static final String MULTI_PROPERTY_SEPERATOR = ",";
 
-	/*
-	 * FILE EXTENSIONS
-	 */
-
-	/**
-	 * File extension for main file: emfstore server storage.
-	 */
-	public static final String FILE_EXTENSION_MAINSTORAGE = ".uss";
-
-	/**
-	 * File extension for main file: emfstore project historyF.
-	 */
-	public static final String FILE_EXTENSION_PROJECTHISTORY = ".uph";
-
-	/**
-	 * File extension for main file: emfstore project version.
-	 */
-	public static final String FILE_EXTENSION_VERSION = ".upv";
-
-	/**
-	 * File extension for main file: emfstore project state.
-	 */
-	public static final String FILE_EXTENSION_PROJECTSTATE = VersionImpl.FILE_EXTENSION_PROJECTSTATE; // ".ups";
-
-	/**
-	 * File extension for main file: emfstore change package.
-	 */
-	public static final String FILE_EXTENSION_CHANGEPACKAGE = VersionImpl.FILE_EXTENSION_CHANGEPACKAGE;// ".ucp";
-
-	/*
-	 * FILE PREFIXES
-	 */
-
-	/**
-	 * File prefix for file: changepackage.
-	 */
-	public static final String FILE_PREFIX_CHANGEPACKAGE = VersionImpl.FILE_PREFIX_CHANGEPACKAGE;// "changepackage-";
-
-	/**
-	 * File prefix for file: projectstate.
-	 */
-	public static final String FILE_PREFIX_PROJECTSTATE = VersionImpl.FILE_PREFIX_PROJECTSTATE; // "projectstate-";
-
-	/**
-	 * File prefix for file: version.
-	 */
-	public static final String FILE_PREFIX_VERSION = "version-";
-
-	/**
-	 * File prefix for folder: project.
-	 */
-	public static final String FILE_PREFIX_PROJECTFOLDER = "project-";
-
-	/**
-	 * File name for model release number.
-	 */
-	public static final String MODEL_VERSION_FILENAME = "modelReleaseNumber";
-
 	/**
 	 * Prefix for EMFStore Home Startup Argument.
 	 */
@@ -573,25 +514,6 @@ public final class ServerConfiguration {
 	 */
 	public static boolean isInternalReleaseVersion() {
 		return getServerVersion().endsWith("internal");
-	}
-
-	/**
-	 * Returns path to emfstore's main file.
-	 * 
-	 * @return path
-	 */
-	public static String getServerMainFile() {
-		return getServerHome() + "storage" + FILE_EXTENSION_MAINSTORAGE;
-	}
-
-	/**
-	 * Return the name of the model release number file. This file identifies
-	 * the release number of the model in the workspace.
-	 * 
-	 * @return the file name
-	 */
-	public static String getModelReleaseNumberFileName() {
-		return getServerHome() + MODEL_VERSION_FILENAME;
 	}
 
 	/**

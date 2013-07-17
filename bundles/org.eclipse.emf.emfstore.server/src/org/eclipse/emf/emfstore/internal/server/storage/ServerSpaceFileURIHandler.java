@@ -13,12 +13,12 @@ package org.eclipse.emf.emfstore.internal.server.storage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl;
-import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 
 /**
  * Handler for serverspace file URIs. Adds functionality for also deleting project folder.
@@ -28,16 +28,21 @@ import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
  */
 public class ServerSpaceFileURIHandler extends FileURIHandlerImpl {
 
+	private HashSet<String> extensions;
+
+	/**
+	 * Constructor for {@link ServerSpaceFileURIHandler}.
+	 * 
+	 * @param extensions set of all file extensions this handler should handle.
+	 */
+	public ServerSpaceFileURIHandler(HashSet<String> extensions) {
+		this.extensions = extensions;
+	}
+
 	@Override
 	public boolean canHandle(URI uri) {
 		String extension = "." + uri.fileExtension();
-		if (extension.equals(ServerConfiguration.FILE_EXTENSION_CHANGEPACKAGE) ||
-			extension.equals(ServerConfiguration.FILE_EXTENSION_PROJECTHISTORY) ||
-			extension.equals(ServerConfiguration.FILE_EXTENSION_PROJECTSTATE) ||
-			extension.equals(ServerConfiguration.FILE_EXTENSION_VERSION)) {
-			return true;
-		}
-		return false;
+		return extensions.contains(extension);
 	}
 
 	@Override

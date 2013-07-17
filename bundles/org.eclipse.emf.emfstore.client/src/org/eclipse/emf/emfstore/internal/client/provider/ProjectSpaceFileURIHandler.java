@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.URI;
@@ -29,7 +28,7 @@ import org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl;
  */
 public class ProjectSpaceFileURIHandler extends FileURIHandlerImpl {
 
-	private Set<String> extensions;
+	private HashSet<String> extensions;
 
 	/**
 	 * Constructor for {@link ProjectSpaceFileURIHandler}.
