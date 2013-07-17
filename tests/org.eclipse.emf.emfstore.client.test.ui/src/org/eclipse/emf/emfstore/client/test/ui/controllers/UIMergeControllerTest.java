@@ -47,7 +47,7 @@ public class UIMergeControllerTest extends AbstractUIControllerTestWithCommitAnd
 			public String getFailureMessage() {
 				return "Branch checkout did not succeed";
 			}
-		});
+		}, timeout());
 
 		assertEquals(2, getCopy().getModelElements().size());
 	}

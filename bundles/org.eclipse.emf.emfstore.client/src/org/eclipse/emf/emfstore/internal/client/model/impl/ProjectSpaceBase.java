@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -45,6 +46,7 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportChangesController;
@@ -834,32 +836,40 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void mergeBranch(final PrimaryVersionSpec branchSpec, final ConflictResolver conflictResolver,
 		final IProgressMonitor monitor)
 		throws ESException {
-		new ServerCall<Void>(this) {
+
+		if (branchSpec == null || conflictResolver == null) {
+			throw new IllegalArgumentException("Arguments must not be null.");
+		}
+
+		if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
+			throw new InvalidVersionSpecException("Can't merge branch with itself.");
+		}
+
+		PrimaryVersionSpec commonAncestor = new ServerCall<PrimaryVersionSpec>(this) {
 			@Override
-			protected Void run() throws ESException {
-				if (branchSpec == null || conflictResolver == null) {
-					throw new IllegalArgumentException("Arguments must not be null.");
-				}
-				if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
-					throw new InvalidVersionSpecException("Can't merge branch with itself.");
-				}
-				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
+			protected PrimaryVersionSpec run() throws ESException {
+				return resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
 					branchSpec), monitor);
-				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
-				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
-
-				ChangeConflictSet conflictSet = new ConflictDetector().calculateConflicts(branchChanges,
-					baseChanges, getProject());
-
-				if (conflictResolver.resolveConflicts(getProject(), conflictSet)) {
-					ChangePackage resolvedConflicts = mergeResolvedConflicts(conflictSet, branchChanges, baseChanges);
-					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts, monitor, false);
-					setMergedVersion(ModelUtil.clone(branchSpec));
-				}
-
-				return null;
 			}
 		}.execute();
+
+		final List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
+		List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
+
+		ChangeConflictSet conflictSet = new ConflictDetector().calculateConflicts(branchChanges,
+			baseChanges, getProject());
+
+		if (conflictResolver.resolveConflicts(getProject(), conflictSet)) {
+			final ChangePackage resolvedConflicts = mergeResolvedConflicts(conflictSet, branchChanges, baseChanges);
+			RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+
+				public Void call() throws Exception {
+					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts, monitor, false);
+					setMergedVersion(ModelUtil.clone(branchSpec));
+					return null;
+				}
+			});
+		}
 	}
 
 	public ChangePackage mergeResolvedConflicts(ChangeConflictSet conflictSet,
