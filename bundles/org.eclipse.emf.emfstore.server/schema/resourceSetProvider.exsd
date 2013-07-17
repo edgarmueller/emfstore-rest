@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.common.extensionpoint.ESServerResourceSetProvider"/>
                </appInfo>
             </annotation>
          </attribute>

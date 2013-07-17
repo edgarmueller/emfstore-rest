@@ -11,11 +11,17 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
  * Helper class for creating EMFStore Server URIs and accessing segments.
@@ -81,6 +87,13 @@ public final class ServerURIUtil {
 	 */
 	public static final String PROJECTHISTORY_SEGMENT = "projecthistory";
 
+	/**
+	 * The EMFStore URI segment for dynamic models.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/<b>dynamic-models</b>
+	 */
+	public static final String DYNAMIC_MODELS_SEGMENT = "dynamic-models";
+
 	private ServerURIUtil() {
 		// private constructor
 	}
@@ -94,6 +107,26 @@ public final class ServerURIUtil {
 	 */
 	public static URI createServerSpaceURI() {
 		return URI.createURI(getServerPrefix() + SERVERSPACE_SEGMENT);
+	}
+
+	/**
+	 * Creates an EMFStore URI for addressing a dynamic model.
+	 * <p />
+	 * Example URI: emfstore:/serverspaces/<i>profile</i>/dynamic-models/example.ecore
+	 * 
+	 * @param ePackage the ePackage
+	 * @return the EMFStore URI
+	 * @throws ESException if namespace Uri can't be converted to filename
+	 */
+	public static URI createDynamicModelsURI(EPackage ePackage) throws ESException {
+		String uriFileName = null;
+		try {
+			uriFileName = URLEncoder.encode(ePackage.getNsURI(), CommonUtil.getEncoding());
+		} catch (UnsupportedEncodingException e1) {
+			throw new ESException("Registration failed: Could not convert NsUri to filename!");
+		}
+		return URI.createURI(getServerPrefix() + DYNAMIC_MODELS_SEGMENT + "/" + uriFileName
+			+ (uriFileName.endsWith(".ecore") ? "" : ".ecore"));
 	}
 
 	/**

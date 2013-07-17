@@ -15,13 +15,11 @@ package org.eclipse.emf.emfstore.internal.server;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -31,15 +29,13 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESServerResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControlImpl;
@@ -48,7 +44,6 @@ import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcAdminCon
 import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl;
-import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
@@ -181,34 +176,16 @@ public class EMFStoreController implements IApplication, Runnable {
 		}
 	}
 
-	// loads the ".ecore"-files from the dynamic-models-folder
+	// delegates loading of dynamic models to the resource set provider
 	private void loadDynamicModels() {
-		ServerConfiguration.getServerHome();
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+			true);
+		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		extensionPoint.reload();
+		ESServerResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
+			"class", ESServerResourceSetProvider.class);
+		resourceSetProvider.registerDynamicModels();
 
-		// TODO: retrieve path from configuration-file
-		File dir = new File(ServerConfiguration.getServerHome() + "dynamic-models");
-		File[] files = null;
-
-		files = dir.listFiles(new FilenameFilter() {
-			public boolean accept(File d, String name) {
-				return name.endsWith(".ecore");
-			}
-		});
-		if (files != null) {
-			for (File file : files) {
-				ResourceSet resourceSet = new ResourceSetImpl();
-				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-					.put("ecore", new EcoreResourceFactoryImpl());
-				Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
-				EPackage model = (EPackage) resource.getContents().get(0);
-				EPackage.Registry.INSTANCE.put(model.getNsURI(), model);
-				List<EPackage> packages = EPackageHelper.getAllSubPackages(model);
-				for (EPackage subPkg : packages) {
-					EPackage.Registry.INSTANCE.put(subPkg.getNsURI(), subPkg);
-				}
-				ModelUtil.logInfo("Dynamic Model \"" + model.getNsURI() + "\" loaded.");
-			}
-		}
 	}
 
 	private void initLogging() {

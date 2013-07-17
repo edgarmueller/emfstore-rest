@@ -36,6 +36,11 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 					return normalizeServerSpaceURI(uri.segment(1));
 				}
 
+				// emfstore:/serverspaces/0/dynamic-models/model.ecore
+				else if (uri.segment(2).equals(ServerURIUtil.DYNAMIC_MODELS_SEGMENT)) {
+					return normalizeDynamicModelsURI(uri.segment(1), uri.segment(3));
+				}
+
 				// emfstore:/serverspaces/0/projects/<identifier>
 				else if (uri.segment(2).equals(ServerURIUtil.PROJECTS_SEGMENT)) {
 					return normalizeProjects(uri);
@@ -81,6 +86,15 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 	 * @return the normalized URI
 	 */
 	protected abstract URI normalizeServerSpaceURI(String profile);
+
+	/**
+	 * Normalizes EMFStore dynamic model URI.
+	 * 
+	 * @param profile the selected profile
+	 * @param ecoreName the file name of the dynamic model
+	 * @return the normalized URI
+	 */
+	protected abstract URI normalizeDynamicModelsURI(String profile, String ecoreName);
 
 	/**
 	 * Normalizes an EMFStore projecthistory URI.

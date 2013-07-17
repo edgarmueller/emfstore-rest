@@ -13,8 +13,6 @@
 package org.eclipse.emf.emfstore.internal.server.core.subinterfaces;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,12 +21,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.DanglingHREFException;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
@@ -36,6 +34,7 @@ import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -90,21 +89,23 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 			}
 
-			// Save the EPackages to disc as an ".ecore"-file
-			String uriFileName = null;
-			try {
-				uriFileName = URLEncoder.encode(ePackage.getNsURI(), CommonUtil.getEncoding());
-			} catch (UnsupportedEncodingException e1) {
-				throw new ESException("Registration failed: Could not convert NsUri to filename!");
-			}
-			URI fileUri = URI.createFileURI(ServerConfiguration.getServerHome() + "dynamic-models/" + uriFileName
-				+ (uriFileName.endsWith(".ecore") ? "" : ".ecore"));
+			URI dynamicModelUri = ServerURIUtil.createDynamicModelsURI(ePackage);
 
 			// create a resource to save the file to disc
-			ResourceSet resourceSet = new ResourceSetImpl();
+			ESExtensionPoint extensionPoint = new ESExtensionPoint(
+				"org.eclipse.emf.emfstore.server.resourceSetProvider",
+				true);
+			extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+			extensionPoint.reload();
+
+			ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
+				"class",
+				ESResourceSetProvider.class);
+
+			ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
 				.put("ecore", new EcoreResourceFactoryImpl());
-			Resource resource = resourceSet.createResource(fileUri);
+			Resource resource = resourceSet.createResource(dynamicModelUri);
 			resource.getContents().add(ePackage);
 			try {
 				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());

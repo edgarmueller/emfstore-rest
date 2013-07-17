@@ -11,23 +11,17 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
-
 /**
- * Interface for resource set provider.
+ * Interface for server resource set provider.
  * 
  * @author jfaltermeier
  * 
  */
-public interface ESResourceSetProvider {
+public interface ESServerResourceSetProvider extends ESResourceSetProvider {
 
 	/**
-	 * Returns ResourceSet with load and save options configured and including {@link ResourceFactoryRegistry} and
-	 * {@link URIConverter}.
-	 * 
-	 * @return the ResourceSet
+	 * Registers the dynamic models on server side.
 	 */
-	ResourceSet getResourceSet();
+	void registerDynamicModels();
+
 }

@@ -54,4 +54,10 @@ public class MongoServerURIConverter extends AbstractESServerURIConverter {
 		return "mongodb://localhost/esserver-" + profile + "/";
 	}
 
+	@Override
+	protected URI normalizeDynamicModelsURI(String profile, String ecoreName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
