@@ -77,7 +77,7 @@ public class UICommitProjectController extends
 	public void noLocalChanges(ESLocalProject projectSpace) {
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				MessageDialog.openInformation(getShell(), null,
+				MessageDialog.openInformation(getShell(), "No local changes",
 					"No local changes in your project. No need to commit.");
 				return null;
 			}

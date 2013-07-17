@@ -37,7 +37,7 @@ public class UIUpdateProjectToVersionControllerTest extends AbstractUIController
 		createPlayerAndCommit();
 		updateToVersion();
 
-		Player player = (Player) getCheckedoutCopy().getModelElements().get(0);
+		Player player = (Player) getCopy().getModelElements().get(0);
 		assertEquals(PLAYER_NAME, player.getName());
 	}
 

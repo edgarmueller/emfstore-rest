@@ -21,6 +21,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	NoLocalChangesCommitControllerTest.class,
+	LocalProjectNeedsToBeUpdatedCommitControllerTest.class,
 	UIAddTagControllerTest.class,
 	UIAskForBranchCheckoutControllerTest.class,
 	UIBranchControllersTest.class,

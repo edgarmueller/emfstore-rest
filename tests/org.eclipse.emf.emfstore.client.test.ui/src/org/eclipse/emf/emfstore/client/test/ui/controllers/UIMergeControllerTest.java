@@ -23,7 +23,7 @@ public class UIMergeControllerTest extends AbstractUIControllerTestWithCommitAnd
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				UIMergeController mergeController = null;
-				mergeController = new UIMergeController(bot.getDisplay().getActiveShell(), getCheckedoutCopy());
+				mergeController = new UIMergeController(bot.getDisplay().getActiveShell(), getCopy());
 				mergeController.execute();
 			}
 		});
@@ -35,7 +35,7 @@ public class UIMergeControllerTest extends AbstractUIControllerTestWithCommitAnd
 
 			public boolean test() throws Exception {
 				for (ESLocalProject project : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
-					if (project == getCheckedoutCopy()) {
+					if (project == getCopy()) {
 						if (project.getModelElements().size() == 2) {
 							return true;
 						}
@@ -49,7 +49,7 @@ public class UIMergeControllerTest extends AbstractUIControllerTestWithCommitAnd
 			}
 		});
 
-		assertEquals(2, getCheckedoutCopy().getModelElements().size());
+		assertEquals(2, getCopy().getModelElements().size());
 	}
 
 }

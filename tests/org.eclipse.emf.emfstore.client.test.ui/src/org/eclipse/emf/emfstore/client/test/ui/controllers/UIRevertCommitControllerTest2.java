@@ -51,30 +51,30 @@ public class UIRevertCommitControllerTest2 extends AbstractUIControllerTestWithC
 		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 
 		// update checkout
-		getCheckedoutCopy().update(localProject.getBaseVersion(), updateCallback, monitor);
+		getCopy().update(localProject.getBaseVersion(), updateCallback, monitor);
 
 		// delete player
 		deleteTournamentAndCommit();
 		assertEquals(1, localProject.getModelElements().size());
 
 		// update checkout
-		getCheckedoutCopy().update(localProject.getBaseVersion(), updateCallback, monitor);
-		assertEquals(1, getCheckedoutCopy().getModelElements().size());
+		getCopy().update(localProject.getBaseVersion(), updateCallback, monitor);
+		assertEquals(1, getCopy().getModelElements().size());
 
 		// revert to version where tournament has been created
 		revertAndCommit(baseVersion);
 
 		// update checkout
-		getCheckedoutCopy().update(ESVersionSpec.FACTORY.createHEAD(), updateCallback, monitor);
-		assertEquals(2, getCheckedoutCopy().getModelElements().size());
-		Tournament tournament = getCheckedoutCopy().getAllModelElementsByClass(Tournament.class).iterator().next();
+		getCopy().update(ESVersionSpec.FACTORY.createHEAD(), updateCallback, monitor);
+		assertEquals(2, getCopy().getModelElements().size());
+		Tournament tournament = getCopy().getAllModelElementsByClass(Tournament.class).iterator().next();
 		assertEquals(new Integer(32), tournament.getPlayerPoints().values().iterator().next());
 
 		// revert again, should have no effect
 		revertAndCommit(baseVersion);
-		getCheckedoutCopy().update(ESVersionSpec.FACTORY.createHEAD(), updateCallback, monitor);
+		getCopy().update(ESVersionSpec.FACTORY.createHEAD(), updateCallback, monitor);
 
-		assertEquals(2, getCheckedoutCopy().getModelElements().size());
+		assertEquals(2, getCopy().getModelElements().size());
 	}
 
 	private void createPlayerAndTournamentAndCommit() {

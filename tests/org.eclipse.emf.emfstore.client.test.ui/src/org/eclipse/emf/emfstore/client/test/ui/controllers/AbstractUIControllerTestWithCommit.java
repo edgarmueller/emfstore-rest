@@ -189,11 +189,11 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		return localProjectArr[0];
 	}
 
-	public ESLocalProject getCheckedoutCopy() {
+	public ESLocalProject getCopy() {
 		return checkedoutCopy;
 	}
 
-	protected ESPrimaryVersionSpec update() {
+	protected ESPrimaryVersionSpec updateCopy() {
 		SWTBotPreferences.PLAYBACK_DELAY = 100;
 		didUpdate = false;
 
@@ -204,7 +204,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
 					bot.getDisplay().getActiveShell(),
-					getCheckedoutCopy());
+					getCopy());
 				updateProjectController.execute();
 			}
 		});
@@ -225,7 +225,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
 
-		return getCheckedoutCopy().getBaseVersion();
+		return getCopy().getBaseVersion();
 	}
 
 	protected ESPrimaryVersionSpec updateToVersion() {
@@ -239,7 +239,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			public void run() {
 				UIUpdateProjectToVersionController updateProjectController = new UIUpdateProjectToVersionController(
 					bot.getDisplay().getActiveShell(),
-					getCheckedoutCopy());
+					getCopy());
 				updateProjectController.execute();
 			}
 		});
@@ -264,7 +264,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
 
-		return getCheckedoutCopy().getBaseVersion();
+		return getCopy().getBaseVersion();
 	}
 
 	private ESUpdateObserver createUpdateObserver() {
@@ -287,7 +287,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
 					bot.getDisplay().getActiveShell(),
-					getCheckedoutCopy());
+					getCopy());
 				updateProjectController.execute();
 			}
 		});
@@ -297,7 +297,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
-				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
+				return getCopy().getBaseVersion().getIdentifier() ==
 				localProject.getBaseVersion().getIdentifier() - 1;
 			}
 
@@ -313,7 +313,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
-				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
+				return getCopy().getBaseVersion().getIdentifier() ==
 				localProject.getBaseVersion().getIdentifier();
 			}
 
@@ -322,6 +322,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			}
 		}, timeout());
 
-		return getCheckedoutCopy().getBaseVersion();
+		return getCopy().getBaseVersion();
 	}
 }
