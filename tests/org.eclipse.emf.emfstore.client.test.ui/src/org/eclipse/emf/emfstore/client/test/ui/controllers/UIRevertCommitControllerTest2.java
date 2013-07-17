@@ -90,7 +90,7 @@ public class UIRevertCommitControllerTest2 extends AbstractUIControllerTestWithC
 				return null;
 			}
 		});
-		commit(baseVersion);
+		commit();
 	}
 
 	private void revertAndCommit(final ESPrimaryVersionSpec baseVersion) throws ESException {
@@ -136,7 +136,7 @@ public class UIRevertCommitControllerTest2 extends AbstractUIControllerTestWithC
 				return null;
 			}
 		});
-		commit(baseVersion);
+		commit();
 		assertEquals(1, localProject.getModelElements().size());
 	}
 

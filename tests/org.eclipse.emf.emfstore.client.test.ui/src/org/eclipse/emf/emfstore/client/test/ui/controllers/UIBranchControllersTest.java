@@ -72,7 +72,6 @@ public class UIBranchControllersTest extends AbstractUIControllerTestWithCommit 
 		bot.text(0).setText("branch-checkout");
 		bot.button("OK").click();
 
-		bot.shell("Checkout Branch");
 		bot.table().select(0);
 		bot.button("OK").click();
 

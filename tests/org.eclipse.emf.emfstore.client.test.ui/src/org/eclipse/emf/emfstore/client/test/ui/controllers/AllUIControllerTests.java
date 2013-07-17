@@ -22,11 +22,12 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	UIAddTagControllerTest.class,
+	UIAskForBranchCheckoutControllerTest.class,
 	UIBranchControllersTest.class,
 	UICheckoutControllerTest.class,
-	UIAskForBranchCheckoutControllerTest.class,
 	UICreateRemoteProjectControllerTest.class,
 	UIDeleteRemoteProjectControllerTest.class,
+	UIMergeControllerTest.class,
 	UIRevertCommitControllerTest.class,
 	UIRevertCommitControllerTest2.class,
 	UIServerControllerTest.class,

@@ -49,41 +49,51 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 	protected void createTournamentAndCommit() {
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
-		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				localProject.getModelElements().add(tournament);
 				return null;
-			};
+			}
 		});
-		commit(baseVersion);
+		commit(localProject);
 	}
 
 	protected void createLeagueAndCommit() {
-		final League league = ProjectChangeUtil.createLeague("L");
-		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				localProject.getModelElements().add(league);
-				return null;
-			}
-		});
-		commit(baseVersion);
+		createLeagueAndCommit(localProject);
 	}
 
 	protected void createPlayerAndCommit() {
+		createPlayerAndCommit(localProject);
+	}
+
+	protected void createPlayerAndCommit(final ESLocalProject localProject) {
 		final Player player = ProjectChangeUtil.createPlayer(PLAYER_NAME);
-		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				localProject.getModelElements().add(player);
 				return null;
 			}
 		});
-		commit(baseVersion);
+		commit(localProject);
 	}
 
-	protected void commit(final ESPrimaryVersionSpec baseVersion) {
+	protected void createLeagueAndCommit(final ESLocalProject localProject) {
+		final League league = ProjectChangeUtil.createLeague("L");
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(league);
+				return null;
+			}
+		});
+		commit(localProject);
+	}
+
+	protected void commit() {
+		commit(localProject);
+	}
+
+	protected void commit(final ESLocalProject localProject) {
+		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				ESUIControllerFactory.INSTANCE.commitProject(
@@ -98,7 +108,8 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		bot.waitUntil(new DefaultCondition() {
 
 			public boolean test() throws Exception {
-				return baseVersion.getIdentifier() + 1 == localProject.getBaseVersion().getIdentifier();
+				return baseVersion.getIdentifier() + 1 == localProject.getBaseVersion()
+					.getIdentifier();
 			}
 
 			public String getFailureMessage() {
@@ -139,6 +150,43 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 				return "Checkout did not succeed";
 			}
 		}, timeout());
+	}
+
+	protected ESLocalProject checkout(final ESPrimaryVersionSpec versionSpec, String checkoutName) {
+
+		final ESLocalProject[] localProjectArr = new ESLocalProject[1];
+
+		UIThreadRunnable.asyncExec(new VoidResult() {
+
+			public void run() {
+				UICheckoutController checkoutController;
+				try {
+					checkoutController = new UICheckoutController(
+						bot.getDisplay().getActiveShell(),
+						versionSpec,
+						localProject.getRemoteProject());
+					localProjectArr[0] = checkoutController.execute();
+				} catch (ESException e) {
+					fail(e.getMessage());
+				}
+			}
+		});
+
+		bot.text().setText(checkoutName);
+		bot.button("OK").click();
+
+		bot.waitUntil(new DefaultCondition() {
+
+			public boolean test() throws Exception {
+				return localProjectArr[0] != null;
+			}
+
+			public String getFailureMessage() {
+				return "Checkout did not succeed";
+			}
+		}, timeout());
+
+		return localProjectArr[0];
 	}
 
 	public ESLocalProject getCheckedoutCopy() {
