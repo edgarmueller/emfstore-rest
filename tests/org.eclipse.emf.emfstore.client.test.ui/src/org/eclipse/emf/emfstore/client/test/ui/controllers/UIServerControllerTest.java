@@ -26,6 +26,7 @@ public class UIServerControllerTest extends AbstractUIControllerTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
+		super.setUp();
 		ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(
 			ESWorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0));
 	}

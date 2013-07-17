@@ -142,9 +142,8 @@ public abstract class FuzzyProjectTest {
 					// do nothing
 				} catch (IOException e) {
 					// do nothing
-				} finally {
-
 				}
+				
 				return null;
 			}
 		});

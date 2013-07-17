@@ -228,8 +228,6 @@ public class HistoryBrowserView extends ViewPart implements ProjectSpaceContaine
 			data = currItem.getData();
 		}
 
-		assert data instanceof HistoryInfo : "Would have returned otherwise.";
-
 		final IPlotCommit c = commitProvider.getCommitFor((HistoryInfo) data, !isCommitItem);
 		final PlotLane lane = c.getLane();
 		if (lane != null && lane.getSaturatedColor().isDisposed()) {

@@ -209,7 +209,7 @@ public class ChangePackageVisualizationHelper {
 		String[] strings = unresolvedString.split(devider);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < strings.length; i++) {
-			if (i % 2 == 1) {
+			if (isOdd(i)) {
 				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 				modelElementId.setId(strings[i]);
 				EObject modelElement = getModelElement(modelElementId);
@@ -229,6 +229,11 @@ public class ChangePackageVisualizationHelper {
 			}
 		}
 		return stringBuilder.toString();
+	}
+
+	private boolean isOdd(int i) {
+		int res = i % 2;
+		return res == -1 || res == 1;
 	}
 
 	/**
