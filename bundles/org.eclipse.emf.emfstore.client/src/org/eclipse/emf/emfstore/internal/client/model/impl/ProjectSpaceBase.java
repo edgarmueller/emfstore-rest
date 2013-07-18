@@ -46,9 +46,8 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
-import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
-import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportChangesController;
@@ -919,7 +918,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			protected List<BranchInfo> run() throws ESException {
 				final ConnectionManager cm = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 				return cm.getBranches(getSessionId(), getProjectId());
-			};
+			}
 		}.execute();
 	}
 
