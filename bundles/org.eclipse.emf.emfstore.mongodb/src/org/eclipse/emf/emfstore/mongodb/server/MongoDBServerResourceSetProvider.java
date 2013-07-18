@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESServerResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 
@@ -26,7 +26,7 @@ import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
  * @author jfaltermeier
  * 
  */
-public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
+public class MongoDBServerResourceSetProvider implements ESServerResourceSetProvider {
 
 	private static IResourceSetFactory resourceSetFactory;
 
@@ -52,7 +52,7 @@ public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
 				if (runs == 20) {
 					return null;
 				}
-				Thread.sleep(100);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// do nothing
 			}
@@ -74,4 +74,31 @@ public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
 		return uriConverter;
 	}
 
+	public void registerDynamicModels() {
+		// // put ecore in db
+		// ResourceSet resourceSet = new ResourceSetImpl();
+		// resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+		// .put("ecore", new EcoreResourceFactoryImpl());
+		// Resource resource = resourceSet.getResource(
+		// URI.createFileURI(new File("D:" + File.separator + "Repositories" + File.separator
+		// + "eclipse-platform-evaluation" + File.separator + "bundles" + File.separator + "org.openetcs.model"
+		// + File.separator + "model" + File.separator + "model.ecore").getAbsolutePath()), true);
+		// EPackage model = (EPackage) resource.getContents().get(0);
+		//
+		// // TODO
+		// URI dynamicModelsURI = URI.createURI("mongodb://localhost/esserver/dynamic-models/");
+		// Resource resource2 = getResourceSet().getResource(dynamicModelsURI, true);
+		//
+		// resource2.getContents().add(model);
+		// try {
+		// resource2.save(null);
+		// } catch (IOException e) {
+		//
+		// }
+		//
+		// URI dynamicModelsURI = URI.createURI("mongodb://localhost/esserver/dynamic-models/");
+		// ResourceSet resourceSet = getResourceSet();
+		// resourceSet.getURIConverter().exists(dynamicModelsURI, null);
+		// Resource resource = resourceSet.getResource(dynamicModelsURI, true);
+	}
 }
