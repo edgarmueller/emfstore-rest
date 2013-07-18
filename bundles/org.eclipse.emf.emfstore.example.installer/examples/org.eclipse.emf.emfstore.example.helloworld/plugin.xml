@@ -9,7 +9,7 @@
             thread="main"
             visible="true">
          <run
-               class="org.eclipse.emf.emfstore.exampleclient.Application">
+               class="org.eclipse.emf.emfstore.example.helloworld.Application">
          </run>
       </application>
    </extension>
