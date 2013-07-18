@@ -27,12 +27,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.test.conflictDetection.ConflictDetectionTest;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -168,24 +167,22 @@ public class MergeTest extends ConflictDetectionTest {
 			List<ChangePackage> myChangePackages = Arrays.asList(getProjectSpace().getLocalChangePackage(true));
 			List<ChangePackage> theirChangePackages = Arrays.asList(getTheirProjectSpace().getLocalChangePackage(true));
 
-			Set<ConflictBucketCandidate> conflictCandidateBuckets = new ConflictDetector()
-				.calculateConflictCandidateBuckets(myChangePackages, theirChangePackages, getProject());
-			ChangeConflict changeConflict = new ChangeConflict(getProjectSpace(),
-				myChangePackages, theirChangePackages, conflictCandidateBuckets, getProject());
+			ChangeConflictSet changeConflictSet = new ConflictDetector().calculateConflicts(myChangePackages,
+				theirChangePackages, getProject());
 
-			DecisionManager manager = new DecisionManager(getProject(), changeConflict, spec, spec, false);
+			DecisionManager manager = new DecisionManager(getProject(), changeConflictSet, false);
 
 			return manager;
 		}
 
-		public <T extends Conflict> MergeTestQuery hasConflict(Class<T> clazz, int expectedConflicts) {
+		public <T extends VisualConflict> MergeTestQuery hasConflict(Class<T> clazz, int expectedConflicts) {
 			MergeTestQuery query = new MergeTestQuery(execute());
 			return query.hasConflict(clazz, expectedConflicts);
 		}
 
-		public <T extends Conflict> MergeTestQuery hasConflict(Class<T> clazz) {
+		public <T extends VisualConflict> MergeTestQuery hasConflict(Class<T> clazz) {
 			if (clazz == null) {
-				ArrayList<Conflict> conflicts = execute().getConflicts();
+				ArrayList<VisualConflict> conflicts = execute().getConflicts();
 				assertEquals(0, conflicts.size());
 				return null;
 			}
@@ -200,7 +197,7 @@ public class MergeTest extends ConflictDetectionTest {
 	public class MergeTestQuery {
 
 		private final DecisionManager manager;
-		private ArrayList<Conflict> conflicts;
+		private ArrayList<VisualConflict> conflicts;
 		private Object lastObject;
 		private HashSet<AbstractOperation> mySeen;
 		private HashSet<AbstractOperation> theirSeen;
@@ -211,10 +208,10 @@ public class MergeTest extends ConflictDetectionTest {
 			theirSeen = new LinkedHashSet<AbstractOperation>();
 		}
 
-		public <T extends Conflict> MergeTestQuery hasConflict(Class<T> clazz, int i) {
+		public <T extends VisualConflict> MergeTestQuery hasConflict(Class<T> clazz, int i) {
 			conflicts = manager.getConflicts();
 			assertEquals("Number of conflicts", i, conflicts.size());
-			Conflict currentConflict = currentConflict();
+			VisualConflict currentConflict = currentConflict();
 			if (!clazz.isInstance(currentConflict)) {
 				throw new AssertionError("Expected: " + clazz.getName() + " but found: "
 					+ ((currentConflict == null) ? "null" : currentConflict.getClass().getName()));
@@ -222,7 +219,7 @@ public class MergeTest extends ConflictDetectionTest {
 			return this;
 		}
 
-		private Conflict currentConflict() {
+		private VisualConflict currentConflict() {
 			return conflicts.get(0);
 		}
 

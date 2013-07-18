@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * shterev
  * emueller
  * koegel
@@ -17,9 +17,9 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.client.ui.common.OperationCustomLabelProvider;
+import org.eclipse.emf.emfstore.internal.common.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
@@ -209,7 +209,7 @@ public class ChangePackageVisualizationHelper {
 		String[] strings = unresolvedString.split(devider);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < strings.length; i++) {
-			if (i % 2 == 1) {
+			if (isOdd(i)) {
 				ModelElementId modelElementId = ModelFactory.eINSTANCE.createModelElementId();
 				modelElementId.setId(strings[i]);
 				EObject modelElement = getModelElement(modelElementId);
@@ -229,6 +229,11 @@ public class ChangePackageVisualizationHelper {
 			}
 		}
 		return stringBuilder.toString();
+	}
+
+	private boolean isOdd(int i) {
+		int res = i % 2;
+		return res == -1 || res == 1;
 	}
 
 	/**

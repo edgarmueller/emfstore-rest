@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a create method for each non-abstract class of
  * the model. <!-- end-user-doc -->
  * 
- * @see org.eclipse.emf.emfstore.internal.common.model.internal.client.model.ModelPackage
+ * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage
  * @generated
  */
 public interface ModelFactory extends EFactory {
@@ -63,15 +63,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	ProjectSpace createProjectSpace();
-
-	/**
-	 * Returns a new object of class '<em>Operation Composite</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return a new object of class '<em>Operation Composite</em>'.
-	 * @generated
-	 */
-	OperationComposite createOperationComposite();
 
 	/**
 	 * Returns a new object of class '<em>Pending File Transfer</em>'.

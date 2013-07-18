@@ -43,7 +43,6 @@ public abstract class TopologyTest {
 		projectSpace.setBaseVersion(VersioningFactory.eINSTANCE.createPrimaryVersionSpec());
 		projectSpace.setIdentifier("testProjectSpace");
 		projectSpace.setLastUpdated(new Date());
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 		projectSpace.setProjectDescription("ps description");
 		projectSpace.setProjectId(org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
 			.createProjectId());

@@ -25,8 +25,10 @@ public class Test {
 	private int seedCount;
 
 	/**
-	 * @param name The name of the test.
-	 * @param seedCount The count (run) of the test.
+	 * @param name
+	 *            The name of the test.
+	 * @param seedCount
+	 *            The count (run) of the test.
 	 */
 	public Test(String name, int seedCount) {
 		this.name = name;

@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.ecore;
 
@@ -14,7 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -42,7 +41,7 @@ public class ETypeIdResolver implements ESSingletonIdResolver {
 	}
 
 	public ESModelElementId getSingletonModelElementId(EObject singleton) {
-		if (!(singleton instanceof EClass||EStructuralFeature.class.isInstance(singleton)) || singleton == null) {
+		if (!(singleton instanceof EClass || EStructuralFeature.class.isInstance(singleton)) || singleton == null) {
 			return null;
 		}
 
@@ -62,7 +61,7 @@ public class ETypeIdResolver implements ESSingletonIdResolver {
 	}
 
 	public boolean isSingleton(EObject eDataType) {
-		return EClass.class.isInstance(eDataType)||EStructuralFeature.class.isInstance(eDataType);
+		return EClass.class.isInstance(eDataType) || EStructuralFeature.class.isInstance(eDataType);
 	}
 
 }

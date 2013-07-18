@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * pfeifferc
  * koegel
  ******************************************************************************/
@@ -15,8 +15,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 import java.security.cert.X509Certificate;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
-import org.eclipse.emf.emfstore.client.exceptions.ESInvalidCertificateException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateException;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -141,7 +140,7 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 					try {
 						KeyStoreManager.getInstance().deleteCertificate(alias);
 						setListElements(KeyStoreManager.getInstance().getCertificates().toArray());
-					} catch (ESCertificateStoreException e1) {
+					} catch (ESCertificateException e1) {
 						setErrorMessage(e1.getMessage());
 					}
 				}
@@ -204,7 +203,7 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 					}
 					certAlias.setText(alias);
 					certDetails.setText(tmp);
-				} catch (ESCertificateStoreException e1) {
+				} catch (ESCertificateException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 			}
@@ -220,10 +219,10 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 		/**
 		 * Add a certificate specified by the user.
 		 * 
-		 * @param e
+		 * @param event
 		 *            selection event
 		 */
-		public void widgetSelected(SelectionEvent e) {
+		public void widgetSelected(SelectionEvent event) {
 			FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell());
 			fileDialog.open();
 			if (!fileDialog.getFileName().equals("")) {
@@ -243,16 +242,16 @@ public class CertificateSelectionDialog extends ElementListSelectionDialog {
 				if (alias.equals("")) {
 					alias = "unnamed:" + EcoreUtil.generateUUID();
 				}
+
 				try {
 					KeyStoreManager.getInstance().addCertificate(alias, location);
-				} catch (final ESInvalidCertificateException e1) {
-					setErrorMessage("Invalid certificate!");
-				} catch (ESCertificateStoreException e1) {
-					setErrorMessage(e1.getMessage());
+				} catch (final ESCertificateException e) {
+					setErrorMessage(e.getMessage());
 				}
+
 				try {
 					setListElements(KeyStoreManager.getInstance().getCertificates().toArray());
-				} catch (ESCertificateStoreException e1) {
+				} catch (ESCertificateException e1) {
 					setErrorMessage(e1.getMessage());
 				}
 			}

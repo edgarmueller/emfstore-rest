@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
@@ -24,6 +24,8 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * 
  * @emueller
  * @ovonwesen
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESUpdateObserver extends ESObserver {
 
@@ -31,13 +33,15 @@ public interface ESUpdateObserver extends ESObserver {
 	 * Called to notify the observer about the changes that will be merged into the project space.
 	 * 
 	 * @param project
-	 *            the project that should be updated
+	 *            the {@link ESLocalProject} that should be updated
 	 * @param changePackages
-	 *            a list of change packages containing the update changes
+	 *            a list of {@link ESChangePackage}s containing the update changes
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that may be used by clients to inform
 	 *            about progress
-	 * @return false if the observer wants to cancel the update
+	 * @return {@code false} if the observer wants to cancel the update, {@code true} otherwise
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages, IProgressMonitor monitor);
 
@@ -45,10 +49,12 @@ public interface ESUpdateObserver extends ESObserver {
 	 * Called after the changes have been applied to the project and the update is completed.
 	 * 
 	 * @param project
-	 *            the project whose update has been completed
+	 *            the {@link ESLocalProject} whose update has been completed
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that may be used by clients to inform
 	 *            about progress
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void updateCompleted(ESLocalProject project, IProgressMonitor monitor);
 

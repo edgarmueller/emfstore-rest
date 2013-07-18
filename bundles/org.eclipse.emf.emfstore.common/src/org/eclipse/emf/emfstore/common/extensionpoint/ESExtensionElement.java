@@ -6,8 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * wesendon
+ * Contributors:
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
@@ -17,15 +17,16 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 
 /**
- * This is the companion class to {@link ESExtensionPoint}. It wrapps a {@link IConfigurationElement} for convenience
- * purposes.
+ * This is the companion class to {@link ESExtensionPoint}. 
+ * It wraps a {@link IConfigurationElement} for convenience purposes.
  * As {@link ESExtensionPoint} it can be configured to return null or throw an runtime exception
  * {@link ESExtensionPointException}
  * 
  * @author wesendon
  * 
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class ESExtensionElement {
+public final class ESExtensionElement {
 
 	private final IConfigurationElement element;
 	private boolean exceptionInsteadOfNull;

@@ -11,6 +11,7 @@
 package org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl;
 
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -348,21 +349,11 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 		return super.eIsSet(featureID);
 	}
 
+	@SuppressWarnings("serial")
 	public void apply(IdEObjectCollection project) {
-		EObject modelElement = project.getModelElement(getModelElementId());
-		if (modelElement == null) {
-			modelElement = ((IdEObjectCollectionImpl) project).getDeletedModelElement(getModelElementId());
-		}
-
-		EObject oldModelElement = project.getModelElement(getOldValue());
-		if (oldModelElement == null) {
-			oldModelElement = ((IdEObjectCollectionImpl) project).getDeletedModelElement(getOldValue());
-		}
-
-		EObject newModelElement = project.getModelElement(getNewValue());
-		if (newModelElement == null) {
-			newModelElement = ((IdEObjectCollectionImpl) project).getDeletedModelElement(getNewValue());
-		}
+		final EObject modelElement = getModelElement(project, getModelElementId());
+		final EObject oldModelElement = getModelElement(project, getOldValue());
+		final EObject newModelElement = getModelElement(project, getNewValue());
 
 		if (modelElement == null) {
 			// silently fail
@@ -389,8 +380,18 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 			// really need to be deleted there will be a
 			// delete operation
 			if (reference.isContainer() && newModelElement == null) {
+				project.allocateModelElementIds(new LinkedHashMap<EObject, ModelElementId>() {
+					{
+						put(modelElement, getModelElementId());
+					}
+				});
 				project.addModelElement(modelElement);
 			} else if (reference.isContainment() && newModelElement == null && oldModelElement != null) {
+				project.allocateModelElementIds(new LinkedHashMap<EObject, ModelElementId>() {
+					{
+						put(oldModelElement, getOldValue());
+					}
+				});
 				project.addModelElement(oldModelElement);
 			}
 		} catch (UnkownFeatureException e) {
@@ -398,6 +399,16 @@ public class SingleReferenceOperationImpl extends ReferenceOperationImpl impleme
 			return;
 		}
 
+	}
+
+	private EObject getModelElement(IdEObjectCollection collection, ModelElementId modelElementId) {
+		EObject modelElement = collection.getModelElement(modelElementId);
+
+		if (modelElement == null) {
+			modelElement = ((IdEObjectCollectionImpl) collection).getDeletedModelElement(modelElementId);
+		}
+
+		return modelElement;
 	}
 
 	@Override

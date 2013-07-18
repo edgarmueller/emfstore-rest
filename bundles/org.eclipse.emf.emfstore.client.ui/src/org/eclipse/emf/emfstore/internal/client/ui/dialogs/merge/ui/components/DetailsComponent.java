@@ -6,13 +6,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;
 
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.widgets.MergeTextWidget;
@@ -41,7 +41,7 @@ public class DetailsComponent extends Section {
 	 * @param conflict
 	 *            conflict
 	 */
-	public DetailsComponent(final DecisionBox decisionBox, Conflict conflict) {
+	public DetailsComponent(final DecisionBox decisionBox, VisualConflict conflict) {
 		super(decisionBox, Section.TWISTIE);
 		setText("Details");
 		setLayout(new FillLayout());

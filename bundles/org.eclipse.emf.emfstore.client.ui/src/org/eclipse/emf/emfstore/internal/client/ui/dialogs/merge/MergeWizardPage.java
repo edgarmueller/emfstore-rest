@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge;
@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.UIDecisionConfig;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -95,14 +95,14 @@ public class MergeWizardPage extends WizardPage {
 		decisionBoxes = new ArrayList<DecisionBox>();
 
 		// show only unresolved conflicts
-		List<Conflict> unresolvedConflicts = new ArrayList<Conflict>();
-		for (Conflict conflict : decisionManager.getConflicts()) {
+		List<VisualConflict> unresolvedConflicts = new ArrayList<VisualConflict>();
+		for (VisualConflict conflict : decisionManager.getConflicts()) {
 			if (!conflict.isResolved()) {
 				unresolvedConflicts.add(conflict);
 			}
 		}
 
-		for (Conflict conflict : unresolvedConflicts) {
+		for (VisualConflict conflict : unresolvedConflicts) {
 			decisionBoxes.add(new DecisionBox(client, decisionManager, colorSwitcher.getColor(), conflict));
 		}
 

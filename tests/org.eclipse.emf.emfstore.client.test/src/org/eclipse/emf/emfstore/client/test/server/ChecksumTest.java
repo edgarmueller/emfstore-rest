@@ -18,11 +18,9 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
-import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
@@ -37,13 +35,11 @@ import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.ESConflictSet;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.junit.After;
 import org.junit.Test;
 
@@ -422,13 +418,6 @@ public class ChecksumTest extends CoreServerTest {
 			ESCommitCallback.NOCALLBACK.noLocalChanges(projectSpace);
 		}
 
-		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws ESException {
-			ESChecksumErrorHandler checksumErrorHandler = Configuration.getClientBehavior().getChecksumErrorHandler();
-			return checksumErrorHandler.execute(projectSpace, versionSpec,
-				progressMonitor);
-		}
-
 	}
 
 	private class MyUpdateCallback implements ESUpdateCallback {
@@ -442,30 +431,20 @@ public class ChecksumTest extends CoreServerTest {
 			ESUpdateCallback.NOCALLBACK.noChangesOnServer();
 		}
 
-		public boolean conflictOccurred(ESChangeConflict changeConflictException,
+		public boolean conflictOccurred(ESConflictSet changeConflictException,
 			IProgressMonitor progressMonitor) {
 			return ESUpdateCallback.NOCALLBACK.conflictOccurred(changeConflictException, progressMonitor);
 		}
 
-		public boolean checksumCheckFailed(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec,
-			IProgressMonitor progressMonitor) throws ESException {
-			ESChecksumErrorHandler checksumErrorHandler = Configuration.getClientBehavior().getChecksumErrorHandler();
-			return checksumErrorHandler.execute(projectSpace, versionSpec,
-				progressMonitor);
-		}
 	}
 
 	protected PrimaryVersionSpec commitWithoutCommand(final ProjectSpace projectSpace) throws ESException {
-		return projectSpace.commit(createEmptyLogMessage(), new MyCommitCallback(),
+		return projectSpace.commit("SomeCommitMessage", new MyCommitCallback(),
 			new NullProgressMonitor());
 	}
 
 	protected PrimaryVersionSpec update(ProjectSpace projectSpace) throws ESException {
 		return projectSpace.update(Versions.createHEAD(), new MyUpdateCallback(),
 			new NullProgressMonitor());
-	}
-
-	private LogMessage createEmptyLogMessage() {
-		return VersioningFactory.eINSTANCE.createLogMessage();
 	}
 }

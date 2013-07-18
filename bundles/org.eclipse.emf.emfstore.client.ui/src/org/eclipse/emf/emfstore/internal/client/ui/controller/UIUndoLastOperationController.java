@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * Edgar
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Shell;
  * 
  */
 public class UIUndoLastOperationController extends
-		AbstractEMFStoreUIController<Void> {
+	AbstractEMFStoreUIController<Void> {
 
 	private final ProjectSpace projectSpace;
 
@@ -39,10 +39,10 @@ public class UIUndoLastOperationController extends
 	 *            operation
 	 */
 	public UIUndoLastOperationController(Shell shell,
-			ESLocalProject projectSpace) {
+		ESLocalProject projectSpace) {
 		super(shell);
 		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
-				.toInternalAPI();
+			.toInternalAPI();
 	}
 
 	/**

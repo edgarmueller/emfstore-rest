@@ -18,25 +18,23 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 import static org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation;
 
-public class MultiReferenceSetSetConflict extends Conflict {
+public class MultiReferenceSetSetConflict extends VisualConflict {
 
 	private boolean containmentConflict;
 
-	public MultiReferenceSetSetConflict(Set<AbstractOperation> opsA, Set<AbstractOperation> opsB,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
-		super(opsA, opsB, leftOperation, rightOperation, decisionManager, true, false);
+	public MultiReferenceSetSetConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
+		super(conflictBucket, decisionManager, true, false);
 		// is this rule enough?
 		containmentConflict = getMyOperation().getModelElementId().equals(getTheirOperation().getModelElementId());
 		init();
@@ -45,7 +43,7 @@ public class MultiReferenceSetSetConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictDescription()
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictDescription()
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {

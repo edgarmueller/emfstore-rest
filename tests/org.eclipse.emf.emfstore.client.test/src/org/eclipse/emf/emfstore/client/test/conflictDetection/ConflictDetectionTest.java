@@ -14,16 +14,25 @@ package org.eclipse.emf.emfstore.client.test.conflictDetection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
+import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetectionStrategy;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.IndexSensitiveConflictDetectionStrategy;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
@@ -53,16 +62,6 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	}
 
 	/**
-	 * Returns a conflict detection strategy to use.
-	 * 
-	 * @return a conflict detection strategy
-	 */
-
-	public ConflictDetectionStrategy getConflictDetectionStrategy() {
-		return new IndexSensitiveConflictDetectionStrategy();
-	}
-
-	/**
 	 * Convenience to get an operation by type.
 	 * 
 	 * @param clazz class of operation
@@ -85,7 +84,32 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	 * @return boolean
 	 */
 	protected boolean doConflict(AbstractOperation opA, AbstractOperation opB) {
-		return getConflictDetectionStrategy().doConflict(opB, opA);
+		ConflictDetector conflictDetector = new ConflictDetector();
+		ChangePackage changePackage1 = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage1.getOperations().add(opA);
+		ChangePackage changePackage2 = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage2.getOperations().add(opB);
+
+		ChangeConflictSet conflictSet = conflictDetector.calculateConflicts(Arrays.asList(changePackage1),
+			Arrays.asList(changePackage2),
+			ModelFactory.eINSTANCE.createProject());
+		return conflictSet.getConflictBuckets().size() > 0;
+	}
+
+	public Set<AbstractOperation> getConflicts(List<AbstractOperation> ops1, List<AbstractOperation> ops2) {
+		ChangePackage changePackage1 = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage1.getOperations().addAll(ops1);
+		ChangePackage changePackage2 = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage2.getOperations().addAll(ops2);
+		Project project = ModelFactory.eINSTANCE.createProject();
+		ChangeConflictSet conflicts = new ConflictDetector().calculateConflicts(Arrays.asList(changePackage1),
+			Arrays.asList(changePackage2), project);
+		LinkedHashSet<AbstractOperation> result = new LinkedHashSet<AbstractOperation>();
+		for (ConflictBucket conflictBucket : conflicts.getConflictBuckets()) {
+			Set<AbstractOperation> myOperations = conflictBucket.getMyOperations();
+			result.addAll(myOperations);
+		}
+		return result;
 	}
 
 	public <T extends AbstractOperation> AbstractOperation myCheckAndGetOperation(

@@ -240,7 +240,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		// Obtain or create and register package
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new OperationsPackageImpl());
+			.get(eNS_URI)
+			: new OperationsPackageImpl());
 
 		isInited = true;
 
@@ -271,7 +272,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(UrlPackage.eNS_URI)
+			: UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theOperationsPackage.createPackageContents();

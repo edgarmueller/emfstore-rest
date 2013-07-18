@@ -34,7 +34,8 @@ public class OperationReverseTest extends FuzzyProjectTest {
 	@Test
 	public void reverseTest() {
 		final ProjectSpaceBase projectSpace = (ProjectSpaceBase) getProjectSpace();
-		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace.getProject());
+		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace
+				.getProject());
 
 		new EMFStoreCommand() {
 			@Override
@@ -46,10 +47,12 @@ public class OperationReverseTest extends FuzzyProjectTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				projectSpace.getLocalChangePackage().reverse().apply(projectSpace.getProject());
+				projectSpace.getLocalChangePackage().reverse()
+						.apply(projectSpace.getProject());
 			}
 		}.run(false);
 
-		compareIgnoreOrder(getCopyProjectSpace().getProject(), projectSpace.getProject());
+		compareIgnoreOrder(getCopyProjectSpace().getProject(),
+				projectSpace.getProject());
 	}
 }

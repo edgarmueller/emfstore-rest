@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * Wesendonk
  * koegel
  ******************************************************************************/
@@ -119,7 +119,8 @@ public class AdminBrokerImpl implements AdminBroker {
 	 */
 	public List<ACOrgUnit> getParticipants(ProjectId projectId) throws ESException {
 
-		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().getParticipants(getSessionId(), projectId);
+		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.getParticipants(getSessionId(), projectId);
 	}
 
 	/**
@@ -149,7 +150,8 @@ public class AdminBrokerImpl implements AdminBroker {
 	 */
 	public Role getRole(ProjectId projectId, ACOrgUnitId orgUnit) throws ESException {
 
-		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().getRole(getSessionId(), projectId, orgUnit);
+		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.getRole(getSessionId(), projectId, orgUnit);
 	}
 
 	/**

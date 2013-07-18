@@ -6,21 +6,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
-import org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
@@ -29,16 +28,16 @@ import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.BranchSelectionDialog;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.CommitDialog;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdToEObjectMappingImpl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
-import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -56,7 +55,6 @@ public class UICreateBranchController extends
 	ESCommitCallback {
 
 	private final ProjectSpace projectSpace;
-	private LogMessage logMessage;
 	private int dialogReturnValue;
 	private BranchVersionSpec branch;
 
@@ -169,10 +167,11 @@ public class UICreateBranchController extends
 		if (dialogReturnValue == Dialog.OK) {
 			RunESCommand.run(new Callable<Void>() {
 				public Void call() throws Exception {
-					changePackage.setLogMessage(ESLogMessage.FACTORY.createLogMessage(
-						commitDialog.getLogText(), projectSpace
-							.getUsersession()
-							.getUsername()));
+					LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
+					logMessage.setAuthor(projectSpace
+						.getUsersession().getUsername());
+					logMessage.setClientDate(new Date());
+					changePackage.setLogMessage(logMessage.toAPI());
 					return null;
 				}
 			});
@@ -198,11 +197,11 @@ public class UICreateBranchController extends
 			// TODO OTS
 			PrimaryVersionSpec commitToBranch = projectSpace.commitToBranch(
 				branch,
-				logMessage,
+				null,
 				UICreateBranchController.this,
 				progressMonitor);
 			return commitToBranch.toAPI();
-		} catch (BaseVersionOutdatedException e) {
+		} catch (ESUpdateRequiredException e) {
 			// project is out of date and user canceled update
 			// ignore
 		} catch (final ESException e) {
@@ -246,21 +245,5 @@ public class UICreateBranchController extends
 			});
 
 		return Versions.createBRANCH(branch);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#checksumCheckFailed(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	public boolean checksumCheckFailed(ESLocalProject projectSpace,
-		ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
-		throws ESException {
-		ESChecksumErrorHandler errorHandler = Configuration.getClientBehavior()
-			.getChecksumErrorHandler();
-		return errorHandler.execute(projectSpace, versionSpec, monitor);
 	}
 }

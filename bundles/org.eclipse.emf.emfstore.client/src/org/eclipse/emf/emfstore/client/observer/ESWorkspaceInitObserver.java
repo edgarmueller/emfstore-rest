@@ -6,23 +6,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * wesendon
- * emueller
+ * Contributors:
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
 import org.eclipse.emf.emfstore.client.ESWorkspace;
+import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
- * Is called when the workspace is initiated. Use this for things which have to be initiated right at beginning.
+ * Called when the workspace is initiated.
+ * Use this for things which have to be initiated right at beginning.
  * It often is used to register Listeners.
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
-// TODO: check whether we can re-use the ObserverBus
-public interface ESWorkspaceInitObserver {
+public interface ESWorkspaceInitObserver extends ESObserver {
 
 	/**
 	 * Is called when the workspace is initiated.

@@ -22,12 +22,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
+import org.eclipse.emf.emfstore.common.ESSystemOutProgressMonitor;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommandWithResult;
-import org.eclipse.emf.emfstore.internal.common.ConsoleProgressMonitor;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutator;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
@@ -57,7 +57,7 @@ public class MemoryLoadTest {
 	private static final Logger LOGGER = Logger.getLogger("org.eclipse.emf.emfstore.client.test");
 	private long currentProjectCount; // The current project count.
 	private ModelMutatorConfiguration currentProjectConfiguration;
-	private static final ConsoleProgressMonitor MONITOR = new ConsoleProgressMonitor();
+	private static final ESSystemOutProgressMonitor MONITOR = new ESSystemOutProgressMonitor();
 
 	/** Class Rule for starting an EMFStore-Server. */
 	// @ClassRule

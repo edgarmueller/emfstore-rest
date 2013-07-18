@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.connection;
@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.exceptions.ServerKeyStoreException;
 
 /**
- * The ServerKeyStoreManager loads the keystore, which is needed for decryption of user passwords and for rmi
+ * The ServerKeyStoreManager loads the keystore, which is needed for decryption of user passwords and for RMI
  * encryption.
  * 
  * @author wesendon
@@ -103,7 +103,14 @@ public final class ServerKeyStoreManager {
 		}
 	}
 
-	private KeyStore getKeyStore() throws ServerKeyStoreException {
+	/**
+	 * Returns the keystore of the server.
+	 * 
+	 * @return the server key store
+	 * @throws ServerKeyStoreException
+	 *             in case key store initialization fails
+	 */
+	public KeyStore getKeyStore() throws ServerKeyStoreException {
 		if (keyStore == null) {
 			FileInputStream fileInputStream = null;
 			try {
@@ -134,8 +141,7 @@ public final class ServerKeyStoreManager {
 	}
 
 	/**
-	 * Creates a {@link KeyManagerFactory} for the rmi encryption (
-	 * {@link org.eclipse.emf.emfstore.internal.server.connection.rmi.RMISSLServerSocketFactory} ).
+	 * Creates a {@link KeyManagerFactory} for the RMI encryption.
 	 * 
 	 * @return KeyManagerFactory
 	 * @throws ServerKeyStoreException in case of failure
@@ -157,12 +163,13 @@ public final class ServerKeyStoreManager {
 	}
 
 	/**
-	 * Sets java runtime properties for ssl.
+	 * Sets java runtime properties for SSL.
 	 */
 	public void setJavaSSLProperties() {
 		System.setProperty("javax.net.ssl.keyStore", ServerConfiguration.getServerKeyStorePath());
 		System.setProperty("javax.net.ssl.trustStore", ServerConfiguration.getServerKeyStorePath());
 		System.setProperty("javax.net.ssl.keyStorePassword", Arrays.toString(getKeyStorePassword()));
+		System.setProperty("javax.net.ssl.trustStorePassword", Arrays.toString(getKeyStorePassword()));
 	}
 
 	private char[] getKeyStorePassword() {

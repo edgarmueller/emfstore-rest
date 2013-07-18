@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.provider;
 
@@ -17,30 +17,40 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 
 /**
- * This provider allows to set the default {@link ESServer} and initialize the {@link ESKeyStoreManager} with necessary
- * certificates.
+ * This provider allows to set the default {@link ESServer} and
+ * initialize the {@link ESKeyStoreManager} with necessary certificates.
  * 
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESClientConfigurationProvider {
 
 	/**
+	 * <p>
 	 * Returns a list of default {@link ESServer}s.
-	 * This method is called during workspace initialization, i.e. you must <b>NOT</b>
-	 * use {@link ESWorkspaceProvider#INSTANCE} in the scope of this method. This
-	 * means you must not create a session while creating the default server information.
+	 * </p>
+	 * <p>
+	 * <b>NOTE:</b> This method is called during workspace initialization, i.e. you must <b>NOT</b> use
+	 * {@link ESWorkspaceProvider#INSTANCE} in the scope of this method. This means you must not create a session while
+	 * creating the default server information.
+	 * </p>
 	 * 
 	 * @return a list of default server entries
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	List<ESServer> getDefaultServerInfos();
 
 	/**
 	 * Allows the {@link ESClientConfigurationProvider} to initialize the {@link ESKeyStoreManager}. Use
 	 * {@link ESKeyStoreManager#setDefaultCertificate(String)} to set the default alias and
-	 * {@link ESKeyStoreManager#addCertificate(String, java.io.InputStream)} to add you certificate.
+	 * {@link ESKeyStoreManager#addCertificate(String, java.io.InputStream)} to add your certificate.
 	 * 
 	 * @param keyStoreManager
 	 *            the {@link ESKeyStoreManager} to be initialized
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void initDefaultCertificates(ESKeyStoreManager keyStoreManager);
 

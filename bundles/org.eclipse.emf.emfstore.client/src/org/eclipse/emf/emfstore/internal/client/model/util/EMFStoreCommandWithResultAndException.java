@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.util;
@@ -25,7 +25,7 @@ public abstract class EMFStoreCommandWithResultAndException<T, E> extends EMFSto
 		return excpetion;
 	}
 
-	public void setExcpetion(E excpetion) {
+	public void setException(E excpetion) {
 		this.excpetion = excpetion;
 	}
 

@@ -6,8 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * JulianSommerfeldt
+ * Contributors:
+ * Julian Sommerfeldt - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common;
 
@@ -16,11 +16,12 @@ import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 
 /**
  * Utility class to run {@link ESSafeRunnable}s.
- * If {@link CommonUtil#isTesting()} is true, a possible exception is thrown.
  * 
  * @author Julian Sommerfeldt
  * 
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
+// If {@link CommonUtil#isTesting()} is true, a possible exception is thrown.
 public final class ESSafeRunner {
 
 	private ESSafeRunner() {

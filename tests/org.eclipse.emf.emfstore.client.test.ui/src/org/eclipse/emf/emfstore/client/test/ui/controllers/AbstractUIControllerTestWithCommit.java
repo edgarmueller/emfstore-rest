@@ -29,12 +29,14 @@ import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UICheckoutController;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUpdateProjectController;
+import org.eclipse.emf.emfstore.internal.client.ui.controller.UIUpdateProjectToVersionController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.hamcrest.Matcher;
@@ -47,41 +49,51 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 	protected void createTournamentAndCommit() {
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
-		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				localProject.getModelElements().add(tournament);
 				return null;
-			};
+			}
 		});
-		commit(baseVersion);
+		commit(localProject);
 	}
 
 	protected void createLeagueAndCommit() {
-		final League league = ProjectChangeUtil.createLeague("L");
-		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				localProject.getModelElements().add(league);
-				return null;
-			}
-		});
-		commit(baseVersion);
+		createLeagueAndCommit(localProject);
 	}
 
 	protected void createPlayerAndCommit() {
+		createPlayerAndCommit(localProject);
+	}
+
+	protected void createPlayerAndCommit(final ESLocalProject localProject) {
 		final Player player = ProjectChangeUtil.createPlayer(PLAYER_NAME);
-		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				localProject.getModelElements().add(player);
 				return null;
 			}
 		});
-		commit(baseVersion);
+		commit(localProject);
 	}
 
-	private void commit(final ESPrimaryVersionSpec baseVersion) {
+	protected void createLeagueAndCommit(final ESLocalProject localProject) {
+		final League league = ProjectChangeUtil.createLeague("L");
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(league);
+				return null;
+			}
+		});
+		commit(localProject);
+	}
+
+	protected void commit() {
+		commit(localProject);
+	}
+
+	protected void commit(final ESLocalProject localProject) {
+		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				ESUIControllerFactory.INSTANCE.commitProject(
@@ -96,7 +108,8 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		bot.waitUntil(new DefaultCondition() {
 
 			public boolean test() throws Exception {
-				return baseVersion.getIdentifier() + 1 == localProject.getBaseVersion().getIdentifier();
+				return baseVersion.getIdentifier() + 1 == localProject.getBaseVersion()
+					.getIdentifier();
 			}
 
 			public String getFailureMessage() {
@@ -106,7 +119,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		assertEquals(baseVersion.getIdentifier() + 1,
 			localProject.getBaseVersion().getIdentifier());
-		System.out.println("commit succeeded");
 	}
 
 	protected void checkout() {
@@ -140,12 +152,49 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		}, timeout());
 	}
 
-	public ESLocalProject getCheckedoutCopy() {
+	protected ESLocalProject checkout(final ESPrimaryVersionSpec versionSpec, String checkoutName) {
+
+		final ESLocalProject[] localProjectArr = new ESLocalProject[1];
+
+		UIThreadRunnable.asyncExec(new VoidResult() {
+
+			public void run() {
+				UICheckoutController checkoutController;
+				try {
+					checkoutController = new UICheckoutController(
+						bot.getDisplay().getActiveShell(),
+						versionSpec,
+						localProject.getRemoteProject());
+					localProjectArr[0] = checkoutController.execute();
+				} catch (ESException e) {
+					fail(e.getMessage());
+				}
+			}
+		});
+
+		bot.text().setText(checkoutName);
+		bot.button("OK").click();
+
+		bot.waitUntil(new DefaultCondition() {
+
+			public boolean test() throws Exception {
+				return localProjectArr[0] != null;
+			}
+
+			public String getFailureMessage() {
+				return "Checkout did not succeed";
+			}
+		}, timeout());
+
+		return localProjectArr[0];
+	}
+
+	public ESLocalProject getCopy() {
 		return checkedoutCopy;
 	}
 
-	protected ESPrimaryVersionSpec update() {
-
+	protected ESPrimaryVersionSpec updateCopy() {
+		SWTBotPreferences.PLAYBACK_DELAY = 100;
 		didUpdate = false;
 
 		ESUpdateObserver updateObserver = createUpdateObserver();
@@ -155,14 +204,14 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
 					bot.getDisplay().getActiveShell(),
-					getCheckedoutCopy());
+					getCopy());
 				updateProjectController.execute();
 			}
 		});
 
 		Matcher<Shell> matcher = withText("Update");
 		bot.waitUntil(waitForShell(matcher));
-		bot.button(0).click();
+		bot.button("OK").click();
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
@@ -176,7 +225,46 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
 
-		return getCheckedoutCopy().getBaseVersion();
+		return getCopy().getBaseVersion();
+	}
+
+	protected ESPrimaryVersionSpec updateToVersion() {
+		SWTBotPreferences.PLAYBACK_DELAY = 100;
+		didUpdate = false;
+
+		ESUpdateObserver updateObserver = createUpdateObserver();
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().register(updateObserver);
+
+		UIThreadRunnable.asyncExec(new VoidResult() {
+			public void run() {
+				UIUpdateProjectToVersionController updateProjectController = new UIUpdateProjectToVersionController(
+					bot.getDisplay().getActiveShell(),
+					getCopy());
+				updateProjectController.execute();
+			}
+		});
+
+		Matcher<Shell> matcher = withText("Select a Version to update to");
+		bot.waitUntil(waitForShell(matcher));
+		bot.button("OK").click();
+
+		matcher = withText("Update");
+		bot.waitUntil(waitForShell(matcher));
+		bot.button("OK").click();
+
+		bot.waitUntil(new DefaultCondition() {
+			public boolean test() throws Exception {
+				return didUpdate;
+			}
+
+			public String getFailureMessage() {
+				return "Update to version did not succeed.";
+			}
+		}, 600000);
+
+		ESWorkspaceProviderImpl.getInstance().getObserverBus().unregister(updateObserver);
+
+		return getCopy().getBaseVersion();
 	}
 
 	private ESUpdateObserver createUpdateObserver() {
@@ -199,17 +287,17 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			public void run() {
 				UIUpdateProjectController updateProjectController = new UIUpdateProjectController(
 					bot.getDisplay().getActiveShell(),
-					getCheckedoutCopy());
+					getCopy());
 				updateProjectController.execute();
 			}
 		});
 
-		SWTBotButton buttonWithLabel = bot.button(0);
+		SWTBotButton buttonWithLabel = bot.button("OK");
 		buttonWithLabel.click();
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
-				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
+				return getCopy().getBaseVersion().getIdentifier() ==
 				localProject.getBaseVersion().getIdentifier() - 1;
 			}
 
@@ -220,12 +308,12 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		Matcher<Shell> matcher = withText("More updates available");
 		bot.waitUntil(waitForShell(matcher));
-		bot.button(0).click(); // update notification hint
-		bot.button(0).click(); // inspect changes on update
+		bot.button("OK").click(); // update notification hint
+		bot.button("OK").click(); // inspect changes on update
 
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
-				return getCheckedoutCopy().getBaseVersion().getIdentifier() ==
+				return getCopy().getBaseVersion().getIdentifier() ==
 				localProject.getBaseVersion().getIdentifier();
 			}
 
@@ -234,6 +322,6 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 			}
 		}, timeout());
 
-		return getCheckedoutCopy().getBaseVersion();
+		return getCopy().getBaseVersion();
 	}
 }

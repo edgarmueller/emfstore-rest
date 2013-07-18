@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * chodnick
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.util;
@@ -444,10 +444,10 @@ public class NotificationInfo implements Notification, APIDelegate<ESNotificatio
 	}
 
 	/**
-	 * @return @see org.eclipse.emf.common.notify.Notification#wasSet()
+	 * @return true if the feature is unsetable and was in the set state before this notification.
 	 */
-	public boolean wasSet() {
-		return notification.wasSet();
+	public boolean wasUnset() {
+		return getStructuralFeature().isUnsettable() && !notification.wasSet();
 	}
 
 	/**
@@ -559,5 +559,14 @@ public class NotificationInfo implements Notification, APIDelegate<ESNotificatio
 	 */
 	public ESNotificationInfo createAPI() {
 		return new ESNotificationInfoImpl(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.common.notify.Notification#wasSet()
+	 */
+	public boolean wasSet() {
+		return notification.wasSet();
 	}
 }

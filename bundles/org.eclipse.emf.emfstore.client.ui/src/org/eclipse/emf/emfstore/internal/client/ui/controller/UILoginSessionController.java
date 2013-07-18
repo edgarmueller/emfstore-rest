@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.login.LoginDialogController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -54,7 +55,7 @@ public class UILoginSessionController extends AbstractEMFStoreUIController<Void>
 		try {
 			loginDialogController.login(serverInfo);
 		} catch (ESException e) {
-			// don't show user that login failed, duh
+			MessageDialog.openError(getShell(), "Login failed", e.getMessage());
 		}
 
 		return null;

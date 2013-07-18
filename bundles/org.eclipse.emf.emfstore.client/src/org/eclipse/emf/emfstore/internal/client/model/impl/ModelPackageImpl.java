@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.internal.client.model.OperationComposite;
 import org.eclipse.emf.emfstore.internal.client.model.PendingFileTransfer;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
@@ -25,7 +24,6 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningPackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.OperationsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,14 +64,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass projectSpaceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass operationCompositeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -466,7 +456,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public EReference getProjectSpace_LocalOperations() {
+	public EReference getProjectSpace_WaitingUploads() {
 		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -476,7 +466,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public EReference getProjectSpace_WaitingUploads() {
+	public EReference getProjectSpace_Properties() {
 		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -486,7 +476,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public EReference getProjectSpace_Properties() {
+	public EReference getProjectSpace_ChangedSharedProperties() {
 		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -496,7 +486,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public EReference getProjectSpace_ChangedSharedProperties() {
+	public EReference getProjectSpace_Workspace() {
 		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -506,7 +496,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public EReference getProjectSpace_Workspace() {
+	public EReference getProjectSpace_LocalChangePackage() {
 		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -516,38 +506,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public EReference getProjectSpace_LocalChangePackage() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(15);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public EReference getProjectSpace_MergedVersion() {
-		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(16);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EClass getOperationComposite() {
-		return operationCompositeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EReference getOperationComposite_Operations() {
-		return (EReference) operationCompositeEClass.getEStructuralFeatures().get(0);
+		return (EReference) projectSpaceEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -686,16 +646,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__RESOURCE_COUNT);
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__DIRTY);
 		createEAttribute(projectSpaceEClass, PROJECT_SPACE__OLD_LOG_MESSAGES);
-		createEReference(projectSpaceEClass, PROJECT_SPACE__LOCAL_OPERATIONS);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__WAITING_UPLOADS);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__PROPERTIES);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__CHANGED_SHARED_PROPERTIES);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__WORKSPACE);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__LOCAL_CHANGE_PACKAGE);
 		createEReference(projectSpaceEClass, PROJECT_SPACE__MERGED_VERSION);
-
-		operationCompositeEClass = createEClass(OPERATION_COMPOSITE);
-		createEReference(operationCompositeEClass, OPERATION_COMPOSITE__OPERATIONS);
 
 		pendingFileTransferEClass = createEClass(PENDING_FILE_TRANSFER);
 		createEReference(pendingFileTransferEClass, PENDING_FILE_TRANSFER__ATTACHMENT_ID);
@@ -741,8 +697,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			.getEPackage(AccesscontrolPackage.eNS_URI);
 		VersioningPackage theVersioningPackage = (VersioningPackage) EPackage.Registry.INSTANCE
 			.getEPackage(VersioningPackage.eNS_URI);
-		OperationsPackage theOperationsPackage = (OperationsPackage) EPackage.Registry.INSTANCE
-			.getEPackage(OperationsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -839,9 +793,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getProjectSpace_OldLogMessages(), ecorePackage.getEString(), "oldLogMessages", null, 0, -1,
 			ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);
-		initEReference(getProjectSpace_LocalOperations(), this.getOperationComposite(), null, "localOperations", null,
-			0, 1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProjectSpace_WaitingUploads(), theModelPackage_1.getFileIdentifier(), null, "waitingUploads",
 			null, 0, -1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -860,12 +811,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getProjectSpace_MergedVersion(), theVersioningPackage.getPrimaryVersionSpec(), null,
 			"mergedVersion", null, 0, 1, ProjectSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 			IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(operationCompositeEClass, OperationComposite.class, "OperationComposite", !IS_ABSTRACT,
-			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOperationComposite_Operations(), theOperationsPackage.getAbstractOperation(), null,
-			"operations", null, 0, -1, OperationComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pendingFileTransferEClass, PendingFileTransfer.class, "PendingFileTransfer", !IS_ABSTRACT,
 			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

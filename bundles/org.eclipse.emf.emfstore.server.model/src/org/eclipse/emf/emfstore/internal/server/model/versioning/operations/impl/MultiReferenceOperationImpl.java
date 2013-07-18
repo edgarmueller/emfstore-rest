@@ -12,8 +12,10 @@ package org.eclipse.emf.emfstore.internal.server.model.versioning.operations.imp
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -306,20 +308,27 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 	}
 
 	public void apply(IdEObjectCollection project) {
+
 		EObject modelElement = project.getModelElement(getModelElementId());
+
 		if (modelElement == null) {
 			// fail silently
 			return;
 		}
+
+		Map<EObject, ModelElementId> allocatables = new LinkedHashMap<EObject, ModelElementId>();
 		EList<ModelElementId> referencedModelElementIds = getReferencedModelElements();
 		List<EObject> referencedModelElements = new ArrayList<EObject>();
+
 		for (ModelElementId refrencedModelElementId : referencedModelElementIds) {
-			EObject referencedME = project.getModelElement(refrencedModelElementId);
-			if (referencedME == null) {
-				referencedME = ((IdEObjectCollectionImpl) project).getDeletedModelElement(refrencedModelElementId);
+			EObject referencedModelElement = project.getModelElement(refrencedModelElementId);
+			if (referencedModelElement == null) {
+				referencedModelElement = ((IdEObjectCollectionImpl) project)
+					.getDeletedModelElement(refrencedModelElementId);
 			}
-			if (referencedME != null) {
-				referencedModelElements.add(referencedME);
+			if (referencedModelElement != null) {
+				referencedModelElements.add(referencedModelElement);
+				allocatables.put(referencedModelElement, refrencedModelElementId);
 			}
 		}
 		EReference reference;
@@ -381,16 +390,21 @@ public class MultiReferenceOperationImpl extends ReferenceOperationImpl implemen
 					}
 				}
 			} else {
+
 				for (EObject me : referencedModelElements) {
 					if (list.contains(me)) {
 						list.remove(me);
 					}
 				}
+
+				project.allocateModelElementIds(allocatables);
+
 				for (EObject currentElement : referencedModelElements) {
 					if (reference.isContainment()) {
 						project.addModelElement(currentElement);
 					}
 				}
+
 				if (referencedModelElements.size() == 0 && getUnset().getValue() == UnsetType.WAS_UNSET_VALUE) {
 					modelElement.eSet(reference, list);
 				}

@@ -28,8 +28,10 @@ public class FileTestRunProvider extends TestRunProvider {
 	@Override
 	public TestRun[] getTestRuns() throws IOException {
 
-		Resource run1Resource = FuzzyUtil.createResource("file://D:/downloads/1.xml");
-		Resource run2Resource = FuzzyUtil.createResource("file://D:/downloads/2.xml");
+		Resource run1Resource = FuzzyUtil
+				.createResource("file://D:/downloads/1.xml");
+		Resource run2Resource = FuzzyUtil
+				.createResource("file://D:/downloads/2.xml");
 
 		if (FuzzyUtil.resourceExists(run1Resource)) {
 			run1Resource.load(null);
@@ -38,6 +40,7 @@ public class FileTestRunProvider extends TestRunProvider {
 			run2Resource.load(null);
 		}
 
-		return new TestRun[] { getTestRun(run1Resource), getTestRun(run2Resource) };
+		return new TestRun[] { getTestRun(run1Resource),
+				getTestRun(run2Resource) };
 	}
 }

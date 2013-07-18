@@ -29,7 +29,8 @@ public class LogAdapter implements ILog {
 	 * @see org.eclipse.emf.emfstore.internal.common.ILog#log(java.lang.String, java.lang.Exception, int)
 	 */
 	public void log(final String message, final Exception exception, final int statusInt) {
-		final Status status = new Status(statusInt, Activator.getDefault().getBundle().getSymbolicName(), statusInt, message,
+		final Status status = new Status(statusInt, Activator.getDefault().getBundle().getSymbolicName(), statusInt,
+			message,
 			exception);
 		Activator.getDefault().getLog().log(status);
 	}

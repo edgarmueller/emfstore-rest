@@ -7,20 +7,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerNotFoundException;
 
 /**
  * Container for all local projects and available servers.
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESWorkspace {
 
@@ -73,6 +77,9 @@ public interface ESWorkspace {
 	 * 
 	 * @param server
 	 *            the server to be removed from the workspace
+	 * 
+	 * @throws ESServerNotFoundException
+	 *             in case the server couldn't be found in the workspace
 	 */
-	void removeServer(ESServer server);
+	void removeServer(ESServer server) throws ESServerNotFoundException;
 }

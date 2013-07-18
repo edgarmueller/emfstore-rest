@@ -24,7 +24,8 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl#getIdentifier <em>Identifier</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl#getIdentifier <em>Identifier
+ * </em>}</li>
  * </ul>
  * </p>
  * 

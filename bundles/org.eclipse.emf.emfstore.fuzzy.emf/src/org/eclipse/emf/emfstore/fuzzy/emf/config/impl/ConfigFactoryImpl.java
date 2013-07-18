@@ -26,24 +26,22 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model <b>Factory</b>.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
  * 
  * @generated
  */
 public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public static ConfigFactory init() {
 		try {
 			ConfigFactory theConfigFactory = (ConfigFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://org/eclipse/emf/emfstore/fuzzy/emf/config");
+					.getEFactory("http://org/eclipse/emf/emfstore/fuzzy/emf/config");
 			if (theConfigFactory != null) {
 				return theConfigFactory;
 			}
@@ -54,9 +52,8 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -65,8 +62,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -88,13 +84,13 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 		case ConfigPackage.MUTATOR_CONFIG:
 			return createMutatorConfig();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -104,8 +100,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -115,8 +110,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -126,8 +120,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -137,8 +130,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -148,8 +140,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -159,8 +150,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -170,8 +160,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -180,8 +169,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @deprecated
 	 * @generated

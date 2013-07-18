@@ -27,7 +27,8 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
 /**
- * {@link RunListener} used to create the report of a run of the {@link EMFDataProvider}.
+ * {@link RunListener} used to create the report of a run of the
+ * {@link EMFDataProvider}.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -45,8 +46,10 @@ public class EMFRunListener extends RunListener {
 	private String className;
 
 	/**
-	 * @param dataProvider The {@link EMFDataProvider} containing the infos.
-	 * @param testRun The {@link TestRun} where to save the results.
+	 * @param dataProvider
+	 *            The {@link EMFDataProvider} containing the infos.
+	 * @param testRun
+	 *            The {@link TestRun} where to save the results.
 	 */
 	public EMFRunListener(EMFDataProvider dataProvider, TestRun testRun) {
 		this.dataProvider = dataProvider;
@@ -65,7 +68,8 @@ public class EMFRunListener extends RunListener {
 			return;
 		}
 		testResult = ConfigFactory.eINSTANCE.createTestResult();
-		testResult.setTestName(description.getMethodName().split(FuzzyRunner.NAME_SEPARATOR)[0]);
+		testResult.setTestName(description.getMethodName().split(
+				FuzzyRunner.NAME_SEPARATOR)[0]);
 		testStartTime = System.currentTimeMillis();
 	}
 
@@ -84,13 +88,13 @@ public class EMFRunListener extends RunListener {
 		if (filter(failure.getDescription())) {
 			return;
 		}
-		
+
 		Throwable throwable = failure.getException();
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
-		try{
+		try {
 			throwable.printStackTrace(new PrintWriter(sw));
-	
+
 			if (throwable instanceof AssertionFailedError) {
 				testResult.setFailure(sw.toString());
 			} else {

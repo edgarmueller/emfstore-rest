@@ -14,11 +14,12 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.HistoryInfo;
+import org.eclipse.emf.emfstore.internal.client.ui.common.RunInUI;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESHistoryInfo;
 import org.eclipse.emf.emfstore.server.model.query.ESHistoryQuery;
@@ -64,22 +65,33 @@ public class UIUpdateProjectToVersionController extends
 			}
 			if (historyInfo.size() == 0) {
 				return new UIUpdateProjectController(
-					getShell(), projectSpace,
+					getShell(),
+					projectSpace,
 					ESVersionSpec.FACTORY.createHEAD(projectSpace.getBaseVersion()))
 					.execute();
 			}
 
-			ListDialog listDialog = createDialog(historyInfo);
-			int result = listDialog.open();
+			final ListDialog listDialog = createDialog(historyInfo);
+			Integer result = RunInUI.runWithResult(new Callable<Integer>() {
+				public Integer call() throws Exception {
+					return listDialog.open();
+				}
+			});
+
 			if (Dialog.OK == result) {
 				Object[] selection = listDialog.getResult();
-				final HistoryInfo info = (HistoryInfo) selection[0];
-				return new UIUpdateProjectController(
+				final ESHistoryInfo info = (ESHistoryInfo) selection[0];
+				final UIUpdateProjectController controller = new UIUpdateProjectController(
 					getShell(),
 					projectSpace,
 					ESVersionSpec.FACTORY.createPRIMARY(
-						info.getPrimarySpec().getIdentifier()))
-					.execute();
+						info.getPrimarySpec().getIdentifier()));
+				return RunInUI.WithException.runWithResult(new Callable<ESPrimaryVersionSpec>() {
+
+					public ESPrimaryVersionSpec call() throws Exception {
+						return controller.execute();
+					}
+				});
 			}
 		} catch (ESException e) {
 
@@ -95,7 +107,7 @@ public class UIUpdateProjectToVersionController extends
 			@Override
 			public String getText(Object element) {
 
-				HistoryInfo historyInfo = (HistoryInfo) element;
+				ESHistoryInfo historyInfo = (ESHistoryInfo) element;
 
 				StringBuilder sb = new StringBuilder("Version ");
 				sb.append(Integer.toString(historyInfo.getPrimarySpec()

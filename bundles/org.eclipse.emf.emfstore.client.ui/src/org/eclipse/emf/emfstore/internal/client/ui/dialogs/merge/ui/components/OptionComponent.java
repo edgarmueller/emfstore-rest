@@ -12,9 +12,9 @@
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.CustomConflictOption;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.DecisionBox;
 import org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util.UIDecisionConfig;
@@ -43,7 +43,7 @@ import org.eclipse.swt.widgets.Listener;
 public class OptionComponent {
 
 	private Group group;
-	private final Conflict conflict;
+	private final VisualConflict conflict;
 	private DecisionBox dBox;
 
 	/**
@@ -54,7 +54,7 @@ public class OptionComponent {
 	 * @param conflict
 	 *            conflict.
 	 */
-	public OptionComponent(DecisionBox dBox, Conflict conflict) {
+	public OptionComponent(DecisionBox dBox, VisualConflict conflict) {
 		this.dBox = dBox;
 		this.conflict = conflict;
 		group = new Group(dBox, SWT.NONE);
@@ -157,7 +157,7 @@ public class OptionComponent {
 		private final ConflictOption option;
 		private StyledText styledText;
 
-		private OptionContainer(Conflict conflict, final ConflictOption option) {
+		private OptionContainer(VisualConflict conflict, final ConflictOption option) {
 			super(group, SWT.BORDER | SWT.INHERIT_FORCE);
 			this.option = option;
 			GridLayout layout = new GridLayout(2, false);

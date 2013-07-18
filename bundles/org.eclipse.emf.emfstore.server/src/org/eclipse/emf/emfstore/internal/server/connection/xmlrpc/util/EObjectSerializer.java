@@ -6,8 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * emueller
+ * Contributors:
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.util;
 
@@ -44,6 +44,7 @@ import org.xml.sax.SAXException;
 /**
  * Serializer for EObjects.
  * 
+ * @author ovonwesen
  * @author emueller
  */
 public class EObjectSerializer extends TypeSerializerImpl {
@@ -75,11 +76,18 @@ public class EObjectSerializer extends TypeSerializerImpl {
 				XMIResource resource = (XMIResource) eObject.eResource();
 
 				if ((eObject instanceof ChangePackage || eObject instanceof IdEObjectCollection) && resource != null) {
-					OutputStreamWriter writer = new OutputStreamWriter(bos, CommonUtil.getEncoding());
-					uws = new URIConverter.WriteableOutputStream(writer, CommonUtil.getEncoding());
-					Resource res = eObject.eResource();
-					checkResource(res);
-					res.save(uws, ModelUtil.getResourceSaveOptions());
+					OutputStreamWriter writer = null;
+					try {
+						writer = new OutputStreamWriter(bos, CommonUtil.getEncoding());
+						uws = new URIConverter.WriteableOutputStream(writer, CommonUtil.getEncoding());
+						Resource res = eObject.eResource();
+						checkResource(res);
+						res.save(uws, ModelUtil.getResourceSaveOptions());
+					} finally {
+						if (writer != null) {
+							writer.close();
+						}
+					}
 				} else {
 					resource = (XMIResource) (new ResourceSetImpl()).createResource(ModelUtil.VIRTUAL_URI);
 					((ResourceImpl) resource).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());

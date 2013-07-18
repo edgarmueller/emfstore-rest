@@ -47,7 +47,7 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		server = ESServer.FACTORY.getServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
+		server = ESServer.FACTORY.createServer("localhost", 8080, KeyStoreManager.DEFAULT_CERTIFICATE);
 		server = ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
 		try {
 			usersession = server.login("super", "super");
@@ -55,6 +55,8 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 			fail(e.getMessage());
 		}
 		Assert.assertEquals(usersession, server.getLastUsersession());
+		deleteLocalProjects();
+		deleteRemoteProjects(usersession);
 
 		localProject = workspace.createLocalProject("TestProject");
 		localProject.shareProject(usersession, new NullProgressMonitor());
@@ -64,8 +66,6 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 	protected void tearDown() throws Exception {
 		localProject = null;
 		checkedoutCopy = null;
-		deleteRemoteProjects(usersession);
-		deleteLocalProjects();
 		super.tearDown();
 	}
 

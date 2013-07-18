@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * ovonwesen
  * emueller
  ******************************************************************************/
@@ -18,8 +18,7 @@ import org.eclipse.emf.emfstore.internal.client.ui.exceptions.RequiredSelectionE
 
 /**
  * Handler for bringing up the dialog that enables it to managed organizational
- * units. It is assumed that the user previously has selected a
- * {@link ServerInfo} instance.
+ * units. It is assumed that the user previously has selected a {@link ServerInfo} instance.
  * 
  * @author ovonwesen
  * @author emueller
@@ -32,10 +31,10 @@ public class ManageOrgUnitsHandler extends AbstractEMFStoreHandler {
 
 		if (serverInfo.getLastUsersession() == null) {
 			throw new RequiredSelectionException(
-					"Usersession not available in selected ServerInfo.");
+				"Usersession not available in selected ServerInfo.");
 		}
 
 		new UIManageOrgUnitsController(getShell(), serverInfo
-				.getLastUsersession().toAPI()).execute();
+			.getLastUsersession().toAPI()).execute();
 	}
 }

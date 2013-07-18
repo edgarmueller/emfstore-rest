@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.model;
 
@@ -25,6 +25,9 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESHistoryInfo {
 
@@ -72,9 +75,19 @@ public interface ESHistoryInfo {
 	 */
 	ESLogMessage getLogMessage();
 
-	// TODO: javadoc
+	/**
+	 * Returns the tag specifiers associated with this history.
+	 * 
+	 * @return a list of tag specifiers
+	 */
 	List<ESTagVersionSpec> getTagSpecs();
 
+	/**
+	 * Returns the {@link ESChangePackage} containing the changes associated
+	 * with this history.
+	 * 
+	 * @return the change package containing the changes.
+	 */
 	ESChangePackage getChangePackage();
 
 }

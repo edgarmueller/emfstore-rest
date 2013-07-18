@@ -19,6 +19,7 @@ import junit.framework.Assert;
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerNotFoundException;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
@@ -36,7 +37,7 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 
 	@Before
 	public void setUp() throws Exception {
-		server = ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		server = ESServer.FACTORY.createServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
 		try {
 			usersession = server.login("super", "super");
 		} catch (ESException e) {
@@ -70,7 +71,11 @@ public abstract class BaseLoggedInUserTest extends BaseEmptyEmfstoreTest {
 						}
 					}
 				}
-				ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
+				try {
+					ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
+				} catch (ESServerNotFoundException e) {
+					fail(e.getMessage());
+				}
 			}
 		};
 

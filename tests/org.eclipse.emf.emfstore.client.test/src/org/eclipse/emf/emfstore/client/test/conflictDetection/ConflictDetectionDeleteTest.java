@@ -83,9 +83,9 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 1);
 
@@ -132,9 +132,9 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 1);
 
@@ -177,9 +177,9 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 1);
 
@@ -226,9 +226,9 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 0);
 
@@ -278,9 +278,9 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		assertEquals(conflicts.size(), 1);
 
@@ -330,9 +330,9 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		// technically no conflict, since annotated milestone will not be deleted,
 		// but there is no way to tell containment from non-containment changes,
@@ -398,14 +398,19 @@ public class ConflictDetectionDeleteTest extends ConflictDetectionTest {
 		List<AbstractOperation> ops1 = getProjectSpace().getOperations();
 		List<AbstractOperation> ops2 = ps2.getOperations();
 
-		ConflictDetector cd = new ConflictDetector(getConflictDetectionStrategy());
-		Set<AbstractOperation> conflicts = cd.getConflicting(ops1, ops2);
-		assertEquals(cd.getConflicting(ops1, ops2).size(), cd.getConflicting(ops2, ops1).size());
+		
+		Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
+		assertEquals(getConflicts(ops1, ops2).size(), getConflicts(ops2, ops1).size());
 
 		// a move change is a change... from users perspective it should not be lost, probably..
 		// currently considered to be a hard conflict, because the user should know
 		assertEquals(1, conflicts.size());
 
+	}
+
+	@Override
+	protected void configureCompareAtEnd() {
+		setCompareAtEnd(false);
 	}
 
 }

@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common;
@@ -47,23 +47,23 @@ public final class CommonUtil {
 	}
 
 	/**
-	 * Returns a containing reference of the <code>parent</code> that may contain the 
-	 * given <code>containee</code>. 
+	 * Returns a containing reference of the <code>parent</code> that may contain the
+	 * given <code>containee</code>.
 	 * 
-	 * @param containee 
-	 * 			the EObject that may be contained by the parent's reference, if any    
+	 * @param containee
+	 *            the EObject that may be contained by the parent's reference, if any
 	 * @param parent The EObject to get the containment references from
- 	 * @return the <code>parent</code>'s container reference
+	 * @return the <code>parent</code>'s container reference
 	 */
 	public static EReference getPossibleContainingReference(final EObject containee, final EObject parent) {
-		
+
 		final List<EReference> eAllContainments = parent.eClass().getEAllContainments();
 		EReference reference = null;
-		
+
 		for (EReference containmentItem : eAllContainments) {
 
 			final EClass eReferenceType = containmentItem.getEReferenceType();
-			
+
 			if (eReferenceType.equals(containee)) {
 				reference = containmentItem;
 				break;
@@ -73,27 +73,27 @@ public final class CommonUtil {
 				break;
 			}
 		}
-		
+
 		return reference;
 	}
 
 	/**
 	 * Gives all registryEClasses which can be contained in a given EClass.
 	 * 
-	 * @param eClass 
-	 * 			the EClass 
+	 * @param eClass
+	 *            the EClass
 	 * @return all Classes which can be contained
 	 */
 	public static Set<EClass> getAllEContainments(final EClass eClass) {
-		
+
 		final List<EReference> containments = eClass.getEAllContainments();
 		final Set<EClass> eClasses = new LinkedHashSet<EClass>();
-		
+
 		for (EReference ref : containments) {
 			final EClass eReferenceType = ref.getEReferenceType();
 			eClasses.addAll(getAllSubEClasses(eReferenceType));
 		}
-		
+
 		return eClasses;
 	}
 
@@ -105,15 +105,15 @@ public final class CommonUtil {
 	 * @return a set of EClasses
 	 */
 	public static Set<EClass> getAllSubEClasses(final EClass eClass) {
-		
+
 		final Set<EClass> allEClasses = getAllModelElementEClasses();
-		
+
 		if (EcorePackage.eINSTANCE.getEObject().equals(eClass)) {
 			return allEClasses;
 		}
-		
+
 		final Set<EClass> result = new LinkedHashSet<EClass>();
-		
+
 		for (EClass subClass : allEClasses) {
 			final boolean isSuperTypeOf = eClass.isSuperTypeOf(subClass)
 				|| eClass.equals(EcorePackage.eINSTANCE.getEObject());
@@ -130,11 +130,11 @@ public final class CommonUtil {
 	 * @return a set of EClasses
 	 */
 	public static Set<EClass> getAllModelElementEClasses() {
-		
+
 		if (registryEClasses != null) {
 			return new LinkedHashSet<EClass>(registryEClasses);
 		}
-		
+
 		final Set<EClass> result = new LinkedHashSet<EClass>();
 		final Registry registry = EPackage.Registry.INSTANCE;
 
@@ -150,7 +150,7 @@ public final class CommonUtil {
 			}
 
 		}
-		
+
 		registryEClasses = result;
 		return result;
 	}
@@ -158,8 +158,8 @@ public final class CommonUtil {
 	/**
 	 * Retrieve all EClasses from the ECore package that are model element subclasses.
 	 * 
-	 * @param ePackage 
-	 * 			the package to get the classes from
+	 * @param ePackage
+	 *            the package to get the classes from
 	 * @return a set of EClasses found in the given EPackage
 	 */
 	private static Set<EClass> getAllModelElementEClasses(final EPackage ePackage) {
@@ -191,7 +191,8 @@ public final class CommonUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <T extends EObject> T getParent(final Class<T> parent, final EObject child, final Set<EObject> seenModelElements) {
+	private static <T extends EObject> T getParent(final Class<T> parent, final EObject child,
+		final Set<EObject> seenModelElements) {
 		if (child == null) {
 			return null;
 		}
@@ -209,11 +210,12 @@ public final class CommonUtil {
 	}
 
 	/**
-	 * Check an EObject and its containment tree whether it is self-contained. A containment tree is self contained if it
+	 * Check an EObject and its containment tree whether it is self-contained. A containment tree is self contained if
+	 * it
 	 * does not have references to EObjects outside the tree.
 	 * 
-	 * @param object 
-	 * 			the eObject that is checked whether it is self-contained
+	 * @param object
+	 *            the eObject that is checked whether it is self-contained
 	 * @return true if it is self-contained, false otherwise
 	 */
 	public static boolean isSelfContained(final EObject object) {
@@ -224,10 +226,10 @@ public final class CommonUtil {
 	 * Check an EObject and its containment tree whether it is self-contained.<br/>
 	 * A containment tree is self contained if it does not have references to EObjects outside the tree.
 	 * 
-	 * @param eObject 
-	 * 			the EObject that is checked whether it is self-contained
-	 * @param ignoreContainer 
-	 * 			true, if references of object to its container should be ignored in the check
+	 * @param eObject
+	 *            the EObject that is checked whether it is self-contained
+	 * @param ignoreContainer
+	 *            true, if references of object to its container should be ignored in the check
 	 * @return true if it is self-contained, false otherwise
 	 */
 	public static boolean isSelfContained(final EObject eObject, final boolean ignoreContainer) {
@@ -256,8 +258,8 @@ public final class CommonUtil {
 	/**
 	 * Get all contained EObjects not including transient containment features.
 	 * 
-	 * @param eObject 
-	 * 		the EObject whose non-transient contents should be retrieved
+	 * @param eObject
+	 *            the EObject whose non-transient contents should be retrieved
 	 * @return a set of contained elements not including root (the passed EObject itself)
 	 */
 	public static Set<EObject> getNonTransientContents(final EObject eObject) {
@@ -324,8 +326,8 @@ public final class CommonUtil {
 	 * Determines whether an EObject is a singleton object. All EObjects being children of ECorePackage are considered
 	 * as singletons.
 	 * 
-	 * @param eObject 
-	 * 			the EObject that will be checked whether it is a singleton
+	 * @param eObject
+	 *            the EObject that will be checked whether it is a singleton
 	 * @return true if it is a singleton, false otherwise
 	 */
 	public static boolean isSingletonEObject(final EObject eObject) {
@@ -359,8 +361,8 @@ public final class CommonUtil {
 
 		contents = resource.getAllContents();
 
-		// 2. Run: Check if RootNodes are children -> set.contains(RootNode) 
-		// -- no:  RootNode in rootNode-Set 
+		// 2. Run: Check if RootNodes are children -> set.contains(RootNode)
+		// -- no: RootNode in rootNode-Set
 		// -- yes: Drop RootNode, will be imported as a child
 		while (contents.hasNext()) {
 			EObject content = contents.next();

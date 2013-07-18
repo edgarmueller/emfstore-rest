@@ -13,29 +13,25 @@ package org.eclipse.emf.emfstore.fuzzy.emf.config.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.emf.emfstore.fuzzy.emf.config.ConfigPackage;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Diff Report</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Diff Report</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.DiffReportImpl#getDiffs <em>Diffs</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.DiffReportImpl#getDiffs
+ * <em>Diffs</em>}</li>
  * </ul>
  * </p>
  * 
@@ -43,9 +39,8 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff;
  */
 public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	/**
-	 * The cached value of the '{@link #getDiffs() <em>Diffs</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDiffs() <em>Diffs</em>}' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see #getDiffs()
 	 * @generated
@@ -54,8 +49,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	protected EList<TestDiff> diffs;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -64,8 +58,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -75,26 +68,26 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public EList<TestDiff> getDiffs() {
 		if (diffs == null) {
-			diffs = new EObjectContainmentEList<TestDiff>(TestDiff.class, this, ConfigPackage.DIFF_REPORT__DIFFS);
+			diffs = new EObjectContainmentEList<TestDiff>(TestDiff.class, this,
+					ConfigPackage.DIFF_REPORT__DIFFS);
 		}
 		return diffs;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ConfigPackage.DIFF_REPORT__DIFFS:
 			return ((InternalEList<?>) getDiffs()).basicRemove(otherEnd, msgs);
@@ -103,8 +96,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -118,8 +110,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -136,8 +127,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -152,8 +142,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 
 package org.eclipse.emf.emfstore.client;
@@ -27,18 +27,21 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESTagVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 
 /**
- * Represents a project in EMFStore. There are two different types of projects, {@link ESLocalProject} and
- * {@link ESRemoteProject}. Representing a locally checked out and a project on the server. This interface groups all
+ * Common interface for a project in EMFStore. There are two different types of projects, {@link ESLocalProject} and
+ * {@link ESRemoteProject}, representing a locally checked out and a project on the server. This interface groups all
  * attributes and calls which are available on both.
  * 
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESProject {
 
 	/**
-	 * Return the global ID of the project. This ID is globally unique even among different server and client nodes.
+	 * Returns the global ID of the project. This ID is globally unique even among different server and client nodes.
 	 * 
 	 * @return the global ID of the project
 	 */
@@ -123,7 +126,7 @@ public interface ESProject {
 	 * 
 	 * @throws ESException in case an error occurs while retrieving the history information
 	 */
-	<U extends ESHistoryQuery<?>> List<ESHistoryInfo> getHistoryInfos(U query, IProgressMonitor monitor)
+	List<ESHistoryInfo> getHistoryInfos(ESHistoryQuery<? extends ESHistoryQuery<?>> query, IProgressMonitor monitor)
 		throws ESException;
 
 	/**

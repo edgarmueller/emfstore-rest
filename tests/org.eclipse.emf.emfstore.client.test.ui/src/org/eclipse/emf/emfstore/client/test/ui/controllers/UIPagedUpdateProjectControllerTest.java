@@ -11,7 +11,7 @@
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
 import org.eclipse.emf.emfstore.client.ESPagedUpdateConfig;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
+import org.eclipse.emf.emfstore.internal.common.ExtensionRegistry;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,7 +42,7 @@ public class UIPagedUpdateProjectControllerTest extends AbstractUIControllerTest
 
 		pagedUpdate();
 
-		assertTrue(getCheckedoutCopy().getBaseVersion().getIdentifier() == localProject.getBaseVersion()
+		assertTrue(getCopy().getBaseVersion().getIdentifier() == localProject.getBaseVersion()
 			.getIdentifier());
 
 	}

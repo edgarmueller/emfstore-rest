@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * koegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.caching;
 
@@ -27,7 +27,6 @@ import org.junit.Before;
 public abstract class CachingTest {
 
 	private Project project;
-	private ProjectSpace projectSpace;
 
 	/**
 	 * Setup a dummy project for testing.
@@ -38,56 +37,19 @@ public abstract class CachingTest {
 		projectSpace.setBaseVersion(VersioningFactory.eINSTANCE.createPrimaryVersionSpec());
 		projectSpace.setIdentifier("testProjectSpace");
 		projectSpace.setLastUpdated(new Date());
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 		projectSpace.setProjectDescription("ps description");
 		projectSpace.setProjectId(org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
 			.createProjectId());
 		projectSpace.setProjectName("ps name");
 
-		setProject(org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject());
-
+		project = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject();
 		projectSpace.setProject(getProject());
 
 		projectSpace.makeTransient();
 		projectSpace.init();
-
-		setProjectSpace(projectSpace);
-
 	}
 
-	/**
-	 * @param project the project to set
-	 */
-	private void setProject(Project project) {
-		this.project = project;
-	}
-
-	/**
-	 * @return the project
-	 */
-	public Project getProject() {
+	protected Project getProject() {
 		return project;
 	}
-
-	/**
-	 * @param projectSpace the projectSpace to set
-	 */
-	private void setProjectSpace(ProjectSpace projectSpace) {
-		this.projectSpace = projectSpace;
-	}
-
-	/**
-	 * @return the projectSpace
-	 */
-	public ProjectSpace getProjectSpace() {
-		return projectSpace;
-	}
-
-	/**
-	 * Clear all operations from project space.
-	 */
-	protected void clearOperations() {
-		clearOperations();
-	}
-
 }

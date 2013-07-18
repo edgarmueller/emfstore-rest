@@ -32,6 +32,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.common.model.ModelVersion} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class ModelVersionItemProvider extends RootElementItemProvider implements IEditingDomainItemProvider,
@@ -39,6 +40,7 @@ public class ModelVersionItemProvider extends RootElementItemProvider implements
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ModelVersionItemProvider(AdapterFactory adapterFactory) {
@@ -48,6 +50,7 @@ public class ModelVersionItemProvider extends RootElementItemProvider implements
 	/**
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -64,6 +67,7 @@ public class ModelVersionItemProvider extends RootElementItemProvider implements
 	/**
 	 * This adds a property descriptor for the Release Number feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addReleaseNumberPropertyDescriptor(Object object) {
@@ -86,6 +90,7 @@ public class ModelVersionItemProvider extends RootElementItemProvider implements
 	/**
 	 * This returns ModelVersion.gif.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -96,6 +101,7 @@ public class ModelVersionItemProvider extends RootElementItemProvider implements
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -128,6 +134,7 @@ public class ModelVersionItemProvider extends RootElementItemProvider implements
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
 	 * that can be created under this object.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -138,6 +145,7 @@ public class ModelVersionItemProvider extends RootElementItemProvider implements
 	/**
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

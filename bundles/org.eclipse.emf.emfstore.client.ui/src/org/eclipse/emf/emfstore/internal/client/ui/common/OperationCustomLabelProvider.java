@@ -13,7 +13,7 @@
 package org.eclipse.emf.emfstore.internal.client.ui.common;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.common.ESDisposable;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**

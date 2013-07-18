@@ -6,8 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * wesendon
+ * Contributors:
+ * Otto von Wesendonk - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.handler;
 
@@ -17,10 +18,12 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**
- * This interface allows to hook into the operation recorder and to modify the recorded operations. Generally this is
- * useful for combining similar operations in composite operations.
+ * This interface allows to hook into the operation recorder and to modify the recorded operations.
+ * Generally this is useful for combining similar operations into composite operations.
  * 
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESOperationModifier {
 
@@ -30,11 +33,20 @@ public interface ESOperationModifier {
 	String ID = "org.eclipse.emf.emfstore.client.handler.operationModifier";
 
 	/**
-	 * Allows to modify the operations.
+	 * <p>
+	 * Allows to modify the recorded operations.
+	 * </p>
+	 * <p>
+	 * <b>NOTE:</b> This method is only called if commands are used.
+	 * </p>
 	 * 
-	 * @param operations recorded operations
-	 * @param command triggering command
-	 * @return new list of operations
+	 * @param operations
+	 *            the recorded operations that may be modified
+	 * @param command
+	 *            the triggering command
+	 * @return a possibly modified list of operations
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	List<AbstractOperation> modify(List<AbstractOperation> operations, Command command);
 

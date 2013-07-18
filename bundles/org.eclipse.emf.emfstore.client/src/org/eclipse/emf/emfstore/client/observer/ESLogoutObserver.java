@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
@@ -18,6 +19,8 @@ import org.eclipse.emf.emfstore.common.ESObserver;
  * Observes a logout of a session.
  * 
  * @author koegel
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESLogoutObserver extends ESObserver {
 
@@ -25,7 +28,9 @@ public interface ESLogoutObserver extends ESObserver {
 	 * Called to notify about the completion of a logout of the given usersession.
 	 * 
 	 * @param session
-	 *            the usersession that was logged out
+	 *            the {@link ESUsersession} that was logged out
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void logoutCompleted(ESUsersession session);
 }

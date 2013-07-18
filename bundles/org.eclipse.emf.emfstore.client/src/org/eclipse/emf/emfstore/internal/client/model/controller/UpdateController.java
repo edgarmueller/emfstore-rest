@@ -6,13 +6,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * ovonwesen
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.controller;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,13 +26,15 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ModelElementIdToEObjectMappingImpl;
+import org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
+import org.eclipse.emf.emfstore.server.ESConflict;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 
@@ -145,20 +146,20 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			.notify(ESUpdateObserver.class)
 			.inspectChanges(getProjectSpace().toAPI(), copy, getProgressMonitor());
 
-		boolean potentialConflictsDetected = false;
 		if (getProjectSpace().getOperations().size() > 0) {
-			Set<ConflictBucketCandidate> conflictBucketCandidates = conflictDetector
-				.calculateConflictCandidateBuckets(Collections.singletonList(localChanges), changes, idToEObjectMapping);
-			potentialConflictsDetected = conflictDetector.containsConflictingBuckets(conflictBucketCandidates);
-			if (potentialConflictsDetected) {
+			ChangeConflictSet changeConflictSet = conflictDetector.calculateConflicts(
+				Collections.singletonList(localChanges), changes, idToEObjectMapping);
+			ESConflictSetImpl conflictSet = new ESConflictSetImpl(changeConflictSet);
+			Set<ESConflict> conflicts = conflictSet.getConflicts();
+			if (conflicts.size() > 0) {
 				getProgressMonitor().subTask("Conflicts detected, calculating conflicts");
-				ChangeConflictException conflictException = new ChangeConflictException(new ChangeConflict(
-					getProjectSpace(), Arrays.asList(localChanges), changes, conflictBucketCandidates,
-					idToEObjectMapping).toAPI());
-				if (callback.conflictOccurred(conflictException.getChangeConflict(), getProgressMonitor())) {
-					return getProjectSpace().getBaseVersion();
+				if (callback.conflictOccurred(conflictSet, getProgressMonitor())) {
+					localChanges = getProjectSpace().mergeResolvedConflicts(changeConflictSet,
+						Collections.singletonList(localChanges),
+						changes);
+					// continue with update by applying changes
 				} else {
-					throw conflictException;
+					throw new ChangeConflictException(changeConflictSet);
 				}
 			}
 		}
@@ -167,11 +168,12 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		getProgressMonitor().subTask("Applying changes");
 
-		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, callback, getProgressMonitor());
+		getProjectSpace().applyChanges(resolvedVersion, changes, localChanges, getProgressMonitor(), true);
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESUpdateObserver.class)
 			.updateCompleted(getProjectSpace().toAPI(), getProgressMonitor());
 
 		return getProjectSpace().getBaseVersion();
 	}
+
 }

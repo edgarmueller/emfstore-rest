@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -63,7 +63,7 @@ public class UIShowProjectPropertiesController extends AbstractEMFStoreUIControl
 			ESRemoteProject remoteProjectImpl = new ESRemoteProjectImpl(serverInfo, projectInfo);
 			// TODO: monitor
 			versionSpec = remoteProjectImpl.resolveVersionSpec(ESVersionSpec.FACTORY.createHEAD(),
-																new NullProgressMonitor());
+				new NullProgressMonitor());
 			revision = "" + versionSpec.getIdentifier();
 		} catch (ESException e) {
 			// do nothing

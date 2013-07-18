@@ -6,8 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * emueller
+ * Contributors:
+ * Edgar Mueller - initial API and implementation, API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.ui;
 
@@ -23,11 +23,13 @@ import org.eclipse.emf.ecore.EClass;
  * update, commit and merge details dialog.
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESClassFilter {
 
 	/**
-	 * The {@link EClass}es that are considered as filtered.
+	 * Returns the {@link EClass}es that are considered as filtered.
 	 * 
 	 * @return the filtered {@link EClass}es
 	 */

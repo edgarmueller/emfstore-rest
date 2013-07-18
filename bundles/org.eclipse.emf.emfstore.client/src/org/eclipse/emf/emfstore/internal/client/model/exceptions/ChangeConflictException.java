@@ -6,13 +6,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
-import org.eclipse.emf.emfstore.client.ESChangeConflict;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictImpl;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
+import org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl;
 
 /**
  * Exception that represents that there are conflicting changes.
@@ -22,26 +22,26 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESChangeConflictI
 @SuppressWarnings("serial")
 public class ChangeConflictException extends WorkspaceException {
 
-	private final ESChangeConflict changeConflict;
+	private final ChangeConflictSet changeConflict;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param changeConflict
-	 *            the {@link ESChangeConflictImpl} leading to the conflict
+	 *            the {@link ChangeConflictSet} leading to the conflict
 	 */
-	public ChangeConflictException(ESChangeConflict changeConflict) {
-		super("Conflict detected on update");
-		this.changeConflict = changeConflict;
-
+	public ChangeConflictException(ChangeConflictSet changeConflict) {
+		this("Conflict detected on update", changeConflict);
 	}
 
 	/**
-	 * Returns the {@link ESChangeConflictImpl} that caused the exception.
+	 * Constructor.
 	 * 
-	 * @return the change conflict that led to the exception
+	 * @param conflictSet
+	 *            the {@link ESConflictSetImpl} leading to the conflict
 	 */
-	public ESChangeConflict getChangeConflict() {
-		return changeConflict;
+	public ChangeConflictException(String message, ChangeConflictSet conflictSet) {
+		super(message);
+		this.changeConflict = conflictSet;
 	}
 }

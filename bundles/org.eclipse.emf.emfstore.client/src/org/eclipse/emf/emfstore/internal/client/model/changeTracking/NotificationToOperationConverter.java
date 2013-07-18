@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * chodnick
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking;
@@ -181,7 +181,7 @@ public final class NotificationToOperationConverter {
 			}
 		}
 
-		if (!n.wasSet()) {
+		if (n.wasUnset()) {
 			operation.setUnset(UnsetType.WAS_UNSET);
 		}
 
@@ -215,7 +215,7 @@ public final class NotificationToOperationConverter {
 			n.getReference(), list, isAdd,
 			n.getPosition());
 
-		if (!n.wasSet()) {
+		if (n.wasUnset()) {
 			multiRefOp.setUnset(UnsetType.WAS_UNSET);
 		}
 
@@ -301,7 +301,7 @@ public final class NotificationToOperationConverter {
 			op.setNewValue(n.getNewValue());
 			op.setOldValue(n.getOldValue());
 
-			if (!n.wasSet()) {
+			if (n.wasUnset()) {
 				op.setUnset(UnsetType.WAS_UNSET);
 			}
 			return op;
@@ -314,7 +314,7 @@ public final class NotificationToOperationConverter {
 			setOperation.setOldValue(n.getOldValue());
 			setOperation.setIndex(n.getPosition());
 
-			if (!n.wasSet()) {
+			if (n.wasUnset()) {
 				setOperation.setUnset(UnsetType.WAS_UNSET);
 			}
 
@@ -369,7 +369,7 @@ public final class NotificationToOperationConverter {
 				newModelElementId, n.getReference(),
 				n.getNotifierModelElement());
 
-			if (!n.wasSet()) {
+			if (n.wasUnset()) {
 				singleRefOperation.setUnset(UnsetType.WAS_UNSET);
 			}
 
@@ -391,7 +391,7 @@ public final class NotificationToOperationConverter {
 				setOperation.setNewValue(newModelElementId);
 			}
 
-			if (!n.wasSet()) {
+			if (n.wasUnset()) {
 				setOperation.setUnset(UnsetType.WAS_UNSET);
 			}
 

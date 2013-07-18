@@ -18,11 +18,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -42,11 +46,11 @@ import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
 import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportChangesController;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
@@ -59,10 +63,10 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.Con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.controller.CommitController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.ShareController;
 import org.eclipse.emf.emfstore.internal.client.model.controller.UpdateController;
+import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.IllegalProjectSpaceStateException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.PropertyNotFoundException;
@@ -74,13 +78,16 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.client.observers.DeleteProjectSpaceObserver;
 import org.eclipse.emf.emfstore.internal.client.properties.PropertyManager;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
+import org.eclipse.emf.emfstore.internal.common.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucketCandidate;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -192,27 +199,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            changes from the current branch
 	 * @param myChanges
 	 *            merged changes
-	 * 
-	 * @throws ESException in case the checksum comparison failed and the activated IChecksumErrorHandler
-	 *             also failed
-	 */
-	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges)
-		throws ESException {
-		applyChanges(baseSpec, incoming, myChanges, ESUpdateCallback.NOCALLBACK, new NullProgressMonitor());
-	}
-
-	/**
-	 * Helper method which applies merged changes on the ProjectSpace. This
-	 * method is used by merge mechanisms in update as well as branch merging.
-	 * 
-	 * @param baseSpec
-	 *            new base version
-	 * @param incoming
-	 *            changes from the current branch
-	 * @param myChanges
-	 *            merged changes
-	 * @param callback
-	 *            a {@link ESUpdateCallback} that is used to handle a possibly occurring checksum error
 	 * @param progressMonitor
 	 *            an {@link IProgressMonitor} to inform about the progress of the UpdateCallback in case it is called
 	 * 
@@ -220,7 +206,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *             also failed
 	 */
 	public void applyChanges(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming, ChangePackage myChanges,
-		ESUpdateCallback callback, IProgressMonitor progressMonitor) throws ESException {
+		IProgressMonitor progressMonitor, boolean runChecksumTestOnBaseSpec) throws ESException {
 
 		// revert local changes
 		notifyPreRevertMyChanges(getLocalChangePackage());
@@ -231,11 +217,26 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		applyChangePackages(incoming, false);
 		notifyPostApplyTheirChanges(incoming);
 
+		if (runChecksumTestOnBaseSpec) {
+			runChecksumTests(baseSpec, incoming, progressMonitor);
+		}
+		// reapply local changes
+		applyOperations(myChanges.getOperations(), true);
+		notifyPostApplyMergedChanges(myChanges);
+
+		setBaseVersion(baseSpec);
+		saveProjectSpaceOnly();
+	}
+
+	private void runChecksumTests(PrimaryVersionSpec baseSpec, List<ChangePackage> incoming,
+		IProgressMonitor progressMonitor)
+		throws ESException {
 		progressMonitor.subTask("Computing checksum");
 		if (!performChecksumCheck(baseSpec, getProject())) {
 			progressMonitor.subTask("Invalid checksum.  Activating checksum error handler.");
-			boolean errorHandled = callback.checksumCheckFailed(this.toAPI(), baseSpec.toAPI(),
-				progressMonitor);
+			boolean errorHandled = Configuration.getClientBehavior().getChecksumErrorHandler()
+				.execute(this.toAPI(), baseSpec.toAPI(),
+					progressMonitor);
 			if (!errorHandled) {
 				// rollback
 				for (int i = incoming.size() - 1; i >= 0; i--) {
@@ -246,13 +247,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				throw new ESException("Update cancelled by checksum error handler due to invalid checksum.");
 			}
 		}
-
-		// reapply local changes
-		applyOperations(myChanges.getOperations(), true);
-		notifyPostApplyMergedChanges(myChanges);
-
-		setBaseVersion(baseSpec);
-		saveProjectSpaceOnly();
 	}
 
 	private void applyChangePackage(ChangePackage changePackage, boolean addOperations) {
@@ -344,7 +338,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *      org.eclipse.emf.emfstore.client.model.controller.callbacks.CommitCallback,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public PrimaryVersionSpec commit(LogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
+	public PrimaryVersionSpec commit(String logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws ESException {
 		return new CommitController(this, logMessage, callback, monitor).execute();
 	}
@@ -352,7 +346,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * {@inheritDoc}
 	 */
-	public PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage,
+	public PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, String logMessage,
 		ESCommitCallback callback,
 		IProgressMonitor monitor) throws ESException {
 		return new CommitController(this, branch, logMessage, callback, monitor).execute();
@@ -445,7 +439,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			AbstractOperation copy = ModelUtil.clone(abstractOperation);
 			changePackage.getOperations().add(copy);
 		}
-
+		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
+		if (getUsersession() != null) {
+			logMessage.setAuthor(getUsersession().getUsername());
+		}
+		else {
+			logMessage.setAuthor("<Unkown>");
+		}
+		logMessage.setClientDate(new Date());
+		changePackage.setLogMessage(logMessage);
 		return changePackage;
 	}
 
@@ -479,36 +481,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			this.setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 			localChangePackage = getLocalChangePackage();
 		}
-
-		if (getLocalOperations() != null) {
-			migrateOperations(localChangePackage);
-		}
-
 		return localChangePackage.getOperations();
-	}
-
-	private void migrateOperations(ChangePackage localChangePackage) {
-
-		if (getLocalOperations() == null || getLocalOperations().getOperations().size() == 0 || isTransient()) {
-			return;
-		}
-
-		localChangePackage.getOperations().addAll(getLocalOperations().getOperations());
-
-		Resource eResource = getLocalOperations().eResource();
-		// if for some reason the resource of project space and operations
-		// are not different, then reinitialize operations URI
-		// TODO: first case kills change package
-		if (this.eResource() == eResource) {
-			eResource = resourceSet.createResource(ClientURIUtil.createOperationsURI(this));
-		} else {
-			eResource.getContents().remove(0);
-		}
-		setLocalOperations(null);
-		eResource.getContents().add(localChangePackage);
-		saveResource(eResource);
-		save();
-
 	}
 
 	/**
@@ -657,7 +630,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			resourcePersister.addResource(this.eResource());
 			resourcePersister.addResource(getLocalChangePackage().eResource());
 			resourcePersister.addResource(getProject().eResource());
-			resourcePersister.addDirtyStateChangeLister(new ProjectSpaceSaveStateNotifier(this));
+			resourcePersister.addDirtyStateChangeLister(new ESLocalProjectSaveStateNotifier(toAPI()));
 			ESWorkspaceProviderImpl.getObserverBus().register(resourcePersister);
 		}
 	}
@@ -842,58 +815,97 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 */
-	public boolean merge(PrimaryVersionSpec target, ChangeConflict conflict,
-		ConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws ESException {
-		// merge the conflicts
-		if (conflictResolver.resolveConflicts(getProject(), conflict,
-			getBaseVersion(), target)) {
-			progressMonitor.subTask("Conflicts resolved, calculating result");
-			ChangePackage mergedResult = conflictResolver.getMergedResult();
-			applyChanges(target, conflict.getNewPackages(), mergedResult,
-				callback, progressMonitor);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
 	 */
 	public void mergeBranch(final PrimaryVersionSpec branchSpec, final ConflictResolver conflictResolver,
 		final IProgressMonitor monitor)
 		throws ESException {
-		new ServerCall<Void>(this) {
+
+		if (branchSpec == null || conflictResolver == null) {
+			throw new IllegalArgumentException("Arguments must not be null.");
+		}
+
+		if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
+			throw new InvalidVersionSpecException("Can't merge branch with itself.");
+		}
+
+		PrimaryVersionSpec commonAncestor = new ServerCall<PrimaryVersionSpec>(this) {
 			@Override
-			protected Void run() throws ESException {
-				if (branchSpec == null || conflictResolver == null) {
-					throw new IllegalArgumentException("Arguments must not be null.");
-				}
-				if (Versions.isSameBranch(getBaseVersion(), branchSpec)) {
-					throw new InvalidVersionSpecException("Can't merge branch with itself.");
-				}
-				PrimaryVersionSpec commonAncestor = resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
+			protected PrimaryVersionSpec run() throws ESException {
+				return resolveVersionSpec(Versions.createANCESTOR(getBaseVersion(),
 					branchSpec), monitor);
-				List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
-				List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
-
-				Set<ConflictBucketCandidate> calculateConflictCandidateBuckets = new ConflictDetector()
-					.calculateConflictCandidateBuckets(branchChanges, baseChanges, getProject());
-
-				ChangeConflict conflictException = new ChangeConflict(ProjectSpaceBase.this,
-					branchChanges, baseChanges, calculateConflictCandidateBuckets, ProjectSpaceBase.this.getProject());
-
-				if (conflictResolver.resolveConflicts(getProject(), conflictException, getBaseVersion(), null)) {
-					// TODO: do we need to care about checksum errors here?
-					applyChanges(getBaseVersion(), baseChanges, conflictResolver.getMergedResult());
-					setMergedVersion(ModelUtil.clone(branchSpec));
-				}
-
-				return null;
 			}
 		}.execute();
+
+		final List<ChangePackage> baseChanges = getChanges(commonAncestor, getBaseVersion());
+		List<ChangePackage> branchChanges = getChanges(commonAncestor, branchSpec);
+
+		ChangeConflictSet conflictSet = new ConflictDetector().calculateConflicts(branchChanges,
+			baseChanges, getProject());
+
+		if (conflictResolver.resolveConflicts(getProject(), conflictSet)) {
+			final ChangePackage resolvedConflicts = mergeResolvedConflicts(conflictSet, branchChanges, baseChanges);
+			RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
+
+				public Void call() throws Exception {
+					applyChanges(getBaseVersion(), baseChanges, resolvedConflicts, monitor, false);
+					setMergedVersion(ModelUtil.clone(branchSpec));
+					return null;
+				}
+			});
+		}
+	}
+
+	public ChangePackage mergeResolvedConflicts(ChangeConflictSet conflictSet,
+		List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages)
+		throws ChangeConflictException {
+
+		Set<AbstractOperation> accceptedMineSet = new LinkedHashSet<AbstractOperation>();
+		Set<AbstractOperation> rejectedTheirsSet = new LinkedHashSet<AbstractOperation>();
+
+		for (ConflictBucket conflict : conflictSet.getConflictBuckets()) {
+			if (!conflict.isResolved()) {
+				throw new ChangeConflictException(
+					"Conflict during update occured and callback failed to resolve all conflicts!",
+					conflictSet);
+			}
+			accceptedMineSet.addAll(conflict.getAcceptedLocalOperations());
+			rejectedTheirsSet.addAll(conflict.getRejectedRemoteOperations());
+		}
+
+		List<AbstractOperation> acceptedMineList = new LinkedList<AbstractOperation>();
+		for (ChangePackage locChangePackage : myChangePackages) {
+			for (AbstractOperation myOp : locChangePackage.getOperations()) {
+				if (conflictSet.getNotInvolvedInConflict().contains(myOp)) {
+					acceptedMineList.add(myOp);
+				} else if (accceptedMineSet.contains(myOp)) {
+					acceptedMineList.add(myOp);
+				}
+				accceptedMineSet.remove(myOp);
+			}
+		}
+		// add all remaining operations in acceptedMineSet (they have been generated during merge)
+		accceptedMineSet.addAll(accceptedMineSet);
+
+		List<AbstractOperation> rejectedTheirsList = new LinkedList<AbstractOperation>();
+		for (ChangePackage theirCP : theirChangePackages) {
+			for (AbstractOperation theirOp : theirCP.getOperations()) {
+				if (rejectedTheirsSet.contains(theirOp)) {
+					rejectedTheirsList.add(theirOp);
+				}
+			}
+		}
+
+		List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>(rejectedTheirsList.size()
+			+ acceptedMineList.size());
+		for (AbstractOperation operationToReverse : rejectedTheirsList) {
+			mergeResult.add(0, operationToReverse.reverse());
+		}
+
+		mergeResult.addAll(acceptedMineList);
+		ChangePackage result = VersioningFactory.eINSTANCE.createChangePackage();
+		result.getOperations().addAll(mergeResult);
+
+		return result;
 	}
 
 	/**
@@ -1069,8 +1081,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#shareProject()
 	 */
-	public void shareProject(IProgressMonitor monitor) throws ESException {
-		shareProject(null, monitor);
+	public ProjectInfo shareProject(IProgressMonitor monitor) throws ESException {
+		return shareProject(null, monitor);
 	}
 
 	/**
@@ -1080,8 +1092,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.client.model.ProjectSpace#shareProject(org.eclipse.emf.emfstore.client.model.Usersession,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	public void shareProject(Usersession session, IProgressMonitor monitor) throws ESException {
-		new ShareController(this, session, monitor).execute();
+	public ProjectInfo shareProject(Usersession session, IProgressMonitor monitor) throws ESException {
+		return new ShareController(this, session, monitor).execute();
 	}
 
 	/**
@@ -1214,7 +1226,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.ESDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	@SuppressWarnings("unchecked")
 	public void dispose() {

@@ -21,15 +21,22 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	NoLocalChangesCommitControllerTest.class,
+	LocalProjectNeedsToBeUpdatedCommitControllerTest.class,
 	UIAddTagControllerTest.class,
-	UICreateBranchControllerTest.class,
+	UIAskForBranchCheckoutControllerTest.class,
+	UIBranchControllersTest.class,
+	UICheckoutControllerTest.class,
 	UICreateRemoteProjectControllerTest.class,
 	UIDeleteRemoteProjectControllerTest.class,
-	// UIRevertCommitControllerTest.class,
-	// UIServerControllerTest.class,
+	UIMergeControllerTest.class,
+	UIRevertCommitControllerTest.class,
+	UIRevertCommitControllerTest2.class,
+	UIServerControllerTest.class,
 	UISessionControllerTest.class,
 	UIShareProjectControllerTest.class,
 	UIUpdateProjectControllerTest.class,
+	UIUpdateProjectToVersionControllerTest.class,
 	UIPagedUpdateProjectControllerTest.class
 })
 public class AllUIControllerTests {

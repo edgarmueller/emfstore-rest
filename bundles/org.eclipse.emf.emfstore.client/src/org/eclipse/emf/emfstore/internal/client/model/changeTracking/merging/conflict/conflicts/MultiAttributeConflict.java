@@ -16,23 +16,21 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 //
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
 
-public class MultiAttributeConflict extends Conflict {
+public class MultiAttributeConflict extends VisualConflict {
 
-	public MultiAttributeConflict(Set<AbstractOperation> opsA, Set<AbstractOperation> opsB,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager,
+	public MultiAttributeConflict(ConflictBucket conflictBucket, DecisionManager decisionManager,
 		boolean myAdd) {
-		super(opsA, opsB, leftOperation, rightOperation, decisionManager, myAdd, true);
+		super(conflictBucket, decisionManager, myAdd, true);
 	}
 
 	/**
@@ -42,7 +40,7 @@ public class MultiAttributeConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictDescription()
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictDescription()
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
@@ -60,7 +58,7 @@ public class MultiAttributeConflict extends Conflict {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.conflict.Conflict#initConflictOptions(java.util.List)
+	 * @see org.eclipse.emf.emfstore.internal.client.VisualConflict.dialogs.merge.conflict.Conflict#initConflictOptions(java.util.List)
 	 */
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {

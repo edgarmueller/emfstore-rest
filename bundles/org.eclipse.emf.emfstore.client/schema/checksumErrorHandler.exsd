@@ -52,17 +52,17 @@
          <attribute name="isActive" type="boolean" use="required">
             <annotation>
                <documentation>
-                  
+                  Whether the computation of the checksum is performed.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="errorHandler" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The actual error handler.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.model.handler.ESChecksumErrorHandler"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.client.handler.ESChecksumErrorHandler"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -74,7 +74,7 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         1.0
       </documentation>
    </annotation>
 
@@ -105,5 +105,18 @@
       </documentation>
    </annotation>
 
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         Copyright (c) 2011-2013 EclipseSource Muenchen GmbH and others.&lt;br/&gt;
+
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+      </documentation>
+   </annotation>
 
 </schema>

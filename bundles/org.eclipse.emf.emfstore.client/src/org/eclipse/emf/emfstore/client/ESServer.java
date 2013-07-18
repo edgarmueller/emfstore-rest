@@ -7,15 +7,15 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ServerFactoryImpl;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerFactoryImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -24,13 +24,16 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESServer {
 
 	/**
 	 * Factory for creating ESServer instances.
 	 */
-	ESServerFactory FACTORY = ServerFactoryImpl.INSTANCE;
+	ESServerFactory FACTORY = ESServerFactoryImpl.INSTANCE;
 
 	/**
 	 * Returns the local name of the server.

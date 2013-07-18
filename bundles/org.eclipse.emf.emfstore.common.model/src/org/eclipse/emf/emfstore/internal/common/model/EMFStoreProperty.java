@@ -53,7 +53,8 @@ public interface EMFStoreProperty extends EObject {
 	String getKey();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getKey <em>Key</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getKey
+	 * <em>Key</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,7 +83,8 @@ public interface EMFStoreProperty extends EObject {
 	EObject getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getValue <em>Value</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getValue
+	 * <em>Value</em>}'
 	 * containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,7 +97,8 @@ public interface EMFStoreProperty extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType}.
+	 * The literals are from the enumeration {@link org.eclipse.emf.emfstore.internal.common.model.EMFStorePropertyType}
+	 * .
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear, there really should be more of a description here...
@@ -112,7 +115,8 @@ public interface EMFStoreProperty extends EObject {
 	EMFStorePropertyType getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getType <em>Type</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getType
+	 * <em>Type</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,8 +146,8 @@ public interface EMFStoreProperty extends EObject {
 	int getVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getVersion <em>Version</em>}
-	 * ' attribute.
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty#getVersion
+	 * <em>Version</em>} ' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 

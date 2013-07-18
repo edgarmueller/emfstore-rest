@@ -92,7 +92,8 @@ public class EventsPackageImpl extends EPackageImpl implements EventsPackage {
 
 		// Obtain or create and register package
 		EventsPackageImpl theEventsPackage = (EventsPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EventsPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new EventsPackageImpl());
+			.get(eNS_URI)
+			: new EventsPackageImpl());
 
 		isInited = true;
 
@@ -123,7 +124,8 @@ public class EventsPackageImpl extends EPackageImpl implements EventsPackage {
 			.getEPackage(RolesPackage.eNS_URI) instanceof RolesPackageImpl ? EPackage.Registry.INSTANCE
 			.getEPackage(RolesPackage.eNS_URI) : RolesPackage.eINSTANCE);
 		UrlPackageImpl theUrlPackage = (UrlPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(UrlPackage.eNS_URI) instanceof UrlPackageImpl ? EPackage.Registry.INSTANCE
-			.getEPackage(UrlPackage.eNS_URI) : UrlPackage.eINSTANCE);
+			.getEPackage(UrlPackage.eNS_URI)
+			: UrlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theEventsPackage.createPackageContents();

@@ -251,7 +251,7 @@ public class ServerInterfaceTest extends ServerTests {
 				try {
 					// TODO: TQ cast
 					return getProjectSpace().commit(
-						SetupHelper.createLogMessage("bla", "blablba"), null, null);
+						"SomeCommitMessage", null, null);
 
 				} catch (ESException e) {
 					throw new RuntimeException(e);
@@ -323,7 +323,7 @@ public class ServerInterfaceTest extends ServerTests {
 				try {
 					// TODO: TQ cast
 					return getProjectSpace().commit(
-						SetupHelper.createLogMessage("bla", "blablba"), null, null);
+						"SomeCommitMessage", null, null);
 
 				} catch (ESException e) {
 					throw new RuntimeException(e);
@@ -368,7 +368,7 @@ public class ServerInterfaceTest extends ServerTests {
 				try {
 					// TODO: TQ cast
 					return getProjectSpace().commit(
-						SetupHelper.createLogMessage("bla", logMessage), null, null);
+						"SomeCommitMessage", null, null);
 
 				} catch (ESException e) {
 					throw new RuntimeException(e);

@@ -93,7 +93,7 @@ public class ESUsersessionImpl extends AbstractAPIImpl<ESUsersessionImpl, Userse
 	 * @see org.eclipse.emf.emfstore.client.ESUsersession#refresh()
 	 */
 	public void refresh() throws ESException {
-		RunESCommand.run(new Callable<Void>() {
+		RunESCommand.WithException.run(ESException.class, new Callable<Void>() {
 			public Void call() throws Exception {
 				toInternalAPI().logIn();
 				return null;

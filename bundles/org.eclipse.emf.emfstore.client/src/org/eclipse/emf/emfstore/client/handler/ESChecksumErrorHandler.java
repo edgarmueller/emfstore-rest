@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.handler;
 
@@ -20,17 +21,19 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * Interface that determines what to do in case the checksum computation on a {@link ESLocalProject} fails.
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESChecksumErrorHandler {
 
 	/**
 	 * Executes the error handler.
 	 * 
-	 * @param projectSpace
+	 * @param localProject
 	 *            the {@link ESLocalProject} which contains the project that got in an inconsistent state
 	 *            and therefore caused the failing computation of the checksum
 	 * @param versionSpec
-	 *            the version spec containing the correct checksum
+	 *            the version specifier containing the correct checksum
 	 * @param monitor
 	 *            an {@link IProgressMonitor} instance that should be used to indicate progress
 	 *            of the error handler
@@ -39,7 +42,9 @@ public interface ESChecksumErrorHandler {
 	 * 
 	 * @throws ESException
 	 *             in case any error occurs during execution of the error handler
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	boolean execute(ESLocalProject projectSpace, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
+	boolean execute(ESLocalProject localProject, ESPrimaryVersionSpec versionSpec, IProgressMonitor monitor)
 		throws ESException;
 }

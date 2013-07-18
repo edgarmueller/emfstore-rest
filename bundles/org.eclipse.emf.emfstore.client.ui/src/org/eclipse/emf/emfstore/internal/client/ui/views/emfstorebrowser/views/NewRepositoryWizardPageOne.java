@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * shterev
  * pfeifferc
  ******************************************************************************/
@@ -15,7 +15,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 import java.util.ArrayList;
 
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.exceptions.ESCertificateStoreException;
+import org.eclipse.emf.emfstore.client.exceptions.ESCertificateException;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -131,7 +131,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 				} else {
 					certificateCombo.setText("");
 				}
-			} catch (ESCertificateStoreException e1) {
+			} catch (ESCertificateException e1) {
 				certificateCombo.setText("");
 			}
 		}
@@ -146,7 +146,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			ESServer server = wizard.getServer();
 			String selectedCertificate = server.getCertificateAlias();
 			certificateCombo.select(certificates.indexOf(selectedCertificate));
-		} catch (ESCertificateStoreException e) {
+		} catch (ESCertificateException e) {
 			WorkspaceUtil.logException(e.getMessage(), e);
 		}
 	}
@@ -172,7 +172,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 	 * @return
 	 */
 	public ESServer getServer() {
-		return ESServer.FACTORY.getServer(name.getText(),
+		return ESServer.FACTORY.createServer(name.getText(),
 			url.getText(),
 			port.getSelection(),
 			certificateCombo.getText());
@@ -233,7 +233,7 @@ public class NewRepositoryWizardPageOne extends WizardPage {
 			try {
 				certificates = KeyStoreManager.getInstance().getCertificates();
 				csd.setElements(certificates.toArray());
-			} catch (ESCertificateStoreException e1) {
+			} catch (ESCertificateException e1) {
 				csd.setErrorMessage(e1.getMessage());
 			}
 			csd.setBlockOnOpen(true);

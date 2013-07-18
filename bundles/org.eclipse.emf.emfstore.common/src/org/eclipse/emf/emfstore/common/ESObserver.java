@@ -6,8 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * wesendon
+ * Contributors:
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common;
 
@@ -15,6 +15,7 @@ package org.eclipse.emf.emfstore.common;
  * Universal observer super interface. To be used with observer bus.
  * 
  * @author wesendon
+ * 
  */
 public interface ESObserver {
 }

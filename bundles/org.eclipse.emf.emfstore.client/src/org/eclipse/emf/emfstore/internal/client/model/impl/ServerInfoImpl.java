@@ -41,7 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
  * </li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getLastUsersession <em>Last Usersession
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getCertificateAlias <em> Certificate
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.model.impl.ServerInfoImpl#getCertificateAlias <em>Certificate
  * Alias</em>}</li>
  * </ul>
  * </p>
@@ -243,7 +243,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 * @generated
 	 */
 	public EList<ProjectInfo> getProjectInfos() {
-		if (projectInfos == null) {
+		if (projectInfos == null)
+		{
 			projectInfos = new EObjectContainmentEList.Resolving<ProjectInfo>(ProjectInfo.class, this,
 				ModelPackage.SERVER_INFO__PROJECT_INFOS);
 		}
@@ -256,10 +257,12 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 * @generated
 	 */
 	public Usersession getLastUsersession() {
-		if (lastUsersession != null && lastUsersession.eIsProxy()) {
+		if (lastUsersession != null && lastUsersession.eIsProxy())
+		{
 			InternalEObject oldLastUsersession = (InternalEObject) lastUsersession;
 			lastUsersession = (Usersession) eResolveProxy(oldLastUsersession);
-			if (lastUsersession != oldLastUsersession) {
+			if (lastUsersession != oldLastUsersession)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
 						ModelPackage.SERVER_INFO__LAST_USERSESSION, oldLastUsersession, lastUsersession));
@@ -319,7 +322,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.SERVER_INFO__PROJECT_INFOS:
 			return ((InternalEList<?>) getProjectInfos()).basicRemove(otherEnd, msgs);
 		}
@@ -333,7 +337,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.SERVER_INFO__NAME:
 			return getName();
 		case ModelPackage.SERVER_INFO__URL:
@@ -360,7 +365,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.SERVER_INFO__NAME:
 			setName((String) newValue);
 			return;
@@ -391,7 +397,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.SERVER_INFO__NAME:
 			setName(NAME_EDEFAULT);
 			return;
@@ -421,7 +428,8 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 		case ModelPackage.SERVER_INFO__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case ModelPackage.SERVER_INFO__URL:

@@ -6,8 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * wesendon
+ * Contributors:
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.extensionpoint;
 
@@ -27,8 +27,8 @@ import org.eclipse.emf.emfstore.internal.common.Activator;
  * 
  * @author wesendon
  */
-
-public class ESExtensionPoint {
+public final class ESExtensionPoint {
+	
 	private List<ESExtensionElement> elements;
 	private final String id;
 	private boolean exceptionInsteadOfNull;
@@ -184,8 +184,8 @@ public class ESExtensionPoint {
 	/**
 	 * Returns the first {@link ESExtensionElement} in the list.
 	 * 
-	 * @return {@link ESExtensionElement}, null or a {@link ESExtensionPointException} is thrown, depending on your config (
-	 *         {@link #setThrowException(boolean)}
+	 * @return {@link ESExtensionElement}, null or a {@link ESExtensionPointException} is thrown, depending on your
+	 *         config ( {@link #setThrowException(boolean)}
 	 */
 	public ESExtensionElement getFirst() {
 		if (elements.size() > 0) {

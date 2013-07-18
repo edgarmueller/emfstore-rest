@@ -36,6 +36,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
  * <li>autosave</li>
  * <li>default server configuration</li>
  * <li>
+ * </ul>
  * 
  * @author emueller
  * @author ovonwesen
@@ -115,7 +116,7 @@ public class Behavior {
 			}
 
 			if (checksumErrorHandler == null) {
-				checksumErrorHandler = ChecksumErrorHandler.LOG;
+				checksumErrorHandler = ChecksumErrorHandler.CANCEL;
 			}
 		}
 

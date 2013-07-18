@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  * emueller
  * koegel
@@ -15,8 +15,10 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,7 +27,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.emfstore.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportProjectSpaceController;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportWorkspaceController;
 import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
@@ -42,6 +43,7 @@ import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnkownProjectEx
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.client.observers.DeleteProjectSpaceObserver;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
@@ -100,7 +102,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProject(ModelUtil.clone(originalProject));
 		projectSpace.setProjectName(projectName);
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
 		projectSpace.initResources(getResourceSet());
 
@@ -141,7 +142,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.ESDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		for (ProjectSpace projectSpace : getProjectSpaces()) {
@@ -213,8 +214,6 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		projectSpace.setProject(project);
 		projectSpace.setProjectName(name);
 		projectSpace.setProjectDescription(description);
-		projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
-
 		projectSpace.initResources(this.workspaceResourceSet);
 
 		addProjectSpace(projectSpace);
@@ -355,7 +354,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
 	 * @generated NOT
 	 */
-	public Object getAdapter(Class adapter) {
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		return null;
 	}
 
@@ -433,6 +432,20 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 
 	public void removeServerInfo(ServerInfo serverInfo) {
 		getServerInfos().remove(serverInfo);
+
+		List<Usersession> deletables = new ArrayList<Usersession>();
+		for (Usersession session : getUsersessions()) {
+			if (session.getServerInfo() == serverInfo) {
+				try {
+					session.logout();
+				} catch (ESException e) {
+					// ignore, will be deleted anyways
+				}
+				deletables.add(session);
+			}
+		}
+
+		getUsersessions().removeAll(deletables);
 		save();
 	}
 

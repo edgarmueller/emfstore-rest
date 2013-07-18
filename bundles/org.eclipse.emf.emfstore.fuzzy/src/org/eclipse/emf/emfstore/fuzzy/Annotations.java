@@ -47,7 +47,8 @@ public final class Annotations {
 	}
 
 	/**
-	 * An annotation to set the {@link FuzzyDataProvider} for the {@link FuzzyRunner}.
+	 * An annotation to set the {@link FuzzyDataProvider} for the
+	 * {@link FuzzyRunner}.
 	 * 
 	 * @author Julian Sommerfeldt
 	 * 
@@ -61,7 +62,8 @@ public final class Annotations {
 	}
 
 	/**
-	 * An optional annotation to declare options to use in the {@link FuzzyDataProvider}.
+	 * An optional annotation to declare options to use in the
+	 * {@link FuzzyDataProvider}.
 	 * 
 	 * @author Julian Sommerfeldt
 	 * 

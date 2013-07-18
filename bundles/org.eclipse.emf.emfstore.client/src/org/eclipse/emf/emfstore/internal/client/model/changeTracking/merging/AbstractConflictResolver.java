@@ -6,20 +6,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 
 /**
  * Convenience super class for implementing {@link ConflictResolver}.
@@ -28,8 +21,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  */
 public abstract class AbstractConflictResolver implements ConflictResolver {
 
-	private List<AbstractOperation> acceptedMine;
-	private List<AbstractOperation> rejectedTheirs;
 	private final boolean isBranchMerge;
 
 	/**
@@ -41,26 +32,6 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 */
 	public AbstractConflictResolver(boolean isBranchMerge) {
 		this.isBranchMerge = isBranchMerge;
-		acceptedMine = new ArrayList<AbstractOperation>();
-		rejectedTheirs = new ArrayList<AbstractOperation>();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#getAcceptedMine()
-	 */
-	public List<AbstractOperation> getAcceptedMine() {
-		return acceptedMine;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#getAcceptedMine()
-	 */
-	public List<AbstractOperation> getRejectedTheirs() {
-		return rejectedTheirs;
 	}
 
 	/**
@@ -72,13 +43,12 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec)
 	 */
-	public boolean resolveConflicts(Project project, ChangeConflict changeConflict, PrimaryVersionSpec base,
-		PrimaryVersionSpec target) {
+	public boolean resolveConflicts(Project project, ChangeConflictSet changeConflict) {
 
 		// allow subclasses do execute before the decisionmanager is initialized
 		preDecisionManagerHook();
 
-		DecisionManager decisionManager = new DecisionManager(project, changeConflict, base, target, isBranchMerge);
+		DecisionManager decisionManager = new DecisionManager(project, changeConflict, isBranchMerge);
 
 		// if all conflicts are resolved, there's no need for further actions
 		if (decisionManager.isResolved()) {
@@ -87,27 +57,36 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 		}
 
 		// handle conflicts, most likely using the MergeWizard
-		boolean resolved = controlDecisionManager(decisionManager);
+		boolean resolved = controlDecisionManager(decisionManager, changeConflict);
 		if (resolved) {
 			if (!decisionManager.isResolved()) {
 				return false;
 			}
 			setResults(decisionManager);
 		}
+
+		postDecisionManagerHook();
 		return resolved;
 	}
 
 	private void setResults(DecisionManager decisionManager) {
 		decisionManager.calcResult();
-		acceptedMine = decisionManager.getAcceptedMine();
-		rejectedTheirs = decisionManager.getRejectedTheirs();
 	}
 
 	/**
 	 * Allows to execute code before the {@link DecisionManager} is
-	 * initiallized.
+	 * initialized.
 	 */
 	protected void preDecisionManagerHook() {
+		// do nothing by default
+	}
+
+	/**
+	 * Allows to execute code after the {@link DecisionManager} is
+	 * finished.
+	 */
+	protected void postDecisionManagerHook() {
+		// do nothing by default
 	}
 
 	/**
@@ -115,26 +94,10 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * 
 	 * @param decisionManager
 	 *            initialized {@link DecisionManager}
+	 * @param changeConflictSet the conflict set to be resolved
 	 * @return true, if all conflicts could be resolved
 	 */
-	protected abstract boolean controlDecisionManager(DecisionManager decisionManager);
+	protected abstract boolean controlDecisionManager(DecisionManager decisionManager,
+		ChangeConflictSet changeConflictSet);
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#getMergedResult()
-	 */
-	public ChangePackage getMergedResult() {
-		List<AbstractOperation> mergeResult = new ArrayList<AbstractOperation>();
-		for (AbstractOperation operationToReverse : getRejectedTheirs()) {
-			mergeResult.add(0, operationToReverse.reverse());
-		}
-
-		mergeResult.addAll(getAcceptedMine());
-		ChangePackage result = VersioningFactory.eINSTANCE.createChangePackage();
-		result.getOperations().addAll(mergeResult);
-
-		return result;
-	}
 }

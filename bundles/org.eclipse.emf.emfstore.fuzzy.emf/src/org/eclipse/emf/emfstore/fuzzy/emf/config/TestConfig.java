@@ -13,18 +13,23 @@ package org.eclipse.emf.emfstore.fuzzy.emf.config;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Test Config</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Test Config</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getSeed <em>Seed</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getCount <em>Count</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getTestClass <em>Test Class</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getId <em>Id</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getMutatorConfig <em>Mutator Config</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getSeed <em>
+ * Seed</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getCount <em>
+ * Count</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getTestClass
+ * <em>Test Class</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getId <em>Id
+ * </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getMutatorConfig
+ * <em>Mutator Config</em>}</li>
  * </ul>
  * </p>
  * 
@@ -34,10 +39,11 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TestConfig extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Seed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Seed</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Seed</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Seed</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -50,23 +56,23 @@ public interface TestConfig extends EObject {
 	long getSeed();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getSeed <em>Seed</em>}'
-	 * attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getSeed
+	 * <em>Seed</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Seed</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Seed</em>' attribute.
 	 * @see #getSeed()
 	 * @generated
 	 */
 	void setSeed(long value);
 
 	/**
-	 * Returns the value of the '<em><b>Count</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Count</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Count</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Count</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -79,23 +85,23 @@ public interface TestConfig extends EObject {
 	int getCount();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getCount <em>Count</em>}'
-	 * attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getCount
+	 * <em>Count</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Count</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Count</em>' attribute.
 	 * @see #getCount()
 	 * @generated
 	 */
 	void setCount(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Test Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Test Class</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Test Class</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Test Class</em>' attribute isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -108,22 +114,24 @@ public interface TestConfig extends EObject {
 	Class<?> getTestClass();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getTestClass
-	 * <em>Test Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getTestClass
+	 * <em>Test Class</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Test Class</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Test Class</em>' attribute.
 	 * @see #getTestClass()
 	 * @generated
 	 */
 	void setTestClass(Class<?> value);
 
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Id</b></em>' attribute. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear, there really should be more of a description here...
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear, there really
+	 * should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -136,22 +144,23 @@ public interface TestConfig extends EObject {
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getId
+	 * <em>Id</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @param value
+	 *            the new value of the '<em>Id</em>' attribute.
 	 * @see #getId()
 	 * @generated
 	 */
 	void setId(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Mutator Config</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Mutator Config</b></em>' containment
+	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mutator Config</em>' containment reference isn't clear, there really should be more of
-	 * a description here...
+	 * If the meaning of the '<em>Mutator Config</em>' containment reference
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -164,12 +173,14 @@ public interface TestConfig extends EObject {
 	MutatorConfig getMutatorConfig();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getMutatorConfig
-	 * <em>Mutator Config</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getMutatorConfig
+	 * <em>Mutator Config</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value the new value of the '<em>Mutator Config</em>' containment reference.
+	 * @param value
+	 *            the new value of the '<em>Mutator Config</em>' containment
+	 *            reference.
 	 * @see #getMutatorConfig()
 	 * @generated
 	 */

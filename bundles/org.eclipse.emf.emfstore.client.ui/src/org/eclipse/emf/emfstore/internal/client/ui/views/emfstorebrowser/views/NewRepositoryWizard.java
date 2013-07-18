@@ -6,8 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * shterev
+ * Contributors:
+ * Aleksandar Shterev - initial API and implementation
+ * Edgar Mueller - Refactorings due to new API, invalidation of existing sessions
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;
 
@@ -29,16 +30,22 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Wizard for adding a new repository.
+ * Wizard for adding or creating a new repository.
+ * 
+ * 
  * 
  * @author shterev
+ * @author emueller
  */
 public class NewRepositoryWizard extends Wizard implements INewWizard {
 
 	private ESServer server;
-
 	private NewRepositoryWizardPageOne mainPage;
 
+	/**
+	 * Whether we use this page to edit an existing server
+	 * or to create a new one.
+	 */
 	private boolean isEdit;
 
 	/**
@@ -71,6 +78,16 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 		return true;
 	}
 
+	private void invalidateSessions(final ESWorkspaceImpl workspace) throws ESException {
+		for (Usersession session : workspace.toInternalAPI().getUsersessions()) {
+			if (session.getServerInfo() == server) {
+				session.logout();
+			}
+		}
+
+		workspace.toInternalAPI().save();
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -88,21 +105,15 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 						server.setPort(editedServer.getPort());
 						server.setURL(editedServer.getURL());
 
-						// invalidate all sessions
 						invalidateSessions(workspace);
+
+						// set default certificate
+						KeyStoreManager.getInstance().setDefaultCertificate(
+							editedServer.getCertificateAlias());
 
 						return null;
 					}
 
-					private void invalidateSessions(final ESWorkspaceImpl workspace) throws ESException {
-						for (Usersession session : workspace.toInternalAPI().getUsersessions()) {
-							if (session.getServerInfo() == server) {
-								session.logout();
-							}
-						}
-
-						workspace.toInternalAPI().save();
-					}
 				});
 
 			} else {
@@ -131,7 +142,7 @@ public class NewRepositoryWizard extends Wizard implements INewWizard {
 	public ESServer getServer() {
 		if (server == null) {
 			// TODO: review or reuse client util
-			server = ESServer.FACTORY.getServer("localhost", 8080,
+			server = ESServer.FACTORY.createServer("localhost", 8080,
 				KeyStoreManager.DEFAULT_CERTIFICATE);
 		}
 		return server;

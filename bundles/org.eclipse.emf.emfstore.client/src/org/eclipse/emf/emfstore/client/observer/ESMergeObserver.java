@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
@@ -30,6 +31,8 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * The changes being applied in the 2nd and 3rd steps are filtered by means of a conflict resolver.<br/>
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface ESMergeObserver extends ESObserver {
 
@@ -37,9 +40,11 @@ public interface ESMergeObserver extends ESObserver {
 	 * Called before all local changes are reverted.
 	 * 
 	 * @param project
-	 *            the project space upon local changes have been reverted
+	 *            the {@link ESLocalProject} upon which local changes have been reverted
 	 * @param changePackage
-	 *            the {@link ChangePackage} containing the operations being reverted
+	 *            the {@link ESChangePackage} containing the operations being reverted
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void preRevertMyChanges(ESLocalProject project, ESChangePackage changePackage);
 
@@ -48,7 +53,9 @@ public interface ESMergeObserver extends ESObserver {
 	 * changes are applied.
 	 * 
 	 * @param project
-	 *            the project space upon local changes have been reverted
+	 *            the {@link ESLocalProject} upon which local changes have been reverted
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void postRevertMyChanges(ESLocalProject project);
 
@@ -57,21 +64,25 @@ public interface ESMergeObserver extends ESObserver {
 	 * our changes are re-applied.
 	 * 
 	 * @param project
-	 *            the project space upon local changes have been reverted
+	 *            the {@link ESLocalProject} upon which local changes have been reverted
 	 * @param theirChangePackages
-	 *            a list of change packages containing the changes that have been applied
-	 *            upon the project space
+	 *            a list of {@link ESChangePackage}s containing the changes that have been applied
+	 *            upon the project
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void postApplyTheirChanges(ESLocalProject project, List<ESChangePackage> theirChangePackages);
 
 	/**
-	 * Called after merge result has been re-applied, i.e. after the incoming changes
-	 * from other parties have been applied upon the given project space.
+	 * Called after the merge result has been re-applied, i.e. after the incoming changes
+	 * from other parties have been applied upon the given project.
 	 * 
 	 * @param project
-	 *            the project space upon which changes should be reapplied
+	 *            the {@link ESLocalProject} upon which changes should have been re-applied
 	 * @param changePackage
-	 *            the change package containing the changes to be applied upon the project space
+	 *            the {@link ESChangePackage} containing the changes to be applied upon the project
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	void postApplyMergedChanges(ESLocalProject project, ESChangePackage changePackage);
 }

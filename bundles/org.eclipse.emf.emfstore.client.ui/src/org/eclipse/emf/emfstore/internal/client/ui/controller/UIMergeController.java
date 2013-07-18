@@ -6,8 +6,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * wesendon
+ * Contributors:
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
@@ -16,7 +16,6 @@ import java.util.ListIterator;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.CancelOperationException;
@@ -68,9 +67,8 @@ public class UIMergeController extends AbstractEMFStoreUIController<Void> {
 		PrimaryVersionSpec selectedVersionSpec = branchSelection(projectSpace);
 
 		if (selectedVersionSpec != null) {
-			// TODO: monitor
 			projectSpace.mergeBranch(selectedVersionSpec,
-				new MergeProjectHandler(true), new NullProgressMonitor());
+				new MergeProjectHandler(true), monitor);
 		}
 		return null;
 	}

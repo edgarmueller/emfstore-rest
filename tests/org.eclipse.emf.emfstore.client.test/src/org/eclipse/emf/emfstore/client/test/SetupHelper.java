@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
 import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
@@ -340,7 +341,10 @@ public class SetupHelper {
 	 * @return server info
 	 */
 	public static ESServerImpl createServer() {
-		return (ESServerImpl) ESServer.FACTORY.getServer("localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESServerImpl server = (ESServerImpl) ESServer.FACTORY.createServer(
+			"localhost", port, KeyStoreManager.DEFAULT_CERTIFICATE);
+		ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
+		return server;
 	}
 
 	/**
@@ -368,7 +372,6 @@ public class SetupHelper {
 					.createProject());
 				projectSpace.setProjectName("Testproject");
 				projectSpace.setProjectDescription("Test description");
-				projectSpace.setLocalOperations(ModelFactory.eINSTANCE.createOperationComposite());
 
 				projectSpace.initResources(workSpace.eResource().getResourceSet());
 				// TODO: OTS
@@ -640,7 +643,6 @@ public class SetupHelper {
 	 * Commits the changes to server.
 	 */
 	public void commitChanges() {
-		final LogMessage logMessage = createLogMessage(usersession.getUsername(), "some message");
 		new EMFStoreCommand() {
 
 			@Override
@@ -649,7 +651,7 @@ public class SetupHelper {
 					.getChangePackage(getTestProjectSpace().getOperations(), true, false).getOperations().size()
 					+ " operations.");
 				try {
-					getTestProjectSpace().commit(logMessage, null, new NullProgressMonitor());
+					getTestProjectSpace().commit("SomeCommitMessage", null, new NullProgressMonitor());
 					System.out.println("commit successful!");
 				} catch (ESException e) {
 					e.printStackTrace();

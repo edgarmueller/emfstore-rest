@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver;
-import org.eclipse.emf.emfstore.internal.client.model.controller.ChangeConflict;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MEUrlResolutionException;
 import org.eclipse.emf.emfstore.internal.client.model.filetransfer.FileDownloadStatus;
@@ -34,6 +33,7 @@ import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FileTransferException;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -43,7 +43,6 @@ import org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragmen
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
@@ -116,7 +115,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @generated NOT
 	 */
-	public static final String RUNNABLE_CONTEXT_ID = "org.eclipse.emf.emfstore.client.runnableContext";
+	static final String RUNNABLE_CONTEXT_ID = "org.eclipse.emf.emfstore.client.runnableContext";
 
 	/**
 	 * Adds a file to this project space. The file will be uploaded to the
@@ -197,7 +196,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @generated NOT
 	 */
-	PrimaryVersionSpec commit(LogMessage logMessage, ESCommitCallback callback, IProgressMonitor monitor)
+	PrimaryVersionSpec commit(String logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws ESException;
 
 	/**
@@ -218,7 +217,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * @throws ESException
 	 *             in case of an exception
 	 */
-	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, LogMessage logMessage, ESCommitCallback callback,
+	PrimaryVersionSpec commitToBranch(BranchVersionSpec branch, String logMessage, ESCommitCallback callback,
 		IProgressMonitor monitor) throws ESException;
 
 	/**
@@ -234,6 +233,10 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 */
 	void mergeBranch(PrimaryVersionSpec branchSpec, ConflictResolver conflictResolver, IProgressMonitor monitor)
 		throws ESException;
+
+	ChangePackage mergeResolvedConflicts(ChangeConflictSet conflictSet,
+		List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages)
+		throws ChangeConflictException;
 
 	/**
 	 * Returns a list of branches of the current project. Every call triggers a
@@ -298,8 +301,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	void exportProject(File file, IProgressMonitor progressMonitor) throws IOException;
 
 	/**
-	 * Returns the value of the '<em><b>Base Version</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Base Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Base Version</em>' containment reference isn't clear, there really should be more of a
 	 * description here...
@@ -308,7 +311,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Base Version</em>' containment reference.
 	 * @see #setBaseVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_BaseVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_BaseVersion()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
@@ -336,8 +339,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	/**
 	 * Returns the value of the '<em><b>Workspace</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces
-	 * <em>Project Spaces</em>}'. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces <em>Project Spaces</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Workspace</em>' container reference isn't clear, there really should be more of a
 	 * description here...
@@ -346,38 +349,37 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Workspace</em>' container reference.
 	 * @see #setWorkspace(Workspace)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Workspace()
-	 * @see org.eclipse.emf.emfstore.client.model.Workspace#getProjectSpaces
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_Workspace()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpaces
 	 * @model opposite="projectSpaces" transient="false"
 	 * @generated
 	 */
 	Workspace getWorkspace();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWorkspace
-	 * <em>Workspace</em>} ' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWorkspace
+	 * <em>Workspace</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Workspace</em>' container reference.
+	 * @param value the new value of the '<em>Workspace</em>' container reference.
 	 * @see #getWorkspace()
 	 * @generated
 	 */
 	void setWorkspace(Workspace value);
 
 	/**
-	 * Returns the value of the '<em><b>Local Change Package</b></em>'
-	 * containment reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Local Change Package</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Local Change Package</em>' containment reference isn't clear, there really should be
 	 * more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
-	 * @return the value of the '<em>Local Change Package</em>' containment
-	 *         reference.
+	 * @return the value of the '<em>Local Change Package</em>' containment reference.
 	 * @see #setLocalChangePackage(ChangePackage)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_LocalChangePackage()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_LocalChangePackage()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -397,8 +399,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	void setLocalChangePackage(ChangePackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Merged Version</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Merged Version</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Merged Version</em>' containment reference isn't clear, there really should be more of
 	 * a description here...
@@ -407,20 +409,19 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Merged Version</em>' containment reference.
 	 * @see #setMergedVersion(PrimaryVersionSpec)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_MergedVersion()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_MergedVersion()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	PrimaryVersionSpec getMergedVersion();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getMergedVersion
-	 * <em>Merged Version</em>}' containment reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getMergedVersion
+	 * <em>Merged Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Merged Version</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Merged Version</em>' containment reference.
 	 * @see #getMergedVersion()
 	 * @generated
 	 */
@@ -522,25 +523,6 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	ChangePackage getLocalChangePackage(boolean canonized);
 
 	/**
-	 * Returns the value of the '<em><b>Local Operations</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Local Operations</em>' containment reference isn't clear, there really should be more
-	 * of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Local Operations</em>' containment
-	 *         reference.
-	 * @see #setLocalOperations(OperationComposite)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_LocalOperations()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 * @deprecated
-	 */
-	OperationComposite getLocalOperations();
-
-	/**
 	 * Returns the value of the '<em><b>Old Log Messages</b></em>' attribute
 	 * list. The list contents are of type {@link java.lang.String}. <!--
 	 * begin-user-doc -->
@@ -585,7 +567,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Project</em>' containment reference.
 	 * @see #setProject(Project)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Project()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_Project()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -602,15 +584,15 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Project Description</em>' attribute.
 	 * @see #setProjectDescription(String)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectDescription()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_ProjectDescription()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getProjectDescription();
 
 	/**
-	 * Returns the value of the '<em><b>Project Id</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Project Id</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Project Id</em>' containment reference isn't clear, there really should be more of a
 	 * description here...
@@ -619,7 +601,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Project Id</em>' containment reference.
 	 * @see #setProjectId(ProjectId)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectId()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_ProjectId()
 	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
@@ -812,34 +794,6 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	void makeTransient();
 
 	/**
-	 * Merge the changes from current base version to given target version with
-	 * the local operations.
-	 * 
-	 * @param target
-	 *            a target version
-	 * @param conflictException
-	 *            a {@link ChangeConflictException} containing the changes to be merged
-	 * @param conflictResolver
-	 *            a {@link ConflictResolver} that will actually perform the conflict
-	 *            resolution
-	 * @param callback
-	 *            the {@link UpdateCallback} that is called in case the checksum comparison fails
-	 * @param progressMonitor
-	 *            an {@link IProgressMonitor} to report on progress
-	 * 
-	 * @throws ESException
-	 *             if the connection to the server fails
-	 * @return true, if merge was successful, false otherwise
-	 * 
-	 * @see UpdateCallback#checksumCheckFailed(ProjectSpace, PrimaryVersionSpec, IProgressMonitor)
-	 * 
-	 * @generated NOT
-	 */
-	boolean merge(PrimaryVersionSpec target, ChangeConflict conflict,
-		ConflictResolver conflictResolver, ESUpdateCallback callback, IProgressMonitor progressMonitor)
-		throws ESException;
-
-	/**
 	 * Removes a tag to the specified version of this project.
 	 * 
 	 * @param versionSpec
@@ -887,13 +841,12 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	void revert();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion
-	 * <em>Base Version</em>}' containment reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getBaseVersion
+	 * <em>Base Version</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Base Version</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Base Version</em>' containment reference.
 	 * @see #getBaseVersion()
 	 * @generated
 	 */
@@ -917,97 +870,83 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	int getResourceCount();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount
-	 * <em>Resource Count</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getResourceCount
+	 * <em>Resource Count</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Resource Count</em>' attribute.
+	 * @param value the new value of the '<em>Resource Count</em>' attribute.
 	 * @see #getResourceCount()
 	 * @generated
 	 */
 	void setResourceCount(int value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty
-	 * <em>Dirty</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isDirty <em>Dirty</em>}
+	 * ' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Dirty</em>' attribute.
+	 * @param value the new value of the '<em>Dirty</em>' attribute.
 	 * @see #isDirty()
 	 * @generated
 	 */
 	void setDirty(boolean value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated
-	 * <em>Last Updated</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLastUpdated
+	 * <em>Last Updated</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Last Updated</em>' attribute.
+	 * @param value the new value of the '<em>Last Updated</em>' attribute.
 	 * @see #getLastUpdated()
 	 * @generated
 	 */
 	void setLastUpdated(Date value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations
-	 * <em>Local Operations</em>}' containment reference. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Local Operations</em>' containment
-	 *            reference.
-	 * @see #getLocalOperations()
-	 * @generated
-	 */
-	void setLocalOperations(OperationComposite value);
-
-	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject
-	 * <em>Project</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProject
+	 * <em>Project</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project</em>' containment reference.
+	 * @param value the new value of the '<em>Project</em>' containment reference.
 	 * @see #getProject()
 	 * @generated
 	 */
 	void setProject(Project value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription
-	 * <em>Project Description</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectDescription
+	 * <em>Project Description</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project Description</em>' attribute.
+	 * @param value the new value of the '<em>Project Description</em>' attribute.
 	 * @see #getProjectDescription()
 	 * @generated
 	 */
 	void setProjectDescription(String value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId
-	 * <em>Project Id</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectId
+	 * <em>Project Id</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project Id</em>' containment
-	 *            reference.
+	 * @param value the new value of the '<em>Project Id</em>' containment reference.
 	 * @see #getProjectId()
 	 * @generated
 	 */
 	void setProjectId(ProjectId value);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName
-	 * <em>Project Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectName
+	 * <em>Project Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Project Name</em>' attribute.
+	 * @param value the new value of the '<em>Project Name</em>' attribute.
 	 * @see #getProjectName()
 	 * @generated
 	 */
@@ -1023,12 +962,12 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	void setProperty(OrgUnitProperty property);
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession
-	 * <em>Usersession</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getUsersession
+	 * <em>Usersession</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @param value
-	 *            the new value of the '<em>Usersession</em>' reference.
+	 * @param value the new value of the '<em>Usersession</em>' reference.
 	 * @see #getUsersession()
 	 * @generated
 	 */
@@ -1037,10 +976,12 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	/**
 	 * Shares this project space.
 	 * 
+	 * @return the project info of the created project
+	 * 
 	 * @throws ESException
 	 *             if an error occurs during the sharing of the project
 	 */
-	public void shareProject(IProgressMonitor monitor) throws ESException;
+	public ProjectInfo shareProject(IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Shares this project space.
@@ -1050,11 +991,12 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 *            project
 	 * @param monitor
 	 *            an instance of an {@link IProgressMonitor}
+	 * @return the project info of the remote project
 	 * 
 	 * @throws ESException
 	 *             if an error occurs during the sharing of the project
 	 */
-	public void shareProject(Usersession session, IProgressMonitor monitor) throws ESException;
+	public ProjectInfo shareProject(Usersession session, IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * Transmit the OrgUnitproperties to the server.

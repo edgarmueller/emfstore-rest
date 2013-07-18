@@ -24,10 +24,11 @@ import org.junit.runners.model.FrameworkField;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
 
 /**
- * A {@link org.junit.runner.Runner} for each {@link org.junit.runners.model.TestClass}.
- * Used in the {@link FuzzyRunner}.
+ * A {@link org.junit.runner.Runner} for each
+ * {@link org.junit.runners.model.TestClass}. Used in the {@link FuzzyRunner}.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -45,7 +46,8 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	private FuzzyDataProvider<?> dataProvider;
 
 	/**
-	 * The {@link FrameworkField} of the {@link TestClass} where to put in the data.
+	 * The {@link FrameworkField} of the {@link TestClass} where to put in the
+	 * data.
 	 */
 	private FrameworkField dataField;
 
@@ -61,17 +63,28 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	/**
 	 * Constructor.
 	 * 
-	 * @param type The testclass
-	 * @param dataProvider The {@link FuzzyDataProvider} providing the data to put into the dataField
-	 * @param dataField The datafield in the testclass
-	 * @param utilField the utilfield in the testclass
-	 * @param optionsField the options field in the testclass
-	 * @param util The {@link Util} class
-	 * @param counter The counter of the run
-	 * @throws InitializationError If there was a problem during the initialization of the test
+	 * @param type
+	 *            The testclass
+	 * @param dataProvider
+	 *            The {@link FuzzyDataProvider} providing the data to put into
+	 *            the dataField
+	 * @param dataField
+	 *            The datafield in the testclass
+	 * @param utilField
+	 *            the utilfield in the testclass
+	 * @param optionsField
+	 *            the options field in the testclass
+	 * @param util
+	 *            The {@link Util} class
+	 * @param counter
+	 *            The counter of the run
+	 * @throws InitializationError
+	 *             If there was a problem during the initialization of the test
 	 */
-	FuzzyTestClassRunner(Class<?> type, FuzzyDataProvider<?> dataProvider, FrameworkField dataField,
-		FrameworkField utilField, FrameworkField optionsField, Util util, int counter) throws InitializationError {
+	FuzzyTestClassRunner(Class<?> type, FuzzyDataProvider<?> dataProvider,
+			FrameworkField dataField, FrameworkField utilField,
+			FrameworkField optionsField, Util util, int counter)
+			throws InitializationError {
 		super(type);
 		this.counter = counter;
 		this.dataField = dataField;
@@ -86,19 +99,22 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	public Object createTest() {
 		try {
 			// create a new instance of the testclass
-			Object testInstance = getTestClass().getOnlyConstructor().newInstance();
+			Object testInstance = getTestClass().getOnlyConstructor()
+					.newInstance();
 
 			// set the options to dataprovider
 			if (optionsField != null) {
-				Object options = getValueFromField(optionsField.getField(), testInstance);
+				Object options = getValueFromField(optionsField.getField(),
+						testInstance);
 				if (options == null) {
 					throw new IllegalStateException(
-						"The options field has to be not null! Fill it or remove annotation.");
+							"The options field has to be not null! Fill it or remove annotation.");
 				}
 				try {
 					dataProvider.setOptions((Map<String, Object>) options);
 				} catch (ClassCastException e) {
-					throw new ClassCastException("The options field is not of type: Map<String, Object>!");
+					throw new ClassCastException(
+							"The options field is not of type: Map<String, Object>!");
 				}
 			}
 
@@ -107,16 +123,18 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 
 			// set the data to the datafield
 			setValueToField(dataField.getField(), testInstance, data,
-				"The field annotated with " + Data.class.getSimpleName()
-					+ " does not fit to the type of the dataprovider (" + dataProvider.getClass() + ").");
+					"The field annotated with " + Data.class.getSimpleName()
+							+ " does not fit to the type of the dataprovider ("
+							+ dataProvider.getClass() + ").");
 
 			// set the util to the util field
 			if (util != null && utilField != null) {
 				setValueToField(utilField.getField(), testInstance, util,
-					"The field annotated " + Util.class.getSimpleName() + " does not fit to the Util type!");
+						"The field annotated " + Util.class.getSimpleName()
+								+ " does not fit to the Util type!");
 			}
 
-			return testInstance;		
+			return testInstance;
 		} catch (InstantiationException e) {
 			throw new RuntimeException(e);
 		} catch (IllegalAccessException e) {
@@ -126,8 +144,9 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 		}
 	}
 
-	private Object getValueFromField(Field field, Object instance) throws IllegalAccessException {
-		try{
+	private Object getValueFromField(Field field, Object instance)
+			throws IllegalAccessException {
+		try {
 			field.setAccessible(true);
 			Object o = field.get(instance);
 			return o;
@@ -136,8 +155,8 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 		}
 	}
 
-	private void setValueToField(Field field, Object instance, Object value, String errorMsg) throws IllegalAccessException
-		 {
+	private void setValueToField(Field field, Object instance, Object value,
+			String errorMsg) throws IllegalAccessException {
 		try {
 			field.setAccessible(true);
 			field.set(instance, value);
@@ -171,7 +190,8 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	}
 
 	private String testName(String name) {
-		return String.format("%s%s[%s]", name, FuzzyRunner.NAME_SEPARATOR, counter);
+		return String.format("%s%s[%s]", name, FuzzyRunner.NAME_SEPARATOR,
+				counter);
 	}
 
 	@Override
@@ -181,7 +201,8 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 
 	@Override
 	protected String getName() {
-		return String.format("%s%s[%s]", getTestClass().getName(), FuzzyRunner.NAME_SEPARATOR, counter);
+		return String.format("%s%s[%s]", getTestClass().getName(),
+				FuzzyRunner.NAME_SEPARATOR, counter);
 	}
 
 	@Override

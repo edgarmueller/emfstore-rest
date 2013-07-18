@@ -23,7 +23,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Class used as junit plugin test to create {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport}s from an
+ * Class used as junit plugin test to create
+ * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport}s from an
  * {@link TestRunProvider}.
  * 
  * @author Julian Sommerfeldt
@@ -35,20 +36,21 @@ import org.junit.runners.Suite.SuiteClasses;
 public class CreateAllDiffs {
 
 	/**
-	 * Creates all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff}s from an {@link TestRunProvider}.
+	 * Creates all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff}s
+	 * from an {@link TestRunProvider}.
 	 */
 	@Test
 	public void createAllDiffs() {
-				
+
 		DiffGenerator diffGenerator = new DiffGenerator();
-		
+
 		try {
 			HudsonTestRunProvider runProvider = new HudsonTestRunProvider();
 			for (TestConfig config : runProvider.getAllConfigs()) {
 				runProvider.setConfig(config);
 				TestRun[] runs = runProvider.getTestRuns();
 				diffGenerator.createDiff(runs[0], runs[1]);
-			}		
+			}
 		} catch (DocumentException e) {
 			throw new RuntimeException("Could not create diffs.", e);
 		} catch (IOException e) {

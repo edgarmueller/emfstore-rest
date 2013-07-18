@@ -47,7 +47,8 @@ public interface PropertyStringValue extends EObject {
 	String getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue#getValue <em>Value</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue#getValue
+	 * <em>Value</em>}'
 	 * attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

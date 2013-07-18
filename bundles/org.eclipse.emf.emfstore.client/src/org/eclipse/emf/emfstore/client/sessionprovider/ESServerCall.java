@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.sessionprovider;
 
@@ -17,9 +18,12 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 
 /**
  * Represents a call to a server, i.e. a remote action that involves a server.
- * Typical server calls are share and commit.
+ * Typical server calls are, for instance, share and commit.
  * 
  * @author emueller
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESServerCall {
 
@@ -31,14 +35,14 @@ public interface ESServerCall {
 	ESUsersession getUsersession();
 
 	/**
-	 * Returns the project this server call is associated with.
+	 * Returns the {@link ESLocalProject} this server call is associated with.
 	 * 
 	 * @return the local project associated with this server call
 	 */
 	ESLocalProject getLocalProject();
 
 	/**
-	 * Returns the server this server call is meant to be executed against.
+	 * Returns the {@link ESServer} this server call is meant to be executed against.
 	 * 
 	 * @return the server this call is meant to be executed against
 	 */

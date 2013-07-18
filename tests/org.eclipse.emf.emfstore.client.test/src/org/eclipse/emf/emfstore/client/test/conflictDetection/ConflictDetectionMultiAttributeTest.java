@@ -253,8 +253,8 @@ public class ConflictDetectionMultiAttributeTest extends ConflictDetectionTest {
 
 		AbstractOperation move2 = myCheckAndGetOperation(MultiAttributeMoveOperation.class);
 
-		assertEquals(false, doConflict(move2, move1));
-		assertEquals(false, doConflict(move1, move2));
+		assertEquals(true, doConflict(move2, move1));
+		assertEquals(true, doConflict(move1, move2));
 	}
 
 	/**
@@ -283,8 +283,8 @@ public class ConflictDetectionMultiAttributeTest extends ConflictDetectionTest {
 
 		AbstractOperation add = myCheckAndGetOperation(MultiAttributeOperation.class);
 
-		assertEquals(false, doConflict(set, add));
-		assertEquals(false, doConflict(add, set));
+		assertEquals(true, doConflict(set, add));
+		assertEquals(true, doConflict(add, set));
 	}
 
 	/**
@@ -346,8 +346,8 @@ public class ConflictDetectionMultiAttributeTest extends ConflictDetectionTest {
 
 		AbstractOperation remove = myCheckAndGetOperation(MultiAttributeOperation.class);
 
-		assertEquals(false, doConflict(set, remove));
-		assertEquals(false, doConflict(remove, set));
+		assertEquals(true, doConflict(set, remove));
+		assertEquals(true, doConflict(remove, set));
 	}
 
 	/**
@@ -439,7 +439,12 @@ public class ConflictDetectionMultiAttributeTest extends ConflictDetectionTest {
 
 		AbstractOperation move = myCheckAndGetOperation(MultiAttributeMoveOperation.class);
 
-		assertEquals(false, doConflict(set, move));
-		assertEquals(false, doConflict(move, set));
+		assertEquals(true, doConflict(set, move));
+		assertEquals(true, doConflict(move, set));
+	}
+
+	@Override
+	protected void configureCompareAtEnd() {
+		setCompareAtEnd(false);
 	}
 }

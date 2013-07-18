@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.controller;
@@ -31,7 +31,6 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ModelElementIdToEObjectMappingImpl;
-import org.eclipse.emf.emfstore.internal.server.exceptions.BaseVersionOutdatedException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -40,6 +39,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 
 /**
  * The controller responsible for performing a commit.
@@ -48,7 +48,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
-	private LogMessage logMessage;
+	private String logMessage;
 	private ESCommitCallback callback;
 	private BranchVersionSpec branch;
 
@@ -66,7 +66,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            an {@link IProgressMonitor} that will be used to inform
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
-	public CommitController(ProjectSpaceBase projectSpace, LogMessage logMessage, ESCommitCallback callback,
+	public CommitController(ProjectSpaceBase projectSpace, String logMessage, ESCommitCallback callback,
 		IProgressMonitor monitor) {
 		this(projectSpace, null, logMessage, callback, monitor);
 	}
@@ -88,11 +88,11 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 	 *            an {@link IProgressMonitor} that will be used to inform
 	 *            clients about the commit progress. May be <code>null</code>.
 	 */
-	public CommitController(ProjectSpaceBase projectSpace, BranchVersionSpec branch, LogMessage logMessage,
+	public CommitController(ProjectSpaceBase projectSpace, BranchVersionSpec branch, String logMessage,
 		ESCommitCallback callback, IProgressMonitor monitor) {
 		super(projectSpace);
 		this.branch = branch;
-		this.logMessage = (logMessage == null) ? createLogMessage() : logMessage;
+		this.logMessage = (logMessage == null) ? "<NO MESSAGE>" : logMessage;
 		this.callback = callback == null ? ESCommitCallback.NOCALLBACK : callback;
 		setProgressMonitor(monitor);
 	}
@@ -102,8 +102,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		return commit(this.logMessage, this.branch);
 	}
 
-	private PrimaryVersionSpec commit(final LogMessage logMessage, final BranchVersionSpec branch)
-		throws InvalidVersionSpecException, BaseVersionOutdatedException, ESException {
+	private PrimaryVersionSpec commit(final String logMessage, final BranchVersionSpec branch)
+		throws InvalidVersionSpecException, ESUpdateRequiredException, ESException {
 
 		if (!getProjectSpace().isShared()) {
 			throw new ESProjectNotSharedException();
@@ -132,7 +132,11 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
-				changePackage.setLogMessage(logMessage);
+				LogMessage logMessageObject = VersioningFactory.eINSTANCE.createLogMessage();
+				logMessageObject.setMessage(logMessage);
+				logMessageObject.setClientDate(new Date());
+				logMessageObject.setAuthor(getProjectSpace().getUsersession().getUsername());
+				changePackage.setLogMessage(logMessageObject);
 				return null;
 			}
 		});
@@ -207,8 +211,8 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		if (!validChecksum) {
 			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
-			boolean errorHandled = callback
-				.checksumCheckFailed(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
+			boolean errorHandled = Configuration.getClientBehavior().getChecksumErrorHandler()
+				.execute(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
 			if (!errorHandled) {
 				throw new ESException("Commit cancelled by checksum error handler due to invalid checksum.");
 			}
@@ -245,7 +249,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 	private boolean checkForCommitPreconditions(final BranchVersionSpec branch, IProgressMonitor monitor)
 		throws InvalidVersionSpecException,
-		ESException, BaseVersionOutdatedException {
+		ESException, ESUpdateRequiredException {
 		if (branch != null) {
 			// check branch conditions
 			if (StringUtils.isEmpty(branch.getBranch())) {
@@ -268,7 +272,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 					Versions.createHEAD(getProjectSpace().getBaseVersion()), monitor);
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
 				if (!callback.baseVersionOutOfDate(getProjectSpace().toAPI(), getProgressMonitor())) {
-					throw new BaseVersionOutdatedException();
+					throw new ESUpdateRequiredException();
 				}
 				return true;
 			}

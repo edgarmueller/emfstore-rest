@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.emfstore.client.handler.ESOperationModifier;
-import org.eclipse.emf.emfstore.common.extensionpoint.ExtensionRegistry;
+import org.eclipse.emf.emfstore.internal.common.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 
 /**

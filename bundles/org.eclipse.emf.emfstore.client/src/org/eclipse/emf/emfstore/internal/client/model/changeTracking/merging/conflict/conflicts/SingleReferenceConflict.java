@@ -6,23 +6,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendon
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.Conflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictOption.OptionType;
+import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
+import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.UnkownFeatureException;
@@ -32,20 +32,31 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Unko
  * 
  * @author wesendon
  */
-public class SingleReferenceConflict extends Conflict {
+public class SingleReferenceConflict extends VisualConflict {
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param myOperations list of my operations
-	 * @param theirOperations list of their operations
-	 * @param leftOperation the operation representing all left operations
-	 * @param rightOperation the operation representing all right operations
+	 * @param conflictBucket the conflict
 	 * @param decisionManager decisionmanager
 	 */
-	public SingleReferenceConflict(Set<AbstractOperation> myOperations, Set<AbstractOperation> theirOperations,
-		AbstractOperation leftOperation, AbstractOperation rightOperation, DecisionManager decisionManager) {
-		super(myOperations, theirOperations, leftOperation, rightOperation, decisionManager);
+	public SingleReferenceConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
+		super(conflictBucket, decisionManager);
+	}
+
+	/**
+	 * Construct conflict from designated left and right operation.
+	 * 
+	 * 
+	 * @param conflictBucket the conflict
+	 * @param leftOperation the left operation
+	 * @param rightOperation the right operation
+	 * @param decisionManager decisionmanager
+	 */
+	public SingleReferenceConflict(ConflictBucket conflictBucket, AbstractOperation leftOperation,
+		AbstractOperation rightOperation,
+		DecisionManager decisionManager) {
+		super(conflictBucket, leftOperation, rightOperation, decisionManager, true, true);
 	}
 
 	/**
@@ -83,6 +94,7 @@ public class SingleReferenceConflict extends Conflict {
 				return true;
 			}
 		} catch (UnkownFeatureException e) {
+			// ignore
 		}
 		return false;
 	}

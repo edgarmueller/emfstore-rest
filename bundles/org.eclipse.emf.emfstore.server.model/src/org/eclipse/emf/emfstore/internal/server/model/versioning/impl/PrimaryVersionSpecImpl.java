@@ -239,15 +239,36 @@ public class PrimaryVersionSpecImpl extends VersionSpecImpl implements PrimaryVe
 		return result.toString();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 * 
+	 * @generated NOT
+	 */
 	@Override
 	public boolean equals(Object object) {
 		if (object instanceof PrimaryVersionSpec) {
 			PrimaryVersionSpec otherPrimaryVersionSpec = (PrimaryVersionSpec) object;
 			return this.getIdentifier() == otherPrimaryVersionSpec.getIdentifier()
 				&& (this.getBranch() != null && this.getBranch().equals(otherPrimaryVersionSpec.getBranch()));
-		} else {
-			return false;
 		}
+
+		return false;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public int hashCode() {
+		return getIdentifier() >> 31 + (getBranch() != null ? getBranch().hashCode() : 0);
 	}
 
 	public int compareTo(PrimaryVersionSpec o) {

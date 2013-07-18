@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * zardosht
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.dialogs;
@@ -70,7 +70,8 @@ public class CompareProjectsDialog extends TitleAreaDialog {
 		listViewer.getList().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		listViewer.setContentProvider(new IStructuredContentProvider() {
 			public Object[] getElements(Object inputElement) {
-				List<? extends ESProject> projects = ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects();
+				List<? extends ESProject> projects = ESWorkspaceProviderImpl.getInstance().getWorkspace()
+					.getLocalProjects();
 				return projects.toArray();
 			}
 

@@ -228,8 +228,6 @@ public abstract class ServerTests extends WorkspaceTest {
 			@Override
 			protected void doRun() {
 				try {
-					// getProjectSpace().setUsersession(getServerInfo().getLastUsersession());
-					// getProjectSpace().getUsersession().logIn();
 					getProjectSpace().shareProject(new NullProgressMonitor());
 				} catch (ESException e) {
 					Assert.fail();

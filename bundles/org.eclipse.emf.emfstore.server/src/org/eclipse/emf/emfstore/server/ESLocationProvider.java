@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
- * koegel
+ * Otto von Wesendonk, Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server;
 
@@ -16,11 +16,13 @@ import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationPr
 
 /**
  * Interface for workspace location providers. Implementing classes provide a location for the workspace - or server
- * workspace - files to store models and other files. You may subclass {@link DefaultServerWorkspaceLocationProvider} in
+ * workspace - files to store models and other files. You may subclass
+ * {@link org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider} in
  * order to ease your implementation. By convention, every path should end with an folder separator char.
  * 
  * @author koegel
  * @author wesendon
+ * 
  */
 public interface ESLocationProvider {
 
@@ -32,13 +34,5 @@ public interface ESLocationProvider {
 	 * @return a string representing the path
 	 */
 	String getWorkspaceDirectory();
-
-	/**
-	 * Returns the path to a folder which holds backups of the workspaces. For example this is used to backup a
-	 * workspace prior to migration.
-	 * 
-	 * @return a string representing the path
-	 */
-	String getBackupDirectory();
 
 }

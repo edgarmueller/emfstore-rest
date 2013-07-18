@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -130,7 +130,7 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	private void deleteRemoteProject(ServerInfo server, ProjectInfo projectInfo, ESUsersession session,
 		IProgressMonitor monitor) throws ESException {
 		if (confirm("Confirmation",
-					MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {
+			MessageFormat.format("Do you really want to delete the remote project {0}?", projectInfo.getName()))) {
 			if (session != null) {
 				new ESRemoteProjectImpl(server, projectInfo).delete(session, monitor);
 			} else {
@@ -142,9 +142,9 @@ public class UIDeleteRemoteProjectController extends AbstractEMFStoreUIControlle
 	private void deleteRemoteProject(ESRemoteProject remoteProject, ESUsersession session, IProgressMonitor monitor)
 		throws ESException {
 		if (confirm(
-					"Confirmation",
-					MessageFormat.format("Do you really want to delete the remote project {0}?", remoteProject
-						.getProjectName()))) {
+			"Confirmation",
+			MessageFormat.format("Do you really want to delete the remote project {0}?", remoteProject
+				.getProjectName()))) {
 			if (session != null) {
 				remoteProject.delete(session, monitor);
 			} else {

@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -39,12 +39,13 @@ public class UIRevertCommitControllerTest extends AbstractUIControllerTestWithCo
 				revertCommitController.execute();
 			}
 		});
-		System.out.println("Waiting for shell");
+
 		SWTBotShell shell = bot.shell("Confirmation");
-		shell.bot().button("Yes").click();
+		shell.bot().button("OK").click();
+
 		final ESLocalProject clonedProject = ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()
 			.get(localProjectsSize);
-		System.out.println(localProjectsSize);
+
 		bot.waitUntil(new DefaultCondition() {
 			public boolean test() throws Exception {
 				return localProjectsSize + 1 == ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects().size()
@@ -55,6 +56,7 @@ public class UIRevertCommitControllerTest extends AbstractUIControllerTestWithCo
 				return "Revert did not succeed.";
 			}
 		}, timeout());
+
 		assertEquals(0, clonedProject.getModelElements().size());
 	}
 

@@ -6,8 +6,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
- * jsommerfeldt
+ * Contributors:
+ * Julian Sommerfeldt - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model.util;
 
@@ -16,10 +17,16 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
+ * A wrapper type around {@link NotificationInfo} that adds
+ * some convenience methods.
+ * 
  * @author jsommerfeldt
  * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESNotificationInfo {
 

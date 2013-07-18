@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
+ * Edgar Mueller - API annotations
  ******************************************************************************/
 package org.eclipse.emf.emfstore.common.model;
 
@@ -17,6 +17,8 @@ package org.eclipse.emf.emfstore.common.model;
  * 
  * @author emueller
  * @author wesendon
+ * 
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ESUniqueIdentifier {
 

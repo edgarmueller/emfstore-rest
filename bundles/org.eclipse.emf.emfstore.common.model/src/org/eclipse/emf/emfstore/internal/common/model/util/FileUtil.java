@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * wesendonk
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.util;
@@ -47,12 +47,15 @@ public final class FileUtil {
 	 * @param destination the destination
 	 * @throws IOException copy problem
 	 */
+	@SuppressWarnings("resource")
+	// created input stream is closed by copyFile
+	// TODO: refactor
 	public static void copyFile(File source, File destination) throws IOException {
 		copyFile(new FileInputStream(source), destination);
 	}
 
 	/**
-	 * This method copies a single file.
+	 * This method copies a single file and closes the given stream.
 	 * 
 	 * @param source the source input stream
 	 * @param destination the destination

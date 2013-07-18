@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * emueller
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Shell;
  * 
  */
 public class UIRevertOperationController extends
-		AbstractEMFStoreUIController<Void> {
+	AbstractEMFStoreUIController<Void> {
 
 	private final ProjectSpace projectSpace;
 
@@ -42,7 +42,7 @@ public class UIRevertOperationController extends
 	public UIRevertOperationController(Shell shell, ESLocalProject projectSpace) {
 		super(shell);
 		this.projectSpace = ((ESLocalProjectImpl) projectSpace)
-				.toInternalAPI();
+			.toInternalAPI();
 	}
 
 	/**
@@ -55,14 +55,14 @@ public class UIRevertOperationController extends
 	public Void doRun(IProgressMonitor progressMonitor) throws ESException {
 
 		String message = "Do you really want to revert all your changes on project "
-				+ projectSpace.getProjectName() + "?";
+			+ projectSpace.getProjectName() + "?";
 
 		if (confirm("Confirmation", message)) {
 			progressMonitor.beginTask("Revert project...", 100);
 			progressMonitor.worked(10);
 			projectSpace.revert();
 			MessageDialog.openInformation(getShell(), "Revert",
-					"Reverted project ");
+				"Reverted project ");
 		}
 
 		return null;

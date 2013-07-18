@@ -28,7 +28,7 @@ public class IgnoreNotificationsOutsideProject implements ESNotificationFilter {
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
 	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
 	 */
-	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 
 		// do not filter notifications from (deleted) elements in project
 		if (container.getModelElementId(notificationInfo.getNotifierModelElement()) != null

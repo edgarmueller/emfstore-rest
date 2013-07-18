@@ -59,33 +59,37 @@ public class ServerTest extends CoreServerTest {
 		Configuration.getClientBehavior().setAutoSave(false);
 		new EMFStoreCommand() {
 			@Override
-			protected void doRun() {				
-				setProjectSpace(((WorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace()).importProject(project, "", ""));
+			protected void doRun() {
+				setProjectSpace(((WorkspaceImpl) ESWorkspaceProvider.INSTANCE
+						.getWorkspace()).importProject(project, "", ""));
 			}
 		}.run(false);
 		setProject(project);
 	}
 
 	/**
-	 * @throws EmfStoreException Problems with share, checkout, commit or update.
+	 * @throws EmfStoreException
+	 *             Problems with share, checkout, commit or update.
 	 */
 	@Test
 	public void shareCheckoutCommitUpdate() throws ESException {
-		
+
 		ProjectSpace projectSpace = getProjectSpace();
 
 		// share original project
 		PrimaryVersionSpec versionSpec = share(projectSpace);
 
 		// checkout project
-		final ProjectSpace psCheckedout = checkout(projectSpace.toAPI().getRemoteProject(), versionSpec);
+		final ProjectSpace psCheckedout = checkout(projectSpace.toAPI()
+				.getRemoteProject(), versionSpec);
 
 		// compare original and checkedout project
-		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(), psCheckedout.getProject(), util);
+		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(),
+				psCheckedout.getProject(), util);
 
 		// change & commit original project
-		final ModelMutatorConfiguration mmc = FuzzyProjectTest.getModelMutatorConfiguration(projectSpace.getProject(),
-			util);
+		final ModelMutatorConfiguration mmc = FuzzyProjectTest
+				.getModelMutatorConfiguration(projectSpace.getProject(), util);
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -108,6 +112,7 @@ public class ServerTest extends CoreServerTest {
 		}.run(false);
 
 		// compare original and updated project
-		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(), psCheckedout.getProject(), util);
+		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(),
+				psCheckedout.getProject(), util);
 	}
 }

@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 
-
 public interface ConflictBucketCandidateStore {
 
 	ConflictBucketCandidate getConflictBucketCandidate();

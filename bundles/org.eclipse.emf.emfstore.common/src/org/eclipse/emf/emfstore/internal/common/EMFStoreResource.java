@@ -25,8 +25,8 @@ public class EMFStoreResource extends XMIResourceImpl {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param uri 
-	 * 			the URI of the resource
+	 * @param uri
+	 *            the URI of the resource
 	 */
 	public EMFStoreResource(final URI uri) {
 		super(uri);
@@ -37,9 +37,9 @@ public class EMFStoreResource extends XMIResourceImpl {
 	 * Initialize the ID to EObjects map and reverse map directly. The map must be consistent with each other.
 	 * 
 	 * @param idToEObjectMap
-	 * 		 a map from IDs to EObject in the resource
-	 * @param eObjectToIdMap 
-	 * 		 a map from EObjects to IDs in the resource
+	 *            a map from IDs to EObject in the resource
+	 * @param eObjectToIdMap
+	 *            a map from EObjects to IDs in the resource
 	 */
 	public void setIdToEObjectMap(final Map<String, EObject> idToEObjectMap, final Map<EObject, String> eObjectToIdMap) {
 		this.idToEObjectMap = idToEObjectMap;

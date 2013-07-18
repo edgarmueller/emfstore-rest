@@ -21,7 +21,8 @@ import org.junit.runners.Suite;
  * @author wesendon
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ServerInterfaceTest.class, InvalidArgumentsTest.class, // InvalidAuthenticationTest.class,
+@Suite.SuiteClasses({ ServerInterfaceTest.class, InvalidArgumentsTest.class,
+	ChangeCertificationTest.class,
 	PropertiesTest.class, FileManagerTest.class, AllServerAPITests.class, ChecksumTest.class })
 public class AllServerTests {
 

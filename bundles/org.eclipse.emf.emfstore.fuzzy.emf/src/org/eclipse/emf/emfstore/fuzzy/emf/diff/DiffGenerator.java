@@ -42,7 +42,8 @@ public class DiffGenerator {
 	private Resource diffResource;
 
 	/**
-	 * A {@link DiffGenerator} with the standard diff file {@link FuzzyUtil#DIFF_FILE}.
+	 * A {@link DiffGenerator} with the standard diff file
+	 * {@link FuzzyUtil#DIFF_FILE}.
 	 */
 	public DiffGenerator() {
 		this(FuzzyUtil.DIFF_FILE);
@@ -51,7 +52,8 @@ public class DiffGenerator {
 	/**
 	 * A {@link DiffGenerator} with using the diffPath.
 	 * 
-	 * @param diffPath The path to the Diff file.
+	 * @param diffPath
+	 *            The path to the Diff file.
 	 */
 	public DiffGenerator(String diffPath) {
 		this(FuzzyUtil.createResource(diffPath));
@@ -60,7 +62,8 @@ public class DiffGenerator {
 	/**
 	 * A {@link DiffGenerator} using the diffResource.
 	 * 
-	 * @param diffResource The resource to use for the diff.
+	 * @param diffResource
+	 *            The resource to use for the diff.
 	 */
 	public DiffGenerator(Resource diffResource) {
 		this.diffResource = diffResource;
@@ -69,7 +72,8 @@ public class DiffGenerator {
 			try {
 				diffResource.load(null);
 			} catch (IOException e) {
-				throw new RuntimeException("Could not load resource: " + diffResource.getURI(), e);
+				throw new RuntimeException("Could not load resource: "
+						+ diffResource.getURI(), e);
 			}
 		}
 
@@ -79,11 +83,15 @@ public class DiffGenerator {
 	/**
 	 * Create a diff from two {@link TestRun}s.
 	 * 
-	 * @param firstRun The first {@link TestRun}.
-	 * @param secondRun The second {@link TestRun}.
-	 * @throws IOException If there is a saving/loading failure with resources.
+	 * @param firstRun
+	 *            The first {@link TestRun}.
+	 * @param secondRun
+	 *            The second {@link TestRun}.
+	 * @throws IOException
+	 *             If there is a saving/loading failure with resources.
 	 */
-	public void createDiff(TestRun firstRun, TestRun secondRun) throws IOException {
+	public void createDiff(TestRun firstRun, TestRun secondRun)
+			throws IOException {
 
 		TestConfig config = firstRun.getConfig();
 
@@ -100,7 +108,8 @@ public class DiffGenerator {
 			existingDiffs.put(getResultIdentifier(result), diff);
 
 			// check for configs
-			if ((!containsConfig) && (diff.getConfig().getId().equals(config.getId()))) {
+			if ((!containsConfig)
+					&& (diff.getConfig().getId().equals(config.getId()))) {
 				containsConfig = true;
 				config = diff.getConfig();
 			}
@@ -112,18 +121,22 @@ public class DiffGenerator {
 		}
 
 		// create diffs for the two testruns
-		checkForDiffs(firstRun.getResults(), secondRun.getResults(), config, existingDiffs);
-		checkForDiffs(secondRun.getResults(), firstRun.getResults(), config, existingDiffs);
+		checkForDiffs(firstRun.getResults(), secondRun.getResults(), config,
+				existingDiffs);
+		checkForDiffs(secondRun.getResults(), firstRun.getResults(), config,
+				existingDiffs);
 
 		diffResource.getContents().add(diffReport);
 		diffResource.save(null);
 	}
 
-	private void checkForDiffs(List<TestResult> firstResults, List<TestResult> secondResults, TestConfig config,
-		Map<String, TestDiff> existingDiffs) {
+	private void checkForDiffs(List<TestResult> firstResults,
+			List<TestResult> secondResults, TestConfig config,
+			Map<String, TestDiff> existingDiffs) {
 		EList<TestDiff> diffs = diffReport.getDiffs();
 		for (TestResult result : new ArrayList<TestResult>(firstResults)) {
-			TestResult corrResult = getCorrespondingTestResult(result, secondResults);
+			TestResult corrResult = getCorrespondingTestResult(result,
+					secondResults);
 
 			TestDiff diff = getChangedTestDiff(result, corrResult);
 			if (diff != null) {
@@ -183,9 +196,11 @@ public class DiffGenerator {
 		return diff;
 	}
 
-	private static TestResult getCorrespondingTestResult(TestResult result, List<TestResult> results) {
+	private static TestResult getCorrespondingTestResult(TestResult result,
+			List<TestResult> results) {
 		for (TestResult res : results) {
-			if (res.getSeedCount() == result.getSeedCount() && res.getTestName().equals(result.getTestName())) {
+			if (res.getSeedCount() == result.getSeedCount()
+					&& res.getTestName().equals(result.getTestName())) {
 				return res;
 			}
 		}

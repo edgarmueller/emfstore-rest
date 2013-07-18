@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * TobiasVerhoeven
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author Tobias Verhoeven
  */
 public class UIRegisterEPackageController extends
-		AbstractEMFStoreUIController<Void> {
+	AbstractEMFStoreUIController<Void> {
 
 	private ServerInfo serverInfo;
 
@@ -60,7 +60,7 @@ public class UIRegisterEPackageController extends
 	 */
 	public void registerEPackage(ServerInfo serverInfo) throws ESException {
 		EPackageTreeSelectionDialog dialog = new EPackageTreeSelectionDialog(
-				EPackageRegistryHelper.getAvailablePackages(true));
+			EPackageRegistryHelper.getAvailablePackages(true));
 		dialog.open();
 		final EPackage pkg = dialog.getSelectedEPackage();
 		if (pkg != null) {
@@ -68,7 +68,7 @@ public class UIRegisterEPackageController extends
 				@Override
 				protected Void run() throws ESException {
 					getConnectionManager()
-							.registerEPackage(getSessionId(), pkg);
+						.registerEPackage(getSessionId(), pkg);
 					return null;
 				}
 			}.execute();
@@ -85,7 +85,7 @@ public class UIRegisterEPackageController extends
 				public Void call() throws Exception {
 					WorkspaceUtil.logException(e.getMessage(), e);
 					MessageDialog.openError(getShell(), "Registration failed",
-							e.getMessage());
+						e.getMessage());
 					return null;
 				}
 			});
