@@ -123,7 +123,7 @@ public final class ClientURIUtil {
 	}
 
 	private static String getClientPrefix() {
-		return SCHEME + ":/" + CLIENT_SEGMENT + "/" + ServerURIUtil.getProfile() + "/";
+		return SCHEME + "://" + CLIENT_SEGMENT + "/" + ServerURIUtil.getProfile() + "/";
 	}
 
 	private static String getProjectspacesPrefix(IdentifiableElement projectSpace) {

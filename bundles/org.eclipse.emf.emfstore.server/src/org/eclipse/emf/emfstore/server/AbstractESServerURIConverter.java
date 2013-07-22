@@ -29,20 +29,20 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 		if (uri.scheme() != null && uri.scheme().equals(ServerURIUtil.SCHEME)) {
 
 			// emfstore:/serverspaces/0
-			if (uri.segment(0).equals(ServerURIUtil.SERVER_SEGMENT)) {
+			if (uri.authority().equals(ServerURIUtil.SERVER_SEGMENT)) {
 
 				// emfstore:/serverspaces/0/serverspace
-				if (uri.segment(2).equals(ServerURIUtil.SERVERSPACE_SEGMENT)) {
-					return normalizeServerSpaceURI(uri.segment(1));
+				if (uri.segment(1).equals(ServerURIUtil.SERVERSPACE_SEGMENT)) {
+					return normalizeServerSpaceURI(uri.segment(0));
 				}
 
 				// emfstore:/serverspaces/0/dynamic-models/model.ecore
-				else if (uri.segment(2).equals(ServerURIUtil.DYNAMIC_MODELS_SEGMENT)) {
-					return normalizeDynamicModelsURI(uri.segment(1), uri.segment(3));
+				else if (uri.segment(1).equals(ServerURIUtil.DYNAMIC_MODELS_SEGMENT)) {
+					return normalizeDynamicModelsURI(uri.segment(0), uri.segment(2));
 				}
 
 				// emfstore:/serverspaces/0/projects/<identifier>
-				else if (uri.segment(2).equals(ServerURIUtil.PROJECTS_SEGMENT)) {
+				else if (uri.segment(1).equals(ServerURIUtil.PROJECTS_SEGMENT)) {
 					return normalizeProjects(uri);
 				}
 			}
@@ -54,23 +54,23 @@ public abstract class AbstractESServerURIConverter extends ExtensibleURIConverte
 
 	private URI normalizeProjects(URI uri) {
 		// emfstore:/serverspaces/0/projects/<identifier>/projecthistory
-		if (uri.segment(4).equals(ServerURIUtil.PROJECTHISTORY_SEGMENT)) {
-			return normalizeProjectHistoryURI(uri.segment(1), uri.segment(3));
+		if (uri.segment(3).equals(ServerURIUtil.PROJECTHISTORY_SEGMENT)) {
+			return normalizeProjectHistoryURI(uri.segment(0), uri.segment(2));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/versions/<nr>
-		else if (uri.segment(4).equals(ServerURIUtil.VERSIONS_SEGMENT)) {
-			return normalizeVersionURI(uri.segment(1), uri.segment(3), Integer.valueOf(uri.segment(5)));
+		else if (uri.segment(3).equals(ServerURIUtil.VERSIONS_SEGMENT)) {
+			return normalizeVersionURI(uri.segment(0), uri.segment(2), Integer.valueOf(uri.segment(4)));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/changepackages/<nr>
-		else if (uri.segment(4).equals(ServerURIUtil.CHANGEPACKAGES_SEGMENT)) {
-			return normalizeChangePackageURI(uri.segment(1), uri.segment(3), Integer.valueOf(uri.segment(5)));
+		else if (uri.segment(3).equals(ServerURIUtil.CHANGEPACKAGES_SEGMENT)) {
+			return normalizeChangePackageURI(uri.segment(0), uri.segment(2), Integer.valueOf(uri.segment(4)));
 		}
 
 		// emfstore:/serverspaces/0/projects/<identifier>/projectstates/<nr>
-		else if (uri.segment(4).equals(ServerURIUtil.PROJECTSTATES_SEGMENT)) {
-			return normalizeProjectStateURI(uri.segment(1), uri.segment(3), Integer.valueOf(uri.segment(5)));
+		else if (uri.segment(3).equals(ServerURIUtil.PROJECTSTATES_SEGMENT)) {
+			return normalizeProjectStateURI(uri.segment(0), uri.segment(2), Integer.valueOf(uri.segment(4)));
 		}
 
 		// unexpected

@@ -206,7 +206,7 @@ public final class ServerURIUtil {
 	}
 
 	private static String getServerPrefix() {
-		return SCHEME + ":/" + SERVER_SEGMENT + "/" + getProfile() + "/";
+		return SCHEME + "://" + SERVER_SEGMENT + "/" + getProfile() + "/";
 	}
 
 	private static String getProjectsPrefix(ProjectId projectId) {

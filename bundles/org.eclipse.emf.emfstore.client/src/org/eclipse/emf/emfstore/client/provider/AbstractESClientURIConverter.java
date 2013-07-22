@@ -30,15 +30,15 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 		if (uri.scheme() != null && uri.scheme().equals(ClientURIUtil.SCHEME)) {
 
 			// emfstore:/workspaces/0
-			if (uri.segment(0).equals(ClientURIUtil.CLIENT_SEGMENT)) {
+			if (uri.authority().equals(ClientURIUtil.CLIENT_SEGMENT)) {
 
 				// emfstore:/workspaces/0/workspace
-				if (uri.segment(2).equals(ClientURIUtil.WORKSPACE_SEGMENT)) {
-					return normalizeWorkspaceURI(uri.segment(1));
+				if (uri.segment(1).equals(ClientURIUtil.WORKSPACE_SEGMENT)) {
+					return normalizeWorkspaceURI(uri.segment(0));
 				}
 
 				// emfstore:/workspaces/0/projectspaces/<identifier>
-				else if (uri.segment(2).equals(ClientURIUtil.PROJECTSPACES_SEGMENT)) {
+				else if (uri.segment(1).equals(ClientURIUtil.PROJECTSPACES_SEGMENT)) {
 					return normalizeProjectSpaces(uri);
 				}
 			}
@@ -50,18 +50,18 @@ public abstract class AbstractESClientURIConverter extends ExtensibleURIConverte
 
 	private URI normalizeProjectSpaces(URI uri) {
 		// emfstore:/workspaces/0/projectspaces/<identifier>/project
-		if (uri.segment(4).equals(ClientURIUtil.PROJECT_SEGMENT)) {
-			return normalizeProjectURI(uri.segment(1), uri.segment(3));
+		if (uri.segment(3).equals(ClientURIUtil.PROJECT_SEGMENT)) {
+			return normalizeProjectURI(uri.segment(0), uri.segment(2));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/operations
-		else if (uri.segment(4).equals(ClientURIUtil.OPERATIONS_SEGMENT)) {
-			return normalizeOperationsURI(uri.segment(1), uri.segment(3));
+		else if (uri.segment(3).equals(ClientURIUtil.OPERATIONS_SEGMENT)) {
+			return normalizeOperationsURI(uri.segment(0), uri.segment(2));
 		}
 
 		// emfstore:/workspaces/0/projectspaces/<identifier>/projectspace
-		else if (uri.segment(4).equals(ClientURIUtil.PROJECTSPACE_SEGMENT)) {
-			return normalizeProjectSpaceURI(uri.segment(1), uri.segment(3));
+		else if (uri.segment(3).equals(ClientURIUtil.PROJECTSPACE_SEGMENT)) {
+			return normalizeProjectSpaceURI(uri.segment(0), uri.segment(2));
 		}
 
 		// unexpected
