@@ -711,7 +711,7 @@ public final class ModelUtil {
 
 		if (resourceURI != null && resourceURI.scheme().equals("emfstore")) {
 			ESExtensionPoint extensionPoint = null;
-			if (resourceURI.segment(0).equals("workspaces")) {
+			if (resourceURI.authority().equals("workspaces")) {
 				extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
 					false);
 			} else {
