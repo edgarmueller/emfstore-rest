@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.emf.emfstore.server.model" version="2">
+    <resource path="src/org/eclipse/emf/emfstore/server/model/ESGlobalProjectId.java" type="org.eclipse.emf.emfstore.server.model.ESGlobalProjectId">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="ESUniqueIdentifier"/>
+                <message_argument value="ESGlobalProjectId"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
