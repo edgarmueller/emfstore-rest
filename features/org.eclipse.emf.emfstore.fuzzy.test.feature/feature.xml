@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.emf.emfstore.fuzzy.test.feature"
-      label="EMFStore Fuzzy Tests (Incubation)"
+      label="EMFStore Fuzzy Tests"
       version="1.0.0.qualifier"
       provider-name="Eclipse Modeling Project">
 

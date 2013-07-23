@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.emf.emfstore.migration.edapt.feature"
-      label="EMFStore Edapt Migration (Incubation)"
+      label="EMFStore Edapt Migration"
       version="1.0.0.qualifier"
       provider-name="Eclipse Modeling Project">
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.emf.emfstore.example.feature"
-      label="EMFStore Code Examples (Incubation)"
+      label="EMFStore Code Examples"
       version="1.0.0.qualifier"
       provider-name="Eclipse Modeling Project"
       plugin="org.eclipse.emf.emfstore.example.installer">
