@@ -31,7 +31,7 @@ public class TransactionalEditingDomainProvider implements ESEditingDomainProvid
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.util.EditingDomainProvider#getEditingDomain(org.eclipse.emf.ecore.resource.ResourceSet)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.util.EditingDomainProvider#getEditingDomain(org.eclipse.emf.ecore.resource.ResourceSet)
 	 */
 	public EditingDomain getEditingDomain(ResourceSet resourceSet) {
 		TransactionalEditingDomain domain = new TransactionalEditingDomainImpl(new ComposedAdapterFactory(

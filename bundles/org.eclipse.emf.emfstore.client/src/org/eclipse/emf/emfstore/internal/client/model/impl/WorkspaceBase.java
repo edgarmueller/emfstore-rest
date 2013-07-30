@@ -401,7 +401,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 */
 	public ProjectSpace getProjectSpace(Project project) throws UnkownProjectException {
 		ProjectSpace projectSpace = projectToProjectSpaceMap.get(project);

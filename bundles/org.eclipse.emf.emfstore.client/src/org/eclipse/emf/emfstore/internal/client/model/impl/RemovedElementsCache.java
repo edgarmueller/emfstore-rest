@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.SettingWithReferencedElement;
@@ -31,26 +32,26 @@ import org.eclipse.emf.emfstore.internal.common.model.util.SettingWithReferenced
  */
 public class RemovedElementsCache {
 
-	private IdEObjectCollectionImpl collection;
+	private final IdEObjectCollectionImpl collection;
 
-	private List<EObject> removedElements;
-	private Map<EObject, ModelElementId> removedElementsIds;
-	private Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
+	private final List<EObject> removedElements;
+	private final Map<EObject, ModelElementId> removedElementsIds;
+	private final Map<EObject, List<SettingWithReferencedElement>> removedElementsToReferenceSettings;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param collection
+	 * @param collection an underlying {@link IdEObjectCollection}
 	 */
 	public RemovedElementsCache(IdEObjectCollectionImpl collection) {
 		this.collection = collection;
-		this.removedElements = new ArrayList<EObject>();
-		this.removedElementsIds = new HashMap<EObject, ModelElementId>();
-		this.removedElementsToReferenceSettings = new LinkedHashMap<EObject, List<SettingWithReferencedElement>>();
+		removedElements = new ArrayList<EObject>();
+		removedElementsIds = new HashMap<EObject, ModelElementId>();
+		removedElementsToReferenceSettings = new LinkedHashMap<EObject, List<SettingWithReferencedElement>>();
 	}
 
 	/**
-	 * Adds a new deleted element to the cache
+	 * Adds a new deleted element to the cache.
 	 * 
 	 * @param modelElement
 	 *            the deleted element
@@ -61,18 +62,18 @@ public class RemovedElementsCache {
 	 */
 	public void addRemovedElement(EObject modelElement, Set<EObject> allModelElements,
 		List<SettingWithReferencedElement> crossReferences) {
-		this.removedElements.add(modelElement);
-		this.removedElementsIds.put(modelElement, collection.getDeletedModelElementId(modelElement));
+		removedElements.add(modelElement);
+		removedElementsIds.put(modelElement, collection.getDeletedModelElementId(modelElement));
 
 		if (crossReferences.size() != 0) {
-			for (EObject eObject : allModelElements) {
+			for (final EObject eObject : allModelElements) {
 				removedElementsToReferenceSettings.put(eObject, crossReferences);
 			}
 		}
 	}
 
 	/**
-	 * Returns the removed elements
+	 * Returns the removed elements.
 	 * 
 	 * @return list of all elements
 	 */
@@ -81,7 +82,7 @@ public class RemovedElementsCache {
 	}
 
 	/**
-	 * Returns the id of the specified element id
+	 * Returns the id of the specified element id.
 	 * 
 	 * @param modelElement
 	 *            The element whose id is requested
@@ -103,7 +104,7 @@ public class RemovedElementsCache {
 	}
 
 	/**
-	 * Clears the cache
+	 * Clears the cache.
 	 */
 	public void clear() {
 		removedElements.clear();

@@ -73,7 +73,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#changeRole(org.eclipse.emf.emfstore.internal.server.model.ProjectId,
-	 *      org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId, org.eclipse.emf.ecore.EClass)
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId, org.eclipse.emf.ecore.EClass)
 	 */
 	public void changeRole(ProjectId projectId, ACOrgUnitId orgUnit, EClass role) throws ESException {
 
@@ -95,7 +95,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#getGroups(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#getGroups(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public List<ACGroup> getGroups(ACOrgUnitId user) throws ESException {
 
@@ -126,7 +126,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#getMembers(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#getMembers(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public List<ACOrgUnit> getMembers(ACOrgUnitId groupId) throws ESException {
 		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().getMembers(getSessionId(), groupId);
@@ -146,7 +146,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#getRole(org.eclipse.emf.emfstore.internal.server.model.ProjectId,
-	 *      org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public Role getRole(ProjectId projectId, ACOrgUnitId orgUnit) throws ESException {
 
@@ -167,8 +167,8 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#removeGroup(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId,
-	 *      org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#removeGroup(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public void removeGroup(ACOrgUnitId user, ACOrgUnitId group) throws ESException {
 
@@ -180,7 +180,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#removeParticipant(org.eclipse.emf.emfstore.internal.server.model.ProjectId,
-	 *      org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public void removeParticipant(ProjectId projectId, ACOrgUnitId participant) throws ESException {
 
@@ -216,7 +216,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#deleteGroup(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#deleteGroup(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public void deleteGroup(ACOrgUnitId group) throws ESException {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().deleteGroup(getSessionId(), group);
@@ -226,7 +226,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#deleteUser(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#deleteUser(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public void deleteUser(ACOrgUnitId user) throws ESException {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().deleteUser(getSessionId(), user);
@@ -236,8 +236,8 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#addMember(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId,
-	 *      org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#addMember(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public void addMember(ACOrgUnitId group, ACOrgUnitId member) throws ESException {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().addMember(getSessionId(), group, member);
@@ -247,8 +247,8 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#removeMember(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId,
-	 *      org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#removeMember(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public void removeMember(ACOrgUnitId group, ACOrgUnitId member) throws ESException {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().removeMember(getSessionId(), group, member);
@@ -257,7 +257,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#changeOrgUnit(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#changeOrgUnit(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId,
 	 *      java.lang.String, java.lang.String)
 	 */
 	public void changeOrgUnit(ACOrgUnitId orgUnitId, String name, String description) throws ESException {
@@ -268,7 +268,7 @@ public class AdminBrokerImpl implements AdminBroker {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#getOrgUnit(org.eclipse.emf.emfstore.internal.client.model.accesscontrol.ACOrgUnitId)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#getOrgUnit(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws ESException {
 		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().getOrgUnit(sessionId, orgUnitId);

@@ -52,9 +52,6 @@ public class Behavior {
 	private static Boolean autoSave;
 	private ESChecksumErrorHandler checksumErrorHandler;
 
-	public Behavior() {
-	}
-
 	/**
 	 * Whether to enable the automatic saving of the workspace.
 	 * If disabled, performance improves vastly, but clients have to
@@ -87,7 +84,8 @@ public class Behavior {
 	 * @return true, if the checksum comparison is activated, false otherwise
 	 */
 	public boolean isChecksumCheckActive() {
-		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
 
@@ -100,13 +98,13 @@ public class Behavior {
 
 		if (checksumErrorHandler == null) {
 
-			ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			final ESExtensionPoint extensionPoint = new ESExtensionPoint(
 				"org.eclipse.emf.emfstore.client.checksumErrorHandler");
 
-			ESExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
+			final ESExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 
 			if (elementWithHighestPriority != null) {
-				ESChecksumErrorHandler errorHandler = elementWithHighestPriority
+				final ESChecksumErrorHandler errorHandler = elementWithHighestPriority
 					.getClass("errorHandler",
 						ESChecksumErrorHandler.class);
 
@@ -139,15 +137,15 @@ public class Behavior {
 	 * @return server info
 	 */
 	public List<ServerInfo> getDefaultServerInfos() {
-		ESClientConfigurationProvider provider = new ESExtensionPoint(
+		final ESClientConfigurationProvider provider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider")
 			.getClass("providerClass",
 				ESClientConfigurationProvider.class);
-		ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();
+		final ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();
 		if (provider != null) {
-			List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
+			final List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
 
-			for (ESServer server : defaultServerInfos) {
+			for (final ESServer server : defaultServerInfos) {
 				result.add(((ESServerImpl) server).toInternalAPI());
 			}
 
@@ -158,13 +156,13 @@ public class Behavior {
 	}
 
 	private ServerInfo getLocalhostServerInfo() {
-		ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
+		final ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
 		serverInfo.setName("Localhost Server");
 		serverInfo.setPort(8080);
 		serverInfo.setUrl("localhost");
 		serverInfo.setCertificateAlias(KeyStoreManager.DEFAULT_CERTIFICATE);
 
-		Usersession superUsersession = ModelFactory.eINSTANCE.createUsersession();
+		final Usersession superUsersession = ModelFactory.eINSTANCE.createUsersession();
 		superUsersession.setServerInfo(serverInfo);
 		superUsersession.setPassword("super");
 		superUsersession.setSavePassword(true);

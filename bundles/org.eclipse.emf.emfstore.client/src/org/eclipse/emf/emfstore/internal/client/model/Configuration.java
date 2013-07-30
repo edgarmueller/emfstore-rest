@@ -25,40 +25,60 @@ import org.eclipse.emf.emfstore.internal.client.configuration.XMLRPC;
  */
 public final class Configuration {
 
-	private static XMLRPC XML_RPC = new XMLRPC();
-	private static VersioningInfo VERSIONING_INFO = new VersioningInfo();
-	private static Behavior ClIENT_BEHAVIOR = new Behavior();
-	private static FileInfo FILE_INFO = new FileInfo();
+	private static XMLRPC xmlRpc = new XMLRPC();
+	private static VersioningInfo versioningInfo = new VersioningInfo();
+	private static Behavior clientBehaviour = new Behavior();
+	private static FileInfo fileInfo = new FileInfo();
 
 	private Configuration() {
 		// nothing to do
 	}
 
+	/**
+	 * Get the client behavior configuration.
+	 * 
+	 * @return the configuration
+	 */
 	public static Behavior getClientBehavior() {
-		if (ClIENT_BEHAVIOR == null) {
-			ClIENT_BEHAVIOR = new Behavior();
+		if (clientBehaviour == null) {
+			clientBehaviour = new Behavior();
 		}
-		return ClIENT_BEHAVIOR;
+		return clientBehaviour;
 	}
 
+	/**
+	 * Get the file configuration.
+	 * 
+	 * @return the configuration
+	 */
 	public static FileInfo getFileInfo() {
-		if (FILE_INFO == null) {
-			FILE_INFO = new FileInfo();
+		if (fileInfo == null) {
+			fileInfo = new FileInfo();
 		}
-		return FILE_INFO;
+		return fileInfo;
 	}
 
+	/**
+	 * Get the version configuration.
+	 * 
+	 * @return the configuration
+	 */
 	public static VersioningInfo getVersioningInfo() {
-		if (VERSIONING_INFO == null) {
-			VERSIONING_INFO = new VersioningInfo();
+		if (versioningInfo == null) {
+			versioningInfo = new VersioningInfo();
 		}
-		return VERSIONING_INFO;
+		return versioningInfo;
 	}
 
+	/**
+	 * Get the XML RPC configuration.
+	 * 
+	 * @return the configuration.
+	 */
 	public static XMLRPC getXMLRPC() {
-		if (XML_RPC == null) {
-			XML_RPC = new XMLRPC();
+		if (xmlRpc == null) {
+			xmlRpc = new XMLRPC();
 		}
-		return XML_RPC;
+		return xmlRpc;
 	}
 }

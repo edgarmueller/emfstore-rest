@@ -27,7 +27,7 @@ public class UIRunnableContext implements ESRunnableContext {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.handler.IRunnableContext#executeRunnable(java.lang.Runnable)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.handler.IRunnableContext#executeRunnable(java.lang.Runnable)
 	 */
 	public void executeRunnable(final Runnable runnable) {
 		RunInUI.run(new Callable<Void>() {

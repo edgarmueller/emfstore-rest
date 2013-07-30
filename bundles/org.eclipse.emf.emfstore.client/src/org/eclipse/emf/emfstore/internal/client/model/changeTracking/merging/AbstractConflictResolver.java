@@ -38,7 +38,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.Project,
 	 *      java.util.List, java.util.List,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec)

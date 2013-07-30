@@ -59,52 +59,52 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  *          <p>
  *          The following features are supported:
  *          <ul>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProject <em> Project</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectId
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProject <em> Project</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectId
  *          <em>Project Id</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectName
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectName
  *          <em>Project Name</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProjectDescription
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectDescription
  *          <em>Project Description</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getUsersession
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getUsersession
  *          <em>Usersession</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLastUpdated
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLastUpdated
  *          <em>Last Updated</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getBaseVersion
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getBaseVersion
  *          <em>Base Version</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getResourceCount
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getResourceCount
  *          <em>Resource Count</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#isDirty <em> Dirty</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getOldLogMessages
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getOldLogMessages
  *          <em>Old Log Messages</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalOperations
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalOperations
  *          <em>Local Operations</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotifications
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getNotifications
  *          <em>Notifications</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getEventComposite
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getEventComposite
  *          <em>Event Composite</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getNotificationComposite
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getNotificationComposite
  *          <em>Notification Composite </em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getWaitingUploads
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWaitingUploads
  *          <em>Waiting Uploads</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getProperties
+ *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProperties
  *          <em>Properties</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getChangedSharedProperties
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getChangedSharedProperties
  *          <em>Changed Shared Properties</em>}</li>
  *          </ul>
  *          </p>
  * 
- * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace()
+ * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace()
  * @model
  * @generated
  */
@@ -319,7 +319,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 
 	/**
 	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>'
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -330,7 +330,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Changed Shared Properties</em>' reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ChangedSharedProperties()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_ChangedSharedProperties()
 	 * @model
 	 * @generated
 	 */
@@ -386,7 +386,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	ChangePackage getLocalChangePackage();
 
 	/**
-	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.client.model.ProjectSpace#getLocalChangePackage
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalChangePackage
 	 * <em>Local Change Package</em>}' containment reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -505,7 +505,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Last Updated</em>' attribute.
 	 * @see #setLastUpdated(Date)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_LastUpdated()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_LastUpdated()
 	 * @model
 	 * @generated
 	 */
@@ -533,7 +533,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Old Log Messages</em>' attribute list.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_OldLogMessages()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_OldLogMessages()
 	 * @model
 	 * @generated
 	 */
@@ -627,7 +627,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Project Name</em>' attribute.
 	 * @see #setProjectName(String)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ProjectName()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_ProjectName()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -635,7 +635,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -645,7 +645,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Properties</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Properties()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_Properties()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -670,7 +670,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Usersession</em>' reference.
 	 * @see #setUsersession(Usersession)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Usersession()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_Usersession()
 	 * @model
 	 * @generated
 	 */
@@ -688,7 +688,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Waiting Uploads</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_WaitingUploads()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_WaitingUploads()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -757,7 +757,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Dirty</em>' attribute.
 	 * @see #setDirty(boolean)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_Dirty()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_Dirty()
 	 * @model
 	 * @generated
 	 */
@@ -863,7 +863,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @return the value of the '<em>Resource Count</em>' attribute.
 	 * @see #setResourceCount(int)
-	 * @see org.eclipse.emf.emfstore.client.model.ModelPackage#getProjectSpace_ResourceCount()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ModelPackage#getProjectSpace_ResourceCount()
 	 * @model
 	 * @generated
 	 */

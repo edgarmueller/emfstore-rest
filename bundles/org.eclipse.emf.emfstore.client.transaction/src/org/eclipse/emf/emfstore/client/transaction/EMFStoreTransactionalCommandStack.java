@@ -200,7 +200,7 @@ public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransacti
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack#addCommandStackObserver(org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack#addCommandStackObserver(org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver)
 	 */
 	public void addCommandStackObserver(CommandObserver observer) {
 		notifier.addCommandStackObserver(observer);
@@ -209,7 +209,7 @@ public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransacti
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.EMFStoreCommandStack#removeCommandStackObserver(org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack#removeCommandStackObserver(org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver)
 	 */
 	public void removeCommandStackObserver(CommandObserver observer) {
 		notifier.removeCommandStackObserver(observer);

@@ -15,7 +15,6 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.server.ESLocationProvider;
 
 /**
  * This is the default workspace location provider. If no other location
@@ -27,8 +26,7 @@ import org.eclipse.emf.emfstore.server.ESLocationProvider;
  * 
  * @author wesendon
  */
-public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLocationProvider implements
-	ESLocationProvider {
+public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLocationProvider {
 
 	/**
 	 * {@inheritDoc}
@@ -37,12 +35,11 @@ public class DefaultWorkspaceLocationProvider extends DefaultServerWorkspaceLoca
 	 */
 	@Override
 	protected String getRootDirectory() {
-		String parameter = getStartParameter(ServerConfiguration.EMFSTORE_HOME);
+		final String parameter = getStartParameter(ServerConfiguration.EMFSTORE_HOME);
 		if (parameter == null) {
 			return addFolders(getUserHome(), ".emfstore", "client");
-		} else {
-			return parameter;
 		}
+		return parameter;
 
 	}
 

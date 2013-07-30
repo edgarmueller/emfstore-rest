@@ -457,7 +457,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandCompleted(Command command) {
 
@@ -757,7 +757,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
 	 *      org.eclipse.core.runtime.OperationCanceledException)
 	 */
 	public void commandFailed(Command command, Exception exception) {
@@ -784,7 +784,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;

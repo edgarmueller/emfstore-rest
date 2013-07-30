@@ -30,7 +30,7 @@ public class NotifiableIdEObjectCollectionFilter implements ESNotificationFilter
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
+	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
 	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
 		return (notificationInfo.getNotifier() instanceof NotifiableIdEObjectCollection);

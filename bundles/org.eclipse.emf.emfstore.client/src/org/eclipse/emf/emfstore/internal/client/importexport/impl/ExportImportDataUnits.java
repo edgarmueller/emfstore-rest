@@ -28,7 +28,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esc";
@@ -43,7 +43,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".ecp";
@@ -58,7 +58,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esp";
@@ -74,7 +74,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esw";
@@ -89,7 +89,7 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esh";

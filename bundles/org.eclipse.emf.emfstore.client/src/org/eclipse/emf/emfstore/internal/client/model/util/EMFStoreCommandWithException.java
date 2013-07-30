@@ -10,19 +10,41 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.util;
 
+/**
+ * Abstract superclass for commands that are run on the EMFStore command stack and can throw eceptions.
+ * 
+ * @author mkoegel
+ * 
+ * @param <T> type of the exception
+ */
 public abstract class EMFStoreCommandWithException<T> extends EMFStoreCommand {
 
-	private T excpetion;
+	private T exception;
 
+	/**
+	 * Get the exception that occured if any.
+	 * 
+	 * @return the exception or null
+	 */
 	public T getException() {
-		return excpetion;
+		return exception;
 	}
 
-	public void setException(T excpetion) {
-		this.excpetion = excpetion;
+	/**
+	 * Set the exception that occured during the command.
+	 * 
+	 * @param exception the exception
+	 */
+	protected void setException(T exception) {
+		this.exception = exception;
 	}
 
+	/**
+	 * Determine if exception occured on execution.
+	 * 
+	 * @return true if exception occured.
+	 */
 	public boolean hasException() {
-		return excpetion != null;
+		return exception != null;
 	}
 }

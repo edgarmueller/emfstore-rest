@@ -208,8 +208,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
+	 *      org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
@@ -231,7 +231,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void modelElementAdded(IdEObjectCollection collection, EObject modelElement) {
@@ -242,7 +242,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void modelElementRemoved(IdEObjectCollection collection, EObject modelElement) {
@@ -257,7 +257,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.internal.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.IdEObjectCollection)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection)
 	 */
 	public void collectionDeleted(IdEObjectCollection collection) {
 
