@@ -24,6 +24,7 @@ import static org.eclipse.emf.emfstore.internal.server.model.versioning.operatio
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -70,15 +71,17 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Mult
  */
 public class DecisionManager {
 
-	private ConflictHandler conflictHandler;
+	private final ConflictHandler conflictHandler;
 
 	private ArrayList<VisualConflict> conflicts;
 
-	private ConflictDetector conflictDetector;
-	private ChangeConflictSet changeConflictSet;
-	private ModelElementIdToEObjectMapping mapping;
+	private final ConflictDetector conflictDetector;
+	private final ChangeConflictSet changeConflictSet;
+	private final ModelElementIdToEObjectMapping mapping;
 	private final boolean isBranchMerge;
 	private final Project project;
+
+	private Set<ConflictBucket> unvisualizedConflicts;
 
 	/**
 	 * Default constructor.
@@ -94,11 +97,11 @@ public class DecisionManager {
 	 */
 	public DecisionManager(Project project, ChangeConflictSet changeConflict, boolean isBranchMerge) {
 		this.project = project;
-		this.mapping = changeConflict.getIdToEObjectMapping();
+		mapping = changeConflict.getIdToEObjectMapping();
 		this.isBranchMerge = isBranchMerge;
-		this.changeConflictSet = changeConflict;
-		this.conflictHandler = initConflictHandlers();
-		this.conflictDetector = new ConflictDetector();
+		changeConflictSet = changeConflict;
+		conflictHandler = initConflictHandlers();
+		conflictDetector = new ConflictDetector();
 		init();
 	}
 
@@ -119,6 +122,8 @@ public class DecisionManager {
 
 		conflicts = new ArrayList<VisualConflict>();
 
+		unvisualizedConflicts = new LinkedHashSet<ConflictBucket>();
+
 		Set<ConflictBucket> conflictBuckets;
 
 		conflictBuckets = changeConflictSet.getConflictBuckets();
@@ -133,10 +138,10 @@ public class DecisionManager {
 	// BEGIN COMPLEX CODE
 	private void createConflicts(Set<ConflictBucket> conflictBucket) {
 		// Create Conflicts from ConflictBucket
-		for (ConflictBucket conf : conflictBucket) {
+		for (final ConflictBucket conf : conflictBucket) {
 
-			AbstractOperation my = conf.getMyOperation();
-			AbstractOperation their = conf.getTheirOperation();
+			final AbstractOperation my = conf.getMyOperation();
+			final AbstractOperation their = conf.getTheirOperation();
 			VisualConflict conflict = null;
 
 			if (isAttribute(my) && isAttribute(their)) {
@@ -148,35 +153,35 @@ public class DecisionManager {
 			} else if (isMultiRef(my) && isMultiRef(their)) {
 				conflict = createMultiMultiConflict(conf);
 
-			} else if ((isMultiRef(my) && isSingleRef(their)) || (isMultiRef(their) && isSingleRef(my))) {
+			} else if (isMultiRef(my) && isSingleRef(their) || isMultiRef(their) && isSingleRef(my)) {
 				conflict = createMultiSingle(conf);
 
 			} else if (isCompositeRef(my) && isCompositeRef(their)) {
 				conflict = createReferenceConflict(conf);
 
-			} else if ((isCompositeRef(my) && (isMultiRef(their) || isSingleRef(their)))
-				|| ((isMultiRef(my) || isSingleRef(my)) && isCompositeRef(their))) {
+			} else if (isCompositeRef(my) && (isMultiRef(their) || isSingleRef(their))
+				|| (isMultiRef(my) || isSingleRef(my)) && isCompositeRef(their)) {
 				conflict = createReferenceCompVSSingleMulti(conf);
 
-			} else if ((isMultiRef(my) && isMultiRefSet(their)) || (isMultiRef(their) && isMultiRefSet(my))) {
+			} else if (isMultiRef(my) && isMultiRefSet(their) || isMultiRef(their) && isMultiRefSet(my)) {
 				conflict = createMultiRefMultiSet(conf);
 
 			} else if (isMultiRefSet(my) && isMultiRefSet(their)) {
 				conflict = createMultiRefSetSet(conf);
 
-			} else if ((isMultiRefSet(my) && isSingleRef(their)) || (isMultiRefSet(their) && isSingleRef(my))) {
+			} else if (isMultiRefSet(my) && isSingleRef(their) || isMultiRefSet(their) && isSingleRef(my)) {
 				conflict = createMultiSetSingle(conf);
 
 			} else if (isMultiAtt(my) && isMultiAtt(their)) {
 				conflict = createMultiAtt(conf);
 
-			} else if ((isMultiAtt(my) && isMultiAttSet(their)) || (isMultiAtt(their) && isMultiAttSet(my))) {
+			} else if (isMultiAtt(my) && isMultiAttSet(their) || isMultiAtt(their) && isMultiAttSet(my)) {
 				conflict = createMultiAttSet(conf);
 
-			} else if ((isMultiAtt(my) && isMultiAttMove(their)) || (isMultiAtt(their) && isMultiAttMove(my))) {
+			} else if (isMultiAtt(my) && isMultiAttMove(their) || isMultiAtt(their) && isMultiAttMove(my)) {
 				conflict = createMultiAttMove(conf);
 
-			} else if ((isMultiAttSet(my) && isMultiAttMove(their)) || (isMultiAttSet(their) && isMultiAttMove(my))) {
+			} else if (isMultiAttSet(my) && isMultiAttMove(their) || isMultiAttSet(their) && isMultiAttMove(my)) {
 				conflict = createMultiAttMoveSet(conf);
 
 			} else if (isMultiAttSet(my) && isMultiAttSet(their)) {
@@ -193,6 +198,7 @@ public class DecisionManager {
 				conflict = notifyConflictHandlers(conflict);
 				addConflict(conflict);
 			} else {
+				unvisualizedConflicts.add(conf);
 				WorkspaceUtil
 					.log(
 						"A created conflict has been ignored (does not apply to any existing conflict rule).",
@@ -289,8 +295,9 @@ public class DecisionManager {
 	}
 
 	private VisualConflict createReferenceConflict(ConflictBucket conf) {
-		EList<AbstractOperation> myOperations = ((CompositeOperation) conf.getMyOperation()).getSubOperations();
-		EList<AbstractOperation> theirOperations = ((CompositeOperation) conf.getTheirOperation()).getSubOperations();
+		final EList<AbstractOperation> myOperations = ((CompositeOperation) conf.getMyOperation()).getSubOperations();
+		final EList<AbstractOperation> theirOperations = ((CompositeOperation) conf.getTheirOperation())
+			.getSubOperations();
 
 		return createRefFromSub(conf, myOperations, theirOperations);
 	}
@@ -298,7 +305,7 @@ public class DecisionManager {
 	private VisualConflict createRefFromSub(ConflictBucket conf, List<AbstractOperation> myOperations,
 		List<AbstractOperation> theirOperations) {
 
-		for (AbstractOperation myOp : myOperations) {
+		for (final AbstractOperation myOp : myOperations) {
 			if (isSingleRef(myOp)) {
 
 				return new ReferenceConflict(true, conf, this);
@@ -366,7 +373,7 @@ public class DecisionManager {
 	 */
 	public boolean isResolved() {
 		boolean isResolved = true;
-		for (VisualConflict conflict : conflicts) {
+		for (final VisualConflict conflict : conflicts) {
 			isResolved = isResolved && conflict.isResolved();
 		}
 		return isResolved;
@@ -381,8 +388,13 @@ public class DecisionManager {
 			return;
 		}
 
-		for (VisualConflict conflict : conflicts) {
+		for (final VisualConflict conflict : conflicts) {
 			conflict.resolve();
+		}
+		// resolve unvisualized conflicts automatically
+		for (final ConflictBucket conflictBucket : unvisualizedConflicts) {
+			conflictBucket.resolveConflict(new LinkedHashSet<AbstractOperation>(),
+				new LinkedHashSet<AbstractOperation>());
 		}
 	}
 
@@ -491,7 +503,7 @@ public class DecisionManager {
 		int myLeafCount = 0;
 		int theirCount = 0;
 		int theirLeafCount = 0;
-		for (VisualConflict conflict : conflicts) {
+		for (final VisualConflict conflict : conflicts) {
 			myCount += conflict.getLeftOperations().size();
 			myLeafCount += ChangePackageImpl.countLeafOperations(conflict.getMyOperations());
 			theirCount += conflict.getRightOperations().size();
