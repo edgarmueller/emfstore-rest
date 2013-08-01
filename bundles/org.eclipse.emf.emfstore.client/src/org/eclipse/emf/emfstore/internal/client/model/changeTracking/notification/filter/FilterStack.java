@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * chodnick
+ * Slawomir Chodnicki - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -32,6 +32,8 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
  */
 public final class FilterStack implements ESNotificationFilter {
 
+	private static final String NOTIFICATION_FILTER_EXTENSION_ID = "org.eclipse.emf.emfstore.client.notificationFilter";
+
 	private static final ESNotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
 		new UnknownEventTypeFilter(), new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(),
 		new IgnoreOutsideProjectReferencesFilter(), new IgnoreNullFeatureNotificationsFilter(),
@@ -42,7 +44,7 @@ public final class FilterStack implements ESNotificationFilter {
 	 */
 	public static final ESNotificationFilter DEFAULT = new FilterStack(DEFAULT_STACK);
 
-	private List<ESNotificationFilter> filterList;
+	private final List<ESNotificationFilter> filterList;
 
 	/**
 	 * Constructor.
@@ -57,12 +59,11 @@ public final class FilterStack implements ESNotificationFilter {
 	}
 
 	private void collectExtensionPoints() {
-		for (ESExtensionElement element : new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.notificationFilter", true)
-			.getExtensionElements()) {
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(NOTIFICATION_FILTER_EXTENSION_ID, true);
+		for (final ESExtensionElement element : extensionPoint.getExtensionElements()) {
 			try {
 				filterList.add(element.getClass("class", ESNotificationFilter.class));
-			} catch (ESExtensionPointException e) {
+			} catch (final ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
 		}
@@ -72,12 +73,12 @@ public final class FilterStack implements ESNotificationFilter {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
 	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
 	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
-		for (ESNotificationFilter f : filterList) {
-			if (f.check(notificationInfo, container)) {
+		for (final ESNotificationFilter filter : filterList) {
+			if (filter.check(notificationInfo, container)) {
 				return true;
 			}
 		}

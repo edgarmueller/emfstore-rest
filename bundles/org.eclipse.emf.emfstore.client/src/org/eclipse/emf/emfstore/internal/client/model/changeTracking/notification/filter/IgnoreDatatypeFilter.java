@@ -25,15 +25,17 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 public class IgnoreDatatypeFilter implements ESNotificationFilter {
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo)
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
 	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 
-		Object newValue = notificationInfo.getNewValue();
-		Object oldValue = notificationInfo.getOldValue();
-		Object notifier = notificationInfo.getNotifier();
+		final Object newValue = notificationInfo.getNewValue();
+		final Object oldValue = notificationInfo.getOldValue();
+		final Object notifier = notificationInfo.getNotifier();
 		boolean ignore = false;
 
 		if (newValue != null && newValue instanceof EObject) {

@@ -7,9 +7,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Maximilian Koegel, Mueller Edgar - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.client.handler.ESNotificationFilter;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
@@ -18,6 +20,8 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionIm
 /**
  * Filter notifications from elements outside of the project.
  * 
+ * @author mkoegel
+ * @author emueller
  */
 public class IgnoreNotificationsOutsideProject implements ESNotificationFilter {
 
@@ -25,15 +29,17 @@ public class IgnoreNotificationsOutsideProject implements ESNotificationFilter {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
 	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
 	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 
 		// do not filter notifications from (deleted) elements in project
-		if (container.getModelElementId(notificationInfo.getNotifierModelElement()) != null
-			|| ((IdEObjectCollectionImpl) container).getDeletedModelElementId(notificationInfo
-				.getNotifierModelElement()) != null) {
+		final EObject notifierModelElement = notificationInfo.getNotifierModelElement();
+		final IdEObjectCollectionImpl containerImpl = (IdEObjectCollectionImpl) container;
+
+		if (container.getModelElementId(notifierModelElement) != null
+			|| containerImpl.getDeletedModelElementId(notifierModelElement) != null) {
 			return false;
 		}
 

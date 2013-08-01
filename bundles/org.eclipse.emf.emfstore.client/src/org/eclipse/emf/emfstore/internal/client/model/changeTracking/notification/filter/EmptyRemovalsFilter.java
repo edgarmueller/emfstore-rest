@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * chodnick
+ * Slawomir Chodnicki - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -18,8 +18,12 @@ import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 
 /**
- * This class filters zero effect remove operations from a notification recording. An example of a zero effect remove is
- * a notification that [] changed to null.
+ * <p>
+ * This class filters zero effect remove operations from a notification recording.
+ * </p>
+ * <p>
+ * An example of a zero effect remove would be a notification that <code>[]</code> changed to <code>null</code>.
+ * </p>
  * 
  * @author chodnick
  */
@@ -29,12 +33,13 @@ public class EmptyRemovalsFilter implements ESNotificationFilter {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
 	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
 	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 
-		return notificationInfo.isRemoveManyEvent() && notificationInfo.getNewValue() == null
+		return notificationInfo.isRemoveManyEvent()
+			&& notificationInfo.getNewValue() == null
 			&& notificationInfo.getOldValue() instanceof Collection<?>
 			&& ((Collection<?>) notificationInfo.getOldValue()).isEmpty() && notificationInfo.wasSet();
 	}

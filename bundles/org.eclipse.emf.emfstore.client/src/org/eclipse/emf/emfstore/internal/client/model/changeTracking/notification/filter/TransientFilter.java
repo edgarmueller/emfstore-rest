@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * chodnick
+ * Slawomir Chodnicki - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -23,11 +23,13 @@ import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 public class TransientFilter implements ESNotificationFilter {
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo)
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
-	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 		return notificationInfo.isTransient();
 	}
 
