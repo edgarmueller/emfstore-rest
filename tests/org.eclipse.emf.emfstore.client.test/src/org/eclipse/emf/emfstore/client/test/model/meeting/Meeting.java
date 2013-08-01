@@ -28,12 +28,13 @@ import org.eclipse.emf.emfstore.client.test.model.organization.User;
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getFacilitator <em>Facilitator</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getMinutetaker <em>Minutetaker</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getTimekeeper <em>Timekeeper</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getParticipants <em>Participants</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getParticipants <em>Participants</em>}
+ * </li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getSections <em>Sections</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedIssuesSection <em>Identified
- * Issues Section</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedWorkItemsSection <em>Identified
- * Work Items Section</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedIssuesSection <em>
+ * Identified Issues Section</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.Meeting#getIdentifiedWorkItemsSection <em>
+ * Identified Work Items Section</em>}</li>
  * </ul>
  * </p>
  * 

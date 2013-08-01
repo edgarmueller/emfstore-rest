@@ -134,8 +134,7 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig
 	 * <em>Test Config</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -150,8 +149,7 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun
 	 * <em>Test Run</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
@@ -166,8 +164,7 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult
 	 * <em>Test Result</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -182,8 +179,7 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff
 	 * <em>Test Diff</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
@@ -198,8 +194,7 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport
 	 * <em>Diff Report</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.
@@ -214,8 +209,8 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root <em>Root</em>}'.
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root
+	 * <em>Root</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
@@ -229,8 +224,7 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig
+	 * Creates a new adapter for an object of class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig
 	 * <em>Mutator Config</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's
 	 * useful to ignore a case when inheritance will catch all the cases anyway.

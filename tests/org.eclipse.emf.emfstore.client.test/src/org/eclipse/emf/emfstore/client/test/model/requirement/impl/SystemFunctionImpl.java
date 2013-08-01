@@ -33,17 +33,19 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Workspace;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getInput <em>Input</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getOutput <em>Output</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getException <em>Exception
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getInput <em>Input
  * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getOutput <em>
+ * Output</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getException <em>
+ * Exception </em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getNonFunctionalRequirement
  * <em>Non Functional Requirement</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getUsecases <em>Usecases
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getWorkspace <em>Workspace
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getUsecases <em>
+ * Usecases </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.SystemFunctionImpl#getWorkspace <em>
+ * Workspace </em>}</li>
  * </ul>
  * </p>
  * 

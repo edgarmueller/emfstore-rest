@@ -18,7 +18,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections <em>Subsections</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.CompositeSection#getSubsections <em>
+ * Subsections</em>}</li>
  * </ul>
  * </p>
  * 
@@ -29,8 +30,9 @@ import org.eclipse.emf.common.util.EList;
 public interface CompositeSection extends Section {
 	/**
 	 * Returns the value of the '<em><b>Subsections</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section#getParent <em>Parent</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.document.Section#getParent
+	 * <em>Parent</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Subsections</em>' containment reference list isn't clear, there really should be more

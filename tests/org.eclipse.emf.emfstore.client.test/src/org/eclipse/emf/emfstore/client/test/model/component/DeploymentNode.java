@@ -18,7 +18,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode#getComponents <em>Components</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.DeploymentNode#getComponents <em>Components
+ * </em>}</li>
  * </ul>
  * </p>
  * 

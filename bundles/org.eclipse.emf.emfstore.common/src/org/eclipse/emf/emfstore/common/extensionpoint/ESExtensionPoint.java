@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.internal.common.Activator;
  * @author wesendon
  */
 public final class ESExtensionPoint {
-	
+
 	private List<ESExtensionElement> elements;
 	private final String id;
 	private boolean exceptionInsteadOfNull;

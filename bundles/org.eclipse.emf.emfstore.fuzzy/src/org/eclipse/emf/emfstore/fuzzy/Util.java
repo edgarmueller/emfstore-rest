@@ -6,14 +6,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy;
 
 /**
- * Marker Interface for utility classes in test classes using the
- * {@link FuzzyRunner}.
+ * Marker Interface for utility classes in test classes using the {@link FuzzyRunner}.
  * 
  * @author Julian Sommerfeldt
  */

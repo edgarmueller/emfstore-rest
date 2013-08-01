@@ -38,23 +38,28 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
  * <li>
  * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getRefinedRequirement
  * <em>Refined Requirement</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getStoryPoints <em>
- * Story Points</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getPriority <em>
- * Priority</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getStoryPoints
+ * <em> Story Points</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getPriority
+ * <em> Priority</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getRefiningRequirements
  * <em>Refining Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getUseCases <em>Use
- * Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getScenarios <em>
- * Scenarios</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#isReviewed <em>
- * Reviewed</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getStakeholder <em>
- * Stakeholder</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getCost <em>Cost
- * </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getUseCases
+ * <em>Use Cases</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getScenarios
+ * <em> Scenarios</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#isReviewed
+ * <em> Reviewed</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getStakeholder
+ * <em> Stakeholder</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.FunctionalRequirementImpl#getCost
+ * <em>Cost </em>}</li>
  * </ul>
  * </p>
  * 

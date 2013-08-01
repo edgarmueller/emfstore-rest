@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.diff;
@@ -19,8 +19,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun;
 
 /**
- * Abstract TestRunProvider to provide the {@link TestRun}s needed in the
- * {@link DiffGenerator}.
+ * Abstract TestRunProvider to provide the {@link TestRun}s needed in the {@link DiffGenerator}.
  * 
  * @author Julian Sommerfeldt
  * 

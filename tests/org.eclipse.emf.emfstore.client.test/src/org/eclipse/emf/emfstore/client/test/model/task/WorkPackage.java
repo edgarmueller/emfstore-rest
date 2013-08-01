@@ -19,8 +19,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getContainedWorkItems <em>Contained Work Items
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getContainedWorkItems <em>Contained
+ * Work Items </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getStartDate <em>Start Date</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getEndDate <em>End Date</em>}</li>
  * </ul>
@@ -33,7 +33,8 @@ import org.eclipse.emf.common.util.EList;
 public interface WorkPackage extends WorkItem {
 	/**
 	 * Returns the value of the '<em><b>Contained Work Items</b></em>' containment reference list. The list contents are
-	 * of type {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is
+	 * of type {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getContainingWorkpackage
 	 * <em>Containing Workpackage</em>}'. <!-- begin-user-doc -->
 	 * <p>

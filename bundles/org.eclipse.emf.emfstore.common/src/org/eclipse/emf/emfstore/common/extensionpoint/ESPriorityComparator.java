@@ -49,10 +49,10 @@ public final class ESPriorityComparator implements Comparator<ESExtensionElement
 	/**
 	 * Constructor allows to config fieldname and ordering.
 	 * 
-	 * @param fieldname 
-	 * 				the attribute id of the priority field
-	 * @param descending 
-	 * 				if true, priorities are sorted in descending order, ascending otherwise
+	 * @param fieldname
+	 *            the attribute id of the priority field
+	 * @param descending
+	 *            if true, priorities are sorted in descending order, ascending otherwise
 	 */
 	public ESPriorityComparator(final String fieldname, final boolean descending) {
 		this.fieldname = fieldname;

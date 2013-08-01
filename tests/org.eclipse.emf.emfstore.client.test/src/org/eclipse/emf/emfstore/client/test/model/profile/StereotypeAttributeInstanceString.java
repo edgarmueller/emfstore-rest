@@ -16,8 +16,8 @@ package org.eclipse.emf.emfstore.client.test.model.profile;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString#getValue <em>Value
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString#getValue
+ * <em>Value </em>}</li>
  * </ul>
  * </p>
  * 

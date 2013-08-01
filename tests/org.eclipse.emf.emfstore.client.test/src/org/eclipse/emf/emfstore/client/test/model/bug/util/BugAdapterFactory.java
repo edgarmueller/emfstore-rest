@@ -116,7 +116,8 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport
 	 * <em>Report</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
@@ -130,7 +131,8 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement <em>Unicase Model Element</em>}'.
+	 * <!--
 	 * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
 	 * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
@@ -143,7 +145,8 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.Annotation
 	 * <em>Annotation</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
@@ -157,7 +160,8 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem
 	 * <em>Work Item</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
@@ -171,7 +175,8 @@ public class BugAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
+	 * Creates a new adapter for an object of class '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.Checkable
 	 * <em>Checkable</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
 	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->

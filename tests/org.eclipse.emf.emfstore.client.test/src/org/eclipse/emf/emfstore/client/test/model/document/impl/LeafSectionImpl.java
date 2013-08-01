@@ -34,11 +34,13 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl#getParent <em>Parent</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl#getModelElements <em>Model
- * Elements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl#getReferencedModelElements <em>
- * Referenced Model Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl#getParent <em>Parent
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl#getModelElements <em>
+ * Model Elements</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.document.impl.LeafSectionImpl#getReferencedModelElements
+ * <em> Referenced Model Elements</em>}</li>
  * </ul>
  * </p>
  * 

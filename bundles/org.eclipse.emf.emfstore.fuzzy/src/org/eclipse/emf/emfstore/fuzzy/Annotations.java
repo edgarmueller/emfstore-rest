@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy;
@@ -47,8 +47,7 @@ public final class Annotations {
 	}
 
 	/**
-	 * An annotation to set the {@link FuzzyDataProvider} for the
-	 * {@link FuzzyRunner}.
+	 * An annotation to set the {@link FuzzyDataProvider} for the {@link FuzzyRunner}.
 	 * 
 	 * @author Julian Sommerfeldt
 	 * 
@@ -62,8 +61,7 @@ public final class Annotations {
 	}
 
 	/**
-	 * An optional annotation to declare options to use in the
-	 * {@link FuzzyDataProvider}.
+	 * An optional annotation to declare options to use in the {@link FuzzyDataProvider}.
 	 * 
 	 * @author Julian Sommerfeldt
 	 * 

@@ -78,7 +78,8 @@ public class ReleaseItemProviderAdapterFactory extends ReleaseAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +103,8 @@ public class ReleaseItemProviderAdapterFactory extends ReleaseAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

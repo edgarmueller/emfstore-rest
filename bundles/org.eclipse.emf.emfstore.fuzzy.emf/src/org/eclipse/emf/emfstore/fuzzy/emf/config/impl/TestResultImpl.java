@@ -18,8 +18,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.ConfigPackage;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Test Result</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Test Result</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -184,8 +183,8 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
 		seedCount = newSeedCount;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_RESULT__SEED_COUNT, oldSeedCount,
-					seedCount));
+				ConfigPackage.TEST_RESULT__SEED_COUNT, oldSeedCount,
+				seedCount));
 	}
 
 	/**
@@ -207,7 +206,7 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
 		testName = newTestName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_RESULT__TEST_NAME, oldTestName, testName));
+				ConfigPackage.TEST_RESULT__TEST_NAME, oldTestName, testName));
 	}
 
 	/**
@@ -229,7 +228,7 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
 		error = newError;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_RESULT__ERROR, oldError, error));
+				ConfigPackage.TEST_RESULT__ERROR, oldError, error));
 	}
 
 	/**
@@ -251,7 +250,7 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
 		failure = newFailure;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_RESULT__FAILURE, oldFailure, failure));
+				ConfigPackage.TEST_RESULT__FAILURE, oldFailure, failure));
 	}
 
 	/**
@@ -273,8 +272,8 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
 		executionTime = newExecutionTime;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_RESULT__EXECUTION_TIME,
-					oldExecutionTime, executionTime));
+				ConfigPackage.TEST_RESULT__EXECUTION_TIME,
+				oldExecutionTime, executionTime));
 	}
 
 	/**
@@ -365,13 +364,13 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
 			return seedCount != SEED_COUNT_EDEFAULT;
 		case ConfigPackage.TEST_RESULT__TEST_NAME:
 			return TEST_NAME_EDEFAULT == null ? testName != null
-					: !TEST_NAME_EDEFAULT.equals(testName);
+				: !TEST_NAME_EDEFAULT.equals(testName);
 		case ConfigPackage.TEST_RESULT__ERROR:
 			return ERROR_EDEFAULT == null ? error != null : !ERROR_EDEFAULT
-					.equals(error);
+				.equals(error);
 		case ConfigPackage.TEST_RESULT__FAILURE:
 			return FAILURE_EDEFAULT == null ? failure != null
-					: !FAILURE_EDEFAULT.equals(failure);
+				: !FAILURE_EDEFAULT.equals(failure);
 		case ConfigPackage.TEST_RESULT__EXECUTION_TIME:
 			return executionTime != EXECUTION_TIME_EDEFAULT;
 		}

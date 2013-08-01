@@ -189,7 +189,8 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 
 		// Obtain or create and register package
 		BowlingPackageImpl theBowlingPackage = (BowlingPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BowlingPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI) : new BowlingPackageImpl());
+			.get(eNS_URI)
+			: new BowlingPackageImpl());
 
 		isInited = true;
 

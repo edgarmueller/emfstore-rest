@@ -77,15 +77,17 @@ public class StateItemProviderAdapterFactory extends StateAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State} instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	protected StateItemProvider stateItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State}. <!-- begin-user-doc
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.state.State}. <!--
+	 * begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -101,7 +103,8 @@ public class StateItemProviderAdapterFactory extends StateAdapterFactory impleme
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.Transition} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -125,7 +128,8 @@ public class StateItemProviderAdapterFactory extends StateAdapterFactory impleme
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -133,7 +137,8 @@ public class StateItemProviderAdapterFactory extends StateAdapterFactory impleme
 	protected StateInitialItemProvider stateInitialItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateInitial}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -149,7 +154,8 @@ public class StateItemProviderAdapterFactory extends StateAdapterFactory impleme
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.state.StateEnd} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated

@@ -77,8 +77,9 @@ public class BugItemProviderAdapterFactory extends BugAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.bug.BugReport} instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */

@@ -18,10 +18,10 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getOfferingComponent <em>Offering
- * Component</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getConsumingComponents <em>Consuming
- * Components</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getOfferingComponent <em>
+ * Offering Component</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.ComponentService#getConsumingComponents <em>
+ * Consuming Components</em>}</li>
  * </ul>
  * </p>
  * 
@@ -63,8 +63,8 @@ public interface ComponentService extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Consuming Components</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getConsumedServices
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.component.Component#getConsumedServices
 	 * <em>Consumed Services</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Consuming Components</em>' reference list isn't clear, there really should be more of

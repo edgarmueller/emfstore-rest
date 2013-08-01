@@ -186,7 +186,8 @@ public interface Workspace extends EObject, IAdaptable, APIDelegate<ESWorkspaceI
 
 	/**
 	 * Returns the value of the '<em><b>Server Infos</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.ServerInfo}.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Server Infos</em>' containment reference list isn't clear, there really should be more
@@ -204,7 +205,8 @@ public interface Workspace extends EObject, IAdaptable, APIDelegate<ESWorkspaceI
 
 	/**
 	 * Returns the value of the '<em><b>Usersessions</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.Usersession}. <!--
+	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.model.Usersession}.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Usersessions</em>' containment reference list isn't clear, there really should be more

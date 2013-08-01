@@ -34,12 +34,14 @@ import org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#isRequired <em>Required</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#getProfile <em>Profile</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#getStereotypeInstances <em>
- * Stereotype Instances</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#getStereotypeAttributes <em>
- * Stereotype Attributes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#isRequired <em>Required
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#getProfile <em>Profile
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#getStereotypeInstances
+ * <em> Stereotype Instances</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeImpl#getStereotypeAttributes
+ * <em> Stereotype Attributes</em>}</li>
  * </ul>
  * </p>
  * 

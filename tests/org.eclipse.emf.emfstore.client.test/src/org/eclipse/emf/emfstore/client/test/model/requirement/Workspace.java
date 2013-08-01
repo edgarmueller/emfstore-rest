@@ -18,8 +18,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace#getSystemFunctions <em>System Functions
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace#getSystemFunctions <em>System
+ * Functions </em>}</li>
  * </ul>
  * </p>
  * 
@@ -30,7 +30,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
 public interface Workspace extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>System Functions</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. It is bidirectional and its
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. It is bidirectional and
+	 * its
 	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction#getWorkspace
 	 * <em>Workspace</em>}'. <!-- begin-user-doc -->
 	 * <p>

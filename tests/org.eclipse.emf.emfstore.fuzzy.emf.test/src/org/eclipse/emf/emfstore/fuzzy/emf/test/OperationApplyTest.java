@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -38,7 +38,7 @@ public class OperationApplyTest extends FuzzyProjectTest {
 
 		final ProjectSpace projectSpace = getProjectSpace();
 		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace
-				.getProject());
+			.getProject());
 
 		new EMFStoreCommand() {
 			@Override
@@ -53,11 +53,11 @@ public class OperationApplyTest extends FuzzyProjectTest {
 			@Override
 			protected void doRun() {
 				((ProjectSpaceBase) copyProjectSpace).applyOperations(
-						projectSpace.getOperations(), false);
+					projectSpace.getOperations(), false);
 			}
 		}.run(false);
 
 		compareIgnoreOrder(projectSpace.getProject(),
-				copyProjectSpace.getProject());
+			copyProjectSpace.getProject());
 	}
 }

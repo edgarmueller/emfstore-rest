@@ -19,8 +19,10 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype <em>Stereotype</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotypeAttributeInstances
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype <em>
+ * Stereotype</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotypeAttributeInstances
  * <em>Stereotype Attribute Instances</em>}</li>
  * </ul>
  * </p>
@@ -51,7 +53,8 @@ public interface StereotypeAttribute extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype <em>Stereotype</em>}'
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype
+	 * <em>Stereotype</em>}'
 	 * container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Stereotype</em>' container reference.

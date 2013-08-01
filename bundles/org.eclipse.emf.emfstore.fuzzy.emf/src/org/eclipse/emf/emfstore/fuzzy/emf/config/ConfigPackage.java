@@ -59,11 +59,10 @@ public interface ConfigPackage extends EPackage {
 	 * @generated
 	 */
 	ConfigPackage eINSTANCE = org.eclipse.emf.emfstore.fuzzy.emf.config.impl.ConfigPackageImpl
-			.init();
+		.init();
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl
 	 * <em>Test Config</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -128,8 +127,7 @@ public interface ConfigPackage extends EPackage {
 	int TEST_CONFIG_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestRunImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestRunImpl
 	 * <em>Test Run</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestRunImpl
@@ -175,8 +173,7 @@ public interface ConfigPackage extends EPackage {
 	int TEST_RUN_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestResultImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestResultImpl
 	 * <em>Test Result</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -241,8 +238,7 @@ public interface ConfigPackage extends EPackage {
 	int TEST_RESULT_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestDiffImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestDiffImpl
 	 * <em>Test Diff</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestDiffImpl
@@ -297,8 +293,7 @@ public interface ConfigPackage extends EPackage {
 	int TEST_DIFF_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.DiffReportImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.DiffReportImpl
 	 * <em>Diff Report</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -327,8 +322,7 @@ public interface ConfigPackage extends EPackage {
 	int DIFF_REPORT_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.RootImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.RootImpl
 	 * <em>Root</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.impl.RootImpl
@@ -356,8 +350,7 @@ public interface ConfigPackage extends EPackage {
 	int ROOT_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.MutatorConfigImpl
+	 * The meta object id for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.MutatorConfigImpl
 	 * <em>Mutator Config</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -458,8 +451,7 @@ public interface ConfigPackage extends EPackage {
 	int MUTATOR_CONFIG_FEATURE_COUNT = 9;
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig
 	 * <em>Test Config</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Test Config</em>'.
@@ -469,8 +461,7 @@ public interface ConfigPackage extends EPackage {
 	EClass getTestConfig();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getSeed
+	 * Returns the meta object for the attribute ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getSeed
 	 * <em>Seed</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Seed</em>'.
@@ -481,8 +472,7 @@ public interface ConfigPackage extends EPackage {
 	EAttribute getTestConfig_Seed();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getCount
+	 * Returns the meta object for the attribute ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getCount
 	 * <em>Count</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Count</em>'.
@@ -505,8 +495,7 @@ public interface ConfigPackage extends EPackage {
 	EAttribute getTestConfig_TestClass();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getId
+	 * Returns the meta object for the attribute ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getId
 	 * <em>Id</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Id</em>'.
@@ -521,8 +510,7 @@ public interface ConfigPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getMutatorConfig
 	 * <em>Mutator Config</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Mutator Config</em>'.
+	 * @return the meta object for the containment reference ' <em>Mutator Config</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig#getMutatorConfig()
 	 * @see #getTestConfig()
 	 * @generated
@@ -530,8 +518,7 @@ public interface ConfigPackage extends EPackage {
 	EReference getTestConfig_MutatorConfig();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun
 	 * <em>Test Run</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Test Run</em>'.
@@ -553,8 +540,7 @@ public interface ConfigPackage extends EPackage {
 	EReference getTestRun_Config();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun#getTime
+	 * Returns the meta object for the attribute ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun#getTime
 	 * <em>Time</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Time</em>'.
@@ -569,8 +555,7 @@ public interface ConfigPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun#getResults
 	 * <em>Results</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Results</em>'.
+	 * @return the meta object for the containment reference list ' <em>Results</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun#getResults()
 	 * @see #getTestRun()
 	 * @generated
@@ -578,8 +563,7 @@ public interface ConfigPackage extends EPackage {
 	EReference getTestRun_Results();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult
 	 * <em>Test Result</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Test Result</em>'.
@@ -613,8 +597,7 @@ public interface ConfigPackage extends EPackage {
 	EAttribute getTestResult_TestName();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getError
+	 * Returns the meta object for the attribute ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getError
 	 * <em>Error</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Error</em>'.
@@ -649,8 +632,7 @@ public interface ConfigPackage extends EPackage {
 	EAttribute getTestResult_ExecutionTime();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff
 	 * <em>Test Diff</em>} '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Test Diff</em>'.
@@ -672,8 +654,7 @@ public interface ConfigPackage extends EPackage {
 	EAttribute getTestDiff_LastUpdate();
 
 	/**
-	 * Returns the meta object for the reference '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff#getConfig
+	 * Returns the meta object for the reference ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff#getConfig
 	 * <em>Config</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Config</em>'.
@@ -688,8 +669,7 @@ public interface ConfigPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff#getOldResult
 	 * <em>Old Result</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>Old Result</em>'.
+	 * @return the meta object for the containment reference ' <em>Old Result</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff#getOldResult()
 	 * @see #getTestDiff()
 	 * @generated
@@ -701,8 +681,7 @@ public interface ConfigPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff#getNewResult
 	 * <em>New Result</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference '
-	 *         <em>New Result</em>'.
+	 * @return the meta object for the containment reference ' <em>New Result</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff#getNewResult()
 	 * @see #getTestDiff()
 	 * @generated
@@ -710,8 +689,7 @@ public interface ConfigPackage extends EPackage {
 	EReference getTestDiff_NewResult();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport
 	 * <em>Diff Report</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Diff Report</em>'.
@@ -725,8 +703,7 @@ public interface ConfigPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport#getDiffs
 	 * <em>Diffs</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Diffs</em>'.
+	 * @return the meta object for the containment reference list ' <em>Diffs</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport#getDiffs()
 	 * @see #getDiffReport()
 	 * @generated
@@ -734,8 +711,7 @@ public interface ConfigPackage extends EPackage {
 	EReference getDiffReport_Diffs();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root <em>Root</em>}'.
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root <em>Root</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Root</em>'.
@@ -749,8 +725,7 @@ public interface ConfigPackage extends EPackage {
 	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root#getElements
 	 * <em>Elements</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '
-	 *         <em>Elements</em>'.
+	 * @return the meta object for the containment reference list ' <em>Elements</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.Root#getElements()
 	 * @see #getRoot()
 	 * @generated
@@ -758,8 +733,7 @@ public interface ConfigPackage extends EPackage {
 	EReference getRoot_Elements();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig
+	 * Returns the meta object for class ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig
 	 * <em>Mutator Config</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Mutator Config</em>'.
@@ -811,8 +785,7 @@ public interface ConfigPackage extends EPackage {
 	 * <em>Do Not Generate Root</em>} '. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute '<em>Do Not Generate Root</em>
-	 *         '.
+	 * @return the meta object for the attribute '<em>Do Not Generate Root</em> '.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig#isDoNotGenerateRoot()
 	 * @see #getMutatorConfig()
 	 * @generated
@@ -825,8 +798,7 @@ public interface ConfigPackage extends EPackage {
 	 * <em>Use Ecore Util Delete</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the attribute '<em>Use Ecore Util Delete</em>
-	 *         '.
+	 * @return the meta object for the attribute '<em>Use Ecore Util Delete</em> '.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig#isUseEcoreUtilDelete()
 	 * @see #getMutatorConfig()
 	 * @generated
@@ -839,8 +811,7 @@ public interface ConfigPackage extends EPackage {
 	 * <em>EClasses To Ignore</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @return the meta object for the reference list '
-	 *         <em>EClasses To Ignore</em>'.
+	 * @return the meta object for the reference list ' <em>EClasses To Ignore</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig#getEClassesToIgnore()
 	 * @see #getMutatorConfig()
 	 * @generated
@@ -853,8 +824,7 @@ public interface ConfigPackage extends EPackage {
 	 * <em>EStructural Features To Ignore</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the meta object for the reference list '
-	 *         <em>EStructural Features To Ignore</em>'.
+	 * @return the meta object for the reference list ' <em>EStructural Features To Ignore</em>'.
 	 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig#getEStructuralFeaturesToIgnore()
 	 * @see #getMutatorConfig()
 	 * @generated
@@ -910,8 +880,7 @@ public interface ConfigPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestConfigImpl
 		 * <em>Test Config</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
@@ -944,7 +913,7 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TEST_CONFIG__TEST_CLASS = eINSTANCE
-				.getTestConfig_TestClass();
+			.getTestConfig_TestClass();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute
@@ -962,11 +931,10 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEST_CONFIG__MUTATOR_CONFIG = eINSTANCE
-				.getTestConfig_MutatorConfig();
+			.getTestConfig_MutatorConfig();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestRunImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestRunImpl
 		 * <em>Test Run</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
@@ -1001,8 +969,7 @@ public interface ConfigPackage extends EPackage {
 		EReference TEST_RUN__RESULTS = eINSTANCE.getTestRun_Results();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestResultImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestResultImpl
 		 * <em>Test Result</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
@@ -1019,7 +986,7 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TEST_RESULT__SEED_COUNT = eINSTANCE
-				.getTestResult_SeedCount();
+			.getTestResult_SeedCount();
 
 		/**
 		 * The meta object literal for the '<em><b>Test Name</b></em>' attribute
@@ -1052,11 +1019,10 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TEST_RESULT__EXECUTION_TIME = eINSTANCE
-				.getTestResult_ExecutionTime();
+			.getTestResult_ExecutionTime();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestDiffImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.TestDiffImpl
 		 * <em>Test Diff</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
@@ -1101,8 +1067,7 @@ public interface ConfigPackage extends EPackage {
 		EReference TEST_DIFF__NEW_RESULT = eINSTANCE.getTestDiff_NewResult();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.DiffReportImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.DiffReportImpl
 		 * <em>Diff Report</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
@@ -1121,8 +1086,7 @@ public interface ConfigPackage extends EPackage {
 		EReference DIFF_REPORT__DIFFS = eINSTANCE.getDiffReport_Diffs();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.RootImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.RootImpl
 		 * <em>Root</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see org.eclipse.emf.emfstore.fuzzy.emf.config.impl.RootImpl
@@ -1141,8 +1105,7 @@ public interface ConfigPackage extends EPackage {
 		EReference ROOT__ELEMENTS = eINSTANCE.getRoot_Elements();
 
 		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.MutatorConfigImpl
+		 * The meta object literal for the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.impl.MutatorConfigImpl
 		 * <em>Mutator Config</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
@@ -1159,7 +1122,7 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MUTATOR_CONFIG__ROOT_ECLASS = eINSTANCE
-				.getMutatorConfig_RootEClass();
+			.getMutatorConfig_RootEClass();
 
 		/**
 		 * The meta object literal for the '<em><b>Min Objects Count</b></em>'
@@ -1168,7 +1131,7 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MUTATOR_CONFIG__MIN_OBJECTS_COUNT = eINSTANCE
-				.getMutatorConfig_MinObjectsCount();
+			.getMutatorConfig_MinObjectsCount();
 
 		/**
 		 * The meta object literal for the '<em><b>Ignore And Log</b></em>'
@@ -1177,26 +1140,25 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MUTATOR_CONFIG__IGNORE_AND_LOG = eINSTANCE
-				.getMutatorConfig_IgnoreAndLog();
+			.getMutatorConfig_IgnoreAndLog();
 
 		/**
-		 * The meta object literal for the '<em><b>Do Not Generate Root</b></em>
-		 * ' attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '<em><b>Do Not Generate Root</b></em> ' attribute feature. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute MUTATOR_CONFIG__DO_NOT_GENERATE_ROOT = eINSTANCE
-				.getMutatorConfig_DoNotGenerateRoot();
+			.getMutatorConfig_DoNotGenerateRoot();
 
 		/**
-		 * The meta object literal for the '
-		 * <em><b>Use Ecore Util Delete</b></em>' attribute feature. <!--
+		 * The meta object literal for the ' <em><b>Use Ecore Util Delete</b></em>' attribute feature. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EAttribute MUTATOR_CONFIG__USE_ECORE_UTIL_DELETE = eINSTANCE
-				.getMutatorConfig_UseEcoreUtilDelete();
+			.getMutatorConfig_UseEcoreUtilDelete();
 
 		/**
 		 * The meta object literal for the '<em><b>EClasses To Ignore</b></em>'
@@ -1205,17 +1167,16 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MUTATOR_CONFIG__ECLASSES_TO_IGNORE = eINSTANCE
-				.getMutatorConfig_EClassesToIgnore();
+			.getMutatorConfig_EClassesToIgnore();
 
 		/**
-		 * The meta object literal for the '
-		 * <em><b>EStructural Features To Ignore</b></em>' reference list
+		 * The meta object literal for the ' <em><b>EStructural Features To Ignore</b></em>' reference list
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		EReference MUTATOR_CONFIG__ESTRUCTURAL_FEATURES_TO_IGNORE = eINSTANCE
-				.getMutatorConfig_EStructuralFeaturesToIgnore();
+			.getMutatorConfig_EStructuralFeaturesToIgnore();
 
 		/**
 		 * The meta object literal for the '<em><b>EPackages</b></em>' reference
@@ -1224,7 +1185,7 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MUTATOR_CONFIG__EPACKAGES = eINSTANCE
-				.getMutatorConfig_EPackages();
+			.getMutatorConfig_EPackages();
 
 		/**
 		 * The meta object literal for the '<em><b>Max Delete Count</b></em>'
@@ -1233,7 +1194,7 @@ public interface ConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MUTATOR_CONFIG__MAX_DELETE_COUNT = eINSTANCE
-				.getMutatorConfig_MaxDeleteCount();
+			.getMutatorConfig_MaxDeleteCount();
 
 	}
 

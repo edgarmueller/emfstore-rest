@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * koegel
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.transaction;
@@ -29,7 +29,8 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
  * 
  * @author koegel
  */
-public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransactionalCommandStackImpl implements EMFStoreCommandStack {
+public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransactionalCommandStackImpl implements
+	EMFStoreCommandStack {
 
 	private Command currentCommand;
 	private EMFStoreCommandNotifier notifier;
@@ -67,7 +68,7 @@ public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransacti
 			throw cmd.getRuntimeException();
 		}
 	}
-	
+
 	@Override
 	protected void basicRedo() {
 		notifier.notifiyListenersAboutStart(mostRecentCommand);
@@ -75,59 +76,57 @@ public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransacti
 		rethrowComamndInCaseOfError(mostRecentCommand);
 		notifier.notifiyListenersAboutCommandCompleted(mostRecentCommand);
 	}
-	
+
 	protected void basicUndo() {
 		notifier.notifiyListenersAboutStart(mostRecentCommand);
 		undoOfBasicCommandStack();
 		rethrowComamndInCaseOfError(mostRecentCommand);
 		notifier.notifiyListenersAboutCommandCompleted(mostRecentCommand);
 	}
-	
+
 	private void redoOfBasicCommandStack() {
 		Command command = commandList.get(++top);
 
-		  try
-		  {
-		    command.redo();
-		    mostRecentCommand = command;
-		  }
-		  catch (RuntimeException exception)
-		  {
-		    handleError(exception);
+		try
+		{
+			command.redo();
+			mostRecentCommand = command;
+		} catch (RuntimeException exception)
+		{
+			handleError(exception);
 
-		    mostRecentCommand = null;
+			mostRecentCommand = null;
 
-		    // Clear the list past the top.
-		    //
-		    for (Iterator<Command> commands = commandList.listIterator(top--); commands.hasNext(); commands.remove())
-		    {
-		      Command otherCommand = commands.next();
-		      otherCommand.dispose();
-		    }
-		  }
+			// Clear the list past the top.
+			//
+			for (Iterator<Command> commands = commandList.listIterator(top--); commands.hasNext(); commands.remove())
+			{
+				Command otherCommand = commands.next();
+				otherCommand.dispose();
+			}
+		}
 
-		  notifyListeners();
+		notifyListeners();
 	}
 
 	private void undoOfBasicCommandStack() {
 		Command command = commandList.get(top--);
-		  try
-		  {
-		    command.undo();
-		    mostRecentCommand = command;
-		  }
-		  catch (RuntimeException exception)
-		  {
-		    handleError(exception);
+		try
+		{
+			command.undo();
+			mostRecentCommand = command;
+		} catch (RuntimeException exception)
+		{
+			handleError(exception);
 
-		    mostRecentCommand = null;
-		    flush();
-		  }
+			mostRecentCommand = null;
+			flush();
+		}
 
-		  notifyListeners();
-//			((BasicCommandStack) this).undo();
+		notifyListeners();
+		// ((BasicCommandStack) this).undo();
 	}
-	
+
 	private void rethrowComamndInCaseOfError(Command command) {
 		// handle EMFStore commands
 		if (command instanceof AbstractEMFStoreCommand) {
@@ -139,7 +138,7 @@ public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransacti
 			}
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * 

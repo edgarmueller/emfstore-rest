@@ -32,7 +32,8 @@ import org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage;
 import org.eclipse.emf.emfstore.client.test.model.release.Stream;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

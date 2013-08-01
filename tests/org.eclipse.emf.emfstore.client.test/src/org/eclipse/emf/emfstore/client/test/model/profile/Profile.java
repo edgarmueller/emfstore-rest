@@ -18,8 +18,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile#getAffectedContainers <em>Affected Containers
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile#getAffectedContainers <em>Affected
+ * Containers </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile#getStereotypes <em>Stereotypes</em>}</li>
  * </ul>
  * </p>
@@ -47,8 +47,9 @@ public interface Profile extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Stereotypes</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#getProfile <em>Profile</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#getProfile
+	 * <em>Profile</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Stereotypes</em>' containment reference list isn't clear, there really should be more

@@ -78,7 +78,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +103,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -110,7 +112,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 	protected StereotypeItemProvider stereotypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,7 +129,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance} instances. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +138,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 	protected StereotypeInstanceItemProvider stereotypeInstanceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance}. <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -159,7 +164,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeSimple}. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -175,7 +181,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString} instances. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString} instances.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -184,7 +191,8 @@ public class ProfileItemProviderAdapterFactory extends ProfileAdapterFactory imp
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString}. <!-- begin-user-doc
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttributeInstanceString}. <!--
+	 * begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated

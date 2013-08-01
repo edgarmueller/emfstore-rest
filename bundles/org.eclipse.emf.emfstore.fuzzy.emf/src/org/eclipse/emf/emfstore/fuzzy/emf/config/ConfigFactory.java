@@ -27,7 +27,7 @@ public interface ConfigFactory extends EFactory {
 	 * @generated
 	 */
 	ConfigFactory eINSTANCE = org.eclipse.emf.emfstore.fuzzy.emf.config.impl.ConfigFactoryImpl
-			.init();
+		.init();
 
 	/**
 	 * Returns a new object of class '<em>Test Config</em>'. <!-- begin-user-doc

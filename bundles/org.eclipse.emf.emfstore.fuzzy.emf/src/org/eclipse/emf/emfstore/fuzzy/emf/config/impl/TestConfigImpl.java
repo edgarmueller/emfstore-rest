@@ -21,8 +21,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Test Config</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Test Config</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -166,7 +165,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		seed = newSeed;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_CONFIG__SEED, oldSeed, seed));
+				ConfigPackage.TEST_CONFIG__SEED, oldSeed, seed));
 	}
 
 	/**
@@ -188,7 +187,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		count = newCount;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_CONFIG__COUNT, oldCount, count));
+				ConfigPackage.TEST_CONFIG__COUNT, oldCount, count));
 	}
 
 	/**
@@ -210,8 +209,8 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		testClass = newTestClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_CONFIG__TEST_CLASS, oldTestClass,
-					testClass));
+				ConfigPackage.TEST_CONFIG__TEST_CLASS, oldTestClass,
+				testClass));
 	}
 
 	/**
@@ -233,7 +232,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_CONFIG__ID, oldId, id));
+				ConfigPackage.TEST_CONFIG__ID, oldId, id));
 	}
 
 	/**
@@ -251,14 +250,14 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	 * @generated
 	 */
 	public NotificationChain basicSetMutatorConfig(
-			MutatorConfig newMutatorConfig, NotificationChain msgs) {
+		MutatorConfig newMutatorConfig, NotificationChain msgs) {
 		MutatorConfig oldMutatorConfig = mutatorConfig;
 		mutatorConfig = newMutatorConfig;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
-					oldMutatorConfig, newMutatorConfig);
+				Notification.SET,
+				ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+				oldMutatorConfig, newMutatorConfig);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -277,21 +276,21 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 			NotificationChain msgs = null;
 			if (mutatorConfig != null)
 				msgs = ((InternalEObject) mutatorConfig).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
-						null, msgs);
+					EOPPOSITE_FEATURE_BASE
+						- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+					null, msgs);
 			if (newMutatorConfig != null)
 				msgs = ((InternalEObject) newMutatorConfig).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
-						null, msgs);
+					EOPPOSITE_FEATURE_BASE
+						- ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+					null, msgs);
 			msgs = basicSetMutatorConfig(newMutatorConfig, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
-					newMutatorConfig, newMutatorConfig));
+				ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG,
+				newMutatorConfig, newMutatorConfig));
 	}
 
 	/**
@@ -301,7 +300,7 @@ public class TestConfigImpl extends EObjectImpl implements TestConfig {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+		int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG:
 			return basicSetMutatorConfig(null, msgs);

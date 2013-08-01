@@ -87,7 +87,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.NonFunctionalRequirement}. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -112,7 +113,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement}. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -128,7 +130,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -136,7 +139,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 	protected UseCaseItemProvider useCaseItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -152,7 +156,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -160,7 +165,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 	protected ScenarioItemProvider scenarioItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -176,7 +182,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -200,7 +207,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance} instances. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -208,7 +216,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 	protected ActorInstanceItemProvider actorInstanceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance}. <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -224,7 +233,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -248,7 +258,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction} instances. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -256,7 +267,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 	protected SystemFunctionItemProvider systemFunctionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.SystemFunction}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -272,7 +284,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -280,7 +293,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 	protected UserTaskItemProvider userTaskItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -296,7 +310,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -304,7 +319,8 @@ public class RequirementItemProviderAdapterFactory extends RequirementAdapterFac
 	protected WorkspaceItemProvider workspaceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Workspace}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

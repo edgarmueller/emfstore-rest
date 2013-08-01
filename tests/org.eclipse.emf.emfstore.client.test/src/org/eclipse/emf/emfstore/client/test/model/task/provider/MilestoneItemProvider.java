@@ -32,7 +32,8 @@ import org.eclipse.emf.emfstore.client.test.model.task.Milestone;
 import org.eclipse.emf.emfstore.client.test.model.task.TaskPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.task.Milestone}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

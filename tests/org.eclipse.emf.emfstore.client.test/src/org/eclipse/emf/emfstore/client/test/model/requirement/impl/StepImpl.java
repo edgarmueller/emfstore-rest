@@ -27,12 +27,14 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#isUserStep <em>User Step</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#getIncludedUseCase <em>Included Use
- * Case</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#getIncludedSystemFunction <em>
- * Included System Function</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#getUseCase <em>Use Case</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#isUserStep <em>User Step
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#getIncludedUseCase <em>
+ * Included Use Case</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#getIncludedSystemFunction
+ * <em> Included System Function</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.StepImpl#getUseCase <em>Use Case
+ * </em>}</li>
  * </ul>
  * </p>
  * 

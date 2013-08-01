@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getReleases <em>Releases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getSourceCodeRepositoryStream <em>Source Code
- * Repository Stream</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Stream#getSourceCodeRepositoryStream <em>
+ * Source Code Repository Stream</em>}</li>
  * </ul>
  * </p>
  * 
@@ -31,8 +31,8 @@ import org.eclipse.emf.ecore.EObject;
 public interface Stream extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Releases</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getStream <em>Stream</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getStream <em>Stream</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Releases</em>' containment reference list isn't clear, there really should be more of

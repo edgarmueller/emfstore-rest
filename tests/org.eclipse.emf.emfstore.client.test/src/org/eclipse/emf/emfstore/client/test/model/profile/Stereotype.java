@@ -20,10 +20,10 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#isRequired <em>Required</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#getProfile <em>Profile</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#getStereotypeInstances <em>Stereotype
- * Instances</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#getStereotypeAttributes <em>Stereotype
- * Attributes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#getStereotypeInstances <em>
+ * Stereotype Instances</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Stereotype#getStereotypeAttributes <em>
+ * Stereotype Attributes</em>}</li>
  * </ul>
  * </p>
  * 
@@ -60,7 +60,8 @@ public interface Stereotype extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Profile</b></em>' container reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile#getStereotypes <em>Stereotypes</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.Profile#getStereotypes <em>Stereotypes</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Profile</em>' container reference isn't clear, there really should be more of a
@@ -89,7 +90,8 @@ public interface Stereotype extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Stereotype Instances</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance}. It is bidirectional and its
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance}. It is bidirectional and
+	 * its
 	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeInstance#getStereotype
 	 * <em>Stereotype</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -108,8 +110,10 @@ public interface Stereotype extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Stereotype Attributes</b></em>' containment reference list. The list contents
-	 * are of type {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute}. It is bidirectional
-	 * and its opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype
+	 * are of type {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute}. It is
+	 * bidirectional
+	 * and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.StereotypeAttribute#getStereotype
 	 * <em>Stereotype</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Stereotype Attributes</em>' containment reference list isn't clear, there really

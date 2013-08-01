@@ -28,7 +28,8 @@ import org.eclipse.emf.common.util.EList;
 public interface Group extends OrgUnit {
 	/**
 	 * Returns the value of the '<em><b>Org Units</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getGroupMemberships
 	 * <em>Group Memberships</em>}'. <!-- begin-user-doc -->
 	 * <p>

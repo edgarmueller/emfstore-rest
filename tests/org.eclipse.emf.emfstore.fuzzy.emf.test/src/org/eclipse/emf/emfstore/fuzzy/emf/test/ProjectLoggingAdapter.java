@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -35,19 +35,18 @@ public class ProjectLoggingAdapter extends LoggingAdapter {
 	 * @param project
 	 *            The project containing the elements notifying.
 	 * @param toLogClasses
-	 *            The {@link EClass}es to log. If <code>null</code> every
-	 *            {@link EClass} is logged.
+	 *            The {@link EClass}es to log. If <code>null</code> every {@link EClass} is logged.
 	 * @param toLogReferences
-	 *            The {@link EReference}es of the toLogClasses to log. If
-	 *            <code>null</code> every {@link EReference} is logged.
+	 *            The {@link EReference}es of the toLogClasses to log. If <code>null</code> every {@link EReference} is
+	 *            logged.
 	 * @param references
 	 *            Log reference changes?
 	 * @param attributes
 	 *            Log attribute changes?
 	 */
 	public ProjectLoggingAdapter(ProjectImpl project,
-			List<EClass> toLogClasses, List<EReference> toLogReferences,
-			boolean references, boolean attributes) {
+		List<EClass> toLogClasses, List<EReference> toLogReferences,
+		boolean references, boolean attributes) {
 		super(toLogClasses, toLogReferences, references, attributes);
 		this.projectImpl = project;
 	}
@@ -56,8 +55,8 @@ public class ProjectLoggingAdapter extends LoggingAdapter {
 	protected String format(Notification notification) {
 		StringBuffer result = new StringBuffer();
 		result.append("Notifier:  "
-				+ getModelElementId(projectImpl, notification.getNotifier())
-				+ " " + notification.getNotifier());
+			+ getModelElementId(projectImpl, notification.getNotifier())
+			+ " " + notification.getNotifier());
 		result.append("\n");
 		result.append("Feature:   " + notification.getFeature());
 		result.append("\n");
@@ -66,12 +65,12 @@ public class ProjectLoggingAdapter extends LoggingAdapter {
 		result.append("EventType: " + getEventType(notification.getEventType()));
 		result.append("\n");
 		result.append("OldValue:  "
-				+ getModelElementId(projectImpl, notification.getOldValue())
-				+ " " + notification.getOldValue());
+			+ getModelElementId(projectImpl, notification.getOldValue())
+			+ " " + notification.getOldValue());
 		result.append("\n");
 		result.append("NewValue:  "
-				+ getModelElementId(projectImpl, notification.getNewValue())
-				+ " " + notification.getNewValue());
+			+ getModelElementId(projectImpl, notification.getNewValue())
+			+ " " + notification.getNewValue());
 		result.append("\n");
 		return result.toString();
 	}
@@ -91,8 +90,8 @@ public class ProjectLoggingAdapter extends LoggingAdapter {
 			return modelElementId.getId();
 		}
 		ModelElementId deletedModelElementId = project
-				.getDeletedModelElementId(eObject);
+			.getDeletedModelElementId(eObject);
 		return deletedModelElementId != null ? deletedModelElementId.getId()
-				: null;
+			: null;
 	}
 }

@@ -25,8 +25,8 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance
- * hierarchy. It supports the call {@link #doSwitch(EObject) doSwitch(object)}
- * to invoke the <code>caseXXX</code> method for each class of the model,
+ * hierarchy. It supports the call {@link #doSwitch(EObject) doSwitch(object)} to invoke the <code>caseXXX</code> method
+ * for each class of the model,
  * starting with the actual class of the object and proceeding up the
  * inheritance hierarchy until a non-null result is returned, which is the
  * result of the switch. <!-- end-user-doc -->
@@ -59,8 +59,7 @@ public class ConfigSwitch<T> {
 	 * a non null result; it yields that result. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the first non-null result returned by a <code>caseXXX</code>
-	 *         call.
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	public T doSwitch(EObject theEObject) {
@@ -72,8 +71,7 @@ public class ConfigSwitch<T> {
 	 * a non null result; it yields that result. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the first non-null result returned by a <code>caseXXX</code>
-	 *         call.
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
@@ -82,7 +80,7 @@ public class ConfigSwitch<T> {
 		} else {
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
-					eSuperTypes.get(0), theEObject);
+				eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -91,8 +89,7 @@ public class ConfigSwitch<T> {
 	 * a non null result; it yields that result. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @return the first non-null result returned by a <code>caseXXX</code>
-	 *         call.
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
@@ -152,15 +149,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>Test Config</em>'. <!-- begin-user-doc --> This implementation
+	 * Returns the result of interpreting the object as an instance of ' <em>Test Config</em>'. <!-- begin-user-doc -->
+	 * This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>Test Config</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Test Config</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -169,15 +165,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>Test Run</em>'. <!-- begin-user-doc --> This implementation returns
+	 * Returns the result of interpreting the object as an instance of ' <em>Test Run</em>'. <!-- begin-user-doc -->
+	 * This implementation returns
 	 * null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>Test Run</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Test Run</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -186,15 +181,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>Test Result</em>'. <!-- begin-user-doc --> This implementation
+	 * Returns the result of interpreting the object as an instance of ' <em>Test Result</em>'. <!-- begin-user-doc -->
+	 * This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>Test Result</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Test Result</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -203,15 +197,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>Test Diff</em>'. <!-- begin-user-doc --> This implementation returns
+	 * Returns the result of interpreting the object as an instance of ' <em>Test Diff</em>'. <!-- begin-user-doc -->
+	 * This implementation returns
 	 * null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>Test Diff</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Test Diff</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -220,15 +213,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>Diff Report</em>'. <!-- begin-user-doc --> This implementation
+	 * Returns the result of interpreting the object as an instance of ' <em>Diff Report</em>'. <!-- begin-user-doc -->
+	 * This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>Diff Report</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Diff Report</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -237,15 +229,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>Root</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * Returns the result of interpreting the object as an instance of ' <em>Root</em>'. <!-- begin-user-doc --> This
+	 * implementation returns null;
 	 * returning a non-null result will terminate the switch. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>Root</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Root</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -254,15 +245,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>Mutator Config</em>'. <!-- begin-user-doc --> This implementation
+	 * Returns the result of interpreting the object as an instance of ' <em>Mutator Config</em>'. <!-- begin-user-doc
+	 * --> This implementation
 	 * returns null; returning a non-null result will terminate the switch. <!--
 	 * end-user-doc -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>Mutator Config</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>Mutator Config</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -271,15 +261,14 @@ public class ConfigSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '
-	 * <em>EObject</em>'. <!-- begin-user-doc --> This implementation returns
+	 * Returns the result of interpreting the object as an instance of ' <em>EObject</em>'. <!-- begin-user-doc --> This
+	 * implementation returns
 	 * null; returning a non-null result will terminate the switch, but this is
 	 * the last case anyway. <!-- end-user-doc -->
 	 * 
 	 * @param object
 	 *            the target of the switch.
-	 * @return the result of interpreting the object as an instance of '
-	 *         <em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of ' <em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */

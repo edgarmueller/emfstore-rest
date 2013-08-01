@@ -18,8 +18,10 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion <em>Base Version</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion <em>Target Version</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion <em>Base Version
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion <em>Target
+ * Version</em>}</li>
  * </ul>
  * </p>
  * 
@@ -45,7 +47,8 @@ public interface MergingIssue extends Issue {
 	PrimaryVersionSpec getBaseVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getBaseVersion
 	 * <em>Base Version</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Base Version</em>' containment reference.
@@ -71,7 +74,8 @@ public interface MergingIssue extends Issue {
 	PrimaryVersionSpec getTargetVersion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingIssue#getTargetVersion
 	 * <em>Target Version</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target Version</em>' containment reference.

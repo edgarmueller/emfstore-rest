@@ -29,8 +29,8 @@ import org.eclipse.emf.emfstore.client.test.model.release.ReleasePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.PatchAttachmentImpl#getAppliedTo <em>Applied To
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.PatchAttachmentImpl#getAppliedTo <em>
+ * Applied To </em>}</li>
  * </ul>
  * </p>
  * 

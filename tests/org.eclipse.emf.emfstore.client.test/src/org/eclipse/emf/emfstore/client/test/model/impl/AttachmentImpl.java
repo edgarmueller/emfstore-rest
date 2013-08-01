@@ -27,8 +27,8 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.AttachmentImpl#getReferringModelElements <em>Referring
- * Model Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.impl.AttachmentImpl#getReferringModelElements <em>
+ * Referring Model Elements</em>}</li>
  * </ul>
  * </p>
  * 

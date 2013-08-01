@@ -37,8 +37,8 @@ import org.eclipse.emf.emfstore.client.test.model.profile.StereotypeInstance;
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeInstanceImpl#getStereotype <em>
  * Stereotype</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeInstanceImpl#getModelElement <em>Model
- * Element</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeInstanceImpl#getModelElement
+ * <em>Model Element</em>}</li>
  * <li>
  * {@link org.eclipse.emf.emfstore.internal.client.test.model.profile.impl.StereotypeInstanceImpl#getStereotypeAttributeInstances
  * <em>Stereotype Attribute Instances</em>}</li>

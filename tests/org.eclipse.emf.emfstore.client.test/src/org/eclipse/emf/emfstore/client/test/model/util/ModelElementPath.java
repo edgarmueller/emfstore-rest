@@ -48,7 +48,8 @@ public interface ModelElementPath extends EObject {
 	ModelElementId getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getSource
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getSource
 	 * <em>Source</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Source</em>' containment reference.
@@ -74,7 +75,8 @@ public interface ModelElementPath extends EObject {
 	ModelElementId getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getTarget
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.util.ModelElementPath#getTarget
 	 * <em>Target</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Target</em>' containment reference.

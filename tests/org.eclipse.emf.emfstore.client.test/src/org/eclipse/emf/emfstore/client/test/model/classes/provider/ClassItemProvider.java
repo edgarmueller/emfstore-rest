@@ -29,7 +29,8 @@ import org.eclipse.emf.emfstore.client.test.model.classes.ClassesFactory;
 import org.eclipse.emf.emfstore.client.test.model.classes.ClassesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class}
+ * object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

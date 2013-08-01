@@ -24,14 +24,16 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getType <em>Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getDirection <em>Direction
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getType <em>Type</em>}
+ * </li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getDirection <em>
+ * Direction </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getDefaultValue <em>
+ * Default Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getSignature <em>
+ * Signature </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getLabel <em>Label
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getDefaultValue <em>Default
- * Value</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getSignature <em>Signature
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.MethodArgumentImpl#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
  * 

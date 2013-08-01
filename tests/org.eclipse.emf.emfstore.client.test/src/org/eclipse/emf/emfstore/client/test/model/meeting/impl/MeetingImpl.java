@@ -36,19 +36,26 @@ import org.eclipse.emf.emfstore.client.test.model.organization.User;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getLocation <em>Location</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getStarttime <em>Starttime</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getLocation <em>Location
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getStarttime <em>Starttime
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getEndtime <em>Endtime</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getFacilitator <em>Facilitator</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getMinutetaker <em>Minutetaker</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getTimekeeper <em>Timekeeper</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getParticipants <em>Participants</em>}
- * </li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getSections <em>Sections</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getIdentifiedIssuesSection <em>
- * Identified Issues Section</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getIdentifiedWorkItemsSection <em>
- * Identified Work Items Section</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getFacilitator <em>
+ * Facilitator</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getMinutetaker <em>
+ * Minutetaker</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getTimekeeper <em>Timekeeper
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getParticipants <em>
+ * Participants</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getSections <em>Sections
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getIdentifiedIssuesSection
+ * <em> Identified Issues Section</em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.impl.MeetingImpl#getIdentifiedWorkItemsSection
+ * <em> Identified Work Items Section</em>}</li>
  * </ul>
  * </p>
  * 

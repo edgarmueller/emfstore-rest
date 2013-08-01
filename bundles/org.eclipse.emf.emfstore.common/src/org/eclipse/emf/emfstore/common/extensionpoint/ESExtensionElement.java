@@ -17,7 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 
 /**
- * This is the companion class to {@link ESExtensionPoint}. 
+ * This is the companion class to {@link ESExtensionPoint}.
  * It wraps a {@link IConfigurationElement} for convenience purposes.
  * As {@link ESExtensionPoint} it can be configured to return null or throw an runtime exception
  * {@link ESExtensionPointException}

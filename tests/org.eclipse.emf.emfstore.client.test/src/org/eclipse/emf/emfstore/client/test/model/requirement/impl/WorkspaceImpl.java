@@ -28,8 +28,8 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Workspace;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.WorkspaceImpl#getSystemFunctions <em>System
- * Functions</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.impl.WorkspaceImpl#getSystemFunctions <em>
+ * System Functions</em>}</li>
  * </ul>
  * </p>
  * 

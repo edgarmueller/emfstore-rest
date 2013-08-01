@@ -19,8 +19,8 @@ import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection#getIncludedIssues <em>Included
- * Issues</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.IssueMeetingSection#getIncludedIssues <em>
+ * Included Issues</em>}</li>
  * </ul>
  * </p>
  * 

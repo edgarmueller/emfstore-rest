@@ -18,14 +18,14 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUserTask <em>Initiated User Task
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUserTasks <em>Participated
- * User Tasks</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUseCases <em>Initiated Use Cases
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUseCases <em>Participated Use
- * Cases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUserTask <em>Initiated
+ * User Task </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUserTasks <em>
+ * Participated User Tasks</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUseCases <em>Initiated
+ * Use Cases </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getParticipatedUseCases <em>
+ * Participated Use Cases</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInstances <em>Instances</em>}</li>
  * </ul>
  * </p>
@@ -55,7 +55,8 @@ public interface Actor extends UnicaseModelElement {
 	UserTask getInitiatedUserTask();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUserTask
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Actor#getInitiatedUserTask
 	 * <em>Initiated User Task</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Initiated User Task</em>' reference.
@@ -66,7 +67,8 @@ public interface Actor extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participated User Tasks</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UserTask#getParticipatingActors
 	 * <em>Participating Actors</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -85,8 +87,8 @@ public interface Actor extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Initiated Use Cases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getInitiatingActor
 	 * <em>Initiating Actor</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Initiated Use Cases</em>' reference list isn't clear, there really should be more of a
@@ -104,7 +106,8 @@ public interface Actor extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Participated Use Cases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getParticipatingActors
 	 * <em>Participating Actors</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -123,8 +126,10 @@ public interface Actor extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Instances</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance}. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInstantiatedActor
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance}. It is bidirectional and
+	 * its
+	 * opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.ActorInstance#getInstantiatedActor
 	 * <em>Instantiated Actor</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Instances</em>' reference list isn't clear, there really should be more of a

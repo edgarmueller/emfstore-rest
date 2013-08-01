@@ -20,23 +20,26 @@ import org.eclipse.emf.emfstore.client.test.model.organization.OrgUnit;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefinedRequirement <em>
- * Refined Requirement</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getStoryPoints <em>Story
- * Points</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getPriority <em>Priority
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefiningRequirements <em>
- * Refining Requirements</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getUseCases <em>Use Cases
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getScenarios <em>Scenarios
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#isReviewed <em>Reviewed</em>}
- * </li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefinedRequirement
+ * <em> Refined Requirement</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getStoryPoints <em>
+ * Story Points</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getPriority <em>
+ * Priority </em>}</li>
+ * <li>
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getRefiningRequirements
+ * <em> Refining Requirements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getUseCases <em>Use
+ * Cases </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getScenarios <em>
+ * Scenarios </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#isReviewed <em>
+ * Reviewed</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getStakeholder <em>
  * Stakeholder</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getCost <em>Cost</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getCost <em>Cost
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -154,7 +157,8 @@ public interface FunctionalRequirement extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Use Cases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase}. It is bidirectional and its
+	 * opposite is '
 	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.UseCase#getFunctionalRequirements
 	 * <em>Functional Requirements</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -173,7 +177,8 @@ public interface FunctionalRequirement extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Scenarios</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getFunctionalRequirements
 	 * <em>Functional Requirements</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -208,8 +213,8 @@ public interface FunctionalRequirement extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#isReviewed <em>Reviewed</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#isReviewed
+	 * <em>Reviewed</em>} ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Reviewed</em>' attribute.
 	 * @see #isReviewed()
@@ -261,7 +266,8 @@ public interface FunctionalRequirement extends UnicaseModelElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getCost <em>Cost</em>}'
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.FunctionalRequirement#getCost
+	 * <em>Cost</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Cost</em>' attribute.

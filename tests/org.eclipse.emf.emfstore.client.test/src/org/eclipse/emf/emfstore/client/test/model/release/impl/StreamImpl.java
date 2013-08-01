@@ -31,9 +31,10 @@ import org.eclipse.emf.emfstore.client.test.model.release.Stream;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl#getReleases <em>Releases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl#getSourceCodeRepositoryStream <em>
- * Source Code Repository Stream</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl#getReleases <em>Releases</em>}
+ * </li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.impl.StreamImpl#getSourceCodeRepositoryStream
+ * <em> Source Code Repository Stream</em>}</li>
  * </ul>
  * </p>
  * 

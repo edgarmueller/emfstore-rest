@@ -18,9 +18,12 @@ import org.eclipse.emf.emfstore.client.test.model.UnicaseModelElement;
  * The following features are supported:
  * <ul>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getType <em>Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection <em>Direction</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue <em>Default Value</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getSignature <em>Signature</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection <em>Direction
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue <em>Default
+ * Value</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getSignature <em>Signature
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
@@ -57,7 +60,8 @@ public interface MethodArgument extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute. The literals are from the enumeration
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType}. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.ArgumentDirectionType}. <!-- begin-user-doc
+	 * -->
 	 * <p>
 	 * If the meaning of the '<em>Direction</em>' attribute isn't clear, there really should be more of a description
 	 * here...
@@ -74,7 +78,8 @@ public interface MethodArgument extends UnicaseModelElement {
 	ArgumentDirectionType getDirection();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDirection
 	 * <em>Direction</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Direction</em>' attribute.
@@ -101,7 +106,8 @@ public interface MethodArgument extends UnicaseModelElement {
 	String getDefaultValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getDefaultValue
 	 * <em>Default Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Default Value</em>' attribute.
@@ -142,7 +148,8 @@ public interface MethodArgument extends UnicaseModelElement {
 	String getLabel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getLabel
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.MethodArgument#getLabel
 	 * <em>Label</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Label</em>' attribute.

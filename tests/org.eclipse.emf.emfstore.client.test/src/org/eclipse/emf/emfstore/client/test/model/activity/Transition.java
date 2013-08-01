@@ -103,7 +103,8 @@ public interface Transition extends UnicaseModelElement {
 	String getCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getCondition
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition#getCondition
 	 * <em>Condition</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Condition</em>' attribute.

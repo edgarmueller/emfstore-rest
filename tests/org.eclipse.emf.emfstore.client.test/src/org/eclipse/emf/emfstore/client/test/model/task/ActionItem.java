@@ -41,7 +41,8 @@ public interface ActionItem extends WorkItem, Checkable {
 	boolean isDone();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem#isDone <em>Done</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.ActionItem#isDone
+	 * <em>Done</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Done</em>' attribute.

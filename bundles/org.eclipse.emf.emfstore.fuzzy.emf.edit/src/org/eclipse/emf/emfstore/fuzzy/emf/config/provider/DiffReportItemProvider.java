@@ -30,15 +30,14 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.ConfigPackage;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
 public class DiffReportItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	IEditingDomainItemProvider, IStructuredItemContentProvider,
+	ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -66,17 +65,15 @@ public class DiffReportItemProvider extends ItemProviderAdapter implements
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+		Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ConfigPackage.Literals.DIFF_REPORT__DIFFS);
@@ -107,7 +104,7 @@ public class DiffReportItemProvider extends ItemProviderAdapter implements
 	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/DiffReport"));
+			getResourceLocator().getImage("full/obj16/DiffReport"));
 	}
 
 	/**
@@ -136,7 +133,7 @@ public class DiffReportItemProvider extends ItemProviderAdapter implements
 		switch (notification.getFeatureID(DiffReport.class)) {
 		case ConfigPackage.DIFF_REPORT__DIFFS:
 			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+				notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -151,12 +148,12 @@ public class DiffReportItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+		Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
-				ConfigPackage.Literals.DIFF_REPORT__DIFFS,
-				ConfigFactory.eINSTANCE.createTestDiff()));
+			ConfigPackage.Literals.DIFF_REPORT__DIFFS,
+			ConfigFactory.eINSTANCE.createTestDiff()));
 	}
 
 	/**

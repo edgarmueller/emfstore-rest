@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf;
@@ -46,8 +46,7 @@ public final class FuzzyUtil {
 	public static final String ROOT_FOLDER = "../" + FUZZY_FOLDER;
 
 	/**
-	 * The folder where to store the
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun}s.
+	 * The folder where to store the {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun}s.
 	 */
 	public static final String RUN_FOLDER = "testruns/";
 
@@ -65,7 +64,7 @@ public final class FuzzyUtil {
 	 * The path to the TEST_CONFIG_FILE.
 	 */
 	public static final String TEST_CONFIG_PATH = FUZZY_FOLDER
-			+ TEST_CONFIG_FILE;
+		+ TEST_CONFIG_FILE;
 
 	/**
 	 * The path to the file containing the {@link TestDiff}.
@@ -76,7 +75,7 @@ public final class FuzzyUtil {
 	 * The path to the properties file.
 	 */
 	public static final String PROPERTIES_FILE = FUZZY_FOLDER
-			+ "fuzzy.properties";
+		+ "fuzzy.properties";
 
 	/**
 	 * The prefix for all fuzzy properties in the properties file.
@@ -84,9 +83,9 @@ public final class FuzzyUtil {
 	public static final String PROP_PRE = "fuzzy";
 
 	private static final AdapterFactoryEditingDomain EDITING_DOMAIN = new AdapterFactoryEditingDomain(
-			new ComposedAdapterFactory(
-					ComposedAdapterFactory.Descriptor.Registry.INSTANCE),
-			new BasicCommandStack());
+		new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE),
+		new BasicCommandStack());
 
 	private static Properties properties;
 
@@ -94,8 +93,7 @@ public final class FuzzyUtil {
 	}
 
 	/**
-	 * Searches in the resource for a {@link TestConfig} fitting to the given
-	 * {@link TestClass}.
+	 * Searches in the resource for a {@link TestConfig} fitting to the given {@link TestClass}.
 	 * 
 	 * @param resource
 	 *            The resource where to search in.
@@ -104,7 +102,7 @@ public final class FuzzyUtil {
 	 * @return The {@link TestConfig} fitting to the {@link TestClass}.
 	 */
 	public static TestConfig getTestConfig(Resource resource,
-			TestClass testClass) {
+		TestClass testClass) {
 		// TODO add a standard TestConfig? e.g. where clazz = null / or
 		// testconfig for complete packages
 		for (EObject object : resource.getContents()) {
@@ -118,7 +116,7 @@ public final class FuzzyUtil {
 		}
 
 		throw new IllegalArgumentException("No fitting testconfig for "
-				+ testClass.getName() + " in " + resource.getURI() + " found.");
+			+ testClass.getName() + " in " + resource.getURI() + " found.");
 	}
 
 	/**
@@ -128,8 +126,7 @@ public final class FuzzyUtil {
 	 *            The resource where to search in.
 	 * @param config
 	 *            The {@link TestConfig} to check.
-	 * @return <code>true</code> if the resource contains the {@link TestConfig}
-	 *         , else <code>false</code>.
+	 * @return <code>true</code> if the resource contains the {@link TestConfig} , else <code>false</code>.
 	 */
 	public static boolean containsConfig(Resource resource, TestConfig config) {
 		for (EObject obj : resource.getContents()) {
@@ -148,12 +145,11 @@ public final class FuzzyUtil {
 	 * 
 	 * @param resource
 	 *            The {@link Resource} to check.
-	 * @return <code>true</code> if the resource exists, <code>false</code>
-	 *         otherwise.
+	 * @return <code>true</code> if the resource exists, <code>false</code> otherwise.
 	 */
 	public static boolean resourceExists(Resource resource) {
 		return resource.getResourceSet().getURIConverter()
-				.exists(resource.getURI(), null);
+			.exists(resource.getURI(), null);
 	}
 
 	/**
@@ -185,7 +181,7 @@ public final class FuzzyUtil {
 			return result;
 		}
 		throw new RuntimeException(
-				"Configuration of TestDiff is wrong! (Does not contain any TestResult)");
+			"Configuration of TestDiff is wrong! (Does not contain any TestResult)");
 	}
 
 	/**
@@ -218,7 +214,7 @@ public final class FuzzyUtil {
 				fs.close();
 			} catch (IOException e) {
 				throw new RuntimeException("Could not load properties from "
-						+ file.getAbsolutePath(), e);
+					+ file.getAbsolutePath(), e);
 			}
 		}
 	}

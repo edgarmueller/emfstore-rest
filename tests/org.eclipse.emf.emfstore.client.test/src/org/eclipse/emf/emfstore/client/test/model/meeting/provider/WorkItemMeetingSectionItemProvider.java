@@ -28,7 +28,8 @@ import org.eclipse.emf.emfstore.client.test.model.meeting.WorkItemMeetingSection
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection} object. <!-- begin-user-doc -->
+ * {@link org.eclipse.emf.emfstore.internal.client.test.model.meeting.WorkItemMeetingSection} object. <!--
+ * begin-user-doc -->
  * <!-- end-user-doc -->
  * 
  * @generated

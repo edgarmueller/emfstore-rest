@@ -35,17 +35,20 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.UseCase;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getInstantiationType <em>Instantiation
- * Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getParticipatedUseCases <em>Participated
- * Use Cases</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getSuperClasses <em>Super Classes</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getSubClasses <em>Sub Classes</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getIncomingAssociations <em>Incoming
- * Associations</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getOutgoingAssociations <em>Outgoing
- * Associations</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getAttributes <em>Attributes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getInstantiationType <em>
+ * Instantiation Type</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getParticipatedUseCases <em>
+ * Participated Use Cases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getSuperClasses <em>Super
+ * Classes</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getSubClasses <em>Sub Classes
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getIncomingAssociations <em>
+ * Incoming Associations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getOutgoingAssociations <em>
+ * Outgoing Associations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getAttributes <em>Attributes
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getMethods <em>Methods</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.ClassImpl#getDemoParticipations <em>Demo
  * Participations</em>}</li>

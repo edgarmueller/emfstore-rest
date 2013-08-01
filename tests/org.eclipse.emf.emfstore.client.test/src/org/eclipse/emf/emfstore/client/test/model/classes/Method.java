@@ -25,13 +25,16 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.Scenario;
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getSignature <em>Signature</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getArguments <em>Arguments</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getProperties <em>Properties</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass <em>Defining Class</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass <em>Defining Class
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getLabel <em>Label</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#isStubbed <em>Stubbed</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCalledMethods <em>Called Methods</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCallingMethods <em>Calling Methods</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDemoParticipations <em>Demo Participations
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCalledMethods <em>Called Methods
  * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCallingMethods <em>Calling Methods
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDemoParticipations <em>Demo
+ * Participations </em>}</li>
  * </ul>
  * </p>
  * 
@@ -88,7 +91,8 @@ public interface Method extends UnicaseModelElement {
 	ScopeType getScope();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getScope <em>Scope</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getScope
+	 * <em>Scope</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Scope</em>' attribute.
@@ -185,7 +189,8 @@ public interface Method extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Defining Class</b></em>' container reference. It is bidirectional and its
-	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getMethods <em>Methods</em>}'. <!--
+	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Class#getMethods
+	 * <em>Methods</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Defining Class</em>' container reference isn't clear, there really should be more of a
@@ -203,7 +208,8 @@ public interface Method extends UnicaseModelElement {
 	org.eclipse.emf.emfstore.client.test.model.classes.Class getDefiningClass();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getDefiningClass
 	 * <em>Defining Class</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Defining Class</em>' container reference.
@@ -229,7 +235,8 @@ public interface Method extends UnicaseModelElement {
 	String getLabel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getLabel <em>Label</em>}'
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getLabel
+	 * <em>Label</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Label</em>' attribute.
@@ -266,8 +273,9 @@ public interface Method extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Called Methods</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCallingMethods <em>Calling Methods</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCallingMethods
+	 * <em>Calling Methods</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Called Methods</em>' reference list isn't clear, there really should be more of a
@@ -285,8 +293,9 @@ public interface Method extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Calling Methods</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCalledMethods <em>Called Methods</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.classes.Method#getCalledMethods
+	 * <em>Called Methods</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Calling Methods</em>' reference list isn't clear, there really should be more of a
@@ -304,7 +313,8 @@ public interface Method extends UnicaseModelElement {
 
 	/**
 	 * Returns the value of the '<em><b>Demo Participations</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Scenario#getParticipatingMethods
 	 * <em>Participating Methods</em>}'. <!-- begin-user-doc -->
 	 * <p>

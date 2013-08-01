@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -46,7 +46,7 @@ public class SerializationTest extends FuzzyProjectTest {
 		// again
 		ProjectSpace projectSpace = getProjectSpace();
 		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace
-				.getProject());
+			.getProject());
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -62,20 +62,20 @@ public class SerializationTest extends FuzzyProjectTest {
 
 		// reload projectSpaces and check for valid state
 		EList<ProjectSpace> projectSpaces = ((WorkspaceImpl) ESWorkspaceProvider.INSTANCE
-				.getWorkspace()).getProjectSpaces();
+			.getWorkspace()).getProjectSpaces();
 		if (projectSpaces.size() != 1) {
 			throw new IllegalStateException(
-					"There must be exactly one projectSpace in the workspace! Current value: "
-							+ projectSpaces.size());
+				"There must be exactly one projectSpace in the workspace! Current value: "
+					+ projectSpaces.size());
 		}
 
 		// compare
 		ProjectSpace reloadedProjectSpace = projectSpaces.get(0);
 		try {
 			if (!ModelUtil.areEqual(reloadedProjectSpace.getProject(),
-					projectSpace.getProject())) {
+				projectSpace.getProject())) {
 				fail(reloadedProjectSpace.getProject(),
-						projectSpace.getProject());
+					projectSpace.getProject());
 			}
 		} finally {
 			// set projectSpace to the reloaded one to ensure correct cleanup

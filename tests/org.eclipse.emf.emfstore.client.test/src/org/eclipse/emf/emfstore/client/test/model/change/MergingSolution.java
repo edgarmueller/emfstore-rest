@@ -20,8 +20,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution#getAppliedOperations <em>Applied
- * Operations</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.change.MergingSolution#getAppliedOperations <em>
+ * Applied Operations</em>}</li>
  * </ul>
  * </p>
  * 

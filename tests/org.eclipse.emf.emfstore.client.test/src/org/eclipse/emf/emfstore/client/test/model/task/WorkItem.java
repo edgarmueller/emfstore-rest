@@ -35,8 +35,8 @@ import org.eclipse.emf.emfstore.client.test.model.release.Release;
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getEffort <em>Effort</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getPriority <em>Priority</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#isResolved <em>Resolved</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getIncludingReleases <em>Including Releases</em>}
- * </li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getIncludingReleases <em>Including
+ * Releases</em>}</li>
  * </ul>
  * </p>
  * 
@@ -47,7 +47,8 @@ import org.eclipse.emf.emfstore.client.test.model.release.Release;
 public interface WorkItem extends Annotation {
 	/**
 	 * Returns the value of the '<em><b>Containing Workpackage</b></em>' container reference. It is bidirectional and
-	 * its opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getContainedWorkItems
+	 * its opposite is '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkPackage#getContainedWorkItems
 	 * <em>Contained Work Items</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Containing Workpackage</em>' container reference isn't clear, there really should be
@@ -66,7 +67,8 @@ public interface WorkItem extends Annotation {
 	WorkPackage getContainingWorkpackage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getContainingWorkpackage
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getContainingWorkpackage
 	 * <em>Containing Workpackage</em>}' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Containing Workpackage</em>' container reference.
@@ -77,8 +79,9 @@ public interface WorkItem extends Annotation {
 
 	/**
 	 * Returns the value of the '<em><b>Predecessors</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getSuccessors <em>Successors</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getSuccessors <em>Successors</em>}
+	 * '. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Predecessors</em>' reference list isn't clear, there really should be more of a
@@ -96,8 +99,9 @@ public interface WorkItem extends Annotation {
 
 	/**
 	 * Returns the value of the '<em><b>Successors</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getPredecessors <em>Predecessors</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getPredecessors
+	 * <em>Predecessors</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Successors</em>' reference list isn't clear, there really should be more of a
@@ -115,7 +119,8 @@ public interface WorkItem extends Annotation {
 
 	/**
 	 * Returns the value of the '<em><b>Assignee</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAssignments <em>Assignments</em>}'.
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getAssignments
+	 * <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Assignee</em>' reference isn't clear, there really should be more of a description
@@ -173,7 +178,8 @@ public interface WorkItem extends Annotation {
 
 	/**
 	 * Returns the value of the '<em><b>Participants</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit}. It is bidirectional and its opposite is
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit}. It is bidirectional and its
+	 * opposite is
 	 * '{@link org.eclipse.emf.emfstore.internal.client.test.model.organization.OrgUnit#getParticipations
 	 * <em>Participations</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -259,8 +265,8 @@ public interface WorkItem extends Annotation {
 	int getEffort();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getEffort <em>Effort</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getEffort
+	 * <em>Effort</em>} ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Effort</em>' attribute.
 	 * @see #getEffort()
@@ -322,8 +328,8 @@ public interface WorkItem extends Annotation {
 
 	/**
 	 * Returns the value of the '<em><b>Including Releases</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getIncludedWorkItems
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getIncludedWorkItems
 	 * <em>Included Work Items</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Including Releases</em>' reference list isn't clear, there really should be more of a

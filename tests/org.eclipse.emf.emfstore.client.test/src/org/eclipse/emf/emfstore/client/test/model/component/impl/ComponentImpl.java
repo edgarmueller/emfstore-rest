@@ -30,13 +30,14 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getPackages <em>Packages</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getOfferedServices <em>Offered
- * Services</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getConsumedServices <em>Consumed
- * Services</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getSubsystems <em>Subsystems</em>}
- * </li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getPackages <em>Packages
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getOfferedServices <em>
+ * Offered Services</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getConsumedServices <em>
+ * Consumed Services</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.component.impl.ComponentImpl#getSubsystems <em>
+ * Subsystems</em>}</li>
  * </ul>
  * </p>
  * 

@@ -17,8 +17,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.Attachment#getReferringModelElements <em>Referring Model
- * Elements</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.Attachment#getReferringModelElements <em>Referring
+ * Model Elements</em>}</li>
  * </ul>
  * </p>
  * 
@@ -29,8 +29,9 @@ import org.eclipse.emf.common.util.EList;
 public interface Attachment extends UnicaseModelElement {
 	/**
 	 * Returns the value of the '<em><b>Referring Model Elements</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAttachments <em>Attachments</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.UnicaseModelElement#getAttachments
+	 * <em>Attachments</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referring Model Elements</em>' reference list isn't clear, there really should be more

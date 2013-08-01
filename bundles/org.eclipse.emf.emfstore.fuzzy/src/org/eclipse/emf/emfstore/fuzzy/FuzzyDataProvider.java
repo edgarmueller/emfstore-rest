@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy;
@@ -45,8 +45,7 @@ public interface FuzzyDataProvider<T> {
 	/**
 	 * This method is called after the {@link FuzzyDataProvider} was created and
 	 * everything was set BEFORE the first run.<br/>
-	 * Should be used to to create internal stuff depending on e.g. the
-	 * {@link TestClass}.
+	 * Should be used to to create internal stuff depending on e.g. the {@link TestClass}.
 	 */
 	void init();
 
@@ -68,22 +67,20 @@ public interface FuzzyDataProvider<T> {
 	List<RunListener> getListener();
 
 	/**
-	 * @return A list of {@link Test}s to specify, which tests the
-	 *         {@link FuzzyRunner} should run. <code>null</code> means run all
+	 * @return A list of {@link Test}s to specify, which tests the {@link FuzzyRunner} should run. <code>null</code>
+	 *         means run all
 	 *         tests.
 	 */
 	List<Test> getTestsToRun();
 
 	/**
-	 * @return The {@link Util} for this {@link FuzzyDataProvider}.
-	 *         <code>null</code> permitted.
+	 * @return The {@link Util} for this {@link FuzzyDataProvider}. <code>null</code> permitted.
 	 */
 	Util getUtil();
 
 	/**
 	 * @param options
-	 *            The options for the {@link FuzzyDataProvider}. Can be
-	 *            <code>null</code>.
+	 *            The options for the {@link FuzzyDataProvider}. Can be <code>null</code>.
 	 */
 	void setOptions(Map<String, Object> options);
 }

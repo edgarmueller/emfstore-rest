@@ -42,7 +42,8 @@ public interface UrlAttachment extends Attachment {
 	String getUrl();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment#getUrl
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.UrlAttachment#getUrl
 	 * <em>Url</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Url</em>' attribute.

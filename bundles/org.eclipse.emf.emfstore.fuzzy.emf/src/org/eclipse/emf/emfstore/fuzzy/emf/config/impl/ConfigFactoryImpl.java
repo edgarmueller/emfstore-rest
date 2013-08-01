@@ -41,7 +41,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 	public static ConfigFactory init() {
 		try {
 			ConfigFactory theConfigFactory = (ConfigFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://org/eclipse/emf/emfstore/fuzzy/emf/config");
+				.getEFactory("http://org/eclipse/emf/emfstore/fuzzy/emf/config");
 			if (theConfigFactory != null) {
 				return theConfigFactory;
 			}
@@ -85,7 +85,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory {
 			return createMutatorConfig();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+				+ "' is not a valid classifier");
 		}
 	}
 

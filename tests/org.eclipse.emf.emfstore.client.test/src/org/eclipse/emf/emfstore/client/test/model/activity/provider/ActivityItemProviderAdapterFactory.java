@@ -78,7 +78,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -86,7 +87,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 	protected TransitionItemProvider transitionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Transition}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -102,7 +104,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Activity} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Activity} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -125,8 +128,9 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Fork}
-	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This keeps track of the one adapter used for all
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Fork} instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -149,7 +153,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Branch} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.Branch} instances. <!-- begin-user-doc -->
+	 * <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -173,7 +178,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial} instances. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial} instances. <!--
+	 * begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -181,7 +187,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 	protected ActivityInitialItemProvider activityInitialItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial}. <!--
+	 * This creates an adapter for a
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityInitial}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -197,7 +204,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd} instances. <!-- begin-user-doc --> <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd} instances. <!-- begin-user-doc
+	 * --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -205,7 +213,8 @@ public class ActivityItemProviderAdapterFactory extends ActivityAdapterFactory i
 	protected ActivityEndItemProvider activityEndItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.activity.ActivityEnd}.
+	 * <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

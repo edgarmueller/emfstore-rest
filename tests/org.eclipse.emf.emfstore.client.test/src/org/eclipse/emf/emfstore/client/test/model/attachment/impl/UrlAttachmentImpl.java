@@ -22,7 +22,8 @@ import org.eclipse.emf.emfstore.client.test.model.impl.AttachmentImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.UrlAttachmentImpl#getUrl <em>Url</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.impl.UrlAttachmentImpl#getUrl <em>Url</em>}
+ * </li>
  * </ul>
  * </p>
  * 

@@ -18,7 +18,8 @@ import org.eclipse.emf.emfstore.client.test.model.attachment.FileAttachment;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile <em>Audio File</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile <em>Audio File
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -44,7 +45,8 @@ public interface AudioComment extends EObject {
 	FileAttachment getAudioFile();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile
+	 * Sets the value of the '
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.AudioComment#getAudioFile
 	 * <em>Audio File</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value the new value of the '<em>Audio File</em>' containment reference.

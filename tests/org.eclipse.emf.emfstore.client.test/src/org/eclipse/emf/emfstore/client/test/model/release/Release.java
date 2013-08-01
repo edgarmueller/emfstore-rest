@@ -23,11 +23,12 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getStream <em>Stream</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getPredecessor <em>Predecessor</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSuccessor <em>Successor</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches <em>Applied Patches</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getIncludedWorkItems <em>Included Work Items
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getAppliedPatches <em>Applied Patches
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSourceCodeRepositoryRevision <em>Source Code
- * Repository Revision</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getIncludedWorkItems <em>Included Work
+ * Items </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSourceCodeRepositoryRevision <em>
+ * Source Code Repository Revision</em>}</li>
  * </ul>
  * </p>
  * 
@@ -67,7 +68,8 @@ public interface Release extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Predecessor</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSuccessor <em>Successor</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getSuccessor <em>Successor</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Predecessor</em>' reference isn't clear, there really should be more of a description
@@ -96,7 +98,8 @@ public interface Release extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Successor</b></em>' reference. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getPredecessor <em>Predecessor</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.release.Release#getPredecessor <em>Predecessor</em>}'.
+	 * <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Successor</em>' reference isn't clear, there really should be more of a description
@@ -125,7 +128,8 @@ public interface Release extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Applied Patches</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment}. It is bidirectional and its
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment}. It is bidirectional and
+	 * its
 	 * opposite is '{@link org.eclipse.emf.emfstore.internal.client.test.model.attachment.PatchAttachment#getAppliedTo
 	 * <em>Applied To</em>}'. <!-- begin-user-doc -->
 	 * <p>
@@ -144,9 +148,9 @@ public interface Release extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Included Work Items</b></em>' reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getIncludingReleases <em>Including Releases</em>}
-	 * '. <!-- begin-user-doc -->
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem}. It is bidirectional and its opposite
+	 * is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.task.WorkItem#getIncludingReleases
+	 * <em>Including Releases</em>} '. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Included Work Items</em>' reference list isn't clear, there really should be more of a
 	 * description here...

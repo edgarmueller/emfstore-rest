@@ -31,7 +31,8 @@ import org.eclipse.emf.emfstore.client.test.model.requirement.RequirementPackage
 import org.eclipse.emf.emfstore.client.test.model.requirement.Step;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.internal.client.test.model.requirement.Step}
+ * object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

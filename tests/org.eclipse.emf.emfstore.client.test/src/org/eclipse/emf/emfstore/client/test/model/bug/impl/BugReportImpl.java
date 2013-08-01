@@ -42,25 +42,29 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getContainingWorkpackage <em>Containing
- * Workpackage</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getPredecessors <em>Predecessors</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getSuccessors <em>Successors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getContainingWorkpackage <em>
+ * Containing Workpackage</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getPredecessors <em>
+ * Predecessors</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getSuccessors <em>Successors
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getAssignee <em>Assignee</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getReviewer <em>Reviewer</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getParticipants <em>Participants</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getParticipants <em>
+ * Participants</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getDueDate <em>Due Date</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getEstimate <em>Estimate</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getEffort <em>Effort</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getPriority <em>Priority</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#isResolved <em>Resolved</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getIncludingReleases <em>Including
- * Releases</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getIncludingReleases <em>
+ * Including Releases</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#isChecked <em>Checked</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getSeverity <em>Severity</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getResolution <em>Resolution</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getResolutionType <em>Resolution Type
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getResolution <em>Resolution
  * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#getResolutionType <em>
+ * Resolution Type </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.bug.impl.BugReportImpl#isDone <em>Done</em>}</li>
  * </ul>
  * </p>

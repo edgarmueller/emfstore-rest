@@ -36,8 +36,9 @@ import org.eclipse.emf.emfstore.client.test.model.task.WorkItem;
 public interface Issue extends Annotation, Checkable, WorkItem {
 	/**
 	 * Returns the value of the '<em><b>Proposals</b></em>' containment reference list. The list contents are of type
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal}. It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getIssue <em>Issue</em>}'. <!--
+	 * {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal}. It is bidirectional and its
+	 * opposite is ' {@link org.eclipse.emf.emfstore.internal.client.test.model.rationale.Proposal#getIssue
+	 * <em>Issue</em>}'. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Proposals</em>' containment reference list isn't clear, there really should be more of

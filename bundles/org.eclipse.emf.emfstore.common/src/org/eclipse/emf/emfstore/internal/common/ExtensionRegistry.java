@@ -87,7 +87,6 @@ public class ExtensionRegistry {
 
 		private Object t;
 
-
 		public ESConfigElement(Object o) {
 			t = o;
 		}

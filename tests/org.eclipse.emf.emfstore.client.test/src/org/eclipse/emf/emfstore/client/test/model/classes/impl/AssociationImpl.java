@@ -25,18 +25,21 @@ import org.eclipse.emf.emfstore.client.test.model.impl.UnicaseModelElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getSource <em>Source
+ * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getTarget <em>Target
+ * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getType <em>Type</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getSourceMultiplicity <em>Source
- * Multiplicity</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getTargetMultiplicity <em>Target
- * Multiplicity</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getSourceRole <em>Source Role
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getSourceMultiplicity
+ * <em>Source Multiplicity</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getTargetMultiplicity
+ * <em>Target Multiplicity</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getSourceRole <em>Source
+ * Role </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getTargetRole <em>Target
+ * Role </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#isTransient <em>Transient
  * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#getTargetRole <em>Target Role
- * </em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.model.classes.impl.AssociationImpl#isTransient <em>Transient</em>}</li>
  * </ul>
  * </p>
  * 
