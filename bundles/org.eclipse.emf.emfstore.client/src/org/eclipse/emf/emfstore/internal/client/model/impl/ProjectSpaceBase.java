@@ -7,14 +7,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
- * emueller
- * koegel
+ * Otto von Wesendonk, Edgar Mueller, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -148,10 +147,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	private void initRunnableContext() {
-		setRunnableContext(ExtensionRegistry.INSTANCE.get(
+		runnableContext = ExtensionRegistry.INSTANCE.get(
 			RUNNABLE_CONTEXT_ID,
 			ESRunnableContext.class,
-			new DefaultRunnableContext(), true));
+			new DefaultRunnableContext(), true);
 	}
 
 	/**
@@ -182,8 +181,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#addTag(org.eclipse.emf.emfstore.server.model.versioning.PrimaryVersionSpec,
-	 *      org.eclipse.emf.emfstore.server.model.versioning.TagVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#addTag(org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec)
 	 */
 	public void addTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws ESException {
 		final ConnectionManager cm = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
@@ -202,6 +201,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 *            merged changes
 	 * @param progressMonitor
 	 *            an {@link IProgressMonitor} to inform about the progress of the UpdateCallback in case it is called
+	 * @param runChecksumTestOnBaseSpec
+	 *            whether the checksum check is performed while applying the changes
 	 * 
 	 * @throws ESException in case the checksum comparison failed and the activated IChecksumErrorHandler
 	 *             also failed
@@ -285,7 +286,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @param addOperations
 	 *            whether the operations should be saved in project space
 	 * 
-	 * @see #applyOperationsWithRecording(List, boolean)
 	 */
 	public void applyOperations(List<AbstractOperation> operations, boolean addOperations) {
 		executeRunnable(new ApplyOperationsRunnable(this, operations, addOperations));
@@ -325,7 +325,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec commit(IProgressMonitor monitor) throws ESException {
 		return new CommitController(this, null, null, monitor).execute();
@@ -335,9 +335,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit(org.eclipse.emf.emfstore.server.model.versioning.LogMessage,
-	 *      org.eclipse.emf.emfstore.internal.client.callbacks.CommitCallback,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#commit(java.lang.String,
+	 *      org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec commit(String logMessage, ESCommitCallback callback, IProgressMonitor monitor)
 		throws ESException {
@@ -411,19 +410,20 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getFile(org.eclipse.emf.emfstore.server.model.FileIdentifier,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getFile(org.eclipse.emf.emfstore.internal.server.model.FileIdentifier)
 	 */
 	public FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException {
 		return fileTransferManager.getFile(fileIdentifier);
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getFileInfo(org.eclipse.emf.emfstore.server.model.FileIdentifier)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getFileInfo(org.eclipse.emf.emfstore.internal.server.model.FileIdentifier)
 	 */
 	public FileInformation getFileInfo(FileIdentifier fileIdentifier) {
 		return fileTransferManager.getFileInfo(fileIdentifier);
@@ -526,7 +526,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				return orgUnitProperty;
 			}
 		}
-		throw new PropertyNotFoundException();
+		throw new PropertyNotFoundException(MessageFormat.format(
+			"Property {0} not found.", name));
 	}
 
 	/**
@@ -707,10 +708,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#delete()
-	 * @generated NOT
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#delete(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void delete(IProgressMonitor monitor) throws IOException {
 
@@ -877,6 +878,13 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#mergeResolvedConflicts(org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet,
+	 *      java.util.List, java.util.List)
+	 */
 	public ChangePackage mergeResolvedConflicts(ChangeConflictSet conflictSet,
 		List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages)
 		throws ChangeConflictException {
@@ -941,7 +949,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			protected List<BranchInfo> run() throws ESException {
 				final ConnectionManager cm = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 				return cm.getBranches(getSessionId(), getProjectId());
-			};
+			}
 		}.execute();
 	}
 
@@ -956,9 +964,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#resolve(org.eclipse.emf.emfstore.server.model.url.ModelElementUrlFragment)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#resolve(org.eclipse.emf.emfstore.internal.server.model.url.ModelElementUrlFragment)
 	 */
 	public EObject resolve(ModelElementUrlFragment modelElementUrlFragment) throws MEUrlResolutionException {
 		final ModelElementId modelElementId = modelElementUrlFragment.getModelElementId();
@@ -970,11 +979,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#resolveVersionSpec(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec)
-	 * @throws ESException
-	 * @generated NOT
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#resolveVersionSpec(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec resolveVersionSpec(final VersionSpec versionSpec, IProgressMonitor monitor)
 		throws InvalidVersionSpecException, ESException {
@@ -1065,7 +1074,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#setProperty(org.eclipse.emf.emfstore.server.model.accesscontrol.OrgUnitProperty)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#setProperty(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.OrgUnitProperty)
 	 */
 	public void setProperty(OrgUnitProperty property) {
 		// sanity checks
@@ -1101,7 +1110,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#shareProject()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#shareProject(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ProjectInfo shareProject(IProgressMonitor monitor) throws ESException {
 		return shareProject(null, monitor);
@@ -1208,7 +1217,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec update(IProgressMonitor monitor) throws ESException {
 		return update(Versions.createHEAD(getBaseVersion()), null, monitor);
@@ -1218,7 +1227,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec)
 	 */
 	public PrimaryVersionSpec update(final VersionSpec version) throws ESException {
 		return update(version, null, null);
@@ -1228,9 +1237,8 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.server.model.versioning.VersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.client.callbacks.UpdateCallback,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#update(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
+	 *      org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public PrimaryVersionSpec update(VersionSpec version, ESUpdateCallback callback, IProgressMonitor progress)
 		throws ESException {
@@ -1311,6 +1319,12 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 				toAPI(), changePackage.toAPI());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
+	 */
 	public ESLocalProjectImpl toAPI() {
 		if (esLocalProjectImpl == null) {
 			esLocalProjectImpl = createAPI();
@@ -1318,15 +1332,23 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		return esLocalProjectImpl;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
+	 */
 	public ESLocalProjectImpl createAPI() {
 		return new ESLocalProjectImpl(this);
 	}
 
+	/**
+	 * Returns the {@link ESRunnableContext} operations are applied in.
+	 * 
+	 * @return the runnable context operations are executed in
+	 */
 	public ESRunnableContext getRunnableContext() {
 		return runnableContext;
 	}
 
-	public void setRunnableContext(ESRunnableContext runnableContext) {
-		this.runnableContext = runnableContext;
-	}
 }

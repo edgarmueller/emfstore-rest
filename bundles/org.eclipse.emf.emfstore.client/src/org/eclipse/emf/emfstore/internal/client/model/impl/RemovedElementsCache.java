@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -20,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.SettingWithReferencedElement;
@@ -41,7 +39,7 @@ public class RemovedElementsCache {
 	/**
 	 * Constructor.
 	 * 
-	 * @param collection an underlying {@link IdEObjectCollection}
+	 * @param collection an underlying {@link org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection}
 	 */
 	public RemovedElementsCache(IdEObjectCollectionImpl collection) {
 		this.collection = collection;
@@ -96,7 +94,7 @@ public class RemovedElementsCache {
 	 * Returns the saved settings of the specified model element.
 	 * 
 	 * @param modelElement
-	 *            The model elemente whose settings are requested
+	 *            The model element whose settings are requested
 	 * @return the settings
 	 */
 	public List<SettingWithReferencedElement> getRemovedElementToReferenceSetting(EObject modelElement) {

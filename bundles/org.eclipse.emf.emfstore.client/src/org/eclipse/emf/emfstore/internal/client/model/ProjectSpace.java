@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk, Edgar Mueller, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model;
 
@@ -67,7 +68,6 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  *          <li>
  *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectDescription
  *          <em>Project Description</em>}</li>
- *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getEvents <em> Events</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getUsersession
  *          <em>Usersession</em>}</li>
  *          <li>{@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLastUpdated
@@ -82,17 +82,8 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getOldLogMessages
  *          <em>Old Log Messages</em>}</li>
  *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalOperations
- *          <em>Local Operations</em>}</li>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getNotifications
- *          <em>Notifications</em>}</li>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getEventComposite
- *          <em>Event Composite</em>}</li>
- *          <li>
- *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getNotificationComposite
- *          <em>Notification Composite </em>}</li>
+ *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getLocalChangePackage()
+ *          <em>Local Change Package</em>}</li>
  *          <li>
  *          {@link org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getWaitingUploads
  *          <em>Waiting Uploads</em>}</li>
@@ -115,7 +106,7 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @generated NOT
 	 */
-	static final String RUNNABLE_CONTEXT_ID = "org.eclipse.emf.emfstore.client.runnableContext";
+	String RUNNABLE_CONTEXT_ID = "org.eclipse.emf.emfstore.client.runnableContext";
 
 	/**
 	 * Adds a file to this project space. The file will be uploaded to the
@@ -170,6 +161,9 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	/**
 	 * Commits all pending changes of the project space.
 	 * 
+	 * @param monitor
+	 *            a progress monitor that may be used during the commit to indicate the progress
+	 * 
 	 * @throws ESException
 	 *             in case the commit went wrong
 	 * 
@@ -201,8 +195,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 
 	/**
 	 * This method allows to commit changes to a new branch. It works very
-	 * similar to {@link #commit()} with the addition of a Branch specifier.
-	 * Once the branch is created use {@link #commit()} for further commits.
+	 * similar to {@link #commit(IProgressMonitor)} with the addition of a Branch specifier.
+	 * Once the branch is created use {@link #commit(IProgressMonitor)} for further commits.
 	 * 
 	 * 
 	 * @param branch
@@ -228,12 +222,27 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 *            the version which is supposed to be merged
 	 * @param conflictResolver
 	 *            a {@link ConflictResolver} for conflict resolving
+	 * @param monitor
+	 *            a progress monitor that may be used during the merge to indicate the progress
 	 * @throws ESException
 	 *             in case of an exception
 	 */
 	void mergeBranch(PrimaryVersionSpec branchSpec, ConflictResolver conflictResolver, IProgressMonitor monitor)
 		throws ESException;
 
+	/**
+	 * Merges the resolved conflict sets.
+	 * 
+	 * @param conflictSet
+	 *            a set containing the conflicts
+	 * @param myChangePackages
+	 *            a list of local change packages
+	 * @param theirChangePackages
+	 *            a list of containing the incoming change packages
+	 * @return a merge change package
+	 * 
+	 * @throws ChangeConflictException in case the conflicts can not be resolved
+	 */
 	ChangePackage mergeResolvedConflicts(ChangeConflictSet conflictSet,
 		List<ChangePackage> myChangePackages, List<ChangePackage> theirChangePackages)
 		throws ChangeConflictException;
@@ -319,7 +328,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 
 	/**
 	 * Returns the value of the '<em><b>Changed Shared Properties</b></em>'
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -635,7 +645,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty}.
 	 * <!--
 	 * begin-user-doc -->
 	 * <p>
@@ -678,7 +689,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 
 	/**
 	 * Returns the value of the '<em><b>Waiting Uploads</b></em>' containment
-	 * reference list. The list contents are of type {@link org.eclipse.emf.emfstore.server.model.FileIdentifier}. <!--
+	 * reference list. The list contents are of type
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.FileIdentifier}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Waiting Uploads</em>' containment reference list isn't clear, there really should be
@@ -724,6 +736,9 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	/**
 	 * Deletes the project space.
 	 * 
+	 * @param monitor
+	 *            a progress monitor that may be used during the delete to indicate the progress
+	 * 
 	 * @generated NOT
 	 * 
 	 * @throws IOException
@@ -735,6 +750,8 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * Returns the resource set of the ProjectSpace.
 	 * 
 	 * @return resource set of the ProjectSpace
+	 * 
+	 * @generated NOT
 	 */
 	ResourceSet getResourceSet();
 
@@ -824,7 +841,10 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * 
 	 * @param versionSpec
 	 *            the spec to resolve
-	 * @return the primary version spec <!-- end-user-doc -->
+	 * @param monitor
+	 *            a progress monitor that may be used during resolving the version to indicate the progress
+	 * 
+	 * @return the primary version specifier <!-- end-user-doc -->
 	 * @throws ESException
 	 *             if resolving fails
 	 * @model
@@ -1025,6 +1045,9 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	/**
 	 * <!-- begin-user-doc --> Update the project to the head version.
 	 * 
+	 * @param monitor
+	 *            a progress monitor that may be used during update to indicate progress
+	 * 
 	 * @return the new base version
 	 * @throws ESException
 	 *             if update fails <!-- end-user-doc -->
@@ -1052,15 +1075,15 @@ public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalPr
 	 * @param version
 	 *            the {@link VersionSpec} to update to
 	 * @param callback
-	 *            the {@link UpdateCallback} that will be called when the update
+	 *            the {@link ESUpdateCallback} that will be called when the update
 	 *            has been performed
 	 * @param progress
 	 *            an {@link IProgressMonitor} instance
-	 * @return the current version spec
+	 * @return the current version specifier
 	 * 
 	 * @throws ESException
 	 *             in case the update went wrong
-	 * @see UpdateCallback#updateCompleted(ProjectSpace, PrimaryVersionSpec, PrimaryVersionSpec)
+	 * 
 	 * @generated NOT
 	 */
 	PrimaryVersionSpec update(VersionSpec version, ESUpdateCallback callback, IProgressMonitor progress)

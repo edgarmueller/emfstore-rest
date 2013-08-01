@@ -7,9 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
- * Maximilian Koegel
+ * Otto von Wesendonk, Edgar Mueller, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.configuration;
 
@@ -32,10 +30,9 @@ import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
  * Configuration options that influence the behavior of the client.
  * This currently includes:
  * <ul>
- * <li>checksum error handler</li>
- * <li>autosave</li>
- * <li>default server configuration</li>
- * <li>
+ * <li>Checksum Error Handler</li>
+ * <li>Autosave</li>
+ * <li>Default Server Configuration</li>
  * </ul>
  * 
  * @author emueller
@@ -68,7 +65,7 @@ public class Behavior {
 	 * 
 	 * @return true, if auto-save is enabled, false otherwise
 	 */
-	public static boolean isAutoSaveEnabled() {
+	public boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
 			autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions")
 				.getBoolean(

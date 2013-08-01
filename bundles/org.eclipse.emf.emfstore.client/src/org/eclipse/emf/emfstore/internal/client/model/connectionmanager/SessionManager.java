@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
@@ -44,17 +44,20 @@ public class SessionManager {
 	/**
 	 * Executes the given {@link ServerCall}.
 	 * 
+	 * @param <T>
+	 *            type of the result the server call is providing
+	 * 
 	 * @param serverCall
 	 *            the server call to be executed
 	 * @throws ESException
 	 *             If an error occurs during execution of the server call
 	 */
-	public void execute(ServerCall<?> serverCall) throws ESException {
-		ESUsersessionImpl session = (ESUsersessionImpl) getSessionProvider().provideUsersession(
-			new ESServerCallImpl(serverCall));
+	public <T> void execute(ServerCall<T> serverCall) throws ESException {
+		final ESUsersessionImpl session = (ESUsersessionImpl) getSessionProvider().provideUsersession(
+			new ESServerCallImpl<T>(serverCall));
 		serverCall.setUsersession(session.toInternalAPI());
 		// TODO OTS
-		Usersession loginUsersession = loginUsersession(session.toInternalAPI(), false);
+		final Usersession loginUsersession = loginUsersession(session.toInternalAPI(), false);
 		executeCall(serverCall, loginUsersession, true);
 	}
 
@@ -90,12 +93,12 @@ public class SessionManager {
 						}
 					});
 					return usersession;
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					// ignore, session provider should try to login
 				}
 			}
 			// TODO: ugly
-			ESUsersession session = RunESCommand.WithException.runWithResult(ESException.class,
+			final ESUsersession session = RunESCommand.WithException.runWithResult(ESException.class,
 				new Callable<ESUsersession>() {
 					public ESUsersession call() throws Exception {
 						return getSessionProvider().login(usersession.toAPI());
@@ -108,17 +111,17 @@ public class SessionManager {
 	}
 
 	private boolean isLoggedIn(Usersession usersession) {
-		ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		return usersession.isLoggedIn() && connectionManager.isLoggedIn(usersession.getSessionId());
 	}
 
 	private void executeCall(ServerCall<?> serverCall, Usersession usersession, boolean retry) throws ESException {
 		try {
 			serverCall.run(usersession.getSessionId());
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			if (retry && (e instanceof SessionTimedOutException || e instanceof UnknownSessionException)) {
 				// login & retry
-				Usersession loginUsersession = loginUsersession(usersession, true);
+				final Usersession loginUsersession = loginUsersession(usersession, true);
 				executeCall(serverCall, loginUsersession, false);
 			} else {
 				throw e;
@@ -146,10 +149,11 @@ public class SessionManager {
 	}
 
 	private void initSessionProvider() {
-		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.usersessionProvider");
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.usersessionProvider");
 
 		if (extensionPoint.getExtensionElements().size() > 0) {
-			ESAbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",
+			final ESAbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",
 				ESAbstractSessionProvider.class);
 			if (sessionProvider != null) {
 				provider = sessionProvider;

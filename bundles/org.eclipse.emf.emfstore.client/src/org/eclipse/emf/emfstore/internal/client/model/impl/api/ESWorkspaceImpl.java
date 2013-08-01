@@ -33,7 +33,6 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
  * Mapping between {@link ESWorkspace} and {@link Workspace}.
  * 
  * @author emueller
- * 
  */
 public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace> implements ESWorkspace {
 
@@ -67,7 +66,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 		return new EMFStoreCommandWithResult<ESLocalProjectImpl>() {
 			@Override
 			protected ESLocalProjectImpl doRun() {
-				ProjectSpace projectSpace = toInternalAPI().createLocalProject(projectName);
+				final ProjectSpace projectSpace = toInternalAPI().createLocalProject(projectName);
 				return projectSpace.toAPI();
 			}
 		}.run(false);
@@ -105,8 +104,15 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 		return serverImpl;
 	}
 
+	/**
+	 * Whether a server with the same name, URL and port as the given one, exists.
+	 * 
+	 * @param server
+	 *            the server instance containing the name, URL and port to be checked for
+	 * @return {@code true}, if a server with the same name, URL and port already exists, {@code false} otherwise
+	 */
 	public boolean serverExists(ESServer server) {
-		ESServer existingServer = getExistingServer(server);
+		final ESServer existingServer = getExistingServer(server);
 		return existingServer != null;
 	}
 
@@ -119,7 +125,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	 */
 	private ESServer getExistingServer(ESServer server) {
 
-		for (ESServer s : getServers()) {
+		for (final ESServer s : getServers()) {
 			if (s == server) {
 				return s;
 			}
@@ -161,8 +167,8 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 	public ESLocalProject getLocalProject(final EObject modelElement) {
 		return RunESCommand.runWithResult(new Callable<ESLocalProject>() {
 			public ESLocalProject call() throws Exception {
-				Project project = ModelUtil.getProject(modelElement);
-				ProjectSpace projectSpace = toInternalAPI().getProjectSpace(project);
+				final Project project = ModelUtil.getProject(modelElement);
+				final ProjectSpace projectSpace = toInternalAPI().getProjectSpace(project);
 				return projectSpace.toAPI();
 			}
 		});

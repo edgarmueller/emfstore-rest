@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
- * Edgar Mueller
+ * Maximilian Koegel, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -53,7 +52,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 public class ResourcePersister implements CommandObserver, IdEObjectCollectionChangeObserver, ESCommitObserver,
 	ESUpdateObserver, ESDisposable {
 
-	private FilterStack filterStack;
+	private final FilterStack filterStack;
 
 	private boolean isDirty;
 
@@ -76,9 +75,9 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 */
 	public ResourcePersister(IdEObjectCollection collection) {
 		this.collection = collection;
-		this.resources = new LinkedHashSet<Resource>();
-		this.listeners = new ArrayList<IDEObjectCollectionDirtyStateListener>();
-		this.filterStack = new FilterStack(new ESNotificationFilter[] { new TouchFilter(), new TransientFilter(),
+		resources = new LinkedHashSet<Resource>();
+		listeners = new ArrayList<IDEObjectCollectionDirtyStateListener>();
+		filterStack = new FilterStack(new ESNotificationFilter[] { new TouchFilter(), new TransientFilter(),
 			new EmptyRemovalsFilter() });
 	}
 
@@ -149,7 +148,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
-		for (Resource resource : resources) {
+		for (final Resource resource : resources) {
 
 			if (resource.getURI() == null || resource.getURI().toString().equals("")) {
 				continue;
@@ -159,16 +158,16 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 				((EMFStoreResource) resource).setIdToEObjectMap(collection.getIdToEObjectMapping(),
 					collection.getEObjectToIdMapping());
 			} else {
-				Set<EObject> modelElements = ModelUtil.getAllContainedModelElements(resource, false, false);
+				final Set<EObject> modelElements = ModelUtil.getAllContainedModelElements(resource, false, false);
 
-				for (EObject modelElement : modelElements) {
+				for (final EObject modelElement : modelElements) {
 					setModelElementIdOnResource((XMIResource) resource, modelElement);
 				}
 			}
 
 			try {
 				ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				// ignore exception
 			}
 		}
@@ -209,8 +208,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
-	 *      org.eclipse.emf.ecore.EObject)
+	 *      org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 
@@ -265,12 +263,12 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 
 	private void cleanResources(EObject deletedElement) {
 
-		Set<EObject> allDeletedModelElements = ModelUtil.getAllContainedModelElements(deletedElement, false);
+		final Set<EObject> allDeletedModelElements = ModelUtil.getAllContainedModelElements(deletedElement, false);
 		allDeletedModelElements.add(deletedElement);
 
 		// TODO: check whether resource is contained in resources??
-		for (EObject element : allDeletedModelElements) {
-			Resource childResource = element.eResource();
+		for (final EObject element : allDeletedModelElements) {
+			final Resource childResource = element.eResource();
 			if (childResource != null) {
 				childResource.getContents().remove(element);
 			}
@@ -283,12 +281,12 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 			return;
 		}
 
-		String modelElementId = getIDForEObject(modelElement);
+		final String modelElementId = getIDForEObject(modelElement);
 		resource.setID(modelElement, modelElementId);
 	}
 
 	private String getIDForEObject(EObject modelElement) {
-		String modelElementId = collection.getModelElementId(modelElement).toString();
+		final String modelElementId = collection.getModelElementId(modelElement).toString();
 
 		if (modelElementId == null) {
 			WorkspaceUtil.handleException(new IllegalStateException("No ID for model element" + modelElement));
@@ -298,7 +296,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	}
 
 	private void fireDirtyStateChangedNotification() {
-		for (IDEObjectCollectionDirtyStateListener listener : listeners) {
+		for (final IDEObjectCollectionDirtyStateListener listener : listeners) {
 			listener.notifyAboutDirtyStateChange();
 		}
 	}
@@ -307,7 +305,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.client.observer.ESUpdateObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
 	 *      java.util.List, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ESLocalProject project, List<ESChangePackage> changePackages,
@@ -328,9 +326,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
-	 *      org.eclipse.emf.emfstore.internal.server.model.ESChangePackage.IChangePackage,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.ESChangePackage, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean inspectChanges(ESLocalProject project, ESChangePackage changePackage, IProgressMonitor monitor) {
 		saveDirtyResources(true);
@@ -341,8 +338,8 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
-	 *      org.eclipse.emf.emfstore.internal.server.model.ESPrimaryVersionSpec.versionspecs.IPrimaryVersionSpec,
+	 * @see org.eclipse.emf.emfstore.client.observer.ESCommitObserver#commitCompleted(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void commitCompleted(ESLocalProject project, ESPrimaryVersionSpec newRevision, IProgressMonitor monitor) {
@@ -353,7 +350,7 @@ public class ResourcePersister implements CommandObserver, IdEObjectCollectionCh
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		listeners = null;

@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * ovonwesen
- * emueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.controller;
 
@@ -34,9 +33,9 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class RevertCommitController extends ServerCall<Void> {
 
-	private PrimaryVersionSpec versionSpec;
+	private final PrimaryVersionSpec versionSpec;
 	private final boolean headRevert;
-	private String checkedoutCopyName;
+	private final String checkedoutCopyName;
 
 	/**
 	 * Constructor.
@@ -47,6 +46,8 @@ public class RevertCommitController extends ServerCall<Void> {
 	 *            the target version to revert to
 	 * @param headRevert
 	 *            reverts HEAD if set to {@code true}, otherwise just revert individual version
+	 * @param checkedoutCopyName
+	 *            the name of the checkout that is going to be created
 	 */
 	public RevertCommitController(ProjectSpace projectSpace,
 		PrimaryVersionSpec versionSpec, boolean headRevert, String checkedoutCopyName) {
@@ -59,24 +60,24 @@ public class RevertCommitController extends ServerCall<Void> {
 	private void checkoutHeadAndReverseCommit(final ProjectSpace projectSpace, final PrimaryVersionSpec baseVersion,
 		boolean headRevert) throws ESException {
 
-		PrimaryVersionSpec localHead = getConnectionManager()
+		final PrimaryVersionSpec localHead = getConnectionManager()
 			.resolveVersionSpec(
 				projectSpace.getUsersession().getSessionId(),
 				projectSpace.getProjectId(),
 				Versions.createHEAD(baseVersion));
 
-		ESLocalProjectImpl revertSpace = projectSpace.toAPI().getRemoteProject().checkout(
+		final ESLocalProjectImpl revertSpace = projectSpace.toAPI().getRemoteProject().checkout(
 			checkedoutCopyName,
 			projectSpace.getUsersession().toAPI(),
 			getProgressMonitor());
 
-		List<ChangePackage> changes = revertSpace.toInternalAPI().getChanges(
+		final List<ChangePackage> changes = revertSpace.toInternalAPI().getChanges(
 			baseVersion,
 			headRevert ? localHead : ModelUtil.clone(baseVersion));
 
 		Collections.reverse(changes);
 
-		for (ChangePackage changePackage : changes) {
+		for (final ChangePackage changePackage : changes) {
 			changePackage.reverse().apply(revertSpace.toInternalAPI().getProject(), true);
 		}
 	}

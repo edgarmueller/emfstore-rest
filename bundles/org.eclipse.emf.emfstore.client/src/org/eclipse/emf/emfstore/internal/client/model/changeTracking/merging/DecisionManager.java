@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
@@ -89,7 +89,7 @@ public class DecisionManager {
 	 * @param project
 	 *            the related project
 	 * @param changeConflict
-	 *            the {@link ChangechangeConflict} containing the changes leading to a potential conflict
+	 *            the {@link ChangeConflictSet} containing the changes leading to a potential conflict
 	 * @param isBranchMerge
 	 *            allows to specify whether two branches are merged, opposed to
 	 *            changes from the same branch. Has an effect on the wording of
@@ -132,9 +132,8 @@ public class DecisionManager {
 	}
 
 	/**
-	 * BEGIN FACTORY TODO EXTRACT FACTORY CLASS.
+	 * BEGIN FACTORY TODO: EXTRACT FACTORY CLASS.
 	 */
-
 	// BEGIN COMPLEX CODE
 	private void createConflicts(Set<ConflictBucket> conflictBucket) {
 		// Create Conflicts from ConflictBucket
@@ -222,25 +221,25 @@ public class DecisionManager {
 	private VisualConflict createMultiRefMultiSet(ConflictBucket conf) {
 		if (isMultiRef(conf.getMyOperation())) {
 			return new MultiReferenceSetConflict(conf, this, true);
-		} else {
-			return new MultiReferenceSetConflict(conf, this, false);
 		}
+
+		return new MultiReferenceSetConflict(conf, this, false);
 	}
 
 	private VisualConflict createMultiSetSingle(ConflictBucket conf) {
 		if (isMultiRefSet(conf.getMyOperation())) {
 			return new MultiReferenceSetSingleConflict(conf, this, true);
-		} else {
-			return new MultiReferenceSetSingleConflict(conf, this, false);
 		}
+
+		return new MultiReferenceSetSingleConflict(conf, this, false);
 	}
 
 	private VisualConflict createMultiSingle(ConflictBucket conf) {
 		if (isMultiRef(conf.getMyOperation())) {
 			return new MultiReferenceSingleConflict(conf, this, true);
-		} else {
-			return new MultiReferenceSingleConflict(conf, this, false);
 		}
+
+		return new MultiReferenceSingleConflict(conf, this, false);
 	}
 
 	private VisualConflict createMultiRefSetSet(ConflictBucket conf) {
@@ -254,44 +253,43 @@ public class DecisionManager {
 	private VisualConflict createMultiAtt(ConflictBucket conf) {
 		if (((MultiAttributeOperation) conf.getMyOperation()).isAdd()) {
 			return new MultiAttributeConflict(conf, this, true);
-		} else {
-			return new MultiAttributeConflict(conf, this, false);
-
 		}
+
+		return new MultiAttributeConflict(conf, this, false);
 	}
 
 	private VisualConflict createMultiAttSet(ConflictBucket conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
 			return new MultiAttributeSetConflict(conf, this, true);
-		} else {
-			return new MultiAttributeSetConflict(conf, this, false);
 		}
+
+		return new MultiAttributeSetConflict(conf, this, false);
 	}
 
 	private VisualConflict createMultiAttMove(ConflictBucket conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
 			return new MultiAttributeMoveConflict(conf, this, true);
-		} else {
-			return new MultiAttributeMoveConflict(conf, this, false);
 		}
+
+		return new MultiAttributeMoveConflict(conf, this, false);
 	}
 
 	private VisualConflict createMultiAttMoveSet(ConflictBucket conf) {
 		if (isMultiAttSet(conf.getMyOperation())) {
 			return new MultiAttributeMoveSetConflict(conf, this, true);
-		} else {
-			return new MultiAttributeMoveSetConflict(conf, this, false);
 		}
+
+		return new MultiAttributeMoveSetConflict(conf, this, false);
 	}
 
 	private VisualConflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
 		if (isCompositeRef(conf.getMyOperation())) {
 			return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
 				Arrays.asList(conf.getTheirOperation()));
-		} else {
-			return createRefFromSub(conf, Arrays.asList(conf.getMyOperation()),
-				((CompositeOperation) conf.getTheirOperation()).getSubOperations());
 		}
+
+		return createRefFromSub(conf, Arrays.asList(conf.getMyOperation()),
+			((CompositeOperation) conf.getTheirOperation()).getSubOperations());
 	}
 
 	private VisualConflict createReferenceConflict(ConflictBucket conf) {
@@ -332,25 +330,25 @@ public class DecisionManager {
 	private VisualConflict createMultiMultiConflict(ConflictBucket conf) {
 		if (((MultiReferenceOperation) conf.getMyOperation()).isAdd()) {
 			return new MultiReferenceConflict(conf, this, true);
-		} else {
-			return new MultiReferenceConflict(conf, this, false);
 		}
+
+		return new MultiReferenceConflict(conf, this, false);
 	}
 
 	private VisualConflict createDeleteOtherConflict(ConflictBucket conf) {
 		if (isDelete(conf.getMyOperation())) {
 			return new DeletionConflict(conf, true, this);
-		} else {
-			return new DeletionConflict(conf, false, this);
 		}
+
+		return new DeletionConflict(conf, false, this);
 	}
 
 	private VisualConflict createCompositeConflict(ConflictBucket conf) {
 		if (isComposite(conf.getMyOperation())) {
 			return new CompositeConflict(conf, this, true);
-		} else {
-			return new CompositeConflict(conf, this, false);
 		}
+
+		return new CompositeConflict(conf, this, false);
 	}
 
 	/**
@@ -381,7 +379,7 @@ public class DecisionManager {
 
 	/**
 	 * If all conflicts are resolved this method will generate the resulting
-	 * operations from the conflicts. Then call {@link #getAcceptedMine()} and {@link #getRejectedTheirs()}.
+	 * operations from the conflicts.
 	 */
 	public void calcResult() {
 		if (!isResolved()) {

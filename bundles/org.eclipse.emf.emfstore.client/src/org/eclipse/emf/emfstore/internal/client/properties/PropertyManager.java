@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * haunolder
- * emueller
+ * Franziska Haunolder, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.properties;
 
@@ -55,8 +54,8 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 public final class PropertyManager {
 
 	private final ProjectSpaceImpl projectSpace;
-	private Map<String, EMFStoreProperty> sharedProperties;
-	private Map<String, EMFStoreProperty> localProperties;
+	private final Map<String, EMFStoreProperty> sharedProperties;
+	private final Map<String, EMFStoreProperty> localProperties;
 
 	/**
 	 * PropertyManager constructor.
@@ -67,8 +66,8 @@ public final class PropertyManager {
 	 **/
 	public PropertyManager(ProjectSpace projectSpace) {
 		this.projectSpace = (ProjectSpaceImpl) projectSpace;
-		this.localProperties = createMap(EMFStorePropertyType.LOCAL);
-		this.sharedProperties = createMap(EMFStorePropertyType.SHARED);
+		localProperties = createMap(EMFStorePropertyType.LOCAL);
+		sharedProperties = createMap(EMFStorePropertyType.SHARED);
 	}
 
 	/**
@@ -104,7 +103,7 @@ public final class PropertyManager {
 	 *            the value of the local property
 	 **/
 	public void setLocalStringProperty(String propertyName, String value) {
-		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+		final PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
 		propertyValue.setValue(value);
 		setLocalProperty(propertyName, propertyValue);
@@ -129,7 +128,7 @@ public final class PropertyManager {
 	 * @return the string value if it exists, otherwise <code>null</code>
 	 **/
 	public String getLocalStringProperty(String propertyName) {
-		EMFStoreProperty property = localProperties.get(propertyName);
+		final EMFStoreProperty property = localProperties.get(propertyName);
 		if (property == null || property.getValue() == null) {
 			return null;
 		}
@@ -156,10 +155,9 @@ public final class PropertyManager {
 	 * @param string
 	 *            the string value that should be set
 	 * 
-	 * @see this{@link #synchronizeSharedProperties()}
 	 **/
 	public void setSharedStringProperty(String propertyName, String string) {
-		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+		final PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
 		propertyValue.setValue(string);
 		setSharedProperty(propertyName, propertyValue, false);
@@ -173,10 +171,9 @@ public final class PropertyManager {
 	 * @param string
 	 *            the string value that should be set
 	 * 
-	 * @see this{@link #synchronizeSharedProperties()}
 	 **/
 	public void setSharedVersionedStringProperty(String propertyName, String string) {
-		PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+		final PropertyStringValue propertyValue = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createPropertyStringValue();
 		propertyValue.setValue(string);
 		setSharedProperty(propertyName, propertyValue, true);
@@ -199,12 +196,12 @@ public final class PropertyManager {
 		if (prop == null) {
 			prop = createProperty(propertyName, value, isVersioned);
 			prop.setType(EMFStorePropertyType.SHARED);
-			this.projectSpace.getProperties().add(prop);
+			projectSpace.getProperties().add(prop);
 		} else {
 			prop.setValue(value);
 		}
 
-		this.projectSpace.getChangedSharedProperties().add(prop);
+		projectSpace.getChangedSharedProperties().add(prop);
 		projectSpace.saveProjectSpaceOnly();
 	}
 
@@ -236,14 +233,14 @@ public final class PropertyManager {
 		if (prop == null) {
 			prop = createProperty(property.getKey(), property.getValue(), property.getVersion() != 0);
 			prop.setType(EMFStorePropertyType.SHARED);
-			this.projectSpace.getProperties().add(prop);
+			projectSpace.getProperties().add(prop);
 		} else {
 			prop.setValue(property.getValue());
 		}
 
 		prop.setVersion(property.getVersion());
 
-		this.sharedProperties.put(property.getKey(), prop);
+		sharedProperties.put(property.getKey(), prop);
 		projectSpace.saveProjectSpaceOnly();
 	}
 
@@ -266,7 +263,7 @@ public final class PropertyManager {
 	 * @return the string value if it exists, otherwise <code>null</code>
 	 **/
 	public String getSharedStringProperty(String propertyName) {
-		EMFStoreProperty property = sharedProperties.get(propertyName);
+		final EMFStoreProperty property = sharedProperties.get(propertyName);
 		if (property == null || property.getValue() == null) {
 			return null;
 		}
@@ -297,26 +294,26 @@ public final class PropertyManager {
 
 		new AccessControlHelper(projectSpace.getUsersession()).checkWriteAccess(projectSpace.getProjectId());
 
-		List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>(
+		final List<EMFStoreProperty> changedProperties = new ArrayList<EMFStoreProperty>(
 			projectSpace.getChangedSharedProperties());
 
-		List<EMFStoreProperty> rejectedProperties = ESWorkspaceProviderImpl
+		final List<EMFStoreProperty> rejectedProperties = ESWorkspaceProviderImpl
 			.getInstance()
 			.getConnectionManager()
-			.setEMFProperties(this.projectSpace.getUsersession().getSessionId(), changedProperties,
-				this.projectSpace.getProjectId());
+			.setEMFProperties(projectSpace.getUsersession().getSessionId(), changedProperties,
+				projectSpace.getProjectId());
 
 		// setEMFProperties returns us a list of properties as found one the
 		// server,
 		// i.e. we have to deal with different object identities
-		List<EMFStoreProperty> nonRejectedProperties = filterNonRejected(changedProperties, rejectedProperties);
+		final List<EMFStoreProperty> nonRejectedProperties = filterNonRejected(changedProperties, rejectedProperties);
 		projectSpace.getChangedSharedProperties().removeAll(nonRejectedProperties);
 
 		// update properties to reflect current state on server
-		List<EMFStoreProperty> sharedProperties = ESWorkspaceProviderImpl.getInstance().getConnectionManager()
-			.getEMFProperties(this.projectSpace.getUsersession().getSessionId(), this.projectSpace.getProjectId());
+		final List<EMFStoreProperty> sharedProperties = ESWorkspaceProviderImpl.getInstance().getConnectionManager()
+			.getEMFProperties(projectSpace.getUsersession().getSessionId(), projectSpace.getProjectId());
 
-		for (EMFStoreProperty prop : sharedProperties) {
+		for (final EMFStoreProperty prop : sharedProperties) {
 			updateProperty(prop);
 		}
 
@@ -337,13 +334,13 @@ public final class PropertyManager {
 	 */
 	private List<EMFStoreProperty> filterNonRejected(List<EMFStoreProperty> changedProperties,
 		List<EMFStoreProperty> rejectedProperties) {
-		List<EMFStoreProperty> result = new ArrayList<EMFStoreProperty>();
+		final List<EMFStoreProperty> result = new ArrayList<EMFStoreProperty>();
 
-		for (EMFStoreProperty changed : changedProperties) {
+		for (final EMFStoreProperty changed : changedProperties) {
 
 			boolean isNotRejected = true;
 
-			for (EMFStoreProperty rejected : rejectedProperties) {
+			for (final EMFStoreProperty rejected : rejectedProperties) {
 				if (changed.getKey().equals(rejected.getKey())) {
 					isNotRejected = false;
 					break;
@@ -368,10 +365,10 @@ public final class PropertyManager {
 	 *            be contained in the map
 	 */
 	private Map<String, EMFStoreProperty> createMap(EMFStorePropertyType type) {
-		Map<String, EMFStoreProperty> map = new LinkedHashMap<String, EMFStoreProperty>();
-		EList<EMFStoreProperty> properties = this.projectSpace.getProperties();
+		final Map<String, EMFStoreProperty> map = new LinkedHashMap<String, EMFStoreProperty>();
+		final EList<EMFStoreProperty> properties = projectSpace.getProperties();
 
-		for (EMFStoreProperty prop : properties) {
+		for (final EMFStoreProperty prop : properties) {
 			if (prop.getType() == type) {
 				map.put(prop.getKey(), prop);
 			}
@@ -390,7 +387,7 @@ public final class PropertyManager {
 	 * @return the newly created property
 	 */
 	private EMFStoreProperty createProperty(String key, EObject value, boolean isVersioned) {
-		EMFStoreProperty prop = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
+		final EMFStoreProperty prop = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
 			.createEMFStoreProperty();
 		prop.setKey(key);
 		prop.setValue(value);
@@ -421,7 +418,7 @@ public final class PropertyManager {
 
 		if (property == null) {
 			// actually we should never get here
-			for (EMFStoreProperty p : projectSpace.getProperties()) {
+			for (final EMFStoreProperty p : projectSpace.getProperties()) {
 				if (p.getKey().equals(propertyName)) {
 					property = p;
 				}

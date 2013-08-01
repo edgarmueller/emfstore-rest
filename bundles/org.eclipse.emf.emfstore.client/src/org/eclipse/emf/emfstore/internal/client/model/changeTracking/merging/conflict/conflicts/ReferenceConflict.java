@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
@@ -35,33 +35,39 @@ public class ReferenceConflict extends VisualConflict {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param conflict underlying conflict, {@link MultiReferenceConflict} or {@link SingleReferenceConflict}
-	 * @param conflictBucket the conflict
-	 * @param decisionManager decisionmanager
+	 * @param underlyingSingleConflict
+	 *            the underlying conflict, {@link MultiReferenceConflict} or {@link SingleReferenceConflict}
+	 * @param conflictBucket
+	 *            the conflict bucket
+	 * @param decisionManager
+	 *            the decision manager
 	 */
-	public ReferenceConflict(boolean underlyingSingleConflict, ConflictBucket conf, DecisionManager decisionManager) {
-		super(conf, decisionManager, true, false);
+	public ReferenceConflict(boolean underlyingSingleConflict, ConflictBucket conflictBucket,
+		DecisionManager decisionManager) {
+		super(conflictBucket, decisionManager, true, false);
 		if (underlyingSingleConflict) {
-			this.conflict = new SingleReferenceConflict(conf, conf.getMyOperation(), conf.getTheirOperation(),
+			conflict = new SingleReferenceConflict(conflictBucket, conflictBucket.getMyOperation(),
+				conflictBucket.getTheirOperation(),
 				decisionManager);
 		}
 		else {
-			this.conflict = createMultiMultiConflict(conf, conf.getMyOperation(), conf.getTheirOperation(),
+			conflict = createMultiMultiConflict(conflictBucket, conflictBucket.getMyOperation(),
+				conflictBucket.getTheirOperation(),
 				decisionManager);
-			this.setLeftIsMy(((MultiReferenceOperation) conf.getMyOperation()).isAdd());
+			setLeftIsMy(((MultiReferenceOperation) conflictBucket.getMyOperation()).isAdd());
 
 		}
 		init();
 	}
 
 	private VisualConflict createMultiMultiConflict(ConflictBucket conflictBucket, AbstractOperation my,
-		AbstractOperation their,
-		DecisionManager decisionManager) {
+		AbstractOperation their, DecisionManager decisionManager) {
+
 		if (((MultiReferenceOperation) my).isAdd()) {
 			return new MultiReferenceConflict(conflictBucket, my, their, decisionManager, true);
-		} else {
-			return new MultiReferenceConflict(conflictBucket, their, my, decisionManager, false);
 		}
+
+		return new MultiReferenceConflict(conflictBucket, their, my, decisionManager, false);
 	}
 
 	/**
@@ -85,7 +91,7 @@ public class ReferenceConflict extends VisualConflict {
 	 */
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {
-		for (ConflictOption option : conflict.getOptions()) {
+		for (final ConflictOption option : conflict.getOptions()) {
 			if (option.getType() == OptionType.MyOperation) {
 				option.addOperations(getLeftOperations());
 			} else if (option.getType() == OptionType.TheirOperation) {

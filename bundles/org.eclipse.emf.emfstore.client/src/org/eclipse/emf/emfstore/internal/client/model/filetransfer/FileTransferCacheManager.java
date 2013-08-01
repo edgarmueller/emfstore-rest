@@ -7,13 +7,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * jfinis
+ * Jan Finis - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.emf.emfstore.internal.client.configuration.FileInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
@@ -30,7 +31,7 @@ import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 public class FileTransferCacheManager {
 
 	/**
-	 * tmp folder for file uploads to server.
+	 * Temporary folder for file uploads to server.
 	 */
 	public static final String TEMP_FOLDER = "tmp";
 
@@ -53,17 +54,17 @@ public class FileTransferCacheManager {
 	/**
 	 * The associated project space.
 	 */
-	private ProjectSpace projectSpace;
+	private final ProjectSpace projectSpace;
 
 	/**
 	 * The cache folder, constructed from the identifier of the project space.
 	 */
-	private File cacheFolder;
+	private final File cacheFolder;
 
 	/**
 	 * The temp folder is a folder where unfinished file downloads are stored.
 	 */
-	private File tempCacheFolder;
+	private final File tempCacheFolder;
 
 	/**
 	 * Default constructor for a specific project space.
@@ -72,9 +73,9 @@ public class FileTransferCacheManager {
 	 *            the project space to which this cache belongs.
 	 */
 	public FileTransferCacheManager(ProjectSpace projectSpaceImpl) {
-		this.projectSpace = projectSpaceImpl;
-		this.cacheFolder = new File(getCacheFolder(projectSpace));
-		this.tempCacheFolder = new File(cacheFolder, "temp");
+		projectSpace = projectSpaceImpl;
+		cacheFolder = new File(getCacheFolder(projectSpace));
+		tempCacheFolder = new File(cacheFolder, "temp");
 		mkdirs();
 	}
 
@@ -85,8 +86,9 @@ public class FileTransferCacheManager {
 	 * @return the name of the cache folder
 	 */
 	public static String getCacheFolder(ProjectSpace projectSpace) {
+		Configuration.getFileInfo();
 		return Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().PROJECT_SPACE_DIR_PREFIX
+			+ FileInfo.PROJECT_SPACE_DIR_PREFIX
 			+ projectSpace.getIdentifier()
 			+ File.separatorChar
 			+ "files" + File.separatorChar;
@@ -102,7 +104,7 @@ public class FileTransferCacheManager {
 	 * @return if the file is present in the cache
 	 */
 	public boolean hasCachedFile(FileIdentifier identifier) {
-		File f = getFileFromId(cacheFolder, identifier);
+		final File f = getFileFromId(cacheFolder, identifier);
 		return f.exists();
 	}
 
@@ -117,7 +119,7 @@ public class FileTransferCacheManager {
 	 *             if the file is not present in the cache
 	 */
 	public File getCachedFile(FileIdentifier identifier) throws FileTransferException {
-		File f = getFileFromId(cacheFolder, identifier);
+		final File f = getFileFromId(cacheFolder, identifier);
 		if (!f.exists()) {
 			throw new FileTransferException("The file with the id " + identifier + " is not in the cache");
 		}
@@ -138,7 +140,7 @@ public class FileTransferCacheManager {
 	 */
 	public File cacheFile(File input, FileIdentifier id) throws IOException {
 		mkdirs();
-		File destination = new File(cacheFolder, id.getIdentifier());
+		final File destination = new File(cacheFolder, id.getIdentifier());
 		FileUtil.copyFile(input, destination);
 		return destination;
 	}
@@ -155,13 +157,13 @@ public class FileTransferCacheManager {
 	 */
 	public File createTempFile(FileIdentifier id) throws FileTransferException {
 		mkdirs();
-		File cacheFile = getFileFromId(tempCacheFolder, id);
+		final File cacheFile = getFileFromId(tempCacheFolder, id);
 		if (cacheFile.exists()) {
 			cacheFile.delete();
 		}
 		try {
 			cacheFile.createNewFile();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new FileTransferException("Could not create temporary file");
 		}
 		return cacheFile;
@@ -184,8 +186,8 @@ public class FileTransferCacheManager {
 	 */
 	public File moveTempFileToCache(FileIdentifier id) throws FileTransferException {
 		mkdirs();
-		File cacheFile = getFileFromId(cacheFolder, id);
-		File tmpFile = getFileFromId(tempCacheFolder, id);
+		final File cacheFile = getFileFromId(cacheFolder, id);
+		final File tmpFile = getFileFromId(tempCacheFolder, id);
 		if (!tmpFile.exists()) {
 			throw new FileTransferException(
 				"Could not move temp file to cache folder. The file does not exist in the temp folder. FileId: "
@@ -233,7 +235,7 @@ public class FileTransferCacheManager {
 	 * @return true iff the file was deleted successfully
 	 */
 	public boolean removeCachedFile(FileIdentifier fileIdentifier) {
-		File toRemove = getFileFromId(cacheFolder, fileIdentifier);
+		final File toRemove = getFileFromId(cacheFolder, fileIdentifier);
 		if (toRemove.exists()) {
 			return toRemove.delete();
 		}

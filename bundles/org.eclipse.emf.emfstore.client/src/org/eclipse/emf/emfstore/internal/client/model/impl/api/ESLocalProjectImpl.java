@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
@@ -71,7 +71,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
  * Mapping between {@link ESLocalProject} and {@link ProjectSpace}.
  * </p>
  * <p>
- * All methods except {@link this#getModelElements()} are wrapped in commands by default.
+ * All methods except {@code getModelElements()} are wrapped in commands by default.
  * </p>
  * 
  * @author emueller
@@ -374,7 +374,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#commit(org.eclipse.emf.emfstore.server.model.ESLogMessage,
+	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#commit(java.lang.String,
 	 *      org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ESPrimaryVersionSpec commit(final String logMessage, final ESCommitCallback callback,
@@ -403,8 +403,8 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#commitToBranch(org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec,
-	 *      org.eclipse.emf.emfstore.server.model.ESLogMessage,
-	 *      org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback, org.eclipse.core.runtime.IProgressMonitor)
+	 *      java.lang.String, org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ESPrimaryVersionSpec commitToBranch(final ESBranchVersionSpec branch, final String logMessage,
 		final ESCommitCallback callback, final IProgressMonitor monitor) throws InvalidVersionSpecException,
@@ -487,8 +487,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#merge(org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec,
 	 *      org.eclipse.emf.emfstore.client.ESChangeConflict,
 	 *      org.eclipse.emf.emfstore.client.changetracking.merging.ConflictResolver,
-	 *      org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 *      org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	// public boolean merge(ESPrimaryVersionSpec target, final ESChangeConflict changeConflict,
 	// final ESConflictResolver conflictResolver, final ESUpdateCallback callback, final IProgressMonitor monitor)

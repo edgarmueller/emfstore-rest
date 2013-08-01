@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
- * Edgar Mueller
+ * Maximilian Koegel, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -41,9 +40,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.sema
 public class OperationManager implements OperationRecorderListener, ESDisposable, CommandObserver,
 	IdEObjectCollectionChangeObserver {
 
-	private OperationRecorder operationRecorder;
-	private List<OperationObserver> operationListeners;
-	private ProjectSpace projectSpace;
+	private final OperationRecorder operationRecorder;
+	private final List<OperationObserver> operationListeners;
+	private final ProjectSpace projectSpace;
 
 	/**
 	 * Constructor.
@@ -112,7 +111,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 *            the operation that has been undone
 	 */
 	public void notifyOperationUndone(AbstractOperation operation) {
-		for (OperationObserver operationListener : operationListeners) {
+		for (final OperationObserver operationListener : operationListeners) {
 			operationListener.operationUndone(operation);
 		}
 	}
@@ -124,7 +123,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 *            the operation
 	 */
 	void notifyOperationExecuted(AbstractOperation operation) {
-		for (OperationObserver operationListener : operationListeners) {
+		for (final OperationObserver operationListener : operationListeners) {
 			operationListener.operationExecuted(operation);
 		}
 	}
@@ -152,7 +151,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 *            the semantic operation that replaces the composite operation
 	 */
 	public void endCompositeOperation(SemanticCompositeOperation semanticCompositeOperation) {
-		List<AbstractOperation> operations = projectSpace.getOperations();
+		final List<AbstractOperation> operations = projectSpace.getOperations();
 		operations.remove(operations.size() - 1);
 		operations.add(semanticCompositeOperation);
 		endCompositeOperation();
@@ -190,7 +189,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		ESWorkspaceProviderImpl.getObserverBus().unregister(operationRecorder);
@@ -242,8 +241,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
-	 *      org.eclipse.emf.ecore.EObject)
+	 *      org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 		operationRecorder.notify(notification, collection, modelElement);

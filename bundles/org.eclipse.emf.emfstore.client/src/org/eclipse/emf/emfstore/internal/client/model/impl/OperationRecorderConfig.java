@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -139,6 +139,11 @@ public class OperationRecorderConfig {
 		isEmitOperationsUponCommandCompletion = shouldEmitOperationsUponCommandCompletion;
 	}
 
+	/**
+	 * Returns the operation modificator.
+	 * 
+	 * @return the operation modificator in use
+	 */
 	public ESOperationModifier getOperationModificator() {
 		return ExtensionRegistry.INSTANCE.get(
 			ESOperationModifier.ID,

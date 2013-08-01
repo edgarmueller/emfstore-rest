@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
@@ -43,7 +43,6 @@ import org.eclipse.emf.emfstore.server.model.ESGlobalProjectId;
  * Mapping between {@link ESServer} and {@link ServerInfo}.
  * 
  * @author emueller
- * 
  */
 public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> implements ESServer {
 
@@ -180,7 +179,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public ESRemoteProject createRemoteProject(final String projectName, IProgressMonitor monitor) throws ESException {
-		ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
+		final ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
 			.setServer(toInternalAPI()).execute();
 		return new ESRemoteProjectImpl(toInternalAPI(), projectInfo);
 	}
@@ -194,8 +193,8 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 */
 	public ESRemoteProject createRemoteProject(ESUsersession usersession, final String projectName,
 		final IProgressMonitor progressMonitor) throws ESException {
-		ESUsersessionImpl session = (ESUsersessionImpl) validateUsersession(usersession);
-		ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
+		final ESUsersessionImpl session = (ESUsersessionImpl) validateUsersession(usersession);
+		final ProjectInfo projectInfo = getCreateRemoteProjectServerCall(projectName)
 			.setUsersession(session.toInternalAPI()).execute();
 		return new ESRemoteProjectImpl(toInternalAPI(), projectInfo);
 	}
@@ -215,18 +214,18 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		usersession.setUsername(name);
 		usersession.setPassword(password);
 		usersession.setServerInfo(toInternalAPI());
-		ESUsersessionImpl esSession = usersession.toAPI();
+		final ESUsersessionImpl esSession = usersession.toAPI();
 
-		EMFStoreCommandWithException<ESException> cmd =
+		final EMFStoreCommandWithException<ESException> cmd =
 			new EMFStoreCommandWithException<ESException>() {
 				@Override
 				protected void doRun() {
 					workspace.toInternalAPI().getUsersessions().add(usersession);
 					try {
 						usersession.logIn();
-					} catch (AccessControlException e) {
+					} catch (final AccessControlException e) {
 						setException(e);
-					} catch (ESException e) {
+					} catch (final ESException e) {
 						setException(e);
 					}
 				}
@@ -235,11 +234,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		cmd.run(false);
 
 		if (cmd.hasException()) {
-			if (cmd.getException() instanceof AccessControlException) {
-				throw cmd.getException();
-			} else {
-				throw cmd.getException();
-			}
+			throw cmd.getException();
 		}
 
 		workspace.toInternalAPI().save();
@@ -248,9 +243,9 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	}
 
 	private List<ESRemoteProject> mapToRemoteProject(List<ProjectInfo> projectInfos) {
-		List<ESRemoteProject> remoteProjects = new ArrayList<ESRemoteProject>();
-		for (ProjectInfo projectInfo : projectInfos) {
-			ESRemoteProjectImpl wrapper = new ESRemoteProjectImpl(toInternalAPI(), projectInfo);
+		final List<ESRemoteProject> remoteProjects = new ArrayList<ESRemoteProject>();
+		for (final ProjectInfo projectInfo : projectInfos) {
+			final ESRemoteProjectImpl wrapper = new ESRemoteProjectImpl(toInternalAPI(), projectInfo);
 			remoteProjects.add(wrapper);
 		}
 		return remoteProjects;
@@ -263,7 +258,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 * @see org.eclipse.emf.emfstore.client.ESServer#getRemoteProjects()
 	 */
 	public List<ESRemoteProject> getRemoteProjects() throws ESException {
-		List<ProjectInfo> projectInfos = getRemoteProjectsServerCall().setServer(toInternalAPI()).execute();
+		final List<ProjectInfo> projectInfos = getRemoteProjectsServerCall().setServer(toInternalAPI()).execute();
 		return copy(mapToRemoteProject(projectInfos));
 	}
 
@@ -279,7 +274,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		final ServerCall<List<ProjectInfo>> serverCall = getRemoteProjectsServerCall()
 			.setUsersession(((ESUsersessionImpl) usersession).toInternalAPI());
 
-		List<ProjectInfo> projectInfos = RunESCommand.WithException
+		final List<ProjectInfo> projectInfos = RunESCommand.WithException
 			.runWithResult(ESException.class, new Callable<List<ProjectInfo>>() {
 				public List<ProjectInfo> call() throws Exception {
 					return serverCall.execute();
@@ -317,7 +312,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	}
 
 	private ESUsersession validateUsersession(ESUsersession usersession) throws ESException {
-		if (usersession == null || !this.equals(usersession.getServer())) {
+		if (usersession == null || !equals(usersession.getServer())) {
 			// TODO OTS custom exception
 			throw new ESException("Invalid usersession for given server.");
 		}
@@ -335,7 +330,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	 */
 	public ESRemoteProject getRemoteProject(final ESGlobalProjectId projectId) throws ESException {
 
-		for (ESRemoteProject remoteProject : getRemoteProjects()) {
+		for (final ESRemoteProject remoteProject : getRemoteProjects()) {
 			if (remoteProject.getGlobalProjectId().equals(projectId)) {
 				return remoteProject;
 			}
@@ -359,7 +354,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	public ESRemoteProject getRemoteProject(final ESUsersession usersession,
 		final ESGlobalProjectId projectId) throws ESException {
 
-		for (ESRemoteProject remoteProject : getRemoteProjects(usersession)) {
+		for (final ESRemoteProject remoteProject : getRemoteProjects(usersession)) {
 			if (remoteProject.getGlobalProjectId().equals(projectId)) {
 				return remoteProject;
 			}

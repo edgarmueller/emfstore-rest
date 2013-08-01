@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
- * Edgar Mueller
+ * Maximilian Koegel, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -88,20 +87,20 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	private EMFStoreCommandStack emfStoreCommandStack;
 
 	private List<AbstractOperation> operations;
-	private List<OperationRecorderListener> observers;
-	private RemovedElementsCache removedElementsCache;
+	private final List<OperationRecorderListener> observers;
+	private final RemovedElementsCache removedElementsCache;
 
-	private NotificationToOperationConverter converter;
+	private final NotificationToOperationConverter converter;
 	private NotificationRecorder notificationRecorder;
 	private CompositeOperation compositeOperation;
 
-	private ProjectSpaceBase projectSpace;
-	private IdEObjectCollectionImpl collection;
+	private final ProjectSpaceBase projectSpace;
+	private final IdEObjectCollectionImpl collection;
 
 	private boolean isRecording;
 	private boolean commandIsRunning;
 
-	private OperationRecorderConfig config;
+	private final OperationRecorderConfig config;
 
 	/**
 	 * Constructor.
@@ -112,7 +111,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	// TODO: provide ext. point for rollBackInCaseOfCommandFailure
 	public OperationRecorder(ProjectSpaceBase projectSpace) {
 		this.projectSpace = projectSpace;
-		this.collection = (IdEObjectCollectionImpl) projectSpace.getProject();
+		collection = (IdEObjectCollectionImpl) projectSpace.getProject();
 
 		operations = new ArrayList<AbstractOperation>();
 		observers = new ArrayList<OperationRecorderListener>();
@@ -128,7 +127,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 * @return the list of cleared operations
 	 */
 	public List<AbstractOperation> clearOperations() {
-		List<AbstractOperation> ops = new ArrayList<AbstractOperation>(operations);
+		final List<AbstractOperation> ops = new ArrayList<AbstractOperation>(operations);
 		operations.clear();
 		return ops;
 	}
@@ -155,7 +154,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.common.model.IdEObjectCollection,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void modelElementAdded(IdEObjectCollection project, EObject modelElement) {
@@ -174,26 +173,26 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESPostCreationObserver.class).onCreation(modelElement);
 		startChangeRecording();
 
-		Set<EObject> allModelElements = new LinkedHashSet<EObject>();
+		final Set<EObject> allModelElements = new LinkedHashSet<EObject>();
 		allModelElements.add(modelElement);
 		allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
 
 		// collect out-going cross-reference for containment tree of modelElement
-		List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
+		final List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(collection,
 			allModelElements);
 
 		// collect in-going cross-reference for containment tree of modelElement
-		List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
+		final List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
 			allModelElements);
 		crossReferences.addAll(ingoingCrossReferences);
 
 		// clean up already existing references when collection already contained the object
-		List<SettingWithReferencedElement> savedSettings = removedElementsCache
+		final List<SettingWithReferencedElement> savedSettings = removedElementsCache
 			.getRemovedElementToReferenceSetting(modelElement);
 		if (savedSettings != null) {
-			List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
-			for (SettingWithReferencedElement setting : savedSettings) {
-				for (SettingWithReferencedElement newSetting : crossReferences) {
+			final List<SettingWithReferencedElement> toRemove = new ArrayList<SettingWithReferencedElement>();
+			for (final SettingWithReferencedElement setting : savedSettings) {
+				for (final SettingWithReferencedElement newSetting : crossReferences) {
 					if (setting.getSetting().getEStructuralFeature()
 						.equals(newSetting.getSetting().getEStructuralFeature())
 						&& setting.getReferencedElement().equals(newSetting.getReferencedElement())) {
@@ -206,7 +205,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		}
 
 		// collect recorded operations and add to create operation
-		List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
+		final List<ReferenceOperation> recordedOperations = generateCrossReferenceOperations(crossReferences);
 
 		List<AbstractOperation> resultingOperations;
 
@@ -214,12 +213,12 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		if (commandIsRunning && removedElementsCache.getRemovedElements().contains(modelElement)) {
 			resultingOperations = new ArrayList<AbstractOperation>(recordedOperations);
 		} else {
-			CreateDeleteOperation createDeleteOperation = createCreateDeleteOperation(modelElement, false);
+			final CreateDeleteOperation createDeleteOperation = createCreateDeleteOperation(modelElement, false);
 			createDeleteOperation.getSubOperations().addAll(recordedOperations);
 			resultingOperations = new ArrayList<AbstractOperation>();
 			resultingOperations.add(createDeleteOperation);
 		}
-		if (this.compositeOperation != null) {
+		if (compositeOperation != null) {
 			compositeOperation.getSubOperations().addAll(resultingOperations);
 			return;
 		}
@@ -236,23 +235,24 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private List<SettingWithReferencedElement> collectIngoingCrossReferences(IdEObjectCollection collection,
 		Set<EObject> allModelElements) {
-		List<SettingWithReferencedElement> settings = new ArrayList<SettingWithReferencedElement>();
-		for (EObject modelElement : allModelElements) {
-			Collection<Setting> inverseReferences = projectSpace.findInverseCrossReferences(modelElement);
+		final List<SettingWithReferencedElement> settings = new ArrayList<SettingWithReferencedElement>();
+		for (final EObject modelElement : allModelElements) {
+			final Collection<Setting> inverseReferences = projectSpace.findInverseCrossReferences(modelElement);
 
-			for (Setting setting : inverseReferences) {
+			for (final Setting setting : inverseReferences) {
 				if (!ModelUtil.shouldBeCollected(collection, allModelElements, setting.getEObject())) {
 					continue;
 				}
-				EReference reference = (EReference) setting.getEStructuralFeature();
-				EClassifier eType = reference.getEType();
+				final EReference reference = (EReference) setting.getEStructuralFeature();
+				final EClassifier eType = reference.getEType();
 
 				if (reference.isContainer() || reference.isContainment() || !reference.isChangeable()
-					|| (!(eType instanceof EClass))) {
+					|| !(eType instanceof EClass)) {
 					continue;
 				}
 
-				SettingWithReferencedElement settingWithReferencedElement = new SettingWithReferencedElement(setting,
+				final SettingWithReferencedElement settingWithReferencedElement = new SettingWithReferencedElement(
+					setting,
 					modelElement);
 				settings.add(settingWithReferencedElement);
 			}
@@ -263,10 +263,10 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private List<ReferenceOperation> generateCrossReferenceOperations(
 		Collection<SettingWithReferencedElement> crossReferences) {
-		List<ReferenceOperation> result = new ArrayList<ReferenceOperation>();
+		final List<ReferenceOperation> result = new ArrayList<ReferenceOperation>();
 
-		for (SettingWithReferencedElement setting : crossReferences) {
-			EObject referencedElement = setting.getReferencedElement();
+		for (final SettingWithReferencedElement setting : crossReferences) {
+			final EObject referencedElement = setting.getReferencedElement();
 
 			// fetch ID of referenced element
 			ModelElementId newModelElementId = collection.getModelElementId(referencedElement);
@@ -274,17 +274,19 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 				newModelElementId = collection.getDeletedModelElementId(referencedElement);
 			}
 
-			EObject eObject = setting.getSetting().getEObject();
-			EReference reference = (EReference) setting.getSetting().getEStructuralFeature();
+			final EObject eObject = setting.getSetting().getEObject();
+			final EReference reference = (EReference) setting.getSetting().getEStructuralFeature();
 
 			if (setting.getSetting().getEStructuralFeature().isMany()) {
-				int position = ((List<?>) eObject.eGet(reference)).indexOf(referencedElement);
-				MultiReferenceOperation multiRefOp = NotificationToOperationConverter.createMultiReferenceOperation(
-					collection, eObject, reference, Arrays.asList(referencedElement), true, position);
+				final int position = ((List<?>) eObject.eGet(reference)).indexOf(referencedElement);
+				final MultiReferenceOperation multiRefOp = NotificationToOperationConverter
+					.createMultiReferenceOperation(
+						collection, eObject, reference, Arrays.asList(referencedElement), true, position);
 				result.add(multiRefOp);
 			} else {
-				SingleReferenceOperation singleRefOp = NotificationToOperationConverter.createSingleReferenceOperation(
-					collection, null, newModelElementId, reference, eObject);
+				final SingleReferenceOperation singleRefOp = NotificationToOperationConverter
+					.createSingleReferenceOperation(
+						collection, null, newModelElementId, reference, eObject);
 				result.add(singleRefOp);
 			}
 		}
@@ -298,7 +300,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 			return;
 		}
 
-		for (OperationRecorderListener observer : observers) {
+		for (final OperationRecorderListener observer : observers) {
 			observer.operationsRecorded(operations);
 		}
 	}
@@ -343,31 +345,30 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 * @generated NOT
 	 */
 	public void stopChangeRecording() {
-		this.isRecording = false;
+		isRecording = false;
 	}
 
 	private List<AbstractOperation> recordingFinished() {
 
 		// create operations from "valid" notifications, log invalid ones,
 		// accumulate the ops
-		List<AbstractOperation> ops = new LinkedList<AbstractOperation>();
-		List<NotificationInfo> rec = notificationRecorder.getRecording().asMutableList();
-		for (NotificationInfo n : rec) {
+		final List<AbstractOperation> ops = new LinkedList<AbstractOperation>();
+		final List<NotificationInfo> rec = notificationRecorder.getRecording().asMutableList();
+		for (final NotificationInfo n : rec) {
 			if (!n.isValid()) {
 				WorkspaceUtil.log("INVALID NOTIFICATION MESSAGE DETECTED: " + n.getValidationMessage(), null, 0);
 				continue;
+			}
+			final AbstractOperation op = converter.convert(n);
+			if (op != null) {
+				ops.add(op);
 			} else {
-				AbstractOperation op = converter.convert(n);
-				if (op != null) {
-					ops.add(op);
-				} else {
-					// we should never get here, this would indicate a
-					// consistency error,
-					// n.isValid() should have been false
-					WorkspaceUtil.log("INVALID NOTIFICATION CLASSIFICATION,"
-						+ " notification is valid, but cannot be converted to an operation: " + n.toString(), null, 0);
-					continue;
-				}
+				// we should never get here, this would indicate a
+				// consistency error,
+				// n.isValid() should have been false
+				WorkspaceUtil.log("INVALID NOTIFICATION CLASSIFICATION,"
+					+ " notification is valid, but cannot be converted to an operation: " + n.toString(), null, 0);
+				continue;
 			}
 		}
 
@@ -393,30 +394,31 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 * @return the operation
 	 */
 	private CreateDeleteOperation createCreateDeleteOperation(EObject modelElement, boolean delete) {
-		CreateDeleteOperation createDeleteOperation = OperationsFactory.eINSTANCE.createCreateDeleteOperation();
+		final CreateDeleteOperation createDeleteOperation = OperationsFactory.eINSTANCE.createCreateDeleteOperation();
 		createDeleteOperation.setDelete(delete);
-		EObject element = modelElement;
+		final EObject element = modelElement;
 
-		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(element, false);
+		final List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(element, false);
 		allContainedModelElements.add(element);
 
-		Copier copier = new Copier(true, false);
-		EObject copiedElement = copier.copy(element);
+		final Copier copier = new Copier(true, false);
+		final EObject copiedElement = copier.copy(element);
 		copier.copyReferences();
 
-		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
+		final List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(
+			copiedElement,
 			false);
 		copiedAllContainedModelElements.add(copiedElement);
 
 		for (int i = 0; i < allContainedModelElements.size(); i++) {
-			EObject child = allContainedModelElements.get(i);
+			final EObject child = allContainedModelElements.get(i);
 
 			if (ModelUtil.isIgnoredDatatype(child)) {
 				continue;
 			}
 
-			EObject copiedChild = copiedAllContainedModelElements.get(i);
-			ModelElementId childId = collection.getModelElementId(child);
+			final EObject copiedChild = copiedAllContainedModelElements.get(i);
+			final ModelElementId childId = collection.getModelElementId(child);
 
 			((CreateDeleteOperationImpl) createDeleteOperation).getEObjectToIdMap().put(copiedChild, childId);
 		}
@@ -429,10 +431,11 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.ProjectChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.common.model.Project,
-	 *      org.eclipse.emf.emfstore.common.model.ModelElement)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
+	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void modelElementRemoved(IdEObjectCollection project, EObject modelElement) {
 		if (isRecording) {
@@ -440,12 +443,13 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 				handleElementDelete(modelElement);
 				collection.clearAllocatedCaches();
 			} else {
-				Set<EObject> allModelElements = new LinkedHashSet<EObject>();
+				final Set<EObject> allModelElements = new LinkedHashSet<EObject>();
 				allModelElements.add(modelElement);
 				allModelElements.addAll(ModelUtil.getAllContainedModelElements(modelElement, false));
-				List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(
+				final List<SettingWithReferencedElement> crossReferences = ModelUtil.collectOutgoingCrossReferences(
 					collection, allModelElements);
-				List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(collection,
+				final List<SettingWithReferencedElement> ingoingCrossReferences = collectIngoingCrossReferences(
+					collection,
 					allModelElements);
 				crossReferences.addAll(ingoingCrossReferences);
 
@@ -466,9 +470,9 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		// return;
 		// }
 
-		List<EObject> deletedElements = new ArrayList<EObject>();
+		final List<EObject> deletedElements = new ArrayList<EObject>();
 		for (int i = removedElementsCache.getRemovedElements().size() - 1; i >= 0; i--) {
-			EObject removedElement = removedElementsCache.getRemovedElements().get(i);
+			final EObject removedElement = removedElementsCache.getRemovedElements().get(i);
 			if (!collection.contains(removedElement)) {
 				if (!deletedElements.contains(removedElement)) {
 					deletedElements.add(0, removedElement);
@@ -486,15 +490,15 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		}
 
 		// add all cut elements to modelElements to guarantee a consistent state if it is allowed
-		Project project = projectSpace.getProject();
-		EList<EObject> cutElements = project.getCutElements();
+		final Project project = projectSpace.getProject();
+		final EList<EObject> cutElements = project.getCutElements();
 		if (config.isDenyAddCutElementsToModelElements() && cutElements.size() != 0) {
 			throw new IllegalStateException(
 				"It is not allowed to have cutelements at the end of the command."
 					+ " Remove them or use isDenyAddCutElementsToModelElements flag in the org.eclipse.emf.emfstore.client.recording.options extension point.");
 		}
 
-		for (EObject eObject : new ArrayList<EObject>(cutElements)) {
+		for (final EObject eObject : new ArrayList<EObject>(cutElements)) {
 			project.addModelElement(eObject);
 		}
 
@@ -518,9 +522,9 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private void deleteOutgoingCrossReferencesOfContainmentTree(Set<EObject> allEObjects) {
 		// delete all non containment cross references to other elments
-		for (EObject modelElement : allEObjects) {
-			for (EReference reference : modelElement.eClass().getEAllReferences()) {
-				EClassifier eType = reference.getEType();
+		for (final EObject modelElement : allEObjects) {
+			for (final EReference reference : modelElement.eClass().getEAllReferences()) {
+				final EClassifier eType = reference.getEType();
 
 				if (!(eType instanceof EClass)) {
 					continue;
@@ -541,16 +545,16 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 				// deleted
 				if (reference.isMany()) {
 					@SuppressWarnings("unchecked")
-					List<EObject> referencedElements = (List<EObject>) modelElement.eGet(reference);
-					List<EObject> referencesToRemove = new ArrayList<EObject>();
-					for (EObject referencedElement : referencedElements) {
+					final List<EObject> referencedElements = (List<EObject>) modelElement.eGet(reference);
+					final List<EObject> referencesToRemove = new ArrayList<EObject>();
+					for (final EObject referencedElement : referencedElements) {
 						if (!allEObjects.contains(referencedElement)) {
 							referencesToRemove.add(referencedElement);
 						}
 					}
 					referencedElements.removeAll(referencesToRemove);
 				} else {
-					EObject referencedElement = (EObject) modelElement.eGet(reference);
+					final EObject referencedElement = (EObject) modelElement.eGet(reference);
 					if (referencedElement != null && !allEObjects.contains(referencedElement)) {
 						modelElement.eSet(reference, null);
 					}
@@ -562,8 +566,8 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private void handleMapEntryDeletion(EObject modelElement, EClassifier eType, EReference reference,
 		Set<EObject> allEObjects) {
-		EClass mapEntryEClass = (EClass) eType;
-		EReference nonContainmentKeyReference = getNonContainmentKeyReference(mapEntryEClass);
+		final EClass mapEntryEClass = (EClass) eType;
+		final EReference nonContainmentKeyReference = getNonContainmentKeyReference(mapEntryEClass);
 
 		// key references seems to be containment, skip loop
 		if (nonContainmentKeyReference == null) {
@@ -571,14 +575,14 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		}
 
 		@SuppressWarnings("unchecked")
-		List<EObject> mapEntriesEList = (List<EObject>) modelElement.eGet(reference);
+		final List<EObject> mapEntriesEList = (List<EObject>) modelElement.eGet(reference);
 		boolean outgoingKeyReferenceFound = false;
 
 		// check key reference of all map entries if they reference one of the objects in the containment
 		// tree
-		for (EObject eObject : mapEntriesEList) {
+		for (final EObject eObject : mapEntriesEList) {
 
-			Object eGet = eObject.eGet(nonContainmentKeyReference);
+			final Object eGet = eObject.eGet(nonContainmentKeyReference);
 
 			if (!allEObjects.contains(eGet)) {
 				outgoingKeyReferenceFound = true;
@@ -593,7 +597,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 		// copy list before clearing reference
 		// TODO is this really the underlying list
-		List<EObject> mapEntries = new ArrayList<EObject>(mapEntriesEList);
+		final List<EObject> mapEntries = new ArrayList<EObject>(mapEntriesEList);
 
 		// the reference is a containment map feature and its referenced entries do have at least one
 		// non-containment key crossreference that goes to an element outside of
@@ -606,14 +610,14 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		// result in unresolved proxies
 		EcoreUtil.resolveAll(modelElement);
 		modelElement.eUnset(reference);
-		for (EObject mapEntry : mapEntries) {
+		for (final EObject mapEntry : mapEntries) {
 			handleElementDelete(mapEntry);
 		}
 
 	}
 
 	private EReference getNonContainmentKeyReference(EClass eClass) {
-		for (EReference eRef : eClass.getEReferences()) {
+		for (final EReference eRef : eClass.getEReferences()) {
 			if (eRef.getName().equals("key") && !eRef.isContainment()) {
 				return eRef;
 			} else if (eRef.getName().equals("key") && eRef.isContainment()) {
@@ -627,15 +631,15 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private void handleElementDelete(EObject deletedElement) {
 
-		Set<EObject> allContainedModelElementsSet = ModelUtil.getAllContainedModelElements(deletedElement, false);
+		final Set<EObject> allContainedModelElementsSet = ModelUtil.getAllContainedModelElements(deletedElement, false);
 		allContainedModelElementsSet.add(deletedElement);
 		deleteOutgoingCrossReferencesOfContainmentTree(allContainedModelElementsSet);
 
 		if (config.isCutOffIncomingCrossReferences()) {
 
-			for (EObject eObject : allContainedModelElementsSet) {
+			for (final EObject eObject : allContainedModelElementsSet) {
 				// delete incoming cross references
-				Collection<Setting> inverseReferences = projectSpace.findInverseCrossReferences(eObject);
+				final Collection<Setting> inverseReferences = projectSpace.findInverseCrossReferences(eObject);
 				ModelUtil.deleteIncomingCrossReferencesFromParent(inverseReferences, eObject);
 
 			}
@@ -645,14 +649,16 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 			return;
 		}
 
-		List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(deletedElement, false);
+		final List<EObject> allContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(deletedElement,
+			false);
 		allContainedModelElements.add(deletedElement);
-		EObject copiedElement = ModelUtil.clone(deletedElement);
-		List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(copiedElement,
+		final EObject copiedElement = ModelUtil.clone(deletedElement);
+		final List<EObject> copiedAllContainedModelElements = ModelUtil.getAllContainedModelElementsAsList(
+			copiedElement,
 			false);
 		copiedAllContainedModelElements.add(copiedElement);
 
-		CreateDeleteOperation deleteOperation = OperationsFactory.eINSTANCE.createCreateDeleteOperation();
+		final CreateDeleteOperation deleteOperation = OperationsFactory.eINSTANCE.createCreateDeleteOperation();
 		deleteOperation.setClientDate(new Date());
 		deleteOperation.setModelElement(copiedElement);
 
@@ -665,17 +671,17 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 		// sync IDs into Map
 		for (int i = 0; i < allContainedModelElements.size(); i++) {
-			EObject child = allContainedModelElements.get(i);
-			EObject copiedChild = copiedAllContainedModelElements.get(i);
-			ModelElementId childId = collection.getDeletedModelElementId(child);
+			final EObject child = allContainedModelElements.get(i);
+			final EObject copiedChild = copiedAllContainedModelElements.get(i);
+			final ModelElementId childId = collection.getDeletedModelElementId(child);
 			((CreateDeleteOperationImpl) deleteOperation).getEObjectToIdMap().put(copiedChild, childId);
 		}
 
 		deleteOperation.setDelete(true);
 
 		// extract all reference ops that belong to the delete
-		List<CompositeOperation> compositeOperationsToDelete = new ArrayList<CompositeOperation>();
-		List<ReferenceOperation> extractReferenceOperationsForDelete = extractReferenceOperationsForDelete(
+		final List<CompositeOperation> compositeOperationsToDelete = new ArrayList<CompositeOperation>();
+		final List<ReferenceOperation> extractReferenceOperationsForDelete = extractReferenceOperationsForDelete(
 			deletedElement, compositeOperationsToDelete);
 		deleteOperation.getSubOperations().addAll(extractReferenceOperationsForDelete);
 		operations.removeAll(compositeOperationsToDelete);
@@ -690,28 +696,28 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	@SuppressWarnings("unchecked")
 	private List<ReferenceOperation> extractReferenceOperationsForDelete(EObject deletedElement,
 		List<CompositeOperation> compositeOperationsToDelete) {
-		Set<ModelElementId> allDeletedElementsIds = new LinkedHashSet<ModelElementId>();
-		for (EObject child : ModelUtil.getAllContainedModelElements(deletedElement, false)) {
-			ModelElementId childId = collection.getDeletedModelElementId(child);
+		final Set<ModelElementId> allDeletedElementsIds = new LinkedHashSet<ModelElementId>();
+		for (final EObject child : ModelUtil.getAllContainedModelElements(deletedElement, false)) {
+			final ModelElementId childId = collection.getDeletedModelElementId(child);
 			allDeletedElementsIds.add(childId);
 		}
 		allDeletedElementsIds.add(collection.getDeletedModelElementId(deletedElement));
 
-		List<ReferenceOperation> referenceOperationsForDelete = new ArrayList<ReferenceOperation>();
-		List<AbstractOperation> newOperations = operations.subList(0, operations.size());
-		List<AbstractOperation> l = new ArrayList<AbstractOperation>();
+		final List<ReferenceOperation> referenceOperationsForDelete = new ArrayList<ReferenceOperation>();
+		final List<AbstractOperation> newOperations = operations.subList(0, operations.size());
+		final List<AbstractOperation> l = new ArrayList<AbstractOperation>();
 
 		for (int i = newOperations.size() - 1; i >= 0; i--) {
-			AbstractOperation operation = newOperations.get(i);
+			final AbstractOperation operation = newOperations.get(i);
 			if (belongsToDelete(operation, allDeletedElementsIds)) {
 				referenceOperationsForDelete.add(0, (ReferenceOperation) operation);
 				l.add(operation);
 				continue;
 			}
 			if (operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() != null) {
-				CompositeOperation compositeOperation = (CompositeOperation) operation;
+				final CompositeOperation compositeOperation = (CompositeOperation) operation;
 				boolean doesNotBelongToDelete = false;
-				for (AbstractOperation subOperation : compositeOperation.getSubOperations()) {
+				for (final AbstractOperation subOperation : compositeOperation.getSubOperations()) {
 					if (!belongsToDelete(subOperation, allDeletedElementsIds)) {
 						doesNotBelongToDelete = true;
 						break;
@@ -734,8 +740,8 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private boolean belongsToDelete(AbstractOperation operation, Set<ModelElementId> allDeletedElementsIds) {
 		if (operation instanceof ReferenceOperation) {
-			ReferenceOperation referenceOperation = (ReferenceOperation) operation;
-			Set<ModelElementId> allInvolvedModelElements = referenceOperation.getAllInvolvedModelElements();
+			final ReferenceOperation referenceOperation = (ReferenceOperation) operation;
+			final Set<ModelElementId> allInvolvedModelElements = referenceOperation.getAllInvolvedModelElements();
 			if (allInvolvedModelElements.removeAll(allDeletedElementsIds)) {
 				return isDestructorReferenceOperation(referenceOperation);
 			}
@@ -745,20 +751,21 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 	private boolean isDestructorReferenceOperation(ReferenceOperation referenceOperation) {
 		if (referenceOperation instanceof MultiReferenceOperation) {
-			MultiReferenceOperation multiReferenceOperation = (MultiReferenceOperation) referenceOperation;
+			final MultiReferenceOperation multiReferenceOperation = (MultiReferenceOperation) referenceOperation;
 			return !multiReferenceOperation.isAdd();
 		} else if (referenceOperation instanceof SingleReferenceOperation) {
-			SingleReferenceOperation singleReferenceOperation = (SingleReferenceOperation) referenceOperation;
+			final SingleReferenceOperation singleReferenceOperation = (SingleReferenceOperation) referenceOperation;
 			return singleReferenceOperation.getOldValue() != null && singleReferenceOperation.getNewValue() == null;
 		}
 		return false;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
-	 *      org.eclipse.core.runtime.OperationCanceledException)
+	 *      java.lang.Exception)
 	 */
 	public void commandFailed(Command command, Exception exception) {
 
@@ -812,7 +819,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 		}
 
 		compositeOperation = OperationsFactory.eINSTANCE.createCompositeOperation();
-		CompositeOperationHandle handle = new CompositeOperationHandle(this, compositeOperation);
+		final CompositeOperationHandle handle = new CompositeOperationHandle(this, compositeOperation);
 		notificationRecorder.newRecording();
 
 		return handle;
@@ -834,7 +841,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 */
 	public void endCompositeOperation() {
 		bufferOrRecordOperation(compositeOperation);
-		this.compositeOperation = null;
+		compositeOperation = null;
 		notificationRecorder.stopRecording();
 	}
 
@@ -855,8 +862,8 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
+	 *      org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
 	 */
 	public void notify(Notification notification, IdEObjectCollection collection, EObject modelElement) {
 
@@ -875,7 +882,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 
 		if (notificationRecorder.isRecordingComplete()) {
 
-			List<AbstractOperation> ops = recordingFinished();
+			final List<AbstractOperation> ops = recordingFinished();
 
 			// add resulting operations as sub-operations to composite or top-level operations
 			if (compositeOperation != null) {
@@ -892,7 +899,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	}
 
 	private CompositeOperation createCompositeOperation(List<AbstractOperation> ops) {
-		CompositeOperation op = OperationsFactory.eINSTANCE.createCompositeOperation();
+		final CompositeOperation op = OperationsFactory.eINSTANCE.createCompositeOperation();
 		op.getSubOperations().addAll(ops);
 		// set the last operation as the main one for natural composites
 		op.setMainOperation(ops.get(ops.size() - 1));
@@ -913,9 +920,10 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.common.model.IdEObjectCollection)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#collectionDeleted(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection)
 	 */
 	public void collectionDeleted(IdEObjectCollection collection) {
 		if (emfStoreCommandStack != null) {

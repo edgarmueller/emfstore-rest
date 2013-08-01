@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Wesendonk
- * koegel
+ * Otto von Wesendonk, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -33,16 +32,11 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * Implementation of the AdminBroker.
  * 
  * @author Wesendonk
- */
-/**
- * @author koegel
- */
-/**
  * @author koegel
  */
 public class AdminBrokerImpl implements AdminBroker {
 
-	private SessionId sessionId;
+	private final SessionId sessionId;
 
 	/**
 	 * Constructor.
@@ -57,9 +51,10 @@ public class AdminBrokerImpl implements AdminBroker {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#addParticipant(org.eclipse.emf.emfstore.internal.server.ProjectId,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#addParticipant(org.eclipse.emf.emfstore.internal.server.model.ProjectId,
 	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
 	 */
 	public void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws ESException {

@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * pfeifferc,jfinis
+ * Carl Peiffer, Jan Finis - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 
@@ -55,11 +55,11 @@ public abstract class FileTransferJob extends Job {
 	 */
 	protected FileTransferJob(FileTransferManager transferManager, FileTransferInformation fileInfo, String name) {
 		super(name);
-		this.fileInformation = fileInfo;
-		this.fileId = fileInfo.getFileIdentifier();
-		this.projectSpace = transferManager.getProjectSpace();
+		fileInformation = fileInfo;
+		fileId = fileInfo.getFileIdentifier();
+		projectSpace = transferManager.getProjectSpace();
 		this.transferManager = transferManager;
-		this.cache = transferManager.getCache();
+		cache = transferManager.getCache();
 	}
 
 	/**
@@ -68,25 +68,27 @@ public abstract class FileTransferJob extends Job {
 	 * @throws FileTransferException if there are any null values in the attributes
 	 */
 	protected void getConnectionAttributes() throws FileTransferException {
+
 		connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		projectId = projectSpace.getProjectId();
+
 		if (projectSpace.getUsersession() == null) {
 			throw new FileTransferException("Session ID is unknown. Please login first!");
-		} else {
-			new EMFStoreCommand() {
-				@Override
-				protected void doRun() {
-					sessionId = projectSpace.getUsersession().getSessionId();
-				}
-			}.run(false);
 		}
+
+		new EMFStoreCommand() {
+			@Override
+			protected void doRun() {
+				sessionId = projectSpace.getUsersession().getSessionId();
+			}
+		}.run(false);
 	}
 
 	/**
 	 * @param monitor monitor
 	 */
 	protected void setTotalWork(IProgressMonitor monitor) {
-		monitor.beginTask("Transfering ", (fileInformation.getFileSize() / FilePartitionerUtil.getChunkSize()));
+		monitor.beginTask("Transfering ", fileInformation.getFileSize() / FilePartitionerUtil.getChunkSize());
 	}
 
 	/**

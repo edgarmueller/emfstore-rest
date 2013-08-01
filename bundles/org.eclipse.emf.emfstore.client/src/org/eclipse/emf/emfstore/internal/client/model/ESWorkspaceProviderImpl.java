@@ -57,6 +57,7 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -73,11 +74,10 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 /**
  * Controller for workspaces. Workspace Manager is a singleton.
  * 
- * @author Maximilian Koegel
- * @generated NOT
+ * @author mkoegel
  */
 public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCommitObserver, ESUpdateObserver,
-	ESShareObserver, ESCheckoutObserver {
+	ESShareObserver, ESCheckoutObserver, ESDisposable {
 
 	private static ESWorkspaceProviderImpl instance;
 
@@ -157,7 +157,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
+	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
 		if (currentWorkspace != null) {
@@ -306,9 +306,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		// check if my container is a project space
 		if (ModelPackage.eINSTANCE.getProjectSpace().isInstance(project.eContainer())) {
 			return (ProjectSpace) project.eContainer();
-		} else {
-			throw new IllegalStateException("Project is not contained by any project space");
 		}
+
+		throw new IllegalStateException("Project is not contained by any project space");
 	}
 
 	/**
@@ -426,19 +426,18 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		final ESEditingDomainProvider domainProvider = getDomainProvider();
 		if (domainProvider != null) {
 			return domainProvider.getEditingDomain(resourceSet);
-		} else {
-
-			AdapterFactory adapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-			adapterFactory = new ComposedAdapterFactory(new AdapterFactory[] { adapterFactory,
-				new ReflectiveItemProviderAdapterFactory() });
-
-			final AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(adapterFactory,
-				new EMFStoreBasicCommandStack(), resourceSet);
-			resourceSet.eAdapters().add(new AdapterFactoryEditingDomain.EditingDomainProvider(domain));
-			return domain;
 		}
+
+		AdapterFactory adapterFactory = new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+		adapterFactory = new ComposedAdapterFactory(new AdapterFactory[] { adapterFactory,
+			new ReflectiveItemProviderAdapterFactory() });
+
+		final AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(adapterFactory,
+			new EMFStoreBasicCommandStack(), resourceSet);
+		resourceSet.eAdapters().add(new AdapterFactoryEditingDomain.EditingDomainProvider(domain));
+		return domain;
 	}
 
 	private ESEditingDomainProvider getDomainProvider() {

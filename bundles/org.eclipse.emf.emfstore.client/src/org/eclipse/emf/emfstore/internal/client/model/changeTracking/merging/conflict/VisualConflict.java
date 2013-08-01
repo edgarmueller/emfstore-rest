@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict;
 
@@ -27,15 +27,14 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation;
 
 /**
- * Main class representing a conflict. it offers all kind of convenience methods
- * and organizes the conflicts initialization. Read the constructor's
- * description for further implemenation details ( {@link #Conflict(List, List, DecisionManager)})
+ * Main class representing a conflict. It offers all kind of convenience methods
+ * and organizes the conflicts initialization.
  * 
  * @author wesendon
  */
 public abstract class VisualConflict extends Observable {
 
-	private DecisionManager decisionManager;
+	private final DecisionManager decisionManager;
 	private ArrayList<ConflictOption> options;
 	private ConflictOption solution;
 	private ConflictContext conflictContext;
@@ -46,11 +45,11 @@ public abstract class VisualConflict extends Observable {
 	 * 
 	 * @see #Conflict(List, List, DecisionManager)
 	 */
-	private Set<AbstractOperation> leftOperations;
-	private Set<AbstractOperation> rightOperations;
+	private final Set<AbstractOperation> leftOperations;
+	private final Set<AbstractOperation> rightOperations;
+	private final AbstractOperation rightOperation;
+	private final AbstractOperation leftOperation;
 	private boolean leftIsMy;
-	private AbstractOperation rightOperation;
-	private AbstractOperation leftOperation;
 	private ConflictBucket conflictBucket;
 
 	/**
@@ -75,21 +74,29 @@ public abstract class VisualConflict extends Observable {
 	 * Construct conflict from given specific left and right operation.
 	 * 
 	 * @param conflictBucket the underlying conflict
-	 * @param leftOperation the left operation
-	 * @param rightOperation the right operation
 	 * @param decisionManager the decision manager
+	 * @param leftIsMy true if left operation is my operation
+	 * @param init true if conflict should be initialized on construction
+	 */
+	public VisualConflict(ConflictBucket conflictBucket, DecisionManager decisionManager, boolean leftIsMy, boolean init) {
+		this(leftIsMy ? conflictBucket.getMyOperations() : conflictBucket.getTheirOperations(),
+			leftIsMy ? conflictBucket.getTheirOperations() : conflictBucket.getMyOperations(),
+			leftIsMy ? conflictBucket.getMyOperation() : conflictBucket.getTheirOperation(),
+			leftIsMy ? conflictBucket.getTheirOperation() : conflictBucket.getMyOperation(),
+			decisionManager, leftIsMy, init);
+		this.conflictBucket = conflictBucket;
+	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param conflictBucket
+	 *            the underlying conflict
+	 * @param decisionManager
+	 *            the decision manager
 	 */
 	public VisualConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
 		this(conflictBucket, decisionManager, true, true);
-	}
-
-	public VisualConflict(ConflictBucket conflictBucket, DecisionManager decisionManager, boolean isLeftMy, boolean init) {
-		this(isLeftMy ? conflictBucket.getMyOperations() : conflictBucket.getTheirOperations(),
-			isLeftMy ? conflictBucket.getTheirOperations() : conflictBucket.getMyOperations(),
-			isLeftMy ? conflictBucket.getMyOperation() : conflictBucket.getTheirOperation(),
-			isLeftMy ? conflictBucket.getTheirOperation() : conflictBucket.getMyOperation(),
-			decisionManager, isLeftMy, init);
-		this.conflictBucket = conflictBucket;
 	}
 
 	/**
@@ -126,7 +133,7 @@ public abstract class VisualConflict extends Observable {
 	}
 
 	private static <T> Set<T> set(T object) {
-		Set<T> set = new LinkedHashSet<T>();
+		final Set<T> set = new LinkedHashSet<T>();
 		set.add(object);
 		return set;
 	}
@@ -168,9 +175,9 @@ public abstract class VisualConflict extends Observable {
 	protected abstract ConflictDescription initConflictDescription(ConflictDescription description);
 
 	private ConflictDescription initConflictDescription() {
-		ConflictDescription description = new ConflictDescription("");
+		final ConflictDescription description = new ConflictDescription("");
 		description.setImage("notset.gif");
-		EObject modelElement = getDecisionManager().getModelElement(getMyOperation().getModelElementId());
+		final EObject modelElement = getDecisionManager().getModelElement(getMyOperation().getModelElementId());
 		if (modelElement != null) {
 			description.add("modelelement", modelElement);
 		}
@@ -223,7 +230,7 @@ public abstract class VisualConflict extends Observable {
 	 * @return true if resolved
 	 */
 	public boolean isResolved() {
-		return (solution != null);
+		return solution != null;
 	}
 
 	/**
@@ -232,7 +239,7 @@ public abstract class VisualConflict extends Observable {
 	 * @return true, if at least one got details.
 	 */
 	public boolean hasDetails() {
-		for (ConflictOption option : getOptions()) {
+		for (final ConflictOption option : getOptions()) {
 			if (option.isDetailsProvider()) {
 				return true;
 			}
@@ -274,40 +281,44 @@ public abstract class VisualConflict extends Observable {
 	 * This method is used by {@link DecisionManager} in order to create the
 	 * resulting operations.
 	 * 
-	 * @return list of ops.
+	 * @return a set containing the rejected operations
 	 */
 	public Set<AbstractOperation> getRejectedTheirs() {
+
 		if (!isResolved()) {
 			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
 		}
+
 		if (solution.getType() == OptionType.TheirOperation) {
 			return Collections.emptySet();
-		} else {
-			for (ConflictOption options : getOptions()) {
-				if (options.getType() == OptionType.TheirOperation) {
-					return options.getOperations();
-				}
+		}
+
+		for (final ConflictOption options : getOptions()) {
+			if (options.getType() == OptionType.TheirOperation) {
+				return options.getOperations();
 			}
 		}
+
 		throw new IllegalStateException("No TheirOperations found.");
-		// return new ArrayList<AbstractOperation>();
 	}
 
 	/**
 	 * This method is used by {@link DecisionManager} in order to create the
 	 * resulting operations.
 	 * 
-	 * @return list of ops
+	 * @return set containing the accepted operations
 	 */
 	public Set<AbstractOperation> getAcceptedMine() {
+
 		if (!isResolved()) {
 			throw new IllegalStateException("Can't call this method, unless conflict is resolved.");
 		}
+
 		if (solution.getType() == OptionType.TheirOperation) {
 			return Collections.emptySet();
-		} else {
-			return solution.getOperations();
 		}
+
+		return solution.getOperations();
 	}
 
 	/**
@@ -327,7 +338,7 @@ public abstract class VisualConflict extends Observable {
 	 * @return list of operations
 	 */
 	public Set<AbstractOperation> getMyOperations() {
-		return ((leftIsMy) ? leftOperations : rightOperations);
+		return leftIsMy ? leftOperations : rightOperations;
 	}
 
 	/**
@@ -336,7 +347,7 @@ public abstract class VisualConflict extends Observable {
 	 * @return list of operations
 	 */
 	public Set<AbstractOperation> getTheirOperations() {
-		return ((!leftIsMy) ? leftOperations : rightOperations);
+		return !leftIsMy ? leftOperations : rightOperations;
 	}
 
 	/**
@@ -381,7 +392,7 @@ public abstract class VisualConflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getMyOperation() {
-		return ((leftIsMy) ? leftOperation : rightOperation);
+		return leftIsMy ? leftOperation : rightOperation;
 	}
 
 	/**
@@ -390,7 +401,7 @@ public abstract class VisualConflict extends Observable {
 	 * @return operation
 	 */
 	public AbstractOperation getTheirOperation() {
-		return ((!leftIsMy) ? leftOperation : rightOperation);
+		return !leftIsMy ? leftOperation : rightOperation;
 	}
 
 	/**
@@ -421,14 +432,19 @@ public abstract class VisualConflict extends Observable {
 		return (T) getTheirOperation();
 	}
 
+	/**
+	 * Resolves this conflict.
+	 */
 	public void resolve() {
 		conflictBucket.resolveConflict(getAcceptedMine(), getRejectedTheirs());
 	}
 
-	public boolean isLeftIsMy() {
-		return leftIsMy;
-	}
-
+	/**
+	 * Whether the left operations is mine operation.
+	 * 
+	 * @param leftIsMy
+	 *            should be {@code true}, if the left operation belongs to me, {@code false} otherwise
+	 */
 	public void setLeftIsMy(boolean leftIsMy) {
 		this.leftIsMy = leftIsMy;
 	}

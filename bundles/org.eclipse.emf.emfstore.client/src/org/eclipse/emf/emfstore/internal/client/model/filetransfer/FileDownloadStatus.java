@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * jfinis
+ * Jan Finis - initial API and implementaiton
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 
@@ -32,14 +32,14 @@ import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 public final class FileDownloadStatus {
 
 	/* PRIVATE MEMBERS */
-	private ProjectSpace transferringProjectSpace;
-	private Observable finishedObservable = new Obs();
-	private Observable failedObservable = new Obs();
+	private final ProjectSpace transferringProjectSpace;
+	private final Observable finishedObservable = new Obs();
+	private final Observable failedObservable = new Obs();
 
-	private FileTransferStatistics statistics = new FileTransferStatistics(this);
+	private final FileTransferStatistics statistics = new FileTransferStatistics(this);
 	private Status status;
 	private File transferredFile;
-	private FileIdentifier id;
+	private final FileIdentifier id;
 	private Exception exception;
 
 	private FileDownloadStatus(ProjectSpace transferringProjectSpace, FileIdentifier id, Status status,
@@ -153,8 +153,8 @@ public final class FileDownloadStatus {
 		addTransferFailedObserver(new Observer() {
 
 			public void update(Observable arg0, Object arg1) {
-				FileDownloadStatus status = (FileDownloadStatus) arg1;
-				Exception e = status.getException();
+				final FileDownloadStatus status = (FileDownloadStatus) arg1;
+				final Exception e = status.getException();
 				ModelUtil.logException("File transfer failed!", e);
 
 			}
@@ -170,6 +170,11 @@ public final class FileDownloadStatus {
 		return status == Status.FINISHED;
 	}
 
+	/**
+	 * Whether the file to be downloaded is on server.
+	 * 
+	 * @return {@code true} if the file is not on the server, {@code false} otherwise
+	 */
 	public boolean isNotOnServer() {
 		return status == Status.FAILED && getException() instanceof FileNotOnServerException;
 	}
@@ -239,7 +244,7 @@ public final class FileDownloadStatus {
 				synchronized (observer) {
 					observer.wait();
 				}
-			} catch (InterruptedException e) {
+			} catch (final InterruptedException e) {
 				throw new FileTransferException("Failed to initialize blocked get.", e);
 			}
 		}
