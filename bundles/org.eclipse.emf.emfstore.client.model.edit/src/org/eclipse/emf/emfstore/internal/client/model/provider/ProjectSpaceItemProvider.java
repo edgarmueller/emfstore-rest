@@ -23,12 +23,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
@@ -45,8 +40,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
  * 
  * @generated
  */
-public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider implements IEditingDomainItemProvider,
-	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
+{
 
 	private Map<Project, ProjectSpace> projectToProjectSpaceMap;
 
@@ -329,10 +324,10 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 	@Override
 	public String getText(Object object) {
 		if (object instanceof ProjectSpace) {
-			ProjectSpace projectSpace = (ProjectSpace) object;
-			StringBuilder stringBuilder = new StringBuilder();
+			final ProjectSpace projectSpace = (ProjectSpace) object;
+			final StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append(projectSpace.getProjectName());
-			String string = stringBuilder.toString();
+			final String string = stringBuilder.toString();
 			return string;
 		}
 		return getString("_UI_ProjectSpace_type");
@@ -354,7 +349,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 		// update on the appropriate projectspace
 
 		if (notification != null && getProjectToProjectSpaceMap().get(notification.getNotifier()) != null) {
-			ProjectSpace projectSpace = getProjectToProjectSpaceMap().get(notification.getNotifier());
+			final ProjectSpace projectSpace = getProjectToProjectSpaceMap().get(notification.getNotifier());
 			fireNotifyChanged(new ViewerNotification(notification, projectSpace, true, true));
 			return;
 		}
@@ -446,10 +441,10 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 	 */
 	@Override
 	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
+		final Object childFeature = feature;
+		final Object childObject = child;
 
-		boolean qualify =
+		final boolean qualify =
 			childFeature == ModelPackage.Literals.PROJECT_SPACE__BASE_VERSION ||
 				childFeature == ModelPackage.Literals.PROJECT_SPACE__MERGED_VERSION;
 
@@ -483,8 +478,8 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider im
 		// also register for notifications on the corresponding project to be
 		// able to trigger viewer updates accordingly, see method notifyChanged().
 		if (target instanceof ProjectSpace) {
-			ProjectSpace projectSpace = (ProjectSpace) target;
-			Project project = projectSpace.getProject();
+			final ProjectSpace projectSpace = (ProjectSpace) target;
+			final Project project = projectSpace.getProject();
 			project.eAdapters().add(this);
 			setTarget(project);
 			getProjectToProjectSpaceMap().put(project, projectSpace);
