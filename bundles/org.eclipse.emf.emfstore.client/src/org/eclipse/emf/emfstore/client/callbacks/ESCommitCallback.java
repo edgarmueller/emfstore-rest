@@ -80,7 +80,8 @@ public interface ESCommitCallback {
 	 * 
 	 * <p>
 	 * Does not veto against updating the project in case it is out of date and returns {@code true} for
-	 * {@link #inspectChanges(ESLocalProject, ESChangePackage)}, such that a commit is always performed.
+	 * {@link #inspectChanges(ESLocalProject, ESChangePackage, ESModelElementIdToEObjectMapping)}, such that a commit is
+	 * always performed.
 	 * </p>
 	 */
 	ESCommitCallback NOCALLBACK = new ESCommitCallback() {

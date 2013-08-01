@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 public class ConflictOption {
 
 	private String option;
-	private OptionType type;
+	private final OptionType type;
 	private String detailProvider;
 	private Set<AbstractOperation> operations;
 
@@ -60,7 +60,7 @@ public class ConflictOption {
 	 * @param type option type
 	 */
 	public ConflictOption(Object obj, OptionType type) {
-		this(DecisionUtil.getLabel(obj, ("unset")), type);
+		this(DecisionUtil.getLabel(obj, "unset"), type);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class ConflictOption {
 	 * @param option text
 	 */
 	public void setOptionLabel(String option) {
-		this.option = (option == null) ? "" : option;
+		this.option = option == null ? "" : option;
 	}
 
 	/**
@@ -142,7 +142,6 @@ public class ConflictOption {
 	/**
 	 * Sets a detailprovider.
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components.DetailsComponent
 	 * @param detailProvider identifying string
 	 */
 	public void setDetailProvider(String detailProvider) {
@@ -156,7 +155,7 @@ public class ConflictOption {
 	 */
 	public String getDetailProvider() {
 		// return detailProvider;
-		return (detailProvider == null) ? "jawoll" : detailProvider;
+		return detailProvider == null ? "jawoll" : detailProvider;
 	}
 
 	/**

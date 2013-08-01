@@ -24,7 +24,9 @@ public class Activator extends Plugin {
 	private static Activator plugin;
 
 	/**
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.core.runtime.Plugin#start(org.osgi.framework.BundleContext)
 	 */
 	@Override
 	// BEGIN SUPRESS CATCH EXCEPTION
@@ -34,7 +36,9 @@ public class Activator extends Plugin {
 	}
 
 	/**
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {

@@ -15,7 +15,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
- * Listener for a {@link EMFStoreTransactionalCommandStack}.
+ * Listener for a {@link EMFStoreCommandStack}.
  * 
  * @author koegel
  */
