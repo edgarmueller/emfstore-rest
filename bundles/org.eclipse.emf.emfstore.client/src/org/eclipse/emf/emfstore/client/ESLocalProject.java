@@ -17,7 +17,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
-import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
@@ -25,7 +24,6 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecExc
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 import org.eclipse.emf.emfstore.server.model.ESLocalProjectId;
-import org.eclipse.emf.emfstore.server.model.ESLogMessage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESBranchVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
@@ -48,15 +46,17 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * </p>
 	 * <p>
 	 * <b>NOTE</b>: The commit will be executed in headless mode, so no callback can be specified. If clients would like
-	 * to influence the commit behavior, they should use
-	 * {@link #commit(ESLogMessage, ESCommitCallback, IProgressMonitor)}.
+	 * to influence the commit behavior, they should use {@link #commit(String, ESCommitCallback, IProgressMonitor)}.
+	 * </p>
+	 * <p>
+	 * This method throws a {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} runtime
+	 * exception if the project hasn't been shared yet
 	 * </p>
 	 * 
 	 * @param monitor a progress monitor to track the progress of the commit
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
-	 * @throws ESProjectNotSharedException if the project hasn't been shared yet
 	 * @throws ESException in case any error occurs during commit
 	 */
 	ESPrimaryVersionSpec commit(IProgressMonitor monitor) throws ESException;
@@ -66,8 +66,14 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * Commits any local changes.
 	 * </p>
 	 * <p>
+	 * <p>
 	 * <b>NOTE</b>: If no callback is specified the return value will be used to indicate whether the commit was
 	 * successful or not. This enables the the headless execution of the commit.
+	 * </p>
+	 * <p>
+	 * This method throws a {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} runtime
+	 * exception if the project hasn't been shared yet
+	 * </p>
 	 * 
 	 * @param logMessage
 	 *            a message describing the changes being committed
@@ -78,8 +84,7 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
-	 * @throws ESProjectNotSharedException if the project hasn't been shared yet
-	 * @throws BaseVersionOutdatedException in case the local working copy is outdated
+	 * @throws ESUpdateRequiredException in case the local working copy is outdated and an update is required
 	 * @throws ESException in case any other error occurs during commit
 	 */
 	ESPrimaryVersionSpec commit(String logMessage, ESCommitCallback callback, IProgressMonitor monitor)
@@ -90,8 +95,14 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * Commits any local changes to a branch.
 	 * </p>
 	 * <p>
+	 * <p>
 	 * <b>NOTE</b>: If no callback is specified the return value will be used to indicate whether the commit was
 	 * successful or not. This enables the the headless execution of the commit.
+	 * </p>
+	 * <p>
+	 * This method throws a {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} runtime
+	 * exception if the project hasn't been shared yet
+	 * </p>
 	 * 
 	 * @param branch
 	 *            the {@link ESBranchVersionSpec} indicating the branch to commit to
@@ -104,7 +115,6 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * 
 	 * @return the new base version, if the commit was successful, otherwise the old base version
 	 * 
-	 * @throws ESProjectNotSharedException if the project hasn't been shared yet
 	 * @throws InvalidVersionSpecException in case the given {@link ESBranchVersionSpec} could not be resolved
 	 * @throws ESUpdateRequiredException in case the local working copy is outdated
 	 * @throws ESException in case any other error occurs during commit
@@ -116,13 +126,16 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 * <p>
 	 * Updates the project to the head version from the server.
 	 * </p>
+	 * <p>
+	 * This method throws a {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} runtime
+	 * exception if the project hasn't been shared yet
+	 * </p>
 	 * 
 	 * @param monitor
 	 *            a progress monitor to track progress
 	 * 
 	 * @return the new base version
 	 * 
-	 * @throws ESProjectNotSharedException if the project hasn't been shared yet
 	 * @throws ChangeConflictException in case a conflict is detected on update
 	 * @throws ESException in case update fails for any other reason
 	 */
@@ -131,6 +144,10 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	/**
 	 * <p>
 	 * Updates the project to the given version from the server.
+	 * </p>
+	 * <p>
+	 * This method throws a {@link org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException} runtime
+	 * exception if the project hasn't been shared yet
 	 * </p>
 	 * 
 	 * @param version
@@ -141,7 +158,6 @@ public interface ESLocalProject extends ESProject, ESObjectContainer<ESModelElem
 	 *            an {@link IProgressMonitor} instance that is used to track the progress of the update
 	 * @return the new base version
 	 * 
-	 * @throws ESProjectNotSharedException if the project hasn't been shared yet
 	 * @throws ChangeConflictException in case a conflict is detected on update
 	 * @throws ESException in case update fails for any other reason
 	 */

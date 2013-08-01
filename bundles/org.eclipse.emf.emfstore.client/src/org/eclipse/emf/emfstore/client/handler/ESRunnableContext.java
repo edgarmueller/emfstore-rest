@@ -12,14 +12,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.handler;
 
-import org.eclipse.emf.emfstore.client.ESLocalProject;
-
 /**
  * <p>
  * Provides a context in which a {@link Runnable} is executed.
  * </p>
  * <p>
- * This may be used to provide a context while applying operations on a {@link ESLocalProject}.
+ * This may be used to provide a context while applying operations on a
+ * {@link org.eclipse.emf.emfstore.client.ESLocalProject}.
  * </p>
  * 
  * @author emueller

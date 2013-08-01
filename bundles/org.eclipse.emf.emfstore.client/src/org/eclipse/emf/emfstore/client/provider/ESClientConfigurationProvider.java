@@ -14,7 +14,6 @@ package org.eclipse.emf.emfstore.client.provider;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.client.ESServer;
-import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 
 /**
  * This provider allows to set the default {@link ESServer} and
@@ -32,8 +31,8 @@ public interface ESClientConfigurationProvider {
 	 * </p>
 	 * <p>
 	 * <b>NOTE:</b> This method is called during workspace initialization, i.e. you must <b>NOT</b> use
-	 * {@link ESWorkspaceProvider#INSTANCE} in the scope of this method. This means you must not create a session while
-	 * creating the default server information.
+	 * {@link org.eclipse.emf.emfstore.client.ESWorkspaceProvider#INSTANCE} in the scope of this method. This means you
+	 * must not create a session while creating the default server information.
 	 * </p>
 	 * 
 	 * @return a list of default server entries

@@ -21,6 +21,9 @@ package org.eclipse.emf.emfstore.client;
  */
 public interface ESPagedUpdateConfig {
 
+	/**
+	 * The ID of an page update configuration class.
+	 */
 	String ID = "org.eclipse.emf.emfstore.client.pagedUpdate.config";
 
 	/**
