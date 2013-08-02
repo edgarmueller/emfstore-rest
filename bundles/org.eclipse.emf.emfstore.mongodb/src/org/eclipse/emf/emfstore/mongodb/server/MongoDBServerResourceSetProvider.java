@@ -28,7 +28,10 @@ import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
  */
 public class MongoDBServerResourceSetProvider implements ESResourceSetProvider {
 
-	private static IResourceSetFactory resourceSetFactory;
+	/**
+	 * The injected {@link IResourceSetFactory}.
+	 */
+	static IResourceSetFactory resourceSetFactory;
 
 	/**
 	 * Sets the resource set factory.

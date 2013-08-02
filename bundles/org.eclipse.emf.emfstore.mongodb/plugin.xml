@@ -15,5 +15,12 @@
             priority="10">
       </resourceSetProvider>
    </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.server.dynamicModelProvider">
+      <dynamicModelProvider
+            class="org.eclipse.emf.emfstore.mongodb.server.MongoDBDynamicModelProvider"
+            priority="10">
+      </dynamicModelProvider>
+   </extension>
 
 </plugin>

@@ -33,6 +33,11 @@ import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
  */
 public class FileDynamicModelProvider implements ESDynamicModelProvider {
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.server.ESDynamicModelProvider#getDynamicModels()
+	 */
 	public List<EPackage> getDynamicModels() {
 		File dir = new File(ServerConfiguration.getServerHome() + "dynamic-models");
 		File[] files = null;

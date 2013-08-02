@@ -32,7 +32,7 @@ public class MongoServerURIConverter extends ESAbstractServerURIConverter {
 
 	@Override
 	protected URI normalizeDynamicModelsURI(String profile, String ecoreName) {
-		return URI.createURI(getMongoURIPrefix(profile) + "dynamic-models/" + ecoreName);
+		return URI.createURI(getMongoURIPrefix(profile) + "dynamic-models/ecore");
 	}
 
 	@Override
@@ -55,7 +55,13 @@ public class MongoServerURIConverter extends ESAbstractServerURIConverter {
 		return URI.createURI(getMongoURIPrefix(profile) + "projectstate/" + projectId + "-v" + version);
 	}
 
-	private String getMongoURIPrefix(String profile) {
+	/**
+	 * Returns the URI-prefix for mongodb URIs.
+	 * 
+	 * @param profile the profile name
+	 * @return the prefix
+	 */
+	static String getMongoURIPrefix(String profile) {
 		return "mongodb://localhost/esserver-" + profile + "/";
 	}
 
