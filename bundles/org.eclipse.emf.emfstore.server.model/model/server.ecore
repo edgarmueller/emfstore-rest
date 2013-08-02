@@ -52,6 +52,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedACUser" eType="#//accesscontrol/ACUser"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPackageRegistry"/>
   <eSubpackages name="versioning" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning"
       nsPrefix="org.eclipse.emf.emfstore.internal.server.model.versioning">
     <eClassifiers xsi:type="ecore:EClass" name="TagVersionSpec" eSuperTypes="#//versioning/VersionSpec">
@@ -172,6 +173,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//versioning/PrimaryVersionSpec"
           containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PagedUpdateVersionSpec" eSuperTypes="#//versioning/VersionSpec">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxChanges" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersionSpec" eType="#//versioning/PrimaryVersionSpec"
+          containment="true"/>
+    </eClassifiers>
     <eSubpackages name="operations" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning/operations"
         nsPrefix="org.eclipse.emf.emfstore.internal.server.model.versioning.operations">
       <eClassifiers xsi:type="ecore:EClass" name="AbstractOperation" abstract="true"
@@ -195,6 +201,12 @@
           eSuperTypes="#//versioning/operations/AbstractOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
             defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="unset" eType="#//versioning/operations/UnsetType"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="UnsetType">
+        <eLiterals name="NONE"/>
+        <eLiterals name="IS_UNSET" value="1"/>
+        <eLiterals name="WAS_UNSET" value="2" literal=""/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CreateDeleteOperation" eSuperTypes="#//versioning/operations/AbstractOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="delete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
