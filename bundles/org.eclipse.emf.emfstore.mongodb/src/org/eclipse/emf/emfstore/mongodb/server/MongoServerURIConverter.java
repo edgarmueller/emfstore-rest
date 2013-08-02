@@ -12,7 +12,7 @@
 package org.eclipse.emf.emfstore.mongodb.server;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.emfstore.server.AbstractESServerURIConverter;
+import org.eclipse.emf.emfstore.server.ESAbstractServerURIConverter;
 
 /**
  * Converts from EMFStore to mongoDB URIs.
@@ -23,7 +23,7 @@ import org.eclipse.emf.emfstore.server.AbstractESServerURIConverter;
  * @author jfaltermeier
  * 
  */
-public class MongoServerURIConverter extends AbstractESServerURIConverter {
+public class MongoServerURIConverter extends ESAbstractServerURIConverter {
 
 	@Override
 	protected URI normalizeServerSpaceURI(String profile) {

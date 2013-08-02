@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?>
-
-<target name="ECP RCP" sequenceNumber="218">
+<?pde version="3.8"?><target name="ECP RCP" sequenceNumber="219">
 <locations>
-<location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.emfstore.modelmutator.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.ecore.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.client.transaction.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.client.ui.historybrowsercomparator.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.client.ui.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.common.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.example.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.server.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<unit id="org.eclipse.emf.emfstore.client.feature.feature.group" version="1.0.0.v20130624-0607"/>
-<repository location="http://download.eclipse.org/emf-store/milestones/100RC5"/>
-</location>
 <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.h2" version="1.1.117.v201105142352"/>
 <unit id="org.h2.source" version="1.1.117.v201105142352"/>
@@ -33,18 +19,26 @@
 <repository location="http://download.eclipse.org/releases/kepler"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.8.0.v20121212-203907-7M7fA78g4_y-gDvtH0ZcFvhMPDZJ"/>
-<unit id="org.eclipse.platform.ide" version="4.2.2.M20130204-1200"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.2"/>
-</location>
-<location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.mongodb.feature.feature.group" version="2.9.3.201211071007"/>
-<repository location="http://bryanhunt.github.com/mongo-emf/mongodb/2.9.3"/>
-</location>
-<location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipselabs.mongo.emf.feature.feature.group" version="0.7.1.201211071319"/>
 <unit id="org.eclipselabs.mongo.emf.feature.source.feature.group" version="0.7.1.201211071319"/>
 <repository location="http://bryanhunt.github.com/mongo-emf/releases/0.7.1"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.emfstore.modelmutator.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.ecore.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.client.transaction.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.client.ui.historybrowsercomparator.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.client.ui.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.common.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.example.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.server.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<unit id="org.eclipse.emf.emfstore.client.feature.feature.group" version="1.0.0.v20130624-0607"/>
+<repository location="http://download.eclipse.org/emf-store/milestones/100RC5"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.8.0.v20121212-203907-7M7fA78g4_y-gDvtH0ZcFvhMPDZJ"/>
+<unit id="org.eclipse.platform.ide" version="4.2.2.M20130204-1200"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.2"/>
 </location>
 </locations>
 </target>
