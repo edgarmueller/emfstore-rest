@@ -223,16 +223,16 @@ litigation.
    </license>
 
    <requires>
-      <import plugin="org.junit4" version="4.8.1" match="compatible"/>
       <import plugin="org.eclipse.emf.emfstore.modelmutator"/>
       <import plugin="org.eclipse.emf.ecore" version="2.5.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecore.edit" version="2.5.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.5.0" match="compatible"/>
       <import plugin="org.eclipse.core.runtime" version="3.7.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.junit" version="4.11.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.edit" version="2.5.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.emfstore.client.test"/>
+      <import plugin="org.eclipse.core.resources" version="3.7.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.5.0" match="compatible"/>
+      <import plugin="org.eclipse.ui.ide" version="3.7.0" match="compatible"/>
    </requires>
 
    <plugin
