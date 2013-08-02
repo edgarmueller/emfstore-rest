@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
-import org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ModelPackage;
@@ -96,8 +95,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			return createFileIdentifier();
 		case ModelPackage.AUTHENTICATION_INFORMATION:
 			return createAuthenticationInformation();
-		case ModelPackage.EPACKAGE_REGISTRY:
-			return createEPackageRegistry();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -191,18 +188,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public AuthenticationInformation createAuthenticationInformation() {
 		AuthenticationInformationImpl authenticationInformation = new AuthenticationInformationImpl();
 		return authenticationInformation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EPackageRegistry createEPackageRegistry()
-	{
-		EPackageRegistryImpl ePackageRegistry = new EPackageRegistryImpl();
-		return ePackageRegistry;
 	}
 
 	/**

@@ -113,16 +113,6 @@ public interface ModelFactory extends EFactory {
 	AuthenticationInformation createAuthenticationInformation();
 
 	/**
-	 * Returns a new object of class '<em>EPackage Registry</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return a new object of class '<em>EPackage Registry</em>'.
-	 * @generated
-	 */
-	EPackageRegistry createEPackageRegistry();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

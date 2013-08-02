@@ -18,7 +18,6 @@ import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
-import org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
@@ -179,13 +178,6 @@ public class ModelSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ModelPackage.EPACKAGE_REGISTRY: {
-			EPackageRegistry ePackageRegistry = (EPackageRegistry) theEObject;
-			T result = caseEPackageRegistry(ePackageRegistry);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -332,23 +324,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseAuthenticationInformation(AuthenticationInformation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EPackage Registry</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EPackage Registry</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEPackageRegistry(EPackageRegistry object)
-	{
 		return null;
 	}
 

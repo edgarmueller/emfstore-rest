@@ -450,28 +450,6 @@ public interface ModelPackage extends EPackage {
 	int AUTHENTICATION_INFORMATION_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.emf.emfstore.internal.server.model.impl.EPackageRegistryImpl
-	 * <em>EPackage Registry</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.model.impl.EPackageRegistryImpl
-	 * @see org.eclipse.emf.emfstore.internal.server.model.impl.ModelPackageImpl#getEPackageRegistry()
-	 * @generated
-	 */
-	int EPACKAGE_REGISTRY = 9;
-
-	/**
-	 * The number of structural features of the '<em>EPackage Registry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @ordered
-	 */
-	int EPACKAGE_REGISTRY_FEATURE_COUNT = 0;
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.ProjectHistory
 	 * <em>Project History</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -807,18 +785,6 @@ public interface ModelPackage extends EPackage {
 	EReference getAuthenticationInformation_ResolvedACUser();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry
-	 * <em>EPackage Registry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for class '<em>EPackage Registry</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry
-	 * @generated
-	 */
-	EClass getEPackageRegistry();
-
-	/**
 	 * Returns the factory that creates the instances of the model. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1113,19 +1079,6 @@ public interface ModelPackage extends EPackage {
 		 */
 		EReference AUTHENTICATION_INFORMATION__RESOLVED_AC_USER = eINSTANCE
 			.getAuthenticationInformation_ResolvedACUser();
-
-		/**
-		 * The meta object literal for the '
-		 * {@link org.eclipse.emf.emfstore.internal.server.model.impl.EPackageRegistryImpl <em>EPackage Registry</em>}'
-		 * class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * 
-		 * @see org.eclipse.emf.emfstore.internal.server.model.impl.EPackageRegistryImpl
-		 * @see org.eclipse.emf.emfstore.internal.server.model.impl.ModelPackageImpl#getEPackageRegistry()
-		 * @generated
-		 */
-		EClass EPACKAGE_REGISTRY = eINSTANCE.getEPackageRegistry();
 
 	}
 

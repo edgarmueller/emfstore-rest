@@ -18,7 +18,6 @@ import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.UniqueIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
-import org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ModelPackage;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
@@ -141,12 +140,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 		public Adapter caseAuthenticationInformation(AuthenticationInformation object)
 		{
 			return createAuthenticationInformationAdapter();
-		}
-
-		@Override
-		public Adapter caseEPackageRegistry(EPackageRegistry object)
-		{
-			return createEPackageRegistryAdapter();
 		}
 
 		@Override
@@ -324,23 +317,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAuthenticationInformationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry <em>EPackage Registry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the new adapter.
-	 * @see org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry
-	 * @generated
-	 */
-	public Adapter createEPackageRegistryAdapter()
-	{
 		return null;
 	}
 

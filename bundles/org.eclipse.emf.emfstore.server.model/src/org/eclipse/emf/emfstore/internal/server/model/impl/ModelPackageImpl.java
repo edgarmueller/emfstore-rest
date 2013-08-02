@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
-import org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ModelPackage;
@@ -113,14 +112,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass authenticationInformationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EClass ePackageRegistryEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -483,17 +474,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EClass getEPackageRegistry()
-	{
-		return ePackageRegistryEClass;
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -559,8 +539,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		authenticationInformationEClass = createEClass(AUTHENTICATION_INFORMATION);
 		createEReference(authenticationInformationEClass, AUTHENTICATION_INFORMATION__SESSION_ID);
 		createEReference(authenticationInformationEClass, AUTHENTICATION_INFORMATION__RESOLVED_AC_USER);
-
-		ePackageRegistryEClass = createEClass(EPACKAGE_REGISTRY);
 	}
 
 	/**
@@ -693,9 +671,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getAuthenticationInformation_ResolvedACUser(), theAccesscontrolPackage.getACUser(), null,
 			"resolvedACUser", null, 0, 1, AuthenticationInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 			IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(ePackageRegistryEClass, EPackageRegistry.class, "EPackageRegistry", !IS_ABSTRACT, !IS_INTERFACE,
-			IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
