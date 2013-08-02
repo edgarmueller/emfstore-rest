@@ -54,11 +54,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
@@ -722,9 +722,10 @@ public final class ModelUtil {
 			extensionPoint.setComparator(new ESPriorityComparator("priority", true));
 			extensionPoint.reload();
 
-			ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
-				"class",
-				ESResourceSetProvider.class);
+			ESResourceSetProvider resourceSetProvider = extensionPoint
+				.getElementWithHighestPriority().getClass(
+					"class",
+					ESResourceSetProvider.class);
 
 			if (resourceSetProvider == null) {
 				resourceSet = new ResourceSetImpl();

@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 
@@ -27,17 +27,17 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
  * @author jfaltermeier
  * 
  */
-public class ESClientXMIResourceSetProvider implements ESResourceSetProvider {
+public class ClientXMIResourceSetProvider implements ESResourceSetProvider {
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider#getResourceSet()
+	 * @see org.eclipse.emf.emfstore.common.ESResourceSetProvider#getResourceSet()
 	 */
 	public ResourceSet getResourceSet() {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		resourceSet.setURIConverter(new DefaultESClientXMIURIConverter());
+		resourceSet.setURIConverter(new XMIClientURIConverter());
 		resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
 		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
 		return resourceSet;

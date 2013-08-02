@@ -35,9 +35,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
@@ -1055,8 +1055,9 @@ public class VersionImpl extends EObjectImpl implements Version {
 		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
 		extensionPoint.reload();
 
-		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
-			ESResourceSetProvider.class);
+		ESResourceSetProvider resourceSetProvider = extensionPoint
+			.getElementWithHighestPriority().getClass("class",
+				ESResourceSetProvider.class);
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 		resourceSet.getResources().add(resource);

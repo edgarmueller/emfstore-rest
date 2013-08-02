@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.HashSet;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.emfstore.client.provider.AbstractESClientURIConverter;
+import org.eclipse.emf.emfstore.client.provider.ESAbstractClientURIConverter;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
  * @author jfaltermeier
  * 
  */
-public class DefaultESClientXMIURIConverter extends AbstractESClientURIConverter {
+public class XMIClientURIConverter extends ESAbstractClientURIConverter {
 
 	/**
 	 * The prefix of project space directories.
@@ -42,7 +42,7 @@ public class DefaultESClientXMIURIConverter extends AbstractESClientURIConverter
 	/**
 	 * Creates an instance including all needed URIHandlers.
 	 */
-	public DefaultESClientXMIURIConverter() {
+	public XMIClientURIConverter() {
 		super();
 		getURIHandlers().add(0, new ProjectSpaceFileURIHandler(getExtensionsMap()));
 	}

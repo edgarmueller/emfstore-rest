@@ -104,7 +104,7 @@
   <extension
         point="org.eclipse.emf.emfstore.client.resourceSetProvider">
      <resourceSetProvider
-           class="org.eclipse.emf.emfstore.internal.client.provider.ESClientXMIResourceSetProvider"
+           class="org.eclipse.emf.emfstore.internal.client.provider.ClientXMIResourceSetProvider"
            priority="0">
      </resourceSetProvider>
   </extension>

@@ -17,7 +17,7 @@ import java.util.HashSet;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
-import org.eclipse.emf.emfstore.server.AbstractESServerURIConverter;
+import org.eclipse.emf.emfstore.server.ESAbstractServerURIConverter;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
@@ -26,7 +26,7 @@ import org.eclipse.emf.emfstore.server.ServerURIUtil;
  * @author jfaltermeier
  * 
  */
-public class DefaultESServerXMIURIConverter extends AbstractESServerURIConverter {
+public class XMIServerURIConverter extends ESAbstractServerURIConverter {
 
 	/**
 	 * File prefix for folder: project.
@@ -76,7 +76,7 @@ public class DefaultESServerXMIURIConverter extends AbstractESServerURIConverter
 	/**
 	 * Creates an instance including all needed URIHandlers.
 	 */
-	public DefaultESServerXMIURIConverter() {
+	public XMIServerURIConverter() {
 		super();
 		getURIHandlers().add(0, new ServerSpaceFileURIHandler(getExtensionsMap()));
 	}

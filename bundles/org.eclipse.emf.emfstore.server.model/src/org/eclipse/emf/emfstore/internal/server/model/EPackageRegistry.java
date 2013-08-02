@@ -24,4 +24,8 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface EPackageRegistry extends EObject
 {
+	/**
+	 * Registers dynamic EPackages.
+	 */
+	void registerDynamicEPackages();
 } // EPackageRegistry

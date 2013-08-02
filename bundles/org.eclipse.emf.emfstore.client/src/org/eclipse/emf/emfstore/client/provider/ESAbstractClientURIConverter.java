@@ -22,7 +22,7 @@ import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
  * @author jfaltermeier
  * 
  */
-public abstract class AbstractESClientURIConverter extends ExtensibleURIConverterImpl {
+public abstract class ESAbstractClientURIConverter extends ExtensibleURIConverterImpl {
 
 	@Override
 	public URI normalize(URI uri) {

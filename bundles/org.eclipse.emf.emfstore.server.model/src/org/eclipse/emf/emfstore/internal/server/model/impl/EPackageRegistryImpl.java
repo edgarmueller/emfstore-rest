@@ -49,4 +49,13 @@ public class EPackageRegistryImpl extends EObjectImpl implements EPackageRegistr
 		return ModelPackage.Literals.EPACKAGE_REGISTRY;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.model.EPackageRegistry#registerDynamicEPackages()
+	 */
+	public void registerDynamicEPackages() {
+
+	}
+
 } // EPackageRegistryImpl

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
  * @author jfaltermeier
  * 
  */
-public abstract class AbstractESServerURIConverter extends ExtensibleURIConverterImpl {
+public abstract class ESAbstractServerURIConverter extends ExtensibleURIConverterImpl {
 
 	@Override
 	public URI normalize(URI uri) {

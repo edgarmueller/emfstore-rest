@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FilePartitionerUtil;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileTransferInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
-import org.eclipse.emf.emfstore.internal.server.storage.DefaultESServerXMIURIConverter;
+import org.eclipse.emf.emfstore.internal.server.storage.XMIServerURIConverter;
 
 /**
  * The file transfer subinterface.
@@ -181,7 +181,7 @@ public class FileTransferSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private String getProjectAttachmentFolder(ProjectId projectId) {
-		return ServerConfiguration.getServerHome() + DefaultESServerXMIURIConverter.FILE_PREFIX_PROJECTFOLDER
+		return ServerConfiguration.getServerHome() + XMIServerURIConverter.FILE_PREFIX_PROJECTFOLDER
 			+ projectId.getId()
 			+ File.separator + ATTACHMENT_FOLDER;
 	}

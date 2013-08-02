@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.emf.emfstore.server" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.emf.emfstore.server" id="resourceSetProvider" name="ResourceSet Provider"/>
+         <meta.schema plugin="org.eclipse.emf.emfstore.server" id="dynamicModelProvider" name="Dynamic Model Provider"/>
       </appInfo>
       <documentation>
          [Enter description of this extension point.]
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="resourceSetProvider"/>
+            <element ref="dynamicModelProvider"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,7 +47,7 @@
       </complexType>
    </element>
 
-   <element name="resourceSetProvider">
+   <element name="dynamicModelProvider">
       <complexType>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -55,11 +55,11 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.emfstore.server.ESDynamicModelProvider"/>
                </appInfo>
             </annotation>
          </attribute>
-         <attribute name="priority" type="string" use="required">
+         <attribute name="priority" type="string">
             <annotation>
                <documentation>
                   

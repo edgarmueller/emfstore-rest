@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -29,13 +30,13 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESResourceSetProvider;
-import org.eclipse.emf.emfstore.common.extensionpoint.ESServerResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControlImpl;
@@ -44,6 +45,7 @@ import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcAdminCon
 import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl;
+import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.StorageException;
@@ -59,6 +61,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
+import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -125,7 +128,7 @@ public class EMFStoreController implements IApplication, Runnable {
 
 		logGeneralInformation();
 
-		this.loadDynamicModels();
+		this.registerDynamicModels();
 
 		// FIXME: JF
 		// new MigrationManager().migrateModel();
@@ -177,14 +180,23 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	// delegates loading of dynamic models to the resource set provider
-	private void loadDynamicModels() {
-		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+	private void registerDynamicModels() {
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.dynamicModelProvider",
 			true);
 		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
 		extensionPoint.reload();
-		ESServerResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
-			"class", ESServerResourceSetProvider.class);
-		resourceSetProvider.registerDynamicModels();
+		ESDynamicModelProvider dynamicModelProvider = extensionPoint.getElementWithHighestPriority().getClass(
+			"class", ESDynamicModelProvider.class);
+		List<EPackage> models = dynamicModelProvider.getDynamicModels();
+
+		for (EPackage model : models) {
+			EPackage.Registry.INSTANCE.put(model.getNsURI(), model);
+			List<EPackage> packages = EPackageHelper.getAllSubPackages(model);
+			for (EPackage subPkg : packages) {
+				EPackage.Registry.INSTANCE.put(subPkg.getNsURI(), subPkg);
+			}
+			ModelUtil.logInfo("Dynamic Model \"" + model.getNsURI() + "\" loaded.");
+		}
 
 	}
 

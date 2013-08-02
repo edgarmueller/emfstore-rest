@@ -36,7 +36,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl;
-import org.eclipse.emf.emfstore.internal.server.storage.DefaultESServerXMIURIConverter;
+import org.eclipse.emf.emfstore.internal.server.storage.XMIServerURIConverter;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
@@ -208,7 +208,7 @@ public class ResourceHelper {
 	 * @return file path
 	 */
 	public String getProjectFolder(ProjectId projectId) {
-		return ServerConfiguration.getServerHome() + DefaultESServerXMIURIConverter.FILE_PREFIX_PROJECTFOLDER
+		return ServerConfiguration.getServerHome() + XMIServerURIConverter.FILE_PREFIX_PROJECTFOLDER
 			+ projectId.getId()
 			+ File.separatorChar;
 	}
