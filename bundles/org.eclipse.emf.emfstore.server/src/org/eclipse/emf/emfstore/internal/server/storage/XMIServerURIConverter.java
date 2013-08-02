@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
 import org.eclipse.emf.emfstore.server.ESAbstractServerURIConverter;
-import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
  * The default URI converter of EMFStore Server. Normalizes EMFStore URIs to file URIs.
@@ -84,12 +83,6 @@ public class XMIServerURIConverter extends ESAbstractServerURIConverter {
 	@Override
 	protected URI normalizeServerSpaceURI(String profile) {
 		return URI.createFileURI(ServerConfiguration.getServerHome() + "storage" + FILE_EXTENSION_MAINSTORAGE);
-	}
-
-	@Override
-	protected URI normalizeDynamicModelsURI(String profile, String ecoreName) {
-		return URI.createFileURI(ServerConfiguration.getServerHome() + ServerURIUtil.DYNAMIC_MODELS_SEGMENT + "/"
-			+ ecoreName);
 	}
 
 	@Override

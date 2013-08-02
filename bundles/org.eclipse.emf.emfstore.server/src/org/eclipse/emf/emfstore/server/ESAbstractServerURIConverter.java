@@ -13,6 +13,8 @@ package org.eclipse.emf.emfstore.server;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
+import org.eclipse.emf.emfstore.internal.server.storage.FileDynamicModelProvider;
 
 /**
  * Abstract URIConverter for normalizing EMFStore URIs on server side. Delegates normalizing to specialized methods
@@ -89,12 +91,19 @@ public abstract class ESAbstractServerURIConverter extends ExtensibleURIConverte
 
 	/**
 	 * Normalizes EMFStore dynamic model URI.
+	 * <p />
+	 * This may be overridden for usage in relation with a custom {@link ESDynamicModelProvider}. The default
+	 * implementation will map the URI to a File-URI and works in accordance to the default
+	 * {@link FileDynamicModelProvider}.
 	 * 
 	 * @param profile the selected profile
 	 * @param ecoreName the file name of the dynamic model
 	 * @return the normalized URI
 	 */
-	protected abstract URI normalizeDynamicModelsURI(String profile, String ecoreName);
+	protected URI normalizeDynamicModelsURI(String profile, String ecoreName) {
+		return URI.createFileURI(ServerConfiguration.getServerHome() + ServerURIUtil.DYNAMIC_MODELS_SEGMENT + "/"
+			+ ecoreName);
+	}
 
 	/**
 	 * Normalizes an EMFStore projecthistory URI.
