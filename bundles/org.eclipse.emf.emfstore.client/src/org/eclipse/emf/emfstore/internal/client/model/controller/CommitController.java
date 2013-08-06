@@ -130,16 +130,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				final LogMessage logMessageObject = VersioningFactory.eINSTANCE.createLogMessage();
-				logMessageObject.setMessage(logMessage);
-				logMessageObject.setClientDate(new Date());
-				logMessageObject.setAuthor(getProjectSpace().getUsersession().getUsername());
-				changePackage.setLogMessage(logMessageObject);
-				return null;
-			}
-		});
+		setLogMessage(logMessage, changePackage);
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
 			.inspectChanges(getProjectSpace().toAPI(), changePackage.toAPI(), getProgressMonitor());
@@ -176,21 +167,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			}
 		}
 
-		// Branching case: branch specifier added
-		final PrimaryVersionSpec newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(
-			getProgressMonitor()) {
-			@Override
-			public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
-				return getConnectionManager().createVersion(
-					getUsersession().getSessionId(),
-					getProjectSpace().getProjectId(),
-					getProjectSpace().getBaseVersion(),
-					changePackage,
-					branch,
-					getProjectSpace().getMergedVersion(),
-					changePackage.getLogMessage());
-			}
-		}.execute();
+		final PrimaryVersionSpec newBaseVersion = performCommit(branch, changePackage);
 
 		// TODO reimplement with ObserverBus and think about subtasks for commit
 		getProgressMonitor().worked(35);
@@ -201,22 +178,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().worked(30);
 		getProgressMonitor().subTask("Computing checksum");
 
-		boolean validChecksum = true;
-		try {
-			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
-		} catch (final SerializationException exception) {
-			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
-				getProjectSpace().getProjectName()), exception);
-		}
-
-		if (!validChecksum) {
-			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
-			final boolean errorHandled = Configuration.getClientBehavior().getChecksumErrorHandler()
-				.execute(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
-			if (!errorHandled) {
-				throw new ESException("Commit cancelled by checksum error handler due to invalid checksum.");
-			}
-		}
+		handleChecksumProcessing(newBaseVersion);
 
 		getProgressMonitor().subTask("Finalizing commit");
 
@@ -234,6 +196,58 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			.commitCompleted(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
 
 		return newBaseVersion;
+	}
+
+	private void handleChecksumProcessing(final PrimaryVersionSpec newBaseVersion) throws ESException {
+		boolean validChecksum = true;
+		try {
+			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
+		} catch (final SerializationException exception) {
+			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
+				getProjectSpace().getProjectName()), exception);
+		}
+
+		if (!validChecksum) {
+			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
+			final boolean errorHandled = Configuration.getClientBehavior().getChecksumErrorHandler()
+				.execute(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
+			if (!errorHandled) {
+				throw new ESException("Commit cancelled by checksum error handler due to invalid checksum.");
+			}
+		}
+	}
+
+	private PrimaryVersionSpec performCommit(final BranchVersionSpec branch, final ChangePackage changePackage)
+		throws ESException {
+		// Branching case: branch specifier added
+		final PrimaryVersionSpec newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(
+			getProgressMonitor()) {
+			@Override
+			public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
+				return getConnectionManager().createVersion(
+					getUsersession().getSessionId(),
+					getProjectSpace().getProjectId(),
+					getProjectSpace().getBaseVersion(),
+					changePackage,
+					branch,
+					getProjectSpace().getMergedVersion(),
+					changePackage.getLogMessage());
+			}
+		}.execute();
+		return newBaseVersion;
+	}
+
+	private void setLogMessage(final String logMessage, final ChangePackage changePackage) {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				final LogMessage logMessageObject = VersioningFactory.eINSTANCE.createLogMessage();
+				logMessageObject.setMessage(logMessage);
+				logMessageObject.setClientDate(new Date());
+				logMessageObject.setAuthor(getProjectSpace().getUsersession().getUsername());
+				changePackage.setLogMessage(logMessageObject);
+				return null;
+			}
+		});
 	}
 
 	private boolean performChecksumCheck(PrimaryVersionSpec newBaseVersion, Project project)
