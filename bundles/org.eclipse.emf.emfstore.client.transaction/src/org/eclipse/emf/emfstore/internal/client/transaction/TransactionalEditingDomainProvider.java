@@ -9,7 +9,7 @@
  * Contributors:
  * wesendon
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.transaction;
+package org.eclipse.emf.emfstore.internal.client.transaction;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;

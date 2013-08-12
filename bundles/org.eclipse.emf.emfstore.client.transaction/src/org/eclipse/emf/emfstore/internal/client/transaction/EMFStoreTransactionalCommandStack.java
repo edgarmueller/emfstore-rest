@@ -9,7 +9,7 @@
  * Contributors:
  * koegel
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.transaction;
+package org.eclipse.emf.emfstore.internal.client.transaction;
 
 import java.util.Iterator;
 

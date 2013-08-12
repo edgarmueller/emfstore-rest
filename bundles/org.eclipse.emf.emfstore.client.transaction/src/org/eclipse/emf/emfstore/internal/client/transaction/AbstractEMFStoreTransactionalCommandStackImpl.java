@@ -10,7 +10,7 @@
  * Maximilian Koegel
  * Edgar Mueller
  ******************************************************************************/
-package org.eclipse.emf.emfstore.client.transaction;
+package org.eclipse.emf.emfstore.internal.client.transaction;
 
 import org.eclipse.emf.transaction.RollbackException;
 import org.eclipse.emf.transaction.Transaction;
