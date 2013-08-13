@@ -22,6 +22,8 @@ import java.util.Properties;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
+import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
+import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 
 /**
  * This verifyer can be used to store user and passwords in a property file. Entries in the property file look should
@@ -31,9 +33,11 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
  */
 public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 
-	private Properties passwordFile;
+	private final Properties passwordFile;
 
 	private final Hash hash;
+
+	private final String filePath;
 
 	/**
 	 * Hash algorithms supported by spfv verifier.
@@ -67,18 +71,23 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 	 */
 	public SimplePropertyFileVerifier(String filePath, Hash hash) throws FatalESException {
 		super();
+		this.filePath = filePath;
 		if (hash == null) {
 			throw new FatalESException("Hash may not be null for verifier.");
 		}
 		this.hash = hash;
 
 		passwordFile = new Properties();
-		File propertyFile = new File(filePath);
+		loadPasswordFile(filePath);
+	}
+
+	private void loadPasswordFile(String filePath) {
+		final File propertyFile = new File(filePath);
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(propertyFile);
 			passwordFile.load(fis);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			ModelUtil.logInfo("Couldn't load password file from path: " + filePath);
 			// Run with empty password file
 			// throw new AccessControlException("Couldn't load password file from path: "+filePath);
@@ -86,7 +95,7 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 			if (fis != null) {
 				try {
 					fis.close();
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					ModelUtil.logInfo("Couldn't load password file from path: " + filePath);
 				}
 			}
@@ -98,7 +107,8 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 	 */
 	@Override
 	protected boolean verifyPassword(String username, String password) throws AccessControlException {
-		String expectedPassword = passwordFile.getProperty(username);
+		loadPasswordFile(filePath);
+		final String expectedPassword = passwordFile.getProperty(username);
 		password = hashPassword(password);
 		if (expectedPassword == null || !expectedPassword.equals(password)) {
 			return false;
@@ -107,26 +117,40 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 	}
 
 	private String hashPassword(String password) {
+
 		if (password == null || hash.equals(Hash.NONE)) {
 			return password;
-		} else {
-			try {
-				MessageDigest md = null;
-				switch (hash) {
-				case SHA1:
-					md = MessageDigest.getInstance("SHA-1");
-					break;
-				case MD5:
-					md = MessageDigest.getInstance("MD5");
-					break;
-				default:
-				}
-				if (md != null) {
-					return new String(md.digest(password.getBytes()));
-				}
-			} catch (NoSuchAlgorithmException e) {
-			}
 		}
+
+		try {
+			MessageDigest md = null;
+			switch (hash) {
+			case SHA1:
+				md = MessageDigest.getInstance("SHA-1");
+				break;
+			case MD5:
+				md = MessageDigest.getInstance("MD5");
+				break;
+			default:
+			}
+			if (md != null) {
+				return new String(md.digest(password.getBytes()));
+			}
+		} catch (final NoSuchAlgorithmException e) {
+		}
+
 		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#logIn(java.lang.String,
+	 *      java.lang.String, org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo)
+	 */
+	@Override
+	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+		throws AccessControlException {
+		return super.logIn(username, password, clientVersionInfo);
 	}
 }
