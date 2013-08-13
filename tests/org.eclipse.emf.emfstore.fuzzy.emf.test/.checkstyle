@@ -6,7 +6,10 @@
     <additional-data name="cache-props-file-location" value="null_1375458582796_cache.properties"/>
     <additional-data name="cache-file-location" value="null_1375458582796_cache.xml"/>
   </local-check-config>
-  <fileset name="all" enabled="true" check-config-name="ESM Checkstyle" local="true">
+  <local-check-config name="ESM Cekcstyle for Tests" location="http://download.eclipse.org/emfclient/config/esmCheckstyleForTests.xml" type="remote" description="">
+    <additional-data name="cache-file" value="false"/>
+  </local-check-config>
+  <fileset name="all" enabled="true" check-config-name="ESM Cekcstyle for Tests" local="true">
     <file-match-pattern match-pattern="." include-pattern="true"/>
   </fileset>
 </fileset-config>
