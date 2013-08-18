@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Johannes Faltermeier
+ * Johannes Faltermeier - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server;
 
@@ -34,63 +34,63 @@ public final class ServerURIUtil {
 	/**
 	 * The EMFStore URI scheme.
 	 * <p />
-	 * Example URI: <b>emfstore</b>:/workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
+	 * Example URI: <b>emfstore</b>://workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
 	public static final String SCHEME = "emfstore";
 
 	/**
 	 * The EMFStore URI segment for serverspaces.
 	 * <p />
-	 * Example URI: emfstore:/<b>serverspaces</b>/<i>profile</i>/serverspace
+	 * Example URI: emfstore://<b>serverspaces</b>/<i>profile</i>/serverspace
 	 */
 	public static final String SERVER_SEGMENT = "serverspaces";
 
 	/**
 	 * The EMFStore URI segment for projects.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/<b>projects</b>/<i>identifier</i>/versions/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/<b>projects</b>/<i>identifier</i>/versions/<i>nr</i>
 	 */
 	public static final String PROJECTS_SEGMENT = "projects";
 
 	/**
 	 * The EMFStore URI segment for a version.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>versions</b>/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>versions</b>/<i>nr</i>
 	 */
 	public static final String VERSIONS_SEGMENT = "versions";
 
 	/**
 	 * The EMFStore URI segment for a changepackage.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>changepackages</b>/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>changepackages</b>/<i>nr</i>
 	 */
 	public static final String CHANGEPACKAGES_SEGMENT = VersionImpl.CHANGEPACKAGES_SEGMENT;
 
 	/**
 	 * The EMFStore URI segment for a projectstate.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>projectstates</b>/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>projectstates</b>/<i>nr</i>
 	 */
 	public static final String PROJECTSTATES_SEGMENT = VersionImpl.PROJECTSTATES_SEGMENT;
 
 	/**
 	 * The EMFStore URI segment for the serverspace.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/<b>serverspace</b>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/<b>serverspace</b>
 	 */
 	public static final String SERVERSPACE_SEGMENT = "serverspace";
 
 	/**
 	 * The EMFStore URI segment for a project's history.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>projecthistory</b>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>projecthistory</b>
 	 */
 	public static final String PROJECTHISTORY_SEGMENT = "projecthistory";
 
 	/**
 	 * The EMFStore URI segment for dynamic models.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/<b>dynamic-models</b>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/<b>dynamic-models</b>
 	 */
 	public static final String DYNAMIC_MODELS_SEGMENT = "dynamic-models";
 
@@ -101,7 +101,7 @@ public final class ServerURIUtil {
 	/**
 	 * Creates an EMFStore URI for addressing the serverspace.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/serverspace
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/serverspace
 	 * 
 	 * @return the EMFStore URI
 	 */
@@ -112,7 +112,7 @@ public final class ServerURIUtil {
 	/**
 	 * Creates an EMFStore URI for addressing a dynamic model.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/dynamic-models/example.ecore
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/dynamic-models/example.ecore
 	 * 
 	 * @param ePackage the ePackage
 	 * @return the EMFStore URI
@@ -132,7 +132,7 @@ public final class ServerURIUtil {
 	/**
 	 * Creates an EMFStore URI for addressing the history of a project.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/projecthistory
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/projecthistory
 	 * 
 	 * @param projectId the project id
 	 * @return the EMFStore URI
@@ -144,7 +144,7 @@ public final class ServerURIUtil {
 	/**
 	 * Creates an EMFStore URI for addressing a specific version of a project.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/versions/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/versions/<i>nr</i>
 	 * 
 	 * @param projectId the project id
 	 * @param versionId the version id
@@ -158,7 +158,7 @@ public final class ServerURIUtil {
 	/**
 	 * Creates an EMFStore URI for addressing a specific changepackage of a project.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/changepackages/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/changepackages/<i>nr</i>
 	 * 
 	 * @param projectId the project id
 	 * @param versionId the version id
@@ -171,7 +171,7 @@ public final class ServerURIUtil {
 	/**
 	 * Creates an EMFStore URI for addressing a specific state of a project.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<i>profile</i>/projects/<i>identifier</i>/projectstates/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/projectstates/<i>nr</i>
 	 * 
 	 * @param projectId the project id
 	 * @param versionId the version id
@@ -184,7 +184,7 @@ public final class ServerURIUtil {
 	/**
 	 * Returns the used profile.
 	 * <p />
-	 * Example URI: emfstore:/serverspaces/<b><i>profile</i></b>/projects/<i>identifier</i>/versions/<i>nr</i>
+	 * Example URI: emfstore://serverspaces/<b><i>profile</i></b>/projects/<i>identifier</i>/versions/<i>nr</i>
 	 * 
 	 * @return the profile
 	 */

@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Johannes Faltermeier
+ * Johannes Faltermeier - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.provider;
 
@@ -48,7 +48,7 @@ public class ProjectSpaceFileURIHandler extends FileURIHandlerImpl {
 	@Override
 	public void delete(URI uri, Map<?, ?> options) throws IOException
 	{
-		// TODO check options
+		// TODO options?
 		File file = new File(uri.toFileString());
 		File parent = file.getParentFile();
 		file.delete();

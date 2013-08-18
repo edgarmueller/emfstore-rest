@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Johannes Faltermeier
+ * Johannes Faltermeier - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.provider;
 
@@ -29,15 +29,15 @@ public abstract class ESAbstractClientURIConverter extends ExtensibleURIConverte
 		// emfstore:
 		if (uri.scheme() != null && uri.scheme().equals(ClientURIUtil.SCHEME)) {
 
-			// emfstore:/workspaces/0
+			// emfstore://workspaces/0
 			if (uri.authority().equals(ClientURIUtil.CLIENT_SEGMENT)) {
 
-				// emfstore:/workspaces/0/workspace
+				// emfstore://workspaces/0/workspace
 				if (uri.segment(1).equals(ClientURIUtil.WORKSPACE_SEGMENT)) {
 					return normalizeWorkspaceURI(uri.segment(0));
 				}
 
-				// emfstore:/workspaces/0/projectspaces/<identifier>
+				// emfstore://workspaces/0/projectspaces/<identifier>
 				else if (uri.segment(1).equals(ClientURIUtil.PROJECTSPACES_SEGMENT)) {
 					return normalizeProjectSpaces(uri);
 				}
@@ -49,17 +49,17 @@ public abstract class ESAbstractClientURIConverter extends ExtensibleURIConverte
 	}
 
 	private URI normalizeProjectSpaces(URI uri) {
-		// emfstore:/workspaces/0/projectspaces/<identifier>/project
+		// emfstore://workspaces/0/projectspaces/<identifier>/project
 		if (uri.segment(3).equals(ClientURIUtil.PROJECT_SEGMENT)) {
 			return normalizeProjectURI(uri.segment(0), uri.segment(2));
 		}
 
-		// emfstore:/workspaces/0/projectspaces/<identifier>/operations
+		// emfstore://workspaces/0/projectspaces/<identifier>/operations
 		else if (uri.segment(3).equals(ClientURIUtil.OPERATIONS_SEGMENT)) {
 			return normalizeOperationsURI(uri.segment(0), uri.segment(2));
 		}
 
-		// emfstore:/workspaces/0/projectspaces/<identifier>/projectspace
+		// emfstore://workspaces/0/projectspaces/<identifier>/projectspace
 		else if (uri.segment(3).equals(ClientURIUtil.PROJECTSPACE_SEGMENT)) {
 			return normalizeProjectSpaceURI(uri.segment(0), uri.segment(2));
 		}
