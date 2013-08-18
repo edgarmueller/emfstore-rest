@@ -7,11 +7,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Johannes Faltermeier
+ * Johannes Faltermeier - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.mongodb;
 
+import java.util.concurrent.CountDownLatch;
+
 import org.eclipse.emf.emfstore.mongodb.client.MongoDBClientResourceSetProvider;
+import org.eclipse.emf.emfstore.mongodb.server.MongoDBDynamicModelProvider;
 import org.eclipse.emf.emfstore.mongodb.server.MongoDBServerResourceSetProvider;
 import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 
@@ -24,6 +27,11 @@ import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 public class ResourceSetFactoryProvider {
 
 	/**
+	 * Synchronization tool for ResourceSetFactory-Service.
+	 */
+	public static final CountDownLatch COUNT_DOWN_LATCH = new CountDownLatch(1);
+
+	/**
 	 * Binds the resource set factory.
 	 * 
 	 * @param resourceSetFactory the resource set factory
@@ -31,6 +39,8 @@ public class ResourceSetFactoryProvider {
 	void bindResourceSetFactory(IResourceSetFactory resourceSetFactory) {
 		MongoDBClientResourceSetProvider.setResourceSetFactory(resourceSetFactory);
 		MongoDBServerResourceSetProvider.setResourceSetFactory(resourceSetFactory);
+		MongoDBDynamicModelProvider.setResourceSetFactory(resourceSetFactory);
+		COUNT_DOWN_LATCH.countDown();
 	}
 
 }

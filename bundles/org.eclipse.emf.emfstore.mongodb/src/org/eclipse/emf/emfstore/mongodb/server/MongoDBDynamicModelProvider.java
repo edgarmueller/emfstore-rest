@@ -7,12 +7,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Johannes Faltermeier
+ * Johannes Faltermeier - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.mongodb.server;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -20,9 +21,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.mongodb.ResourceSetFactoryProvider;
 import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipselabs.mongo.emf.ext.ECollection;
+import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 
 /**
  * MongoDB Dynamic Model Provider.
@@ -30,7 +34,19 @@ import org.eclipselabs.mongo.emf.ext.ECollection;
  * @author jfaltermeier
  * 
  */
+@SuppressWarnings("restriction")
 public class MongoDBDynamicModelProvider implements ESDynamicModelProvider {
+
+	private static IResourceSetFactory resourceSetFactory;
+
+	/**
+	 * Sets the resource set factory.
+	 * 
+	 * @param factory the factory
+	 */
+	public static void setResourceSetFactory(IResourceSetFactory factory) {
+		MongoDBDynamicModelProvider.resourceSetFactory = factory;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -40,7 +56,12 @@ public class MongoDBDynamicModelProvider implements ESDynamicModelProvider {
 	public List<EPackage> getDynamicModels() {
 		URI dynamicModelsURI = URI.createURI(MongoServerURIConverter.getMongoURIPrefix(ServerURIUtil.getProfile())
 			+ "dynamic-models/ecore");
-		ResourceSet resourceSet = MongoDBServerResourceSetProvider.resourceSetFactory.createResourceSet();
+		try {
+			ResourceSetFactoryProvider.COUNT_DOWN_LATCH.await(10, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			ModelUtil.logException("Setup of Mongo-DB ResourceSet failed", e);
+		}
+		ResourceSet resourceSet = MongoDBDynamicModelProvider.resourceSetFactory.createResourceSet();
 		Resource resource = resourceSet.getResource(dynamicModelsURI, true);
 
 		List<EPackage> result = new ArrayList<EPackage>();
