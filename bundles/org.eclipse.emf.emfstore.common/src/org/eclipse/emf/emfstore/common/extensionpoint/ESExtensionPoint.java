@@ -28,7 +28,7 @@ import org.eclipse.emf.emfstore.internal.common.Activator;
  * @author wesendon
  */
 public final class ESExtensionPoint {
-	
+
 	private List<ESExtensionElement> elements;
 	private final String id;
 	private boolean exceptionInsteadOfNull;
@@ -53,6 +53,20 @@ public final class ESExtensionPoint {
 		this.id = id;
 		exceptionInsteadOfNull = throwException;
 		this.comparator = getDefaultComparator();
+		reload();
+	}
+
+	/**
+	 * Constructor with option of set the throw exception option.
+	 * 
+	 * @param id extension point id
+	 * @param throwException if true, an {@link ESExtensionPointException} is thrown instead of returning null
+	 * @param comparator the comparator which defines the order of the {@link ESExtensionElement}s
+	 */
+	public ESExtensionPoint(String id, boolean throwException, Comparator<ESExtensionElement> comparator) {
+		this.id = id;
+		exceptionInsteadOfNull = throwException;
+		this.comparator = comparator;
 		reload();
 	}
 

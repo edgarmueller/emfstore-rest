@@ -94,9 +94,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// create a resource to save the file to disc
 			ESExtensionPoint extensionPoint = new ESExtensionPoint(
 				"org.eclipse.emf.emfstore.server.resourceSetProvider",
-				true);
-			extensionPoint.setComparator(new ESPriorityComparator("priority", true));
-			extensionPoint.reload();
+				true, new ESPriorityComparator("priority", true));
 
 			ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
 				"class",

@@ -464,9 +464,7 @@ public class SetupHelper {
 	 */
 	public static void cleanupServer() {
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
-			true);
-		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
-		extensionPoint.reload();
+			true, new ESPriorityComparator("priority", true));
 
 		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
 			ESResourceSetProvider.class);
@@ -514,9 +512,7 @@ public class SetupHelper {
 		ESWorkspaceProviderImpl.getInstance().dispose();
 
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
-			true);
-		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
-		extensionPoint.reload();
+			true, new ESPriorityComparator("priority", true));
 
 		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
 			ESResourceSetProvider.class);

@@ -713,14 +713,11 @@ public final class ModelUtil {
 			ESExtensionPoint extensionPoint = null;
 			if (resourceURI.authority().equals("workspaces")) {
 				extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
-					false);
+					false, new ESPriorityComparator("priority", true));
 			} else {
 				extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
-					false);
+					false, new ESPriorityComparator("priority", true));
 			}
-
-			extensionPoint.setComparator(new ESPriorityComparator("priority", true));
-			extensionPoint.reload();
 
 			ESResourceSetProvider resourceSetProvider = extensionPoint
 				.getElementWithHighestPriority().getClass(

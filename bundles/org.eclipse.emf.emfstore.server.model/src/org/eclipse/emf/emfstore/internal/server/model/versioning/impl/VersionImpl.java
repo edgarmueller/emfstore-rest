@@ -1051,9 +1051,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 */
 	private void addResourceToResourceSet(Resource resource) {
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
-			true);
-		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
-		extensionPoint.reload();
+			true, new ESPriorityComparator("priority", true));
 
 		ESResourceSetProvider resourceSetProvider = extensionPoint
 			.getElementWithHighestPriority().getClass("class",

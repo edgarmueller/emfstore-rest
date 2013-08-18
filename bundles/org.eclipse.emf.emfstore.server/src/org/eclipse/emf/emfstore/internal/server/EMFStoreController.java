@@ -182,9 +182,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	// delegates loading of dynamic models to the resource set provider
 	private void registerDynamicModels() {
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.dynamicModelProvider",
-			true);
-		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
-		extensionPoint.reload();
+			true, new ESPriorityComparator("priority", true));
 		ESDynamicModelProvider dynamicModelProvider = extensionPoint.getElementWithHighestPriority().getClass(
 			"class", ESDynamicModelProvider.class);
 		List<EPackage> models = dynamicModelProvider.getDynamicModels();
@@ -295,9 +293,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	private ServerSpace initServerSpace() throws FatalESException {
 
 		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
-			true);
-		extensionPoint.setComparator(new ESPriorityComparator("priority", true));
-		extensionPoint.reload();
+			true, new ESPriorityComparator("priority", true));
 
 		ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
 			ESResourceSetProvider.class);
