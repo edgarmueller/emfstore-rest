@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,9 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
- * Maximilian Koegel
+ * Otto von Wesendonk, Edgar Mueller, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.configuration;
 
@@ -32,10 +30,9 @@ import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
  * Configuration options that influence the behavior of the client.
  * This currently includes:
  * <ul>
- * <li>checksum error handler</li>
- * <li>autosave</li>
- * <li>default server configuration</li>
- * <li>
+ * <li>Checksum Error Handler</li>
+ * <li>Autosave</li>
+ * <li>Default Server Configuration</li>
  * </ul>
  * 
  * @author emueller
@@ -51,9 +48,6 @@ public class Behavior {
 	private static final String AUTO_SAVE_EXTENSION_POINT_ATTRIBUTE_NAME = "autoSave";
 	private static Boolean autoSave;
 	private ESChecksumErrorHandler checksumErrorHandler;
-
-	public Behavior() {
-	}
 
 	/**
 	 * Whether to enable the automatic saving of the workspace.
@@ -71,7 +65,7 @@ public class Behavior {
 	 * 
 	 * @return true, if auto-save is enabled, false otherwise
 	 */
-	public static boolean isAutoSaveEnabled() {
+	public boolean isAutoSaveEnabled() {
 		if (autoSave == null) {
 			autoSave = new ESExtensionPoint("org.eclipse.emf.emfstore.client.recordingOptions")
 				.getBoolean(
@@ -87,7 +81,8 @@ public class Behavior {
 	 * @return true, if the checksum comparison is activated, false otherwise
 	 */
 	public boolean isChecksumCheckActive() {
-		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.checksumErrorHandler");
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.checksumErrorHandler");
 		return extensionPoint.getBoolean("isActive", true);
 	}
 
@@ -100,13 +95,13 @@ public class Behavior {
 
 		if (checksumErrorHandler == null) {
 
-			ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			final ESExtensionPoint extensionPoint = new ESExtensionPoint(
 				"org.eclipse.emf.emfstore.client.checksumErrorHandler");
 
-			ESExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
+			final ESExtensionElement elementWithHighestPriority = extensionPoint.getElementWithHighestPriority();
 
 			if (elementWithHighestPriority != null) {
-				ESChecksumErrorHandler errorHandler = elementWithHighestPriority
+				final ESChecksumErrorHandler errorHandler = elementWithHighestPriority
 					.getClass("errorHandler",
 						ESChecksumErrorHandler.class);
 
@@ -139,15 +134,15 @@ public class Behavior {
 	 * @return server info
 	 */
 	public List<ServerInfo> getDefaultServerInfos() {
-		ESClientConfigurationProvider provider = new ESExtensionPoint(
+		final ESClientConfigurationProvider provider = new ESExtensionPoint(
 			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider")
 			.getClass("providerClass",
 				ESClientConfigurationProvider.class);
-		ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();
+		final ArrayList<ServerInfo> result = new ArrayList<ServerInfo>();
 		if (provider != null) {
-			List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
+			final List<ESServer> defaultServerInfos = provider.getDefaultServerInfos();
 
-			for (ESServer server : defaultServerInfos) {
+			for (final ESServer server : defaultServerInfos) {
 				result.add(((ESServerImpl) server).toInternalAPI());
 			}
 
@@ -158,13 +153,13 @@ public class Behavior {
 	}
 
 	private ServerInfo getLocalhostServerInfo() {
-		ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
+		final ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
 		serverInfo.setName("Localhost Server");
 		serverInfo.setPort(8080);
 		serverInfo.setUrl("localhost");
 		serverInfo.setCertificateAlias(KeyStoreManager.DEFAULT_CERTIFICATE);
 
-		Usersession superUsersession = ModelFactory.eINSTANCE.createUsersession();
+		final Usersession superUsersession = ModelFactory.eINSTANCE.createUsersession();
 		superUsersession.setServerInfo(serverInfo);
 		superUsersession.setPassword("super");
 		superUsersession.setSavePassword(true);

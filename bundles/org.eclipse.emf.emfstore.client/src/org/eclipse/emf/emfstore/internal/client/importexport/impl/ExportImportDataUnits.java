@@ -21,17 +21,26 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 	/**
 	 * A local change.
 	 * 
-	 * @see ProjectSpace#getLocalOperations()
+	 * @see ProjectSpace#getLocalChangePackage()
 	 */
 	Change {
 		/**
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
-			return ".esc";
+			return ".eoc";
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getName()
+		 */
+		public String getName() {
+			return "operations";
 		}
 	},
 
@@ -43,10 +52,19 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".ecp";
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getName()
+		 */
+		public String getName() {
+			return "project";
 		}
 	},
 
@@ -58,10 +76,19 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esp";
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getName()
+		 */
+		public String getName() {
+			return "projectspace";
 		}
 	},
 
@@ -74,10 +101,19 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esw";
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getName()
+		 */
+		public String getName() {
+			return "workspace";
 		}
 	},
 
@@ -89,10 +125,19 @@ public enum ExportImportDataUnits implements ExportImportDataUnit {
 		 * 
 		 * {@inheritDoc}
 		 * 
-		 * @see org.eclipse.emf.emfstore.internal.client.model.controller.importexport.IExportImportController.ExportImportDataUnit#getExtension()
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getExtension()
 		 */
 		public String getExtension() {
 			return ".esh";
+		}
+
+		/**
+		 * {@inheritDoc}
+		 * 
+		 * @see org.eclipse.emf.emfstore.internal.client.importexport.ExportImportDataUnit#getName()
+		 */
+		public String getName() {
+			return "history";
 		}
 	}
 }

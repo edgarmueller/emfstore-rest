@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -24,8 +24,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.ConfigPackage;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.Root;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Root</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Root</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -75,7 +74,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	public EList<EObject> getElements() {
 		if (elements == null) {
 			elements = new EObjectContainmentEList<EObject>(EObject.class,
-					this, ConfigPackage.ROOT__ELEMENTS);
+				this, ConfigPackage.ROOT__ELEMENTS);
 		}
 		return elements;
 	}
@@ -87,11 +86,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+		int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ConfigPackage.ROOT__ELEMENTS:
 			return ((InternalEList<?>) getElements()).basicRemove(otherEnd,
-					msgs);
+				msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

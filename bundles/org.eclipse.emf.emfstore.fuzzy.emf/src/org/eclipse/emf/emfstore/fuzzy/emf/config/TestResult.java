@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,8 +13,7 @@ package org.eclipse.emf.emfstore.fuzzy.emf.config;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '
- * <em><b>Test Result</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Test Result</b></em>'. <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -23,8 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * <em>Seed Count</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getTestName
  * <em>Test Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getError <em>
- * Error</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getError <em> Error</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getFailure
  * <em>Failure</em>}</li>
  * <li>
@@ -42,8 +40,8 @@ public interface TestResult extends EObject {
 	 * Returns the value of the '<em><b>Seed Count</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Seed Count</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Seed Count</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -56,8 +54,7 @@ public interface TestResult extends EObject {
 	int getSeedCount();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getSeedCount
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getSeedCount
 	 * <em>Seed Count</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -72,8 +69,8 @@ public interface TestResult extends EObject {
 	 * Returns the value of the '<em><b>Test Name</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Test Name</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Test Name</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -86,8 +83,7 @@ public interface TestResult extends EObject {
 	String getTestName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getTestName
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getTestName
 	 * <em>Test Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -102,8 +98,8 @@ public interface TestResult extends EObject {
 	 * Returns the value of the '<em><b>Error</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Error</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Error</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -116,8 +112,7 @@ public interface TestResult extends EObject {
 	String getError();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getError
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getError
 	 * <em>Error</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -131,8 +126,8 @@ public interface TestResult extends EObject {
 	 * Returns the value of the '<em><b>Failure</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Failure</em>' attribute isn't clear, there
-	 * really should be more of a description here...
+	 * If the meaning of the '<em>Failure</em>' attribute isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -145,8 +140,7 @@ public interface TestResult extends EObject {
 	String getFailure();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getFailure
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getFailure
 	 * <em>Failure</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -161,8 +155,8 @@ public interface TestResult extends EObject {
 	 * Returns the value of the '<em><b>Execution Time</b></em>' attribute. <!--
 	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Execution Time</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Execution Time</em>' attribute isn't clear, there really should be more of a
+	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * 
@@ -175,8 +169,7 @@ public interface TestResult extends EObject {
 	long getExecutionTime();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getExecutionTime
+	 * Sets the value of the ' {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult#getExecutionTime
 	 * <em>Execution Time</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

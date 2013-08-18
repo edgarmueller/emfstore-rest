@@ -22,7 +22,6 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -39,7 +38,7 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelFactory;
  * @generated
  */
 public class PendingFileTransferItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
-	IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -237,7 +236,7 @@ public class PendingFileTransferItemProvider extends ItemProviderAdapter impleme
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PendingFileTransfer) object).getFileName();
+		final String label = ((PendingFileTransfer) object).getFileName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_PendingFileTransfer_type") :
 			getString("_UI_PendingFileTransfer_type") + " " + label;

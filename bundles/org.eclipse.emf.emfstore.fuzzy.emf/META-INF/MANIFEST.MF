@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EMFDataProvider for FuzzyTestRunner (Incubation)
+Bundle-Name: EMFDataProvider for FuzzyTestRunner
 Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy.emf;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

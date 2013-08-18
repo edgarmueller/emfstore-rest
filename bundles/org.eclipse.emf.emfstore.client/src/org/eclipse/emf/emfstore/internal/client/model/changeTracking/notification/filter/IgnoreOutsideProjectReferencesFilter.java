@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * koegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -33,11 +33,11 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
 	@SuppressWarnings("rawtypes")
-	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 
 		// if notification is from an element disconnected from the project?s containment tree we will not try to filter
 		// since we cannot derive the project then
@@ -50,8 +50,8 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 			return false;
 		}
 
-		// do not filter notificatiosn on containment or container references
-		EReference reference = (EReference) notificationInfo.getFeature();
+		// do not filter notifications on containment or container references
+		final EReference reference = (EReference) notificationInfo.getFeature();
 		if (reference.isContainer() || reference.isContainment()) {
 			return false;
 		}
@@ -83,7 +83,7 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 
 	}
 
-	private boolean checkSingleReference(ESNotificationInfo notificationInfo, ESObjectContainer container) {
+	private boolean checkSingleReference(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 		if (notificationInfo.getEventType() == Notification.UNSET) {
 			// do NOT filter unset notifications although old and new value are not in project
 			return false;
@@ -104,8 +104,8 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkOldValueList(ESNotificationInfo notificationInfo, ESObjectContainer container) {
-		for (EObject referencedElement : ((List<EObject>) notificationInfo.getOldValue())) {
+	private boolean checkOldValueList(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
+		for (final EObject referencedElement : (List<EObject>) notificationInfo.getOldValue()) {
 			if (isOrWasInProject(container, referencedElement)) {
 				return false;
 			}
@@ -116,8 +116,8 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkNewValueList(ESNotificationInfo notificationInfo, ESObjectContainer container) {
-		for (EObject referencedElement : ((List<EObject>) notificationInfo.getNewValue())) {
+	private boolean checkNewValueList(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
+		for (final EObject referencedElement : (List<EObject>) notificationInfo.getNewValue()) {
 			if (isOrWasInProject(container, referencedElement)) {
 				return false;
 			}
@@ -126,12 +126,15 @@ public class IgnoreOutsideProjectReferencesFilter implements ESNotificationFilte
 		return true;
 	}
 
-	private boolean isOrWasInProject(ESObjectContainer container, EObject referencedElement) {
+	private boolean isOrWasInProject(ESObjectContainer<?> container, EObject referencedElement) {
+
 		if (ModelUtil.isSingleton(referencedElement)) {
 			return true;
 		}
-		boolean b = container.contains(referencedElement)
+
+		final boolean b = container.contains(referencedElement)
 			|| ((IdEObjectCollectionImpl) container).getDeletedModelElementId(referencedElement) != null;
+
 		return b;
 	}
 }

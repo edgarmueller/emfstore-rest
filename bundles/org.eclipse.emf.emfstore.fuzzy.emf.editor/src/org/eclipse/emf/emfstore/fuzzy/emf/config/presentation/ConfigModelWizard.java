@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -80,9 +80,9 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSIONS = Collections
-			.unmodifiableList(Arrays.asList(ConfigEditorPlugin.INSTANCE
-					.getString("_UI_ConfigEditorFilenameExtensions").split(
-							"\\s*,\\s*")));
+		.unmodifiableList(Arrays.asList(ConfigEditorPlugin.INSTANCE
+			.getString("_UI_ConfigEditorFilenameExtensions").split(
+				"\\s*,\\s*")));
 
 	/**
 	 * A formatted list of supported file extensions, suitable for display. <!--
@@ -91,8 +91,8 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final String FORMATTED_FILE_EXTENSIONS = ConfigEditorPlugin.INSTANCE
-			.getString("_UI_ConfigEditorFilenameExtensions").replaceAll(
-					"\\s*,\\s*", ", ");
+		.getString("_UI_ConfigEditorFilenameExtensions").replaceAll(
+			"\\s*,\\s*", ", ");
 
 	/**
 	 * This caches an instance of the model package. <!-- begin-user-doc -->
@@ -160,10 +160,10 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(ConfigEditorPlugin.INSTANCE
-				.getString("_UI_Wizard_label"));
+			.getString("_UI_Wizard_label"));
 		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE
-				.getImageDescriptor(ConfigEditorPlugin.INSTANCE
-						.getImage("full/wizban/NewConfig")));
+			.getImageDescriptor(ConfigEditorPlugin.INSTANCE
+				.getImage("full/wizban/NewConfig")));
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 				}
 			}
 			Collections.sort(initialObjectNames,
-					CommonPlugin.INSTANCE.getComparator());
+				CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;
 	}
@@ -196,8 +196,8 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 	 */
 	protected EObject createInitialModel() {
 		EClass eClass = (EClass) configPackage
-				.getEClassifier(initialObjectCreationPage
-						.getInitialObjectName());
+			.getEClassifier(initialObjectCreationPage
+				.getInitialObjectName());
 		EObject rootObject = configFactory.create(eClass);
 		return rootObject;
 	}
@@ -228,7 +228,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 						// Get the URI of the model file.
 						//
 						URI fileURI = URI.createPlatformResourceURI(modelFile
-								.getFullPath().toString(), true);
+							.getFullPath().toString(), true);
 
 						// Create a resource for this file.
 						//
@@ -245,7 +245,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 						//
 						Map<Object, Object> options = new HashMap<Object, Object>();
 						options.put(XMLResource.OPTION_ENCODING,
-								initialObjectCreationPage.getEncoding());
+							initialObjectCreationPage.getEncoding());
 						resource.save(options);
 					} catch (Exception exception) {
 						ConfigEditorPlugin.INSTANCE.log(exception);
@@ -260,16 +260,16 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 			// Select the new file resource in the current view.
 			//
 			IWorkbenchWindow workbenchWindow = workbench
-					.getActiveWorkbenchWindow();
+				.getActiveWorkbenchWindow();
 			IWorkbenchPage page = workbenchWindow.getActivePage();
 			final IWorkbenchPart activePart = page.getActivePart();
 			if (activePart instanceof ISetSelectionTarget) {
 				final ISelection targetSelection = new StructuredSelection(
-						modelFile);
+					modelFile);
 				getShell().getDisplay().asyncExec(new Runnable() {
 					public void run() {
 						((ISetSelectionTarget) activePart)
-								.selectReveal(targetSelection);
+							.selectReveal(targetSelection);
 					}
 				});
 			}
@@ -278,17 +278,17 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 			//
 			try {
 				page.openEditor(
-						new FileEditorInput(modelFile),
-						workbench
-								.getEditorRegistry()
-								.getDefaultEditor(
-										modelFile.getFullPath().toString())
-								.getId());
+					new FileEditorInput(modelFile),
+					workbench
+						.getEditorRegistry()
+						.getDefaultEditor(
+							modelFile.getFullPath().toString())
+						.getId());
 			} catch (PartInitException exception) {
 				MessageDialog.openError(workbenchWindow.getShell(),
-						ConfigEditorPlugin.INSTANCE
-								.getString("_UI_OpenEditorError_label"),
-						exception.getMessage());
+					ConfigEditorPlugin.INSTANCE
+						.getString("_UI_OpenEditorError_label"),
+					exception.getMessage());
 				return false;
 			}
 
@@ -306,14 +306,14 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public class ConfigModelWizardNewFileCreationPage extends
-			WizardNewFileCreationPage {
+		WizardNewFileCreationPage {
 		/**
 		 * Pass in the selection. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		public ConfigModelWizardNewFileCreationPage(String pageId,
-				IStructuredSelection selection) {
+			IStructuredSelection selection) {
 			super(pageId, selection);
 		}
 
@@ -329,9 +329,9 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 				String extension = new Path(getFileName()).getFileExtension();
 				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
 					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions"
-							: "_WARN_FilenameExtension";
+						: "_WARN_FilenameExtension";
 					setErrorMessage(ConfigEditorPlugin.INSTANCE.getString(key,
-							new Object[] { FORMATTED_FILE_EXTENSIONS }));
+						new Object[] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
 				return true;
@@ -346,7 +346,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 		 */
 		public IFile getModelFile() {
 			return ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(getContainerFullPath().append(getFileName()));
+				.getFile(getContainerFullPath().append(getFileName()));
 		}
 	}
 
@@ -408,7 +408,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 			Label containerLabel = new Label(composite, SWT.LEFT);
 			{
 				containerLabel.setText(ConfigEditorPlugin.INSTANCE
-						.getString("_UI_ModelObject"));
+					.getString("_UI_ModelObject"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -435,7 +435,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 			Label encodingLabel = new Label(composite, SWT.LEFT);
 			{
 				encodingLabel.setText(ConfigEditorPlugin.INSTANCE
-						.getString("_UI_XMLEncoding"));
+					.getString("_UI_XMLEncoding"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -478,7 +478,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 		 */
 		protected boolean validatePage() {
 			return getInitialObjectName() != null
-					&& getEncodings().contains(encodingField.getText());
+				&& getEncodings().contains(encodingField.getText());
 		}
 
 		/**
@@ -534,7 +534,7 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 		protected String getLabel(String typeName) {
 			try {
 				return ConfigEditPlugin.INSTANCE.getString("_UI_" + typeName
-						+ "_type");
+					+ "_type");
 			} catch (MissingResourceException mre) {
 				ConfigEditorPlugin.INSTANCE.log(mre);
 			}
@@ -550,9 +550,9 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 			if (encodings == null) {
 				encodings = new ArrayList<String>();
 				for (StringTokenizer stringTokenizer = new StringTokenizer(
-						ConfigEditorPlugin.INSTANCE
-								.getString("_UI_XMLEncodingChoices")); stringTokenizer
-						.hasMoreTokens();) {
+					ConfigEditorPlugin.INSTANCE
+						.getString("_UI_XMLEncodingChoices")); stringTokenizer
+					.hasMoreTokens();) {
 					encodings.add(stringTokenizer.nextToken());
 				}
 			}
@@ -571,15 +571,15 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 		// Create a page, set the title, and the initial model file name.
 		//
 		newFileCreationPage = new ConfigModelWizardNewFileCreationPage(
-				"Whatever", selection);
+			"Whatever", selection);
 		newFileCreationPage.setTitle(ConfigEditorPlugin.INSTANCE
-				.getString("_UI_ConfigModelWizard_label"));
+			.getString("_UI_ConfigModelWizard_label"));
 		newFileCreationPage.setDescription(ConfigEditorPlugin.INSTANCE
-				.getString("_UI_ConfigModelWizard_description"));
+			.getString("_UI_ConfigModelWizard_description"));
 		newFileCreationPage.setFileName(ConfigEditorPlugin.INSTANCE
-				.getString("_UI_ConfigEditorFilenameDefaultBase")
-				+ "."
-				+ FILE_EXTENSIONS.get(0));
+			.getString("_UI_ConfigEditorFilenameDefaultBase")
+			+ "."
+			+ FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory
@@ -600,35 +600,35 @@ public class ConfigModelWizard extends Wizard implements INewWizard {
 				// This gives us a directory...
 				//
 				if (selectedResource instanceof IFolder
-						|| selectedResource instanceof IProject) {
+					|| selectedResource instanceof IProject) {
 					// Set this for the container.
 					//
 					newFileCreationPage.setContainerFullPath(selectedResource
-							.getFullPath());
+						.getFullPath());
 
 					// Make up a unique new name here.
 					//
 					String defaultModelBaseFilename = ConfigEditorPlugin.INSTANCE
-							.getString("_UI_ConfigEditorFilenameDefaultBase");
+						.getString("_UI_ConfigEditorFilenameDefaultBase");
 					String defaultModelFilenameExtension = FILE_EXTENSIONS
-							.get(0);
+						.get(0);
 					String modelFilename = defaultModelBaseFilename + "."
-							+ defaultModelFilenameExtension;
+						+ defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer) selectedResource)
-							.findMember(modelFilename) != null; ++i) {
+						.findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "."
-								+ defaultModelFilenameExtension;
+							+ defaultModelFilenameExtension;
 					}
 					newFileCreationPage.setFileName(modelFilename);
 				}
 			}
 		}
 		initialObjectCreationPage = new ConfigModelWizardInitialObjectCreationPage(
-				"Whatever2");
+			"Whatever2");
 		initialObjectCreationPage.setTitle(ConfigEditorPlugin.INSTANCE
-				.getString("_UI_ConfigModelWizard_label"));
+			.getString("_UI_ConfigModelWizard_label"));
 		initialObjectCreationPage.setDescription(ConfigEditorPlugin.INSTANCE
-				.getString("_UI_Wizard_initial_object_description"));
+			.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}
 

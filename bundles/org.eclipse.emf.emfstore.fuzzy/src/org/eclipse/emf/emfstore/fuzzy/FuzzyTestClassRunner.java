@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy;
@@ -27,8 +27,8 @@ import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 
 /**
- * A {@link org.junit.runner.Runner} for each
- * {@link org.junit.runners.model.TestClass}. Used in the {@link FuzzyRunner}.
+ * A {@link org.junit.runner.Runner} for each {@link org.junit.runners.model.TestClass}. Used in the {@link FuzzyRunner}
+ * .
  * 
  * @author Julian Sommerfeldt
  * 
@@ -82,9 +82,9 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	 *             If there was a problem during the initialization of the test
 	 */
 	FuzzyTestClassRunner(Class<?> type, FuzzyDataProvider<?> dataProvider,
-			FrameworkField dataField, FrameworkField utilField,
-			FrameworkField optionsField, Util util, int counter)
-			throws InitializationError {
+		FrameworkField dataField, FrameworkField utilField,
+		FrameworkField optionsField, Util util, int counter)
+		throws InitializationError {
 		super(type);
 		this.counter = counter;
 		this.dataField = dataField;
@@ -100,21 +100,21 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 		try {
 			// create a new instance of the testclass
 			Object testInstance = getTestClass().getOnlyConstructor()
-					.newInstance();
+				.newInstance();
 
 			// set the options to dataprovider
 			if (optionsField != null) {
 				Object options = getValueFromField(optionsField.getField(),
-						testInstance);
+					testInstance);
 				if (options == null) {
 					throw new IllegalStateException(
-							"The options field has to be not null! Fill it or remove annotation.");
+						"The options field has to be not null! Fill it or remove annotation.");
 				}
 				try {
 					dataProvider.setOptions((Map<String, Object>) options);
 				} catch (ClassCastException e) {
 					throw new ClassCastException(
-							"The options field is not of type: Map<String, Object>!");
+						"The options field is not of type: Map<String, Object>!");
 				}
 			}
 
@@ -123,15 +123,15 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 
 			// set the data to the datafield
 			setValueToField(dataField.getField(), testInstance, data,
-					"The field annotated with " + Data.class.getSimpleName()
-							+ " does not fit to the type of the dataprovider ("
-							+ dataProvider.getClass() + ").");
+				"The field annotated with " + Data.class.getSimpleName()
+					+ " does not fit to the type of the dataprovider ("
+					+ dataProvider.getClass() + ").");
 
 			// set the util to the util field
 			if (util != null && utilField != null) {
 				setValueToField(utilField.getField(), testInstance, util,
-						"The field annotated " + Util.class.getSimpleName()
-								+ " does not fit to the Util type!");
+					"The field annotated " + Util.class.getSimpleName()
+						+ " does not fit to the Util type!");
 			}
 
 			return testInstance;
@@ -145,7 +145,7 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	}
 
 	private Object getValueFromField(Field field, Object instance)
-			throws IllegalAccessException {
+		throws IllegalAccessException {
 		try {
 			field.setAccessible(true);
 			Object o = field.get(instance);
@@ -156,7 +156,7 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	}
 
 	private void setValueToField(Field field, Object instance, Object value,
-			String errorMsg) throws IllegalAccessException {
+		String errorMsg) throws IllegalAccessException {
 		try {
 			field.setAccessible(true);
 			field.set(instance, value);
@@ -191,7 +191,7 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 
 	private String testName(String name) {
 		return String.format("%s%s[%s]", name, FuzzyRunner.NAME_SEPARATOR,
-				counter);
+			counter);
 	}
 
 	@Override
@@ -202,7 +202,7 @@ public class FuzzyTestClassRunner extends BlockJUnit4ClassRunner {
 	@Override
 	protected String getName() {
 		return String.format("%s%s[%s]", getTestClass().getName(),
-				FuzzyRunner.NAME_SEPARATOR, counter);
+			FuzzyRunner.NAME_SEPARATOR, counter);
 	}
 
 	@Override

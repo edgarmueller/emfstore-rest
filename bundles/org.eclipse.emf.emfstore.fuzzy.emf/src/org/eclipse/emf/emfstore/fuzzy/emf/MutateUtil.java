@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf;
@@ -55,8 +55,7 @@ public class MutateUtil implements Util {
 	}
 
 	/**
-	 * @return The minimum objects count of the current
-	 *         {@link ModelMutatorConfiguration} of the {@link EMFDataProvider}
+	 * @return The minimum objects count of the current {@link ModelMutatorConfiguration} of the {@link EMFDataProvider}
 	 *         .
 	 */
 	public int getMinObjectsCount() {
@@ -78,21 +77,19 @@ public class MutateUtil implements Util {
 	}
 
 	/**
-	 * @return The EClasses to ignore in the current
-	 *         {@link ModelMutatorConfiguration}.
+	 * @return The EClasses to ignore in the current {@link ModelMutatorConfiguration}.
 	 */
 	public Collection<EClass> getEClassesToIgnore() {
 		return dataProvider.getModelMutatorConfiguration()
-				.geteClassesToIgnore();
+			.geteClassesToIgnore();
 	}
 
 	/**
-	 * @return The {@link EStructuralFeature}s to ignore in the current
-	 *         {@link ModelMutatorConfiguration}.
+	 * @return The {@link EStructuralFeature}s to ignore in the current {@link ModelMutatorConfiguration}.
 	 */
 	public Collection<EStructuralFeature> getEStructuralFeaturesToIgnore() {
 		return dataProvider.getModelMutatorConfiguration()
-				.geteStructuralFeaturesToIgnore();
+			.geteStructuralFeaturesToIgnore();
 	}
 
 	/**
@@ -125,22 +122,21 @@ public class MutateUtil implements Util {
 	 * @param obj
 	 *            The EObject to save.
 	 * @param suffix
-	 *            The suffix of the file: e.g. testFile. <code>null</code>
-	 *            permitted.
+	 *            The suffix of the file: e.g. testFile. <code>null</code> permitted.
 	 * @param discardDanglingHREF
 	 *            Should the save ignore dangling hrefs?
 	 */
 	public void saveEObject(EObject obj, String suffix,
-			boolean discardDanglingHREF) {
+		boolean discardDanglingHREF) {
 		Resource resource = FuzzyUtil
-				.createResource(getRunResourcePath(suffix));
+			.createResource(getRunResourcePath(suffix));
 		resource.getContents().add(obj);
 
 		try {
 			Map<Object, Object> options = new HashMap<Object, Object>();
 			if (discardDanglingHREF) {
 				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
-						XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
+					XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 			}
 			resource.save(options);
 		} catch (IOException e) {
@@ -150,24 +146,22 @@ public class MutateUtil implements Util {
 
 	/**
 	 * @param suffix
-	 *            The suffix for the file: e.g. testFile. <code>null</code>
-	 *            permitted.
+	 *            The suffix for the file: e.g. testFile. <code>null</code> permitted.
 	 * @return A file path to the current run folder.
 	 */
 	public String getRunResourcePath(String suffix) {
 		String toAdd = (suffix == null || "".equals(suffix)) ? "" : "_"
-				+ suffix;
+			+ suffix;
 		return FuzzyUtil.ROOT_FOLDER + FuzzyUtil.RUN_FOLDER
-				+ dataProvider.getConfig().getId() + "/"
-				+ dataProvider.getCurrentSeedCount() + toAdd
-				+ FuzzyUtil.FILE_SUFFIX;
+			+ dataProvider.getConfig().getId() + "/"
+			+ dataProvider.getCurrentSeedCount() + toAdd
+			+ FuzzyUtil.FILE_SUFFIX;
 	}
 
 	/**
 	 * 
 	 * @param suffix
-	 *            The suffix for the file: e.g. testFile. <code>null</code>
-	 *            permitted.
+	 *            The suffix for the file: e.g. testFile. <code>null</code> permitted.
 	 * @return A file {@link URI} to the current run folder.
 	 */
 	public URI getRunResourceURI(String suffix) {

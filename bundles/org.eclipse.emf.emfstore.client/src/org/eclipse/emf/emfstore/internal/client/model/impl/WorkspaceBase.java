@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,9 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
- * emueller
- * koegel
+ * Otto von Wesendonk, Maximilian Koegel, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -99,14 +97,14 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 */
 	public ProjectSpace cloneProject(String projectName, Project originalProject) {
 
-		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
+		final ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProject(ModelUtil.clone(originalProject));
 		projectSpace.setProjectName(projectName);
 
 		projectSpace.initResources(getResourceSet());
 
-		this.addProjectSpace(projectSpace);
-		this.save();
+		addProjectSpace(projectSpace);
+		save();
 
 		return projectSpace;
 	}
@@ -123,14 +121,16 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#init(org.eclipse.emf.transaction.TransactionalEditingDomain)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#init()
 	 */
+	@SuppressWarnings("unchecked")
 	public void init() {
 		projectToProjectSpaceMap = new LinkedHashMap<Project, ProjectSpace>();
 		// initialize all projectSpaces
-		for (ProjectSpace projectSpace : getProjectSpaces()) {
+		for (final ProjectSpace projectSpace : getProjectSpaces()) {
 			projectSpace.init();
 			projectToProjectSpaceMap.put(projectSpace.getProject(), projectSpace);
 		}
@@ -145,7 +145,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * @see org.eclipse.emf.emfstore.internal.common.ESDisposable#dispose()
 	 */
 	public void dispose() {
-		for (ProjectSpace projectSpace : getProjectSpaces()) {
+		for (final ProjectSpace projectSpace : getProjectSpaces()) {
 			((ProjectSpaceBase) projectSpace).dispose();
 		}
 		getServerInfos().clear();
@@ -154,14 +154,15 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#setWorkspaceResourceSet(org.eclipse.emf.ecore.resource.ResourceSet)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#setResourceSet(org.eclipse.emf.ecore.resource.ResourceSet)
 	 */
 	public void setResourceSet(ResourceSet resourceSet) {
-		this.workspaceResourceSet = resourceSet;
-		for (ProjectSpace projectSpace : getProjectSpaces()) {
-			ProjectSpaceBase base = (ProjectSpaceBase) projectSpace;
+		workspaceResourceSet = resourceSet;
+		for (final ProjectSpace projectSpace : getProjectSpaces()) {
+			final ProjectSpaceBase base = (ProjectSpaceBase) projectSpace;
 			base.setResourceSet(workspaceResourceSet);
 		}
 	}
@@ -203,21 +204,21 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * {@inheritDoc}
 	 */
 	public ResourceSet getResourceSet() {
-		return this.workspaceResourceSet;
+		return workspaceResourceSet;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public ProjectSpace importProject(Project project, String name, String description) {
-		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
+		final ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProject(project);
 		projectSpace.setProjectName(name);
 		projectSpace.setProjectDescription(description);
-		projectSpace.initResources(this.workspaceResourceSet);
+		projectSpace.initResources(workspaceResourceSet);
 
 		addProjectSpace(projectSpace);
-		this.save();
+		save();
 
 		return projectSpace;
 	}
@@ -228,7 +229,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#importProject(java.lang.String)
 	 */
 	public ProjectSpace importProject(String absoluteFileName) throws IOException {
-		Project project = ResourceHelper.getElementFromResource(absoluteFileName, Project.class, 0);
+		final Project project = ResourceHelper.getElementFromResource(absoluteFileName, Project.class, 0);
 		return importProject(project, absoluteFileName.substring(absoluteFileName.lastIndexOf(File.separatorChar) + 1),
 			"Imported from " + absoluteFileName);
 	}
@@ -240,12 +241,13 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 */
 	public ProjectSpace importProjectSpace(String absoluteFileName) throws IOException {
 
-		ProjectSpace projectSpace = ResourceHelper.getElementFromResource(absoluteFileName, ProjectSpace.class, 0);
+		final ProjectSpace projectSpace = ResourceHelper
+			.getElementFromResource(absoluteFileName, ProjectSpace.class, 0);
 
-		projectSpace.initResources(this.workspaceResourceSet);
+		projectSpace.initResources(workspaceResourceSet);
 
 		addProjectSpace(projectSpace);
-		this.save();
+		save();
 		return projectSpace;
 	}
 
@@ -255,8 +257,8 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#resolve(org.eclipse.emf.emfstore.internal.server.model.url.ProjectUrlFragment)
 	 */
 	public Set<ProjectSpace> resolve(ProjectUrlFragment projectUrlFragment) throws ProjectUrlResolutionException {
-		Set<ProjectSpace> result = new LinkedHashSet<ProjectSpace>();
-		for (ProjectSpace projectSpace : getProjectSpaces()) {
+		final Set<ProjectSpace> result = new LinkedHashSet<ProjectSpace>();
+		for (final ProjectSpace projectSpace : getProjectSpaces()) {
 			if (projectSpace.getProjectId().equals(projectUrlFragment.getProjectId())) {
 				result.add(projectSpace);
 			}
@@ -273,10 +275,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#resolve(org.eclipse.emf.emfstore.internal.server.model.url.ServerUrl)
 	 */
 	public Set<ServerInfo> resolve(ServerUrl serverUrl) throws ServerUrlResolutionException {
-		Set<ServerInfo> result = new LinkedHashSet<ServerInfo>();
-		for (ServerInfo serverInfo : getServerInfos()) {
-			boolean matchingHostname = serverInfo.getUrl().equals(serverUrl.getHostName());
-			boolean matchingPort = serverInfo.getPort() == serverUrl.getPort();
+		final Set<ServerInfo> result = new LinkedHashSet<ServerInfo>();
+		for (final ServerInfo serverInfo : getServerInfos()) {
+			final boolean matchingHostname = serverInfo.getUrl().equals(serverUrl.getHostName());
+			final boolean matchingPort = serverInfo.getPort() == serverUrl.getPort();
 			if (matchingHostname && matchingPort) {
 				result.add(serverInfo);
 			}
@@ -296,7 +298,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	public void save() {
 		try {
 			ModelUtil.saveResource(eResource(), ModelUtil.getResourceLogger());
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// MK Auto-generated catch block
 			// FIXME OW MK: also insert code for dangling href handling here
 		}
@@ -401,10 +403,10 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getProjectSpace(org.eclipse.emf.emfstore.internal.common.model.Project)
 	 */
 	public ProjectSpace getProjectSpace(Project project) throws UnkownProjectException {
-		ProjectSpace projectSpace = projectToProjectSpaceMap.get(project);
+		final ProjectSpace projectSpace = projectToProjectSpaceMap.get(project);
 		if (projectSpace == null) {
 			throw new UnkownProjectException();
 		}
@@ -415,30 +417,42 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.DeleteProjectSpaceObserver#projectSpaceDeleted(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.internal.client.observers.DeleteProjectSpaceObserver#projectSpaceDeleted(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
 	 */
 	public void projectSpaceDeleted(ProjectSpace projectSpace) {
-		assert (projectSpace != null);
+		assert projectSpace != null;
 
 		getProjectSpaces().remove(projectSpace);
 		save();
 		projectToProjectSpaceMap.remove(projectSpace.getProject());
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#addServerInfo(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 */
 	public void addServerInfo(ServerInfo serverInfo) {
 		getServerInfos().add(serverInfo);
 		save();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#removeServerInfo(org.eclipse.emf.emfstore.internal.client.model.ServerInfo)
+	 */
 	public void removeServerInfo(ServerInfo serverInfo) {
 		getServerInfos().remove(serverInfo);
 
-		List<Usersession> deletables = new ArrayList<Usersession>();
-		for (Usersession session : getUsersessions()) {
+		final List<Usersession> deletables = new ArrayList<Usersession>();
+		for (final Usersession session : getUsersessions()) {
 			if (session.getServerInfo() == serverInfo) {
 				try {
 					session.logout();
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					// ignore, will be deleted anyways
 				}
 				deletables.add(session);
@@ -449,6 +463,12 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		save();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
+	 */
 	public ESWorkspaceImpl toAPI() {
 		if (apiImplClass == null) {
 			apiImplClass = createAPI();
@@ -456,10 +476,22 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		return apiImplClass;
 	}
 
-	public void setAPIImpl(ESWorkspaceImpl esWorkspaceImpl) {
-		apiImplClass = esWorkspaceImpl;
+	/**
+	 * Set the API implementation class.
+	 * 
+	 * @param apiImpl
+	 *            the internal workspace implementation class to be used
+	 */
+	public void setAPIImpl(ESWorkspaceImpl apiImpl) {
+		apiImplClass = apiImpl;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
+	 */
 	public ESWorkspaceImpl createAPI() {
 		return new ESWorkspaceImpl(this);
 	}

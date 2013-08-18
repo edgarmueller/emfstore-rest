@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.common.model.ESObjectContainer;
 import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
 
 /**
- * A notification filter that filters all notifications that have an unknow type.
+ * A notification filter that filters all notifications that have an unknown type.
  * All notification with an event type >= {@link Notification#EVENT_TYPE_COUNT} are considered to be unknown.
  * 
  * @author emueller
@@ -29,10 +29,10 @@ public class UnknownEventTypeFilter implements ESNotificationFilter {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
-	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
 		return notificationInfo.getEventType() >= Notification.EVENT_TYPE_COUNT;
 	}
 

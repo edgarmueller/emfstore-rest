@@ -70,35 +70,15 @@ public interface ESUpdateCallback {
 	 */
 	ESUpdateCallback NOCALLBACK = new ESUpdateCallback() {
 
-		/**
-		 * 
-		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
-		 *      java.util.List, org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping)
-		 */
 		public boolean inspectChanges(ESLocalProject projectSpace, List<ESChangePackage> changes,
 			ESModelElementIdToEObjectMapping idToEObjectMapping) {
 			return true;
 		}
 
-		/**
-		 * 
-		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#noChangesOnServer()
-		 */
 		public void noChangesOnServer() {
 			// do nothing
 		}
 
-		/**
-		 * 
-		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.server.ESConflictSet,
-		 *      org.eclipse.core.runtime.IProgressMonitor)
-		 */
 		public boolean conflictOccurred(ESConflictSet changeConflict, IProgressMonitor progressMonitor) {
 			return false;
 		}

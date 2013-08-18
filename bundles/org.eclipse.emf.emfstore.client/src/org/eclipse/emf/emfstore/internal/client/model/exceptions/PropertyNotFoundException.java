@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * shterev
+ * Aleksander Shterev - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
@@ -16,7 +16,18 @@ package org.eclipse.emf.emfstore.internal.client.model.exceptions;
  * 
  * @author shterev
  */
-@SuppressWarnings("serial")
 public class PropertyNotFoundException extends Exception {
+
+	private static final long serialVersionUID = -6818317309825518165L;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param message
+	 *            an error message
+	 */
+	public PropertyNotFoundException(String message) {
+		super(message);
+	}
 
 }

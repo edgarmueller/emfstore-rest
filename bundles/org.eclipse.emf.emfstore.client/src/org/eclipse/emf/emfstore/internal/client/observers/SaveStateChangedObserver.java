@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * mkoegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.observers;
 
@@ -25,7 +25,7 @@ public interface SaveStateChangedObserver extends ESObserver {
 	/**
 	 * Notify the listener about a save state change.
 	 * 
-	 * @param projectSpace the project space the notification is about
+	 * @param localProject the project space the notification is about
 	 * @param hasUnsavedChangesNow the new save state, true if there are unsaved changes now
 	 */
 	void saveStateChanged(ESLocalProject localProject, boolean hasUnsavedChangesNow);

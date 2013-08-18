@@ -16,20 +16,36 @@ package org.eclipse.emf.emfstore.internal.client.model.util;
  * 
  * @author koegel
  * @param <T> result type
+ * @param <E> exception type
  */
 public abstract class EMFStoreCommandWithResultAndException<T, E> extends EMFStoreCommandWithResult<T> {
 
-	private E excpetion;
+	private E exception;
 
-	public E getExcpetion() {
-		return excpetion;
+	/**
+	 * Get the exception that occured during command execution if any.
+	 * 
+	 * @return the exception or null
+	 */
+	public E getException() {
+		return exception;
 	}
 
-	public void setException(E excpetion) {
-		this.excpetion = excpetion;
+	/**
+	 * Set the exception that occured during the command execution.
+	 * 
+	 * @param exception the exception
+	 */
+	protected void setException(E exception) {
+		this.exception = exception;
 	}
 
+	/**
+	 * Determine if an exception occured during command execution.
+	 * 
+	 * @return true if an exception has occured
+	 */
 	public boolean hasException() {
-		return excpetion != null;
+		return exception != null;
 	}
 }

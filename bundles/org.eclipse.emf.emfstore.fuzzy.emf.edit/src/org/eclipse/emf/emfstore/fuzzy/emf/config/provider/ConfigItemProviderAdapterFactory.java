@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -40,7 +40,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.util.ConfigAdapterFactory;
  * @generated
  */
 public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
-		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+	implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this
 	 * adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -50,8 +50,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement
-	 * {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -59,8 +58,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by
-	 * {@link #isFactoryForType isFactoryForType}. <!-- begin-user-doc --> <!--
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}. <!--
+	 * begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
@@ -82,8 +81,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig}
+	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -91,8 +90,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected TestConfigItemProvider testConfigItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -107,8 +105,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun} instances. <!--
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -116,8 +114,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected TestRunItemProvider testRunItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -132,8 +129,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult}
+	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -141,8 +138,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected TestResultItemProvider testResultItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -157,8 +153,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff}
+	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -166,8 +162,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected TestDiffItemProvider testDiffItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -182,8 +177,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport}
+	 * instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -191,8 +186,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected DiffReportItemProvider diffReportItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -207,8 +201,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root} instances. <!--
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root}
+	 * instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -216,8 +210,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected RootItemProvider rootItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.Root}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -232,8 +225,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig}
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig}
 	 * instances. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -241,8 +233,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	protected MutatorConfigItemProvider mutatorConfigItemProvider;
 
 	/**
-	 * This creates an adapter for a
-	 * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig}. <!--
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.MutatorConfig}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -264,7 +255,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory
-				.getRootAdapterFactory();
+			.getRootAdapterFactory();
 	}
 
 	/**
@@ -274,7 +265,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	 * @generated
 	 */
 	public void setParentAdapterFactory(
-			ComposedAdapterFactory parentAdapterFactory) {
+		ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -309,7 +300,7 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
 			if (!(type instanceof Class<?>)
-					|| (((Class<?>) type).isInstance(adapter))) {
+				|| (((Class<?>) type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -336,8 +327,8 @@ public class ConfigItemProviderAdapterFactory extends ConfigAdapterFactory
 	}
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to
-	 * {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!-- end-user-doc
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}. <!-- begin-user-doc --> <!--
+	 * end-user-doc
 	 * -->
 	 * 
 	 * @generated

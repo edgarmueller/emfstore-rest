@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -35,7 +35,7 @@ public class OperationReverseTest extends FuzzyProjectTest {
 	public void reverseTest() {
 		final ProjectSpaceBase projectSpace = (ProjectSpaceBase) getProjectSpace();
 		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace
-				.getProject());
+			.getProject());
 
 		new EMFStoreCommand() {
 			@Override
@@ -48,11 +48,11 @@ public class OperationReverseTest extends FuzzyProjectTest {
 			@Override
 			protected void doRun() {
 				projectSpace.getLocalChangePackage().reverse()
-						.apply(projectSpace.getProject());
+					.apply(projectSpace.getProject());
 			}
 		}.run(false);
 
 		compareIgnoreOrder(getCopyProjectSpace().getProject(),
-				projectSpace.getProject());
+			projectSpace.getProject());
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -27,7 +27,7 @@ public class UIRunnableContext implements ESRunnableContext {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.handler.IRunnableContext#executeRunnable(java.lang.Runnable)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.handler.IRunnableContext#executeRunnable(java.lang.Runnable)
 	 */
 	public void executeRunnable(final Runnable runnable) {
 		RunInUI.run(new Callable<Void>() {

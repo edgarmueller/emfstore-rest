@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -61,7 +61,7 @@ public class ServerTest extends CoreServerTest {
 			@Override
 			protected void doRun() {
 				setProjectSpace(((WorkspaceImpl) ESWorkspaceProvider.INSTANCE
-						.getWorkspace()).importProject(project, "", ""));
+					.getWorkspace()).importProject(project, "", ""));
 			}
 		}.run(false);
 		setProject(project);
@@ -81,15 +81,15 @@ public class ServerTest extends CoreServerTest {
 
 		// checkout project
 		final ProjectSpace psCheckedout = checkout(projectSpace.toAPI()
-				.getRemoteProject(), versionSpec);
+			.getRemoteProject(), versionSpec);
 
 		// compare original and checkedout project
 		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(),
-				psCheckedout.getProject(), util);
+			psCheckedout.getProject(), util);
 
 		// change & commit original project
 		final ModelMutatorConfiguration mmc = FuzzyProjectTest
-				.getModelMutatorConfiguration(projectSpace.getProject(), util);
+			.getModelMutatorConfiguration(projectSpace.getProject(), util);
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -113,6 +113,6 @@ public class ServerTest extends CoreServerTest {
 
 		// compare original and updated project
 		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(),
-				psCheckedout.getProject(), util);
+			psCheckedout.getProject(), util);
 	}
 }

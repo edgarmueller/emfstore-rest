@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
@@ -38,17 +38,15 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.internal.common.model.Project,
-	 *      java.util.List, java.util.List,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec)
+	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver#resolveConflicts(org.eclipse.emf.emfstore.internal.common.model.Project,
+	 *      org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet)
 	 */
 	public boolean resolveConflicts(Project project, ChangeConflictSet changeConflict) {
 
 		// allow subclasses do execute before the decisionmanager is initialized
 		preDecisionManagerHook();
 
-		DecisionManager decisionManager = new DecisionManager(project, changeConflict, isBranchMerge);
+		final DecisionManager decisionManager = new DecisionManager(project, changeConflict, isBranchMerge);
 
 		// if all conflicts are resolved, there's no need for further actions
 		if (decisionManager.isResolved()) {
@@ -57,7 +55,7 @@ public abstract class AbstractConflictResolver implements ConflictResolver {
 		}
 
 		// handle conflicts, most likely using the MergeWizard
-		boolean resolved = controlDecisionManager(decisionManager, changeConflict);
+		final boolean resolved = controlDecisionManager(decisionManager, changeConflict);
 		if (resolved) {
 			if (!decisionManager.isResolved()) {
 				return false;

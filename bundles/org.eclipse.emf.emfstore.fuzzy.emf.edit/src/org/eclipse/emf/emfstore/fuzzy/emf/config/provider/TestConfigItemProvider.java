@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -32,15 +32,14 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.ConfigPackage;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestConfig} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
 public class TestConfigItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	IEditingDomainItemProvider, IStructuredItemContentProvider,
+	ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -78,14 +77,14 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addSeedPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestConfig_seed_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestConfig_seed_feature", "_UI_TestConfig_type"),
-				ConfigPackage.Literals.TEST_CONFIG__SEED, true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestConfig_seed_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestConfig_seed_feature", "_UI_TestConfig_type"),
+			ConfigPackage.Literals.TEST_CONFIG__SEED, true, false, false,
+			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -96,14 +95,14 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addCountPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestConfig_count_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestConfig_count_feature", "_UI_TestConfig_type"),
-				ConfigPackage.Literals.TEST_CONFIG__COUNT, true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestConfig_count_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestConfig_count_feature", "_UI_TestConfig_type"),
+			ConfigPackage.Literals.TEST_CONFIG__COUNT, true, false, false,
+			ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -114,15 +113,15 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addTestClassPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestConfig_testClass_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestConfig_testClass_feature",
-						"_UI_TestConfig_type"),
-				ConfigPackage.Literals.TEST_CONFIG__TEST_CLASS, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestConfig_testClass_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestConfig_testClass_feature",
+				"_UI_TestConfig_type"),
+			ConfigPackage.Literals.TEST_CONFIG__TEST_CLASS, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -133,33 +132,31 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addIdPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestConfig_id_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestConfig_id_feature", "_UI_TestConfig_type"),
-				ConfigPackage.Literals.TEST_CONFIG__ID, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestConfig_id_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestConfig_id_feature", "_UI_TestConfig_type"),
+			ConfigPackage.Literals.TEST_CONFIG__ID, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+		Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
-					.add(ConfigPackage.Literals.TEST_CONFIG__MUTATOR_CONFIG);
+				.add(ConfigPackage.Literals.TEST_CONFIG__MUTATOR_CONFIG);
 		}
 		return childrenFeatures;
 	}
@@ -187,7 +184,7 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/TestConfig"));
+			getResourceLocator().getImage("full/obj16/TestConfig"));
 	}
 
 	/**
@@ -200,7 +197,7 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
 		String label = ((TestConfig) object).getId();
 		return label == null || label.length() == 0 ? getString("_UI_TestConfig_type")
-				: getString("_UI_TestConfig_type") + " " + label;
+			: getString("_UI_TestConfig_type") + " " + label;
 	}
 
 	/**
@@ -221,11 +218,11 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 		case ConfigPackage.TEST_CONFIG__TEST_CLASS:
 		case ConfigPackage.TEST_CONFIG__ID:
 			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+				notification.getNotifier(), false, true));
 			return;
 		case ConfigPackage.TEST_CONFIG__MUTATOR_CONFIG:
 			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+				notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -240,12 +237,12 @@ public class TestConfigItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+		Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
-				ConfigPackage.Literals.TEST_CONFIG__MUTATOR_CONFIG,
-				ConfigFactory.eINSTANCE.createMutatorConfig()));
+			ConfigPackage.Literals.TEST_CONFIG__MUTATOR_CONFIG,
+			ConfigFactory.eINSTANCE.createMutatorConfig()));
 	}
 
 	/**

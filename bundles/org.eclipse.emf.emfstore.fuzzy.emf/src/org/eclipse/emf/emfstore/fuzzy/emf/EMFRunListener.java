@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf;
@@ -27,8 +27,7 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
 /**
- * {@link RunListener} used to create the report of a run of the
- * {@link EMFDataProvider}.
+ * {@link RunListener} used to create the report of a run of the {@link EMFDataProvider}.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -69,7 +68,7 @@ public class EMFRunListener extends RunListener {
 		}
 		testResult = ConfigFactory.eINSTANCE.createTestResult();
 		testResult.setTestName(description.getMethodName().split(
-				FuzzyRunner.NAME_SEPARATOR)[0]);
+			FuzzyRunner.NAME_SEPARATOR)[0]);
 		testStartTime = System.currentTimeMillis();
 	}
 

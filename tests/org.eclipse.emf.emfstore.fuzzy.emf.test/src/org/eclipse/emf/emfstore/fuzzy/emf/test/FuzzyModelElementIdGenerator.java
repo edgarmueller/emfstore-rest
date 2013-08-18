@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -36,9 +36,8 @@ public class FuzzyModelElementIdGenerator implements ESModelElementIdGenerator<M
 	 * Generates a new {@link ModelElementId}.
 	 * 
 	 * @param collection
-	 *            The
-	 *            {@link org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection}
-	 *            for which to create a new {@link ModelElementId}.
+	 *            The {@link org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection} for which to create a
+	 *            new {@link ModelElementId}.
 	 * @return A new {@link ModelElementId}.
 	 */
 	public ModelElementId generateModelElementId(ESObjectContainer<ModelElementId> collection) {
@@ -47,7 +46,7 @@ public class FuzzyModelElementIdGenerator implements ESModelElementIdGenerator<M
 			id = new Integer(0);
 		}
 		ModelElementId modelElementId = ModelFactory.eINSTANCE
-				.createModelElementId();
+			.createModelElementId();
 		modelElementId.setId(String.valueOf(id));
 		collectionsToIds.put(collection, id + 1);
 		return modelElementId;

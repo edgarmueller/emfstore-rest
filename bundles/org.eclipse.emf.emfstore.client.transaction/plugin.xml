@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.emf.emfstore.client.editingDomainProvider">
       <provider
-            class="org.eclipse.emf.emfstore.client.transaction.TransactionalEditingDomainProvider">
+            class="org.eclipse.emf.emfstore.internal.client.transaction.TransactionalEditingDomainProvider">
       </provider>
    </extension>
      <extension

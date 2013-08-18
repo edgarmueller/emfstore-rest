@@ -154,7 +154,7 @@ public class VersionDecorator extends AdapterImpl implements ILightweightLabelDe
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.model.observer.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
+	 * @see org.eclipse.emf.emfstore.internal.client.model.observer.UpdateObserver#updateCompleted(org.eclipse.emf.emfstore.internal.client.ESLocalProject.ILocalProject,
 	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void updateCompleted(ESLocalProject project, IProgressMonitor monitor) {

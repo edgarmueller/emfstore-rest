@@ -54,7 +54,7 @@ public abstract class SimpleOperationObserver implements OperationObserver, ESCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.OperationObserver#operationExecuted(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.client.observers.OperationObserver#operationExecuted(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public void operationExecuted(AbstractOperation operation) {
 		operationPerformed(operation);
@@ -63,7 +63,7 @@ public abstract class SimpleOperationObserver implements OperationObserver, ESCo
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.observers.OperationObserver#operationUndone(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
+	 * @see org.eclipse.emf.emfstore.internal.client.observers.OperationObserver#operationUndone(org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation)
 	 */
 	public void operationUndone(AbstractOperation operation) {
 		operationPerformed(operation.reverse());

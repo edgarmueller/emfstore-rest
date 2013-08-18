@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -227,11 +228,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	public void setUsername(String newUsername) {
-		String oldUsername = username;
+		final String oldUsername = username;
 		username = newUsername;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__USERNAME, oldUsername,
 				username));
+		}
 	}
 
 	/**
@@ -253,10 +255,9 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	public String getPassword() {
 		if (isSavePassword()) {
 			return getPersistentPassword();
-		} else {
-			return password;
 		}
 
+		return password;
 	}
 
 	// end of custom code
@@ -267,11 +268,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	public void setPasswordGen(String newPassword) {
-		String oldPassword = password;
+		final String oldPassword = password;
 		password = newPassword;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__PASSWORD, oldPassword,
 				password));
+		}
 	}
 
 	// begin of custom code
@@ -288,7 +290,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 			setPasswordGen(null);
 		}
 		if (isSavePassword()) {
-			if (!(newPassword.equals(persistentPassword))) {
+			if (!newPassword.equals(persistentPassword)) {
 				setPersistentPassword(KeyStoreManager.getInstance().encrypt(newPassword, getServerInfo()));
 			}
 		}
@@ -304,13 +306,14 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	public SessionId getSessionIdGen() {
 		if (sessionId != null && sessionId.eIsProxy())
 		{
-			InternalEObject oldSessionId = (InternalEObject) sessionId;
+			final InternalEObject oldSessionId = (InternalEObject) sessionId;
 			sessionId = (SessionId) eResolveProxy(oldSessionId);
 			if (sessionId != oldSessionId)
 			{
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.USERSESSION__SESSION_ID,
 						oldSessionId, sessionId));
+				}
 			}
 		}
 		return sessionId;
@@ -331,11 +334,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	public void setSessionId(SessionId newSessionId) {
-		SessionId oldSessionId = sessionId;
+		final SessionId oldSessionId = sessionId;
 		sessionId = newSessionId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__SESSION_ID, oldSessionId,
 				sessionId));
+		}
 	}
 
 	/**
@@ -353,11 +357,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	public void setPersistentPasswordGen(String newPersistentPassword) {
-		String oldPersistentPassword = persistentPassword;
+		final String oldPersistentPassword = persistentPassword;
 		persistentPassword = newPersistentPassword;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__PERSISTENT_PASSWORD,
 				oldPersistentPassword, persistentPassword));
+		}
 	}
 
 	/**
@@ -380,13 +385,14 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	public ServerInfo getServerInfo() {
 		if (serverInfo != null && serverInfo.eIsProxy())
 		{
-			InternalEObject oldServerInfo = (InternalEObject) serverInfo;
+			final InternalEObject oldServerInfo = (InternalEObject) serverInfo;
 			serverInfo = (ServerInfo) eResolveProxy(oldServerInfo);
 			if (serverInfo != oldServerInfo)
 			{
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.USERSESSION__SERVER_INFO,
 						oldServerInfo, serverInfo));
+				}
 			}
 		}
 		return serverInfo;
@@ -407,11 +413,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	public void setServerInfo(ServerInfo newServerInfo) {
-		ServerInfo oldServerInfo = serverInfo;
+		final ServerInfo oldServerInfo = serverInfo;
 		serverInfo = newServerInfo;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__SERVER_INFO, oldServerInfo,
 				serverInfo));
+		}
 	}
 
 	/**
@@ -429,11 +436,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	public void setSavePasswordGen(boolean newSavePassword) {
-		boolean oldSavePassword = savePassword;
+		final boolean oldSavePassword = savePassword;
 		savePassword = newSavePassword;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__SAVE_PASSWORD,
 				oldSavePassword, savePassword));
+		}
 	}
 
 	// begin of custom code
@@ -464,11 +472,11 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	public ACUser getACUser() {
 		if (acUser != null && acUser.eIsProxy())
 		{
-			InternalEObject oldACUser = (InternalEObject) acUser;
+			final InternalEObject oldACUser = (InternalEObject) acUser;
 			acUser = (ACUser) eResolveProxy(oldACUser);
 			if (acUser != oldACUser)
 			{
-				InternalEObject newACUser = (InternalEObject) acUser;
+				final InternalEObject newACUser = (InternalEObject) acUser;
 				NotificationChain msgs = oldACUser.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- ModelPackage.USERSESSION__AC_USER, null, null);
 				if (newACUser.eInternalContainer() == null)
@@ -476,11 +484,13 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 					msgs = newACUser.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.USERSESSION__AC_USER,
 						null, msgs);
 				}
-				if (msgs != null)
+				if (msgs != null) {
 					msgs.dispatch();
-				if (eNotificationRequired())
+				}
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.USERSESSION__AC_USER,
 						oldACUser, acUser));
+				}
 			}
 		}
 		return acUser;
@@ -501,16 +511,17 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated
 	 */
 	public NotificationChain basicSetACUser(ACUser newACUser, NotificationChain msgs) {
-		ACUser oldACUser = acUser;
+		final ACUser oldACUser = acUser;
 		acUser = newACUser;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
 				ModelPackage.USERSESSION__AC_USER, oldACUser, newACUser);
-			if (msgs == null)
+			if (msgs == null) {
 				msgs = notification;
-			else
+			} else {
 				msgs.add(notification);
+			}
 		}
 		return msgs;
 	}
@@ -524,19 +535,23 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		if (newACUser != acUser)
 		{
 			NotificationChain msgs = null;
-			if (acUser != null)
+			if (acUser != null) {
 				msgs = ((InternalEObject) acUser).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
 					- ModelPackage.USERSESSION__AC_USER, null, msgs);
-			if (newACUser != null)
+			}
+			if (newACUser != null) {
 				msgs = ((InternalEObject) newACUser).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
 					- ModelPackage.USERSESSION__AC_USER, null, msgs);
+			}
 			msgs = basicSetACUser(newACUser, msgs);
-			if (msgs != null)
+			if (msgs != null) {
 				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.USERSESSION__AC_USER, newACUser,
 				newACUser));
+		}
 	}
 
 	/**
@@ -561,7 +576,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated NOT
 	 */
 	public boolean isLoggedIn() {
-		return this.sessionId != null;
+		return sessionId != null;
 	}
 
 	/**
@@ -571,12 +586,12 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 	 * @generated NOT
 	 */
 	public void logIn() throws ESException, AccessControlException {
-		ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		// sanity checks
 		if (getUsername() == null || getPassword() == null) {
 			throw new AccessControlException("Username or Password not set!");
 		}
-		ServerInfo serverInfo = getServerInfo();
+		final ServerInfo serverInfo = getServerInfo();
 		if (serverInfo == null) {
 			throw new IllegalStateException("No ServerInfo set!");
 		}
@@ -585,21 +600,22 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		}
 
 		// prepare serverInfo for send: copy and remove usersession
-		ServerInfo copy = ModelUtil.clone(serverInfo);
+		final ServerInfo copy = ModelUtil.clone(serverInfo);
 		copy.setLastUsersession(null);
-		AuthenticationInformation authenticationInformation = connectionManager.logIn(username, getPassword(), copy,
+		final AuthenticationInformation authenticationInformation = connectionManager.logIn(username, getPassword(),
+			copy,
 			Configuration.getVersioningInfo().getClientVersion());
 		getServerInfo().setLastUsersession(this);
-		this.setSessionId(authenticationInformation.getSessionId());
-		this.setACUser(authenticationInformation.getResolvedACUser());
-		ESWorkspaceProviderImpl.getObserverBus().notify(ESLoginObserver.class).loginCompleted(this.toAPI());
+		setSessionId(authenticationInformation.getSessionId());
+		setACUser(authenticationInformation.getResolvedACUser());
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESLoginObserver.class).loginCompleted(toAPI());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void logout() throws ESException {
-		ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		connectionManager.logout(sessionId);
 		setSessionId(null);
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESLogoutObserver.class).logoutCompleted(toAPI());
@@ -638,20 +654,23 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 		case ModelPackage.USERSESSION__PASSWORD:
 			return getPassword();
 		case ModelPackage.USERSESSION__SESSION_ID:
-			if (resolve)
+			if (resolve) {
 				return getSessionId();
+			}
 			return basicGetSessionId();
 		case ModelPackage.USERSESSION__PERSISTENT_PASSWORD:
 			return getPersistentPassword();
 		case ModelPackage.USERSESSION__SERVER_INFO:
-			if (resolve)
+			if (resolve) {
 				return getServerInfo();
+			}
 			return basicGetServerInfo();
 		case ModelPackage.USERSESSION__SAVE_PASSWORD:
 			return isSavePassword();
 		case ModelPackage.USERSESSION__AC_USER:
-			if (resolve)
+			if (resolve) {
 				return getACUser();
+			}
 			return basicGetACUser();
 		case ModelPackage.USERSESSION__CHANGED_PROPERTIES:
 			return getChangedProperties();
@@ -776,7 +795,7 @@ public class UsersessionImpl extends EObjectImpl implements Usersession {
 			return super.toString();
 		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (username: ");
 		result.append(username);
 		result.append(')');

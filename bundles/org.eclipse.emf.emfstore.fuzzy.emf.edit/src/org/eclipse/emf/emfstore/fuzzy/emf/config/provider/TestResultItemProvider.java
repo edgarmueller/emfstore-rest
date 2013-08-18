@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,15 +30,14 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.ConfigPackage;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestResult} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
 public class TestResultItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	IEditingDomainItemProvider, IStructuredItemContentProvider,
+	ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -77,17 +76,17 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addSeedCountPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_TestResult_seedCount_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_TestResult_seedCount_feature",
-								"_UI_TestResult_type"),
-						ConfigPackage.Literals.TEST_RESULT__SEED_COUNT, true,
-						false, false,
-						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+			.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+					.getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_TestResult_seedCount_feature"),
+				getString("_UI_PropertyDescriptor_description",
+					"_UI_TestResult_seedCount_feature",
+					"_UI_TestResult_type"),
+				ConfigPackage.Literals.TEST_RESULT__SEED_COUNT, true,
+				false, false,
+				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -98,15 +97,15 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addTestNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestResult_testName_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestResult_testName_feature",
-						"_UI_TestResult_type"),
-				ConfigPackage.Literals.TEST_RESULT__TEST_NAME, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestResult_testName_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestResult_testName_feature",
+				"_UI_TestResult_type"),
+			ConfigPackage.Literals.TEST_RESULT__TEST_NAME, true, false,
+			false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -117,14 +116,14 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addErrorPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestResult_error_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestResult_error_feature", "_UI_TestResult_type"),
-				ConfigPackage.Literals.TEST_RESULT__ERROR, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestResult_error_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestResult_error_feature", "_UI_TestResult_type"),
+			ConfigPackage.Literals.TEST_RESULT__ERROR, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -135,17 +134,17 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addFailurePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_TestResult_failure_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_TestResult_failure_feature",
-								"_UI_TestResult_type"),
-						ConfigPackage.Literals.TEST_RESULT__FAILURE, true,
-						false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+					.getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_TestResult_failure_feature"),
+				getString("_UI_PropertyDescriptor_description",
+					"_UI_TestResult_failure_feature",
+					"_UI_TestResult_type"),
+				ConfigPackage.Literals.TEST_RESULT__FAILURE, true,
+				false, false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -156,16 +155,16 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addExecutionTimePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestResult_executionTime_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestResult_executionTime_feature",
-						"_UI_TestResult_type"),
-				ConfigPackage.Literals.TEST_RESULT__EXECUTION_TIME, true,
-				false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestResult_executionTime_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestResult_executionTime_feature",
+				"_UI_TestResult_type"),
+			ConfigPackage.Literals.TEST_RESULT__EXECUTION_TIME, true,
+			false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+			null, null));
 	}
 
 	/**
@@ -177,7 +176,7 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/TestResult"));
+			getResourceLocator().getImage("full/obj16/TestResult"));
 	}
 
 	/**
@@ -190,7 +189,7 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
 		String label = ((TestResult) object).getTestName();
 		return label == null || label.length() == 0 ? getString("_UI_TestResult_type")
-				: getString("_UI_TestResult_type") + " " + label;
+			: getString("_UI_TestResult_type") + " " + label;
 	}
 
 	/**
@@ -212,7 +211,7 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 		case ConfigPackage.TEST_RESULT__FAILURE:
 		case ConfigPackage.TEST_RESULT__EXECUTION_TIME:
 			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+				notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -227,7 +226,7 @@ public class TestResultItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+		Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

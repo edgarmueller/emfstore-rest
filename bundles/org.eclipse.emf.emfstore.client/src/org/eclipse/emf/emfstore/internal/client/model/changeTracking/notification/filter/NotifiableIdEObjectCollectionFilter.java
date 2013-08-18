@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -29,11 +29,11 @@ public class NotifiableIdEObjectCollectionFilter implements ESNotificationFilter
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
-	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
-		return (notificationInfo.getNotifier() instanceof NotifiableIdEObjectCollection);
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
+		return notificationInfo.getNotifier() instanceof NotifiableIdEObjectCollection;
 	}
 
 }

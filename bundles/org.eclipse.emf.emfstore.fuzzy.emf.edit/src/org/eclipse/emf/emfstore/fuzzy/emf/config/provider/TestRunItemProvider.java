@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -33,15 +33,14 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.ConfigPackage;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun;
 
 /**
- * This is the item provider adapter for a
- * {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun} object. <!--
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
  */
 public class TestRunItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	IEditingDomainItemProvider, IStructuredItemContentProvider,
+	ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -76,29 +75,27 @@ public class TestRunItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addTimePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TestRun_time_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TestRun_time_feature", "_UI_TestRun_type"),
-				ConfigPackage.Literals.TEST_RUN__TIME, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+			((ComposeableAdapterFactory) adapterFactory)
+				.getRootAdapterFactory(),
+			getResourceLocator(),
+			getString("_UI_TestRun_time_feature"),
+			getString("_UI_PropertyDescriptor_description",
+				"_UI_TestRun_time_feature", "_UI_TestRun_type"),
+			ConfigPackage.Literals.TEST_RUN__TIME, true, false, false,
+			ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
+	 * deduce an appropriate feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or {@link org.eclipse.emf.edit.command.MoveCommand} in
 	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
-			Object object) {
+		Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ConfigPackage.Literals.TEST_RUN__CONFIG);
@@ -129,7 +126,7 @@ public class TestRunItemProvider extends ItemProviderAdapter implements
 	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/TestRun"));
+			getResourceLocator().getImage("full/obj16/TestRun"));
 	}
 
 	/**
@@ -143,7 +140,7 @@ public class TestRunItemProvider extends ItemProviderAdapter implements
 		Date labelValue = ((TestRun) object).getTime();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ? getString("_UI_TestRun_type")
-				: getString("_UI_TestRun_type") + " " + label;
+			: getString("_UI_TestRun_type") + " " + label;
 	}
 
 	/**
@@ -161,12 +158,12 @@ public class TestRunItemProvider extends ItemProviderAdapter implements
 		switch (notification.getFeatureID(TestRun.class)) {
 		case ConfigPackage.TEST_RUN__TIME:
 			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
+				notification.getNotifier(), false, true));
 			return;
 		case ConfigPackage.TEST_RUN__CONFIG:
 		case ConfigPackage.TEST_RUN__RESULTS:
 			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
+				notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -181,16 +178,16 @@ public class TestRunItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
-			Collection<Object> newChildDescriptors, Object object) {
+		Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
-				ConfigPackage.Literals.TEST_RUN__CONFIG,
-				ConfigFactory.eINSTANCE.createTestConfig()));
+			ConfigPackage.Literals.TEST_RUN__CONFIG,
+			ConfigFactory.eINSTANCE.createTestConfig()));
 
 		newChildDescriptors.add(createChildParameter(
-				ConfigPackage.Literals.TEST_RUN__RESULTS,
-				ConfigFactory.eINSTANCE.createTestResult()));
+			ConfigPackage.Literals.TEST_RUN__RESULTS,
+			ConfigFactory.eINSTANCE.createTestResult()));
 	}
 
 	/**

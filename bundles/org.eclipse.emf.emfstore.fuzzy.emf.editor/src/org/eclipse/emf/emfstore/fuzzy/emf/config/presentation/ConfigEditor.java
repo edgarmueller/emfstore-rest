@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -133,8 +133,8 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
  * @generated
  */
 public class ConfigEditor extends MultiPageEditorPart implements
-		IEditingDomainProvider, ISelectionProvider, IMenuListener,
-		IViewerProvider, IGotoMarker {
+	IEditingDomainProvider, ISelectionProvider, IMenuListener,
+	IViewerProvider, IGotoMarker {
 	/**
 	 * This keeps track of the editing domain that is used to track all changes
 	 * to the model. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -257,8 +257,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	protected ISelectionChangedListener selectionChangedListener;
 
 	/**
-	 * This keeps track of all the
-	 * {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are
+	 * This keeps track of all the {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are
 	 * listening to this editor. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -293,14 +292,14 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			if (p instanceof ContentOutline) {
 				if (((ContentOutline) p).getCurrentPage() == contentOutlinePage) {
 					getActionBarContributor()
-							.setActiveEditor(ConfigEditor.this);
+						.setActiveEditor(ConfigEditor.this);
 
 					setCurrentViewer(contentOutlineViewer);
 				}
 			} else if (p instanceof PropertySheet) {
 				if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
 					getActionBarContributor()
-							.setActiveEditor(ConfigEditor.this);
+						.setActiveEditor(ConfigEditor.this);
 					handleActivate();
 				}
 			} else if (p == ConfigEditor.this) {
@@ -381,7 +380,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				case Resource.RESOURCE__WARNINGS: {
 					Resource resource = (Resource) notification.getNotifier();
 					Diagnostic diagnostic = analyzeResourceProblems(resource,
-							null);
+						null);
 					if (diagnostic.getSeverity() != Diagnostic.OK) {
 						resourceToDiagnosticMap.put(resource, diagnostic);
 					} else {
@@ -390,11 +389,11 @@ public class ConfigEditor extends MultiPageEditorPart implements
 
 					if (updateProblemIndication) {
 						getSite().getShell().getDisplay()
-								.asyncExec(new Runnable() {
-									public void run() {
-										updateProblemIndication();
-									}
-								});
+							.asyncExec(new Runnable() {
+								public void run() {
+									updateProblemIndication();
+								}
+							});
 					}
 					break;
 				}
@@ -427,21 +426,21 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			try {
 				class ResourceDeltaVisitor implements IResourceDeltaVisitor {
 					protected ResourceSet resourceSet = editingDomain
-							.getResourceSet();
+						.getResourceSet();
 					protected Collection<Resource> changedResources = new ArrayList<Resource>();
 					protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
 					public boolean visit(IResourceDelta delta) {
 						if (delta.getResource().getType() == IResource.FILE) {
 							if (delta.getKind() == IResourceDelta.REMOVED
-									|| delta.getKind() == IResourceDelta.CHANGED
-									&& delta.getFlags() != IResourceDelta.MARKERS) {
+								|| delta.getKind() == IResourceDelta.CHANGED
+								&& delta.getFlags() != IResourceDelta.MARKERS) {
 								Resource resource = resourceSet
-										.getResource(URI
-												.createPlatformResourceURI(
-														delta.getFullPath()
-																.toString(),
-														true), false);
+									.getResource(URI
+										.createPlatformResourceURI(
+											delta.getFullPath()
+												.toString(),
+											true), false);
 								if (resource != null) {
 									if (delta.getKind() == IResourceDelta.REMOVED) {
 										removedResources.add(resource);
@@ -471,10 +470,10 @@ public class ConfigEditor extends MultiPageEditorPart implements
 					getSite().getShell().getDisplay().asyncExec(new Runnable() {
 						public void run() {
 							removedResources.addAll(visitor
-									.getRemovedResources());
+								.getRemovedResources());
 							if (!isDirty()) {
 								getSite().getPage().closeEditor(
-										ConfigEditor.this, false);
+									ConfigEditor.this, false);
 							}
 						}
 					});
@@ -484,7 +483,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 					getSite().getShell().getDisplay().asyncExec(new Runnable() {
 						public void run() {
 							changedResources.addAll(visitor
-									.getChangedResources());
+								.getChangedResources());
 							if (getSite().getPage().getActiveEditor() == ConfigEditor.this) {
 								handleActivate();
 							}
@@ -538,10 +537,10 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 */
 	protected void handleChangedResources() {
 		if (!changedResources.isEmpty()
-				&& (!isDirty() || handleDirtyConflict())) {
+			&& (!isDirty() || handleDirtyConflict())) {
 			if (isDirty()) {
 				changedResources.addAll(editingDomain.getResourceSet()
-						.getResources());
+					.getResources());
 			}
 			editingDomain.getCommandStack().flush();
 
@@ -554,9 +553,9 @@ public class ConfigEditor extends MultiPageEditorPart implements
 					} catch (IOException exception) {
 						if (!resourceToDiagnosticMap.containsKey(resource)) {
 							resourceToDiagnosticMap
-									.put(resource,
-											analyzeResourceProblems(resource,
-													exception));
+								.put(resource,
+									analyzeResourceProblems(resource,
+										exception));
 						}
 					}
 				}
@@ -580,8 +579,8 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	protected void updateProblemIndication() {
 		if (updateProblemIndication) {
 			BasicDiagnostic diagnostic = new BasicDiagnostic(Diagnostic.OK,
-					"org.eclipse.emf.emfstore.fuzzy.emf.editor", 0, null,
-					new Object[] { editingDomain.getResourceSet() });
+				"org.eclipse.emf.emfstore.fuzzy.emf.editor", 0, null,
+				new Object[] { editingDomain.getResourceSet() });
 			for (Diagnostic childDiagnostic : resourceToDiagnosticMap.values()) {
 				if (childDiagnostic.getSeverity() != Diagnostic.OK) {
 					diagnostic.add(childDiagnostic);
@@ -590,9 +589,9 @@ public class ConfigEditor extends MultiPageEditorPart implements
 
 			int lastEditorPage = getPageCount() - 1;
 			if (lastEditorPage >= 0
-					&& getEditor(lastEditorPage) instanceof ProblemEditorPart) {
+				&& getEditor(lastEditorPage) instanceof ProblemEditorPart) {
 				((ProblemEditorPart) getEditor(lastEditorPage))
-						.setDiagnostic(diagnostic);
+					.setDiagnostic(diagnostic);
 				if (diagnostic.getSeverity() != Diagnostic.OK) {
 					setActivePage(lastEditorPage);
 				}
@@ -602,7 +601,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				problemEditorPart.setMarkerHelper(markerHelper);
 				try {
 					addPage(++lastEditorPage, problemEditorPart,
-							getEditorInput());
+						getEditorInput());
 					setPageText(lastEditorPage, problemEditorPart.getPartName());
 					setActivePage(lastEditorPage);
 					showTabs();
@@ -632,8 +631,8 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 */
 	protected boolean handleDirtyConflict() {
 		return MessageDialog.openQuestion(getSite().getShell(),
-				getString("_UI_FileConflict_label"),
-				getString("_WARN_FileConflict"));
+			getString("_UI_FileConflict_label"),
+			getString("_WARN_FileConflict"));
 	}
 
 	/**
@@ -657,14 +656,14 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		// Create an adapter factory that yields item providers.
 		//
 		adapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory
-				.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+			.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory
-				.addAdapterFactory(new ConfigItemProviderAdapterFactory());
+			.addAdapterFactory(new ConfigItemProviderAdapterFactory());
 		adapterFactory
-				.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+			.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are
 		// executed.
@@ -684,13 +683,13 @@ public class ConfigEditor extends MultiPageEditorPart implements
 						// Try to select the affected objects.
 						//
 						Command mostRecentCommand = ((CommandStack) event
-								.getSource()).getMostRecentCommand();
+							.getSource()).getMostRecentCommand();
 						if (mostRecentCommand != null) {
 							setSelectionToViewer(mostRecentCommand
-									.getAffectedObjects());
+								.getAffectedObjects());
 						}
 						if (propertySheetPage != null
-								&& !propertySheetPage.getControl().isDisposed()) {
+							&& !propertySheetPage.getControl().isDisposed()) {
 							propertySheetPage.refresh();
 						}
 					}
@@ -701,7 +700,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		// Create the editing domain with a special command stack.
 		//
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory,
-				commandStack, new HashMap<Resource, Boolean>());
+			commandStack, new HashMap<Resource, Boolean>());
 	}
 
 	/**
@@ -733,7 +732,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 					//
 					if (currentViewer != null) {
 						currentViewer.setSelection(new StructuredSelection(
-								theSelection.toArray()), true);
+							theSelection.toArray()), true);
 					}
 				}
 			};
@@ -742,10 +741,10 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	}
 
 	/**
-	 * This returns the editing domain as required by the
-	 * {@link IEditingDomainProvider} interface. This is important for
-	 * implementing the static methods of {@link AdapterFactoryEditingDomain}
-	 * and for supporting {@link org.eclipse.emf.edit.ui.action.CommandAction}.
+	 * This returns the editing domain as required by the {@link IEditingDomainProvider} interface. This is important
+	 * for
+	 * implementing the static methods of {@link AdapterFactoryEditingDomain} and for supporting
+	 * {@link org.eclipse.emf.edit.ui.action.CommandAction}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -760,14 +759,14 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 * @generated
 	 */
 	public class ReverseAdapterFactoryContentProvider extends
-			AdapterFactoryContentProvider {
+		AdapterFactoryContentProvider {
 		/**
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @generated
 		 */
 		public ReverseAdapterFactoryContentProvider(
-				AdapterFactory adapterFactory) {
+			AdapterFactory adapterFactory) {
 			super(adapterFactory);
 		}
 
@@ -780,7 +779,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		public Object[] getElements(Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections
-					.singleton(parent)).toArray();
+				.singleton(parent)).toArray();
 		}
 
 		/**
@@ -792,7 +791,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		public Object[] getChildren(Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections
-					.singleton(parent)).toArray();
+				.singleton(parent)).toArray();
 		}
 
 		/**
@@ -851,7 +850,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 					// section.
 					//
 					public void selectionChanged(
-							SelectionChangedEvent selectionChangedEvent) {
+						SelectionChangedEvent selectionChangedEvent) {
 						setSelection(selectionChangedEvent.getSelection());
 					}
 				};
@@ -861,7 +860,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			//
 			if (currentViewer != null) {
 				currentViewer
-						.removeSelectionChangedListener(selectionChangedListener);
+					.removeSelectionChangedListener(selectionChangedListener);
 			}
 
 			// Start listening to the new one.
@@ -878,13 +877,13 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			// selection.
 			//
 			setSelection(currentViewer == null ? StructuredSelection.EMPTY
-					: currentViewer.getSelection());
+				: currentViewer.getSelection());
 		}
 	}
 
 	/**
-	 * This returns the viewer as required by the {@link IViewerProvider}
-	 * interface. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the viewer as required by the {@link IViewerProvider} interface. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -907,14 +906,14 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		Menu menu = contextMenu.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(contextMenu,
-				new UnwrappingSelectionProvider(viewer));
+			new UnwrappingSelectionProvider(viewer));
 
 		int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
 		Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance() };
 		viewer.addDragSupport(dndOperations, transfers, new ViewerDragAdapter(
-				viewer));
+			viewer));
 		viewer.addDropSupport(dndOperations, transfers,
-				new EditingDomainViewerDropAdapter(editingDomain, viewer));
+			new EditingDomainViewerDropAdapter(editingDomain, viewer));
 	}
 
 	/**
@@ -932,20 +931,20 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			// Load the resource through the editing domain.
 			//
 			resource = editingDomain.getResourceSet().getResource(resourceURI,
-					true);
+				true);
 		} catch (Exception e) {
 			exception = e;
 			resource = editingDomain.getResourceSet().getResource(resourceURI,
-					false);
+				false);
 		}
 
 		Diagnostic diagnostic = analyzeResourceProblems(resource, exception);
 		if (diagnostic.getSeverity() != Diagnostic.OK) {
 			resourceToDiagnosticMap.put(resource,
-					analyzeResourceProblems(resource, exception));
+				analyzeResourceProblems(resource, exception));
 		}
 		editingDomain.getResourceSet().eAdapters()
-				.add(problemIndicationAdapter);
+			.add(problemIndicationAdapter);
 	}
 
 	/**
@@ -956,22 +955,22 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 * @generated
 	 */
 	public Diagnostic analyzeResourceProblems(Resource resource,
-			Exception exception) {
+		Exception exception) {
 		if (!resource.getErrors().isEmpty()
-				|| !resource.getWarnings().isEmpty()) {
+			|| !resource.getWarnings().isEmpty()) {
 			BasicDiagnostic basicDiagnostic = new BasicDiagnostic(
-					Diagnostic.ERROR,
-					"org.eclipse.emf.emfstore.fuzzy.emf.editor", 0, getString(
-							"_UI_CreateModelError_message", resource.getURI()),
-					new Object[] { exception == null ? (Object) resource
-							: exception });
+				Diagnostic.ERROR,
+				"org.eclipse.emf.emfstore.fuzzy.emf.editor", 0, getString(
+					"_UI_CreateModelError_message", resource.getURI()),
+				new Object[] { exception == null ? (Object) resource
+					: exception });
 			basicDiagnostic.merge(EcoreUtil.computeDiagnostic(resource, true));
 			return basicDiagnostic;
 		} else if (exception != null) {
 			return new BasicDiagnostic(Diagnostic.ERROR,
-					"org.eclipse.emf.emfstore.fuzzy.emf.editor", 0, getString(
-							"_UI_CreateModelError_message", resource.getURI()),
-					new Object[] { exception });
+				"org.eclipse.emf.emfstore.fuzzy.emf.editor", 0, getString(
+					"_UI_CreateModelError_message", resource.getURI()),
+				new Object[] { exception });
 		} else {
 			return Diagnostic.OK_INSTANCE;
 		}
@@ -996,7 +995,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			//
 			{
 				ViewerPane viewerPane = new ViewerPane(getSite().getPage(),
-						ConfigEditor.this) {
+					ConfigEditor.this) {
 					@Override
 					public Viewer createViewer(Composite composite) {
 						Tree tree = new Tree(composite, SWT.MULTI);
@@ -1014,20 +1013,20 @@ public class ConfigEditor extends MultiPageEditorPart implements
 
 				selectionViewer = (TreeViewer) viewerPane.getViewer();
 				selectionViewer
-						.setContentProvider(new AdapterFactoryContentProvider(
-								adapterFactory));
+					.setContentProvider(new AdapterFactoryContentProvider(
+						adapterFactory));
 
 				selectionViewer
-						.setLabelProvider(new AdapterFactoryLabelProvider(
-								adapterFactory));
+					.setLabelProvider(new AdapterFactoryLabelProvider(
+						adapterFactory));
 				selectionViewer.setInput(editingDomain.getResourceSet());
 				selectionViewer.setSelection(new StructuredSelection(
-						editingDomain.getResourceSet().getResources().get(0)),
-						true);
+					editingDomain.getResourceSet().getResources().get(0)),
+					true);
 				viewerPane.setTitle(editingDomain.getResourceSet());
 
 				new AdapterFactoryTreeEditor(selectionViewer.getTree(),
-						adapterFactory);
+					adapterFactory);
 
 				createContextMenuFor(selectionViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1038,7 +1037,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			//
 			{
 				ViewerPane viewerPane = new ViewerPane(getSite().getPage(),
-						ConfigEditor.this) {
+					ConfigEditor.this) {
 					@Override
 					public Viewer createViewer(Composite composite) {
 						Tree tree = new Tree(composite, SWT.MULTI);
@@ -1057,10 +1056,10 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				parentViewer = (TreeViewer) viewerPane.getViewer();
 				parentViewer.setAutoExpandLevel(30);
 				parentViewer
-						.setContentProvider(new ReverseAdapterFactoryContentProvider(
-								adapterFactory));
-				parentViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					.setContentProvider(new ReverseAdapterFactoryContentProvider(
 						adapterFactory));
+				parentViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					adapterFactory));
 
 				createContextMenuFor(parentViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1071,7 +1070,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			//
 			{
 				ViewerPane viewerPane = new ViewerPane(getSite().getPage(),
-						ConfigEditor.this) {
+					ConfigEditor.this) {
 					@Override
 					public Viewer createViewer(Composite composite) {
 						return new ListViewer(composite);
@@ -1086,10 +1085,10 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				viewerPane.createControl(getContainer());
 				listViewer = (ListViewer) viewerPane.getViewer();
 				listViewer
-						.setContentProvider(new AdapterFactoryContentProvider(
-								adapterFactory));
-				listViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					.setContentProvider(new AdapterFactoryContentProvider(
 						adapterFactory));
+				listViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					adapterFactory));
 
 				createContextMenuFor(listViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1100,7 +1099,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			//
 			{
 				ViewerPane viewerPane = new ViewerPane(getSite().getPage(),
-						ConfigEditor.this) {
+					ConfigEditor.this) {
 					@Override
 					public Viewer createViewer(Composite composite) {
 						return new TreeViewer(composite);
@@ -1115,13 +1114,13 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				viewerPane.createControl(getContainer());
 				treeViewer = (TreeViewer) viewerPane.getViewer();
 				treeViewer
-						.setContentProvider(new AdapterFactoryContentProvider(
-								adapterFactory));
-				treeViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					.setContentProvider(new AdapterFactoryContentProvider(
 						adapterFactory));
+				treeViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					adapterFactory));
 
 				new AdapterFactoryTreeEditor(treeViewer.getTree(),
-						adapterFactory);
+					adapterFactory);
 
 				createContextMenuFor(treeViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1132,7 +1131,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			//
 			{
 				ViewerPane viewerPane = new ViewerPane(getSite().getPage(),
-						ConfigEditor.this) {
+					ConfigEditor.this) {
 					@Override
 					public Viewer createViewer(Composite composite) {
 						return new TableViewer(composite);
@@ -1165,10 +1164,10 @@ public class ConfigEditor extends MultiPageEditorPart implements
 
 				tableViewer.setColumnProperties(new String[] { "a", "b" });
 				tableViewer
-						.setContentProvider(new AdapterFactoryContentProvider(
-								adapterFactory));
-				tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					.setContentProvider(new AdapterFactoryContentProvider(
 						adapterFactory));
+				tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					adapterFactory));
 
 				createContextMenuFor(tableViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1179,7 +1178,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			//
 			{
 				ViewerPane viewerPane = new ViewerPane(getSite().getPage(),
-						ConfigEditor.this) {
+					ConfigEditor.this) {
 					@Override
 					public Viewer createViewer(Composite composite) {
 						return new TreeViewer(composite);
@@ -1211,18 +1210,18 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				selfColumn.setWidth(200);
 
 				treeViewerWithColumns.setColumnProperties(new String[] { "a",
-						"b" });
+					"b" });
 				treeViewerWithColumns
-						.setContentProvider(new AdapterFactoryContentProvider(
-								adapterFactory));
+					.setContentProvider(new AdapterFactoryContentProvider(
+						adapterFactory));
 				treeViewerWithColumns
-						.setLabelProvider(new AdapterFactoryLabelProvider(
-								adapterFactory));
+					.setLabelProvider(new AdapterFactoryLabelProvider(
+						adapterFactory));
 
 				createContextMenuFor(treeViewerWithColumns);
 				int pageIndex = addPage(viewerPane.getControl());
 				setPageText(pageIndex,
-						getString("_UI_TreeWithColumnsPage_label"));
+					getString("_UI_TreeWithColumnsPage_label"));
 			}
 
 			getSite().getShell().getDisplay().asyncExec(new Runnable() {
@@ -1344,35 +1343,35 @@ public class ConfigEditor extends MultiPageEditorPart implements
 					// Set up the tree viewer.
 					//
 					contentOutlineViewer
-							.setContentProvider(new AdapterFactoryContentProvider(
-									adapterFactory));
+						.setContentProvider(new AdapterFactoryContentProvider(
+							adapterFactory));
 					contentOutlineViewer
-							.setLabelProvider(new AdapterFactoryLabelProvider(
-									adapterFactory));
+						.setLabelProvider(new AdapterFactoryLabelProvider(
+							adapterFactory));
 					contentOutlineViewer.setInput(editingDomain
-							.getResourceSet());
+						.getResourceSet());
 
 					// Make sure our popups work.
 					//
 					createContextMenuFor(contentOutlineViewer);
 
 					if (!editingDomain.getResourceSet().getResources()
-							.isEmpty()) {
+						.isEmpty()) {
 						// Select the root object in the view.
 						//
 						contentOutlineViewer
-								.setSelection(new StructuredSelection(
-										editingDomain.getResourceSet()
-												.getResources().get(0)), true);
+							.setSelection(new StructuredSelection(
+								editingDomain.getResourceSet()
+									.getResources().get(0)), true);
 					}
 				}
 
 				@Override
 				public void makeContributions(IMenuManager menuManager,
-						IToolBarManager toolBarManager,
-						IStatusLineManager statusLineManager) {
+					IToolBarManager toolBarManager,
+					IStatusLineManager statusLineManager) {
 					super.makeContributions(menuManager, toolBarManager,
-							statusLineManager);
+						statusLineManager);
 					contentOutlineStatusLineManager = statusLineManager;
 				}
 
@@ -1380,7 +1379,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				public void setActionBars(IActionBars actionBars) {
 					super.setActionBars(actionBars);
 					getActionBarContributor().shareGlobalActions(this,
-							actionBars);
+						actionBars);
 				}
 			}
 
@@ -1389,13 +1388,13 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			// Listen to selection so that we can handle it is a special way.
 			//
 			contentOutlinePage
-					.addSelectionChangedListener(new ISelectionChangedListener() {
-						// This ensures that we handle selections correctly.
-						//
-						public void selectionChanged(SelectionChangedEvent event) {
-							handleContentOutlineSelection(event.getSelection());
-						}
-					});
+				.addSelectionChangedListener(new ISelectionChangedListener() {
+					// This ensures that we handle selections correctly.
+					//
+					public void selectionChanged(SelectionChangedEvent event) {
+						handleContentOutlineSelection(event.getSelection());
+					}
+				});
 		}
 
 		return contentOutlinePage;
@@ -1420,12 +1419,12 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				public void setActionBars(IActionBars actionBars) {
 					super.setActionBars(actionBars);
 					getActionBarContributor().shareGlobalActions(this,
-							actionBars);
+						actionBars);
 				}
 			};
 			propertySheetPage
-					.setPropertySourceProvider(new AdapterFactoryContentProvider(
-							adapterFactory));
+				.setPropertySourceProvider(new AdapterFactoryContentProvider(
+					adapterFactory));
 		}
 
 		return propertySheetPage;
@@ -1439,9 +1438,9 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
 		if (currentViewerPane != null && !selection.isEmpty()
-				&& selection instanceof IStructuredSelection) {
+			&& selection instanceof IStructuredSelection) {
 			Iterator<?> selectedElements = ((IStructuredSelection) selection)
-					.iterator();
+				.iterator();
 			if (selectedElements.hasNext()) {
 				// Get the first selected element.
 				//
@@ -1460,7 +1459,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 					// Set the selection to the widget.
 					//
 					selectionViewer.setSelection(new StructuredSelection(
-							selectionList));
+						selectionList));
 				} else {
 					// Set the input to the widget.
 					//
@@ -1482,7 +1481,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	@Override
 	public boolean isDirty() {
 		return ((BasicCommandStack) editingDomain.getCommandStack())
-				.isSaveNeeded();
+			.isSaveNeeded();
 	}
 
 	/**
@@ -1497,7 +1496,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		//
 		final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-				Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+			Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 
 		// Do the work within an operation because this is a long running
 		// activity that modifies the workbench.
@@ -1511,9 +1510,9 @@ public class ConfigEditor extends MultiPageEditorPart implements
 				//
 				boolean first = true;
 				for (Resource resource : editingDomain.getResourceSet()
-						.getResources()) {
+					.getResources()) {
 					if ((first || !resource.getContents().isEmpty() || isPersisted(resource))
-							&& !editingDomain.isReadOnly(resource)) {
+						&& !editingDomain.isReadOnly(resource)) {
 						try {
 							long timeStamp = resource.getTimeStamp();
 							resource.save(saveOptions);
@@ -1522,9 +1521,9 @@ public class ConfigEditor extends MultiPageEditorPart implements
 							}
 						} catch (Exception exception) {
 							resourceToDiagnosticMap
-									.put(resource,
-											analyzeResourceProblems(resource,
-													exception));
+								.put(resource,
+									analyzeResourceProblems(resource,
+										exception));
 						}
 						first = false;
 					}
@@ -1537,7 +1536,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			// This runs the options, and shows progress.
 			//
 			new ProgressMonitorDialog(getSite().getShell()).run(true, false,
-					operation);
+				operation);
 
 			// Refresh the necessary state.
 			//
@@ -1564,7 +1563,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		boolean result = false;
 		try {
 			InputStream stream = editingDomain.getResourceSet()
-					.getURIConverter().createInputStream(resource.getURI());
+				.getURIConverter().createInputStream(resource.getURI());
 			if (stream != null) {
 				result = true;
 				stream.close();
@@ -1601,7 +1600,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 			if (file != null) {
 				doSaveAs(URI.createPlatformResourceURI(file.getFullPath()
-						.toString(), true), new FileEditorInput(file));
+					.toString(), true), new FileEditorInput(file));
 			}
 		}
 	}
@@ -1616,9 +1615,9 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		IProgressMonitor progressMonitor = getActionBars()
-				.getStatusLineManager() != null ? getActionBars()
-				.getStatusLineManager().getProgressMonitor()
-				: new NullProgressMonitor();
+			.getStatusLineManager() != null ? getActionBars()
+			.getStatusLineManager().getProgressMonitor()
+			: new NullProgressMonitor();
 		doSave(progressMonitor);
 	}
 
@@ -1631,14 +1630,14 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		try {
 			if (marker.getType().equals(EValidator.MARKER)) {
 				String uriAttribute = marker.getAttribute(
-						EValidator.URI_ATTRIBUTE, null);
+					EValidator.URI_ATTRIBUTE, null);
 				if (uriAttribute != null) {
 					URI uri = URI.createURI(uriAttribute);
 					EObject eObject = editingDomain.getResourceSet()
-							.getEObject(uri, true);
+						.getEObject(uri, true);
 					if (eObject != null) {
 						setSelectionToViewer(Collections
-								.singleton(editingDomain.getWrapper(eObject)));
+							.singleton(editingDomain.getWrapper(eObject)));
 					}
 				}
 			}
@@ -1661,7 +1660,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		site.setSelectionProvider(this);
 		site.getPage().addPartListener(partListener);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(
-				resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
+			resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/**
@@ -1695,7 +1694,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 * @generated
 	 */
 	public void removeSelectionChangedListener(
-			ISelectionChangedListener listener) {
+		ISelectionChangedListener listener) {
 		selectionChangedListeners.remove(listener);
 	}
 
@@ -1733,31 +1732,31 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 */
 	public void setStatusLineManager(ISelection selection) {
 		IStatusLineManager statusLineManager = currentViewer != null
-				&& currentViewer == contentOutlineViewer ? contentOutlineStatusLineManager
-				: getActionBars().getStatusLineManager();
+			&& currentViewer == contentOutlineViewer ? contentOutlineStatusLineManager
+			: getActionBars().getStatusLineManager();
 
 		if (statusLineManager != null) {
 			if (selection instanceof IStructuredSelection) {
 				Collection<?> collection = ((IStructuredSelection) selection)
-						.toList();
+					.toList();
 				switch (collection.size()) {
 				case 0: {
 					statusLineManager
-							.setMessage(getString("_UI_NoObjectSelected"));
+						.setMessage(getString("_UI_NoObjectSelected"));
 					break;
 				}
 				case 1: {
 					String text = new AdapterFactoryItemDelegator(
-							adapterFactory).getText(collection.iterator()
-							.next());
+						adapterFactory).getText(collection.iterator()
+						.next());
 					statusLineManager.setMessage(getString(
-							"_UI_SingleObjectSelected", text));
+						"_UI_SingleObjectSelected", text));
 					break;
 				}
 				default: {
 					statusLineManager.setMessage(getString(
-							"_UI_MultiObjectSelected",
-							Integer.toString(collection.size())));
+						"_UI_MultiObjectSelected",
+						Integer.toString(collection.size())));
 					break;
 				}
 				}
@@ -1796,7 +1795,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 */
 	public void menuAboutToShow(IMenuManager menuManager) {
 		((IMenuListener) getEditorSite().getActionBarContributor())
-				.menuAboutToShow(menuManager);
+			.menuAboutToShow(menuManager);
 	}
 
 	/**
@@ -1806,7 +1805,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 	 */
 	public EditingDomainActionBarContributor getActionBarContributor() {
 		return (EditingDomainActionBarContributor) getEditorSite()
-				.getActionBarContributor();
+			.getActionBarContributor();
 	}
 
 	/**
@@ -1837,7 +1836,7 @@ public class ConfigEditor extends MultiPageEditorPart implements
 		updateProblemIndication = false;
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
-				resourceChangeListener);
+			resourceChangeListener);
 
 		getSite().getPage().removePartListener(partListener);
 

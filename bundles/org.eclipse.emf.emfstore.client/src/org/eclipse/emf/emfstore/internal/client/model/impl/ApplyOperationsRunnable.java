@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -26,9 +26,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  */
 public class ApplyOperationsRunnable implements Runnable {
 
-	private ProjectSpaceBase projectSpace;
-	private List<AbstractOperation> operations;
-	private boolean addOperations;
+	private final ProjectSpaceBase projectSpace;
+	private final List<AbstractOperation> operations;
+	private final boolean addOperations;
 
 	/**
 	 * Constructor.
@@ -58,11 +58,11 @@ public class ApplyOperationsRunnable implements Runnable {
 			protected void doRun() {
 				projectSpace.stopChangeRecording();
 				try {
-					for (AbstractOperation operation : operations) {
+					for (final AbstractOperation operation : operations) {
 						try {
 							operation.apply(projectSpace.getProject());
 							// BEGIN SUPRESS CATCH EXCEPTION
-						} catch (RuntimeException e) {
+						} catch (final RuntimeException e) {
 							WorkspaceUtil.handleException(e);
 						}
 						// END SUPRESS CATCH EXCEPTION

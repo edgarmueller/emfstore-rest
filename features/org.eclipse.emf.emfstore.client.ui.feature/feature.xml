@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.emf.emfstore.client.ui.feature"
-      label="EMFStore Client UI (Incubation)"
+      label="EMFStore Client UI"
       version="1.0.0.qualifier"
       provider-name="Eclipse Modeling Project"
       plugin="org.eclipse.emf.emfstore.client.ui">

@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * jfinis
+ * Jan Finis - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 
@@ -37,12 +37,12 @@ public class FileTransferManager {
 	/**
 	 * The associated cache manager.
 	 */
-	private FileTransferCacheManager cacheManager;
+	private final FileTransferCacheManager cacheManager;
 
 	/**
 	 * The associated project space.
 	 */
-	private ProjectSpaceBase projectSpace;
+	private final ProjectSpaceBase projectSpace;
 
 	/**
 	 * Constructor that creates a file transfer manager for a specific project
@@ -57,14 +57,32 @@ public class FileTransferManager {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Adds a file to be transferred (uploaded).
+	 * 
+	 * @param file
+	 *            the file to be transferred
+	 * 
+	 * @return the {@link FileIdentifier} that associates the file with its ID
+	 * 
+	 * @throws FileTransferException in case the {@code file} is either {@code null}, a directory
+	 *             or does not exist
 	 */
 	public FileIdentifier addFile(File file) throws FileTransferException {
 		return addFile(file, null);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Adds a file to be transferred (uploaded).
+	 * 
+	 * @param file
+	 *            the file to be transferred
+	 * @param id
+	 *            the ID that will be associated with the file being uploaded
+	 * 
+	 * @return the {@link FileIdentifier} that associates the file with its ID
+	 * 
+	 * @throws FileTransferException in case the {@code file} is either {@code null}, a directory
+	 *             or does not exist
 	 */
 	public FileIdentifier addFile(File file, String id) throws FileTransferException {
 		if (file == null) {
@@ -79,7 +97,7 @@ public class FileTransferManager {
 		}
 
 		// Create the file identifier
-		FileIdentifier identifier = ModelFactory.eINSTANCE.createFileIdentifier();
+		final FileIdentifier identifier = ModelFactory.eINSTANCE.createFileIdentifier();
 		if (id != null) {
 			identifier.setIdentifier(id);
 		}
@@ -87,7 +105,7 @@ public class FileTransferManager {
 		// Move file to cache
 		try {
 			cacheManager.cacheFile(file, identifier);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new FileTransferException("An exception occurred while trying to cache an incoming file:\n"
 				+ e.getMessage(), e);
 		}
@@ -105,7 +123,7 @@ public class FileTransferManager {
 	 * @param identifier
 	 */
 	private void addToCommitQueue(final FileIdentifier identifier) {
-		for (FileIdentifier f : projectSpace.getWaitingUploads()) {
+		for (final FileIdentifier f : projectSpace.getWaitingUploads()) {
 			if (f.getIdentifier().equals(identifier.getIdentifier())) {
 				return;
 			}
@@ -127,11 +145,10 @@ public class FileTransferManager {
 	 * 
 	 * @param progress
 	 *            progress monitor
-	 * @throws FileTransferException
 	 */
 	public void uploadQueuedFiles(IProgressMonitor progress) {
 		try {
-			EList<FileIdentifier> uploads = projectSpace.getWaitingUploads();
+			final EList<FileIdentifier> uploads = projectSpace.getWaitingUploads();
 			while (!uploads.isEmpty()) {
 				final FileIdentifier fi = uploads.get(0);
 
@@ -153,8 +170,8 @@ public class FileTransferManager {
 					continue;
 
 				}
-				FileUploadJob job = new FileUploadJob(this, fi, true);
-				IStatus result = job.run(progress);
+				final FileUploadJob job = new FileUploadJob(this, fi, true);
+				final IStatus result = job.run(progress);
 
 				if (job.getException() != null) {
 					WorkspaceUtil.logException("An exception occurred while trying to upload a file to the server",
@@ -166,15 +183,20 @@ public class FileTransferManager {
 					return;
 				}
 			}
-		} catch (FileTransferException e) {
+		} catch (final FileTransferException e) {
 			WorkspaceUtil.logException("Uploading the waiting files did not succeed", e);
 		}
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns the download status of the file that is associated with the given {@link FileIdentifier}.
 	 * 
-	 * @param monitor
+	 * @param fileIdentifier
+	 *            the file identifier whose download status should be retrieved
+	 * 
+	 * @return the download status of the file
+	 * 
+	 * @throws FileTransferException in case the given file identifier is {@code null}
 	 */
 	public FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException {
 
@@ -203,9 +225,9 @@ public class FileTransferManager {
 	 * @return the status
 	 */
 	private FileDownloadStatus startDownload(FileIdentifier fileIdentifier) {
-		FileDownloadStatus fds = FileDownloadStatus.Factory.createNew(projectSpace, fileIdentifier);
+		final FileDownloadStatus fds = FileDownloadStatus.Factory.createNew(projectSpace, fileIdentifier);
 		// TODO Check if true is correct here
-		FileDownloadJob job = new FileDownloadJob(fds, this, fileIdentifier, true);
+		final FileDownloadJob job = new FileDownloadJob(fds, this, fileIdentifier, true);
 		job.schedule();
 		return fds;
 	}
@@ -239,7 +261,7 @@ public class FileTransferManager {
 		 * the element. Equals is not well-defined for EObjects, so we cannot
 		 * use it here.
 		 */
-		for (FileIdentifier upload : projectSpace.getWaitingUploads()) {
+		for (final FileIdentifier upload : projectSpace.getWaitingUploads()) {
 			// This is our equals: Compare the strings!
 			if (upload.getIdentifier().equals(fileId.getIdentifier())) {
 				return i;
@@ -259,7 +281,7 @@ public class FileTransferManager {
 	 *             if the file is not in the queue
 	 */
 	void removeWaitingUpload(FileIdentifier fileId) throws FileTransferException {
-		int index = getWaitingUploadIndex(fileId);
+		final int index = getWaitingUploadIndex(fileId);
 		if (index != -1) {
 			projectSpace.getWaitingUploads().remove(index);
 			projectSpace.saveProjectSpaceOnly();
@@ -276,7 +298,7 @@ public class FileTransferManager {
 	 * 
 	 * @param fileIdentifier
 	 *            the file to be looked up
-	 * @return true, iff the file is in the queue
+	 * @return true, if the file is in the queue
 	 */
 	public boolean hasWaitingUpload(FileIdentifier fileIdentifier) {
 		return getWaitingUploadIndex(fileIdentifier) != -1;
@@ -295,7 +317,7 @@ public class FileTransferManager {
 		// Remove from the waiting queue
 		try {
 			removeWaitingUpload(fileIdentifier);
-		} catch (FileTransferException e) {
+		} catch (final FileTransferException e) {
 			return;
 		}
 

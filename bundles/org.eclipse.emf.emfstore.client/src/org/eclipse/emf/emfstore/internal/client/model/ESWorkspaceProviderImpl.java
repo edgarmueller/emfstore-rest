@@ -11,8 +11,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -24,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -44,6 +47,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
+import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
@@ -56,23 +60,28 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.common.ESDisposable;
+import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.MalformedModelVersionException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrator;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
+import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
 /**
  * Controller for workspaces. Workspace Manager is a singleton.
  * 
- * @author Maximilian Koegel
- * @generated NOT
+ * @author mkoegel
  */
 public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCommitObserver, ESUpdateObserver,
-	ESShareObserver, ESCheckoutObserver {
+	ESShareObserver, ESCheckoutObserver, ESDisposable {
 
 	private static ESWorkspaceProviderImpl instance;
 
@@ -97,7 +106,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 				instance = new ESWorkspaceProviderImpl();
 				instance.initialize();
 				// BEGIN SUPRESS CATCH EXCEPTION
-			} catch (RuntimeException e) {
+			} catch (final RuntimeException e) {
 				// END SURPRESS CATCH EXCEPTION
 				ModelUtil.logException("Workspace Initialization failed, shutting down", e);
 				throw e;
@@ -188,9 +197,10 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 		resourceSet = resourceSetProvider.getResourceSet();
 
+		// register an editing domain on the resource
 		setEditingDomain(createEditingDomain(resourceSet));
 
-		URI workspaceURI = ClientURIUtil.createWorkspaceURI();
+		final URI workspaceURI = ClientURIUtil.createWorkspaceURI();
 		final Workspace workspace;
 		final Resource resource;
 
@@ -205,11 +215,11 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 			try {
 				resource.load(ModelUtil.getResourceLoadOptions());
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				WorkspaceUtil.logException("Error while loading workspace.", e);
 			}
 
-			EList<EObject> directContents = resource.getContents();
+			final EList<EObject> directContents = resource.getContents();
 			workspace = (Workspace) directContents.get(0);
 		}
 
@@ -259,7 +269,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 			return (ProjectSpace) modelElement;
 		}
 
-		Project project = ModelUtil.getProject(modelElement);
+		final Project project = ModelUtil.getProject(modelElement);
 
 		if (project == null) {
 			throw new IllegalArgumentException("The model element " + modelElement + " has no project");
@@ -281,9 +291,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		// check if my container is a project space
 		if (ModelPackage.eINSTANCE.getProjectSpace().isInstance(project.eContainer())) {
 			return (ProjectSpace) project.eContainer();
-		} else {
-			throw new IllegalStateException("Project is not contained by any project space");
 		}
+
+		throw new IllegalStateException("Project is not contained by any project space");
 	}
 
 	/**
@@ -353,21 +363,22 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	}
 
 	private void initialize() {
-		this.observerBus = new ObserverBus();
-		this.connectionManager = initConnectionManager();
-		this.adminConnectionManager = initAdminConnectionManager();
-		this.sessionManager = new SessionManager();
+		observerBus = new ObserverBus();
+		connectionManager = initConnectionManager();
+		adminConnectionManager = initAdminConnectionManager();
+		sessionManager = new SessionManager();
 		load();
 	}
 
 	private void notifyPostWorkspaceInitiators() {
-		for (ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", true)
+		for (final ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit",
+			true)
 			.getExtensionElements()) {
 			try {
 				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
 					currentWorkspace
 						.toAPI());
-			} catch (ESExtensionPointException e) {
+			} catch (final ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}
 		}
@@ -397,22 +408,21 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	}
 
 	private EditingDomain createEditingDomain(ResourceSet resourceSet) {
-		ESEditingDomainProvider domainProvider = getDomainProvider();
+		final ESEditingDomainProvider domainProvider = getDomainProvider();
 		if (domainProvider != null) {
 			return domainProvider.getEditingDomain(resourceSet);
-		} else {
-
-			AdapterFactory adapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-			adapterFactory = new ComposedAdapterFactory(new AdapterFactory[] { adapterFactory,
-				new ReflectiveItemProviderAdapterFactory() });
-
-			AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(adapterFactory,
-				new EMFStoreBasicCommandStack(), resourceSet);
-			resourceSet.eAdapters().add(new AdapterFactoryEditingDomain.EditingDomainProvider(domain));
-			return domain;
 		}
+
+		AdapterFactory adapterFactory = new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+		adapterFactory = new ComposedAdapterFactory(new AdapterFactory[] { adapterFactory,
+			new ReflectiveItemProviderAdapterFactory() });
+
+		final AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(adapterFactory,
+			new EMFStoreBasicCommandStack(), resourceSet);
+		resourceSet.eAdapters().add(new AdapterFactoryEditingDomain.EditingDomainProvider(domain));
+		return domain;
 	}
 
 	private ESEditingDomainProvider getDomainProvider() {
@@ -429,9 +439,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		resource = resourceSet.createResource(fileURI);
 		workspace = ModelFactory.eINSTANCE.createWorkspace();
 		workspace.getServerInfos().addAll(Configuration.getClientBehavior().getDefaultServerInfos());
-		EList<Usersession> usersessions = workspace.getUsersessions();
-		for (ServerInfo serverInfo : workspace.getServerInfos()) {
-			Usersession lastUsersession = serverInfo.getLastUsersession();
+		final EList<Usersession> usersessions = workspace.getUsersessions();
+		for (final ServerInfo serverInfo : workspace.getServerInfos()) {
+			final Usersession lastUsersession = serverInfo.getLastUsersession();
 			if (lastUsersession != null) {
 				usersessions.add(lastUsersession);
 			}
@@ -446,7 +456,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 		try {
 			resource.save(ModelUtil.getResourceSaveOptions());
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			WorkspaceUtil.logException(
 				"Creating new workspace failed! Delete workspace folder: "
 					+ Configuration.getFileInfo().getWorkspaceDirectory(), e);

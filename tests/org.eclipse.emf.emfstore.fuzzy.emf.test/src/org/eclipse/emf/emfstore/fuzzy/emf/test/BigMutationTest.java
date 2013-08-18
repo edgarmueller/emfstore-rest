@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -25,8 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Test to run bigger
- * {@link org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration}s.
+ * Test to run bigger {@link org.eclipse.emf.emfstore.modelmutator.api.ModelMutatorConfiguration}s.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -49,7 +48,7 @@ public class BigMutationTest {
 		System.out.println("CHANGE");
 
 		ModelMutatorConfiguration config = new ModelMutatorConfiguration(
-				util.getEPackages(), root, 1L);
+			util.getEPackages(), root, 1L);
 		config.setMinObjectsCount(util.getMinObjectsCount());
 		ModelMutator.changeModel(config);
 

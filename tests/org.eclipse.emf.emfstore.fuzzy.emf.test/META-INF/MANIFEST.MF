@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests for EMFDataprovider (Incubation)
+Bundle-Name: Tests for EMFDataprovider
 Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy.emf.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.emf.emfstore.fuzzy.emf;visibility:=reexport,

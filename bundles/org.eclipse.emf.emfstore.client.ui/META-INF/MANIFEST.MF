@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EMFStore Client UI  (Incubation)
+Bundle-Name: EMFStore Client UI
 Bundle-SymbolicName: org.eclipse.emf.emfstore.client.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.internal.client.ui.Activator

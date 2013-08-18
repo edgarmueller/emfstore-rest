@@ -85,7 +85,7 @@
   	<module>../../releng/_target</module>
     <!-- EMFStore Core Features -->
     <module>../../features/org.eclipse.emf.emfstore.common.feature</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.branding</module>
+    <!-- <module>../../bundles/org.eclipse.emf.emfstore.branding</module>-->
     <module>../../bundles/org.eclipse.emf.emfstore.common</module>
     <module>../../bundles/org.eclipse.emf.emfstore.common.model</module>
 
@@ -106,12 +106,7 @@
  -->
     <module>../../features/org.eclipse.emf.emfstore.ecore.feature</module>
     <module>../../bundles/org.eclipse.emf.emfstore.ecore</module>
-<!--
-    <module>../org.eclipse.emf.emfstore.ecp.feature</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.emfstorebridge</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.navigatoreditorbridge</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.validation</module>
-     -->
+
 
     <module>../../features/org.eclipse.emf.emfstore.client.feature</module>
     <module>../../bundles/org.eclipse.emf.emfstore.client</module>
@@ -160,6 +155,7 @@
     <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.client.backchannel</module>
     <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.server.backchannel</module>
      -->
+     <!-- Model Mutator -->  
     <module>../../bundles/org.eclipse.emf.emfstore.modelmutator</module>
     <module>../../features/org.eclipse.emf.emfstore.modelmutator.feature</module>
         
@@ -300,7 +296,8 @@
         <configuration>
           <!-- Checkstyle violations will not fail the whole build -->
           <failOnViolation>false</failOnViolation>
-          <configLocation>${basedir}/../../EMFStoreDeveloper/coding/emfstoreStyle5.x.xml</configLocation>
+          <!-- <configLocation>${basedir}/../../EMFStoreDeveloper/coding/emfstoreStyle5.x.xml</configLocation>-->
+          <configLocation>http://download.eclipse.org/emfclient/config/esmCheckstyle.xml</configLocation>
           <propertyExpansion>samedir=${basedir}/../../EMFStoreDeveloper/coding</propertyExpansion>
         </configuration>
       </plugin>

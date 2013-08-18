@@ -73,7 +73,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// same operations going on in both working copies, no conflicts expected
 		assertEquals(1, conflicts.size());
 
@@ -168,7 +168,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// obviously an index-integrity conflict
 		assertEquals(conflicts.size(), 1);
 
@@ -679,7 +679,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 
 		// index conflict arises: if the add happens before the move, the move will work
 		// if it does after the move, the move could be ineffective
@@ -725,7 +725,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 
 		// index conflict arises: if the add happens before the move, the move will work
 		// if it does after the move, the move could be ineffective
@@ -773,7 +773,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 
 		// an index conflict arises: result depends on which move comes last
 		assertEquals(conflicts.size(), 1);
@@ -819,7 +819,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		assertEquals(conflicts.size(), 0);
 	}
 
@@ -861,7 +861,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict (the change happens at the boundary)
 		assertEquals(conflicts.size(), 0);
 
@@ -906,7 +906,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict (outcome does not depend on serialization)
 		assertEquals(conflicts.size(), 0);
 
@@ -950,7 +950,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict (outcome does not depend on serialization)
 		assertEquals(conflicts.size(), 0);
 
@@ -992,7 +992,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict (outcome does not depend on serialization)
 		assertEquals(conflicts.size(), 0);
 
@@ -1038,7 +1038,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1084,7 +1084,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1131,7 +1131,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1178,7 +1178,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1227,7 +1227,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1274,7 +1274,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1320,7 +1320,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 	}
@@ -1365,7 +1365,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1411,7 +1411,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1459,7 +1459,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1506,7 +1506,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(conflicts.size(), 0);
 
@@ -1553,7 +1553,7 @@ public class ConflictDetectionMultiReferenceTest extends ConflictDetectionTest {
 		Set<AbstractOperation> conflicts = getConflicts(ops1, oclonedProjectSpace);
 		assertEquals(getConflicts(ops1, oclonedProjectSpace).size(),
 			getConflicts(oclonedProjectSpace, ops1)
-			.size());
+				.size());
 		// no index-integrity conflict: result independent of serialization
 		assertEquals(0, conflicts.size());
 

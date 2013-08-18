@@ -23,6 +23,9 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMap
  */
 public interface ConflictHandler {
 
+	/**
+	 * Constant for the extenstion point id of conflict handlers.
+	 */
 	String EXTENSION_POINT_ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler";
 
 	/**

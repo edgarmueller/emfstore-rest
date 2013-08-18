@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util;
 
@@ -24,9 +24,8 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
  * Class offering common methods for the merge dialog.
  * 
  * @author wesendon
- * 
- *         TODO BRANCH some of this stuff is UI related and isn't supposed to be defined here.
  */
+// TODO: BRANCH some of this stuff is UI related and isn't supposed to be defined here.
 public final class DecisionUtil {
 
 	private DecisionUtil() {
@@ -66,22 +65,24 @@ public final class DecisionUtil {
 	 * @param length
 	 *            length
 	 * @param addPoints
-	 *            true, if ending dotts
+	 *            true, if ending dots
 	 * @return shortened string
 	 */
 	public static String cutString(String str, int length, boolean addPoints) {
+
 		if (str == null) {
-			return "";
+			return StringUtils.EMPTY;
 		}
+
 		if (str.length() > length) {
 			str = str.substring(0, length);
 			if (addPoints) {
 				str += "...";
 			}
 			return str;
-		} else {
-			return str;
 		}
+
+		return str;
 	}
 
 	/**
@@ -108,7 +109,7 @@ public final class DecisionUtil {
 	 * @return resulting option or null
 	 */
 	public static ConflictOption getConflictOptionByType(List<ConflictOption> options, OptionType type) {
-		for (ConflictOption option : options) {
+		for (final ConflictOption option : options) {
 			if (option.getType().equals(type)) {
 				return option;
 			}
@@ -127,7 +128,7 @@ public final class DecisionUtil {
 		if (!conflict.hasDetails()) {
 			return false;
 		}
-		for (ConflictOption option : conflict.getOptions()) {
+		for (final ConflictOption option : conflict.getOptions()) {
 			if (!option.isDetailsProvider()) {
 				continue;
 			}
@@ -170,7 +171,7 @@ public final class DecisionUtil {
 	 * @return obj.toString or unset
 	 */
 	public static String getLabel(Object obj, String unset) {
-		return (obj != null && obj.toString().length() > 0) ? obj.toString() : unset;
+		return obj != null && obj.toString().length() > 0 ? obj.toString() : unset;
 	}
 
 	/**
@@ -200,7 +201,8 @@ public final class DecisionUtil {
 			return StringUtils.EMPTY;
 		}
 
-		MergeLabelProvider labelProvider = ESWorkspaceProviderImpl.getObserverBus().notify(MergeLabelProvider.class,
+		final MergeLabelProvider labelProvider = ESWorkspaceProviderImpl.getObserverBus().notify(
+			MergeLabelProvider.class,
 			true);
 		if (labelProvider == null) {
 			return modelElement.toString();

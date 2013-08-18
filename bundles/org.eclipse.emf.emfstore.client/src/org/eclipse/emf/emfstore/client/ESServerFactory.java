@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,7 +12,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client;
 
-import org.eclipse.emf.ecore.xmi.DanglingHREFException;
 import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.common.model.ESFactory;
 
@@ -31,7 +30,7 @@ public interface ESServerFactory extends ESFactory {
 	 * Creates a server without a local name.
 	 * The created server is not automatically added to the workspace, i.e.
 	 * most users will call {@link org.eclipse.emf.emfstore.client.ESWorkspace#addServer(ESServer)} in order to
-	 * to avoid {@link DanglingHREFException}s upon saving.
+	 * to avoid {@link org.eclipse.emf.ecore.xmi.DanglingHREFException}s upon saving.
 	 * 
 	 * @param url
 	 *            the URL of the server
@@ -50,7 +49,7 @@ public interface ESServerFactory extends ESFactory {
 	 * Creates a server with a local name.
 	 * The created server is not automatically added to the workspace, i.e.
 	 * most users will call {@link org.eclipse.emf.emfstore.client.ESWorkspace#addServer(ESServer)} in order to
-	 * to avoid {@link DanglingHREFException}s upon saving.
+	 * to avoid {@link org.eclipse.emf.ecore.xmi.DanglingHREFException}s upon saving.
 	 * 
 	 * @param name
 	 *            the local name of the server
@@ -73,7 +72,7 @@ public interface ESServerFactory extends ESFactory {
 	 * not launch another server, but just return a new ESServer.
 	 * The created server is not automatically added to the workspace, i.e.
 	 * most users will call {@link org.eclipse.emf.emfstore.client.ESWorkspace#addServer(ESServer)} in order to
-	 * to avoid {@link DanglingHREFException}s upon saving.
+	 * to avoid {@link org.eclipse.emf.ecore.xmi.DanglingHREFException}s upon saving.
 	 * 
 	 * @return an {@link ESServer} instance representing the local server on the client side.
 	 * @throws ESServerStartFailedException if starting the server fails
@@ -81,7 +80,7 @@ public interface ESServerFactory extends ESFactory {
 	ESServer createAndStartLocalServer() throws ESServerStartFailedException;
 
 	/**
-	 * Stop the local server iff it has been started. Blocks until server has stopped fully.
+	 * Stop the local server if it has been started. Blocks until server has stopped fully.
 	 */
 	void stopLocalServer();
 }

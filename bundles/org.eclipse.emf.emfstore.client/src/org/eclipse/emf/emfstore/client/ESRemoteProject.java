@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -44,7 +44,7 @@ public interface ESRemoteProject extends ESProject {
 	 * 
 	 * @param name
 	 *            the name of the copy being created during the fetch
-	 * @param usersession
+	 * @param session
 	 *            the user session that will be used by the
 	 *            {@link org.eclipse.emf.emfstore.client.sessionprovider.ESServerCall} to fetch the project
 	 * @param versionSpec
@@ -57,7 +57,7 @@ public interface ESRemoteProject extends ESProject {
 	 * @throws ESException in case an error occurs during fetch
 	 */
 	ESLocalProject fetch(String name, ESUsersession session, ESPrimaryVersionSpec versionSpec,
-		IProgressMonitor progressMonitor) throws ESException;
+		IProgressMonitor monitor) throws ESException;
 
 	/**
 	 * <p>

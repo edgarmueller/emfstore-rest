@@ -7,12 +7,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * koegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.exceptions;
 
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
-import org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl;
 
 /**
  * Exception that represents that there are conflicting changes.
@@ -37,11 +36,23 @@ public class ChangeConflictException extends WorkspaceException {
 	/**
 	 * Constructor.
 	 * 
+	 * @param message
+	 *            a error message
 	 * @param conflictSet
-	 *            the {@link ESConflictSetImpl} leading to the conflict
+	 *            the {@link org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl} leading to the
+	 *            conflict
 	 */
 	public ChangeConflictException(String message, ChangeConflictSet conflictSet) {
 		super(message);
-		this.changeConflict = conflictSet;
+		changeConflict = conflictSet;
+	}
+
+	/**
+	 * Returns the change conflict.
+	 * 
+	 * @return the change conflict that caused the exception
+	 */
+	public ChangeConflictSet getChangeConflict() {
+		return changeConflict;
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -51,9 +51,9 @@ public class FileInfo {
 				// TODO EXPT PRIO
 				locationProvider = new ESExtensionPoint("org.eclipse.emf.emfstore.client.workspaceLocationProvider")
 					.setThrowException(true).getClass("providerClass", ESLocationProvider.class);
-			} catch (ESExtensionPointException e) {
+			} catch (final ESExtensionPointException e) {
 				ModelUtil.logInfo(e.getMessage());
-				String message = "Error while instantiating location provider or none configured, switching to default location!";
+				final String message = "Error while instantiating location provider or none configured, switching to default location!";
 				ModelUtil.logInfo(message);
 			}
 
@@ -71,8 +71,8 @@ public class FileInfo {
 	 * @return the workspace directory path string
 	 */
 	public String getWorkspaceDirectory() {
-		String workspaceDirectory = getLocationProvider().getWorkspaceDirectory();
-		File workspace = new File(workspaceDirectory);
+		final String workspaceDirectory = getLocationProvider().getWorkspaceDirectory();
+		final File workspace = new File(workspaceDirectory);
 		if (!workspace.exists()) {
 			workspace.mkdirs();
 		}
@@ -99,8 +99,9 @@ public class FileInfo {
 	 * @return the path to the error log directory
 	 */
 	public String getErrorLogDirectory() {
-		String workspaceDirectory = getWorkspaceDirectory();
-		File errorDiagnosisDir = new File(StringUtils.join(Arrays.asList(workspaceDirectory, ERROR_DIAGNOSIS_DIR_NAME),
+		final String workspaceDirectory = getWorkspaceDirectory();
+		final File errorDiagnosisDir = new File(StringUtils.join(
+			Arrays.asList(workspaceDirectory, ERROR_DIAGNOSIS_DIR_NAME),
 			File.separatorChar));
 
 		if (!errorDiagnosisDir.exists()) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,14 +12,13 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.handler;
 
-import org.eclipse.emf.emfstore.client.ESLocalProject;
-
 /**
  * <p>
  * Provides a context in which a {@link Runnable} is executed.
  * </p>
  * <p>
- * This may be used to provide a context while applying operations on a {@link ESLocalProject}.
+ * This may be used to provide a context while applying operations on a
+ * {@link org.eclipse.emf.emfstore.client.ESLocalProject}.
  * </p>
  * 
  * @author emueller

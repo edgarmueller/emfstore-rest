@@ -20,9 +20,6 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
  * @author jsommerfeldt
  * @author mkoegel
  * 
- * @noextend This interface is not intended to be extended by clients.
- * @noimplement This interface is not intended to be implemented by clients.
- * 
  * @param <ID>
  *            the type of the ID being used
  * 

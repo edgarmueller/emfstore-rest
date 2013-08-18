@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
@@ -66,14 +66,14 @@ public class MutatorTest {
 		ModelMutator.changeModel(getConfig(project2));
 
 		Iterator<EObject> project1Iterator = project1.getAllModelElements()
-				.iterator();
+			.iterator();
 		Iterator<EObject> project2Iterator = project2.getAllModelElements()
-				.iterator();
+			.iterator();
 
 		while (project1Iterator.hasNext()) {
 			EObject modelElement = project1Iterator.next();
 			ModelElementId modelElementId = project1
-					.getModelElementId(modelElement);
+				.getModelElementId(modelElement);
 			if (!project2.contains(modelElementId)) {
 				failed(project1, project2);
 			}
@@ -88,10 +88,10 @@ public class MutatorTest {
 			}
 			EObject modelElement = allContentsProject1.next();
 			ModelElementId modelElementId = project1
-					.getModelElementId(modelElement);
+				.getModelElementId(modelElement);
 			EObject modelElement2 = allContentsProject2.next();
 			ModelElementId modelElementId2 = project2
-					.getModelElementId(modelElement2);
+				.getModelElementId(modelElement2);
 			if (!modelElementId.equals(modelElementId2)) {
 				failed(project1, project2);
 			}
@@ -103,9 +103,9 @@ public class MutatorTest {
 		while (project1Iterator.hasNext()) {
 			EObject modelElement = project1Iterator.next();
 			ModelElementId modelElementId = project1
-					.getModelElementId(modelElement);
+				.getModelElementId(modelElement);
 			ModelElementId modelElementId2 = project2
-					.getModelElementId(project2Iterator.next());
+				.getModelElementId(project2Iterator.next());
 			if (!modelElementId.equals(modelElementId2)) {
 				failed(project1, project2);
 			}
@@ -120,10 +120,10 @@ public class MutatorTest {
 
 	private ModelMutatorConfiguration getConfig(Project root) {
 		ModelMutatorConfiguration mmc = new ModelMutatorConfiguration(
-				util.getEPackages(), root, util.getSeed());
+			util.getEPackages(), root, util.getSeed());
 		Collection<EStructuralFeature> eStructuralFeaturesToIgnore = new HashSet<EStructuralFeature>();
 		eStructuralFeaturesToIgnore
-				.add(ModelPackage.Literals.PROJECT__CUT_ELEMENTS);
+			.add(ModelPackage.Literals.PROJECT__CUT_ELEMENTS);
 		mmc.seteStructuralFeaturesToIgnore(eStructuralFeaturesToIgnore);
 		mmc.setMinObjectsCount(util.getMinObjectsCount());
 		return mmc;

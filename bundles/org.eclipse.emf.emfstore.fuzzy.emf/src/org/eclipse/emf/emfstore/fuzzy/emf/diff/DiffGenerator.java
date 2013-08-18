@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors: 
+ * Contributors:
  * JulianSommerfeldt
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.diff;
@@ -42,8 +42,7 @@ public class DiffGenerator {
 	private Resource diffResource;
 
 	/**
-	 * A {@link DiffGenerator} with the standard diff file
-	 * {@link FuzzyUtil#DIFF_FILE}.
+	 * A {@link DiffGenerator} with the standard diff file {@link FuzzyUtil#DIFF_FILE}.
 	 */
 	public DiffGenerator() {
 		this(FuzzyUtil.DIFF_FILE);
@@ -73,7 +72,7 @@ public class DiffGenerator {
 				diffResource.load(null);
 			} catch (IOException e) {
 				throw new RuntimeException("Could not load resource: "
-						+ diffResource.getURI(), e);
+					+ diffResource.getURI(), e);
 			}
 		}
 
@@ -91,7 +90,7 @@ public class DiffGenerator {
 	 *             If there is a saving/loading failure with resources.
 	 */
 	public void createDiff(TestRun firstRun, TestRun secondRun)
-			throws IOException {
+		throws IOException {
 
 		TestConfig config = firstRun.getConfig();
 
@@ -109,7 +108,7 @@ public class DiffGenerator {
 
 			// check for configs
 			if ((!containsConfig)
-					&& (diff.getConfig().getId().equals(config.getId()))) {
+				&& (diff.getConfig().getId().equals(config.getId()))) {
 				containsConfig = true;
 				config = diff.getConfig();
 			}
@@ -122,21 +121,21 @@ public class DiffGenerator {
 
 		// create diffs for the two testruns
 		checkForDiffs(firstRun.getResults(), secondRun.getResults(), config,
-				existingDiffs);
+			existingDiffs);
 		checkForDiffs(secondRun.getResults(), firstRun.getResults(), config,
-				existingDiffs);
+			existingDiffs);
 
 		diffResource.getContents().add(diffReport);
 		diffResource.save(null);
 	}
 
 	private void checkForDiffs(List<TestResult> firstResults,
-			List<TestResult> secondResults, TestConfig config,
-			Map<String, TestDiff> existingDiffs) {
+		List<TestResult> secondResults, TestConfig config,
+		Map<String, TestDiff> existingDiffs) {
 		EList<TestDiff> diffs = diffReport.getDiffs();
 		for (TestResult result : new ArrayList<TestResult>(firstResults)) {
 			TestResult corrResult = getCorrespondingTestResult(result,
-					secondResults);
+				secondResults);
 
 			TestDiff diff = getChangedTestDiff(result, corrResult);
 			if (diff != null) {
@@ -197,10 +196,10 @@ public class DiffGenerator {
 	}
 
 	private static TestResult getCorrespondingTestResult(TestResult result,
-			List<TestResult> results) {
+		List<TestResult> results) {
 		for (TestResult res : results) {
 			if (res.getSeedCount() == result.getSeedCount()
-					&& res.getTestName().equals(result.getTestName())) {
+				&& res.getTestName().equals(result.getTestName())) {
 				return res;
 			}
 		}

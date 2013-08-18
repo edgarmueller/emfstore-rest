@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
@@ -80,7 +79,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 *            information about which project to access
 	 */
 	public ESRemoteProjectImpl(ServerInfo serverInfo, ProjectInfo projectInfo) {
-		this.server = serverInfo;
+		server = serverInfo;
 		this.projectInfo = projectInfo;
 	}
 
@@ -156,9 +155,9 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	public ESPrimaryVersionSpec resolveVersionSpec(final ESVersionSpec versionSpec, IProgressMonitor monitor)
 		throws ESException {
 
-		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = ((ESVersionSpecImpl<?, ?>) versionSpec);
+		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = (ESVersionSpecImpl<?, ?>) versionSpec;
 
-		PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(getServerInfo(), monitor) {
+		final PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(getServerInfo(), monitor) {
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(getSessionId(),
@@ -180,10 +179,10 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	public ESPrimaryVersionSpec resolveVersionSpec(ESUsersession session, final ESVersionSpec versionSpec,
 		IProgressMonitor monitor) throws ESException {
 
-		Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
+		final Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
 		final ESVersionSpecImpl<?, ? extends VersionSpec> versionSpecImpl = (ESVersionSpecImpl<?, ?>) versionSpec;
 
-		PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(usersession) {
+		final PrimaryVersionSpec primaryVersionSpec = new ServerCall<PrimaryVersionSpec>(usersession) {
 			@Override
 			protected PrimaryVersionSpec run() throws ESException {
 				return getConnectionManager().resolveVersionSpec(getSessionId(),
@@ -232,10 +231,10 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		final ESHistoryQuery<? extends ESHistoryQuery<?>> query,
 		IProgressMonitor monitor) throws ESException {
 
-		Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
+		final Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
 		final ESHistoryQueryImpl<?, ?> queryImpl = (ESHistoryQueryImpl<?, ?>) query;
 
-		List<HistoryInfo> historyInfos = new ServerCall<List<HistoryInfo>>(usersession,
+		final List<HistoryInfo> historyInfos = new ServerCall<List<HistoryInfo>>(usersession,
 			monitor) {
 			@Override
 			protected List<HistoryInfo> run() throws ESException {
@@ -348,7 +347,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		throws ESException {
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 			public ESLocalProjectImpl call() throws Exception {
-				ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD()
+				final ESPrimaryVersionSpec primaryVersionSpec = resolveVersionSpec(usersession, Versions.createHEAD()
 					.toAPI(), monitor);
 				return checkout(name, usersession, primaryVersionSpec, monitor);
 			}
@@ -368,20 +367,19 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		final ESPrimaryVersionSpec versionSpec, final IProgressMonitor progressMonitor) throws ESException {
 		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, "Fetch", 100);
 
+		final Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
+		final ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) versionSpec;
+		final ProjectInfo projectInfoCopy = ModelUtil.clone(getProjectInfo());
+
+		projectInfoCopy.setVersion(primaryVersionSpecImpl.toInternalAPI());
+
 		return RunESCommand.WithException.runWithResult(ESException.class, new Callable<ESLocalProjectImpl>() {
 
 			public ESLocalProjectImpl call() throws Exception {
 
 				Project project = null;
-				final Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
 
-				// FIXME: MK: hack: set head version manually because esbrowser does not
-				// update revisions properly
-				final ProjectInfo projectInfoCopy = ModelUtil.clone(getProjectInfo());
-				ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) versionSpec;
-				projectInfoCopy.setVersion(primaryVersionSpecImpl.toInternalAPI());
-
-				SubMonitor childMonitor = parentMonitor.newChild(40);
+				final SubMonitor childMonitor = parentMonitor.newChild(40);
 				parentMonitor.subTask("Fetching project from server...");
 				project = new UnknownEMFStoreWorkloadCommand<Project>(childMonitor) {
 					@Override
@@ -418,7 +416,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	public ESLocalProjectImpl checkout(final String name, final ESUsersession session,
 		final ESPrimaryVersionSpec versionSpec, final IProgressMonitor progressMonitor)
 		throws ESException {
-		ESLocalProjectImpl project = fetch(name, session, versionSpec, progressMonitor);
+		final ESLocalProjectImpl project = fetch(name, session, versionSpec, progressMonitor);
 		project.addToWorkspace(progressMonitor);
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCheckoutObserver.class)
 			.checkoutDone(project);
@@ -429,7 +427,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	private ProjectSpace initProjectSpace(final Usersession usersession, final ProjectInfo projectInfoCopy,
 		Project project, String projectName) {
 
-		ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
+		final ProjectSpace projectSpace = ModelFactory.eINSTANCE.createProjectSpace();
 		projectSpace.setProjectId(projectInfoCopy.getProjectId());
 		projectSpace.setProjectName(projectName);
 		projectSpace.setProjectDescription(projectInfoCopy.getDescription());
@@ -439,8 +437,8 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		projectSpace.setProject(project);
 		projectSpace.setResourceCount(0);
 
-		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
-		XMIResource res = (XMIResource) resourceSetImpl.createResource(ModelUtil.VIRTUAL_URI);
+		final ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
+		final XMIResource res = (XMIResource) resourceSetImpl.createResource(ModelUtil.VIRTUAL_URI);
 		((ResourceImpl) res).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 		res.getContents().add(project);
 
@@ -524,10 +522,20 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		};
 	}
 
+	/**
+	 * Returns the project info of this remote project.
+	 * 
+	 * @return the project info of this remote project
+	 */
 	public ProjectInfo getProjectInfo() {
 		return projectInfo;
 	}
 
+	/**
+	 * Returns the server info of this remote project.
+	 * 
+	 * @return the server info of this remote project
+	 */
 	public ServerInfo getServerInfo() {
 		return server;
 	}

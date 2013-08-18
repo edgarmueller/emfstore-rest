@@ -569,7 +569,7 @@ public interface ModelPackage extends EPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Server Infos</em>'.
-	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getServers()
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#getServerInfos()
 	 * @see #getWorkspace()
 	 * @generated
 	 */

@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
- * Otto von Wesendonk
+ * Maximilian Koegel, Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter;
 
@@ -21,7 +20,7 @@ import org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo;
  * the feature member.
  * 
  * @author mkoegel
- * 
+ * @author ovonwesen
  */
 public class IgnoreNullFeatureNotificationsFilter implements ESNotificationFilter {
 
@@ -29,11 +28,11 @@ public class IgnoreNullFeatureNotificationsFilter implements ESNotificationFilte
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo,
-	 *      org.eclipse.emf.emfstore.internal.common.model.ESObjectContainer.common.model.EObjectContainer)
+	 * @see org.eclipse.emf.emfstore.client.handler.ESNotificationFilter#check(org.eclipse.emf.emfstore.common.model.util.ESNotificationInfo,
+	 *      org.eclipse.emf.emfstore.common.model.ESObjectContainer)
 	 */
-	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer container) {
-		return (notificationInfo.getFeature() == null);
+	public boolean check(ESNotificationInfo notificationInfo, ESObjectContainer<?> container) {
+		return notificationInfo.getFeature() == null;
 	}
 
 }

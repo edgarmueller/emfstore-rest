@@ -51,16 +51,16 @@ public final class EMFStoreClientUtil {
 	 */
 	public static ServerInfo giveServerInfo(String url, int port) {
 
-		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
+		final ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
 
-		for (ServerInfo existingServerInfo : workspace.toInternalAPI().getServerInfos()) {
+		for (final ServerInfo existingServerInfo : workspace.toInternalAPI().getServerInfos()) {
 			if (existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)) {
 				if (url.equals(existingServerInfo.getUrl()) && port == existingServerInfo.getPort()) {
 					return existingServerInfo;
 				}
 			}
 		}
-		ServerInfo serverInfo = createServerInfo(url, port, null);
+		final ServerInfo serverInfo = createServerInfo(url, port, null);
 		workspace.toInternalAPI().getServerInfos().add(serverInfo);
 		// TODO: OTS
 		((WorkspaceBase) workspace.toInternalAPI()).save();
@@ -72,11 +72,11 @@ public final class EMFStoreClientUtil {
 	 * 
 	 * @param url the server URL (e.g. IP address or DNS name)
 	 * @param port the server port
-	 * @param certificateAlias the certificateAlias (defaults to {@link KeyStoreManager.DEFAULT_CERTIFICATE})
+	 * @param certificateAlias the certificateAlias
 	 * @return a server info
 	 */
 	public static ServerInfo createServerInfo(String url, int port, String certificateAlias) {
-		ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
+		final ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
 		serverInfo.setName(LOCALHOST_GENERATED_ENTRY_NAME);
 		serverInfo.setUrl(url);
 		serverInfo.setPort(port);
@@ -108,18 +108,18 @@ public final class EMFStoreClientUtil {
 	 * @return a user session
 	 */
 	public static Usersession createUsersession(String username, String password, String serverUrl, int serverPort) {
-		ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
-		for (Usersession usersession : workspace.toInternalAPI().getUsersessions()) {
-			ServerInfo existingServerInfo = usersession.getServerInfo();
+		final ESWorkspaceImpl workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace();
+		for (final Usersession usersession : workspace.toInternalAPI().getUsersessions()) {
+			final ServerInfo existingServerInfo = usersession.getServerInfo();
 			if (existingServerInfo != null && existingServerInfo.getName().equals(LOCALHOST_GENERATED_ENTRY_NAME)
 				&& existingServerInfo.getUrl().equals(serverUrl) && existingServerInfo.getPort() == serverPort) {
-				String encPassword = KeyStoreManager.getInstance().encrypt(password, existingServerInfo);
+				final String encPassword = KeyStoreManager.getInstance().encrypt(password, existingServerInfo);
 				if (username.equals(usersession.getUsername()) && encPassword.equals(usersession.getPassword())) {
 					return usersession;
 				}
 			}
 		}
-		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
+		final Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(giveServerInfo(serverUrl, serverPort));
 		usersession.setUsername(username);
 		usersession.setPassword(password);
@@ -136,27 +136,34 @@ public final class EMFStoreClientUtil {
 	 * @param password the password
 	 * @param serverUrl server url
 	 * @param serverPort server port
-	 * @param certificateAlias the certificateAlias (defaults to {@link KeyStoreManager.DEFAULT_CERTIFICATE})
+	 * @param certificateAlias the certificateAlias
 	 * @return true, if user name & password are right
 	 * @throws ESException Problem with the EMFStore Server
 	 */
 	public static boolean dryLogin(String username, String password, String serverUrl, int serverPort,
 		String certificateAlias) throws ESException {
-		Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
+		final Usersession usersession = ModelFactory.eINSTANCE.createUsersession();
 		usersession.setServerInfo(createServerInfo(serverUrl, serverPort, certificateAlias));
 		usersession.setUsername(username);
 		usersession.setPassword(password);
 		try {
 			usersession.logIn();
-		} catch (AccessControlException e) {
+		} catch (final AccessControlException e) {
 			return false;
 		}
 		return true;
 	}
 
+	/**
+	 * Determine if the contents of two projects are equal.
+	 * 
+	 * @param projectA a project
+	 * @param projectB another project
+	 * @return true if the projects´ contents are identical
+	 */
 	public static boolean areEqual(ESLocalProject projectA, ESLocalProject projectB) {
-		ProjectSpace projectSpaceA = ((ESLocalProjectImpl) projectA).toInternalAPI();
-		ProjectSpace projectSpaceB = ((ESLocalProjectImpl) projectB).toInternalAPI();
+		final ProjectSpace projectSpaceA = ((ESLocalProjectImpl) projectA).toInternalAPI();
+		final ProjectSpace projectSpaceB = ((ESLocalProjectImpl) projectB).toInternalAPI();
 
 		return ModelUtil.areEqual(projectSpaceA.getProject(), projectSpaceB.getProject());
 	}

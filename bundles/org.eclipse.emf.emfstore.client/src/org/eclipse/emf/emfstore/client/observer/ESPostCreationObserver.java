@@ -12,7 +12,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.observer;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.common.ESObserver;
 
@@ -20,8 +19,8 @@ import org.eclipse.emf.emfstore.common.ESObserver;
  * <p>
  * Enables the modification of attributes of newly created model elements.
  * </p>
- * <b>IMPORTANT</b>: do not modify any references in the {@link this#onCreation(EObject)} method.
- * This interfaces is only intended to modify {@link EAttribute}s of a model element.
+ * <b>IMPORTANT</b>: do not modify any references in the {@code onCreation(EObject)} method.
+ * This interfaces is only intended to modify attributes of a model element.
  * 
  * @author emueller
  * 
@@ -30,8 +29,12 @@ import org.eclipse.emf.emfstore.common.ESObserver;
 public interface ESPostCreationObserver extends ESObserver {
 
 	/**
-	 * Called when a new model element has been created. Use this method to
-	 * modify {@link EAttribute}s of a newly created model element.
+	 * <p>
+	 * Called when a new model element has been created.
+	 * </p>
+	 * <p>
+	 * Use this method to modify attributes of a newly created model element. Do <b>not</b> modify any references.
+	 * </p>
 	 * 
 	 * @param modelElement
 	 *            the model element that has been created

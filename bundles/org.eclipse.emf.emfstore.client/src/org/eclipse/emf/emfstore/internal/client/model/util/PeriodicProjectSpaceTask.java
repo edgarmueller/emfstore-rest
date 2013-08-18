@@ -27,7 +27,7 @@ public abstract class PeriodicProjectSpaceTask extends TimerTask {
 
 	private final ProjectSpace projectSpace;
 	private final long interval;
-	private Timer timer;
+	private final Timer timer;
 	private boolean isStarted;
 
 	/**
@@ -41,7 +41,7 @@ public abstract class PeriodicProjectSpaceTask extends TimerTask {
 	public PeriodicProjectSpaceTask(ProjectSpace projectSpace, long interval) {
 		this.projectSpace = projectSpace;
 		this.interval = interval;
-		this.timer = new Timer();
+		timer = new Timer();
 	}
 
 	/**
@@ -56,8 +56,6 @@ public abstract class PeriodicProjectSpaceTask extends TimerTask {
 
 	/**
 	 * Stops the task. If once stopped, continuation is not possible
-	 * 
-	 * @throws
 	 */
 	public void stop() {
 		timer.cancel();

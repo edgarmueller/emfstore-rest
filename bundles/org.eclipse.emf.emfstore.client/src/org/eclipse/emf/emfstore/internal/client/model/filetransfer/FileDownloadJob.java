@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * pfeifferc,jfinis
+ * Carl Pfeiffer, Jan Finis - initial API and implementaiton
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.filetransfer;
 
@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class FileDownloadJob extends FileTransferJob {
 
-	private FileDownloadStatus status;
+	private final FileDownloadStatus status;
 
 	/**
 	 * Default constructor. Only used internally; only the FileTransferManager may create such jobs.
@@ -63,12 +63,12 @@ public class FileDownloadJob extends FileTransferJob {
 			if (!executeTransfer(monitor)) {
 				return Status.CANCEL_STATUS;
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			return registerException(e);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			return registerException(e);
 			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			// END SUPRESS CATCH EXCEPTION
 			return registerException(e);
 		}
@@ -87,12 +87,6 @@ public class FileDownloadJob extends FileTransferJob {
 		return Status.CANCEL_STATUS;
 	}
 
-	/**
-	 * . {@inheritDoc}
-	 * 
-	 * @throws ESException
-	 * @throws RemoteException
-	 */
 	private boolean executeTransfer(IProgressMonitor monitor) throws RemoteException, ESException {
 
 		// download file chunk to retrieve filesize (file chunk is discarded)
@@ -114,7 +108,7 @@ public class FileDownloadJob extends FileTransferJob {
 		} while (!fileChunk.isLast());
 
 		// Once the file is downloaded, it can be moved from the tmp folder to the cache
-		File result = getCache().moveTempFileToCache(getFileId());
+		final File result = getCache().moveTempFileToCache(getFileId());
 		status.transferFinished(result);
 		return true;
 	}

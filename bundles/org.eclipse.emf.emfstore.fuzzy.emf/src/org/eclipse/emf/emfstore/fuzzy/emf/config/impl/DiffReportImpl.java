@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 EclipseSource Muenchen GmbH.
+ * Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -24,8 +24,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport;
 import org.eclipse.emf.emfstore.fuzzy.emf.config.TestDiff;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Diff Report</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Diff Report</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -75,7 +74,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	public EList<TestDiff> getDiffs() {
 		if (diffs == null) {
 			diffs = new EObjectContainmentEList<TestDiff>(TestDiff.class, this,
-					ConfigPackage.DIFF_REPORT__DIFFS);
+				ConfigPackage.DIFF_REPORT__DIFFS);
 		}
 		return diffs;
 	}
@@ -87,7 +86,7 @@ public class DiffReportImpl extends EObjectImpl implements DiffReport {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+		int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ConfigPackage.DIFF_REPORT__DIFFS:
 			return ((InternalEList<?>) getDiffs()).basicRemove(otherEnd, msgs);

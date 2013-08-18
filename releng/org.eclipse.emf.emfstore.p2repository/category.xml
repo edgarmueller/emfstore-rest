@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="EMFStore (Incubation)" url="http://download.eclipse.org/emf-store/latest">
+   <description name="EMFStore" url="http://download.eclipse.org/emf-store/latest">
       Update Site for the EMFStore
    </description>
    <feature id="org.eclipse.emf.emfstore.client.feature" version="0.0.0">

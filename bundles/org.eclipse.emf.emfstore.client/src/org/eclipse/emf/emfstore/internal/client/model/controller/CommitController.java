@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.controller;
 
@@ -48,9 +48,9 @@ import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
  */
 public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
-	private String logMessage;
-	private ESCommitCallback callback;
-	private BranchVersionSpec branch;
+	private final String logMessage;
+	private final ESCommitCallback callback;
+	private final BranchVersionSpec branch;
 
 	/**
 	 * Constructor.
@@ -92,14 +92,14 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		ESCommitCallback callback, IProgressMonitor monitor) {
 		super(projectSpace);
 		this.branch = branch;
-		this.logMessage = (logMessage == null) ? "<NO MESSAGE>" : logMessage;
+		this.logMessage = logMessage == null ? "<NO MESSAGE>" : logMessage;
 		this.callback = callback == null ? ESCommitCallback.NOCALLBACK : callback;
 		setProgressMonitor(monitor);
 	}
 
 	@Override
 	protected PrimaryVersionSpec run() throws ESException {
-		return commit(this.logMessage, this.branch);
+		return commit(logMessage, branch);
 	}
 
 	private PrimaryVersionSpec commit(final String logMessage, final BranchVersionSpec branch)
@@ -130,21 +130,12 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		final ChangePackage changePackage = getProjectSpace().getLocalChangePackage();
 
-		RunESCommand.run(new Callable<Void>() {
-			public Void call() throws Exception {
-				LogMessage logMessageObject = VersioningFactory.eINSTANCE.createLogMessage();
-				logMessageObject.setMessage(logMessage);
-				logMessageObject.setClientDate(new Date());
-				logMessageObject.setAuthor(getProjectSpace().getUsersession().getUsername());
-				changePackage.setLogMessage(logMessageObject);
-				return null;
-			}
-		});
+		setLogMessage(logMessage, changePackage);
 
 		ESWorkspaceProviderImpl.getObserverBus().notify(ESCommitObserver.class)
 			.inspectChanges(getProjectSpace().toAPI(), changePackage.toAPI(), getProgressMonitor());
 
-		ModelElementIdToEObjectMappingImpl idToEObjectMapping = new ModelElementIdToEObjectMappingImpl(
+		final ModelElementIdToEObjectMappingImpl idToEObjectMapping = new ModelElementIdToEObjectMappingImpl(
 			getProjectSpace().getProject(), changePackage);
 
 		getProgressMonitor().subTask("Presenting Changes");
@@ -164,7 +155,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Sending changes to server");
 
 		// check again if an update is required
-		boolean updatePerformed = checkForCommitPreconditions(branch, getProgressMonitor());
+		final boolean updatePerformed = checkForCommitPreconditions(branch, getProgressMonitor());
 		// present changes again if update was performed
 		if (updatePerformed) {
 			getProgressMonitor().subTask("Presenting Changes");
@@ -176,21 +167,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			}
 		}
 
-		// Branching case: branch specifier added
-		final PrimaryVersionSpec newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(
-			getProgressMonitor()) {
-			@Override
-			public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
-				return getConnectionManager().createVersion(
-					getUsersession().getSessionId(),
-					getProjectSpace().getProjectId(),
-					getProjectSpace().getBaseVersion(),
-					changePackage,
-					branch,
-					getProjectSpace().getMergedVersion(),
-					changePackage.getLogMessage());
-			}
-		}.execute();
+		final PrimaryVersionSpec newBaseVersion = performCommit(branch, changePackage);
 
 		// TODO reimplement with ObserverBus and think about subtasks for commit
 		getProgressMonitor().worked(35);
@@ -201,22 +178,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().worked(30);
 		getProgressMonitor().subTask("Computing checksum");
 
-		boolean validChecksum = true;
-		try {
-			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
-		} catch (SerializationException exception) {
-			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
-				getProjectSpace().getProjectName()), exception);
-		}
-
-		if (!validChecksum) {
-			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
-			boolean errorHandled = Configuration.getClientBehavior().getChecksumErrorHandler()
-				.execute(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
-			if (!errorHandled) {
-				throw new ESException("Commit cancelled by checksum error handler due to invalid checksum.");
-			}
-		}
+		handleChecksumProcessing(newBaseVersion);
 
 		getProgressMonitor().subTask("Finalizing commit");
 
@@ -236,11 +198,63 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 		return newBaseVersion;
 	}
 
+	private void handleChecksumProcessing(final PrimaryVersionSpec newBaseVersion) throws ESException {
+		boolean validChecksum = true;
+		try {
+			validChecksum = performChecksumCheck(newBaseVersion, getProjectSpace().getProject());
+		} catch (final SerializationException exception) {
+			WorkspaceUtil.logWarning(MessageFormat.format("Checksum computation for project {0} failed.",
+				getProjectSpace().getProjectName()), exception);
+		}
+
+		if (!validChecksum) {
+			getProgressMonitor().subTask("Invalid checksum.  Activating checksum error handler.");
+			final boolean errorHandled = Configuration.getClientBehavior().getChecksumErrorHandler()
+				.execute(getProjectSpace().toAPI(), newBaseVersion.toAPI(), getProgressMonitor());
+			if (!errorHandled) {
+				throw new ESException("Commit cancelled by checksum error handler due to invalid checksum.");
+			}
+		}
+	}
+
+	private PrimaryVersionSpec performCommit(final BranchVersionSpec branch, final ChangePackage changePackage)
+		throws ESException {
+		// Branching case: branch specifier added
+		final PrimaryVersionSpec newBaseVersion = new UnknownEMFStoreWorkloadCommand<PrimaryVersionSpec>(
+			getProgressMonitor()) {
+			@Override
+			public PrimaryVersionSpec run(IProgressMonitor monitor) throws ESException {
+				return getConnectionManager().createVersion(
+					getUsersession().getSessionId(),
+					getProjectSpace().getProjectId(),
+					getProjectSpace().getBaseVersion(),
+					changePackage,
+					branch,
+					getProjectSpace().getMergedVersion(),
+					changePackage.getLogMessage());
+			}
+		}.execute();
+		return newBaseVersion;
+	}
+
+	private void setLogMessage(final String logMessage, final ChangePackage changePackage) {
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				final LogMessage logMessageObject = VersioningFactory.eINSTANCE.createLogMessage();
+				logMessageObject.setMessage(logMessage);
+				logMessageObject.setClientDate(new Date());
+				logMessageObject.setAuthor(getProjectSpace().getUsersession().getUsername());
+				changePackage.setLogMessage(logMessageObject);
+				return null;
+			}
+		});
+	}
+
 	private boolean performChecksumCheck(PrimaryVersionSpec newBaseVersion, Project project)
 		throws SerializationException {
 
 		if (Configuration.getClientBehavior().isChecksumCheckActive()) {
-			long computedChecksum = ModelUtil.computeChecksum(project);
+			final long computedChecksum = ModelUtil.computeChecksum(project);
 			return computedChecksum == newBaseVersion.getProjectStateChecksum();
 		}
 
@@ -258,7 +272,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			PrimaryVersionSpec potentialBranch = null;
 			try {
 				potentialBranch = getProjectSpace().resolveVersionSpec(branch, monitor);
-			} catch (InvalidVersionSpecException e) {
+			} catch (final InvalidVersionSpecException e) {
 				// branch doesn't exist, create.
 			}
 			if (potentialBranch != null) {
@@ -267,7 +281,7 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 
 		} else {
 			// check if we need to update first
-			PrimaryVersionSpec resolvedVersion = getProjectSpace()
+			final PrimaryVersionSpec resolvedVersion = getProjectSpace()
 				.resolveVersionSpec(
 					Versions.createHEAD(getProjectSpace().getBaseVersion()), monitor);
 			if (!getProjectSpace().getBaseVersion().equals(resolvedVersion)) {
@@ -278,18 +292,5 @@ public class CommitController extends ServerCall<PrimaryVersionSpec> {
 			}
 		}
 		return false;
-	}
-
-	private LogMessage createLogMessage() {
-		LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
-		String commiter = "UNKOWN";
-		if (getProjectSpace().getUsersession() != null && getProjectSpace().getUsersession().getACUser() != null
-			&& getProjectSpace().getUsersession().getACUser().getName() != null) {
-			commiter = getProjectSpace().getUsersession().getACUser().getName();
-		}
-		logMessage.setAuthor(commiter);
-		logMessage.setClientDate(new Date());
-		logMessage.setMessage("");
-		return logMessage;
 	}
 }

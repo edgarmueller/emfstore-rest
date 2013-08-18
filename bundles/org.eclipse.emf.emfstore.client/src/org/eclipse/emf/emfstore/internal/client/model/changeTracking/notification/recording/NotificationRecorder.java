@@ -53,9 +53,8 @@ public class NotificationRecorder {
 	public NotificationRecording getRecording() {
 		if (isRecordingComplete()) {
 			return recording;
-		} else {
-			throw new IllegalStateException("trying to get a recording, that is not finished yet");
 		}
+		throw new IllegalStateException("trying to get a recording, that is not finished yet");
 	}
 
 	/**
@@ -108,7 +107,7 @@ public class NotificationRecorder {
 	public void newRecording(NotificationRecordingHint aHint) {
 
 		if (recording != null && !isRecordingComplete()) {
-			String message = "trying to create new notification chain, even though there is an uncompleted chain present";
+			final String message = "trying to create new notification chain, even though there is an uncompleted chain present";
 			ModelUtil.logException(message, new IllegalStateException(message));
 		}
 
