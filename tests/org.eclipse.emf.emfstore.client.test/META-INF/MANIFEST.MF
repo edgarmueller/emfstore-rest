@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.emf.emfstore.client;bundle-version="[1.0.0,2.0.0)";v
  org.eclipse.core.resources;bundle-version="3.5.0",
  org.eclipse.emf.emfstore.example.merging;bundle-version="1.0.0",
  org.eclipse.emf.emfstore.example.helloworld;bundle-version="1.0.0",
- org.junit;bundle-version="4.11.0";visibility:=reexport
+ org.junit;bundle-version="4.10.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.client.test.Activator
 Export-Package: org.eclipse.emf.emfstore.client.test,

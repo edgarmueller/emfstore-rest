@@ -29,6 +29,8 @@ import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESServerSpaceImpl;
+import org.eclipse.emf.emfstore.server.model.ESServerSpace;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>Server Space</b></em>'. <!-- end-user-doc -->
@@ -88,6 +90,8 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	protected EList<ACUser> users;
 
 	private Resource resource;
+
+	private ESServerSpaceImpl apiImpl;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -297,6 +301,27 @@ public class ServerSpaceImpl extends EObjectImpl implements ServerSpace {
 	 */
 	public void setResource(Resource resource) {
 		this.resource = resource;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
+	 */
+	public ESServerSpace toAPI() {
+		if (apiImpl == null) {
+			apiImpl = createAPI();
+		}
+		return apiImpl;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
+	 */
+	public ESServerSpaceImpl createAPI() {
+		return new ESServerSpaceImpl(this);
 	}
 
 } // ServerSpaceImpl

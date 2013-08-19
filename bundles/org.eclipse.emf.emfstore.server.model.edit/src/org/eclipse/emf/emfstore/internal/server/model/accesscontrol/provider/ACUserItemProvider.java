@@ -62,6 +62,7 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 
 			addFirstNamePropertyDescriptor(object);
 			addLastNamePropertyDescriptor(object);
+			addPasswordPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -102,6 +103,30 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 				getString("_UI_ACUser_lastName_feature"),
 				getString("_UI_PropertyDescriptor_description", "_UI_ACUser_lastName_feature", "_UI_ACUser_type"),
 				AccesscontrolPackage.Literals.AC_USER__LAST_NAME,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Password feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addPasswordPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ACUser_password_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ACUser_password_feature", "_UI_ACUser_type"),
+				AccesscontrolPackage.Literals.AC_USER__PASSWORD,
 				true,
 				false,
 				false,
@@ -183,6 +208,7 @@ public class ACUserItemProvider extends ACOrgUnitItemProvider implements IEditin
 		{
 		case AccesscontrolPackage.AC_USER__FIRST_NAME:
 		case AccesscontrolPackage.AC_USER__LAST_NAME:
+		case AccesscontrolPackage.AC_USER__PASSWORD:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:

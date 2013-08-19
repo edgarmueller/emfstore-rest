@@ -78,6 +78,7 @@ Export-Package: org.eclipse.emf.emfstore.internal.server.model;version="1.0.0.qu
    org.eclipse.emf.emfstore.server.model.edit,
    org.eclipse.emf.emfstore.client.ui",
  org.eclipse.emf.emfstore.server.model;version="1.0.0.qualifier",
+ org.eclipse.emf.emfstore.server.model.accesscontrol,
  org.eclipse.emf.emfstore.server.model.query;version="1.0.0.qualifier",
  org.eclipse.emf.emfstore.server.model.versionspec;version="1.0.0.qualifier"
 Require-Bundle: org.eclipse.emf.emfstore.common.model;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,

@@ -15,27 +15,33 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.server.model.ESServerSpace;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Space</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Space</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getGroups <em>Groups</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getProjects <em>Projects</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getOpenSessions <em>Open Sessions</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getUsers <em>Users</em>}</li>
- * </ul>
- * </p>
+ * @extends APIDelegate<ESServerSpace>
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getGroups <em>Groups</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getProjects <em>Projects</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getOpenSessions <em>Open Sessions
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.ServerSpace#getUsers <em>Users</em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.ModelPackage#getServerSpace()
  * @model
  * @generated
  */
-public interface ServerSpace extends EObject {
+public interface ServerSpace extends EObject, APIDelegate<ESServerSpace> {
 	/**
 	 * Returns the value of the '<em><b>Groups</b></em>' containment reference
 	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup}.
