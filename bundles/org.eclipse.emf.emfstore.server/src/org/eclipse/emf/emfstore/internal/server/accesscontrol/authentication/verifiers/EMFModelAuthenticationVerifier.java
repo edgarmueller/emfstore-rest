@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
+package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;
 
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
@@ -26,7 +26,7 @@ public class EMFModelAuthenticationVerifier extends AbstractAuthenticationContro
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser,
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.AbstractAuthenticationControl#verifyPassword(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser,
 	 *      java.lang.String, java.lang.String)
 	 */
 	@Override

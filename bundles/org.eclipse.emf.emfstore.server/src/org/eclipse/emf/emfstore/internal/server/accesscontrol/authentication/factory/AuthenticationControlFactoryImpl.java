@@ -10,17 +10,17 @@
  * Otto von Wesendonk - initial API and implementation
  * Edgar Mueller - refactorings and singleton access
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory;
+package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory;
 
 import java.util.Properties;
 
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.EMFModelAuthenticationVerifier;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.LDAPVerifier;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.SimplePropertyFileVerifier;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.VerifierChain;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.AbstractAuthenticationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.EMFModelAuthenticationVerifier;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.LDAPVerifier;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.SimplePropertyFileVerifier;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.VerifierChain;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidPropertyException;
 
@@ -50,7 +50,7 @@ public final class AuthenticationControlFactoryImpl implements AuthenticationCon
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactory#createAuthenticationControl(org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory#createAuthenticationControl(org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType)
 	 */
 	public AbstractAuthenticationControl createAuthenticationControl(AuthenticationControlType authenticationControlType)
 		throws FatalESException {

@@ -19,9 +19,9 @@ import org.eclipse.emf.emfstore.internal.client.model.AdminBroker;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactory;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
@@ -36,8 +36,8 @@ import org.junit.Test;
  */
 public class AllAdminBrokerTests extends ServerTests {
 
-	private final String USER_NAME = "quux";
-	private final String USER_PW = "pass";
+	private static final String USER_NAME = "quux";
+	private static final String USER_PW = "pass";
 	private AdminBroker adminBroker;
 	private ESUsersessionImpl login;
 

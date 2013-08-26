@@ -9,7 +9,7 @@
  * Contributors:
  * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
+package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class VerifierChain extends AbstractAuthenticationControl {
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser,
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.AbstractAuthenticationControl#verifyPassword(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser,
 	 *      java.lang.String, java.lang.String)
 	 */
 	@Override

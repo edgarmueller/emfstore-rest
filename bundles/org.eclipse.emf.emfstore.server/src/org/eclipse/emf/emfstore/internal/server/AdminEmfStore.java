@@ -180,6 +180,21 @@ public interface AdminEmfStore extends EMFStoreInterface {
 		throws ESException;
 
 	/**
+	 * Changes the name and password of an {@link ACUser}.
+	 * 
+	 * @param sessionId
+	 *            the session id for authentication.
+	 * @param userId
+	 *            the ID of the user
+	 * @param name
+	 *            the new name
+	 * @param password
+	 *            the new password
+	 * @throws ESException if any error in the EmfStore occurs
+	 */
+	void changeUser(SessionId sessionId, ACOrgUnitId userId, String name, String password) throws ESException;
+
+	/**
 	 * Returns all orgUnits which are attached to the given project.
 	 * 
 	 * @param sessionId the session id for authentication

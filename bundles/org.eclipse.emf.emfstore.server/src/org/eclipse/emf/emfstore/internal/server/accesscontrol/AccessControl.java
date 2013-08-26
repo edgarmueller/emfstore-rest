@@ -11,7 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol;
 
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;

@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
+package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;
 
 import java.io.IOException;
 import java.net.InetAddress;

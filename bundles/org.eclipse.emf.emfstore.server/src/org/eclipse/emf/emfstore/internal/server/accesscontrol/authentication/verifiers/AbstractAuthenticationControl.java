@@ -10,7 +10,7 @@
  * Otto von Wesendonk - initial API and implementation
  * Edgar Mueller - refactorings
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
+package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;
 
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
