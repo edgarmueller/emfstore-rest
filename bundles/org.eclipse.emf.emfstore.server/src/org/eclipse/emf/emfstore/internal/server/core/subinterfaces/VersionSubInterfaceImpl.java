@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core.subinterfaces;
 
@@ -71,18 +71,6 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * 
-	 * @throws FatalESException
-	 *             in case of failure
-	 * @see org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface#initSubInterface()
-	 */
-	@Override
-	public void initSubInterface() throws FatalESException {
-		super.initSubInterface();
-	}
-
-	/**
 	 * Resolves a versionSpec and delivers the corresponding primary
 	 * versionSpec.
 	 * 
@@ -91,6 +79,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 * @param versionSpec
 	 *            versionSpec
 	 * @return primary versionSpec
+	 * 
+	 * @throws InvalidVersionSpecException
+	 *             if the project ID is invalid
 	 * @throws ESException
 	 *             if versionSpec can't be resolved or other failure
 	 */
@@ -101,35 +92,24 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		sanityCheckObjects(projectId, versionSpec);
 
 		synchronized (getMonitor()) {
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			final ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
 			if (versionSpec instanceof PrimaryVersionSpec) {
-
-				return resolvePrimaryVersionSpec(projectHistory, ((PrimaryVersionSpec) versionSpec));
-
+				return resolvePrimaryVersionSpec(projectHistory, (PrimaryVersionSpec) versionSpec);
 			} else if (versionSpec instanceof HeadVersionSpec) {
-
 				return resolveHeadVersionSpec(projectHistory, (HeadVersionSpec) versionSpec);
-
 			} else if (versionSpec instanceof DateVersionSpec) {
-
 				return resolveDateVersionSpec(projectHistory, (DateVersionSpec) versionSpec);
-
 			} else if (versionSpec instanceof TagVersionSpec) {
-
 				return resolveTagVersionSpec(projectHistory, (TagVersionSpec) versionSpec);
-
 			} else if (versionSpec instanceof BranchVersionSpec) {
-
 				return resolveBranchVersionSpec(projectHistory, (BranchVersionSpec) versionSpec);
-
 			} else if (versionSpec instanceof AncestorVersionSpec) {
-
 				return resolveAncestorVersionSpec(projectHistory, (AncestorVersionSpec) versionSpec);
-
 			} else if (versionSpec instanceof PagedUpdateVersionSpec) {
 				return resolvePagedUpdateVersionSpec(projectHistory, (PagedUpdateVersionSpec) versionSpec);
 			}
+
 			throw new InvalidVersionSpecException();
 		}
 	}
@@ -177,9 +157,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private PrimaryVersionSpec resolvePrimaryVersionSpec(ProjectHistory projectHistory, PrimaryVersionSpec versionSpec)
 		throws InvalidVersionSpecException {
-		int index = versionSpec.getIdentifier();
-		String branch = versionSpec.getBranch();
-		int versions = projectHistory.getVersions().size();
+		final int index = versionSpec.getIdentifier();
+		final String branch = versionSpec.getBranch();
+		final int versions = projectHistory.getVersions().size();
 		if (0 > index || index >= versions || branch == null) {
 			throw new InvalidVersionSpecException("Invalid version requested. Version " + index
 				+ " does not exist on server.");
@@ -192,7 +172,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		// Get biggest primary version of given branch which is equal or lower
 		// to the given versionSpec
 		for (int i = index; i >= 0; i--) {
-			Version version = projectHistory.getVersions().get(i);
+			final Version version = projectHistory.getVersions().get(i);
 			if (branch.equals(version.getPrimarySpec().getBranch())) {
 				return version.getPrimarySpec();
 			}
@@ -206,7 +186,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (VersionSpec.GLOBAL.equals(versionSpec.getBranch())) {
 			return projectHistory.getVersions().get(projectHistory.getVersions().size() - 1).getPrimarySpec();
 		}
-		BranchInfo info = getBranchInfo(projectHistory, versionSpec);
+		final BranchInfo info = getBranchInfo(projectHistory, versionSpec);
 		if (info != null) {
 			return info.getHead();
 		}
@@ -214,13 +194,13 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private PrimaryVersionSpec resolveDateVersionSpec(ProjectHistory projectHistory, DateVersionSpec versionSpec) {
-		for (Version version : projectHistory.getVersions()) {
-			LogMessage logMessage = version.getLogMessage();
+		for (final Version version : projectHistory.getVersions()) {
+			final LogMessage logMessage = version.getLogMessage();
 			if (logMessage == null || logMessage.getDate() == null) {
 				continue;
 			}
 			if (versionSpec.getDate().before(logMessage.getDate())) {
-				Version previousVersion = version.getPreviousVersion();
+				final Version previousVersion = version.getPreviousVersion();
 				if (previousVersion == null) {
 					return VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 				}
@@ -232,8 +212,8 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private PrimaryVersionSpec resolveTagVersionSpec(ProjectHistory projectHistory, TagVersionSpec versionSpec)
 		throws InvalidVersionSpecException {
-		for (Version version : projectHistory.getVersions()) {
-			for (TagVersionSpec tag : version.getTagSpecs()) {
+		for (final Version version : projectHistory.getVersions()) {
+			for (final TagVersionSpec tag : version.getTagSpecs()) {
 				if (versionSpec.equals(tag)) {
 					return ModelUtil.clone(version.getPrimarySpec());
 				}
@@ -244,7 +224,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private PrimaryVersionSpec resolveBranchVersionSpec(ProjectHistory projectHistory, BranchVersionSpec versionSpec)
 		throws InvalidVersionSpecException {
-		BranchInfo branchInfo = getBranchInfo(projectHistory, versionSpec);
+		final BranchInfo branchInfo = getBranchInfo(projectHistory, versionSpec);
 		if (branchInfo == null) {
 			throw new InvalidVersionSpecException();
 		}
@@ -252,24 +232,40 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Create a new version.
 	 * 
-	 * @param user
+	 * @param sessionId
+	 *            the ID of the session being used to create a new version
+	 * @param projectId
+	 *            the ID of the project for which a new version is created
+	 * @param baseVersionSpec
+	 *            the base version
+	 * @param changePackage
+	 *            the change package containing all changes that make up the new version
+	 * @param targetBranch
+	 *            the target branch for which to create the new version
+	 * @param sourceVersion
+	 *            the source version
+	 * @param logMessage
+	 *            a log message
+	 * @return the new version
+	 * @throws ESException in case of failure
 	 */
 	@EmfStoreMethod(MethodId.CREATEVERSION)
 	public PrimaryVersionSpec createVersion(SessionId sessionId, ProjectId projectId,
 		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
 		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws ESException {
-		ACUser user = getAuthorizationControl().resolveUser(sessionId);
+
+		final ACUser user = getAuthorizationControl().resolveUser(sessionId);
 		sanityCheckObjects(sessionId, projectId, baseVersionSpec, changePackage, logMessage);
 		synchronized (getMonitor()) {
 
-			long currentTimeMillis = System.currentTimeMillis();
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			final long currentTimeMillis = System.currentTimeMillis();
+			final ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
 			// Find branch
-			BranchInfo baseBranch = getBranchInfo(projectHistory, baseVersionSpec);
-			Version baseVersion = getVersion(projectHistory, baseVersionSpec);
+			final BranchInfo baseBranch = getBranchInfo(projectHistory, baseVersionSpec);
+			final Version baseVersion = getVersion(projectHistory, baseVersionSpec);
 
 			if (baseVersion == null || baseBranch == null) {
 				throw new InvalidVersionSpecException("Branch and/or version doesn't exist.");
@@ -280,12 +276,12 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			BranchInfo newBranch = null;
 
 			// copy project and apply changes
-			Project newProjectState = ((ProjectImpl) getSubInterface(ProjectSubInterfaceImpl.class).getProject(
+			final Project newProjectState = ((ProjectImpl) getSubInterface(ProjectSubInterfaceImpl.class).getProject(
 				baseVersion)).copy();
 			changePackage.apply(newProjectState);
 
 			// normal commit
-			if (targetBranch == null || (baseVersion.getPrimarySpec().getBranch().equals(targetBranch.getBranch()))) {
+			if (targetBranch == null || baseVersion.getPrimarySpec().getBranch().equals(targetBranch.getBranch())) {
 
 				// If branch is null or branch equals base branch, create new
 				// version for specific branch
@@ -332,17 +328,16 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					newVersion.setProjectStateResource(newProjectState.eResource());
 					newVersion.setChangeResource(changePackage.eResource());
 
-				} catch (FatalESException e) {
+				} catch (final FatalESException e) {
 					// try to roll back. removing version is necessary in all cases
 					projectHistory.getVersions().remove(newVersion);
 
-					// normal commit
 					if (newBranch == null) {
+						// normal commit
 						baseVersion.setNextVersion(null);
 						baseBranch.setHead(ModelUtil.clone(baseVersion.getPrimarySpec()));
-
-						// branch commit
 					} else {
+						// branch commit
 						baseVersion.getBranchedVersions().remove(newVersion);
 						projectHistory.getBranches().remove(newBranch);
 					}
@@ -350,7 +345,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 					throw new StorageException(StorageException.NOSAVE, e);
 				}
 
-				// if ancesotr isn't null, a new branch was created. In this
+				// if ancestor isn't null, a new branch was created. In this
 				// case we want to keep the old base project
 				// state
 				if (newVersion.getAncestorVersion() == null && baseVersion.getProjectState() != null) {
@@ -362,7 +357,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				save(baseVersion);
 				save(projectHistory);
 
-			} catch (FatalESException e) {
+			} catch (final FatalESException e) {
 				// roll back failed
 				EMFStoreController.getInstance().shutdown(e);
 				throw new ESException("Shutting down server.");
@@ -377,7 +372,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		PrimaryVersionSpec primarySpec, BranchVersionSpec branch) {
 		primarySpec.setBranch(branch.getBranch());
 
-		BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
+		final BranchInfo branchInfo = VersioningFactory.eINSTANCE.createBranchInfo();
 		branchInfo.setName(branch.getBranch());
 		branchInfo.setSource(ModelUtil.clone(baseSpec));
 		branchInfo.setHead(ModelUtil.clone(primarySpec));
@@ -389,7 +384,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private Version createVersion(ProjectHistory projectHistory, Project projectState, LogMessage logMessage,
 		ACUser user, Version previousVersion) throws ESException {
-		Version newVersion = VersioningFactory.eINSTANCE.createVersion();
+		final Version newVersion = VersioningFactory.eINSTANCE.createVersion();
 
 		long computedChecksum = ModelUtil.NO_CHECKSUM;
 
@@ -397,7 +392,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			if (ServerConfiguration.isComputeChecksumOnCommitActive()) {
 				computedChecksum = ModelUtil.computeChecksum(projectState);
 			}
-		} catch (SerializationException exception) {
+		} catch (final SerializationException exception) {
 			// TODO: clarify what to do in case checksum computation fails + provide ext. point
 			throw new ESException(MessageFormat.format("Could not compute checksum of project {0}.",
 				projectHistory.getProjectName()), exception);
@@ -425,7 +420,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			|| baseVersionSpec.getIdentifier() > projectHistory.getVersions().size() - 1) {
 			return null;
 		}
-		Version version = projectHistory.getVersions().get(baseVersionSpec.getIdentifier());
+		final Version version = projectHistory.getVersions().get(baseVersionSpec.getIdentifier());
 		if (version == null || !version.getPrimarySpec().equals(baseVersionSpec)) {
 			return null;
 		}
@@ -433,7 +428,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private PrimaryVersionSpec isHeadOfBranch(ProjectHistory projectHistory, PrimaryVersionSpec versionSpec) {
-		BranchInfo branchInfo = getBranchInfo(projectHistory, versionSpec);
+		final BranchInfo branchInfo = getBranchInfo(projectHistory, versionSpec);
 		if (branchInfo != null && branchInfo.getHead().equals(versionSpec)) {
 			return branchInfo.getHead();
 		}
@@ -441,7 +436,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private BranchInfo getBranchInfo(ProjectHistory projectHistory, VersionSpec versionSpec) {
-		for (BranchInfo branchInfo : projectHistory.getBranches()) {
+		for (final BranchInfo branchInfo : projectHistory.getBranches()) {
 			if (branchInfo.getName().equals(versionSpec.getBranch())) {
 				return branchInfo;
 			}
@@ -450,14 +445,19 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns all branches for the project with the given ID.
+	 * 
+	 * @param projectId
+	 *            the ID of a project
+	 * @return a list containing information about each branch
+	 * @throws ESException in case of failure
 	 */
 	@EmfStoreMethod(MethodId.GETBRANCHES)
 	public List<BranchInfo> getBranches(ProjectId projectId) throws ESException {
 		synchronized (getMonitor()) {
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
-			ArrayList<BranchInfo> result = new ArrayList<BranchInfo>();
-			for (BranchInfo branch : projectHistory.getBranches()) {
+			final ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			final ArrayList<BranchInfo> result = new ArrayList<BranchInfo>();
+			for (final BranchInfo branch : projectHistory.getBranches()) {
 				result.add(ModelUtil.clone(branch));
 			}
 			return result;
@@ -473,18 +473,18 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *            last head version
 	 */
 	private void deleteOldProjectSpaceAccordingToOptions(ProjectId projectId, Version previousHeadVersion) {
-		String property = ServerConfiguration.getProperties().getProperty(
+		final String property = ServerConfiguration.getProperties().getProperty(
 			ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE,
 			ServerConfiguration.PROJECTSPACE_VERSION_PERSISTENCE_DEFAULT);
 
 		if (property.equals(ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS)) {
 
-			int x = getResourceHelper().getXFromPolicy(
+			final int x = getResourceHelper().getXFromPolicy(
 				ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X,
 				ServerConfiguration.PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X_DEFAULT, false);
 
 			// always save projecstate of first version
-			int lastVersion = previousHeadVersion.getPrimarySpec().getIdentifier();
+			final int lastVersion = previousHeadVersion.getPrimarySpec().getIdentifier();
 			if (lastVersion != 0 && lastVersion % x != 0) {
 				getResourceHelper().deleteProjectState(previousHeadVersion, projectId);
 			}
@@ -495,21 +495,36 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns all changes within the specified version range for a given project.
+	 * 
+	 * @param projectId
+	 *            the ID of a project
+	 * @param source
+	 *            the source version
+	 * @param target
+	 *            the target version (inclusive)
+	 * @return a list of change packages containing all the changes for the specified version range
+	 * 
+	 * @throws InvalidVersionSpecException
+	 *             if an invalid version has been specified
+	 * @throws ESException
+	 *             in case of failure
 	 */
 	@EmfStoreMethod(MethodId.GETCHANGES)
 	public List<ChangePackage> getChanges(ProjectId projectId, VersionSpec source, VersionSpec target)
 		throws InvalidVersionSpecException, ESException {
-		sanityCheckObjects(projectId, source, target);
-		synchronized (getMonitor()) {
-			PrimaryVersionSpec resolvedSource = resolveVersionSpec(projectId, source);
-			PrimaryVersionSpec resolvedTarget = resolveVersionSpec(projectId, target);
 
-			// if target and source are equal return empty list
-			if (resolvedSource.getIdentifier() == resolvedTarget.getIdentifier()) {
-				return new ArrayList<ChangePackage>();
-			}
-			boolean updateForward = resolvedTarget.getIdentifier() > resolvedSource.getIdentifier();
+		sanityCheckObjects(projectId, source, target);
+		final PrimaryVersionSpec resolvedSource = resolveVersionSpec(projectId, source);
+		final PrimaryVersionSpec resolvedTarget = resolveVersionSpec(projectId, target);
+		// if target and source are equal return empty list
+		if (resolvedSource.getIdentifier() == resolvedTarget.getIdentifier()) {
+			return new ArrayList<ChangePackage>();
+		}
+
+		synchronized (getMonitor()) {
+
+			final boolean updateForward = resolvedTarget.getIdentifier() > resolvedSource.getIdentifier();
 
 			// Example: if you want the changes to get from version 5 to 7, you
 			// need the changes contained in version 6
@@ -519,14 +534,14 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// to 5 and therefore is irrelevant.
 			// For that reason the first version is removed, since getVersions
 			// always sorts ascending order.
-			List<Version> versions = getVersions(projectId, resolvedSource, resolvedTarget);
+			final List<Version> versions = getVersions(projectId, resolvedSource, resolvedTarget);
 			if (versions.size() > 1) {
 				versions.remove(0);
 			}
 
 			List<ChangePackage> result = new ArrayList<ChangePackage>();
-			for (Version version : versions) {
-				ChangePackage changes = version.getChanges();
+			for (final Version version : versions) {
+				final ChangePackage changes = version.getChanges();
 				if (changes != null) {
 					changes.setLogMessage(ModelUtil.clone(version.getLogMessage()));
 					result.add(changes);
@@ -536,9 +551,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// if source is after target in time
 			if (!updateForward) {
 				// reverse list and change packages
-				List<ChangePackage> resultReverse = new ArrayList<ChangePackage>();
-				for (ChangePackage changePackage : result) {
-					ChangePackage changePackageReverse = changePackage.reverse();
+				final List<ChangePackage> resultReverse = new ArrayList<ChangePackage>();
+				for (final ChangePackage changePackage : result) {
+					final ChangePackage changePackageReverse = changePackage.reverse();
 					// copy again log message
 					// reverse() created a new change package without copying
 					// existent attributes
@@ -566,7 +581,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 *             if version couldn't be found
 	 */
 	protected Version getVersion(ProjectId projectId, PrimaryVersionSpec versionSpec) throws ESException {
-		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+		final ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 		return getVersion(project, versionSpec);
 	}
 
@@ -589,15 +604,15 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	protected List<Version> getVersions(ProjectId projectId, PrimaryVersionSpec source, PrimaryVersionSpec target)
 		throws ESException {
 		if (source.compareTo(target) < 1) {
-			ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+			final ProjectHistory projectHistory = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
-			Version sourceVersion = getVersion(projectHistory, source);
-			Version targetVersion = getVersion(projectHistory, target);
+			final Version sourceVersion = getVersion(projectHistory, source);
+			final Version targetVersion = getVersion(projectHistory, target);
 
 			if (sourceVersion == null || targetVersion == null) {
 				throw new InvalidVersionSpecException();
 			}
-			List<Version> result = new ArrayList<Version>();
+			final List<Version> result = new ArrayList<Version>();
 
 			// since the introduction of branches the versions are collected
 			// in different order.
@@ -626,9 +641,9 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			// versions are collected in descending order, so the result has to be reversed.
 			Collections.reverse(result);
 			return result;
-		} else {
-			return getVersions(projectId, target, source);
 		}
+
+		return getVersions(projectId, target, source);
 	}
 
 	/**
@@ -680,16 +695,16 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 		while (changes < maxChanges && i < projectHistory.getVersions().size()) {
 			resolvedSpec = projectHistory.getVersions().get(i).getPrimarySpec();
-			Version version = projectHistory.getVersions().get(i);
-			ChangePackage changePackage = version.getChanges();
+			final Version version = projectHistory.getVersions().get(i);
+			final ChangePackage changePackage = version.getChanges();
+
 			if (changePackage != null) {
-				int size = changePackage.getSize();
+				final int size = changePackage.getSize();
 				if (changes + size >= maxChanges) {
 					resolvedSpec = projectHistory.getVersions().get(i).getPrimarySpec();
 					break;
-				} else {
-					changes += size;
 				}
+				changes += size;
 			}
 			i += 1;
 		}

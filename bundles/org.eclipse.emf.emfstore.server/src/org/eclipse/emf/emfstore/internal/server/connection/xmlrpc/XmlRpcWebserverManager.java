@@ -171,11 +171,8 @@ public final class XmlRpcWebserverManager {
 
 	/**
 	 * Stops the server.
-	 * 
-	 * @param force
-	 *            should be set to {@code true}, if handler should be stopped forcefully
 	 */
-	public void stopServer(boolean force) {
+	public void stopServer() {
 		webServer.shutdown();
 		webServer = null;
 	}

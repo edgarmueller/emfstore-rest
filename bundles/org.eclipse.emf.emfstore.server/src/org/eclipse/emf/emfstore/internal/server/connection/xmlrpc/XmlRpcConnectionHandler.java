@@ -76,12 +76,15 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EMFStore> {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#stop()
 	 */
-	public void stop(boolean force) {
+	public void stop() {
 		final XmlRpcWebserverManager webserverManager = XmlRpcWebserverManager.getInstance();
 		if (!webserverManager.removeHandler(EMFSTORE)) {
-			webserverManager.stopServer(force);
+			webserverManager.stopServer();
 		}
 	}
 

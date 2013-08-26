@@ -15,7 +15,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl;
 import org.eclipse.emf.emfstore.internal.server.core.helper.ResourceHelper;
@@ -73,22 +72,12 @@ public abstract class AbstractSubEmfstoreInterface {
 	/**
 	 * Saves an eObject.
 	 * 
-	 * @param object the object
+	 * @param eObject
+	 *            the object
 	 * @throws FatalESException in case of failure
 	 */
-	protected void save(EObject object) throws FatalESException {
-		resourceHelper.save(object);
-	}
-
-	/**
-	 * Saves an eObject together with all model element IDs of the given project.
-	 * 
-	 * @param object the object
-	 * @param project the project, that contains the model element IDs to be saved
-	 * @throws FatalESException in case of failure
-	 */
-	protected void saveWithProject(EObject object, Project project) throws FatalESException {
-		resourceHelper.saveWithProject(object, project);
+	protected void save(EObject eObject) throws FatalESException {
+		resourceHelper.save(eObject);
 	}
 
 	/**
@@ -144,16 +133,16 @@ public abstract class AbstractSubEmfstoreInterface {
 			if (method.getParameterTypes()[0] == SessionId.class) {
 				return method.invoke(this, args);
 			}
-			Object[] argsWoSessionId = new Object[args.length - 1];
+			final Object[] argsWoSessionId = new Object[args.length - 1];
 			System.arraycopy(args, 1, argsWoSessionId, 0, args.length - 1);
 			return method.invoke(this, argsWoSessionId);
-		} catch (IllegalArgumentException e) {
+		} catch (final IllegalArgumentException e) {
 			ModelUtil.logWarning("this must not happen, bad parameters", e);
 			throw new ESException(e);
-		} catch (IllegalAccessException e) {
+		} catch (final IllegalAccessException e) {
 			ModelUtil.logWarning("this must not happen, method is not accessible", e);
 			throw new ESException(e);
-		} catch (InvocationTargetException e) {
+		} catch (final InvocationTargetException e) {
 			ModelUtil.logInfo("exception on execution");
 			if (e.getTargetException() instanceof ESException) {
 				throw (ESException) e.getTargetException();
@@ -172,7 +161,7 @@ public abstract class AbstractSubEmfstoreInterface {
 	 * @throws InvalidInputException is thrown if the check fails
 	 */
 	protected void sanityCheckObjects(Object... objects) throws InvalidInputException {
-		for (Object object : objects) {
+		for (final Object object : objects) {
 			sanityCheckObject(object);
 		}
 	}

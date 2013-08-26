@@ -50,6 +50,7 @@ import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcAdminCon
 import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.core.AdminEmfStoreImpl;
 import org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl;
+import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.ResourceHelper;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
@@ -155,6 +156,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		connectionHandlers = initConnectionHandlers();
 
 		handlePostStartupListener();
+		registerShutdownHook();
 
 		ModelUtil.logInfo("Initialitation COMPLETE.");
 		ModelUtil.logInfo("Server is RUNNING...Time to relax...");
@@ -162,6 +164,18 @@ public class EMFStoreController implements IApplication, Runnable {
 			waitForTermination();
 		}
 
+	}
+
+	/**
+	 * 
+	 */
+	private void registerShutdownHook() {
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				stopServer();
+			}
+		});
 	}
 
 	private void logGeneralInformation() {
@@ -473,17 +487,20 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.equinox.app.IApplication#stop()
+	 * Stops the EMFStore gracefully.
 	 */
-	public void stop() {
+	public void stopServer() {
 		wakeForTermination();
 		// connection handlers may be null in case an exception has been thrown
 		// while starting
 		if (connectionHandlers != null) {
-			for (final ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
-				handler.stop(false);
+
+			final Object monitor = MonitorProvider.getInstance().getMonitor();
+
+			synchronized (monitor) {
+				for (final ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
+					handler.stop();
+				}
 			}
 		}
 		ModelUtil.logInfo("Server was stopped.");
@@ -502,7 +519,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		if (connectionHandlers != null) {
 			for (final ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
 				ModelUtil.logWarning("Stopping connection handler \"" + handler.getName() + "\".");
-				handler.stop(true);
+				handler.stop();
 				ModelUtil.logWarning("Connection handler \"" + handler.getName() + "\" stopped.");
 			}
 		}
@@ -591,6 +608,15 @@ public class EMFStoreController implements IApplication, Runnable {
 	 */
 	public AccessControl getAccessControl() {
 		return accessControl;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.equinox.app.IApplication#stop()
+	 */
+	public void stop() {
+		stopServer();
 	}
 
 }

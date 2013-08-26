@@ -52,21 +52,24 @@ public class XmlRpcAdminConnectionHandler implements ConnectionHandler<AdminEmfS
 	}
 
 	/**
-	 * Returns AdminEmfstore.
+	 * Returns the admin interface for EMFStore.
 	 * 
-	 * @return admin emfstore
+	 * @return the admin interface for EMFStore
 	 */
 	public static AdminEmfStore getAdminEmfStore() {
 		return adminEmfStore;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#stop()
 	 */
-	public void stop(boolean force) {
+	public void stop() {
 		final XmlRpcWebserverManager webserverManager = XmlRpcWebserverManager.getInstance();
 		if (!webserverManager.removeHandler(ADMINEMFSTORE)) {
-			webserverManager.stopServer(force);
+			webserverManager.stopServer();
 		}
 	}
 
