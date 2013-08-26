@@ -28,6 +28,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESSessionIdImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +45,7 @@ public class AllAdminBrokerTests extends ServerTests {
 	@Before
 	public void setup() throws AccessControlException, ESException, FatalESException {
 		final AbstractAuthenticationControl modelAuthenticationControl = AuthenticationControlFactory.INSTANCE
-			.createAuthenticationControl(AuthenticationControlType.Model);
+			.createAuthenticationControl(AuthenticationControlType.model);
 		EMFStoreController.getInstance().getAccessControl().setAuthenticationControl(modelAuthenticationControl);
 		login = (ESUsersessionImpl) getServer().login("super", "super");
 		adminBroker = ESWorkspaceProviderImpl.getInstance().getInternalWorkspace()
@@ -58,6 +59,13 @@ public class AllAdminBrokerTests extends ServerTests {
 		if (userToDelete != null) {
 			adminBroker.deleteUser(userToDelete.getId());
 		}
+	}
+
+	@AfterClass
+	public static void afterClass() throws FatalESException {
+		final AbstractAuthenticationControl modelAuthenticationControl = AuthenticationControlFactory.INSTANCE
+			.createAuthenticationControl(AuthenticationControlType.spfv);
+		EMFStoreController.getInstance().getAccessControl().setAuthenticationControl(modelAuthenticationControl);
 	}
 
 	@Test

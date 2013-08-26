@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.ACUserContainer;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory.AuthenticationControlFactory;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers.AbstractAuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.core.MethodInvocation;
@@ -99,8 +100,17 @@ public class AccessControlImpl implements AccessControl {
 		sessionUserMap = new LinkedHashMap<SessionId, ACUserContainer>();
 		this.serverSpace = serverSpace;
 
+		AuthenticationControlType authenticationControlType = ServerConfiguration.AUTHENTICATION_POLICY_DEFAULT;
+
+		final String property = ServerConfiguration.getProperties().getProperty(
+			ServerConfiguration.AUTHENTICATION_POLICY);
+
+		if (property != null) {
+			authenticationControlType = AuthenticationControlType.valueOf(property);
+		}
+
 		authenticationControl = AuthenticationControlFactory.INSTANCE.createAuthenticationControl(
-			ServerConfiguration.AUTHENTICATION_POLICY_DEFAULT);
+			authenticationControlType);
 	}
 
 	/**

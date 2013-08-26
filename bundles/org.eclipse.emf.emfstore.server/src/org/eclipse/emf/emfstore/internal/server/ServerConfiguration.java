@@ -231,7 +231,7 @@ public final class ServerConfiguration {
 	/**
 	 * Default authentication policy is simple property file aut.
 	 */
-	public static final AuthenticationControlType AUTHENTICATION_POLICY_DEFAULT = AuthenticationControlType.PropertyFile;
+	public static final AuthenticationControlType AUTHENTICATION_POLICY_DEFAULT = AuthenticationControlType.spfv;
 
 	/**
 	 * Path to property file for spfv authentication.

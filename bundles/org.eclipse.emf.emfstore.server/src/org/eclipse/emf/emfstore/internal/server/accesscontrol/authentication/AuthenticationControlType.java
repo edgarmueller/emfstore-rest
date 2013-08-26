@@ -23,7 +23,7 @@ public enum AuthenticationControlType {
 	/**
 	 * A verifier that uses a simple property file for authentication.
 	 */
-	PropertyFile {
+	spfv {
 		/**
 		 * {@inheritDoc}
 		 * 
@@ -37,7 +37,7 @@ public enum AuthenticationControlType {
 	/**
 	 * A verifier that uses LDAP for authentication.
 	 */
-	LDAP {
+	ldap {
 		/**
 		 * {@inheritDoc}
 		 * 
@@ -52,7 +52,7 @@ public enum AuthenticationControlType {
 	 * A verifier that uses the password attribute of an
 	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser} for authentication.
 	 */
-	Model {
+	model {
 		/**
 		 * {@inheritDoc}
 		 * 

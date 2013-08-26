@@ -55,7 +55,7 @@ public final class AuthenticationControlFactoryImpl implements AuthenticationCon
 	public AbstractAuthenticationControl createAuthenticationControl(AuthenticationControlType authenticationControlType)
 		throws FatalESException {
 
-		if (authenticationControlType.equals(AuthenticationControlType.LDAP)) {
+		if (authenticationControlType.equals(AuthenticationControlType.ldap)) {
 			final VerifierChain chain = new VerifierChain();
 			final Properties properties = ServerConfiguration.getProperties();
 			int count = 1;
@@ -88,12 +88,12 @@ public final class AuthenticationControlFactoryImpl implements AuthenticationCon
 
 			return chain;
 
-		} else if (authenticationControlType.equals(AuthenticationControlType.PropertyFile)) {
+		} else if (authenticationControlType.equals(AuthenticationControlType.spfv)) {
 
 			return new SimplePropertyFileVerifier(ServerConfiguration.getProperties().getProperty(
 				ServerConfiguration.AUTHENTICATION_SPFV_FILEPATH, ServerConfiguration.getDefaultSPFVFilePath()));
 
-		} else if (authenticationControlType.equals(AuthenticationControlType.Model)) {
+		} else if (authenticationControlType.equals(AuthenticationControlType.model)) {
 			return new EMFModelAuthenticationVerifier();
 
 		} else {
