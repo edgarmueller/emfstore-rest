@@ -55,7 +55,7 @@ public class ProjectComposite extends PropertiesComposite {
 	private static final int SERVER_ADMIN_ROLE = 3;
 
 	// Set column names
-	private String[] roleNames = new String[] { "Reader", "Writer", "Project Admin", "Server Admin" };
+	private final String[] roleNames = new String[] { "Reader", "Writer", "Project Admin", "Server Admin" };
 
 	private Label lblVersion;
 	private Text txtVersion;
@@ -81,7 +81,7 @@ public class ProjectComposite extends PropertiesComposite {
 	protected void removeOrgUnit(ACOrgUnit orgUnit) {
 		try {
 			getAdminBroker().removeParticipant(projectInfo.getProjectId(), orgUnit.getId());
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -96,7 +96,7 @@ public class ProjectComposite extends PropertiesComposite {
 			if (participant != null) {
 				getAdminBroker().addParticipant(projectInfo.getProjectId(), participant.getId());
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -108,14 +108,14 @@ public class ProjectComposite extends PropertiesComposite {
 	@Override
 	protected void addNewOrgUnit() {
 		try {
-			EList<ACOrgUnit> participants = getParticipants();
-			for (ACOrgUnit orgUnit : participants) {
+			final EList<ACOrgUnit> participants = getParticipants();
+			for (final ACOrgUnit orgUnit : participants) {
 
 				getAdminBroker().addParticipant(projectInfo.getProjectId(), orgUnit.getId());
 
 			}
 
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -130,8 +130,8 @@ public class ProjectComposite extends PropertiesComposite {
 	 */
 	private EList<ACOrgUnit> getParticipants() {
 
-		Collection<ACOrgUnit> allOrgUnits = new BasicEList<ACOrgUnit>();
-		EList<ACOrgUnit> participants = new BasicEList<ACOrgUnit>();
+		final Collection<ACOrgUnit> allOrgUnits = new BasicEList<ACOrgUnit>();
+		final EList<ACOrgUnit> participants = new BasicEList<ACOrgUnit>();
 
 		try {
 
@@ -141,14 +141,14 @@ public class ProjectComposite extends PropertiesComposite {
 				allOrgUnits.removeAll(getAdminBroker().getParticipants(projectInfo.getProjectId()));
 			}
 
-			Object[] result = showDialog(allOrgUnits, "Select a participant");
+			final Object[] result = showDialog(allOrgUnits, "Select a participant");
 
 			for (int i = 0; i < result.length; i++) {
 				if (result[i] instanceof ACOrgUnit) {
 					participants.add((ACOrgUnit) result[i]);
 				}
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 
@@ -158,10 +158,12 @@ public class ProjectComposite extends PropertiesComposite {
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.PropertiesComposite#getTabTitle()
 	 */
 	@Override
-	protected void createTableGroup() {
-		super.createTableGroup("Participants");
+	protected String getTabTitle() {
+		return "Participants";
 	}
 
 	/**
@@ -174,14 +176,14 @@ public class ProjectComposite extends PropertiesComposite {
 
 		super.createTableViewer(parent);
 
-		TableViewerColumn roleColumnViewer = new TableViewerColumn(getTableViewer(), SWT.NONE);
+		final TableViewerColumn roleColumnViewer = new TableViewerColumn(getTableViewer(), SWT.NONE);
 		roleColumnViewer.getColumn().setText("Role");
 		roleColumnViewer.getColumn().setWidth(120);
 		roleColumnViewer.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				ACOrgUnit orgUnit = (ACOrgUnit) element;
-				int roleIndex = getCurrentRoleIndex(orgUnit);
+				final ACOrgUnit orgUnit = (ACOrgUnit) element;
+				final int roleIndex = getCurrentRoleIndex(orgUnit);
 				return roleNames[roleIndex];
 			}
 
@@ -199,9 +201,9 @@ public class ProjectComposite extends PropertiesComposite {
 		super.addDragNDropSupport();
 
 		// add drop support
-		int ops = DND.DROP_COPY;
-		Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
-		DropTargetListener dropListener = new DropTargetAdapter() {
+		final int ops = DND.DROP_COPY;
+		final Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
+		final DropTargetListener dropListener = new DropTargetAdapter() {
 			@Override
 			public void dragEnter(DropTargetEvent event) {
 				if (PropertiesForm.getDragSource().equals("Projects")) {
@@ -216,7 +218,7 @@ public class ProjectComposite extends PropertiesComposite {
 			public void drop(DropTargetEvent event) {
 				if (PropertiesForm.getDragNDropObject() != null) {
 					if (PropertiesForm.getDragNDropObject() instanceof ACOrgUnit) {
-						ACOrgUnit orgUnit = (ACOrgUnit) PropertiesForm.getDragNDropObject();
+						final ACOrgUnit orgUnit = (ACOrgUnit) PropertiesForm.getDragNDropObject();
 						addExistingOrgUnit(orgUnit);
 						PropertiesForm.setDragNDropObject(null);
 						getTableViewer().refresh();
@@ -261,7 +263,7 @@ public class ProjectComposite extends PropertiesComposite {
 				break;
 
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -294,7 +296,7 @@ public class ProjectComposite extends PropertiesComposite {
 	public void updateControls(EObject input) {
 
 		if (input instanceof ProjectInfo) {
-			this.projectInfo = (ProjectInfo) input;
+			projectInfo = (ProjectInfo) input;
 
 			getTxtName().setText(projectInfo.getName());
 			getTxtDescription().setText(projectInfo.getDescription());
@@ -325,7 +327,7 @@ public class ProjectComposite extends PropertiesComposite {
 			} else if (role.eClass().equals(RolesPackage.eINSTANCE.getServerAdmin())) {
 				result = SERVER_ADMIN_ROLE;
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return result;
@@ -338,7 +340,7 @@ public class ProjectComposite extends PropertiesComposite {
 	 */
 	private class RoleEditingSupport extends EditingSupport {
 
-		private ComboBoxCellEditor cellEditor;
+		private final ComboBoxCellEditor cellEditor;
 
 		public RoleEditingSupport(ColumnViewer viewer) {
 			super(viewer);

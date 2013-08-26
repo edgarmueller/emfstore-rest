@@ -43,9 +43,13 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 /**
+ * User tab content in the manage users dialog.
+ * 
  * @author gurcankarakoc, deser
  */
 public class UserTabContent extends TabContent implements IPropertyChangeListener {
+
+	private static final String NEW_USER_NAME = "New User";
 
 	/**
 	 * Action to delete a user.
@@ -179,7 +183,14 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 			@Override
 			public void run() {
 				try {
-					getAdminBroker().createUser("New User");
+					if (userExists(NEW_USER_NAME)) {
+						MessageDialog
+							.openInformation(Display.getCurrent().getActiveShell(),
+								"User already exists", "A user with the given name '" + NEW_USER_NAME
+									+ "' already exists.");
+					} else {
+						getAdminBroker().createUser(NEW_USER_NAME);
+					}
 				} catch (final ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
@@ -234,6 +245,20 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 			}
 
 		};
+	}
+
+	private boolean userExists(String username) {
+		try {
+			for (final ACUser user : getAdminBroker().getUsers()) {
+				if (user.getName().equals(username)) {
+					return true;
+				}
+			}
+		} catch (final ESException ex) {
+			return false;
+		}
+
+		return false;
 	}
 
 	/**

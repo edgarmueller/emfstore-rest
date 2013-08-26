@@ -40,7 +40,7 @@ import org.eclipse.ui.forms.widgets.Form;
 public class GroupComposite extends PropertiesComposite {
 
 	private ACGroup group;
-	private OrgUnitManagementGUI orgUnitMgmtGUI;
+	private final OrgUnitManagementGUI orgUnitMgmtGUI;
 
 	/**
 	 * Constructor.
@@ -70,7 +70,7 @@ public class GroupComposite extends PropertiesComposite {
 		try {
 			getAdminBroker().removeMember(group.getId(), orgUnit.getId());
 
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -87,7 +87,7 @@ public class GroupComposite extends PropertiesComposite {
 				try {
 					getAdminBroker().addMember(group.getId(), orgUnit.getId());
 
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 			}
@@ -102,12 +102,12 @@ public class GroupComposite extends PropertiesComposite {
 	 */
 	@Override
 	protected void addNewOrgUnit() {
-		EList<ACOrgUnit> members = getNewMembers();
-		for (ACOrgUnit ou : members) {
+		final EList<ACOrgUnit> members = getNewMembers();
+		for (final ACOrgUnit ou : members) {
 			try {
 				getAdminBroker().addMember(group.getId(), ou.getId());
 
-			} catch (ESException e) {
+			} catch (final ESException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}
@@ -126,8 +126,8 @@ public class GroupComposite extends PropertiesComposite {
 		// (get list of all AcOrgUnits, remove those who take part in this
 		// 2. return the selected ACOrgunits
 
-		Collection<ACOrgUnit> allOrgUnits = new BasicEList<ACOrgUnit>();
-		EList<ACOrgUnit> members = new BasicEList<ACOrgUnit>();
+		final Collection<ACOrgUnit> allOrgUnits = new BasicEList<ACOrgUnit>();
+		final EList<ACOrgUnit> members = new BasicEList<ACOrgUnit>();
 		try {
 			allOrgUnits.addAll(getAdminBroker().getOrgUnits());
 			allOrgUnits.removeAll(getAdminBroker().getMembers(group.getId()));
@@ -135,14 +135,14 @@ public class GroupComposite extends PropertiesComposite {
 				allOrgUnits.remove(group);
 			}
 
-			Object[] result = showDialog(allOrgUnits, "Select a member");
+			final Object[] result = showDialog(allOrgUnits, "Select a member");
 
 			for (int i = 0; i < result.length; i++) {
 				if (result[i] instanceof ACOrgUnit) {
 					members.add((ACOrgUnit) result[i]);
 				}
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			// ZH Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -151,10 +151,12 @@ public class GroupComposite extends PropertiesComposite {
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.PropertiesComposite#getTabTitle()
 	 */
 	@Override
-	protected void createTableGroup() {
-		super.createTableGroup("Members");
+	protected String getTabTitle() {
+		return "Members";
 	}
 
 	/**
@@ -165,10 +167,10 @@ public class GroupComposite extends PropertiesComposite {
 
 		if (input != null && input instanceof ACGroup) {
 
-			this.group = (ACGroup) input;
+			group = (ACGroup) input;
 
 			getTxtName().setText(group.getName());
-			getTxtDescription().setText((group.getDescription() == null) ? "" : group.getDescription());
+			getTxtDescription().setText(group.getDescription() == null ? "" : group.getDescription());
 			getTableViewer().setInput(group);
 
 		}
@@ -190,9 +192,9 @@ public class GroupComposite extends PropertiesComposite {
 			getTxtDescription().getText()))) {
 			try {
 				getAdminBroker().changeOrgUnit(group.getId(), getTxtName().getText(), getTxtDescription().getText());
-				((Form) (this.getParent().getParent())).setText("Group: " + getTxtName().getText());
+				((Form) getParent().getParent()).setText("Group: " + getTxtName().getText());
 				orgUnitMgmtGUI.getActiveTabContent().getTableViewer().refresh();
-			} catch (ESException e) {
+			} catch (final ESException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}
@@ -209,9 +211,9 @@ public class GroupComposite extends PropertiesComposite {
 		super.addDragNDropSupport();
 
 		// add drop support
-		int ops = DND.DROP_COPY;
-		Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
-		DropTargetListener dropListener = new DropTargetAdapter() {
+		final int ops = DND.DROP_COPY;
+		final Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
+		final DropTargetListener dropListener = new DropTargetAdapter() {
 			@Override
 			public void dragEnter(DropTargetEvent event) {
 				if (PropertiesForm.getDragSource().equals("Projects")) {
@@ -225,7 +227,7 @@ public class GroupComposite extends PropertiesComposite {
 			public void drop(DropTargetEvent event) {
 				if (PropertiesForm.getDragNDropObject() != null) {
 					if (PropertiesForm.getDragNDropObject() instanceof ACOrgUnit) {
-						ACOrgUnit orgUnit = (ACOrgUnit) PropertiesForm.getDragNDropObject();
+						final ACOrgUnit orgUnit = (ACOrgUnit) PropertiesForm.getDragNDropObject();
 						addExistingOrgUnit(orgUnit);
 						PropertiesForm.setDragNDropObject(null);
 						getTableViewer().refresh();

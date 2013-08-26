@@ -41,7 +41,7 @@ import org.eclipse.ui.forms.widgets.Form;
 public class UserComposite extends PropertiesComposite {
 
 	private ACUser user;
-	private OrgUnitManagementGUI orgUnitMgmtGUI;
+	private final OrgUnitManagementGUI orgUnitMgmtGUI;
 
 	/**
 	 * Constructor.
@@ -64,7 +64,7 @@ public class UserComposite extends PropertiesComposite {
 	protected void removeOrgUnit(ACOrgUnit group) {
 		try {
 			getAdminBroker().removeGroup(user.getId(), ((ACGroup) group).getId());
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -81,7 +81,7 @@ public class UserComposite extends PropertiesComposite {
 				getAdminBroker().addMember(((ACGroup) group).getId(), user.getId());
 
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -94,14 +94,14 @@ public class UserComposite extends PropertiesComposite {
 	protected void addNewOrgUnit() {
 
 		try {
-			List<ACGroup> groups = getGroups();
-			for (ACGroup newGroup : groups) {
+			final List<ACGroup> groups = getGroups();
+			for (final ACGroup newGroup : groups) {
 
 				getAdminBroker().addMember(newGroup.getId(), user.getId());
 
 			}
 
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		getTableViewer().refresh();
@@ -114,35 +114,38 @@ public class UserComposite extends PropertiesComposite {
 	 */
 	private List<ACGroup> getGroups() {
 
-		List<ACOrgUnit> allGroups = new ArrayList<ACOrgUnit>();
-		List<ACGroup> groups = new ArrayList<ACGroup>();
+		final List<ACOrgUnit> allGroups = new ArrayList<ACOrgUnit>();
+		final List<ACGroup> groups = new ArrayList<ACGroup>();
 
 		try {
 			allGroups.addAll(getAdminBroker().getGroups());
-			List<ACGroup> groupsToRemove = new ArrayList<ACGroup>();
+			final List<ACGroup> groupsToRemove = new ArrayList<ACGroup>();
 			groupsToRemove.addAll(getAdminBroker().getGroups(user.getId()));
 
 			allGroups.removeAll(groupsToRemove);
 
-			Object[] result = showDialog(allGroups, "Select a group");
+			final Object[] result = showDialog(allGroups, "Select a group");
 
 			for (int i = 0; i < result.length; i++) {
 				if (result[i] instanceof ACGroup) {
 					groups.add((ACGroup) result[i]);
 				}
 			}
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
 		}
 		return groups;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.PropertiesComposite#getTabTitle()
 	 */
 	@Override
-	protected void createTableGroup() {
-		super.createTableGroup("Groups");
+	protected String getTabTitle() {
+		return "Groups";
 	}
 
 	/**
@@ -152,14 +155,15 @@ public class UserComposite extends PropertiesComposite {
 	public void updateControls(EObject input) {
 		if (input != null && input instanceof ACUser) {
 
-			this.user = (ACUser) input;
+			user = (ACUser) input;
 
 			getTxtName().setText(user.getName());
-			getTxtDescription().setText((user.getDescription() == null) ? "" : user.getDescription());
+			getTxtDescription().setText(user.getDescription() == null ? "" : user.getDescription());
 			getTableViewer().setInput(user);
 
 			// disable the text fields for editing name and description when displaying the super user
-			String superUserName = ServerConfiguration.getProperties().getProperty(ServerConfiguration.SUPER_USER,
+			final String superUserName = ServerConfiguration.getProperties().getProperty(
+				ServerConfiguration.SUPER_USER,
 				ServerConfiguration.SUPER_USER_DEFAULT);
 
 			if (user.getName().equals(superUserName)) {
@@ -182,9 +186,9 @@ public class UserComposite extends PropertiesComposite {
 		super.addDragNDropSupport();
 
 		// add drop support
-		int ops = DND.DROP_COPY;
-		Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
-		DropTargetListener dropListener = new DropTargetAdapter() {
+		final int ops = DND.DROP_COPY;
+		final Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
+		final DropTargetListener dropListener = new DropTargetAdapter() {
 			@Override
 			public void dragEnter(DropTargetEvent event) {
 				if (PropertiesForm.getDragSource().equals("Projects") || PropertiesForm.getDragSource().equals("Users")) {
@@ -199,7 +203,7 @@ public class UserComposite extends PropertiesComposite {
 			public void drop(DropTargetEvent event) {
 				if (PropertiesForm.getDragNDropObject() != null) {
 					if (PropertiesForm.getDragNDropObject() instanceof ACGroup) {
-						ACGroup group = (ACGroup) PropertiesForm.getDragNDropObject();
+						final ACGroup group = (ACGroup) PropertiesForm.getDragNDropObject();
 						addExistingOrgUnit(group);
 						PropertiesForm.setDragNDropObject(null);
 						getTableViewer().refresh();
@@ -222,17 +226,17 @@ public class UserComposite extends PropertiesComposite {
 			return;
 		}
 
-		String superUserName = ServerConfiguration.getProperties().getProperty(ServerConfiguration.SUPER_USER,
+		final String superUserName = ServerConfiguration.getProperties().getProperty(ServerConfiguration.SUPER_USER,
 			ServerConfiguration.SUPER_USER_DEFAULT);
 		if (getTxtName().getText().compareToIgnoreCase(superUserName) == 0) {
 			getTxtName().setText("New User");
-			MessageDialog.openInformation(this.getShell(), "Illegal User Name!!!",
+			MessageDialog.openInformation(getShell(), "Illegal User Name!!!",
 				"The username \"super\" is not allowed! It was set to a default value. ");
 			return;
 		}
 		if (getTxtName().getText().equals("")) {
 			getTxtName().setText("New User");
-			MessageDialog.openInformation(this.getShell(), "Empty User Name!!!",
+			MessageDialog.openInformation(getShell(), "Empty User Name!!!",
 				"Empty usernames are not allowed! It was set to a default value.");
 			return;
 		}
@@ -241,10 +245,10 @@ public class UserComposite extends PropertiesComposite {
 			getTxtDescription().getText()))) {
 			try {
 				getAdminBroker().changeOrgUnit(user.getId(), getTxtName().getText(), getTxtDescription().getText());
-				((Form) (this.getParent().getParent())).setText("User: " + getTxtName().getText());
+				((Form) getParent().getParent()).setText("User: " + getTxtName().getText());
 				orgUnitMgmtGUI.getActiveTabContent().getTableViewer().refresh();
 
-			} catch (ESException e) {
+			} catch (final ESException e) {
 				EMFStoreMessageDialog.showExceptionDialog(e);
 			}
 		}
