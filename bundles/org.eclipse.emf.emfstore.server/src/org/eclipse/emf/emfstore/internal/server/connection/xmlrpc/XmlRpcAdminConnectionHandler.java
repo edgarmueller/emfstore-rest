@@ -12,7 +12,7 @@
 package org.eclipse.emf.emfstore.internal.server.connection.xmlrpc;
 
 import org.eclipse.emf.emfstore.internal.server.AdminEmfStore;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
@@ -43,10 +43,10 @@ public class XmlRpcAdminConnectionHandler implements ConnectionHandler<AdminEmfS
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("static-access")
-	public synchronized void init(AdminEmfStore adminEmfStore, AuthenticationControl accessControl)
+	public synchronized void init(AdminEmfStore adminEmfStore, AccessControl accessControl)
 		throws FatalESException {
 		this.adminEmfStore = adminEmfStore;
-		XmlRpcWebserverManager webServer = XmlRpcWebserverManager.getInstance();
+		final XmlRpcWebserverManager webServer = XmlRpcWebserverManager.getInstance();
 		webServer.initServer();
 		webServer.addHandler(ADMINEMFSTORE, XmlRpcAdminEmfStoreImpl.class);
 	}
@@ -64,9 +64,9 @@ public class XmlRpcAdminConnectionHandler implements ConnectionHandler<AdminEmfS
 	 * {@inheritDoc}
 	 */
 	public void stop(boolean force) {
-		XmlRpcWebserverManager webserverManager = XmlRpcWebserverManager.getInstance();
+		final XmlRpcWebserverManager webserverManager = XmlRpcWebserverManager.getInstance();
 		if (!webserverManager.removeHandler(ADMINEMFSTORE)) {
-			webserverManager.stopServer();
+			webserverManager.stopServer(force);
 		}
 	}
 

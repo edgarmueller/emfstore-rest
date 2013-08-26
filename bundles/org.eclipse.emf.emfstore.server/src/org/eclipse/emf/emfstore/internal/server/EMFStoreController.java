@@ -43,6 +43,7 @@ import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControlImpl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.XmlRpcAdminConnectionHandler;
@@ -68,7 +69,6 @@ import org.eclipse.emf.emfstore.internal.server.startup.MigrationManager;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.internal.server.storage.ResourceStorage;
-import org.eclipse.emf.emfstore.server.model.ESServerSpace;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
@@ -496,7 +496,6 @@ public class EMFStoreController implements IApplication, Runnable {
 	 * 
 	 * @param exception
 	 *            the fatal exception that triggered the shutdown
-	 * @generated NOT
 	 */
 	public void shutdown(FatalESException exception) {
 		ModelUtil.logWarning("Stopping all connection handlers...");
@@ -577,11 +576,21 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	/**
-	 * Returns the {@link ESServerSpace}.
+	 * Returns the {@link ServerSpace}.
 	 * 
 	 * @return the server space
 	 */
-	public ESServerSpace getServerSpace() {
-		return serverSpace.toAPI();
+	public ServerSpace getServerSpace() {
+		return serverSpace;
 	}
+
+	/**
+	 * Returns the {@link AccessControl} component of the EMFStore controller.
+	 * 
+	 * @return the {@link AccessControl} component
+	 */
+	public AccessControl getAccessControl() {
+		return accessControl;
+	}
+
 }

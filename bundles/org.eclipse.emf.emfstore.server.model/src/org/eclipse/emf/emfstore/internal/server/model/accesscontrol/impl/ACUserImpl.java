@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage;
-import org.eclipse.emf.emfstore.internal.server.model.impl.api.accesscontrol.ESUserImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object ' <em><b>AC User</b></em>'. <!-- end-user-doc -->
@@ -116,8 +115,6 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 * @ordered
 	 */
 	protected String password = PASSWORD_EDEFAULT;
-
-	private ESUserImpl apiImpl;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -354,27 +351,6 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 		result.append(password);
 		result.append(')');
 		return result.toString();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
-	 */
-	public ESUserImpl toAPI() {
-		if (apiImpl == null) {
-			apiImpl = createAPI();
-		}
-		return apiImpl;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#createAPI()
-	 */
-	public ESUserImpl createAPI() {
-		return new ESUserImpl(this);
 	}
 
 } // ACUserImpl

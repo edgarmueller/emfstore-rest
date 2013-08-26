@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendonk
+ * Otto von Wesendonk - initial API and implementation
+ * Edgar Mueller - refactorings
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
 
@@ -22,6 +23,7 @@ import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 
 /**
  * Abstract class for authentication.
@@ -30,8 +32,8 @@ import org.eclipse.emf.emfstore.internal.server.model.SessionId;
  */
 public abstract class AbstractAuthenticationControl implements AuthenticationControl {
 
-	private String superuser;
-	private String superuserpw;
+	private final String superuser;
+	private final String superuserpw;
 
 	/**
 	 * Default constructor.
@@ -44,19 +46,46 @@ public abstract class AbstractAuthenticationControl implements AuthenticationCon
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Tries to login the given user.
+	 * 
+	 * @param resolvedUser
+	 *            the user instance as resolved by the user
+	 * @param username
+	 *            the username as determined by the client
+	 * @param password
+	 *            the password as entered by the client
+	 * @param clientVersionInfo
+	 *            the version of the client
+	 * @return an {@link AuthenticationInformation} instance holding information about the
+	 *         logged-in session
+	 * 
+	 * @throws AccessControlException in case the login fails
 	 */
-	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+	public AuthenticationInformation logIn(ACUser resolvedUser, String username, String password,
+		ClientVersionInfo clientVersionInfo)
 		throws AccessControlException {
+
 		checkClientVersion(clientVersionInfo);
 		password = preparePassword(password);
-		if (verifySuperUser(username, password) || verifyPassword(username, password)) {
-			AuthenticationInformation authenticationInformation = ModelFactory.eINSTANCE
-				.createAuthenticationInformation();
-			authenticationInformation.setSessionId(ModelFactory.eINSTANCE.createSessionId());
-			return authenticationInformation;
+
+		if (verifySuperUser(username, password) || verifyPassword(resolvedUser, username, password)) {
+			return createAuthenticationInfo();
 		}
+
 		throw new AccessControlException();
+	}
+
+	/**
+	 * Creates a new {@link AuthenticationInformation} with a {@link SessionId} set.
+	 * 
+	 * @return a new instance of an {@link AuthenticationInformation} with an already
+	 *         set session ID
+	 */
+	protected AuthenticationInformation createAuthenticationInfo() {
+		final AuthenticationInformation authenticationInformation = ModelFactory.eINSTANCE
+			.createAuthenticationInformation();
+		authenticationInformation.setSessionId(ModelFactory.eINSTANCE.createSessionId());
+		return authenticationInformation;
 	}
 
 	/**
@@ -78,7 +107,7 @@ public abstract class AbstractAuthenticationControl implements AuthenticationCon
 	 * @return true if super user
 	 */
 	protected boolean verifySuperUser(String username, String password) {
-		return (username.equals(superuser) && password.equals(superuserpw));
+		return username.equals(superuser) && password.equals(superuserpw);
 	}
 
 	/**
@@ -88,42 +117,65 @@ public abstract class AbstractAuthenticationControl implements AuthenticationCon
 	}
 
 	/**
-	 * This method must be implemented by subclasses in order to verify a pair of username and password. When using
-	 * authentication you should use {@link AuthenticationControl#logIn(String, String)} in order to gain a session id.
+	 * This method must be implemented by subclasses in order to verify a pair of username and password.
+	 * When using authentication you should use {@link AuthenticationControl#logIn(String, String)} in order to gain a
+	 * session id.
 	 * 
-	 * @param username the username
-	 * @param password the password
-	 * @return boolean true if authentication was successful, false if not
-	 * @throws AccessControlException an exception
+	 * @param resolvedUser
+	 *            the user instance that has been resolved by the user
+	 * @param username
+	 *            the username as entered by the client; may differ from the user name of the {@code resolvedUser}
+	 * @param password
+	 *            the password as entered by the client
+	 * @return boolean {@code true} if authentication was successful, {@code false} if not
+	 * @throws AccessControlException
+	 *             if an exception occurs during the verification process
 	 */
-	protected abstract boolean verifyPassword(String username, String password) throws AccessControlException;
+	protected abstract boolean verifyPassword(ACUser resolvedUser,
+		String username, String password) throws AccessControlException;
 
+	/**
+	 * Checks whether the given client version is valid.
+	 * If not, throws an exception
+	 * 
+	 * @param clientVersionInfo
+	 *            the client version to be checked
+	 * @throws ClientVersionOutOfDateException
+	 *             in case the given client version is not valid
+	 */
 	// TODO include client name in verification
-	private void checkClientVersion(ClientVersionInfo clientVersionInfo) throws ClientVersionOutOfDateException {
+	protected void checkClientVersion(ClientVersionInfo clientVersionInfo) throws ClientVersionOutOfDateException {
+
 		if (clientVersionInfo == null) {
 			throw new ClientVersionOutOfDateException("No client version recieved.");
 		}
-		String[] versions = ServerConfiguration.getSplittedProperty(ServerConfiguration.ACCEPTED_VERSIONS);
+
+		final String[] versions = ServerConfiguration.getSplittedProperty(ServerConfiguration.ACCEPTED_VERSIONS);
 
 		if (versions == null) {
-			String msg = "No server versions supplied";
+			final String msg = "No server versions supplied";
 			ModelUtil.logWarning(msg, new ClientVersionOutOfDateException(msg));
 			return;
 		}
-		for (String str : versions) {
+
+		for (final String str : versions) {
 			if (str.equals(clientVersionInfo.getVersion()) || str.equals(ServerConfiguration.ACCEPTED_VERSIONS_ANY)) {
 				return;
 			}
 		}
-		StringBuffer version = new StringBuffer();
-		for (String str : versions) {
+
+		final StringBuffer version = new StringBuffer();
+
+		for (final String str : versions) {
 			if (versions.length == 1) {
 				version.append(str + ". ");
 			} else {
 				version.append(str + ", ");
 			}
 		}
+
 		version.replace(version.length() - 2, version.length(), ".");
+
 		throw new ClientVersionOutOfDateException("Client version: " + clientVersionInfo.getVersion()
 			+ " - Accepted versions: " + version);
 	}

@@ -7,22 +7,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Wesendonk
- * koegel
+ * Otto von Wesendonk, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.connection;
 
-// BEGIN IGNORE UNNECCESSARY IMPORT
-// import caused by comment
-import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreInterface;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * The ConnectionHandler makes the network transport layer transparent for the server. It requires {@link EMFStore} and
- * {@link AuthenticationControl} to delegate the messaeges.
+ * The ConnectionHandler makes the network transport layer transparent for the server.
+ * It requires {@link org.eclipse.emf.emfstore.internal.server.EMFStore} and
+ * {@link org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl} to delegate the messages.
  * 
  * @param <T> server interface type E.g {@link org.eclipse.emf.emfstore.internal.server.EMFStore} or
  *            {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}
@@ -34,18 +31,23 @@ public interface ConnectionHandler<T extends EMFStoreInterface> {
 	/**
 	 * This method initializes the ConnectionHandler.
 	 * 
-	 * @param emfStore an implementation of a server interface.
-	 * @param accessControl an implementation of the {@link AuthenticationControl}
-	 * @throws FatalESException is thrown if the server can't initialize
-	 * @throws ESException exception within the server
+	 * @param emfStore
+	 *            an implementation of a server interface
+	 * @param accessControl
+	 *            an implementation of the
+	 *            {@link org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl}
+	 * @throws FatalESException
+	 *             in case the server can't initialize
+	 * @throws ESException
+	 *             in case an exception occurred within the server
 	 */
-	void init(T emfStore, AuthenticationControl accessControl) throws FatalESException, ESException;
+	void init(T emfStore, AccessControl accessControl) throws FatalESException, ESException;
 
 	/**
 	 * Stop the handler.
 	 * 
-	 * @param force true if handler should be stopped forcefully
-	 * @generated NOT
+	 * @param force
+	 *            should be set to {@code true}, if handler should be stopped forcefully
 	 */
 	void stop(boolean force);
 
@@ -53,7 +55,6 @@ public interface ConnectionHandler<T extends EMFStoreInterface> {
 	 * Return the handler name.
 	 * 
 	 * @return the name of the handler
-	 * @generated NOT
 	 */
 	String getName();
 }

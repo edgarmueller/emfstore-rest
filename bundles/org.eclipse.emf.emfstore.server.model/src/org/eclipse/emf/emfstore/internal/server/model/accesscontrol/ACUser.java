@@ -11,8 +11,6 @@
 package org.eclipse.emf.emfstore.internal.server.model.accesscontrol;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
-import org.eclipse.emf.emfstore.server.model.accesscontrol.ESUser;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>AC User</b></em>'.
@@ -38,7 +36,7 @@ import org.eclipse.emf.emfstore.server.model.accesscontrol.ESUser;
  * @model
  * @generated
  */
-public interface ACUser extends ACOrgUnit, APIDelegate<ESUser> {
+public interface ACUser extends ACOrgUnit {
 	/**
 	 * Returns the value of the '<em><b>First Name</b></em>' attribute. <!--
 	 * begin-user-doc -->

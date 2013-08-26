@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
- * wesendonk
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
 
@@ -22,8 +21,7 @@ import java.util.Properties;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
-import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
-import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 
 /**
  * This verifyer can be used to store user and passwords in a property file. Entries in the property file look should
@@ -103,10 +101,15 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser,
+	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
-	protected boolean verifyPassword(String username, String password) throws AccessControlException {
+	protected boolean verifyPassword(ACUser resolvedUser, String username, String password)
+		throws AccessControlException {
 		loadPasswordFile(filePath);
 		final String expectedPassword = passwordFile.getProperty(username);
 		password = hashPassword(password);
@@ -140,17 +143,5 @@ public class SimplePropertyFileVerifier extends AbstractAuthenticationControl {
 		}
 
 		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#logIn(java.lang.String,
-	 *      java.lang.String, org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo)
-	 */
-	@Override
-	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
-		throws AccessControlException {
-		return super.logIn(username, password, clientVersionInfo);
 	}
 }

@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendonk
- * koegel
+ * Otto von Wesendonk, Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server;
 
@@ -21,6 +20,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionImpl;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
@@ -31,7 +31,7 @@ import org.osgi.framework.Bundle;
  * Represents the current server configuration.
  * 
  * @author koegel
- * @author wesendonk
+ * @author wesendon
  */
 public final class ServerConfiguration {
 
@@ -199,14 +199,7 @@ public final class ServerConfiguration {
 	public static final String AUTHENTICATION_POLICY = "emfstore.accesscontrol.authentication.policy";
 
 	/**
-	 * Use ldap for authentication.
-	 */
-	public static final String AUTHENTICATION_LDAP = "ldap";
-
-	/**
-	 * Beginng tag of every ldap property. Format for ldap configuration is {@link #AUTHENTICATION_LDAP_PREFIX}
-	 * .[numberOfLdapConfiguration].{ {@link #AUTHENTICATION_LDAP_URL}/ {@link #AUTHENTICATION_LDAP_BASE_DEFAULT}/
-	 * {@link #AUTHENTICATION_LDAP_SEARCHDN} .
+	 * Beginning tag of every LDAP property.
 	 */
 	public static final String AUTHENTICATION_LDAP_PREFIX = "emfstore.accesscontrol.authentication.ldap";
 
@@ -236,14 +229,9 @@ public final class ServerConfiguration {
 	public static final String AUTHENTICATION_LDAP_SEARCHDN = "searchdn";
 
 	/**
-	 * Use simple property file for authentication.
+	 * Default authentication policy is simple property file aut.
 	 */
-	public static final String AUTHENTICATION_SPFV = "spfv";
-
-	/**
-	 * Default authentication policy: ldap.
-	 */
-	public static final String AUTHENTICATION_POLICY_DEFAULT = AUTHENTICATION_SPFV;
+	public static final AuthenticationControlType AUTHENTICATION_POLICY_DEFAULT = AuthenticationControlType.PropertyFile;
 
 	/**
 	 * Path to property file for spfv authentication.
@@ -257,14 +245,11 @@ public final class ServerConfiguration {
 
 	/**
 	 * Sets the level of validation. The level is set via bitmask, use the
-	 * values
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#RESOLVEALL} ,
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#MODELELEMENTID}
-	 * and
-	 * {@link org.eclipse.emf.emfstore.internal.server.startup.server.internal.startup.EmfStoreValidator#PROJECTGENERATION}
-	 * . E.g.:
-	 * If you want to resolve all elements and check use the
-	 * modelelement id validation, you have to set the level to <code>1 | 2</code>, which is 3.
+	 * values {@link org.eclipse.emf.emfstore.internal.server.startup.EmfStoreValidator#RESOLVEALL} ,
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.EmfStoreValidator#MODELELEMENTID} and
+	 * {@link org.eclipse.emf.emfstore.internal.server.startup.EmfStoreValidator#PROJECTGENERATION} . E.g.:
+	 * If you want to resolve all elements and use the
+	 * model element id validation, you have to set the level to <code>1 | 2</code>, which is 3.
 	 */
 	public static final String VALIDATION_LEVEL = "emfstore.validation.level";
 
@@ -382,10 +367,8 @@ public final class ServerConfiguration {
 	 */
 	public static final String AUTHENTICATION_MATCH_USERS_IGNORE_CASE = "emfstore.accesscontrol.authentication.matchusers.ignorecase";
 
-	/**
-	 * Default value for {@link #PERFORM_CLEAN_MEMORY_TASK}.
-	 */
-	public static final String PERFORM_CLEAN_MEMORY_TASK_DEFAULT = TRUE;
+	private static final List<PostStartupListener> POST_STARTUP_LISTENERS = new ArrayList<PostStartupListener>();
+	private static final List<StartupListener> STARTUP_LISTENERS = new ArrayList<StartupListener>();
 
 	private static boolean testing;
 
@@ -401,7 +384,7 @@ public final class ServerConfiguration {
 	 * @return the dir path string
 	 */
 	public static String getConfDirectory() {
-		StringBuffer sb = new StringBuffer(getServerHome());
+		final StringBuffer sb = new StringBuffer(getServerHome());
 		sb.append(".");
 		sb.append(File.separatorChar);
 		sb.append("conf");
@@ -427,8 +410,8 @@ public final class ServerConfiguration {
 	 * @return the dir path string
 	 */
 	public static String getServerHome() {
-		String workspaceDirectory = getLocationProvider().getWorkspaceDirectory();
-		File workspace = new File(workspaceDirectory);
+		final String workspaceDirectory = getLocationProvider().getWorkspaceDirectory();
+		final File workspace = new File(workspaceDirectory);
 		if (!workspace.exists()) {
 			workspace.mkdirs();
 		}
@@ -441,7 +424,7 @@ public final class ServerConfiguration {
 
 	/**
 	 * Returns the registered {@link ESLocationProvider} or if not existent, the
-	 * {@link DefaultWorkspaceLocationProvider}.
+	 * {@link org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider}.
 	 * 
 	 * @return workspace location provider
 	 */
@@ -451,8 +434,8 @@ public final class ServerConfiguration {
 			try {
 				locationProvider = new ESExtensionPoint("org.eclipse.emf.emfstore.server.locationProvider", true)
 					.getClass("providerClass", ESLocationProvider.class);
-			} catch (ESExtensionPointException e) {
-				String message = "No location provider or error while instantiating location provider, switching to default location!";
+			} catch (final ESExtensionPointException e) {
+				final String message = "No location provider or error while instantiating location provider, switching to default location!";
 				ModelUtil.logWarning(message);
 			}
 
@@ -473,7 +456,7 @@ public final class ServerConfiguration {
 	 * @return parameter as string or null
 	 */
 	public static String getStartArgument(String parameter) {
-		for (String arg : Platform.getApplicationArgs()) {
+		for (final String arg : Platform.getApplicationArgs()) {
 			if (arg.startsWith(parameter) && arg.length() > parameter.length() && arg.charAt(parameter.length()) == '=') {
 				return arg.substring(parameter.length() + 1, arg.length());
 			}
@@ -489,7 +472,7 @@ public final class ServerConfiguration {
 	 * @return boolean
 	 */
 	public static boolean isStartArgSet(String parameter) {
-		for (String arg : Platform.getApplicationArgs()) {
+		for (final String arg : Platform.getApplicationArgs()) {
 			if (arg.equals(parameter)) {
 				return true;
 			}
@@ -527,8 +510,8 @@ public final class ServerConfiguration {
 	 * @return String array or null
 	 */
 	public static String[] getSplittedProperty(String property) {
-		String result = getProperties().getProperty(property);
-		return (result == null) ? null : splitProperty(result);
+		final String result = getProperties().getProperty(property);
+		return result == null ? null : splitProperty(result);
 	}
 
 	/**
@@ -542,13 +525,13 @@ public final class ServerConfiguration {
 	 * @return String array or null
 	 */
 	public static String[] getSplittedProperty(String property, String defaultValue) {
-		String result = getProperties().getProperty(property, defaultValue);
-		return (result == null) ? null : splitProperty(result);
+		final String result = getProperties().getProperty(property, defaultValue);
+		return result == null ? null : splitProperty(result);
 	}
 
 	private static String[] splitProperty(String property) {
-		ArrayList<String> result = new ArrayList<String>();
-		for (String str : property.split(ServerConfiguration.MULTI_PROPERTY_SEPERATOR)) {
+		final ArrayList<String> result = new ArrayList<String>();
+		for (final String str : property.split(ServerConfiguration.MULTI_PROPERTY_SEPERATOR)) {
 			result.add(str.trim());
 		}
 		return result.toArray(new String[result.size()]);
@@ -571,7 +554,7 @@ public final class ServerConfiguration {
 	 * @param keepExisting Keep already contained properties?
 	 */
 	public static void setProperties(Properties prop, boolean keepExisting) {
-		Properties beforeProperties = properties;
+		final Properties beforeProperties = properties;
 		properties = prop;
 		if (keepExisting && beforeProperties != null) {
 			properties.putAll(beforeProperties);
@@ -595,8 +578,8 @@ public final class ServerConfiguration {
 	 */
 	@SuppressWarnings("cast")
 	public static String getServerVersion() {
-		Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
-		String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
+		final Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
+		final String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
 			org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;
 	}
@@ -668,8 +651,8 @@ public final class ServerConfiguration {
 				isChecksumComputationOnCommitActive = new ESExtensionPoint(
 					"org.eclipse.emf.emfstore.server.computeChecksum", true)
 					.getBoolean("shouldComputeChecksumOnCommit");
-			} catch (ESExtensionPointException e) {
-				String message = "Can not determine whether to compute checksums on commit, default is true.";
+			} catch (final ESExtensionPointException e) {
+				final String message = "Can not determine whether to compute checksums on commit, default is true.";
 				ModelUtil.logWarning(message);
 				isChecksumComputationOnCommitActive = true;
 			}
@@ -678,15 +661,13 @@ public final class ServerConfiguration {
 		return isChecksumComputationOnCommitActive;
 	}
 
-	private static final List<StartupListener> startupListeners = new ArrayList<StartupListener>();
-
 	/**
 	 * Returns the list of all {@link StartupListener}s.
 	 * 
 	 * @return the List of all registered {@link StartupListener}.
 	 */
 	public static List<StartupListener> getStartupListeners() {
-		return startupListeners;
+		return STARTUP_LISTENERS;
 	}
 
 	/**
@@ -696,12 +677,9 @@ public final class ServerConfiguration {
 	 * @param listener
 	 *            the {@link StartupListener} to add
 	 */
-
 	public static void addStartupListener(StartupListener listener) {
-		startupListeners.add(listener);
+		STARTUP_LISTENERS.add(listener);
 	}
-
-	private static final List<PostStartupListener> postStartupListeners = new ArrayList<PostStartupListener>();
 
 	/**
 	 * Returns the list of all {@link PostStartupListener}s.
@@ -709,7 +687,7 @@ public final class ServerConfiguration {
 	 * @return the List of all registered {@link PostStartupListener}.
 	 */
 	public static List<PostStartupListener> getPostStartupListeners() {
-		return postStartupListeners;
+		return POST_STARTUP_LISTENERS;
 	}
 
 	/**
@@ -721,7 +699,7 @@ public final class ServerConfiguration {
 	 */
 
 	public static void addPostStartupListener(PostStartupListener listener) {
-		postStartupListeners.add(listener);
+		POST_STARTUP_LISTENERS.add(listener);
 	}
 
 }

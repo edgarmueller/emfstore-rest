@@ -60,6 +60,18 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	}
 
 	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#changeUser(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId, java.lang.String,
+	 *      java.lang.String)
+	 */
+	public void changeUser(SessionId sessionId, ACOrgUnitId userId, String name, String password) throws ESException {
+		getAdminEmfStore().changeUser(sessionId, userId, name, password);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public void changeRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit, EClass role)

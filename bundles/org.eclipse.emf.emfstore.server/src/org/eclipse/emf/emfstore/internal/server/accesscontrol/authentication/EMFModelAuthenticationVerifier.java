@@ -1,28 +1,45 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
- * Technische Universitaet Muenchen.
+ * Copyright (c) 2011-2013 EclipseSource Muenchen GmbH and others.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol;
+package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
 
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
-import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 
 /**
- * Controller for the Authentication of users.
+ * @author emueller
  * 
- * @author koegel
  */
-public interface AuthenticationControl {
+public class EMFModelAuthenticationVerifier extends AbstractAuthenticationControl {
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser,
+	 *      java.lang.String, java.lang.String)
+	 */
+	@Override
+	protected boolean verifyPassword(ACUser resolvedUser, String username, String password)
+		throws AccessControlException {
+
+		if (resolvedUser == null) {
+			// TODO: throw UserNotFoundException? -> Signature
+			return false;
+		}
+
+		return resolvedUser.getPassword().equals(password);
+	}
 
 	/**
 	 * Tries to login the given user.
@@ -40,18 +57,18 @@ public interface AuthenticationControl {
 	 * 
 	 * @throws AccessControlException in case the login fails
 	 */
-	AuthenticationInformation logIn(ACUser resolvedUser, String username, String password,
+	@Override
+	public AuthenticationInformation logIn(ACUser resolvedUser, String username, String password,
 		ClientVersionInfo clientVersionInfo)
-		throws AccessControlException;
+		throws AccessControlException {
 
-	/**
-	 * Logout/delete a session on the server.
-	 * 
-	 * @param sessionId
-	 *            the id of the session to be logout
-	 * @throws AccessControlException
-	 *             in case of failure on server
-	 */
-	void logout(SessionId sessionId) throws AccessControlException;
+		super.checkClientVersion(clientVersionInfo);
+		password = preparePassword(password);
 
+		if (verifySuperUser(username, password) || verifyPassword(resolvedUser, username, password)) {
+			return createAuthenticationInfo();
+		}
+
+		throw new AccessControlException();
+	}
 }

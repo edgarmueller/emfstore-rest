@@ -7,7 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
+ * Edgar Mueller - refactorings and singleton access
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory;
 
@@ -15,6 +16,8 @@ import java.util.Properties;
 
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.EMFModelAuthenticationVerifier;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.LDAPVerifier;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.SimplePropertyFileVerifier;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.VerifierChain;
@@ -26,38 +29,57 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidPropertyExcept
  * 
  * @author wesendon
  */
-public class AuthenticationControlFactoryImpl implements AuthenticationControlFactory {
+public final class AuthenticationControlFactoryImpl implements AuthenticationControlFactory {
+
+	private static AuthenticationControlFactory instance = new AuthenticationControlFactoryImpl();
+
+	private AuthenticationControlFactoryImpl() {
+		// private ctor
+	}
 
 	/**
+	 * The singleton instance.
+	 * 
+	 * @return the singleton instance
+	 */
+	public static AuthenticationControlFactory getInstance() {
+		return instance;
+	}
+
+	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactory#createAuthenticationControl()
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.internal.factory.AuthenticationControlFactory#createAuthenticationControl(org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType)
 	 */
-	public AbstractAuthenticationControl createAuthenticationControl() throws FatalESException {
+	public AbstractAuthenticationControl createAuthenticationControl(AuthenticationControlType authenticationControlType)
+		throws FatalESException {
 
-		String property = ServerConfiguration.getProperties().getProperty(ServerConfiguration.AUTHENTICATION_POLICY,
-			ServerConfiguration.AUTHENTICATION_POLICY_DEFAULT);
-
-		if (property.equals(ServerConfiguration.AUTHENTICATION_LDAP)) {
-			VerifierChain chain = new VerifierChain();
-			Properties properties = ServerConfiguration.getProperties();
+		if (authenticationControlType.equals(AuthenticationControlType.LDAP)) {
+			final VerifierChain chain = new VerifierChain();
+			final Properties properties = ServerConfiguration.getProperties();
 			int count = 1;
 			while (count != -1) {
 
-				String ldapUrl = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "." + count
+				final String ldapUrl = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "."
+					+ count
 					+ "." + ServerConfiguration.AUTHENTICATION_LDAP_URL);
-				String ldapBase = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "." + count
+				final String ldapBase = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "."
+					+ count
 					+ "." + ServerConfiguration.AUTHENTICATION_LDAP_BASE);
-				String searchDn = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "." + count
+				final String searchDn = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "."
+					+ count
 					+ "." + ServerConfiguration.AUTHENTICATION_LDAP_SEARCHDN);
-				String authUser = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "." + count
+				final String authUser = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "."
+					+ count
 					+ "." + ServerConfiguration.AUTHENTICATION_LDAP_AUTHUSER);
-				String authPassword = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "."
+				final String authPassword = properties.getProperty(ServerConfiguration.AUTHENTICATION_LDAP_PREFIX + "."
 					+ count + "." + ServerConfiguration.AUTHENTICATION_LDAP_AUTHPASS);
 
 				if (ldapUrl != null && ldapBase != null && searchDn != null) {
-					LDAPVerifier ldapVerifier = new LDAPVerifier(ldapUrl, ldapBase, searchDn, authUser, authPassword);
-					chain.getVerifier().add(ldapVerifier);
+					final LDAPVerifier ldapVerifier = new LDAPVerifier(ldapUrl, ldapBase, searchDn, authUser,
+						authPassword);
+					chain.getVerifiers().add(ldapVerifier);
 					count++;
 				} else {
 					count = -1;
@@ -66,10 +88,13 @@ public class AuthenticationControlFactoryImpl implements AuthenticationControlFa
 
 			return chain;
 
-		} else if (property.equals(ServerConfiguration.AUTHENTICATION_SPFV)) {
+		} else if (authenticationControlType.equals(AuthenticationControlType.PropertyFile)) {
 
 			return new SimplePropertyFileVerifier(ServerConfiguration.getProperties().getProperty(
 				ServerConfiguration.AUTHENTICATION_SPFV_FILEPATH, ServerConfiguration.getDefaultSPFVFilePath()));
+
+		} else if (authenticationControlType.equals(AuthenticationControlType.Model)) {
+			return new EMFModelAuthenticationVerifier();
 
 		} else {
 			throw new InvalidPropertyException();

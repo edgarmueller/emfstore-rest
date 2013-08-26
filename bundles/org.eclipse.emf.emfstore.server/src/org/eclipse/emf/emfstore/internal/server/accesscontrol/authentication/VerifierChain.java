@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
 
@@ -15,20 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 
 /**
+ * Calls all available verifiers and tries to verify the given credentials.
+ * 
  * @author wesendon
  */
 public class VerifierChain extends AbstractAuthenticationControl {
 
-	private ArrayList<AbstractAuthenticationControl> verifier;
+	private final ArrayList<AbstractAuthenticationControl> verifiers;
 
 	/**
 	 * Constructs an empty verifier chain.
 	 */
 	public VerifierChain() {
 		super();
-		verifier = new ArrayList<AbstractAuthenticationControl>();
+		verifiers = new ArrayList<AbstractAuthenticationControl>();
 	}
 
 	/**
@@ -36,20 +39,22 @@ public class VerifierChain extends AbstractAuthenticationControl {
 	 * 
 	 * @return list of verifier
 	 */
-	public List<AbstractAuthenticationControl> getVerifier() {
-		return verifier;
+	public List<AbstractAuthenticationControl> getVerifiers() {
+		return verifiers;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(java.lang.String,
-	 *      java.lang.String)
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AbstractAuthenticationControl#verifyPassword(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser,
+	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
-	protected boolean verifyPassword(String username, String password) throws AccessControlException {
-		for (AbstractAuthenticationControl verifier : this.verifier) {
-			if (verifier.verifyPassword(username, password)) {
+	protected boolean verifyPassword(ACUser resolvedUser, String username, String password)
+		throws AccessControlException {
+		for (final AbstractAuthenticationControl verifier : verifiers) {
+			if (verifier.verifyPassword(resolvedUser, username, password)) {
 				return true;
 			}
 		}

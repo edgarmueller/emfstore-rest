@@ -15,10 +15,8 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
-import org.eclipse.emf.emfstore.server.model.ESServerSpace;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Space</b></em>'.
@@ -41,7 +39,7 @@ import org.eclipse.emf.emfstore.server.model.ESServerSpace;
  * @model
  * @generated
  */
-public interface ServerSpace extends EObject, APIDelegate<ESServerSpace> {
+public interface ServerSpace extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Groups</b></em>' containment reference
 	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup}.
@@ -54,7 +52,7 @@ public interface ServerSpace extends EObject, APIDelegate<ESServerSpace> {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Groups</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_Groups()
+	 * @see ModelPackage#getServerSpace_Groups()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
@@ -71,7 +69,7 @@ public interface ServerSpace extends EObject, APIDelegate<ESServerSpace> {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Projects</em>' reference list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_Projects()
+	 * @see ModelPackage#getServerSpace_Projects()
 	 * @model
 	 * @generated
 	 */
@@ -90,7 +88,7 @@ public interface ServerSpace extends EObject, APIDelegate<ESServerSpace> {
 	 * 
 	 * @return the value of the '<em>Open Sessions</em>' containment reference
 	 *         list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_OpenSessions()
+	 * @see ModelPackage#getServerSpace_OpenSessions()
 	 * @model containment="true" resolveProxies="true" transient="true"
 	 * @generated
 	 */
@@ -108,7 +106,7 @@ public interface ServerSpace extends EObject, APIDelegate<ESServerSpace> {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Users</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.internal.common.model.server.model.ModelPackage#getServerSpace_Users()
+	 * @see ModelPackage#getServerSpace_Users()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */

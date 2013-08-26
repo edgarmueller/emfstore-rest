@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc;
 
@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * connection manager for adminemfstore.
+ * Connection manager for EMFStore that enables admin capabilities.
  * 
  * @author wesendon
  */
@@ -41,7 +41,7 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	 * {@inheritDoc}
 	 */
 	public void initConnection(ServerInfo serverInfo, SessionId id) throws ConnectionException {
-		XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcAdminConnectionHandler.ADMINEMFSTORE);
+		final XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcAdminConnectionHandler.ADMINEMFSTORE);
 		clientManager.initConnection(serverInfo);
 		addConnectionProxy(id, clientManager);
 	}
@@ -67,6 +67,14 @@ public class XmlRpcAdminConnectionManager extends AbstractConnectionManager<XmlR
 	public void changeOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId, String name, String description)
 		throws ESException {
 		getConnectionProxy(sessionId).call("changeOrgUnit", sessionId, orgUnitId, name, description);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void changeUser(SessionId sessionId, ACOrgUnitId userId, String name, String password)
+		throws ESException {
+		getConnectionProxy(sessionId).call("changeUser", sessionId, userId, name, password);
 	}
 
 	/**
