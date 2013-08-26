@@ -24,6 +24,7 @@ import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcServer;
 import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
+import org.apache.xmlrpc.webserver.WebServer;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
@@ -56,7 +57,7 @@ public final class XmlRpcWebserverManager {
 		return SingletonHolder.INSTANCE;
 	}
 
-	private EMFStoreWebServer webServer;
+	private WebServer webServer;
 	private final int port;
 
 	private XmlRpcWebserverManager() {
@@ -175,7 +176,7 @@ public final class XmlRpcWebserverManager {
 	 *            should be set to {@code true}, if handler should be stopped forcefully
 	 */
 	public void stopServer(boolean force) {
-		webServer.shutdown(force);
+		webServer.shutdown();
 		webServer = null;
 	}
 }
