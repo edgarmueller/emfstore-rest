@@ -80,7 +80,7 @@ public final class XmlRpcWebserverManager {
 			return;
 		}
 		try {
-			webServer = new EMFStoreWebServer(port) {
+			webServer = new WebServer(port) {
 
 				@Override
 				protected ServerSocket createServerSocket(int pPort, int backlog, InetAddress addr) throws IOException {
