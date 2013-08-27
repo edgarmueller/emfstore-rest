@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.api;
 
@@ -24,21 +24,33 @@ package org.eclipse.emf.emfstore.internal.common.api;
  * 
  * @author emueller
  * 
- * @param <INTERNAL_TYPE> the internal API type to be mapped onto an API implementation class
+ * @param <INTERNAL> the internal API type to be mapped onto an API implementation class
  * @param <API> the interface available in the API
  * 
  * @see InternalAPIDelegator
  */
-public abstract class AbstractAPIImpl<API, INTERNAL_TYPE extends APIDelegate<API>>
-	implements InternalAPIDelegator<API, INTERNAL_TYPE> {
+public abstract class AbstractAPIImpl<API, INTERNAL extends APIDelegate<API>>
+	implements InternalAPIDelegator<API, INTERNAL> {
 
-	private INTERNAL_TYPE internal;
+	private final INTERNAL internal;
 
-	protected AbstractAPIImpl(INTERNAL_TYPE internalType) {
-		this.internal = internalType;
+	/**
+	 * Constructor.
+	 * 
+	 * @param internal
+	 *            the internal API to delegate to
+	 */
+	protected AbstractAPIImpl(INTERNAL internal) {
+		this.internal = internal;
 	}
 
-	public INTERNAL_TYPE toInternalAPI() {
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.api.InternalAPIDelegator#toInternalAPI()
+	 */
+	public INTERNAL toInternalAPI() {
 		return internal;
 	}
 
