@@ -65,10 +65,13 @@ public final class ResourceHelper {
 
 		// sanity check
 		if (directContents.size() != 1 && !type.isInstance(directContents.get(0))) {
-			throw new IOException("File is corrupt, does not contain a " + type.getName() + ".");
+			throw new IOException("File is corrupt, does not contain a " + type.getName() + " .");
 		}
 
-		return ModelUtil.clone((T) directContents.get(index));
+		final T object = (T) directContents.get(index);
+		resource.getContents().remove(object);
+
+		return object;
 	}
 
 	/**
