@@ -244,8 +244,7 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 		final ProjectSpace projectSpace = ResourceHelper
 			.getElementFromResource(absoluteFileName, ProjectSpace.class, 0);
 
-		projectSpace.setProjectId(org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
-			.createProjectId());
+		projectSpace.setIdentifier(ModelFactory.eINSTANCE.createProjectSpace().getIdentifier());
 		projectSpace.initResources(workspaceResourceSet);
 
 		addProjectSpace(projectSpace);

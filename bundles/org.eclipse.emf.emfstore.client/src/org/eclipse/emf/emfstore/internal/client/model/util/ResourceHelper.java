@@ -69,6 +69,7 @@ public final class ResourceHelper {
 		}
 
 		final T object = (T) directContents.get(index);
+		// make sure object has no resource
 		resource.getContents().remove(object);
 
 		return object;
