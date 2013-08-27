@@ -45,11 +45,8 @@ public interface ConnectionHandler<T extends EMFStoreInterface> {
 
 	/**
 	 * Stop the handler.
-	 * 
-	 * @param force
-	 *            should be set to {@code true}, if handler should be stopped forcefully
 	 */
-	void stop(boolean force);
+	void stop();
 
 	/**
 	 * Return the handler name.
