@@ -335,6 +335,81 @@ public class BowlingItemProviderAdapterFactory extends BowlingAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.Ticket} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected TicketItemProvider ticketItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.Ticket}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createTicketAdapter() {
+		if (ticketItemProvider == null) {
+			ticketItemProvider = new TicketItemProvider(this);
+		}
+
+		return ticketItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.SeasonTicket} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected SeasonTicketItemProvider seasonTicketItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.SeasonTicket}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createSeasonTicketAdapter() {
+		if (seasonTicketItemProvider == null) {
+			seasonTicketItemProvider = new SeasonTicketItemProvider(this);
+		}
+
+		return seasonTicketItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.DayTicket} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected DayTicketItemProvider dayTicketItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.DayTicket}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createDayTicketAdapter() {
+		if (dayTicketItemProvider == null) {
+			dayTicketItemProvider = new DayTicketItemProvider(this);
+		}
+
+		return dayTicketItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.Merchandise} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -357,6 +432,134 @@ public class BowlingItemProviderAdapterFactory extends BowlingAdapterFactory imp
 		}
 
 		return merchandiseItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.AntiTheftChip}
+	 * instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected AntiTheftChipItemProvider antiTheftChipItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.AntiTheftChip}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createAntiTheftChipAdapter() {
+		if (antiTheftChipItemProvider == null) {
+			antiTheftChipItemProvider = new AntiTheftChipItemProvider(this);
+		}
+
+		return antiTheftChipItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.Module} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected ModuleItemProvider moduleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.Module}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createModuleAdapter() {
+		if (moduleItemProvider == null) {
+			moduleItemProvider = new ModuleItemProvider(this);
+		}
+
+		return moduleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.GPSModule} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected GPSModuleItemProvider gpsModuleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.GPSModule}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createGPSModuleAdapter() {
+		if (gpsModuleItemProvider == null) {
+			gpsModuleItemProvider = new GPSModuleItemProvider(this);
+		}
+
+		return gpsModuleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.ElectroMagneticModule}
+	 * instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected ElectroMagneticModuleItemProvider electroMagneticModuleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.ElectroMagneticModule}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createElectroMagneticModuleAdapter() {
+		if (electroMagneticModuleItemProvider == null) {
+			electroMagneticModuleItemProvider = new ElectroMagneticModuleItemProvider(this);
+		}
+
+		return electroMagneticModuleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.emf.emfstore.bowling.TwoInOneModule}
+	 * instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected TwoInOneModuleItemProvider twoInOneModuleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.emf.emfstore.bowling.TwoInOneModule}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public Adapter createTwoInOneModuleAdapter() {
+		if (twoInOneModuleItemProvider == null) {
+			twoInOneModuleItemProvider = new TwoInOneModuleItemProvider(this);
+		}
+
+		return twoInOneModuleItemProvider;
 	}
 
 	/**
@@ -487,8 +690,24 @@ public class BowlingItemProviderAdapterFactory extends BowlingAdapterFactory imp
 			areaItemProvider.dispose();
 		if (fanItemProvider != null)
 			fanItemProvider.dispose();
+		if (ticketItemProvider != null)
+			ticketItemProvider.dispose();
+		if (seasonTicketItemProvider != null)
+			seasonTicketItemProvider.dispose();
+		if (dayTicketItemProvider != null)
+			dayTicketItemProvider.dispose();
 		if (merchandiseItemProvider != null)
 			merchandiseItemProvider.dispose();
+		if (antiTheftChipItemProvider != null)
+			antiTheftChipItemProvider.dispose();
+		if (moduleItemProvider != null)
+			moduleItemProvider.dispose();
+		if (gpsModuleItemProvider != null)
+			gpsModuleItemProvider.dispose();
+		if (electroMagneticModuleItemProvider != null)
+			electroMagneticModuleItemProvider.dispose();
+		if (twoInOneModuleItemProvider != null)
+			twoInOneModuleItemProvider.dispose();
 	}
 
 }

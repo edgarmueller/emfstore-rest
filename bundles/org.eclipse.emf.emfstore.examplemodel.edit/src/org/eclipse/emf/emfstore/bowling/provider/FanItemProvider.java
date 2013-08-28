@@ -297,6 +297,7 @@ public class FanItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BowlingPackage.Literals.FAN__FAN_MERCHANDISE);
 			childrenFeatures.add(BowlingPackage.Literals.FAN__FAVOURITE_MERCHANDISE);
+			childrenFeatures.add(BowlingPackage.Literals.FAN__TICKET);
 		}
 		return childrenFeatures;
 	}
@@ -366,6 +367,7 @@ public class FanItemProvider
 			return;
 		case BowlingPackage.FAN__FAN_MERCHANDISE:
 		case BowlingPackage.FAN__FAVOURITE_MERCHANDISE:
+		case BowlingPackage.FAN__TICKET:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -393,6 +395,21 @@ public class FanItemProvider
 			(createChildParameter
 			(BowlingPackage.Literals.FAN__FAVOURITE_MERCHANDISE,
 				BowlingFactory.eINSTANCE.createMerchandise()));
+
+		newChildDescriptors.add
+			(createChildParameter
+			(BowlingPackage.Literals.FAN__TICKET,
+				BowlingFactory.eINSTANCE.createTicket()));
+
+		newChildDescriptors.add
+			(createChildParameter
+			(BowlingPackage.Literals.FAN__TICKET,
+				BowlingFactory.eINSTANCE.createSeasonTicket()));
+
+		newChildDescriptors.add
+			(createChildParameter
+			(BowlingPackage.Literals.FAN__TICKET,
+				BowlingFactory.eINSTANCE.createDayTicket()));
 	}
 
 	/**

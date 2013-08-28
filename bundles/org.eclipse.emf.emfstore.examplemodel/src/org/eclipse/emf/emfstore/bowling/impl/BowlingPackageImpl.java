@@ -18,19 +18,27 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.emfstore.bowling.AntiTheftChip;
 import org.eclipse.emf.emfstore.bowling.Area;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
+import org.eclipse.emf.emfstore.bowling.DayTicket;
+import org.eclipse.emf.emfstore.bowling.ElectroMagneticModule;
 import org.eclipse.emf.emfstore.bowling.Fan;
+import org.eclipse.emf.emfstore.bowling.GPSModule;
 import org.eclipse.emf.emfstore.bowling.Game;
 import org.eclipse.emf.emfstore.bowling.Gender;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Merchandise;
+import org.eclipse.emf.emfstore.bowling.Module;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Referee;
+import org.eclipse.emf.emfstore.bowling.SeasonTicket;
+import org.eclipse.emf.emfstore.bowling.Ticket;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
+import org.eclipse.emf.emfstore.bowling.TwoInOneModule;
 
 /**
  * <!-- begin-user-doc -->
@@ -126,7 +134,71 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * 
 	 * @generated
 	 */
+	private EClass ticketEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass seasonTicketEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass dayTicketEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	private EClass merchandiseEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass antiTheftChipEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass moduleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass gpsModuleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass electroMagneticModuleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass twoInOneModuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,8 +261,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 
 		// Obtain or create and register package
 		BowlingPackageImpl theBowlingPackage = (BowlingPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BowlingPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI)
-			: new BowlingPackageImpl());
+			.get(eNS_URI) : new BowlingPackageImpl());
 
 		isInited = true;
 
@@ -685,7 +756,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * @generated
 	 */
 	public EReference getFan_VisitedTournaments() {
-		return (EReference) fanEClass.getEStructuralFeatures().get(8);
+		return (EReference) fanEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -695,7 +766,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * @generated
 	 */
 	public EAttribute getFan_NumberOfTournamentsVisited() {
-		return (EAttribute) fanEClass.getEStructuralFeatures().get(9);
+		return (EAttribute) fanEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -705,7 +776,87 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * @generated
 	 */
 	public EAttribute getFan_MoneySpentOnTickets() {
-		return (EAttribute) fanEClass.getEStructuralFeatures().get(10);
+		return (EAttribute) fanEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getTicket() {
+		return ticketEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getTicket_Venue() {
+		return (EAttribute) ticketEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getTicket_AntiTheftModule() {
+		return (EReference) ticketEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getSeasonTicket() {
+		return seasonTicketEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getSeasonTicket_From() {
+		return (EAttribute) seasonTicketEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getSeasonTicket_To() {
+		return (EAttribute) seasonTicketEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getDayTicket() {
+		return dayTicketEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getDayTicket_Date() {
+		return (EAttribute) dayTicketEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -726,6 +877,16 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 */
 	public EReference getFan_FavouriteMerchandise() {
 		return (EReference) fanEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getFan_Ticket() {
+		return (EReference) fanEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -766,6 +927,116 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 */
 	public EAttribute getMerchandise_SerialNumber() {
 		return (EAttribute) merchandiseEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getMerchandise_Chip() {
+		return (EReference) merchandiseEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getAntiTheftChip() {
+		return antiTheftChipEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getAntiTheftChip_Description() {
+		return (EAttribute) antiTheftChipEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getAntiTheftChip_Module() {
+		return (EReference) antiTheftChipEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getModule() {
+		return moduleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getModule_Description() {
+		return (EAttribute) moduleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getGPSModule() {
+		return gpsModuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getElectroMagneticModule() {
+		return electroMagneticModuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getTwoInOneModule() {
+		return twoInOneModuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getTwoInOneModule_Module1() {
+		return (EReference) twoInOneModuleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getTwoInOneModule_Module2() {
+		return (EReference) twoInOneModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -878,14 +1149,42 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		createEReference(fanEClass, FAN__FAVOURITE_PLAYER);
 		createEReference(fanEClass, FAN__FAN_MERCHANDISE);
 		createEReference(fanEClass, FAN__FAVOURITE_MERCHANDISE);
+		createEReference(fanEClass, FAN__TICKET);
 		createEReference(fanEClass, FAN__VISITED_TOURNAMENTS);
 		createEAttribute(fanEClass, FAN__NUMBER_OF_TOURNAMENTS_VISITED);
 		createEAttribute(fanEClass, FAN__MONEY_SPENT_ON_TICKETS);
+
+		ticketEClass = createEClass(TICKET);
+		createEAttribute(ticketEClass, TICKET__VENUE);
+		createEReference(ticketEClass, TICKET__ANTI_THEFT_MODULE);
+
+		seasonTicketEClass = createEClass(SEASON_TICKET);
+		createEAttribute(seasonTicketEClass, SEASON_TICKET__FROM);
+		createEAttribute(seasonTicketEClass, SEASON_TICKET__TO);
+
+		dayTicketEClass = createEClass(DAY_TICKET);
+		createEAttribute(dayTicketEClass, DAY_TICKET__DATE);
 
 		merchandiseEClass = createEClass(MERCHANDISE);
 		createEAttribute(merchandiseEClass, MERCHANDISE__NAME);
 		createEAttribute(merchandiseEClass, MERCHANDISE__PRICE);
 		createEAttribute(merchandiseEClass, MERCHANDISE__SERIAL_NUMBER);
+		createEReference(merchandiseEClass, MERCHANDISE__CHIP);
+
+		antiTheftChipEClass = createEClass(ANTI_THEFT_CHIP);
+		createEAttribute(antiTheftChipEClass, ANTI_THEFT_CHIP__DESCRIPTION);
+		createEReference(antiTheftChipEClass, ANTI_THEFT_CHIP__MODULE);
+
+		moduleEClass = createEClass(MODULE);
+		createEAttribute(moduleEClass, MODULE__DESCRIPTION);
+
+		gpsModuleEClass = createEClass(GPS_MODULE);
+
+		electroMagneticModuleEClass = createEClass(ELECTRO_MAGNETIC_MODULE);
+
+		twoInOneModuleEClass = createEClass(TWO_IN_ONE_MODULE);
+		createEReference(twoInOneModuleEClass, TWO_IN_ONE_MODULE__MODULE1);
+		createEReference(twoInOneModuleEClass, TWO_IN_ONE_MODULE__MODULE2);
 
 		// Create enums
 		tournamentTypeEEnum = createEEnum(TOURNAMENT_TYPE);
@@ -923,6 +1222,11 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		seasonTicketEClass.getESuperTypes().add(this.getTicket());
+		dayTicketEClass.getESuperTypes().add(this.getTicket());
+		gpsModuleEClass.getESuperTypes().add(this.getModule());
+		electroMagneticModuleEClass.getESuperTypes().add(this.getModule());
+		twoInOneModuleEClass.getESuperTypes().add(this.getModule());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(playerEClass, Player.class, "Player", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1050,6 +1354,9 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		initEReference(getFan_FavouriteMerchandise(), this.getMerchandise(), null, "favouriteMerchandise", null, 0, 1,
 			Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE,
 			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFan_Ticket(), this.getTicket(), null, "ticket", null, 0, 1, Fan.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+			IS_ORDERED);
 		initEReference(getFan_VisitedTournaments(), this.getTournament(), null, "visitedTournaments", null, 0, -1,
 			Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE,
 			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1060,6 +1367,25 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 			Fan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 			IS_ORDERED);
 
+		initEClass(ticketEClass, Ticket.class, "Ticket", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTicket_Venue(), ecorePackage.getEString(), "venue", null, 0, 1, Ticket.class, !IS_TRANSIENT,
+			!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTicket_AntiTheftModule(), this.getModule(), null, "antiTheftModule", null, 0, 1,
+			Ticket.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+			IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(seasonTicketEClass, SeasonTicket.class, "SeasonTicket", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSeasonTicket_From(), ecorePackage.getEDate(), "from", null, 0, 1, SeasonTicket.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSeasonTicket_To(), ecorePackage.getEDate(), "to", null, 0, 1, SeasonTicket.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dayTicketEClass, DayTicket.class, "DayTicket", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDayTicket_Date(), ecorePackage.getEDate(), "date", null, 0, 1, DayTicket.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(merchandiseEClass, Merchandise.class, "Merchandise", !IS_ABSTRACT, !IS_INTERFACE,
 			IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMerchandise_Name(), ecorePackage.getEString(), "name", null, 0, 1, Merchandise.class,
@@ -1069,6 +1395,37 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		initEAttribute(getMerchandise_SerialNumber(), ecorePackage.getEBigInteger(), "serialNumber", null, 0, 1,
 			Merchandise.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 			!IS_DERIVED, IS_ORDERED);
+		initEReference(getMerchandise_Chip(), this.getAntiTheftChip(), null, "chip", null, 0, 1, Merchandise.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+
+		initEClass(antiTheftChipEClass, AntiTheftChip.class, "AntiTheftChip", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAntiTheftChip_Description(), ecorePackage.getEString(), "description", null, 0, 1,
+			AntiTheftChip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+		initEReference(getAntiTheftChip_Module(), this.getModule(), null, "module", null, 0, 1, AntiTheftChip.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+			!IS_DERIVED, IS_ORDERED);
+
+		initEClass(moduleEClass, Module.class, "Module", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModule_Description(), ecorePackage.getEString(), "description", null, 0, 1, Module.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(gpsModuleEClass, GPSModule.class, "GPSModule", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(electroMagneticModuleEClass, ElectroMagneticModule.class, "ElectroMagneticModule", !IS_ABSTRACT,
+			!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(twoInOneModuleEClass, TwoInOneModule.class, "TwoInOneModule", !IS_ABSTRACT, !IS_INTERFACE,
+			IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTwoInOneModule_Module1(), this.getModule(), null, "module1", null, 0, 1,
+			TwoInOneModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTwoInOneModule_Module2(), this.getModule(), null, "module2", null, 0, 1,
+			TwoInOneModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(tournamentTypeEEnum, TournamentType.class, "TournamentType");

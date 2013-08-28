@@ -21,6 +21,7 @@ import org.eclipse.emf.emfstore.bowling.Fan;
 import org.eclipse.emf.emfstore.bowling.Gender;
 import org.eclipse.emf.emfstore.bowling.Merchandise;
 import org.eclipse.emf.emfstore.bowling.Player;
+import org.eclipse.emf.emfstore.bowling.Ticket;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 
 /**
@@ -38,6 +39,7 @@ import org.eclipse.emf.emfstore.bowling.Tournament;
  * <li>{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl#getFavouritePlayer <em>Favourite Player</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl#getFanMerchandise <em>Fan Merchandise</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl#getFavouriteMerchandise <em>Favourite Merchandise</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl#getTicket <em>Ticket</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl#getVisitedTournaments <em>Visited Tournaments</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.impl.FanImpl#getNumberOfTournamentsVisited <em>Number Of Tournaments
  * Visited</em>}</li>
@@ -240,6 +242,17 @@ public class FanImpl extends EObjectImpl implements Fan {
 	 * @ordered
 	 */
 	protected boolean favouriteMerchandiseESet;
+
+	/**
+	 * The cached value of the '{@link #getTicket() <em>Ticket</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getTicket()
+	 * @generated
+	 * @ordered
+	 */
+	protected Ticket ticket;
 
 	/**
 	 * The cached value of the '{@link #getVisitedTournaments() <em>Visited Tournaments</em>}' reference list.
@@ -977,6 +990,86 @@ public class FanImpl extends EObjectImpl implements Fan {
 	 * 
 	 * @generated
 	 */
+	public Ticket getTicket() {
+		if (ticket != null && ticket.eIsProxy()) {
+			InternalEObject oldTicket = (InternalEObject) ticket;
+			ticket = (Ticket) eResolveProxy(oldTicket);
+			if (ticket != oldTicket) {
+				InternalEObject newTicket = (InternalEObject) ticket;
+				NotificationChain msgs = oldTicket.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- BowlingPackage.FAN__TICKET, null, null);
+				if (newTicket.eInternalContainer() == null) {
+					msgs = newTicket.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BowlingPackage.FAN__TICKET, null, msgs);
+				}
+				if (msgs != null)
+					msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BowlingPackage.FAN__TICKET, oldTicket,
+						ticket));
+			}
+		}
+		return ticket;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public Ticket basicGetTicket() {
+		return ticket;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotificationChain basicSetTicket(Ticket newTicket, NotificationChain msgs) {
+		Ticket oldTicket = ticket;
+		ticket = newTicket;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BowlingPackage.FAN__TICKET,
+				oldTicket, newTicket);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setTicket(Ticket newTicket) {
+		if (newTicket != ticket) {
+			NotificationChain msgs = null;
+			if (ticket != null)
+				msgs = ((InternalEObject) ticket).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+					- BowlingPackage.FAN__TICKET, null, msgs);
+			if (newTicket != null)
+				msgs = ((InternalEObject) newTicket).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+					- BowlingPackage.FAN__TICKET, null, msgs);
+			msgs = basicSetTicket(newTicket, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.FAN__TICKET, newTicket, newTicket));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -984,6 +1077,8 @@ public class FanImpl extends EObjectImpl implements Fan {
 			return ((InternalEList<?>) getFanMerchandise()).basicRemove(otherEnd, msgs);
 		case BowlingPackage.FAN__FAVOURITE_MERCHANDISE:
 			return basicUnsetFavouriteMerchandise(msgs);
+		case BowlingPackage.FAN__TICKET:
+			return basicSetTicket(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1017,6 +1112,10 @@ public class FanImpl extends EObjectImpl implements Fan {
 			if (resolve)
 				return getFavouriteMerchandise();
 			return basicGetFavouriteMerchandise();
+		case BowlingPackage.FAN__TICKET:
+			if (resolve)
+				return getTicket();
+			return basicGetTicket();
 		case BowlingPackage.FAN__VISITED_TOURNAMENTS:
 			return getVisitedTournaments();
 		case BowlingPackage.FAN__NUMBER_OF_TOURNAMENTS_VISITED:
@@ -1062,6 +1161,9 @@ public class FanImpl extends EObjectImpl implements Fan {
 			return;
 		case BowlingPackage.FAN__FAVOURITE_MERCHANDISE:
 			setFavouriteMerchandise((Merchandise) newValue);
+			return;
+		case BowlingPackage.FAN__TICKET:
+			setTicket((Ticket) newValue);
 			return;
 		case BowlingPackage.FAN__VISITED_TOURNAMENTS:
 			getVisitedTournaments().clear();
@@ -1110,6 +1212,9 @@ public class FanImpl extends EObjectImpl implements Fan {
 		case BowlingPackage.FAN__FAVOURITE_MERCHANDISE:
 			unsetFavouriteMerchandise();
 			return;
+		case BowlingPackage.FAN__TICKET:
+			setTicket((Ticket) null);
+			return;
 		case BowlingPackage.FAN__VISITED_TOURNAMENTS:
 			unsetVisitedTournaments();
 			return;
@@ -1148,6 +1253,8 @@ public class FanImpl extends EObjectImpl implements Fan {
 			return isSetFanMerchandise();
 		case BowlingPackage.FAN__FAVOURITE_MERCHANDISE:
 			return isSetFavouriteMerchandise();
+		case BowlingPackage.FAN__TICKET:
+			return ticket != null;
 		case BowlingPackage.FAN__VISITED_TOURNAMENTS:
 			return isSetVisitedTournaments();
 		case BowlingPackage.FAN__NUMBER_OF_TOURNAMENTS_VISITED:

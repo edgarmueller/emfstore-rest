@@ -91,6 +91,8 @@
         eType="#//Merchandise" unsettable="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="favouriteMerchandise" eType="#//Merchandise"
         unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ticket" eType="#//Ticket"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="visitedTournaments" upperBound="-1"
         eType="#//Tournament" unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfTournamentsVisited"
@@ -98,11 +100,41 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="moneySpentOnTickets" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
         unsettable="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ticket">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="venue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="antiTheftModule" eType="#//Module"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SeasonTicket" eSuperTypes="#//Ticket">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DayTicket" eSuperTypes="#//Ticket">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Merchandise">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="serialNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
         unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chip" eType="#//AntiTheftChip"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AntiTheftChip">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module" eType="#//Module"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Module">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GPSModule" eSuperTypes="#//Module"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElectroMagneticModule" eSuperTypes="#//Module"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoInOneModule" eSuperTypes="#//Module">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module1" eType="#//Module"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module2" eType="#//Module"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

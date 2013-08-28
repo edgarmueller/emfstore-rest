@@ -112,6 +112,36 @@ public interface BowlingFactory extends EFactory {
 	Fan createFan();
 
 	/**
+	 * Returns a new object of class '<em>Ticket</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Ticket</em>'.
+	 * @generated
+	 */
+	Ticket createTicket();
+
+	/**
+	 * Returns a new object of class '<em>Season Ticket</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Season Ticket</em>'.
+	 * @generated
+	 */
+	SeasonTicket createSeasonTicket();
+
+	/**
+	 * Returns a new object of class '<em>Day Ticket</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Day Ticket</em>'.
+	 * @generated
+	 */
+	DayTicket createDayTicket();
+
+	/**
 	 * Returns a new object of class '<em>Merchandise</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -120,6 +150,56 @@ public interface BowlingFactory extends EFactory {
 	 * @generated
 	 */
 	Merchandise createMerchandise();
+
+	/**
+	 * Returns a new object of class '<em>Anti Theft Chip</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Anti Theft Chip</em>'.
+	 * @generated
+	 */
+	AntiTheftChip createAntiTheftChip();
+
+	/**
+	 * Returns a new object of class '<em>Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Module</em>'.
+	 * @generated
+	 */
+	Module createModule();
+
+	/**
+	 * Returns a new object of class '<em>GPS Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>GPS Module</em>'.
+	 * @generated
+	 */
+	GPSModule createGPSModule();
+
+	/**
+	 * Returns a new object of class '<em>Electro Magnetic Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Electro Magnetic Module</em>'.
+	 * @generated
+	 */
+	ElectroMagneticModule createElectroMagneticModule();
+
+	/**
+	 * Returns a new object of class '<em>Two In One Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Two In One Module</em>'.
+	 * @generated
+	 */
+	TwoInOneModule createTwoInOneModule();
 
 	/**
 	 * Returns the package supported by this factory.

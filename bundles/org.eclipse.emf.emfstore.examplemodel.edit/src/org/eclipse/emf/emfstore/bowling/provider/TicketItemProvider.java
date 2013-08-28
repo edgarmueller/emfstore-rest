@@ -21,16 +21,16 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
-import org.eclipse.emf.emfstore.bowling.Merchandise;
+import org.eclipse.emf.emfstore.bowling.Ticket;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.bowling.Merchandise} object.
+ * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.bowling.Ticket} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * 
  * @generated
  */
-public class MerchandiseItemProvider
+public class TicketItemProvider
 	extends ItemProviderAdapter
 	implements
 	IEditingDomainItemProvider,
@@ -45,7 +45,7 @@ public class MerchandiseItemProvider
 	 * 
 	 * @generated
 	 */
-	public MerchandiseItemProvider(AdapterFactory adapterFactory) {
+	public TicketItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,77 +61,26 @@ public class MerchandiseItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addPricePropertyDescriptor(object);
-			addSerialNumberPropertyDescriptor(object);
+			addVenuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Venue feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add
-			(createItemPropertyDescriptor
-			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_Merchandise_name_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Merchandise_name_feature", "_UI_Merchandise_type"),
-				BowlingPackage.Literals.MERCHANDISE__NAME,
-				true,
-				false,
-				false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null,
-				null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Price feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addPricePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-			.add
-			(createItemPropertyDescriptor
-			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_Merchandise_price_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Merchandise_price_feature", "_UI_Merchandise_type"),
-				BowlingPackage.Literals.MERCHANDISE__PRICE,
-				true,
-				false,
-				false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null,
-				null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Serial Number feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addSerialNumberPropertyDescriptor(Object object) {
+	protected void addVenuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_Merchandise_serialNumber_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Merchandise_serialNumber_feature",
-					"_UI_Merchandise_type"),
-				BowlingPackage.Literals.MERCHANDISE__SERIAL_NUMBER,
+				getString("_UI_Ticket_venue_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Ticket_venue_feature", "_UI_Ticket_type"),
+				BowlingPackage.Literals.TICKET__VENUE,
 				true,
 				false,
 				false,
@@ -153,7 +102,7 @@ public class MerchandiseItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BowlingPackage.Literals.MERCHANDISE__CHIP);
+			childrenFeatures.add(BowlingPackage.Literals.TICKET__ANTI_THEFT_MODULE);
 		}
 		return childrenFeatures;
 	}
@@ -173,7 +122,7 @@ public class MerchandiseItemProvider
 	}
 
 	/**
-	 * This returns Merchandise.gif.
+	 * This returns Ticket.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -181,7 +130,7 @@ public class MerchandiseItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Merchandise"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Ticket"));
 	}
 
 	/**
@@ -193,10 +142,10 @@ public class MerchandiseItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Merchandise) object).getName();
+		String label = ((Ticket) object).getVenue();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Merchandise_type") :
-			getString("_UI_Merchandise_type") + " " + label;
+			getString("_UI_Ticket_type") :
+			getString("_UI_Ticket_type") + " " + label;
 	}
 
 	/**
@@ -211,13 +160,11 @@ public class MerchandiseItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Merchandise.class)) {
-		case BowlingPackage.MERCHANDISE__NAME:
-		case BowlingPackage.MERCHANDISE__PRICE:
-		case BowlingPackage.MERCHANDISE__SERIAL_NUMBER:
+		switch (notification.getFeatureID(Ticket.class)) {
+		case BowlingPackage.TICKET__VENUE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
-		case BowlingPackage.MERCHANDISE__CHIP:
+		case BowlingPackage.TICKET__ANTI_THEFT_MODULE:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -238,8 +185,23 @@ public class MerchandiseItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-			(BowlingPackage.Literals.MERCHANDISE__CHIP,
-				BowlingFactory.eINSTANCE.createAntiTheftChip()));
+			(BowlingPackage.Literals.TICKET__ANTI_THEFT_MODULE,
+				BowlingFactory.eINSTANCE.createModule()));
+
+		newChildDescriptors.add
+			(createChildParameter
+			(BowlingPackage.Literals.TICKET__ANTI_THEFT_MODULE,
+				BowlingFactory.eINSTANCE.createGPSModule()));
+
+		newChildDescriptors.add
+			(createChildParameter
+			(BowlingPackage.Literals.TICKET__ANTI_THEFT_MODULE,
+				BowlingFactory.eINSTANCE.createElectroMagneticModule()));
+
+		newChildDescriptors.add
+			(createChildParameter
+			(BowlingPackage.Literals.TICKET__ANTI_THEFT_MODULE,
+				BowlingFactory.eINSTANCE.createTwoInOneModule()));
 	}
 
 	/**

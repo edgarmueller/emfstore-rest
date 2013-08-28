@@ -16,17 +16,24 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.bowling.*;
+import org.eclipse.emf.emfstore.bowling.AntiTheftChip;
 import org.eclipse.emf.emfstore.bowling.Area;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
+import org.eclipse.emf.emfstore.bowling.DayTicket;
+import org.eclipse.emf.emfstore.bowling.ElectroMagneticModule;
 import org.eclipse.emf.emfstore.bowling.Fan;
+import org.eclipse.emf.emfstore.bowling.GPSModule;
 import org.eclipse.emf.emfstore.bowling.Game;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Merchandise;
+import org.eclipse.emf.emfstore.bowling.Module;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Referee;
+import org.eclipse.emf.emfstore.bowling.SeasonTicket;
+import org.eclipse.emf.emfstore.bowling.Ticket;
 import org.eclipse.emf.emfstore.bowling.Tournament;
+import org.eclipse.emf.emfstore.bowling.TwoInOneModule;
 
 /**
  * <!-- begin-user-doc -->
@@ -140,8 +147,48 @@ public class BowlingAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseTicket(Ticket object) {
+			return createTicketAdapter();
+		}
+
+		@Override
+		public Adapter caseSeasonTicket(SeasonTicket object) {
+			return createSeasonTicketAdapter();
+		}
+
+		@Override
+		public Adapter caseDayTicket(DayTicket object) {
+			return createDayTicketAdapter();
+		}
+
+		@Override
 		public Adapter caseMerchandise(Merchandise object) {
 			return createMerchandiseAdapter();
+		}
+
+		@Override
+		public Adapter caseAntiTheftChip(AntiTheftChip object) {
+			return createAntiTheftChipAdapter();
+		}
+
+		@Override
+		public Adapter caseModule(Module object) {
+			return createModuleAdapter();
+		}
+
+		@Override
+		public Adapter caseGPSModule(GPSModule object) {
+			return createGPSModuleAdapter();
+		}
+
+		@Override
+		public Adapter caseElectroMagneticModule(ElectroMagneticModule object) {
+			return createElectroMagneticModuleAdapter();
+		}
+
+		@Override
+		public Adapter caseTwoInOneModule(TwoInOneModule object) {
+			return createTwoInOneModuleAdapter();
 		}
 
 		@Override
@@ -316,6 +363,53 @@ public class BowlingAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.Ticket <em>Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.Ticket
+	 * @generated
+	 */
+	public Adapter createTicketAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.SeasonTicket
+	 * <em>Season Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.SeasonTicket
+	 * @generated
+	 */
+	public Adapter createSeasonTicketAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.DayTicket
+	 * <em>Day Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.DayTicket
+	 * @generated
+	 */
+	public Adapter createDayTicketAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.Merchandise
 	 * <em>Merchandise</em>}'.
 	 * <!-- begin-user-doc -->
@@ -328,6 +422,85 @@ public class BowlingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMerchandiseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.AntiTheftChip
+	 * <em>Anti Theft Chip</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.AntiTheftChip
+	 * @generated
+	 */
+	public Adapter createAntiTheftChipAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.Module <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.Module
+	 * @generated
+	 */
+	public Adapter createModuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.GPSModule
+	 * <em>GPS Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.GPSModule
+	 * @generated
+	 */
+	public Adapter createGPSModuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.ElectroMagneticModule
+	 * <em>Electro Magnetic Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.ElectroMagneticModule
+	 * @generated
+	 */
+	public Adapter createElectroMagneticModuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.bowling.TwoInOneModule
+	 * <em>Two In One Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.bowling.TwoInOneModule
+	 * @generated
+	 */
+	public Adapter createTwoInOneModuleAdapter() {
 		return null;
 	}
 

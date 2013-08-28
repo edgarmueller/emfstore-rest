@@ -663,6 +663,16 @@ public interface BowlingPackage extends EPackage {
 	int FAN__FAVOURITE_MERCHANDISE = 7;
 
 	/**
+	 * The feature id for the '<em><b>Ticket</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FAN__TICKET = 8;
+
+	/**
 	 * The feature id for the '<em><b>Visited Tournaments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -670,7 +680,7 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAN__VISITED_TOURNAMENTS = 8;
+	int FAN__VISITED_TOURNAMENTS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Number Of Tournaments Visited</b></em>' attribute.
@@ -680,7 +690,7 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAN__NUMBER_OF_TOURNAMENTS_VISITED = 9;
+	int FAN__NUMBER_OF_TOURNAMENTS_VISITED = 10;
 
 	/**
 	 * The feature id for the '<em><b>Money Spent On Tickets</b></em>' attribute.
@@ -690,7 +700,7 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAN__MONEY_SPENT_ON_TICKETS = 10;
+	int FAN__MONEY_SPENT_ON_TICKETS = 11;
 
 	/**
 	 * The number of structural features of the '<em>Fan</em>' class.
@@ -700,7 +710,162 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAN_FEATURE_COUNT = 11;
+	int FAN_FEATURE_COUNT = 12;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.TicketImpl <em>Ticket</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.TicketImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getTicket()
+	 * @generated
+	 */
+	int TICKET = 10;
+
+	/**
+	 * The feature id for the '<em><b>Venue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TICKET__VENUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Anti Theft Module</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TICKET__ANTI_THEFT_MODULE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Ticket</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TICKET_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.SeasonTicketImpl <em>Season Ticket</em>}
+	 * ' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.SeasonTicketImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getSeasonTicket()
+	 * @generated
+	 */
+	int SEASON_TICKET = 11;
+
+	/**
+	 * The feature id for the '<em><b>Venue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SEASON_TICKET__VENUE = TICKET__VENUE;
+
+	/**
+	 * The feature id for the '<em><b>Anti Theft Module</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SEASON_TICKET__ANTI_THEFT_MODULE = TICKET__ANTI_THEFT_MODULE;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SEASON_TICKET__FROM = TICKET_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SEASON_TICKET__TO = TICKET_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Season Ticket</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SEASON_TICKET_FEATURE_COUNT = TICKET_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.DayTicketImpl <em>Day Ticket</em>}'
+	 * class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.DayTicketImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getDayTicket()
+	 * @generated
+	 */
+	int DAY_TICKET = 12;
+
+	/**
+	 * The feature id for the '<em><b>Venue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DAY_TICKET__VENUE = TICKET__VENUE;
+
+	/**
+	 * The feature id for the '<em><b>Anti Theft Module</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DAY_TICKET__ANTI_THEFT_MODULE = TICKET__ANTI_THEFT_MODULE;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DAY_TICKET__DATE = TICKET_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Day Ticket</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DAY_TICKET_FEATURE_COUNT = TICKET_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.MerchandiseImpl <em>Merchandise</em>}'
@@ -712,7 +877,7 @@ public interface BowlingPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getMerchandise()
 	 * @generated
 	 */
-	int MERCHANDISE = 10;
+	int MERCHANDISE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -745,6 +910,16 @@ public interface BowlingPackage extends EPackage {
 	int MERCHANDISE__SERIAL_NUMBER = 2;
 
 	/**
+	 * The feature id for the '<em><b>Chip</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MERCHANDISE__CHIP = 3;
+
+	/**
 	 * The number of structural features of the '<em>Merchandise</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -752,7 +927,196 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MERCHANDISE_FEATURE_COUNT = 3;
+	int MERCHANDISE_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.AntiTheftChipImpl
+	 * <em>Anti Theft Chip</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.AntiTheftChipImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getAntiTheftChip()
+	 * @generated
+	 */
+	int ANTI_THEFT_CHIP = 14;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ANTI_THEFT_CHIP__DESCRIPTION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Module</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ANTI_THEFT_CHIP__MODULE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Anti Theft Chip</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ANTI_THEFT_CHIP_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.ModuleImpl <em>Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.ModuleImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getModule()
+	 * @generated
+	 */
+	int MODULE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE__DESCRIPTION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.GPSModuleImpl <em>GPS Module</em>}'
+	 * class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.GPSModuleImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getGPSModule()
+	 * @generated
+	 */
+	int GPS_MODULE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int GPS_MODULE__DESCRIPTION = MODULE__DESCRIPTION;
+
+	/**
+	 * The number of structural features of the '<em>GPS Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int GPS_MODULE_FEATURE_COUNT = MODULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.ElectroMagneticModuleImpl
+	 * <em>Electro Magnetic Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.ElectroMagneticModuleImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getElectroMagneticModule()
+	 * @generated
+	 */
+	int ELECTRO_MAGNETIC_MODULE = 17;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ELECTRO_MAGNETIC_MODULE__DESCRIPTION = MODULE__DESCRIPTION;
+
+	/**
+	 * The number of structural features of the '<em>Electro Magnetic Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ELECTRO_MAGNETIC_MODULE_FEATURE_COUNT = MODULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.TwoInOneModuleImpl
+	 * <em>Two In One Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see org.eclipse.emf.emfstore.bowling.impl.TwoInOneModuleImpl
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getTwoInOneModule()
+	 * @generated
+	 */
+	int TWO_IN_ONE_MODULE = 18;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TWO_IN_ONE_MODULE__DESCRIPTION = MODULE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Module1</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TWO_IN_ONE_MODULE__MODULE1 = MODULE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Module2</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TWO_IN_ONE_MODULE__MODULE2 = MODULE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Two In One Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int TWO_IN_ONE_MODULE_FEATURE_COUNT = MODULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.TournamentType <em>Tournament Type</em>}'
@@ -764,7 +1128,7 @@ public interface BowlingPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getTournamentType()
 	 * @generated
 	 */
-	int TOURNAMENT_TYPE = 11;
+	int TOURNAMENT_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.Gender <em>Gender</em>}' enum.
@@ -775,7 +1139,7 @@ public interface BowlingPackage extends EPackage {
 	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 12;
+	int GENDER = 20;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Player <em>Player</em>}'.
@@ -1408,6 +1772,104 @@ public interface BowlingPackage extends EPackage {
 	EAttribute getFan_MoneySpentOnTickets();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Ticket <em>Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Ticket</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Ticket
+	 * @generated
+	 */
+	EClass getTicket();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Ticket#getVenue
+	 * <em>Venue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Venue</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Ticket#getVenue()
+	 * @see #getTicket()
+	 * @generated
+	 */
+	EAttribute getTicket_Venue();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.bowling.Ticket#getAntiTheftModule <em>Anti Theft Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Anti Theft Module</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Ticket#getAntiTheftModule()
+	 * @see #getTicket()
+	 * @generated
+	 */
+	EReference getTicket_AntiTheftModule();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.SeasonTicket <em>Season Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Season Ticket</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.SeasonTicket
+	 * @generated
+	 */
+	EClass getSeasonTicket();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.SeasonTicket#getFrom
+	 * <em>From</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>From</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.SeasonTicket#getFrom()
+	 * @see #getSeasonTicket()
+	 * @generated
+	 */
+	EAttribute getSeasonTicket_From();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.SeasonTicket#getTo
+	 * <em>To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>To</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.SeasonTicket#getTo()
+	 * @see #getSeasonTicket()
+	 * @generated
+	 */
+	EAttribute getSeasonTicket_To();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.DayTicket <em>Day Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Day Ticket</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.DayTicket
+	 * @generated
+	 */
+	EClass getDayTicket();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.DayTicket#getDate
+	 * <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Date</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.DayTicket#getDate()
+	 * @see #getDayTicket()
+	 * @generated
+	 */
+	EAttribute getDayTicket_Date();
+
+	/**
 	 * Returns the meta object for the containment reference list '
 	 * {@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}'.
 	 * <!-- begin-user-doc -->
@@ -1432,6 +1894,19 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFan_FavouriteMerchandise();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.emf.emfstore.bowling.Fan#getTicket
+	 * <em>Ticket</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Ticket</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Fan#getTicket()
+	 * @see #getFan()
+	 * @generated
+	 */
+	EReference getFan_Ticket();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Merchandise <em>Merchandise</em>}'.
@@ -1482,6 +1957,142 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMerchandise_SerialNumber();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.bowling.Merchandise#getChip <em>Chip</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Chip</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Merchandise#getChip()
+	 * @see #getMerchandise()
+	 * @generated
+	 */
+	EReference getMerchandise_Chip();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.AntiTheftChip
+	 * <em>Anti Theft Chip</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Anti Theft Chip</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.AntiTheftChip
+	 * @generated
+	 */
+	EClass getAntiTheftChip();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.AntiTheftChip#getDescription
+	 * <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.AntiTheftChip#getDescription()
+	 * @see #getAntiTheftChip()
+	 * @generated
+	 */
+	EAttribute getAntiTheftChip_Description();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.bowling.AntiTheftChip#getModule <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Module</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.AntiTheftChip#getModule()
+	 * @see #getAntiTheftChip()
+	 * @generated
+	 */
+	EReference getAntiTheftChip_Module();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Module <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Module</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Module
+	 * @generated
+	 */
+	EClass getModule();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Module#getDescription
+	 * <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Module#getDescription()
+	 * @see #getModule()
+	 * @generated
+	 */
+	EAttribute getModule_Description();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.GPSModule <em>GPS Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>GPS Module</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.GPSModule
+	 * @generated
+	 */
+	EClass getGPSModule();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.ElectroMagneticModule
+	 * <em>Electro Magnetic Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Electro Magnetic Module</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.ElectroMagneticModule
+	 * @generated
+	 */
+	EClass getElectroMagneticModule();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.TwoInOneModule
+	 * <em>Two In One Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Two In One Module</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.TwoInOneModule
+	 * @generated
+	 */
+	EClass getTwoInOneModule();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.bowling.TwoInOneModule#getModule1 <em>Module1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Module1</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.TwoInOneModule#getModule1()
+	 * @see #getTwoInOneModule()
+	 * @generated
+	 */
+	EReference getTwoInOneModule_Module1();
+
+	/**
+	 * Returns the meta object for the containment reference '
+	 * {@link org.eclipse.emf.emfstore.bowling.TwoInOneModule#getModule2 <em>Module2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference '<em>Module2</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.TwoInOneModule#getModule2()
+	 * @see #getTwoInOneModule()
+	 * @generated
+	 */
+	EReference getTwoInOneModule_Module2();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.emf.emfstore.bowling.TournamentType
@@ -2008,6 +2619,87 @@ public interface BowlingPackage extends EPackage {
 		EAttribute FAN__MONEY_SPENT_ON_TICKETS = eINSTANCE.getFan_MoneySpentOnTickets();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.TicketImpl <em>Ticket</em>}'
+		 * class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.TicketImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getTicket()
+		 * @generated
+		 */
+		EClass TICKET = eINSTANCE.getTicket();
+
+		/**
+		 * The meta object literal for the '<em><b>Venue</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute TICKET__VENUE = eINSTANCE.getTicket_Venue();
+
+		/**
+		 * The meta object literal for the '<em><b>Anti Theft Module</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference TICKET__ANTI_THEFT_MODULE = eINSTANCE.getTicket_AntiTheftModule();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.SeasonTicketImpl
+		 * <em>Season Ticket</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.SeasonTicketImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getSeasonTicket()
+		 * @generated
+		 */
+		EClass SEASON_TICKET = eINSTANCE.getSeasonTicket();
+
+		/**
+		 * The meta object literal for the '<em><b>From</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute SEASON_TICKET__FROM = eINSTANCE.getSeasonTicket_From();
+
+		/**
+		 * The meta object literal for the '<em><b>To</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute SEASON_TICKET__TO = eINSTANCE.getSeasonTicket_To();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.DayTicketImpl
+		 * <em>Day Ticket</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.DayTicketImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getDayTicket()
+		 * @generated
+		 */
+		EClass DAY_TICKET = eINSTANCE.getDayTicket();
+
+		/**
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute DAY_TICKET__DATE = eINSTANCE.getDayTicket_Date();
+
+		/**
 		 * The meta object literal for the '<em><b>Fan Merchandise</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2024,6 +2716,15 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FAN__FAVOURITE_MERCHANDISE = eINSTANCE.getFan_FavouriteMerchandise();
+
+		/**
+		 * The meta object literal for the '<em><b>Ticket</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference FAN__TICKET = eINSTANCE.getFan_Ticket();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.MerchandiseImpl
@@ -2063,6 +2764,120 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MERCHANDISE__SERIAL_NUMBER = eINSTANCE.getMerchandise_SerialNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Chip</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference MERCHANDISE__CHIP = eINSTANCE.getMerchandise_Chip();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.AntiTheftChipImpl
+		 * <em>Anti Theft Chip</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.AntiTheftChipImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getAntiTheftChip()
+		 * @generated
+		 */
+		EClass ANTI_THEFT_CHIP = eINSTANCE.getAntiTheftChip();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute ANTI_THEFT_CHIP__DESCRIPTION = eINSTANCE.getAntiTheftChip_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Module</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference ANTI_THEFT_CHIP__MODULE = eINSTANCE.getAntiTheftChip_Module();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.ModuleImpl <em>Module</em>}'
+		 * class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.ModuleImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getModule()
+		 * @generated
+		 */
+		EClass MODULE = eINSTANCE.getModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute MODULE__DESCRIPTION = eINSTANCE.getModule_Description();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.GPSModuleImpl
+		 * <em>GPS Module</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.GPSModuleImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getGPSModule()
+		 * @generated
+		 */
+		EClass GPS_MODULE = eINSTANCE.getGPSModule();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.ElectroMagneticModuleImpl
+		 * <em>Electro Magnetic Module</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.ElectroMagneticModuleImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getElectroMagneticModule()
+		 * @generated
+		 */
+		EClass ELECTRO_MAGNETIC_MODULE = eINSTANCE.getElectroMagneticModule();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.impl.TwoInOneModuleImpl
+		 * <em>Two In One Module</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see org.eclipse.emf.emfstore.bowling.impl.TwoInOneModuleImpl
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getTwoInOneModule()
+		 * @generated
+		 */
+		EClass TWO_IN_ONE_MODULE = eINSTANCE.getTwoInOneModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Module1</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference TWO_IN_ONE_MODULE__MODULE1 = eINSTANCE.getTwoInOneModule_Module1();
+
+		/**
+		 * The meta object literal for the '<em><b>Module2</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference TWO_IN_ONE_MODULE__MODULE2 = eINSTANCE.getTwoInOneModule_Module2();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.emf.emfstore.bowling.TournamentType

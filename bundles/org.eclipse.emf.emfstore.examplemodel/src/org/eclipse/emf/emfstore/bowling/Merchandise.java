@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <li>{@link org.eclipse.emf.emfstore.bowling.Merchandise#getName <em>Name</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.Merchandise#getPrice <em>Price</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.Merchandise#getSerialNumber <em>Serial Number</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Merchandise#getChip <em>Chip</em>}</li>
  * </ul>
  * </p>
  * 
@@ -170,5 +171,34 @@ public interface Merchandise extends EObject {
 	 * @generated
 	 */
 	boolean isSetSerialNumber();
+
+	/**
+	 * Returns the value of the '<em><b>Chip</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Chip</em>' containment reference isn't clear, there really should be more of a
+	 * description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Chip</em>' containment reference.
+	 * @see #setChip(AntiTheftChip)
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getMerchandise_Chip()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	AntiTheftChip getChip();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Merchandise#getChip <em>Chip</em>}' containment
+	 * reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Chip</em>' containment reference.
+	 * @see #getChip()
+	 * @generated
+	 */
+	void setChip(AntiTheftChip value);
 
 } // Merchandise
