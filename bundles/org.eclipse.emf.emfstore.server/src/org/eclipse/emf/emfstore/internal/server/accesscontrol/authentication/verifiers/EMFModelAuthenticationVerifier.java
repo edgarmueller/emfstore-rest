@@ -11,6 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
@@ -36,6 +37,13 @@ public class EMFModelAuthenticationVerifier extends AbstractAuthenticationContro
 		if (resolvedUser == null) {
 			// TODO: throw UserNotFoundException? -> Signature
 			return false;
+		}
+
+		final String userPassword = resolvedUser.getPassword();
+
+		if (userPassword == null && (password == null || password.equals(StringUtils.EMPTY))) {
+			// no password set
+			return true;
 		}
 
 		return resolvedUser.getPassword().equals(password);
