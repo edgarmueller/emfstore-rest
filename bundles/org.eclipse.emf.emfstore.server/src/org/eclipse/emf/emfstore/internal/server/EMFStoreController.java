@@ -490,6 +490,10 @@ public class EMFStoreController implements IApplication, Runnable {
 	 * Stops the EMFStore gracefully.
 	 */
 	public void stopServer() {
+		if (instance == null) {
+			// server already has been stopped manually
+			return;
+		}
 		wakeForTermination();
 		// connection handlers may be null in case an exception has been thrown
 		// while starting
