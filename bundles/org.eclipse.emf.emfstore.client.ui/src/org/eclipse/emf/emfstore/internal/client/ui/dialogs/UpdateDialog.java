@@ -37,8 +37,8 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
-	private List<ChangePackage> changes;
-	private ProjectSpace projectSpace;
+	private final List<ChangePackage> changes;
+	private final ProjectSpace projectSpace;
 	private Image updateImage;
 	private final ModelElementIdToEObjectMapping idToEObjectMapping;
 
@@ -47,8 +47,8 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	 * 
 	 * @param parentShell
 	 *            the parent shell
-	 * @param projectSpace
-	 *            the project space that should be updated
+	 * @param localProject
+	 *            the local project that should be updated
 	 * @param changes
 	 *            the list of changes
 	 * @param idToEObjectMapping
@@ -62,9 +62,9 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 
 		super(parentShell);
 		this.idToEObjectMapping = idToEObjectMapping;
-		this.setShellStyle(this.getShellStyle() | SWT.RESIZE);
+		setShellStyle(getShellStyle() | SWT.RESIZE);
 		this.changes = changes;
-		this.projectSpace = ((ESLocalProjectImpl) localProject)
+		projectSpace = ((ESLocalProjectImpl) localProject)
 			.toInternalAPI();
 	}
 
@@ -73,14 +73,13 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		Composite contents = new Composite(parent, SWT.NONE);
+		final Composite contents = new Composite(parent, SWT.NONE);
 		contents.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		contents.setLayout(new GridLayout(1, false));
 
 		// changes tree
 		if (changes != null) {
-			System.out.println("init changed composite");
-			TabbedChangesComposite changesComposite = new TabbedChangesComposite(
+			final TabbedChangesComposite changesComposite = new TabbedChangesComposite(
 				contents, SWT.BORDER, changes, projectSpace.getProject(),
 				idToEObjectMapping, true);
 			// changesComposite.setReverseNodes(false);
@@ -98,9 +97,8 @@ public class UpdateDialog extends EMFStoreTitleAreaDialog {
 		setTitle("Incoming changes from server" + projectName);
 		int operationCount = 0;
 		int rootCount = 0;
-		System.out.println("iterating changes");
-		for (ChangePackage esChangePackage : changes) {
-			ChangePackage changePackage = esChangePackage;
+		for (final ChangePackage esChangePackage : changes) {
+			final ChangePackage changePackage = esChangePackage;
 			rootCount += changePackage.getOperations().size();
 			operationCount += changePackage.getSize();
 		}

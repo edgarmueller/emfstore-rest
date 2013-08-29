@@ -139,9 +139,6 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@EmfStoreMethod(MethodId.GETHISTORYINFO)
 	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery<?> historyQuery) throws ESException {
 		sanityCheckObjects(projectId, historyQuery);

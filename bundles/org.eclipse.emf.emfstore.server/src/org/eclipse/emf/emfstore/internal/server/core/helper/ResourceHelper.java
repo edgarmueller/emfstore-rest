@@ -67,7 +67,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalESException {
-		String fileName = getProjectFolder(projectHistory.getProjectId()) + "projectHistory"
+		final String fileName = getProjectFolder(projectHistory.getProjectId()) + "projectHistory"
 			+ ServerConfiguration.FILE_EXTENSION_PROJECTHISTORY;
 		saveInResource(projectHistory, fileName);
 	}
@@ -83,7 +83,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalESException {
-		String fileName = getProjectFolder(projectId) + ServerConfiguration.FILE_PREFIX_VERSION
+		final String fileName = getProjectFolder(projectId) + ServerConfiguration.FILE_PREFIX_VERSION
 			+ version.getPrimarySpec().getIdentifier() + ServerConfiguration.FILE_EXTENSION_VERSION;
 		saveInResource(version, fileName);
 	}
@@ -102,7 +102,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForProject(Project project, PrimaryVersionSpec versionId, ProjectId projectId)
 		throws FatalESException {
-		String filename = getProjectFolder(projectId) + getProjectFile(versionId.getIdentifier());
+		final String filename = getProjectFolder(projectId) + getProjectFile(versionId.getIdentifier());
 		saveInResourceWithProject(project, filename, project);
 	}
 
@@ -120,17 +120,17 @@ public class ResourceHelper {
 	 */
 	public void createResourceForChangePackage(ChangePackage changePackage, PrimaryVersionSpec versionId,
 		ProjectId projectId) throws FatalESException {
-		String filename = getProjectFolder(projectId) + getChangePackageFile(versionId.getIdentifier());
-		List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
+		final String filename = getProjectFolder(projectId) + getChangePackageFile(versionId.getIdentifier());
+		final List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
 
-		for (AbstractOperation op : changePackage.getOperations()) {
+		for (final AbstractOperation op : changePackage.getOperations()) {
 			if (op instanceof CreateDeleteOperation) {
-				CreateDeleteOperation createDeleteOp = (CreateDeleteOperation) op;
+				final CreateDeleteOperation createDeleteOp = (CreateDeleteOperation) op;
 
-				for (Map.Entry<EObject, ModelElementId> e : ((CreateDeleteOperationImpl) createDeleteOp)
+				for (final Map.Entry<EObject, ModelElementId> e : ((CreateDeleteOperationImpl) createDeleteOp)
 					.getEObjectToIdMap().entrySet()) {
 
-					EObject modelElement = e.getKey();
+					final EObject modelElement = e.getKey();
 
 					if (ModelUtil.isIgnoredDatatype(modelElement)) {
 						ignoredDatatypes.add(e);
@@ -156,10 +156,10 @@ public class ResourceHelper {
 	 *            the ID of the project to be deleted
 	 */
 	public void deleteProjectState(Version version, ProjectId projectId) {
-		int lastVersion = version.getPrimarySpec().getIdentifier();
-		Resource projectResource = version.getProjectState().eResource();
+		final int lastVersion = version.getPrimarySpec().getIdentifier();
+		final Resource projectResource = version.getProjectState().eResource();
 
-		File file = new File(getProjectFolder(projectId) + getProjectFile(lastVersion));
+		final File file = new File(getProjectFolder(projectId) + getProjectFile(lastVersion));
 		// version.setProjectState(null);
 		file.delete();
 
@@ -176,7 +176,6 @@ public class ResourceHelper {
 	 * It's needed to determine whether a projectstate should be saved or be
 	 * backuped.
 	 * 
-	 * @see ServerConfiguration#PROJECTSTATE_VERSION_BACKUP_PERSISTENCE_EVERYXVERSIONS_X
 	 * @see ServerConfiguration#PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X
 	 * @param policy
 	 *            policy name from server configuration
@@ -190,7 +189,7 @@ public class ResourceHelper {
 		int x;
 		try {
 			x = Integer.parseInt(ServerConfiguration.getProperties().getProperty(policy, defaultPolicy));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			x = 1;
 			ModelUtil.logWarning("Couldn't read property: " + policy + " , x set to 1", e);
 		}
@@ -228,19 +227,19 @@ public class ResourceHelper {
 	}
 
 	private void saveInResource(EObject obj, String fileName) throws FatalESException {
-		Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
+		final Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
 		resource.getContents().add(obj);
 		save(obj);
 	}
 
 	private void saveInResourceWithProject(EObject obj, String fileName, Project project) throws FatalESException {
-		Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
+		final Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
 		resource.getContents().add(obj);
 
 		if (resource instanceof XMIResource) {
-			XMIResource xmiResource = (XMIResource) resource;
-			for (EObject modelElement : project.getAllModelElements()) {
-				ModelElementId modelElementId = project.getModelElementId(modelElement);
+			final XMIResource xmiResource = (XMIResource) resource;
+			for (final EObject modelElement : project.getAllModelElements()) {
+				final ModelElementId modelElementId = project.getModelElementId(modelElement);
 				xmiResource.setID(modelElement, modelElementId.getId());
 			}
 		}
@@ -261,12 +260,12 @@ public class ResourceHelper {
 	 *             in case of failure
 	 */
 	public void saveWithProject(EObject eObject, Project project) throws FatalESException {
-		Resource resource = eObject.eResource();
+		final Resource resource = eObject.eResource();
 
 		if (resource instanceof XMIResource) {
-			XMIResource xmiResource = (XMIResource) resource;
-			for (EObject modelElement : project.getAllModelElements()) {
-				ModelElementId modelElementId = project.getModelElementId(modelElement);
+			final XMIResource xmiResource = (XMIResource) resource;
+			for (final EObject modelElement : project.getAllModelElements()) {
+				final ModelElementId modelElementId = project.getModelElementId(modelElement);
 				xmiResource.setID(modelElement, modelElementId.getId());
 			}
 		}
@@ -286,7 +285,7 @@ public class ResourceHelper {
 		try {
 			ModelUtil.saveResource(object.eResource(), ModelUtil.getResourceLogger());
 			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new FatalESException(StorageException.NOSAVE, e);
 		}
 		// END SUPRESS CATCH EXCEPTION
@@ -299,12 +298,12 @@ public class ResourceHelper {
 	 *             in case of failure
 	 */
 	public void saveAll() throws FatalESException {
-		for (Resource res : serverSpace.eResource().getResourceSet().getResources()) {
+		for (final Resource res : serverSpace.eResource().getResourceSet().getResources()) {
 			if (res.isLoaded() && res.isModified()) {
 				try {
 					ModelUtil.saveResource(res, ModelUtil.getResourceLogger());
 					// BEGIN SUPRESS CATCH EXCEPTION
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					throw new FatalESException(StorageException.NOSAVE, e);
 				}
 				// END SUPRESS CATCH EXCEPTION
