@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouritePlayer <em>Favourite Player</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFanMerchandise <em>Fan Merchandise</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getFavouriteMerchandise <em>Favourite Merchandise</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getTicket <em>Ticket</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getVisitedTournaments <em>Visited Tournaments</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.Fan#getNumberOfTournamentsVisited <em>Number Of Tournaments Visited</em>}
  * </li>
@@ -644,34 +643,5 @@ public interface Fan extends EObject {
 	 * @generated
 	 */
 	boolean isSetFavouriteMerchandise();
-
-	/**
-	 * Returns the value of the '<em><b>Ticket</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ticket</em>' containment reference isn't clear, there really should be more of a
-	 * description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Ticket</em>' containment reference.
-	 * @see #setTicket(Ticket)
-	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getFan_Ticket()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	Ticket getTicket();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Fan#getTicket <em>Ticket</em>}' containment
-	 * reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param value the new value of the '<em>Ticket</em>' containment reference.
-	 * @see #getTicket()
-	 * @generated
-	 */
-	void setTicket(Ticket value);
 
 } // Fan

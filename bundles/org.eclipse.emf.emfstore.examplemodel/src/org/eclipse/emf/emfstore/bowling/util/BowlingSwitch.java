@@ -15,24 +15,17 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.bowling.AntiTheftChip;
+import org.eclipse.emf.emfstore.bowling.*;
 import org.eclipse.emf.emfstore.bowling.Area;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
-import org.eclipse.emf.emfstore.bowling.DayTicket;
-import org.eclipse.emf.emfstore.bowling.ElectroMagneticModule;
 import org.eclipse.emf.emfstore.bowling.Fan;
-import org.eclipse.emf.emfstore.bowling.GPSModule;
 import org.eclipse.emf.emfstore.bowling.Game;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Merchandise;
-import org.eclipse.emf.emfstore.bowling.Module;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Referee;
-import org.eclipse.emf.emfstore.bowling.SeasonTicket;
-import org.eclipse.emf.emfstore.bowling.Ticket;
 import org.eclipse.emf.emfstore.bowling.Tournament;
-import org.eclipse.emf.emfstore.bowling.TwoInOneModule;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,10 +90,12 @@ public class BowlingSwitch<T> {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		List<EClass> eSuperTypes = theEClass.getESuperTypes();
-		return eSuperTypes.isEmpty() ?
-			defaultCase(theEObject) :
-			doSwitch(eSuperTypes.get(0), theEObject);
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return eSuperTypes.isEmpty() ?
+				defaultCase(theEObject) :
+				doSwitch(eSuperTypes.get(0), theEObject);
+		}
 	}
 
 	/**
@@ -186,75 +181,9 @@ public class BowlingSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case BowlingPackage.TICKET: {
-			Ticket ticket = (Ticket) theEObject;
-			T result = caseTicket(ticket);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BowlingPackage.SEASON_TICKET: {
-			SeasonTicket seasonTicket = (SeasonTicket) theEObject;
-			T result = caseSeasonTicket(seasonTicket);
-			if (result == null)
-				result = caseTicket(seasonTicket);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BowlingPackage.DAY_TICKET: {
-			DayTicket dayTicket = (DayTicket) theEObject;
-			T result = caseDayTicket(dayTicket);
-			if (result == null)
-				result = caseTicket(dayTicket);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case BowlingPackage.MERCHANDISE: {
 			Merchandise merchandise = (Merchandise) theEObject;
 			T result = caseMerchandise(merchandise);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BowlingPackage.ANTI_THEFT_CHIP: {
-			AntiTheftChip antiTheftChip = (AntiTheftChip) theEObject;
-			T result = caseAntiTheftChip(antiTheftChip);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BowlingPackage.MODULE: {
-			Module module = (Module) theEObject;
-			T result = caseModule(module);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BowlingPackage.GPS_MODULE: {
-			GPSModule gpsModule = (GPSModule) theEObject;
-			T result = caseGPSModule(gpsModule);
-			if (result == null)
-				result = caseModule(gpsModule);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BowlingPackage.ELECTRO_MAGNETIC_MODULE: {
-			ElectroMagneticModule electroMagneticModule = (ElectroMagneticModule) theEObject;
-			T result = caseElectroMagneticModule(electroMagneticModule);
-			if (result == null)
-				result = caseModule(electroMagneticModule);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BowlingPackage.TWO_IN_ONE_MODULE: {
-			TwoInOneModule twoInOneModule = (TwoInOneModule) theEObject;
-			T result = caseTwoInOneModule(twoInOneModule);
-			if (result == null)
-				result = caseModule(twoInOneModule);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -425,54 +354,6 @@ public class BowlingSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ticket</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ticket</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTicket(Ticket object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Season Ticket</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Season Ticket</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSeasonTicket(SeasonTicket object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Day Ticket</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Day Ticket</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDayTicket(DayTicket object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Merchandise</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -485,86 +366,6 @@ public class BowlingSwitch<T> {
 	 * @generated
 	 */
 	public T caseMerchandise(Merchandise object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Anti Theft Chip</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Anti Theft Chip</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAntiTheftChip(AntiTheftChip object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Module</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Module</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModule(Module object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>GPS Module</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>GPS Module</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGPSModule(GPSModule object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Electro Magnetic Module</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Electro Magnetic Module</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseElectroMagneticModule(ElectroMagneticModule object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Two In One Module</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Two In One Module</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTwoInOneModule(TwoInOneModule object) {
 		return null;
 	}
 

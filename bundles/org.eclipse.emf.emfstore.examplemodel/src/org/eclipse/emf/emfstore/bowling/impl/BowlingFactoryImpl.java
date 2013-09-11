@@ -18,27 +18,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.emfstore.bowling.AntiTheftChip;
+import org.eclipse.emf.emfstore.bowling.*;
 import org.eclipse.emf.emfstore.bowling.Area;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
-import org.eclipse.emf.emfstore.bowling.DayTicket;
-import org.eclipse.emf.emfstore.bowling.ElectroMagneticModule;
 import org.eclipse.emf.emfstore.bowling.Fan;
-import org.eclipse.emf.emfstore.bowling.GPSModule;
 import org.eclipse.emf.emfstore.bowling.Game;
 import org.eclipse.emf.emfstore.bowling.Gender;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Matchup;
 import org.eclipse.emf.emfstore.bowling.Merchandise;
-import org.eclipse.emf.emfstore.bowling.Module;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Referee;
-import org.eclipse.emf.emfstore.bowling.SeasonTicket;
-import org.eclipse.emf.emfstore.bowling.Ticket;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
-import org.eclipse.emf.emfstore.bowling.TwoInOneModule;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +51,7 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	public static BowlingFactory init() {
 		try {
 			BowlingFactory theBowlingFactory = (BowlingFactory) EPackage.Registry.INSTANCE
-				.getEFactory(BowlingPackage.eNS_URI);
+				.getEFactory("http://org/eclipse/example/bowling");
 			if (theBowlingFactory != null) {
 				return theBowlingFactory;
 			}
@@ -108,24 +101,8 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 			return createArea();
 		case BowlingPackage.FAN:
 			return createFan();
-		case BowlingPackage.TICKET:
-			return createTicket();
-		case BowlingPackage.SEASON_TICKET:
-			return createSeasonTicket();
-		case BowlingPackage.DAY_TICKET:
-			return createDayTicket();
 		case BowlingPackage.MERCHANDISE:
 			return createMerchandise();
-		case BowlingPackage.ANTI_THEFT_CHIP:
-			return createAntiTheftChip();
-		case BowlingPackage.MODULE:
-			return createModule();
-		case BowlingPackage.GPS_MODULE:
-			return createGPSModule();
-		case BowlingPackage.ELECTRO_MAGNETIC_MODULE:
-			return createElectroMagneticModule();
-		case BowlingPackage.TWO_IN_ONE_MODULE:
-			return createTwoInOneModule();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -283,97 +260,9 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	 * 
 	 * @generated
 	 */
-	public Ticket createTicket() {
-		TicketImpl ticket = new TicketImpl();
-		return ticket;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public SeasonTicket createSeasonTicket() {
-		SeasonTicketImpl seasonTicket = new SeasonTicketImpl();
-		return seasonTicket;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public DayTicket createDayTicket() {
-		DayTicketImpl dayTicket = new DayTicketImpl();
-		return dayTicket;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public Merchandise createMerchandise() {
 		MerchandiseImpl merchandise = new MerchandiseImpl();
 		return merchandise;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public AntiTheftChip createAntiTheftChip() {
-		AntiTheftChipImpl antiTheftChip = new AntiTheftChipImpl();
-		return antiTheftChip;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public Module createModule() {
-		ModuleImpl module = new ModuleImpl();
-		return module;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public GPSModule createGPSModule() {
-		GPSModuleImpl gpsModule = new GPSModuleImpl();
-		return gpsModule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public ElectroMagneticModule createElectroMagneticModule() {
-		ElectroMagneticModuleImpl electroMagneticModule = new ElectroMagneticModuleImpl();
-		return electroMagneticModule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public TwoInOneModule createTwoInOneModule() {
-		TwoInOneModuleImpl twoInOneModule = new TwoInOneModuleImpl();
-		return twoInOneModule;
 	}
 
 	/**
