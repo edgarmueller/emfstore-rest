@@ -30,7 +30,10 @@
    <feature url="features/org.eclipse.emf.emfstore.client.ui.historybrowsercomparator.feature_1.0.0.qualifier.jar" id="org.eclipse.emf.emfstore.client.ui.historybrowsercomparator.feature" version="1.0.0.qualifier">
       <category name="org.eclipse.emf.emfstore.other"/>
    </feature>
-   <category-def name="org.eclipse.emf.emfstore.core" label="EMFStore Core Features (Install all to get started)">
+   <feature url="features/org.eclipse.emf.emfstore.sdk.feature_1.0.0.qualifier.jar" id="org.eclipse.emf.emfstore.sdk.feature" version="1.0.0.qualifier">
+      <category name="org.eclipse.emfstore.sdk"/>
+   </feature>
+   <category-def name="org.eclipse.emf.emfstore.core" label="EMFStore Core Features">
       <description>
          Core Features of EMFStore, a model repository for EMF.
       </description>
@@ -38,6 +41,11 @@
    <category-def name="org.eclipse.emf.emfstore.other" label="EMFStore Additional Features">
       <description>
          Additional Features of EMFStore, a model repository for EMF.
+      </description>
+   </category-def>
+   <category-def name="org.eclipse.emfstore.sdk" label="EMFStore SDK (Install all to get started)">
+      <description>
+         Core Features + Sources
       </description>
    </category-def>
 </site>

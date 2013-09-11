@@ -146,6 +146,7 @@
     <module>../../bundles/org.eclipse.emf.emfstore.examplemodel.edit</module>
 
     <!-- Update site and products -->
+	<module>../../features/org.eclipse.emf.emfstore.sdk.feature</module>
     <module>../org.eclipse.emf.emfstore.p2repository</module>
 	<module>../org.eclipse.emf.emfstore.products</module>
 
