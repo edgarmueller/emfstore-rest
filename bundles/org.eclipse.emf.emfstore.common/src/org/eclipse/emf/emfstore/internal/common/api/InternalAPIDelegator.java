@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.api;
 
@@ -25,6 +25,11 @@ package org.eclipse.emf.emfstore.internal.common.api;
  */
 public interface InternalAPIDelegator<API, INTERNAL extends APIDelegate<? extends API>> {
 
+	/**
+	 * Returns the internal interface of this class.
+	 * 
+	 * @return the internal interface of this class
+	 */
 	INTERNAL toInternalAPI();
 
 }

@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Wesendonk
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core;
 
@@ -45,7 +45,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 /**
  * Implementation of {@link AdminEmfStore} interface.
  * 
- * @author Wesendonk
+ * @author wesendon
  */
 // TODO: bring this interface in new subinterface structure and refactor it
 // TODO: internal
@@ -74,11 +74,11 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		List<ACGroup> result = new ArrayList<ACGroup>();
-		for (ACGroup group : getServerSpace().getGroups()) {
+		final List<ACGroup> result = new ArrayList<ACGroup>();
+		for (final ACGroup group : getServerSpace().getGroups()) {
 
 			// quickfix
-			ACGroup copy = ModelUtil.clone(group);
+			final ACGroup copy = ModelUtil.clone(group);
 			clearMembersFromGroup(copy);
 			result.add(copy);
 		}
@@ -93,13 +93,13 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		List<ACGroup> result = new ArrayList<ACGroup>();
-		ACOrgUnit orgUnit = getOrgUnit(orgUnitId);
-		for (ACGroup group : getServerSpace().getGroups()) {
+		final List<ACGroup> result = new ArrayList<ACGroup>();
+		final ACOrgUnit orgUnit = getOrgUnit(orgUnitId);
+		for (final ACGroup group : getServerSpace().getGroups()) {
 			if (group.getMembers().contains(orgUnit)) {
 
 				// quickfix
-				ACGroup copy = ModelUtil.clone(group);
+				final ACGroup copy = ModelUtil.clone(group);
 				clearMembersFromGroup(copy);
 				result.add(copy);
 			}
@@ -118,7 +118,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		if (groupExists(name)) {
 			throw new InvalidInputException("group already exists.");
 		}
-		ACGroup acGroup = AccesscontrolFactory.eINSTANCE.createACGroup();
+		final ACGroup acGroup = AccesscontrolFactory.eINSTANCE.createACGroup();
 		acGroup.setName(name);
 		acGroup.setDescription("");
 		getServerSpace().getGroups().add(acGroup);
@@ -127,7 +127,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private boolean groupExists(String name) {
-		for (ACGroup group : getServerSpace().getGroups()) {
+		for (final ACGroup group : getServerSpace().getGroups()) {
 			if (group.getName().equals(name)) {
 				return true;
 			}
@@ -155,8 +155,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		for (Iterator<ACGroup> iter = getServerSpace().getGroups().iterator(); iter.hasNext();) {
-			ACGroup next = iter.next();
+		for (final Iterator<ACGroup> iter = getServerSpace().getGroups().iterator(); iter.hasNext();) {
+			final ACGroup next = iter.next();
 			if (next.getId().equals(group)) {
 				EcoreUtil.delete(next);
 				save();
@@ -175,8 +175,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 
 		// quickfix
-		List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
-		for (ACOrgUnit orgUnit : getGroup(groupId).getMembers()) {
+		final List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
+		for (final ACOrgUnit orgUnit : getGroup(groupId).getMembers()) {
 			result.add(ModelUtil.clone(orgUnit));
 		}
 		clearMembersFromGroups(result);
@@ -191,8 +191,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		ACGroup acGroup = getGroup(group);
-		ACOrgUnit acMember = getOrgUnit(member);
+		final ACGroup acGroup = getGroup(group);
+		final ACOrgUnit acMember = getOrgUnit(member);
 		acGroup.getMembers().add(acMember);
 		save();
 
@@ -206,8 +206,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		ACGroup acGroup = getGroup(group);
-		ACOrgUnit acMember = getOrgUnit(member);
+		final ACGroup acGroup = getGroup(group);
+		final ACOrgUnit acMember = getOrgUnit(member);
 		if (acGroup.getMembers().contains(acMember)) {
 			acGroup.getMembers().remove(acMember);
 			save();
@@ -222,16 +222,16 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkProjectAdminAccess(sessionId, projectId);
-		List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
-		for (ACOrgUnit orgUnit : getServerSpace().getUsers()) {
-			for (Role role : orgUnit.getRoles()) {
+		final List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
+		for (final ACOrgUnit orgUnit : getServerSpace().getUsers()) {
+			for (final Role role : orgUnit.getRoles()) {
 				if (isServerAdmin(role) || role.getProjects().contains(projectId)) {
 					result.add(ModelUtil.clone(orgUnit));
 				}
 			}
 		}
-		for (ACOrgUnit orgUnit : getServerSpace().getGroups()) {
-			for (Role role : orgUnit.getRoles()) {
+		for (final ACOrgUnit orgUnit : getServerSpace().getGroups()) {
+			for (final Role role : orgUnit.getRoles()) {
 				if (isServerAdmin(role) || role.getProjects().contains(projectId)) {
 					result.add(ModelUtil.clone(orgUnit));
 				}
@@ -252,14 +252,14 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		projectId = getProjectId(projectId);
-		ACOrgUnit orgUnit = getOrgUnit(participant);
-		for (Role role : orgUnit.getRoles()) {
+		final ACOrgUnit orgUnit = getOrgUnit(participant);
+		for (final Role role : orgUnit.getRoles()) {
 			if (role.getProjects().contains(projectId)) {
 				return;
 			}
 		}
 		// check whether reader role exists
-		for (Role role : orgUnit.getRoles()) {
+		for (final Role role : orgUnit.getRoles()) {
 			if (isReader(role)) {
 				role.getProjects().add(ModelUtil.clone(projectId));
 				save();
@@ -267,14 +267,14 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			}
 		}
 		// else create new reader role
-		ReaderRole reader = RolesFactory.eINSTANCE.createReaderRole();
+		final ReaderRole reader = RolesFactory.eINSTANCE.createReaderRole();
 		reader.getProjects().add(ModelUtil.clone(projectId));
 		orgUnit.getRoles().add(reader);
 		save();
 	}
 
 	private ProjectId getProjectId(ProjectId projectId) throws ESException {
-		for (ProjectHistory projectHistory : getServerSpace().getProjects()) {
+		for (final ProjectHistory projectHistory : getServerSpace().getProjects()) {
 			if (projectHistory.getProjectId().equals(projectId)) {
 				return projectHistory.getProjectId();
 			}
@@ -292,8 +292,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		projectId = getProjectId(projectId);
-		ACOrgUnit orgUnit = getOrgUnit(participant);
-		for (Role role : orgUnit.getRoles()) {
+		final ACOrgUnit orgUnit = getOrgUnit(participant);
+		for (final Role role : orgUnit.getRoles()) {
 			if (role.getProjects().contains(projectId)) {
 				role.getProjects().remove(projectId);
 				save();
@@ -311,8 +311,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		projectId = getProjectId(projectId);
-		ACOrgUnit oUnit = getOrgUnit(orgUnitId);
-		for (Role role : oUnit.getRoles()) {
+		final ACOrgUnit oUnit = getOrgUnit(orgUnitId);
+		for (final Role role : oUnit.getRoles()) {
 			if (isServerAdmin(role) || role.getProjects().contains(projectId)) {
 				return role;
 			}
@@ -330,9 +330,9 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		projectId = getProjectId(projectId);
-		ACOrgUnit orgUnit = getOrgUnit(orgUnitId);
+		final ACOrgUnit orgUnit = getOrgUnit(orgUnitId);
 		// delete old role first
-		Role role = getRole(projectId, orgUnit);
+		final Role role = getRole(projectId, orgUnit);
 		if (role != null) {
 			role.getProjects().remove(projectId);
 			if (role.getProjects().size() == 0) {
@@ -346,7 +346,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			return;
 		}
 		// add project to role if it exists
-		for (Role role1 : orgUnit.getRoles()) {
+		for (final Role role1 : orgUnit.getRoles()) {
 			if (role1.eClass().getName().equals(roleClass.getName())) {
 				role1.getProjects().add(ModelUtil.clone(projectId));
 				save();
@@ -354,7 +354,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			}
 		}
 		// create role if does not exists
-		Role newRole = (Role) RolesPackage.eINSTANCE.getEFactoryInstance().create(
+		final Role newRole = (Role) RolesPackage.eINSTANCE.getEFactoryInstance().create(
 			(EClass) RolesPackage.eINSTANCE.getEClassifier(roleClass.getName()));
 		newRole.getProjects().add(ModelUtil.clone(projectId));
 		orgUnit.getRoles().add(newRole);
@@ -369,8 +369,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		List<ACUser> result = new ArrayList<ACUser>();
-		for (ACUser user : getServerSpace().getUsers()) {
+		final List<ACUser> result = new ArrayList<ACUser>();
+		for (final ACUser user : getServerSpace().getUsers()) {
 			result.add(user);
 		}
 		return result;
@@ -384,11 +384,11 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
-		for (ACOrgUnit user : getServerSpace().getUsers()) {
+		final List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
+		for (final ACOrgUnit user : getServerSpace().getUsers()) {
 			result.add(ModelUtil.clone(user));
 		}
-		for (ACOrgUnit group : getServerSpace().getGroups()) {
+		for (final ACOrgUnit group : getServerSpace().getGroups()) {
 			result.add(ModelUtil.clone(group));
 		}
 		// quickfix
@@ -404,8 +404,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		List<ProjectInfo> result = new ArrayList<ProjectInfo>();
-		for (ProjectHistory ph : getServerSpace().getProjects()) {
+		final List<ProjectInfo> result = new ArrayList<ProjectInfo>();
+		for (final ProjectHistory ph : getServerSpace().getProjects()) {
 			result.add(getProjectInfo(ph));
 		}
 		return result;
@@ -422,7 +422,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		if (userExists(name)) {
 			throw new InvalidInputException("username '" + name + "' already exists.");
 		}
-		ACUser acUser = AccesscontrolFactory.eINSTANCE.createACUser();
+		final ACUser acUser = AccesscontrolFactory.eINSTANCE.createACUser();
 		// acUser.setId(AccesscontrolFactory.eINSTANCE.createACOrgUnitId());
 		acUser.setName(name);
 		acUser.setDescription(" ");
@@ -432,7 +432,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private boolean userExists(String name) {
-		for (ACUser user : getServerSpace().getUsers()) {
+		for (final ACUser user : getServerSpace().getUsers()) {
 			if (user.getName().equals(name)) {
 				return true;
 			}
@@ -448,8 +448,8 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		for (Iterator<ACUser> iter = getServerSpace().getUsers().iterator(); iter.hasNext();) {
-			ACUser next = iter.next();
+		for (final Iterator<ACUser> iter = getServerSpace().getUsers().iterator(); iter.hasNext();) {
+			final ACUser next = iter.next();
 			if (next.getId().equals(user)) {
 				EcoreUtil.delete(next);
 				save();
@@ -467,11 +467,29 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		ACOrgUnit ou = getOrgUnit(orgUnitId);
+		final ACOrgUnit ou = getOrgUnit(orgUnitId);
 		ou.setName(name);
 		ou.setDescription(description);
 		save();
+	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#changeUser(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId, java.lang.String,
+	 *      java.lang.String)
+	 */
+	public void changeUser(SessionId sessionId, ACOrgUnitId userId, String name, String password) throws ESException {
+		if (sessionId == null || userId == null || name == null || password == null) {
+			throw new InvalidInputException();
+		}
+		getAuthorizationControl().checkServerAdminAccess(sessionId);
+		final ACUser user = (ACUser) getOrgUnit(userId);
+		user.setName(name);
+		user.setPassword(password);
+		save();
 	}
 
 	/**
@@ -483,7 +501,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		// quickfix
-		ACOrgUnit orgUnit = ModelUtil.clone(getOrgUnit(orgUnitId));
+		final ACOrgUnit orgUnit = ModelUtil.clone(getOrgUnit(orgUnitId));
 		clearMembersFromGroup(orgUnit);
 		return orgUnit;
 	}
@@ -492,7 +510,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	 * This method is used as fix for the containment issue of group.
 	 */
 	private void clearMembersFromGroups(Collection<ACOrgUnit> orgUnits) {
-		for (ACOrgUnit orgUnit : orgUnits) {
+		for (final ACOrgUnit orgUnit : orgUnits) {
 			clearMembersFromGroup(orgUnit);
 		}
 	}
@@ -515,7 +533,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private ProjectInfo getProjectInfo(ProjectHistory project) {
-		ProjectInfo info = ModelFactory.eINSTANCE.createProjectInfo();
+		final ProjectInfo info = ModelFactory.eINSTANCE.createProjectInfo();
 		info.setName(project.getProjectName());
 		info.setDescription(project.getProjectDescription());
 		info.setProjectId(ModelUtil.clone(project.getProjectId()));
@@ -524,7 +542,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private ACGroup getGroup(ACOrgUnitId orgUnitId) throws ESException {
-		for (ACGroup group : getServerSpace().getGroups()) {
+		for (final ACGroup group : getServerSpace().getGroups()) {
 			if (group.getId().equals(orgUnitId)) {
 				return group;
 			}
@@ -533,12 +551,12 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws ESException {
-		for (ACOrgUnit unit : getServerSpace().getUsers()) {
+		for (final ACOrgUnit unit : getServerSpace().getUsers()) {
 			if (unit.getId().equals(orgUnitId)) {
 				return unit;
 			}
 		}
-		for (ACOrgUnit unit : getServerSpace().getGroups()) {
+		for (final ACOrgUnit unit : getServerSpace().getGroups()) {
 			if (unit.getId().equals(orgUnitId)) {
 				return unit;
 			}
@@ -547,7 +565,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private Role getRole(ProjectId projectId, ACOrgUnit orgUnit) {
-		for (Role role : orgUnit.getRoles()) {
+		for (final Role role : orgUnit.getRoles()) {
 			if (isServerAdmin(role) || role.getProjects().contains(projectId)) {
 				// return (Role) ModelUtil.clone(role);
 				return role;
@@ -559,9 +577,9 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	private void save() throws ESException {
 		try {
 			getServerSpace().save();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new StorageException(StorageException.NOSAVE, e);
-		} catch (NullPointerException e) {
+		} catch (final NullPointerException e) {
 			throw new StorageException(StorageException.NOSAVE, e);
 		}
 	}

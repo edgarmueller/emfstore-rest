@@ -16,7 +16,12 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.EnumMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
@@ -32,6 +37,7 @@ import org.eclipse.emf.emfstore.internal.server.core.subinterfaces.VersionSubInt
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.eclipse.emf.emfstore.server.observer.ESServerCallObserver;
 
 /**
  * This is the main implementation of {@link EMFStore}.
@@ -48,11 +54,11 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * @author boehlke
 	 */
 	private class SubInterfaceMethod {
-		private AbstractSubEmfstoreInterface iface;
-		private Method method;
+		private final AbstractSubEmfstoreInterface iface;
+		private final Method method;
 
 		public SubInterfaceMethod(AbstractSubEmfstoreInterface iface, Method m) {
-			this.method = m;
+			method = m;
 			this.iface = iface;
 		}
 
@@ -72,6 +78,7 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	}
 
 	private EnumMap<MethodId, SubInterfaceMethod> subInterfaceMethods;
+	private final Set<ESServerCallObserver> serverCallObservers;
 
 	/**
 	 * Default constructor.
@@ -86,6 +93,22 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	public EMFStoreImpl(ServerSpace serverSpace, AuthorizationControl authorizationControl)
 		throws FatalESException {
 		super(serverSpace, authorizationControl);
+		serverCallObservers = initServerCallObservers();
+	}
+
+	/**
+	 * 
+	 */
+	private Set<ESServerCallObserver> initServerCallObservers() {
+		final Set<ESServerCallObserver> result = new LinkedHashSet<ESServerCallObserver>();
+		for (final ESExtensionElement e : new ESExtensionPoint("org.eclipse.emf.emfstore.server.serverCallObserver")
+			.getExtensionElements()) {
+			final ESServerCallObserver observer = e.getClass("class", ESServerCallObserver.class);
+			if (observer != null) {
+				result.add(observer);
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -107,8 +130,8 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	@Override
 	protected void addSubInterface(AbstractSubEmfstoreInterface iface) {
 		super.addSubInterface(iface);
-		for (Method method : iface.getClass().getMethods()) {
-			EmfStoreMethod implSpec = method.getAnnotation(EmfStoreMethod.class);
+		for (final Method method : iface.getClass().getMethods()) {
+			final EmfStoreMethod implSpec = method.getAnnotation(EmfStoreMethod.class);
 			if (implSpec != null) {
 				subInterfaceMethods.put(implSpec.value(), new SubInterfaceMethod(iface, method));
 			}
@@ -121,12 +144,59 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * 
 	 * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
 	 */
-	public Object invoke(Object obj, Method method, Object[] args) throws ESException {
-		MethodInvocation methodInvocation = new MethodInvocation(method.getName(), args);
-
+	public Object invoke(Object obj, final Method method, final Object[] args) throws ESException {
+		final MethodInvocation methodInvocation = new MethodInvocation(method.getName(), args);
 		getAuthorizationControl().checkAccess(methodInvocation);
-		SubInterfaceMethod subIfaceMethod = subInterfaceMethods.get(methodInvocation.getType());
-		return subIfaceMethod.getIface().execute(subIfaceMethod.getMethod(), args);
+
+		notifyServerCallObservers(new ServerCallObserverNotifier() {
+			public void notify(ESServerCallObserver observer) {
+				observer.notifyPreServerCallExecution(method, args);
+			}
+		});
+		final SubInterfaceMethod subIfaceMethod = subInterfaceMethods.get(methodInvocation.getType());
+		try {
+			final Object result = subIfaceMethod.getIface().execute(subIfaceMethod.getMethod(), args);
+			notifyServerCallObservers(new ServerCallObserverNotifier() {
+				public void notify(ESServerCallObserver observer) {
+					observer.notifyPostServerCallExecution(method, args, result);
+				}
+			});
+			return result;
+			// notify observers about exceptions and rethrow exception
+		} catch (final ESException esException) {
+			notifyServerCallObservers(new ServerCallObserverNotifier() {
+				public void notify(ESServerCallObserver observer) {
+					observer.notifyServerCallExecutionESExceptionFailure(method, args, esException);
+				}
+			});
+			throw esException;
+			// BEGIN SUPRESS CATCH EXCEPTION
+		} catch (final RuntimeException runtimeException) {
+			// END SUPRESS CATCH EXCEPTION
+			notifyServerCallObservers(new ServerCallObserverNotifier() {
+				public void notify(ESServerCallObserver observer) {
+					observer.notifyServerCallExecutionRuntimeExceptionFailure(method, args, runtimeException);
+				}
+			});
+			throw runtimeException;
+		}
+	}
+
+	/**
+	 * Notify the observers with the given notifier.
+	 * 
+	 * @param serverCallObserverNotifier the notifier
+	 */
+	private void notifyServerCallObservers(ServerCallObserverNotifier serverCallObserverNotifier) {
+		for (final ESServerCallObserver callObserver : serverCallObservers) {
+			try {
+				serverCallObserverNotifier.notify(callObserver);
+				// BEGIN SUPRESS CATCH EXCEPTION
+			} catch (final RuntimeException runtimeException) {
+				// END SUPRESS CATCH EXCEPTION
+				ModelUtil.logWarning("Server Call Observer Notification failed with exception!", runtimeException);
+			}
+		}
 	}
 
 	/**

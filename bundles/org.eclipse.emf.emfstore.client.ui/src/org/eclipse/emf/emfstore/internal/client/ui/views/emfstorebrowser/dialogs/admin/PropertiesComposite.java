@@ -62,7 +62,7 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
  */
 public abstract class PropertiesComposite extends Composite {
 
-	private AdminBroker adminBroker;
+	private final AdminBroker adminBroker;
 
 	private Group grpTable;
 	private Group grpAttributes;
@@ -90,12 +90,10 @@ public abstract class PropertiesComposite extends Composite {
 	 * This creates attributes, and table group controls.
 	 */
 	protected void createControls() {
-		this.setLayout(new GridLayout());
-
+		setLayout(new GridLayout());
 		createSimpleAttributes();
-		createTableGroup();
+		createTableGroup(getTabTitle());
 		createButtons(grpTable);
-
 	}
 
 	/**
@@ -105,7 +103,6 @@ public abstract class PropertiesComposite extends Composite {
 		grpAttributes = new Group(this, SWT.V_SCROLL);
 		grpAttributes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		grpAttributes.setText("Properties");
-
 		grpAttributes.setLayout(new GridLayout(2, false));
 
 		lblName = new Label(grpAttributes, SWT.NONE);
@@ -120,9 +117,7 @@ public abstract class PropertiesComposite extends Composite {
 
 			public void focusLost(FocusEvent e) {
 				saveOrgUnitAttributes();
-
 			}
-
 		});
 
 		lblDescription = new Label(grpAttributes, SWT.NONE);
@@ -136,17 +131,16 @@ public abstract class PropertiesComposite extends Composite {
 
 			public void focusLost(FocusEvent e) {
 				saveOrgUnitAttributes();
-
 			}
-
 		});
-
 	}
 
 	/**
-	 * This creates table viewer group control. Subclasses must override it.
+	 * Returns the title of the tab.
+	 * 
+	 * @return the title of the tab.
 	 */
-	protected abstract void createTableGroup();
+	protected abstract String getTabTitle();
 
 	/**
 	 * This saves an OrgUnit when txtName or txtDescription lose focus. GroupComposite and UserComposite Subclasses must
@@ -177,10 +171,10 @@ public abstract class PropertiesComposite extends Composite {
 	 */
 	protected void createTableViewer(Composite parent) {
 
-		int style = SWT.SINGLE | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION;
+		final int style = SWT.SINGLE | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION;
 
-		Table table = new Table(parent, style);
-		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
+		final Table table = new Table(parent, style);
+		final GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		gridData.horizontalSpan = 5;
 		table.setLayoutData(gridData);
 		table.setLinesVisible(true);
@@ -214,7 +208,7 @@ public abstract class PropertiesComposite extends Composite {
 	 */
 	protected void createButtons(Composite parent) {
 		// Create and configure the "Add" button
-		Button add = new Button(parent, SWT.PUSH | SWT.CENTER);
+		final Button add = new Button(parent, SWT.PUSH | SWT.CENTER);
 		add.setText("Add...");
 
 		GridData gridData = new GridData();
@@ -232,7 +226,7 @@ public abstract class PropertiesComposite extends Composite {
 		});
 
 		// Create and configure the "Delete" button
-		Button remove = new Button(parent, SWT.PUSH | SWT.CENTER);
+		final Button remove = new Button(parent, SWT.PUSH | SWT.CENTER);
 		remove.setText("Remove");
 		gridData = new GridData(SWT.END);
 		gridData.widthHint = 80;
@@ -243,7 +237,7 @@ public abstract class PropertiesComposite extends Composite {
 			// Remove the selection and refresh the view
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				ACOrgUnit ou = (ACOrgUnit) ((IStructuredSelection) tableViewer.getSelection()).getFirstElement();
+				final ACOrgUnit ou = (ACOrgUnit) ((IStructuredSelection) tableViewer.getSelection()).getFirstElement();
 				if (ou != null) {
 					removeOrgUnit(ou);
 				}
@@ -256,19 +250,19 @@ public abstract class PropertiesComposite extends Composite {
 	 * This adds DnD support. This method adds drag support, subclasses add drop support by overriding this method.
 	 */
 	protected void addDragNDropSupport() {
-		int ops = DND.DROP_MOVE;
-		Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
-		DragSourceListener dragListener = new DragSourceListener() {
+		final int ops = DND.DROP_MOVE;
+		final Transfer[] transfers = new Transfer[] { LocalSelectionTransfer.getTransfer() };
+		final DragSourceListener dragListener = new DragSourceListener() {
 			public void dragFinished(DragSourceEvent event) {
 				getTableViewer().refresh();
 				PropertiesForm.setDragNDropObject(null);
 			}
 
 			public void dragSetData(DragSourceEvent event) {
-				EObject eObject = getSelectedItem();
+				final EObject eObject = getSelectedItem();
 				if (eObject != null) {
 					if (eObject instanceof ACOrgUnit) {
-						ACOrgUnit orgUnit = (ACOrgUnit) eObject;
+						final ACOrgUnit orgUnit = (ACOrgUnit) eObject;
 						PropertiesForm.setDragNDropObject(orgUnit);
 					}
 				}
@@ -319,7 +313,7 @@ public abstract class PropertiesComposite extends Composite {
 	 * @return selected elements.
 	 */
 	protected Object[] showDialog(Collection<ACOrgUnit> content, String title) {
-		ElementListSelectionDialog dlg = new ElementListSelectionDialog(this.getShell(),
+		final ElementListSelectionDialog dlg = new ElementListSelectionDialog(getShell(),
 			new ILabelProviderImplementation());
 
 		dlg.setElements(content.toArray(new Object[content.size()]));
@@ -340,14 +334,14 @@ public abstract class PropertiesComposite extends Composite {
 	 */
 	protected EObject getSelectedItem() {
 		EObject result = null;
-		ISelection sel = tableViewer.getSelection();
+		final ISelection sel = tableViewer.getSelection();
 		IStructuredSelection ssel = null;
 		if (sel != null) {
 			ssel = (IStructuredSelection) sel;
 		}
 
 		if (ssel != null) {
-			Object obj = ssel.getFirstElement();
+			final Object obj = ssel.getFirstElement();
 			result = (ACOrgUnit) obj;
 		}
 		return result;
@@ -443,16 +437,16 @@ public abstract class PropertiesComposite extends Composite {
 					result = groups.toArray(new ACOrgUnit[groups.size()]);
 
 				} else if (inputElement instanceof ACGroup) {
-					List<ACOrgUnit> members = adminBroker.getMembers(((ACGroup) inputElement).getId());
+					final List<ACOrgUnit> members = adminBroker.getMembers(((ACGroup) inputElement).getId());
 					result = members.toArray(new ACOrgUnit[members.size()]);
 
 				} else if (inputElement instanceof ProjectInfo) {
-					List<ACOrgUnit> participants = adminBroker.getParticipants(((ProjectInfo) inputElement)
+					final List<ACOrgUnit> participants = adminBroker.getParticipants(((ProjectInfo) inputElement)
 						.getProjectId());
 					result = participants.toArray(new ACOrgUnit[participants.size()]);
 
 				}
-			} catch (ESException e) {
+			} catch (final ESException e) {
 				// ZH Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -490,7 +484,7 @@ public abstract class PropertiesComposite extends Composite {
 
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
-			ACOrgUnit orgUnit = (ACOrgUnit) element;
+			final ACOrgUnit orgUnit = (ACOrgUnit) element;
 			String result = "";
 
 			switch (columnIndex) {

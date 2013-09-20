@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Hodaie
+ * Zardosht Hodaie - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin;
 
@@ -54,7 +54,6 @@ public class OrgUnitManagementGUI {
 	 *            server.
 	 */
 	public OrgUnitManagementGUI(Composite parent, AdminBroker adminBroker) {
-
 		createSash(parent, adminBroker);
 	}
 
@@ -65,7 +64,7 @@ public class OrgUnitManagementGUI {
 	 * @param parent
 	 */
 	private void createSash(Composite parent, AdminBroker adminBroker) {
-		SashForm sash = new SashForm(parent, SWT.HORIZONTAL);
+		final SashForm sash = new SashForm(parent, SWT.HORIZONTAL);
 		sash.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		// ATTENTION: the creation order is important!
@@ -76,7 +75,7 @@ public class OrgUnitManagementGUI {
 		// 2. Tabs shown in TabItems need to be aware of form (first create
 		// form, then tabs.)
 		createTabFolder(sash);
-		PropertiesForm frm = createPropertiesForm(sash, adminBroker);
+		final PropertiesForm frm = createPropertiesForm(sash, adminBroker);
 		initTabFolder(adminBroker, frm);
 
 		sash.setWeights(sashWeights());
@@ -90,9 +89,7 @@ public class OrgUnitManagementGUI {
 	private void createTabFolder(SashForm sash) {
 
 		tabFolder = new TabFolder(sash, SWT.NONE);
-
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
 		tabFolder.addSelectionListener(new SelectionListener() {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -112,27 +109,22 @@ public class OrgUnitManagementGUI {
 					break;
 				default:
 					break;
-
 				}
-
 			}
-
 		});
-
 	}
 
 	private PropertiesForm createPropertiesForm(SashForm sash, AdminBroker adminBroker) {
 
-		FormToolkit toolkit = new FormToolkit(sash.getDisplay());
+		final FormToolkit toolkit = new FormToolkit(sash.getDisplay());
 
-		PropertiesForm frm = new PropertiesForm(sash, SWT.NONE, adminBroker, this);
+		final PropertiesForm frm = new PropertiesForm(sash, SWT.NONE, adminBroker, this);
 		frm.setText("Properties");
 		frm.setFont(JFaceResources.getHeaderFont());
 
 		toolkit.decorateFormHeading(frm);
 
 		return frm;
-
 	}
 
 	/**
@@ -145,17 +137,17 @@ public class OrgUnitManagementGUI {
 	 */
 	private void initTabFolder(AdminBroker adminBroker, PropertiesForm frm) {
 
-		TabItem projectsTab = new TabItem(tabFolder, SWT.NONE);
+		final TabItem projectsTab = new TabItem(tabFolder, SWT.NONE);
 		projectsTabContents = new ProjectTabContent("Projects", adminBroker, frm);
 		projectsTab.setControl(projectsTabContents.createContents(tabFolder));
 		projectsTab.setText("Projects");
 
-		TabItem groupsTab = new TabItem(tabFolder, SWT.NONE);
+		final TabItem groupsTab = new TabItem(tabFolder, SWT.NONE);
 		groupsTabContents = new GroupTabContent("Groups", adminBroker, frm);
 		groupsTab.setControl(groupsTabContents.createContents(tabFolder));
 		groupsTab.setText("Groups");
 
-		TabItem usersTab = new TabItem(tabFolder, SWT.NONE);
+		final TabItem usersTab = new TabItem(tabFolder, SWT.NONE);
 		usersTabContents = new UserTabContent("Users", adminBroker, frm);
 		usersTab.setControl(usersTabContents.createContents(tabFolder));
 		usersTab.setText("Users");
@@ -176,19 +168,11 @@ public class OrgUnitManagementGUI {
 				groupsTabContents.getTableViewer().refresh();
 				usersTabContents.getTableViewer().refresh();
 			}
-
 		});
 	}
 
 	private int[] sashWeights() {
 		return new int[] { 25, 75 };
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setFocus() {
-		tabFolder.setFocus();
 	}
 
 	/**
@@ -199,8 +183,6 @@ public class OrgUnitManagementGUI {
 	 * @return Active tab of TabFolder
 	 */
 	public TabContent getActiveTabContent() {
-		return this.activeTabContent;
-
+		return activeTabContent;
 	}
-
 }

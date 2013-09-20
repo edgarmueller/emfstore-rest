@@ -64,7 +64,7 @@ public final class XmlRpcWebserverManager {
 		int tmp = 8080;
 		try {
 			tmp = Integer.valueOf(ServerConfiguration.getProperties().getProperty(ServerConfiguration.XML_RPC_PORT));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			tmp = Integer.valueOf(ServerConfiguration.XML_RPC_PORT_DEFAULT);
 		}
 		port = tmp;
@@ -88,15 +88,15 @@ public final class XmlRpcWebserverManager {
 					SSLServerSocketFactory serverSocketFactory = null;
 
 					try {
-						SSLContext context = SSLContext.getInstance("TLS");
+						final SSLContext context = SSLContext.getInstance("TLS");
 						context.init(ServerKeyStoreManager.getInstance().getKeyManagerFactory().getKeyManagers(), null,
 							null);
 						serverSocketFactory = context.getServerSocketFactory();
-					} catch (NoSuchAlgorithmException exception) {
+					} catch (final NoSuchAlgorithmException exception) {
 						shutdown(serverSocketFactory, exception);
-					} catch (KeyManagementException exception) {
+					} catch (final KeyManagementException exception) {
 						shutdown(serverSocketFactory, exception);
-					} catch (ServerKeyStoreException exception) {
+					} catch (final ServerKeyStoreException exception) {
 						shutdown(serverSocketFactory, exception);
 					}
 
@@ -113,25 +113,25 @@ public final class XmlRpcWebserverManager {
 
 			ModelUtil.logInfo("Started XML RPC Webserver on port: " + port);
 
-			XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
+			final XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
 			xmlRpcServer.setTypeFactory(new EObjectTypeFactory(xmlRpcServer));
-			EObjectTypeConverterFactory pFactory = new EObjectTypeConverterFactory();
+			final EObjectTypeConverterFactory pFactory = new EObjectTypeConverterFactory();
 			xmlRpcServer.setTypeConverterFactory(pFactory);
 
-			PropertyHandlerMapping phm = new PropertyHandlerMapping();
+			final PropertyHandlerMapping phm = new PropertyHandlerMapping();
 
 			phm.setVoidMethodEnabled(true);
 			phm.setTypeConverterFactory(pFactory);
 
 			xmlRpcServer.setHandlerMapping(phm);
 
-			XmlRpcServerConfigImpl serverConfig = (XmlRpcServerConfigImpl) xmlRpcServer.getConfig();
+			final XmlRpcServerConfigImpl serverConfig = (XmlRpcServerConfigImpl) xmlRpcServer.getConfig();
 			serverConfig.setEnabledForExtensions(true);
 			serverConfig.setEnabledForExceptions(true);
 			serverConfig.setContentLengthOptional(true);
 
 			webServer.start();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new FatalESException("Couldn't start webserver", e);
 		}
 	}
@@ -145,9 +145,10 @@ public final class XmlRpcWebserverManager {
 	 */
 	public void addHandler(String handlerName, Class<?> clazz) throws FatalESException {
 		try {
-			PropertyHandlerMapping mapper = (PropertyHandlerMapping) webServer.getXmlRpcServer().getHandlerMapping();
+			final PropertyHandlerMapping mapper = (PropertyHandlerMapping) webServer.getXmlRpcServer()
+				.getHandlerMapping();
 			mapper.addHandler(handlerName, clazz);
-		} catch (XmlRpcException e) {
+		} catch (final XmlRpcException e) {
 			throw new FatalESException("Couldn't add handler", e);
 		}
 	}
@@ -159,11 +160,11 @@ public final class XmlRpcWebserverManager {
 	 * @return true, if other handler still available
 	 */
 	public boolean removeHandler(String handlerName) {
-		PropertyHandlerMapping mapper = (PropertyHandlerMapping) webServer.getXmlRpcServer().getHandlerMapping();
+		final PropertyHandlerMapping mapper = (PropertyHandlerMapping) webServer.getXmlRpcServer().getHandlerMapping();
 		mapper.removeHandler(handlerName);
 		try {
 			return mapper.getListMethods().length > 0;
-		} catch (XmlRpcException e) {
+		} catch (final XmlRpcException e) {
 			return false;
 		}
 	}

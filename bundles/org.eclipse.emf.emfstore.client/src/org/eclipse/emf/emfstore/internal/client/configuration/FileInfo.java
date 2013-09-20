@@ -10,6 +10,7 @@
  * Otto von Wesendonk
  * Edgar Mueller
  * Maximilian Koegel
+ * Johannes Faltermeier
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.configuration;
 

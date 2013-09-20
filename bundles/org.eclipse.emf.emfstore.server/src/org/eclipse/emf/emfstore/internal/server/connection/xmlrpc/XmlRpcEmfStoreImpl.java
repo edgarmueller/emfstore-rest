@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.filetransfer.FileChunk;
@@ -48,18 +48,28 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * 
  * @author wesendon
  */
-public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
+public class XmlRpcEmfStoreImpl implements EMFStore {
 
 	private EMFStore getEmfStore() {
 		return XmlRpcConnectionHandler.getEmfStore();
 	}
 
-	private AuthenticationControl getAccessControl() {
+	private AccessControl getAccessControl() {
 		return XmlRpcConnectionHandler.getAccessControl();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Log in the given credentials.
+	 * 
+	 * @param username
+	 *            the name of the user
+	 * @param password
+	 *            the password of the user to be logged in
+	 * @param clientVersionInfo
+	 *            client version information
+	 * @return an {@link AuthenticationInformation} instance holding information about the logged in session
+	 * @throws AccessControlException
+	 *             in case login fails
 	 */
 	public AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
 		throws AccessControlException {
@@ -67,7 +77,13 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Logout the session with the given ID.
+	 * 
+	 * @param sessionId
+	 *            the ID of the session to be logged out
+	 * 
+	 * @throws AccessControlException
+	 *             in case logout fails
 	 */
 	public void logout(SessionId sessionId) throws AccessControlException {
 		getAccessControl().logout(sessionId);
@@ -149,7 +165,7 @@ public class XmlRpcEmfStoreImpl implements EMFStore, AuthenticationControl {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
+	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery<?> historyQuery)
 		throws ESException {
 		return getEmfStore().getHistoryInfo(sessionId, projectId, historyQuery);
 	}

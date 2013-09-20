@@ -77,37 +77,55 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Add a tag to the specified version specifier.
+	 * 
+	 * @param projectId
+	 *            the ID of a project
+	 * @param versionSpec
+	 *            the version specifier
+	 * @param tag
+	 *            the tag to be added
+	 * @throws ESException in case of failure
+	 * 
 	 */
 	@EmfStoreMethod(MethodId.ADDTAG)
 	public void addTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
 		throws ESException {
+
 		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
-			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
-
+			final Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
 			// stamp branch instead of throwing an exception
 			tag.setBranch(versionSpec.getBranch());
-
 			version.getTagSpecs().add(tag);
+
 			try {
 				save(version);
-			} catch (FatalESException e) {
+			} catch (final FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
 		}
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Removes the tag from the specified version specifier.
+	 * 
+	 * @param projectId
+	 *            the ID of a project
+	 * @param versionSpec
+	 *            the version specifier
+	 * @param tag
+	 *            the tag to be removed
+	 * @throws ESException in case of failure
+	 * 
 	 */
 	@EmfStoreMethod(MethodId.REMOVETAG)
 	public void removeTag(ProjectId projectId, PrimaryVersionSpec versionSpec, TagVersionSpec tag)
 		throws ESException {
 		sanityCheckObjects(projectId, versionSpec, tag);
 		synchronized (getMonitor()) {
-			Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
-			Iterator<TagVersionSpec> iterator = version.getTagSpecs().iterator();
+			final Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, versionSpec);
+			final Iterator<TagVersionSpec> iterator = version.getTagSpecs().iterator();
 			while (iterator.hasNext()) {
 				if (iterator.next().getName().equals(tag.getName())) {
 					iterator.remove();
@@ -115,17 +133,14 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			}
 			try {
 				save(version);
-			} catch (FatalESException e) {
+			} catch (final FatalESException e) {
 				throw new StorageException(StorageException.NOSAVE);
 			}
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@EmfStoreMethod(MethodId.GETHISTORYINFO)
-	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery historyQuery) throws ESException {
+	public List<HistoryInfo> getHistoryInfo(ProjectId projectId, HistoryQuery<?> historyQuery) throws ESException {
 		sanityCheckObjects(projectId, historyQuery);
 		synchronized (getMonitor()) {
 
@@ -149,13 +164,13 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private List<Version> handleRangeQuery(ProjectId projectId, RangeQuery<?> query) throws ESException {
-		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+		final ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 		if (query.isIncludeAllVersions()) {
 			return getAllVersions(project, sourceNumber(query) - query.getLowerLimit(),
 				sourceNumber(query) + query.getUpperLimit(), true);
 		}
-		Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, query.getSource());
-		TreeSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
+		final Version version = getSubInterface(VersionSubInterfaceImpl.class).getVersion(projectId, query.getSource());
+		final TreeSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
 		result.addAll(addForwardVersions(project, version, query.getUpperLimit(), query.isIncludeIncoming(),
 			query.isIncludeOutgoing()));
 		result.add(version);
@@ -165,10 +180,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private List<Version> handlePathQuery(ProjectId projectId, PathQuery query) throws ESException {
-		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+		final ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 		if (query.isIncludeAllVersions()) {
-			List<Version> result = getAllVersions(project, sourceNumber(query), targetNumber(query), false);
-			if ((targetNumber(query) > sourceNumber(query))) {
+			final List<Version> result = getAllVersions(project, sourceNumber(query), targetNumber(query), false);
+			if (targetNumber(query) > sourceNumber(query)) {
 				Collections.reverse(result);
 			}
 			return result;
@@ -176,7 +191,8 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (query.getSource() == null || query.getTarget() == null) {
 			throw new InvalidInputException();
 		}
-		List<Version> result = getSubInterface(VersionSubInterfaceImpl.class).getVersions(projectId, query.getSource(),
+		final List<Version> result = getSubInterface(VersionSubInterfaceImpl.class).getVersions(projectId,
+			query.getSource(),
 			query.getTarget());
 		if (query.getTarget().compareTo(query.getSource()) < 0) {
 			Collections.reverse(result);
@@ -185,16 +201,17 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private List<HistoryInfo> handleMEQuery(ProjectId projectId, ModelElementQuery query) throws ESException {
-		List<Version> inRange = handleRangeQuery(projectId, query);
+		final List<Version> inRange = handleRangeQuery(projectId, query);
 		// SortedSet<Version> relevantVersions = new TreeSet<Version>(new VersionComparator(false));
 		// for (ModelElementId id : query.getModelElements()) {
 		// relevantVersions.addAll(historyCache.getChangesForModelElement(projectId, id));
 		// }
 		// relevantVersions.retainAll(inRange);
-		List<Version> relevantVersions = filterVersions(inRange, query.getModelElements());
-		List<HistoryInfo> result = versionToHistoryInfo(projectId, relevantVersions, query.isIncludeChangePackages());
+		final List<Version> relevantVersions = filterVersions(inRange, query.getModelElements());
+		final List<HistoryInfo> result = versionToHistoryInfo(projectId, relevantVersions,
+			query.isIncludeChangePackages());
 		// filter ops
-		for (HistoryInfo historyInfo : result) {
+		for (final HistoryInfo historyInfo : result) {
 			filterOperationsForSelectedME(query.getModelElements(), historyInfo);
 		}
 		return result;
@@ -202,12 +219,12 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	// TODO combine with op filtering
 	private List<Version> filterVersions(List<Version> inRange, List<ModelElementId> modelElements) {
-		ArrayList<Version> result = new ArrayList<Version>();
-		for (Version version : inRange) {
+		final ArrayList<Version> result = new ArrayList<Version>();
+		for (final Version version : inRange) {
 			// special case for initial version
 			if (version.getPrimarySpec() != null && version.getPrimarySpec().getIdentifier() == 0) {
 				if (version.getProjectState() != null) {
-					for (ModelElementId id : modelElements) {
+					for (final ModelElementId id : modelElements) {
 						if (version.getProjectState().contains(id)) {
 							result.add(version);
 							break;
@@ -218,8 +235,8 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 			if (version.getChanges() == null) {
 				continue;
 			}
-			Set<ModelElementId> involvedModelElements = version.getChanges().getAllInvolvedModelElements();
-			for (ModelElementId id : modelElements) {
+			final Set<ModelElementId> involvedModelElements = version.getChanges().getAllInvolvedModelElements();
+			for (final ModelElementId id : modelElements) {
 				if (involvedModelElements.contains(id)) {
 					result.add(version);
 					break;
@@ -229,7 +246,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		return result;
 	}
 
-	private int sourceNumber(HistoryQuery query) throws ESException {
+	private int sourceNumber(HistoryQuery<?> query) throws ESException {
 		if (query.getSource() == null) {
 			throw new InvalidInputException();
 		}
@@ -252,17 +269,18 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (to < from) {
 			return getAllVersions(project, to, from, tollerant);
 		}
-		EList<Version> versions = project.getVersions();
-		int globalhead = versions.size() - 1;
+		final EList<Version> versions = project.getVersions();
+		final int globalhead = versions.size() - 1;
 
 		int start = to;
 		int end = from;
+
 		if (!tollerant && (from < 0 || to < 0 || from > globalhead || to > globalhead)) {
 			throw new InvalidVersionSpecException();
-		} else {
-			start = Math.min(globalhead, to);
-			end = Math.max(0, from);
 		}
+
+		start = Math.min(globalhead, to);
+		end = Math.max(0, from);
 
 		if (start < 0 || start > globalhead || end < 0 || end > globalhead) {
 			throw new InvalidVersionSpecException();
@@ -276,7 +294,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (Math.abs(start - end) > Math.abs(to - from)) {
 			throw new InvalidVersionSpecException();
 		}
-		ArrayList<Version> result = new ArrayList<Version>();
+		final ArrayList<Version> result = new ArrayList<Version>();
 		for (int i = start; i >= end; i--) {
 			result.add(versions.get(i));
 		}
@@ -288,7 +306,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (limit == 0) {
 			return Collections.emptyList();
 		}
-		SortedSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
+		final SortedSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
 		Version currentVersion = version;
 		while (currentVersion != null && result.size() < limit) {
 			if (includeOutgoing && currentVersion.getBranchedVersions().size() > 0) {
@@ -315,7 +333,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (limit == 0) {
 			return Collections.emptyList();
 		}
-		SortedSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
+		final SortedSet<Version> result = new TreeSet<Version>(new VersionComparator(false));
 		Version currentVersion = version;
 		while (currentVersion != null && result.size() < limit) {
 			if (includeOutgoing && currentVersion.getBranchedVersions().size() > 0) {
@@ -347,10 +365,10 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		if (historyInfo.getChangePackage() == null || historyInfo.getChangePackage().getOperations() == null) {
 			return;
 		}
-		Set<AbstractOperation> operationsToRemove = new LinkedHashSet<AbstractOperation>();
-		EList<AbstractOperation> operations = historyInfo.getChangePackage().getOperations();
-		for (AbstractOperation operation : operations) {
-			for (ModelElementId id : ids) {
+		final Set<AbstractOperation> operationsToRemove = new LinkedHashSet<AbstractOperation>();
+		final EList<AbstractOperation> operations = historyInfo.getChangePackage().getOperations();
+		for (final AbstractOperation operation : operations) {
+			for (final ModelElementId id : ids) {
 				if (!operation.getAllInvolvedModelElements().contains(id)) {
 					operationsToRemove.add(operation);
 				}
@@ -361,8 +379,8 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 	private List<HistoryInfo> versionToHistoryInfo(ProjectId projectId, Collection<Version> versions, boolean includeCP)
 		throws ESException {
-		ArrayList<HistoryInfo> result = new ArrayList<HistoryInfo>();
-		for (Version version : versions) {
+		final ArrayList<HistoryInfo> result = new ArrayList<HistoryInfo>();
+		for (final Version version : versions) {
 			result.add(createHistoryInfo(projectId, version, includeCP));
 		}
 		return result;
@@ -382,7 +400,7 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	 */
 	private HistoryInfo createHistoryInfo(ProjectId projectId, Version version, boolean includeChangePackage)
 		throws ESException {
-		HistoryInfo history = VersioningFactory.eINSTANCE.createHistoryInfo();
+		final HistoryInfo history = VersioningFactory.eINSTANCE.createHistoryInfo();
 		if (includeChangePackage && version.getChanges() != null) {
 			history.setChangePackage(ModelUtil.clone(version.getChanges()));
 		}
@@ -406,12 +424,12 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private void setTags(ProjectId projectId, Version version, HistoryInfo history) throws ESException {
-		ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
+		final ProjectHistory project = getSubInterface(ProjectSubInterfaceImpl.class).getProject(projectId);
 
 		if (version.getPrimarySpec().equals(project.getLastVersion().getPrimarySpec())) {
 			history.getTagSpecs().add(Versions.createTAG("HEAD", VersionSpec.GLOBAL));
 		}
-		for (BranchInfo branch : project.getBranches()) {
+		for (final BranchInfo branch : project.getBranches()) {
 			if (version.getPrimarySpec().equals(branch.getHead())) {
 				history.getTagSpecs().add(Versions.createTAG("HEAD: " + branch.getName(), branch.getName()));
 			}
@@ -421,8 +439,8 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	private List<PrimaryVersionSpec> addSpecs(List<Version> versions) {
-		ArrayList<PrimaryVersionSpec> result = new ArrayList<PrimaryVersionSpec>();
-		for (Version version : versions) {
+		final ArrayList<PrimaryVersionSpec> result = new ArrayList<PrimaryVersionSpec>();
+		for (final Version version : versions) {
 			result.add(ModelUtil.clone(version.getPrimarySpec()));
 		}
 		return result;
@@ -442,16 +460,17 @@ public class HistorySubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		}
 
 		public int compare(Version o1, Version o2) {
-			PrimaryVersionSpec v1 = o1.getPrimarySpec();
-			PrimaryVersionSpec v2 = o2.getPrimarySpec();
+			final PrimaryVersionSpec v1 = o1.getPrimarySpec();
+			final PrimaryVersionSpec v2 = o2.getPrimarySpec();
 			if (v1 == null || v2 == null) {
 				throw new IllegalStateException();
 			}
+
 			if (asc) {
 				return v1.compareTo(v2);
-			} else {
-				return v1.compareTo(v2) * -1;
 			}
+
+			return v1.compareTo(v2) * -1;
 		}
 	}
 }

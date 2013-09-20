@@ -13,17 +13,24 @@ package org.eclipse.emf.emfstore.internal.server.model.accesscontrol;
 import org.eclipse.emf.common.util.EList;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object ' <em><b>AC User</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object ' <em><b>AC User</b></em>'.
  * 
- * <p>
- * The following features are supported:
- * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getFirstName <em>First Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getLastName <em>Last Name</em>}</li>
- * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getEffectiveGroups <em>Effective
- * Groups</em>}</li>
- * </ul>
- * </p>
+ * @extends APIDelegate<ESUser>
+ *          <!-- end-user-doc -->
+ * 
+ *          <p>
+ *          The following features are supported:
+ *          <ul>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getFirstName <em>First Name
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getLastName <em>Last Name
+ *          </em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getEffectiveGroups <em>
+ *          Effective Groups</em>}</li>
+ *          <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getPassword <em>Password
+ *          </em>}</li>
+ *          </ul>
+ *          </p>
  * 
  * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getACUser()
  * @model
@@ -106,5 +113,34 @@ public interface ACUser extends ACOrgUnit {
 	 * @generated
 	 */
 	EList<ACGroup> getEffectiveGroups();
+
+	/**
+	 * Returns the value of the '<em><b>Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Password</em>' attribute isn't clear, there really should be more of a description
+	 * here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Password</em>' attribute.
+	 * @see #setPassword(String)
+	 * @see org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolPackage#getACUser_Password()
+	 * @model
+	 * @generated
+	 */
+	String getPassword();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser#getPassword
+	 * <em>Password</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Password</em>' attribute.
+	 * @see #getPassword()
+	 * @generated
+	 */
+	void setPassword(String value);
 
 } // ACUser

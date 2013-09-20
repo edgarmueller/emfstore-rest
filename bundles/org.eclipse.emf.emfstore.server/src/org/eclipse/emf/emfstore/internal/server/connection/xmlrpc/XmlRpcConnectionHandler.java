@@ -7,17 +7,17 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.connection.xmlrpc;
 
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
-import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 
 /**
- * Connection Handler for XML RPC Emfstore interface.
+ * Connection Handler for XML RPC EMFStore interface.
  * 
  * @author wesendon
  */
@@ -32,7 +32,7 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EMFStore> {
 
 	private static EMFStore emfStore;
 
-	private static AuthenticationControl accessControl;
+	private static AccessControl accessControl;
 
 	/**
 	 * {@inheritDoc}
@@ -42,21 +42,25 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EMFStore> {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#init(org.eclipse.emf.emfstore.internal.server.EMFStoreInterface,
+	 *      org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl)
 	 */
 	@SuppressWarnings("static-access")
-	public synchronized void init(EMFStore emfStore, AuthenticationControl accessControl) throws FatalESException {
+	public synchronized void init(EMFStore emfStore, AccessControl accessControl) throws FatalESException {
 		this.emfStore = emfStore;
 		this.accessControl = accessControl;
-		XmlRpcWebserverManager webServer = XmlRpcWebserverManager.getInstance();
+		final XmlRpcWebserverManager webServer = XmlRpcWebserverManager.getInstance();
 		webServer.initServer();
 		webServer.addHandler(EMFSTORE, XmlRpcEmfStoreImpl.class);
 	}
 
 	/**
-	 * Returns Emfstore.
+	 * Returns EMFstore.
 	 * 
-	 * @return emfstore
+	 * @return the EMFStore
 	 */
 	public static EMFStore getEmfStore() {
 		return emfStore;
@@ -67,15 +71,18 @@ public class XmlRpcConnectionHandler implements ConnectionHandler<EMFStore> {
 	 * 
 	 * @return access control
 	 */
-	public static AuthenticationControl getAccessControl() {
+	public static AccessControl getAccessControl() {
 		return accessControl;
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#stop()
 	 */
-	public void stop(boolean force) {
-		XmlRpcWebserverManager webserverManager = XmlRpcWebserverManager.getInstance();
+	public void stop() {
+		final XmlRpcWebserverManager webserverManager = XmlRpcWebserverManager.getInstance();
 		if (!webserverManager.removeHandler(EMFSTORE)) {
 			webserverManager.stopServer();
 		}

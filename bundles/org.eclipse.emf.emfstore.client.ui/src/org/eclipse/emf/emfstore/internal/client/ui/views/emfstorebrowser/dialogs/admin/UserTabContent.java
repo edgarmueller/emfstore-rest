@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * gurcankarakoc,deser
- * koegel
+ * Gürcan Karakoc, Michael Deser - initial API and implementation
+ * Maximilian Koegel - added delete user action
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin;
 
@@ -28,6 +28,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -36,13 +37,19 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 /**
+ * User tab content in the manage users dialog.
+ * 
  * @author gurcankarakoc, deser
  */
 public class UserTabContent extends TabContent implements IPropertyChangeListener {
+
+	private static final String NEW_USER_NAME = "New User";
 
 	/**
 	 * Action to delete a user.
@@ -56,38 +63,98 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 
 		@Override
 		public void run() {
-			IStructuredSelection selection = (IStructuredSelection) getTableViewer().getSelection();
-			Iterator<?> iterator = selection.iterator();
+			final IStructuredSelection selection = (IStructuredSelection) getTableViewer().getSelection();
+			final Iterator<?> iterator = selection.iterator();
 
 			while (iterator.hasNext()) {
-				ACUser ou = (ACUser) iterator.next();
+				final ACUser ou = (ACUser) iterator.next();
 				if (ou == null) {
 					return;
 				}
 
 				try {
-					String superUser = ServerConfiguration.getProperties().getProperty(ServerConfiguration.SUPER_USER,
+					final String superUser = ServerConfiguration.getProperties().getProperty(
+						ServerConfiguration.SUPER_USER,
 						ServerConfiguration.SUPER_USER_DEFAULT);
 					boolean isAdmin = false;
-					for (Iterator<Role> it = ou.getRoles().iterator(); it.hasNext();) {
-						Role userRole = it.next();
-						if ((ou.getName().compareTo(superUser) == 0) && (userRole instanceof ServerAdmin)) {
+					for (final Iterator<Role> it = ou.getRoles().iterator(); it.hasNext();) {
+						final Role userRole = it.next();
+						if (ou.getName().compareTo(superUser) == 0 && userRole instanceof ServerAdmin) {
 							isAdmin = true;
 							break;
 						}
 					}
 					if (isAdmin) {
-						Display display = Display.getCurrent();
+						final Display display = Display.getCurrent();
 						MessageDialog.openInformation(display.getActiveShell(), "Illegal deletion attempt",
 							"It is not allowed to delete the super user!");
 					} else {
 						getAdminBroker().deleteUser(ou.getId());
 					}
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 
 				if (getForm().getCurrentInput() instanceof ACOrgUnit && getForm().getCurrentInput().equals(ou)) {
+					getForm().setInput(null);
+				}
+			}
+			getTableViewer().refresh();
+		}
+	}
+
+	/**
+	 * Action to change the password of a user.
+	 */
+	private final class ChangePasswordAction extends Action {
+
+		private ChangePasswordAction(String text) {
+			super(text);
+		}
+
+		@Override
+		public void run() {
+			final IStructuredSelection selection = (IStructuredSelection) getTableViewer().getSelection();
+			final Iterator<?> iterator = selection.iterator();
+
+			while (iterator.hasNext()) {
+
+				final ACUser user = (ACUser) iterator.next();
+
+				if (user == null) {
+					return;
+				}
+
+				try {
+					final String superUser = ServerConfiguration.getProperties().getProperty(
+						ServerConfiguration.SUPER_USER,
+						ServerConfiguration.SUPER_USER_DEFAULT);
+					boolean isAdmin = false;
+					for (final Iterator<Role> it = user.getRoles().iterator(); it.hasNext();) {
+						final Role userRole = it.next();
+						if (user.getName().compareTo(superUser) == 0 && userRole instanceof ServerAdmin) {
+							isAdmin = true;
+							break;
+						}
+					}
+					final Display display = Display.getCurrent();
+					final Shell activeShell = display.getActiveShell();
+					if (isAdmin) {
+						MessageDialog.openInformation(activeShell, "Illegal deletion attempt",
+							"It is not allowed to delete the super user!");
+					} else {
+						final InputDialog inputDialog = new InputDialog(activeShell,
+							"Enter new password for user '" + user.getName() + "'", "Enter the new password", "", null);
+						if (inputDialog.open() == Window.OK) {
+							final String newPassword = inputDialog.getValue();
+							getAdminBroker().changeUser(user.getId(), user.getName(), newPassword);
+						}
+					}
+				} catch (final ESException e) {
+					EMFStoreMessageDialog.showExceptionDialog(e);
+				}
+
+				if (getForm().getCurrentInput() instanceof ACOrgUnit && getForm().getCurrentInput().equals(user)) {
 					getForm().setInput(null);
 				}
 			}
@@ -102,7 +169,7 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 	 */
 	public UserTabContent(String string, AdminBroker adminBroker, PropertiesForm frm) {
 		super(string, adminBroker, frm);
-		this.setTab(this);
+		setTab(this);
 	}
 
 	/**
@@ -112,12 +179,19 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 	 */
 	@Override
 	protected List<Action> initActions() {
-		Action createNewUser = new Action("Create new user") {
+		final Action createNewUser = new Action("Create new user") {
 			@Override
 			public void run() {
 				try {
-					getAdminBroker().createUser("New User");
-				} catch (ESException e) {
+					if (userExists(NEW_USER_NAME)) {
+						MessageDialog
+							.openInformation(Display.getCurrent().getActiveShell(),
+								"User already exists", "A user with the given name '" + NEW_USER_NAME
+									+ "' already exists.");
+					} else {
+						getAdminBroker().createUser(NEW_USER_NAME);
+					}
+				} catch (final ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				getTableViewer().refresh();
@@ -128,14 +202,18 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 		createNewUser.setImageDescriptor(Activator.getImageDescriptor("icons/user.png"));
 		createNewUser.setToolTipText("Create new user");
 
-		Action deleteUser = new DeleteUserAction("Delete user");
+		final Action deleteUser = new DeleteUserAction("Delete user");
 		deleteUser.setImageDescriptor(Activator.getImageDescriptor("icons/delete.gif"));
 		deleteUser.setToolTipText("Delete user");
 
-		Action importOrgUnit = new AcUserImportAction(getAdminBroker());
+		final Action importOrgUnit = new AcUserImportAction(getAdminBroker());
 		importOrgUnit.addPropertyChangeListener(this);
 
-		return Arrays.asList(createNewUser, deleteUser, importOrgUnit);
+		final Action changePassword = new ChangePasswordAction("Change password of selected user");
+		changePassword.setImageDescriptor(Activator.getImageDescriptor("icons/lock.png"));
+		changePassword.setToolTipText("Change password of selected user");
+
+		return Arrays.asList(createNewUser, deleteUser, importOrgUnit, changePassword);
 	}
 
 	/**
@@ -169,6 +247,20 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 		};
 	}
 
+	private boolean userExists(String username) {
+		try {
+			for (final ACUser user : getAdminBroker().getUsers()) {
+				if (user.getName().equals(username)) {
+					return true;
+				}
+			}
+		} catch (final ESException ex) {
+			return false;
+		}
+
+		return false;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -178,10 +270,10 @@ public class UserTabContent extends TabContent implements IPropertyChangeListene
 
 			public Object[] getElements(Object inputElement) {
 				// return a list of Users in project space
-				List<ACUser> users = new ArrayList<ACUser>();
+				final List<ACUser> users = new ArrayList<ACUser>();
 				try {
 					users.addAll(getAdminBroker().getUsers());
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					EMFStoreMessageDialog.showExceptionDialog(e);
 				}
 				return users.toArray(new ACUser[users.size()]);

@@ -23,7 +23,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ ServerInterfaceTest.class, InvalidArgumentsTest.class,
 	ChangeCertificationTest.class,
-	PropertiesTest.class, FileManagerTest.class, AllServerAPITests.class, ChecksumTest.class })
+	PropertiesTest.class, FileManagerTest.class, AllServerAPITests.class, ChecksumTest.class,
+	AllAdminBrokerTests.class })
 public class AllServerTests {
 
 }

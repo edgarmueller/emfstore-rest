@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.emf.emfstore.ecp.feature"
       label="EMFStore ECP Integration"
-      version="1.0.0.qualifier"
+      version="1.0.1.qualifier"
       provider-name="Eclipse Modeling Project">
 
    <description url="http://emfstore.org ">

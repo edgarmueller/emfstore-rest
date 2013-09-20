@@ -31,7 +31,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 /**
  * Implementation of the AdminBroker.
  * 
- * @author Wesendonk
+ * @author wesendon
  * @author koegel
  */
 public class AdminBrokerImpl implements AdminBroker {
@@ -258,6 +258,18 @@ public class AdminBrokerImpl implements AdminBroker {
 	public void changeOrgUnit(ACOrgUnitId orgUnitId, String name, String description) throws ESException {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
 			.changeOrgUnit(getSessionId(), orgUnitId, name, description);
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#changeUser(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId,
+	 *      java.lang.String, java.lang.String)
+	 */
+	public void changeUser(ACOrgUnitId userId, String name, String password) throws ESException {
+		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.changeUser(getSessionId(), userId, name, password);
 	}
 
 	/**

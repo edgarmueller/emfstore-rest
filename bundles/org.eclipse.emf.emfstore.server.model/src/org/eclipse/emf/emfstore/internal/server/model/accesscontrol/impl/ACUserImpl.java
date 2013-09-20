@@ -35,6 +35,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.Accesscontro
  * </em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACUserImpl#getEffectiveGroups <em>
  * Effective Groups</em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.impl.ACUserImpl#getPassword <em>Password
+ * </em>}</li>
  * </ul>
  * </p>
  * 
@@ -93,6 +95,28 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	protected EList<ACGroup> effectiveGroups;
 
 	/**
+	 * The default value of the '{@link #getPassword() <em>Password</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getPassword()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PASSWORD_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPassword() <em>Password</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getPassword()
+	 * @generated
+	 * @ordered
+	 */
+	protected String password = PASSWORD_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -126,11 +150,12 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 * @generated
 	 */
 	public void setFirstName(String newFirstName) {
-		String oldFirstName = firstName;
+		final String oldFirstName = firstName;
 		firstName = newFirstName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_USER__FIRST_NAME,
 				oldFirstName, firstName));
+		}
 	}
 
 	/**
@@ -148,11 +173,12 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 * @generated
 	 */
 	public void setLastName(String newLastName) {
-		String oldLastName = lastName;
+		final String oldLastName = lastName;
 		lastName = newLastName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_USER__LAST_NAME, oldLastName,
 				lastName));
+		}
 	}
 
 	/**
@@ -167,6 +193,33 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 				AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS);
 		}
 		return effectiveGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String getPassword()
+	{
+		return password;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setPassword(String newPassword)
+	{
+		final String oldPassword = password;
+		password = newPassword;
+		if (eNotificationRequired()) {
+			eNotify(new ENotificationImpl(this, Notification.SET, AccesscontrolPackage.AC_USER__PASSWORD, oldPassword,
+				password));
+		}
 	}
 
 	/**
@@ -199,6 +252,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 			return getLastName();
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
 			return getEffectiveGroups();
+		case AccesscontrolPackage.AC_USER__PASSWORD:
+			return getPassword();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -223,6 +278,9 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 			getEffectiveGroups().clear();
 			getEffectiveGroups().addAll((Collection<? extends ACGroup>) newValue);
 			return;
+		case AccesscontrolPackage.AC_USER__PASSWORD:
+			setPassword((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -245,6 +303,9 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
 			getEffectiveGroups().clear();
 			return;
+		case AccesscontrolPackage.AC_USER__PASSWORD:
+			setPassword(PASSWORD_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -264,6 +325,8 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 			return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
 		case AccesscontrolPackage.AC_USER__EFFECTIVE_GROUPS:
 			return effectiveGroups != null && !effectiveGroups.isEmpty();
+		case AccesscontrolPackage.AC_USER__PASSWORD:
+			return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -275,14 +338,17 @@ public class ACUserImpl extends ACOrgUnitImpl implements ACUser {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
+		if (eIsProxy()) {
 			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (firstName: ");
 		result.append(firstName);
 		result.append(", lastName: ");
 		result.append(lastName);
+		result.append(", password: ");
+		result.append(password);
 		result.append(')');
 		return result.toString();
 	}

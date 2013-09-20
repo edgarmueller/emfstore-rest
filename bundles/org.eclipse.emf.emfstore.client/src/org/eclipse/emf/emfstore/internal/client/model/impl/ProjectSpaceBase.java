@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Otto von Wesendonk, Edgar Mueller, Maximilian Koegel - initial API and implementation
+ * Johannes Faltermeier - adaptions for independent storage
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -113,6 +114,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * @author koegel
  * @author wesendon
  * @author emueller
+ * @author jfaltermeier
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, ESLoginObserver,
@@ -142,6 +144,22 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public ProjectSpaceBase() {
 		propertyMap = new LinkedHashMap<String, OrgUnitProperty>();
 		initRunnableContext();
+	}
+
+	/**
+	 * <p>
+	 * Provides a context in which a {@link Runnable} is executed.
+	 * </p>
+	 * <p>
+	 * This may be used to provide a context while applying operations on a
+	 * {@link org.eclipse.emf.emfstore.client.ESLocalProject}.
+	 * </p>
+	 * 
+	 * @param runnableContext
+	 *            the runnable context to be set
+	 */
+	public void setRunnableContext(ESRunnableContext runnableContext) {
+		this.runnableContext = runnableContext;
 	}
 
 	private void initRunnableContext() {
@@ -393,9 +411,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @generated NOT
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getChanges(org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec)
 	 */
 	public List<ChangePackage> getChanges(VersionSpec sourceVersion, VersionSpec targetVersion)
 		throws InvalidVersionSpecException, ESException {
@@ -485,10 +505,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getProjectInfo()
-	 * @generated NOT
 	 */
 	public ProjectInfo getProjectInfo() {
 		final ProjectInfo projectInfo = org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE
@@ -554,10 +574,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#init()
-	 * @generated NOT
 	 */
 	public void init() {
 		initCrossReferenceAdapter();
@@ -646,10 +666,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#initResources(org.eclipse.emf.ecore.resource.ResourceSet)
-	 * @generated NOT
 	 */
 	public void initResources(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
@@ -917,9 +937,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @generated NOT
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getBranches()
 	 */
 	public List<BranchInfo> getBranches() throws ESException {
 		return new ServerCall<List<BranchInfo>>(this) {
@@ -932,9 +953,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @generated NOT
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#removeTag(org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec,
+	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec)
 	 */
 	public void removeTag(PrimaryVersionSpec versionSpec, TagVersionSpec tag) throws ESException {
 		final ConnectionManager cm = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
@@ -977,9 +1000,10 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @generated NOT
+	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#revert()
 	 */
 	public void revert() {
 		while (!getOperations().isEmpty()) {
@@ -1108,8 +1132,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * Starts change recording on this workspace, resumes previous recordings if
 	 * there are any.
-	 * 
-	 * @generated NOT
 	 */
 	public void startChangeRecording() {
 		operationManager.startChangeRecording();
@@ -1119,8 +1141,6 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	/**
 	 * Stops current recording of changes and adds recorded changes to this
 	 * project spaces changes.
-	 * 
-	 * @generated NOT
 	 */
 	public void stopChangeRecording() {
 		if (operationManager != null) {

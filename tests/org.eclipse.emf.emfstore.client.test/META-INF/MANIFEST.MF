@@ -2,20 +2,20 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Client Tests
 Bundle-SymbolicName: org.eclipse.emf.emfstore.client.test;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.emfstore.client;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.client.model.edit;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.modelmutator;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
+Require-Bundle: org.eclipse.emf.emfstore.client;bundle-version="[1.0.1,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.client.model.edit;bundle-version="[1.0.1,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.modelmutator;bundle-version="[1.0.1,2.0.0)";visibility:=reexport,
  org.eclipse.emf.emfstore.examplemodel;bundle-version="0.9.3";visibility:=reexport,
- org.eclipse.emf.emfstore.common.model.edit;bundle-version="1.0.0",
- org.eclipse.emf.emfstore.server.model.edit;bundle-version="1.0.0",
+ org.eclipse.emf.emfstore.common.model.edit;bundle-version="1.0.1",
+ org.eclipse.emf.emfstore.server.model.edit;bundle-version="1.0.1",
  org.eclipse.core.resources;bundle-version="3.5.0",
- org.eclipse.emf.emfstore.example.merging;bundle-version="1.0.0",
- org.eclipse.emf.emfstore.example.helloworld;bundle-version="1.0.0",
- org.junit;bundle-version="4.11.0";visibility:=reexport
+ org.eclipse.emf.emfstore.example.merging;bundle-version="1.0.1",
+ org.eclipse.emf.emfstore.example.helloworld;bundle-version="1.0.1",
+ org.junit;bundle-version="4.10.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.client.test.Activator
 Export-Package: org.eclipse.emf.emfstore.client.test,

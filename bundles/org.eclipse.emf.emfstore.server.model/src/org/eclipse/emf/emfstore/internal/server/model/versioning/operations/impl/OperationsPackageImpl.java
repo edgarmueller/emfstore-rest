@@ -182,19 +182,19 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	private EClass eObjectToModelElementIdMapEClass = null;
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EEnum containmentTypeEEnum = null;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	private EEnum unsetTypeEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EEnum containmentTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -866,6 +866,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	}
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EEnum getContainmentType() {
+		return containmentTypeEEnum;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -874,15 +883,6 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	public EEnum getUnsetType()
 	{
 		return unsetTypeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EEnum getContainmentType() {
-		return containmentTypeEEnum;
 	}
 
 	/**
@@ -995,8 +995,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		createEReference(eObjectToModelElementIdMapEClass, EOBJECT_TO_MODEL_ELEMENT_ID_MAP__VALUE);
 
 		// Create enums
-		unsetTypeEEnum = createEEnum(UNSET_TYPE);
 		containmentTypeEEnum = createEEnum(CONTAINMENT_TYPE);
+		unsetTypeEEnum = createEEnum(UNSET_TYPE);
 	}
 
 	/**
@@ -1238,15 +1238,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 			!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(unsetTypeEEnum, UnsetType.class, "UnsetType");
-		addEEnumLiteral(unsetTypeEEnum, UnsetType.NONE);
-		addEEnumLiteral(unsetTypeEEnum, UnsetType.IS_UNSET);
-		addEEnumLiteral(unsetTypeEEnum, UnsetType.WAS_UNSET);
-
 		initEEnum(containmentTypeEEnum, ContainmentType.class, "ContainmentType");
 		addEEnumLiteral(containmentTypeEEnum, ContainmentType.NONE);
 		addEEnumLiteral(containmentTypeEEnum, ContainmentType.CONTAINER);
 		addEEnumLiteral(containmentTypeEEnum, ContainmentType.CONTAINMENT);
+
+		initEEnum(unsetTypeEEnum, UnsetType.class, "UnsetType");
+		addEEnumLiteral(unsetTypeEEnum, UnsetType.NONE);
+		addEEnumLiteral(unsetTypeEEnum, UnsetType.IS_UNSET);
+		addEEnumLiteral(unsetTypeEEnum, UnsetType.WAS_UNSET);
 	}
 
 } // OperationsPackageImpl

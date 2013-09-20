@@ -224,6 +224,23 @@ public interface AdminBroker {
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#changeOrgUnit(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      ACOrgUnitId, String, String)
+	 * 
+	 * @param userId
+	 *            the ID of the user
+	 * @param name
+	 *            the new name of the user
+	 * @param password
+	 *            the new password of the user
+	 * @throws ESException
+	 *             if an exceptions occurs on the server or on transport
+	 */
+	void changeUser(ACOrgUnitId userId, String name, String password) throws ESException;
+
+	/**
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
+	 * 
 	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#getParticipants(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      ProjectId)
 	 * @param projectId

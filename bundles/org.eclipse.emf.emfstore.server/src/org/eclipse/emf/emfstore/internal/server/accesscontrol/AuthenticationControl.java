@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * koegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol;
 
@@ -15,32 +15,42 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlExceptio
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 
 /**
- * Controler for the Authentication of users.
+ * Controller for the Authentication of users.
  * 
  * @author koegel
  */
 public interface AuthenticationControl {
 
 	/**
-	 * Log into the server given by server info.
+	 * Tries to login the given user.
 	 * 
-	 * @param username the user name
-	 * @param password the password
-	 * @param clientVersionInfo the client's version
-	 * @return {@link AuthenticationInformation} id that can be used for later authentication
-	 * @throws AccessControlException if any error in the EmfStore occurs
-	 * @generated NOT
+	 * @param resolvedUser
+	 *            the user instance as resolved by the user
+	 * @param username
+	 *            the username as determined by the client
+	 * @param password
+	 *            the password as entered by the client
+	 * @param clientVersionInfo
+	 *            the version of the client
+	 * @return an {@link AuthenticationInformation} instance holding information about the
+	 *         logged-in session
+	 * 
+	 * @throws AccessControlException in case the login fails
 	 */
-	AuthenticationInformation logIn(String username, String password, ClientVersionInfo clientVersionInfo)
+	AuthenticationInformation logIn(ACUser resolvedUser, String username, String password,
+		ClientVersionInfo clientVersionInfo)
 		throws AccessControlException;
 
 	/**
-	 * Deletes a session on the server.
+	 * Logout/delete a session on the server.
 	 * 
-	 * @param sessionId id to be deleted.
-	 * @throws AccessControlException in case of failure on server
+	 * @param sessionId
+	 *            the id of the session to be logout
+	 * @throws AccessControlException
+	 *             in case of failure on server
 	 */
 	void logout(SessionId sessionId) throws AccessControlException;
 

@@ -9,7 +9,7 @@
  * Contributors:
  * Edgar Mueller - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;
+package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -37,29 +37,37 @@ public class LDAPSSLSocketFactory extends SSLSocketFactory {
 
 	private SSLSocketFactory socketFactory;
 
+	/**
+	 * Constructor.
+	 */
 	public LDAPSSLSocketFactory() {
 		SSLContext context;
 		try {
 			context = SSLContext.getInstance("TLS");
-			TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
+			final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
 				TrustManagerFactory.getDefaultAlgorithm());
 			trustManagerFactory.init(ServerKeyStoreManager.getInstance().getKeyStore());
 			context.init(ServerKeyStoreManager.getInstance().getKeyManagerFactory().getKeyManagers(),
 				trustManagerFactory.getTrustManagers(),
 				null);
 			socketFactory = context.getSocketFactory();
-		} catch (NoSuchAlgorithmException e) {
+		} catch (final NoSuchAlgorithmException e) {
 			e.printStackTrace();
-		} catch (ServerKeyStoreException e) {
+		} catch (final ServerKeyStoreException e) {
 			e.printStackTrace();
-		} catch (KeyStoreException e) {
+		} catch (final KeyStoreException e) {
 			e.printStackTrace();
-		} catch (KeyManagementException e) {
+		} catch (final KeyManagementException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public synchronized static SocketFactory getDefault() {
+	/**
+	 * Returns a new instance of this factory.
+	 * 
+	 * @return a new instance of this factory
+	 */
+	public static synchronized SocketFactory getDefault() {
 		return new LDAPSSLSocketFactory();
 	}
 

@@ -39,17 +39,24 @@ public class UserSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Resolves a given user ID to the an actual user instance.
+	 * 
+	 * @param sessionId
+	 *            the ID of the session that is used to resolve the user
+	 * @param id
+	 *            the user ID
+	 * @return the user with the given ID
+	 * @throws ESException in case of failure
 	 */
 	@EmfStoreMethod(MethodId.RESOLVEUSER)
 	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws ESException {
 		sanityCheckObjects(sessionId);
 		synchronized (getMonitor()) {
-			ACUser requestingUser = getAuthorizationControl().resolveUser(sessionId);
+			final ACUser requestingUser = getAuthorizationControl().resolveUser(sessionId);
 			if (id == null) {
 				return requestingUser;
 			}
-			ACUser user = getAuthorizationControl().resolveUser(id);
+			final ACUser user = getAuthorizationControl().resolveUser(id);
 			if (requestingUser.getId().equals(user.getId())) {
 				return user;
 			}

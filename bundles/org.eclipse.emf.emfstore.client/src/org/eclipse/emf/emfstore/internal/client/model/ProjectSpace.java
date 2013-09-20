@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
+import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MEUrlResolutionException;
@@ -102,11 +103,25 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 public interface ProjectSpace extends IdentifiableElement, APIDelegate<ESLocalProjectImpl> {
 
 	/**
-	 * ID of the runnable context option.
+	 * ID of the runnable change context option.
 	 * 
 	 * @generated NOT
 	 */
-	String RUNNABLE_CONTEXT_ID = "org.eclipse.emf.emfstore.client.runnableContext";
+	String RUNNABLE_CONTEXT_ID = "org.eclipse.emf.emfstore.client.runnableChangeContext";
+
+	/**
+	 * <p>
+	 * Provides a context in which a {@link Runnable} is executed.
+	 * </p>
+	 * <p>
+	 * This may be used to provide a context while applying operations on a
+	 * {@link org.eclipse.emf.emfstore.client.ESLocalProject}.
+	 * </p>
+	 * 
+	 * @param runnableContext
+	 *            the runnable context to be set
+	 */
+	void setRunnableContext(ESRunnableContext runnableContext);
 
 	/**
 	 * Adds a file to this project space. The file will be uploaded to the

@@ -18,12 +18,11 @@ import org.eclipse.emf.emfstore.internal.common.api.APIDelegate;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.server.model.ESOperation;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Abstract Operation</b></em>'.
  * 
- * @extends APIDelegate<ESLogMessage>
+ * @extends APIDelegate<org.eclipse.emf.emfstore.server.model.ESOperation>
  *          <!-- end-user-doc
  *          -->
  * 
@@ -46,7 +45,8 @@ import org.eclipse.emf.emfstore.server.model.ESOperation;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractOperation extends IdentifiableElement, ESOperation, APIDelegate<ESOperation> {
+public interface AbstractOperation extends IdentifiableElement,
+	APIDelegate<org.eclipse.emf.emfstore.server.model.ESOperation> {
 	/**
 	 * Returns the value of the '<em><b>Model Element Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

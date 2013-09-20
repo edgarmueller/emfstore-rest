@@ -129,10 +129,10 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID())
 		{
-		case OperationsPackage.UNSET_TYPE:
-			return createUnsetTypeFromString(eDataType, initialValue);
 		case OperationsPackage.CONTAINMENT_TYPE:
 			return createContainmentTypeFromString(eDataType, initialValue);
+		case OperationsPackage.UNSET_TYPE:
+			return createUnsetTypeFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -147,10 +147,10 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID())
 		{
-		case OperationsPackage.UNSET_TYPE:
-			return convertUnsetTypeToString(eDataType, instanceValue);
 		case OperationsPackage.CONTAINMENT_TYPE:
 			return convertContainmentTypeToString(eDataType, instanceValue);
+		case OperationsPackage.UNSET_TYPE:
+			return convertUnsetTypeToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -297,6 +297,28 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	}
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ContainmentType createContainmentTypeFromString(EDataType eDataType, String initialValue) {
+		ContainmentType result = ContainmentType.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
+				+ eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertContainmentTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -319,28 +341,6 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	 */
 	public String convertUnsetTypeToString(EDataType eDataType, Object instanceValue)
 	{
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public ContainmentType createContainmentTypeFromString(EDataType eDataType, String initialValue) {
-		ContainmentType result = ContainmentType.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
-				+ eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public String convertContainmentTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

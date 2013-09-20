@@ -37,7 +37,7 @@ public enum UnsetType implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	NONE(0, "NONE", "NONE"),
+	NONE(0, "NONE", ""),
 
 	/**
 	 * The '<em><b>IS UNSET</b></em>' literal object.
@@ -59,7 +59,7 @@ public enum UnsetType implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	WAS_UNSET(2, "WAS_UNSET", "");
+	WAS_UNSET(2, "WAS_UNSET", "WAS_UNSET");
 
 	/**
 	 * The '<em><b>NONE</b></em>' literal value.
@@ -71,7 +71,7 @@ public enum UnsetType implements Enumerator
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #NONE
-	 * @model
+	 * @model literal=""
 	 * @generated
 	 * @ordered
 	 */
@@ -103,7 +103,7 @@ public enum UnsetType implements Enumerator
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see #WAS_UNSET
-	 * @model literal=""
+	 * @model
 	 * @generated
 	 * @ordered
 	 */

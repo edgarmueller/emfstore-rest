@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.util;
 
@@ -51,22 +51,25 @@ public final class ResourceHelper {
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T getElementFromResource(String absoluteFileName, Class<T> type,
 		Map<?, ?> options, int index) throws IOException {
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		// Resource resource = resourceSet.getResource(URI.createFileURI(absoluteFileName), false);
-		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
+
+		final ResourceSetImpl resourceSet = new ResourceSetImpl();
+		final Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
+
 		if (options != null) {
 			resource.load(options);
 		} else {
 			ModelUtil.loadResource(resource, WorkspaceUtil.getResourceLogger());
 		}
-		EList<EObject> directContents = resource.getContents();
+
+		final EList<EObject> directContents = resource.getContents();
 
 		// sanity check
-		if (directContents.size() != 1 && (!type.isInstance(directContents.get(0)))) {
+		if (directContents.size() != 1 && !type.isInstance(directContents.get(0))) {
 			throw new IOException("File is corrupt, does not contain a " + type.getName() + " .");
 		}
 
-		T object = (T) directContents.get(index);
+		final T object = (T) directContents.get(index);
+		// make sure object has no resource
 		resource.getContents().remove(object);
 
 		return object;
@@ -97,8 +100,8 @@ public final class ResourceHelper {
 	 */
 	public static <T extends EObject> void putElementIntoNewResource(String absoluteFileName, T element)
 		throws IOException {
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
+		final ResourceSetImpl resourceSet = new ResourceSetImpl();
+		final Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
 		resource.getContents().add(element);
 		ModelUtil.saveResource(resource, WorkspaceUtil.getResourceLogger());
 	}
@@ -114,14 +117,14 @@ public final class ResourceHelper {
 	 */
 	public static <T extends EObject> void putElementIntoNewResourceWithProject(String absoluteFileName, T element,
 		Project project) throws IOException {
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
+		final ResourceSetImpl resourceSet = new ResourceSetImpl();
+		final Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
 		resource.getContents().add(element);
 
 		if (resource instanceof XMIResource) {
-			XMIResource xmiResource = (XMIResource) resource;
-			for (EObject modelElement : project.getAllModelElements()) {
-				String modelElementId = project.getModelElementId(modelElement).getId();
+			final XMIResource xmiResource = (XMIResource) resource;
+			for (final EObject modelElement : project.getAllModelElements()) {
+				final String modelElementId = project.getModelElementId(modelElement).getId();
 				xmiResource.setID(modelElement, modelElementId);
 			}
 		}
@@ -140,19 +143,19 @@ public final class ResourceHelper {
 	public static <T extends EObject> void putWorkspaceIntoNewResource(String absoluteFileName, Workspace workSpace)
 		throws IOException {
 
-		ResourceSetImpl resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
+		final ResourceSetImpl resourceSet = new ResourceSetImpl();
+		final Resource resource = resourceSet.createResource(URI.createFileURI(absoluteFileName));
 		resource.getContents().add(workSpace);
 
 		if (resource instanceof XMIResource) {
-			XMIResource xmiResource = (XMIResource) resource;
+			final XMIResource xmiResource = (XMIResource) resource;
 
-			for (ProjectSpace projectSpace : workSpace.getProjectSpaces()) {
-				Project project = projectSpace.getProject();
-				TreeIterator<EObject> it = project.eAllContents();
+			for (final ProjectSpace projectSpace : workSpace.getProjectSpaces()) {
+				final Project project = projectSpace.getProject();
+				final TreeIterator<EObject> it = project.eAllContents();
 				while (it.hasNext()) {
-					EObject modelElement = it.next();
-					String modelElementId = project.getModelElementId(modelElement).getId();
+					final EObject modelElement = it.next();
+					final String modelElementId = project.getModelElementId(modelElement).getId();
 					xmiResource.setID(modelElement, modelElementId);
 				}
 			}

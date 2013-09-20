@@ -39,8 +39,8 @@ public class DefaultServerWorkspaceLocationProvider implements ESLocationProvide
 	 * @return path as string
 	 */
 	protected String getRootDirectory() {
-		String parameter = getStartParameter(EMFSTORE_HOME);
-		return (parameter == null) ? addFolders(getUserHome(), ".emfstore", "server") : parameter;
+		final String parameter = getStartParameter(EMFSTORE_HOME);
+		return parameter == null ? addFolders(getUserHome(), ".emfstore", "server") : parameter;
 	}
 
 	/**
@@ -52,17 +52,17 @@ public class DefaultServerWorkspaceLocationProvider implements ESLocationProvide
 	 */
 	public String getWorkspaceDirectory() {
 		String rootDirectory = getRootDirectory();
-		File file = new File(rootDirectory);
+		final File file = new File(rootDirectory);
 
 		if (!file.isAbsolute()) {
 			String currentDir = new File(".").getAbsolutePath();
 			// strip last dot away from path
 			currentDir = currentDir.substring(0, currentDir.length() - 1);
-			String absolutePath = currentDir + getRootDirectory();
+			final String absolutePath = currentDir + getRootDirectory();
 			try {
 				// convert to canonical path, since absolutePath still may contain '.' or '..' references
 				rootDirectory = new File(absolutePath).getCanonicalPath();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				// fall back to user home as default if path is invalid
 				rootDirectory = getUserHome();
 				ModelUtil.logWarning("Invalid root directory specified.  Using default " + getUserHome() + ".", e);
@@ -98,9 +98,9 @@ public class DefaultServerWorkspaceLocationProvider implements ESLocationProvide
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns the backup directory.
 	 * 
-	 * @see org.eclipse.emf.emfstore.server.ESLocationProvider#getBackupDirectory()
+	 * @return the full path of the backup directory
 	 */
 	public String getBackupDirectory() {
 		return addFolders(getRootDirectory(), "backup");
@@ -124,11 +124,11 @@ public class DefaultServerWorkspaceLocationProvider implements ESLocationProvide
 	 * @return new path as string
 	 */
 	protected static String addFolders(String path, String... folders) {
-		StringBuffer result = new StringBuffer(path);
+		final StringBuffer result = new StringBuffer(path);
 		if (!path.endsWith(File.separator)) {
 			result.append(File.separatorChar);
 		}
-		for (String folder : folders) {
+		for (final String folder : folders) {
 			result.append(folder);
 			if (!folder.endsWith(File.separator)) {
 				result.append(File.separatorChar);
@@ -143,7 +143,7 @@ public class DefaultServerWorkspaceLocationProvider implements ESLocationProvide
 	 * @return the full path as string
 	 */
 	protected static String getUserHome() {
-		StringBuffer sb = new StringBuffer();
+		final StringBuffer sb = new StringBuffer();
 		sb.append(System.getProperty("user.home"));
 		sb.append(File.separatorChar);
 		return sb.toString();

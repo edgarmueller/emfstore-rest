@@ -202,11 +202,6 @@
             defaultValueLiteral=""/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="unset" eType="#//versioning/operations/UnsetType"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="UnsetType">
-        <eLiterals name="NONE"/>
-        <eLiterals name="IS_UNSET" value="1"/>
-        <eLiterals name="WAS_UNSET" value="2" literal=""/>
-      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CreateDeleteOperation" eSuperTypes="#//versioning/operations/AbstractOperation">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="delete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="modelElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
@@ -293,6 +288,11 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
             containment="true"/>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="UnsetType">
+        <eLiterals name="NONE" literal=""/>
+        <eLiterals name="IS_UNSET" value="1"/>
+        <eLiterals name="WAS_UNSET" value="2"/>
+      </eClassifiers>
       <eSubpackages name="semantic" nsURI="http://eclipse.org/emf/emfstore/server/model/versioning/operations/semantic"
           nsPrefix="org.eclipse.emf.emfstore.internal.server.model.versioning.operations.semantic">
         <eClassifiers xsi:type="ecore:EClass" name="SemanticCompositeOperation" abstract="true"
@@ -326,6 +326,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="effectiveGroups" upperBound="-1"
           eType="#//accesscontrol/ACGroup" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ACOrgUnit" eSuperTypes="../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//IdentifiableElement">
       <eOperations name="getId" eType="#//accesscontrol/ACOrgUnitId"/>

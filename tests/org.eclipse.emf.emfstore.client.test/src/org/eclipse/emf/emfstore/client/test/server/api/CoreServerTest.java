@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.server.api.util.AuthControlMock;
 import org.eclipse.emf.emfstore.client.test.server.api.util.ConnectionMock;
@@ -23,6 +24,7 @@ import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc.XmlRpcConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESRemoteProjectImpl;
@@ -39,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.junit.After;
 import org.junit.Before;
 
 public abstract class CoreServerTest extends WorkspaceTest {
@@ -57,9 +60,14 @@ public abstract class CoreServerTest extends WorkspaceTest {
 	public void before() {
 		try {
 			initServer();
-		} catch (FatalESException e) {
+		} catch (final FatalESException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@After
+	public void after() {
+		ESWorkspaceProviderImpl.getInstance().setConnectionManager(new XmlRpcConnectionManager());
 	}
 
 	public void initServer() throws FatalESException {
@@ -72,10 +80,10 @@ public abstract class CoreServerTest extends WorkspaceTest {
 	}
 
 	private ServerSpace initServerSpace() {
-		ResourceSetImpl set = new ResourceSetImpl();
+		final ResourceSetImpl set = new ResourceSetImpl();
 		set.setResourceFactoryRegistry(new ResourceFactoryMock());
-		Resource resource = set.createResource(URI.createURI(""));
-		ServerSpace serverSpace = ModelFactory.eINSTANCE.createServerSpace();
+		final Resource resource = set.createResource(URI.createURI(""));
+		final ServerSpace serverSpace = ModelFactory.eINSTANCE.createServerSpace();
 		resource.getContents().add(serverSpace);
 		return serverSpace;
 	}
@@ -97,8 +105,8 @@ public abstract class CoreServerTest extends WorkspaceTest {
 	}
 
 	protected ProjectHistory getProjectHistory(ProjectSpace ps) {
-		ProjectId id = ps.getProjectId();
-		for (ProjectHistory history : getServerSpace().getProjects()) {
+		final ProjectId id = ps.getProjectId();
+		for (final ProjectHistory history : getServerSpace().getProjects()) {
 			if (history.getProjectId().equals(id)) {
 				return history;
 			}
@@ -113,7 +121,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					// TODO: TQ cast
 					return ps.commitToBranch(Versions.createBRANCH(branchName), null, null, null);
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -127,7 +135,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 				try {
 					ps.shareProject(new NullProgressMonitor());
 					return ps.getBaseVersion();
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -140,7 +148,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			protected PrimaryVersionSpec doRun() {
 				try {
 					return ps.commit(new NullProgressMonitor());
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -152,16 +160,16 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE)
+					((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE)
 						.setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					ESLocalProject checkout = projectSpace.toAPI().getRemoteProject().checkout(
+					final ESLocalProject checkout = projectSpace.toAPI().getRemoteProject().checkout(
 						"testCheckout",
 						projectSpace.getUsersession().toAPI(),
 						projectSpace.getBaseVersion().toAPI(),
 						new NullProgressMonitor());
 					return ((ESLocalProjectImpl) checkout).toInternalAPI();
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -173,16 +181,16 @@ public abstract class CoreServerTest extends WorkspaceTest {
 			@Override
 			protected ProjectSpace doRun() {
 				try {
-					((ESWorkspaceProviderImpl) ESWorkspaceProviderImpl.INSTANCE)
+					((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE)
 						.setConnectionManager(getConnectionMock());
 					// TODO: TQ
-					ESLocalProject checkout = remoteProject.checkout(
+					final ESLocalProject checkout = remoteProject.checkout(
 						"testCheckout",
 						getProjectSpace().getUsersession().toAPI(),
 						baseVersion.toAPI(),
 						new NullProgressMonitor());
 					return ((ESLocalProjectImpl) checkout).toInternalAPI();
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
@@ -198,7 +206,7 @@ public abstract class CoreServerTest extends WorkspaceTest {
 					// the conflict resolver always prefers the changes from the incoming branch
 					((ProjectSpaceBase) trunk).mergeBranch(latestOnBranch, new TestConflictResolver(true,
 						expectedConflicts), new NullProgressMonitor());
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
 			}

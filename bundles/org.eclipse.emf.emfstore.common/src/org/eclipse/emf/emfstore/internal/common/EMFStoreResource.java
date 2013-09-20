@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common;
 
@@ -19,6 +20,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 /**
  * EMFStore Resource, inherits from XMIResource and sets intrinsic ID to EObjectMap optimization.
+ * 
+ * @author emueller
  */
 public class EMFStoreResource extends XMIResourceImpl {
 
@@ -30,7 +33,7 @@ public class EMFStoreResource extends XMIResourceImpl {
 	 */
 	public EMFStoreResource(final URI uri) {
 		super(uri);
-		this.setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
+		setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 	}
 
 	/**
@@ -43,6 +46,16 @@ public class EMFStoreResource extends XMIResourceImpl {
 	 */
 	public void setIdToEObjectMap(final Map<String, EObject> idToEObjectMap, final Map<EObject, String> eObjectToIdMap) {
 		this.idToEObjectMap = idToEObjectMap;
-		this.eObjectToIDMap = eObjectToIdMap;
+		eObjectToIDMap = eObjectToIdMap;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl#createXMLHelper()
+	 */
+	// @Override
+	// protected XMLHelper createXMLHelper() {
+	// return new ESXMLResourceHelper(this);
+	// }
 }
