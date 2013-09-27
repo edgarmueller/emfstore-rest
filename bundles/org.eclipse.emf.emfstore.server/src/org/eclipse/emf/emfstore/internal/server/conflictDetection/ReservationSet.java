@@ -31,7 +31,7 @@ import java.util.Set;
  */
 public class ReservationSet {
 
-	private ModelElementIdReservationMap modelElementIdReservationMap;
+	private final ModelElementIdReservationMap modelElementIdReservationMap;
 
 	/**
 	 * Default constructor.
@@ -61,8 +61,14 @@ public class ReservationSet {
 		addMultiReferenceWithOppositeReservation(modelElementId, featureName, oppositeModelElementId, null);
 	}
 
+	public void addMapKeyWithOppositeReservation(String modelElementId, String featureName,
+		String key) {
+		addFeatureReservation(modelElementId, featureName + key);
+		// addMultiReferenceWithOppositeReservation(modelElementId, featureName + key, );
+	}
+
 	public void addFullReservation(String modelElementId, ConflictBucketCandidate conflictBucketCandidate) {
-		FeatureNameReservationMap featureNameReservationMap = new FeatureNameReservationMap(true);
+		final FeatureNameReservationMap featureNameReservationMap = new FeatureNameReservationMap(true);
 		featureNameReservationMap.setConflictBucketCandidate(conflictBucketCandidate);
 		modelElementIdReservationMap.put(modelElementId, featureNameReservationMap);
 	}
@@ -132,7 +138,6 @@ public class ReservationSet {
 		} else {
 			throw new IllegalStateException("Reservation on same feature with AND without opposites is illegal!");
 		}
-
 	}
 
 	public Set<String> getAllModelElements() {
@@ -140,12 +145,12 @@ public class ReservationSet {
 	}
 
 	public boolean hasExistenceReservation(String modelElementId) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		return featureNameReservationMap != null && featureNameReservationMap.hasExistenceFeature();
 	}
 
 	public boolean hasFullReservation(String modelElementId) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		return featureNameReservationMap != null && featureNameReservationMap.isAllFeatures();
 	}
 
@@ -154,20 +159,20 @@ public class ReservationSet {
 	}
 
 	public boolean hasFeatureReservation(String modelElementId, String featureName) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		if (featureNameReservationMap == null) {
 			return false;
 		}
-		OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
+		final OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
 		return oppositeReservationMap != null && !oppositeReservationMap.hasOpposites();
 	}
 
 	public boolean hasOppositeReservations(String modelElementId, String featureName) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		if (featureNameReservationMap == null) {
 			return false;
 		}
-		OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
+		final OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
 		return oppositeReservationMap != null && oppositeReservationMap.hasOpposites();
 	}
 
@@ -190,11 +195,11 @@ public class ReservationSet {
 	}
 
 	public boolean hasOppositeReservation(String modelElement, String featureName, String oppositeModelElement) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElement);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElement);
 		if (featureNameReservationMap == null) {
 			return false;
 		}
-		OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
+		final OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
 		if (oppositeReservationMap == null || !oppositeReservationMap.hasOpposites()) {
 			return false;
 		}

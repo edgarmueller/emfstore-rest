@@ -14,8 +14,10 @@ package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.common.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
@@ -38,8 +40,32 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Refe
 public class ReservationToConflictBucketCandidateMap {
 
 	private static ReservationSetModifier reservationSetModifier = initCustomReservationModifier();
-	private ReservationSet reservationToConflictMap;
-	private Set<ConflictBucketCandidate> conflictBucketCandidates;
+	private final ReservationSet reservationToConflictMap;
+	private final Set<ConflictBucketCandidate> conflictBucketCandidates;
+	private final Map<String, Map.Entry<?, ?>> createdMapEntries;
+
+	private static final Set<Class<?>> WRAPPER_TYPES = getWrapperTypes();
+
+	public static boolean isPrimitiveType(Class<?> clazz)
+	{
+		return WRAPPER_TYPES.contains(clazz);
+	}
+
+	// TODO: what about BigInteger etc.?
+	private static Set<Class<?>> getWrapperTypes()
+	{
+		final Set<Class<?>> ret = new LinkedHashSet<Class<?>>();
+		ret.add(Boolean.class);
+		ret.add(Character.class);
+		ret.add(Byte.class);
+		ret.add(Short.class);
+		ret.add(Integer.class);
+		ret.add(Long.class);
+		ret.add(Float.class);
+		ret.add(Double.class);
+		ret.add(String.class);
+		return ret;
+	}
 
 	private static ReservationSetModifier initCustomReservationModifier() {
 
@@ -62,17 +88,19 @@ public class ReservationToConflictBucketCandidateMap {
 	public ReservationToConflictBucketCandidateMap() {
 		reservationToConflictMap = new ReservationSet();
 		conflictBucketCandidates = new LinkedHashSet<ConflictBucketCandidate>();
+		createdMapEntries = new LinkedHashMap<String, Map.Entry<?, ?>>();
+
 	}
 
 	private void joinReservationSet(ReservationSet reservationSet,
 		ConflictBucketCandidate currentConflictBucketCandidate) {
-		Set<String> modelElements = reservationSet.getAllModelElements();
+		final Set<String> modelElements = reservationSet.getAllModelElements();
 		// iterate incoming reservation set
-		for (String modelElement : modelElements) {
+		for (final String modelElement : modelElements) {
 			// handle full reservations
 			if (reservationSet.hasFullReservation(modelElement)
 				|| reservationToConflictMap.hasFullReservation(modelElement)) {
-				ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
+				final ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
 					reservationToConflictMap
 						.getConflictBucketCandidates(modelElement),
 					currentConflictBucketCandidate);
@@ -88,9 +116,9 @@ public class ReservationToConflictBucketCandidateMap {
 			}
 
 			// handle feature reservations
-			Set<String> featureNames = reservationSet.getFeatureNames(modelElement);
+			final Set<String> featureNames = reservationSet.getFeatureNames(modelElement);
 
-			for (String featureName : featureNames) {
+			for (final String featureName : featureNames) {
 
 				if (featureName.equals(FeatureNameReservationMap.EXISTENCE_FEATURE)) {
 					continue;
@@ -114,10 +142,10 @@ public class ReservationToConflictBucketCandidateMap {
 
 		if (reservationToConflictMap.hasFeatureReservation(modelElement, featureName)) {
 
-			Set<ConflictBucketCandidate> existingBuckets = reservationToConflictMap
+			final Set<ConflictBucketCandidate> existingBuckets = reservationToConflictMap
 				.getConflictBucketCandidates(
 					modelElement, featureName);
-			ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
+			final ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
 				existingBuckets,
 				currentConflictBucketCandidate);
 
@@ -133,11 +161,11 @@ public class ReservationToConflictBucketCandidateMap {
 	private void handleOppositeVsOppositeReservation(ReservationSet reservationSet,
 		ConflictBucketCandidate currentConflictBucketCandidate, String modelElement, String featureName) {
 		if (reservationToConflictMap.hasOppositeReservations(modelElement, featureName)) {
-			Set<String> opposites = reservationSet.getOpposites(modelElement, featureName);
-			for (String oppositeModelElement : opposites) {
+			final Set<String> opposites = reservationSet.getOpposites(modelElement, featureName);
+			for (final String oppositeModelElement : opposites) {
 				if (reservationToConflictMap.hasOppositeReservation(modelElement, featureName, oppositeModelElement)) {
 
-					ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
+					final ConflictBucketCandidate mergedConflictBucketCandidates = mergeConflictBucketCandidates(
 						reservationToConflictMap
 							.getConflictBucketCandidates(
 								modelElement,
@@ -155,9 +183,9 @@ public class ReservationToConflictBucketCandidateMap {
 		} else if (reservationToConflictMap.hasFeatureReservation(modelElement, featureName)) {
 			throw new IllegalStateException("Reservation for same feature with and without opposites is illegal!");
 		} else {
-			Set<String> opposites = reservationSet.getOpposites(modelElement, featureName);
+			final Set<String> opposites = reservationSet.getOpposites(modelElement, featureName);
 
-			for (String oppositeModelElement : opposites) {
+			for (final String oppositeModelElement : opposites) {
 				reservationToConflictMap.addMultiReferenceWithOppositeReservation(
 					modelElement,
 					featureName,
@@ -170,8 +198,8 @@ public class ReservationToConflictBucketCandidateMap {
 
 	private ConflictBucketCandidate mergeConflictBucketCandidates(Set<ConflictBucketCandidate> existingBuckets,
 		ConflictBucketCandidate currentBucket) {
-		ConflictBucketCandidate rootBucket = currentBucket.getRootConflictBucketCandidate();
-		for (ConflictBucketCandidate otherBucket : existingBuckets) {
+		final ConflictBucketCandidate rootBucket = currentBucket.getRootConflictBucketCandidate();
+		for (final ConflictBucketCandidate otherBucket : existingBuckets) {
 			otherBucket.getRootConflictBucketCandidate().setParentConflictBucketCandidate(rootBucket);
 		}
 		return rootBucket;
@@ -191,7 +219,7 @@ public class ReservationToConflictBucketCandidateMap {
 
 		ReservationSet reservationSet = extractReservationFromOperation(operation, new ReservationSet());
 		reservationSet = addCustomReservations(operation, reservationSet, idToEObjectMapping);
-		ConflictBucketCandidate conflictBucketCandidate = new ConflictBucketCandidate();
+		final ConflictBucketCandidate conflictBucketCandidate = new ConflictBucketCandidate();
 		conflictBucketCandidates.add(conflictBucketCandidate);
 		conflictBucketCandidate.addOperation(operation, isMyOperation, priority);
 		joinReservationSet(reservationSet, conflictBucketCandidate);
@@ -203,25 +231,36 @@ public class ReservationToConflictBucketCandidateMap {
 	}
 
 	private ReservationSet extractReservationFromOperation(AbstractOperation operation, ReservationSet reservationSet) {
+
 		if (operation instanceof CompositeOperation) {
-			CompositeOperation compositeOperation = (CompositeOperation) operation;
-			for (AbstractOperation subOperation : compositeOperation.getSubOperations()) {
+			final CompositeOperation compositeOperation = (CompositeOperation) operation;
+			for (final AbstractOperation subOperation : compositeOperation.getSubOperations()) {
 				extractReservationFromOperation(subOperation, reservationSet);
 			}
 			return reservationSet;
 		} else if (operation instanceof CreateDeleteOperation) {
 
 			// add full reservations only for delete operations and their deleted elements
-			CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
+			final CreateDeleteOperation createDeleteOperation = (CreateDeleteOperation) operation;
 			if (createDeleteOperation.isDelete()) {
 				// handle containment tree
-				for (ModelElementId modelElementId : createDeleteOperation.getEObjectToIdMap().values()) {
+				for (final ModelElementId modelElementId : createDeleteOperation.getEObjectToIdMap().values()) {
 					reservationSet.addFullReservation(modelElementId.getId());
+				}
+			} else {
+				// check for map entries
+				for (final EObject eObject : createDeleteOperation.getEObjectToIdMap().keySet()) {
+					if (eObject instanceof Map.Entry<?, ?>) {
+						final String id = createDeleteOperation.getEObjectToIdMap().get(eObject).getId();
+						final Map.Entry<?, ?> mapEntry = (Entry<?, ?>) eObject;
+						createdMapEntries.put(id, mapEntry);
+					}
+					// reservationSet.addFullReservation(modelElementId.getId());
 				}
 			}
 
 			// handle suboperations
-			for (AbstractOperation subOperation : createDeleteOperation.getSubOperations()) {
+			for (final AbstractOperation subOperation : createDeleteOperation.getSubOperations()) {
 				extractReservationFromOperation(subOperation, reservationSet);
 			}
 			return reservationSet;
@@ -233,15 +272,15 @@ public class ReservationToConflictBucketCandidateMap {
 	}
 
 	private void handleFeatureOperation(AbstractOperation operation, ReservationSet reservationSet) {
-		FeatureOperation featureOperation = (FeatureOperation) operation;
-		String modelElementId = featureOperation.getModelElementId().getId();
-		String featureName = featureOperation.getFeatureName();
+		final FeatureOperation featureOperation = (FeatureOperation) operation;
+		final String modelElementId = featureOperation.getModelElementId().getId();
+		final String featureName = featureOperation.getFeatureName();
 		if (featureOperation instanceof ReferenceOperation) {
-			ReferenceOperation referenceOperation = (ReferenceOperation) featureOperation;
+			final ReferenceOperation referenceOperation = (ReferenceOperation) featureOperation;
 			// if (isRemovingReferencesOnly(referenceOperation)) {
 			// return;
 			// }
-			for (ModelElementId otherModelElement : referenceOperation.getOtherInvolvedModelElements()) {
+			for (final ModelElementId otherModelElement : referenceOperation.getOtherInvolvedModelElements()) {
 				if (referenceOperation.getContainmentType().equals(ContainmentType.CONTAINMENT)
 					&& !referenceOperation.isBidirectional()) {
 					reservationSet.addContainerReservation(otherModelElement.getId());
@@ -250,17 +289,40 @@ public class ReservationToConflictBucketCandidateMap {
 				}
 			}
 		}
-		if ((featureOperation instanceof MultiReferenceOperation)
-			|| (featureOperation instanceof MultiReferenceSetOperation || featureOperation instanceof MultiReferenceMoveOperation)) {
-			for (ModelElementId otherModelElement : featureOperation.getOtherInvolvedModelElements()) {
+		if (featureOperation instanceof MultiReferenceOperation
+			|| featureOperation instanceof MultiReferenceSetOperation
+			|| featureOperation instanceof MultiReferenceMoveOperation) {
+			for (final ModelElementId otherModelElement : featureOperation.getOtherInvolvedModelElements()) {
 				reservationSet.addMultiReferenceWithOppositeReservation(modelElementId, featureName,
 					otherModelElement.getId());
+
+				if (isCreatedMapEntry(otherModelElement)) {
+					final Map.Entry<?, ?> mapEntry = getCreatedMapEntry(otherModelElement);
+					final Object value = mapEntry.getValue();
+					if (isPrimitiveType(value.getClass())) {
+						reservationSet.addMapKeyWithOppositeReservation(modelElementId, featureName,
+							(String) mapEntry.getKey());
+					}
+					// else {
+					// final Entry<?, ?> entry = getCreatedMapEntry(otherModelElement);
+					// final ModelElementId oppositeModelElementId = entry.getValue()
+					// reservationSet.addMapKeyWithOppositeReservation(modelElementId, featureName, mapEntry.getKey(),
+					// oppositeModelElementId);
+					// }
+				}
 			}
 		} else {
 			reservationSet.addFeatureReservation(modelElementId, featureName);
 		}
 		return;
+	}
 
+	private Map.Entry<?, ?> getCreatedMapEntry(ModelElementId otherModelElement) {
+		return createdMapEntries.get(otherModelElement);
+	}
+
+	private boolean isCreatedMapEntry(ModelElementId modelElementId) {
+		return createdMapEntries.containsKey(modelElementId.getId());
 	}
 
 	/**
@@ -269,9 +331,9 @@ public class ReservationToConflictBucketCandidateMap {
 	 * @return a set of conflict bucket candidates
 	 */
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates() {
-		Map<ConflictBucketCandidate, Set<ConflictBucketCandidate>> rootToBucketMergeSetMap = new LinkedHashMap<ConflictBucketCandidate, Set<ConflictBucketCandidate>>();
-		for (ConflictBucketCandidate candidate : conflictBucketCandidates) {
-			ConflictBucketCandidate root = candidate.getRootConflictBucketCandidate();
+		final Map<ConflictBucketCandidate, Set<ConflictBucketCandidate>> rootToBucketMergeSetMap = new LinkedHashMap<ConflictBucketCandidate, Set<ConflictBucketCandidate>>();
+		for (final ConflictBucketCandidate candidate : conflictBucketCandidates) {
+			final ConflictBucketCandidate root = candidate.getRootConflictBucketCandidate();
 			Set<ConflictBucketCandidate> bucketMergeSet = rootToBucketMergeSetMap.get(root);
 			if (bucketMergeSet == null) {
 				bucketMergeSet = new LinkedHashSet<ConflictBucketCandidate>();
@@ -279,8 +341,8 @@ public class ReservationToConflictBucketCandidateMap {
 			}
 			bucketMergeSet.add(candidate);
 		}
-		for (ConflictBucketCandidate root : rootToBucketMergeSetMap.keySet()) {
-			for (ConflictBucketCandidate sibling : rootToBucketMergeSetMap.get(root)) {
+		for (final ConflictBucketCandidate root : rootToBucketMergeSetMap.keySet()) {
+			for (final ConflictBucketCandidate sibling : rootToBucketMergeSetMap.get(root)) {
 				root.addConflictBucketCandidate(sibling);
 			}
 		}
