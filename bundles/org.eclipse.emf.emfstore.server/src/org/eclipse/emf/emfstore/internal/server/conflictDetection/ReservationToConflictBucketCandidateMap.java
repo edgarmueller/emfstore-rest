@@ -44,29 +44,6 @@ public class ReservationToConflictBucketCandidateMap {
 	private final Set<ConflictBucketCandidate> conflictBucketCandidates;
 	private final Map<String, Map.Entry<?, ?>> createdMapEntries;
 
-	private static final Set<Class<?>> WRAPPER_TYPES = getWrapperTypes();
-
-	public static boolean isPrimitiveType(Class<?> clazz)
-	{
-		return WRAPPER_TYPES.contains(clazz);
-	}
-
-	// TODO: what about BigInteger etc.?
-	private static Set<Class<?>> getWrapperTypes()
-	{
-		final Set<Class<?>> ret = new LinkedHashSet<Class<?>>();
-		ret.add(Boolean.class);
-		ret.add(Character.class);
-		ret.add(Byte.class);
-		ret.add(Short.class);
-		ret.add(Integer.class);
-		ret.add(Long.class);
-		ret.add(Float.class);
-		ret.add(Double.class);
-		ret.add(String.class);
-		return ret;
-	}
-
 	private static ReservationSetModifier initCustomReservationModifier() {
 
 		return ExtensionRegistry.INSTANCE.get(
@@ -205,15 +182,18 @@ public class ReservationToConflictBucketCandidateMap {
 		return rootBucket;
 	}
 
-	// /**
-	// * Request to map and thereby reserve the given model element and feature for the given bucket.
-	// *
-	// * @param modelElementId the model element id
-	// * @param featureName the feature name
-	// * @param currentOperationsConflictBucket the bucket
-	// * @param replace whether existing entries should be overwritten, if this is not enabled and existing entries are
-	// * found an {@link IllegalStateException} will be thrown
-	// */
+	/**
+	 * Scans the given {@link AbstractOperation} into the reservation set.
+	 * 
+	 * @param operation
+	 *            the operation to be scanned
+	 * @param priority
+	 *            the global priority of the operation, which is later used to represent a conflict bucket candidate
+	 * @param idToEObjectMapping
+	 *            a mapping from IDs to model elements containing all involved model elements
+	 * @param isMyOperation
+	 *            whether this operation is incoming, {@code false} if it is, {@code true} otherwise
+	 */
 	public void scanOperationReservations(AbstractOperation operation, int priority,
 		ModelElementIdToEObjectMapping idToEObjectMapping, boolean isMyOperation) {
 
@@ -230,7 +210,8 @@ public class ReservationToConflictBucketCandidateMap {
 		return reservationSetModifier.addCustomReservation(operation, reservationSet, idToEObjectMapping);
 	}
 
-	private ReservationSet extractReservationFromOperation(AbstractOperation operation, ReservationSet reservationSet) {
+	private ReservationSet extractReservationFromOperation(final AbstractOperation operation,
+		ReservationSet reservationSet) {
 
 		if (operation instanceof CompositeOperation) {
 			final CompositeOperation compositeOperation = (CompositeOperation) operation;
@@ -298,17 +279,9 @@ public class ReservationToConflictBucketCandidateMap {
 
 				if (isCreatedMapEntry(otherModelElement)) {
 					final Map.Entry<?, ?> mapEntry = getCreatedMapEntry(otherModelElement);
-					final Object value = mapEntry.getValue();
-					if (isPrimitiveType(value.getClass())) {
-						reservationSet.addMapKeyWithOppositeReservation(modelElementId, featureName,
-							(String) mapEntry.getKey());
-					}
-					// else {
-					// final Entry<?, ?> entry = getCreatedMapEntry(otherModelElement);
-					// final ModelElementId oppositeModelElementId = entry.getValue()
-					// reservationSet.addMapKeyWithOppositeReservation(modelElementId, featureName, mapEntry.getKey(),
-					// oppositeModelElementId);
-					// }
+					// currently we only can handle keys which have a valid string representation
+					reservationSet.addMapKeyReservation(modelElementId, featureName,
+						mapEntry.getKey().toString());
 				}
 			}
 		} else {
