@@ -35,7 +35,7 @@ import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfigurat
  */
 public class MutateUtil implements Util {
 
-	private EMFDataProvider dataProvider;
+	private final EMFDataProvider dataProvider;
 
 	/**
 	 * For internal use.
@@ -103,7 +103,7 @@ public class MutateUtil implements Util {
 	}
 
 	/**
-	 * @see #saveEObject(EObject, String)
+	 * @see #saveEObject(EObject, String, boolean)
 	 * 
 	 * @param obj
 	 *            The {@link EObject} to save.
@@ -128,18 +128,18 @@ public class MutateUtil implements Util {
 	 */
 	public void saveEObject(EObject obj, String suffix,
 		boolean discardDanglingHREF) {
-		Resource resource = FuzzyUtil
+		final Resource resource = FuzzyUtil
 			.createResource(getRunResourcePath(suffix));
 		resource.getContents().add(obj);
 
 		try {
-			Map<Object, Object> options = new HashMap<Object, Object>();
+			final Map<Object, Object> options = new HashMap<Object, Object>();
 			if (discardDanglingHREF) {
 				options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF,
 					XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
 			}
 			resource.save(options);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new RuntimeException("Could not save the eobject: " + obj, e);
 		}
 	}
@@ -150,7 +150,7 @@ public class MutateUtil implements Util {
 	 * @return A file path to the current run folder.
 	 */
 	public String getRunResourcePath(String suffix) {
-		String toAdd = (suffix == null || "".equals(suffix)) ? "" : "_"
+		final String toAdd = suffix == null || "".equals(suffix) ? "" : "_"
 			+ suffix;
 		return FuzzyUtil.ROOT_FOLDER + FuzzyUtil.RUN_FOLDER
 			+ dataProvider.getConfig().getId() + "/"
