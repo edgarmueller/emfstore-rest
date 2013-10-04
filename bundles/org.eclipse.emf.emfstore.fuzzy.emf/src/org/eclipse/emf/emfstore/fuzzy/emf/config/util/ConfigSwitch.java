@@ -77,11 +77,10 @@ public class ConfigSwitch<T> {
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
-		} else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
-				eSuperTypes.get(0), theEObject);
 		}
+		final List<EClass> eSuperTypes = theEClass.getESuperTypes();
+		return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
+			eSuperTypes.get(0), theEObject);
 	}
 
 	/**
@@ -95,52 +94,59 @@ public class ConfigSwitch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 		case ConfigPackage.TEST_CONFIG: {
-			TestConfig testConfig = (TestConfig) theEObject;
+			final TestConfig testConfig = (TestConfig) theEObject;
 			T result = caseTestConfig(testConfig);
-			if (result == null)
+			if (result == null) {
 				result = defaultCase(theEObject);
+			}
 			return result;
 		}
 		case ConfigPackage.TEST_RUN: {
-			TestRun testRun = (TestRun) theEObject;
+			final TestRun testRun = (TestRun) theEObject;
 			T result = caseTestRun(testRun);
-			if (result == null)
+			if (result == null) {
 				result = defaultCase(theEObject);
+			}
 			return result;
 		}
 		case ConfigPackage.TEST_RESULT: {
-			TestResult testResult = (TestResult) theEObject;
+			final TestResult testResult = (TestResult) theEObject;
 			T result = caseTestResult(testResult);
-			if (result == null)
+			if (result == null) {
 				result = defaultCase(theEObject);
+			}
 			return result;
 		}
 		case ConfigPackage.TEST_DIFF: {
-			TestDiff testDiff = (TestDiff) theEObject;
+			final TestDiff testDiff = (TestDiff) theEObject;
 			T result = caseTestDiff(testDiff);
-			if (result == null)
+			if (result == null) {
 				result = defaultCase(theEObject);
+			}
 			return result;
 		}
 		case ConfigPackage.DIFF_REPORT: {
-			DiffReport diffReport = (DiffReport) theEObject;
+			final DiffReport diffReport = (DiffReport) theEObject;
 			T result = caseDiffReport(diffReport);
-			if (result == null)
+			if (result == null) {
 				result = defaultCase(theEObject);
+			}
 			return result;
 		}
 		case ConfigPackage.ROOT: {
-			Root root = (Root) theEObject;
+			final Root root = (Root) theEObject;
 			T result = caseRoot(root);
-			if (result == null)
+			if (result == null) {
 				result = defaultCase(theEObject);
+			}
 			return result;
 		}
 		case ConfigPackage.MUTATOR_CONFIG: {
-			MutatorConfig mutatorConfig = (MutatorConfig) theEObject;
+			final MutatorConfig mutatorConfig = (MutatorConfig) theEObject;
 			T result = caseMutatorConfig(mutatorConfig);
-			if (result == null)
+			if (result == null) {
 				result = defaultCase(theEObject);
+			}
 			return result;
 		}
 		default:
