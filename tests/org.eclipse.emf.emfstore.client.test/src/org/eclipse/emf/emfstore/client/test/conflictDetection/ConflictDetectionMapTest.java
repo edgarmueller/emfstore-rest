@@ -14,8 +14,6 @@ package org.eclipse.emf.emfstore.client.test.conflictDetection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -26,9 +24,6 @@ import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
-import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.junit.Test;
 
@@ -56,32 +51,12 @@ public class ConflictDetectionMapTest extends ConflictDetectionTest {
 		updateMapEntry(testElement, "foo", "bar");
 		updateMapEntry(clonedTestElement, "foo", "quux");
 
-		// final List<AbstractOperation> ops1 = getProjectSpace().getOperations();
-		// final List<AbstractOperation> ops2 = clonedProjectSpace.getOperations();
-
-		final ChangeConflictSet changeConflictSet = getChangeConflictSet(
+		final Set<AbstractOperation> conflicts = getConflicts(
 			getProjectSpace().getLocalChangePackage().getOperations(),
 			clonedProjectSpace.getLocalChangePackage().getOperations());
 
-		assertTrue(changeConflictSet.getConflictBuckets().size() > 0);
+		assertTrue(conflicts.size() > 0);
 
-		// resolve conflict
-		resolveConflict(changeConflictSet);
-	}
-
-	private void resolveConflict(final ChangeConflictSet changeConflictSet) throws ChangeConflictException {
-		for (final ConflictBucket bucket : changeConflictSet.getConflictBuckets()) {
-			bucket.resolveConflict(new LinkedHashSet<AbstractOperation>(
-				getProjectSpace().getLocalChangePackage().getOperations()),
-				new LinkedHashSet<AbstractOperation>(
-					clonedProjectSpace.getLocalChangePackage().getOperations()));
-		}
-
-		final ChangePackage mergeResolvedConflicts = clonedProjectSpace.mergeResolvedConflicts(changeConflictSet,
-			Arrays.asList(getProjectSpace().getLocalChangePackage()),
-			Arrays.asList(clonedProjectSpace.getLocalChangePackage()));
-
-		clonedProjectSpace.applyOperations(mergeResolvedConflicts.getCopyOfOperations(), false);
 	}
 
 	@Test
@@ -106,13 +81,7 @@ public class ConflictDetectionMapTest extends ConflictDetectionTest {
 
 		final Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
 
-		final ChangeConflictSet changeConflictSet = getChangeConflictSet(
-			getProjectSpace().getLocalChangePackage().getOperations(),
-			clonedProjectSpace.getLocalChangePackage().getOperations());
-
 		assertTrue(conflicts.size() > 0);
-
-		resolveConflict(changeConflictSet);
 	}
 
 	@Test
@@ -162,13 +131,7 @@ public class ConflictDetectionMapTest extends ConflictDetectionTest {
 
 		final Set<AbstractOperation> conflicts = getConflicts(ops1, ops2);
 
-		final ChangeConflictSet changeConflictSet = getChangeConflictSet(
-			getProjectSpace().getLocalChangePackage().getOperations(),
-			clonedProjectSpace.getLocalChangePackage().getOperations());
-
 		assertTrue(conflicts.size() > 0);
-
-		resolveConflict(changeConflictSet);
 	}
 
 	@Test
@@ -226,7 +189,7 @@ public class ConflictDetectionMapTest extends ConflictDetectionTest {
 
 	@Override
 	protected void configureCompareAtEnd() {
-		setCompareAtEnd(true);
+		setCompareAtEnd(false);
 	}
 
 }

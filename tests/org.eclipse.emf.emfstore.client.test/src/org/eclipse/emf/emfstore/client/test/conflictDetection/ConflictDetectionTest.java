@@ -96,19 +96,14 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 		return conflictSet.getConflictBuckets().size() > 0;
 	}
 
-	public ChangeConflictSet getChangeConflictSet(List<AbstractOperation> ops1, List<AbstractOperation> ops2) {
+	public Set<AbstractOperation> getConflicts(List<AbstractOperation> ops1, List<AbstractOperation> ops2) {
 		final ChangePackage changePackage1 = VersioningFactory.eINSTANCE.createChangePackage();
+		changePackage1.getOperations().addAll(ops1);
 		final ChangePackage changePackage2 = VersioningFactory.eINSTANCE.createChangePackage();
-		changePackage1.getOperations().addAll(ModelUtil.clone(ops1));
-		changePackage2.getOperations().addAll(ModelUtil.clone(ops2));
+		changePackage2.getOperations().addAll(ops2);
 		final Project project = ModelFactory.eINSTANCE.createProject();
 		final ChangeConflictSet conflicts = new ConflictDetector().calculateConflicts(Arrays.asList(changePackage1),
 			Arrays.asList(changePackage2), project);
-		return conflicts;
-	}
-
-	public Set<AbstractOperation> getConflicts(List<AbstractOperation> ops1, List<AbstractOperation> ops2) {
-		final ChangeConflictSet conflicts = getChangeConflictSet(ops1, ops2);
 		final LinkedHashSet<AbstractOperation> result = new LinkedHashSet<AbstractOperation>();
 		for (final ConflictBucket conflictBucket : conflicts.getConflictBuckets()) {
 			final Set<AbstractOperation> myOperations = conflictBucket.getMyOperations();
