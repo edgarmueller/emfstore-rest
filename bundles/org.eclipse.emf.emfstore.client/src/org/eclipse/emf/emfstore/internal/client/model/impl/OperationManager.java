@@ -17,11 +17,11 @@ import java.util.List;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.observers.OperationObserver;
 import org.eclipse.emf.emfstore.internal.common.ESDisposable;
@@ -37,7 +37,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.sema
  * @author koegel
  * @author emueller
  */
-public class OperationManager implements OperationRecorderListener, ESDisposable, CommandObserver,
+public class OperationManager implements OperationRecorderListener, ESDisposable, ESCommandObserver,
 	IdEObjectCollectionChangeObserver {
 
 	private final OperationRecorder operationRecorder;
@@ -209,7 +209,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandStarted(Command command) {
 		operationRecorder.commandStarted(command);
@@ -219,7 +219,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandCompleted(Command command) {
 		operationRecorder.commandCompleted(command);
@@ -229,7 +229,7 @@ public class OperationManager implements OperationRecorderListener, ESDisposable
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
 	 *      java.lang.Exception)
 	 */
 	public void commandFailed(Command command, Exception exception) {

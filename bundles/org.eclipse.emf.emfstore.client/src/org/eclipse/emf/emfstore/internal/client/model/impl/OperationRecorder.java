@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandStack;
 import org.eclipse.emf.emfstore.client.observer.ESCommitObserver;
 import org.eclipse.emf.emfstore.client.observer.ESPostCreationObserver;
 import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
@@ -42,8 +44,6 @@ import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.NotificationToOperationConverter;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.filter.FilterStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.MissingCommandException;
@@ -75,7 +75,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * @author koegel
  * @author emueller
  */
-public class OperationRecorder implements CommandObserver, ESCommitObserver, ESUpdateObserver, ESShareObserver,
+public class OperationRecorder implements ESCommandObserver, ESCommitObserver, ESUpdateObserver, ESShareObserver,
 	IdEObjectCollectionChangeObserver {
 
 	/**
@@ -84,7 +84,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	public static final String UNKOWN_CREATOR = "unknown";
 
 	private int currentOperationListSize;
-	private EMFStoreCommandStack emfStoreCommandStack;
+	private ESCommandStack emfStoreCommandStack;
 
 	private List<AbstractOperation> operations;
 	private final List<OperationRecorderListener> observers;
@@ -461,7 +461,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver#commandCompleted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandCompleted(Command command) {
 
@@ -764,7 +764,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver#commandFailed(org.eclipse.emf.common.command.Command,
 	 *      java.lang.Exception)
 	 */
 	public void commandFailed(Command command, Exception exception) {
@@ -791,7 +791,7 @@ public class OperationRecorder implements CommandObserver, ESCommitObserver, ESU
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver#commandStarted(org.eclipse.emf.common.command.Command)
 	 */
 	public void commandStarted(Command command) {
 		currentOperationListSize = 0;

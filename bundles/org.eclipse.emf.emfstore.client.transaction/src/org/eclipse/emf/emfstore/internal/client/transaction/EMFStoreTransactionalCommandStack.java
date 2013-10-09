@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * koegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.transaction;
 
@@ -15,10 +15,10 @@ import java.util.Iterator;
 
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandNotifier;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.util.AbstractEMFStoreCommand;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.RollbackException;
@@ -30,7 +30,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
  * @author koegel
  */
 public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransactionalCommandStackImpl implements
-	EMFStoreCommandStack {
+	ESCommandStack {
 
 	private Command currentCommand;
 	private final EMFStoreCommandNotifier notifier;
@@ -205,18 +205,18 @@ public class EMFStoreTransactionalCommandStack extends AbstractEMFStoreTransacti
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack#addCommandStackObserver(org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandStack#addCommandStackObserver(org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver)
 	 */
-	public void addCommandStackObserver(CommandObserver observer) {
+	public void addCommandStackObserver(ESCommandObserver observer) {
 		notifier.addCommandStackObserver(observer);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack#removeCommandStackObserver(org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandStack#removeCommandStackObserver(org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver)
 	 */
-	public void removeCommandStackObserver(CommandObserver observer) {
+	public void removeCommandStackObserver(ESCommandObserver observer) {
 		notifier.removeCommandStackObserver(observer);
 	}
 }
