@@ -13,6 +13,8 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands;
 
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.util.AbstractEMFStoreCommand;
 
 /**
@@ -20,7 +22,7 @@ import org.eclipse.emf.emfstore.internal.client.model.util.AbstractEMFStoreComma
  * 
  * @author koegel
  */
-public class EMFStoreBasicCommandStack extends BasicCommandStack implements EMFStoreCommandStack {
+public class EMFStoreBasicCommandStack extends BasicCommandStack implements ESCommandStack {
 
 	private EMFStoreCommandNotifier notifier;
 	private Command currentCommand;
@@ -95,18 +97,18 @@ public class EMFStoreBasicCommandStack extends BasicCommandStack implements EMFS
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack#addCommandStackObserver(org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandStack#addCommandStackObserver(org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver)
 	 */
-	public void addCommandStackObserver(CommandObserver observer) {
+	public void addCommandStackObserver(ESCommandObserver observer) {
 		notifier.addCommandStackObserver(observer);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack#removeCommandStackObserver(org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.CommandObserver)
+	 * @see org.eclipse.emf.emfstore.client.changetracking.ESCommandStack#removeCommandStackObserver(org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver)
 	 */
-	public void removeCommandStackObserver(CommandObserver observer) {
+	public void removeCommandStackObserver(ESCommandObserver observer) {
 		notifier.removeCommandStackObserver(observer);
 	}
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandObserver;
 import org.eclipse.emf.emfstore.common.ESSafeRunnable;
 import org.eclipse.emf.emfstore.common.ESSafeRunner;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -26,14 +27,14 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
  */
 public class EMFStoreCommandNotifier {
 
-	private List<CommandObserver> commandObservers;
+	private List<ESCommandObserver> commandObservers;
 
 	/**
 	 * Default constructor.
 	 */
 	public EMFStoreCommandNotifier() {
 		super();
-		commandObservers = new ArrayList<CommandObserver>();
+		commandObservers = new ArrayList<ESCommandObserver>();
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class EMFStoreCommandNotifier {
 	 * @param command the command
 	 */
 	public void notifiyListenersAboutStart(final Command command) {
-		for (final CommandObserver commandObservers : this.commandObservers) {
+		for (final ESCommandObserver commandObservers : this.commandObservers) {
 			ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
@@ -66,7 +67,7 @@ public class EMFStoreCommandNotifier {
 	 * @param exception the exception that triggered the failure
 	 */
 	public void notifiyListenersAboutCommandFailed(final Command command, final Exception exception) {
-		for (final CommandObserver commandObservers : this.commandObservers) {
+		for (final ESCommandObserver commandObservers : this.commandObservers) {
 			ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
@@ -88,7 +89,7 @@ public class EMFStoreCommandNotifier {
 	 * @param command the command
 	 */
 	public void notifiyListenersAboutCommandCompleted(final Command command) {
-		for (final CommandObserver commandObservers : this.commandObservers) {
+		for (final ESCommandObserver commandObservers : this.commandObservers) {
 			ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
@@ -109,7 +110,7 @@ public class EMFStoreCommandNotifier {
 	 * 
 	 * @param observer the observer
 	 */
-	public void addCommandStackObserver(CommandObserver observer) {
+	public void addCommandStackObserver(ESCommandObserver observer) {
 		commandObservers.add(observer);
 	}
 
@@ -118,7 +119,7 @@ public class EMFStoreCommandNotifier {
 	 * 
 	 * @param observer the observer
 	 */
-	public void removeCommandStackObserver(CommandObserver observer) {
+	public void removeCommandStackObserver(ESCommandObserver observer) {
 		commandObservers.remove(observer);
 	}
 

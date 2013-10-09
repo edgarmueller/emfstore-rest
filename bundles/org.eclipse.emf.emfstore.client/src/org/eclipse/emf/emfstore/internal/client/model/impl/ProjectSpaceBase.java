@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
+import org.eclipse.emf.emfstore.client.changetracking.ESCommandStack;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
@@ -57,7 +58,6 @@ import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.ConflictResolver;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording.NotificationRecorder;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
@@ -582,7 +582,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void init() {
 		initCrossReferenceAdapter();
 
-		final EMFStoreCommandStack commandStack = (EMFStoreCommandStack)
+		final ESCommandStack commandStack = (ESCommandStack)
 			ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack();
 
 		fileTransferManager = new FileTransferManager(this);
@@ -1289,7 +1289,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			getProject().eAdapters().remove(crossReferenceAdapter);
 		}
 
-		final EMFStoreCommandStack commandStack = (EMFStoreCommandStack)
+		final ESCommandStack commandStack = (ESCommandStack)
 			ESWorkspaceProviderImpl.getInstance().getEditingDomain().getCommandStack();
 		commandStack.removeCommandStackObserver(operationManager);
 		commandStack.removeCommandStackObserver(resourcePersister);
