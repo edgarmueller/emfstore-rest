@@ -236,7 +236,6 @@ public class ReservationToConflictBucketCandidateMap {
 						final Map.Entry<?, ?> mapEntry = (Entry<?, ?>) eObject;
 						createdMapEntries.put(id, mapEntry);
 					}
-					// reservationSet.addFullReservation(modelElementId.getId());
 				}
 			}
 
@@ -279,7 +278,7 @@ public class ReservationToConflictBucketCandidateMap {
 
 				if (isCreatedMapEntry(otherModelElement)) {
 					final Map.Entry<?, ?> mapEntry = getCreatedMapEntry(otherModelElement);
-					// currently we only can handle keys which have a valid string representation
+					// FIXME: currently we only can handle keys which have a valid string representation
 					reservationSet.addMapKeyReservation(modelElementId, featureName,
 						mapEntry.getKey().toString());
 				}
