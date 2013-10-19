@@ -78,7 +78,7 @@ public interface IdEObjectCollection extends EObject, ESObjectContainer<ModelEle
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#contains(org.eclipse.emf.emfstore.common.model.ESModelElementId)
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#contains(java.lang.Object)
 	 */
 	boolean contains(ModelElementId eObjectId);
 
@@ -94,7 +94,7 @@ public interface IdEObjectCollection extends EObject, ESObjectContainer<ModelEle
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElement(org.eclipse.emf.emfstore.common.model.ESModelElementId)
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElement(java.lang.Object)
 	 */
 	EObject getModelElement(ModelElementId modelElementId);
 
