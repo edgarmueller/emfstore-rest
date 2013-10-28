@@ -71,7 +71,7 @@ public class FileInfo {
 	}
 
 	/**
-	 * Get the Workspace directory.
+	 * Gets the Workspace directory with an pending {@link File#separatorChar} at the end.
 	 * 
 	 * @return the workspace directory path string
 	 */
