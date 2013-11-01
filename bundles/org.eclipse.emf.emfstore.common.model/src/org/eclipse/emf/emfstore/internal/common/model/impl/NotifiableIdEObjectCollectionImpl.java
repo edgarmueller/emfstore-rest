@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.emfstore.common.ESSafeRunnable;
 import org.eclipse.emf.emfstore.common.ESSafeRunner;
@@ -93,19 +94,28 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver#modelElementAdded(org.eclipse.emf.emfstore.internal.common.model.Project,
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NotifiableIdEObjectCollection#modelElementAdded(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
-	public void modelElementAdded(final IdEObjectCollection project, final EObject eObject) {
+	public void modelElementAdded(final IdEObjectCollection collection, final EObject eObject) {
+		addToResource(eObject);
 		addModelElementAndChildrenToCache(eObject);
-		EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
+		final EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
 			public void run(IdEObjectCollectionChangeObserver projectChangeObserver) {
-				projectChangeObserver.modelElementAdded(project, eObject);
+				projectChangeObserver.modelElementAdded(collection, eObject);
 			}
 		};
 		notifyIdEObjectCollectionChangeObservers(command);
+	}
+
+	private void addToResource(EObject eObject) {
+		final Resource resource = eObject.eResource();
+		if (resource != null && resource != eResource()) {
+			EcoreUtil.remove(eObject);
+		}
 	}
 
 	/**
@@ -124,9 +134,9 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	protected synchronized void notifyIdEObjectCollectionChangeObservers(
 		final EObjectChangeObserverNotificationCommand command) {
 		isNotifiying = true;
-		for (final IdEObjectCollectionChangeObserver changeObserver : this.observers) {
+		for (final IdEObjectCollectionChangeObserver changeObserver : observers) {
 
-			ESSafeRunnable code = new ESSafeRunnable() {
+			final ESSafeRunnable code = new ESSafeRunnable() {
 
 				public void run() {
 					command.run(changeObserver);
@@ -155,15 +165,15 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 			ESSafeRunner.run(code);
 		}
 		isNotifiying = false;
-		for (IdEObjectCollectionChangeObserver observer : this.observersToRemove) {
+		for (final IdEObjectCollectionChangeObserver observer : observersToRemove) {
 			removeIdEObjectCollectionChangeObserver(observer);
 		}
 
-		for (IdEObjectCollectionChangeObserver observer : this.observersToAttach) {
+		for (final IdEObjectCollectionChangeObserver observer : observersToAttach) {
 			addIdEObjectCollectionChangeObserver(observer);
 		}
 
-		this.observersToRemove.clear();
+		observersToRemove.clear();
 	}
 
 	@Override
@@ -172,12 +182,14 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 		if (changeNotifier == null) {
 			changeNotifier = new EObjectChangeNotifier(this, this);
 		}
-	};
+	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#initCaches(java.util.Map, java.util.Map)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl#initMapping(java.util.Map,
+	 *      java.util.Map)
 	 */
 	@Override
 	public void initMapping(Map<EObject, String> eObjectToIdMap, Map<String, EObject> idToEObjectMap) {
@@ -188,22 +200,23 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
-	 *      org.eclipse.emf.emfstore.internal.common.model.Project, org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver#notify(org.eclipse.emf.common.notify.Notification,
+	 *      org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection, org.eclipse.emf.ecore.EObject)
 	 */
 	public void notify(final Notification notification, final IdEObjectCollection project, final EObject modelElement) {
-		EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
+		final EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
 			public void run(IdEObjectCollectionChangeObserver projectChangeObserver) {
 				projectChangeObserver.notify(notification, project, modelElement);
 			}
 		};
 
-		Resource resource = modelElement.eResource();
+		final Resource resource = modelElement.eResource();
 
 		if (resource != null && resource instanceof ResourceImpl) {
-			ResourceImpl resourceImpl = (ResourceImpl) resource;
+			final ResourceImpl resourceImpl = (ResourceImpl) resource;
 			if (resourceImpl.isLoading()) {
 				return;
 			}
@@ -213,9 +226,10 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#addIdEObjectCollectionChangeObserver(org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NotifiableIdEObjectCollection#addIdEObjectCollectionChangeObserver(org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver)
 	 */
 	public synchronized void addIdEObjectCollectionChangeObserver(
 		IdEObjectCollectionChangeObserver eObjectChangeObserver) {
@@ -226,13 +240,14 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 			return;
 		}
 
-		this.observers.add(eObjectChangeObserver);
+		observers.add(eObjectChangeObserver);
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#removeIdEObjectCollectionChangeObserver(org.eclipse.emf.emfstore.internal.common.model.util.ProjectChangeObserver)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NotifiableIdEObjectCollection#removeIdEObjectCollectionChangeObserver(org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver)
 	 */
 	public synchronized void removeIdEObjectCollectionChangeObserver(
 		IdEObjectCollectionChangeObserver projectChangeObserver) {
@@ -240,7 +255,7 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 			observersToRemove.add(projectChangeObserver);
 			return;
 		}
-		this.observers.remove(projectChangeObserver);
+		observers.remove(projectChangeObserver);
 		exceptionThrowingObservers.remove(projectChangeObserver);
 		undetachableObservers.remove(projectChangeObserver);
 	}
@@ -256,16 +271,15 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	}
 
 	/**
-	 * Handle the removal of an element from the containment hierachy.
 	 * 
-	 * @param projectImpl
-	 *            the project
-	 * @param modelElement
-	 *            the model element
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.common.model.NotifiableIdEObjectCollection#modelElementRemoved(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
+	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	public void modelElementRemoved(final IdEObjectCollection projectImpl, final EObject modelElement) {
 		removeModelElementAndChildrenFromCache(modelElement);
-		EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
+		final EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
 			public void run(IdEObjectCollectionChangeObserver projectChangeObserver) {
 				projectChangeObserver.modelElementRemoved(projectImpl, modelElement);
 			}
@@ -284,11 +298,11 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 	@Override
 	public <T extends IdEObjectCollection> T copy() {
 
-		if (this.changeNotifier != null) {
-			this.changeNotifier.disableNotifications(true);
+		if (changeNotifier != null) {
+			changeNotifier.disableNotifications(true);
 		}
 
-		T result = super.copy();
+		final T result = super.copy();
 
 		if (changeNotifier != null) {
 			changeNotifier.disableNotifications(false);
