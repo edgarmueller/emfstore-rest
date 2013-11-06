@@ -112,7 +112,7 @@ public class LDAPVerifier extends AbstractAuthenticationControl {
 		props.put(Context.INITIAL_CONTEXT_FACTORY, DEFAULT_CTX);
 		props.put(Context.PROVIDER_URL, ldapUrl);
 		props.put("java.naming.ldap.factory.socket",
-			"org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.LDAPSSLSocketFactory");
+			LDAPSSLSocketFactory.class.getCanonicalName());
 
 		if (useSSL()) {
 			props.put(Context.SECURITY_PROTOCOL, "ssl");
