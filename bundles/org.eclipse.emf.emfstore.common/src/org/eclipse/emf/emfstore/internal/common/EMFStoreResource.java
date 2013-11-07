@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 /**
@@ -54,8 +55,8 @@ public class EMFStoreResource extends XMIResourceImpl {
 	 * 
 	 * @see org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl#createXMLHelper()
 	 */
-	// @Override
-	// protected XMLHelper createXMLHelper() {
-	// return new ESXMLResourceHelper(this);
-	// }
+	@Override
+	protected XMLHelper createXMLHelper() {
+		return new EMFStoreResourceHelper(this);
+	}
 }
