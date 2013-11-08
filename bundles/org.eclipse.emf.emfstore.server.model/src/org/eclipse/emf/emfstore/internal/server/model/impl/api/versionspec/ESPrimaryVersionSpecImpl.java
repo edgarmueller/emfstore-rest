@@ -47,7 +47,7 @@ public class ESPrimaryVersionSpecImpl extends ESVersionSpecImpl<ESPrimaryVersion
 	public boolean equals(Object object) {
 
 		if (object instanceof ESPrimaryVersionSpecImpl) {
-			ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl = ((ESPrimaryVersionSpecImpl) object);
+			final ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) object;
 			if (sameIdentifier(otherPrimaryVersionSpecImpl) && sameBranch(otherPrimaryVersionSpecImpl)) {
 				return true;
 			}
@@ -66,7 +66,7 @@ public class ESPrimaryVersionSpecImpl extends ESVersionSpecImpl<ESPrimaryVersion
 	}
 
 	private boolean sameBranch(ESPrimaryVersionSpecImpl otherPrimaryVersionSpecImpl) {
-		String branch = toInternalAPI().getBranch();
-		return branch != null && branch == otherPrimaryVersionSpecImpl.toInternalAPI().getBranch();
+		final String branch = toInternalAPI().getBranch();
+		return branch != null && branch.equals(otherPrimaryVersionSpecImpl.toInternalAPI().getBranch());
 	}
 }
