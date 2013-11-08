@@ -47,6 +47,10 @@ public final class OperationUtil {
 		return operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() == null;
 	}
 
+	public static boolean isCompositeWithMain(AbstractOperation operation) {
+		return operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() != null;
+	}
+
 	/**
 	 * Checks whether given operation is a reference operation.
 	 * 
