@@ -315,7 +315,12 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		resource.save(ModelUtil.getResourceSaveOptions());
 
 		final ESLocalProject localProject = ESWorkspaceProvider.INSTANCE.getWorkspace().createLocalProject("test");
-		localProject.getModelElements().add(league);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(league);
+				return null;
+			}
+		});
 		localProject.shareProject(usersession, new NullProgressMonitor());
 
 		assertTrue(localProject.isShared());
