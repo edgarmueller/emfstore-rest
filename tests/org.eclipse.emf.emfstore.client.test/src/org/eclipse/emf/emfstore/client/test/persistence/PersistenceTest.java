@@ -13,12 +13,18 @@ package org.eclipse.emf.emfstore.client.test.persistence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.common.EMFStoreResource;
+import org.eclipse.emf.emfstore.internal.common.EMFStoreResourceHelper;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
@@ -35,7 +41,8 @@ public class PersistenceTest extends WorkspaceTest {
 	@Test
 	public void testReinitWorkspace() throws SerializationException {
 		Configuration.getClientBehavior().setAutoSave(false);
-		Project originalProject = ModelUtil.clone(ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI()
+		final Project originalProject = ModelUtil.clone(ESWorkspaceProviderImpl.getInstance().getWorkspace()
+			.toInternalAPI()
 			.getProjectSpaces().get(0).getProject());
 
 		new EMFStoreCommand() {
@@ -49,9 +56,33 @@ public class PersistenceTest extends WorkspaceTest {
 			ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().get(0).getModelElements().size(), 1);
 		ESWorkspaceProviderImpl.getInstance().dispose();
 		ESWorkspaceProviderImpl.getInstance().load();
-		Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI();
-		Project project = internalWorkspace.getProjectSpaces().get(0).getProject();
+		final Workspace internalWorkspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI();
+		final Project project = internalWorkspace.getProjectSpaces().get(0).getProject();
 		assertTrue(ModelUtil.areEqual(project, originalProject));
 	}
 
+	/**
+	 * Checks whether the XMLHelper used by the {@link EMFStoreResource} is an {@link EMFStoreResourceHelper}.
+	 * 
+	 * @throws IOException
+	 */
+	@Test
+	public void testIsEMFStoreResourceHelperInUse() throws IOException {
+		final XMLHelper[] helper = new XMLHelper[1];
+		final EMFStoreResource resource = new EMFStoreResource(URI.createURI("foo")) {
+			/**
+			 * {@inheritDoc}
+			 * 
+			 * @see org.eclipse.emf.emfstore.internal.common.EMFStoreResource#createXMLHelper()
+			 */
+			@Override
+			protected XMLHelper createXMLHelper() {
+				final XMLHelper xmlHelper = super.createXMLHelper();
+				helper[0] = xmlHelper;
+				return xmlHelper;
+			}
+		};
+		resource.save(null);
+		assertTrue(EMFStoreResourceHelper.class.isInstance(helper[0]));
+	}
 }
