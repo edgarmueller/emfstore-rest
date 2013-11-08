@@ -14,13 +14,15 @@ package org.eclipse.emf.emfstore.client.test.api;
 import static org.eclipse.emf.emfstore.client.test.api.ClientTestUtil.noCommitCallback;
 import static org.eclipse.emf.emfstore.client.test.api.ClientTestUtil.noLogMessage;
 import static org.eclipse.emf.emfstore.client.test.api.ClientTestUtil.noProgressMonitor;
-import static org.eclipse.emf.emfstore.client.test.api.ClientTestUtil.noUpdateCallback;
 import static org.junit.Assert.assertEquals;
+
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.test.server.api.util.TestConflictResolver;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
@@ -55,19 +57,22 @@ public class BranchTest extends BaseSharedProjectTest {
 
 		// merge into trunk
 		// FIXME: merge API not yet available
-		((ESLocalProjectImpl) trunk).toInternalAPI().mergeBranch(
-			((ESPrimaryVersionSpecImpl) branchCommit).toInternalAPI(),
-			new TestConflictResolver(true, 0),
-			noProgressMonitor());
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				((ESLocalProjectImpl) trunk).toInternalAPI().mergeBranch(
+					((ESPrimaryVersionSpecImpl) branchCommit).toInternalAPI(),
+					new TestConflictResolver(true, 0),
+					noProgressMonitor());
+				return null;
+			}
+		});
 
 		trunk.commit(noProgressMonitor());
-
-		assertEquals(2, localProject.getModelElements().size());
 
 		dummyChange(localProject, "element 3");
 		localProject.commit(noProgressMonitor());
 
-		localProject.update(ESVersionSpec.FACTORY.createHEAD("mybranch"), noUpdateCallback(), noProgressMonitor());
+		assertEquals(3, localProject.getModelElements().size());
 	}
 
 	@Test
@@ -87,21 +92,29 @@ public class BranchTest extends BaseSharedProjectTest {
 
 		// merge trunk into branch
 		// FIXME: merge API not yet available
-		((ESLocalProjectImpl) localProject).toInternalAPI().mergeBranch(
-			((ESPrimaryVersionSpecImpl) trunkCommit).toInternalAPI(),
-			new TestConflictResolver(true, 0),
-			noProgressMonitor());
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				((ESLocalProjectImpl) localProject).toInternalAPI().mergeBranch(
+					((ESPrimaryVersionSpecImpl) trunkCommit).toInternalAPI(),
+					new TestConflictResolver(true, 0),
+					noProgressMonitor());
+				return null;
+			}
+		});
 
 		localProject.commit(noProgressMonitor());
 
 		assertEquals(1, localProject.getModelElements().size());
-
-		localProject.update(noProgressMonitor());
 	}
 
-	private static void dummyChange(ESLocalProject localProject, String name) {
+	private static void dummyChange(final ESLocalProject localProject, String name) {
 		final TestElement testElement = TestmodelFactory.eINSTANCE.createTestElement();
 		testElement.setName(name);
-		localProject.getModelElements().add(testElement);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				localProject.getModelElements().add(testElement);
+				return null;
+			}
+		});
 	}
 }
