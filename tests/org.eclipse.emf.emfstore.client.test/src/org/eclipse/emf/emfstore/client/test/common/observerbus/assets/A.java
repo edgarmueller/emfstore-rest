@@ -14,7 +14,7 @@ import org.eclipse.emf.emfstore.common.ESObserver;
 
 public interface A extends ESObserver {
 
-	public int returnTwo();
+	int returnTwo();
 
-	public String returnFoobarOrException();
+	String returnFoobarOrException();
 }
