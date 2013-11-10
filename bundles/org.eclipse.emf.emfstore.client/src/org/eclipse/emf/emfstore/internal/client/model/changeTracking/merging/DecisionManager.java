@@ -190,11 +190,11 @@ public class DecisionManager {
 			} else if (isComposite(my) || isComposite(their)) {
 				conflict = createCompositeConflict(conf);
 
-			} else if (isCompositeWithMain(my) || isCompositeWithMain(their)) {
-				conflict = createCompositeConflict(conf);
-
 			} else if (isDelete(my) || isDelete(their)) {
 				conflict = createDeleteOtherConflict(conf);
+
+			} else if (isCompositeWithMain(my) || isCompositeWithMain(their)) {
+				conflict = createCompositeConflict(conf);
 			}
 
 			if (conflict != null) {
