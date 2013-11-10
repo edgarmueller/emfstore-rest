@@ -83,13 +83,20 @@ public class CompositeConflict extends VisualConflict {
 	 */
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {
-		ConflictOption myOption = new ConflictOption("", OptionType.MyOperation);
+		final ConflictOption myOption = new ConflictOption("", OptionType.MyOperation);
 		myOption.addOperations(getMyOperations());
-		ConflictOption theirOption = new ConflictOption("", OptionType.TheirOperation);
+		final ConflictOption theirOption = new ConflictOption("", OptionType.TheirOperation);
 		theirOption.addOperations(getTheirOperations());
 
-		String composite = ((CompositeOperation) getLeftOperation()).getCompositeName();
+		String composite = null;
 		String other = null;
+		if (getLeftOperation() instanceof CompositeOperation) {
+			composite = ((CompositeOperation) getLeftOperation()).getCompositeName();
+		} else {
+			composite = "Change related to "
+				+ DecisionUtil.getClassAndName(getDecisionManager().getModelElement(
+					getLeftOperation().getModelElementId()));
+		}
 		if (getRightOperation() instanceof CompositeOperation) {
 			other = ((CompositeOperation) getRightOperation()).getCompositeName();
 		} else {
