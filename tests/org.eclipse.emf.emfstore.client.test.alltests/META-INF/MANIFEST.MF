@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: All EMFStore Client Tests
 Bundle-SymbolicName: org.eclipse.emf.emfstore.client.test.alltests
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 1.0.2.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.client.test.alltests.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.emfstore.client.test;bundle-version="[1.0.1,2.0.0)",
