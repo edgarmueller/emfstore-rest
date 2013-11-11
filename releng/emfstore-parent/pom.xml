@@ -5,7 +5,7 @@
 
   <groupId>org.eclipse.emf.emfstore</groupId>
   <artifactId>emfstore-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
@@ -13,7 +13,7 @@
     <junit-version>4.8.2</junit-version>
     <maven-checkstyle-version>2.10</maven-checkstyle-version>
     <jacoco-version>0.5.7.201204190339</jacoco-version>
-	<emfstore-version>1.0.1-SNAPSHOT</emfstore-version>
+	<emfstore-version>1.0.2-SNAPSHOT</emfstore-version>
 	<!-- Properties to enable jacoco code coverage analysis with sonar -->
 	<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 	<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
