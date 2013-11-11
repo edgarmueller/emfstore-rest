@@ -11,5 +11,6 @@ Require-Bundle: org.eclipse.emf.compare;bundle-version="[1.3.3,2.0.0)";visibilit
  org.eclipse.emf.compare.ui;bundle-version="[1.3.3,2.0.0)";visibility:=reexport,
  org.eclipse.emf.compare.diff.edit;bundle-version="[1.3.3,2.0.0)",
  org.eclipse.compare;bundle-version="[3.5.300,4.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.client;bundle-version="[1.0.1,2.0.0)",
- org.eclipse.emf.emfstore.client.ui;bundle-version="[1.0.1,2.0.0)"
+ org.eclipse.emf.emfstore.client;bundle-version="[1.0.2,2.0.0)",
+ org.eclipse.emf.emfstore.client.ui;bundle-version="[1.0.2,2.0.0)"
+Export-Package: org.eclipse.emf.emfstore.client.ui.historybrowsercomparator;version="1.0.2";x-internal:=true

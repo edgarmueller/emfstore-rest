@@ -8,12 +8,16 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)";visibili
  org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Export-Package: org.apache.commons.io,
- org.apache.commons.io.output,
- org.apache.commons.lang,
- org.eclipse.emf.emfstore.common,
- org.eclipse.emf.emfstore.common.extensionpoint,
- org.eclipse.emf.emfstore.internal.common;
+Export-Package: org.apache.commons.io;version="1.0.2",
+ org.apache.commons.io.comparator;version="2.0.1",
+ org.apache.commons.io.filefilter;version="2.0.1",
+ org.apache.commons.io.input;version="2.0.1",
+ org.apache.commons.io.monitor;version="2.0.1",
+ org.apache.commons.io.output;version="1.0.2",
+ org.apache.commons.lang;version="1.0.2",
+ org.eclipse.emf.emfstore.common;version="1.0.2",
+ org.eclipse.emf.emfstore.common.extensionpoint;version="1.0.2",
+ org.eclipse.emf.emfstore.internal.common;version="1.0.2";
   x-friends:="org.eclipse.emf.emfstore.server.model,
    org.eclipse.emf.emfstore.client,
    org.eclipse.emf.emfstore.client.test,
@@ -21,7 +25,7 @@ Export-Package: org.apache.commons.io,
    org.eclipse.emf.emfstore.client.ui,
    org.eclipse.emf.emfstore.example.merging,
    org.eclipse.emf.emfstore.common.model",
- org.eclipse.emf.emfstore.internal.common.api;
+ org.eclipse.emf.emfstore.internal.common.api;version="1.0.2";
   x-friends:="org.eclipse.emf.emfstore.client.ui,
    org.eclipse.emf.emfstore.server,
    org.eclipse.emf.emfstore.server.model,
@@ -30,7 +34,7 @@ Export-Package: org.apache.commons.io,
    org.eclipse.emf.emfstore.common.model,
    org.eclipse.emf.emfstore.ecore,
    org.eclipse.emf.emfstore.example.merging",
- org.eclipse.emf.emfstore.internal.common.observer;x-friends:="org.eclipse.emf.emfstore.client.ui,org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test"
+ org.eclipse.emf.emfstore.internal.common.observer;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.ui,org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test"
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: lib/commons-io-2.0.1.jar,
