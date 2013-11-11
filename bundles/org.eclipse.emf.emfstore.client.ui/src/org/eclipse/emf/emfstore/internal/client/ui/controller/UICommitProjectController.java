@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
@@ -32,12 +31,12 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * UI-dependent commit controller for committing pending changes on a {@link ProjectSpace}.<br/>
+ * UI-dependent commit controller for committing pending changes on a {@link ESLocalProject}.<br/>
  * The controller presents the user a dialog will all changes made before he is
  * able to confirm the commit. If no changes have been made by the user a
  * information dialog is presented that states that there are no pending changes
@@ -72,9 +71,9 @@ public class UICommitProjectController extends
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#noLocalChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace)
+	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#noLocalChanges(org.eclipse.emf.emfstore.client.ESLocalProject)
 	 */
-	public void noLocalChanges(ESLocalProject projectSpace) {
+	public void noLocalChanges(ESLocalProject localProject) {
 		RunInUI.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				MessageDialog.openInformation(getShell(), "No local changes",
@@ -95,7 +94,7 @@ public class UICommitProjectController extends
 
 		final String message = "Your project is outdated, you need to update before commit. Do you want to update now?";
 
-		boolean shouldUpdate = RunInUI.runWithResult(new Callable<Boolean>() {
+		final boolean shouldUpdate = RunInUI.runWithResult(new Callable<Boolean>() {
 			public Boolean call() throws Exception {
 				return MessageDialog.openConfirm(getShell(), "Confirmation",
 					message);
@@ -103,8 +102,8 @@ public class UICommitProjectController extends
 		});
 
 		if (shouldUpdate) {
-			ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.localProject.getBaseVersion();
-			ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
+			final ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.localProject.getBaseVersion();
+			final ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
 				.executeSub(progressMonitor);
 
 			if (version.equals(baseVersion)) {
@@ -119,8 +118,9 @@ public class UICommitProjectController extends
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
-	 *      org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage)
+	 * @see org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      org.eclipse.emf.emfstore.server.model.ESChangePackage,
+	 *      org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping)
 	 */
 	public boolean inspectChanges(
 		ESLocalProject localProject,
@@ -159,14 +159,11 @@ public class UICommitProjectController extends
 			}
 		});
 
-		if (dialogReturnValue == Dialog.OK) {
+		if (dialogReturnValue == Window.OK) {
 			RunESCommand.run(new Callable<Void>() {
 				public Void call() throws Exception {
 
-					// suppress duplicates
-					if (!projectSpace.getOldLogMessages().contains(commitDialog.getLogText())) {
-						projectSpace.getOldLogMessages().add(commitDialog.getLogText());
-					}
+					projectSpace.getOldLogMessages().add(commitDialog.getLogText());
 
 					// remove older messages
 					if (projectSpace.getOldLogMessages().size() > 10) {
@@ -199,13 +196,13 @@ public class UICommitProjectController extends
 		throws ESException {
 		try {
 
-			ESPrimaryVersionSpec primaryVersionSpec = localProject.commit(
+			final ESPrimaryVersionSpec primaryVersionSpec = localProject.commit(
 				null,
 				UICommitProjectController.this,
 				progressMonitor);
 			return primaryVersionSpec;
 
-		} catch (ESUpdateRequiredException e) {
+		} catch (final ESUpdateRequiredException e) {
 			// project is out of date and user canceled update
 			// ignore
 		} catch (final ESException e) {
