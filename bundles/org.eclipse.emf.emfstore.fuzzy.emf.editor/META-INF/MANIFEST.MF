@@ -8,9 +8,9 @@ Bundle-Activator: org.eclipse.emf.emfstore.fuzzy.emf.config.presentation.ConfigE
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.emf.emfstore.fuzzy.emf.config.presentation
+Export-Package: org.eclipse.emf.emfstore.fuzzy.emf.config.presentation;version="1.0.2"
 Require-Bundle: org.eclipse.core.resources;bundle-version="[3.7.0,4.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.fuzzy.emf.edit;visibility:=reexport,
+ org.eclipse.emf.emfstore.fuzzy.emf.edit;bundle-version="[1.0.2,2.0.0)";visibility:=reexport,
  org.eclipse.emf.edit.ui;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="[3.7.0,4.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
