@@ -13,8 +13,12 @@ package org.eclipse.emf.emfstore.bowling.impl;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -24,6 +28,7 @@ import org.eclipse.emf.emfstore.bowling.BowlingPackage;
 import org.eclipse.emf.emfstore.bowling.Gender;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.TournamentType;
+import org.eclipse.emf.emfstore.bowling.util.BowlingValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -262,10 +267,11 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setName(String newName) {
-		String oldName = name;
+		final String oldName = name;
 		name = newName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__NAME, oldName, name));
+		}
 	}
 
 	/**
@@ -285,11 +291,12 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setDateOfBirth(Date newDateOfBirth) {
-		Date oldDateOfBirth = dateOfBirth;
+		final Date oldDateOfBirth = dateOfBirth;
 		dateOfBirth = newDateOfBirth;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__DATE_OF_BIRTH, oldDateOfBirth,
 				dateOfBirth));
+		}
 	}
 
 	/**
@@ -309,10 +316,11 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setHeight(double newHeight) {
-		double oldHeight = height;
+		final double oldHeight = height;
 		height = newHeight;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__HEIGHT, oldHeight, height));
+		}
 	}
 
 	/**
@@ -332,11 +340,12 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setIsProfessional(boolean newIsProfessional) {
-		boolean oldIsProfessional = isProfessional;
+		final boolean oldIsProfessional = isProfessional;
 		isProfessional = newIsProfessional;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__IS_PROFESSIONAL,
 				oldIsProfessional, isProfessional));
+		}
 	}
 
 	/**
@@ -369,11 +378,12 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setNumberOfVictories(int newNumberOfVictories) {
-		int oldNumberOfVictories = numberOfVictories;
+		final int oldNumberOfVictories = numberOfVictories;
 		numberOfVictories = newNumberOfVictories;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__NUMBER_OF_VICTORIES,
 				oldNumberOfVictories, numberOfVictories));
+		}
 	}
 
 	/**
@@ -407,11 +417,12 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setWinLossRatio(BigDecimal newWinLossRatio) {
-		BigDecimal oldWinLossRatio = winLossRatio;
+		final BigDecimal oldWinLossRatio = winLossRatio;
 		winLossRatio = newWinLossRatio;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__WIN_LOSS_RATIO,
 				oldWinLossRatio, winLossRatio));
+		}
 	}
 
 	/**
@@ -431,14 +442,42 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setGender(Gender newGender) {
-		Gender oldGender = gender;
+		final Gender oldGender = gender;
 		gender = newGender == null ? GENDER_EDEFAULT : newGender;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__GENDER, oldGender, gender));
+		}
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Validates the player.
+	 * 
+	 * @param chain the diagnostic chain
+	 * @param context the context
+	 * @return <code>true</code> if no validation errors, <code>false</code> if validation errors
+	 *         <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean validate(DiagnosticChain chain, Map<?, ?> context) {
+		if (getHeight() > 10) {
+			if (chain != null) {
+				chain.add
+					(new BasicDiagnostic
+					(Diagnostic.ERROR,
+						BowlingValidator.DIAGNOSTIC_SOURCE,
+						BowlingValidator.PLAYER__VALIDATE, "Height seems too big.", //$NON-NLS-1$
+						new Object[] { this, BowlingPackage.eINSTANCE.getPlayer_Height() }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * .
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -591,10 +630,11 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy())
+		if (eIsProxy()) {
 			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", dateOfBirth: ");
