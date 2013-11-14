@@ -2,6 +2,13 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
+         point="org.eclipse.emf.emfstore.client.resourceSetProvider">
+      <resourceSetProvider
+            class="org.eclipse.emf.emfstore.mongodb.client.MongoDBClientResourceSetProvider"
+            priority="10">
+      </resourceSetProvider>
+   </extension>
+   <extension
          point="org.eclipse.emf.emfstore.server.resourceSetProvider">
       <resourceSetProvider
             class="org.eclipse.emf.emfstore.mongodb.server.MongoDBServerResourceSetProvider"

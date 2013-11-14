@@ -11,9 +11,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.memory;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,47 +91,25 @@ public class MemoryLoadTest {
 	 * Test for solely sharing projects.
 	 * 
 	 * @throws ESException in case of an error
-	 * @throws IOException
 	 */
 	@Test
-	public void shareProjectLoadTest() throws ESException, IOException {
-		// shareProjectsLoadTest(100, 1000);
+	public void shareProjectLoadTest() throws ESException {
+		shareProjectsLoadTest(100, 1000);
 		// shareProjectsLoadTest(1000, 10);
-		shareProjectsLoadTest(100000, 1000, "shareMongoNeu");
+		// shareProjectsLoadTest(10000, 1000);
 	}
 
-	private void shareProjectsLoadTest(int minProjectSize, int projectCount, String fileName) throws ESException,
-		IOException {
-		final File file = new File("D:" + File.separator + "Repositories" + File.separator + "misc_joe"
-			+ File.separator + "DA" + File.separator + "messungen" + File.separator + fileName + ".csv");
-		if (!file.createNewFile()) {
-			throw new RuntimeException();
-		}
-
-		final FileWriter fileWriter = new FileWriter(file);
-		final BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-		bufferedWriter.write("projectsShared;usedTime;usedMemory");
-
+	private void shareProjectsLoadTest(int minProjectSize, int projectCount) throws ESException {
 		for (int i = 0; i < projectCount; i++) {
-			final ESLocalProject project = generateRandomProject(minProjectSize);
+			final ESLocalProject project = this.generateRandomProject(minProjectSize);
 			long time = System.nanoTime();
 			project.shareProject(runningEMFStoreRule.defaultSession(), null);
 			time = System.nanoTime() - time;
-			final long usedMemoryInMiB = usedMemoryInMib();
-			final int projectsShared = i + 1;
-
-			bufferedWriter.newLine();
-			bufferedWriter.write(projectsShared + ";" + time + ";" + usedMemoryInMiB);
-			bufferedWriter.flush();
-
-			// log("Shared Project: " + project.getProjectName() + " ,Memory: " + usedMemoryInMiB + " MiB");
+			log("Shared Project: " + project.getProjectName() + " ,Memory: " + usedMemoryInMib() + " MiB");
 
 			deleteLocallyIfNeeded(project);
 			log("Shared Project: " + project.getProjectName() + " ,Memory: " + usedMemoryInMib() + " MiB");
 		}
-
-		bufferedWriter.close();
 	}
 
 	/**
@@ -149,11 +124,11 @@ public class MemoryLoadTest {
 	}
 
 	private void shareCheckoutProjectsLoadTest(int minProjectSize, int projectCount) throws ESException {
-		final long start = currentProjectCount;
-		final int[] sizes = new int[projectCount];
+		long start = currentProjectCount;
+		int[] sizes = new int[projectCount];
 
 		for (int i = 0; i < projectCount; i++) {
-			final ESLocalProject project = generateRandomProject(minProjectSize);
+			final ESLocalProject project = this.generateRandomProject(minProjectSize);
 
 			project.shareProject(runningEMFStoreRule.defaultSession(), null);
 			deleteLocallyIfNeeded(project);
@@ -163,7 +138,7 @@ public class MemoryLoadTest {
 		}
 
 		int i = 0;
-		for (final ESRemoteProject remoteProject : runningEMFStoreRule.server().getRemoteProjects(
+		for (ESRemoteProject remoteProject : runningEMFStoreRule.server().getRemoteProjects(
 			runningEMFStoreRule.defaultSession())) {
 			final ESLocalProject project = remoteProject.checkout("Generated project_" + (start + i), MONITOR);
 			Assert.assertEquals("Generated project_" + (start + i), project.getProjectName());
@@ -180,54 +155,29 @@ public class MemoryLoadTest {
 	 * Test for committing changes.
 	 * 
 	 * @throws ESException in case of an error
-	 * @throws IOException
 	 */
 	@Test
-	public void commitLoadTest() throws ESException, IOException {
-		// commitLoadTest(1000, 1, 200, 1000);
-		commitLoadTest(1000, 1, 3334, 3000, "commitXMLneu");
+	public void commitLoadTest() throws ESException {
+		commitLoadTest(1000, 1, 200, 1000);
+		// commitLoadTest(1000, 1, 2500, 1000);
 	}
 
-	private void commitLoadTest(int minProjectSize, int projectCount, int historySize, int minChangeSize,
-		String fileName)
-		throws ESException, IOException {
-
-		final File file = new File("D:" + File.separator + "Repositories" + File.separator + "misc_joe"
-			+ File.separator + "DA" + File.separator + "messungen" + File.separator + fileName + ".csv");
-		if (!file.createNewFile()) {
-			throw new RuntimeException();
-		}
-
-		final FileWriter fileWriter = new FileWriter(file);
-		final BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-		bufferedWriter.write("changesCommitted;usedTime;usedMemory");
-
+	private void commitLoadTest(int minProjectSize, int projectCount, int historySize, int minChangeSize)
+		throws ESException {
 		for (int i = 0; i < projectCount; i++) {
 
-			final ESLocalProject project = generateRandomProject(minProjectSize);
+			final ESLocalProject project = this.generateRandomProject(minProjectSize);
 			project.shareProject(runningEMFStoreRule.defaultSession(), null);
 
 			for (int z = 0; z < historySize; z++) {
 				mutateProject(project, minChangeSize);
-
-				long time = System.nanoTime();
 				commitProject(project);
-				time = System.nanoTime() - time;
-				final long usedMemoryInMiB = usedMemoryInMib();
-				final int projectsShared = i + 1;
-
-				bufferedWriter.newLine();
-				bufferedWriter.write(projectsShared + ";" + time + ";" + usedMemoryInMiB);
-				bufferedWriter.flush();
 
 				log("Committed Change: " + z + " of Project " + project.getProjectName() + " ,Memory: "
-					+ usedMemoryInMiB + " MiB");
+					+ usedMemoryInMib() + " MiB");
 			}
 			deleteLocallyIfNeeded(project);
 		}
-
-		bufferedWriter.close();
 	}
 
 	/**
@@ -248,10 +198,10 @@ public class MemoryLoadTest {
 
 		for (int i = 0; i < projectCount; i++) {
 
-			final ESLocalProject project = generateRandomProject(minProjectSize);
+			final ESLocalProject project = this.generateRandomProject(minProjectSize);
 			project.shareProject(runningEMFStoreRule.defaultSession(), null);
 
-			final List<ESPrimaryVersionSpec> versions = new ArrayList<ESPrimaryVersionSpec>();
+			List<ESPrimaryVersionSpec> versions = new ArrayList<ESPrimaryVersionSpec>();
 
 			for (int z = 0; z < historySize; z++) {
 				mutateProject(project, minChangeSize);
@@ -265,7 +215,7 @@ public class MemoryLoadTest {
 			for (int x = 0; x < versions.size(); x += checkoutStep) {
 				log("Checking out version: " + versions.get(x).getIdentifier());
 
-				final ESLocalProject projectCopy = project.getRemoteProject().checkout(
+				ESLocalProject projectCopy = project.getRemoteProject().checkout(
 					project.getProjectName() + "_Copy" + x,
 					runningEMFStoreRule.defaultSession(),
 					versions.get(x), MONITOR);
@@ -292,15 +242,15 @@ public class MemoryLoadTest {
 
 		for (int i = 0; i < projectCount; i++) {
 
-			final ESLocalProject project = generateRandomProject(minProjectSize);
+			final ESLocalProject project = this.generateRandomProject(minProjectSize);
 			project.shareProject(runningEMFStoreRule.defaultSession(), null);
 
-			final ESLocalProject projectSecondCheckout = project.getRemoteProject().checkout(
+			ESLocalProject projectSecondCheckout = project.getRemoteProject().checkout(
 				project.getProjectName() + "_SecondCheckout_" + i,
 				runningEMFStoreRule.defaultSession(),
 				project.getBaseVersion(), null);
 
-			final List<ESVersionSpec> versions = new ArrayList<ESVersionSpec>();
+			List<ESVersionSpec> versions = new ArrayList<ESVersionSpec>();
 
 			for (int z = 0; z < historySize; z++) {
 				mutateProject(project, minChangeSize);
@@ -335,10 +285,10 @@ public class MemoryLoadTest {
 
 		for (int i = 0; i < projectCount; i++) {
 
-			final ESLocalProject project = generateRandomProject(minProjectSize);
+			final ESLocalProject project = this.generateRandomProject(minProjectSize);
 			project.shareProject(runningEMFStoreRule.defaultSession(), null);
 
-			final List<VersionSpec> versions = new ArrayList<VersionSpec>();
+			List<VersionSpec> versions = new ArrayList<VersionSpec>();
 
 			for (int z = 0; z < historySize; z++) {
 				mutateProject(project, minChangeSize);
@@ -355,12 +305,12 @@ public class MemoryLoadTest {
 	}
 
 	private long usedMemoryInMib() {
-		return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() >> 20;
+		return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20;
 	}
 
 	private ESLocalProject generateRandomProject(int minProjectSize) {
-		final String projectName = "Generated project_" + currentProjectCount;
-		final Project project = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject();
+		String projectName = "Generated project_" + currentProjectCount;
+		Project project = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE.createProject();
 
 		final ModelMutatorConfiguration config = createModelMutatorConfigurationRandom(modelKey,
 			project,
@@ -374,7 +324,7 @@ public class MemoryLoadTest {
 			}
 		}.run(false);
 
-		final ProjectSpace projectSpace = ((ESWorkspaceImpl) runningEMFStoreRule.connectedWorkspace()).toInternalAPI()
+		ProjectSpace projectSpace = ((ESWorkspaceImpl) runningEMFStoreRule.connectedWorkspace()).toInternalAPI()
 			.importProject(
 				project,
 				projectName, "");
@@ -386,8 +336,8 @@ public class MemoryLoadTest {
 	private void mutateProject(final ESLocalProject project, int minChangeSize) {
 
 		if (currentProjectConfiguration == null
-			|| currentProjectConfiguration.getRootEObject() != ((ESLocalProjectImpl) project).toInternalAPI()
-				.getProject()) {
+			|| (currentProjectConfiguration.getRootEObject() != ((ESLocalProjectImpl) project).toInternalAPI()
+				.getProject())) {
 
 			currentProjectConfiguration = createModelMutatorConfigurationRandom(modelKey,
 				((ESLocalProjectImpl) project).toInternalAPI().getProject(),
@@ -401,7 +351,7 @@ public class MemoryLoadTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				final long time = System.currentTimeMillis();
+				long time = System.currentTimeMillis();
 				ModelMutator.changeModel(mmc);
 				System.out.println("Changed model: " + (System.currentTimeMillis() - time) / 1000.0 + "sec");
 			}
@@ -411,13 +361,13 @@ public class MemoryLoadTest {
 	private ModelMutatorConfiguration createModelMutatorConfigurationRandom(String modelKey, EObject rootObject,
 		int minObjectsCount, long seed) {
 
-		final ModelMutatorConfiguration config = new ModelMutatorConfiguration(ModelMutatorUtil.getEPackage(modelKey),
+		ModelMutatorConfiguration config = new ModelMutatorConfiguration(ModelMutatorUtil.getEPackage(modelKey),
 			rootObject, seed);
 
 		config.setIgnoreAndLog(false);
 		config.setMinObjectsCount(minObjectsCount);
 
-		final List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
+		List<EStructuralFeature> eStructuralFeaturesToIgnore = new ArrayList<EStructuralFeature>();
 
 		config.setEditingDomain(((ESWorkspaceImpl) runningEMFStoreRule.connectedWorkspace()).toInternalAPI()
 			.getEditingDomain());
@@ -431,7 +381,7 @@ public class MemoryLoadTest {
 			protected ESPrimaryVersionSpec doRun() {
 				try {
 					return project.commit(null);
-				} catch (final ESException e) {
+				} catch (ESException e) {
 					Assert.fail();
 					return null;
 				}
@@ -443,9 +393,9 @@ public class MemoryLoadTest {
 		if (!keepLocalData) {
 			try {
 				project.delete(null);
-			} catch (final ESException e) {
+			} catch (ESException e) {
 				Assert.fail();
-			} catch (final IOException e) {
+			} catch (IOException e) {
 				Assert.fail();
 			}
 		}
