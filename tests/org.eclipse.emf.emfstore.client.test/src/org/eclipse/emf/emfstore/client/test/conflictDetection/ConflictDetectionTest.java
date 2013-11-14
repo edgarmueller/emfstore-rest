@@ -51,10 +51,10 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	public ProjectSpace cloneProjectSpace(final ProjectSpace ps) {
 
 		final Workspace workspace = ESWorkspaceProviderImpl.getInstance().getWorkspace().toInternalAPI();
-		ProjectSpace result = new EMFStoreCommandWithResult<ProjectSpace>() {
+		final ProjectSpace result = new EMFStoreCommandWithResult<ProjectSpace>() {
 			@Override
 			protected ProjectSpace doRun() {
-				Project clonedProject = ModelUtil.clone(ps.getProject());
+				final Project clonedProject = ModelUtil.clone(ps.getProject());
 				return workspace.importProject(clonedProject, "clonedProject", "cloned Project");
 			}
 		}.run(false);
@@ -70,7 +70,7 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	protected AbstractOperation checkAndGetOperation(Class<? extends AbstractOperation> clazz) {
 		assertEquals(getProjectSpace().getOperations().size(), 1);
 		assertTrue(clazz.isInstance(getProjectSpace().getOperations().get(0)));
-		AbstractOperation operation = getProjectSpace().getOperations().get(0);
+		final AbstractOperation operation = getProjectSpace().getOperations().get(0);
 		clearOperations();
 		assertEquals(getProjectSpace().getOperations().size(), 0);
 		return operation;
@@ -84,29 +84,29 @@ public abstract class ConflictDetectionTest extends WorkspaceTest {
 	 * @return boolean
 	 */
 	protected boolean doConflict(AbstractOperation opA, AbstractOperation opB) {
-		ConflictDetector conflictDetector = new ConflictDetector();
-		ChangePackage changePackage1 = VersioningFactory.eINSTANCE.createChangePackage();
+		final ConflictDetector conflictDetector = new ConflictDetector();
+		final ChangePackage changePackage1 = VersioningFactory.eINSTANCE.createChangePackage();
 		changePackage1.getOperations().add(opA);
-		ChangePackage changePackage2 = VersioningFactory.eINSTANCE.createChangePackage();
+		final ChangePackage changePackage2 = VersioningFactory.eINSTANCE.createChangePackage();
 		changePackage2.getOperations().add(opB);
 
-		ChangeConflictSet conflictSet = conflictDetector.calculateConflicts(Arrays.asList(changePackage1),
+		final ChangeConflictSet conflictSet = conflictDetector.calculateConflicts(Arrays.asList(changePackage1),
 			Arrays.asList(changePackage2),
 			ModelFactory.eINSTANCE.createProject());
 		return conflictSet.getConflictBuckets().size() > 0;
 	}
 
 	public Set<AbstractOperation> getConflicts(List<AbstractOperation> ops1, List<AbstractOperation> ops2) {
-		ChangePackage changePackage1 = VersioningFactory.eINSTANCE.createChangePackage();
+		final ChangePackage changePackage1 = VersioningFactory.eINSTANCE.createChangePackage();
 		changePackage1.getOperations().addAll(ops1);
-		ChangePackage changePackage2 = VersioningFactory.eINSTANCE.createChangePackage();
+		final ChangePackage changePackage2 = VersioningFactory.eINSTANCE.createChangePackage();
 		changePackage2.getOperations().addAll(ops2);
-		Project project = ModelFactory.eINSTANCE.createProject();
-		ChangeConflictSet conflicts = new ConflictDetector().calculateConflicts(Arrays.asList(changePackage1),
+		final Project project = ModelFactory.eINSTANCE.createProject();
+		final ChangeConflictSet conflicts = new ConflictDetector().calculateConflicts(Arrays.asList(changePackage1),
 			Arrays.asList(changePackage2), project);
-		LinkedHashSet<AbstractOperation> result = new LinkedHashSet<AbstractOperation>();
-		for (ConflictBucket conflictBucket : conflicts.getConflictBuckets()) {
-			Set<AbstractOperation> myOperations = conflictBucket.getMyOperations();
+		final LinkedHashSet<AbstractOperation> result = new LinkedHashSet<AbstractOperation>();
+		for (final ConflictBucket conflictBucket : conflicts.getConflictBuckets()) {
+			final Set<AbstractOperation> myOperations = conflictBucket.getMyOperations();
 			result.addAll(myOperations);
 		}
 		return result;

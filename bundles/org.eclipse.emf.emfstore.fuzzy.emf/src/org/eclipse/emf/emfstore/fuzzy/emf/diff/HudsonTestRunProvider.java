@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * JulianSommerfeldt
+ * Julian Sommerfeldt - initial APi and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.diff;
 
@@ -40,13 +40,13 @@ public class HudsonTestRunProvider extends TestRunProvider {
 
 	private static SAXReader saxReader = new SAXReader();
 
-	private String hudsonUrl;
-
 	private static String jobUrl;
 
-	private int firstBuildNumber;
+	private String hudsonUrl;
 
-	private int secondBuildNumber;
+	private final int firstBuildNumber;
+
+	private final int secondBuildNumber;
 
 	/**
 	 * The prefix for hudson peroperties.
@@ -133,10 +133,10 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	}
 
 	private static String getHudsonUrl() {
-		String port = FuzzyUtil.getProperty(PROP_HUDSON + PROP_PORT, null);
+		final String port = FuzzyUtil.getProperty(PROP_HUDSON + PROP_PORT, null);
 		return FuzzyUtil
 			.getProperty(PROP_HUDSON + PROP_URL, "http://localhost")
-			+ (port != null ? (":" + port) : "") + "/";
+			+ (port != null ? ":" + port : "") + "/";
 	}
 
 	private static int getLastValidBuildNumber(int maxBuildNumber, String jobUrl)
@@ -147,16 +147,16 @@ public class HudsonTestRunProvider extends TestRunProvider {
 		}
 		if (isValidBuild(maxBuildNumber, jobUrl)) {
 			return maxBuildNumber;
-		} else {
-			return getLastValidBuildNumber(maxBuildNumber - 1, jobUrl);
 		}
+
+		return getLastValidBuildNumber(maxBuildNumber - 1, jobUrl);
 	}
 
 	private static boolean isValidBuild(int buildNumber, String jobUrl)
 		throws MalformedURLException, DocumentException {
-		String result = getFirstElementValue(jobUrl + buildNumber
+		final String result = getFirstElementValue(jobUrl + buildNumber
 			+ "/api/xml?tree=result");
-		for (String valid : VALID_STATES) {
+		for (final String valid : VALID_STATES) {
 			if (valid.equals(result)) {
 				return true;
 			}
@@ -167,8 +167,8 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	@SuppressWarnings("unchecked")
 	private static String getFirstElementValue(String url)
 		throws MalformedURLException, DocumentException {
-		Document doc = saxReader.read(new URL(url));
-		List<Element> elements = doc.getRootElement().elements();
+		final Document doc = saxReader.read(new URL(url));
+		final List<Element> elements = doc.getRootElement().elements();
 		if (elements.size() == 0) {
 			throw new RuntimeException(
 				"There are no elements in the result of the url: " + url);
@@ -179,7 +179,7 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	@Override
 	public TestRun[] getTestRuns() throws IOException {
 
-		TestRun[] runs = new TestRun[2];
+		final TestRun[] runs = new TestRun[2];
 
 		Resource resource = getTestRunResource(firstBuildNumber);
 		if (!FuzzyUtil.resourceExists(resource)) {
@@ -210,16 +210,16 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	 * @return All {@link TestConfig} which are loadable via this {@link HudsonTestRunProvider}.
 	 */
 	public List<TestConfig> getAllConfigs() {
-		Resource resource = FuzzyUtil.createResource(jobUrl + firstBuildNumber
+		final Resource resource = FuzzyUtil.createResource(jobUrl + firstBuildNumber
 			+ ARTIFACT + FuzzyUtil.FUZZY_FOLDER
 			+ FuzzyUtil.TEST_CONFIG_FILE);
 		try {
 			resource.load(null);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new RuntimeException("Could not load configs file!", e);
 		}
-		List<TestConfig> configs = new ArrayList<TestConfig>();
-		for (EObject obj : resource.getContents()) {
+		final List<TestConfig> configs = new ArrayList<TestConfig>();
+		for (final EObject obj : resource.getContents()) {
 			if (obj instanceof TestConfig) {
 				configs.add((TestConfig) obj);
 			}
@@ -236,10 +236,10 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	 */
 	public static Resource getDiffResource() throws MalformedURLException,
 		DocumentException {
-		String diffJobUrl = getHudsonUrl() + JOB
+		final String diffJobUrl = getHudsonUrl() + JOB
 			+ FuzzyUtil.getProperty(PROP_HUDSON + PROP_DIFF_JOB, "Diff")
 			+ "/";
-		int lastValidNumber = getLastValidBuildNumber(
+		final int lastValidNumber = getLastValidBuildNumber(
 			Integer.parseInt(getFirstElementValue(diffJobUrl + LAST_BUILD
 				+ "/api/xml?tree=number")), diffJobUrl);
 		return FuzzyUtil.createResource(diffJobUrl + lastValidNumber + ARTIFACT

@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isAttribute;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isComposite;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isCompositeRef;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isCompositeWithMain;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isDelete;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiAtt;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiAttMove;
@@ -155,12 +156,12 @@ public class DecisionManager {
 			} else if (isMultiRef(my) && isSingleRef(their) || isMultiRef(their) && isSingleRef(my)) {
 				conflict = createMultiSingle(conf);
 
-			} else if (isCompositeRef(my) && isCompositeRef(their)) {
-				conflict = createReferenceConflict(conf);
-
-			} else if (isCompositeRef(my) && (isMultiRef(their) || isSingleRef(their))
-				|| (isMultiRef(my) || isSingleRef(my)) && isCompositeRef(their)) {
-				conflict = createReferenceCompVSSingleMulti(conf);
+				// } else if (isCompositeRef(my) && isCompositeRef(their)) {
+				// conflict = createReferenceConflict(conf);
+				//
+				// } else if (isCompositeRef(my) && (isMultiRef(their) || isSingleRef(their))
+				// || (isMultiRef(my) || isSingleRef(my)) && isCompositeRef(their)) {
+				// conflict = createReferenceCompVSSingleMulti(conf);
 
 			} else if (isMultiRef(my) && isMultiRefSet(their) || isMultiRef(their) && isMultiRefSet(my)) {
 				conflict = createMultiRefMultiSet(conf);
@@ -191,6 +192,9 @@ public class DecisionManager {
 
 			} else if (isDelete(my) || isDelete(their)) {
 				conflict = createDeleteOtherConflict(conf);
+
+			} else if (isCompositeWithMain(my) || isCompositeWithMain(their)) {
+				conflict = createCompositeConflict(conf);
 			}
 
 			if (conflict != null) {

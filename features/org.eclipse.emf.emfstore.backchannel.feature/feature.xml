@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.emf.emfstore.backchannel.feature"
       label="EMFStore Backchannel"
-      version="1.0.1.qualifier"
+      version="1.0.2.qualifier"
       provider-name="Eclipse Modeling Project"
       plugin="org.eclipse.emf.emfstore.branding">
 

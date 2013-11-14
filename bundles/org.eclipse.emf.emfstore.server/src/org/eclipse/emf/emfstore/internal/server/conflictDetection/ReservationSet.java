@@ -17,13 +17,6 @@ import java.util.Set;
  * <p>
  * Mapping from model elements to their features.
  * </p>
- * <p>
- * The mapping uses {@link ReservationSet#ALL_FEATURES_NAME} as a magic feature name to represent all features of a
- * model element. This magic feature name is used also in the singleton set representing the set of all feature,
- * {@link ReservationSet#ALL_FEATURE_NAME_SET}. Furthermore it uses the magic feature name
- * {@link ReservationSet#EXISTENCE_FEATURE_NAME} to represent the feature representing the existence of the model
- * element as such.
- * </p>
  * 
  * @author mkoegel
  * @author emueller
@@ -31,7 +24,7 @@ import java.util.Set;
  */
 public class ReservationSet {
 
-	private ModelElementIdReservationMap modelElementIdReservationMap;
+	private final ModelElementIdReservationMap modelElementIdReservationMap;
 
 	/**
 	 * Default constructor.
@@ -40,33 +33,101 @@ public class ReservationSet {
 		modelElementIdReservationMap = new ModelElementIdReservationMap();
 	}
 
+	/**
+	 * Adds an full reservation.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 */
 	public void addFullReservation(String modelElementId) {
 		addFullReservation(modelElementId, null);
 	}
 
+	/**
+	 * Adds an existence reservation.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 */
 	public void addExistenceReservation(String modelElementId) {
 		addExistenceReservation(modelElementId, null);
 	}
 
+	/**
+	 * Adds an full reservation.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 */
 	public void addContainerReservation(String modelElementId) {
 		addFeatureReservation(modelElementId, FeatureNameReservationMap.CONTAINER_FEATURE);
 	}
 
+	/**
+	 * Adds a feature reservation for the given model element an one of its feature.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the name of a feature
+	 */
 	public void addFeatureReservation(String modelElementId, String featureName) {
 		addFeatureReservation(modelElementId, featureName, null);
 	}
 
+	/**
+	 * Adds a multi-reference feature reservation together with an opposite model element.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the name of a feature
+	 * @param oppositeModelElementId
+	 *            the ID of a model element
+	 */
 	public void addMultiReferenceWithOppositeReservation(String modelElementId, String featureName,
 		String oppositeModelElementId) {
 		addMultiReferenceWithOppositeReservation(modelElementId, featureName, oppositeModelElementId, null);
 	}
 
+	/**
+	 * Adds a reservation for a map entry that is contained in a map feature.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the name of a feature
+	 * @param key
+	 *            the key of the map entry
+	 */
+	public void addMapKeyReservation(String modelElementId, String featureName,
+		String key) {
+		// use map entry key as opposite ID to make a reservation on both - feature & key and feature
+		addMultiReferenceWithOppositeReservation(modelElementId, featureName, key);
+	}
+
+	/**
+	 * Adds a full reservation for the given model element.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param conflictBucketCandidate
+	 *            the conflict bucket into which the reservation is put
+	 */
 	public void addFullReservation(String modelElementId, ConflictBucketCandidate conflictBucketCandidate) {
-		FeatureNameReservationMap featureNameReservationMap = new FeatureNameReservationMap(true);
+		final FeatureNameReservationMap featureNameReservationMap = new FeatureNameReservationMap(true);
 		featureNameReservationMap.setConflictBucketCandidate(conflictBucketCandidate);
 		modelElementIdReservationMap.put(modelElementId, featureNameReservationMap);
 	}
 
+	/**
+	 * Adds an existence reservation.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param conflictBucketCandidate
+	 *            the conflict bucket candidate into which the reservation is put
+	 */
 	public void addExistenceReservation(String modelElementId, ConflictBucketCandidate conflictBucketCandidate) {
 		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		if (featureNameReservationMap == null) {
@@ -84,6 +145,16 @@ public class ReservationSet {
 		existenceOppositeReservationMap.addConflictBucketCandidate(conflictBucketCandidate);
 	}
 
+	/**
+	 * Adds a feature reservation for the given feature.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the name of a feature
+	 * @param conflictBucketCandidate
+	 *            the conflict bucket candidate into which the reservation is put
+	 */
 	public void addFeatureReservation(String modelElementId, String featureName,
 		ConflictBucketCandidate conflictBucketCandidate) {
 		if (featureName == FeatureNameReservationMap.EXISTENCE_FEATURE) {
@@ -108,12 +179,24 @@ public class ReservationSet {
 		}
 	}
 
-	public void addMultiReferenceWithOppositeReservation(String modelElementId, String featureName,
+	/**
+	 * Performs an opposite reservation for multi-reference features.
+	 * 
+	 * @param modelElementID
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the name of a multi-reference feature
+	 * @param oppositeModelElementId
+	 *            the opposite model element ID
+	 * @param conflictBucketCandidate
+	 *            the conflict bucket candidate into which the reservation is put
+	 */
+	public void addMultiReferenceWithOppositeReservation(String modelElementID, String featureName,
 		String oppositeModelElementId, ConflictBucketCandidate conflictBucketCandidate) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementID);
 		if (featureNameReservationMap == null) {
 			featureNameReservationMap = new FeatureNameReservationMap();
-			modelElementIdReservationMap.put(modelElementId, featureNameReservationMap);
+			modelElementIdReservationMap.put(modelElementID, featureNameReservationMap);
 		}
 		OppositeReservationMap oppositeReservationMap;
 		if (!featureNameReservationMap.containsKey(featureName)) {
@@ -132,73 +215,166 @@ public class ReservationSet {
 		} else {
 			throw new IllegalStateException("Reservation on same feature with AND without opposites is illegal!");
 		}
-
 	}
 
+	/**
+	 * Returns all model elements in the reservation set.
+	 * 
+	 * @return a set of all model elements
+	 */
 	public Set<String> getAllModelElements() {
 		return modelElementIdReservationMap.keySet();
 	}
 
+	/**
+	 * Whether the given model element has an existence reservation.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @return {@code true}, if there is an existence reservation for the given model element, {@code false} otherwise
+	 */
 	public boolean hasExistenceReservation(String modelElementId) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		return featureNameReservationMap != null && featureNameReservationMap.hasExistenceFeature();
 	}
 
+	/**
+	 * Whether the given model element has a full reservation.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @return {@code true}, if there is a full reservation for the given model element, {@code false} otherwise
+	 */
 	public boolean hasFullReservation(String modelElementId) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		return featureNameReservationMap != null && featureNameReservationMap.isAllFeatures();
 	}
 
+	/**
+	 * Returns all reserved features for the given model element.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a mode element
+	 * @return a set of all feature names that are reserved for the given model element
+	 */
 	public Set<String> getFeatureNames(String modelElementId) {
 		return modelElementIdReservationMap.get(modelElementId).keySet();
 	}
 
+	/**
+	 * Whether the given model element has a reservation for the given feature.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            a feature name
+	 * @return {@code true}, if the model element has a feature reservation for the given feature, {@code false}
+	 *         otherwise
+	 */
 	public boolean hasFeatureReservation(String modelElementId, String featureName) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		if (featureNameReservationMap == null) {
 			return false;
 		}
-		OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
+		final OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
 		return oppositeReservationMap != null && !oppositeReservationMap.hasOpposites();
 	}
 
+	/**
+	 * Whether the given model element has a opposite reservation for the given feature.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the name of a feature
+	 * @return {@code true}, if the model element has a opposite reservation for the given feature, {@code false}
+	 *         otherwise
+	 */
 	public boolean hasOppositeReservations(String modelElementId, String featureName) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementId);
 		if (featureNameReservationMap == null) {
 			return false;
 		}
-		OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
+		final OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
 		return oppositeReservationMap != null && oppositeReservationMap.hasOpposites();
 	}
 
-	public Set<String> getOpposites(String modelElementId, String featureName) {
-		return modelElementIdReservationMap.get(modelElementId).get(featureName).keySet();
+	/**
+	 * Returns all opposites for the given model element ID and a feature.
+	 * 
+	 * @param modelElementID
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the name of a feature
+	 * @return a set of opposite model element IDs
+	 */
+	public Set<String> getOpposites(String modelElementID, String featureName) {
+		return modelElementIdReservationMap.get(modelElementID).get(featureName).keySet();
 	}
 
+	/**
+	 * Returns all conflict bucket candidates for the given model element.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @return a set of {@link ConflictBucketCandidate}s
+	 */
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates(String modelElementId) {
 		return modelElementIdReservationMap.getConflictBucketCandidates(modelElementId);
 	}
 
+	/**
+	 * Returns all conflict bucket candidates for the given model element and a feature.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the feature name
+	 * @return a set of {@link ConflictBucketCandidate}s
+	 */
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates(String modelElementId, String featureName) {
 		return modelElementIdReservationMap.getConflictBucketCandidates(modelElementId, featureName);
 	}
 
+	/**
+	 * Returns all conflict bucket candidates for the given model element and its feature, together with
+	 * an opposite model element.
+	 * 
+	 * @param modelElementId
+	 *            the ID of a model element
+	 * @param featureName
+	 *            the feature name
+	 * @param oppositeModelElement
+	 *            the ID of the opposite model element
+	 * @return a set of {@link ConflictBucketCandidate}s
+	 */
 	public Set<ConflictBucketCandidate> getConflictBucketCandidates(String modelElementId, String featureName,
 		String oppositeModelElement) {
 		return modelElementIdReservationMap.getConflictBucketCandidates(modelElementId, featureName,
 			oppositeModelElement);
 	}
 
-	public boolean hasOppositeReservation(String modelElement, String featureName, String oppositeModelElement) {
-		FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElement);
+	/**
+	 * Whether the given model element has a feature reservation with the given opposite model element.
+	 * 
+	 * @param modelElementID
+	 *            the ID of the model element
+	 * @param featureName
+	 *            a feature of the model element
+	 * @param oppositeModelElementID
+	 *            the ID of the opposite model element
+	 * @return {@code true}, if there exists a opposite reservation, {@code false} otherwise
+	 */
+	public boolean hasOppositeReservation(String modelElementID, String featureName, String oppositeModelElementID) {
+		final FeatureNameReservationMap featureNameReservationMap = modelElementIdReservationMap.get(modelElementID);
 		if (featureNameReservationMap == null) {
 			return false;
 		}
-		OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
+		final OppositeReservationMap oppositeReservationMap = featureNameReservationMap.get(featureName);
 		if (oppositeReservationMap == null || !oppositeReservationMap.hasOpposites()) {
 			return false;
 		}
-		return oppositeReservationMap.containsKey(oppositeModelElement);
+		return oppositeReservationMap.containsKey(oppositeModelElementID);
 	}
 
 }

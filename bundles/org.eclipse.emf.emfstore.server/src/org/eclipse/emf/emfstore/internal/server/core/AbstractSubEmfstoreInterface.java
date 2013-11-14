@@ -11,6 +11,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -143,12 +145,19 @@ public abstract class AbstractSubEmfstoreInterface {
 			ModelUtil.logWarning("this must not happen, method is not accessible", e);
 			throw new ESException(e);
 		} catch (final InvocationTargetException e) {
-			ModelUtil.logInfo("exception on execution");
+			ModelUtil.logInfo("Exception on execution: " + mkString(e));
 			if (e.getTargetException() instanceof ESException) {
 				throw (ESException) e.getTargetException();
 			}
 			throw new ESException(e.getTargetException());
 		}
+	}
+
+	private String mkString(Throwable throwable) {
+		final StringWriter sw = new StringWriter();
+		final PrintWriter pw = new PrintWriter(sw);
+		throwable.printStackTrace(pw);
+		return sw.toString();
 	}
 
 	/**

@@ -21,6 +21,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	BranchTest.class,
 	ServerCreationTest.class,
 	ModelElementTest.class,
 	ServerCommunicationTest.class,

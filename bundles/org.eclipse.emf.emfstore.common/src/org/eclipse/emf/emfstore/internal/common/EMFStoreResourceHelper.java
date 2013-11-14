@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIHelperImpl;
  * @author emueller
  * 
  */
-public class ESXMLResourceHelper extends XMIHelperImpl {
+public class EMFStoreResourceHelper extends XMIHelperImpl {
 
 	/**
 	 * Constructor.
@@ -34,7 +34,7 @@ public class ESXMLResourceHelper extends XMIHelperImpl {
 	 * @param resource
 	 *            the EMFStore resource for which to create the helper
 	 */
-	public ESXMLResourceHelper(EMFStoreResource resource) {
+	public EMFStoreResourceHelper(EMFStoreResource resource) {
 		super(resource);
 	}
 

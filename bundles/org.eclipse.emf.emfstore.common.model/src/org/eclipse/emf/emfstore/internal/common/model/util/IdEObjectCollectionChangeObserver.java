@@ -40,27 +40,28 @@ public interface IdEObjectCollectionChangeObserver extends ESObserver {
 	void notify(Notification notification, IdEObjectCollection collection, EObject modelElement);
 
 	/**
-	 * The given model element was added to the collection.
-	 * This means it is now in the collection's containment tree.
+	 * Called when the {@code eObject} has been added to the {@code collection}.
 	 * 
 	 * @param collection
-	 *            the collection
-	 * @param modelElement
-	 *            the modelElement
+	 *            the {@link IdEObjectCollection} to which the {@code eObject} was added
+	 * @param eObject
+	 *            the {@link EObject} that has been added to the {@code collection}
 	 */
-	void modelElementAdded(IdEObjectCollection collection, EObject modelElement);
+	void modelElementAdded(IdEObjectCollection collection, EObject eObject);
 
 	/**
-	 * The given model element and its siblings have been removed from the
-	 * collection. Note that you will NOT receive a separate notification for each
+	 * Called when the {@code eObject} and its siblings have been removed from
+	 * the {@code collection}.
+	 * 
+	 * <b>NOTE</b>: Note that you will NOT receive a separate notification for each
 	 * sibling.
 	 * 
 	 * @param collection
-	 *            the collection
-	 * @param modelElement
-	 *            the model element
+	 *            the {@link IdEObjectCollection} to which the {@code eObject} was added
+	 * @param eObject
+	 *            the {@link EObject} that has been added to the {@code collection}
 	 */
-	void modelElementRemoved(IdEObjectCollection collection, EObject modelElement);
+	void modelElementRemoved(final IdEObjectCollection collection, final EObject eObject);
 
 	/**
 	 * If the {@link IdEObjectCollection} is deleted.

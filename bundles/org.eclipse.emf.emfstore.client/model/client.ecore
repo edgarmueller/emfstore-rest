@@ -54,8 +54,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dirty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldLogMessages" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldLogMessages" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="waitingUploads" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//FileIdentifier"
         containment="true"/>

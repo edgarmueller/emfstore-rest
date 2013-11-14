@@ -70,7 +70,7 @@ public class UIUpdateProjectController extends
 	public UIUpdateProjectController(Shell shell, ESLocalProject localProject) {
 		super(shell, true, true);
 		this.localProject = localProject;
-		this.maxChanges = ALL_CHANGES;
+		maxChanges = ALL_CHANGES;
 		initPagedUpdateSize();
 	}
 
@@ -87,8 +87,8 @@ public class UIUpdateProjectController extends
 	public UIUpdateProjectController(Shell shell, ESLocalProject localProject, ESVersionSpec versionSpec) {
 		super(shell, true, true);
 		this.localProject = localProject;
-		this.version = versionSpec;
-		this.maxChanges = ALL_CHANGES;
+		version = versionSpec;
+		maxChanges = ALL_CHANGES;
 		initPagedUpdateSize();
 	}
 
@@ -109,7 +109,7 @@ public class UIUpdateProjectController extends
 	}
 
 	private void initPagedUpdateSize() {
-		ESPagedUpdateConfig pagedUpdateConfig = ExtensionRegistry.INSTANCE.get(
+		final ESPagedUpdateConfig pagedUpdateConfig = ExtensionRegistry.INSTANCE.get(
 			ESPagedUpdateConfig.ID,
 			ESPagedUpdateConfig.class);
 
@@ -140,7 +140,8 @@ public class UIUpdateProjectController extends
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException)
+	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#conflictOccurred(org.eclipse.emf.emfstore.server.ESConflictSet,
+	 *      org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public boolean conflictOccurred(final ESConflictSet changeConflict,
 		final IProgressMonitor monitor) {
@@ -154,14 +155,14 @@ public class UIUpdateProjectController extends
 	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#inspectChanges(org.eclipse.emf.emfstore.internal.client.model.ProjectSpace,
-	 *      java.util.List)
+	 * @see org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback#inspectChanges(org.eclipse.emf.emfstore.client.ESLocalProject,
+	 *      java.util.List, org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping)
 	 */
 	public boolean inspectChanges(final ESLocalProject localProject,
 		final List<ESChangePackage> changePackages,
 		final ESModelElementIdToEObjectMapping idToEObjectMapping) {
 
-		List<ChangePackage> internal = APIUtil.toInternal(ChangePackage.class, changePackages);
+		final List<ChangePackage> internal = APIUtil.toInternal(ChangePackage.class, changePackages);
 		final UpdateDialog updateDialog = new UpdateDialog(getShell(), localProject,
 			internal,
 			((ESModelElementIdToEObjectMappingImpl) idToEObjectMapping).toInternalAPI());
@@ -186,17 +187,17 @@ public class UIUpdateProjectController extends
 	public ESPrimaryVersionSpec doRun(final IProgressMonitor monitor)
 		throws ESException {
 
-		ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
+		final ESPrimaryVersionSpec oldBaseVersion = localProject.getBaseVersion();
 		ESPrimaryVersionSpec newBaseVersion;
 
-		ESPrimaryVersionSpec headVersion = localProject.resolveVersionSpec(
-			ESVersionSpec.FACTORY.createHEAD(),
+		final ESPrimaryVersionSpec headVersion = localProject.resolveVersionSpec(
+			ESVersionSpec.FACTORY.createHEAD(oldBaseVersion.getBranch()),
 			monitor);
 
 		if (doNotUsePagedUpdate) {
 			resolvedVersion = headVersion;
 		} else {
-			ESPrimaryVersionSpecImpl oldBaseVersionImpl = (ESPrimaryVersionSpecImpl) oldBaseVersion;
+			final ESPrimaryVersionSpecImpl oldBaseVersionImpl = (ESPrimaryVersionSpecImpl) oldBaseVersion;
 			resolvedVersion = resolveVersionByChanges(maxChanges, ModelUtil.clone(oldBaseVersionImpl.toInternalAPI())
 				.toAPI(), monitor);
 		}
@@ -215,7 +216,7 @@ public class UIUpdateProjectController extends
 		}
 
 		if (!doNotUsePagedUpdate && !newBaseVersion.equals(headVersion) && !newBaseVersion.equals(oldBaseVersion)) {
-			boolean yes = RunInUI.runWithResult(new Callable<Boolean>() {
+			final boolean yes = RunInUI.runWithResult(new Callable<Boolean>() {
 				public Boolean call() throws Exception {
 					return MessageDialog.openConfirm(getShell(), "More updates available",
 						"There are more updates available on the server.  Do you want to fetch and apply them now?");

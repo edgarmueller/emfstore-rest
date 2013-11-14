@@ -25,7 +25,13 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 public interface ESEditingDomainProvider {
 
 	/**
+	 * <p>
 	 * Returns an {@link EditingDomain}.
+	 * </p>
+	 * <p>
+	 * <b>NOTE</b>: When creating the {@link EditingDomain} clients have to guarantee that an implementation of an
+	 * {@link org.eclipse.emf.emfstore.client.changetracking.ESCommandStack ESCommandStack} is used.
+	 * </p>
 	 * 
 	 * @param resourceSet
 	 *            the {@link ResourceSet} for which to retrieve an {@link EditingDomain}

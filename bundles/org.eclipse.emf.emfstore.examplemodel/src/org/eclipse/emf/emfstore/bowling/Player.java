@@ -12,7 +12,9 @@ package org.eclipse.emf.emfstore.bowling;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -278,5 +280,14 @@ public interface Player extends EObject {
 	 * @generated
 	 */
 	void setGender(Gender value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @model
+	 * @generated
+	 */
+	boolean validate(DiagnosticChain chain, Map<?, ?> context);
 
 } // Player

@@ -218,9 +218,9 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	 * @see org.eclipse.emf.emfstore.internal.common.model.Project#delete()
 	 */
 	public void delete() {
-		EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
+		final EObjectChangeObserverNotificationCommand command = new EObjectChangeObserverNotificationCommand() {
 			public void run(IdEObjectCollectionChangeObserver projectChangeObserver) {
-				IdEObjectCollectionChangeObserver observer = projectChangeObserver;
+				final IdEObjectCollectionChangeObserver observer = projectChangeObserver;
 				observer.collectionDeleted(ProjectImpl.this);
 			}
 		};
@@ -240,10 +240,10 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.NotifiableIdEObjectCollectionImpl#cutElementAdded(org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection,
-	 *      org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.emfstore.internal.common.model.impl.NotifiableIdEObjectCollectionImpl#addCutElement(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
 	public void addCutElement(EObject eObject) {
@@ -258,7 +258,7 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	@Override
 	public void initMapping() {
 
-		for (EObject modelElement : getCutElements()) {
+		for (final EObject modelElement : getCutElements()) {
 			putModelElementIntoCache(modelElement);
 		}
 

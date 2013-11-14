@@ -48,6 +48,19 @@ public final class OperationUtil {
 	}
 
 	/**
+	 * Checks whether given operation is a composite operation and has a set main operation.
+	 * 
+	 * @param operation
+	 *            operation
+	 * @return true if correct
+	 */
+	// TODO: preliminary, will be removed after conflict detection & resolution with bidirectional references
+	// has been fixed
+	public static boolean isCompositeWithMain(AbstractOperation operation) {
+		return operation instanceof CompositeOperation && ((CompositeOperation) operation).getMainOperation() != null;
+	}
+
+	/**
 	 * Checks whether given operation is a reference operation.
 	 * 
 	 * @param operation

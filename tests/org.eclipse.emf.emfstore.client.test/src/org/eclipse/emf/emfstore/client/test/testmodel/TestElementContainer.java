@@ -21,21 +21,20 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElementContainer#getElements <em>Elements
- * </em>}</li>
+ * <li>{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestmodelPackage#getTestElementContainer()
+ * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage#getTestElementContainer()
  * @model
  * @generated
  */
 public interface TestElementContainer extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElement}.
+	 * The list contents are of type {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement}.
 	 * It is bidirectional and its opposite is '
-	 * {@link org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElement#getContainer <em>Container</em>}'.
+	 * {@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Elements</em>' containment reference isn't clear, there really should be more of a
@@ -44,8 +43,8 @@ public interface TestElementContainer extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Elements</em>' containment reference list.
-	 * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestmodelPackage#getTestElementContainer_Elements()
-	 * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElement#getContainer
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage#getTestElementContainer_Elements()
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement#getContainer
 	 * @model opposite="container" containment="true"
 	 * @generated
 	 */

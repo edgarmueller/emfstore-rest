@@ -68,6 +68,7 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ESModelElementIdImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
+import org.osgi.framework.Bundle;
 
 /**
  * Utility class for ModelElements.
@@ -560,9 +561,12 @@ public final class ModelUtil {
 	 * @throws LoggedException
 	 */
 	public static void log(String message, Throwable exception, int statusInt) {
-		final Status status = new Status(statusInt, Platform.getBundle(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL)
-			.getSymbolicName(), statusInt, message, exception);
-		Platform.getLog(Platform.getBundle(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL)).log(status);
+		final Bundle bundle = Platform.getBundle(ORG_ECLIPSE_EMF_EMFSTORE_COMMON_MODEL);
+		if (bundle == null) {
+			return;
+		}
+		final Status status = new Status(statusInt, bundle.getSymbolicName(), statusInt, message, exception);
+		Platform.getLog(bundle).log(status);
 	}
 
 	/**

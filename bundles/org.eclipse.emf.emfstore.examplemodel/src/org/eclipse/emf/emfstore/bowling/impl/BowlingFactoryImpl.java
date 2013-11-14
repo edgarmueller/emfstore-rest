@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.emf.emfstore.bowling.*;
 import org.eclipse.emf.emfstore.bowling.Area;
 import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
@@ -51,7 +50,7 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	public static BowlingFactory init() {
 		try {
 			BowlingFactory theBowlingFactory = (BowlingFactory) EPackage.Registry.INSTANCE
-				.getEFactory("http://org/eclipse/example/bowling");
+				.getEFactory(BowlingPackage.eNS_URI);
 			if (theBowlingFactory != null) {
 				return theBowlingFactory;
 			}
