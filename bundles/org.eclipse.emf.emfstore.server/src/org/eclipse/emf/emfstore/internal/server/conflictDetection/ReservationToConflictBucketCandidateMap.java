@@ -7,10 +7,18 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Maximilian Koegel - initial API and implementation
+ * Edgar Mueller - custom reservation set modifiers
+ * Edgar Mueller - Bug 418183: recognizing conflicts on map entries
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.conflictDetection;
 
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiMoveRef;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiRef;
+import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiRefSet;
+
+import java.text.MessageFormat;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -21,30 +29,29 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.common.ExtensionRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMapping;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ContainmentType;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.FeatureOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceMoveOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceSetOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 
 /**
- * Map from modelelements and their features to conflict candidate buckets.
+ * Map from model elements and their features to conflict candidate buckets.
  * 
  * @author mkoegel
- * 
+ * @author emueller
  */
 public class ReservationToConflictBucketCandidateMap {
 
-	private static ReservationSetModifier reservationSetModifier = initCustomReservationModifier();
+	private static ReservationSetModifier reservationSetModifier = initCustomReservationSetModifier();
 	private final ReservationSet reservationToConflictMap;
 	private final Set<ConflictBucketCandidate> conflictBucketCandidates;
-	private final Map<String, Map.Entry<?, ?>> createdMapEntries;
+	private final Map<String, Integer> idToKeyHashCode;
 
-	private static ReservationSetModifier initCustomReservationModifier() {
+	private static ReservationSetModifier initCustomReservationSetModifier() {
 
 		return ExtensionRegistry.INSTANCE.get(
 			ReservationSetModifier.ID,
@@ -65,7 +72,7 @@ public class ReservationToConflictBucketCandidateMap {
 	public ReservationToConflictBucketCandidateMap() {
 		reservationToConflictMap = new ReservationSet();
 		conflictBucketCandidates = new LinkedHashSet<ConflictBucketCandidate>();
-		createdMapEntries = new LinkedHashMap<String, Map.Entry<?, ?>>();
+		idToKeyHashCode = new LinkedHashMap<String, Integer>();
 
 	}
 
@@ -100,7 +107,7 @@ public class ReservationToConflictBucketCandidateMap {
 				if (featureName.equals(FeatureNameReservationMap.EXISTENCE_FEATURE)) {
 					continue;
 				}
-				// we do not care about existence reservations since they will not colide with any other features
+				// we do not care about existence reservations since they will not collide with any other features
 
 				// handle normal feature reservations without opposite
 				if (!reservationSet.hasOppositeReservations(modelElement, featureName)) {
@@ -197,7 +204,8 @@ public class ReservationToConflictBucketCandidateMap {
 	public void scanOperationReservations(AbstractOperation operation, int priority,
 		ModelElementIdToEObjectMapping idToEObjectMapping, boolean isMyOperation) {
 
-		ReservationSet reservationSet = extractReservationFromOperation(operation, new ReservationSet());
+		ReservationSet reservationSet = extractReservationFromOperation(operation, new ReservationSet(),
+			idToEObjectMapping);
 		reservationSet = addCustomReservations(operation, reservationSet, idToEObjectMapping);
 		final ConflictBucketCandidate conflictBucketCandidate = new ConflictBucketCandidate();
 		conflictBucketCandidates.add(conflictBucketCandidate);
@@ -211,12 +219,12 @@ public class ReservationToConflictBucketCandidateMap {
 	}
 
 	private ReservationSet extractReservationFromOperation(final AbstractOperation operation,
-		ReservationSet reservationSet) {
+		ReservationSet reservationSet, ModelElementIdToEObjectMapping idToEObjectMapping) {
 
 		if (operation instanceof CompositeOperation) {
 			final CompositeOperation compositeOperation = (CompositeOperation) operation;
 			for (final AbstractOperation subOperation : compositeOperation.getSubOperations()) {
-				extractReservationFromOperation(subOperation, reservationSet);
+				extractReservationFromOperation(subOperation, reservationSet, idToEObjectMapping);
 			}
 			return reservationSet;
 		} else if (operation instanceof CreateDeleteOperation) {
@@ -231,28 +239,85 @@ public class ReservationToConflictBucketCandidateMap {
 			} else {
 				// check for map entries
 				for (final EObject eObject : createDeleteOperation.getEObjectToIdMap().keySet()) {
-					if (eObject instanceof Map.Entry<?, ?>) {
-						final String id = createDeleteOperation.getEObjectToIdMap().get(eObject).getId();
-						final Map.Entry<?, ?> mapEntry = (Entry<?, ?>) eObject;
-						createdMapEntries.put(id, mapEntry);
+					if (!isMapEntry(eObject)) {
+						continue;
 					}
-					// reservationSet.addFullReservation(modelElementId.getId());
+					handleMapEntry((Entry<?, ?>) eObject, createDeleteOperation, idToEObjectMapping);
 				}
 			}
 
 			// handle suboperations
 			for (final AbstractOperation subOperation : createDeleteOperation.getSubOperations()) {
-				extractReservationFromOperation(subOperation, reservationSet);
+				extractReservationFromOperation(subOperation, reservationSet, idToEObjectMapping);
 			}
 			return reservationSet;
 		} else if (operation instanceof FeatureOperation) {
-			handleFeatureOperation(operation, reservationSet);
+			handleFeatureOperation(operation, reservationSet, idToEObjectMapping);
 			return reservationSet;
 		}
 		throw new IllegalStateException("Unkown operation type: " + operation.getClass().getCanonicalName());
 	}
 
-	private void handleFeatureOperation(AbstractOperation operation, ReservationSet reservationSet) {
+	private boolean isMapEntry(EObject eObject) {
+		return eObject instanceof Map.Entry<?, ?>;
+	}
+
+	private void handleMapEntry(final Map.Entry<?, ?> mapEntry, CreateDeleteOperation createDeleteOperation,
+		ModelElementIdToEObjectMapping idToEObjectMapping) {
+		final String mapEntryId = createDeleteOperation.getEObjectToIdMap().get(mapEntry).getId();
+
+		if (mapEntry.getKey() != null) {
+			idToKeyHashCode.put(mapEntryId, new Integer(mapEntry.getKey().hashCode()));
+			return;
+		}
+
+		// if entry's key is null, fetch sub operation, check feature name for key, and resolve ID to get a
+		// string representation for the key
+		final ReferenceOperation keyReferenceOperation = getKeyReferenceOperation(createDeleteOperation);
+
+		if (keyReferenceOperation != null) {
+			final Set<ModelElementId> otherInvolvedModelElements = keyReferenceOperation
+				.getOtherInvolvedModelElements();
+			final Iterator<ModelElementId> iterator = otherInvolvedModelElements.iterator();
+			if (iterator.hasNext()) {
+				final ModelElementId otherId = iterator.next();
+				final EObject key = idToEObjectMapping.get(otherId);
+				if (key != null) {
+					idToKeyHashCode.put(mapEntryId, new Integer(key.hashCode()));
+				} else {
+					ModelUtil.logWarning("Key is null. Can not be used for conflict detection.");
+				}
+			}
+		} else {
+			ModelUtil.logWarning(
+				MessageFormat.format("Single reference sub operation of create operation {0} is missing",
+					createDeleteOperation.getOperationId()));
+		}
+	}
+
+	/**
+	 * Tries to find the operation that set's the key attribute of a map entry.
+	 * 
+	 * @param createDeleteOperation
+	 * @return
+	 */
+	private ReferenceOperation getKeyReferenceOperation(CreateDeleteOperation createDeleteOperation) {
+		for (final AbstractOperation op : createDeleteOperation.getSubOperations()) {
+			if (!SingleReferenceOperation.class.isInstance(op)) {
+				continue;
+			}
+
+			final SingleReferenceOperation singleReferenceOperation = SingleReferenceOperation.class.cast(op);
+			if (singleReferenceOperation.getFeatureName().equals("key")) {
+				return singleReferenceOperation;
+			}
+		}
+
+		return null;
+	}
+
+	private void handleFeatureOperation(AbstractOperation operation, ReservationSet reservationSet,
+		ModelElementIdToEObjectMapping idToEObjectMapping) {
 		final FeatureOperation featureOperation = (FeatureOperation) operation;
 		final String modelElementId = featureOperation.getModelElementId().getId();
 		final String featureName = featureOperation.getFeatureName();
@@ -270,18 +335,24 @@ public class ReservationToConflictBucketCandidateMap {
 				}
 			}
 		}
-		if (featureOperation instanceof MultiReferenceOperation
-			|| featureOperation instanceof MultiReferenceSetOperation
-			|| featureOperation instanceof MultiReferenceMoveOperation) {
+		if (isMultiRef(featureOperation) || isMultiRefSet(featureOperation) || isMultiMoveRef(featureOperation)) {
+
 			for (final ModelElementId otherModelElement : featureOperation.getOtherInvolvedModelElements()) {
+
 				reservationSet.addMultiReferenceWithOppositeReservation(modelElementId, featureName,
 					otherModelElement.getId());
 
+				Integer hashCode = null;
+
 				if (isCreatedMapEntry(otherModelElement)) {
-					final Map.Entry<?, ?> mapEntry = getCreatedMapEntry(otherModelElement);
-					// currently we only can handle keys which have a valid string representation
+					hashCode = getKeyHashCode(otherModelElement);
+				} else if (isMapEntry(idToEObjectMapping.get(otherModelElement))) {
+					hashCode = getKeyHashCode(idToEObjectMapping, otherModelElement);
+				}
+
+				if (hashCode != null) {
 					reservationSet.addMapKeyReservation(modelElementId, featureName,
-						mapEntry.getKey().toString());
+						hashCode.toString());
 				}
 			}
 		} else {
@@ -290,12 +361,20 @@ public class ReservationToConflictBucketCandidateMap {
 		return;
 	}
 
-	private Map.Entry<?, ?> getCreatedMapEntry(ModelElementId otherModelElement) {
-		return createdMapEntries.get(otherModelElement);
+	private Integer getKeyHashCode(ModelElementIdToEObjectMapping idToEObjectMapping, ModelElementId keyId) {
+		final Map.Entry<?, ?> mapEntry = (Entry<?, ?>) idToEObjectMapping.get(keyId);
+		if (mapEntry.getKey() != null) {
+			return new Integer(mapEntry.getKey().hashCode());
+		}
+		return null;
+	}
+
+	private Integer getKeyHashCode(ModelElementId keyId) {
+		return idToKeyHashCode.get(keyId);
 	}
 
 	private boolean isCreatedMapEntry(ModelElementId modelElementId) {
-		return createdMapEntries.containsKey(modelElementId.getId());
+		return idToKeyHashCode.containsKey(modelElementId.getId());
 	}
 
 	/**
