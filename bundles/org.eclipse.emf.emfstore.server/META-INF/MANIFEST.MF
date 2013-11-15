@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Server
 Bundle-SymbolicName: org.eclipse.emf.emfstore.server;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.0.3.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.internal.server.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.apache.commons.codec;bundle-version="[1.3.0,2.0.0)",
- org.eclipse.emf.emfstore.server.model;bundle-version="[1.0.2,2.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.migration;bundle-version="[1.0.2,2.0.0)",
- org.eclipse.emf.emfstore.common;bundle-version="[1.0.2,2.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.common.model;bundle-version="[1.0.2,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.server.model;bundle-version="[1.0.3,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.migration;bundle-version="[1.0.3,2.0.0)",
+ org.eclipse.emf.emfstore.common;bundle-version="[1.0.3,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.common.model;bundle-version="[1.0.3,2.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)"
@@ -30,30 +30,30 @@ Export-Package: org.apache.xmlrpc;version="3.1.3",
  org.apache.xmlrpc.server;version="3.1.3",
  org.apache.xmlrpc.util;version="3.1.3",
  org.apache.xmlrpc.webserver;version="3.1.3",
- org.eclipse.emf.emfstore.internal.server;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test,org.eclipse.emf.emfstore.client.ui",
- org.eclipse.emf.emfstore.internal.server.accesscontrol;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test",
- org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test",
- org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory;version="1.0.2",
- org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test",
- org.eclipse.emf.emfstore.internal.server.conflictDetection;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test,org.eclipse.emf.emfstore.client.ui",
- org.eclipse.emf.emfstore.internal.server.connection;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test",
- org.eclipse.emf.emfstore.internal.server.connection.xmlrpc;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client",
- org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.util;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client",
- org.eclipse.emf.emfstore.internal.server.core;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test",
- org.eclipse.emf.emfstore.internal.server.core.helper;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.server.core.subinterfaces;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.server.eventmanager;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.server.exceptions;version="1.0.2";
+ org.eclipse.emf.emfstore.internal.server;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test,org.eclipse.emf.emfstore.client.ui",
+ org.eclipse.emf.emfstore.internal.server.accesscontrol;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client.test",
+ org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client.test",
+ org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.factory;version="1.0.3",
+ org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client.test",
+ org.eclipse.emf.emfstore.internal.server.conflictDetection;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test,org.eclipse.emf.emfstore.client.ui",
+ org.eclipse.emf.emfstore.internal.server.connection;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client.test",
+ org.eclipse.emf.emfstore.internal.server.connection.xmlrpc;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client",
+ org.eclipse.emf.emfstore.internal.server.connection.xmlrpc.util;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client",
+ org.eclipse.emf.emfstore.internal.server.core;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client.test",
+ org.eclipse.emf.emfstore.internal.server.core.helper;version="1.0.3";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.server.core.subinterfaces;version="1.0.3";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.server.eventmanager;version="1.0.3";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.server.exceptions;version="1.0.3";
   x-friends:="org.eclipse.emf.emfstore.client,
    org.eclipse.emf.emfstore.client.ui,
    org.eclipse.emf.emfstore.client.test,
    org.eclipse.emf.emfstore.example.merging",
- org.eclipse.emf.emfstore.internal.server.filetransfer;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test",
- org.eclipse.emf.emfstore.internal.server.impl.api;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.ui",
- org.eclipse.emf.emfstore.internal.server.startup;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.server.storage;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.server;version="1.0.2",
- org.eclipse.emf.emfstore.server.exceptions;version="1.0.2",
- org.eclipse.emf.emfstore.server.observer;version="1.0.2"
+ org.eclipse.emf.emfstore.internal.server.filetransfer;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.test",
+ org.eclipse.emf.emfstore.internal.server.impl.api;version="1.0.3";x-friends:="org.eclipse.emf.emfstore.client,org.eclipse.emf.emfstore.client.ui",
+ org.eclipse.emf.emfstore.internal.server.startup;version="1.0.3";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.server.storage;version="1.0.3";x-internal:=true,
+ org.eclipse.emf.emfstore.server;version="1.0.3",
+ org.eclipse.emf.emfstore.server.exceptions;version="1.0.3",
+ org.eclipse.emf.emfstore.server.observer;version="1.0.3"
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.commons.logging;version="[1.0.0,2.0.0)"

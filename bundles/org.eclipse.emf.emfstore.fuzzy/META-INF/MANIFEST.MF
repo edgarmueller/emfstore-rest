@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Fuzzy JUnit Testing Framework
 Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.0.3.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
-Export-Package: org.eclipse.emf.emfstore.fuzzy;version="1.0.2"
+Export-Package: org.eclipse.emf.emfstore.fuzzy;version="1.0.3"
 Require-Bundle: org.junit;bundle-version="[4.10.0,5.0.0)";visibility:=reexport
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
