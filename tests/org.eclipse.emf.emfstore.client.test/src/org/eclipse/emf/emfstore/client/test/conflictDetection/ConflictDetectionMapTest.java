@@ -18,10 +18,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-import org.eclipse.core.runtime.ILogListener;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.emfstore.client.test.TestLogListener;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
 import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
 import org.eclipse.emf.emfstore.client.test.testmodel.impl.TestElementToStringMapImpl;
@@ -37,6 +36,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Sing
 import org.junit.Test;
 
 /**
+ * Conflict detection tests for map entries.
+ * 
  * @author emueller
  */
 public class ConflictDetectionMapTest extends ConflictDetectionTest {
@@ -165,7 +166,7 @@ public class ConflictDetectionMapTest extends ConflictDetectionTest {
 			getProjectSpace().getLocalChangePackage().getOperations(),
 			clonedProjectSpace.getLocalChangePackage().getOperations(), getProject());
 
-		assertTrue(logListener.didReceive);
+		assertTrue(logListener.didReceive());
 	}
 
 	/**
@@ -201,9 +202,6 @@ public class ConflictDetectionMapTest extends ConflictDetectionTest {
 
 		final List<AbstractOperation> operations2 = ModelUtil.clone(
 			clonedProjectSpace.getLocalChangePackage().getOperations());
-		final CreateDeleteOperation createDeleteOperation2 = CreateDeleteOperation.class.cast(operations2.get(0));
-		final SingleReferenceOperation singleReferenceOperation2 = SingleReferenceOperation.class.cast(
-			createDeleteOperation.getSubOperations().get(0));
 		// causes null to be returned when trying to find the key
 		singleReferenceOperation.getOtherInvolvedModelElements().iterator().next().setId("bar");
 
@@ -222,32 +220,7 @@ public class ConflictDetectionMapTest extends ConflictDetectionTest {
 
 		getConflicts(operations, operations2, getProject());
 
-		assertTrue(logListener.didReceive);
-	}
-
-	class TestLogListener implements ILogListener {
-
-		private final String expectedMessage;
-		private boolean didReceive;
-
-		public TestLogListener(String expectedMessage) {
-			this.expectedMessage = expectedMessage;
-		}
-
-		/**
-		 * {@inheritDoc}
-		 * 
-		 * @see org.eclipse.core.runtime.ILogListener#logging(org.eclipse.core.runtime.IStatus, java.lang.String)
-		 */
-		public void logging(IStatus status, String plugin) {
-			if (status.getMessage().contains(expectedMessage)) {
-				didReceive = true;
-			}
-		}
-
-		public boolean didReceiveExpectedMessage() {
-			return didReceive;
-		}
+		assertTrue(logListener.didReceive());
 	}
 
 	@Test
