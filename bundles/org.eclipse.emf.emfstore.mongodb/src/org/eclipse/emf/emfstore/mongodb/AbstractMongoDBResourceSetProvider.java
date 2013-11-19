@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
-import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 
 /**
  * Abstract {@link ESResourceSetProvider} for Mongo DB.
@@ -29,17 +28,6 @@ import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 @SuppressWarnings("restriction")
 public abstract class AbstractMongoDBResourceSetProvider implements ESResourceSetProvider {
 
-	private static IResourceSetFactory resourceSetFactory;
-
-	/**
-	 * Sets the resource set factory.
-	 * 
-	 * @param factory the factory
-	 */
-	public static void setResourceSetFactory(IResourceSetFactory factory) {
-		AbstractMongoDBResourceSetProvider.resourceSetFactory = factory;
-	}
-
 	/**
 	 * 
 	 * {@inheritDoc}
@@ -49,10 +37,11 @@ public abstract class AbstractMongoDBResourceSetProvider implements ESResourceSe
 	public ResourceSet getResourceSet() {
 		try {
 			ResourceSetFactoryProvider.COUNT_DOWN_LATCH.await(10, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			ModelUtil.logException("Setup of Mongo-DB ResourceSet failed", e);
 		}
-		ResourceSetImpl resourceSet = (ResourceSetImpl) resourceSetFactory.createResourceSet();
+		final ResourceSetImpl resourceSet = (ResourceSetImpl) ResourceSetFactoryProvider.getResourceSetFactory()
+			.createResourceSet();
 		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
 		setURIConverter(resourceSet);
 		return resourceSet;

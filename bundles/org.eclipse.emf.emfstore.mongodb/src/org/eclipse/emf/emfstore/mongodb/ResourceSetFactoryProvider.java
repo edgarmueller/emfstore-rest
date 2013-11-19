@@ -13,9 +13,6 @@ package org.eclipse.emf.emfstore.mongodb;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.eclipse.emf.emfstore.mongodb.client.MongoDBClientResourceSetProvider;
-import org.eclipse.emf.emfstore.mongodb.server.MongoDBDynamicModelProvider;
-import org.eclipse.emf.emfstore.mongodb.server.MongoDBServerResourceSetProvider;
 import org.eclipselabs.mongo.emf.ext.IResourceSetFactory;
 
 /**
@@ -31,15 +28,24 @@ public class ResourceSetFactoryProvider {
 	 */
 	public static final CountDownLatch COUNT_DOWN_LATCH = new CountDownLatch(1);
 
+	private static IResourceSetFactory resourceSetFactory;
+
+	/**
+	 * Returns the {@link IResourceSetFactory} or <code>null</code> if not binded.
+	 * 
+	 * @return the resource set factory
+	 */
+	public static IResourceSetFactory getResourceSetFactory() {
+		return resourceSetFactory;
+	}
+
 	/**
 	 * Binds the resource set factory.
 	 * 
 	 * @param resourceSetFactory the resource set factory
 	 */
 	void bindResourceSetFactory(IResourceSetFactory resourceSetFactory) {
-		MongoDBClientResourceSetProvider.setResourceSetFactory(resourceSetFactory);
-		MongoDBServerResourceSetProvider.setResourceSetFactory(resourceSetFactory);
-		MongoDBDynamicModelProvider.setResourceSetFactory(resourceSetFactory);
+		ResourceSetFactoryProvider.resourceSetFactory = resourceSetFactory;
 		COUNT_DOWN_LATCH.countDown();
 	}
 

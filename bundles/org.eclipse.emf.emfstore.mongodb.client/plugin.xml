@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.emf.emfstore.client.resourceSetProvider">
+      <resourceSetProvider
+            class="org.eclipse.emf.emfstore.mongodb.client.MongoDBClientResourceSetProvider"
+            priority="10">
+      </resourceSetProvider>
+   </extension>
+
+</plugin>
