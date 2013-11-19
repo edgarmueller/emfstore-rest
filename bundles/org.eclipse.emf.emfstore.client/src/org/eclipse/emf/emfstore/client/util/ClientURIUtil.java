@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.server.ServerURIUtil;
  * Helper class for EMFStore Client URIs and accessing segments.
  * 
  * @author jfaltermeier
+ * @since 1.1
  */
 public final class ClientURIUtil {
 
@@ -34,42 +35,42 @@ public final class ClientURIUtil {
 	 * <p />
 	 * Example URI: emfstore://<b>workspaces</b>/<i>profile</i>/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
-	public static final String CLIENT_SEGMENT = "workspaces";
+	public static final String CLIENT_SEGMENT = "workspaces"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for projectspaces.
 	 * <p />
 	 * Example URI: emfstore://workspaces/<i>profile</i>/<b>projectspaces</b>/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
-	public static final String PROJECTSPACES_SEGMENT = "projectspaces";
+	public static final String PROJECTSPACES_SEGMENT = "projectspaces"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for the workspace.
 	 * <p />
 	 * Example URI: emfstore://workspaces/<i>profile</i>/<b>workspace</b>
 	 */
-	public static final String WORKSPACE_SEGMENT = "workspace";
+	public static final String WORKSPACE_SEGMENT = "workspace"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for a project.
 	 * <p />
 	 * Example URI: emfstore://workspaces/<i>profile</i>/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/<b>project</b>
 	 */
-	public static final String PROJECT_SEGMENT = "project";
+	public static final String PROJECT_SEGMENT = "project"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for a projectspace.
 	 * <p />
 	 * Example URI: emfstore://workspaces/<i>profile</i>/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/<b>projectspace</b>
 	 */
-	public static final String PROJECTSPACE_SEGMENT = "projectspace";
+	public static final String PROJECTSPACE_SEGMENT = "projectspace"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for a project's operations.
 	 * <p />
 	 * Example URI: emfstore://workspaces/<i>profile</i>/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/<b>operations</b>
 	 */
-	public static final String OPERATIONS_SEGMENT = "operations";
+	public static final String OPERATIONS_SEGMENT = "operations"; //$NON-NLS-1$
 
 	private ClientURIUtil() {
 		// private constructor
@@ -123,11 +124,11 @@ public final class ClientURIUtil {
 	}
 
 	private static String getClientPrefix() {
-		return SCHEME + "://" + CLIENT_SEGMENT + "/" + ServerURIUtil.getProfile() + "/";
+		return SCHEME + "://" + CLIENT_SEGMENT + "/" + ServerURIUtil.getProfile() + "/"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static String getProjectspacesPrefix(IdentifiableElement projectSpace) {
-		return getClientPrefix() + PROJECTSPACES_SEGMENT + "/" + projectSpace.getIdentifier() + "/";
+		return getClientPrefix() + PROJECTSPACES_SEGMENT + "/" + projectSpace.getIdentifier() + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 }

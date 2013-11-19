@@ -44,9 +44,10 @@ public class MongoConfigurator {
 	 * @throws IOException if config update fails
 	 */
 	void activate() throws IOException {
-		Configuration config = configurationAdmin.createFactoryConfiguration("org.eclipselabs.mongo.provider", null);
-		Dictionary<String, Object> properties = new Hashtable<String, Object>();
-		properties.put(IMongoProvider.PROP_URI, "mongodb://localhost/");
+		final Configuration config = configurationAdmin.createFactoryConfiguration(
+			"org.eclipselabs.mongo.provider", null); //$NON-NLS-1$
+		final Dictionary<String, Object> properties = new Hashtable<String, Object>();
+		properties.put(IMongoProvider.PROP_URI, "mongodb://localhost/"); //$NON-NLS-1$
 		config.update(properties);
 	}
 

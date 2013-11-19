@@ -54,26 +54,27 @@ public class MongoDBDynamicModelProvider implements ESDynamicModelProvider {
 	 * @see org.eclipse.emf.emfstore.server.ESDynamicModelProvider#getDynamicModels()
 	 */
 	public List<EPackage> getDynamicModels() {
-		URI dynamicModelsURI = URI.createURI(MongoServerURIConverter.getMongoURIPrefix(ServerURIUtil.getProfile())
-			+ "dynamic-models/ecore");
+		final URI dynamicModelsURI = URI
+			.createURI(MongoServerURIConverter.getMongoURIPrefix(ServerURIUtil.getProfile())
+				+ "dynamic-models/ecore"); //$NON-NLS-1$
 		try {
 			ResourceSetFactoryProvider.COUNT_DOWN_LATCH.await(10, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			ModelUtil.logException("Setup of Mongo-DB ResourceSet failed", e);
 		}
-		ResourceSet resourceSet = MongoDBDynamicModelProvider.resourceSetFactory.createResourceSet();
-		Resource resource = resourceSet.getResource(dynamicModelsURI, true);
+		final ResourceSet resourceSet = MongoDBDynamicModelProvider.resourceSetFactory.createResourceSet();
+		final Resource resource = resourceSet.getResource(dynamicModelsURI, true);
 
-		List<EPackage> result = new ArrayList<EPackage>();
+		final List<EPackage> result = new ArrayList<EPackage>();
 
-		EList<EObject> contents = resource.getContents();
+		final EList<EObject> contents = resource.getContents();
 		if (contents != null && contents.size() > 0) {
-			EObject object = contents.get(0);
+			final EObject object = contents.get(0);
 			if (object instanceof EPackage) {
 				result.add((EPackage) object);
 			} else if (object instanceof ECollection) {
-				ECollection collection = (ECollection) object;
-				for (EObject o : collection.getValues()) {
+				final ECollection collection = (ECollection) object;
+				for (final EObject o : collection.getValues()) {
 					result.add((EPackage) o);
 				}
 			}

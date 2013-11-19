@@ -19,6 +19,7 @@ import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
  * Interface for resource set provider.
  * 
  * @author jfaltermeier
+ * @since 1.1
  * 
  */
 public interface ESResourceSetProvider {

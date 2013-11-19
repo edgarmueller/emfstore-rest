@@ -20,6 +20,7 @@ import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
  * which have to be implemented by extenders.
  * 
  * @author jfaltermeier
+ * @since 1.1
  * 
  */
 public abstract class ESAbstractClientURIConverter extends ExtensibleURIConverterImpl {

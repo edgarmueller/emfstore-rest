@@ -27,6 +27,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * Helper class for creating EMFStore Server URIs and accessing segments.
  * 
  * @author jfaltermeier
+ * @since 1.1
  * 
  */
 public final class ServerURIUtil {
@@ -36,28 +37,28 @@ public final class ServerURIUtil {
 	 * <p />
 	 * Example URI: <b>emfstore</b>://workspaces/0/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
-	public static final String SCHEME = "emfstore";
+	public static final String SCHEME = "emfstore"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for serverspaces.
 	 * <p />
 	 * Example URI: emfstore://<b>serverspaces</b>/<i>profile</i>/serverspace
 	 */
-	public static final String SERVER_SEGMENT = "serverspaces";
+	public static final String SERVER_SEGMENT = "serverspaces"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for projects.
 	 * <p />
 	 * Example URI: emfstore://serverspaces/<i>profile</i>/<b>projects</b>/<i>identifier</i>/versions/<i>nr</i>
 	 */
-	public static final String PROJECTS_SEGMENT = "projects";
+	public static final String PROJECTS_SEGMENT = "projects"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for a version.
 	 * <p />
 	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>versions</b>/<i>nr</i>
 	 */
-	public static final String VERSIONS_SEGMENT = "versions";
+	public static final String VERSIONS_SEGMENT = "versions"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for a changepackage.
@@ -78,21 +79,21 @@ public final class ServerURIUtil {
 	 * <p />
 	 * Example URI: emfstore://serverspaces/<i>profile</i>/<b>serverspace</b>
 	 */
-	public static final String SERVERSPACE_SEGMENT = "serverspace";
+	public static final String SERVERSPACE_SEGMENT = "serverspace"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for a project's history.
 	 * <p />
 	 * Example URI: emfstore://serverspaces/<i>profile</i>/projects/<i>identifier</i>/<b>projecthistory</b>
 	 */
-	public static final String PROJECTHISTORY_SEGMENT = "projecthistory";
+	public static final String PROJECTHISTORY_SEGMENT = "projecthistory"; //$NON-NLS-1$
 
 	/**
 	 * The EMFStore URI segment for dynamic models.
 	 * <p />
 	 * Example URI: emfstore://serverspaces/<i>profile</i>/<b>dynamic-models</b>
 	 */
-	public static final String DYNAMIC_MODELS_SEGMENT = "dynamic-models";
+	public static final String DYNAMIC_MODELS_SEGMENT = "dynamic-models"; //$NON-NLS-1$
 
 	private ServerURIUtil() {
 		// private constructor
@@ -122,11 +123,11 @@ public final class ServerURIUtil {
 		String uriFileName = null;
 		try {
 			uriFileName = URLEncoder.encode(ePackage.getNsURI(), CommonUtil.getEncoding());
-		} catch (UnsupportedEncodingException e1) {
+		} catch (final UnsupportedEncodingException e1) {
 			throw new ESException("Registration failed: Could not convert NsUri to filename!");
 		}
-		return URI.createURI(getServerPrefix() + DYNAMIC_MODELS_SEGMENT + "/" + uriFileName
-			+ (uriFileName.endsWith(".ecore") ? "" : ".ecore"));
+		return URI.createURI(getServerPrefix() + DYNAMIC_MODELS_SEGMENT + "/" + uriFileName //$NON-NLS-1$
+			+ (uriFileName.endsWith(".ecore") ? "" : ".ecore")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/**
@@ -151,7 +152,7 @@ public final class ServerURIUtil {
 	 * @return the EMFStore URI
 	 */
 	public static URI createVersionURI(ProjectId projectId, PrimaryVersionSpec versionId) {
-		return URI.createURI(getProjectsPrefix(projectId) + VERSIONS_SEGMENT + "/"
+		return URI.createURI(getProjectsPrefix(projectId) + VERSIONS_SEGMENT + "/" //$NON-NLS-1$
 			+ versionId.getIdentifier());
 	}
 
@@ -165,7 +166,7 @@ public final class ServerURIUtil {
 	 * @return the EMFStore URI
 	 */
 	public static URI createChangePackageURI(ProjectId projectId, PrimaryVersionSpec versionId) {
-		return URI.createURI(getProjectsPrefix(projectId) + CHANGEPACKAGES_SEGMENT + "/" + versionId.getIdentifier());
+		return URI.createURI(getProjectsPrefix(projectId) + CHANGEPACKAGES_SEGMENT + "/" + versionId.getIdentifier()); //$NON-NLS-1$
 	}
 
 	/**
@@ -178,7 +179,7 @@ public final class ServerURIUtil {
 	 * @return the EMFStore URI
 	 */
 	public static URI createProjectStateURI(ProjectId projectId, PrimaryVersionSpec versionId) {
-		return URI.createURI(getProjectsPrefix(projectId) + PROJECTSTATES_SEGMENT + "/" + versionId.getIdentifier());
+		return URI.createURI(getProjectsPrefix(projectId) + PROJECTSTATES_SEGMENT + "/" + versionId.getIdentifier()); //$NON-NLS-1$
 	}
 
 	/**
@@ -189,16 +190,16 @@ public final class ServerURIUtil {
 	 * @return the profile
 	 */
 	public static String getProfile() {
-		String parameter = ServerConfiguration.getStartArgument("-profile");
+		String parameter = ServerConfiguration.getStartArgument("-profile"); //$NON-NLS-1$
 		if (parameter == null) {
-			parameter = "default";
+			parameter = "default"; //$NON-NLS-1$
 			if (ServerConfiguration.isTesting()) {
-				parameter += "_test";
+				parameter += "_test"; //$NON-NLS-1$
 			} else if (!ServerConfiguration.isReleaseVersion()) {
 				if (ServerConfiguration.isInternalReleaseVersion()) {
-					parameter += "_internal";
+					parameter += "_internal"; //$NON-NLS-1$
 				} else {
-					parameter += "_dev";
+					parameter += "_dev"; //$NON-NLS-1$
 				}
 			}
 		}
@@ -206,11 +207,11 @@ public final class ServerURIUtil {
 	}
 
 	private static String getServerPrefix() {
-		return SCHEME + "://" + SERVER_SEGMENT + "/" + getProfile() + "/";
+		return SCHEME + "://" + SERVER_SEGMENT + "/" + getProfile() + "/"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static String getProjectsPrefix(ProjectId projectId) {
-		return getServerPrefix() + PROJECTS_SEGMENT + "/" + projectId.getId() + "/";
+		return getServerPrefix() + PROJECTS_SEGMENT + "/" + projectId.getId() + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 }

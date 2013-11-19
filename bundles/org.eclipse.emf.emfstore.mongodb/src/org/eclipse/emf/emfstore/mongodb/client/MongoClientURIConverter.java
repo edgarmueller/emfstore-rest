@@ -27,26 +27,26 @@ public class MongoClientURIConverter extends ESAbstractClientURIConverter {
 
 	@Override
 	protected URI normalizeWorkspaceURI(String profile) {
-		return URI.createURI(getMongoURIPrefix(profile) + "workspace/workspace");
+		return URI.createURI(getMongoURIPrefix(profile) + "workspace/workspace"); //$NON-NLS-1$
 	}
 
 	@Override
 	protected URI normalizeProjectURI(String profile, String projectId) {
-		return URI.createURI(getMongoURIPrefix(profile) + "project/" + projectId);
+		return URI.createURI(getMongoURIPrefix(profile) + "project/" + projectId); //$NON-NLS-1$
 	}
 
 	@Override
 	protected URI normalizeOperationsURI(String profile, String projectId) {
-		return URI.createURI(getMongoURIPrefix(profile) + "operations/" + projectId);
+		return URI.createURI(getMongoURIPrefix(profile) + "operations/" + projectId); //$NON-NLS-1$
 	}
 
 	@Override
 	protected URI normalizeProjectSpaceURI(String profile, String projectId) {
-		return URI.createURI(getMongoURIPrefix(profile) + "projectspace/" + projectId);
+		return URI.createURI(getMongoURIPrefix(profile) + "projectspace/" + projectId); //$NON-NLS-1$
 	}
 
 	private String getMongoURIPrefix(String profile) {
-		return "mongodb://localhost/esclient-" + profile + "/";
+		return "mongodb://localhost/esclient-" + profile + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 }

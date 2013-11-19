@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
  * Interface for dynamic model provider.
  * 
  * @author jfaltermeier
+ * @since 1.1
  * 
  */
 public interface ESDynamicModelProvider {
