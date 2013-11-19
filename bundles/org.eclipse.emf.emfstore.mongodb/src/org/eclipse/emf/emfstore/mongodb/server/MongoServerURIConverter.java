@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.mongodb.server;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.emfstore.mongodb.MongoDBConfiguration;
 import org.eclipse.emf.emfstore.server.ESAbstractServerURIConverter;
 
 /**
@@ -62,7 +63,7 @@ public class MongoServerURIConverter extends ESAbstractServerURIConverter {
 	 * @return the prefix
 	 */
 	static String getMongoURIPrefix(String profile) {
-		return "mongodb://localhost/esserver-" + profile + "/"; //$NON-NLS-1$ //$NON-NLS-2$
+		return MongoDBConfiguration.INSTANCE.getMongoURIPrefix() + "esserver-" + profile + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 }

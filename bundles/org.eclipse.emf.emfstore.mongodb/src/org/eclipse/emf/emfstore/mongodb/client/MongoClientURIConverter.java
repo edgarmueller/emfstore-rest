@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.mongodb.client;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.client.provider.ESAbstractClientURIConverter;
+import org.eclipse.emf.emfstore.mongodb.MongoDBConfiguration;
 
 /**
  * Converts from EMFStore to mongoDB URIs.
@@ -46,7 +47,7 @@ public class MongoClientURIConverter extends ESAbstractClientURIConverter {
 	}
 
 	private String getMongoURIPrefix(String profile) {
-		return "mongodb://localhost/esclient-" + profile + "/"; //$NON-NLS-1$ //$NON-NLS-2$
+		return MongoDBConfiguration.INSTANCE.getMongoURIPrefix() + "esclient-" + profile + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 }
