@@ -63,7 +63,9 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
+import org.eclipse.emf.emfstore.internal.server.startup.ServerHrefMigrator;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
+import org.eclipse.emf.emfstore.internal.server.storage.ServerXMIResourceSetProvider;
 import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
 import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipse.equinox.app.IApplication;
@@ -333,6 +335,11 @@ public class EMFStoreController implements IApplication, Runnable {
 				throw new FatalESException("Could not init XMLRessource", e);
 			}
 		} else {
+			// hrefs are persisted differently in 1.1+ in comparison to 1.0
+			// migrate, if needed, before loading
+			if (resourceSetProvider instanceof ServerXMIResourceSetProvider) {
+				new ServerHrefMigrator().migrate();
+			}
 			resource = resourceSet.createResource(serverspaceURI);
 		}
 

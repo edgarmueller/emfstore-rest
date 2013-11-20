@@ -30,7 +30,7 @@ public class XMIServerURIConverter extends ESAbstractServerURIConverter {
 	/**
 	 * File prefix for folder: project.
 	 */
-	public static final String FILE_PREFIX_PROJECTFOLDER = "project-";
+	public static final String FILE_PREFIX_PROJECTFOLDER = "project-"; //$NON-NLS-1$
 
 	/**
 	 * File prefix for file: changepackage.
@@ -45,22 +45,22 @@ public class XMIServerURIConverter extends ESAbstractServerURIConverter {
 	/**
 	 * File prefix for file: version.
 	 */
-	private static final String FILE_PREFIX_VERSION = "version-";
+	private static final String FILE_PREFIX_VERSION = "version-"; //$NON-NLS-1$
 
 	/**
 	 * File extension for main file: emfstore server storage.
 	 */
-	private static final String FILE_EXTENSION_MAINSTORAGE = ".uss";
+	private static final String FILE_EXTENSION_MAINSTORAGE = ".uss"; //$NON-NLS-1$
 
 	/**
 	 * File extension for main file: emfstore project historyF.
 	 */
-	private static final String FILE_EXTENSION_PROJECTHISTORY = ".uph";
+	private static final String FILE_EXTENSION_PROJECTHISTORY = ".uph"; //$NON-NLS-1$
 
 	/**
 	 * File extension for main file: emfstore project version.
 	 */
-	private static final String FILE_EXTENSION_VERSION = ".upv";
+	private static final String FILE_EXTENSION_VERSION = ".upv"; //$NON-NLS-1$
 
 	/**
 	 * File extension for main file: emfstore project state.
@@ -82,12 +82,12 @@ public class XMIServerURIConverter extends ESAbstractServerURIConverter {
 
 	@Override
 	protected URI normalizeServerSpaceURI(String profile) {
-		return URI.createFileURI(ServerConfiguration.getServerHome() + "storage" + FILE_EXTENSION_MAINSTORAGE);
+		return URI.createFileURI(ServerConfiguration.getServerHome() + "storage" + FILE_EXTENSION_MAINSTORAGE); //$NON-NLS-1$
 	}
 
 	@Override
 	protected URI normalizeProjectHistoryURI(String profile, String projectId) {
-		return URI.createFileURI(getProjectFolder(projectId) + "projectHistory"
+		return URI.createFileURI(getProjectFolder(projectId) + "projectHistory" //$NON-NLS-1$
 			+ FILE_EXTENSION_PROJECTHISTORY);
 	}
 
@@ -123,7 +123,7 @@ public class XMIServerURIConverter extends ESAbstractServerURIConverter {
 	}
 
 	private HashSet<String> getExtensionsMap() {
-		HashSet<String> extensions = new HashSet<String>();
+		final HashSet<String> extensions = new HashSet<String>();
 		extensions.add(FILE_EXTENSION_CHANGEPACKAGE);
 		extensions.add(FILE_EXTENSION_PROJECTHISTORY);
 		extensions.add(FILE_EXTENSION_PROJECTSTATE);

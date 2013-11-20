@@ -56,4 +56,6 @@ Export-Package: org.eclipse.emf.emfstore.client;version="1.0.2",
    org.eclipse.emf.emfstore.client.transaction,
    org.eclipse.emf.emfstore.example.merging",
  org.eclipse.emf.emfstore.internal.client.observers;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test,org.eclipse.emf.emfstore.client.ui",
- org.eclipse.emf.emfstore.internal.client.properties;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test"
+ org.eclipse.emf.emfstore.internal.client.properties;version="1.0.2";x-friends:="org.eclipse.emf.emfstore.client.test",
+ org.eclipse.emf.emfstore.internal.client.provider;version="1.0.2";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.startup;version="1.0.2";x-internal:=true

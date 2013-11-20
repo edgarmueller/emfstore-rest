@@ -56,6 +56,8 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.internal.client.provider.ClientXMIResourceSetProvider;
+import org.eclipse.emf.emfstore.internal.client.startup.ClientHrefMigrator;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
@@ -183,11 +185,11 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 */
 	public void load() {
 		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.resourceSetProvider",
-			true, new ESPriorityComparator("priority", true));
+			"org.eclipse.emf.emfstore.client.resourceSetProvider", //$NON-NLS-1$
+			true, new ESPriorityComparator("priority", true)); //$NON-NLS-1$
 
 		final ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
-			"class",
+			"class", //$NON-NLS-1$
 			ESResourceSetProvider.class);
 
 		resourceSet = resourceSetProvider.getResourceSet();
@@ -202,6 +204,12 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		if (!resourceSet.getURIConverter().exists(workspaceURI, null)) {
 			workspace = createNewWorkspace(resourceSet, workspaceURI);
 		} else {
+			// hrefs are persisted differently in 1.1+ in comparison to 1.0
+			// migrate, if needed, before loading
+			if (resourceSetProvider instanceof ClientXMIResourceSetProvider) {
+				new ClientHrefMigrator().migrate();
+			}
+
 			// file exists, load it,
 			// check if a migration is needed
 			migrateModelIfNeeded(resourceSet);
@@ -387,11 +395,11 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	}
 
 	private void notifyPostWorkspaceInitiators() {
-		for (final ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit",
+		for (final ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", //$NON-NLS-1$
 			true)
 			.getExtensionElements()) {
 			try {
-				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
+				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete( //$NON-NLS-1$
 					currentWorkspace
 						.toAPI());
 			} catch (final ESExtensionPointException e) {
@@ -443,8 +451,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 	private ESEditingDomainProvider getDomainProvider() {
 		// TODO EXPT PRIO
-		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider")
-			.getClass("class",
+		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider") //$NON-NLS-1$
+			.getClass("class", //$NON-NLS-1$
 				ESEditingDomainProvider.class);
 	}
 
@@ -613,11 +621,11 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 	private List<List<URI>> getPhysicalURIsForMigration() {
 		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.resourceSetProvider",
-			true, new ESPriorityComparator("priority", true));
+			"org.eclipse.emf.emfstore.client.resourceSetProvider", //$NON-NLS-1$
+			true, new ESPriorityComparator("priority", true)); //$NON-NLS-1$
 
 		final ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
-			"class",
+			"class", //$NON-NLS-1$
 			ESResourceSetProvider.class);
 
 		final ResourceSet migrationResourceSet = resourceSetProvider.getResourceSet();

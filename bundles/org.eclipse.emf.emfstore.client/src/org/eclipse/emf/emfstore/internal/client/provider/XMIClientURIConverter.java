@@ -30,13 +30,13 @@ public class XMIClientURIConverter extends ESAbstractClientURIConverter {
 	/**
 	 * The prefix of project space directories.
 	 */
-	public static final String PROJECT_SAPCE_DIRECTORY_PREFIX = "ps-";
+	public static final String PROJECT_SAPCE_DIRECTORY_PREFIX = "ps-"; //$NON-NLS-1$
 
-	private final String projectSpaceFileName = "projectspace";
+	private final String projectSpaceFileName = "projectspace"; //$NON-NLS-1$
 	private final String projectSpaceFileExtension = ExportImportDataUnits.ProjectSpace.getExtension();
-	private final String localChangePackageFileName = "operations";
-	private final String localChangePackageExtension = ".eoc";
-	private final String projectFragmentFileName = "project";
+	private final String localChangePackageFileName = "operations"; //$NON-NLS-1$
+	private final String localChangePackageExtension = ".eoc"; //$NON-NLS-1$
+	private final String projectFragmentFileName = "project"; //$NON-NLS-1$
 	private final String projectFragmentExtension = ExportImportDataUnits.Project.getExtension();
 
 	/**
@@ -49,7 +49,7 @@ public class XMIClientURIConverter extends ESAbstractClientURIConverter {
 
 	@Override
 	protected URI normalizeWorkspaceURI(String profile) {
-		return URI.createFileURI(Configuration.getFileInfo().getWorkspaceDirectory() + "workspace.ucw");
+		return URI.createFileURI(Configuration.getFileInfo().getWorkspaceDirectory() + "workspace.ucw"); //$NON-NLS-1$
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class XMIClientURIConverter extends ESAbstractClientURIConverter {
 	}
 
 	private HashSet<String> getExtensionsMap() {
-		HashSet<String> extensions = new HashSet<String>();
+		final HashSet<String> extensions = new HashSet<String>();
 		extensions.add(projectSpaceFileExtension);
 		extensions.add(localChangePackageExtension);
 		extensions.add(projectFragmentExtension);
