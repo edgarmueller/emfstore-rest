@@ -16,7 +16,9 @@ import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.ui.Activator;
 import org.eclipse.emf.emfstore.internal.common.ESDisposable;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.IDialogLabelKeys;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -53,7 +55,7 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 	public ServerInfoSelectionDialog(Shell parentShell, java.util.List<ServerInfo> servers) {
 		super(parentShell);
 		this.servers = servers;
-		this.result = null;
+		result = null;
 	}
 
 	@Override
@@ -72,13 +74,13 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		setMessage("In order to execute your requested operation, you have to select a server.");
 		setTitle("Please select a Server");
-		Composite area = (Composite) super.createDialogArea(parent);
-		Composite container = new Composite(area, SWT.NONE);
+		final Composite area = (Composite) super.createDialogArea(parent);
+		final Composite container = new Composite(area, SWT.NONE);
 		container.setLayout(new GridLayout(1, false));
 		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		listViewer = new ListViewer(container, SWT.BORDER | SWT.V_SCROLL);
-		List list = listViewer.getList();
+		final List list = listViewer.getList();
 		list.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		listViewer.setContentProvider(ArrayContentProvider.getInstance());
 		labelProvider = new ServerInfoLabelProvider();
@@ -92,10 +94,10 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 
 	@Override
 	protected void okPressed() {
-		ISelection selection = listViewer.getSelection();
+		final ISelection selection = listViewer.getSelection();
 		if (selection instanceof IStructuredSelection
 			&& ((IStructuredSelection) selection).getFirstElement() instanceof ServerInfo) {
-			ServerInfo serverInfo = (ServerInfo) ((IStructuredSelection) selection).getFirstElement();
+			final ServerInfo serverInfo = (ServerInfo) ((IStructuredSelection) selection).getFirstElement();
 			result = serverInfo.toAPI();
 		}
 		super.okPressed();
@@ -124,8 +126,9 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, IDialogConstants.OK_ID, JFaceResources.getString(IDialogLabelKeys.OK_LABEL_KEY), true);
+		createButton(parent, IDialogConstants.CANCEL_ID, JFaceResources.getString(IDialogLabelKeys.CANCEL_LABEL_KEY),
+			false);
 	}
 
 	/**
@@ -151,7 +154,7 @@ public class ServerInfoSelectionDialog extends TitleAreaDialog {
 		@Override
 		public String getText(Object object) {
 			if (object instanceof ServerInfo) {
-				ServerInfo server = (ServerInfo) object;
+				final ServerInfo server = (ServerInfo) object;
 				return server.getName() + " [" + server.getUrl() + " : " + server.getPort() + "]";
 			}
 

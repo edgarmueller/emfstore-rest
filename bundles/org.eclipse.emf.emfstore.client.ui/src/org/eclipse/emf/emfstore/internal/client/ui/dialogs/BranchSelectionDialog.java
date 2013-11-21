@@ -16,12 +16,12 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.IDialogLabelKeys;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StyledCellLabelProvider;
-import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
@@ -84,15 +84,15 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		setHeaderTexts();
 
-		Composite area = (Composite) super.createDialogArea(parent);
-		Composite container = new Composite(area, SWT.NONE);
+		final Composite area = (Composite) super.createDialogArea(parent);
+		final Composite container = new Composite(area, SWT.NONE);
 		container.setLayout(new GridLayout(1, false));
 		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		addCreationField(container);
 
 		setTableViewer(new TableViewer(container, SWT.BORDER | SWT.V_SCROLL));
-		Table list = getTableViewer().getTable();
+		final Table list = getTableViewer().getTable();
 		list.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		getTableViewer().setContentProvider(ArrayContentProvider.getInstance());
@@ -100,10 +100,10 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 		getTableViewer().setLabelProvider(new StyledCellLabelProvider() {
 			@Override
 			public void update(ViewerCell cell) {
-				Object element = cell.getElement();
+				final Object element = cell.getElement();
 				if (element instanceof BranchInfo) {
-					BranchInfo branch = (BranchInfo) element;
-					StyledString styledString = new StyledString("Branch:  "
+					final BranchInfo branch = (BranchInfo) element;
+					final StyledString styledString = new StyledString("Branch:  "
 						+ branch.getName() + "  ", StyledString
 						.createColorRegistryStyler("red", null));
 					styledString.append("[Version: "
@@ -132,7 +132,7 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 	@Override
 	protected void okPressed() {
-		ISelection selection = getTableViewer().getSelection();
+		final ISelection selection = getTableViewer().getSelection();
 		if (selection instanceof IStructuredSelection) {
 			setResult((BranchInfo) ((IStructuredSelection) selection)
 				.getFirstElement());
@@ -175,10 +175,10 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
+		createButton(parent, IDialogConstants.OK_ID, JFaceResources.getString(IDialogLabelKeys.OK_LABEL_KEY),
 			true);
 		createButton(parent, IDialogConstants.CANCEL_ID,
-			IDialogConstants.CANCEL_LABEL, false);
+			JFaceResources.getString(IDialogLabelKeys.CANCEL_LABEL_KEY), false);
 	}
 
 	/**
@@ -318,12 +318,12 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 		@Override
 		protected void addCreationField(Composite container) {
-			Composite creationContainer = new Composite(container, SWT.NONE);
+			final Composite creationContainer = new Composite(container, SWT.NONE);
 			creationContainer.setLayout(new GridLayout(2, false));
 			creationContainer.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
 				true, false, 1, 1));
 
-			Label lblNewBranch = new Label(creationContainer, SWT.NONE);
+			final Label lblNewBranch = new Label(creationContainer, SWT.NONE);
 			lblNewBranch.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
 				false, false, 1, 1));
 			lblNewBranch.setText("New Branch:");
