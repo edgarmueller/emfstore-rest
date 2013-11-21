@@ -20,6 +20,7 @@ import org.eclipse.jface.dialogs.IDialogLabelKeys;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
@@ -97,23 +98,17 @@ public class BranchSelectionDialog extends TitleAreaDialog {
 
 		getTableViewer().setContentProvider(ArrayContentProvider.getInstance());
 
-		getTableViewer().setLabelProvider(new StyledCellLabelProvider() {
+		getTableViewer().setLabelProvider(new CellLabelProvider() {
 			@Override
 			public void update(ViewerCell cell) {
 				final Object element = cell.getElement();
 				if (element instanceof BranchInfo) {
 					final BranchInfo branch = (BranchInfo) element;
-					final StyledString styledString = new StyledString("Branch:  "
-						+ branch.getName() + "  ", StyledString
-						.createColorRegistryStyler("red", null));
-					styledString.append("[Version: "
-						+ branch.getHead().getIdentifier() + "]",
-						StyledString.DECORATIONS_STYLER);
-					cell.setText(styledString.toString());
-					cell.setStyleRanges(styledString.getStyleRanges());
+					final String styledString = "Branch:  "
+						+ branch.getName() + "  " + "[Version: "
+						+ branch.getHead().getIdentifier() + "]";
+					cell.setText(styledString);
 				}
-
-				super.update(cell);
 			}
 		});
 
