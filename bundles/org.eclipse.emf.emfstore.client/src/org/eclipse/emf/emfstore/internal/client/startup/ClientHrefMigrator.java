@@ -123,6 +123,8 @@ public class ClientHrefMigrator extends ServerHrefMigrator {
 				new ProjectAndChangePackageRule());
 			migrateContainmentHRefs(pS, "localChangePackage", //$NON-NLS-1$
 				new ProjectAndChangePackageRule());
+			migrateNonContainment(pS, "workspace", new WorkspaceRule()); //$NON-NLS-1$
+			migrateNonContainment(pS, "usersession", new UsersessionRule()); //$NON-NLS-1$
 		}
 	}
 

@@ -130,19 +130,34 @@ public class ServerHrefMigrator {
 	}
 
 	private void doMigrate(String sEMFStoreServer) throws InvocationTargetException {
-		migrateServerSpace(sEMFStoreServer + "storage.uss"); //$NON-NLS-1$
+		migrateNonContainment(sEMFStoreServer + "storage.uss", "projects", new ServerSpaceRule()); //$NON-NLS-1$ //$NON-NLS-2$
 
 		final File fEMFStoreServer = new File(sEMFStoreServer);
-		final File[] projectHistories = fEMFStoreServer
+		final File[] projects = fEMFStoreServer
 			.listFiles(new FilenameFilter() {
 				public boolean accept(File dir, String name) {
 					return name.startsWith("project-"); //$NON-NLS-1$
 				}
 			});
-		for (final File f : projectHistories) {
+		for (final File f : projects) {
 			final String pH = f.getAbsolutePath() + "/projectHistory.uph"; //$NON-NLS-1$
 			migrateContainmentHRefs(pH, "versions", //$NON-NLS-1$
 				new VersionRule());
+
+			final File[] versions = f.listFiles(new FilenameFilter() {
+				public boolean accept(File dir, String name) {
+					return name.startsWith("version-"); //$NON-NLS-1$
+				}
+			});
+			for (final File v : versions) {
+				final String versionPath = v.getAbsolutePath();
+				migrateNonContainment(versionPath, "nextVersion", new VersionMultiRule()); //$NON-NLS-1$
+				migrateNonContainment(versionPath, "previousVersion", new VersionMultiRule()); //$NON-NLS-1$
+				migrateNonContainment(versionPath, "ancestorVersion", new VersionMultiRule()); //$NON-NLS-1$
+				migrateNonContainment(versionPath, "branchedVersions", new VersionMultiRule()); //$NON-NLS-1$
+				migrateNonContainment(versionPath, "mergedToVersion", new VersionMultiRule()); //$NON-NLS-1$
+				migrateNonContainment(versionPath, "mergedFromVersion", new VersionMultiRule()); //$NON-NLS-1$
+			}
 		}
 	}
 
@@ -218,10 +233,17 @@ public class ServerHrefMigrator {
 		}
 	}
 
-	private void migrateServerSpace(String pathToFile) throws InvocationTargetException {
+	/**
+	 * Updates the attribute with the given name.
+	 * 
+	 * @param pathToFile the path of the xmi file to be updated
+	 * @param tagName the tag for which the attribute contents are to be updated
+	 * @param rule the rule computing the new value
+	 * @throws InvocationTargetException in case of error
+	 */
+	protected void migrateNonContainment(String pathToFile,
+		String tagName, UpdateXMIAttributeRule rule) throws InvocationTargetException {
 		try {
-			final UpdateXMIAttributeRule rule = new ServerSpaceRule();
-
 			final DocumentBuilderFactory docFactory = DocumentBuilderFactory
 				.newInstance();
 			final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -229,10 +251,13 @@ public class ServerHrefMigrator {
 
 			final Node serverSpace = doc.getFirstChild();
 			final NamedNodeMap attr = serverSpace.getAttributes();
-			final Node nodeAttr = attr.getNamedItem("projects"); //$NON-NLS-1$
-			final String projectsOld = nodeAttr.getTextContent();
-			final String projectsNew = rule.getNewAttribute(projectsOld);
-			nodeAttr.setTextContent(projectsNew);
+			final Node nodeAttr = attr.getNamedItem(tagName);
+			if (nodeAttr == null) {
+				return;
+			}
+			final String attributeOld = nodeAttr.getTextContent();
+			final String attributeNew = rule.getNewAttribute(attributeOld);
+			nodeAttr.setTextContent(attributeNew);
 
 			final TransformerFactory transformerFactory = TransformerFactory
 				.newInstance();
