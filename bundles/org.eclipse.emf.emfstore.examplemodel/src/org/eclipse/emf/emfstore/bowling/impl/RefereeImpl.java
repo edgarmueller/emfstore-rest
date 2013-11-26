@@ -10,6 +10,8 @@
  */
 package org.eclipse.emf.emfstore.bowling.impl;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -26,6 +28,7 @@ import org.eclipse.emf.emfstore.bowling.Referee;
  * <p>
  * The following features are implemented:
  * <ul>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.impl.RefereeImpl#getDateOfBirth <em>Date Of Birth</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.impl.RefereeImpl#getLeague <em>League</em>}</li>
  * </ul>
  * </p>
@@ -33,6 +36,26 @@ import org.eclipse.emf.emfstore.bowling.Referee;
  * @generated
  */
 public class RefereeImpl extends EObjectImpl implements Referee {
+	/**
+	 * The default value of the '{@link #getDateOfBirth() <em>Date Of Birth</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getDateOfBirth()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final XMLGregorianCalendar DATE_OF_BIRTH_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getDateOfBirth() <em>Date Of Birth</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see #getDateOfBirth()
+	 * @generated
+	 * @ordered
+	 */
+	protected XMLGregorianCalendar dateOfBirth = DATE_OF_BIRTH_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getLeague() <em>League</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -63,6 +86,30 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	@Override
 	protected EClass eStaticClass() {
 		return BowlingPackage.Literals.REFEREE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public XMLGregorianCalendar getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setDateOfBirth(XMLGregorianCalendar newDateOfBirth) {
+		XMLGregorianCalendar oldDateOfBirth = dateOfBirth;
+		dateOfBirth = newDateOfBirth;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.REFEREE__DATE_OF_BIRTH,
+				oldDateOfBirth, dateOfBirth));
 	}
 
 	/**
@@ -116,6 +163,8 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case BowlingPackage.REFEREE__DATE_OF_BIRTH:
+			return getDateOfBirth();
 		case BowlingPackage.REFEREE__LEAGUE:
 			if (resolve)
 				return getLeague();
@@ -133,6 +182,9 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case BowlingPackage.REFEREE__DATE_OF_BIRTH:
+			setDateOfBirth((XMLGregorianCalendar) newValue);
+			return;
 		case BowlingPackage.REFEREE__LEAGUE:
 			setLeague((League) newValue);
 			return;
@@ -149,6 +201,9 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case BowlingPackage.REFEREE__DATE_OF_BIRTH:
+			setDateOfBirth(DATE_OF_BIRTH_EDEFAULT);
+			return;
 		case BowlingPackage.REFEREE__LEAGUE:
 			setLeague((League) null);
 			return;
@@ -165,10 +220,30 @@ public class RefereeImpl extends EObjectImpl implements Referee {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case BowlingPackage.REFEREE__DATE_OF_BIRTH:
+			return DATE_OF_BIRTH_EDEFAULT == null ? dateOfBirth != null : !DATE_OF_BIRTH_EDEFAULT.equals(dateOfBirth);
 		case BowlingPackage.REFEREE__LEAGUE:
 			return league != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (dateOfBirth: ");
+		result.append(dateOfBirth);
+		result.append(')');
+		return result.toString();
 	}
 
 } // RefereeImpl

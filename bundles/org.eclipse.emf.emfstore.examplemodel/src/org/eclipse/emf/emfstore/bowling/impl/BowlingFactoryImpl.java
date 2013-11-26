@@ -12,6 +12,8 @@ package org.eclipse.emf.emfstore.bowling.impl;
 
 import java.util.Map;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -120,6 +122,8 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 			return createTournamentTypeFromString(eDataType, initialValue);
 		case BowlingPackage.GENDER:
 			return createGenderFromString(eDataType, initialValue);
+		case BowlingPackage.XML_DATE:
+			return createXMLDateFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -138,6 +142,8 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 			return convertTournamentTypeToString(eDataType, instanceValue);
 		case BowlingPackage.GENDER:
 			return convertGenderToString(eDataType, instanceValue);
+		case BowlingPackage.XML_DATE:
+			return convertXMLDateToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -310,6 +316,26 @@ public class BowlingFactoryImpl extends EFactoryImpl implements BowlingFactory {
 	 */
 	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public XMLGregorianCalendar createXMLDateFromString(EDataType eDataType, String initialValue) {
+		return (XMLGregorianCalendar) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public String convertXMLDateToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

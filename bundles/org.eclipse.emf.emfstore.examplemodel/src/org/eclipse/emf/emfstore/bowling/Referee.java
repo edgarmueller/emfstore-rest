@@ -10,6 +10,8 @@
  */
 package org.eclipse.emf.emfstore.bowling;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -20,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ * <li>{@link org.eclipse.emf.emfstore.bowling.Referee#getDateOfBirth <em>Date Of Birth</em>}</li>
  * <li>{@link org.eclipse.emf.emfstore.bowling.Referee#getLeague <em>League</em>}</li>
  * </ul>
  * </p>
@@ -29,6 +32,35 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Referee extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Date Of Birth</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Date Of Birth</em>' attribute isn't clear, there really should be more of a
+	 * description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Date Of Birth</em>' attribute.
+	 * @see #setDateOfBirth(XMLGregorianCalendar)
+	 * @see org.eclipse.emf.emfstore.bowling.BowlingPackage#getReferee_DateOfBirth()
+	 * @model dataType="org.eclipse.emf.emfstore.bowling.XMLDate"
+	 * @generated
+	 */
+	XMLGregorianCalendar getDateOfBirth();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.emf.emfstore.bowling.Referee#getDateOfBirth <em>Date Of Birth</em>}'
+	 * attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value the new value of the '<em>Date Of Birth</em>' attribute.
+	 * @see #getDateOfBirth()
+	 * @generated
+	 */
+	void setDateOfBirth(XMLGregorianCalendar value);
+
 	/**
 	 * Returns the value of the '<em><b>League</b></em>' reference.
 	 * <!-- begin-user-doc -->

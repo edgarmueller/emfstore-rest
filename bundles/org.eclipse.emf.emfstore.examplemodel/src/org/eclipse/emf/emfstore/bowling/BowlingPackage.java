@@ -12,6 +12,7 @@ package org.eclipse.emf.emfstore.bowling;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -469,6 +470,16 @@ public interface BowlingPackage extends EPackage {
 	int REFEREE = 6;
 
 	/**
+	 * The feature id for the '<em><b>Date Of Birth</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int REFEREE__DATE_OF_BIRTH = 0;
+
+	/**
 	 * The feature id for the '<em><b>League</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -476,7 +487,7 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFEREE__LEAGUE = 0;
+	int REFEREE__LEAGUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Referee</em>' class.
@@ -486,7 +497,7 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFEREE_FEATURE_COUNT = 1;
+	int REFEREE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.emf.emfstore.bowling.impl.RefereeToGamesMapImpl
@@ -776,6 +787,17 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 */
 	int GENDER = 12;
+
+	/**
+	 * The meta object id for the '<em>XML Date</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @see javax.xml.datatype.XMLGregorianCalendar
+	 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getXMLDate()
+	 * @generated
+	 */
+	int XML_DATE = 13;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.emf.emfstore.bowling.Player <em>Player</em>}'.
@@ -1193,6 +1215,19 @@ public interface BowlingPackage extends EPackage {
 	EClass getReferee();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.emf.emfstore.bowling.Referee#getDateOfBirth
+	 * <em>Date Of Birth</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Date Of Birth</em>'.
+	 * @see org.eclipse.emf.emfstore.bowling.Referee#getDateOfBirth()
+	 * @see #getReferee()
+	 * @generated
+	 */
+	EAttribute getReferee_DateOfBirth();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.emf.emfstore.bowling.Referee#getLeague
 	 * <em>League</em>}'.
 	 * <!-- begin-user-doc -->
@@ -1505,6 +1540,18 @@ public interface BowlingPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getGender();
+
+	/**
+	 * Returns the meta object for data type '{@link javax.xml.datatype.XMLGregorianCalendar <em>XML Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for data type '<em>XML Date</em>'.
+	 * @see javax.xml.datatype.XMLGregorianCalendar
+	 * @model instanceClass="javax.xml.datatype.XMLGregorianCalendar"
+	 * @generated
+	 */
+	EDataType getXMLDate();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1848,6 +1895,15 @@ public interface BowlingPackage extends EPackage {
 		EClass REFEREE = eINSTANCE.getReferee();
 
 		/**
+		 * The meta object literal for the '<em><b>Date Of Birth</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute REFEREE__DATE_OF_BIRTH = eINSTANCE.getReferee_DateOfBirth();
+
+		/**
 		 * The meta object literal for the '<em><b>League</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2086,6 +2142,17 @@ public interface BowlingPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum GENDER = eINSTANCE.getGender();
+
+		/**
+		 * The meta object literal for the '<em>XML Date</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @see javax.xml.datatype.XMLGregorianCalendar
+		 * @see org.eclipse.emf.emfstore.bowling.impl.BowlingPackageImpl#getXMLDate()
+		 * @generated
+		 */
+		EDataType XML_DATE = eINSTANCE.getXMLDate();
 
 	}
 

@@ -267,11 +267,10 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setName(String newName) {
-		final String oldName = name;
+		String oldName = name;
 		name = newName;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__NAME, oldName, name));
-		}
 	}
 
 	/**
@@ -291,12 +290,11 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setDateOfBirth(Date newDateOfBirth) {
-		final Date oldDateOfBirth = dateOfBirth;
+		Date oldDateOfBirth = dateOfBirth;
 		dateOfBirth = newDateOfBirth;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__DATE_OF_BIRTH, oldDateOfBirth,
 				dateOfBirth));
-		}
 	}
 
 	/**
@@ -316,11 +314,10 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setHeight(double newHeight) {
-		final double oldHeight = height;
+		double oldHeight = height;
 		height = newHeight;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__HEIGHT, oldHeight, height));
-		}
 	}
 
 	/**
@@ -340,12 +337,11 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setIsProfessional(boolean newIsProfessional) {
-		final boolean oldIsProfessional = isProfessional;
+		boolean oldIsProfessional = isProfessional;
 		isProfessional = newIsProfessional;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__IS_PROFESSIONAL,
 				oldIsProfessional, isProfessional));
-		}
 	}
 
 	/**
@@ -378,12 +374,11 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setNumberOfVictories(int newNumberOfVictories) {
-		final int oldNumberOfVictories = numberOfVictories;
+		int oldNumberOfVictories = numberOfVictories;
 		numberOfVictories = newNumberOfVictories;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__NUMBER_OF_VICTORIES,
 				oldNumberOfVictories, numberOfVictories));
-		}
 	}
 
 	/**
@@ -417,12 +412,11 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setWinLossRatio(BigDecimal newWinLossRatio) {
-		final BigDecimal oldWinLossRatio = winLossRatio;
+		BigDecimal oldWinLossRatio = winLossRatio;
 		winLossRatio = newWinLossRatio;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__WIN_LOSS_RATIO,
 				oldWinLossRatio, winLossRatio));
-		}
 	}
 
 	/**
@@ -442,11 +436,10 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 * @generated
 	 */
 	public void setGender(Gender newGender) {
-		final Gender oldGender = gender;
+		Gender oldGender = gender;
 		gender = newGender == null ? GENDER_EDEFAULT : newGender;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BowlingPackage.PLAYER__GENDER, oldGender, gender));
-		}
 	}
 
 	/**
@@ -630,11 +623,10 @@ public class PlayerImpl extends EObjectImpl implements Player {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
+		if (eIsProxy())
 			return super.toString();
-		}
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", dateOfBirth: ");

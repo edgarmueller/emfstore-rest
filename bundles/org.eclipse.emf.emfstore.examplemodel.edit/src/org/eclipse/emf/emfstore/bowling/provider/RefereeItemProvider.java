@@ -13,6 +13,8 @@ package org.eclipse.emf.emfstore.bowling.provider;
 import java.util.Collection;
 import java.util.List;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -23,8 +25,11 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.emfstore.bowling.BowlingPackage;
+import org.eclipse.emf.emfstore.bowling.Referee;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.emf.emfstore.bowling.Referee} object.
@@ -58,9 +63,33 @@ public class RefereeItemProvider extends ItemProviderAdapter implements IEditing
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDateOfBirthPropertyDescriptor(object);
 			addLeaguePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Date Of Birth feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	protected void addDateOfBirthPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_Referee_dateOfBirth_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Referee_dateOfBirth_feature", "_UI_Referee_type"),
+				BowlingPackage.Literals.REFEREE__DATE_OF_BIRTH,
+				true,
+				false,
+				false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				null,
+				null));
 	}
 
 	/**
@@ -107,7 +136,11 @@ public class RefereeItemProvider extends ItemProviderAdapter implements IEditing
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Referee_type");
+		XMLGregorianCalendar labelValue = ((Referee) object).getDateOfBirth();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Referee_type") :
+			getString("_UI_Referee_type") + " " + label;
 	}
 
 	/**
@@ -121,6 +154,12 @@ public class RefereeItemProvider extends ItemProviderAdapter implements IEditing
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Referee.class)) {
+		case BowlingPackage.REFEREE__DATE_OF_BIRTH:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
+		}
 		super.notifyChanged(notification);
 	}
 
