@@ -6,13 +6,13 @@
   <parent>
     <groupId>org.eclipse.emf.emfstore</groupId>
     <artifactId>emfstore-parent</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <relativePath>../../releng/emfstore-parent/</relativePath>
   </parent>
 
   <groupId>org.eclipse.emf.emfstore</groupId>
   <artifactId>org.eclipse.emf.emfstore.client.test</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.4-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 
 </project>

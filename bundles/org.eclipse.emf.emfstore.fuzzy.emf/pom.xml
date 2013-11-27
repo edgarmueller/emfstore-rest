@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.eclipse.emf.emfstore</groupId>
     <artifactId>emfstore-parent</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <relativePath>../../releng/emfstore-parent/</relativePath>
   </parent>
   <groupId>org.eclipse.emf.emfstore</groupId>
   <artifactId>org.eclipse.emf.emfstore.fuzzy.emf</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.4-SNAPSHOT</version>
   <packaging>eclipse-test-plugin</packaging>
   
   <build>
