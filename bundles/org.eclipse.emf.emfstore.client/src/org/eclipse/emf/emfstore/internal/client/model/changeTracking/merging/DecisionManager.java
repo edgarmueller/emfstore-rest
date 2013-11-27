@@ -29,6 +29,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -133,8 +134,9 @@ public class DecisionManager {
 	}
 
 	/**
-	 * BEGIN FACTORY TODO: EXTRACT FACTORY CLASS.
+	 * BEGIN FACTORY TODO EXTRACT FACTORY CLASS.
 	 */
+
 	// BEGIN COMPLEX CODE
 	private void createConflicts(Set<ConflictBucket> conflictBucket) {
 		// Create Conflicts from ConflictBucket
@@ -226,7 +228,6 @@ public class DecisionManager {
 		if (isMultiRef(conf.getMyOperation())) {
 			return new MultiReferenceSetConflict(conf, this, true);
 		}
-
 		return new MultiReferenceSetConflict(conf, this, false);
 	}
 
@@ -234,16 +235,16 @@ public class DecisionManager {
 		if (isMultiRefSet(conf.getMyOperation())) {
 			return new MultiReferenceSetSingleConflict(conf, this, true);
 		}
-
 		return new MultiReferenceSetSingleConflict(conf, this, false);
+
 	}
 
 	private VisualConflict createMultiSingle(ConflictBucket conf) {
 		if (isMultiRef(conf.getMyOperation())) {
 			return new MultiReferenceSingleConflict(conf, this, true);
 		}
-
 		return new MultiReferenceSingleConflict(conf, this, false);
+
 	}
 
 	private VisualConflict createMultiRefSetSet(ConflictBucket conf) {
@@ -258,7 +259,6 @@ public class DecisionManager {
 		if (((MultiAttributeOperation) conf.getMyOperation()).isAdd()) {
 			return new MultiAttributeConflict(conf, this, true);
 		}
-
 		return new MultiAttributeConflict(conf, this, false);
 	}
 
@@ -266,24 +266,24 @@ public class DecisionManager {
 		if (isMultiAtt(conf.getMyOperation())) {
 			return new MultiAttributeSetConflict(conf, this, true);
 		}
-
 		return new MultiAttributeSetConflict(conf, this, false);
+
 	}
 
 	private VisualConflict createMultiAttMove(ConflictBucket conf) {
 		if (isMultiAtt(conf.getMyOperation())) {
 			return new MultiAttributeMoveConflict(conf, this, true);
 		}
-
 		return new MultiAttributeMoveConflict(conf, this, false);
+
 	}
 
 	private VisualConflict createMultiAttMoveSet(ConflictBucket conf) {
 		if (isMultiAttSet(conf.getMyOperation())) {
 			return new MultiAttributeMoveSetConflict(conf, this, true);
 		}
-
 		return new MultiAttributeMoveSetConflict(conf, this, false);
+
 	}
 
 	private VisualConflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
@@ -291,9 +291,9 @@ public class DecisionManager {
 			return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
 				Arrays.asList(conf.getTheirOperation()));
 		}
-
 		return createRefFromSub(conf, Arrays.asList(conf.getMyOperation()),
 			((CompositeOperation) conf.getTheirOperation()).getSubOperations());
+
 	}
 
 	private VisualConflict createReferenceConflict(ConflictBucket conf) {
@@ -335,7 +335,6 @@ public class DecisionManager {
 		if (((MultiReferenceOperation) conf.getMyOperation()).isAdd()) {
 			return new MultiReferenceConflict(conf, this, true);
 		}
-
 		return new MultiReferenceConflict(conf, this, false);
 	}
 
@@ -343,7 +342,6 @@ public class DecisionManager {
 		if (isDelete(conf.getMyOperation())) {
 			return new DeletionConflict(conf, true, this);
 		}
-
 		return new DeletionConflict(conf, false, this);
 	}
 
@@ -351,7 +349,6 @@ public class DecisionManager {
 		if (isComposite(conf.getMyOperation())) {
 			return new CompositeConflict(conf, this, true);
 		}
-
 		return new CompositeConflict(conf, this, false);
 	}
 
@@ -483,7 +480,7 @@ public class DecisionManager {
 		// }
 		// }
 		// MKCD
-		return "";
+		return StringUtils.EMPTY;
 	}
 
 	private Integer myLeafOperationCount;

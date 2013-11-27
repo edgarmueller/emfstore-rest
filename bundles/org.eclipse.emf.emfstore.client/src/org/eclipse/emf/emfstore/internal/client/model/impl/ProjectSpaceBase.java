@@ -434,7 +434,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	 * @see org.eclipse.emf.emfstore.internal.client.model.ProjectSpace#getFile(org.eclipse.emf.emfstore.internal.server.model.FileIdentifier)
 	 */
 	public FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException {
-		return fileTransferManager.getFile(fileIdentifier);
+		return fileTransferManager.getFile(fileIdentifier, false);
 	}
 
 	/**

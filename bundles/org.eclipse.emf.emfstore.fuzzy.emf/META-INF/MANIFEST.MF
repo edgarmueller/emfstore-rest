@@ -2,21 +2,21 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFDataProvider for FuzzyTestRunner
 Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy.emf;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.0.4.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .,
  lib/dom4j-1.6.1.jar
 Bundle-Localization: plugin
-Export-Package: org.eclipse.emf.emfstore.fuzzy.emf;version="1.0.2",
- org.eclipse.emf.emfstore.fuzzy.emf.config;version="1.0.2",
- org.eclipse.emf.emfstore.fuzzy.emf.config.impl;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.fuzzy.emf.config.util;version="1.0.2",
- org.eclipse.emf.emfstore.fuzzy.emf.diff;version="1.0.2"
-Require-Bundle: org.eclipse.emf.emfstore.modelmutator;bundle-version="[1.0.2,2.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.fuzzy;bundle-version="[1.0.2,2.0.0)";visibility:=reexport,
+Export-Package: org.eclipse.emf.emfstore.fuzzy.emf;version="1.0.4",
+ org.eclipse.emf.emfstore.fuzzy.emf.config;version="1.0.4",
+ org.eclipse.emf.emfstore.fuzzy.emf.config.impl;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.fuzzy.emf.config.util;version="1.0.4",
+ org.eclipse.emf.emfstore.fuzzy.emf.diff;version="1.0.4"
+Require-Bundle: org.eclipse.emf.emfstore.modelmutator;bundle-version="[1.0.4,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.fuzzy;bundle-version="[1.0.4,2.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)";visibility:=reexport,
  org.eclipse.emf.edit;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.client.test;bundle-version="[1.0.2,2.0.0)"
+ org.eclipse.emf.emfstore.client.test;bundle-version="[1.0.4,2.0.0)"
 Bundle-Vendor: Eclipse Modeling Project

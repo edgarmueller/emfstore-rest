@@ -12,7 +12,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.verifiers;
 
-import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthenticationControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ServerKeyStoreManager;
@@ -145,38 +144,8 @@ public abstract class AbstractAuthenticationControl implements AuthenticationCon
 	 */
 	// TODO include client name in verification
 	protected void checkClientVersion(ClientVersionInfo clientVersionInfo) throws ClientVersionOutOfDateException {
-
-		if (clientVersionInfo == null) {
-			throw new ClientVersionOutOfDateException("No client version recieved.");
-		}
-
-		final String[] versions = ServerConfiguration.getSplittedProperty(ServerConfiguration.ACCEPTED_VERSIONS);
-
-		if (versions == null) {
-			final String msg = "No server versions supplied";
-			ModelUtil.logWarning(msg, new ClientVersionOutOfDateException(msg));
-			return;
-		}
-
-		for (final String str : versions) {
-			if (str.equals(clientVersionInfo.getVersion()) || str.equals(ServerConfiguration.ACCEPTED_VERSIONS_ANY)) {
-				return;
-			}
-		}
-
-		final StringBuffer version = new StringBuffer();
-
-		for (final String str : versions) {
-			if (versions.length == 1) {
-				version.append(str + ". ");
-			} else {
-				version.append(str + ", ");
-			}
-		}
-
-		version.replace(version.length() - 2, version.length(), ".");
-
-		throw new ClientVersionOutOfDateException("Client version: " + clientVersionInfo.getVersion()
-			+ " - Accepted versions: " + version);
+		VersionVerifier.verify(
+			ServerConfiguration.getSplittedProperty(ServerConfiguration.ACCEPTED_VERSIONS),
+			clientVersionInfo);
 	}
 }
