@@ -178,6 +178,11 @@ public abstract class NotifiableIdEObjectCollectionImpl extends IdEObjectCollect
 
 	@Override
 	public void initMapping() {
+
+		if (isCacheInitialized()) {
+			return;
+		}
+
 		super.initMapping();
 		if (changeNotifier == null) {
 			changeNotifier = new EObjectChangeNotifier(this, this);

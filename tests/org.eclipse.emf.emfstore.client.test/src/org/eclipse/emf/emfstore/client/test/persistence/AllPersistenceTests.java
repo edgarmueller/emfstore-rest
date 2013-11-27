@@ -20,7 +20,7 @@ import org.junit.runners.Suite;
  * @author emueller
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ImportExportTest.class, PersistenceTest.class, ProjectCacheTest.class })
+@Suite.SuiteClasses({ ImportExportTest.class, PersistenceTest.class })
 public class AllPersistenceTests {
 
 }

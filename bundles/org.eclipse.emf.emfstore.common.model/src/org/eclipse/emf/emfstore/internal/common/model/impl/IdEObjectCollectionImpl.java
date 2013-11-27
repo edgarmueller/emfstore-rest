@@ -669,8 +669,11 @@ public abstract class IdEObjectCollectionImpl extends EObjectImpl implements IdE
 	 *            a {@link ModelElementId}
 	 */
 	protected void putIntoCaches(EObject modelElement, String modelElementId) {
-		eObjectToIdMap.put(modelElement, modelElementId);
-		idToEObjectMap.put(modelElementId, modelElement);
+		// never overwrite existing IDs
+		if (!eObjectToIdMap.containsKey(modelElement)) {
+			eObjectToIdMap.put(modelElement, modelElementId);
+			idToEObjectMap.put(modelElementId, modelElement);
+		}
 	}
 
 	/**
