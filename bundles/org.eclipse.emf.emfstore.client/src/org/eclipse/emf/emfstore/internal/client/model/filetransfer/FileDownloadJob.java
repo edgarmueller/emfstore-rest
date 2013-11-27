@@ -39,13 +39,13 @@ public class FileDownloadJob extends FileTransferJob {
 	 * @param status the status to which this download job will report its progress
 	 * @param transferManager the transfer manager administering the download.
 	 * @param fileId the id of the file to be transferred
-	 * @param transferVisibleToUser progress bar yes/no
+	 * @param isTriggeredByUI progress bar yes/no
 	 */
 	FileDownloadJob(FileDownloadStatus status, FileTransferManager transferManager, FileIdentifier fileId,
-		boolean transferVisibleToUser) {
+		boolean isTriggeredByUI) {
 		super(transferManager, new FileTransferInformation(fileId, FileTransferInformation.UNKOWN_SIZE),
 			"File Download");
-		setUser(transferVisibleToUser);
+		setUser(isTriggeredByUI);
 		this.status = status;
 	}
 
@@ -71,6 +71,8 @@ public class FileDownloadJob extends FileTransferJob {
 		} catch (final RuntimeException e) {
 			// END SUPRESS CATCH EXCEPTION
 			return registerException(e);
+		} finally {
+			monitor.done();
 		}
 		return Status.OK_STATUS;
 	}

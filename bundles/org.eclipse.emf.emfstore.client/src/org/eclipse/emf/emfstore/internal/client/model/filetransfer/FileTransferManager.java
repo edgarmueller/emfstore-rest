@@ -198,7 +198,8 @@ public class FileTransferManager {
 	 * 
 	 * @throws FileTransferException in case the given file identifier is {@code null}
 	 */
-	public FileDownloadStatus getFile(FileIdentifier fileIdentifier) throws FileTransferException {
+	public FileDownloadStatus getFile(FileIdentifier fileIdentifier, boolean isTriggeredByUI)
+		throws FileTransferException {
 
 		if (fileIdentifier == null) {
 			throw new FileTransferException("File identifier may not be null,");
@@ -211,7 +212,7 @@ public class FileTransferManager {
 		}
 
 		// Otherwise, start a download
-		return startDownload(fileIdentifier);
+		return startDownload(fileIdentifier, isTriggeredByUI);
 	}
 
 	/**
@@ -224,10 +225,10 @@ public class FileTransferManager {
 	 *            a progress monitor for the download
 	 * @return the status
 	 */
-	private FileDownloadStatus startDownload(FileIdentifier fileIdentifier) {
+	private FileDownloadStatus startDownload(FileIdentifier fileIdentifier, boolean isTriggeredByUI) {
 		final FileDownloadStatus fds = FileDownloadStatus.Factory.createNew(projectSpace, fileIdentifier);
 		// TODO Check if true is correct here
-		final FileDownloadJob job = new FileDownloadJob(fds, this, fileIdentifier, true);
+		final FileDownloadJob job = new FileDownloadJob(fds, this, fileIdentifier, isTriggeredByUI);
 		job.schedule();
 		return fds;
 	}
