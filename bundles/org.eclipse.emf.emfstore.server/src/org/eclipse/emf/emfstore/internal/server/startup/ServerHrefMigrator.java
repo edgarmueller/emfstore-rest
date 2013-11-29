@@ -27,7 +27,6 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
@@ -50,41 +49,45 @@ import org.xml.sax.SAXException;
  */
 public class ServerHrefMigrator {
 
+	private File backup;
+
 	/**
 	 * Performs the migration, if needed. Creates a backup beforehand.
+	 * 
+	 * @return <code>true</code> if migration was successful, <code>false</code> if an error occurred and the server
+	 *         startup should be canceled.
 	 */
-	public void migrate() {
+	public boolean migrate() {
 
 		final String sEMFStoreServer = ServerConfiguration.getServerHome();
 
 		// check if migration is needed
 		if (isMigrationNeeded(sEMFStoreServer + "storage.uss")) { //$NON-NLS-1$
 
-			// create backup
-			File backup = null;
+			if (backup != null) {
+				return false;
+			}
+
 			try {
 				backup = createBackup(ServerConfiguration.getServerHome(),
 					ServerConfiguration.getServerHome() + "../backup" + System.currentTimeMillis()); //$NON-NLS-1$
 			} catch (final IOException ex) {
 				ModelUtil.logException(
 					"Error during the backup creation.", ex);
+				return false;
 			}
 
 			// perform migration
 			try {
 				doMigrate(sEMFStoreServer);
-				if (backup != null) {
-					FileUtils.deleteDirectory(backup);
-				}
-				return;
+				return true;
 			} catch (final InvocationTargetException ex) {
 				ModelUtil.logException(
 					"Error during the migration process.", ex);
-			} catch (final IOException ex) {
-				ModelUtil.logException(
-					"Deleting the backup failed", ex);
+				return false;
 			}
 		}
+		return true;
 	}
 
 	private boolean isMigrationNeeded(String pathToServerSpace) {
@@ -105,13 +108,14 @@ public class ServerHrefMigrator {
 				"Cannot determine whether migration is needed. Migration will be skipped, backup will be created.", ex);
 		}
 		try {
-			createBackup(ServerConfiguration.getServerHome(),
+			backup = createBackup(ServerConfiguration.getServerHome(),
 				ServerConfiguration.getServerHome() + "../backup" + System.currentTimeMillis()); //$NON-NLS-1$
 		} catch (final IOException ex) {
+			backup = new File(""); //$NON-NLS-1$
 			ModelUtil.logException(
 				"Creating the backup failed.", ex);
 		}
-		return false;
+		return true;
 	}
 
 	/**

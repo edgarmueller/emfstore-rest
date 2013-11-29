@@ -338,7 +338,10 @@ public class EMFStoreController implements IApplication, Runnable {
 			// hrefs are persisted differently in 1.1+ in comparison to 1.0
 			// migrate, if needed, before loading
 			if (resourceSetProvider instanceof ServerXMIResourceSetProvider) {
-				new ServerHrefMigrator().migrate();
+				if (!new ServerHrefMigrator().migrate()) {
+					throw new FatalESException("Error during migration");
+				}
+
 			}
 			resource = resourceSet.createResource(serverspaceURI);
 		}

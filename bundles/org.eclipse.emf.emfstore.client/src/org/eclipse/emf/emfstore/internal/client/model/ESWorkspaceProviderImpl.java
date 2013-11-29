@@ -207,7 +207,9 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 			// hrefs are persisted differently in 1.1+ in comparison to 1.0
 			// migrate, if needed, before loading
 			if (resourceSetProvider instanceof ClientXMIResourceSetProvider) {
-				new ClientHrefMigrator().migrate();
+				if (!new ClientHrefMigrator().migrate()) {
+					throw new RuntimeException("Migration failed");
+				}
 			}
 
 			// file exists, load it,

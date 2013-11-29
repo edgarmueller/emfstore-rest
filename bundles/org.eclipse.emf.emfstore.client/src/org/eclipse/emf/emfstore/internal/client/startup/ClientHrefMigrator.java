@@ -20,7 +20,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.startup.ServerHrefMigrator;
@@ -42,42 +41,46 @@ import org.xml.sax.SAXException;
  */
 public class ClientHrefMigrator extends ServerHrefMigrator {
 
+	private File backup;
+
 	/**
 	 * Performs the migration, if needed. Creates a backup beforehand.
+	 * 
+	 * @return <code>true</code> if migration was successful, <code>false</code> if an error occurred and the client
+	 *         startup should be canceled.
 	 */
 	@Override
-	public void migrate() {
+	public boolean migrate() {
 
 		final String sEMFStoreClient = Configuration.getFileInfo().getWorkspaceDirectory();
 
 		// check if migration is needed
 		if (isMigrationNeeded(sEMFStoreClient + "workspace.ucw")) { //$NON-NLS-1$
 
-			// create backup
-			File backup = null;
+			if (backup != null) {
+				return false;
+			}
+
 			try {
 				backup = createBackup(Configuration.getFileInfo().getWorkspaceDirectory(),
 					Configuration.getFileInfo().getWorkspaceDirectory() + "../backup" + System.currentTimeMillis()); //$NON-NLS-1$
 			} catch (final IOException ex) {
 				ModelUtil.logException(
 					"Error during the backup creation.", ex);
+				return false;
 			}
 
 			// perform migration
 			try {
 				doMigrate(sEMFStoreClient);
-				if (backup != null) {
-					FileUtils.deleteDirectory(backup);
-				}
-				return;
+				return true;
 			} catch (final InvocationTargetException ex) {
 				ModelUtil.logException(
 					"Error during the migration process.", ex);
-			} catch (final IOException ex) {
-				ModelUtil.logException(
-					"Deleting the backup failed", ex);
+				return false;
 			}
 		}
+		return true;
 	}
 
 	private boolean isMigrationNeeded(String pathToFile) {
@@ -98,13 +101,14 @@ public class ClientHrefMigrator extends ServerHrefMigrator {
 				"Cannot determine whether migration is needed. Migration will be skipped, backup will be created.", ex);
 		}
 		try {
-			createBackup(Configuration.getFileInfo().getWorkspaceDirectory(),
+			backup = createBackup(Configuration.getFileInfo().getWorkspaceDirectory(),
 				Configuration.getFileInfo().getWorkspaceDirectory() + "../backup" + System.currentTimeMillis()); //$NON-NLS-1$
 		} catch (final IOException ex) {
+			backup = new File(""); //$NON-NLS-1$
 			ModelUtil.logException(
 				"Creating the backup failed.", ex);
 		}
-		return false;
+		return true;
 	}
 
 	private void doMigrate(String sEMFStoreClient) throws InvocationTargetException {
