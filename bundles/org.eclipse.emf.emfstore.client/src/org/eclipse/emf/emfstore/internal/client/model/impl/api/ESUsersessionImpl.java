@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar Mueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
@@ -182,5 +182,23 @@ public class ESUsersessionImpl extends AbstractAPIImpl<ESUsersessionImpl, Userse
 	 */
 	public ESSessionId getSessionId() {
 		return toInternalAPI().getSessionId().toAPI();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESUsersession#setSavePassword(boolean)
+	 */
+	public void setSavePassword(boolean shouldSavePassword) {
+		toInternalAPI().setSavePassword(shouldSavePassword);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESUsersession#isSavePassword()
+	 */
+	public boolean isSavePassword() {
+		return toInternalAPI().isSavePassword();
 	}
 }

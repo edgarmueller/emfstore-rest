@@ -79,4 +79,19 @@ public interface ESUsersession {
 	 * @return the current session id
 	 */
 	ESSessionId getSessionId();
+
+	/**
+	 * Whether the password that is used by this session should be saved.
+	 * 
+	 * @param shouldSavePassword
+	 *            {@code true} if the password should be saved, {@code false} otherwise
+	 */
+	void setSavePassword(boolean shouldSavePassword);
+
+	/**
+	 * Whether the password that is used by this session will be saved.
+	 * 
+	 * @return {@code true} if the password is saved, {@code false} otherwise
+	 */
+	boolean isSavePassword();
 }
