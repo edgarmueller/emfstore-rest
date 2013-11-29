@@ -33,6 +33,12 @@
    <feature url="features/org.eclipse.emf.emfstore.sdk.feature_1.0.2.qualifier.jar" id="org.eclipse.emf.emfstore.sdk.feature" version="1.0.2.qualifier">
       <category name="org.eclipse.emfstore.sdk"/>
    </feature>
+   <feature url="features/org.eclipse.emf.emfstore.mongodb.client.feature_1.1.0.qualifier.jar" id="org.eclipse.emf.emfstore.mongodb.client.feature" version="1.1.0.qualifier">
+      <category name="org.eclipse.emf.emfstore.other"/>
+   </feature>
+   <feature url="features/org.eclipse.emf.emfstore.mongodb.server.feature_1.1.0.qualifier.jar" id="org.eclipse.emf.emfstore.mongodb.server.feature" version="1.1.0.qualifier">
+      <category name="org.eclipse.emf.emfstore.other"/>
+   </feature>
    <category-def name="org.eclipse.emf.emfstore.core" label="EMFStore Core Features">
       <description>
          Core Features of EMFStore, a model repository for EMF.

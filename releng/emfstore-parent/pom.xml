@@ -144,6 +144,14 @@
     
     <module>../../bundles/org.eclipse.emf.emfstore.examplemodel</module>
     <module>../../bundles/org.eclipse.emf.emfstore.examplemodel.edit</module>
+	
+	<!-- EMFStore MongoDB -->
+    <module>../../features/org.eclipse.emf.emfstore.mongodb.client.feature</module>
+	<module>../../features/org.eclipse.emf.emfstore.mongodb.server.feature</module>
+    
+    <module>../../bundles/org.eclipse.emf.emfstore.mongodb</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.mongodb.client</module>
+    <module>../../bundles/org.eclipse.emf.emfstore.mongodb.server</module>
 
     <!-- Update site and products -->
 	<module>../../features/org.eclipse.emf.emfstore.sdk.feature</module>
