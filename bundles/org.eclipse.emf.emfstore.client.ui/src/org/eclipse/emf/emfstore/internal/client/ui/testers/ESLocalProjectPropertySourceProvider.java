@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * mkoegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.testers;
 
@@ -15,13 +15,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.observer.ESSaveStateChangedObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.observers.SaveStateChangedObserver;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.ui.AbstractSourceProvider;
 import org.eclipse.ui.ISources;
-
-// import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 
 /**
  * Source provider for properties of ProjectSpace.
@@ -36,7 +34,7 @@ public class ESLocalProjectPropertySourceProvider extends AbstractSourceProvider
 	 */
 	public static final String CURRENT_SAVE_STATE_PROPERTY = "org.eclipse.emf.emfstore.client.ui.currentProjectSpaceSaveState";
 
-	private SaveStateChangedObserver saveStateChangedObserver;
+	private ESSaveStateChangedObserver saveStateChangedObserver;
 
 	private Map<String, Boolean> currentSaveStates;
 
@@ -50,16 +48,16 @@ public class ESLocalProjectPropertySourceProvider extends AbstractSourceProvider
 		try {
 			ESWorkspaceProviderImpl.init();
 			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (RuntimeException exception) {
+		} catch (final RuntimeException exception) {
 			// END SUPRESS CATCH EXCEPTION
 			ModelUtil.logException(
 				"ProjectSpacePropertySourceProvider init failed because workspace init failed with exception.",
 				exception);
 			return;
 		}
-		saveStateChangedObserver = new SaveStateChangedObserver() {
+		saveStateChangedObserver = new ESSaveStateChangedObserver() {
 			public void saveStateChanged(ESLocalProject localProject, boolean hasUnsavedChangesNow) {
-				Boolean newValue = new Boolean(hasUnsavedChangesNow);
+				final Boolean newValue = new Boolean(hasUnsavedChangesNow);
 				currentSaveStates.put(localProject.getLastUpdated().toString(), newValue);
 				fireSourceChanged(ISources.WORKBENCH, CURRENT_SAVE_STATE_PROPERTY, newValue);
 			}
@@ -86,7 +84,7 @@ public class ESLocalProjectPropertySourceProvider extends AbstractSourceProvider
 	 * @see org.eclipse.ui.ISourceProvider#getCurrentState()
 	 */
 	public Map<String, Object> getCurrentState() {
-		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		final Map<String, Object> map = new LinkedHashMap<String, Object>();
 		map.put(CURRENT_SAVE_STATE_PROPERTY, currentSaveStates);
 		return map;
 	}

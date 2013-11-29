@@ -9,24 +9,26 @@
  * Contributors:
  * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.internal.client.observers;
+package org.eclipse.emf.emfstore.client.observer;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.common.ESObserver;
 
 /**
- * Listener for changes to the save state (project is fully saved or still dirty) of a project space.
+ * Listener for changes to the save state (project is fully saved or still dirty) of a {@link ESLocalProject}.
  * 
  * @author mkoegel
  * 
  */
-public interface SaveStateChangedObserver extends ESObserver {
+public interface ESSaveStateChangedObserver extends ESObserver {
 
 	/**
 	 * Notify the listener about a save state change.
 	 * 
-	 * @param localProject the project space the notification is about
-	 * @param hasUnsavedChangesNow the new save state, true if there are unsaved changes now
+	 * @param localProject
+	 *            the {@link ESLocalProject} the notification is about
+	 * @param hasUnsavedChangesNow
+	 *            the new save state, {@code true} if there are unsaved changes now, {@code false} otherwise
 	 */
 	void saveStateChanged(ESLocalProject localProject, boolean hasUnsavedChangesNow);
 }

@@ -7,13 +7,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * mkoegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
+import org.eclipse.emf.emfstore.client.observer.ESSaveStateChangedObserver;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.client.observers.SaveStateChangedObserver;
 
 /**
  * Notifies {@link ESLocalProjectSaveStateNotifier} about changes of the {@link ESLocalProject} save state.
@@ -41,7 +41,7 @@ public class ESLocalProjectSaveStateNotifier implements IDEObjectCollectionDirty
 	 * @see org.eclipse.emf.emfstore.internal.client.model.impl.IDEObjectCollectionDirtyStateListener#notifyAboutDirtyStateChange()
 	 */
 	public void notifyAboutDirtyStateChange() {
-		ESWorkspaceProviderImpl.getObserverBus().notify(SaveStateChangedObserver.class)
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESSaveStateChangedObserver.class)
 			.saveStateChanged(localProject, localProject.hasUnsavedChanges());
 	}
 
