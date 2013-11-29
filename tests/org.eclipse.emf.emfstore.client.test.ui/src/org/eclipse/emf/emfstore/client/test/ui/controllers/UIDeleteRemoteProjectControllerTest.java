@@ -40,9 +40,12 @@ public class UIDeleteRemoteProjectControllerTest extends AbstractUIControllerTes
 		bot.button("Yes").click();
 		bot.waitUntil(new DefaultCondition() {
 
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return server.getRemoteProjects().size() == remoteProjectsSize - 1;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Delete remote project did not succeed.";

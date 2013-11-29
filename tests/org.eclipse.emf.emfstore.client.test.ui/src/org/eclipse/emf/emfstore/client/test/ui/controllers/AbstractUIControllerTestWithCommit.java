@@ -45,7 +45,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 	public static final String PLAYER_NAME = "A";
 	public static final String LEAGUE_NAME = "L";
-	protected boolean didUpdate;
+	private boolean didUpdate;
 
 	protected void createTournamentAndCommit() {
 		final Tournament tournament = ProjectChangeUtil.createTournament(true);
@@ -107,11 +107,13 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		buttonWithLabel.click();
 
 		bot.waitUntil(new DefaultCondition() {
-
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return baseVersion.getIdentifier() + 1 == localProject.getBaseVersion()
 					.getIdentifier();
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Commit did not succeed.";
@@ -142,10 +144,12 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		bot.button("OK").click();
 
 		bot.waitUntil(new DefaultCondition() {
-
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return checkedoutCopy != null;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Checkout did not succeed";
@@ -178,9 +182,12 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 
 		bot.waitUntil(new DefaultCondition() {
 
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return localProjectArr[0] != null;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Checkout did not succeed";
@@ -216,9 +223,12 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		bot.button("OK").click();
 
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return didUpdate;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Update did not succeed.";
@@ -257,9 +267,12 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		bot.button("OK").click();
 
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return didUpdate;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Update to version did not succeed.";
@@ -301,10 +314,13 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		buttonWithLabel.click();
 
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return getCopy().getBaseVersion().getIdentifier() ==
 				localProject.getBaseVersion().getIdentifier() - 1;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Paged Update did not succeed.";
@@ -317,10 +333,13 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 		bot.button("OK").click(); // inspect changes on update
 
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return getCopy().getBaseVersion().getIdentifier() ==
 				localProject.getBaseVersion().getIdentifier();
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Paged Update did not succeed.";

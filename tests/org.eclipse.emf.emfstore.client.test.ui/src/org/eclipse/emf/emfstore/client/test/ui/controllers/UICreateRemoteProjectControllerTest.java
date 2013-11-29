@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -21,7 +22,7 @@ import org.junit.Test;
 
 public class UICreateRemoteProjectControllerTest extends AbstractUIControllerTest {
 
-	UICreateRemoteProjectController createRemoteProjectController;
+	private UICreateRemoteProjectController createRemoteProjectController;
 
 	@Override
 	@Test
@@ -35,14 +36,17 @@ public class UICreateRemoteProjectControllerTest extends AbstractUIControllerTes
 				createRemoteProjectController.execute();
 			}
 		});
-		SWTBotText text = bot.text(0);
+		final SWTBotText text = bot.text(0);
 		text.setText("foo");
-		SWTBotButton okButton = bot.button("OK");
+		final SWTBotButton okButton = bot.button("OK");
 		okButton.click();
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return server.getRemoteProjects(usersession).size() == remoteProjectsSize + 1;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Create remote project did not succeed.";

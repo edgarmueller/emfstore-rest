@@ -31,24 +31,27 @@ public class UIBranchControllersTest extends AbstractUIControllerTestWithCommit 
 		final int branchesSize = localProject.getBranches(monitor).size();
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
-				UICreateBranchController createBranchController = new UICreateBranchController(bot.getDisplay()
+				final UICreateBranchController createBranchController = new UICreateBranchController(bot.getDisplay()
 					.getActiveShell(),
 					localProject);
 				createBranchController.execute();
 			}
 		});
-		SWTBotShell shell = bot.shell("Create Branch");
+		final SWTBotShell shell = bot.shell("Create Branch");
 
 		shell.bot().text(0).setText("foo");
 		shell.bot().button("OK").click();
-		SWTBotShell commitDialogShell = bot.shell("Commit");
+		final SWTBotShell commitDialogShell = bot.shell("Commit");
 		commitDialogShell.bot().button("OK").click();
 
 		bot.waitUntil(new DefaultCondition() {
 
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return branchesSize + 1 == localProject.getBranches(monitor).size();
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Create branch did not succeed.";
@@ -59,11 +62,11 @@ public class UIBranchControllersTest extends AbstractUIControllerTestWithCommit 
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
 				try {
-					UICheckoutController checkoutController = new UICheckoutController(bot.getDisplay()
+					final UICheckoutController checkoutController = new UICheckoutController(bot.getDisplay()
 						.getActiveShell(),
 						localProject.getRemoteProject(), true);
 					checkoutController.execute();
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					fail(e.getMessage());
 				}
 			}
@@ -76,15 +79,17 @@ public class UIBranchControllersTest extends AbstractUIControllerTestWithCommit 
 		bot.button("OK").click();
 
 		bot.waitUntil(new DefaultCondition() {
-
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
-				for (ESLocalProject localProject : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
+				for (final ESLocalProject localProject : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
 					if (localProject.getProjectName().equals("branch-checkout")) {
 						return true;
 					}
 				}
 				return false;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Branch checkout did not succeed";

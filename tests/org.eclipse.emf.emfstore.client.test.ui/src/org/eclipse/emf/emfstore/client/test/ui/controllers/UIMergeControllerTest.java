@@ -44,6 +44,7 @@ public class UIMergeControllerTest extends AbstractUIControllerTestWithCommitAnd
 
 		bot.waitUntil(new DefaultCondition() {
 
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				for (final ESLocalProject project : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
 					if (project == getCopy()) {
@@ -54,6 +55,8 @@ public class UIMergeControllerTest extends AbstractUIControllerTestWithCommitAnd
 				}
 				return false;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Branch checkout did not succeed";
