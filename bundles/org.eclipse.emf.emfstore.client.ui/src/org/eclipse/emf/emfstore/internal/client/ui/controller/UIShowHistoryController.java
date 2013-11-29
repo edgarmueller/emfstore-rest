@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.controller;
 
@@ -28,11 +28,16 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * UI controller responsible for opening up the history view.
+ * The controller can be either given a project or a model element contained in a project.
  * 
  * @author emueller
  * 
  */
 public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> {
+
+	// TODO: remove hard-coded reference
+	private static final String HISTORYVIEW_ID =
+		"org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
 
 	private final EObject modelElement;
 
@@ -42,16 +47,24 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 	 * @param shell
 	 *            the parent {@link Shell}
 	 * @param modelElement
-	 *            the model element whose history should be queried
+	 *            the model element whose history should be displayed
 	 */
 	public UIShowHistoryController(Shell shell, EObject modelElement) {
-		super(shell, true, true);
+		super(shell, false, true);
 		this.modelElement = modelElement;
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param shell
+	 *            the parent {@link Shell}
+	 * @param localProject
+	 *            the {@link ESLocalProject} whose history should be displayed
+	 */
 	public UIShowHistoryController(Shell shell, ESLocalProject localProject) {
 		super(shell, false, true);
-		this.modelElement = ((ESLocalProjectImpl) localProject).toInternalAPI();
+		modelElement = ((ESLocalProjectImpl) localProject).toInternalAPI();
 	}
 
 	/**
@@ -65,14 +78,11 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 
 		final HistoryBrowserView view = RunInUI.runWithResult(new Callable<HistoryBrowserView>() {
 			public HistoryBrowserView call() throws Exception {
-				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-
-				// TODO: remove hard-coded reference
-				String viewId = "org.eclipse.emf.emfstore.client.ui.views.historybrowserview.HistoryBrowserView";
+				final IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 
 				try {
-					return (HistoryBrowserView) page.showView(viewId);
-				} catch (PartInitException e) {
+					return (HistoryBrowserView) page.showView(HISTORYVIEW_ID);
+				} catch (final PartInitException e) {
 					EMFStoreMessageDialog.showExceptionDialog(getShell(), e);
 				}
 				return null;
@@ -80,13 +90,7 @@ public class UIShowHistoryController extends AbstractEMFStoreUIController<Void> 
 		});
 
 		if (view != null) {
-			try {
-
-				view.setInput(modelElement);
-
-			} catch (Exception e) {
-				System.out.println(e);
-			}
+			view.setInput(modelElement);
 		}
 
 		return null;

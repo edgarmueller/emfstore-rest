@@ -37,7 +37,9 @@ import org.junit.runners.Suite;
 	UIShareProjectControllerTest.class,
 	UIUpdateProjectControllerTest.class,
 	UIUpdateProjectToVersionControllerTest.class,
-	UIPagedUpdateProjectControllerTest.class
+	UIPagedUpdateProjectControllerTest.class,
+	UIShowHistoryControllerTest.class,
+	UIShowHistoryControllerForElementTest.class
 })
 public class AllUIControllerTests {
 
