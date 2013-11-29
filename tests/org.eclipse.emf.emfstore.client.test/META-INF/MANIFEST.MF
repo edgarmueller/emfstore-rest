@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.emf.emfstore.client;bundle-version="[1.0.4,2.0.0)";v
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.client.test.Activator
 Export-Package: org.eclipse.emf.emfstore.client.test;version="1.0.4";x-friends:="org.eclipse.emf.emfstore.client.test.ui",
- org.eclipse.emf.emfstore.client.test.api;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.client.test.api;version="1.0.4";x-friends:="org.eclipse.emf.emfstore.client.test.ui",
  org.eclipse.emf.emfstore.client.test.caching;version="1.0.4";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.changeTracking;version="1.0.4";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.changeTracking.canonization;version="1.0.4";x-internal:=true,

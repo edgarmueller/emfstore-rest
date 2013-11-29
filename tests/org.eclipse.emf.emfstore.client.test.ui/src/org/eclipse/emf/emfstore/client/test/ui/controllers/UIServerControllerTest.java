@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -21,6 +22,11 @@ import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * @author emueller
+ * 
+ */
 public class UIServerControllerTest extends AbstractUIControllerTest {
 
 	@Override
@@ -44,7 +50,7 @@ public class UIServerControllerTest extends AbstractUIControllerTest {
 			.get(howManyServers - 1);
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
-				UIRemoveServerController removeServerController = new UIRemoveServerController(
+				final UIRemoveServerController removeServerController = new UIRemoveServerController(
 					bot.getDisplay().getActiveShell(),
 					serverToBeRemoved);
 				removeServerController.execute();
@@ -52,9 +58,12 @@ public class UIServerControllerTest extends AbstractUIControllerTest {
 		});
 		bot.button("Yes").click();
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return howManyServers - 1 == ESWorkspaceProvider.INSTANCE.getWorkspace().getServers().size();
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Remove server did not succeed.";
@@ -67,13 +76,15 @@ public class UIServerControllerTest extends AbstractUIControllerTest {
 		final int howManyServers = ESWorkspaceProvider.INSTANCE.getWorkspace().getServers().size();
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
-				UIAddServerController addServerController = new UIAddServerController(
+				final UIAddServerController addServerController = new UIAddServerController(
 					bot.getDisplay().getActiveShell());
 				addServerController.execute();
 			}
 		});
 		bot.button("Finish").click();
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
+
 			public boolean test() throws Exception {
 				return howManyServers + 1 == ESWorkspaceProvider.INSTANCE.getWorkspace().getServers().size();
 			}
@@ -81,6 +92,8 @@ public class UIServerControllerTest extends AbstractUIControllerTest {
 			public String getFailureMessage() {
 				return "Add server did not succeed.";
 			}
+			// END SUPRESS CATCH EXCEPTION
+
 		});
 		assertEquals(howManyServers + 1, ESWorkspaceProvider.INSTANCE.getWorkspace().getServers().size());
 	}

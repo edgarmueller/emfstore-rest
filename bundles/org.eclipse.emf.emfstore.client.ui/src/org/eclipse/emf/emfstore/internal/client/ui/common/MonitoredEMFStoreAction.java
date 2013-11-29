@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * emueller
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.ui.common;
 
@@ -58,8 +58,8 @@ public abstract class MonitoredEMFStoreAction<T> {
 	 * 
 	 */
 	public final T execute() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		IProgressService progressService = workbench.getProgressService();
+		final IWorkbench workbench = PlatformUI.getWorkbench();
+		final IProgressService progressService = workbench.getProgressService();
 		try {
 			if (!preRun()) {
 				return null;
@@ -68,14 +68,14 @@ public abstract class MonitoredEMFStoreAction<T> {
 				public void run(final IProgressMonitor monitor) {
 					try {
 						returnValue = doRun(monitor);
-					} catch (ESException e) {
+					} catch (final ESException e) {
 						handleException(e);
 					}
 				}
 			});
-		} catch (InvocationTargetException e) {
+		} catch (final InvocationTargetException e) {
 			WorkspaceUtil.logException("Error during execution of an EMFStore UI controller: " + e.getMessage(), e);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			WorkspaceUtil.logException("Error during execution of an EMFStore UI controller: " + e.getMessage(), e);
 		}
 
@@ -95,7 +95,7 @@ public abstract class MonitoredEMFStoreAction<T> {
 		}
 		try {
 			returnValue = doRun(new SubProgressMonitor(monitor, 5, SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));//
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			handleException(e);
 		}
 

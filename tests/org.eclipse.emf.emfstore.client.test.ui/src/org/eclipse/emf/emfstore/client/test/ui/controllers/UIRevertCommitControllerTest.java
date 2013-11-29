@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -32,7 +33,7 @@ public class UIRevertCommitControllerTest extends AbstractUIControllerTestWithCo
 		createPlayerAndCommit();
 		UIThreadRunnable.asyncExec(new VoidResult() {
 			public void run() {
-				UIRevertCommitController revertCommitController = new UIRevertCommitController(
+				final UIRevertCommitController revertCommitController = new UIRevertCommitController(
 					bot.getDisplay().getActiveShell(),
 					baseVersion,
 					localProject);
@@ -40,17 +41,20 @@ public class UIRevertCommitControllerTest extends AbstractUIControllerTestWithCo
 			}
 		});
 
-		SWTBotShell shell = bot.shell("Confirmation");
+		final SWTBotShell shell = bot.shell("Confirmation");
 		shell.bot().button("OK").click();
 
 		final ESLocalProject clonedProject = ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()
 			.get(localProjectsSize);
 
 		bot.waitUntil(new DefaultCondition() {
+			// BEGIN SUPRESS CATCH EXCEPTION
 			public boolean test() throws Exception {
 				return localProjectsSize + 1 == ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects().size()
 					&& clonedProject.getModelElements().size() == 0;
 			}
+
+			// END SUPRESS CATCH EXCEPTION
 
 			public String getFailureMessage() {
 				return "Revert did not succeed.";

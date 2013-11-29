@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -22,7 +22,7 @@ import org.junit.Test;
 /**
  * Tests login/logout
  * 
- * @author Edgar
+ * @author emueller
  * 
  */
 public class UISessionControllerTest extends AbstractUIControllerTest {
@@ -51,7 +51,7 @@ public class UISessionControllerTest extends AbstractUIControllerTest {
 				loginSessionController.execute();
 			}
 		});
-		SWTBotButton okButton = bot.button("OK");
+		final SWTBotButton okButton = bot.button("OK");
 		okButton.click();
 		assertNotNull(server.getLastUsersession());
 		usersession = server.getLastUsersession();
@@ -62,6 +62,7 @@ public class UISessionControllerTest extends AbstractUIControllerTest {
 			public void run() {
 				logoutSessionController =
 					new UILogoutSessionController(bot.getDisplay().getActiveShell(), usersession);
+				logoutSessionController.execute();
 			}
 		});
 		assertNotNull(server.getLastUsersession());

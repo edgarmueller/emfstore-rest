@@ -14,14 +14,15 @@ package org.eclipse.emf.emfstore.client.test.ui.controllers;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIShowHistoryController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
-import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.junit.Test;
 
 /**
- * @author Edgar
+ * Test the {@link UIShowHistoryController} by displaying the history of a certain model element.
+ * 
+ * @author emueller
  * 
  */
 public class UIShowHistoryControllerForElementTest extends AbstractUIControllerTestWithCommit {
@@ -30,7 +31,6 @@ public class UIShowHistoryControllerForElementTest extends AbstractUIControllerT
 	@Test
 	public void testController() throws ESException {
 
-		final ESPrimaryVersionSpec baseVersion = localProject.getBaseVersion();
 		final Player player = createPlayerAndCommit();
 
 		UIThreadRunnable.asyncExec(new VoidResult() {

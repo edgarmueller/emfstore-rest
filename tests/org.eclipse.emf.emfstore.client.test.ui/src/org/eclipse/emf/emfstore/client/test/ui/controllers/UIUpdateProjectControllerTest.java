@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
  * UpdateProjectController
  * CheckoutController
  * 
- * @author Edgar
+ * @author emueller
  * 
  */
 @RunWith(SWTBotJunit4ClassRunner.class)
@@ -37,7 +37,7 @@ public class UIUpdateProjectControllerTest extends AbstractUIControllerTestWithC
 		createPlayerAndCommit();
 		updateCopy();
 
-		Player player = (Player) getCopy().getModelElements().get(0);
+		final Player player = (Player) getCopy().getModelElements().get(0);
 		assertEquals(PLAYER_NAME, player.getName());
 	}
 

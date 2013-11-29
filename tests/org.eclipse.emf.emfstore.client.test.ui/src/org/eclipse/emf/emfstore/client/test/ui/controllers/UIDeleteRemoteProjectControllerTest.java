@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.ui.controllers;
 
@@ -31,7 +32,7 @@ public class UIDeleteRemoteProjectControllerTest extends AbstractUIControllerTes
 						.getActiveShell(),
 						usersession, localProject.getRemoteProject());
 					deleteRemoteProjectController.execute();
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					fail();
 				}
 			}
