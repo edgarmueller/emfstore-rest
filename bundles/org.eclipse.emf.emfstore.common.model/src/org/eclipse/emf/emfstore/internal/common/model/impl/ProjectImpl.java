@@ -7,10 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * naughton
- * shterev
- * emueller
- * koegel
+ * Helmut Naughton, Maximilian Koegel, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.impl;
 
@@ -197,8 +194,6 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 		return super.eIsSet(featureID);
 	}
 
-	// begin of custom code
-
 	/**
 	 * this methods implements the adapter interface which is needed by the
 	 * navigator.
@@ -257,6 +252,10 @@ public class ProjectImpl extends NotifiableIdEObjectCollectionImpl implements Pr
 	 */
 	@Override
 	public void initMapping() {
+
+		if (isCacheInitialized()) {
+			return;
+		}
 
 		for (final EObject modelElement : getCutElements()) {
 			putModelElementIntoCache(modelElement);

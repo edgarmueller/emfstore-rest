@@ -12,8 +12,11 @@ package org.eclipse.emf.emfstore.bowling.impl;
 
 import java.util.Map;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
@@ -149,6 +152,14 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	private EEnum genderEEnum = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EDataType xmlDateEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
 	 * EPackage.Registry} by the package
 	 * package URI value.
@@ -193,8 +204,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 
 		// Obtain or create and register package
 		BowlingPackageImpl theBowlingPackage = (BowlingPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BowlingPackageImpl ? EPackage.Registry.INSTANCE
-			.get(eNS_URI)
-			: new BowlingPackageImpl());
+			.get(eNS_URI) : new BowlingPackageImpl());
 
 		isInited = true;
 
@@ -557,8 +567,18 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * 
 	 * @generated
 	 */
+	public EAttribute getReferee_DateOfBirth() {
+		return (EAttribute) refereeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EReference getReferee_League() {
-		return (EReference) refereeEClass.getEStructuralFeatures().get(0);
+		return (EReference) refereeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -807,6 +827,16 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 	 * 
 	 * @generated
 	 */
+	public EDataType getXMLDate() {
+		return xmlDateEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public BowlingFactory getBowlingFactory() {
 		return (BowlingFactory) getEFactoryInstance();
 	}
@@ -872,6 +902,7 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		createEAttribute(playerToPointsMapEClass, PLAYER_TO_POINTS_MAP__VALUE);
 
 		refereeEClass = createEClass(REFEREE);
+		createEAttribute(refereeEClass, REFEREE__DATE_OF_BIRTH);
 		createEReference(refereeEClass, REFEREE__LEAGUE);
 
 		refereeToGamesMapEClass = createEClass(REFEREE_TO_GAMES_MAP);
@@ -903,6 +934,9 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		// Create enums
 		tournamentTypeEEnum = createEEnum(TOURNAMENT_TYPE);
 		genderEEnum = createEEnum(GENDER);
+
+		// Create data types
+		xmlDateEDataType = createEDataType(XML_DATE);
 	}
 
 	/**
@@ -1031,6 +1065,8 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 			!IS_DERIVED, IS_ORDERED);
 
 		initEClass(refereeEClass, Referee.class, "Referee", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getReferee_DateOfBirth(), this.getXMLDate(), "dateOfBirth", null, 0, 1, Referee.class,
+			!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getReferee_League(), this.getLeague(), null, "league", null, 0, 1, Referee.class, !IS_TRANSIENT,
 			!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 			IS_ORDERED);
@@ -1100,6 +1136,10 @@ public class BowlingPackageImpl extends EPackageImpl implements BowlingPackage {
 		initEEnum(genderEEnum, Gender.class, "Gender");
 		addEEnumLiteral(genderEEnum, Gender.FEMALE);
 		addEEnumLiteral(genderEEnum, Gender.MALE);
+
+		// Initialize data types
+		initEDataType(xmlDateEDataType, XMLGregorianCalendar.class, "XMLDate", IS_SERIALIZABLE,
+			!IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

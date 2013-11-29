@@ -2,49 +2,49 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFStore Client UI
 Bundle-SymbolicName: org.eclipse.emf.emfstore.client.ui;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.0.4.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.internal.client.ui.Activator
 Require-Bundle: org.eclipse.core.expressions;bundle-version="[3.4.0,4.0.0)",
- org.eclipse.emf.emfstore.client.model.edit;bundle-version="[1.0.2,2.0.0)",
+ org.eclipse.emf.emfstore.client.model.edit;bundle-version="[1.0.4,2.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.emf.edit;bundle-version="[2.5.0,3.0.0)",
- org.eclipse.emf.emfstore.server.model.edit;bundle-version="[1.0.2,2.0.0)"
+ org.eclipse.emf.emfstore.server.model.edit;bundle-version="[1.0.4,2.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-ClassPath: .,
  lib/dmp.jar
-Export-Package: org.eclipse.emf.emfstore.client.ui;version="1.0.2";
+Export-Package: org.eclipse.emf.emfstore.client.ui;version="1.0.4";
   uses:="org.eclipse.emf.ecore,
    org.eclipse.emf.emfstore.client,
    org.eclipse.swt.widgets,
    org.eclipse.emf.emfstore.server.model.versionspec",
- org.eclipse.emf.emfstore.internal.client.ui;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.common;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.controller;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.decorators;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.dialogs;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.widgets;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.epackages;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.exceptions;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.handlers;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.handlers.exportimport;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.testers;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.util;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.changes;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.wizard;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph;version="1.0.2";x-internal:=true,
- org.eclipse.emf.emfstore.internal.client.ui.views.scm;version="1.0.2";x-internal:=true,
- org.eclipse.wb.swt;version="1.0.2";x-internal:=true;uses:="org.eclipse.jface.resource,org.eclipse.swt.graphics"
+ org.eclipse.emf.emfstore.internal.client.ui;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.common;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.controller;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.decorators;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.login;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.components;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.ui.widgets;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.dialogs.merge.util;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.epackages;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.exceptions;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.handlers;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.handlers.exportimport;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.testers;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.util;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.changes;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.dialogs.admin.acimport.wizard;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.emfstorebrowser.views;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.historybrowserview.graph;version="1.0.4";x-internal:=true,
+ org.eclipse.emf.emfstore.internal.client.ui.views.scm;version="1.0.4";x-internal:=true,
+ org.eclipse.wb.swt;version="1.0.4";x-internal:=true;uses:="org.eclipse.jface.resource,org.eclipse.swt.graphics"
 Import-Package: org.eclipse.core.commands;version="0.0.0",
  org.eclipse.emf.edit.ui.provider;version="0.0.0",
  org.eclipse.jface.action;version="0.0.0",

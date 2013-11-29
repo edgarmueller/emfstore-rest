@@ -66,6 +66,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Referee">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfBirth" eType="#//XMLDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="league" eType="#//League"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefereeToGamesMap" instanceClassName="java.util.Map$Entry">
@@ -114,4 +115,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="serialNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
         unsettable="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="XMLDate" instanceClassName="javax.xml.datatype.XMLGregorianCalendar"/>
 </ecore:EPackage>

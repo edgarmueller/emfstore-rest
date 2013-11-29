@@ -7,6 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.common;
 
@@ -15,8 +16,14 @@ import org.eclipse.emf.emfstore.client.test.common.observerbus.ObserverBusTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+/**
+ * Test suite for common functionality used by the server as well as the client.
+ * 
+ * @author ovonwesen
+ * @author emueller
+ */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ObserverBusTest.class, ExtensionRegistryTest.class })
+@Suite.SuiteClasses({ ObserverBusTest.class, ExtensionRegistryTest.class, ProjectCacheTest.class })
 public class AllCommonTests {
 
 }

@@ -4,6 +4,8 @@ package org.eclipse.emf.emfstore.bowling.util;
 
 import java.util.Map;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EObject;
@@ -140,6 +142,8 @@ public class BowlingValidator extends EObjectValidator {
 			return validateTournamentType((TournamentType) value, diagnostics, context);
 		case BowlingPackage.GENDER:
 			return validateGender((Gender) value, diagnostics, context);
+		case BowlingPackage.XML_DATE:
+			return validateXMLDate((XMLGregorianCalendar) value, diagnostics, context);
 		default:
 			return true;
 		}
@@ -311,6 +315,17 @@ public class BowlingValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateGender(Gender gender, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public boolean validateXMLDate(XMLGregorianCalendar xmlDate, DiagnosticChain diagnostics,
+		Map<Object, Object> context) {
 		return true;
 	}
 

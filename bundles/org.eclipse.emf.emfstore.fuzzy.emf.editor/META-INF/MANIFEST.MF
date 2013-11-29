@@ -2,15 +2,15 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFDataProvider Editor
 Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy.emf.editor;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.0.4.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.emf.emfstore.fuzzy.emf.config.presentation.ConfigEditorPlugin$Implementation
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.emf.emfstore.fuzzy.emf.config.presentation;version="1.0.2"
+Export-Package: org.eclipse.emf.emfstore.fuzzy.emf.config.presentation;version="1.0.4"
 Require-Bundle: org.eclipse.core.resources;bundle-version="[3.7.0,4.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.fuzzy.emf.edit;bundle-version="[1.0.2,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.emfstore.fuzzy.emf.edit;bundle-version="[1.0.4,2.0.0)";visibility:=reexport,
  org.eclipse.emf.edit.ui;bundle-version="[2.5.0,3.0.0)";visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="[3.7.0,4.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
