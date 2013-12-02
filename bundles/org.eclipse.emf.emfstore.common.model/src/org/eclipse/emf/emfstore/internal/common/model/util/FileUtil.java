@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendonk
+ * Otto von Wesendonk - initial API and imlementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.util;
 
@@ -22,6 +22,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -47,7 +48,6 @@ public final class FileUtil {
 	 * @param destination the destination
 	 * @throws IOException copy problem
 	 */
-	@SuppressWarnings("resource")
 	// created input stream is closed by copyFile
 	// TODO: refactor
 	public static void copyFile(File source, File destination) throws IOException {
@@ -76,18 +76,14 @@ public final class FileUtil {
 
 			outputStream = new FileOutputStream(destination);
 
-			byte[] buffer = new byte[4096];
+			final byte[] buffer = new byte[4096];
 			int read;
 			while ((read = source.read(buffer)) != -1) {
 				outputStream.write(buffer, 0, read);
 			}
 		} finally {
-			if (source != null) {
-				source.close();
-			}
-			if (outputStream != null) {
-				outputStream.close();
-			}
+			IOUtils.closeQuietly(source);
+			IOUtils.closeQuietly(outputStream);
 		}
 	}
 
@@ -104,7 +100,7 @@ public final class FileUtil {
 		if (!source.exists()) {
 			return;
 		}
-		for (File file : source.listFiles()) {
+		for (final File file : source.listFiles()) {
 			if (file.isDirectory()) {
 				copyDirectory(file, new File(destination.getAbsolutePath() + File.separatorChar + file.getName()));
 			} else {
@@ -127,24 +123,24 @@ public final class FileUtil {
 		if (destination.exists()) {
 			throw new IOException("Destination already exists.");
 		}
-		ZipOutputStream zipOutputStream = new ZipOutputStream(new BufferedOutputStream(
+		final ZipOutputStream zipOutputStream = new ZipOutputStream(new BufferedOutputStream(
 			new FileOutputStream(destination)));
 		String path = source.getPath();
-		path += (path.endsWith(File.separator) ? "" : File.separatorChar);
+		path += path.endsWith(File.separator) ? "" : File.separatorChar;
 		zip(source, path, zipOutputStream, new byte[8192]);
 		zipOutputStream.close();
 	}
 
 	private static void zip(File current, String rootPath, ZipOutputStream zipStream, byte[] buffer) throws IOException {
 		if (current.isDirectory()) {
-			for (File file : current.listFiles()) {
+			for (final File file : current.listFiles()) {
 				if (!".".equals(file.getName()) && !"..".equals(file.getName())) {
 					zip(file, rootPath, zipStream, buffer);
 				}
 			}
 		} else if (current.isFile()) {
 			zipStream.putNextEntry(new ZipEntry(current.getPath().replace(rootPath, "")));
-			FileInputStream file = new FileInputStream(current);
+			final FileInputStream file = new FileInputStream(current);
 			int read;
 			while ((read = file.read(buffer)) != -1) {
 				zipStream.write(buffer, 0, read);
@@ -189,16 +185,20 @@ public final class FileUtil {
 			stream2 = new BufferedInputStream(new FileInputStream(file2));
 			monitor.beginTask("Comparing...",
 				file1.length() > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) file1.length());
-			boolean equals = areEqual(stream1, stream2, monitor);
+			final boolean equals = areEqual(stream1, stream2, monitor);
 			monitor.done();
 			return equals;
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			return false;
 		} finally {
 			try {
-				stream1.close();
-				stream2.close();
-			} catch (IOException e) {
+				if (stream1 != null) {
+					stream1.close();
+				}
+				if (stream2 != null) {
+					stream2.close();
+				}
+			} catch (final IOException e) {
 				return false;
 			}
 		}
@@ -210,7 +210,7 @@ public final class FileUtil {
 		int char1 = inputStream1.read();
 
 		while (char1 != -1) {
-			int char2 = input2.read();
+			final int char2 = input2.read();
 			if (char1 != char2) {
 				return false;
 			}
@@ -236,14 +236,14 @@ public final class FileUtil {
 			try {
 				FileUtils.deleteDirectory(file);
 				return;
-			} catch (IOException exception) {
+			} catch (final IOException exception) {
 				// ignore exception if retry counter below max
 				if (i >= maxRetry) {
 					throw exception;
 				}
 				try {
 					Thread.sleep(30);
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 					throw exception;
 				}
 			}
@@ -258,7 +258,7 @@ public final class FileUtil {
 	 * @return the file extension, if any, otherwise empty string
 	 */
 	public static String getExtension(File file) {
-		int lastIndexOf = file.getName().lastIndexOf(".");
+		final int lastIndexOf = file.getName().lastIndexOf(".");
 
 		if (lastIndexOf == -1) {
 			return StringUtils.EMPTY;

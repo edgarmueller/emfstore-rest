@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @extends NotifiableIdEObjectCollection
  */
-public interface Project extends EObject, IAdaptable, NotifiableIdEObjectCollection {
+public interface Project extends IAdaptable, NotifiableIdEObjectCollection {
 
 	/**
 	 * Returns the value of the '<em><b>Model Elements</b></em>' containment reference list.

@@ -14,6 +14,8 @@ package org.eclipse.emf.emfstore.fuzzy.emf.test;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
+import org.eclipse.emf.emfstore.client.util.ESVoidCallable;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.fuzzy.Annotations.Data;
 import org.eclipse.emf.emfstore.fuzzy.Annotations.DataProvider;
 import org.eclipse.emf.emfstore.fuzzy.Annotations.Util;
@@ -22,9 +24,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.EMFDataProvider;
 import org.eclipse.emf.emfstore.fuzzy.emf.MutateUtil;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
@@ -57,27 +57,29 @@ public class ServerTest extends CoreServerTest {
 	public void setupProjectSpace() {
 		CommonUtil.setTesting(true);
 		Configuration.getClientBehavior().setAutoSave(false);
-		new EMFStoreCommand() {
+
+		RunESCommand.run(new ESVoidCallable() {
 			@Override
-			protected void doRun() {
-				setProjectSpace(((WorkspaceImpl) ESWorkspaceProvider.INSTANCE
-					.getWorkspace()).importProject(project, "", ""));
+			public void run() {
+				final ESWorkspaceImpl workspaceImpl = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
+				setProjectSpace(workspaceImpl.toInternalAPI().importProject(project, "", ""));
 			}
-		}.run(false);
+		});
+
 		setProject(project);
 	}
 
 	/**
-	 * @throws EmfStoreException
+	 * @throws ESException
 	 *             Problems with share, checkout, commit or update.
 	 */
 	@Test
 	public void shareCheckoutCommitUpdate() throws ESException {
 
-		ProjectSpace projectSpace = getProjectSpace();
+		final ProjectSpace projectSpace = getProjectSpace();
 
 		// share original project
-		PrimaryVersionSpec versionSpec = share(projectSpace);
+		final PrimaryVersionSpec versionSpec = share(projectSpace);
 
 		// checkout project
 		final ProjectSpace psCheckedout = checkout(projectSpace.toAPI()
@@ -90,26 +92,27 @@ public class ServerTest extends CoreServerTest {
 		// change & commit original project
 		final ModelMutatorConfiguration mmc = FuzzyProjectTest
 			.getModelMutatorConfiguration(projectSpace.getProject(), util);
-		new EMFStoreCommand() {
+
+		RunESCommand.run(new ESVoidCallable() {
 			@Override
-			protected void doRun() {
+			public void run() {
 				util.mutate(mmc);
 			}
-		}.run(false);
+		});
 
 		commit(projectSpace);
 
 		// update checkedout project
-		new EMFStoreCommand() {
+		RunESCommand.run(new ESVoidCallable() {
 			@Override
-			protected void doRun() {
+			public void run() {
 				try {
 					psCheckedout.update(new NullProgressMonitor());
-				} catch (ESException e) {
+				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
 			}
-		}.run(false);
+		});
 
 		// compare original and updated project
 		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(),

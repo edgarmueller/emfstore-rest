@@ -24,7 +24,8 @@ Export-Package: org.eclipse.emf.emfstore.common.model;version="1.0.4",
    org.eclipse.emf.emfstore.ecore,
    org.eclipse.emf.emfstore.server.model.edit,
    org.eclipse.emf.emfstore.client.ui,
-   org.eclipse.emf.emfstore.example.merging",
+   org.eclipse.emf.emfstore.example.merging,
+   org.eclipse.emf.emfstore.fuzzy.emf.test",
  org.eclipse.emf.emfstore.internal.common.model.impl;version="1.0.4";
   x-friends:="org.eclipse.emf.emfstore.server.model,
    org.eclipse.emf.emfstore.client,
@@ -40,5 +41,6 @@ Export-Package: org.eclipse.emf.emfstore.common.model;version="1.0.4",
    org.eclipse.emf.emfstore.client.ui,
    org.eclipse.emf.emfstore.client.test,
    org.eclipse.emf.emfstore.migration,
-   org.eclipse.emf.emfstore.server.model.edit"
+   org.eclipse.emf.emfstore.server.model.edit,
+   org.eclipse.emf.emfstore.fuzzy.emf.test"
 

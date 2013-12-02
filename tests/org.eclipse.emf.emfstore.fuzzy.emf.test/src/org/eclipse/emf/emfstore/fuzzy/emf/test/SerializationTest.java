@@ -13,20 +13,21 @@ package org.eclipse.emf.emfstore.fuzzy.emf.test;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.util.ESVoidCallable;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.fuzzy.Annotations.DataProvider;
 import org.eclipse.emf.emfstore.fuzzy.FuzzyRunner;
 import org.eclipse.emf.emfstore.fuzzy.emf.EMFDataProvider;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Class to test serialization functionality of the {@link WorkspaceManager}.
+ * Class to test serialization functionality of the {@link ESWorkspaceProvider}.
  * 
  * @author Julian Sommerfeldt
  * 
@@ -36,32 +37,33 @@ import org.junit.runner.RunWith;
 public class SerializationTest extends FuzzyProjectTest {
 
 	/**
-	 * Load and save a {@link ProjectSpace} via {@link WorkspaceManager} and
-	 * compare them.
+	 * Load and save a {@link ProjectSpace} via {@link ESWorkspaceProvider} and
+	 * compares them.
 	 */
 	@Test
 	public void loadAndSaveToResource() {
 
 		// mutate already saved (through importing) projectSpace and save it
 		// again
-		ProjectSpace projectSpace = getProjectSpace();
+		final ProjectSpace projectSpace = getProjectSpace();
 		final ModelMutatorConfiguration mmc = getModelMutatorConfiguration(projectSpace
 			.getProject());
-		new EMFStoreCommand() {
+
+		RunESCommand.run(new ESVoidCallable() {
 			@Override
-			protected void doRun() {
+			public void run() {
 				getUtil().mutate(mmc);
 			}
-		}.run(false);
+		});
 
 		projectSpace.save();
 
 		// dispose and reinit WorkspaceManager
 		((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE).dispose();
-		((ESWorkspaceProviderImpl) ESWorkspaceProvider.INSTANCE).init();
+		ESWorkspaceProviderImpl.init();
 
 		// reload projectSpaces and check for valid state
-		EList<ProjectSpace> projectSpaces = ((WorkspaceImpl) ESWorkspaceProvider.INSTANCE
+		final EList<ProjectSpace> projectSpaces = ((WorkspaceImpl) ESWorkspaceProvider.INSTANCE
 			.getWorkspace()).getProjectSpaces();
 		if (projectSpaces.size() != 1) {
 			throw new IllegalStateException(
@@ -70,7 +72,7 @@ public class SerializationTest extends FuzzyProjectTest {
 		}
 
 		// compare
-		ProjectSpace reloadedProjectSpace = projectSpaces.get(0);
+		final ProjectSpace reloadedProjectSpace = projectSpaces.get(0);
 		try {
 			if (!ModelUtil.areEqual(reloadedProjectSpace.getProject(),
 				projectSpace.getProject())) {
