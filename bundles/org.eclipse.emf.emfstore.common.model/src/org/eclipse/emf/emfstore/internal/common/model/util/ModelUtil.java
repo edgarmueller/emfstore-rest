@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Maximilian Koegel, Edgar Mueller, Otto von Wesendonk - initial API and implementation
+ * Johannes Faltermeier - adaptions for independent storage
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.util;
 
@@ -52,9 +53,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.common.model.ESSingletonIdResolver;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.AssociationClassElement;
@@ -73,6 +76,7 @@ import org.osgi.framework.Bundle;
  * @author koegel
  * @author emueller
  * @author ottovonwesen
+ * @author jfaltermeier
  */
 public final class ModelUtil {
 
@@ -704,7 +708,9 @@ public final class ModelUtil {
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T loadEObjectFromResource(EClass eClass, URI resourceURI, boolean checkConstraints)
 		throws IOException {
-		final ResourceSet resourceSet = new ResourceSetImpl();
+
+		final ResourceSet resourceSet = getResourceSetForURI(resourceURI);
+
 		Resource resource;
 
 		if (checkConstraints) {
@@ -752,6 +758,35 @@ public final class ModelUtil {
 		}
 
 		return (T) eObject;
+	}
+
+	private static ResourceSet getResourceSetForURI(URI resourceURI) {
+		ResourceSet resourceSet = null;
+		if (resourceURI != null && resourceURI.scheme().equals("emfstore")) {
+			ESExtensionPoint extensionPoint = null;
+			if (resourceURI.authority().equals("workspaces")) {
+				extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
+					false, new ESPriorityComparator("priority", true));
+			} else {
+				extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+					false, new ESPriorityComparator("priority", true));
+			}
+
+			final ESResourceSetProvider resourceSetProvider = extensionPoint
+				.getElementWithHighestPriority().getClass(
+					"class",
+					ESResourceSetProvider.class);
+
+			if (resourceSetProvider == null) {
+				resourceSet = new ResourceSetImpl();
+			} else {
+				resourceSet = resourceSetProvider.getResourceSet();
+			}
+
+		} else {
+			resourceSet = new ResourceSetImpl();
+		}
+		return resourceSet;
 	}
 
 	/**
@@ -846,30 +881,6 @@ public final class ModelUtil {
 		}
 		for (final Resource resource : toDelete) {
 			resource.delete(null);
-		}
-	}
-
-	/**
-	 * Retrieve the current model version number.
-	 * 
-	 * @return an integer identifing the current model version
-	 * @throws MalformedModelVersionException
-	 *             if there is no well formed or defined model version
-	 */
-	public static int getModelVersionNumber() throws MalformedModelVersionException {
-		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.ommon.model.modelVersion",
-			true);
-		if (extensionPoint.size() != 1) {
-			final String message = "There is " + extensionPoint.size()
-				+ " Model Version(s) registered for the given model. Migrator will assume model version 0.";
-			logInfo(message);
-			return 0;
-		}
-		try {
-			return extensionPoint.getFirst().getInteger("versionIdentifier");
-		} catch (final ESExtensionPointException e) {
-			throw new MalformedModelVersionException("Version identifier was malformed, it must be an integer.", e);
 		}
 	}
 

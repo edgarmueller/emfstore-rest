@@ -287,6 +287,7 @@ public interface Player extends EObject {
 	 * 
 	 * @model
 	 * @generated
+	 * @since 1.1
 	 */
 	boolean validate(DiagnosticChain chain, Map<?, ?> context);
 

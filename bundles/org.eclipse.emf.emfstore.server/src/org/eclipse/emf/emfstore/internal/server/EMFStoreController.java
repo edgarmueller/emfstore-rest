@@ -9,19 +9,17 @@
  * Contributors:
  * wesendonk
  * koegel
+ * jfaltermeier
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
@@ -36,11 +34,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
@@ -65,11 +62,12 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
-import org.eclipse.emf.emfstore.internal.server.startup.EmfStoreValidator;
-import org.eclipse.emf.emfstore.internal.server.startup.MigrationManager;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
+import org.eclipse.emf.emfstore.internal.server.startup.ServerHrefMigrator;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
-import org.eclipse.emf.emfstore.internal.server.storage.ResourceStorage;
+import org.eclipse.emf.emfstore.internal.server.storage.ServerXMIResourceSetProvider;
+import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
@@ -79,6 +77,7 @@ import org.eclipse.equinox.app.IApplicationContext;
  * 
  * @author koegel
  * @author wesendonk
+ * @author jfaltermeier
  */
 public class EMFStoreController implements IApplication, Runnable {
 
@@ -91,7 +90,6 @@ public class EMFStoreController implements IApplication, Runnable {
 	private AdminEmfStore adminEmfStore;
 	private AccessControlImpl accessControl;
 	private Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers;
-	private Properties properties;
 	private ServerSpace serverSpace;
 	private Resource resource;
 
@@ -132,13 +130,14 @@ public class EMFStoreController implements IApplication, Runnable {
 			"Couldn't copy es.properties file to config folder.",
 			"Default es.properties file was copied to config folder.");
 
-		properties = initProperties();
+		initProperties();
 
 		logGeneralInformation();
 
-		loadDynamicModels();
+		registerDynamicModels();
 
-		new MigrationManager().migrateModel();
+		// FIXME: JF
+		// new MigrationManager().migrateModel();
 		serverSpace = initServerSpace();
 
 		initializeBranchesIfRequired(serverSpace);
@@ -199,34 +198,24 @@ public class EMFStoreController implements IApplication, Runnable {
 		}
 	}
 
-	// loads the ".ecore"-files from the dynamic-models-folder
-	private void loadDynamicModels() {
-		ServerConfiguration.getServerHome();
+	// delegates loading of dynamic models to the resource set provider
+	private void registerDynamicModels() {
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.server.dynamicModelProvider",
+			true, new ESPriorityComparator("priority", true));
+		final ESDynamicModelProvider dynamicModelProvider = extensionPoint.getElementWithHighestPriority().getClass(
+			"class", ESDynamicModelProvider.class);
+		final List<EPackage> models = dynamicModelProvider.getDynamicModels();
 
-		// TODO: retrieve path from configuration-file
-		final File dir = new File(ServerConfiguration.getServerHome() + "dynamic-models");
-		File[] files = null;
-
-		files = dir.listFiles(new FilenameFilter() {
-			public boolean accept(File d, String name) {
-				return name.endsWith(".ecore");
+		for (final EPackage model : models) {
+			EPackage.Registry.INSTANCE.put(model.getNsURI(), model);
+			final List<EPackage> packages = EPackageHelper.getAllSubPackages(model);
+			for (final EPackage subPkg : packages) {
+				EPackage.Registry.INSTANCE.put(subPkg.getNsURI(), subPkg);
 			}
-		});
-		if (files != null) {
-			for (final File file : files) {
-				final ResourceSet resourceSet = new ResourceSetImpl();
-				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-					.put("ecore", new EcoreResourceFactoryImpl());
-				final Resource resource = resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true);
-				final EPackage model = (EPackage) resource.getContents().get(0);
-				EPackage.Registry.INSTANCE.put(model.getNsURI(), model);
-				final List<EPackage> packages = EPackageHelper.getAllSubPackages(model);
-				for (final EPackage subPkg : packages) {
-					EPackage.Registry.INSTANCE.put(subPkg.getNsURI(), subPkg);
-				}
-				ModelUtil.logInfo("Dynamic Model \"" + model.getNsURI() + "\" loaded.");
-			}
+			ModelUtil.logInfo("Dynamic Model \"" + model.getNsURI() + "\" loaded.");
 		}
+
 	}
 
 	private void initLogging() {
@@ -323,21 +312,42 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	private ServerSpace initServerSpace() throws FatalESException {
-		final ResourceStorage storage = initStorage();
-		final URI resourceUri = storage.init(properties);
-		final ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
-		resource = resourceSet.createResource(resourceUri);
+
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.server.resourceSetProvider",
+			true, new ESPriorityComparator("priority", true));
+
+		final ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
+			"class",
+			ESResourceSetProvider.class);
+
+		final ResourceSet resourceSet = resourceSetProvider.getResourceSet();
+
+		final URI serverspaceURI = ServerURIUtil.createServerSpaceURI();
+
+		if (!resourceSet.getURIConverter().exists(serverspaceURI, null)) {
+			try {
+				resource = resourceSet.createResource(serverspaceURI);
+				final ServerSpace serverspace = ModelFactory.eINSTANCE.createServerSpace();
+				resource.getContents().add(serverspace);
+				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
+			} catch (final IOException e) {
+				throw new FatalESException("Could not init XMLRessource", e);
+			}
+		} else {
+			// hrefs are persisted differently in 1.1+ in comparison to 1.0
+			// migrate, if needed, before loading
+			if (resourceSetProvider instanceof ServerXMIResourceSetProvider) {
+				if (!new ServerHrefMigrator().migrate()) {
+					throw new FatalESException("Error during migration");
+				}
+
+			}
+			resource = resourceSet.createResource(serverspaceURI);
+		}
 
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());
-
-			if (properties.getProperty(ServerConfiguration.VALIDATE_SERVERSPACE_ON_SERVERSTART, "true").equals("true")) {
-				ModelUtil.logInfo("Validating serverspace ...");
-				validateServerSpace(resource);
-				ModelUtil.logInfo("Validation complete.");
-			}
 		} catch (final IOException e) {
 			throw new FatalESException(StorageException.NOLOAD, e);
 		}
@@ -371,26 +381,6 @@ public class EMFStoreController implements IApplication, Runnable {
 		return result;
 	}
 
-	private void validateServerSpace(Resource resource) throws FatalESException {
-		final EList<EObject> contents = resource.getContents();
-		for (final EObject object : contents) {
-			if (object instanceof ServerSpace) {
-				final EmfStoreValidator emfStoreValidator = new EmfStoreValidator((ServerSpace) object);
-				final String[] excludedProjects = ServerConfiguration.getSplittedProperty(
-					ServerConfiguration.VALIDATION_PROJECT_EXCLUDE,
-					ServerConfiguration.VALIDATION_PROJECT_EXCLUDE_DEFAULT);
-				emfStoreValidator.setExcludedProjects(Arrays.asList(excludedProjects));
-				try {
-					final String level = ServerConfiguration.getProperties().getProperty(
-						ServerConfiguration.VALIDATION_LEVEL, ServerConfiguration.VALIDATION_LEVEL_DEFAULT);
-					emfStoreValidator.validate(Integer.parseInt(level));
-				} catch (final NumberFormatException e) {
-					emfStoreValidator.validate(Integer.parseInt(ServerConfiguration.VALIDATION_LEVEL_DEFAULT));
-				}
-			}
-		}
-	}
-
 	/**
 	 * Return the singleton instance of EmfStoreControler.
 	 * 
@@ -398,40 +388,6 @@ public class EMFStoreController implements IApplication, Runnable {
 	 */
 	public static EMFStoreController getInstance() {
 		return instance;
-	}
-
-	private ResourceStorage initStorage() throws FatalESException {
-		final String className = properties.getProperty(ServerConfiguration.RESOURCE_STORAGE,
-			ServerConfiguration.RESOURCE_STORAGE_DEFAULT);
-
-		ResourceStorage resourceStorage;
-		final String failMessage = "Failed loading ressource storage!";
-		try {
-			ModelUtil.logInfo("Using RessourceStorage \"" + className + "\".");
-			resourceStorage = (ResourceStorage) Class.forName(className).getConstructor().newInstance();
-			return resourceStorage;
-		} catch (final IllegalArgumentException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (final SecurityException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (final InstantiationException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (final IllegalAccessException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (final InvocationTargetException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (final NoSuchMethodException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		} catch (final ClassNotFoundException e) {
-			ModelUtil.logException(failMessage, e);
-			throw new FatalESException(failMessage, e);
-		}
 	}
 
 	private AccessControlImpl initAccessControl(ServerSpace serverSpace) throws FatalESException {

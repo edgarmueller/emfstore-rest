@@ -4,6 +4,8 @@
    <extension-point id="locationProvider" name="Location Provider" schema="schema/locationProvider.exsd"/>
    <extension-point id="configurationResource" name="Server Configuration Resources" schema="schema/configurationResource.exsd"/>
    <extension-point id="computeChecksum" name="Compute Checksum on Commit" schema="schema/computeChecksum.exsd"/>
+   <extension-point id="resourceSetProvider" name="ResourceSet Provider" schema="schema/resourceSetProvider.exsd"/>
+   <extension-point id="dynamicModelProvider" name="Dynamic Model Provider" schema="schema/dynamicModelProvider.exsd"/>
    <extension-point id="serverCallObserver" name="Observer all calls to the server" schema="schema/serverCallObserver.exsd"/>   
    <extension
          id="application"
@@ -32,5 +34,19 @@
                value="EMFStore Server">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.server.dynamicModelProvider">
+      <dynamicModelProvider
+            class="org.eclipse.emf.emfstore.internal.server.storage.FileDynamicModelProvider"
+            priority="0">
+      </dynamicModelProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.server.resourceSetProvider">
+      <resourceSetProvider
+            class="org.eclipse.emf.emfstore.internal.server.storage.ServerXMIResourceSetProvider"
+            priority="0">
+      </resourceSetProvider>
    </extension>
 </plugin>

@@ -31,6 +31,7 @@ import org.eclipse.emf.emfstore.bowling.TournamentType;
  * 
  * @see org.eclipse.emf.emfstore.bowling.BowlingPackage
  * @generated
+ * @since 1.1
  */
 public class BowlingValidator extends EObjectValidator {
 	/**
@@ -155,23 +156,31 @@ public class BowlingValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePlayer(Player player, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(player, diagnostics, context))
+		if (!validate_NoCircularContainment(player, diagnostics, context)) {
 			return false;
+		}
 		boolean result = validate_EveryMultiplicityConforms(player, diagnostics, context);
-		if (result || diagnostics != null)
+		if (result || diagnostics != null) {
 			result &= validate_EveryDataValueConforms(player, diagnostics, context);
-		if (result || diagnostics != null)
+		}
+		if (result || diagnostics != null) {
 			result &= validate_EveryReferenceIsContained(player, diagnostics, context);
-		if (result || diagnostics != null)
+		}
+		if (result || diagnostics != null) {
 			result &= validate_EveryProxyResolves(player, diagnostics, context);
-		if (result || diagnostics != null)
+		}
+		if (result || diagnostics != null) {
 			result &= validate_UniqueID(player, diagnostics, context);
-		if (result || diagnostics != null)
+		}
+		if (result || diagnostics != null) {
 			result &= validate_EveryKeyUnique(player, diagnostics, context);
-		if (result || diagnostics != null)
+		}
+		if (result || diagnostics != null) {
 			result &= validate_EveryMapEntryUnique(player, diagnostics, context);
-		if (result || diagnostics != null)
+		}
+		if (result || diagnostics != null) {
 			result &= validatePlayer_validate(player, diagnostics, context);
+		}
 		return result;
 	}
 

@@ -52,7 +52,22 @@ public final class ESExtensionPoint {
 	public ESExtensionPoint(String id, boolean throwException) {
 		this.id = id;
 		exceptionInsteadOfNull = throwException;
-		this.comparator = getDefaultComparator();
+		comparator = getDefaultComparator();
+		reload();
+	}
+
+	/**
+	 * Constructor with option of set the throw exception option.
+	 * 
+	 * @param id extension point id
+	 * @param throwException if true, an {@link ESExtensionPointException} is thrown instead of returning null
+	 * @param comparator the comparator which defines the order of the {@link ESExtensionElement}s
+	 * @since 1.1
+	 */
+	public ESExtensionPoint(String id, boolean throwException, Comparator<ESExtensionElement> comparator) {
+		this.id = id;
+		exceptionInsteadOfNull = throwException;
+		this.comparator = comparator;
 		reload();
 	}
 
@@ -60,11 +75,11 @@ public final class ESExtensionPoint {
 	 * Reloads extensions from the registry.
 	 */
 	public void reload() {
-		this.elements = new ArrayList<ESExtensionElement>();
-		for (IConfigurationElement element : Platform.getExtensionRegistry().getConfigurationElementsFor(this.id)) {
+		elements = new ArrayList<ESExtensionElement>();
+		for (final IConfigurationElement element : Platform.getExtensionRegistry().getConfigurationElementsFor(id)) {
 			elements.add(new ESExtensionElement(element, exceptionInsteadOfNull));
 		}
-		Collections.sort(this.elements, this.comparator);
+		Collections.sort(elements, comparator);
 	}
 
 	/**
@@ -93,7 +108,7 @@ public final class ESExtensionPoint {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getClass(String classAttributeName, Class<T> returnType) {
-		ESExtensionElement first = getElementWithHighestPriority();
+		final ESExtensionElement first = getElementWithHighestPriority();
 		if (first != null) {
 			return first.getClass(classAttributeName, returnType);
 		}
@@ -122,7 +137,7 @@ public final class ESExtensionPoint {
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	public Boolean getBoolean(String name, boolean defaultValue) {
-		ESExtensionElement element = getElementWithHighestPriority();
+		final ESExtensionElement element = getElementWithHighestPriority();
 		if (element != null) {
 			return element.getBoolean(name, defaultValue);
 		}
@@ -139,7 +154,7 @@ public final class ESExtensionPoint {
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	public Integer getInteger(String name) {
-		ESExtensionElement element = getElementWithHighestPriority();
+		final ESExtensionElement element = getElementWithHighestPriority();
 		if (element != null) {
 			return element.getInteger(name);
 		}
@@ -155,7 +170,7 @@ public final class ESExtensionPoint {
 	 *         {@link #setThrowException(boolean)} is true.
 	 */
 	public String getAttribute(String name) {
-		ESExtensionElement element = getElementWithHighestPriority();
+		final ESExtensionElement element = getElementWithHighestPriority();
 		if (element != null) {
 			return element.getAttribute(name);
 		}
@@ -210,7 +225,7 @@ public final class ESExtensionPoint {
 	 * @return returns this, in order to allow chaining method calls
 	 */
 	public ESExtensionPoint setThrowException(boolean b) {
-		this.exceptionInsteadOfNull = b;
+		exceptionInsteadOfNull = b;
 		return this;
 	}
 
@@ -261,7 +276,7 @@ public final class ESExtensionPoint {
 	 * @return size
 	 */
 	public int size() {
-		return this.elements.size();
+		return elements.size();
 	}
 
 	public String getId() {

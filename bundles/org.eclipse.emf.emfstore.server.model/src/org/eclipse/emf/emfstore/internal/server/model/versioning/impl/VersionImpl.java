@@ -35,6 +35,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
@@ -95,6 +98,16 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * File prefix for file: projectstate.
 	 */
 	public static final String FILE_PREFIX_PROJECTSTATE = "projectstate-";
+
+	/**
+	 * The EMFStore URI segment for a changepackage.
+	 */
+	public static final String CHANGEPACKAGES_SEGMENT = "changepackages";
+
+	/**
+	 * The EMFStore URI segment for a projectstate.
+	 */
+	public static final String PROJECTSTATES_SEGMENT = "projectstates";
 
 	// SoftReferences acting as a simple cache for project state and ChangePackage
 	private SoftReference<Resource> projectStateResource = new SoftReference<Resource>(null);
@@ -916,7 +929,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	public Project getProjectState() {
 		Resource resource = getProjectStateResource();
-		if (resource == null) {
+		if (resource == null || resource.getContents().size() < 1) {
 			return null;
 		}
 		Project project = (Project) resource.getContents().get(0);
@@ -925,7 +938,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	public ChangePackage getChanges() {
 		Resource resource = getChangePackageResource();
-		if (resource == null) {
+		if (resource == null || resource.getContents().size() < 1) {
 			return null;
 		}
 		ChangePackage changePackage = (ChangePackage) resource.getContents().get(0);
@@ -949,13 +962,19 @@ public class VersionImpl extends EObjectImpl implements Version {
 				}
 			}
 
-			if (result != null) {
+			if (result != null && result.getContents().size() > 1) {
 				Project project = (Project) result.getContents().get(0);
 				initProjectStateAfterLoad((ProjectImpl) project);
 			}
 
 			setProjectStateResource(result);
 		}
+
+		// make sure resource has all needed handlers
+		if (result != null && result.getResourceSet() == null) {
+			addResourceToResourceSet(result);
+		}
+
 		return result;
 	}
 
@@ -996,6 +1015,12 @@ public class VersionImpl extends EObjectImpl implements Version {
 			}
 			setChangeResource(result);
 		}
+
+		// make sure resource has all needed handlers
+		if (result != null && result.getResourceSet() == null) {
+			addResourceToResourceSet(result);
+		}
+
 		return result;
 	}
 
@@ -1022,14 +1047,28 @@ public class VersionImpl extends EObjectImpl implements Version {
 	}
 
 	/**
+	 * Adds a resource to a new ResourceSet which can handle EMFStore URIs.
+	 */
+	private void addResourceToResourceSet(Resource resource) {
+		ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.server.resourceSetProvider",
+			true, new ESPriorityComparator("priority", true));
+
+		ESResourceSetProvider resourceSetProvider = extensionPoint
+			.getElementWithHighestPriority().getClass("class",
+				ESResourceSetProvider.class);
+
+		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
+		resourceSet.getResources().add(resource);
+	}
+
+	/**
 	 * allows to retrieve the URI for the resource containing the project state associated with this version.
 	 * 
 	 * @return the uri for the project state resource
 	 */
 	private URI getProjectURI() {
-		String projectFragment = FILE_PREFIX_PROJECTSTATE + this.getPrimarySpec().getIdentifier()
-			+ FILE_EXTENSION_PROJECTSTATE;
-		return getBaseURI() == null ? null : getBaseURI().appendSegment(projectFragment);
+		return getBaseURI() == null ? null : getBaseURI().appendSegment(PROJECTSTATES_SEGMENT).appendSegment(
+			Integer.toString(this.getPrimarySpec().getIdentifier()));
 	}
 
 	/**
@@ -1038,10 +1077,8 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return the uri for the ChangePackage resource
 	 */
 	private URI getChangePackageURI() {
-		String changePackageFragment = FILE_PREFIX_CHANGEPACKAGE
-			+ this.getPrimarySpec().getIdentifier()
-			+ FILE_EXTENSION_CHANGEPACKAGE;
-		return getBaseURI() == null ? null : getBaseURI().appendSegment(changePackageFragment);
+		return getBaseURI() == null ? null : getBaseURI().appendSegment(CHANGEPACKAGES_SEGMENT).appendSegment(
+			Integer.toString(this.getPrimarySpec().getIdentifier()));
 	}
 
 	/**
@@ -1051,7 +1088,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * @return the base URI
 	 */
 	private URI getBaseURI() {
-		return this.eResource() == null ? null : this.eResource().getURI().trimSegments(1);
+		return this.eResource() == null ? null : this.eResource().getURI().trimSegments(2);
 	}
 
 	public void setChangeResource(Resource resource) {
@@ -1059,7 +1096,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			changePackageResource = new SoftReference<Resource>(null);
 		} else {
 			ResourceSet resourceSet = resource.getResourceSet();
-			if (resourceSet != null) {
+			if (resourceSet != null && resourceSet == this.eResource().getResourceSet()) {
 				// remove the resource from its containing resourceSet in order
 				// to remove the strong referencing.
 				resourceSet.getResources().remove(resource);
@@ -1073,7 +1110,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 			projectStateResource = new SoftReference<Resource>(null);
 		} else {
 			ResourceSet resourceSet = resource.getResourceSet();
-			if (resourceSet != null) {
+			if (resourceSet != null && resourceSet == this.eResource().getResourceSet()) {
 				// remove the resource from its containing resourceSet in order
 				// to remove the strong referencing.
 				resourceSet.getResources().remove(resource);

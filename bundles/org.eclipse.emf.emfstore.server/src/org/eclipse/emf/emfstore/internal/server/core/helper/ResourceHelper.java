@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.internal.server.core.helper;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl;
+import org.eclipse.emf.emfstore.internal.server.storage.XMIServerURIConverter;
+import org.eclipse.emf.emfstore.server.ServerURIUtil;
 
 /**
  * Helper for creating resources etc.
@@ -67,9 +70,8 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalESException {
-		final String fileName = getProjectFolder(projectHistory.getProjectId()) + "projectHistory"
-			+ ServerConfiguration.FILE_EXTENSION_PROJECTHISTORY;
-		saveInResource(projectHistory, fileName);
+		final URI projectHistoryURI = ServerURIUtil.createProjectHistoryURI(projectHistory.getProjectId());
+		saveInResource(projectHistory, projectHistoryURI);
 	}
 
 	/**
@@ -83,9 +85,8 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalESException {
-		final String fileName = getProjectFolder(projectId) + ServerConfiguration.FILE_PREFIX_VERSION
-			+ version.getPrimarySpec().getIdentifier() + ServerConfiguration.FILE_EXTENSION_VERSION;
-		saveInResource(version, fileName);
+		final URI versionURI = ServerURIUtil.createVersionURI(projectId, version.getPrimarySpec());
+		saveInResource(version, versionURI);
 	}
 
 	/**
@@ -102,8 +103,8 @@ public class ResourceHelper {
 	 */
 	public void createResourceForProject(Project project, PrimaryVersionSpec versionId, ProjectId projectId)
 		throws FatalESException {
-		final String filename = getProjectFolder(projectId) + getProjectFile(versionId.getIdentifier());
-		saveInResourceWithProject(project, filename, project);
+		final URI projectStateURI = ServerURIUtil.createProjectStateURI(projectId, versionId);
+		saveInResourceWithProject(project, projectStateURI, project);
 	}
 
 	/**
@@ -120,7 +121,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForChangePackage(ChangePackage changePackage, PrimaryVersionSpec versionId,
 		ProjectId projectId) throws FatalESException {
-		final String filename = getProjectFolder(projectId) + getChangePackageFile(versionId.getIdentifier());
+		final URI changePackageURI = ServerURIUtil.createChangePackageURI(projectId, versionId);
 		final List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
 
 		for (final AbstractOperation op : changePackage.getOperations()) {
@@ -143,7 +144,7 @@ public class ResourceHelper {
 			}
 		}
 
-		saveInResource(changePackage, filename);
+		saveInResource(changePackage, changePackageURI);
 	}
 
 	/**
@@ -156,18 +157,12 @@ public class ResourceHelper {
 	 *            the ID of the project to be deleted
 	 */
 	public void deleteProjectState(Version version, ProjectId projectId) {
-		final int lastVersion = version.getPrimarySpec().getIdentifier();
-		final Resource projectResource = version.getProjectState().eResource();
-
-		final File file = new File(getProjectFolder(projectId) + getProjectFile(lastVersion));
-		// version.setProjectState(null);
-		file.delete();
-
-		if (projectResource.isLoaded()) {
-			projectResource.unload();
+		try {
+			version.getProjectState().eResource().delete(null);
+		} catch (final IOException e) {
+			ModelUtil.logWarning("Could not delete project state with id " + projectId.getId() + " and version "
+				+ version.getPrimarySpec().getIdentifier() + ".", e);
 		}
-
-		// projectResource.getResourceSet().getResources().remove(projectResource);
 	}
 
 	/**
@@ -212,28 +207,19 @@ public class ResourceHelper {
 	 * @return file path
 	 */
 	public String getProjectFolder(ProjectId projectId) {
-		return ServerConfiguration.getServerHome() + ServerConfiguration.FILE_PREFIX_PROJECTFOLDER + projectId.getId()
+		return ServerConfiguration.getServerHome() + XMIServerURIConverter.FILE_PREFIX_PROJECTFOLDER
+			+ projectId.getId()
 			+ File.separatorChar;
 	}
 
-	private String getProjectFile(int versionNumber) {
-		return ServerConfiguration.FILE_PREFIX_PROJECTSTATE + versionNumber
-			+ ServerConfiguration.FILE_EXTENSION_PROJECTSTATE;
-	}
-
-	private String getChangePackageFile(int versionNumber) {
-		return ServerConfiguration.FILE_PREFIX_CHANGEPACKAGE + versionNumber
-			+ ServerConfiguration.FILE_EXTENSION_CHANGEPACKAGE;
-	}
-
-	private void saveInResource(EObject obj, String fileName) throws FatalESException {
-		final Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
+	private void saveInResource(EObject obj, URI resourceURI) throws FatalESException {
+		final Resource resource = serverSpace.eResource().getResourceSet().createResource(resourceURI);
 		resource.getContents().add(obj);
 		save(obj);
 	}
 
-	private void saveInResourceWithProject(EObject obj, String fileName, Project project) throws FatalESException {
-		final Resource resource = serverSpace.eResource().getResourceSet().createResource(URI.createFileURI(fileName));
+	private void saveInResourceWithProject(EObject obj, URI resourceURI, Project project) throws FatalESException {
+		final Resource resource = serverSpace.eResource().getResourceSet().createResource(resourceURI);
 		resource.getContents().add(obj);
 
 		if (resource instanceof XMIResource) {

@@ -8,13 +8,12 @@
  * 
  * Contributors:
  * Maximilian Koegel
+ * Johannes Faltermeier
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -26,7 +25,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -40,11 +38,13 @@ import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
+import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
+import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
-import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.commands.EMFStoreBasicCommandStack;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AdminConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
@@ -56,18 +56,16 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
+import org.eclipse.emf.emfstore.internal.client.provider.ClientXMIResourceSetProvider;
+import org.eclipse.emf.emfstore.internal.client.startup.ClientHrefMigrator;
 import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.ESDisposable;
-import org.eclipse.emf.emfstore.internal.common.ResourceFactoryRegistry;
-import org.eclipse.emf.emfstore.internal.common.model.ModelVersion;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
-import org.eclipse.emf.emfstore.internal.common.model.util.MalformedModelVersionException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.observer.ObserverBus;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrationException;
+import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigrator;
 import org.eclipse.emf.emfstore.internal.migration.EMFStoreMigratorUtil;
-import org.eclipse.emf.emfstore.internal.server.DefaultServerWorkspaceLocationProvider;
 import org.eclipse.emf.emfstore.server.model.ESChangePackage;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
 
@@ -75,6 +73,7 @@ import org.eclipse.emf.emfstore.server.model.versionspec.ESPrimaryVersionSpec;
  * Controller for workspaces. Workspace Manager is a singleton.
  * 
  * @author mkoegel
+ * @author jfaltermeier
  */
 public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCommitObserver, ESUpdateObserver,
 	ESShareObserver, ESCheckoutObserver, ESDisposable {
@@ -85,7 +84,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	private ConnectionManager connectionManager;
 	private EditingDomain editingDomain;
 	private ObserverBus observerBus;
-	private ResourceSetImpl resourceSet;
+	private ResourceSet resourceSet;
 	private SessionManager sessionManager;
 	private Workspace currentWorkspace;
 
@@ -185,28 +184,39 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 * if present. There is always one current Workspace.
 	 */
 	public void load() {
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.resourceSetProvider", //$NON-NLS-1$
+			true, new ESPriorityComparator("priority", true)); //$NON-NLS-1$
 
-		resourceSet = new ResourceSetImpl();
-		resourceSet.setResourceFactoryRegistry(new ResourceFactoryRegistry());
-		resourceSet.setURIResourceMap(new LinkedHashMap<URI, Resource>());
-		resourceSet.getLoadOptions().putAll(ModelUtil.getResourceLoadOptions());
+		final ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
+			"class", //$NON-NLS-1$
+			ESResourceSetProvider.class);
+
+		resourceSet = resourceSetProvider.getResourceSet();
 
 		// register an editing domain on the resource
 		setEditingDomain(createEditingDomain(resourceSet));
 
-		final URI fileURI = URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
-		final File workspaceFile = new File(Configuration.getFileInfo().getWorkspacePath());
+		final URI workspaceURI = ClientURIUtil.createWorkspaceURI();
 		final Workspace workspace;
 		final Resource resource;
 
-		if (!workspaceFile.exists()) {
-			workspace = createNewWorkspace(resourceSet, fileURI);
+		if (!resourceSet.getURIConverter().exists(workspaceURI, null)) {
+			workspace = createNewWorkspace(resourceSet, workspaceURI);
 		} else {
+			// hrefs are persisted differently in 1.1+ in comparison to 1.0
+			// migrate, if needed, before loading
+			if (resourceSetProvider instanceof ClientXMIResourceSetProvider) {
+				if (!new ClientHrefMigrator().migrate()) {
+					throw new RuntimeException("Migration failed");
+				}
+			}
+
 			// file exists, load it,
 			// check if a migration is needed
-			migrateModel(resourceSet);
+			migrateModelIfNeeded(resourceSet);
 
-			resource = resourceSet.createResource(fileURI);
+			resource = resourceSet.createResource(workspaceURI);
 
 			try {
 				resource.load(ModelUtil.getResourceLoadOptions());
@@ -240,23 +250,24 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	}
 
 	public void migrate(String absoluteFilename) {
-		final URI projectURI = URI.createFileURI(absoluteFilename);
-
-		final List<URI> modelURIs = new ArrayList<URI>();
-		modelURIs.add(projectURI);
-
-		final ModelVersion workspaceModelVersion = getWorkspaceModelVersion();
-		if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
-			ModelUtil.logWarning("No Migrator available to migrate imported file");
-			return;
-		}
-
-		try {
-			EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, workspaceModelVersion.getReleaseNumber() - 1,
-				new NullProgressMonitor());
-		} catch (final EMFStoreMigrationException e) {
-			WorkspaceUtil.logWarning("The migration of the project in the file " + absoluteFilename + " failed!", e);
-		}
+		// FIXME JF
+		// final URI projectURI = URI.createFileURI(absoluteFilename);
+		//
+		// final List<URI> modelURIs = new ArrayList<URI>();
+		// modelURIs.add(projectURI);
+		//
+		// final ModelVersion workspaceModelVersion = getWorkspaceModelVersion();
+		// if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
+		// ModelUtil.logWarning("No Migrator available to migrate imported file");
+		// return;
+		// }
+		//
+		// try {
+		// EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, workspaceModelVersion.getReleaseNumber() - 1,
+		// new NullProgressMonitor());
+		// } catch (final EMFStoreMigrationException e) {
+		// WorkspaceUtil.logWarning("The migration of the project in the file " + absoluteFilename + " failed!", e);
+		// }
 	}
 
 	/**
@@ -386,11 +397,11 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	}
 
 	private void notifyPostWorkspaceInitiators() {
-		for (final ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit",
+		for (final ESExtensionElement element : new ESExtensionPoint("org.eclipse.emf.emfstore.client.notify.postinit", //$NON-NLS-1$
 			true)
 			.getExtensionElements()) {
 			try {
-				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete(
+				element.getClass("class", ESWorkspaceInitObserver.class).workspaceInitComplete( //$NON-NLS-1$
 					currentWorkspace
 						.toAPI());
 			} catch (final ESExtensionPointException e) {
@@ -442,8 +453,8 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 
 	private ESEditingDomainProvider getDomainProvider() {
 		// TODO EXPT PRIO
-		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider")
-			.getClass("class",
+		return new ESExtensionPoint("org.eclipse.emf.emfstore.client.editingDomainProvider") //$NON-NLS-1$
+			.getClass("class", //$NON-NLS-1$
 				ESEditingDomainProvider.class);
 	}
 
@@ -476,178 +487,173 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 				"Creating new workspace failed! Delete workspace folder: "
 					+ Configuration.getFileInfo().getWorkspaceDirectory(), e);
 		}
-		int modelVersionNumber;
-		try {
-			modelVersionNumber = ModelUtil.getModelVersionNumber();
-			stampCurrentVersionNumber(modelVersionNumber);
-		} catch (final MalformedModelVersionException e1) {
-			WorkspaceUtil.logException("Loading model version failed!", e1);
-		}
 		return workspace;
 	}
 
-	private void stampCurrentVersionNumber(int modelReleaseNumber) {
-		final URI versionFileUri = URI.createFileURI(Configuration.getFileInfo().getModelReleaseNumberFileName());
-		final Resource versionResource = new ResourceSetImpl().createResource(versionFileUri);
-		final ModelVersion modelVersion = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
-			.createModelVersion();
-		modelVersion.setReleaseNumber(modelReleaseNumber);
-		versionResource.getContents().add(modelVersion);
+	private void migrateModelIfNeeded(ResourceSet resourceSet) {
+		// FIXME JF
+		EMFStoreMigrator migrator = null;
 		try {
-			ModelUtil.saveResource(versionResource, WorkspaceUtil.getResourceLogger());
+			migrator = EMFStoreMigratorUtil.getEMFStoreMigrator();
+		} catch (final EMFStoreMigrationException e2) {
+			WorkspaceUtil.logWarning(e2.getMessage(), null);
+			return;
+		}
+
+		for (final List<URI> curModels : getPhysicalURIsForMigration()) {
+			// TODO logging?
+			if (!migrator.canHandle(curModels)) {
+				return;
+			}
+
+			if (!migrator.needsMigration(curModels)) {
+				return;
+			}
+
+			try {
+				migrator.migrate(curModels, new NullProgressMonitor());
+			} catch (final EMFStoreMigrationException e) {
+				WorkspaceUtil.logException("The migration of the project in projectspace at " + curModels.get(0)
+					+ " failed!", e);
+			}
+		}
+
+		// ModelVersion workspaceModelVersion = getWorkspaceModelVersion();
+		// int modelVersionNumber;
+		// try {
+		// modelVersionNumber = ModelUtil.getModelVersionNumber();
+		// stampCurrentVersionNumber(modelVersionNumber);
+		// } catch (MalformedModelVersionException e1) {
+		// WorkspaceUtil.logException("Loading model version failed, migration skipped!", e1);
+		// return;
+		// }
+		// if (workspaceModelVersion.getReleaseNumber() == modelVersionNumber) {
+		// return;
+		// } else if (workspaceModelVersion.getReleaseNumber() > modelVersionNumber) {
+		// backupAndRecreateWorkspace(resourceSet);
+		// WorkspaceUtil.logException("Model conforms to a newer version, update client! New workspace was backuped!",
+		// new IllegalStateException());
+		// return;
+		// }
+		//
+		// // we need to migrate
+		// if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
+		// WorkspaceUtil.logException("Model requires migration, but no migrators are registered!",
+		// new IllegalStateException());
+		// return;
+		// }
+		//
+		// backupWorkspace(false);
+		//
+		// // ////////// start migration
+		// // load workspace in new resourceset
+		// ESExtensionPoint extensionPoint = new ESExtensionPoint("org.eclipse.emf.emfstore.client.resourceSetProvider",
+		// true);
+		// extensionPoint.setComparator(new ESPriorityComparator("priority", true));
+		// extensionPoint.reload();
+		//
+		// ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass("class",
+		// ESResourceSetProvider.class);
+		//
+		// ResourceSet migrationResourceSet = resourceSetProvider.getResourceSet();
+		// Resource resource = migrationResourceSet.createResource(ClientURIUtil.createWorkspaceURI());
+		//
+		// try {
+		// resource.load(ModelUtil.getResourceLoadOptions());
+		// } catch (IOException e) {
+		// WorkspaceUtil.logException("Error while loading workspace.", e);
+		// }
+		//
+		// EList<EObject> directContents = resource.getContents();
+		// Workspace workspace = (Workspace) directContents.get(0);
+		// for (ProjectSpace ps : workspace.getProjectSpaces()) {
+		// // TODO test this
+		// URI projectURI = migrationResourceSet.getURIConverter().normalize(ps.getProject().eResource().getURI());
+		// URI operationsURI = migrationResourceSet.getURIConverter()
+		// .normalize(ps.getLocalChangePackage().eResource().getURI());
+		// try {
+		// migrate(projectURI, operationsURI, workspaceModelVersion.getReleaseNumber());
+		// } catch (EMFStoreMigrationException e) {
+		// WorkspaceUtil.logException("The migration of the project in projectspace at " + ps.eResource().getURI()
+		// + " failed!", e);
+		// backupAndRecreateWorkspace(resourceSet);
+		// }
+		// }
+		//
+		// // TODO delete if new migration works
+		// // // start migrations
+		// // File workspaceFile = new File(Configuration.getFileInfo().getWorkspaceDirectory());
+		// // for (File file : workspaceFile.listFiles()) {
+		// // if (file.getName().startsWith(Configuration.getFileInfo().getProjectSpaceDirectoryPrefix())) {
+		// // String projectFilePath = file.getAbsolutePath() + File.separatorChar
+		// // + Configuration.getFileInfo().ProjectFragmentFileName
+		// // + Configuration.getFileInfo().ProjectFragmentExtension;
+		// // URI projectURI = URI.createFileURI(projectFilePath);
+		// // String operationsFilePath = null;
+		// // File[] listFiles = file.listFiles();
+		// // if (listFiles == null) {
+		// // WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
+		// // + " failed!", new IllegalStateException("Broken projectSpace!"));
+		// // continue;
+		// // }
+		// // for (File subDirFile : listFiles) {
+		// // if (subDirFile.getName().endsWith(Configuration.getFileInfo().LocalChangePackageExtension)) {
+		// // operationsFilePath = subDirFile.getAbsolutePath();
+		// // }
+		// // }
+		// // if (operationsFilePath == null) {
+		// // WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
+		// // + " failed!", new IllegalStateException("Broken workspace!"));
+		// // backupAndRecreateWorkspace(resourceSet);
+		// // }
+		// // URI operationsURI = URI.createFileURI(operationsFilePath);
+		// // try {
+		// // migrate(projectURI, operationsURI, workspaceModelVersion.getReleaseNumber());
+		// // } catch (EMFStoreMigrationException e) {
+		// // WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
+		// // + " failed!", e);
+		// // backupAndRecreateWorkspace(resourceSet);
+		// // }
+		// // }
+		// // }
+		// // // end migration
+		//
+		// stampCurrentVersionNumber(modelVersionNumber);
+	}
+
+	private List<List<URI>> getPhysicalURIsForMigration() {
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			"org.eclipse.emf.emfstore.client.resourceSetProvider", //$NON-NLS-1$
+			true, new ESPriorityComparator("priority", true)); //$NON-NLS-1$
+
+		final ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
+			"class", //$NON-NLS-1$
+			ESResourceSetProvider.class);
+
+		final ResourceSet migrationResourceSet = resourceSetProvider.getResourceSet();
+		final Resource resource = migrationResourceSet.createResource(ClientURIUtil.createWorkspaceURI());
+
+		try {
+			resource.load(ModelUtil.getResourceLoadOptions());
 		} catch (final IOException e) {
-			WorkspaceUtil.logException(
-				"Version stamping workspace failed! Delete workspace folder: "
-					+ Configuration.getFileInfo().getWorkspaceDirectory(),
-				e);
-		}
-	}
-
-	private void migrateModel(ResourceSet resourceSet) {
-		final ModelVersion workspaceModelVersion = getWorkspaceModelVersion();
-		int modelVersionNumber;
-		try {
-			modelVersionNumber = ModelUtil.getModelVersionNumber();
-			stampCurrentVersionNumber(modelVersionNumber);
-		} catch (final MalformedModelVersionException e1) {
-			WorkspaceUtil.logException("Loading model version failed, migration skipped!", e1);
-			return;
-		}
-		if (workspaceModelVersion.getReleaseNumber() == modelVersionNumber) {
-			return;
-		} else if (workspaceModelVersion.getReleaseNumber() > modelVersionNumber) {
-			backupAndRecreateWorkspace(resourceSet);
-			WorkspaceUtil.logException("Model conforms to a newer version, update client! New workspace was backuped!",
-				new IllegalStateException());
-			return;
+			WorkspaceUtil.logException("Error while loading workspace.", e);
 		}
 
-		// we need to migrate
-		if (!EMFStoreMigratorUtil.isMigratorAvailable()) {
-			WorkspaceUtil.logException("Model requires migration, but no migrators are registered!",
-				new IllegalStateException());
-			return;
+		final List<List<URI>> physicalURIs = new ArrayList<List<URI>>();
+
+		final EList<EObject> directContents = resource.getContents();
+		final Workspace workspace = (Workspace) directContents.get(0);
+		for (final ProjectSpace ps : workspace.getProjectSpaces()) {
+			final List<URI> uris = new ArrayList<URI>();
+			final URI projectURI = migrationResourceSet.getURIConverter().normalize(
+				ps.getProject().eResource().getURI());
+			final URI operationsURI = migrationResourceSet.getURIConverter()
+				.normalize(ps.getLocalChangePackage().eResource().getURI());
+			uris.add(projectURI);
+			uris.add(operationsURI);
+			physicalURIs.add(uris);
 		}
-
-		backupWorkspace(false);
-		final File workspaceFile = new File(Configuration.getFileInfo().getWorkspaceDirectory());
-		for (final File file : workspaceFile.listFiles()) {
-			if (file.getName().startsWith(Configuration.getFileInfo().getProjectSpaceDirectoryPrefix())) {
-				Configuration.getFileInfo();
-				final String projectFilePath = file.getAbsolutePath() + File.separatorChar
-					+ ExportImportDataUnits.Project.getName()
-					+ ExportImportDataUnits.Project.getExtension();
-				final URI projectURI = URI.createFileURI(projectFilePath);
-				String operationsFilePath = null;
-				final File[] listFiles = file.listFiles();
-				if (listFiles == null) {
-					WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
-						+ " failed!", new IllegalStateException("Broken projectSpace!"));
-					continue;
-				}
-				for (final File subDirFile : listFiles) {
-					if (subDirFile.getName().endsWith(ExportImportDataUnits.Change.getExtension())) {
-						operationsFilePath = subDirFile.getAbsolutePath();
-					}
-				}
-				if (operationsFilePath == null) {
-					WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
-						+ " failed!", new IllegalStateException("Broken workspace!"));
-					backupAndRecreateWorkspace(resourceSet);
-				}
-				final URI operationsURI = URI.createFileURI(operationsFilePath);
-				try {
-					migrate(projectURI, operationsURI, workspaceModelVersion.getReleaseNumber());
-				} catch (final EMFStoreMigrationException e) {
-					WorkspaceUtil.logException("The migration of the project in projectspace at " + projectFilePath
-						+ " failed!", e);
-					backupAndRecreateWorkspace(resourceSet);
-				}
-			}
-		}
-
-		stampCurrentVersionNumber(modelVersionNumber);
-	}
-
-	private void backupAndRecreateWorkspace(ResourceSet resourceSet) {
-		backupWorkspace(true);
-		final URI fileURI = URI.createFileURI(Configuration.getFileInfo().getWorkspacePath());
-		createNewWorkspace(resourceSet, fileURI);
-	}
-
-	private void backupWorkspace(boolean move) {
-		final String workspaceDirectory = Configuration.getFileInfo().getWorkspaceDirectory();
-		final File workspacePath = new File(workspaceDirectory);
-
-		// TODO: if you want the date included in the backup folder you should
-		// change the format. the default format
-		// does not work with every os due to : and other characters.
-		final String newWorkspaceDirectory = ((DefaultServerWorkspaceLocationProvider) Configuration.getFileInfo()
-			.getLocationProvider()).getBackupDirectory() + "emfstore_backup_"
-			+ System.currentTimeMillis();
-
-		final File workspacebackupPath = new File(newWorkspaceDirectory);
-		if (move) {
-			workspacePath.renameTo(workspacebackupPath);
-		} else {
-			try {
-				FileUtil.copyDirectory(workspacePath, workspacebackupPath);
-			} catch (final IOException e) {
-				WorkspaceUtil.logException("Workspace backup failed!", e);
-			}
-		}
-	}
-
-	private ModelVersion getWorkspaceModelVersion() {
-		// check for legacy workspace
-		final File versionFile = new File(Configuration.getFileInfo().getModelReleaseNumberFileName());
-		if (!versionFile.exists()) {
-			int modelVersionNumber;
-			try {
-				modelVersionNumber = ModelUtil.getModelVersionNumber();
-				stampCurrentVersionNumber(modelVersionNumber);
-			} catch (final MalformedModelVersionException e1) {
-				WorkspaceUtil.logException("Loading model version failed!", e1);
-			}
-		}
-
-		// check if we need to migrate
-		final URI versionFileUri = URI.createFileURI(Configuration.getFileInfo().getModelReleaseNumberFileName());
-		final ResourceSet resourceSet = new ResourceSetImpl();
-		try {
-			final Resource resource = resourceSet.getResource(versionFileUri, true);
-			final EList<EObject> directContents = resource.getContents();
-			final ModelVersion modelVersion = (ModelVersion) directContents.get(0);
-			return modelVersion;
-			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (final RuntimeException e) {
-			// END SUPRESS CATCH EXCEPTION
-			// resource can not be loaded, assume version number before
-			// metamodel split
-			final ModelVersion modelVersion = org.eclipse.emf.emfstore.internal.common.model.ModelFactory.eINSTANCE
-				.createModelVersion();
-			modelVersion.setReleaseNumber(4);
-			return modelVersion;
-		}
-	}
-
-	/**
-	 * Migrate the model instance if neccessary.
-	 * 
-	 * @param projectURI
-	 *            the uri of the project state
-	 * @param changesURI
-	 *            the uri of the local changes of the project state
-	 * @param sourceModelReleaseNumber
-	 * @throws EMFStoreMigrationException
-	 */
-	private void migrate(URI projectURI, URI changesURI, int sourceModelReleaseNumber)
-		throws EMFStoreMigrationException {
-		final List<URI> modelURIs = new ArrayList<URI>();
-		modelURIs.add(projectURI);
-		modelURIs.add(changesURI);
-		EMFStoreMigratorUtil.getEMFStoreMigrator().migrate(modelURIs, sourceModelReleaseNumber,
-			new NullProgressMonitor());
+		return physicalURIs;
 	}
 
 	/**

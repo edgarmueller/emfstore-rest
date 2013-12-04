@@ -188,7 +188,7 @@ public class EObjectChangeNotifier extends EContentAdapter {
 
 		// detect if the notification is about a reference to an object outside of the collection => notify
 		// project
-		if (feature instanceof EReference && newValue != null) {
+		if (feature instanceof EReference && newValue != null && !notification.isTouch()) {
 			EReference reference = (EReference) feature;
 
 			if (!reference.isContainment() && !reference.isContainer()) {

@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Otto von Wesendonk, Edgar Mueller, Maximilian Koegel - initial API and implementation
+ * Johannes Faltermeier - adaptions for independent storage
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.impl;
 
@@ -46,12 +47,11 @@ import org.eclipse.emf.emfstore.client.changetracking.ESCommandStack;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
+import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
-import org.eclipse.emf.emfstore.internal.client.configuration.FileInfo;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportChangesController;
-import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportProjectController;
 import org.eclipse.emf.emfstore.internal.client.model.CompositeOperationHandle;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
@@ -83,7 +83,6 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
-import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ChangeConflictSet;
@@ -115,6 +114,7 @@ import org.eclipse.emf.emfstore.server.model.ESChangePackage;
  * @author koegel
  * @author wesendon
  * @author emueller
+ * @author jfaltermeier
  * 
  */
 public abstract class ProjectSpaceBase extends IdentifiableElementImpl implements ProjectSpace, ESLoginObserver,
@@ -674,25 +674,15 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 	public void initResources(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 		initCompleted = true;
-		final String projectSpaceFileNamePrefix = Configuration.getFileInfo().getWorkspaceDirectory()
-			+ Configuration.getFileInfo().getProjectSpaceDirectoryPrefix() + getIdentifier() + File.separatorChar;
-		final String projectSpaceFileName = projectSpaceFileNamePrefix
-			+ ExportImportDataUnits.ProjectSpace.getName()
-			+ ExportImportDataUnits.ProjectSpace.getExtension();
-		final String localChangePackageFileName = projectSpaceFileNamePrefix
-			+ ExportImportDataUnits.Change.getName()
-			+ ExportImportDataUnits.Change.getExtension();
-		final URI projectSpaceURI = URI.createFileURI(projectSpaceFileName);
-		final URI localChangePackageURI = URI.createFileURI(localChangePackageFileName);
+
+		final URI projectSpaceURI = ClientURIUtil.createProjectSpaceURI(this);
+		final URI operationsURI = ClientURIUtil.createOperationsURI(this);
+		final URI projectURI = ClientURIUtil.createProjectURI(this);
 
 		setResourceCount(0);
-		final String fileName = projectSpaceFileNamePrefix
-			+ ExportImportDataUnits.Project.getName()
-			+ ExportImportDataUnits.Project.getExtension();
-		final URI fileURI = URI.createFileURI(fileName);
 
 		final List<Resource> resources = new ArrayList<Resource>();
-		final Resource resource = resourceSet.createResource(fileURI);
+		final Resource resource = resourceSet.createResource(projectURI);
 		// if resource splitting fails, we need a reference to the old resource
 		resource.getContents().add(getProject());
 		resources.add(resource);
@@ -702,7 +692,7 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 			((XMIResource) resource).setID(modelElement, getProject().getModelElementId(modelElement).getId());
 		}
 
-		final Resource localChangePackageResource = resourceSet.createResource(localChangePackageURI);
+		final Resource localChangePackageResource = resourceSet.createResource(operationsURI);
 		if (this.getLocalChangePackage() == null) {
 			setLocalChangePackage(VersioningFactory.eINSTANCE.createChangePackage());
 		}
@@ -738,26 +728,16 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		// delete project to notify listeners
 		getProject().delete();
 
-		Configuration.getFileInfo();
-		final String pathToProject = Configuration.getFileInfo().getWorkspaceDirectory()
-			+ FileInfo.PROJECT_SPACE_DIR_PREFIX + getIdentifier();
-
-		resourceSet.getResources().remove(getProject().eResource());
-		resourceSet.getResources().remove(eResource());
-		resourceSet.getResources().remove(getLocalChangePackage().eResource());
+		// remove resources from resource set and delete them
+		deleteResource(getProject().eResource());
+		deleteResource(eResource());
+		deleteResource(getLocalChangePackage().eResource());
 
 		// TODO: remove project space from workspace, this is not the case if delete
 		// is performed via Workspace#deleteProjectSpace
 		ESWorkspaceProviderImpl.getInstance().getInternalWorkspace().getProjectSpaces().remove(this);
 
 		dispose();
-
-		deleteResource(getProject().eResource());
-		deleteResource(eResource());
-		deleteResource(getLocalChangePackage().eResource());
-
-		// delete folder of project space
-		FileUtil.deleteDirectory(new File(pathToProject), true);
 	}
 
 	private void deleteResource(Resource resource) throws IOException {

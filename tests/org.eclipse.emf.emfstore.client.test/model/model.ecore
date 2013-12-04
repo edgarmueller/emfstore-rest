@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
-    nsURI="http://eclipse.org/emf/emfstore/client/test/model" nsPrefix="org.eclipse.emf.emfstore.internal.client.test.model">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://eclipse.org/emf/emfstore/client/test/model"
+    nsPrefix="org.eclipse.emf.emfstore.internal.client.test.model">
   <eClassifiers xsi:type="ecore:EClass" name="UnicaseModelElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="org.unicase.ui.meeditor">
@@ -921,7 +920,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Step" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Step" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="userStep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="includedUseCase" eType="#//requirement/UseCase"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="includedSystemFunction"
@@ -1018,7 +1017,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Proposal" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Proposal" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="assessments" upperBound="-1"
           eType="#//rationale/Assessment" containment="true" eOpposite="#//rationale/Assessment/proposal">
         <eAnnotations source="org.unicase.ui.meeditor">
@@ -1034,7 +1033,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Solution" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Solution" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="underlyingProposals"
           upperBound="-1" eType="#//rationale/Proposal">
         <eAnnotations source="org.unicase.ui.meeditor">
@@ -1059,14 +1058,14 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Assessment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Assessment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="proposal" eType="#//rationale/Proposal"
           eOpposite="#//rationale/Proposal/assessments"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="criterion" eType="#//rationale/Criterion"
           eOpposite="#//rationale/Criterion/assessments"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//NonDomainElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//UnicaseModelElement ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//NonDomainElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//organization/OrgUnit"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="recipients" upperBound="-1"
           eType="#//organization/OrgUnit"/>
@@ -1081,19 +1080,19 @@
   <eSubpackages name="change" nsURI="http://eclipse.org/emf/emfstore/client/test/model/change"
       nsPrefix="org.eclipse.emf.emfstore.internal.client.test.model.change">
     <eClassifiers xsi:type="ecore:EClass" name="MergingIssue" eSuperTypes="#//rationale/Issue">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="baseVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="targetVersion" eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/PrimaryVersionSpec"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MergingProposal" eSuperTypes="#//rationale/Proposal">
       <eStructuralFeatures xsi:type="ecore:EReference" name="pendingOperations" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/operations/AbstractOperation"
+          eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/operations/AbstractOperation"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MergingSolution" eSuperTypes="#//rationale/Solution">
       <eStructuralFeatures xsi:type="ecore:EReference" name="appliedOperations" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.server.model/model/server.ecore#//versioning/operations/AbstractOperation"
+          eType="ecore:EClass ../../org.eclipse.emf.emfstore.server.model/model/server.ecore#//versioning/operations/AbstractOperation"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>
@@ -1395,12 +1394,12 @@
   <eSubpackages name="util" nsURI="http://eclipse.org/emf/emfstore/client/test/model/util"
       nsPrefix="org.eclipse.emf.emfstore.internal.client.test.model.util">
     <eClassifiers xsi:type="ecore:EClass" name="ModelElementPath">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//ModelElementId"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//ModelElementId"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="path" upperBound="-1"
-          eType="ecore:EClass ../../org.eclipse.emf.emfstore.internal.common.model.edit.edit/model/common.ecore#//ModelElementId"
+          eType="ecore:EClass ../../org.eclipse.emf.emfstore.common.model/model/common.ecore#//ModelElementId"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>

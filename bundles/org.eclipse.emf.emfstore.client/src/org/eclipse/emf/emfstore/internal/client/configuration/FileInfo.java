@@ -10,6 +10,7 @@
  * Otto von Wesendonk
  * Edgar Mueller
  * Maximilian Koegel
+ * Johannes Faltermeier
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.configuration;
 
@@ -30,18 +31,13 @@ import org.eclipse.emf.emfstore.server.ESLocationProvider;
  * @author emueller
  * @author ovonwesen
  * @author mkoegel
+ * @author jfaltermeier
  */
 public class FileInfo {
-
-	/**
-	 * Prefix used for project spaces.
-	 */
-	public static final String PROJECT_SPACE_DIR_PREFIX = "ps-";
 
 	private static ESLocationProvider locationProvider;
 	private static final String PLUGIN_BASEDIR = "pluginData";
 	private static final String ERROR_DIAGNOSIS_DIR_NAME = "errorLog";
-	private static final String MODEL_VERSION_FILENAME = "modelReleaseNumber";
 
 	/**
 	 * Returns the registered {@link ESLocationProvider} or if not existent, the
@@ -98,15 +94,6 @@ public class FileInfo {
 	}
 
 	/**
-	 * Get the Workspace file path.
-	 * 
-	 * @return the workspace file path string
-	 */
-	public String getWorkspacePath() {
-		return getWorkspaceDirectory() + "workspace.ucw";
-	}
-
-	/**
 	 * Returns the directory that is used for error logging.<br/>
 	 * If the directory does not exist it will be created. Upon exit of the JVM it will be deleted.
 	 * 
@@ -124,24 +111,5 @@ public class FileInfo {
 		}
 
 		return errorDiagnosisDir.getAbsolutePath();
-	}
-
-	/**
-	 * Return the name of the model release number file. This file identifies
-	 * the release number of the model in the workspace.
-	 * 
-	 * @return the file name
-	 */
-	public String getModelReleaseNumberFileName() {
-		return getWorkspaceDirectory() + MODEL_VERSION_FILENAME;
-	}
-
-	/**
-	 * Return the prefix of the project space directory.
-	 * 
-	 * @return the prefix
-	 */
-	public String getProjectSpaceDirectoryPrefix() {
-		return PROJECT_SPACE_DIR_PREFIX;
 	}
 }
