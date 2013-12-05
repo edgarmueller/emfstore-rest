@@ -353,4 +353,14 @@ public interface Workspace extends EObject, IAdaptable, APIDelegate<ESWorkspaceI
 	 */
 	void removeServerInfo(ServerInfo serverInfo);
 
+	/**
+	 * Remove the given {@link Usersession} from the workspace.
+	 * 
+	 * @param session
+	 *            the session to be removed
+	 * @throws ESException
+	 *             in case removing the session fails
+	 */
+	void removeUsersession(Usersession session) throws ESException;
+
 } // Workspace

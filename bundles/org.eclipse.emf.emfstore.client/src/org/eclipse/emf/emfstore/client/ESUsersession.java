@@ -85,6 +85,8 @@ public interface ESUsersession {
 	 * 
 	 * @param shouldSavePassword
 	 *            {@code true} if the password should be saved, {@code false} otherwise
+	 * 
+	 * @since 1.1
 	 */
 	void setSavePassword(boolean shouldSavePassword);
 
@@ -92,6 +94,18 @@ public interface ESUsersession {
 	 * Whether the password that is used by this session will be saved.
 	 * 
 	 * @return {@code true} if the password is saved, {@code false} otherwise
+	 * 
+	 * @since 1.1
 	 */
 	boolean isSavePassword();
+
+	/**
+	 * Deletes this usersession.
+	 * 
+	 * @throws ESException
+	 *             in case removing the session fails
+	 * 
+	 * @since 1.1
+	 */
+	void delete() throws ESException;
 }

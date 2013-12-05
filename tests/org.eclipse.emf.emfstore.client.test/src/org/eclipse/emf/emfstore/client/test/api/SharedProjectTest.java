@@ -37,6 +37,8 @@ import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.test.CommitCallbackAdapter;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
+import org.eclipse.emf.emfstore.internal.client.model.Workspace;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESUpdateRequiredException;
@@ -324,6 +326,14 @@ public class SharedProjectTest extends BaseSharedProjectTest {
 		localProject.shareProject(usersession, new NullProgressMonitor());
 
 		assertTrue(localProject.isShared());
+	}
+
+	@Test
+	public void testDeleteSession() throws ESException {
+		final Workspace w = ESWorkspaceImpl.class.cast(workspace).toInternalAPI();
+		final int size = w.getUsersessions().size();
+		usersession.delete();
+		assertEquals(size - 1, w.getUsersessions().size());
 	}
 
 	private static Resource createResource() throws IOException {

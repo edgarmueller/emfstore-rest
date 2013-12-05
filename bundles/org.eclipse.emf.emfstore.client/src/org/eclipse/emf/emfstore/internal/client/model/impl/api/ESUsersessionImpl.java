@@ -15,6 +15,8 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
+import org.eclipse.emf.emfstore.client.ESWorkspace;
+import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -200,5 +202,16 @@ public class ESUsersessionImpl extends AbstractAPIImpl<ESUsersessionImpl, Userse
 	 */
 	public boolean isSavePassword() {
 		return toInternalAPI().isSavePassword();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.client.ESUsersession#delete()
+	 */
+	public void delete() throws ESException {
+		final ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
+		final ESWorkspaceImpl workspaceImpl = ESWorkspaceImpl.class.cast(workspace);
+		workspaceImpl.toInternalAPI().removeUsersession(toInternalAPI());
 	}
 }

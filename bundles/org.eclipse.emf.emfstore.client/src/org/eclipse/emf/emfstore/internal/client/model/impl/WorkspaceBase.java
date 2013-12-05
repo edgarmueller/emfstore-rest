@@ -468,6 +468,18 @@ public abstract class WorkspaceBase extends EObjectImpl implements Workspace, ES
 	 * 
 	 * {@inheritDoc}
 	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.Workspace#removeUsersession(org.eclipse.emf.emfstore.internal.client.model.Usersession)
+	 */
+	public void removeUsersession(Usersession session) throws ESException {
+		session.logout();
+		getUsersessions().remove(session);
+		save();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.emf.emfstore.internal.common.api.APIDelegate#toAPI()
 	 */
 	public ESWorkspaceImpl toAPI() {
