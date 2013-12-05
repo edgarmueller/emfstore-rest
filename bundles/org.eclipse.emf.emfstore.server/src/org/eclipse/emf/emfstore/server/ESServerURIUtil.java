@@ -30,7 +30,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @since 1.1
  * 
  */
-public final class ServerURIUtil {
+public final class ESServerURIUtil {
 
 	/**
 	 * The EMFStore URI scheme.
@@ -95,7 +95,7 @@ public final class ServerURIUtil {
 	 */
 	public static final String DYNAMIC_MODELS_SEGMENT = "dynamic-models"; //$NON-NLS-1$
 
-	private ServerURIUtil() {
+	private ESServerURIUtil() {
 		// private constructor
 	}
 

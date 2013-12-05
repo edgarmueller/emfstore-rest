@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.mongodb.ResourceSetFactoryProvider;
 import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
-import org.eclipse.emf.emfstore.server.ServerURIUtil;
+import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipselabs.mongo.emf.ext.ECollection;
 
 /**
@@ -43,7 +43,7 @@ public class MongoDBDynamicModelProvider implements ESDynamicModelProvider {
 	 */
 	public List<EPackage> getDynamicModels() {
 		final URI dynamicModelsURI = URI
-			.createURI(MongoServerURIConverter.getMongoURIPrefix(ServerURIUtil.getProfile())
+			.createURI(MongoServerURIConverter.getMongoURIPrefix(ESServerURIUtil.getProfile())
 				+ "dynamic-models/ecore"); //$NON-NLS-1$
 		try {
 			ResourceSetFactoryProvider.COUNT_DOWN_LATCH.await(10, TimeUnit.SECONDS);

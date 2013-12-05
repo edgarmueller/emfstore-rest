@@ -47,7 +47,7 @@ import org.eclipse.emf.emfstore.client.changetracking.ESCommandStack;
 import org.eclipse.emf.emfstore.client.handler.ESRunnableContext;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESMergeObserver;
-import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
+import org.eclipse.emf.emfstore.client.util.ESClientURIUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
@@ -675,9 +675,9 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 		this.resourceSet = resourceSet;
 		initCompleted = true;
 
-		final URI projectSpaceURI = ClientURIUtil.createProjectSpaceURI(this);
-		final URI operationsURI = ClientURIUtil.createOperationsURI(this);
-		final URI projectURI = ClientURIUtil.createProjectURI(this);
+		final URI projectSpaceURI = ESClientURIUtil.createProjectSpaceURI(this);
+		final URI operationsURI = ESClientURIUtil.createOperationsURI(this);
+		final URI projectURI = ESClientURIUtil.createProjectURI(this);
 
 		setResourceCount(0);
 

@@ -13,7 +13,7 @@ package org.eclipse.emf.emfstore.client.util;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.emfstore.internal.common.model.IdentifiableElement;
-import org.eclipse.emf.emfstore.server.ServerURIUtil;
+import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 
 /**
  * Helper class for EMFStore Client URIs and accessing segments.
@@ -21,14 +21,14 @@ import org.eclipse.emf.emfstore.server.ServerURIUtil;
  * @author jfaltermeier
  * @since 1.1
  */
-public final class ClientURIUtil {
+public final class ESClientURIUtil {
 
 	/**
 	 * The EMFStore URI scheme.
 	 * <p />
 	 * Example URI: <b>emfstore</b>://workspaces/<i>profile</i>/projectspaces/_pWleAMkNEeK_G9uCvLFQ5A/project
 	 */
-	public static final String SCHEME = ServerURIUtil.SCHEME;
+	public static final String SCHEME = ESServerURIUtil.SCHEME;
 
 	/**
 	 * The EMFStore URI segment for client workspaces.
@@ -72,7 +72,7 @@ public final class ClientURIUtil {
 	 */
 	public static final String OPERATIONS_SEGMENT = "operations"; //$NON-NLS-1$
 
-	private ClientURIUtil() {
+	private ESClientURIUtil() {
 		// private constructor
 	}
 
@@ -124,7 +124,7 @@ public final class ClientURIUtil {
 	}
 
 	private static String getClientPrefix() {
-		return SCHEME + "://" + CLIENT_SEGMENT + "/" + ServerURIUtil.getProfile() + "/"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return SCHEME + "://" + CLIENT_SEGMENT + "/" + ESServerURIUtil.getProfile() + "/"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static String getProjectspacesPrefix(IdentifiableElement projectSpace) {

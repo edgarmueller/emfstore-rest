@@ -34,7 +34,7 @@ import org.eclipse.emf.emfstore.internal.server.core.helper.EPackageHelper;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
-import org.eclipse.emf.emfstore.server.ServerURIUtil;
+import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -89,7 +89,7 @@ public class EPackageSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 
 			}
 
-			URI dynamicModelUri = ServerURIUtil.createDynamicModelsURI(ePackage);
+			URI dynamicModelUri = ESServerURIUtil.createDynamicModelsURI(ePackage);
 
 			// create a resource to save the file to disc
 			ESExtensionPoint extensionPoint = new ESExtensionPoint(

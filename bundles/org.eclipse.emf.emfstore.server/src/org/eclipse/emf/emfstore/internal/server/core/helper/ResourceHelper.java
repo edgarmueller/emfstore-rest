@@ -37,7 +37,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CreateDeleteOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.impl.CreateDeleteOperationImpl;
 import org.eclipse.emf.emfstore.internal.server.storage.XMIServerURIConverter;
-import org.eclipse.emf.emfstore.server.ServerURIUtil;
+import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 
 /**
  * Helper for creating resources etc.
@@ -70,7 +70,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForProjectHistory(ProjectHistory projectHistory) throws FatalESException {
-		final URI projectHistoryURI = ServerURIUtil.createProjectHistoryURI(projectHistory.getProjectId());
+		final URI projectHistoryURI = ESServerURIUtil.createProjectHistoryURI(projectHistory.getProjectId());
 		saveInResource(projectHistory, projectHistoryURI);
 	}
 
@@ -85,7 +85,7 @@ public class ResourceHelper {
 	 *             if saving fails
 	 */
 	public void createResourceForVersion(Version version, ProjectId projectId) throws FatalESException {
-		final URI versionURI = ServerURIUtil.createVersionURI(projectId, version.getPrimarySpec());
+		final URI versionURI = ESServerURIUtil.createVersionURI(projectId, version.getPrimarySpec());
 		saveInResource(version, versionURI);
 	}
 
@@ -103,7 +103,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForProject(Project project, PrimaryVersionSpec versionId, ProjectId projectId)
 		throws FatalESException {
-		final URI projectStateURI = ServerURIUtil.createProjectStateURI(projectId, versionId);
+		final URI projectStateURI = ESServerURIUtil.createProjectStateURI(projectId, versionId);
 		saveInResourceWithProject(project, projectStateURI, project);
 	}
 
@@ -121,7 +121,7 @@ public class ResourceHelper {
 	 */
 	public void createResourceForChangePackage(ChangePackage changePackage, PrimaryVersionSpec versionId,
 		ProjectId projectId) throws FatalESException {
-		final URI changePackageURI = ServerURIUtil.createChangePackageURI(projectId, versionId);
+		final URI changePackageURI = ESServerURIUtil.createChangePackageURI(projectId, versionId);
 		final List<Map.Entry<EObject, ModelElementId>> ignoredDatatypes = new ArrayList<Map.Entry<EObject, ModelElementId>>();
 
 		for (final AbstractOperation op : changePackage.getOperations()) {

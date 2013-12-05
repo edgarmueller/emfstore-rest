@@ -67,7 +67,7 @@ import org.eclipse.emf.emfstore.internal.server.startup.ServerHrefMigrator;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.internal.server.storage.ServerXMIResourceSetProvider;
 import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
-import org.eclipse.emf.emfstore.server.ServerURIUtil;
+import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
@@ -323,7 +323,7 @@ public class EMFStoreController implements IApplication, Runnable {
 
 		final ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 
-		final URI serverspaceURI = ServerURIUtil.createServerSpaceURI();
+		final URI serverspaceURI = ESServerURIUtil.createServerSpaceURI();
 
 		if (!resourceSet.getURIConverter().exists(serverspaceURI, null)) {
 			try {

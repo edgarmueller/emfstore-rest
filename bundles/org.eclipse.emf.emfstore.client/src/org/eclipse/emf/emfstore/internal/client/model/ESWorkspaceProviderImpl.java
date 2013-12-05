@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
 import org.eclipse.emf.emfstore.client.observer.ESWorkspaceInitObserver;
 import org.eclipse.emf.emfstore.client.provider.ESEditingDomainProvider;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
-import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
+import org.eclipse.emf.emfstore.client.util.ESClientURIUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionElement;
@@ -197,7 +197,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 		// register an editing domain on the resource
 		setEditingDomain(createEditingDomain(resourceSet));
 
-		final URI workspaceURI = ClientURIUtil.createWorkspaceURI();
+		final URI workspaceURI = ESClientURIUtil.createWorkspaceURI();
 		final Workspace workspace;
 		final Resource resource;
 
@@ -631,7 +631,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 			ESResourceSetProvider.class);
 
 		final ResourceSet migrationResourceSet = resourceSetProvider.getResourceSet();
-		final Resource resource = migrationResourceSet.createResource(ClientURIUtil.createWorkspaceURI());
+		final Resource resource = migrationResourceSet.createResource(ESClientURIUtil.createWorkspaceURI());
 
 		try {
 			resource.load(ModelUtil.getResourceLoadOptions());

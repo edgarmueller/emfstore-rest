@@ -38,7 +38,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.integration.forward.IntegrationTestHelper;
 import org.eclipse.emf.emfstore.client.test.server.TestSessionProvider;
-import org.eclipse.emf.emfstore.client.util.ClientURIUtil;
+import org.eclipse.emf.emfstore.client.util.ESClientURIUtil;
 import org.eclipse.emf.emfstore.common.ESResourceSetProvider;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESPriorityComparator;
@@ -78,7 +78,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Version;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
-import org.eclipse.emf.emfstore.server.ServerURIUtil;
+import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -471,7 +471,7 @@ public class SetupHelper {
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 
-		URI serverspaceURI = ServerURIUtil.createServerSpaceURI();
+		URI serverspaceURI = ESServerURIUtil.createServerSpaceURI();
 
 		if (resourceSet.getURIConverter().exists(serverspaceURI, null)) {
 			Resource mainResource = resourceSet.getResource(serverspaceURI, true);
@@ -519,7 +519,7 @@ public class SetupHelper {
 
 		ResourceSet resourceSet = resourceSetProvider.getResourceSet();
 
-		URI workspaceURI = ClientURIUtil.createWorkspaceURI();
+		URI workspaceURI = ESClientURIUtil.createWorkspaceURI();
 
 		if (resourceSet.getURIConverter().exists(workspaceURI, null)) {
 			Resource mainResource = resourceSet.getResource(workspaceURI, true);
