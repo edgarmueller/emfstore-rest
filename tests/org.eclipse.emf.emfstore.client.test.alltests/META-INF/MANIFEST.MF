@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: All EMFStore Client Tests
 Bundle-SymbolicName: org.eclipse.emf.emfstore.client.test.alltests
-Bundle-Version: 1.0.4.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.eclipse.emf.emfstore.client.test.alltests.Activator
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)",
- org.eclipse.emf.emfstore.client.test;bundle-version="[1.0.4,2.0.0)",
- org.eclipse.emf.emfstore.client.test.ui;bundle-version="[1.0.4,2.0.0)"
+ org.eclipse.emf.emfstore.client.test;bundle-version="[1.1.0,2.0.0)",
+ org.eclipse.emf.emfstore.client.test.ui;bundle-version="[1.1.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.emf.emfstore.client.test.alltests;version="1.0.4";x-internal:=true
+Export-Package: org.eclipse.emf.emfstore.client.test.alltests;version="1.1.0";x-internal:=true

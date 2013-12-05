@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.emf.emfstore.fuzzy.test.feature"
       label="EMFStore Fuzzy Tests"
-      version="1.0.4.qualifier"
+      version="1.1.0.qualifier"
       provider-name="Eclipse Modeling Project">
 
    <description url="http://www.example.com/description">

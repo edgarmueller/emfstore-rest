@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.emf.emfstore.client" version="2">
+    <resource path="src/org/eclipse/emf/emfstore/internal/client/common/UnknownEMFStoreWorkloadCommand.java" type="org.eclipse.emf.emfstore.internal.client.common.UnknownEMFStoreWorkloadCommand">
+        <filter comment="EMFStore internal usage" id="572522506">
+            <message_arguments>
+                <message_argument value="ESException"/>
+                <message_argument value="UnknownEMFStoreWorkloadCommand&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

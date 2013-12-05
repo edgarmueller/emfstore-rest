@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Example Plugin for the Fuzzy EMF Testing
 Bundle-SymbolicName: org.eclipse.emf.emfstore.fuzzy.emf.example
-Bundle-Version: 1.0.4.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.emfstore.fuzzy.emf;bundle-version="[1.0.4,2.0.0)";visibility:=reexport
-Export-Package: org.eclipse.emf.emfstore.fuzzy.emf.example;version="1.0.4";x-internal:=true
+Require-Bundle: org.eclipse.emf.emfstore.fuzzy.emf;bundle-version="[1.1.0,2.0.0)";visibility:=reexport
+Export-Package: org.eclipse.emf.emfstore.fuzzy.emf.example;version="1.1.0";x-internal:=true
