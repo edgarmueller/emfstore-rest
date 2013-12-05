@@ -17,6 +17,7 @@ import org.eclipse.emf.emfstore.client.ESServer;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.util.ESVoidCallableWithException;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
@@ -212,6 +213,11 @@ public class ESUsersessionImpl extends AbstractAPIImpl<ESUsersessionImpl, Userse
 	public void delete() throws ESException {
 		final ESWorkspace workspace = ESWorkspaceProvider.INSTANCE.getWorkspace();
 		final ESWorkspaceImpl workspaceImpl = ESWorkspaceImpl.class.cast(workspace);
-		workspaceImpl.toInternalAPI().removeUsersession(toInternalAPI());
+		RunESCommand.WithException.run(ESException.class, new ESVoidCallableWithException<ESException>() {
+			@Override
+			public void run() throws ESException {
+				workspaceImpl.toInternalAPI().removeUsersession(toInternalAPI());
+			}
+		});
 	}
 }

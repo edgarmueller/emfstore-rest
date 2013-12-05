@@ -14,15 +14,12 @@ package org.eclipse.emf.emfstore.client.util;
 import java.util.concurrent.Callable;
 
 /**
- * Convenience class for using {@link RunESCommand} without a return value.
+ * Convenience class for using {@link RunESCommand} without a return value,
+ * but possibly throwing an exception.
  * 
- * @author emueller
- * 
- * @since 1.1
- * 
+ * @param <E> the type of exception thrown by {@code run}
  */
-public abstract class ESVoidCallable implements Callable<Void> {
-
+public abstract class ESVoidCallableWithException<E extends Exception> implements Callable<Void> {
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -33,8 +30,8 @@ public abstract class ESVoidCallable implements Callable<Void> {
 		return null;
 	}
 
-	/**
-	 * Contains the actual code block to be executed.
-	 */
-	public abstract void run();
+	// BEGIN SUPRESS CATCH EXCEPTION
+	public abstract void run() throws Exception;
+	// END SUPRESS CATCH EXCEPTION
+
 }
