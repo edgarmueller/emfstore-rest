@@ -115,20 +115,23 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		getProgressMonitor().subTask("Fetching changes from server");
 
 		final List<ChangePackage> incomingChanges = getIncomingChanges(resolvedVersion);
-		ChangePackage localChanges = getProjectSpace().getLocalChangePackage();
 
-		final List<AbstractOperation> duplicateOperations = calcDuplicateOperations(incomingChanges, localChanges);
+		final List<AbstractOperation> duplicateOperations = calcDuplicateOperations(incomingChanges, getProjectSpace()
+			.getLocalChangePackage());
 
 		if (duplicateOperations.size() > 0) {
 			// TODO: refactor
-			removeFromChangePackage(Collections.singletonList(localChanges), duplicateOperations);
+			final ChangePackage local = getProjectSpace().getLocalChangePackage();
+			removeFromChangePackage(Collections.singletonList(local), duplicateOperations);
 			final int baseVersionDelta = removeFromChangePackage(incomingChanges, duplicateOperations);
 			final PrimaryVersionSpec newBaseVersion = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 			newBaseVersion.setIdentifier(getProjectSpace().getBaseVersion().getIdentifier() + baseVersionDelta);
 			getProjectSpace().setBaseVersion(newBaseVersion);
 			save(getProjectSpace(), "Could not save project space");
-			save(localChanges, "Could not save local changes");
+			save(local, "Could not save local changes");
 		}
+
+		ChangePackage localChanges = getProjectSpace().getLocalChangePackage(false);
 
 		// build a mapping including deleted and create model elements in local and incoming change packages
 		final ModelElementIdToEObjectMappingImpl idToEObjectMapping = new ModelElementIdToEObjectMappingImpl(
