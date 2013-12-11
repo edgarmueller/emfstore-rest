@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.ui.controller;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
@@ -103,10 +104,12 @@ public class UICommitProjectController extends
 
 		if (shouldUpdate) {
 			final ESPrimaryVersionSpec baseVersion = UICommitProjectController.this.localProject.getBaseVersion();
+			final int baseVersionIdentifier = baseVersion.getIdentifier();
 			final ESPrimaryVersionSpec version = new UIUpdateProjectController(getShell(), projectSpace)
 				.executeSub(progressMonitor);
 
-			if (version.equals(baseVersion)) {
+			// base version identifer may change due to update's recovery
+			if (version.equals(baseVersion) || version.getIdentifier() == baseVersionIdentifier) {
 				return false;
 			}
 		}
@@ -163,7 +166,13 @@ public class UICommitProjectController extends
 			RunESCommand.run(new Callable<Void>() {
 				public Void call() throws Exception {
 
-					projectSpace.getOldLogMessages().add(commitDialog.getLogText());
+					final String commitText = commitDialog.getLogText();
+					final EList<String> oldLogMessages = projectSpace.getOldLogMessages();
+					if (oldLogMessages.size() == 0 || !oldLogMessages.contains(commitText)) {
+						oldLogMessages.add(commitText);
+					} else if (oldLogMessages.contains(commitText)) {
+						oldLogMessages.move(oldLogMessages.size() - 1, oldLogMessages.indexOf(commitText));
+					}
 
 					// remove older messages
 					if (projectSpace.getOldLogMessages().size() > 10) {
