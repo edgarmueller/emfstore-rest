@@ -13,7 +13,6 @@
 package org.eclipse.emf.emfstore.internal.client.model.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -37,7 +36,6 @@ import org.eclipse.emf.emfstore.internal.server.impl.api.ESConflictSetImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -116,20 +114,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 
 		final List<ChangePackage> incomingChanges = getIncomingChanges(resolvedVersion);
 
-		final List<AbstractOperation> duplicateOperations = calcDuplicateOperations(incomingChanges, getProjectSpace()
-			.getLocalChangePackage());
-
-		if (duplicateOperations.size() > 0) {
-			// TODO: refactor
-			final ChangePackage local = getProjectSpace().getLocalChangePackage();
-			removeFromChangePackage(Collections.singletonList(local), duplicateOperations);
-			final int baseVersionDelta = removeFromChangePackage(incomingChanges, duplicateOperations);
-			final PrimaryVersionSpec newBaseVersion = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-			newBaseVersion.setIdentifier(getProjectSpace().getBaseVersion().getIdentifier() + baseVersionDelta);
-			getProjectSpace().setBaseVersion(newBaseVersion);
-			save(getProjectSpace(), "Could not save project space");
-			save(local, "Could not save local changes");
-		}
+		checkAndRemoveDuplicateOperations(incomingChanges, getProjectSpace().getLocalChangePackage());
 
 		ChangePackage localChanges = getProjectSpace().getLocalChangePackage(false);
 
@@ -149,7 +134,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		final List<ESChangePackage> copy = APIUtil.mapToAPI(ESChangePackage.class, incomingChanges);
 
 		// TODO ASYNC review this cancel
-		if (getProgressMonitor().isCanceled() || hasNoOperations(incomingChanges)
+		if (getProgressMonitor().isCanceled()
 			|| !callback.inspectChanges(getProjectSpace().toAPI(), copy, idToEObjectMapping.toAPI())) {
 			return getProjectSpace().getBaseVersion();
 		}
@@ -186,20 +171,6 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		return getProjectSpace().getBaseVersion();
 	}
 
-	private boolean hasNoOperations(List<ChangePackage> changePackages) {
-		for (final ChangePackage changePackage : changePackages) {
-			if (!hasNoOperations(changePackage)) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	private boolean hasNoOperations(ChangePackage changePackage) {
-		return changePackage.getOperations().size() == 0;
-	}
-
 	private void save(EObject eObject, String failureMsg) {
 		try {
 			if (eObject.eResource() != null) {
@@ -208,48 +179,6 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		} catch (final IOException ex) {
 			ModelUtil.logException(failureMsg, ex);
 		}
-	}
-
-	private int removeFromChangePackage(final List<ChangePackage> changes,
-		final List<AbstractOperation> duplicateOperations) {
-		List<AbstractOperation> duplicateOps = new ArrayList<AbstractOperation>(duplicateOperations);
-		int idx = 0;
-		for (final ChangePackage changePackage : changes) {
-			idx++;
-			final List<AbstractOperation> remainingOps = removeFromChangePackage(changePackage, duplicateOps);
-			if (remainingOps.size() == 0) {
-				return idx;
-			}
-			duplicateOps = remainingOps;
-		}
-
-		return idx;
-	}
-
-	private List<AbstractOperation> removeFromChangePackage(ChangePackage changePackage,
-		List<AbstractOperation> duplicateOperations) {
-		final List<AbstractOperation> remainingOperations = new ArrayList<AbstractOperation>(duplicateOperations);
-		final Iterator<AbstractOperation> iterator = changePackage.getOperations().iterator();
-		int duplicateIdx = 0;
-		final int duplicateOpsSize = duplicateOperations.size();
-		while (iterator.hasNext()) {
-			final AbstractOperation incomingOp = iterator.next();
-			if (duplicateIdx == duplicateOpsSize) {
-				// the list should always be empty here
-				return remainingOperations;
-			}
-			final AbstractOperation duplicateOp = duplicateOperations.get(duplicateIdx++);
-			if (duplicateOp.getIdentifier().equals(incomingOp.getIdentifier())) {
-				remainingOperations.remove(duplicateOp);
-				iterator.remove();
-			} else {
-				// the list should always be empty here
-				return remainingOperations;
-			}
-		}
-
-		// duplicates were bigger than the number of ops in change package
-		return remainingOperations;
 	}
 
 	private boolean equalsBaseVersion(final PrimaryVersionSpec resolvedVersion) {
@@ -275,40 +204,77 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 			Collections.singletonList(localChanges), changes, idToEObjectMapping);
 	}
 
-	private List<AbstractOperation> calcDuplicateOperations(List<ChangePackage> incomingChanges,
+	private void checkAndRemoveDuplicateOperations(List<ChangePackage> incomingChanges,
 		ChangePackage localChanges) {
-		final List<AbstractOperation> redundant = new ArrayList<AbstractOperation>();
-		for (final ChangePackage changePackage : incomingChanges) {
-			final List<AbstractOperation> duplicateOperations = calcDuplicateOperations(changePackage, localChanges);
-			if (duplicateOperations.size() == 0) {
-				return redundant;
-			}
-			redundant.addAll(duplicateOperations);
+
+		final int baseVersionDelta = removeFromChangePackages(incomingChanges, localChanges);
+
+		if (baseVersionDelta == 0) {
+			return;
 		}
-		return redundant;
+
+		// some change have been matched, fix base version and save
+		final PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
+		baseVersion.setIdentifier(baseVersion.getIdentifier() + baseVersionDelta);
+		save(getProjectSpace(), "Could not save project space");
+		save(localChanges, "Could not save local changes");
 	}
 
-	private List<AbstractOperation> calcDuplicateOperations(ChangePackage incomingChanges, ChangePackage localChanges) {
+	public int removeFromChangePackages(List<ChangePackage> incomingChanges, ChangePackage localChanges) {
+		final Iterator<ChangePackage> incomingChangesIterator = incomingChanges.iterator();
+		int baseVersionDelta = 0;
 
-		final List<AbstractOperation> redundant = new ArrayList<AbstractOperation>();
-		final List<AbstractOperation> localOperations = localChanges.getOperations();
+		while (incomingChangesIterator.hasNext()) {
+			final ChangePackage incomingChangePackage = incomingChangesIterator.next();
+			final boolean hasBeenConsumed = removeDuplicateOperations(incomingChangePackage, localChanges);
+			if (hasBeenConsumed) {
+				baseVersionDelta += 1;
+				incomingChangesIterator.remove();
+			} else {
+				break;
+			}
+		}
+
+		return baseVersionDelta;
+	}
+
+	public boolean removeDuplicateOperations(ChangePackage incomingChanges, ChangePackage localChanges) {
+
+		final Iterator<AbstractOperation> localOperationsIterator = localChanges.getOperations().iterator();
 		final List<AbstractOperation> incomingOps = incomingChanges.getOperations();
 		final int incomingOpsSize = incomingOps.size();
 		int incomingIdx = 0;
+		boolean operationMatchingStarted = false;
 
-		for (final AbstractOperation localOp : localOperations) {
+		if (localChanges.getOperations().size() == 0) {
+			return false;
+		}
+
+		while (localOperationsIterator.hasNext()) {
 			if (incomingIdx == incomingOpsSize) {
-				return redundant;
+				// incoming change package is fully consumed, continue with next change package
+				return true;
 			}
+
+			final AbstractOperation localOp = localOperationsIterator.next();
 			final AbstractOperation incomingOp = incomingOps.get(incomingIdx++);
 			if (incomingOp.getIdentifier().equals(localOp.getIdentifier())) {
-				redundant.add(localOp);
+				localOperationsIterator.remove();
+				operationMatchingStarted = true;
 			} else {
-				return redundant;
+				if (operationMatchingStarted) {
+					throw new IllegalStateException("Incoming operations only partly match with local.");
+				}
+				// first operation of incoming change package does not match
+				return false;
 			}
 		}
 
-		return redundant;
+		// all incoming and local changes have been consumed
+		if (incomingIdx == incomingOpsSize) {
+			return true;
+		}
+		throw new IllegalStateException("Incoming operations are not fully consumed.");
 	}
 
 }

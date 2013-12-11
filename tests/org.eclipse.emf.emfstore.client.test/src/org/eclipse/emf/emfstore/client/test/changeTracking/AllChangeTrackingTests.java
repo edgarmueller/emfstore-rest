@@ -16,6 +16,7 @@ import org.eclipse.emf.emfstore.client.test.changeTracking.commands.AllCommandTe
 import org.eclipse.emf.emfstore.client.test.changeTracking.notification.AllNotificationTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.operations.AllOperationTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.recording.AllRecordingTests;
+import org.eclipse.emf.emfstore.client.test.changeTracking.recovery.AllRecoveryTests;
 import org.eclipse.emf.emfstore.client.test.changeTracking.topology.AllTopologyTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -27,7 +28,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ AllNotificationTests.class, AllOperationTests.class, AllRecordingTests.class,
-	AllTopologyTests.class, AllCanonizationTests.class, AllCommandTests.class })
+	AllTopologyTests.class, AllCanonizationTests.class, AllCommandTests.class, AllRecoveryTests.class })
 public class AllChangeTrackingTests {
 
 }
