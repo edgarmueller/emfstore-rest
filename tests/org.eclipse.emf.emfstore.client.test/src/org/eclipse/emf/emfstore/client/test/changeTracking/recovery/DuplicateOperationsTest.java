@@ -18,11 +18,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.controller.UpdateController;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
@@ -45,8 +47,13 @@ public class DuplicateOperationsTest extends WorkspaceTest {
 		final ProjectSpaceBase p = (ProjectSpaceBase) getProjectSpace();
 		final Usersession u = org.eclipse.emf.emfstore.internal.client.model.ModelFactory.eINSTANCE.createUsersession();
 		final ESWorkspaceImpl workspace = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
-		workspace.toInternalAPI().getUsersessions().add(u);
-		p.setUsersession(u);
+		RunESCommand.run(new Callable<Void>() {
+			public Void call() throws Exception {
+				workspace.toInternalAPI().getUsersessions().add(u);
+				p.setUsersession(u);
+				return null;
+			}
+		});
 		return new UpdateController(p, null,
 			ESUpdateCallback.NOCALLBACK, new NullProgressMonitor());
 	}
