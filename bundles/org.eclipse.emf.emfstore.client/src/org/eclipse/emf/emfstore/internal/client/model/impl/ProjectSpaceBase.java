@@ -233,11 +233,11 @@ public abstract class ProjectSpaceBase extends IdentifiableElementImpl implement
 
 		// apply changes from repo. incoming (aka theirs)
 		applyChangePackages(incoming, false);
-		notifyPostApplyTheirChanges(incoming);
-
 		if (runChecksumTestOnBaseSpec) {
 			runChecksumTests(baseSpec, incoming, progressMonitor);
 		}
+		notifyPostApplyTheirChanges(incoming);
+
 		// reapply local changes
 		applyOperations(myChanges.getOperations(), true);
 		notifyPostApplyMergedChanges(myChanges);
