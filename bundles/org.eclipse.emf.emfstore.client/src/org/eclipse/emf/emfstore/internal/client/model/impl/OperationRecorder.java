@@ -661,13 +661,7 @@ public class OperationRecorder implements ESCommandObserver, ESCommitObserver, E
 		final CreateDeleteOperation deleteOperation = OperationsFactory.eINSTANCE.createCreateDeleteOperation();
 		deleteOperation.setClientDate(new Date());
 		deleteOperation.setModelElement(copiedElement);
-
-		if (!commandIsRunning) {
-			deleteOperation.setModelElementId(collection.getDeletedModelElementId(deletedElement));
-		} else {
-			deleteOperation
-				.setModelElementId(ModelUtil.clone(removedElementsCache.getRemovedElementId(deletedElement)));
-		}
+		deleteOperation.setModelElementId(getDeletedModelElementId(deletedElement));
 
 		// sync IDs into Map
 		for (int i = 0; i < allContainedModelElements.size(); i++) {
@@ -691,6 +685,13 @@ public class OperationRecorder implements ESCommandObserver, ESCommitObserver, E
 		} else {
 			bufferOrRecordOperation(deleteOperation);
 		}
+	}
+
+	private ModelElementId getDeletedModelElementId(EObject deletedElement) {
+		if (!commandIsRunning) {
+			return collection.getDeletedModelElementId(deletedElement);
+		}
+		return ModelUtil.clone(removedElementsCache.getRemovedElementId(deletedElement));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -991,7 +992,7 @@ public class OperationRecorder implements ESCommandObserver, ESCommitObserver, E
 	}
 
 	private void clearAllocatedCaches(ESLocalProject project) {
-		if (((ESLocalProjectImpl) project).toInternalAPI().getProject().equals(collection)) {
+		if (((ESLocalProjectImpl) project).toInternalAPI().getProject().equals(collection) && !commandIsRunning) {
 			collection.clearAllocatedCaches();
 		}
 	}
