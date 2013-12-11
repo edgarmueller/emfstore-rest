@@ -13,6 +13,7 @@
 package org.eclipse.emf.emfstore.internal.client.model.controller;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -216,6 +217,11 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		// some change have been matched, fix base version and save
 		final PrimaryVersionSpec baseVersion = getProjectSpace().getBaseVersion();
 		baseVersion.setIdentifier(baseVersion.getIdentifier() + baseVersionDelta);
+		ModelUtil.logError(MessageFormat
+			.format(
+				"{0} change packages removed during update!.\n"
+					+ "Pulling up base version from {1} to {2} and persisting changes.",
+				baseVersionDelta, baseVersion.getIdentifier(), baseVersion.getIdentifier() + baseVersionDelta));
 		save(getProjectSpace(), "Could not save project space");
 		save(localChanges, "Could not save local changes");
 	}
@@ -263,6 +269,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 				operationMatchingStarted = true;
 			} else {
 				if (operationMatchingStarted) {
+					ModelUtil.logError("Incoming operations only partly match with local.");
 					throw new IllegalStateException("Incoming operations only partly match with local.");
 				}
 				// first operation of incoming change package does not match
@@ -274,6 +281,7 @@ public class UpdateController extends ServerCall<PrimaryVersionSpec> {
 		if (incomingIdx == incomingOpsSize) {
 			return true;
 		}
+		ModelUtil.logError("Incoming operations are not fully consumed.");
 		throw new IllegalStateException("Incoming operations are not fully consumed.");
 	}
 
