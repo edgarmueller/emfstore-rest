@@ -24,4 +24,21 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/client/model/impl/api/ESServerFactoryImpl.java" type="org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerFactoryImpl">
+        <filter comment="API wrapper class" id="574668824">
+            <message_arguments>
+                <message_argument value="ESServerFactory"/>
+                <message_argument value="ESServerFactoryImpl"/>
+                <message_argument value="ESFactory"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/client/model/impl/api/ESServerImpl.java" type="org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl">
+        <filter comment="API wrapper class" id="572522506">
+            <message_arguments>
+                <message_argument value="ESException"/>
+                <message_argument value="ESServerImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

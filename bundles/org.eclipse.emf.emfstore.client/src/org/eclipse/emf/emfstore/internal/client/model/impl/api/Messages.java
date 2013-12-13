@@ -24,6 +24,9 @@ public class Messages extends NLS {
 	public static String ESRemoteProjectImpl_Fetching_Project;
 	public static String ESRemoteProjectImpl_Fetching_Title;
 	public static String ESRemoteProjectImpl_Server_Returned_Null_Project;
+	public static String ESServerImpl_Creating_Project;
+	public static String ESServerImpl_Invalid_Userssesion;
+	public static String ESWorkspaceImpl_Server_Not_Found;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

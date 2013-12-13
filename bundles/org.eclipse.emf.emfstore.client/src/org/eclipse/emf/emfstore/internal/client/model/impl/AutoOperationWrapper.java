@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
 import org.eclipse.emf.emfstore.client.handler.ESOperationModifier;
@@ -43,24 +44,24 @@ public class AutoOperationWrapper implements ESOperationModifier {
 		} else if (operations.size() == 1 && command instanceof AbstractOverrideableCommand) {
 			return operations;
 		} else if (operations.size() == 1 && operations.get(0) instanceof CompositeOperation) {
-			CompositeOperation compositeOperation = (CompositeOperation) operations.get(0);
+			final CompositeOperation compositeOperation = (CompositeOperation) operations.get(0);
 			if (compositeOperation.getMainOperation() == null) {
 				return operations;
 			}
 		}
 
-		CompositeOperation compositeOperation = OperationsFactory.eINSTANCE.createCompositeOperation();
+		final CompositeOperation compositeOperation = OperationsFactory.eINSTANCE.createCompositeOperation();
 		compositeOperation.setClientDate(new Date());
 		compositeOperation.setCompositeName(getText(command.getLabel()));
 		compositeOperation.setCompositeDescription(getText(command.getDescription()));
 		compositeOperation.setModelElementId(ModelUtil.clone(operations.get(0).getModelElementId()));
 		compositeOperation.getSubOperations().addAll(operations);
-		ArrayList<AbstractOperation> result = new ArrayList<AbstractOperation>();
+		final ArrayList<AbstractOperation> result = new ArrayList<AbstractOperation>();
 		result.add(compositeOperation);
 		return result;
 	}
 
 	private String getText(String str) {
-		return (str == null) ? "" : str;
+		return str == null ? StringUtils.EMPTY : str;
 	}
 }

@@ -13,11 +13,13 @@ package org.eclipse.emf.emfstore.internal.client.model.impl.api;
 
 import static org.eclipse.emf.emfstore.internal.common.APIUtil.copy;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESServer;
@@ -297,7 +299,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 		return new ServerCall<ProjectInfo>() {
 			@Override
 			protected ProjectInfo run() throws ESException {
-				return getConnectionManager().createEmptyProject(getSessionId(), projectName, "",
+				return getConnectionManager().createEmptyProject(getSessionId(), projectName, StringUtils.EMPTY,
 					createLogmessage(getUsersession(), projectName));
 			}
 		};
@@ -305,7 +307,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 
 	private LogMessage createLogmessage(Usersession usersession, final String projectName) {
 		final LogMessage log = VersioningFactory.eINSTANCE.createLogMessage();
-		log.setMessage("Creating project '" + projectName + "'");
+		log.setMessage(MessageFormat.format(Messages.ESServerImpl_Creating_Project, projectName));
 		log.setAuthor(usersession.getUsername());
 		log.setClientDate(new Date());
 		return log;
@@ -314,7 +316,7 @@ public class ESServerImpl extends AbstractAPIImpl<ESServerImpl, ServerInfo> impl
 	private ESUsersession validateUsersession(ESUsersession usersession) throws ESException {
 		if (usersession == null || !equals(usersession.getServer())) {
 			// TODO OTS custom exception
-			throw new ESException("Invalid usersession for given server.");
+			throw new ESException(Messages.ESServerImpl_Invalid_Userssesion);
 		}
 		return usersession;
 	}

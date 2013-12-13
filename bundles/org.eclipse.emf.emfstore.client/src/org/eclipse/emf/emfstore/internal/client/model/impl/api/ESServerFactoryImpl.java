@@ -31,6 +31,8 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
  */
 public final class ESServerFactoryImpl implements ESServerFactory {
 
+	private static final String LOCALHOST = "localhost"; //$NON-NLS-1$
+	private static final String LOCAL_SERVER_NAME = "Local Server"; //$NON-NLS-1$
 	/**
 	 * The factory instance.
 	 */
@@ -63,7 +65,7 @@ public final class ESServerFactoryImpl implements ESServerFactory {
 	 */
 	public ESServer createServer(String name, String url, int port,
 		String certificate) {
-		ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
+		final ServerInfo serverInfo = EMFStoreClientUtil.createServerInfo(url, port, certificate);
 		serverInfo.setName(name);
 		return serverInfo.toAPI();
 	}
@@ -77,11 +79,12 @@ public final class ESServerFactoryImpl implements ESServerFactory {
 		if (localEMFStoreServer == null) {
 			try {
 				localEMFStoreServer = EMFStoreController.runAsNewThread();
-			} catch (FatalESException e) {
+			} catch (final FatalESException e) {
 				throw new ESServerStartFailedException(e);
 			}
 		}
-		ESServer server = createServer("Local Server", "localhost",
+		final ESServer server = createServer(LOCAL_SERVER_NAME,
+			LOCALHOST,
 			Integer.parseInt(ServerConfiguration.XML_RPC_PORT_DEFAULT),
 			KeyStoreManager.DEFAULT_CERTIFICATE);
 		return server;

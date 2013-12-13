@@ -146,7 +146,7 @@ public class ESWorkspaceImpl extends AbstractAPIImpl<ESWorkspaceImpl, Workspace>
 
 		if (existingServer == null) {
 			throw new ESServerNotFoundException(MessageFormat.format(
-				"The server {0} could not be found", server));
+				Messages.ESWorkspaceImpl_Server_Not_Found, server));
 		}
 
 		RunESCommand.run(new Callable<Void>() {
