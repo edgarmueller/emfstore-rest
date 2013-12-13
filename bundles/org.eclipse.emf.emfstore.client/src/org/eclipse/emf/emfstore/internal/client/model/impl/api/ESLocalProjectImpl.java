@@ -28,6 +28,7 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
 import org.eclipse.emf.emfstore.client.exceptions.ESProjectNotSharedException;
+import org.eclipse.emf.emfstore.client.util.ESVoidCallable;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementId;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
@@ -36,7 +37,6 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.ChangeConflictException;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.client.model.impl.WorkspaceBase;
-import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.api.AbstractAPIImpl;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
@@ -132,7 +132,6 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 				return null;
 			}
 		});
-		// dispose();
 	}
 
 	/**
@@ -164,14 +163,8 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 				}
 			});
 
-		return RunESCommand.runWithResult(new Callable<ESPrimaryVersionSpec>() {
-			public ESPrimaryVersionSpec call() throws Exception {
-				return resolvedVersionSpec.toAPI();
-			}
-		});
+		return resolvedVersionSpec.toAPI();
 	}
-
-	// TODO: ab hier weiter
 
 	/**
 	 * 
@@ -271,7 +264,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 */
 	public EObject getModelElement(ESModelElementId modelElementId) {
 		final ModelElementId internalId = ((ESModelElementIdImpl) modelElementId).toInternalAPI();
-		return toInternalAPI().getProject().get(internalId);
+		return RunESCommand.runWithResult(new Callable<EObject>() {
+			public EObject call() throws Exception {
+				return toInternalAPI().getProject().get(internalId);
+			}
+		});
 	}
 
 	/**
@@ -280,7 +277,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * 
 	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElementId(org.eclipse.emf.ecore.EObject)
 	 */
-	public ESModelElementId getModelElementId(EObject modelElement) {
+	public ESModelElementIdImpl getModelElementId(EObject modelElement) {
 		final ModelElementId modelElementId = toInternalAPI().getProject().getModelElementId(modelElement);
 
 		if (modelElementId == null) {
@@ -297,7 +294,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getModelElements()
 	 */
 	public EList<EObject> getModelElements() {
-		return toInternalAPI().getProject().getModelElements();
+		return RunESCommand.runWithResult(new Callable<EList<EObject>>() {
+			public EList<EObject> call() throws Exception {
+				return toInternalAPI().getProject().getModelElements();
+			}
+		});
 	}
 
 	/**
@@ -307,7 +308,41 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElements()
 	 */
 	public Set<EObject> getAllModelElements() {
-		return toInternalAPI().getProject().getAllModelElements();
+		return RunESCommand.runWithResult(new Callable<Set<EObject>>() {
+			public Set<EObject> call() throws Exception {
+				return toInternalAPI().getProject().getAllModelElements();
+			}
+		});
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class,
+	 *      java.lang.Boolean)
+	 */
+	public <T extends EObject> Set<T> getAllModelElementsByClass(final Class<T> modelElementClass,
+		final Boolean includeSubclasses) {
+		return RunESCommand.runWithResult(new Callable<Set<T>>() {
+			public Set<T> call() throws Exception {
+				return toInternalAPI().getProject().getAllModelElementsByClass(modelElementClass, includeSubclasses);
+			}
+		});
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class)
+	 */
+	public <T extends EObject> Set<T> getAllModelElementsByClass(final Class<T> modelElementClass) {
+		return RunESCommand.runWithResult(new Callable<Set<T>>() {
+			public Set<T> call() throws Exception {
+				return toInternalAPI().getProject().getAllModelElementsByClass(modelElementClass);
+			}
+		});
 	}
 
 	/**
@@ -329,27 +364,6 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 */
 	public boolean contains(EObject modelElement) {
 		return toInternalAPI().getProject().contains(modelElement);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class,
-	 *      java.lang.Boolean)
-	 */
-	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass, Boolean includeSubclasses) {
-		return toInternalAPI().getProject().getAllModelElementsByClass(modelElementClass, includeSubclasses);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @see org.eclipse.emf.emfstore.common.model.ESObjectContainer#getAllModelElementsByClass(java.lang.Class)
-	 */
-	public <T extends EObject> Set<T> getAllModelElementsByClass(Class<T> modelElementClass) {
-		return toInternalAPI().getProject().getAllModelElementsByClass(modelElementClass);
 	}
 
 	/**
@@ -613,7 +627,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 		if (toInternalAPI().getUsersession() == null) {
 			return null;
 		}
-		return toInternalAPI().getUsersession().toAPI();
+		return RunESCommand.runWithResult(new Callable<ESUsersessionImpl>() {
+			public ESUsersessionImpl call() throws Exception {
+				return toInternalAPI().getUsersession().toAPI();
+			}
+		});
 	}
 
 	/**
@@ -646,7 +664,11 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 */
 	public List<String> getRecentLogMessages() {
 		checkIsShared();
-		return toInternalAPI().getOldLogMessages();
+		return RunESCommand.runWithResult(new Callable<List<String>>() {
+			public List<String> call() throws Exception {
+				return toInternalAPI().getOldLogMessages();
+			}
+		});
 	}
 
 	/**
@@ -656,12 +678,12 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#undoLastOperation()
 	 */
 	public void undoLastOperation() {
-		new EMFStoreCommand() {
+		RunESCommand.run(new ESVoidCallable() {
 			@Override
-			protected void doRun() {
+			public void run() {
 				toInternalAPI().undoLastOperation();
 			}
-		}.run(false);
+		});
 	}
 
 	/**
@@ -671,12 +693,12 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 	 * @see org.eclipse.emf.emfstore.client.ESLocalProject#undoLastOperations(int)
 	 */
 	public void undoLastOperations(final int nrOperations) {
-		new EMFStoreCommand() {
+		RunESCommand.run(new ESVoidCallable() {
 			@Override
-			protected void doRun() {
+			public void run() {
 				toInternalAPI().undoLastOperations(nrOperations);
 			}
-		}.run(false);
+		});
 	}
 
 	/**
@@ -752,7 +774,7 @@ public class ESLocalProjectImpl extends AbstractAPIImpl<ESLocalProjectImpl, Proj
 
 		// TODO OTS only return if server is available
 		if (getUsersession() == null || getUsersession().getServer() == null) {
-			throw new ESException("No usersession or no server set on usersession.");
+			throw new ESException(Messages.ESLocalProjectImpl_No_Usersession_Found);
 		}
 
 		final ProjectInfo projectInfo = org.eclipse.emf.emfstore.internal.server.model.ModelFactory.eINSTANCE

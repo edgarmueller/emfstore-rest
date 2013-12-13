@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.emf.emfstore.server.model" version="2">
+    <resource path="src/org/eclipse/emf/emfstore/internal/server/model/impl/api/ESLocalProjectIdImpl.java" type="org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLocalProjectIdImpl">
+        <filter comment="API wrapper class" id="574668824">
+            <message_arguments>
+                <message_argument value="ESLocalProjectId"/>
+                <message_argument value="ESLocalProjectIdImpl"/>
+                <message_argument value="ESUniqueIdentifier"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/emf/emfstore/server/model/ESGlobalProjectId.java" type="org.eclipse.emf.emfstore.server.model.ESGlobalProjectId">
         <filter id="571473929">
             <message_arguments>

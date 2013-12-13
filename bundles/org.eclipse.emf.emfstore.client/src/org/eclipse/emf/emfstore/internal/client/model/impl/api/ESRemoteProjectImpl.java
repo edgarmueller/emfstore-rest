@@ -365,7 +365,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 */
 	public ESLocalProjectImpl fetch(final String name, final ESUsersession session,
 		final ESPrimaryVersionSpec versionSpec, final IProgressMonitor progressMonitor) throws ESException {
-		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, "Fetch", 100);
+		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, Messages.ESRemoteProjectImpl_Fetching_Title, 100);
 
 		final Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
 		final ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) versionSpec;
@@ -380,7 +380,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				Project project = null;
 
 				final SubMonitor childMonitor = parentMonitor.newChild(40);
-				parentMonitor.subTask("Fetching project from server...");
+				parentMonitor.subTask(Messages.ESRemoteProjectImpl_Fetching_Project);
 				project = new UnknownEMFStoreWorkloadCommand<Project>(childMonitor) {
 					@Override
 					public Project run(IProgressMonitor monitor) throws ESException {
@@ -396,7 +396,7 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				}.execute();
 
 				if (project == null) {
-					throw new ESException("Server returned a null project!");
+					throw new ESException(Messages.ESRemoteProjectImpl_Server_Returned_Null_Project);
 				}
 
 				return initProjectSpace(usersession, projectInfoCopy, project, name).toAPI();
