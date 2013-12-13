@@ -11,7 +11,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.changetracking;
 
-
 /**
  * Command Stack for EMFStore. Allows to register observer for command start and completion.
  * 

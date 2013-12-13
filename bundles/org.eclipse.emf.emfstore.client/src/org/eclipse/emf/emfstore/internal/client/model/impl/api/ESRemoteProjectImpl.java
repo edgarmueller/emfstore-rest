@@ -365,7 +365,8 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 	 */
 	public ESLocalProjectImpl fetch(final String name, final ESUsersession session,
 		final ESPrimaryVersionSpec versionSpec, final IProgressMonitor progressMonitor) throws ESException {
-		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor, Messages.ESRemoteProjectImpl_Fetching_Title, 100);
+		final SubMonitor parentMonitor = SubMonitor.convert(progressMonitor,
+			Messages.ESRemoteProjectImpl_Fetching_Title, 100);
 
 		final Usersession usersession = ((ESUsersessionImpl) session).toInternalAPI();
 		final ESPrimaryVersionSpecImpl primaryVersionSpecImpl = (ESPrimaryVersionSpecImpl) versionSpec;
