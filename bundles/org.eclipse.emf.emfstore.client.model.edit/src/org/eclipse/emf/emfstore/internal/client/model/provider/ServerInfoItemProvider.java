@@ -82,8 +82,8 @@ public class ServerInfoItemProvider extends ItemProviderAdapter implements IEdit
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ServerInfo_name_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_name_feature", "_UI_ServerInfo_type"),
+				getString("_UI_ServerInfo_name_feature"), //$NON-NLS-1$
+				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_name_feature", "_UI_ServerInfo_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.SERVER_INFO__NAME,
 				true,
 				false,
@@ -105,8 +105,8 @@ public class ServerInfoItemProvider extends ItemProviderAdapter implements IEdit
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ServerInfo_url_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_url_feature", "_UI_ServerInfo_type"),
+				getString("_UI_ServerInfo_url_feature"), //$NON-NLS-1$
+				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_url_feature", "_UI_ServerInfo_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.SERVER_INFO__URL,
 				true,
 				false,
@@ -128,8 +128,8 @@ public class ServerInfoItemProvider extends ItemProviderAdapter implements IEdit
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ServerInfo_port_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_port_feature", "_UI_ServerInfo_type"),
+				getString("_UI_ServerInfo_port_feature"), //$NON-NLS-1$
+				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_port_feature", "_UI_ServerInfo_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.SERVER_INFO__PORT,
 				true,
 				false,
@@ -146,13 +146,14 @@ public class ServerInfoItemProvider extends ItemProviderAdapter implements IEdit
 	 * @generated
 	 */
 	protected void addLastUsersessionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ServerInfo_lastUsersession_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_lastUsersession_feature",
-					"_UI_ServerInfo_type"),
+				getString("_UI_ServerInfo_lastUsersession_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ServerInfo_lastUsersession_feature", "_UI_ServerInfo_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.SERVER_INFO__LAST_USERSESSION,
 				true,
 				false,
@@ -169,13 +170,14 @@ public class ServerInfoItemProvider extends ItemProviderAdapter implements IEdit
 	 * @generated
 	 */
 	protected void addCertificateAliasPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ServerInfo_certificateAlias_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ServerInfo_certificateAlias_feature",
-					"_UI_ServerInfo_type"),
+				getString("_UI_ServerInfo_certificateAlias_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ServerInfo_certificateAlias_feature", "_UI_ServerInfo_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.SERVER_INFO__CERTIFICATE_ALIAS,
 				true,
 				false,
@@ -224,7 +226,7 @@ public class ServerInfoItemProvider extends ItemProviderAdapter implements IEdit
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ServerInfo"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ServerInfo")); //$NON-NLS-1$
 	}
 
 	/**
@@ -238,8 +240,8 @@ public class ServerInfoItemProvider extends ItemProviderAdapter implements IEdit
 	public String getText(Object object) {
 		final String label = ((ServerInfo) object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ServerInfo_type") :
-			getString("_UI_ServerInfo_type") + " " + label;
+			getString("_UI_ServerInfo_type") : //$NON-NLS-1$
+			getString("_UI_ServerInfo_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

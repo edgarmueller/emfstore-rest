@@ -514,15 +514,15 @@ public class PendingFileTransferImpl extends EObjectImpl implements PendingFileT
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (fileVersion: ");
+		result.append(" (fileVersion: "); //$NON-NLS-1$
 		result.append(fileVersion);
-		result.append(", chunkNumber: ");
+		result.append(", chunkNumber: "); //$NON-NLS-1$
 		result.append(chunkNumber);
-		result.append(", upload: ");
+		result.append(", upload: "); //$NON-NLS-1$
 		result.append(upload);
-		result.append(", fileName: ");
+		result.append(", fileName: "); //$NON-NLS-1$
 		result.append(fileName);
-		result.append(", preliminaryFileName: ");
+		result.append(", preliminaryFileName: "); //$NON-NLS-1$
 		result.append(preliminaryFileName);
 		result.append(')');
 		return result.toString();

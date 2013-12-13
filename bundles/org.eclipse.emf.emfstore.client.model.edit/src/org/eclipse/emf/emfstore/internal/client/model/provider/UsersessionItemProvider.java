@@ -83,9 +83,9 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_Usersession_username_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Usersession_username_feature",
-					"_UI_Usersession_type"),
+				getString("_UI_Usersession_username_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_Usersession_username_feature", "_UI_Usersession_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.USERSESSION__USERNAME,
 				true,
 				false,
@@ -106,9 +106,9 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_Usersession_password_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Usersession_password_feature",
-					"_UI_Usersession_type"),
+				getString("_UI_Usersession_password_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_Usersession_password_feature", "_UI_Usersession_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.USERSESSION__PASSWORD,
 				true,
 				false,
@@ -129,9 +129,9 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_Usersession_sessionId_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Usersession_sessionId_feature",
-					"_UI_Usersession_type"),
+				getString("_UI_Usersession_sessionId_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_Usersession_sessionId_feature", "_UI_Usersession_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.USERSESSION__SESSION_ID,
 				true,
 				false,
@@ -148,13 +148,14 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addPersistentPasswordPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_Usersession_persistentPassword_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Usersession_persistentPassword_feature",
-					"_UI_Usersession_type"),
+				getString("_UI_Usersession_persistentPassword_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_Usersession_persistentPassword_feature", "_UI_Usersession_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.USERSESSION__PERSISTENT_PASSWORD,
 				true,
 				false,
@@ -171,13 +172,14 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addServerInfoPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_Usersession_serverInfo_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Usersession_serverInfo_feature",
-					"_UI_Usersession_type"),
+				getString("_UI_Usersession_serverInfo_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_Usersession_serverInfo_feature", "_UI_Usersession_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.USERSESSION__SERVER_INFO,
 				true,
 				false,
@@ -194,13 +196,14 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 	 * @generated
 	 */
 	protected void addSavePasswordPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_Usersession_savePassword_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Usersession_savePassword_feature",
-					"_UI_Usersession_type"),
+				getString("_UI_Usersession_savePassword_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_Usersession_savePassword_feature", "_UI_Usersession_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.USERSESSION__SAVE_PASSWORD,
 				true,
 				false,
@@ -251,7 +254,7 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Usersession"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Usersession")); //$NON-NLS-1$
 	}
 
 	/**
@@ -265,7 +268,7 @@ public class UsersessionItemProvider extends ItemProviderAdapter implements IEdi
 	public String getText(Object object) {
 		final Usersession session = (Usersession) object;
 		final ServerInfo server = session.getServerInfo();
-		return session.getUsername() + "@" + (server != null ? server.getName() : "unknown");
+		return session.getUsername() + "@" + (server != null ? server.getName() : "unknown"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

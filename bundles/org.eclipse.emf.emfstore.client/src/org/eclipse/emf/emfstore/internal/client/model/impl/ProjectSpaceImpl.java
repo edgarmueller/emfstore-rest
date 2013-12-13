@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.client.model.impl;
 
 import java.util.Collection;
 import java.util.Date;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -21,18 +20,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.emfstore.internal.client.model.ModelPackage;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
 import org.eclipse.emf.emfstore.internal.common.model.EMFStoreProperty;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.common.model.impl.IdentifiableElementImpl;
 import org.eclipse.emf.emfstore.internal.server.model.FileIdentifier;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
@@ -1104,7 +1100,7 @@ public class ProjectSpaceImpl extends ProjectSpaceBase {
 			|| (eContainerFeatureID() != ModelPackage.PROJECT_SPACE__WORKSPACE && newWorkspace != null))
 		{
 			if (EcoreUtil.isAncestor(this, newWorkspace))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -1306,17 +1302,17 @@ public class ProjectSpaceImpl extends ProjectSpaceBase {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (projectName: ");
+		result.append(" (projectName: "); //$NON-NLS-1$
 		result.append(projectName);
-		result.append(", projectDescription: ");
+		result.append(", projectDescription: "); //$NON-NLS-1$
 		result.append(projectDescription);
-		result.append(", lastUpdated: ");
+		result.append(", lastUpdated: "); //$NON-NLS-1$
 		result.append(lastUpdated);
-		result.append(", resourceCount: ");
+		result.append(", resourceCount: "); //$NON-NLS-1$
 		result.append(resourceCount);
-		result.append(", dirty: ");
+		result.append(", dirty: "); //$NON-NLS-1$
 		result.append(dirty);
-		result.append(", oldLogMessages: ");
+		result.append(", oldLogMessages: "); //$NON-NLS-1$
 		result.append(oldLogMessages);
 		result.append(')');
 		return result.toString();

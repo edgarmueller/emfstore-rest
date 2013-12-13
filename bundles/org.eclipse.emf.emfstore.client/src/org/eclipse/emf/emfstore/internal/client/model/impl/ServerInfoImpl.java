@@ -458,13 +458,13 @@ public class ServerInfoImpl extends EObjectImpl implements ServerInfo {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (name: "); //$NON-NLS-1$
 		result.append(name);
-		result.append(", url: ");
+		result.append(", url: "); //$NON-NLS-1$
 		result.append(url);
-		result.append(", port: ");
+		result.append(", port: "); //$NON-NLS-1$
 		result.append(port);
-		result.append(", certificateAlias: ");
+		result.append(", certificateAlias: "); //$NON-NLS-1$
 		result.append(certificateAlias);
 		result.append(')');
 		return result.toString();

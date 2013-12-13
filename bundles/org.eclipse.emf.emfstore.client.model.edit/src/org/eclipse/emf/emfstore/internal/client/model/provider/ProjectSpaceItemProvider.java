@@ -40,8 +40,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFacto
  * 
  * @generated
  */
-public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
-{
+public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider {
 
 	private Map<Project, ProjectSpace> projectToProjectSpaceMap;
 
@@ -88,13 +87,14 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	protected void addProjectNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_projectName_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_projectName_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_projectName_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_projectName_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__PROJECT_NAME,
 				true,
 				false,
@@ -111,13 +111,14 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	protected void addProjectDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_projectDescription_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_projectDescription_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_projectDescription_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_projectDescription_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__PROJECT_DESCRIPTION,
 				true,
 				false,
@@ -134,13 +135,14 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	protected void addUsersessionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_usersession_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_usersession_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_usersession_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_usersession_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__USERSESSION,
 				true,
 				false,
@@ -157,13 +159,14 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	protected void addLastUpdatedPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_lastUpdated_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_lastUpdated_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_lastUpdated_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_lastUpdated_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__LAST_UPDATED,
 				true,
 				false,
@@ -180,13 +183,14 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	protected void addResourceCountPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_resourceCount_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_resourceCount_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_resourceCount_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_resourceCount_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__RESOURCE_COUNT,
 				true,
 				false,
@@ -207,9 +211,9 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_dirty_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_dirty_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_dirty_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_dirty_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__DIRTY,
 				true,
 				false,
@@ -226,13 +230,14 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	protected void addOldLogMessagesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_oldLogMessages_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_oldLogMessages_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_oldLogMessages_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_oldLogMessages_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__OLD_LOG_MESSAGES,
 				true,
 				false,
@@ -250,13 +255,14 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 * @generated
 	 */
 	protected void addChangedSharedPropertiesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
+		itemPropertyDescriptors
+			.add
 			(createItemPropertyDescriptor
 			(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
 				getResourceLocator(),
-				getString("_UI_ProjectSpace_changedSharedProperties_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_ProjectSpace_changedSharedProperties_feature",
-					"_UI_ProjectSpace_type"),
+				getString("_UI_ProjectSpace_changedSharedProperties_feature"), //$NON-NLS-1$
+				getString(
+					"_UI_PropertyDescriptor_description", "_UI_ProjectSpace_changedSharedProperties_feature", "_UI_ProjectSpace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				ModelPackage.Literals.PROJECT_SPACE__CHANGED_SHARED_PROPERTIES,
 				true,
 				false,
@@ -312,7 +318,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("prj_obj.gif");
+		return getResourceLocator().getImage("prj_obj.gif"); //$NON-NLS-1$
 	}
 
 	/**
@@ -330,7 +336,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 			final String string = stringBuilder.toString();
 			return string;
 		}
-		return getString("_UI_ProjectSpace_type");
+		return getString("_UI_ProjectSpace_type"); //$NON-NLS-1$
 	}
 
 	// end of custom code
@@ -450,7 +456,7 @@ public class ProjectSpaceItemProvider extends IdentifiableElementItemProvider
 
 		if (qualify)
 		{
-			return getString("_UI_CreateChild_text2",
+			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
 				new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);

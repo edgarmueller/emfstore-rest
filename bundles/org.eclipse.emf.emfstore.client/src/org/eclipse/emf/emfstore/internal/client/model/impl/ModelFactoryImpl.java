@@ -40,12 +40,13 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public static ModelFactory init() {
 		try
 		{
-			ModelFactory theModelFactory = (ModelFactory) EPackage.Registry.INSTANCE.getEFactory(ModelPackage.eNS_URI);
+			final ModelFactory theModelFactory = (ModelFactory) EPackage.Registry.INSTANCE
+				.getEFactory(ModelPackage.eNS_URI);
 			if (theModelFactory != null)
 			{
 				return theModelFactory;
 			}
-		} catch (Exception exception)
+		} catch (final Exception exception)
 		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
@@ -83,7 +84,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		case ModelPackage.PENDING_FILE_TRANSFER:
 			return createPendingFileTransfer();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -93,7 +94,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public Workspace createWorkspace() {
-		WorkspaceImpl workspace = new WorkspaceImpl();
+		final WorkspaceImpl workspace = new WorkspaceImpl();
 		return workspace;
 	}
 
@@ -103,7 +104,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public ServerInfo createServerInfo() {
-		ServerInfoImpl serverInfo = new ServerInfoImpl();
+		final ServerInfoImpl serverInfo = new ServerInfoImpl();
 		return serverInfo;
 	}
 
@@ -113,7 +114,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public Usersession createUsersession() {
-		UsersessionImpl usersession = new UsersessionImpl();
+		final UsersessionImpl usersession = new UsersessionImpl();
 		return usersession;
 	}
 
@@ -123,7 +124,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public ProjectSpace createProjectSpace() {
-		ProjectSpaceImpl projectSpace = new ProjectSpaceImpl();
+		final ProjectSpaceImpl projectSpace = new ProjectSpaceImpl();
 		return projectSpace;
 	}
 
@@ -133,7 +134,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public PendingFileTransfer createPendingFileTransfer() {
-		PendingFileTransferImpl pendingFileTransfer = new PendingFileTransferImpl();
+		final PendingFileTransferImpl pendingFileTransfer = new PendingFileTransferImpl();
 		return pendingFileTransfer;
 	}
 
