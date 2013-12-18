@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.server;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.emf.emfstore.internal.common.EMFStoreURIHandler;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 
 /**
@@ -24,6 +25,14 @@ import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
  * 
  */
 public abstract class ESAbstractServerURIConverter extends ExtensibleURIConverterImpl {
+
+	/**
+	 * Default constructor.
+	 */
+	public ESAbstractServerURIConverter() {
+		final int index = getURIHandlers().size() - 1;
+		getURIHandlers().add(index, new EMFStoreURIHandler());
+	}
 
 	@Override
 	public URI normalize(URI uri) {

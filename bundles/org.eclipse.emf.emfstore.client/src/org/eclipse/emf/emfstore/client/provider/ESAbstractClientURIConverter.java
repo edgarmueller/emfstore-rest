@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.client.provider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.emfstore.client.util.ESClientURIUtil;
+import org.eclipse.emf.emfstore.internal.common.EMFStoreURIHandler;
 
 /**
  * Abstract URIConverter for normalizing EMFStore URIs on client side. Delegates normalizing to specialized methods
@@ -24,6 +25,14 @@ import org.eclipse.emf.emfstore.client.util.ESClientURIUtil;
  * 
  */
 public abstract class ESAbstractClientURIConverter extends ExtensibleURIConverterImpl {
+
+	/**
+	 * Default constructor.
+	 */
+	public ESAbstractClientURIConverter() {
+		final int index = getURIHandlers().size() - 1;
+		getURIHandlers().add(index, new EMFStoreURIHandler());
+	}
 
 	@Override
 	public URI normalize(URI uri) {
