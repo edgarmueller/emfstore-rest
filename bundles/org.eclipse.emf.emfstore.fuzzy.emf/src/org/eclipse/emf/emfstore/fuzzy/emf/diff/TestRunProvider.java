@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * JulianSommerfeldt
+ * Julian Sommerfeldt - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.diff;
 
@@ -53,12 +53,12 @@ public abstract class TestRunProvider {
 	 * @return The {@link TestRun} out of the {@link Resource}.
 	 */
 	protected TestRun getTestRun(Resource resource) {
-		for (EObject obj : resource.getContents()) {
+		for (final EObject obj : resource.getContents()) {
 			if (obj instanceof TestRun) {
 				return (TestRun) obj;
 			}
 		}
-		throw new RuntimeException("Could not load TestRuns from config!");
+		throw new RuntimeException(Messages.TestRunProvider_Could_Not_Load_TestRuns_From_Config);
 	}
 
 	/**

@@ -36,7 +36,7 @@ import org.eclipse.emf.emfstore.fuzzy.emf.config.TestRun;
  */
 public class HudsonTestRunProvider extends TestRunProvider {
 
-	private static final String JOB = "job/";
+	private static final String JOB = "job/"; //$NON-NLS-1$
 
 	private static SAXReader saxReader = new SAXReader();
 
@@ -51,44 +51,44 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	/**
 	 * The prefix for hudson peroperties.
 	 */
-	public static final String PROP_HUDSON = ".hudson";
+	public static final String PROP_HUDSON = ".hudson"; //$NON-NLS-1$
 
 	/**
 	 * The hudson url property.
 	 */
-	public static final String PROP_URL = ".url";
+	public static final String PROP_URL = ".url"; //$NON-NLS-1$
 
 	/**
 	 * The hudson artifact folder property.
 	 */
-	public static final String PROP_ARTIFACT_FOLDER = ".artifact.folder";
+	public static final String PROP_ARTIFACT_FOLDER = ".artifact.folder"; //$NON-NLS-1$
 
 	/**
 	 * The hudson port property.
 	 */
-	public static final String PROP_PORT = ".port";
+	public static final String PROP_PORT = ".port"; //$NON-NLS-1$
 
 	/**
 	 * The name of the hudson job property.
 	 */
-	public static final String PROP_JOB = ".job";
+	public static final String PROP_JOB = ".job"; //$NON-NLS-1$
 
 	/**
 	 * The property of the hudson diff job.
 	 */
-	public static final String PROP_DIFF_JOB = ".diffjob";
+	public static final String PROP_DIFF_JOB = ".diffjob"; //$NON-NLS-1$
 
-	private static final String LAST_BUILD = "lastBuild";
+	private static final String LAST_BUILD = "lastBuild"; //$NON-NLS-1$
 
 	/**
 	 * An array containing all valid states of a hudson build. Valid means it
 	 * can be used for creating diffs.
 	 */
-	public static final String[] VALID_STATES = new String[] { "SUCCESS",
-		"UNSTABLE" };
+	public static final String[] VALID_STATES = new String[] { "SUCCESS", //$NON-NLS-1$
+		"UNSTABLE" }; //$NON-NLS-1$
 
 	private static final String ARTIFACT = FuzzyUtil.getProperty(PROP_HUDSON
-		+ PROP_ARTIFACT_FOLDER, "/artifact/");
+		+ PROP_ARTIFACT_FOLDER, "/artifact/"); //$NON-NLS-1$
 
 	/**
 	 * Standard constructor using the last build and the build before the last
@@ -104,7 +104,7 @@ public class HudsonTestRunProvider extends TestRunProvider {
 
 		firstBuildNumber = getLastValidBuildNumber(
 			Integer.parseInt(getFirstElementValue(jobUrl + LAST_BUILD
-				+ "/api/xml?tree=number")), jobUrl);
+				+ "/api/xml?tree=number")), jobUrl); //$NON-NLS-1$
 		secondBuildNumber = getLastValidBuildNumber(firstBuildNumber - 1,
 			jobUrl);
 	}
@@ -128,22 +128,22 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	private void initProperties() {
 		hudsonUrl = getHudsonUrl();
 		jobUrl = hudsonUrl + JOB
-			+ FuzzyUtil.getProperty(PROP_HUDSON + PROP_JOB, "Explorer")
-			+ "/";
+			+ FuzzyUtil.getProperty(PROP_HUDSON + PROP_JOB, "Explorer") //$NON-NLS-1$
+			+ "/"; //$NON-NLS-1$
 	}
 
 	private static String getHudsonUrl() {
 		final String port = FuzzyUtil.getProperty(PROP_HUDSON + PROP_PORT, null);
 		return FuzzyUtil
-			.getProperty(PROP_HUDSON + PROP_URL, "http://localhost")
-			+ (port != null ? ":" + port : "") + "/";
+			.getProperty(PROP_HUDSON + PROP_URL, "http://localhost") //$NON-NLS-1$
+			+ (port != null ? ":" + port : "") + "/"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static int getLastValidBuildNumber(int maxBuildNumber, String jobUrl)
 		throws MalformedURLException, DocumentException {
 		if (maxBuildNumber < 0) {
 			throw new RuntimeException(
-				"There are not enough valid builds till now!");
+				Messages.HudsonTestRunProvider_Not_Enough_Valid_Builds);
 		}
 		if (isValidBuild(maxBuildNumber, jobUrl)) {
 			return maxBuildNumber;
@@ -155,7 +155,7 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	private static boolean isValidBuild(int buildNumber, String jobUrl)
 		throws MalformedURLException, DocumentException {
 		final String result = getFirstElementValue(jobUrl + buildNumber
-			+ "/api/xml?tree=result");
+			+ "/api/xml?tree=result"); //$NON-NLS-1$
 		for (final String valid : VALID_STATES) {
 			if (valid.equals(result)) {
 				return true;
@@ -171,7 +171,7 @@ public class HudsonTestRunProvider extends TestRunProvider {
 		final List<Element> elements = doc.getRootElement().elements();
 		if (elements.size() == 0) {
 			throw new RuntimeException(
-				"There are no elements in the result of the url: " + url);
+				Messages.HudsonTestRunProvider_No_Elements_In_Result + url);
 		}
 		return elements.get(0).getText();
 	}
@@ -183,7 +183,7 @@ public class HudsonTestRunProvider extends TestRunProvider {
 
 		Resource resource = getTestRunResource(firstBuildNumber);
 		if (!FuzzyUtil.resourceExists(resource)) {
-			throw new RuntimeException("No TestRun file for first run!");
+			throw new RuntimeException(Messages.HudsonTestRunProvider_No_TestRunFile_For_1st_Run);
 		}
 		resource.load(null);
 
@@ -191,7 +191,7 @@ public class HudsonTestRunProvider extends TestRunProvider {
 
 		resource = getTestRunResource(secondBuildNumber);
 		if (!FuzzyUtil.resourceExists(resource)) {
-			throw new RuntimeException("No TestRun file for second run!");
+			throw new RuntimeException(Messages.HudsonTestRunProvider_No_TestRunFile_For_2nd_Run);
 		}
 		resource.load(null);
 
@@ -216,7 +216,7 @@ public class HudsonTestRunProvider extends TestRunProvider {
 		try {
 			resource.load(null);
 		} catch (final IOException e) {
-			throw new RuntimeException("Could not load configs file!", e);
+			throw new RuntimeException(Messages.HudsonTestRunProvider_Could_Not_Load_Config_File, e);
 		}
 		final List<TestConfig> configs = new ArrayList<TestConfig>();
 		for (final EObject obj : resource.getContents()) {
@@ -237,12 +237,12 @@ public class HudsonTestRunProvider extends TestRunProvider {
 	public static Resource getDiffResource() throws MalformedURLException,
 		DocumentException {
 		final String diffJobUrl = getHudsonUrl() + JOB
-			+ FuzzyUtil.getProperty(PROP_HUDSON + PROP_DIFF_JOB, "Diff")
-			+ "/";
+			+ FuzzyUtil.getProperty(PROP_HUDSON + PROP_DIFF_JOB, "Diff") //$NON-NLS-1$
+			+ "/"; //$NON-NLS-1$
 		final int lastValidNumber = getLastValidBuildNumber(
 			Integer.parseInt(getFirstElementValue(diffJobUrl + LAST_BUILD
-				+ "/api/xml?tree=number")), diffJobUrl);
+				+ "/api/xml?tree=number")), diffJobUrl); //$NON-NLS-1$
 		return FuzzyUtil.createResource(diffJobUrl + lastValidNumber + ARTIFACT
-			+ FuzzyUtil.FUZZY_FOLDER + "diff" + FuzzyUtil.FILE_SUFFIX);
+			+ FuzzyUtil.FUZZY_FOLDER + "diff" + FuzzyUtil.FILE_SUFFIX); //$NON-NLS-1$
 	}
 }

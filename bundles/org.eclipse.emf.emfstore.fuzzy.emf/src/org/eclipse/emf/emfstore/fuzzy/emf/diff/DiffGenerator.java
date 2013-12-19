@@ -71,7 +71,7 @@ public class DiffGenerator {
 			try {
 				diffResource.load(null);
 			} catch (IOException e) {
-				throw new RuntimeException("Could not load resource: "
+				throw new RuntimeException(Messages.DiffGenerator_Could_Not_Load_Resource
 					+ diffResource.getURI(), e);
 			}
 		}

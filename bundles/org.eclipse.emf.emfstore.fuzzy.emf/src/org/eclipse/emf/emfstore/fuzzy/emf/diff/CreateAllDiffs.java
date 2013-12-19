@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * JulianSommerfeldt
+ * Julian Sommerfeldt - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.diff;
 
@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Class used as junit plugin test to create {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport DiffReport}s
+ * Class used as JUnit plugin test to create {@link org.eclipse.emf.emfstore.fuzzy.emf.config.DiffReport DiffReport}s
  * from a {@link TestRunProvider}.
  * 
  * @author Julian Sommerfeldt
@@ -51,9 +51,9 @@ public class CreateAllDiffs {
 				diffGenerator.createDiff(runs[0], runs[1]);
 			}
 		} catch (final DocumentException e) {
-			throw new RuntimeException("Could not create diffs.", e);
+			throw new RuntimeException(Messages.CouldNotCreateDiffs, e);
 		} catch (final IOException e) {
-			throw new RuntimeException("Could not create diffs.", e);
+			throw new RuntimeException(Messages.CouldNotCreateDiffs, e);
 		}
 	}
 }

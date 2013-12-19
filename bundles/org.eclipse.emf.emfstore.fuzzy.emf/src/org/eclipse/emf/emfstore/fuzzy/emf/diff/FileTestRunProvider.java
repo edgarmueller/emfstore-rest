@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * JulianSommerfeldt
+ * Julian Sommerfeldt - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.fuzzy.emf.diff;
 
@@ -28,10 +28,10 @@ public class FileTestRunProvider extends TestRunProvider {
 	@Override
 	public TestRun[] getTestRuns() throws IOException {
 
-		Resource run1Resource = FuzzyUtil
-			.createResource("file://D:/downloads/1.xml");
-		Resource run2Resource = FuzzyUtil
-			.createResource("file://D:/downloads/2.xml");
+		final Resource run1Resource = FuzzyUtil
+			.createResource("file://D:/downloads/1.xml"); //$NON-NLS-1$
+		final Resource run2Resource = FuzzyUtil
+			.createResource("file://D:/downloads/2.xml"); //$NON-NLS-1$
 
 		if (FuzzyUtil.resourceExists(run1Resource)) {
 			run1Resource.load(null);

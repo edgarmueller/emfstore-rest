@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.emf.emfstore.client;bundle-version="[1.1.0,2.0.0)";v
  org.junit;bundle-version="[4.10.0,5.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.client.test.Activator
-Export-Package: org.eclipse.emf.emfstore.client.test;version="1.1.0";x-friends:="org.eclipse.emf.emfstore.client.test.ui,org.eclipse.emf.emfstore.fuzzy.emf.test",
+Export-Package: org.eclipse.emf.emfstore.client.test;version="1.1.0";x-friends:="org.eclipse.emf.emfstore.client.test.ui,org.eclipse.emf.emfstore.fuzzy.emf.test,org.eclipse.emf.emfstore.fuzzy.emf",
  org.eclipse.emf.emfstore.client.test.api;version="1.1.0";x-friends:="org.eclipse.emf.emfstore.client.test.ui",
  org.eclipse.emf.emfstore.client.test.caching;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.changeTracking;version="1.1.0";x-internal:=true,
@@ -27,6 +27,7 @@ Export-Package: org.eclipse.emf.emfstore.client.test;version="1.1.0";x-friends:=
  org.eclipse.emf.emfstore.client.test.changeTracking.notification;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.changeTracking.operations;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.changeTracking.recording;version="1.1.0";x-internal:=true,
+ org.eclipse.emf.emfstore.client.test.changeTracking.recovery;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.changeTracking.topology;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.common;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.common.extensionregistry;version="1.1.0";x-internal:=true,
