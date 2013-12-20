@@ -71,20 +71,20 @@ public final class ServerKeyStoreManager {
 			if (password == null) {
 				throw new ServerKeyStoreException("Password is null.");
 			}
-			byte[] passwordBytes = Base64.decodeBase64(password.getBytes());
-			Cipher cipher = Cipher.getInstance(ServerConfiguration.getProperties().getProperty(
+			final byte[] passwordBytes = Base64.decodeBase64(password.getBytes());
+			final Cipher cipher = Cipher.getInstance(ServerConfiguration.getProperties().getProperty(
 				ServerConfiguration.KEYSTORE_CIPHER_ALGORITHM, ServerConfiguration.KEYSTORE_CIPHER_ALGORITHM_DEFAULT));
 			cipher.init(Cipher.DECRYPT_MODE, getDecryptionKey());
 			return new String(cipher.doFinal(passwordBytes));
-		} catch (NoSuchAlgorithmException e) {
+		} catch (final NoSuchAlgorithmException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (NoSuchPaddingException e) {
+		} catch (final NoSuchPaddingException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (InvalidKeyException e) {
+		} catch (final InvalidKeyException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (IllegalBlockSizeException e) {
+		} catch (final IllegalBlockSizeException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (BadPaddingException e) {
+		} catch (final BadPaddingException e) {
 			throw new ServerKeyStoreException(e);
 		}
 	}
@@ -92,13 +92,13 @@ public final class ServerKeyStoreManager {
 	private PrivateKey getDecryptionKey() throws ServerKeyStoreException {
 		try {
 			return (PrivateKey) getKeyStore().getKey(getKeyStoreAlias(), getKeyStorePassword());
-		} catch (ServerKeyStoreException e) {
+		} catch (final ServerKeyStoreException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (KeyStoreException e) {
+		} catch (final KeyStoreException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (NoSuchAlgorithmException e) {
+		} catch (final NoSuchAlgorithmException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (UnrecoverableKeyException e) {
+		} catch (final UnrecoverableKeyException e) {
 			throw new ServerKeyStoreException(e);
 		}
 	}
@@ -117,27 +117,31 @@ public final class ServerKeyStoreManager {
 				keyStore = KeyStore.getInstance("JKS");
 				fileInputStream = new FileInputStream(ServerConfiguration.getServerKeyStorePath());
 				keyStore.load(fileInputStream, getKeyStorePassword());
-			} catch (NoSuchAlgorithmException e) {
+			} catch (final NoSuchAlgorithmException e) {
 				throw new ServerKeyStoreException(e);
-			} catch (CertificateException e) {
+			} catch (final CertificateException e) {
 				throw new ServerKeyStoreException(e);
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				throw new ServerKeyStoreException(e);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				throw new ServerKeyStoreException(e);
-			} catch (KeyStoreException e) {
+			} catch (final KeyStoreException e) {
 				throw new ServerKeyStoreException(e);
 			} finally {
 				try {
 					if (fileInputStream != null) {
 						fileInputStream.close();
 					}
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					throw new ServerKeyStoreException(e);
 				}
 			}
 		}
 		return keyStore;
+	}
+
+	public void unloadKeyStore() {
+		keyStore = null;
 	}
 
 	/**
@@ -148,16 +152,17 @@ public final class ServerKeyStoreManager {
 	 */
 	public KeyManagerFactory getKeyManagerFactory() throws ServerKeyStoreException {
 		try {
-			KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(ServerConfiguration.getProperties()
+			final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(ServerConfiguration
+				.getProperties()
 				.getProperty(ServerConfiguration.KEYSTORE_CERTIFICATE_TYPE,
 					ServerConfiguration.KEYSTORE_CERTIFICATE_TYPE_DEFAULT));
 			keyManagerFactory.init(getKeyStore(), getKeyStorePassword());
 			return keyManagerFactory;
-		} catch (NoSuchAlgorithmException e) {
+		} catch (final NoSuchAlgorithmException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (KeyStoreException e) {
+		} catch (final KeyStoreException e) {
 			throw new ServerKeyStoreException(e);
-		} catch (UnrecoverableKeyException e) {
+		} catch (final UnrecoverableKeyException e) {
 			throw new ServerKeyStoreException(e);
 		}
 	}

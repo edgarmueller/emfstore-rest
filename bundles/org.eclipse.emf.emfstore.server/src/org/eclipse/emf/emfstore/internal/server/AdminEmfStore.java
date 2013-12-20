@@ -153,8 +153,8 @@ public interface AdminEmfStore extends EMFStoreInterface {
 	 * 
 	 * @param sessionId the session id for authentication
 	 * @param name the user's name
-	 * @return ACOrgUnitId
-	 * @throws ESException if any in the EmfStore occurs
+	 * @return ACOrgUnitId the {@link ACOrgUnitId} of the created user
+	 * @throws ESException if any error occurred while creating the user
 	 */
 	ACOrgUnitId createUser(SessionId sessionId, String name) throws ESException;
 

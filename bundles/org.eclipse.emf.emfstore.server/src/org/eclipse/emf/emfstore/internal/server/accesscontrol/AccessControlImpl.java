@@ -1,13 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
- * Technische Universitaet Muenchen.
+ * Copyright (c) 2011-2013 EclipseSource Muenchen GmbH and others.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk, Maximilian Koegel - initial API and implementation
+ * Maximilian Koegel, Otto von Wesendonk - initial API and implementation
+ * Edgar Mueller - introduced DAO
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol;
 
@@ -34,7 +35,6 @@ import org.eclipse.emf.emfstore.internal.server.exceptions.SessionTimedOutExcept
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
-import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
@@ -42,13 +42,8 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
+import org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade;
 
-/**
- * A simple implementation of an {@link AccessControl}.
- * 
- * @author koegel
- * @author wesendonk
- */
 public class AccessControlImpl implements AccessControl {
 
 	/**
@@ -59,15 +54,41 @@ public class AccessControlImpl implements AccessControl {
 	}
 
 	private final Map<SessionId, ACUserContainer> sessionUserMap;
-	private final ServerSpace serverSpace;
 	private EnumMap<MethodId, AccessLevel> accessMap;
 	private AbstractAuthenticationControl authenticationControl;
+	private final ACDAOFacade daoFacade;
+
+	/**
+	 * Default constructor.
+	 * 
+	 * @param acDAOFacade
+	 *            a DAO facade encapsulating different AC related DAOs
+	 * 
+	 * @throws FatalESException
+	 *             an exception
+	 */
+	public AccessControlImpl(ACDAOFacade acDAOFacade) throws FatalESException {
+		daoFacade = acDAOFacade;
+		sessionUserMap = new LinkedHashMap<SessionId, ACUserContainer>();
+
+		AuthenticationControlType authenticationControlType = ServerConfiguration.AUTHENTICATION_POLICY_DEFAULT;
+
+		final String property = ServerConfiguration.getProperties().getProperty(
+			ServerConfiguration.AUTHENTICATION_POLICY);
+
+		if (property != null) {
+			authenticationControlType = AuthenticationControlType.valueOf(property);
+		}
+
+		authenticationControl = AuthenticationControlFactory.INSTANCE.createAuthenticationControl(
+			authenticationControlType);
+	}
 
 	private void initAccessMap() {
 		if (accessMap != null) {
 			return;
 		}
-		accessMap = new EnumMap<MethodId, AccessControlImpl.AccessLevel>(MethodId.class);
+		accessMap = new EnumMap<MethodId, AccessLevel>(MethodId.class);
 		addAccessMapping(AccessLevel.PROJECT_READ, MethodId.GETPROJECT, MethodId.GETEMFPROPERTIES,
 			MethodId.GETHISTORYINFO, MethodId.GETCHANGES, MethodId.RESOLVEVERSIONSPEC, MethodId.DOWNLOADFILECHUNK);
 
@@ -86,31 +107,6 @@ public class AccessControlImpl implements AccessControl {
 		for (final MethodId opType : operationTypes) {
 			accessMap.put(opType, type);
 		}
-	}
-
-	/**
-	 * Default constructor.
-	 * 
-	 * @param serverSpace
-	 *            the server space to work on
-	 * @throws FatalESException
-	 *             an exception
-	 */
-	public AccessControlImpl(ServerSpace serverSpace) throws FatalESException {
-		sessionUserMap = new LinkedHashMap<SessionId, ACUserContainer>();
-		this.serverSpace = serverSpace;
-
-		AuthenticationControlType authenticationControlType = ServerConfiguration.AUTHENTICATION_POLICY_DEFAULT;
-
-		final String property = ServerConfiguration.getProperties().getProperty(
-			ServerConfiguration.AUTHENTICATION_POLICY);
-
-		if (property != null) {
-			authenticationControlType = AuthenticationControlType.valueOf(property);
-		}
-
-		authenticationControl = AuthenticationControlFactory.INSTANCE.createAuthenticationControl(
-			authenticationControlType);
 	}
 
 	/**
@@ -163,7 +159,7 @@ public class AccessControlImpl implements AccessControl {
 			ServerConfiguration.AUTHENTICATION_MATCH_USERS_IGNORE_CASE, "false"));
 
 		synchronized (MonitorProvider.getInstance().getMonitor()) {
-			for (final ACUser user : serverSpace.getUsers()) {
+			for (final ACUser user : daoFacade.getUsers()) {
 				if (ignoreCase) {
 					if (user.getName().equalsIgnoreCase(username)) {
 						return user;
@@ -268,7 +264,7 @@ public class AccessControlImpl implements AccessControl {
 	private List<ACGroup> getGroups(ACOrgUnit orgUnit) {
 		synchronized (MonitorProvider.getInstance().getMonitor()) {
 			final ArrayList<ACGroup> groups = new ArrayList<ACGroup>();
-			for (final ACGroup group : serverSpace.getGroups()) {
+			for (final ACGroup group : daoFacade.getGroups()) {
 				if (group.getMembers().contains(orgUnit)) {
 					groups.add(group);
 					for (final ACGroup g : getGroups(group)) {
@@ -285,7 +281,7 @@ public class AccessControlImpl implements AccessControl {
 
 	private ACUser getUser(ACOrgUnitId orgUnitId) throws AccessControlException {
 		synchronized (MonitorProvider.getInstance().getMonitor()) {
-			for (final ACUser user : serverSpace.getUsers()) {
+			for (final ACUser user : daoFacade.getUsers()) {
 				if (user.getId().equals(orgUnitId)) {
 					return user;
 				}
@@ -464,4 +460,5 @@ public class AccessControlImpl implements AccessControl {
 	public void setAuthenticationControl(AbstractAuthenticationControl authenticationControl) {
 		this.authenticationControl = authenticationControl;
 	}
+
 }

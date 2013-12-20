@@ -16,27 +16,26 @@ import static org.junit.Assert.assertNull;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
-import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
-import org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer;
-import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTest;
+import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;
 import org.eclipse.emf.emfstore.internal.common.model.IdEObjectCollection;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.IdEObjectCollectionChangeObserver;
+import org.eclipse.emf.emfstore.test.model.TestElement;
 import org.junit.Test;
 
-public class ProjectCacheTest extends WorkspaceTest {
+public class ProjectCacheTest extends ESTest {
 
 	@Test
 	public void testGetIdForCutElement() {
 
 		final Project project = getProject();
-		final TestElement cutElement = getTestElement();
-		final TestElement element = getTestElement();
-		new EMFStoreCommand() {
+		final TestElement cutElement = Create.testElement();
+		final TestElement element = Create.testElement();
 
+		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
 				project.getCutElements().add(cutElement);
@@ -55,7 +54,7 @@ public class ProjectCacheTest extends WorkspaceTest {
 		final ModelElementId[] cutElementIWhileCommand = new ModelElementId[1];
 
 		final Project project = getProject();
-		final TestElement cutElement = getTestElement();
+		final TestElement cutElement = Create.testElement();
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
@@ -97,7 +96,7 @@ public class ProjectCacheTest extends WorkspaceTest {
 	public void testGetNoIdForDeletedElement() {
 
 		final Project project = getProject();
-		final TestElement element = getTestElement();
+		final TestElement element = Create.testElement();
 
 		new EMFStoreCommand() {
 			@Override
@@ -121,9 +120,9 @@ public class ProjectCacheTest extends WorkspaceTest {
 	public void testSwitchContainerInDifferentCommands() {
 
 		final Project project = getProject();
-		final TestElement element = getTestElement();
-		final TestElementContainer container = TestmodelFactory.eINSTANCE.createTestElementContainer();
-		container.getElements().add(element);
+		final TestElement element = Create.testElement();
+		final TestElement container = Create.testElement();
+		container.getContainedElements().add(element);
 
 		new EMFStoreCommand() {
 			@Override
@@ -143,7 +142,7 @@ public class ProjectCacheTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				container.getElements().add(element);
+				container.getContainedElements().add(element);
 			}
 		}.run(false);
 
@@ -153,13 +152,12 @@ public class ProjectCacheTest extends WorkspaceTest {
 	public void testSwitchContainerViaElement() {
 
 		final Project project = getProject();
-		final TestElement element = getTestElement();
-		final TestElementContainer container = TestmodelFactory.eINSTANCE.createTestElementContainer();
-		container.getElements().add(element);
-		final TestElementContainer container2 = TestmodelFactory.eINSTANCE.createTestElementContainer();
+		final TestElement element = Create.testElement();
+		final TestElement container = Create.testElement();
+		container.getContainedElements().add(element);
+		final TestElement container2 = Create.testElement();
 
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
 				project.addModelElement(container);
@@ -181,13 +179,12 @@ public class ProjectCacheTest extends WorkspaceTest {
 	public void testSwitchContainerViaContainer() {
 
 		final Project project = getProject();
-		final TestElement element = getTestElement();
-		final TestElementContainer container = TestmodelFactory.eINSTANCE.createTestElementContainer();
-		container.getElements().add(element);
-		final TestElementContainer container2 = TestmodelFactory.eINSTANCE.createTestElementContainer();
+		final TestElement element = Create.testElement();
+		final TestElement container = Create.testElement();
+		container.getContainedElements().add(element);
+		final TestElement container2 = Create.testElement();
 
 		new EMFStoreCommand() {
-
 			@Override
 			protected void doRun() {
 				project.addModelElement(container);
@@ -199,8 +196,8 @@ public class ProjectCacheTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				container.getElements().remove(element);
-				container2.getElements().add(element);
+				container.getContainedElements().remove(element);
+				container2.getContainedElements().add(element);
 			}
 		}.run(false);
 	}
@@ -209,9 +206,9 @@ public class ProjectCacheTest extends WorkspaceTest {
 	public void testElementLosesItsContainer() {
 
 		final Project project = getProject();
-		final TestElement element = getTestElement();
-		final TestElementContainer container = TestmodelFactory.eINSTANCE.createTestElementContainer();
-		container.getElements().add(element);
+		final TestElement element = Create.testElement();
+		final TestElement container = Create.testElement();
+		container.getContainedElements().add(element);
 
 		new EMFStoreCommand() {
 			@Override
@@ -224,7 +221,7 @@ public class ProjectCacheTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				container.getElements().add(element);
+				container.getContainedElements().add(element);
 			}
 		}.run(false);
 
@@ -238,7 +235,7 @@ public class ProjectCacheTest extends WorkspaceTest {
 		new EMFStoreCommand() {
 			@Override
 			protected void doRun() {
-				container.getElements().remove(element);
+				container.getContainedElements().remove(element);
 				element.setContainer(null);
 			}
 		}.run(false);

@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
@@ -40,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Reader
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesFactory;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesPackage;
+import org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -48,22 +50,26 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @author wesendon
  */
 // TODO: bring this interface in new subinterface structure and refactor it
-// TODO: internal
 public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements AdminEmfStore {
+
+	private final ACDAOFacade daoFacade;
 
 	/**
 	 * Default constructor.
 	 * 
+	 * @param daoFacade
+	 *            provider facade for DAOs
 	 * @param serverSpace
-	 *            the serverspace
+	 *            the server space
 	 * @param authorizationControl
-	 *            the authoriazationcontrol
+	 *            the authorization control
 	 * @throws FatalESException
 	 *             in case of failure
 	 */
-	public AdminEmfStoreImpl(ServerSpace serverSpace, AuthorizationControl authorizationControl)
+	public AdminEmfStoreImpl(ACDAOFacade daoFacade, ServerSpace serverSpace, AuthorizationControl authorizationControl)
 		throws FatalESException {
 		super(serverSpace, authorizationControl);
+		this.daoFacade = daoFacade;
 	}
 
 	/**
@@ -75,7 +81,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		final List<ACGroup> result = new ArrayList<ACGroup>();
-		for (final ACGroup group : getServerSpace().getGroups()) {
+		for (final ACGroup group : daoFacade.getGroups()) {
 
 			// quickfix
 			final ACGroup copy = ModelUtil.clone(group);
@@ -116,18 +122,18 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		if (groupExists(name)) {
-			throw new InvalidInputException("group already exists.");
+			throw new InvalidInputException("Group already exists.");
 		}
 		final ACGroup acGroup = AccesscontrolFactory.eINSTANCE.createACGroup();
 		acGroup.setName(name);
-		acGroup.setDescription("");
-		getServerSpace().getGroups().add(acGroup);
+		acGroup.setDescription(StringUtils.EMPTY);
+		daoFacade.add(acGroup);
 		save();
 		return ModelUtil.clone(acGroup.getId());
 	}
 
 	private boolean groupExists(String name) {
-		for (final ACGroup group : getServerSpace().getGroups()) {
+		for (final ACGroup group : daoFacade.getGroups()) {
 			if (group.getName().equals(name)) {
 				return true;
 			}
@@ -155,9 +161,10 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		for (final Iterator<ACGroup> iter = getServerSpace().getGroups().iterator(); iter.hasNext();) {
+		for (final Iterator<ACGroup> iter = daoFacade.getGroups().iterator(); iter.hasNext();) {
 			final ACGroup next = iter.next();
 			if (next.getId().equals(group)) {
+				daoFacade.remove(next);
 				EcoreUtil.delete(next);
 				save();
 				return;
@@ -223,14 +230,14 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkProjectAdminAccess(sessionId, projectId);
 		final List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
-		for (final ACOrgUnit orgUnit : getServerSpace().getUsers()) {
+		for (final ACOrgUnit orgUnit : daoFacade.getUsers()) {
 			for (final Role role : orgUnit.getRoles()) {
 				if (isServerAdmin(role) || role.getProjects().contains(projectId)) {
 					result.add(ModelUtil.clone(orgUnit));
 				}
 			}
 		}
-		for (final ACOrgUnit orgUnit : getServerSpace().getGroups()) {
+		for (final ACOrgUnit orgUnit : daoFacade.getGroups()) {
 			for (final Role role : orgUnit.getRoles()) {
 				if (isServerAdmin(role) || role.getProjects().contains(projectId)) {
 					result.add(ModelUtil.clone(orgUnit));
@@ -370,7 +377,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		final List<ACUser> result = new ArrayList<ACUser>();
-		for (final ACUser user : getServerSpace().getUsers()) {
+		for (final ACUser user : daoFacade.getUsers()) {
 			result.add(user);
 		}
 		return result;
@@ -385,10 +392,10 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
 		final List<ACOrgUnit> result = new ArrayList<ACOrgUnit>();
-		for (final ACOrgUnit user : getServerSpace().getUsers()) {
+		for (final ACOrgUnit user : daoFacade.getUsers()) {
 			result.add(ModelUtil.clone(user));
 		}
-		for (final ACOrgUnit group : getServerSpace().getGroups()) {
+		for (final ACOrgUnit group : daoFacade.getGroups()) {
 			result.add(ModelUtil.clone(group));
 		}
 		// quickfix
@@ -426,13 +433,13 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 		// acUser.setId(AccesscontrolFactory.eINSTANCE.createACOrgUnitId());
 		acUser.setName(name);
 		acUser.setDescription(" ");
-		getServerSpace().getUsers().add(acUser);
+		daoFacade.add(acUser);
 		save();
 		return ModelUtil.clone(acUser.getId());
 	}
 
 	private boolean userExists(String name) {
-		for (final ACUser user : getServerSpace().getUsers()) {
+		for (final ACUser user : daoFacade.getUsers()) {
 			if (user.getName().equals(name)) {
 				return true;
 			}
@@ -448,9 +455,11 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 			throw new InvalidInputException();
 		}
 		getAuthorizationControl().checkServerAdminAccess(sessionId);
-		for (final Iterator<ACUser> iter = getServerSpace().getUsers().iterator(); iter.hasNext();) {
+		for (final Iterator<ACUser> iter = daoFacade.getUsers().iterator(); iter.hasNext();) {
 			final ACUser next = iter.next();
 			if (next.getId().equals(user)) {
+				daoFacade.remove(next);
+				// TODO: move ecore delete into ServerSpace#deleteUser implementation
 				EcoreUtil.delete(next);
 				save();
 				return;
@@ -542,7 +551,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private ACGroup getGroup(ACOrgUnitId orgUnitId) throws ESException {
-		for (final ACGroup group : getServerSpace().getGroups()) {
+		for (final ACGroup group : daoFacade.getGroups()) {
 			if (group.getId().equals(orgUnitId)) {
 				return group;
 			}
@@ -551,12 +560,12 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 	}
 
 	private ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws ESException {
-		for (final ACOrgUnit unit : getServerSpace().getUsers()) {
+		for (final ACOrgUnit unit : daoFacade.getUsers()) {
 			if (unit.getId().equals(orgUnitId)) {
 				return unit;
 			}
 		}
-		for (final ACOrgUnit unit : getServerSpace().getGroups()) {
+		for (final ACOrgUnit unit : daoFacade.getGroups()) {
 			if (unit.getId().equals(orgUnitId)) {
 				return unit;
 			}
@@ -576,7 +585,7 @@ public class AdminEmfStoreImpl extends AbstractEmfstoreInterface implements Admi
 
 	private void save() throws ESException {
 		try {
-			getServerSpace().save();
+			daoFacade.save();
 		} catch (final IOException e) {
 			throw new StorageException(StorageException.NOSAVE, e);
 		} catch (final NullPointerException e) {

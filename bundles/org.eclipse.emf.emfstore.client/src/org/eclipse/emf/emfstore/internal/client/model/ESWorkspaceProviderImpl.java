@@ -281,6 +281,15 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	}
 
 	/**
+	 * Set the admin connection manager.
+	 * 
+	 * @param the new {@link AdminConnectionManager} to be set
+	 */
+	public void setAdminConnectionManager(AdminConnectionManager adminConnectionManager) {
+		this.adminConnectionManager = adminConnectionManager;
+	}
+
+	/**
 	 * Retrieve the project space for a model element.
 	 * 
 	 * @param modelElement

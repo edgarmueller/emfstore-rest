@@ -9,6 +9,8 @@
   <packaging>pom</packaging>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <tycho-version>0.18.0</tycho-version>
     <junit-version>4.8.2</junit-version>
     <maven-checkstyle-version>2.10</maven-checkstyle-version>
@@ -178,10 +180,21 @@
 	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.example</module>
 	<module>../../tests/org.eclipse.emf.emfstore.fuzzy.emf.test</module>
 	
+	<!-- Testing related stuff -->
+	<module>../../features/org.eclipse.emf.emfstore.test.feature</module>
+	<module>../../tests/org.eclipse.emf.emfstore.test.model</module>
+	<module>../../tests/org.eclipse.emf.emfstore.test.model.edit</module>
+	<module>../../tests/org.eclipse.emf.emfstore.test.common</module>
+	
     <!-- Testing -->
+    <module>../../tests/org.eclipse.emf.emfstore.client.api.test</module>
+	<module>../../tests/org.eclipse.emf.emfstore.server.test</module>
+    <module>../../tests/org.eclipse.emf.emfstore.client.changetracking.test</module>
+    <module>../../tests/org.eclipse.emf.emfstore.client.recording.test</module>
+    <module>../../tests/org.eclipse.emf.emfstore.client.conflictdetection.test</module>
     <module>../../tests/org.eclipse.emf.emfstore.client.test</module>
 	<module>../../tests/org.eclipse.emf.emfstore.client.test.ui</module>
-	<module>../../tests/org.eclipse.emf.emfstore.client.test.alltests</module>
+	<!-- <module>../../tests/org.eclipse.emf.emfstore.client.test.alltests</module>-->
     
   </modules>
 <!-- 
@@ -289,7 +302,7 @@
         </executions>
       </plugin>
 
-      <plugin>
+      <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${maven-checkstyle-version}</version>
@@ -303,15 +316,14 @@
           </execution>
         </executions>
         <configuration>
-          <!-- Checkstyle violations will not fail the whole build -->
+          
           <failOnViolation>false</failOnViolation>
-          <!-- <configLocation>${basedir}/../../EMFStoreDeveloper/coding/emfstoreStyle5.x.xml</configLocation>-->
           <configLocation>http://download.eclipse.org/emfclient/config/esmCheckstyle.xml</configLocation>
           <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
 					<suppressionsLocation>http://download.eclipse.org/emfclient/config/suppressions.xml</suppressionsLocation>
           <propertyExpansion>samedir=${basedir}/../../EMFStoreDeveloper/coding</propertyExpansion>
         </configuration>
-      </plugin>
+      </plugin>-->
     </plugins>
   </build>
 

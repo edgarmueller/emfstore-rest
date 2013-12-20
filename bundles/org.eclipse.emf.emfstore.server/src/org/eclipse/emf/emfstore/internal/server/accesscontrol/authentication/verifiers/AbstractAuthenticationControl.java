@@ -96,6 +96,7 @@ public abstract class AbstractAuthenticationControl implements AuthenticationCon
 	 */
 	protected String preparePassword(String password) throws ServerKeyStoreException {
 		return ServerKeyStoreManager.getInstance().decrypt(password);
+
 	}
 
 	/**

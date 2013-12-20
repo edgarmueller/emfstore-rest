@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
-import org.eclipse.emf.emfstore.client.test.api.ProjectChangeUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.ui.controller.UIRevertCommitController;
@@ -79,7 +78,8 @@ public class UIRevertCommitControllerTest2 extends AbstractUIControllerTestWithC
 	}
 
 	private void createPlayerAndTournamentAndCommit() {
-		final Player player = ProjectChangeUtil.createPlayer("player");
+		final Player player = BowlingFactory.eINSTANCE.createPlayer();
+		player.setName("player");
 		final Tournament tournament = BowlingFactory.eINSTANCE.createTournament();
 		tournament.getPlayerPoints().put(player, 32);
 

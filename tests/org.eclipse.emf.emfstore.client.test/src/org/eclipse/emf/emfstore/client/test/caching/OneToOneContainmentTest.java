@@ -14,10 +14,10 @@ package org.eclipse.emf.emfstore.client.test.caching;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.eclipse.emf.emfstore.client.test.model.rationale.Issue;
-import org.eclipse.emf.emfstore.client.test.model.rationale.RationaleFactory;
-import org.eclipse.emf.emfstore.client.test.model.rationale.Solution;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTest;
+import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.test.model.TestElement;
 import org.junit.Test;
 
 /**
@@ -25,7 +25,7 @@ import org.junit.Test;
  * 
  * @author koegel
  */
-public class OneToOneContainmentTest extends CachingTest {
+public class OneToOneContainmentTest extends ESTest {
 
 	/**
 	 * Add a one to one containment child and check for project cache update.
@@ -33,18 +33,18 @@ public class OneToOneContainmentTest extends CachingTest {
 	@Test
 	public void addIssueSolution() {
 
-		Issue issue = RationaleFactory.eINSTANCE.createIssue();
+		final TestElement issue = Create.testElement();
 		getProject().addModelElement(issue);
 
 		assertTrue(getProject().contains(issue));
 		assertEquals(getProject(), ModelUtil.getProject(issue));
 
-		Solution solution = RationaleFactory.eINSTANCE.createSolution();
-		issue.setSolution(solution);
+		final TestElement solution = Create.testElement();
+		issue.setContainedElement(solution);
 
 		assertTrue(getProject().contains(solution));
 		assertEquals(getProject(), ModelUtil.getProject(solution));
-		assertEquals(issue, solution.getIssue());
-		assertEquals(solution, issue.getSolution());
+		assertEquals(issue, solution.getContainer());
+		assertEquals(solution, issue.getContainedElement());
 	}
 }

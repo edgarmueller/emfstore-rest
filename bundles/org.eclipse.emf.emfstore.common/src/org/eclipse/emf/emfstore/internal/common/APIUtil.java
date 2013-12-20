@@ -47,9 +47,9 @@ public class APIUtil {
 			return null;
 		}
 
-		ArrayList<T> result = new ArrayList<T>(toCopy.size());
+		final ArrayList<T> result = new ArrayList<T>(toCopy.size());
 
-		for (T element : toCopy) {
+		for (final T element : toCopy) {
 			result.add(element);
 		}
 
@@ -63,11 +63,11 @@ public class APIUtil {
 			return null;
 		}
 
-		ArrayList<INT> result = new ArrayList<INT>(toCopy.size());
+		final ArrayList<INT> result = new ArrayList<INT>(toCopy.size());
 
-		for (API element : toCopy) {
+		for (final API element : toCopy) {
 			@SuppressWarnings("unchecked")
-			IMPL i = (IMPL) element;
+			final IMPL i = (IMPL) element;
 			result.add(i.toInternalAPI());
 		}
 
@@ -81,11 +81,11 @@ public class APIUtil {
 			return null;
 		}
 
-		ArrayList<INT> result = new ArrayList<INT>(toCopy.size());
+		final ArrayList<INT> result = new ArrayList<INT>(toCopy.size());
 
-		for (API element : toCopy) {
+		for (final API element : toCopy) {
 			@SuppressWarnings("unchecked")
-			IMPL i = (IMPL) element;
+			final IMPL i = (IMPL) element;
 			result.add(i.toInternalAPI());
 		}
 
@@ -99,9 +99,9 @@ public class APIUtil {
 			return null;
 		}
 
-		ArrayList<API> result = new ArrayList<API>(toCopy.size());
+		final ArrayList<API> result = new ArrayList<API>(toCopy.size());
 
-		for (INT element : toCopy) {
+		for (final INT element : toCopy) {
 			result.add(element.toAPI());
 		}
 
@@ -115,9 +115,9 @@ public class APIUtil {
 			return null;
 		}
 
-		LinkedHashSet<API> result = new LinkedHashSet<API>(toCopy.size());
+		final LinkedHashSet<API> result = new LinkedHashSet<API>(toCopy.size());
 
-		for (INT element : toCopy) {
+		for (final INT element : toCopy) {
 			result.add(element.toAPI());
 		}
 
@@ -145,9 +145,9 @@ public class APIUtil {
 			return null;
 		}
 
-		ArrayList<V> result = new ArrayList<V>(toCopy.size());
+		final ArrayList<V> result = new ArrayList<V>(toCopy.size());
 
-		for (T element : toCopy) {
+		for (final T element : toCopy) {
 			result.add(element.toAPI());
 		}
 
@@ -177,9 +177,9 @@ public class APIUtil {
 			return null;
 		}
 
-		ArrayList<T> result = new ArrayList<T>(toCopy.size());
+		final ArrayList<T> result = new ArrayList<T>(toCopy.size());
 
-		for (V element : toCopy) {
+		for (final V element : toCopy) {
 			result.add(((U) element).toInternalAPI());
 		}
 
@@ -193,15 +193,19 @@ public class APIUtil {
 			return null;
 		}
 
-		Set<INT> result = new LinkedHashSet<INT>(toCopy.size());
+		final Set<INT> result = new LinkedHashSet<INT>(toCopy.size());
 
-		for (API element : toCopy) {
+		for (final API element : toCopy) {
 			@SuppressWarnings("unchecked")
-			IMPL i = (IMPL) element;
+			final IMPL i = (IMPL) element;
 			result.add(i.toInternalAPI());
 		}
 
 		return result;
 	}
 
+	public static <V, U extends InternalAPIDelegator<U, T>, T extends APIDelegate<U>> T toInternal(
+		Class<T> apiClass, V element) {
+		return ((U) element).toInternalAPI();
+	}
 }

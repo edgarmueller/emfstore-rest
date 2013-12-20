@@ -48,14 +48,14 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 public interface EMFStore extends EMFStoreInterface {
 
 	/**
-	 * Virtual Uri for change package de-/serialization.
+	 * Virtual URI for change package de-/serialization.
 	 */
-	URI CHANGEPACKAGE_URI = URI.createURI("emfstoreVirtualChangePackageUri");
+	URI CHANGEPACKAGE_URI = URI.createURI("emfstoreVirtualChangePackageUri"); //$NON-NLS-1$
 
 	/**
-	 * Virtual Uri for project de-/serialization.
+	 * Virtual URI for project de-/serialization.
 	 */
-	URI PROJECT_URI = URI.createURI("emfstoreVirtualProjectUri");
+	URI PROJECT_URI = URI.createURI("emfstoreVirtualProjectUri"); //$NON-NLS-1$
 
 	/**
 	 * Get a list of projects the user of the session id can access. The server
@@ -216,7 +216,7 @@ public interface EMFStore extends EMFStoreInterface {
 	 * @param versionSpec
 	 *            the version versionSpec
 	 * @param tag
-	 *            the tags
+	 *            the tag to be removed
 	 * @throws ESException
 	 *             if any error in the EmfStore occurs
 	 */

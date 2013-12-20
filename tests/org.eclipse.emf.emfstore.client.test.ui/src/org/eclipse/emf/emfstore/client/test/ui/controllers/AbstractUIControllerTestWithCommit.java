@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.emfstore.bowling.BowlingFactory;
 import org.eclipse.emf.emfstore.bowling.League;
 import org.eclipse.emf.emfstore.bowling.Player;
 import org.eclipse.emf.emfstore.bowling.Tournament;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.observer.ESUpdateObserver;
-import org.eclipse.emf.emfstore.client.test.api.ProjectChangeUtil;
 import org.eclipse.emf.emfstore.client.test.ui.AllUITests;
 import org.eclipse.emf.emfstore.client.ui.ESUIControllerFactory;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
@@ -48,7 +48,7 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 	private boolean didUpdate;
 
 	protected void createTournamentAndCommit() {
-		final Tournament tournament = ProjectChangeUtil.createTournament(true);
+		final Tournament tournament = BowlingFactory.eINSTANCE.createTournament();
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				localProject.getModelElements().add(tournament);
@@ -67,7 +67,8 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 	}
 
 	protected Player createPlayerAndCommit(final ESLocalProject localProject) {
-		final Player player = ProjectChangeUtil.createPlayer(PLAYER_NAME);
+		final Player player = BowlingFactory.eINSTANCE.createPlayer();
+		player.setName(PLAYER_NAME);
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				localProject.getModelElements().add(player);
@@ -79,7 +80,8 @@ public abstract class AbstractUIControllerTestWithCommit extends AbstractUIContr
 	}
 
 	protected void createLeagueAndCommit(final ESLocalProject localProject) {
-		final League league = ProjectChangeUtil.createLeague("L");
+		final League league = BowlingFactory.eINSTANCE.createLeague();
+		league.setName("L");
 		RunESCommand.run(new Callable<Void>() {
 			public Void call() throws Exception {
 				localProject.getModelElements().add(league);

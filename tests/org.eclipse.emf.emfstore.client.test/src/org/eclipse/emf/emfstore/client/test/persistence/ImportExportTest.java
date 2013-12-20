@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.persistence;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -21,27 +22,26 @@ import junit.framework.Assert;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESProject;
-import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTest;
+import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
+import org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil;
 import org.eclipse.emf.emfstore.internal.client.importexport.ExportImportControllerExecutor;
 import org.eclipse.emf.emfstore.internal.client.importexport.ExportImportControllerFactory;
 import org.eclipse.emf.emfstore.internal.client.importexport.impl.ExportImportDataUnits;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.test.model.TestElement;
 import org.junit.Test;
 
-public class ImportExportTest extends WorkspaceTest {
-
-	@Override
-	protected void configureCompareAtEnd() {
-		setCompareAtEnd(false);
-	}
+public class ImportExportTest extends ESTest {
 
 	@Test
 	public void testExportImportChangesController() throws IOException {
 		final ProjectSpace clonedProjectSpace = ModelUtil.clone(getProjectSpace());
-		createTestElement("A");
-		Assert.assertTrue(getProjectSpace().getOperations().size() > 0);
+		final TestElement testElement = Create.testElement("A");
+		ProjectUtil.addElement(getLocalProject(), testElement);
+		assertTrue(getProjectSpace().getOperations().size() > 0);
 
 		// TODO: assert file extension is correct
 
@@ -59,8 +59,9 @@ public class ImportExportTest extends WorkspaceTest {
 
 	@Test
 	public void testExportImportProjectController() throws IOException {
-		createTestElement("A");
-		Assert.assertTrue(getProjectSpace().getOperations().size() > 0);
+		final TestElement testElement = Create.testElement("A");
+		ProjectUtil.addElement(getLocalProject(), testElement);
+		assertTrue(getProjectSpace().getOperations().size() > 0);
 
 		// TODO: assert file extension is correct
 
@@ -96,7 +97,7 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectSpaceController());
 
-		Assert.assertEquals(3, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
+		assertEquals(3, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 		final ProjectSpace projectSpace = ESWorkspaceProviderImpl.getInstance().getInternalWorkspace()
 			.getProjectSpaces().get(1);
 		final ProjectSpace projectSpace2 = ESWorkspaceProviderImpl.getInstance().getInternalWorkspace()
@@ -106,8 +107,9 @@ public class ImportExportTest extends WorkspaceTest {
 
 	@Test
 	public void testExportImportProjectSpaceController() throws IOException {
-		createTestElement("A");
-		Assert.assertTrue(getProjectSpace().getOperations().size() > 0);
+		final TestElement testElement = Create.testElement("A");
+		ProjectUtil.addElement(getLocalProject(), testElement);
+		assertTrue(getProjectSpace().getOperations().size() > 0);
 
 		// TODO: assert file extension is correct
 
@@ -120,7 +122,7 @@ public class ImportExportTest extends WorkspaceTest {
 		new ExportImportControllerExecutor(temp, new NullProgressMonitor())
 			.execute(ExportImportControllerFactory.Import.getImportProjectSpaceController());
 
-		Assert.assertEquals(2, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
+		assertEquals(2, ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().size());
 
 		final ESLocalProject a = ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().get(0);
 		final ESLocalProject b = ESWorkspaceProviderImpl.getInstance().getWorkspace().getLocalProjects().get(1);

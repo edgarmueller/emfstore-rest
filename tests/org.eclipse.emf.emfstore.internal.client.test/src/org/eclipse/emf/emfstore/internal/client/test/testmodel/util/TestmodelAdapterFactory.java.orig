@@ -1,0 +1,243 @@
+/**
+ * Copyright 2011 Chair for Applied Software Engineering,
+ * Technische Universitaet Muenchen.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ */
+package org.eclipse.emf.emfstore.internal.client.test.testmodel.util;
+
+import java.util.Map;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
+<<<<<<< HEAD:tests/org.eclipse.emf.emfstore.client.test/src/org/eclipse/emf/emfstore/client/test/testmodel/util/TestmodelAdapterFactory.java
+import org.eclipse.emf.emfstore.client.test.testmodel.*;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElement;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer;
+import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage;
+=======
+
+import org.eclipse.emf.emfstore.internal.client.test.testmodel.*;
+>>>>>>> tests-refactoring:tests/org.eclipse.emf.emfstore.internal.client.test/src/org/eclipse/emf/emfstore/internal/client/test/testmodel/util/TestmodelAdapterFactory.java
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Adapter Factory</b> for the model.
+ * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * <!-- end-user-doc -->
+<<<<<<< HEAD:tests/org.eclipse.emf.emfstore.client.test/src/org/eclipse/emf/emfstore/client/test/testmodel/util/TestmodelAdapterFactory.java
+ * @see org.eclipse.emf.emfstore.client.test.testmodel.TestmodelPackage
+=======
+ * @see org.eclipse.emf.emfstore.internal.client.test.testmodel.TestmodelPackage
+>>>>>>> tests-refactoring:tests/org.eclipse.emf.emfstore.internal.client.test/src/org/eclipse/emf/emfstore/internal/client/test/testmodel/util/TestmodelAdapterFactory.java
+ * @generated
+ */
+public class TestmodelAdapterFactory extends AdapterFactoryImpl {
+	/**
+	 * The cached model package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static TestmodelPackage modelPackage;
+
+	/**
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TestmodelAdapterFactory() {
+		if (modelPackage == null) {
+			modelPackage = TestmodelPackage.eINSTANCE;
+		}
+	}
+
+	/**
+	 * Returns whether this factory is applicable for the type of the object.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+	 * <!-- end-user-doc -->
+	 * @return whether this factory is applicable for the type of the object.
+	 * @generated
+	 */
+	@Override
+	public boolean isFactoryForType(Object object) {
+		if (object == modelPackage) {
+			return true;
+		}
+		if (object instanceof EObject) {
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
+		}
+		return false;
+	}
+
+	/**
+	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+<<<<<<< HEAD:tests/org.eclipse.emf.emfstore.client.test/src/org/eclipse/emf/emfstore/client/test/testmodel/util/TestmodelAdapterFactory.java
+	protected TestmodelSwitch<Adapter> modelSwitch = new TestmodelSwitch<Adapter>() {
+=======
+	protected TestmodelSwitch<Adapter> modelSwitch =
+		new TestmodelSwitch<Adapter>() {
+>>>>>>> tests-refactoring:tests/org.eclipse.emf.emfstore.internal.client.test/src/org/eclipse/emf/emfstore/internal/client/test/testmodel/util/TestmodelAdapterFactory.java
+			@Override
+			public Adapter caseTestElement(TestElement object) {
+				return createTestElementAdapter();
+			}
+			@Override
+			public Adapter caseTestElementContainer(TestElementContainer object) {
+				return createTestElementContainerAdapter();
+			}
+			@Override
+			public Adapter caseTestElementToStringMap(Map.Entry<TestElement, String> object) {
+				return createTestElementToStringMapAdapter();
+			}
+			@Override
+			public Adapter caseStringToStringMap(Map.Entry<String, String> object) {
+				return createStringToStringMapAdapter();
+			}
+			@Override
+			public Adapter caseTestElementToTestElementMap(Map.Entry<TestElement, TestElement> object) {
+				return createTestElementToTestElementMapAdapter();
+			}
+			@Override
+			public Adapter caseStringToTestElementMap(Map.Entry<String, TestElement> object) {
+				return createStringToTestElementMapAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
+
+	/**
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
+	@Override
+	public Adapter createAdapter(Notifier target) {
+		return modelSwitch.doSwitch((EObject)target);
+	}
+
+
+	/**
+<<<<<<< HEAD:tests/org.eclipse.emf.emfstore.client.test/src/org/eclipse/emf/emfstore/client/test/testmodel/util/TestmodelAdapterFactory.java
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElement <em>Test Element</em>}'.
+=======
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElement <em>Test Element</em>}'.
+>>>>>>> tests-refactoring:tests/org.eclipse.emf.emfstore.internal.client.test/src/org/eclipse/emf/emfstore/internal/client/test/testmodel/util/TestmodelAdapterFactory.java
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElement
+	 * @generated
+	 */
+	public Adapter createTestElementAdapter() {
+		return null;
+	}
+
+	/**
+<<<<<<< HEAD:tests/org.eclipse.emf.emfstore.client.test/src/org/eclipse/emf/emfstore/client/test/testmodel/util/TestmodelAdapterFactory.java
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer <em>Test Element Container</em>}'.
+=======
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.emfstore.internal.client.test.testmodel.TestElementContainer <em>Test Element Container</em>}'.
+>>>>>>> tests-refactoring:tests/org.eclipse.emf.emfstore.internal.client.test/src/org/eclipse/emf/emfstore/internal/client/test/testmodel/util/TestmodelAdapterFactory.java
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.emfstore.client.test.testmodel.TestElementContainer
+	 * @generated
+	 */
+	public Adapter createTestElementContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Test Element To String Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createTestElementToStringMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>String To String Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createStringToStringMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Test Element To Test Element Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createTestElementToTestElementMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>String To Test Element Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createStringToTestElementMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @generated
+	 */
+	public Adapter createEObjectAdapter() {
+		return null;
+	}
+
+} //TestmodelAdapterFactory

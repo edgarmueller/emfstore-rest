@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * MaximilianKoegel
- * wesendon
+ * Maximilian Koegel, Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
@@ -20,39 +19,38 @@ import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
- * The connection manager manages the connection to the EmfStore. It will initiate, reinitiate and terminate the
- * connection as needed.
+ * The connection manager manages the connection to the EMFStore.
+ * It will initiate, reinitiate and terminate the connection as needed.
  * 
- * @author Maximilian Koegel
+ * @author mkoegel
  * @author wesendon
- * @generated NOT
  */
 public interface ConnectionManager extends EMFStore {
 
 	/**
 	 * Connection related failure message.
 	 */
-	String REMOTE = "Server could not be reached.\n";
+	String REMOTE = Messages.ConnectionManager_Server_Could_Not_Be_Reached;
 
 	/**
 	 * Connection related failure message.
 	 */
-	String LOGIN_FIRST = "Session unkown to Connection manager, log in first!";
+	String LOGIN_FIRST = Messages.ConnectionManager_Session_Unknown;
 
 	/**
 	 * Connection related failure message.
 	 */
-	String UNSUPPORTED_ENCODING = "Problem with en/decoding.";
+	String UNSUPPORTED_ENCODING = Messages.ConnectionManager_Encoding_Problem;
 
 	/**
 	 * Connection related failure message.
 	 */
-	String LOGIN_REFUSED = "Login refused.";
+	String LOGIN_REFUSED = Messages.ConnectionManager_Login_Refused;
 
 	/**
 	 * Connection related failure message.
 	 */
-	String INCOMPATIBLE_VERSION = "Client version not compatible with server. Please update your client.";
+	String INCOMPATIBLE_VERSION = Messages.ConnectionManager_Incompatible_Client_Version;
 
 	/**
 	 * Log into the server given by server info. The connection manager will also remember the serverInfo associated
@@ -64,7 +62,6 @@ public interface ConnectionManager extends EMFStore {
 	 * @param clientVersionInfo the client's version
 	 * @return {@link AuthenticationInformation} that can be used for later authentication
 	 * @throws ESException in case of failure
-	 * @generated NOT
 	 */
 	AuthenticationInformation logIn(String username, String password, ServerInfo severInfo,
 		ClientVersionInfo clientVersionInfo) throws ESException;

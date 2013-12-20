@@ -29,7 +29,7 @@
           
           <argLine>-Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m -DcreateDiffs=${createDiffs}</argLine>
           <failIfNoTests>false</failIfNoTests>
-          <testFailureIgnore>true</testFailureIgnore>
+          <testFailureIgnore>false</testFailureIgnore>
           
           <dependencies> 
           	<dependency>

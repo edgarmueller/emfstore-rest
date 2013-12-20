@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.emf.emfstore.client.usersessionProvider">
+      <sessionProvider
+            class="org.eclipse.emf.emfstore.client.test.common.util.TestSessionProvider">
+      </sessionProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.inverseCrossReferenceCache">
+      <useInverseCrossReferenceCache
+            activated="true">
+      </useInverseCrossReferenceCache>
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.client.workspaceLocationProvider">
+   </extension>
+   <extension
+         point="org.eclipse.emf.emfstore.server.locationProvider">
+   </extension>
+
+</plugin>

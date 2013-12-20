@@ -54,4 +54,44 @@ public abstract class AbstractAPIImpl<API, INTERNAL extends APIDelegate<API>>
 		return internal;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (toInternalAPI() == null ? 0 : toInternalAPI().hashCode());
+		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		@SuppressWarnings("unchecked")
+		final AbstractAPIImpl<API, APIDelegate<API>> other = (AbstractAPIImpl<API, APIDelegate<API>>) obj;
+		if (toInternalAPI() == null) {
+			if (other.toInternalAPI() != null) {
+				return false;
+			}
+		} else if (!toInternalAPI().equals(other.toInternalAPI())) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -17,8 +17,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
-import org.eclipse.emf.emfstore.client.test.WorkspaceTest;
-import org.eclipse.emf.emfstore.client.test.testmodel.TestmodelFactory;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTest;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.Workspace;
@@ -28,15 +27,10 @@ import org.eclipse.emf.emfstore.internal.common.EMFStoreResourceHelper;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
-import org.junit.Before;
+import org.eclipse.emf.emfstore.test.model.TestmodelFactory;
 import org.junit.Test;
 
-public class PersistenceTest extends WorkspaceTest {
-
-	@Before
-	public void before() {
-		setCompareAtEnd(false);
-	}
+public class PersistenceTest extends ESTest {
 
 	@Test
 	public void testReinitWorkspace() throws SerializationException {

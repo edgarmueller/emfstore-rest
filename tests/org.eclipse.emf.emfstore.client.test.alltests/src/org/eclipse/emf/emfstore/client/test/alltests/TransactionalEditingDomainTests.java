@@ -11,11 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.alltests;
 
-import org.eclipse.emf.emfstore.client.test.api.AllAPITests;
-import org.eclipse.emf.emfstore.client.test.changeTracking.AllChangeTrackingTests;
-import org.eclipse.emf.emfstore.client.test.ui.AllUITests;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
@@ -25,8 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author jfaltermeier
  * 
  */
-@RunWith(Suite.class)
-@SuiteClasses({ AllAPITests.class, AllUITests.class, AllChangeTrackingTests.class })
+@RunWith(DynamicSuite.class)
 public class TransactionalEditingDomainTests {
 
 }

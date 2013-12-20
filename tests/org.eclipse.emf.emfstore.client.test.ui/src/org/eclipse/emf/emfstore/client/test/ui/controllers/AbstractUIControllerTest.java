@@ -22,7 +22,6 @@ import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.ESWorkspace;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.test.ui.AllUITests;
-import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -51,7 +50,7 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 		server = ESWorkspaceProvider.INSTANCE.getWorkspace().addServer(server);
 		try {
 			usersession = server.login("super", "super");
-		} catch (ESException e) {
+		} catch (final ESException e) {
 			fail(e.getMessage());
 		}
 		Assert.assertEquals(usersession, server.getLastUsersession());
@@ -70,14 +69,14 @@ public abstract class AbstractUIControllerTest extends SWTBotTestCase {
 	}
 
 	protected static void deleteLocalProjects() throws IOException, FatalESException, ESException {
-		for (ESLocalProject project : ESWorkspaceProviderImpl.INSTANCE.getWorkspace().getLocalProjects()) {
+		for (final ESLocalProject project : ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects()) {
 			project.delete(new NullProgressMonitor());
 		}
 	}
 
 	protected static void deleteRemoteProjects(ESUsersession usersession) throws IOException, FatalESException,
 		ESException {
-		for (ESRemoteProject project : ESWorkspaceProviderImpl.INSTANCE.getWorkspace().getServers().get(0)
+		for (final ESRemoteProject project : ESWorkspaceProvider.INSTANCE.getWorkspace().getServers().get(0)
 			.getRemoteProjects(usersession)) {
 			project.delete(usersession, new NullProgressMonitor());
 		}

@@ -146,7 +146,7 @@ public class EMFStoreController implements IApplication, Runnable {
 
 		accessControl = initAccessControl(serverSpace);
 		emfStore = EMFStoreImpl.createInterface(serverSpace, accessControl);
-		adminEmfStore = new AdminEmfStoreImpl(serverSpace, accessControl);
+		adminEmfStore = new AdminEmfStoreImpl(serverSpace, serverSpace, accessControl);
 
 		// copy keystore file to workspace if not existent
 		copyFileToWorkspace(ServerConfiguration.getServerKeyStorePath(), ServerConfiguration.SERVER_KEYSTORE_FILE,

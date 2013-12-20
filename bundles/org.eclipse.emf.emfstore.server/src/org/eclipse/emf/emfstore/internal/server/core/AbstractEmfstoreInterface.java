@@ -35,19 +35,20 @@ import org.eclipse.emf.emfstore.internal.server.model.SessionId;
  */
 public abstract class AbstractEmfstoreInterface {
 
-	private AuthorizationControl authorizationControl;
-	private HashMap<Class<? extends AbstractSubEmfstoreInterface>, AbstractSubEmfstoreInterface> subInterfaces;
+	private final AuthorizationControl authorizationControl;
+	private final HashMap<Class<? extends AbstractSubEmfstoreInterface>, AbstractSubEmfstoreInterface> subInterfaces;
 	private boolean accessControlDisabled;
 	private final ServerSpace serverSpace;
 
 	/**
 	 * Default constructor.
 	 * 
-	 * @param serverSpace the serverspace
-	 * @param authorizationControl accesscontrol
+	 * @param serverSpace the server space
+	 * @param authorizationControl access control
 	 * @throws FatalESException if initialization fails
 	 */
-	public AbstractEmfstoreInterface(ServerSpace serverSpace, AuthorizationControl authorizationControl)
+	public AbstractEmfstoreInterface(ServerSpace serverSpace,
+		AuthorizationControl authorizationControl)
 		throws FatalESException {
 		this.serverSpace = serverSpace;
 		if (serverSpace == null || authorizationControl == null) {
@@ -57,7 +58,7 @@ public abstract class AbstractEmfstoreInterface {
 		accessControlDisabled = false;
 		subInterfaces = new LinkedHashMap<Class<? extends AbstractSubEmfstoreInterface>, AbstractSubEmfstoreInterface>();
 		initSubInterfaces();
-		for (AbstractSubEmfstoreInterface subInterface : subInterfaces.values()) {
+		for (final AbstractSubEmfstoreInterface subInterface : subInterfaces.values()) {
 			subInterface.initSubInterface();
 		}
 	}
@@ -204,7 +205,7 @@ public abstract class AbstractEmfstoreInterface {
 	 * @throws InvalidInputException is thrown if the check fails
 	 */
 	protected void sanityCheckObjects(Object... objects) throws InvalidInputException {
-		for (Object object : objects) {
+		for (final Object object : objects) {
 			sanityCheckObject(object);
 		}
 	}

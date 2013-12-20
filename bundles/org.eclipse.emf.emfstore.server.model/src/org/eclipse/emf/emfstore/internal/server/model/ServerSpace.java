@@ -17,11 +17,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object ' <em><b>Server Space</b></em>'.
  * 
- * @extends APIDelegate<ESServerSpace>
+ * @extends org.eclipse.emf.emfstore.internal.server.model.versioning.DAOProvider
  *          <!-- end-user-doc -->
  * 
  *          <p>
@@ -39,7 +40,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
  * @model
  * @generated
  */
-public interface ServerSpace extends EObject {
+public interface ServerSpace extends EObject, ACDAOFacade {
 	/**
 	 * Returns the value of the '<em><b>Groups</b></em>' containment reference
 	 * list. The list contents are of type {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup}.

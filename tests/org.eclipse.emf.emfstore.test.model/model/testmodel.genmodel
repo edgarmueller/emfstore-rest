@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2012-2013 EclipseSource Muenchen GmbH and others.&#xD;&#xA;&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA;Contributors:&#xD;&#xA;Edgar Mueller - initial API and implementation"
+    modelDirectory="/org.eclipse.emf.emfstore.test.model/src" editDirectory="/org.eclipse.emf.emfstore.test.model.edit/src"
+    editorDirectory="/org.eclipse.emf.emfstore.client.test.editor/src" modelPluginID="org.eclipse.emf.emfstore.test.model"
+    modelName="Testmodel" editPluginClass="org.eclipse.emf.emfstore.test.model.provider.TestmodelEditPlugin"
+    editorPluginClass="org.eclipse.emf.emfstore.client.test.testmodel.presentation.TestmodelEditorPlugin"
+    nonNLSMarkers="true" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.emf.emfstore.test.model.edit"
+    editorPluginID="org.eclipse.emf.emfstore.client.test.editor" runtimeVersion="2.5"
+    language="" importOrganizing="true">
+  <foreignModel>testmodel.ecore</foreignModel>
+  <genPackages prefix="Testmodel" basePackage="org.eclipse.emf.emfstore" disposableProviderFactory="true"
+      interfacePackageSuffix="model" metaDataPackageSuffix="model" classPackageSuffix="model.impl"
+      utilityPackageSuffix="model.util" childCreationExtenders="true" ecorePackage="testmodel.ecore#/">
+    <genClasses ecoreClass="testmodel.ecore#//TestElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testmodel.ecore#//TestElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testmodel.ecore#//TestElement/strings"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/references"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/containedElements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/reference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/containedElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/otherReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testmodel.ecore#//TestElement/description"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/container"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/srefContainer"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/elementMap"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/stringToStringMap"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/elementToStringMap"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/stringToElementMap"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/nonContained_NTo1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/nonContained_1ToN"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/nonContained_NToM"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/nonContained_MToN"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/containedElements2"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/container2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElement/containedElements_NoOpposite"/>
+    </genClasses>
+    <genClasses ecoreClass="testmodel.ecore#//TestElementToStringMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testmodel.ecore#//TestElementToStringMap/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElementToStringMap/key"/>
+    </genClasses>
+    <genClasses ecoreClass="testmodel.ecore#//StringToStringMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testmodel.ecore#//StringToStringMap/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testmodel.ecore#//StringToStringMap/value"/>
+    </genClasses>
+    <genClasses ecoreClass="testmodel.ecore#//TestElementToTestElementMap">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElementToTestElementMap/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//TestElementToTestElementMap/key"/>
+    </genClasses>
+    <genClasses ecoreClass="testmodel.ecore#//StringToTestElementMap">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference testmodel.ecore#//StringToTestElementMap/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testmodel.ecore#//StringToTestElementMap/key"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

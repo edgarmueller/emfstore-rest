@@ -12,8 +12,8 @@
 package org.eclipse.emf.emfstore.fuzzy.emf.test;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
-import org.eclipse.emf.emfstore.client.test.server.api.CoreServerTest;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTestWithLoggedInUser;
+import org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil;
 import org.eclipse.emf.emfstore.client.util.ESVoidCallable;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.fuzzy.Annotations.Data;
@@ -22,10 +22,7 @@ import org.eclipse.emf.emfstore.fuzzy.Annotations.Util;
 import org.eclipse.emf.emfstore.fuzzy.FuzzyRunner;
 import org.eclipse.emf.emfstore.fuzzy.emf.EMFDataProvider;
 import org.eclipse.emf.emfstore.fuzzy.emf.MutateUtil;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
-import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
-import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESWorkspaceImpl;
-import org.eclipse.emf.emfstore.internal.common.CommonUtil;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.modelmutator.api.ModelMutatorConfiguration;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -42,7 +39,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(FuzzyRunner.class)
 @DataProvider(EMFDataProvider.class)
-public class ServerTest extends CoreServerTest {
+public class ServerTest extends ESTestWithLoggedInUser {
 
 	@Data
 	private Project project;
@@ -55,18 +52,8 @@ public class ServerTest extends CoreServerTest {
 	 */
 	@Before
 	public void setupProjectSpace() {
-		CommonUtil.setTesting(true);
-		Configuration.getClientBehavior().setAutoSave(false);
-
-		RunESCommand.run(new ESVoidCallable() {
-			@Override
-			public void run() {
-				final ESWorkspaceImpl workspaceImpl = (ESWorkspaceImpl) ESWorkspaceProvider.INSTANCE.getWorkspace();
-				setProjectSpace(workspaceImpl.toInternalAPI().importProject(project, "", ""));
-			}
-		});
-
-		setProject(project);
+		super.before();
+		project = getProject();
 	}
 
 	/**
@@ -76,22 +63,19 @@ public class ServerTest extends CoreServerTest {
 	@Test
 	public void shareCheckoutCommitUpdate() throws ESException {
 
-		final ProjectSpace projectSpace = getProjectSpace();
-
+		ProjectUtil.share(getUsersession(), getLocalProject());
 		// share original project
-		final PrimaryVersionSpec versionSpec = share(projectSpace);
+		final PrimaryVersionSpec versionSpec = getProjectSpace().getBaseVersion();
 
-		// checkout project
-		final ProjectSpace psCheckedout = checkout(projectSpace.toAPI()
-			.getRemoteProject(), versionSpec);
+		final ESLocalProjectImpl checkout = (ESLocalProjectImpl) ProjectUtil.checkout(getLocalProject());
 
 		// compare original and checkedout project
-		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(),
-			psCheckedout.getProject(), util);
+		FuzzyProjectTest.compareIgnoreOrder(getProject(),
+			checkout.toInternalAPI().getProject(), util);
 
 		// change & commit original project
 		final ModelMutatorConfiguration mmc = FuzzyProjectTest
-			.getModelMutatorConfiguration(projectSpace.getProject(), util);
+			.getModelMutatorConfiguration(getProject(), util);
 
 		RunESCommand.run(new ESVoidCallable() {
 			@Override
@@ -100,14 +84,14 @@ public class ServerTest extends CoreServerTest {
 			}
 		});
 
-		commit(projectSpace);
+		ProjectUtil.commit(getLocalProject());
 
 		// update checkedout project
 		RunESCommand.run(new ESVoidCallable() {
 			@Override
 			public void run() {
 				try {
-					psCheckedout.update(new NullProgressMonitor());
+					checkout.update(new NullProgressMonitor());
 				} catch (final ESException e) {
 					throw new RuntimeException(e);
 				}
@@ -115,7 +99,6 @@ public class ServerTest extends CoreServerTest {
 		});
 
 		// compare original and updated project
-		FuzzyProjectTest.compareIgnoreOrder(projectSpace.getProject(),
-			psCheckedout.getProject(), util);
+		FuzzyProjectTest.compareIgnoreOrder(getProject(), checkout.toInternalAPI().getProject(), util);
 	}
 }

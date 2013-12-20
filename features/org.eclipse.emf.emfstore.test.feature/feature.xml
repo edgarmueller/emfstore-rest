@@ -219,14 +219,83 @@ litigation.
    </license>
 
    <requires>
-      <import plugin="org.junit4"/>
-      <import plugin="org.eclipse.emf.emfstore.client"/>
-      <import plugin="org.eclipse.emf.emfstore.client.model.edit"/>
-      <import plugin="org.eclipse.emf.emfstore.modelmutator" version="0.9.3" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.emfstore.client.model.edit" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.emfstore.modelmutator" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.emfstore.common.model.edit" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.emfstore.server.model.edit" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.core.resources" version="3.5.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.emfstore.test.common" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.emfstore.test.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.emfstore.client" version="1.1.0" match="compatible"/>
+      <import plugin="org.junit" version="4.11.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.emfstore.examplemodel" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.edit" version="2.9.0" match="compatible"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.emfstore.client" version="1.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="org.eclipse.emf.emfstore.client.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.test.common"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.test.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.test.model.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.client.api.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.client.changetracking.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.client.conflictdetection.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.client.recording.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.emfstore.server.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
