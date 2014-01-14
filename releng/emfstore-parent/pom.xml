@@ -178,7 +178,7 @@
 	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.edit</module>
 	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.editor</module>
 	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.example</module>
-	<!-- <module>../../tests/org.eclipse.emf.emfstore.fuzzy.emf.test</module>-->
+	<module>../../tests/org.eclipse.emf.emfstore.fuzzy.emf.test</module>
 	
 	<!-- Testing related stuff -->
 	<module>../../features/org.eclipse.emf.emfstore.test.feature</module>
