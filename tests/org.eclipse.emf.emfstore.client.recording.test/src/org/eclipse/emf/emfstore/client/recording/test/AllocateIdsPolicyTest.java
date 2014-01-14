@@ -32,6 +32,9 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;
 import org.eclipse.emf.emfstore.internal.common.model.impl.IdEObjectCollectionImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.test.model.TestElement;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -46,6 +49,23 @@ public class AllocateIdsPolicyTest extends ESTestWithLoggedInUser {
 	@BeforeClass
 	public static void beforeClass() {
 		startEMFStore();
+	}
+
+	@AfterClass
+	public static void afterClass() {
+		stopEMFStore();
+	}
+
+	@Override
+	@Before
+	public void before() {
+		super.before();
+	}
+
+	@Override
+	@After
+	public void after() {
+		super.after();
 	}
 
 	/**

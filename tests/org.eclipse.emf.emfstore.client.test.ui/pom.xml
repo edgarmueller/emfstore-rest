@@ -32,7 +32,7 @@
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>false</useUIThread>
 					<argLine>-Dorg.eclipse.swtbot.search.timeout=30000 -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m</argLine>
-					<testFailureIgnore>false</testFailureIgnore>
+					<testFailureIgnore>true<</testFailureIgnore>
 					<!-- Plugins to be loaded to the osgi runtime -->
 					<dependencies>
 						<dependency>
@@ -195,7 +195,7 @@
 							<useUIHarness>true</useUIHarness>
 							<useUIThread>false</useUIThread>
 							<argLine>-Dorg.eclipse.swtbot.search.timeout=30000 -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m</argLine>
-							<testFailureIgnore>false</testFailureIgnore>
+							<testFailureIgnore>true<</testFailureIgnore>
 
 							<dependencies>
 								<dependency>
