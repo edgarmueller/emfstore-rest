@@ -34,7 +34,7 @@
 					<argLine>
 						-Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m
 					</argLine>
-					<testFailureIgnore>true<</testFailureIgnore>
+					<testFailureIgnore>true</testFailureIgnore>
 					<!-- Plugins to be loaded to the osgi runtime -->
 					<dependencies>
 						<dependency>
@@ -190,7 +190,7 @@
 							<argLine>
 								-Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m
 						    </argLine>
-							<testFailureIgnore>true<</testFailureIgnore>
+							<testFailureIgnore>true</testFailureIgnore>
 
 							<dependencies>
 								<dependency>
