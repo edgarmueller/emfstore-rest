@@ -302,7 +302,7 @@
         </executions>
       </plugin>
 
-      <!-- <plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${maven-checkstyle-version}</version>
@@ -323,7 +323,7 @@
 					<suppressionsLocation>http://download.eclipse.org/emfclient/config/suppressions.xml</suppressionsLocation>
           <propertyExpansion>samedir=${basedir}/../../EMFStoreDeveloper/coding</propertyExpansion>
         </configuration>
-      </plugin>-->
+      </plugin>
     </plugins>
   </build>
 
