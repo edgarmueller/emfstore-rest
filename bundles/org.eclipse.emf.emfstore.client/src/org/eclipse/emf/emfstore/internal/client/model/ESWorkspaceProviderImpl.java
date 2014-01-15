@@ -438,7 +438,6 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 * @generated NOT
 	 */
 	private AdminConnectionManager initAdminConnectionManager() {
-		// return new RMIAdminConnectionManagerImpl();
 		return new XmlRpcAdminConnectionManager();
 	}
 

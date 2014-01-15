@@ -46,6 +46,8 @@ import org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade;
 
 public class AccessControlImpl implements AccessControl {
 
+	private static final String MONITOR_NAME = "authentication";
+
 	/**
 	 * Contains possible access levels.
 	 */
@@ -119,7 +121,7 @@ public class AccessControlImpl implements AccessControl {
 	public AuthenticationInformation logIn(String username, String password,
 		ClientVersionInfo clientVersionInfo)
 		throws AccessControlException {
-		synchronized (MonitorProvider.getInstance().getMonitor("authentication")) {
+		synchronized (MonitorProvider.getInstance().getMonitor(MONITOR_NAME)) {
 			final ACUser user = resolveUser(username);
 			final AuthenticationInformation authenticationInformation = authenticationControl.logIn(user,
 				user.getName(), password, clientVersionInfo);
@@ -137,7 +139,7 @@ public class AccessControlImpl implements AccessControl {
 	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl#logout(org.eclipse.emf.emfstore.internal.server.model.SessionId)
 	 */
 	public void logout(SessionId sessionId) throws AccessControlException {
-		synchronized (MonitorProvider.getInstance().getMonitor("authentication")) {
+		synchronized (MonitorProvider.getInstance().getMonitor(MONITOR_NAME)) {
 			if (sessionId == null) {
 				throw new AccessControlException("SessionId is null.");
 			}

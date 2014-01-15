@@ -5,15 +5,15 @@ Bundle-SymbolicName: org.eclipse.emf.emfstore.test.common;singleton:=true
 Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.emfstore.test.model;bundle-version="1.0.0";visibility:=reexport,
+Require-Bundle: org.eclipse.emf.emfstore.test.model;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
  org.eclipse.emf.emfstore.client;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
  org.junit;bundle-version="[4.11.0,5.0.0)";visibility:=reexport,
  org.eclipse.emf.emfstore.examplemodel;bundle-version="[1.1.0,2.0.0)";visibility:=reexport,
- org.eclipse.emf.emfstore.test.model.edit;bundle-version="1.1.0";visibility:=reexport
+ org.eclipse.emf.emfstore.test.model.edit;bundle-version="[1.1.0,2.0.0)";visibility:=reexport
 Export-Package: org.eclipse.emf.emfstore.client.test.common;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.common.builders;version="1.1.0";x-internal:=true,
- org.eclipse.emf.emfstore.client.test.common.cases;version="1.1.0";x-internal:=true,
+ org.eclipse.emf.emfstore.client.test.common.cases;version="1.1.0";x-friends:="org.eclipse.emf.emfstore.server.test",
  org.eclipse.emf.emfstore.client.test.common.dsl;version="1.1.0";x-internal:=true,
  org.eclipse.emf.emfstore.client.test.common.mocks;version="1.1.0";x-internal:=true,
- org.eclipse.emf.emfstore.client.test.common.util;version="1.1.0";x-internal:=true
+ org.eclipse.emf.emfstore.client.test.common.util;version="1.1.0";x-friends:="org.eclipse.emf.emfstore.server.test"
 Bundle-ActivationPolicy: lazy

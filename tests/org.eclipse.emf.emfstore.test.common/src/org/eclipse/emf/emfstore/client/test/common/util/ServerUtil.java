@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfstore.client.ESServer;
+import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.client.test.common.mocks.AdminConnectionManagerMock;
 import org.eclipse.emf.emfstore.client.test.common.mocks.ConnectionMock;
@@ -52,6 +53,7 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesFactory;
 import org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade;
+import org.eclipse.emf.emfstore.internal.server.model.impl.api.ESSessionIdImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.osgi.framework.FrameworkUtil;
 
@@ -61,6 +63,12 @@ import org.osgi.framework.FrameworkUtil;
  * 
  */
 public final class ServerUtil {
+
+	private static final String ES_PROPERTIES_FILE = "es.properties"; //$NON-NLS-1$
+
+	private ServerUtil() {
+
+	}
 
 	private static final String SUPER = "super"; //$NON-NLS-1$
 
@@ -92,20 +100,23 @@ public final class ServerUtil {
 
 	public static ESServer startServer() throws ESServerStartFailedException {
 		// AuthControlMock authMock = new AuthControlMock();
-		final ServerSpace serverSpace = initServerSpace();
+		initServerSpace();
 
 		// perform initial default setup
 
 		CommonUtil.setTesting(true);
 
 		// copy es.properties file to workspace if not existent
-		copyFileToWorkspace(ServerConfiguration.getConfFile(), "es.properties",
-			"Couldn't copy es.properties file to config folder.",
-			"Default es.properties file was copied to config folder.");
+		copyFileToWorkspace(ServerConfiguration.getConfFile(),
+			ES_PROPERTIES_FILE,
+			Messages.ServerUtil_Could_Not_Copy_Properties_File_To_Config_Folder,
+			Messages.ServerUtil_Default_Properties_File_Copied_To_Config_Folder);
 
 		// copy keystore file to workspace if not existent
-		copyFileToWorkspace(ServerConfiguration.getServerKeyStorePath(), ServerConfiguration.SERVER_KEYSTORE_FILE,
-			"Failed to copy keystore.", "Keystore was copied to server workspace.");
+		copyFileToWorkspace(ServerConfiguration.getServerKeyStorePath(),
+			ServerConfiguration.SERVER_KEYSTORE_FILE,
+			Messages.ServerUtil_Failed_To_Copy_Keystore,
+			Messages.ServerUtil_Keystore_Copied_To_Server_Workspace);
 
 		return ESServer.FACTORY.createAndStartLocalServer();
 	}
@@ -126,13 +137,13 @@ public final class ServerUtil {
 		CommonUtil.setTesting(true);
 
 		// copy es.properties file to workspace if not existent
-		copyFileToWorkspace(ServerConfiguration.getConfFile(), "es.properties",
-			"Couldn't copy es.properties file to config folder.",
-			"Default es.properties file was copied to config folder.");
+		copyFileToWorkspace(ServerConfiguration.getConfFile(), ES_PROPERTIES_FILE,
+			Messages.ServerUtil_Could_Not_Copy_Properties_File_To_Config_Folder,
+			Messages.ServerUtil_Default_Properties_File_Copied_To_Config_Folder);
 
 		// copy keystore file to workspace if not existent
 		copyFileToWorkspace(ServerConfiguration.getServerKeyStorePath(), ServerConfiguration.SERVER_KEYSTORE_FILE,
-			"Failed to copy keystore.", "Keystore was copied to server workspace.");
+			Messages.ServerUtil_Failed_To_Copy_Keystore, Messages.ServerUtil_Keystore_Copied_To_Server_Workspace);
 
 		ServerConfiguration.setProperties(initProperties());
 		final DAOFacadeMock daoFacadeMock = new DAOFacadeMock();
@@ -149,7 +160,7 @@ public final class ServerUtil {
 		ESWorkspaceProviderImpl.getInstance().setAdminConnectionManager(
 			new AdminConnectionManagerMock(daoFacadeMock, accessControl));
 
-		final ESServer createServer = ESServer.FACTORY.createServer("localhost",
+		final ESServer createServer = ESServer.FACTORY.createServer("localhost", //$NON-NLS-1$
 			Integer.parseInt(ServerConfiguration.XML_RPC_PORT_DEFAULT),
 			KeyStoreManager.DEFAULT_CERTIFICATE);
 
@@ -158,6 +169,22 @@ public final class ServerUtil {
 
 	public static void deleteUser(SessionId sessionId, ACOrgUnitId user) throws ESException {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().deleteUser(sessionId, user);
+	}
+
+	public static ACOrgUnitId createUser(ESUsersession session, String name) throws ESException {
+		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
+		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.createUser(sessionId.toInternalAPI(), name);
+	}
+
+	public static ACOrgUnitId createUser(SessionId sessionId, String name) throws ESException {
+		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().createUser(sessionId, name);
+	}
+
+	public static void changeUser(SessionId sessionId, ACOrgUnitId userId, String userName, String password)
+		throws ESException {
+		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.changeUser(sessionId, userId, userName, password);
 	}
 
 	public static ACUser getUser(SessionId sessionId, String name) throws ESException {
@@ -183,12 +210,12 @@ public final class ServerUtil {
 		final ACUser superUser = AccesscontrolFactory.eINSTANCE.createACUser();
 		superUser.setName(superuser);
 		superUser.setFirstName(SUPER);
-		superUser.setLastName("user");
-		superUser.setDescription("default server admin (superuser)");
+		superUser.setLastName("user"); //$NON-NLS-1$
+		superUser.setDescription(Messages.ServerUtil_ServerAdmin_Description);
 		superUser.getRoles().add(RolesFactory.eINSTANCE.createServerAdmin());
 		daoFacade.add(superUser);
 
-		ModelUtil.logInfo("added superuser " + superuser);
+		ModelUtil.logInfo(Messages.ServerUtil_Added_Superuser + superuser);
 	}
 
 	private static Properties initProperties() {
@@ -199,16 +226,16 @@ public final class ServerUtil {
 			fis = new FileInputStream(propertyFile);
 			properties.load(fis);
 			ServerConfiguration.setProperties(properties, false);
-			ModelUtil.logInfo("Property file read. (" + propertyFile.getAbsolutePath() + ")");
+			ModelUtil.logInfo("Property file read. (" + propertyFile.getAbsolutePath() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (final IOException e) {
-			ModelUtil.logWarning("Property initialization failed, using default properties.", e);
+			ModelUtil.logWarning(Messages.ServerUtil_Property_Init_Failed, e);
 		} finally {
 			try {
 				if (fis != null) {
 					fis.close();
 				}
 			} catch (final IOException e) {
-				ModelUtil.logWarning("Closing of properties file failed.", e);
+				ModelUtil.logWarning(Messages.ServerUtil_Could_Not_Close_File, e);
 			}
 		}
 
@@ -223,7 +250,7 @@ public final class ServerUtil {
 			// check if the custom configuration resources are provided and if,
 			// copy them to place
 			final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-				"org.eclipse.emf.emfstore.server.configurationResource");
+				"org.eclipse.emf.emfstore.server.configurationResource"); //$NON-NLS-1$
 			final ESExtensionElement element = extensionPoint.getFirst();
 
 			if (element != null) {
@@ -232,20 +259,20 @@ public final class ServerUtil {
 
 				if (attribute != null) {
 					try {
-						FileUtil.copyFile(new URL("platform:/plugin/"
-							+ element.getIConfigurationElement().getNamespaceIdentifier() + "/" + attribute)
+						FileUtil.copyFile(new URL("platform:/plugin/" //$NON-NLS-1$
+							+ element.getIConfigurationElement().getNamespaceIdentifier() + "/" + attribute) //$NON-NLS-1$
 							.openConnection().getInputStream(), targetFile);
 						return;
 					} catch (final IOException e) {
-						ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+						ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					}
 				}
 			}
 			// Guess not, lets copy the default configuration resources
 			try {
-				FileUtil.copyFile(getResource("testFiles/" + source), targetFile);
+				FileUtil.copyFile(getResource("testFiles/" + source), targetFile); //$NON-NLS-1$
 			} catch (final IOException e) {
-				ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+				ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 		}
 
@@ -270,7 +297,7 @@ public final class ServerUtil {
 	private static ServerSpace initServerSpace() {
 		final ResourceSetImpl set = new ResourceSetImpl();
 		set.setResourceFactoryRegistry(new ResourceFactoryMock());
-		final Resource resource = set.createResource(URI.createURI(""));
+		final Resource resource = set.createResource(URI.createURI("")); //$NON-NLS-1$
 		final ServerSpace serverSpace = ModelFactory.eINSTANCE.createServerSpace();
 		resource.getContents().add(serverSpace);
 		return serverSpace;

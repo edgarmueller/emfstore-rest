@@ -7,8 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
- * boehlke
+ * Otto von Wesendonk - initial API and implementation
+ * Andreas Boehlke - method representation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.core;
 
@@ -45,8 +45,10 @@ import org.eclipse.emf.emfstore.server.observer.ESServerCallObserver;
  * @author wesendon
  * @see EMFStore
  */
-// TODO: internal
 public class EMFStoreImpl extends AbstractEmfstoreInterface implements InvocationHandler {
+
+	private static final String CLASS = "class"; //$NON-NLS-1$
+	private static final String ORG_ECLIPSE_EMF_EMFSTORE_SERVER_SERVER_CALL_OBSERVER = "org.eclipse.emf.emfstore.server.serverCallObserver"; //$NON-NLS-1$
 
 	/**
 	 * Represents a method in a subinterface.
@@ -84,9 +86,9 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 * Default constructor.
 	 * 
 	 * @param serverSpace
-	 *            the serverspace
+	 *            the {@link ServerSpace}
 	 * @param authorizationControl
-	 *            the accesscontrol
+	 *            the {@link AuthorizationControl}
 	 * @throws FatalESException
 	 *             in case of failure
 	 */
@@ -101,9 +103,9 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 */
 	private Set<ESServerCallObserver> initServerCallObservers() {
 		final Set<ESServerCallObserver> result = new LinkedHashSet<ESServerCallObserver>();
-		for (final ESExtensionElement e : new ESExtensionPoint("org.eclipse.emf.emfstore.server.serverCallObserver")
+		for (final ESExtensionElement e : new ESExtensionPoint(ORG_ECLIPSE_EMF_EMFSTORE_SERVER_SERVER_CALL_OBSERVER)
 			.getExtensionElements()) {
-			final ESServerCallObserver observer = e.getClass("class", ESServerCallObserver.class);
+			final ESServerCallObserver observer = e.getClass(CLASS, ESServerCallObserver.class);
 			if (observer != null) {
 				result.add(observer);
 			}

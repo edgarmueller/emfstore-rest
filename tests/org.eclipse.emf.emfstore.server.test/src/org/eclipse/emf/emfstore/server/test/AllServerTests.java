@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.test;
 
@@ -15,12 +15,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
+ * Test suite for all server related tests.
  * 
  * @author emueller
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	AdminBrokerTests.class,
+	AdminBrokerAccessControlTests.class,
 	BranchTests.class,
 	ServerInterfaceTest.class,
 	HistoryAPITests.class,

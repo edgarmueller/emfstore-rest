@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.emf.emfstore.server.model" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Internal API" id="924844039">
+            <message_arguments>
+                <message_argument value="1.1.0"/>
+                <message_argument value="1.1.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/server/model/dao/ACDAOFacade.java" type="org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade">
+        <filter comment="Internal API" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/server/model/dao/ACGroupDAO.java" type="org.eclipse.emf.emfstore.internal.server.model.dao.ACGroupDAO">
+        <filter comment="Internal API" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.emf.emfstore.internal.server.model.dao.ACGroupDAO"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/server/model/dao/ACUserDAO.java" type="org.eclipse.emf.emfstore.internal.server.model.dao.ACUserDAO">
+        <filter comment="Internal API" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.emf.emfstore.internal.server.model.dao.ACUserDAO"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/server/model/dao/DAO.java" type="org.eclipse.emf.emfstore.internal.server.model.dao.DAO">
+        <filter comment="Internal API" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.emf.emfstore.internal.server.model.dao.DAO"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/server/model/dao/ProjectDAO.java" type="org.eclipse.emf.emfstore.internal.server.model.dao.ProjectDAO">
+        <filter comment="Internal API" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.emf.emfstore.internal.server.model.dao.ProjectDAO"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/emf/emfstore/internal/server/model/impl/api/ESLocalProjectIdImpl.java" type="org.eclipse.emf.emfstore.internal.server.model.impl.api.ESLocalProjectIdImpl">
         <filter comment="API wrapper class" id="574668824">
             <message_arguments>

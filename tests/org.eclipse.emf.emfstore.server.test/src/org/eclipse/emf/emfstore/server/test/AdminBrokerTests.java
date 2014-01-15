@@ -25,6 +25,8 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESUsersessionImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.ConnectionException;
+import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
@@ -82,13 +84,6 @@ public class AdminBrokerTests extends ESTestWithLoggedInUser {
 		super.after();
 	}
 
-	// @AfterClass
-	// public static void afterClass() throws FatalESException {
-	// final AbstractAuthenticationControl modelAuthenticationControl = AuthenticationControlFactory.INSTANCE
-	// .createAuthenticationControl(AuthenticationControlType.spfv);
-	// EMFStoreController.getInstance().getAccessControl().setAuthenticationControl(modelAuthenticationControl);
-	// }
-
 	@Test
 	public void testCreateUser() throws ESException {
 		final int initialSize = adminBroker.getUsers().size();
@@ -144,5 +139,18 @@ public class AdminBrokerTests extends ESTestWithLoggedInUser {
 	public void testCreateGroup() throws ESException {
 		adminBroker.createGroup(GROUP_NAME);
 		assertEquals(1, adminBroker.getGroups().size());
+	}
+
+	@Test
+	public void testDeleteGroup() throws ESException {
+		final ACOrgUnitId groupId = adminBroker.createGroup(GROUP_NAME);
+		adminBroker.deleteGroup(groupId);
+		assertEquals(0, adminBroker.getGroups().size());
+	}
+
+	@Test(expected = InvalidInputException.class)
+	public void testCreateGroupWithAlreadyExistingName() throws ESException {
+		adminBroker.createGroup(GROUP_NAME);
+		adminBroker.createGroup(GROUP_NAME);
 	}
 }
