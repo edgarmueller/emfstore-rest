@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * ovonwesen
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util;
 
@@ -15,17 +15,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.common.observer.ESPrioritizedObserver;
 
 /**
- * 
+ * Label provider for merge.
  * 
  * @author ovonwesen
- * 
  */
 public interface MergeLabelProvider extends ESPrioritizedObserver {
 
 	/**
 	 * ID of the {@link MergeLabelProvider} option.
 	 */
-	String ID = "org.eclipse.emf.emfstore.client.mergeLabelProvider";
+	String ID = "org.eclipse.emf.emfstore.client.mergeLabelProvider"; //$NON-NLS-1$
 
 	/**
 	 * 

@@ -59,18 +59,25 @@ import org.eclipse.emf.emfstore.internal.common.model.util.FileUtil;
  */
 
 public final class KeyStoreManager implements ESKeyStoreManager {
+
+	private static final String JAVAX_NET_SSL_TRUST_STORE_PASSWORD = "javax.net.ssl.trustStorePassword"; //$NON-NLS-1$
+	private static final String JAVAX_NET_SSL_KEY_STORE_PASSWORD = "javax.net.ssl.keyStorePassword"; //$NON-NLS-1$
+	private static final String JAVAX_NET_SSL_KEY_STORE = "javax.net.ssl.keyStore"; //$NON-NLS-1$
+	private static final String JAVAX_NET_SSL_TRUST_STORE = "javax.net.ssl.trustStore"; //$NON-NLS-1$
+	private static final String PROVIDER_CLASS = "providerClass"; //$NON-NLS-1$
+	private static final String ORG_ECLIPSE_EMF_EMFSTORE_CLIENT_DEFAULT_CONFIGURATION_PROVIDER = "org.eclipse.emf.emfstore.client.defaultConfigurationProvider"; //$NON-NLS-1$
 	/**
 	 * Name of keyStore file.
 	 */
-	public static final String KEYSTORENAME = "emfstoreClient.keystore";
-	private static final String KEYSTOREPASSWORD = "654321";
-	private static final String CERTIFICATE_TYPE = "X.509";
-	private static final String CIPHER_ALGORITHM = "RSA";
+	public static final String KEYSTORENAME = "emfstoreClient.keystore"; //$NON-NLS-1$
+	private static final String KEYSTOREPASSWORD = "654321"; //$NON-NLS-1$
+	private static final String CERTIFICATE_TYPE = "X.509"; //$NON-NLS-1$
+	private static final String CIPHER_ALGORITHM = "RSA"; //$NON-NLS-1$
 
 	/**
 	 * Certificate Alias for development test certificate.
 	 */
-	public static final String DEFAULT_CERTIFICATE = "emfstore test certificate (do not use in production!)"; // "EMFStore Test Certificate (DO NOT USE IN PRODUCTION!)";
+	public static final String DEFAULT_CERTIFICATE = "emfstore test certificate (do not use in production!)"; // "EMFStore Test Certificate (DO NOT USE IN PRODUCTION!)"; //$NON-NLS-1$
 
 	private static KeyStoreManager instance;
 
@@ -85,7 +92,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 	private void loadConfiguration() {
 		final ESClientConfigurationProvider provider = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.defaultConfigurationProvider").getClass("providerClass",
+			ORG_ECLIPSE_EMF_EMFSTORE_CLIENT_DEFAULT_CONFIGURATION_PROVIDER).getClass(PROVIDER_CLASS,
 			ESClientConfigurationProvider.class);
 		if (provider == null) {
 			return;
@@ -137,10 +144,10 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			}
 		}
 
-		System.setProperty("javax.net.ssl.trustStore", getPathToKeyStore());
-		System.setProperty("javax.net.ssl.keyStore", getPathToKeyStore());
-		System.setProperty("javax.net.ssl.keyStorePassword", KEYSTOREPASSWORD);
-		System.setProperty("javax.net.ssl.trustStorePassword", KEYSTOREPASSWORD);
+		System.setProperty(JAVAX_NET_SSL_TRUST_STORE, getPathToKeyStore());
+		System.setProperty(JAVAX_NET_SSL_KEY_STORE, getPathToKeyStore());
+		System.setProperty(JAVAX_NET_SSL_KEY_STORE_PASSWORD, KEYSTOREPASSWORD);
+		System.setProperty(JAVAX_NET_SSL_TRUST_STORE_PASSWORD, KEYSTOREPASSWORD);
 	}
 
 	/**
@@ -161,7 +168,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 				certificates.add(tmp);
 			}
 		} catch (final KeyStoreException e) {
-			final String message = "Loading certificates failed!";
+			final String message = Messages.KeyStoreManager_Loading_Certificate_Failed;
 			WorkspaceUtil.logException(message, e);
 			throw new ESCertificateException(message, e);
 		}
@@ -179,7 +186,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	 */
 	public void deleteCertificate(String alias) throws ESCertificateException {
 		if (isDefaultCertificate(alias)) {
-			throw new ESCertificateException("Cannot delete default certificate!");
+			throw new ESCertificateException(Messages.KeyStoreManager_Cannot_Delete_Default_Certificate);
 		}
 
 		loadKeyStore();
@@ -187,7 +194,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			keyStore.deleteEntry(alias);
 			storeKeyStore();
 		} catch (final KeyStoreException e) {
-			final String message = "Deleting certificate failed!";
+			final String message = Messages.KeyStoreManager_Deleting_Certificate_Failed;
 			WorkspaceUtil.logException(message, e);
 			throw new ESCertificateException(message, e);
 		}
@@ -205,7 +212,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			fileInputStream = new FileInputStream(path);
 			addCertificate(alias, fileInputStream);
 		} catch (final FileNotFoundException e) {
-			final String message = "Storing certificate failed!";
+			final String message = Messages.KeyStoreManager_Storing_Certificate_Failed;
 			WorkspaceUtil.logException(message, e);
 			throw new ESCertificateException(message, e);
 		} finally {
@@ -213,7 +220,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 				try {
 					fileInputStream.close();
 				} catch (final IOException e) {
-					final String message = "Storing certificate failed!";
+					final String message = "Storing certificate failed!"; //$NON-NLS-1$
 					WorkspaceUtil.logException(message, e);
 					throw new ESCertificateException(message, e);
 				}
@@ -232,11 +239,11 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			keyStore.deleteEntry(alias);
 			storeKeyStore();
 		} catch (final KeyStoreException e) {
-			final String message = "Keystore has not been initialized, or entry cannot be removed.";
+			final String message = Messages.KeyStoreManager_Keystore_Not_Initialized;
 			WorkspaceUtil.logException(message, e);
 			throw new ESCertificateException(message, e);
 		} catch (final ESCertificateException e) {
-			final String message = "Storing certificate failed!";
+			final String message = "Storing certificate failed!"; //$NON-NLS-1$
 			WorkspaceUtil.logException(message, e);
 			throw new ESCertificateException(message, e);
 		}
@@ -257,10 +264,10 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 				keyStore.setCertificateEntry(alias, newCertificate);
 				storeKeyStore();
 			} catch (final CertificateException e) {
-				final String message = "Please choose a valid certificate!";
+				final String message = Messages.KeyStoreManager_Choose_Valid_Certificate;
 				throw new ESCertificateException(message);
 			} catch (final KeyStoreException e) {
-				final String message = "Storing certificate failed!";
+				final String message = "Storing certificate failed!"; //$NON-NLS-1$
 				WorkspaceUtil.logException(message, e);
 				throw new ESCertificateException(message, e);
 			}
@@ -274,23 +281,23 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			keyStore.store(fileOutputStream, KEYSTOREPASSWORD.toCharArray());
 			fileOutputStream.close();
 		} catch (final KeyStoreException e) {
-			final String message = "Storing certificate failed!";
+			final String message = "Storing certificate failed!"; //$NON-NLS-1$
 			WorkspaceUtil.logWarning(message, e);
 			throw new ESCertificateException(message, e);
 		} catch (final NoSuchAlgorithmException e) {
-			final String message = "Storing certificate failed!";
+			final String message = "Storing certificate failed!"; //$NON-NLS-1$
 			WorkspaceUtil.logWarning(message, e);
 			throw new ESCertificateException(message, e);
 		} catch (final CertificateException e) {
-			final String message = "Storing certificate failed!";
+			final String message = "Storing certificate failed!"; //$NON-NLS-1$
 			WorkspaceUtil.logWarning(message, e);
 			throw new ESCertificateException(message, e);
 		} catch (final FileNotFoundException e) {
-			final String message = "Storing certificate failed!";
+			final String message = "Storing certificate failed!"; //$NON-NLS-1$
 			WorkspaceUtil.logWarning(message, e);
 			throw new ESCertificateException(message, e);
 		} catch (final IOException e) {
-			final String message = "Storing certificate failed!";
+			final String message = "Storing certificate failed!"; //$NON-NLS-1$
 			WorkspaceUtil.logWarning(message, e);
 			throw new ESCertificateException(message, e);
 		}
@@ -310,28 +317,28 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	private void loadKeyStore() throws ESCertificateException {
 		if (keyStore == null) {
 			try {
-				keyStore = KeyStore.getInstance("JKS");
+				keyStore = KeyStore.getInstance("JKS"); //$NON-NLS-1$
 				final FileInputStream fileInputStream = new FileInputStream(getPathToKeyStore());
 				keyStore.load(fileInputStream, KEYSTOREPASSWORD.toCharArray());
 				fileInputStream.close();
 			} catch (final KeyStoreException e) {
-				final String message = "Loading certificate failed!";
+				final String message = "Loading certificate failed!"; //$NON-NLS-1$
 				WorkspaceUtil.logWarning(message, e);
 				throw new ESCertificateException(message, e);
 			} catch (final NoSuchAlgorithmException e) {
-				final String message = "Loading certificate failed!";
+				final String message = "Loading certificate failed!"; //$NON-NLS-1$
 				WorkspaceUtil.logWarning(message, e);
 				throw new ESCertificateException(message, e);
 			} catch (final CertificateException e) {
-				final String message = "Loading certificate failed!";
+				final String message = "Loading certificate failed!"; //$NON-NLS-1$
 				WorkspaceUtil.logWarning(message, e);
 				throw new ESCertificateException(message, e);
 			} catch (final FileNotFoundException e) {
-				final String message = "Loading certificate failed!";
+				final String message = "Loading certificate failed!"; //$NON-NLS-1$
 				WorkspaceUtil.logWarning(message, e);
 				throw new ESCertificateException(message, e);
 			} catch (final IOException e) {
-				final String message = "Loading certificate failed!";
+				final String message = "Loading certificate failed!"; //$NON-NLS-1$
 				WorkspaceUtil.logWarning(message, e);
 				throw new ESCertificateException(message, e);
 			}
@@ -349,11 +356,11 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 	public SSLContext getSSLContext() throws ESCertificateException {
 		try {
 			loadKeyStore();
-			final KeyManagerFactory managerFactory = KeyManagerFactory.getInstance("SunX509");
+			final KeyManagerFactory managerFactory = KeyManagerFactory.getInstance("SunX509"); //$NON-NLS-1$
 			managerFactory.init(keyStore, KEYSTOREPASSWORD.toCharArray());
-			final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance("SunX509");
+			final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance("SunX509"); //$NON-NLS-1$
 			trustManagerFactory.init(keyStore);
-			final SSLContext sslContext = SSLContext.getInstance("TLS");
+			final SSLContext sslContext = SSLContext.getInstance("TLS"); //$NON-NLS-1$
 			sslContext.init(managerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
 
 			HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
@@ -364,13 +371,13 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 
 			return sslContext;
 		} catch (final NoSuchAlgorithmException e) {
-			throw new ESCertificateException("Loading certificate failed!", e);
+			throw new ESCertificateException(Messages.KeyStoreManager_29, e);
 		} catch (final UnrecoverableKeyException e) {
-			throw new ESCertificateException("Loading certificate failed!", e);
+			throw new ESCertificateException("Loading certificate failed!", e); //$NON-NLS-1$
 		} catch (final KeyStoreException e) {
-			throw new ESCertificateException("Loading certificate failed!", e);
+			throw new ESCertificateException("Loading certificate failed!", e); //$NON-NLS-1$
 		} catch (final KeyManagementException e) {
-			throw new ESCertificateException("Loading certificate failed!", e);
+			throw new ESCertificateException("Loading certificate failed!", e); //$NON-NLS-1$
 		}
 	}
 
@@ -433,9 +440,9 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
-		WorkspaceUtil.logException("Couldn't encrypt password.", new ESCertificateException(
-			"Couldn't encrypt password."));
-		return "";
+		WorkspaceUtil.logException(Messages.KeyStoreManager_Could_Not_Encrypt_Password, new ESCertificateException(
+			Messages.KeyStoreManager_34));
+		return ""; //$NON-NLS-1$
 	}
 
 	private Certificate getCertificateForEncryption(ServerInfo server) throws ESCertificateException {
@@ -448,7 +455,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		if (publicKey == null) {
 			publicKey = getCertificate(getDefaultCertificate());
 			if (publicKey == null) {
-				throw new ESCertificateException("Unable to get certificate for password encryption.");
+				throw new ESCertificateException(Messages.KeyStoreManager_Unable_To_Get_Password);
 			}
 		}
 		return publicKey;
@@ -525,7 +532,7 @@ public final class KeyStoreManager implements ESKeyStoreManager {
 		try {
 			return keyStore.getCertificate(alias);
 		} catch (final KeyStoreException e) {
-			throw new ESCertificateException("Loading certificate failed!");
+			throw new ESCertificateException("Loading certificate failed!"); //$NON-NLS-1$
 		}
 	}
 

@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util;
 
@@ -17,6 +17,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Key-Value-Store for conflict descriptions.
  * 
@@ -25,7 +27,9 @@ import java.util.Properties;
  */
 public class DescriptionProvider {
 
-	private Properties properties;
+	private static final String DOT = "."; //$NON-NLS-1$
+	private static final String CONFLICTDESCRIPTION_INI_PATH = "platform:/plugin/org.eclipse.emf.emfstore.client/resources/conflictdescription.ini"; //$NON-NLS-1$
+	private final Properties properties;
 	private String prefix;
 
 	/**
@@ -47,23 +51,23 @@ public class DescriptionProvider {
 	}
 
 	private Properties load() {
-		Properties properties = new Properties();
+		final Properties properties = new Properties();
 		URL url;
 		InputStream inputStream = null;
 
 		try {
-			url = new URL("platform:/plugin/org.eclipse.emf.emfstore.client/resources/conflictdescription.ini");
+			url = new URL(CONFLICTDESCRIPTION_INI_PATH);
 			inputStream = url.openConnection().getInputStream();
 			properties.load(inputStream);
-		} catch (MalformedURLException e2) {
+		} catch (final MalformedURLException e2) {
 			// ignore
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// ignore
 		} finally {
 			if (inputStream != null) {
 				try {
 					inputStream.close();
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					// ignore
 				}
 			}
@@ -84,10 +88,10 @@ public class DescriptionProvider {
 	}
 
 	private String getKey(String key) {
-		if (prefix == null || prefix == "") {
+		if (prefix == null || prefix == StringUtils.EMPTY) {
 			return key;
 		}
-		return prefix + "." + key;
+		return prefix + DOT + key;
 	}
 
 	/**
@@ -96,7 +100,7 @@ public class DescriptionProvider {
 	 * @return default: empty string ""
 	 */
 	protected String getDefaultValue() {
-		return "";
+		return StringUtils.EMPTY;
 	}
 
 	/**

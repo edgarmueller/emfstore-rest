@@ -11,17 +11,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.emfstore.internal.client.model.Activator;
-import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
 
 /**
@@ -31,7 +25,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.NotificationInfo;
  */
 public class NotificationRecording {
 
-	private List<NotificationInfo> chain = new LinkedList<NotificationInfo>();
+	private final List<NotificationInfo> chain = new LinkedList<NotificationInfo>();
 	private NotificationRecordingHint hint;
 	private Date date;
 
@@ -85,50 +79,6 @@ public class NotificationRecording {
 	 */
 	public boolean empty() {
 		return chain.size() == 0;
-	}
-
-	/**
-	 * For debugging purposes. Will output to Eclipse Error Log.
-	 * 
-	 * @param msg first line message of the debug output
-	 */
-	public void debugLog(String msg) {
-
-		Activator activator = Activator.getDefault();
-		MultiStatus status = new MultiStatus(activator.getBundle().getSymbolicName(), IStatus.OK, msg, null);
-
-		LinkedList<Status> temp = new LinkedList<Status>();
-		for (NotificationInfo n : chain) {
-			temp.add(new Status(IStatus.OK, activator.getBundle().getSymbolicName(), n.getDebugString()
-				+ " ----------------------- " + n.toString()));
-		}
-
-		// make sure the list is reversed, so the events appear in the order they arrived
-		Collections.reverse(temp);
-		for (Status s : temp) {
-			status.add(s);
-		}
-
-		activator.getLog().log(status);
-
-	}
-
-	/**
-	 * For debugging purposes. Will output to Eclipse Error Log.
-	 */
-
-	public void debugLog() {
-
-		String hintType = "DEFAULT";
-
-		if (getHint().equals(NotificationRecordingHint.DELETE)) {
-			hintType = "DELETE";
-		}
-
-		// debug messages only in developer and internal release versions
-		if (!Configuration.getVersioningInfo().isReleaseVersion()) {
-			debugLog("captured notification chain: " + hintType + " operation");
-		}
 	}
 
 	/**

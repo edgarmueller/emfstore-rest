@@ -8,6 +8,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/emf/emfstore/internal/client/model/connectionmanager/BasicSessionProvider.java" type="org.eclipse.emf.emfstore.internal.client.model.connectionmanager.BasicSessionProvider">
+        <filter comment="Internal API usage" id="572522506">
+            <message_arguments>
+                <message_argument value="ESException"/>
+                <message_argument value="BasicSessionProvider"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/emf/emfstore/internal/client/model/impl/api/ESLocalProjectImpl.java" type="org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl">
         <filter comment="API wrapper class" id="572522506">
             <message_arguments>

@@ -251,7 +251,8 @@ public final class NotificationToOperationConverter {
 			if (id != null) {
 				referencedModelElements.add(id);
 			} else if (ModelUtil.getProject(valueElement) == collection) {
-				throw new IllegalStateException("Element in Project does not have an ID: " + valueElement);
+				throw new IllegalStateException(
+					Messages.NotificationToOperationConverter_Element_Has_No_ID + valueElement);
 			}
 			// ignore value elements outside of the current project, they are
 			// not tracked
@@ -401,8 +402,9 @@ public final class NotificationToOperationConverter {
 			id = collection.getDeletedModelElementId(modelElement);
 		}
 		if (id == null) {
-			WorkspaceUtil.handleException(new IllegalStateException("Model Element does not have an ID: "
-				+ modelElement));
+			WorkspaceUtil.handleException(new IllegalStateException(
+				Messages.NotificationToOperationConverter_Element_Has_No_ID
+					+ modelElement));
 		}
 		operation.setModelElementId(id);
 	}

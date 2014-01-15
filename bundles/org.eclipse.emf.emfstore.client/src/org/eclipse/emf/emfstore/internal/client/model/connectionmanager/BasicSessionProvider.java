@@ -33,7 +33,7 @@ public class BasicSessionProvider extends ESAbstractSessionProvider {
 	 */
 	@Override
 	public ESUsersession provideUsersession(ESServer serverInfo) throws ESException {
-		throw new ESException("No usersession found.");
+		throw new ESException(Messages.BasicSessionProvider_No_Usersession_Found);
 	}
 
 	/**
@@ -44,6 +44,6 @@ public class BasicSessionProvider extends ESAbstractSessionProvider {
 	 */
 	@Override
 	public ESUsersession login(ESUsersession usersession) throws ESException {
-		throw new ESException("Usersession not logged in. Login first.");
+		throw new ESException(Messages.BasicSessionProvider_Usersession_Not_Logged_In);
 	}
 }

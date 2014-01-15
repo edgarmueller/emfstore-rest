@@ -7,14 +7,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
 import static org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
+import java.text.MessageFormat;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
@@ -30,11 +32,16 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Sing
  */
 public class MultiReferenceSetSingleConflict extends VisualConflict {
 
+	private static final String MULTIREFERENCE_SET_SINGLECONFLICT_KEY = "multireferencesetsingleconflict"; //$NON-NLS-1$
+	private static final String OTHERCONTAINER_KEY = "othercontainer"; //$NON-NLS-1$
+	private static final String MULTIREF_GIF = "multiref.gif"; //$NON-NLS-1$
+	private static final String TARGET_KEY = "target"; //$NON-NLS-1$
+
 	/**
 	 * Default constructor.
 	 * 
 	 * @param conflictBucket the conflict
-	 * @param decisionManager decisionmanager
+	 * @param decisionManager {@link DecisionManager}
 	 * @param setLeft multi set ref is left
 	 */
 	public MultiReferenceSetSingleConflict(ConflictBucket conflictBucket, DecisionManager decisionManager,
@@ -53,13 +60,14 @@ public class MultiReferenceSetSingleConflict extends VisualConflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		description.setDescription(DecisionUtil.getDescription("multireferencesetsingleconflict", getDecisionManager()
-			.isBranchMerge()));
+		description.setDescription(DecisionUtil.getDescription(MULTIREFERENCE_SET_SINGLECONFLICT_KEY,
+			getDecisionManager()
+				.isBranchMerge()));
 
-		description.add("target", ((SingleReferenceOperation) getRightOperation()).getNewValue());
-		description.add("othercontainer", getTheirOperation().getModelElementId());
+		description.add(TARGET_KEY, ((SingleReferenceOperation) getRightOperation()).getNewValue());
+		description.add(OTHERCONTAINER_KEY, getTheirOperation().getModelElementId());
 
-		description.setImage("multiref.gif");
+		description.setImage(MULTIREF_GIF);
 		return description;
 	}
 
@@ -70,18 +78,20 @@ public class MultiReferenceSetSingleConflict extends VisualConflict {
 	 */
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {
-		ConflictOption myOption = new ConflictOption("", OptionType.MyOperation);
+		final ConflictOption myOption = new ConflictOption(StringUtils.EMPTY, OptionType.MyOperation);
 		myOption.addOperations(getMyOperations());
-		ConflictOption theirOption = new ConflictOption("", OptionType.TheirOperation);
+		final ConflictOption theirOption = new ConflictOption(StringUtils.EMPTY, OptionType.TheirOperation);
 		theirOption.addOperations(getTheirOperations());
 
-		EObject target = getDecisionManager().getModelElement(
+		final EObject target = getDecisionManager().getModelElement(
 			((SingleReferenceOperation) getRightOperation()).getNewValue());
 
-		myOption.setOptionLabel("Move " + getClassAndName(target) + "to"
-			+ getClassAndName(getDecisionManager().getModelElement(getMyOperation().getModelElementId())));
-		theirOption.setOptionLabel("Move " + getClassAndName(target) + " to"
-			+ getClassAndName(getDecisionManager().getModelElement(getTheirOperation().getModelElementId())));
+		myOption.setOptionLabel(MessageFormat.format(Messages.MultiReference_Move_To,
+			getClassAndName(target),
+			getClassAndName(getDecisionManager().getModelElement(getMyOperation().getModelElementId()))));
+		theirOption.setOptionLabel(MessageFormat.format(Messages.MultiReference_Move_To,
+			getClassAndName(target),
+			getClassAndName(getDecisionManager().getModelElement(getTheirOperation().getModelElementId()))));
 
 		options.add(myOption);
 		options.add(theirOption);

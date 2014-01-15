@@ -13,7 +13,6 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isAttribute;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isComposite;
-import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isCompositeRef;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isCompositeWithMain;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isDelete;
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isMultiAtt;
@@ -24,14 +23,11 @@ import static org.eclipse.emf.emfstore.internal.server.model.versioning.operatio
 import static org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util.OperationUtil.isSingleRef;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.VisualConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.AttributeConflict;
@@ -47,7 +43,6 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetSetConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSetSingleConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.MultiReferenceSingleConflict;
-import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.ReferenceConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts.SingleReferenceConflict;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil;
 import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
@@ -60,7 +55,6 @@ import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket
 import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictDetector;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.ChangePackageImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.CompositeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiAttributeOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 
@@ -206,7 +200,7 @@ public class DecisionManager {
 				unvisualizedConflicts.add(conf);
 				WorkspaceUtil
 					.log(
-						"A created conflict has been ignored (does not apply to any existing conflict rule).",
+						Messages.DecisionManager_No_ConflictRule_Applicable,
 						IStatus.WARNING);
 			}
 		}
@@ -286,42 +280,43 @@ public class DecisionManager {
 
 	}
 
-	private VisualConflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
-		if (isCompositeRef(conf.getMyOperation())) {
-			return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
-				Arrays.asList(conf.getTheirOperation()));
-		}
-		return createRefFromSub(conf, Arrays.asList(conf.getMyOperation()),
-			((CompositeOperation) conf.getTheirOperation()).getSubOperations());
+	// TODO: check why this methods are not used anymore
+	// private VisualConflict createReferenceCompVSSingleMulti(ConflictBucket conf) {
+	// if (isCompositeRef(conf.getMyOperation())) {
+	// return createRefFromSub(conf, ((CompositeOperation) conf.getMyOperation()).getSubOperations(),
+	// Arrays.asList(conf.getTheirOperation()));
+	// }
+	// return createRefFromSub(conf, Arrays.asList(conf.getMyOperation()),
+	// ((CompositeOperation) conf.getTheirOperation()).getSubOperations());
+	//
+	// }
+	//
+	// private VisualConflict createReferenceConflict(ConflictBucket conf) {
+	// final EList<AbstractOperation> myOperations = ((CompositeOperation) conf.getMyOperation()).getSubOperations();
+	// final EList<AbstractOperation> theirOperations = ((CompositeOperation) conf.getTheirOperation())
+	// .getSubOperations();
+	//
+	// return createRefFromSub(conf, myOperations, theirOperations);
+	// }
 
-	}
-
-	private VisualConflict createReferenceConflict(ConflictBucket conf) {
-		final EList<AbstractOperation> myOperations = ((CompositeOperation) conf.getMyOperation()).getSubOperations();
-		final EList<AbstractOperation> theirOperations = ((CompositeOperation) conf.getTheirOperation())
-			.getSubOperations();
-
-		return createRefFromSub(conf, myOperations, theirOperations);
-	}
-
-	private VisualConflict createRefFromSub(ConflictBucket conf, List<AbstractOperation> myOperations,
-		List<AbstractOperation> theirOperations) {
-
-		for (final AbstractOperation myOp : myOperations) {
-			if (isSingleRef(myOp)) {
-
-				return new ReferenceConflict(true, conf, this);
-
-			} else if (isMultiRef(myOp)) {
-
-				return new ReferenceConflict(false, conf, this);
-
-			} else {
-				return null;
-			}
-		}
-		return null;
-	}
+	// private VisualConflict createRefFromSub(ConflictBucket conf, List<AbstractOperation> myOperations,
+	// List<AbstractOperation> theirOperations) {
+	//
+	// for (final AbstractOperation myOp : myOperations) {
+	// if (isSingleRef(myOp)) {
+	//
+	// return new ReferenceConflict(true, conf, this);
+	//
+	// } else if (isMultiRef(myOp)) {
+	//
+	// return new ReferenceConflict(false, conf, this);
+	//
+	// } else {
+	// return null;
+	// }
+	// }
+	// return null;
+	// }
 
 	private VisualConflict createAttributeAttributeDecision(ConflictBucket conf) {
 		return new AttributeConflict(conf, this);

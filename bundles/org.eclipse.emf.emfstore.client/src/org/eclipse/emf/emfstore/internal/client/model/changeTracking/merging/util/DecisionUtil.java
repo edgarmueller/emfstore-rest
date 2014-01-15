@@ -28,6 +28,18 @@ import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.con
 // TODO: BRANCH some of this stuff is UI related and isn't supposed to be defined here.
 public final class DecisionUtil {
 
+	private static final String SPACE = " "; //$NON-NLS-1$
+
+	private static final String TO_BE_REPLACED = "\n\r|\r\n|\n \r|\r \n|\n|\r"; //$NON-NLS-1$
+
+	private static final String ENDING_QUOTE = "\""; //$NON-NLS-1$
+
+	private static final String OPENING_QUOTE = " \""; //$NON-NLS-1$
+
+	private static final String BRANCHMERGE = "branchmerge"; //$NON-NLS-1$
+
+	private static final String DOTS = "..."; //$NON-NLS-1$
+
 	private DecisionUtil() {
 		// for checkstyle, my love
 	}
@@ -38,19 +50,19 @@ public final class DecisionUtil {
 	public static final int OPTION_LENGTH = 45;
 
 	/**
-	 * Seperator symbol for detail proivder.
+	 * Separator symbol for detail provider.
 	 */
-	public static final String SEPERATOR = "#";
+	public static final String SEPERATOR = "#"; //$NON-NLS-1$
 
 	/**
 	 * Editable detail provider.
 	 */
-	public static final String EDITABLE = "editable";
+	public static final String EDITABLE = "editable"; //$NON-NLS-1$
 
 	/**
 	 * Multiline widget detail provider.
 	 */
-	public static final String WIDGET_MULTILINE = "org.eclipse.emf.emfstore.client.ui.merge.widget.multiline";
+	public static final String WIDGET_MULTILINE = "org.eclipse.emf.emfstore.client.ui.merge.widget.multiline"; //$NON-NLS-1$
 
 	/**
 	 * Multiline editable widget detail provider.
@@ -77,7 +89,7 @@ public final class DecisionUtil {
 		if (str.length() > length) {
 			str = str.substring(0, length);
 			if (addPoints) {
-				str += "...";
+				str += DOTS;
 			}
 			return str;
 		}
@@ -90,13 +102,13 @@ public final class DecisionUtil {
 	 * 
 	 * @param text
 	 *            text
-	 * @return linf of text
+	 * @return line of text
 	 */
 	public static String stripNewLine(String text) {
 		if (text == null) {
-			return "";
+			return StringUtils.EMPTY;
 		}
-		return text.replaceAll("\n\r|\r\n|\n \r|\r \n|\n|\r", " ");
+		return text.replaceAll(TO_BE_REPLACED, SPACE);
 	}
 
 	/**
@@ -157,7 +169,7 @@ public final class DecisionUtil {
 		if (descriptionProvider == null) {
 			descriptionProvider = new DescriptionProvider();
 		}
-		descriptionProvider.setPrefix(isBranchMerge ? "branchmerge" : null);
+		descriptionProvider.setPrefix(isBranchMerge ? BRANCHMERGE : null);
 		return descriptionProvider.getDescription(key);
 	}
 
@@ -183,9 +195,9 @@ public final class DecisionUtil {
 	 */
 	public static String getClassAndName(EObject modelElement) {
 		if (modelElement == null) {
-			return "";
+			return StringUtils.EMPTY;
 		}
-		return modelElement.eClass().getName() + " \"" + getModelElementName(modelElement) + "\"";
+		return modelElement.eClass().getName() + OPENING_QUOTE + getModelElementName(modelElement) + ENDING_QUOTE;
 	}
 
 	/**

@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging;
 
@@ -24,9 +24,9 @@ import org.eclipse.emf.emfstore.internal.common.model.ModelElementIdToEObjectMap
 public interface ConflictHandler {
 
 	/**
-	 * Constant for the extenstion point id of conflict handlers.
+	 * Constant for the extension point id of conflict handlers.
 	 */
-	String EXTENSION_POINT_ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler";
+	String EXTENSION_POINT_ID = "org.eclipse.emfstore.client.changeTracking.merging.conflictHandler"; //$NON-NLS-1$
 
 	/**
 	 * Called after a conflict has been created and before it is

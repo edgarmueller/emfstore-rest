@@ -7,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Otto von Wesendonk
- * Edgar Mueller
+ * Otto von Wesendonk, Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
@@ -37,6 +36,12 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Unko
  */
 public class AttributeConflict extends VisualConflict {
 
+	private static final String ATTRIBUTE_GIF = "attribute.gif"; //$NON-NLS-1$
+	private static final String THEIR_VALUE_KEY = "theirvalue"; //$NON-NLS-1$
+	private static final String OLD_VALUE_KEY = "oldvalue"; //$NON-NLS-1$
+	private static final String MY_VALUE_KEY = "myvalue"; //$NON-NLS-1$
+	private static final String ATTRIBUTE_CONFLICT_KEY = "attributeconflict"; //$NON-NLS-1$
+
 	/**
 	 * Default constructor.
 	 * 
@@ -52,12 +57,12 @@ public class AttributeConflict extends VisualConflict {
 	 */
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
-		description.setDescription(DecisionUtil.getDescription("attributeconflict", getDecisionManager()
+		description.setDescription(DecisionUtil.getDescription(ATTRIBUTE_CONFLICT_KEY, getDecisionManager()
 			.isBranchMerge()));
-		description.add("myvalue", getMyOperation(AttributeOperation.class).getNewValue());
-		description.add("oldvalue", getMyOperation(AttributeOperation.class).getOldValue());
-		description.add("theirvalue", getTheirOperation(AttributeOperation.class).getNewValue());
-		description.setImage("attribute.gif");
+		description.add(MY_VALUE_KEY, getMyOperation(AttributeOperation.class).getNewValue());
+		description.add(OLD_VALUE_KEY, getMyOperation(AttributeOperation.class).getOldValue());
+		description.add(THEIR_VALUE_KEY, getTheirOperation(AttributeOperation.class).getNewValue());
+		description.setImage(ATTRIBUTE_GIF);
 
 		return description;
 	}
@@ -77,31 +82,32 @@ public class AttributeConflict extends VisualConflict {
 	 * @param withMerge true, if merge text option ({@link MergeTextOption}) should be added
 	 */
 	protected void initOptionsWithOutMerge(List<ConflictOption> options, boolean withMerge) {
-		AttributeOperation attributeOperation = getMyOperation(AttributeOperation.class);
-		ConflictOption myOption = new ConflictOption(attributeOperation.getNewValue(),
+		final AttributeOperation attributeOperation = getMyOperation(AttributeOperation.class);
+		final ConflictOption myOption = new ConflictOption(attributeOperation.getNewValue(),
 			ConflictOption.OptionType.MyOperation);
 		myOption.setDetailProvider(DecisionUtil.WIDGET_MULTILINE);
 		myOption.addOperations(getMyOperations());
 		options.add(myOption);
 
-		ConflictOption theirOption = new ConflictOption(getTheirOperation(AttributeOperation.class).getNewValue(),
+		final ConflictOption theirOption = new ConflictOption(
+			getTheirOperation(AttributeOperation.class).getNewValue(),
 			ConflictOption.OptionType.TheirOperation);
 		theirOption.setDetailProvider(DecisionUtil.WIDGET_MULTILINE);
 		theirOption.addOperations(getTheirOperations());
 		options.add(theirOption);
 
-		EObject eObject = getDecisionManager().getModelElement(attributeOperation.getModelElementId());
+		final EObject eObject = getDecisionManager().getModelElement(attributeOperation.getModelElementId());
 		EStructuralFeature feature;
 		boolean isMultiline = false;
 		try {
 			feature = attributeOperation.getFeature(eObject);
 			isMultiline = isMultiline(eObject, feature);
-		} catch (UnkownFeatureException e) {
+		} catch (final UnkownFeatureException e) {
 			// ignore
 		}
 
 		if (withMerge && DecisionUtil.detailsNeeded(this) && isMultiline) {
-			MergeTextOption mergeOption = new MergeTextOption();
+			final MergeTextOption mergeOption = new MergeTextOption();
 			mergeOption.add(myOption);
 			mergeOption.add(theirOption);
 			options.add(mergeOption);
@@ -109,11 +115,11 @@ public class AttributeConflict extends VisualConflict {
 	}
 
 	private boolean isMultiline(EObject eObject, EStructuralFeature attribute) {
-		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
+		final ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		AdapterFactoryItemDelegator adapterFactoryItemDelegator = new AdapterFactoryItemDelegator(
+		final AdapterFactoryItemDelegator adapterFactoryItemDelegator = new AdapterFactoryItemDelegator(
 			composedAdapterFactory);
-		IItemPropertyDescriptor propertyDescriptor = adapterFactoryItemDelegator
+		final IItemPropertyDescriptor propertyDescriptor = adapterFactoryItemDelegator
 			.getPropertyDescriptor(eObject, attribute);
 		boolean isMultiLine = false;
 		if (propertyDescriptor != null) {

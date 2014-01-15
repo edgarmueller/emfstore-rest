@@ -32,7 +32,9 @@ import org.eclipse.emf.emfstore.internal.client.model.util.WorkspaceUtil;
  */
 public final class FilterStack implements ESNotificationFilter {
 
-	private static final String NOTIFICATION_FILTER_EXTENSION_ID = "org.eclipse.emf.emfstore.client.notificationFilter";
+	private static final String CLASS = "class"; //$NON-NLS-1$
+
+	private static final String NOTIFICATION_FILTER_EXTENSION_ID = "org.eclipse.emf.emfstore.client.notificationFilter"; //$NON-NLS-1$
 
 	private static final ESNotificationFilter[] DEFAULT_STACK = { new TouchFilter(), new TransientFilter(),
 		new UnknownEventTypeFilter(), new EmptyRemovalsFilter(), new IgnoreDatatypeFilter(),
@@ -62,7 +64,7 @@ public final class FilterStack implements ESNotificationFilter {
 		final ESExtensionPoint extensionPoint = new ESExtensionPoint(NOTIFICATION_FILTER_EXTENSION_ID, true);
 		for (final ESExtensionElement element : extensionPoint.getExtensionElements()) {
 			try {
-				filterList.add(element.getClass("class", ESNotificationFilter.class));
+				filterList.add(element.getClass(CLASS, ESNotificationFilter.class));
 			} catch (final ESExtensionPointException e) {
 				WorkspaceUtil.logException(e.getMessage(), e);
 			}

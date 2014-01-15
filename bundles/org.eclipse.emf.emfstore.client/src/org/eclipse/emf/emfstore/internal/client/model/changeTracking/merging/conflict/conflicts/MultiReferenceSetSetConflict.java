@@ -17,8 +17,10 @@ package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.co
 
 import static org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util.DecisionUtil.getClassAndName;
 
+import java.text.MessageFormat;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
@@ -31,7 +33,13 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Mult
 
 public class MultiReferenceSetSetConflict extends VisualConflict {
 
-	private boolean containmentConflict;
+	private static final String MULTIREF_GIF = "multiref.gif"; //$NON-NLS-1$
+	private static final String OTHERCONTAINER_KEY = "othercontainer"; //$NON-NLS-1$
+	private static final String OVALUE_KEY = "ovalue"; //$NON-NLS-1$
+	private static final String VALUE_KEY = "value"; //$NON-NLS-1$
+	private static final String MULTIREFERENCE_SET_SET_CONFLICT_SET_KEY = "multireferencesetsetconflict.set"; //$NON-NLS-1$
+	private static final String MULTIREFERENCE_SET_SET_CONFLICT_MOVE_KEY = "multireferencesetsetconflict.move"; //$NON-NLS-1$
+	private final boolean containmentConflict;
 
 	public MultiReferenceSetSetConflict(ConflictBucket conflictBucket, DecisionManager decisionManager) {
 		super(conflictBucket, decisionManager, true, false);
@@ -48,25 +56,25 @@ public class MultiReferenceSetSetConflict extends VisualConflict {
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
 		if (!containmentConflict) {
-			description.setDescription(DecisionUtil.getDescription("multireferencesetsetconflict.set",
+			description.setDescription(DecisionUtil.getDescription(MULTIREFERENCE_SET_SET_CONFLICT_SET_KEY,
 				getDecisionManager().isBranchMerge()));
 		} else {
-			description.setDescription(DecisionUtil.getDescription("multireferencesetsetconflict.move",
+			description.setDescription(DecisionUtil.getDescription(MULTIREFERENCE_SET_SET_CONFLICT_MOVE_KEY,
 				getDecisionManager().isBranchMerge()));
 		}
 
-		description.add("value", getMyOperation(MultiReferenceSetOperation.class).getNewValue());
-		description.add("ovalue", getTheirOperation(MultiReferenceSetOperation.class).getNewValue());
-		description.add("othercontainer", getTheirOperation().getModelElementId());
-		description.setImage("multiref.gif");
+		description.add(VALUE_KEY, getMyOperation(MultiReferenceSetOperation.class).getNewValue());
+		description.add(OVALUE_KEY, getTheirOperation(MultiReferenceSetOperation.class).getNewValue());
+		description.add(OTHERCONTAINER_KEY, getTheirOperation().getModelElementId());
+		description.setImage(MULTIREF_GIF);
 		return description;
 	}
 
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {
-		ConflictOption myOption = new ConflictOption("", OptionType.MyOperation);
+		final ConflictOption myOption = new ConflictOption(StringUtils.EMPTY, OptionType.MyOperation);
 		myOption.addOperations(getMyOperations());
-		ConflictOption theirOption = new ConflictOption("", OptionType.TheirOperation);
+		final ConflictOption theirOption = new ConflictOption(StringUtils.EMPTY, OptionType.TheirOperation);
 		theirOption.addOperations(getTheirOperations());
 
 		if (!containmentConflict) {
@@ -75,13 +83,15 @@ public class MultiReferenceSetSetConflict extends VisualConflict {
 			theirOption.setOptionLabel(DecisionUtil.getClassAndName(getDecisionManager().getModelElement(
 				getTheirOperation(MultiReferenceSetOperation.class).getNewValue())));
 		} else {
-			EObject target = getDecisionManager().getModelElement(
+			final EObject target = getDecisionManager().getModelElement(
 				getMyOperation(MultiReferenceSetOperation.class).getNewValue());
 
-			myOption.setOptionLabel("Move " + getClassAndName(target) + "to"
-				+ getClassAndName(getDecisionManager().getModelElement(getMyOperation().getModelElementId())));
-			theirOption.setOptionLabel("Move " + getClassAndName(target) + " to"
-				+ getClassAndName(getDecisionManager().getModelElement(getTheirOperation().getModelElementId())));
+			myOption.setOptionLabel(MessageFormat.format(Messages.MultiReference_Move_To,
+				getClassAndName(target),
+				getClassAndName(getDecisionManager().getModelElement(getMyOperation().getModelElementId()))));
+			theirOption.setOptionLabel(MessageFormat.format(Messages.MultiReference_Move_To,
+				getClassAndName(target),
+				getClassAndName(getDecisionManager().getModelElement(getTheirOperation().getModelElementId()))));
 		}
 
 		options.add(myOption);

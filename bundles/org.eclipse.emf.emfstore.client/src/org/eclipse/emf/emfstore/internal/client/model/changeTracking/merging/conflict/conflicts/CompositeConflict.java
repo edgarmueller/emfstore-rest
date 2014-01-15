@@ -7,12 +7,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.conflicts;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.DecisionManager;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictContext;
 import org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.conflict.ConflictDescription;
@@ -31,12 +32,25 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.util
  */
 public class CompositeConflict extends VisualConflict {
 
+	private static final String CHANGE_RELATED_TO = "Change related to "; //$NON-NLS-1$
+	private static final String COMP_DESCRIPTION_KEY = "compdescription"; //$NON-NLS-1$
+	private static final String COMPOSITE_GIF = "composite.gif"; //$NON-NLS-1$
+	private static final String COMPOSITE_CONFLICT_BOTH_KEY = "compositeconflict.both"; //$NON-NLS-1$
+	private static final String OPPOSITE_KEY = "opposite"; //$NON-NLS-1$
+	private static final String COMPOSITE_CONFLICT_THEIR_KEY = "compositeconflict.their"; //$NON-NLS-1$
+	private static final String COMPOSITE_CONFLICT_MY_KEY = "compositeconflict.my"; //$NON-NLS-1$
+	private static final String INCOMING_COMP_DESCRIPTION_KEY = "incomingcompdescription"; //$NON-NLS-1$
+	private static final String LOCAL_COMP_DESCRIPTION_KEY = "localcompdescription"; //$NON-NLS-1$
+
 	/**
 	 * Default constructor.
 	 * 
-	 * @param conflictBucket the conflict
-	 * @param decisionManager decisionmanager
-	 * @param meCausing true, if composite caused by merging user
+	 * @param conflictBucket
+	 *            the conflict
+	 * @param decisionManager
+	 *            {@link DecisionManager}
+	 * @param meCausing
+	 *            true, if composite caused by merging user
 	 */
 	public CompositeConflict(ConflictBucket conflictBucket, DecisionManager decisionManager,
 		boolean meCausing) {
@@ -58,22 +72,22 @@ public class CompositeConflict extends VisualConflict {
 	@Override
 	protected ConflictDescription initConflictDescription(ConflictDescription description) {
 		if (OperationUtil.isComposite(getMyOperation()) && OperationUtil.isComposite(getTheirOperation())) {
-			description.setDescription(DecisionUtil.getDescription("compositeconflict.both", getDecisionManager()
+			description.setDescription(DecisionUtil.getDescription(COMPOSITE_CONFLICT_BOTH_KEY, getDecisionManager()
 				.isBranchMerge()));
-			description.add("localcompdescription", getLeftOperation());
-			description.add("incomingcompdescription", getRightOperation());
+			description.add(LOCAL_COMP_DESCRIPTION_KEY, getLeftOperation());
+			description.add(INCOMING_COMP_DESCRIPTION_KEY, getRightOperation());
 		} else if (isLeftMy()) {
-			description.setDescription(DecisionUtil.getDescription("compositeconflict.my", getDecisionManager()
+			description.setDescription(DecisionUtil.getDescription(COMPOSITE_CONFLICT_MY_KEY, getDecisionManager()
 				.isBranchMerge()));
 		} else {
-			description.setDescription(DecisionUtil.getDescription("compositeconflict.their", getDecisionManager()
+			description.setDescription(DecisionUtil.getDescription(COMPOSITE_CONFLICT_THEIR_KEY, getDecisionManager()
 				.isBranchMerge()));
 		}
 
-		description.add("compdescription", getLeftOperation());
-		description.add("opposite", getDecisionManager().getModelElement(getRightOperation().getModelElementId()));
+		description.add(COMP_DESCRIPTION_KEY, getLeftOperation());
+		description.add(OPPOSITE_KEY, getDecisionManager().getModelElement(getRightOperation().getModelElementId()));
 
-		description.setImage("composite.gif");
+		description.setImage(COMPOSITE_GIF);
 
 		return description;
 	}
@@ -83,9 +97,9 @@ public class CompositeConflict extends VisualConflict {
 	 */
 	@Override
 	protected void initConflictOptions(List<ConflictOption> options) {
-		final ConflictOption myOption = new ConflictOption("", OptionType.MyOperation);
+		final ConflictOption myOption = new ConflictOption(StringUtils.EMPTY, OptionType.MyOperation);
 		myOption.addOperations(getMyOperations());
-		final ConflictOption theirOption = new ConflictOption("", OptionType.TheirOperation);
+		final ConflictOption theirOption = new ConflictOption(StringUtils.EMPTY, OptionType.TheirOperation);
 		theirOption.addOperations(getTheirOperations());
 
 		String composite = null;
@@ -93,14 +107,14 @@ public class CompositeConflict extends VisualConflict {
 		if (getLeftOperation() instanceof CompositeOperation) {
 			composite = ((CompositeOperation) getLeftOperation()).getCompositeName();
 		} else {
-			composite = "Change related to "
+			composite = CHANGE_RELATED_TO
 				+ DecisionUtil.getClassAndName(getDecisionManager().getModelElement(
 					getLeftOperation().getModelElementId()));
 		}
 		if (getRightOperation() instanceof CompositeOperation) {
 			other = ((CompositeOperation) getRightOperation()).getCompositeName();
 		} else {
-			other = "Change related to "
+			other = CHANGE_RELATED_TO
 				+ DecisionUtil.getClassAndName(getDecisionManager().getModelElement(
 					getRightOperation().getModelElementId()));
 		}

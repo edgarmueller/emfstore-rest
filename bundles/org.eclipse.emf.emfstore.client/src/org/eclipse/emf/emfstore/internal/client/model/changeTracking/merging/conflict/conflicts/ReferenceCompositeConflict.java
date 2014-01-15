@@ -23,7 +23,6 @@ import org.eclipse.emf.emfstore.internal.server.conflictDetection.ConflictBucket
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.AbstractOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.MultiReferenceOperation;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.ReferenceOperation;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.SingleReferenceOperation;
 
 /**
  * Container for {@link MultiReferenceConflict} and {@link SingleReferenceConflict}.
@@ -41,6 +40,10 @@ public class ReferenceCompositeConflict extends VisualConflict {
 	 *            the underlying conflict, {@link MultiReferenceConflict} or {@link SingleReferenceConflict}
 	 * @param conflictBucket
 	 *            the conflict bucket
+	 * @param myOperation
+	 *            my conflicting operation
+	 * @param theirOperation
+	 *            their conflicting operation
 	 * @param decisionManager
 	 *            the decision manager
 	 */
@@ -49,8 +52,8 @@ public class ReferenceCompositeConflict extends VisualConflict {
 		AbstractOperation theirOperation, DecisionManager decisionManager) {
 		super(conflictBucket, decisionManager, true, false);
 		if (underlyingSingleConflict) {
-			conflict = new SingleReferenceConflict(conflictBucket, (SingleReferenceOperation) myOperation,
-				(SingleReferenceOperation) theirOperation,
+			conflict = new SingleReferenceConflict(conflictBucket, myOperation,
+				theirOperation,
 				// conflictBucket.getMyOperation(),
 				// conflictBucket.getTheirOperation(),
 				decisionManager);

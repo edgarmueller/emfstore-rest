@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Maximilian Koegel
+ * Maximilian Koegel - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.merging.util;
 
@@ -26,7 +26,8 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Abst
  */
 public class DefaultOperationAuthorProvider implements OperationAuthorProvider {
 
-	private Map<AbstractOperation, String> operationAuthorMap;
+	private static final String UNKOWN = "UNKOWN"; //$NON-NLS-1$
+	private final Map<AbstractOperation, String> operationAuthorMap;
 
 	/**
 	 * Default Constructor.
@@ -37,10 +38,10 @@ public class DefaultOperationAuthorProvider implements OperationAuthorProvider {
 	public DefaultOperationAuthorProvider(List<ChangePackage> leftChanges,
 		List<ChangePackage> rightChanges) {
 		operationAuthorMap = new LinkedHashMap<AbstractOperation, String>();
-		for (ChangePackage changePackage : leftChanges) {
+		for (final ChangePackage changePackage : leftChanges) {
 			scanIntoAuthorMap(changePackage);
 		}
-		for (ChangePackage changePackage : rightChanges) {
+		for (final ChangePackage changePackage : rightChanges) {
 			scanIntoAuthorMap(changePackage);
 		}
 
@@ -48,8 +49,8 @@ public class DefaultOperationAuthorProvider implements OperationAuthorProvider {
 
 	private void scanIntoAuthorMap(ChangePackage changePackage) {
 		if (changePackage.getLogMessage() != null && changePackage.getLogMessage().getAuthor() != null) {
-			String author = changePackage.getLogMessage().getAuthor();
-			for (AbstractOperation operation : changePackage.getOperations()) {
+			final String author = changePackage.getLogMessage().getAuthor();
+			for (final AbstractOperation operation : changePackage.getOperations()) {
 				operationAuthorMap.put(operation, author);
 			}
 		}
@@ -64,7 +65,7 @@ public class DefaultOperationAuthorProvider implements OperationAuthorProvider {
 	public String getAuthor(AbstractOperation operation) {
 		String author = operationAuthorMap.get(operation);
 		if (author == null) {
-			author = "UNKOWN";
+			author = UNKOWN;
 		}
 		return author;
 	}

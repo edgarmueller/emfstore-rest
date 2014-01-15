@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager;
 
 import java.util.concurrent.Callable;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.emfstore.client.ESUsersession;
 import org.eclipse.emf.emfstore.client.sessionprovider.ESAbstractSessionProvider;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
@@ -32,6 +33,9 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class SessionManager {
 
+	private static final String CLASS = "class"; //$NON-NLS-1$
+	private static final String ORG_ECLIPSE_EMF_EMFSTORE_CLIENT_USERSESSION_PROVIDER = "org.eclipse.emf.emfstore.client.usersessionProvider"; //$NON-NLS-1$
+	private static final String USERSESSION_MUST_NOT_BE_NULL = "Usersession must not be null."; //$NON-NLS-1$
 	private ESAbstractSessionProvider provider;
 
 	/**
@@ -76,13 +80,15 @@ public class SessionManager {
 	 * @throws ESException
 	 *             In case
 	 */
-	private Usersession loginUsersession(final Usersession usersession, boolean forceLogin) throws ESException {
+	private Usersession loginUsersession(final Usersession usersession, boolean forceLogin)
+		throws ESException {
 		if (usersession == null) {
 			// TODO create exception
-			throw new RuntimeException("Ouch.");
+			throw new RuntimeException(USERSESSION_MUST_NOT_BE_NULL);
 		}
 		if (!isLoggedIn(usersession) || forceLogin) {
-			if (!(usersession.getUsername() == null || usersession.getUsername().equals(""))
+			if (!(usersession.getUsername() == null
+				|| usersession.getUsername().equals(StringUtils.EMPTY))
 				&& usersession.getPassword() != null) {
 				try {
 					// if login fails, let the session provider handle the rest
@@ -150,10 +156,10 @@ public class SessionManager {
 
 	private void initSessionProvider() {
 		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.client.usersessionProvider");
+			ORG_ECLIPSE_EMF_EMFSTORE_CLIENT_USERSESSION_PROVIDER);
 
 		if (extensionPoint.getExtensionElements().size() > 0) {
-			final ESAbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass("class",
+			final ESAbstractSessionProvider sessionProvider = extensionPoint.getFirst().getClass(CLASS,
 				ESAbstractSessionProvider.class);
 			if (sessionProvider != null) {
 				provider = sessionProvider;

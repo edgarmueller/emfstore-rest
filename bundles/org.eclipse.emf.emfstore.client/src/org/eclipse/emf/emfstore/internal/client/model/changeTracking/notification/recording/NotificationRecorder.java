@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * chodnick
+ * Slawamir Chodnicki - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.changeTracking.notification.recording;
 
@@ -54,7 +54,7 @@ public class NotificationRecorder {
 		if (isRecordingComplete()) {
 			return recording;
 		}
-		throw new IllegalStateException("trying to get a recording, that is not finished yet");
+		throw new IllegalStateException(Messages.NotificationRecorder_Unfinished_Recording);
 	}
 
 	/**
@@ -64,11 +64,11 @@ public class NotificationRecorder {
 	public void stopRecording() {
 		// empty delete might actually happen
 		if (recording == null /* || recording.empty() */) {
-			throw new IllegalStateException("trying to close an empty recording");
+			throw new IllegalStateException(Messages.NotificationRecorder_Empty_Recording);
 		}
 		if (lastNotificationHasFollowUps()) {
 			throw new IllegalStateException(
-				"trying to close a recording, even though its last notification has followups");
+				Messages.NotificationRecorder_Notification_Followups_Available);
 		}
 		recordingComplete = true;
 	}
@@ -107,7 +107,7 @@ public class NotificationRecorder {
 	public void newRecording(NotificationRecordingHint aHint) {
 
 		if (recording != null && !isRecordingComplete()) {
-			final String message = "trying to create new notification chain, even though there is an uncompleted chain present";
+			final String message = Messages.NotificationRecorder_Uncomplete_Chain_Present;
 			ModelUtil.logException(message, new IllegalStateException(message));
 		}
 
