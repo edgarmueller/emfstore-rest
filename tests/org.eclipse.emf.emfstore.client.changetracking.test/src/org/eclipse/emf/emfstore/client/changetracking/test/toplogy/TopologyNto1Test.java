@@ -21,10 +21,10 @@ import static org.junit.Assert.fail;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.emfstore.client.test.common.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.cases.ESTest;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Add;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
+import org.eclipse.emf.emfstore.client.test.common.dsl.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Update;
 import org.eclipse.emf.emfstore.internal.client.model.exceptions.UnsupportedNotificationException;
 import org.eclipse.emf.emfstore.internal.common.model.ModelElementId;

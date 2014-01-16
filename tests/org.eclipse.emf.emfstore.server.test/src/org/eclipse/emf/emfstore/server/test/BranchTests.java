@@ -26,9 +26,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.concurrent.Callable;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.test.common.TestElementFeatures;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTestServerFactory;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTestServerFactory.ServerType;
 import org.eclipse.emf.emfstore.client.test.common.cases.ESTestWithLoggedInUser;
+import org.eclipse.emf.emfstore.client.test.common.cases.IServer;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
+import org.eclipse.emf.emfstore.client.test.common.dsl.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Update;
 import org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
@@ -62,15 +65,17 @@ public class BranchTests extends ESTestWithLoggedInUser {
 	private static final String HORST = "Horst"; //$NON-NLS-1$
 	private static final String B1 = "b1"; //$NON-NLS-1$
 	private static final String B2 = "b2"; //$NON-NLS-1$
+	private static IServer server;
 
 	@BeforeClass
 	public static void beforeClass() {
-		startEMFStore();
+		server = ESTestServerFactory.create(ServerType.Mock);
+		server.startEMFStore();
 	}
 
 	@AfterClass
 	public static void afterClass() {
-		stopEMFStore();
+		server.stopEMFStore();
 	}
 
 	@Override

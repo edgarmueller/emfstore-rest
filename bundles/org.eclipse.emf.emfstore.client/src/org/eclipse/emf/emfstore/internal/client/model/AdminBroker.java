@@ -255,15 +255,17 @@ public interface AdminBroker {
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#addParticipant(org.eclipse.emf.emfstore.internal.server.model.SessionId,
-	 *      ProjectId, ACOrgUnitId)
+	 *      ProjectId, ACOrgUnitId, EClass)
 	 * @param projectId
-	 *            project id
-	 * @param participant
-	 *            orgUnit id
+	 *            the {@link ProjectId}
+	 * @param participantId
+	 *            the {@link ACOrgUnitId} of the participant to be added
+	 * @param role
+	 *            the EClass of the role that should be assigned to the participant
 	 * @throws ESException
 	 *             if an exceptions occurs on the server or on transport
 	 */
-	void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws ESException;
+	void addParticipant(ProjectId projectId, ACOrgUnitId participantId, EClass role) throws ESException;
 
 	/**
 	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
@@ -310,4 +312,17 @@ public interface AdminBroker {
 	 */
 	void changeRole(ProjectId projectId, ACOrgUnitId orgUnit, EClass role) throws ESException;
 
+	/**
+	 * Delegates call to method in {@link org.eclipse.emf.emfstore.internal.server.AdminEmfStore}.
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#assignRole(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      ACOrgUnitId, EClass)
+	 * @param orgUnitId
+	 *            the ID of an organizational unit
+	 * @param role
+	 *            the role to be assigned
+	 * @throws ESException
+	 *             if an exceptions occurs on the server or on transport
+	 */
+	void assignRole(ACOrgUnitId orgUnitId, EClass role) throws ESException;
 }

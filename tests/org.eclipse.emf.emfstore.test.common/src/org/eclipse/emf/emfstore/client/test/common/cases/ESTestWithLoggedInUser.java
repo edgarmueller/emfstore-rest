@@ -152,27 +152,22 @@ public abstract class ESTestWithLoggedInUser extends ESTestWithMockServer {
 				// setUp might have failed
 				if (usersession != null && usersession.isLoggedIn()) {
 					try {
-						superSession.logout();
-						if (!isSuperUser()) {
-							usersession.logout();
+						logoutSessions();
+
+						final Iterator<Usersession> iter = ESWorkspaceProviderImpl.getInstance().getWorkspace()
+							.toInternalAPI()
+							.getUsersessions().iterator();
+						while (iter.hasNext()) {
+							if (iter.next().getServerInfo() == ((ESServerImpl) server).toInternalAPI()) {
+								iter.remove();
+							}
 						}
+						ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
 					} catch (final ESException e) {
 						setException(e);
+					} catch (final ESServerNotFoundException e) {
+						fail(e.getMessage());
 					}
-
-					final Iterator<Usersession> iter = ESWorkspaceProviderImpl.getInstance().getWorkspace()
-						.toInternalAPI()
-						.getUsersessions().iterator();
-					while (iter.hasNext()) {
-						if (iter.next().getServerInfo() == ((ESServerImpl) server).toInternalAPI()) {
-							iter.remove();
-						}
-					}
-				}
-				try {
-					ESWorkspaceProvider.INSTANCE.getWorkspace().removeServer(server);
-				} catch (final ESServerNotFoundException e) {
-					fail(e.getMessage());
 				}
 			}
 		};
@@ -184,5 +179,15 @@ public abstract class ESTestWithLoggedInUser extends ESTestWithMockServer {
 		}
 
 		super.after();
+	}
+
+	/**
+	 * @throws ESException
+	 */
+	private void logoutSessions() throws ESException {
+		superSession.logout();
+		if (!isSuperUser()) {
+			usersession.logout();
+		}
 	}
 }

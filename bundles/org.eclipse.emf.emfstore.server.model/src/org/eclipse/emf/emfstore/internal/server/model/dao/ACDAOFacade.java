@@ -7,12 +7,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Edgar - initial API and implementation
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.model.dao;
 
 /**
- * @author Edgar
+ * Facade for access control related functionality.
+ * 
+ * @author emueller
  * 
  */
 public interface ACDAOFacade extends ACUserDAO, ACGroupDAO, ProjectDAO {

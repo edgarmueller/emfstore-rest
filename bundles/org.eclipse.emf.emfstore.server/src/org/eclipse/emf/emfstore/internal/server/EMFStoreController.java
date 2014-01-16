@@ -7,9 +7,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendonk
- * koegel
- * jfaltermeier
+ * Otto von Wesendonk, Maximilian Koegel - initial API and implementation
+ * Johannes Faltermeier - URI related refactorings
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server;
 
@@ -20,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
@@ -81,6 +81,22 @@ import org.eclipse.equinox.app.IApplicationContext;
  */
 public class EMFStoreController implements IApplication, Runnable {
 
+	private static final String EMFSTORE_TXT_FILE = "emfstore.txt"; //$NON-NLS-1$
+
+	private static final String SUPERUSRE_DESCRIPTION = "default server admin (superuser)"; //$NON-NLS-1$
+
+	private static final String SUPERUSER_LAST_NAME = "user"; //$NON-NLS-1$
+
+	private static final String SUPERUSER_FIRST_NAME = "super"; //$NON-NLS-1$
+
+	private static final String RESOURCE_SET_PROVIDER = "org.eclipse.emf.emfstore.server.resourceSetProvider"; //$NON-NLS-1$
+
+	private static final String CONFIG_RESOURCE_KEY = "org.eclipse.emf.emfstore.server.configurationResource"; //$NON-NLS-1$
+
+	private static final String EMFSTORE_COMMON_BUNDLE = "org.eclipse.emf.emfstore.common.model"; //$NON-NLS-1$
+
+	private static final String ORG_ECLIPSE_EMF_EMFSTORE_SERVER_DYNAMIC_MODEL_PROVIDER = "org.eclipse.emf.emfstore.server.dynamicModelProvider"; //$NON-NLS-1$
+
 	/**
 	 * The period of time in seconds between executing the clean memory task.
 	 */
@@ -101,7 +117,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	public synchronized Object start(IApplicationContext context) throws FatalESException {
 		run(true);
 		instance = null;
-		ModelUtil.logInfo("Server is STOPPED.");
+		ModelUtil.logInfo(Messages.EMFStoreController_Server_Stopped);
 		return IApplication.EXIT_OK;
 	}
 
@@ -116,7 +132,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	 */
 	public synchronized void run(boolean waitForTermination) throws FatalESException {
 		if (instance != null) {
-			throw new FatalESException("Another EmfStore Controller seems to be running already!");
+			throw new FatalESException(Messages.EMFStoreController_EMFStore_Controller_Already_Running);
 		}
 
 		instance = this;
@@ -126,9 +142,9 @@ public class EMFStoreController implements IApplication, Runnable {
 		initLogging();
 
 		// copy es.properties file to workspace if not existent
-		copyFileToWorkspace(ServerConfiguration.getConfFile(), "es.properties",
-			"Couldn't copy es.properties file to config folder.",
-			"Default es.properties file was copied to config folder.");
+		copyFileToWorkspace(ServerConfiguration.getConfFile(), ServerConfiguration.ES_PROPERTIES,
+			Messages.EMFStoreController_Could_Not_Copy_Properties_File,
+			Messages.EMFStoreController_Default_Properties_File_Copied);
 
 		initProperties();
 
@@ -150,24 +166,21 @@ public class EMFStoreController implements IApplication, Runnable {
 
 		// copy keystore file to workspace if not existent
 		copyFileToWorkspace(ServerConfiguration.getServerKeyStorePath(), ServerConfiguration.SERVER_KEYSTORE_FILE,
-			"Failed to copy keystore.", "Keystore was copied to server workspace.");
+			Messages.EMFStoreController_Failed_To_Copy_Keystore, Messages.EMFStoreController_Keystore_Copied);
 
 		connectionHandlers = initConnectionHandlers();
 
 		handlePostStartupListener();
 		registerShutdownHook();
 
-		ModelUtil.logInfo("Initialitation COMPLETE.");
-		ModelUtil.logInfo("Server is RUNNING...Time to relax...");
+		ModelUtil.logInfo(Messages.EMFStoreController_Init_Complete);
+		ModelUtil.logInfo(Messages.EMFStoreController_Server_Running);
 		if (waitForTermination) {
 			waitForTermination();
 		}
 
 	}
 
-	/**
-	 * 
-	 */
 	private void registerShutdownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
@@ -178,8 +191,9 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	private void logGeneralInformation() {
-		ModelUtil.logInfo("Server data home location: " + ServerConfiguration.getServerHome());
-		ModelUtil.logInfo("JVM Max Memory: " + Runtime.getRuntime().maxMemory() / 1000000 + " MByte");
+		ModelUtil.logInfo(Messages.EMFStoreController_Server_Home + ServerConfiguration.getServerHome());
+		ModelUtil.logInfo(MessageFormat.format(
+			Messages.EMFStoreController_JVM_Max_Memory, Runtime.getRuntime().maxMemory() / 1000000));
 	}
 
 	private void initializeBranchesIfRequired(ServerSpace serverSpace) throws FatalESException {
@@ -201,10 +215,10 @@ public class EMFStoreController implements IApplication, Runnable {
 	// delegates loading of dynamic models to the resource set provider
 	private void registerDynamicModels() {
 		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.server.dynamicModelProvider",
-			true, new ESPriorityComparator("priority", true));
+			ORG_ECLIPSE_EMF_EMFSTORE_SERVER_DYNAMIC_MODEL_PROVIDER,
+			true, new ESPriorityComparator("priority", true)); //$NON-NLS-1$
 		final ESDynamicModelProvider dynamicModelProvider = extensionPoint.getElementWithHighestPriority().getClass(
-			"class", ESDynamicModelProvider.class);
+			"class", ESDynamicModelProvider.class); //$NON-NLS-1$
 		final List<EPackage> models = dynamicModelProvider.getDynamicModels();
 
 		for (final EPackage model : models) {
@@ -213,13 +227,14 @@ public class EMFStoreController implements IApplication, Runnable {
 			for (final EPackage subPkg : packages) {
 				EPackage.Registry.INSTANCE.put(subPkg.getNsURI(), subPkg);
 			}
-			ModelUtil.logInfo("Dynamic Model \"" + model.getNsURI() + "\" loaded.");
+			ModelUtil.logInfo(
+				MessageFormat.format(Messages.EMFStoreController_Dynamic_Model_Loaded, model.getNsURI()));
 		}
 
 	}
 
 	private void initLogging() {
-		Platform.getLog(Platform.getBundle("org.eclipse.emf.emfstore.common.model")).addLogListener(new
+		Platform.getLog(Platform.getBundle(EMFSTORE_COMMON_BUNDLE)).addLogListener(new
 			ILogListener() {
 
 				public void logging(IStatus status, String plugin) {
@@ -241,8 +256,8 @@ public class EMFStoreController implements IApplication, Runnable {
 		final String property = ServerConfiguration.getProperties().getProperty(
 			ServerConfiguration.LOAD_STARTUP_LISTENER,
 			ServerConfiguration.LOAD_STARTUP_LISTENER_DEFAULT);
-		if (ServerConfiguration.TRUE.equals(property)) {
-			ModelUtil.logInfo("Notifying startup listener");
+		if (Boolean.TRUE.toString().equals(property)) {
+			ModelUtil.logInfo("Notifying startup listener"); //$NON-NLS-1$
 			for (final StartupListener listener : ServerConfiguration.getStartupListeners()) {
 				listener.startedUp(serverSpace.getProjects());
 			}
@@ -252,8 +267,8 @@ public class EMFStoreController implements IApplication, Runnable {
 	private void handlePostStartupListener() {
 		final String property = ServerConfiguration.getProperties().getProperty(
 			ServerConfiguration.LOAD_POST_STARTUP_LISTENER, ServerConfiguration.LOAD_STARTUP_LISTENER_DEFAULT);
-		if (ServerConfiguration.TRUE.equals(property)) {
-			ModelUtil.logInfo("Notifying post startup listener");
+		if (Boolean.TRUE.toString().equals(property)) {
+			ModelUtil.logInfo("Notifying post startup listener"); //$NON-NLS-1$
 			for (final PostStartupListener listener : ServerConfiguration.getPostStartupListeners()) {
 				listener.postStartUp(serverSpace, accessControl, connectionHandlers);
 			}
@@ -268,7 +283,7 @@ public class EMFStoreController implements IApplication, Runnable {
 			// check if the custom configuration resources are provided and if,
 			// copy them to place
 			final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-				"org.eclipse.emf.emfstore.server.configurationResource");
+				CONFIG_RESOURCE_KEY);
 			final ESExtensionElement element = extensionPoint.getFirst();
 
 			if (element != null) {
@@ -277,12 +292,13 @@ public class EMFStoreController implements IApplication, Runnable {
 
 				if (attribute != null) {
 					try {
-						FileUtil.copyFile(new URL("platform:/plugin/"
-							+ element.getIConfigurationElement().getNamespaceIdentifier() + "/" + attribute)
+						FileUtil.copyFile(new URL("platform:/plugin/" //$NON-NLS-1$
+							+ element.getIConfigurationElement().getNamespaceIdentifier() + "/" + attribute) //$NON-NLS-1$
 							.openConnection().getInputStream(), targetFile);
 						return;
 					} catch (final IOException e) {
-						ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+						ModelUtil.logWarning(
+							MessageFormat.format(Messages.EMFStoreController_Copy_From_To, source, target), e);
 					}
 				}
 			}
@@ -290,7 +306,8 @@ public class EMFStoreController implements IApplication, Runnable {
 			try {
 				FileUtil.copyFile(getClass().getResourceAsStream(source), targetFile);
 			} catch (final IOException e) {
-				ModelUtil.logWarning("Copy of file from " + source + " to " + target + " failed", e);
+				ModelUtil.logWarning(
+					MessageFormat.format("Copy of file from {0} to {1} failed.", source, target), e); //$NON-NLS-1$
 			}
 		}
 
@@ -314,11 +331,11 @@ public class EMFStoreController implements IApplication, Runnable {
 	private ServerSpace initServerSpace() throws FatalESException {
 
 		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
-			"org.eclipse.emf.emfstore.server.resourceSetProvider",
-			true, new ESPriorityComparator("priority", true));
+			RESOURCE_SET_PROVIDER,
+			true, new ESPriorityComparator("priority", true)); //$NON-NLS-1$
 
 		final ESResourceSetProvider resourceSetProvider = extensionPoint.getElementWithHighestPriority().getClass(
-			"class",
+			"class", //$NON-NLS-1$
 			ESResourceSetProvider.class);
 
 		final ResourceSet resourceSet = resourceSetProvider.getResourceSet();
@@ -332,14 +349,14 @@ public class EMFStoreController implements IApplication, Runnable {
 				resource.getContents().add(serverspace);
 				ModelUtil.saveResource(resource, ModelUtil.getResourceLogger());
 			} catch (final IOException e) {
-				throw new FatalESException("Could not init XMLRessource", e);
+				throw new FatalESException(Messages.EMFStoreController_Could_Not_Init_XMLResource, e);
 			}
 		} else {
 			// hrefs are persisted differently in 1.1+ in comparison to 1.0
 			// migrate, if needed, before loading
 			if (resourceSetProvider instanceof ServerXMIResourceSetProvider) {
 				if (!new ServerHrefMigrator().migrate()) {
-					throw new FatalESException("Error during migration");
+					throw new FatalESException(Messages.EMFStoreController_Error_During_Migration);
 				}
 
 			}
@@ -365,7 +382,7 @@ public class EMFStoreController implements IApplication, Runnable {
 			result.setResource(resource);
 		} else {
 			// if no serverspace can be loaded, create one
-			ModelUtil.logInfo("Creating initial server space...");
+			ModelUtil.logInfo(Messages.EMFStoreController_Creating_Initial_ServerSpace);
 			result = ModelFactory.eINSTANCE.createServerSpace();
 
 			result.setResource(resource);
@@ -405,9 +422,9 @@ public class EMFStoreController implements IApplication, Runnable {
 		}
 		final ACUser superUser = AccesscontrolFactory.eINSTANCE.createACUser();
 		superUser.setName(superuser);
-		superUser.setFirstName("super");
-		superUser.setLastName("user");
-		superUser.setDescription("default server admin (superuser)");
+		superUser.setFirstName(SUPERUSER_FIRST_NAME);
+		superUser.setLastName(SUPERUSER_LAST_NAME);
+		superUser.setDescription(SUPERUSRE_DESCRIPTION);
 		superUser.getRoles().add(RolesFactory.eINSTANCE.createServerAdmin());
 		serverSpace.getUsers().add(superUser);
 		try {
@@ -415,7 +432,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		} catch (final IOException e) {
 			throw new FatalESException(StorageException.NOSAVE, e);
 		}
-		ModelUtil.logInfo("added superuser " + superuser);
+		ModelUtil.logInfo(Messages.EMFStoreController_Added_SuperUser + superuser);
 	}
 
 	private Properties initProperties() {
@@ -426,16 +443,17 @@ public class EMFStoreController implements IApplication, Runnable {
 			fis = new FileInputStream(propertyFile);
 			properties.load(fis);
 			ServerConfiguration.setProperties(properties, false);
-			ModelUtil.logInfo("Property file read. (" + propertyFile.getAbsolutePath() + ")");
+			ModelUtil.logInfo(
+				MessageFormat.format(Messages.EMFStoreController_PropertyFile_Read, propertyFile.getAbsolutePath()));
 		} catch (final IOException e) {
-			ModelUtil.logWarning("Property initialization failed, using default properties.", e);
+			ModelUtil.logWarning(Messages.EMFStoreController_Property_Init_Failed, e);
 		} finally {
 			try {
 				if (fis != null) {
 					fis.close();
 				}
 			} catch (final IOException e) {
-				ModelUtil.logWarning("Closing of properties file failed.", e);
+				ModelUtil.logWarning(Messages.EMFStoreController_Closing_Of_Properties_File_Failed, e);
 			}
 		}
 
@@ -463,7 +481,7 @@ public class EMFStoreController implements IApplication, Runnable {
 				}
 			}
 		}
-		ModelUtil.logInfo("Server was stopped.");
+		ModelUtil.logInfo(Messages.EMFStoreController_Server_Was_Stopped);
 		instance = null;
 		wakeForTermination();
 	}
@@ -475,16 +493,20 @@ public class EMFStoreController implements IApplication, Runnable {
 	 *            the fatal exception that triggered the shutdown
 	 */
 	public void shutdown(FatalESException exception) {
-		ModelUtil.logWarning("Stopping all connection handlers...");
+		ModelUtil.logWarning(Messages.EMFStoreController_Stopping_All_ConnectionHandlers);
 		if (connectionHandlers != null) {
 			for (final ConnectionHandler<? extends EMFStoreInterface> handler : connectionHandlers) {
-				ModelUtil.logWarning("Stopping connection handler \"" + handler.getName() + "\".");
+				ModelUtil.logWarning(
+					MessageFormat.format(
+						Messages.EMFStoreController_Stopping_ConnectionHandler, handler.getName()));
 				handler.stop();
-				ModelUtil.logWarning("Connection handler \"" + handler.getName() + "\" stopped.");
+				ModelUtil.logWarning(
+					MessageFormat.format(
+						Messages.EMFStoreController_ConnectionHandler_Stopped, handler.getName()));
 			}
 		}
-		ModelUtil.logException("Server was forcefully stopped.", exception);
-		ModelUtil.logException("Cause for server shutdown: ", exception.getCause());
+		ModelUtil.logException(Messages.EMFStoreController_Serve_Forcefully_Stopped, exception);
+		ModelUtil.logException(Messages.EMFStoreController_Cause_For_Server_Shutdown, exception.getCause());
 		wakeForTermination();
 	}
 
@@ -492,7 +514,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		try {
 			wait();
 		} catch (final InterruptedException e) {
-			ModelUtil.logWarning("Waiting for termination was interrupted", e);
+			ModelUtil.logWarning(Messages.EMFStoreController_Waiting_For_Termination_Interrupted, e);
 		}
 	}
 
@@ -501,7 +523,7 @@ public class EMFStoreController implements IApplication, Runnable {
 	}
 
 	private void serverHeader() {
-		final InputStream inputStream = getClass().getResourceAsStream("emfstore.txt");
+		final InputStream inputStream = getClass().getResourceAsStream(EMFSTORE_TXT_FILE);
 		final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		String line;
 		try {

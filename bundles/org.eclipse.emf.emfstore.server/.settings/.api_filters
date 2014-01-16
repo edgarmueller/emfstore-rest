@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.emf.emfstore.server" version="2">
+    <resource path="src/org/eclipse/emf/emfstore/internal/server/EMFStoreController.java" type="org.eclipse.emf.emfstore.internal.server.EMFStoreController">
+        <filter comment="Internal API usage" id="572522506">
+            <message_arguments>
+                <message_argument value="ESPriorityComparator"/>
+                <message_argument value="EMFStoreController"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

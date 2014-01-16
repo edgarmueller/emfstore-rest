@@ -46,9 +46,9 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
+	public void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant, EClass roleClass)
 		throws ESException {
-		getAdminEmfStore().addParticipant(sessionId, projectId, participant);
+		getAdminEmfStore().addParticipant(sessionId, projectId, participant, roleClass);
 	}
 
 	/**
@@ -190,5 +190,15 @@ public class XmlRpcAdminEmfStoreImpl implements AdminEmfStore {
 	public void removeParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant)
 		throws ESException {
 		getAdminEmfStore().removeParticipant(sessionId, projectId, participant);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.AdminEmfStore#assignRole(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId, org.eclipse.emf.ecore.EClass)
+	 */
+	public void assignRole(SessionId sessionId, ACOrgUnitId orgUnitId, EClass roleClass) throws ESException {
+		getAdminEmfStore().assignRole(sessionId, orgUnitId, roleClass);
 	}
 }

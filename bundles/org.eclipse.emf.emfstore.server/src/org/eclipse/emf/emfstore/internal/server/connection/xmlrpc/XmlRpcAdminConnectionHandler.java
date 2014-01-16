@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.connection.xmlrpc;
 
@@ -26,9 +26,9 @@ public class XmlRpcAdminConnectionHandler implements ConnectionHandler<AdminEmfS
 	/**
 	 * String interface identifier.
 	 */
-	public static final String ADMINEMFSTORE = "AdminEmfStore";
+	public static final String ADMINEMFSTORE = "AdminEmfStore"; //$NON-NLS-1$
 
-	private static final String NAME = "XML RPC Admin Connection Handler";
+	private static final String NAME = "XML RPC Admin Connection Handler"; //$NON-NLS-1$
 
 	private static AdminEmfStore adminEmfStore;
 
@@ -42,10 +42,9 @@ public class XmlRpcAdminConnectionHandler implements ConnectionHandler<AdminEmfS
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("static-access")
 	public synchronized void init(AdminEmfStore adminEmfStore, AccessControl accessControl)
 		throws FatalESException {
-		this.adminEmfStore = adminEmfStore;
+		XmlRpcAdminConnectionHandler.adminEmfStore = adminEmfStore;
 		final XmlRpcWebserverManager webServer = XmlRpcWebserverManager.getInstance();
 		webServer.initServer();
 		webServer.addHandler(ADMINEMFSTORE, XmlRpcAdminEmfStoreImpl.class);

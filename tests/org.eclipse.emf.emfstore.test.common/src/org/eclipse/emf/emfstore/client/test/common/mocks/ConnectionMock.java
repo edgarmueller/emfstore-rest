@@ -1,12 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2008-2011 Chair for Applied Software Engineering,
- * Technische Universitaet Muenchen.
+ * Copyright (c) 2011-2014 EclipseSource Muenchen GmbH and others.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
+ * Edgar Mueller - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.client.test.common.mocks;
 
@@ -52,6 +53,7 @@ public class ConnectionMock implements ConnectionManager {
 	// TODO: auth mock is never used locally
 	private final HashSet<SessionId> sessions;
 	private final AccessControl accessControl;
+	private boolean deleteFiles;
 
 	public ConnectionMock(EMFStore emfStore, AccessControl accessControl) {
 		this.emfStore = emfStore;
@@ -121,7 +123,7 @@ public class ConnectionMock implements ConnectionManager {
 		return ModelUtil.clone(emfStore.getBranches(ModelUtil.clone(sessionId), ModelUtil.clone(projectId)));
 	}
 
-	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery historyQuery)
+	public List<HistoryInfo> getHistoryInfo(SessionId sessionId, ProjectId projectId, HistoryQuery<?> historyQuery)
 		throws ESException {
 		checkSessionId(sessionId);
 		return ModelUtil.clone(emfStore.getHistoryInfo(ModelUtil.clone(sessionId), ModelUtil.clone(projectId),
@@ -157,7 +159,12 @@ public class ConnectionMock implements ConnectionManager {
 
 	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws ESException {
 		checkSessionId(sessionId);
+		this.deleteFiles = deleteFiles;
 		emfStore.deleteProject(ModelUtil.clone(sessionId), ModelUtil.clone(projectId), deleteFiles);
+	}
+
+	public boolean didDeleteFiles() {
+		return deleteFiles;
 	}
 
 	public ACUser resolveUser(SessionId sessionId, ACOrgUnitId id) throws ESException {

@@ -14,8 +14,45 @@ package org.eclipse.emf.emfstore.client.test.common.dsl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesPackage;
 
-public class Roles {
+/**
+ * Convenience class for handling {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role Role}s.
+ * 
+ * @author
+ */
+public final class Roles {
 
-	public static final EClass writer = RolesPackage.eINSTANCE.getWriterRole();
-	public static final EClass reader = RolesPackage.eINSTANCE.getReaderRole();
+	private Roles() {
+
+	}
+
+	/**
+	 * Returns the {@link EClass} of a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.WriterRole WriterRole}.
+	 * 
+	 * @return the WriterRole EClass
+	 */
+	public static EClass writer() {
+		return RolesPackage.eINSTANCE.getWriterRole();
+	}
+
+	/**
+	 * Returns the {@link EClass} of a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ReaderRole ReaderRole}.
+	 * 
+	 * @return the ReaderRole EClass
+	 */
+	public static EClass reader() {
+		return RolesPackage.eINSTANCE.getReaderRole();
+	}
+
+	/**
+	 * Returns the {@link EClass} of a
+	 * {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ProjectAdminRole ProjectAdminRole}.
+	 * 
+	 * @return the ProjectAdminRole EClass
+	 */
+	public static EClass projectAdmin() {
+		return RolesPackage.eINSTANCE.getProjectAdminRole();
+	}
+
 }

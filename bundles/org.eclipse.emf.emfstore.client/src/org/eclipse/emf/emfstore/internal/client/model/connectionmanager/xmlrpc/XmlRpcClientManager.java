@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * wesendon
+ * Otto von Wesendonk - initial API and implementation
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc;
 
@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
@@ -38,6 +39,9 @@ import org.xml.sax.SAXException;
  */
 public class XmlRpcClientManager {
 
+	private final String serverInterface;
+	private XmlRpcClient client;
+
 	/**
 	 * Default constructor.
 	 * 
@@ -47,9 +51,6 @@ public class XmlRpcClientManager {
 		this.serverInterface = serverInterface;
 	}
 
-	private String serverInterface;
-	private XmlRpcClient client;
-
 	/**
 	 * Initializes the connection.
 	 * 
@@ -58,7 +59,7 @@ public class XmlRpcClientManager {
 	 */
 	public void initConnection(ServerInfo serverInfo) throws ConnectionException {
 		try {
-			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+			final XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 			config.setServerURL(createURL(serverInfo));
 			config.setEnabledForExceptions(true);
 			config.setEnabledForExtensions(true);
@@ -69,32 +70,28 @@ public class XmlRpcClientManager {
 			client = new XmlRpcClient();
 			client.setTypeFactory(new EObjectTypeFactory(client));
 
-			XmlRpcSun15HttpTransportFactory factory = new XmlRpcSun15HttpTransportFactory(client);
+			final XmlRpcSun15HttpTransportFactory factory = new XmlRpcSun15HttpTransportFactory(client);
 
 			try {
 				factory.setSSLSocketFactory(KeyStoreManager.getInstance().getSSLContext().getSocketFactory());
-			} catch (ESCertificateException e) {
-				throw new ConnectionException("Couldn't load certificate", e);
+			} catch (final ESCertificateException e) {
+				throw new ConnectionException(Messages.XmlRpcClientManager_Could_Not_Load_Certificate, e);
 			}
 			client.setTransportFactory(factory);
-
 			client.setConfig(config);
-
-			// } catch (XmlRpcException e) {
-			// throw new ConnectionException("", e);
-		} catch (MalformedURLException e) {
-			throw new ConnectionException("Malformed Url or Port", e);
+		} catch (final MalformedURLException e) {
+			throw new ConnectionException(Messages.XmlRpcClientManager_Malformed_URL_Or_Port, e);
 		}
 	}
 
 	private URL createURL(ServerInfo serverInfo) throws MalformedURLException {
 		checkUrl(serverInfo.getUrl());
-		return new URL("https", serverInfo.getUrl(), serverInfo.getPort(), "xmlrpc");
+		return new URL("https", serverInfo.getUrl(), serverInfo.getPort(), "xmlrpc"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private void checkUrl(String url) throws MalformedURLException {
-		if (url != null && !url.equals("")) {
-			if (!(url.contains(":") || url.contains("/"))) {
+		if (url != null && !url.equals(StringUtils.EMPTY)) {
+			if (!(url.contains(":") || url.contains("/"))) { //$NON-NLS-1$ //$NON-NLS-2$
 				return;
 			}
 		}
@@ -128,12 +125,12 @@ public class XmlRpcClientManager {
 	@SuppressWarnings("unchecked")
 	public <T> List<T> callWithListResult(String methodName, Class<T> returnType, Object... parameters)
 		throws ESException {
-		List<T> result = new ArrayList<T>();
-		Object[] callResult = executeCall(methodName, Object[].class, parameters);
+		final List<T> result = new ArrayList<T>();
+		final Object[] callResult = executeCall(methodName, Object[].class, parameters);
 		if (callResult == null) {
 			return result;
 		}
-		for (Object obj : callResult) {
+		for (final Object obj : callResult) {
 			result.add((T) obj);
 		}
 		return result;
@@ -156,13 +153,13 @@ public class XmlRpcClientManager {
 			throw new ConnectionException(ConnectionManager.REMOTE);
 		}
 		try {
-			return (T) client.execute(serverInterface + "." + methodName, params);
-		} catch (XmlRpcException e) {
+			return (T) client.execute(serverInterface + "." + methodName, params); //$NON-NLS-1$
+		} catch (final XmlRpcException e) {
 			if (e.getCause() instanceof ESException) {
-				throw ((ESException) e.getCause());
+				throw (ESException) e.getCause();
 			} else if (e.linkedException instanceof SAXException
 				&& ((SAXException) e.linkedException).getException() instanceof SerializationException) {
-				SerializationException serialE = (SerializationException) ((SAXException) e.linkedException)
+				final SerializationException serialE = (SerializationException) ((SAXException) e.linkedException)
 					.getException();
 				throw new org.eclipse.emf.emfstore.internal.server.exceptions.SerializationException(serialE);
 			} else {

@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.emfstore.client.observer.ESExceptionObserver;
 import org.eclipse.emf.emfstore.internal.client.model.Activator;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
-import org.eclipse.emf.emfstore.internal.common.CommonUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.IResourceLogger;
 
 /**
@@ -32,11 +31,11 @@ public final class WorkspaceUtil {
 	private static IResourceLogger resourceLogger = new IResourceLogger() {
 
 		public void logWarning(String msg) {
-			log(msg, Status.WARNING);
+			log(msg, IStatus.WARNING);
 		}
 
 		public void logError(String msg) {
-			log(msg, Status.ERROR);
+			log(msg, IStatus.ERROR);
 		}
 	};
 
@@ -84,12 +83,14 @@ public final class WorkspaceUtil {
 	 * @param statusInt the status constant as defined in {@link IStatus}
 	 */
 	public static void log(String message, Exception exception, int statusInt) {
-		Activator activator = Activator.getDefault();
-		Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), statusInt, message, exception);
+		final Activator activator = Activator.getDefault();
+		final Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), statusInt, message,
+			exception);
 		activator.getLog().log(status);
-		if (CommonUtil.isTesting() && exception != null) {
-			throw new RuntimeException(exception);
-		}
+		// TODO: deactivated, since this alters the result of testing expected exceptions
+		// if (CommonUtil.isTesting() && exception != null) {
+		// throw new RuntimeException(exception);
+		// }
 	}
 
 	/**
@@ -99,8 +100,8 @@ public final class WorkspaceUtil {
 	 * @param statusInt the status constant as defined in {@link IStatus}
 	 */
 	public static void log(String message, int statusInt) {
-		Activator activator = Activator.getDefault();
-		Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), message);
+		final Activator activator = Activator.getDefault();
+		final Status status = new Status(statusInt, activator.getBundle().getSymbolicName(), message);
 		activator.getLog().log(status);
 	}
 
@@ -131,8 +132,8 @@ public final class WorkspaceUtil {
 	}
 
 	private static void wrapAndHandleException(String errorMessage, Exception exception) {
-		RuntimeException runtimeException = new RuntimeException(errorMessage, exception);
-		Boolean errorHandeled = ESWorkspaceProviderImpl.getObserverBus().notify(ESExceptionObserver.class)
+		final RuntimeException runtimeException = new RuntimeException(errorMessage, exception);
+		final Boolean errorHandeled = ESWorkspaceProviderImpl.getObserverBus().notify(ESExceptionObserver.class)
 			.handleError(runtimeException);
 		logException(exception.getMessage(), exception);
 		if (!errorHandeled.booleanValue()) {

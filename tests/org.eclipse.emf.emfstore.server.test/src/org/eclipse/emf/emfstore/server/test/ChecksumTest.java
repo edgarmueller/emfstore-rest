@@ -33,11 +33,11 @@ import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
 import org.eclipse.emf.emfstore.client.callbacks.ESCommitCallback;
 import org.eclipse.emf.emfstore.client.callbacks.ESUpdateCallback;
-import org.eclipse.emf.emfstore.client.test.common.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.cases.ESTestWithLoggedInUser;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Add;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Delete;
+import org.eclipse.emf.emfstore.client.test.common.dsl.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Update;
 import org.eclipse.emf.emfstore.client.util.ESModelUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
@@ -77,7 +77,7 @@ public class ChecksumTest extends ESTestWithLoggedInUser {
 	}
 
 	public boolean transactionalEditingDomainNotInUse() {
-		return !ESWorkspaceProviderImpl.getInstance().getEditingDomain().getClass().getName().contains("Transactional");
+		return !ESWorkspaceProviderImpl.getInstance().getEditingDomain().getClass().getName().contains("Transactional"); //$NON-NLS-1$
 	}
 
 	@Override

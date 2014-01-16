@@ -37,7 +37,11 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCa
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESHistoryQueryImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESTagVersionSpecImpl;
@@ -506,14 +510,37 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 		return resolveVersionSpec(Versions.createHEAD().toAPI(), monitor);
 	}
 
+	private boolean canDeleteFiles(ACOrgUnit orgUnit, ProjectId projectId) {
+
+		for (final Role role : orgUnit.getRoles()) {
+			if (ServerAdmin.class.isInstance(role)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	private ServerCall<Void> getDeleteProjectServerCall() {
+
 		return new ServerCall<Void>() {
 			@Override
 			protected Void run() throws ESException {
 				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
 					@Override
 					public Void run(IProgressMonitor monitor) throws ESException {
-						getConnectionManager().deleteProject(getSessionId(), getProjectInfo().getProjectId(), true);
+						final ACOrgUnit user = ESWorkspaceProviderImpl
+							.getInstance()
+							.getAdminConnectionManager()
+							.getOrgUnit(getSessionId(), getUsersession().getACUser().getId());
+
+						if (canDeleteFiles(user, getProjectInfo().getProjectId())) {
+							getConnectionManager()
+								.deleteProject(getSessionId(), getProjectInfo().getProjectId(), true);
+						} else {
+							getConnectionManager()
+								.deleteProject(getSessionId(), getProjectInfo().getProjectId(), false);
+						}
 						return null;
 					}
 				}.execute();

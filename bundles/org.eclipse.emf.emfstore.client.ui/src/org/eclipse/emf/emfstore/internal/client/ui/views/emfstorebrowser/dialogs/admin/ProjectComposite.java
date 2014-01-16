@@ -94,7 +94,8 @@ public class ProjectComposite extends PropertiesComposite {
 	protected void addExistingOrgUnit(ACOrgUnit participant) {
 		try {
 			if (participant != null) {
-				getAdminBroker().addParticipant(projectInfo.getProjectId(), participant.getId());
+				getAdminBroker().addParticipant(projectInfo.getProjectId(), participant.getId(),
+					RolesPackage.eINSTANCE.getReaderRole());
 			}
 		} catch (final ESException e) {
 			EMFStoreMessageDialog.showExceptionDialog(e);
@@ -111,7 +112,8 @@ public class ProjectComposite extends PropertiesComposite {
 			final EList<ACOrgUnit> participants = getParticipants();
 			for (final ACOrgUnit orgUnit : participants) {
 
-				getAdminBroker().addParticipant(projectInfo.getProjectId(), orgUnit.getId());
+				getAdminBroker().addParticipant(projectInfo.getProjectId(), orgUnit.getId(),
+					RolesPackage.eINSTANCE.getReaderRole());
 
 			}
 

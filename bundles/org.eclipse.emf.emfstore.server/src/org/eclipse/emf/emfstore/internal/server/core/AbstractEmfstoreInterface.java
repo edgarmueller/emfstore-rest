@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.PAPrivileges;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidInputException;
@@ -163,6 +164,24 @@ public abstract class AbstractEmfstoreInterface {
 			return;
 		}
 		getAuthorizationControl().checkWriteAccess(sessionId, projectId, modelElements);
+	}
+
+	/**
+	 * Checks project admin access.
+	 * 
+	 * @see AuthorizationControl#checkProjectAdminAccess(SessionId, ProjectId)
+	 * @param sessionId sessionid
+	 * @param projectId project id
+	 * @param privilege project admin privilege to be checked
+	 * @throws AccessControlException access exception
+	 */
+	protected synchronized void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId,
+		PAPrivileges privilege)
+		throws AccessControlException {
+		if (accessControlDisabled) {
+			return;
+		}
+		getAuthorizationControl().checkProjectAdminAccess(sessionId, projectId, privilege);
 	}
 
 	/**

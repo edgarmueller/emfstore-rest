@@ -12,8 +12,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.client.model.controller;
 
+import java.text.MessageFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.emfstore.client.observer.ESLoginObserver;
 import org.eclipse.emf.emfstore.client.observer.ESShareObserver;
@@ -23,7 +25,9 @@ import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ServerCall;
 import org.eclipse.emf.emfstore.internal.client.model.impl.ProjectSpaceBase;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.RolesPackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -55,22 +59,18 @@ public class ShareController extends ServerCall<ProjectInfo> {
 	}
 
 	@Override
-	protected ProjectInfo run() throws ESException {
-		return doRun();
-	}
-
 	@SuppressWarnings("unchecked")
-	private ProjectInfo doRun() throws ESException {
+	protected ProjectInfo run() throws ESException {
 
-		getProgressMonitor().beginTask("Sharing Project", 100);
+		getProgressMonitor().beginTask(Messages.ShareController_Sharing_Project, 100);
 		getProgressMonitor().worked(1);
-		getProgressMonitor().subTask("Preparing project for sharing");
+		getProgressMonitor().subTask(Messages.ShareController_Preparing_Share);
 
 		final LogMessage logMessage = VersioningFactory.eINSTANCE.createLogMessage();
 		logMessage.setAuthor(getUsersession().getUsername());
 		logMessage.setClientDate(new Date());
-		logMessage.setMessage("Initial commit");
-		ProjectInfo createdProject = null;
+		logMessage.setMessage(Messages.ShareController_Initial_Commit);
+		ProjectInfo projectInfo = null;
 
 		getProjectSpace().stopChangeRecording();
 
@@ -80,12 +80,49 @@ public class ShareController extends ServerCall<ProjectInfo> {
 			getProjectSpace().startChangeRecording();
 			getProgressMonitor().done();
 		}
-		getProgressMonitor().subTask("Sharing project with server");
+		getProgressMonitor().subTask(Messages.ShareController_Sharing_Project_With_Server);
 
 		// make sure, current state of caches is written to resource
 		getProjectSpace().save();
 
-		createdProject = new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
+		projectInfo = createProject(logMessage);
+		addParticipant(projectInfo.getProjectId());
+
+		getProgressMonitor().worked(30);
+		getProgressMonitor().subTask("Finalizing share"); //$NON-NLS-1$
+
+		// set attributes after server call
+		getProgressMonitor().subTask(Messages.ShareController_Settings_Attributes);
+		setUsersession(getUsersession());
+		ESWorkspaceProviderImpl.getObserverBus().register(getProjectSpace(), ESLoginObserver.class);
+
+		getProjectSpace().save();
+		getProjectSpace().startChangeRecording();
+		getProjectSpace().setBaseVersion(ModelUtil.clone(projectInfo.getVersion()));
+		getProjectSpace().setLastUpdated(new Date());
+		getProjectSpace().setProjectId(ModelUtil.clone(projectInfo.getProjectId()));
+		getProjectSpace().setUsersession(getUsersession());
+		getProjectSpace().saveProjectSpaceOnly();
+
+		// TODO ASYNC implement File Upload with observer
+		// If any files have already been added, upload them.
+		getProgressMonitor().worked(20);
+		getProgressMonitor().subTask(Messages.ShareController_Uploading_Files);
+		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
+
+		getProgressMonitor().worked(20);
+		getProgressMonitor().subTask(Messages.ShareController_Finalizing_Share);
+		getProjectSpace().getOperations().clear();
+		getProjectSpace().updateDirtyState();
+
+		getProgressMonitor().done();
+		ESWorkspaceProviderImpl.getObserverBus().notify(ESShareObserver.class)
+			.shareDone(getProjectSpace().toAPI());
+		return projectInfo;
+	}
+
+	private ProjectInfo createProject(final LogMessage logMessage) throws ESException {
+		return new UnknownEMFStoreWorkloadCommand<ProjectInfo>(getProgressMonitor()) {
 			@Override
 			public ProjectInfo run(IProgressMonitor monitor) throws ESException {
 				return ESWorkspaceProviderImpl
@@ -93,45 +130,26 @@ public class ShareController extends ServerCall<ProjectInfo> {
 					.getConnectionManager()
 					.createProject(
 						getUsersession().getSessionId(),
-						getProjectSpace().getProjectName() == null ? "Project@" + new Date()
-							: getProjectSpace()
-								.getProjectName(),
-						"",
+						getProjectSpace().getProjectName() == null ? MessageFormat.format(Messages.ShareController_Project_At, new Date())
+							: getProjectSpace().getProjectName(),
+						StringUtils.EMPTY,
 						logMessage,
 						getProjectSpace().getProject());
 			}
 		}.execute();
+	}
 
-		getProgressMonitor().worked(30);
-		getProgressMonitor().subTask("Finalizing share");
-
-		// set attributes after server call
-		getProgressMonitor().subTask("Setting attributes");
-		this.setUsersession(getUsersession());
-		ESWorkspaceProviderImpl.getObserverBus().register(getProjectSpace(), ESLoginObserver.class);
-
-		getProjectSpace().save();
-		getProjectSpace().startChangeRecording();
-		getProjectSpace().setBaseVersion(ModelUtil.clone(createdProject.getVersion()));
-		getProjectSpace().setLastUpdated(new Date());
-		getProjectSpace().setProjectId(ModelUtil.clone(createdProject.getProjectId()));
-		getProjectSpace().setUsersession(getUsersession());
-		getProjectSpace().saveProjectSpaceOnly();
-
-		// TODO ASYNC implement File Upload with observer
-		// If any files have already been added, upload them.
-		getProgressMonitor().worked(20);
-		getProgressMonitor().subTask("Uploading files");
-		getProjectSpace().getFileTransferManager().uploadQueuedFiles(getProgressMonitor());
-
-		getProgressMonitor().worked(20);
-		getProgressMonitor().subTask("Finalizing share.");
-		getProjectSpace().getOperations().clear();
-		getProjectSpace().updateDirtyState();
-
-		getProgressMonitor().done();
-		ESWorkspaceProviderImpl.getObserverBus().notify(ESShareObserver.class)
-			.shareDone(getProjectSpace().toAPI());
-		return createdProject;
+	private void addParticipant(final ProjectId projectId) throws ESException {
+		new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
+			@Override
+			public Void run(IProgressMonitor monitor) throws ESException {
+				ESWorkspaceProviderImpl
+					.getInstance()
+					.getAdminConnectionManager()
+					.addParticipant(getSessionId(), projectId, getUsersession().getACUser().getId(),
+						RolesPackage.eINSTANCE.getProjectAdminRole());
+				return null;
+			}
+		}.execute();
 	}
 }

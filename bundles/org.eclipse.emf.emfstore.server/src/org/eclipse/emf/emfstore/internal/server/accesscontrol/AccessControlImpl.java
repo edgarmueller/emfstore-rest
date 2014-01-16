@@ -12,9 +12,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.server.accesscontrol;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,13 +42,21 @@ import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ProjectAdminRole;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
 import org.eclipse.emf.emfstore.internal.server.model.dao.ACDAOFacade;
 
+/**
+ * Implementation of an {@link AccessControl} combining authentication and authorization.
+ * 
+ * @author mkoegel
+ * @author ovonwesen
+ * @author emueller
+ */
 public class AccessControlImpl implements AccessControl {
 
-	private static final String MONITOR_NAME = "authentication";
+	private static final String MONITOR_NAME = "authentication"; //$NON-NLS-1$
 
 	/**
 	 * Contains possible access levels.
@@ -91,16 +101,42 @@ public class AccessControlImpl implements AccessControl {
 			return;
 		}
 		accessMap = new EnumMap<MethodId, AccessLevel>(MethodId.class);
-		addAccessMapping(AccessLevel.PROJECT_READ, MethodId.GETPROJECT, MethodId.GETEMFPROPERTIES,
-			MethodId.GETHISTORYINFO, MethodId.GETCHANGES, MethodId.RESOLVEVERSIONSPEC, MethodId.DOWNLOADFILECHUNK);
 
-		addAccessMapping(AccessLevel.PROJECT_WRITE, MethodId.SETEMFPROPERTIES, MethodId.TRANSMITPROPERTY,
-			MethodId.UPLOADFILECHUNK, MethodId.CREATEVERSION, MethodId.GETBRANCHES);
+		addAccessMapping(AccessLevel.PROJECT_READ,
+			MethodId.GETPROJECT,
+			MethodId.GETEMFPROPERTIES,
+			MethodId.GETHISTORYINFO,
+			MethodId.GETCHANGES,
+			MethodId.RESOLVEVERSIONSPEC,
+			MethodId.DOWNLOADFILECHUNK);
 
-		addAccessMapping(AccessLevel.PROJECT_ADMIN, MethodId.REMOVETAG, MethodId.ADDTAG);
-		addAccessMapping(AccessLevel.SERVER_ADMIN, MethodId.CREATEPROJECT, MethodId.CREATEEMPTYPROJECT,
-			MethodId.DELETEPROJECT, MethodId.IMPORTPROJECTHISTORYTOSERVER, MethodId.EXPORTPROJECTHISTORYFROMSERVER,
+		addAccessMapping(AccessLevel.PROJECT_WRITE,
+			MethodId.SETEMFPROPERTIES,
+			MethodId.TRANSMITPROPERTY,
+			MethodId.UPLOADFILECHUNK,
+			MethodId.CREATEVERSION,
+			MethodId.GETBRANCHES);
+
+		addAccessMapping(AccessLevel.PROJECT_ADMIN,
+			MethodId.DELETEPROJECT,
+			MethodId.REMOVETAG,
+			MethodId.ADDTAG);
+
+		addAccessMapping(AccessLevel.SERVER_ADMIN,
+			MethodId.IMPORTPROJECTHISTORYTOSERVER,
+			MethodId.EXPORTPROJECTHISTORYFROMSERVER,
 			MethodId.REGISTEREPACKAGE);
+
+		// TODO: extract
+		if (ServerConfiguration.isProjectAdminPrivileg(PAPrivileges.ShareProject)) {
+			addAccessMapping(AccessLevel.PROJECT_ADMIN,
+				MethodId.CREATEPROJECT,
+				MethodId.CREATEEMPTYPROJECT);
+		} else {
+			addAccessMapping(AccessLevel.SERVER_ADMIN,
+				MethodId.CREATEPROJECT,
+				MethodId.CREATEEMPTYPROJECT);
+		}
 
 		addAccessMapping(AccessLevel.NONE, MethodId.GETPROJECTLIST, MethodId.RESOLVEUSER);
 	}
@@ -141,7 +177,7 @@ public class AccessControlImpl implements AccessControl {
 	public void logout(SessionId sessionId) throws AccessControlException {
 		synchronized (MonitorProvider.getInstance().getMonitor(MONITOR_NAME)) {
 			if (sessionId == null) {
-				throw new AccessControlException("SessionId is null.");
+				throw new AccessControlException(Messages.AccessControlImpl_SessionID_Is_Null);
 			}
 			sessionUserMap.remove(sessionId);
 		}
@@ -158,7 +194,7 @@ public class AccessControlImpl implements AccessControl {
 	private ACUser resolveUser(String username) throws AccessControlException {
 
 		final Boolean ignoreCase = Boolean.parseBoolean(ServerConfiguration.getProperties().getProperty(
-			ServerConfiguration.AUTHENTICATION_MATCH_USERS_IGNORE_CASE, "false"));
+			ServerConfiguration.AUTHENTICATION_MATCH_USERS_IGNORE_CASE, Boolean.FALSE.toString()));
 
 		synchronized (MonitorProvider.getInstance().getMonitor()) {
 			for (final ACUser user : daoFacade.getUsers()) {
@@ -183,7 +219,7 @@ public class AccessControlImpl implements AccessControl {
 	 */
 	public void checkSession(SessionId sessionId) throws AccessControlException {
 		if (!sessionUserMap.containsKey(sessionId)) {
-			throw new SessionTimedOutException("Session ID unkown.");
+			throw new SessionTimedOutException(Messages.AccessControlImpl_SessionID_Unknown);
 		}
 	}
 
@@ -281,6 +317,22 @@ public class AccessControlImpl implements AccessControl {
 		}
 	}
 
+	private ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws AccessControlException {
+		synchronized (MonitorProvider.getInstance().getMonitor()) {
+			for (final ACUser user : daoFacade.getUsers()) {
+				if (user.getId().equals(orgUnitId)) {
+					return user;
+				}
+			}
+			for (final ACGroup group : daoFacade.getGroups()) {
+				if (group.getId().equals(orgUnitId)) {
+					return group;
+				}
+			}
+			throw new AccessControlException(Messages.AccessControlImpl_Given_OrgUnit_Does_Not_Exist);
+		}
+	}
+
 	private ACUser getUser(ACOrgUnitId orgUnitId) throws AccessControlException {
 		synchronized (MonitorProvider.getInstance().getMonitor()) {
 			for (final ACUser user : daoFacade.getUsers()) {
@@ -288,7 +340,7 @@ public class AccessControlImpl implements AccessControl {
 					return user;
 				}
 			}
-			throw new AccessControlException("Given User doesn't exist.");
+			throw new AccessControlException(Messages.AccessControlImpl_Given_User_Does_Not_Exist);
 		}
 	}
 
@@ -321,18 +373,115 @@ public class AccessControlImpl implements AccessControl {
 	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkProjectAdminAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
-	public void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId) throws AccessControlException {
+	// TODO: seond parameter is optional
+	public boolean checkProjectAdminAccess(SessionId sessionId, ProjectId projectId, PAPrivileges privileg)
+		throws AccessControlException {
 		checkSession(sessionId);
+
 		final ACUser user = getUser(sessionId);
 		final List<Role> roles = new ArrayList<Role>();
 		roles.addAll(user.getRoles());
 		roles.addAll(getRolesFromGroups(user));
 		for (final Role role : roles) {
+			if (isServerAdminRole(role)) {
+				return true;
+			}
+			if (isProjectAdminRole(role)) {
+				if (!ServerConfiguration.isProjectAdminPrivileg(privileg)) {
+					throw new AccessControlException(
+						MessageFormat.format(Messages.AccessControlImpl_PARole_Missing_Privilege,
+							privileg.toString()));
+				}
+
+				return false;
+			}
+			// TODO: does this case ever apply?
+			if (role.canAdministrate(projectId)) {
+				return false;
+			}
+		}
+		throw new AccessControlException();
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkProjectAdminAccessForOrgUnit(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
+	 */
+	public void checkProjectAdminAccessForOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId)
+		throws AccessControlException {
+		final List<Role> allRoles = getAllRoles(orgUnitId, sessionId);
+		final Set<ProjectId> involvedProjects = new LinkedHashSet<ProjectId>();
+
+		for (final Role role : allRoles) {
+			involvedProjects.addAll(role.getProjects());
+		}
+
+		ProjectAdminRole paRole = null;
+		final ACUser user = getUser(sessionId);
+		for (final Role role : user.getRoles()) {
+			if (isServerAdminRole(role)) {
+				return;
+			} else if (isProjectAdminRole(role)) {
+				paRole = (ProjectAdminRole) role;
+				break;
+			}
+		}
+
+		// TODO: paRole should never be null here
+		if (paRole.getProjects().containsAll(involvedProjects)) {
+			return;
+		}
+
+		throw new AccessControlException();
+	}
+
+	private List<Role> getAllRoles(ACOrgUnitId orgUnitId, SessionId sessionId) throws AccessControlException {
+		final ACOrgUnit orgUnit = getOrgUnit(orgUnitId);
+		final List<ACGroup> groups = getGroups(orgUnit);
+		final ArrayList<Role> roles = new ArrayList<Role>();
+		for (final ACGroup group : groups) {
+			roles.addAll(group.getRoles());
+		}
+		roles.addAll(orgUnit.getRoles());
+		return roles;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.server.accesscontrol.AuthorizationControl#checkProjectAdminAccess(org.eclipse.emf.emfstore.internal.server.model.SessionId,
+	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
+	 */
+	public void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId)
+		throws AccessControlException {
+		checkSession(sessionId);
+
+		final ACUser user = getUser(sessionId);
+		final List<Role> roles = new ArrayList<Role>();
+		roles.addAll(user.getRoles());
+		roles.addAll(getRolesFromGroups(user));
+		for (final Role role : roles) {
+			if (isProjectAdminRole(role)) {
+				return;
+			}
+			// TODO: does this case ever apply?
 			if (role.canAdministrate(projectId)) {
 				return;
 			}
 		}
 		throw new AccessControlException();
+	}
+
+	private boolean isServerAdminRole(Role role) {
+		return ServerAdmin.class.isInstance(role);
+	}
+
+	private boolean isProjectAdminRole(Role role) {
+		return ProjectAdminRole.class.isInstance(role);
 	}
 
 	/**
@@ -352,7 +501,6 @@ public class AccessControlImpl implements AccessControl {
 			}
 		}
 		throw new AccessControlException();
-
 	}
 
 	/**
@@ -410,7 +558,7 @@ public class AccessControlImpl implements AccessControl {
 		final AccessLevel accessType = accessMap.get(op.getType());
 		if (accessType == null) {
 			// no access type means "no access"
-			throw new AccessControlException("no access");
+			throw new AccessControlException(Messages.AccessControlImpl_No_Access);
 		}
 		switch (accessType) {
 		case PROJECT_READ:
@@ -431,7 +579,7 @@ public class AccessControlImpl implements AccessControl {
 		case NONE:
 			break;
 		default:
-			throw new AccessControlException("unknown access type");
+			throw new AccessControlException(Messages.AccessControlImpl_Unknown_Access_Type);
 		}
 	}
 
@@ -441,7 +589,8 @@ public class AccessControlImpl implements AccessControl {
 				return (ProjectId) obj;
 			}
 		}
-		throw new IllegalArgumentException("the operation MUST have a project id");
+		return null;
+		// throw new IllegalArgumentException("the operation MUST have a project id");
 	}
 
 	/**

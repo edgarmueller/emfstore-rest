@@ -14,13 +14,16 @@ package org.eclipse.emf.emfstore.internal.server;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPointException;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.PAPrivileges;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.AuthenticationControlType;
 import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
@@ -37,50 +40,51 @@ import org.osgi.framework.Bundle;
 public final class ServerConfiguration {
 
 	/**
-	 * Constant for boolean true string.
+	 * Name of EMFStore properties file.
 	 */
-	public static final String TRUE = "true";
+	public static final String ES_PROPERTIES = "es.properties"; //$NON-NLS-1$
 
-	/**
-	 * Constant for boolean false string.
-	 */
-	public static final String FALSE = "false";
+	private static final String CHECKSUM_KEY = "org.eclipse.emf.emfstore.server.computeChecksum"; //$NON-NLS-1$
+
+	private static final String SERVER_BUNDLE_KEY = "org.eclipse.emf.emfstore.server"; //$NON-NLS-1$
+
+	private static final String LOCATION_PROVIDER_KEY = "org.eclipse.emf.emfstore.server.locationProvider"; //$NON-NLS-1$
 
 	/**
 	 * Constant for the name of the Resource Storage Property.
 	 */
-	public static final String RESOURCE_STORAGE = "emfstore.persistence.resourceStorage";
+	public static final String RESOURCE_STORAGE = "emfstore.persistence.resourceStorage"; //$NON-NLS-1$
 
 	/**
 	 * Constant for the Default Resource Storage.
 	 */
 	// TODO: OTS
-	public static final String RESOURCE_STORAGE_DEFAULT = "org.eclipse.emf.emfstore.internal.server.storage.XMLStorage";
+	public static final String RESOURCE_STORAGE_DEFAULT = "org.eclipse.emf.emfstore.internal.server.storage.XMLStorage"; //$NON-NLS-1$
 
 	/**
 	 * RMI encryption property, possible values are true and false.
 	 */
-	public static final String RMI_ENCRYPTION = "emfstore.connection.rmi.encryption";
+	public static final String RMI_ENCRYPTION = "emfstore.connection.rmi.encryption"; //$NON-NLS-1$
 
 	/**
 	 * Default RMI encryption property value.
 	 */
-	public static final String RMI_ENCRYPTION_DEFAULT = "true";
+	public static final String RMI_ENCRYPTION_DEFAULT = "true"; //$NON-NLS-1$
 
 	/**
 	 * Option for defining port of XML RPC.
 	 */
-	public static final String XML_RPC_PORT = "emfstore.connection.xmlrpc.port";
+	public static final String XML_RPC_PORT = "emfstore.connection.xmlrpc.port"; //$NON-NLS-1$
 
 	/**
 	 * Default port for XML RPC.
 	 */
-	public static final String XML_RPC_PORT_DEFAULT = "8080";
+	public static final String XML_RPC_PORT_DEFAULT = "8080"; //$NON-NLS-1$
 
 	/**
 	 * Default name of server keystore file.
 	 */
-	public static final String SERVER_KEYSTORE_FILE = "emfstoreServer.keystore";
+	public static final String SERVER_KEYSTORE_FILE = "emfstoreServer.keystore"; //$NON-NLS-1$
 
 	/**
 	 * Password of keystore, in which the certificate for rmi encryption and
@@ -88,44 +92,44 @@ public final class ServerConfiguration {
 	 * 
 	 * @see #KEYSTORE_ALIAS
 	 */
-	public static final String KEYSTORE_PASSWORD = "emfstore.keystore.password";
+	public static final String KEYSTORE_PASSWORD = "emfstore.keystore.password"; //$NON-NLS-1$
 
 	/**
 	 * Default keystore password.
 	 */
-	public static final String KEYSTORE_PASSWORD_DEFAULT = "123456"; // av374tb$VBGGtrgwa7tosdfa";
+	public static final String KEYSTORE_PASSWORD_DEFAULT = "123456"; // av374tb$VBGGtrgwa7tosdfa"; //$NON-NLS-1$
 
 	/**
 	 * Alias for certificate in keystore.
 	 * 
 	 * @see #KEYSTORE_PASSWORD
 	 */
-	public static final String KEYSTORE_ALIAS = "emfstore.keystore.alias";
+	public static final String KEYSTORE_ALIAS = "emfstore.keystore.alias"; //$NON-NLS-1$
 
 	/**
 	 * Default alias, intentioned for developers.
 	 */
-	public static final String KEYSTORE_ALIAS_DEFAULT = "testkeygeneratedbyotto";
+	public static final String KEYSTORE_ALIAS_DEFAULT = "testkeygeneratedbyotto"; //$NON-NLS-1$
 
 	/**
 	 * Type of server certificate used for encryption.
 	 */
-	public static final String KEYSTORE_CERTIFICATE_TYPE = "emfstore.keystore.certificate.type";
+	public static final String KEYSTORE_CERTIFICATE_TYPE = "emfstore.keystore.certificate.type"; //$NON-NLS-1$
 
 	/**
 	 * Default certificate.
 	 */
-	public static final String KEYSTORE_CERTIFICATE_TYPE_DEFAULT = "SunX509";
+	public static final String KEYSTORE_CERTIFICATE_TYPE_DEFAULT = "SunX509"; //$NON-NLS-1$
 
 	/**
 	 * Type of cipher algorithm used for encryption.
 	 */
-	public static final String KEYSTORE_CIPHER_ALGORITHM = "emfstore.keystore.cipher.algorithm";
+	public static final String KEYSTORE_CIPHER_ALGORITHM = "emfstore.keystore.cipher.algorithm"; //$NON-NLS-1$
 
 	/**
 	 * Default cipher algorithm.
 	 */
-	public static final String KEYSTORE_CIPHER_ALGORITHM_DEFAULT = "RSA";
+	public static final String KEYSTORE_CIPHER_ALGORITHM_DEFAULT = "RSA"; //$NON-NLS-1$
 
 	/**
 	 * Property for projectstate persistence policy in versions. Possible values
@@ -134,29 +138,29 @@ public final class ServerConfiguration {
 	 * requested. On the other side saving every project state is quite
 	 * redundant.
 	 */
-	public static final String PROJECTSTATE_VERSION_PERSISTENCE = "emfstore.persistence.version.projectstate";
+	public static final String PROJECTSTATE_VERSION_PERSISTENCE = "emfstore.persistence.version.projectstate"; //$NON-NLS-1$
 
 	/**
 	 * Only the project state from the first and last version is stored, the
 	 * other states are calculated by the changes.
 	 */
-	public static final String PROJECTSTATE_VERSION_PERSISTENCE_FIRSTANDLASTVERSIONONLY = "firstAndLastVersionOnly";
+	public static final String PROJECTSTATE_VERSION_PERSISTENCE_FIRSTANDLASTVERSIONONLY = "firstAndLastVersionOnly"; //$NON-NLS-1$
 
 	/**
 	 * The projectstate of every x versions will be stored. This is used to save
 	 * memory. Use x=1 to save every version.
 	 */
-	public static final String PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS = "everyXVersion";
+	public static final String PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS = "everyXVersion"; //$NON-NLS-1$
 
 	/**
 	 * Property for the count of versions, needed by the everyXVersion policy.
 	 */
-	public static final String PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X = "emfstore.persistence.version.projectstate.everyxversions";
+	public static final String PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X = "emfstore.persistence.version.projectstate.everyxversions"; //$NON-NLS-1$
 
 	/**
 	 * Default value for the everyXVersion policy.
 	 */
-	public static final String PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X_DEFAULT = "1";
+	public static final String PROJECTSTATE_VERSION_PERSISTENCE_EVERYXVERSIONS_X_DEFAULT = "1"; //$NON-NLS-1$
 
 	/**
 	 * Default value for projectstate persistence policy in versions.
@@ -166,68 +170,68 @@ public final class ServerConfiguration {
 	/**
 	 * Property for timeout time of a user session.
 	 */
-	public static final String SESSION_TIMEOUT = "emfstore.accesscontrol.session.timeout";
+	public static final String SESSION_TIMEOUT = "emfstore.accesscontrol.session.timeout"; //$NON-NLS-1$
 
 	/**
 	 * Default timeout (= 30 minutes).
 	 */
-	public static final String SESSION_TIMEOUT_DEFAULT = "1800000";
+	public static final String SESSION_TIMEOUT_DEFAULT = "1800000"; //$NON-NLS-1$
 
 	/**
 	 * Property for the super user.
 	 */
-	public static final String SUPER_USER = "emfstore.accesscontrol.authentication.superuser";
+	public static final String SUPER_USER = "emfstore.accesscontrol.authentication.superuser"; //$NON-NLS-1$
 
 	/**
 	 * Default super user name.
 	 */
-	public static final String SUPER_USER_DEFAULT = "super";
+	public static final String SUPER_USER_DEFAULT = "super"; //$NON-NLS-1$
 
 	/**
 	 * Property for the super user's password.
 	 */
-	public static final String SUPER_USER_PASSWORD = "emfstore.accesscontrol.authentication.superuser.password";
+	public static final String SUPER_USER_PASSWORD = "emfstore.accesscontrol.authentication.superuser.password"; //$NON-NLS-1$
 
 	/**
 	 * Default super user password.
 	 */
-	public static final String SUPER_USER_PASSWORD_DEFAULT = "super";
+	public static final String SUPER_USER_PASSWORD_DEFAULT = "super"; //$NON-NLS-1$
 
 	/**
 	 * Property for authentication policy used by server. E.g. ldap or property
 	 * file.
 	 */
-	public static final String AUTHENTICATION_POLICY = "emfstore.accesscontrol.authentication.policy";
+	public static final String AUTHENTICATION_POLICY = "emfstore.accesscontrol.authentication.policy"; //$NON-NLS-1$
 
 	/**
 	 * Beginning tag of every LDAP property.
 	 */
-	public static final String AUTHENTICATION_LDAP_PREFIX = "emfstore.accesscontrol.authentication.ldap";
+	public static final String AUTHENTICATION_LDAP_PREFIX = "emfstore.accesscontrol.authentication.ldap"; //$NON-NLS-1$
 
 	/**
 	 * Ldap url.
 	 */
-	public static final String AUTHENTICATION_LDAP_URL = "url";
+	public static final String AUTHENTICATION_LDAP_URL = "url"; //$NON-NLS-1$
 
 	/**
 	 * LDAP user authentication key.
 	 */
-	public static final String AUTHENTICATION_LDAP_AUTHUSER = "authuser";
+	public static final String AUTHENTICATION_LDAP_AUTHUSER = "authuser"; //$NON-NLS-1$
 
 	/**
 	 * LDAP password authentication key.
 	 */
-	public static final String AUTHENTICATION_LDAP_AUTHPASS = "authpass";
+	public static final String AUTHENTICATION_LDAP_AUTHPASS = "authpass"; //$NON-NLS-1$
 
 	/**
 	 * Ldap base.
 	 */
-	public static final String AUTHENTICATION_LDAP_BASE = "base";
+	public static final String AUTHENTICATION_LDAP_BASE = "base"; //$NON-NLS-1$
 
 	/**
 	 * Searchdn for ldap.
 	 */
-	public static final String AUTHENTICATION_LDAP_SEARCHDN = "searchdn";
+	public static final String AUTHENTICATION_LDAP_SEARCHDN = "searchdn"; //$NON-NLS-1$
 
 	/**
 	 * Default authentication policy is simple property file aut.
@@ -237,56 +241,61 @@ public final class ServerConfiguration {
 	/**
 	 * Path to property file for spfv authentication.
 	 */
-	public static final String AUTHENTICATION_SPFV_FILEPATH = "emfstore.accesscontrol.authentication.spfv";
+	public static final String AUTHENTICATION_SPFV_FILEPATH = "emfstore.accesscontrol.authentication.spfv"; //$NON-NLS-1$
 
 	/**
 	 * Property to validate server on start up.
 	 */
-	public static final String VALIDATION_PROJECT_EXCLUDE_DEFAULT = "";
+	public static final String VALIDATION_PROJECT_EXCLUDE_DEFAULT = ""; //$NON-NLS-1$
 
 	/**
 	 * Property for loading startup listeners from extension point.
 	 */
-	public static final String LOAD_STARTUP_LISTENER = "emfstore.startup.loadlistener";
+	public static final String LOAD_STARTUP_LISTENER = "emfstore.startup.loadlistener"; //$NON-NLS-1$
 
 	/**
 	 * Property for loading post startup listeners from extension point.
 	 */
-	public static final String LOAD_POST_STARTUP_LISTENER = "emfstore.startup.post.loadlistener";
+	public static final String LOAD_POST_STARTUP_LISTENER = "emfstore.startup.post.loadlistener"; //$NON-NLS-1$
 
 	/**
 	 * Default value for {@link #LOAD_STARTUP_LISTENER}.
 	 */
-	public static final String LOAD_STARTUP_LISTENER_DEFAULT = TRUE;
+	public static final String LOAD_STARTUP_LISTENER_DEFAULT = Boolean.TRUE.toString();
 
 	/**
 	 * Property name of accepted client versions. Enter the version's names or
 	 * any, seperate multiple entries with {@link #MULTI_PROPERTY_SEPERATOR}.
 	 */
-	public static final String ACCEPTED_VERSIONS = "emfstore.acceptedversions";
+	public static final String ACCEPTED_VERSIONS = "emfstore.acceptedversions"; //$NON-NLS-1$
 
 	/**
 	 * Allow any client version.
 	 */
-	public static final String ACCEPTED_VERSIONS_ANY = "any";
+	public static final String ACCEPTED_VERSIONS_ANY = "any"; //$NON-NLS-1$
 
 	/**
 	 * Seperator for multiple properties. E.g. acceptedversions = 0.1,0.2
 	 */
-	public static final String MULTI_PROPERTY_SEPERATOR = ",";
+	public static final String MULTI_PROPERTY_SEPERATOR = ","; //$NON-NLS-1$
 
 	/**
 	 * Prefix for EMFStore Home Startup Argument.
 	 */
-	public static final String EMFSTORE_HOME = "-EMFStoreHome";
+	public static final String EMFSTORE_HOME = "-EMFStoreHome"; //$NON-NLS-1$
 
 	/**
 	 * Whether user names should be matched case insensitively.
 	 */
-	public static final String AUTHENTICATION_MATCH_USERS_IGNORE_CASE = "emfstore.accesscontrol.authentication.matchusers.ignorecase";
+	public static final String AUTHENTICATION_MATCH_USERS_IGNORE_CASE = "emfstore.accesscontrol.authentication.matchusers.ignorecase"; //$NON-NLS-1$
 
 	private static final List<PostStartupListener> POST_STARTUP_LISTENERS = new ArrayList<PostStartupListener>();
 	private static final List<StartupListener> STARTUP_LISTENERS = new ArrayList<StartupListener>();
+
+	/**
+	 * Project admin privilege property key.
+	 */
+	public static final String PROJECT_ADMIN_PRIVILEGES_KEY = "emfstore.accesscontrol.projectadmin"; //$NON-NLS-1$
 
 	private static boolean testing;
 
@@ -303,11 +312,53 @@ public final class ServerConfiguration {
 	 */
 	public static String getConfDirectory() {
 		final StringBuffer sb = new StringBuffer(getServerHome());
-		sb.append(".");
+		sb.append("."); //$NON-NLS-1$
 		sb.append(File.separatorChar);
-		sb.append("conf");
+		sb.append("conf"); //$NON-NLS-1$
 		sb.append(File.separatorChar);
 		return sb.toString();
+	}
+
+	@SuppressWarnings("serial")
+	private static Map<PAPrivileges, Boolean> defaultPAPrivilegs = new LinkedHashMap<PAPrivileges, Boolean>() {
+		{
+			put(PAPrivileges.AssignRoleToOrgUnit, Boolean.TRUE);
+			put(PAPrivileges.ChangeAssignmentsOfOrgUnits, Boolean.FALSE);
+			put(PAPrivileges.ChangeUserPassword, Boolean.FALSE);
+			put(PAPrivileges.CreateGroup, Boolean.FALSE);
+			put(PAPrivileges.ShareProject, Boolean.FALSE);
+			put(PAPrivileges.CreateUser, Boolean.FALSE);
+			put(PAPrivileges.DeleteOrgUnit, Boolean.FALSE);
+		}
+	};
+
+	/**
+	 * Whether the {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ProjectAdminRole
+	 * ProjectAdminRole} has the requested privilege.
+	 * 
+	 * @param requestedPrivileg
+	 *            the privilege that is requested
+	 * @return {@code true}, if the
+	 *         {@link org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ProjectAdminRole
+	 *         ProjectAdminRole} has the right to perform
+	 *         the requested privilege, {@code false} otherwise
+	 */
+	public static boolean isProjectAdminPrivileg(PAPrivileges requestedPrivileg) {
+		final String[] definedPrivileges = ServerConfiguration.getSplittedProperty(PROJECT_ADMIN_PRIVILEGES_KEY);
+
+		// key not present in config
+		if (definedPrivileges == null) {
+			return defaultPAPrivilegs.get(requestedPrivileg);
+		}
+
+		for (final String definedPrivileg : definedPrivileges) {
+			final PAPrivileges privilege = PAPrivileges.valueOf(definedPrivileg);
+			if (privilege.equals(requestedPrivileg)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -316,7 +367,7 @@ public final class ServerConfiguration {
 	 * @return the file path string
 	 */
 	public static String getConfFile() {
-		return getConfDirectory() + "es.properties";
+		return getConfDirectory() + ES_PROPERTIES;
 	}
 
 	private static ESLocationProvider locationProvider;
@@ -350,10 +401,10 @@ public final class ServerConfiguration {
 		if (locationProvider == null) {
 			// TODO EXPT PRIO
 			try {
-				locationProvider = new ESExtensionPoint("org.eclipse.emf.emfstore.server.locationProvider", true)
-					.getClass("providerClass", ESLocationProvider.class);
+				locationProvider = new ESExtensionPoint(LOCATION_PROVIDER_KEY, true)
+					.getClass("providerClass", ESLocationProvider.class); //$NON-NLS-1$
 			} catch (final ESExtensionPointException e) {
-				final String message = "No location provider or error while instantiating location provider, switching to default location!";
+				final String message = Messages.ServerConfiguration_No_Location_Provider;
 				ModelUtil.logWarning(message);
 			}
 
@@ -404,7 +455,7 @@ public final class ServerConfiguration {
 	 * @return path as string
 	 */
 	public static String getDefaultSPFVFilePath() {
-		return getConfDirectory() + "user.properties";
+		return getConfDirectory() + "user.properties"; //$NON-NLS-1$
 	}
 
 	/**
@@ -496,7 +547,7 @@ public final class ServerConfiguration {
 	 */
 	@SuppressWarnings("cast")
 	public static String getServerVersion() {
-		final Bundle emfStoreBundle = Platform.getBundle("org.eclipse.emf.emfstore.server");
+		final Bundle emfStoreBundle = Platform.getBundle(SERVER_BUNDLE_KEY);
 		final String emfStoreVersionString = (String) emfStoreBundle.getHeaders().get(
 			org.osgi.framework.Constants.BUNDLE_VERSION);
 		return emfStoreVersionString;
@@ -508,7 +559,7 @@ public final class ServerConfiguration {
 	 * @return true if it is a release version
 	 */
 	public static boolean isReleaseVersion() {
-		return !getServerVersion().endsWith("qualifier") && !isInternalReleaseVersion();
+		return !getServerVersion().endsWith("qualifier") && !isInternalReleaseVersion(); //$NON-NLS-1$
 	}
 
 	/**
@@ -517,7 +568,7 @@ public final class ServerConfiguration {
 	 * @return true if it an internal release
 	 */
 	public static boolean isInternalReleaseVersion() {
-		return getServerVersion().endsWith("internal");
+		return getServerVersion().endsWith("internal"); //$NON-NLS-1$
 	}
 
 	/**
@@ -548,10 +599,10 @@ public final class ServerConfiguration {
 		if (isChecksumComputationOnCommitActive == null) {
 			try {
 				isChecksumComputationOnCommitActive = new ESExtensionPoint(
-					"org.eclipse.emf.emfstore.server.computeChecksum", true)
-					.getBoolean("shouldComputeChecksumOnCommit");
+					CHECKSUM_KEY, true)
+					.getBoolean("shouldComputeChecksumOnCommit"); //$NON-NLS-1$
 			} catch (final ESExtensionPointException e) {
-				final String message = "Can not determine whether to compute checksums on commit, default is true.";
+				final String message = Messages.ServerConfiguration_Default_Checksum_Behavior;
 				ModelUtil.logWarning(message);
 				isChecksumComputationOnCommitActive = true;
 			}

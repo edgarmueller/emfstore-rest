@@ -55,12 +55,12 @@ public class AdminBrokerImpl implements AdminBroker {
 	 * {@inheritDoc}
 	 * 
 	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#addParticipant(org.eclipse.emf.emfstore.internal.server.model.ProjectId,
-	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId)
+	 *      org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId, org.eclipse.emf.ecore.EClass)
 	 */
-	public void addParticipant(ProjectId projectId, ACOrgUnitId participant) throws ESException {
+	public void addParticipant(ProjectId projectId, ACOrgUnitId participant, EClass role) throws ESException {
 
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
-			.addParticipant(getSessionId(), projectId, participant);
+			.addParticipant(getSessionId(), projectId, participant, role);
 
 	}
 
@@ -279,6 +279,17 @@ public class AdminBrokerImpl implements AdminBroker {
 	 */
 	public ACOrgUnit getOrgUnit(ACOrgUnitId orgUnitId) throws ESException {
 		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().getOrgUnit(sessionId, orgUnitId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.emf.emfstore.internal.client.model.AdminBroker#assignRole(org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId,
+	 *      org.eclipse.emf.ecore.EClass)
+	 */
+	public void assignRole(ACOrgUnitId orgUnitId, EClass role) throws ESException {
+		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.assignRole(getSessionId(), orgUnitId, role);
 	}
 
 }

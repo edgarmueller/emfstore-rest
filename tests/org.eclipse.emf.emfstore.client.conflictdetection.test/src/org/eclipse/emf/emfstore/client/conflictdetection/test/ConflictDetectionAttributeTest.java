@@ -16,9 +16,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.emfstore.client.test.common.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Add;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
+import org.eclipse.emf.emfstore.client.test.common.dsl.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Update;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
 import org.eclipse.emf.emfstore.internal.client.model.util.EMFStoreCommand;

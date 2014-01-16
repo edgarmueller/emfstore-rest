@@ -39,11 +39,43 @@ public interface AuthorizationControl {
 	/**
 	 * Check if the session is valid for admin access to the given project.
 	 * 
-	 * @param sessionId the session id
-	 * @param projectId the project id
+	 * @param sessionId
+	 *            the session id
+	 * @param projectId
+	 *            the project id. May be {@code null}
+	 * @param privileg
+	 *            the {@link PAPrivileges} to be checked
+	 * 
+	 * @return {@code true}, if permission is granted via the server admin role, {@code false} otherwise
+	 * 
 	 * @throws AccessControlException if the session is invalid for admin access
 	 */
-	void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId) throws AccessControlException;
+	boolean checkProjectAdminAccess(SessionId sessionId, ProjectId projectId, PAPrivileges privileg)
+		throws AccessControlException;
+
+	/**
+	 * Check if the session is valid for admin access to the given organizational unit.
+	 * 
+	 * @param sessionId
+	 *            the session id
+	 * @param orgUnitId
+	 *            the ID of an organizational unit
+	 * 
+	 * @throws AccessControlException if the session is invalid for admin access
+	 */
+	void checkProjectAdminAccessForOrgUnit(SessionId sessionId, ACOrgUnitId orgUnitId) throws AccessControlException;
+
+	/**
+	 * Check if the session is valid for admin access to the given project.
+	 * 
+	 * @param sessionId
+	 *            the session id
+	 * @param projectId
+	 *            the project id. May be {@code null}
+	 * @throws AccessControlException if the session is invalid for admin access
+	 */
+	void checkProjectAdminAccess(SessionId sessionId, ProjectId projectId)
+		throws AccessControlException;
 
 	/**
 	 * Check if the session is valid for server admin access.
@@ -106,4 +138,5 @@ public interface AuthorizationControl {
 	 * @throws AccessControlException in case access is denied
 	 */
 	void checkAccess(MethodInvocation op) throws AccessControlException;
+
 }

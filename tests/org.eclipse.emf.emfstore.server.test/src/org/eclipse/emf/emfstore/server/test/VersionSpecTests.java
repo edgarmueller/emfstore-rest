@@ -24,10 +24,13 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
-import org.eclipse.emf.emfstore.client.test.common.TestElementFeatures;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTestServerFactory;
+import org.eclipse.emf.emfstore.client.test.common.cases.ESTestServerFactory.ServerType;
 import org.eclipse.emf.emfstore.client.test.common.cases.ESTestWithLoggedInUser;
+import org.eclipse.emf.emfstore.client.test.common.cases.IServer;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Add;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
+import org.eclipse.emf.emfstore.client.test.common.dsl.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Update;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
@@ -39,6 +42,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.Versions;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.server.model.versionspec.ESVersionSpec;
 import org.eclipse.emf.emfstore.test.model.TestElement;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -89,9 +93,17 @@ public class VersionSpecTests extends ESTestWithLoggedInUser {
 
 	private ESLocalProjectImpl history;
 
+	private static IServer server;
+
 	@BeforeClass
 	public static void beforeClass() {
-		startEMFStore();
+		server = ESTestServerFactory.create(ServerType.Mock);
+		server.startEMFStore();
+	}
+
+	@AfterClass
+	public static void afterClass() {
+		server.stopEMFStore();
 	}
 
 	@Override

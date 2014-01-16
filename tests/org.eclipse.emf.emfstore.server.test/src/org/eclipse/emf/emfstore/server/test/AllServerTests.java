@@ -11,6 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.test;
 
+import org.eclipse.emf.emfstore.server.accesscontrol.test.AllAccessControlTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -21,8 +22,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	AdminBrokerTests.class,
-	AdminBrokerAccessControlTests.class,
+	AllAccessControlTests.class,
 	BranchTests.class,
 	ServerInterfaceTest.class,
 	HistoryAPITests.class,

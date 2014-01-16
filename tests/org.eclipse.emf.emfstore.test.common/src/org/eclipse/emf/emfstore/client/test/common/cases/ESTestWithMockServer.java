@@ -15,6 +15,8 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
@@ -29,6 +31,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 /**
+ * ES test case base class with mock server available.
+ * 
  * @author emueller
  * 
  */
@@ -48,12 +52,15 @@ public class ESTestWithMockServer extends ESTest {
 	}
 
 	protected static void startEMFStore() {
+		startEMFStore(Collections.<String, String> emptyMap());
+	}
+
+	protected static void startEMFStore(Map<String, String> properties) {
 		deleteServerHomeDirectory();
 		ServerConfiguration.setTesting(true);
-		ServerConfiguration.getProperties().setProperty(ServerConfiguration.XML_RPC_PORT,
-			String.valueOf(ServerUtil.defaultPort()));
+
 		try {
-			server = ServerUtil.startMockServer();
+			server = ServerUtil.startMockServer(properties);
 		} catch (final IllegalArgumentException ex) {
 			fail(ex.getMessage());
 		} catch (final ESServerStartFailedException ex) {

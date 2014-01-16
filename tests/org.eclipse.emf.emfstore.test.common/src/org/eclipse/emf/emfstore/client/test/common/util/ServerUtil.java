@@ -16,9 +16,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -46,8 +49,11 @@ import org.eclipse.emf.emfstore.internal.server.accesscontrol.authentication.fac
 import org.eclipse.emf.emfstore.internal.server.core.EMFStoreImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ServerSpace;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACGroup;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnitId;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.AccesscontrolFactory;
@@ -125,7 +131,12 @@ public final class ServerUtil {
 		ESServer.FACTORY.stopLocalServer();
 	}
 
-	public static ServerMock startMockServer() throws ESServerStartFailedException,
+	public static ServerMock startMockServer() throws IllegalArgumentException, ESServerStartFailedException,
+		FatalESException {
+		return startMockServer(Collections.<String, String> emptyMap());
+	}
+
+	public static ServerMock startMockServer(Map<String, String> properties) throws ESServerStartFailedException,
 		IllegalArgumentException,
 		FatalESException {
 
@@ -145,7 +156,7 @@ public final class ServerUtil {
 		copyFileToWorkspace(ServerConfiguration.getServerKeyStorePath(), ServerConfiguration.SERVER_KEYSTORE_FILE,
 			Messages.ServerUtil_Failed_To_Copy_Keystore, Messages.ServerUtil_Keystore_Copied_To_Server_Workspace);
 
-		ServerConfiguration.setProperties(initProperties());
+		ServerConfiguration.setProperties(initProperties(properties));
 		final DAOFacadeMock daoFacadeMock = new DAOFacadeMock();
 		setSuperUser(daoFacadeMock);
 		final AccessControl accessControl = new AccessControlImpl(daoFacadeMock);
@@ -158,7 +169,7 @@ public final class ServerUtil {
 		ESWorkspaceProviderImpl.getInstance().setConnectionManager(
 			new ConnectionMock(emfStore, accessControl));
 		ESWorkspaceProviderImpl.getInstance().setAdminConnectionManager(
-			new AdminConnectionManagerMock(daoFacadeMock, accessControl));
+			new AdminConnectionManagerMock(daoFacadeMock, accessControl, serverSpace));
 
 		final ESServer createServer = ESServer.FACTORY.createServer("localhost", //$NON-NLS-1$
 			Integer.parseInt(ServerConfiguration.XML_RPC_PORT_DEFAULT),
@@ -171,10 +182,66 @@ public final class ServerUtil {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager().deleteUser(sessionId, user);
 	}
 
+	/**
+	 * Convenience method for deleting a group by name instead of its ID.
+	 * 
+	 * @param session
+	 *            the {@link ESUsersession} that is used to connection to the admin connection manager
+	 * @param groupName
+	 *            the name of the group to be deleted. Case is ignored
+	 * 
+	 * @return {@code true}, if the groups has been deleted successfully, {@code false} otherwise
+	 * 
+	 * @throws ESException
+	 *             in case the delete fails
+	 */
+	public static boolean deleteGroup(ESUsersession session, String groupName) throws ESException {
+
+		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
+
+		final List<ACGroup> groups = ESWorkspaceProviderImpl
+			.getInstance()
+			.getAdminConnectionManager()
+			.getGroups(sessionId.toInternalAPI());
+
+		ACOrgUnitId id = null;
+
+		for (final ACGroup acGroup : groups) {
+			if (acGroup.getName().equalsIgnoreCase(groupName)) {
+				id = acGroup.getId();
+				break;
+			}
+		}
+
+		if (id != null) {
+			ESWorkspaceProviderImpl
+				.getInstance()
+				.getAdminConnectionManager()
+				.deleteGroup(sessionId.toInternalAPI(), id);
+			return true;
+		}
+
+		return false;
+	}
+
 	public static ACOrgUnitId createUser(ESUsersession session, String name) throws ESException {
 		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
 		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
 			.createUser(sessionId.toInternalAPI(), name);
+	}
+
+	public static ACOrgUnitId createGroup(ESUsersession session, String name) throws ESException {
+		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
+		return ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.createGroup(sessionId.toInternalAPI(), name);
+	}
+
+	// TODO: user parameter is not needed
+	public static void changePassword(ESUsersession session, ACOrgUnitId userId, String user, String password)
+		throws ESException {
+		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
+		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.changeUser(sessionId.toInternalAPI(), userId, user, password);
 	}
 
 	public static ACOrgUnitId createUser(SessionId sessionId, String name) throws ESException {
@@ -185,6 +252,46 @@ public final class ServerUtil {
 		throws ESException {
 		ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
 			.changeUser(sessionId, userId, userName, password);
+	}
+
+	public static ACUser getUser(ESUsersession session, String name) throws ESException {
+		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
+		final List<ACUser> users = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.getUsers(sessionId.toInternalAPI());
+		for (final ACUser acUser : users) {
+			if (acUser.getName().equals(name)) {
+				return acUser;
+			}
+		}
+
+		return null;
+	}
+
+	public static ACUser getUser(ESUsersession session, ACOrgUnitId userId) throws ESException {
+		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
+		final List<ACUser> users = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.getUsers(sessionId.toInternalAPI());
+		for (final ACUser acUser : users) {
+			if (acUser.getId().getId().equals(userId.getId())) {
+				return acUser;
+			}
+		}
+
+		return null;
+	}
+
+	public static ACUser getParticipant(ESUsersession session, ProjectId projectId, ACOrgUnitId userId)
+		throws ESException {
+		final ESSessionIdImpl sessionId = ESSessionIdImpl.class.cast(session.getSessionId());
+		final List<ACOrgUnit> users = ESWorkspaceProviderImpl.getInstance().getAdminConnectionManager()
+			.getParticipants(sessionId.toInternalAPI(), projectId);
+		for (final ACOrgUnit acUser : users) {
+			if (acUser.getId().getId().equals(userId.getId()) && acUser instanceof ACUser) {
+				return (ACUser) acUser;
+			}
+		}
+
+		return null;
 	}
 
 	public static ACUser getUser(SessionId sessionId, String name) throws ESException {
@@ -218,7 +325,7 @@ public final class ServerUtil {
 		ModelUtil.logInfo(Messages.ServerUtil_Added_Superuser + superuser);
 	}
 
-	private static Properties initProperties() {
+	private static Properties initProperties(Map<String, String> additionalProperties) {
 		final File propertyFile = new File(ServerConfiguration.getConfFile());
 		final Properties properties = new Properties();
 		FileInputStream fis = null;
@@ -227,6 +334,11 @@ public final class ServerUtil {
 			properties.load(fis);
 			ServerConfiguration.setProperties(properties, false);
 			ModelUtil.logInfo("Property file read. (" + propertyFile.getAbsolutePath() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
+			for (final Map.Entry<String, String> entry : additionalProperties.entrySet()) {
+				if (StringUtils.isNotEmpty(entry.getValue())) {
+					properties.setProperty(entry.getKey(), entry.getValue());
+				}
+			}
 		} catch (final IOException e) {
 			ModelUtil.logWarning(Messages.ServerUtil_Property_Init_Failed, e);
 		} finally {

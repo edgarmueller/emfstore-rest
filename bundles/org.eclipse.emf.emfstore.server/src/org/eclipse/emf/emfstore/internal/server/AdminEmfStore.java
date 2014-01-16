@@ -205,14 +205,20 @@ public interface AdminEmfStore extends EMFStoreInterface {
 	List<ACOrgUnit> getParticipants(SessionId sessionId, ProjectId projectId) throws ESException;
 
 	/**
-	 * Adds an orgUnit to a project.
+	 * Adds an organization unit to a project.
 	 * 
-	 * @param sessionId the session id for authentication
-	 * @param projectId the project's id
-	 * @param participant the orgUnit's id
+	 * @param sessionId
+	 *            the {@link SessionId} for authentication
+	 * @param projectId
+	 *            the {@link ProjectId} of the project
+	 * @param participantId
+	 *            the {@link ACOrgUnitId} of the participant
+	 * @param roleClass
+	 *            the role to be assigned to the participant
 	 * @throws ESException if any error in the EmfStore occurs
 	 */
-	void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participant) throws ESException;
+	void addParticipant(SessionId sessionId, ProjectId projectId, ACOrgUnitId participantId, EClass roleClass)
+		throws ESException;
 
 	/**
 	 * Removes an orgUnits from a project.
@@ -246,4 +252,18 @@ public interface AdminEmfStore extends EMFStoreInterface {
 	 */
 	void changeRole(SessionId sessionId, ProjectId projectId, ACOrgUnitId orgUnit, EClass role)
 		throws ESException;
+
+	/**
+	 * Assigns a role for an orgUnit without a project.
+	 * 
+	 * @param sessionId
+	 *            the {@link SessionId} for authentication
+	 * @param orgUnitId
+	 *            the ID of an organizational unit
+	 * @param roleClass
+	 *            the role to be assigned
+	 * @throws ESException
+	 *             if an exceptions occurs on the server or on transport
+	 */
+	void assignRole(SessionId sessionId, ACOrgUnitId orgUnitId, EClass roleClass) throws ESException;
 }
