@@ -28,7 +28,6 @@ import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.junit.Before;
-import org.junit.BeforeClass;
 
 /**
  * ES test case base class with mock server available.
@@ -39,11 +38,6 @@ import org.junit.BeforeClass;
 public class ESTestWithMockServer extends ESTest {
 
 	private static ServerMock server;
-
-	@BeforeClass
-	public static void beforeClass() {
-		startEMFStore();
-	}
 
 	@Override
 	@Before
