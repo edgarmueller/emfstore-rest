@@ -26,7 +26,7 @@ public interface ReservationSetModifier {
 	/**
 	 * ID of the {@link ReservationSetModifier} option.
 	 */
-	String ID = "org.eclipse.emf.emfstore.server.conflictDetection.reservationSetModifiier";
+	String ID = "org.eclipse.emf.emfstore.server.conflictDetection.reservationSetModifiier"; //$NON-NLS-1$
 
 	/**
 	 * Allows to modify the given {@link ReservationSet}.

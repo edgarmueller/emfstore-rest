@@ -29,6 +29,6 @@ public class ESServerStartFailedException extends Exception {
 	 * @param cause causing exception
 	 */
 	public ESServerStartFailedException(Throwable cause) {
-		super("Server start failed!", cause);
+		super(Messages.ESServerStartFailedException_Server_Start_Failed, cause);
 	}
 }

@@ -24,13 +24,25 @@ import org.eclipse.emf.emfstore.internal.common.model.PropertyStringValue;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.emf.emfstore.test.model.TestmodelFactory;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PropertiesTest extends TransmissionTests {
 
 	private static PropertyManager propertyManager1;
 	private static PropertyManager propertyManager2;
+
+	@BeforeClass
+	public static void beforeClass() {
+		startEMFStore();
+	}
+
+	@AfterClass
+	public static void afterClass() {
+		stopEMFStore();
+	}
 
 	@Test
 	public void testSharedProperties() throws ESException {

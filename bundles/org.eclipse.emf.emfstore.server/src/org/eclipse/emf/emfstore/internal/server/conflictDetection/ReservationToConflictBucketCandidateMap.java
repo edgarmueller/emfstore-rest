@@ -46,6 +46,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.operations.Sing
  */
 public class ReservationToConflictBucketCandidateMap {
 
+	private static final String KEY = "key"; //$NON-NLS-1$
 	private static ReservationSetModifier reservationSetModifier = initCustomReservationSetModifier();
 	private final ReservationSet reservationToConflictMap;
 	private final Set<ConflictBucketCandidate> conflictBucketCandidates;
@@ -136,7 +137,8 @@ public class ReservationToConflictBucketCandidateMap {
 			reservationToConflictMap.addFeatureReservation(modelElement, featureName, mergedConflictBucketCandidates);
 
 		} else if (reservationToConflictMap.hasOppositeReservations(modelElement, featureName)) {
-			throw new IllegalStateException("Reservation for same feature with and without opposites is illegal!");
+			throw new IllegalStateException(
+				Messages.ReservationToConflictBucketCandidateMap_Illegal_Reservation_With_And_Without_Opposite);
 		} else {
 			reservationToConflictMap.addFeatureReservation(modelElement, featureName, currentConflictBucketCandidate);
 		}
@@ -165,7 +167,8 @@ public class ReservationToConflictBucketCandidateMap {
 				}
 			}
 		} else if (reservationToConflictMap.hasFeatureReservation(modelElement, featureName)) {
-			throw new IllegalStateException("Reservation for same feature with and without opposites is illegal!");
+			throw new IllegalStateException(
+				Messages.ReservationToConflictBucketCandidateMap_Illegal_Reservation_With_And_Without_Opposite);
 		} else {
 			final Set<String> opposites = reservationSet.getOpposites(modelElement, featureName);
 
@@ -255,7 +258,8 @@ public class ReservationToConflictBucketCandidateMap {
 			handleFeatureOperation(operation, reservationSet, idToEObjectMapping);
 			return reservationSet;
 		}
-		throw new IllegalStateException("Unkown operation type: " + operation.getClass().getCanonicalName());
+		throw new IllegalStateException(Messages.ReservationToConflictBucketCandidateMap_Unknown_Operation
+			+ operation.getClass().getCanonicalName());
 	}
 
 	private boolean isMapEntry(EObject eObject) {
@@ -285,12 +289,12 @@ public class ReservationToConflictBucketCandidateMap {
 				if (key != null) {
 					idToKeyHashCode.put(mapEntryId, new Integer(key.hashCode()));
 				} else {
-					ModelUtil.logWarning("Key is null. Can not be used for conflict detection.");
+					ModelUtil.logWarning(Messages.ReservationToConflictBucketCandidateMap_Key_Is_Null);
 				}
 			}
 		} else {
 			ModelUtil.logWarning(
-				MessageFormat.format("Single reference sub operation of create operation {0} is missing",
+				MessageFormat.format(Messages.ReservationToConflictBucketCandidateMap_SingleRefOp_Of_CreateOp_Missing,
 					createDeleteOperation.getOperationId()));
 		}
 	}
@@ -308,7 +312,7 @@ public class ReservationToConflictBucketCandidateMap {
 			}
 
 			final SingleReferenceOperation singleReferenceOperation = SingleReferenceOperation.class.cast(op);
-			if (singleReferenceOperation.getFeatureName().equals("key")) {
+			if (singleReferenceOperation.getFeatureName().equals(KEY)) {
 				return singleReferenceOperation;
 			}
 		}

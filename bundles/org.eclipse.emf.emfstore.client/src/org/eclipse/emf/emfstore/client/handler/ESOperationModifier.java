@@ -30,7 +30,7 @@ public interface ESOperationModifier {
 	/**
 	 * ID of the {@link ESOperationModifier} option.
 	 */
-	String ID = "org.eclipse.emf.emfstore.client.handler.operationModifier";
+	String ID = "org.eclipse.emf.emfstore.client.handler.operationModifier"; //$NON-NLS-1$
 
 	/**
 	 * <p>

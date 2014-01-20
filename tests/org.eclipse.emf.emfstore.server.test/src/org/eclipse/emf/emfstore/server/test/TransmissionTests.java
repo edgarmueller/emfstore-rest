@@ -33,7 +33,6 @@ public abstract class TransmissionTests extends ESTestWithLoggedInUser {
 	private static final String WRITER2 = "writer2"; //$NON-NLS-1$
 	private static final String FOO = "foo"; //$NON-NLS-1$
 	private static final String WRITER1 = "writer1"; //$NON-NLS-1$
-	private static final String TEST1 = "test1"; //$NON-NLS-1$
 	private static final String CHECKOUT2 = "checkout2"; //$NON-NLS-1$
 	private static final String CHECKOUT1 = "checkout1"; //$NON-NLS-1$
 
