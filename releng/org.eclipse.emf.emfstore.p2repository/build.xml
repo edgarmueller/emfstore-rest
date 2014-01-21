@@ -1,0 +1,67 @@
+<project default="custom.build" name="EMFStore site to include updatessite">
+
+	<condition property="build.xml" value="build.xml">
+		<available file="build.xml" type="file" />
+	</condition>
+
+	<property name="update.site.source.dir" value="target/repository" />
+
+	<property name="aggregateSite.properties" value="aggregateSite.properties" />
+	<property file="${aggregateSite.properties}" />
+
+	<target name="init">
+		<taskdef resource="net/sf/antcontrib/antlib.xml">
+			<classpath>
+				<pathelement location="ant-contrib-1.0b3.jar" />
+			</classpath>
+		</taskdef>
+	</target>
+
+	<target name="custom.build" description="aggregate update site extras" depends="init,add.associate.sites" />
+
+	<target name="add.associate.sites" if="associate.sites">
+		<if>
+			<and>
+				<!-- Defined in aggregateSite.properties -->
+				<isset property="associate.sites" />
+				<not>
+					<equals arg1="${associate.sites}" arg2="" />
+				</not>
+			</and>
+			<then>
+				<if>
+					<available file="${update.site.source.dir}/content.jar" type="file" />
+					<then>
+						<unzip src="${update.site.source.dir}/content.jar" dest="${update.site.source.dir}" />
+						<delete file="${update.site.source.dir}/content.jar" />
+					</then>
+				</if>
+				<!-- counter variable -->
+				<var name="associate.sites.0" value="" />
+				<for param="associate.site" list="${associate.sites}" delimiter=", ">
+					<sequential>
+						<var name="associate.sites.0" value="${associate.sites.0}00" />
+					</sequential>
+				</for>
+				<length property="associate.sites.length" string="${associate.sites.0}" />
+
+				<loadfile srcfile="${update.site.source.dir}/content.xml" property="content.xml">
+					<filterchain>
+						<tailfilter lines="-1" skip="1" />
+					</filterchain>
+				</loadfile>
+				<echo file="${update.site.source.dir}/content.xml" message="${content.xml}" />
+				<echo file="${update.site.source.dir}/content.xml" append="true">  &lt;references size='${associate.sites.length}'></echo>
+				<for param="associate.site" list="${associate.sites}" delimiter=", ">
+					<sequential>
+						<!-- insert into content.xml -->
+						<echo file="${update.site.source.dir}/content.xml" append="true">    &lt;repository uri='@{associate.site}' url='@{associate.site}' type='0' options='1'/>&lt;repository uri='@{associate.site}' url='@{associate.site}' type='1' options='1'/></echo>
+					</sequential>
+				</for>
+				<echo file="${update.site.source.dir}/content.xml" append="true">  &lt;/references>&lt;/repository></echo>
+				<zip destfile="${update.site.source.dir}/content.jar" basedir="${update.site.source.dir}" includes="content.xml" />
+				<delete file="${update.site.source.dir}/content.xml" />
+			</then>
+		</if>
+	</target>
+</project>

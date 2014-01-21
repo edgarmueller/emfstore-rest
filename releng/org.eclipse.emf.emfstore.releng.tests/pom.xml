@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.emf.emfstore</groupId>
+		<artifactId>emfstore-parent</artifactId>
+		<version>1.1.0-SNAPSHOT</version>
+		<relativePath>../emfstore-parent/</relativePath>
+	</parent>
+	<groupId>org.eclipse.emf.emfstore</groupId>
+	<artifactId>emfstore-tests-parent</artifactId>
+	<version>1.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../../tests/org.eclipse.emf.emfstore.fuzzy.emf.test</module>
+		<module>../../tests/org.eclipse.emf.emfstore.test.model</module>
+		<module>../../tests/org.eclipse.emf.emfstore.test.model.edit</module>
+		<module>../../tests/org.eclipse.emf.emfstore.test.common</module>
+		<module>../../tests/org.eclipse.emf.emfstore.client.api.test</module>
+		<module>../../tests/org.eclipse.emf.emfstore.server.test</module>
+		<module>../../tests/org.eclipse.emf.emfstore.client.changetracking.test</module>
+		<module>../../tests/org.eclipse.emf.emfstore.client.recording.test</module>
+		<module>../../tests/org.eclipse.emf.emfstore.client.conflictdetection.test</module>
+		<module>../../tests/org.eclipse.emf.emfstore.client.test</module>
+		<module>../../tests/org.eclipse.emf.emfstore.client.test.ui</module>
+	</modules>
+</project>

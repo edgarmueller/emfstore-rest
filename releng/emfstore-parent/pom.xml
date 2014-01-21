@@ -1,341 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.eclipse.emf.emfstore</groupId>
-  <artifactId>emfstore-parent</artifactId>
-  <version>1.1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+	<groupId>org.eclipse.emf.emfstore</groupId>
+	<artifactId>emfstore-parent</artifactId>
+	<version>1.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <tycho-version>0.18.0</tycho-version>
-    <junit-version>4.8.2</junit-version>
-    <maven-checkstyle-version>2.10</maven-checkstyle-version>
-    <jacoco-version>0.5.7.201204190339</jacoco-version>
-	<emfstore-version>1.1.0-SNAPSHOT</emfstore-version>
-	<!-- Properties to enable jacoco code coverage analysis with sonar -->
-	<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-	<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-	<sonar.jacoco.reportPath>../../tests/org.eclipse.emf.emfstore.client.test.alltests/target/jacoco.exec</sonar.jacoco.reportPath>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<tycho-version>0.18.0</tycho-version>
+		<junit-version>4.8.2</junit-version>
+		<maven-checkstyle-version>2.10</maven-checkstyle-version>
+		<jacoco-version>0.5.7.201204190339</jacoco-version>
+		<emfstore-version>1.1.0-SNAPSHOT</emfstore-version>
+		<jarsigner-version>1.0.5</jarsigner-version>
+		<maven.antrun.plugin.version>1.7</maven.antrun.plugin.version>
+		<!-- Properties to enable jacoco code coverage analysis with sonar -->
+		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.jacoco.reportPath>../../tests/org.eclipse.emf.emfstore.client.test.alltests/target/jacoco.exec</sonar.jacoco.reportPath>
+	</properties>
 
-<!-- 
-  <profiles>
-    <profile>
-      <id>platform-galileo</id>
-      <activation>
-        <property>
-          <name>platform-version-name</name>
-          <value>galileo</value>
-        </property>
-      </activation>
-      <properties>
-        <eclipse-site>http://download.eclipse.org/releases/galileo</eclipse-site>
-        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.5</eclipse-platform>
-        <platform-version>[3.5,3.6)</platform-version>
-      </properties>
-    </profile>
-    <profile>
-      <id>platform-helios</id>
-      <activation>
-        <property>
-          <name>platform-version-name</name>
-          <value>helios</value>
-        </property>
-      </activation>
-      <properties>
-        <eclipse-site>http://download.eclipse.org/releases/helios</eclipse-site>
-        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.6</eclipse-platform>
-        <platform-version>[3.6,3.7)</platform-version>
-      </properties>
-    </profile>
-    <profile>
-      <id>platform-indigo</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <property>
-          <name>platform-version-name</name>
-          <value>indigo</value>
-        </property>
-      </activation>
-      <properties>
-        <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
-        <eclipse-platform>http://download.eclipse.org/eclipse/updates/3.7</eclipse-platform>
-        <platform-version>[3.7,3.8)</platform-version>
-      </properties>
-    </profile>
-    <profile>
-      <id>platform-juno</id>
-      <activation>
-        <property>
-          <name>platform-version-name</name>
-          <value>juno</value>
-        </property>
-      </activation>
-      <properties>
-        <eclipse-site>http://download.eclipse.org/releases/juno</eclipse-site>
-        <platform-version>[3.8,3.9)</platform-version>
-      </properties>
-    </profile>
-  </profiles>
- -->
- 
-  <modules>
-  	<module>../../releng/_target</module>
-    <!-- EMFStore Core Features -->
-    <module>../../features/org.eclipse.emf.emfstore.common.feature</module>
-    <!-- <module>../../bundles/org.eclipse.emf.emfstore.branding</module>-->
-    <module>../../bundles/org.eclipse.emf.emfstore.common</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.common.model</module>
+	<profiles>
+		<profile>
+			<id>aggregateSites</id>
+			<activation>
+				<property>
+					<name>aggSite</name>
+				</property>
+			</activation>
+		</profile>
+		<profile>
+			<id>build-server</id>
+			<activation>
+				<property>
+					<name>build-server</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Configure build to use the java compiler as specified in manifest -->
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-compiler-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<useJDK>BREE</useJDK>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
-    <module>../../features/org.eclipse.emf.emfstore.server.feature</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.migration</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.server</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.server.model</module>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>eclipse-maven-releases</id>
+			<url>https://repo.eclipse.org/content/repositories/releases/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
-    <module>../../features/org.eclipse.emf.emfstore.client.ui.feature</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.client.model.edit</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.client.ui</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.common.model.edit</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.server.model.edit</module>
+	<modules>
+		<module>../../releng/_target</module>
+		<module>../../releng/org.eclipse.emf.emfstore.p2repository</module>
+		<module>../../releng/org.eclipse.emf.emfstore.products</module>
 
-    <!-- 
-    <module>../org.eclipse.emf.emfstore.perspective.feature</module>
-    <module>../../org.eclipse.emf.emfstore.core/org.eclipse.emf.emfstore.perspective</module>
- -->
-    <module>../../features/org.eclipse.emf.emfstore.ecore.feature</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.ecore</module>
+		<module>../../releng/org.eclipse.emf.emfstore.releng.bundles</module>
+		<module>../../releng/org.eclipse.emf.emfstore.releng.features</module>
+		<module>../../releng/org.eclipse.emf.emfstore.releng.tests</module>
+	</modules>
 
+	<build>
+		<!-- Use java/eclipse conventions for src and bin here, because of build.properties -->
+		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>bin</outputDirectory>
 
-    <module>../../features/org.eclipse.emf.emfstore.client.feature</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.client</module>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
 
-    <!-- EMFStore Additional Features -->
-    <module>../../features/org.eclipse.emf.emfstore.client.transaction.feature</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.client.transaction</module>
-	<module>../../features/org.eclipse.emf.emfstore.client.ui.historybrowsercomparator.feature</module>
-	<module>../../bundles/org.eclipse.emf.emfstore.client.ui.historybrowsercomparator</module>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+					<pomDependencies>consider</pomDependencies>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+					<target>
+						<artifact>
+							<groupId>org.eclipse.emf.emfstore</groupId>
+							<artifactId>emfstore</artifactId>
+							<version>${emfstore-version}</version>
+						</artifact>
+					</target>
+				</configuration>
+			</plugin>
 
-    <!-- EMF Client Platform 
-    <module>../../org.eclipse.emf.ecp.releng/org.eclipse.emf.ecp.validation.feature</module>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<format>'v'yyyyMMdd'-'HHmm</format>
+				</configuration>
+			</plugin>
 
-    <module>../../org.eclipse.emf.ecp.releng/org.eclipse.emf.ecp.navigator.feature</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.navigator</module>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-    <module>../../org.eclipse.emf.ecp.releng/org.eclipse.emf.ecp.editor.feature</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.editor</module>
-
-    <module>../../org.eclipse.emf.ecp.releng/org.eclipse.emf.ecp.navigatoreditorbridge.feature</module>
-
-    <module>../../org.eclipse.emf.ecp.releng/org.eclipse.emf.ecp.common.feature</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.common</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.common.model</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.common.rcp</module>
-    <module>../../org.eclipse.emf.ecp.core/org.eclipse.emf.ecp.common.util</module>
-    -->
-
-    <!-- EMFStore Examples -->
-    <module>../../features/org.eclipse.emf.emfstore.example.feature</module>
-    
-    <module>../../bundles/org.eclipse.emf.emfstore.example.helloworld</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.example.installer</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.example.merging</module>
-    
-    <module>../../bundles/org.eclipse.emf.emfstore.examplemodel</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.examplemodel.edit</module>
-	
-	<!-- EMFStore MongoDB -->
-    <module>../../features/org.eclipse.emf.emfstore.mongodb.client.feature</module>
-	<module>../../features/org.eclipse.emf.emfstore.mongodb.server.feature</module>
-    
-    <module>../../bundles/org.eclipse.emf.emfstore.mongodb</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.mongodb.client</module>
-    <module>../../bundles/org.eclipse.emf.emfstore.mongodb.server</module>
-
-    <!-- Update site and products -->
-	<module>../../features/org.eclipse.emf.emfstore.sdk.feature</module>
-    <module>../org.eclipse.emf.emfstore.p2repository</module>
-	<module>../org.eclipse.emf.emfstore.products</module>
-
-    <!-- Plugins for test osgi runtime -->
-    <!-- 
-    <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.examplemodel.ecp</module>
-    <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.client.backchannel</module>
-    <module>../../org.eclipse.emf.emfstore.other/org.eclipse.emf.emfstore.server.backchannel</module>
-     -->
-     <!-- Model Mutator -->  
-    <module>../../bundles/org.eclipse.emf.emfstore.modelmutator</module>
-    <module>../../features/org.eclipse.emf.emfstore.modelmutator.feature</module>
-        
-    <!-- Fuzzy -->    
-    <module>../../features/org.eclipse.emf.emfstore.fuzzy.feature</module>
-    <module>../../features/org.eclipse.emf.emfstore.fuzzy.test.feature</module>
-	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy</module>
-	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf</module>
-	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.edit</module>
-	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.editor</module>
-	<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.example</module>
-	<module>../../tests/org.eclipse.emf.emfstore.fuzzy.emf.test</module>
-	
-	<!-- Testing related stuff -->
-	<module>../../features/org.eclipse.emf.emfstore.test.feature</module>
-	<module>../../tests/org.eclipse.emf.emfstore.test.model</module>
-	<module>../../tests/org.eclipse.emf.emfstore.test.model.edit</module>
-	<module>../../tests/org.eclipse.emf.emfstore.test.common</module>
-	
-    <!-- Testing -->
-    <module>../../tests/org.eclipse.emf.emfstore.client.api.test</module>
-	<module>../../tests/org.eclipse.emf.emfstore.server.test</module>
-    <module>../../tests/org.eclipse.emf.emfstore.client.changetracking.test</module>
-    <module>../../tests/org.eclipse.emf.emfstore.client.recording.test</module>
-    <module>../../tests/org.eclipse.emf.emfstore.client.conflictdetection.test</module>
-    <module>../../tests/org.eclipse.emf.emfstore.client.test</module>
-	<module>../../tests/org.eclipse.emf.emfstore.client.test.ui</module>
-	<!-- <module>../../tests/org.eclipse.emf.emfstore.client.test.alltests</module>-->
-    
-  </modules>
-<!-- 
-  <repositories>
-    <repository>
-      <id>eclipse</id>
-      <layout>p2</layout>
-      <url>${eclipse-site}</url>
-    </repository>
-    <repository>
-      <id>eclipse-platform</id>
-      <layout>p2</layout>
-      <url>${eclipse-platform}</url>
-    </repository>
-  </repositories>
-  -->
-
-  <build>
-    <!-- Use java/eclipse conventions for src and bin here, because of build.properties -->
-    <sourceDirectory>src</sourceDirectory>
-    <outputDirectory>bin</outputDirectory>
-
-    <plugins>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <extensions>true</extensions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <resolver>p2</resolver>
-          <pomDependencies>consider</pomDependencies>
-          <environments>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>macosx</os>
-              <ws>cocoa</ws>
-              <arch>x86_64</arch>
-            </environment>
-          </environments>
-	   <!-- work around Equinox bug 348045 (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=348045) -->
-	   <!-- 
-	    <filters>
-            <filter>
-              <type>p2-installable-unit</type>
-              <id>org.eclipse.equinox.servletbridge.extensionbundle</id>
-              <removeAll />
-            </filter>
-          </filters>
-           -->
-          <target>
-			<artifact>
-				<groupId>org.eclipse.emf.emfstore</groupId>
-  				<artifactId>emfstore</artifactId>
-				<version>${emfstore-version}</version>
-			</artifact>
-		</target>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-packaging-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <format>'v'yyyyMMdd'-'HHmm</format>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-source-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <executions>
-          <execution>
-            <id>plugin-source</id>
-            <goals>
-              <goal>plugin-source</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${maven-checkstyle-version}</version>
-        <executions>
-          <execution>
-            <id>checkstyle</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <phase>compile</phase>
-          </execution>
-        </executions>
-        <configuration>
-          
-          <failOnViolation>false</failOnViolation>
-          <configLocation>http://download.eclipse.org/emfclient/config/esmCheckstyle.xml</configLocation>
-          <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-version}</version>
+				<executions>
+					<execution>
+						<id>checkstyle</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>compile</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<failOnViolation>false</failOnViolation>
+					<configLocation>http://download.eclipse.org/emfclient/config/esmCheckstyle.xml</configLocation>
+					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
 					<suppressionsLocation>http://download.eclipse.org/emfclient/config/suppressions.xml</suppressionsLocation>
-          <propertyExpansion>samedir=${basedir}/../../EMFStoreDeveloper/coding</propertyExpansion>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+					<propertyExpansion>samedir=${basedir}/../../EMFStoreDeveloper/coding</propertyExpansion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit-version}</version>
-        <scope>test</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit-version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

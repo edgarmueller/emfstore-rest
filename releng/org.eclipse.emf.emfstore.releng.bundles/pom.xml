@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.emf.emfstore</groupId>
+		<artifactId>emfstore-parent</artifactId>
+		<version>1.1.0-SNAPSHOT</version>
+		<relativePath>../emfstore-parent/</relativePath>
+	</parent>
+	<groupId>org.eclipse.emf.emfstore</groupId>
+	<artifactId>emfstore-bundles-parent</artifactId>
+	<version>1.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../../bundles/org.eclipse.emf.emfstore.common</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.common.model</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.migration</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.server</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.server.model</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.client.model.edit</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.client.ui</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.common.model.edit</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.server.model.edit</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.ecore</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.client</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.client.transaction</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.client.ui.historybrowsercomparator</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.example.helloworld</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.example.installer</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.example.merging</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.examplemodel</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.examplemodel.edit</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.mongodb</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.mongodb.client</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.mongodb.server</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.modelmutator</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.fuzzy</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.edit</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.editor</module>
+		<module>../../bundles/org.eclipse.emf.emfstore.fuzzy.emf.example</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<!-- 1. -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<!-- 2. -->
+		<profile>
+			<id>build-server</id>
+			<build>
+				<plugins>
+					<!-- 3.a -->
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-pack200a-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>pack200-normalize</id>
+								<goals>
+									<goal>normalize</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<version>${jarsigner-version}</version>
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- 3.b -->
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-pack200b-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>pack200-pack</id>
+								<goals>
+									<goal>pack</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- 4. -->
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-p2-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>attach-p2-metadata</id>
+								<phase>package</phase>
+								<goals>
+									<goal>p2-metadata</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<defaultP2Metadata>false</defaultP2Metadata>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
