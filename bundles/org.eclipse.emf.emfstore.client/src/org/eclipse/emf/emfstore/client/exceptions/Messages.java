@@ -17,6 +17,7 @@ import org.eclipse.osgi.util.NLS;
  * API exceptions related messages.
  * 
  * @author emueller
+ * @since 1.2
  * 
  */
 public final class Messages extends NLS {

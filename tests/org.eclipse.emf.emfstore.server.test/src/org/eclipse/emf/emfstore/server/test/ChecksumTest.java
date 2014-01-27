@@ -39,13 +39,13 @@ import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Delete;
 import org.eclipse.emf.emfstore.client.test.common.dsl.TestElementFeatures;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Update;
-import org.eclipse.emf.emfstore.client.util.ESModelUtil;
 import org.eclipse.emf.emfstore.client.util.RunESCommand;
 import org.eclipse.emf.emfstore.common.model.ESModelElementIdToEObjectMapping;
 import org.eclipse.emf.emfstore.internal.client.model.Configuration;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.util.ChecksumErrorHandler;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.versionspec.ESPrimaryVersionSpecImpl;
 import org.eclipse.emf.emfstore.server.ESConflictSet;
@@ -185,7 +185,9 @@ public class ChecksumTest extends ESTestWithLoggedInUser {
 		final ESLocalProject restoredProject = ESWorkspaceProvider.INSTANCE.getWorkspace().getLocalProjects().get(0);
 		final long computedChecksum = computeChecksum(restoredProject);
 
-		assertTrue(ESModelUtil.areEqual(restoredProject, clonedProject));
+		assertTrue(ModelUtil.areEqual(
+			ESLocalProjectImpl.class.cast(restoredProject).toInternalAPI().getProject(),
+			ESLocalProjectImpl.class.cast(clonedProject).toInternalAPI().getProject()));
 		assertEquals(expectedChecksum,
 			ESPrimaryVersionSpecImpl.class.cast(commit).toInternalAPI().getProjectStateChecksum());
 		assertEquals(computedChecksum,
@@ -312,7 +314,11 @@ public class ChecksumTest extends ESTestWithLoggedInUser {
 		commitWithoutCommand(checkout);
 
 		final ESPrimaryVersionSpec baseVersion = update(getLocalProject()).getBaseVersion();
-		assertTrue(ESModelUtil.areEqual(getLocalProject(), checkout));
+
+		assertTrue(ModelUtil.areEqual(
+			ESLocalProjectImpl.class.cast(getLocalProject()).toInternalAPI().getProject(),
+			ESLocalProjectImpl.class.cast(checkout).toInternalAPI().getProject()));
+
 		assertEquals(
 			computeChecksum(getLocalProject()),
 			ESPrimaryVersionSpecImpl.class.cast(baseVersion).toInternalAPI().getProjectStateChecksum());
