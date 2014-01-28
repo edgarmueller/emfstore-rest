@@ -6,4 +6,6 @@ Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: com.eclipsesource.jaxrs.publisher;bundle-version="3.2.0",
- com.eclipsesource.jaxrs.consumer;bundle-version="2.2.0"
+ com.eclipsesource.jaxrs.consumer;bundle-version="2.2.0",
+ com.eclipsesource.jaxrs.consumer.source;bundle-version="2.2.0",
+ com.eclipsesource.jaxrs.publisher.source;bundle-version="3.2.0"
