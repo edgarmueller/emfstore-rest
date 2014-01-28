@@ -9,3 +9,4 @@ Require-Bundle: com.eclipsesource.jaxrs.publisher;bundle-version="3.2.0",
  com.eclipsesource.jaxrs.consumer;bundle-version="2.2.0",
  com.eclipsesource.jaxrs.consumer.source;bundle-version="2.2.0",
  com.eclipsesource.jaxrs.publisher.source;bundle-version="3.2.0"
+Import-Package: javax.ws.rs;version="2.0.0"
