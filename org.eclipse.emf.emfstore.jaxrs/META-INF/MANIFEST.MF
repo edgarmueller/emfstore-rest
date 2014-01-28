@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JAX-RS-Implementierung
+Bundle-SymbolicName: org.eclipse.emf.emfstore.jaxrs
+Bundle-Version: 1.1.0.qualifier
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
