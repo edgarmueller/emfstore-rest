@@ -13,12 +13,15 @@ package org.eclipse.emf.emfstore.jaxrs.testOsgiConnector;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 
 /**
  * @author Pascal
  * 
  */
 public class Activator implements BundleActivator {
+
+	private ServiceRegistration<?> registration;
 
 	/**
 	 * {@inheritDoc}
@@ -27,7 +30,10 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
+
+		final ExampleService exampleService = new ExampleService();
+		registration = context.registerService(ExampleService.class.getName(),
+				exampleService, null);
 
 	}
 
@@ -38,7 +44,8 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
+
+		registration.unregister();
 
 	}
 
