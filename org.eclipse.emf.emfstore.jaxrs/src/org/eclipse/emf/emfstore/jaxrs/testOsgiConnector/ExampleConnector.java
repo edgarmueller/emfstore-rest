@@ -11,18 +11,20 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jaxrs.testOsgiConnector;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import com.eclipsesource.jaxrs.consumer.ConsumerFactory;
 
 /**
  * @author Pascal
  * 
  */
-@Path("/osgi-jax-rs")
-public class ExampleService {
+public class ExampleConnector {
 
-	@GET
-	public String sayHello() {
-		return "JAX-RS and OSGi are a lovely couple.";
+	public static void run() {
+
+		final ExampleService exampleService = ConsumerFactory.createConsumer(
+			"http://localhost:9090/services/osgi-jax-rs", ExampleService.class);
+
+		System.out.println(exampleService.sayHello());
 	}
+
 }

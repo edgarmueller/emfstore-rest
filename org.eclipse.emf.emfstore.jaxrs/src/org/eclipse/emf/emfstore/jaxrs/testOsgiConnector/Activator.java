@@ -31,8 +31,10 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 
 		final ExampleService exampleService = new ExampleService();
-		registration = context.registerService(ExampleService.class.getName(),
+		registration = context.registerService(ExampleService.class,
 			exampleService, null);
+
+		// ExampleConnector.run(); //erlaubt?
 
 	}
 
