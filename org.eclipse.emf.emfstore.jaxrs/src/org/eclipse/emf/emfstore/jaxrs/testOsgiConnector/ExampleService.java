@@ -13,6 +13,8 @@ package org.eclipse.emf.emfstore.jaxrs.testOsgiConnector;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * @author Pascal
@@ -22,7 +24,14 @@ import javax.ws.rs.Path;
 public class ExampleService {
 
 	@GET
-	public String sayHello() {
+	@Produces(MediaType.TEXT_PLAIN)
+	public String sayHelloPlain() {
 		return "JAX-RS and OSGi are a lovely couple.";
+	}
+
+	@GET
+	@Produces(MediaType.TEXT_HTML)
+	public String sayHelloHTML() {
+		return "<html> <body> <h1> JAX-RS and OSGi </h1> <p> are a lovely couple. </p> </body> </html>";
 	}
 }

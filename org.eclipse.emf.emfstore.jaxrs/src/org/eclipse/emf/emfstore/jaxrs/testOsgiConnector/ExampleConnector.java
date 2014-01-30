@@ -24,7 +24,7 @@ public class ExampleConnector {
 		final ExampleService exampleService = ConsumerFactory.createConsumer(
 			"http://localhost:9090/services/osgi-jax-rs", ExampleService.class);
 
-		System.out.println(exampleService.sayHello());
+		System.out.println(exampleService.sayHelloPlain());
 	}
 
 }
