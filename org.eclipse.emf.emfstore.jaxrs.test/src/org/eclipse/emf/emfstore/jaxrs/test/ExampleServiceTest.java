@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import org.junit.Test;
 import org.osgi.util.tracker.ServiceTracker;
 
-public class ConnectionExampleTest {
+public class ExampleServiceTest {
 
 	@Test
 	public void testsayHelloPlain() {
