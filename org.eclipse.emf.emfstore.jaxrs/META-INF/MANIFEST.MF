@@ -12,5 +12,6 @@ Bundle-Activator: org.eclipse.emf.emfstore.jaxrs.testOsgiConnector.Activator
 Import-Package: javax.ws.rs;version="[2.0.0,2.1.0)",
  javax.ws.rs.core;version="2.0.0"
 Export-Package: org.eclipse.emf.emfstore.jaxrs.client,
+ org.eclipse.emf.emfstore.jaxrs.server.resources,
  org.eclipse.emf.emfstore.jaxrs.testOsgiConnector
 Bundle-ActivationPolicy: lazy
