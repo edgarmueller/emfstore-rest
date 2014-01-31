@@ -11,10 +11,24 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jaxrs.server.resources;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 /**
  * @author Pascal
- *
+ * 
  */
-public class Project {
 
+@Path("/emfstore/projects")
+public class Projects {
+
+	@GET
+	@Produces({ MediaType.APPLICATION_XML })
+	public String getProjectList() {
+		// TODO
+
+		return null;
+	}
 }
