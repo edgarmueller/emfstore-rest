@@ -9,8 +9,9 @@
  * Contributors:
  * Pascal - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.jaxrs.testOsgiConnector;
+package org.eclipse.emf.emfstore.jaxrs;
 
+import org.eclipse.emf.emfstore.jaxrs.testOsgiConnector.ExampleService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -33,8 +34,6 @@ public class Activator implements BundleActivator {
 		final ExampleService exampleService = new ExampleService();
 		registration = context.registerService(ExampleService.class,
 			exampleService, null);
-
-		// ExampleConnector.run(); //erlaubt?
 
 	}
 
