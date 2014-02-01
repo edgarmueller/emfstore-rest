@@ -11,16 +11,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jaxrs.server.resources;
 
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.eclipse.emf.emfstore.internal.common.model.Project;
-import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 
 /**
  * @author Pascal
@@ -32,7 +27,7 @@ public class Projects {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_XML })
-	public List<ProjectInfo> getProjectList() {
+	public String getProjectList() {
 		// TODO
 
 		return null;
@@ -41,7 +36,7 @@ public class Projects {
 	@GET
 	@Path("/{projectId}")
 	@Produces({ MediaType.APPLICATION_XML })
-	public Project getProject(@PathParam("projectId") String projectId) {
+	public String getProject(@PathParam("projectId") String projectId) {
 		// /TODO
 
 		return null;
