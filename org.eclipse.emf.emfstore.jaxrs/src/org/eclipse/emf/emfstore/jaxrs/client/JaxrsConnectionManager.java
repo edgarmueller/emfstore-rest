@@ -11,9 +11,10 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jaxrs.client;
 
+
 /**
  * @author Pascal
- *
+ * 
  */
 public class JaxrsConnectionManager {
 
