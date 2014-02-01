@@ -21,7 +21,7 @@ public class ExampleServiceTest {
 	@BeforeClass
 	public static void beforeClass() {
 		Client client = ClientBuilder.newClient();
-		target = client.target("http://localhost:9090/services").path("osgi-jax-rs");
+		target = client.target("http://localhost:8080/services").path("osgi-jax-rs");
 	}
 	
 	@Test
