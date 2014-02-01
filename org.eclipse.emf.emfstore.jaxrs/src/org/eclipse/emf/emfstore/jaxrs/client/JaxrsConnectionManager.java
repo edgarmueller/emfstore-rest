@@ -11,10 +11,9 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jaxrs.client;
 
-import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.impl.ProjectInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 
 /**
  * @author Pascal
@@ -25,48 +24,7 @@ public class JaxrsConnectionManager {
 	public ProjectInfo createEmptyProject(String name, String description, LogMessage logMessage) {
 		// TODO: implement!!!
 
-		return new ProjectInfo() {
-
-			public void setVersion(PrimaryVersionSpec value) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void setProjectId(ProjectId value) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void setName(String value) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void setDescription(String value) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public PrimaryVersionSpec getVersion() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			public ProjectId getProjectId() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			public String getName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			public String getDescription() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+		return new ProjectInfoImpl();
 	}
 
 }
