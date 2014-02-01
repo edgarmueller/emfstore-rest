@@ -14,7 +14,6 @@ package org.eclipse.emf.emfstore.jaxrs.client;
 import java.util.List;
 
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.internal.server.model.impl.ProjectInfoImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 
 /**
@@ -32,7 +31,7 @@ public class JaxrsConnectionManager {
 	public ProjectInfo createEmptyProject(String name, String description, LogMessage logMessage) {
 		// TODO: implement!!!
 
-		return new ProjectInfoImpl();
+		return null;
 	}
 
 }

@@ -102,7 +102,7 @@ public class ProjectInfoImpl extends EObjectImpl implements ProjectInfo {
 	 * 
 	 * @generated
 	 */
-	public ProjectInfoImpl() {
+	protected ProjectInfoImpl() {
 		super();
 	}
 
