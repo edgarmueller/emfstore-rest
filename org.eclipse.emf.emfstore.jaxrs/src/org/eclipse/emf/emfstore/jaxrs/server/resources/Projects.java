@@ -28,17 +28,17 @@ public class Projects {
 	@GET
 	@Produces({ MediaType.APPLICATION_XML })
 	public String getProjectList() {
-		// TODO
+		// TODO implement!
 
-		return null;
+		return "";
 	}
 
 	@GET
 	@Path("/{projectId}")
 	@Produces({ MediaType.APPLICATION_XML })
 	public String getProject(@PathParam("projectId") String projectId) {
-		// /TODO
+		// /TODO implement!
 
-		return null;
+		return "";
 	}
 }
