@@ -31,8 +31,7 @@
 					<testClass>org.eclipse.emf.emfstore.client.conflictdetection.test.AllConflictDetectionTests</testClass>
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>false</useUIThread>
-					<argLine>
-						-Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m
+					<argLine>${tycho.testArgLine} -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m
 					</argLine>
 					<testFailureIgnore>true</testFailureIgnore>
 					<!-- Plugins to be loaded to the osgi runtime -->

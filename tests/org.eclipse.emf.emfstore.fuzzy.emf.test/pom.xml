@@ -27,7 +27,7 @@
           <useUIHarness>true</useUIHarness>
           <useUIThread>false</useUIThread>
           
-          <argLine>-Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m -DrunFuzzyTests=${runFuzzyTests} -DfilterTests=${filterTests}</argLine>
+          <argLine>${tycho.testArgLine} -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m -DrunFuzzyTests=${runFuzzyTests} -DfilterTests=${filterTests}</argLine>
           <failIfNoTests>false</failIfNoTests>
           <testFailureIgnore>true</testFailureIgnore>
           

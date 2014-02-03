@@ -31,7 +31,7 @@
 				<useUIHarness>true</useUIHarness>
 				<useUIThread>false</useUIThread>
 				<argLine>
-					-Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m
+					${tycho.testArgLine} -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m
 				</argLine>
 				<testFailureIgnore>true</testFailureIgnore>
 				<!-- Plugins to be loaded to the osgi runtime -->

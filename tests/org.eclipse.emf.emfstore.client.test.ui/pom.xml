@@ -31,7 +31,7 @@
 					<testClass>org.eclipse.emf.emfstore.client.test.ui.AllUITests</testClass>
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>false</useUIThread>
-					<argLine>-Dorg.eclipse.swtbot.search.timeout=30000 -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m</argLine>
+					<argLine>${tycho.testArgLine} -Dorg.eclipse.swtbot.search.timeout=30000 -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m</argLine>
 					<testFailureIgnore>true</testFailureIgnore>
 					<!-- Plugins to be loaded to the osgi runtime -->
 					<dependencies>
@@ -194,7 +194,7 @@
 							<testClass>org.eclipse.emf.emfstore.client.test.ui.AllUITests</testClass>
 							<useUIHarness>true</useUIHarness>
 							<useUIThread>false</useUIThread>
-							<argLine>-Dorg.eclipse.swtbot.search.timeout=30000 -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m</argLine>
+							<argLine>${tycho.testArgLine} -Dorg.eclipse.swtbot.search.timeout=30000 -Dosgi.requiredJavaVersion=1.5 -Xms40m -Xmx512m</argLine>
 							<testFailureIgnore>true</testFailureIgnore>
 
 							<dependencies>
@@ -358,19 +358,6 @@
 								</bundle>
 							</bundleStartLevel>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco-version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
