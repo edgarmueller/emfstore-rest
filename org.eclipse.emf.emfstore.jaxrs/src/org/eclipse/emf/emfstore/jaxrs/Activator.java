@@ -11,6 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jaxrs;
 
+import org.eclipse.emf.emfstore.jaxrs.server.resources.Projects;
 import org.eclipse.emf.emfstore.jaxrs.testOsgiConnector.ExampleService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -22,7 +23,8 @@ import org.osgi.framework.ServiceRegistration;
  */
 public class Activator implements BundleActivator {
 
-	private ServiceRegistration<?> registration;
+	private ServiceRegistration<?> exampleServiceRegistration;
+	private ServiceRegistration<?> projectServiceRegistration;
 
 	/**
 	 * {@inheritDoc}
@@ -32,8 +34,12 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 
 		final ExampleService exampleService = new ExampleService();
-		registration = context.registerService(ExampleService.class,
+		exampleServiceRegistration = context.registerService(ExampleService.class,
 			exampleService, null);
+
+		final Projects projectsService = new Projects();
+		projectServiceRegistration = context.registerService(Projects.class,
+			projectsService, null);
 
 	}
 
@@ -44,7 +50,8 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext context) throws Exception {
 
-		registration.unregister();
+		exampleServiceRegistration.unregister();
+		projectServiceRegistration.unregister();
 
 	}
 
