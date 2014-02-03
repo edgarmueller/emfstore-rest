@@ -30,7 +30,7 @@ public class Projects {
 	public String getProjectList() {
 		// TODO implement!
 
-		return "";
+		return "not yet implemented";
 	}
 
 	@GET
@@ -39,6 +39,6 @@ public class Projects {
 	public String getProject(@PathParam("projectId") String projectId) {
 		// /TODO implement!
 
-		return "";
+		return "not yet implemented";
 	}
 }
