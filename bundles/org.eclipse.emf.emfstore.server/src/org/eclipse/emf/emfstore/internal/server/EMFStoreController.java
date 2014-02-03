@@ -66,8 +66,10 @@ import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.ServerHrefMigrator;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.internal.server.storage.ServerXMIResourceSetProvider;
+import org.eclipse.emf.emfstore.jaxrs.server.JaxrsConnectionHandler;
 import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
 import org.eclipse.emf.emfstore.server.ESServerURIUtil;
+import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 
@@ -324,6 +326,26 @@ public class EMFStoreController implements IApplication, Runnable {
 		final XmlRpcAdminConnectionHandler xmlRpcAdminConnectionHander = new XmlRpcAdminConnectionHandler();
 		xmlRpcAdminConnectionHander.init(adminEmfStore, accessControl);
 		connectionHandlers.add(xmlRpcAdminConnectionHander);
+
+		// create JAX-RS connection handlers
+		final JaxrsConnectionHandler jaxrsConnectionHandler = new JaxrsConnectionHandler();
+		try {
+			jaxrsConnectionHandler.init(emfStore, accessControl);
+		} catch (final ESException ex) {
+			// TODO Auto-generated catch block
+			// Do NOT catch all Exceptions ("catch (Exception e)")
+			// Log AND handle Exceptions if possible
+			//
+			// You can just uncomment one of the lines below to log an exception:
+			// logException will show the logged excpetion to the user
+			// ModelUtil.logException(ex);
+			// ModelUtil.logException("YOUR MESSAGE HERE", ex);
+			// logWarning will only add the message to the error log
+			// ModelUtil.logWarning("YOUR MESSAGE HERE", ex);
+			// ModelUtil.logWarning("YOUR MESSAGE HERE");
+			//
+			// If handling is not possible declare and rethrow Exception
+		}
 
 		return connectionHandlers;
 	}
