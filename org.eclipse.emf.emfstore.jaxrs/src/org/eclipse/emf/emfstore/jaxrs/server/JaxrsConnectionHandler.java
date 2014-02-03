@@ -15,13 +15,20 @@ import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
+import org.eclipse.emf.emfstore.jaxrs.Activator;
+import org.eclipse.emf.emfstore.jaxrs.server.resources.Projects;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceRegistration;
 
 /**
  * @author Pascal
  * 
  */
 public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
+
+	private ServiceRegistration<?> projectServiceRegistration;
 
 	/**
 	 * {@inheritDoc}
@@ -30,9 +37,12 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	 *      org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl)
 	 */
 	public void init(EMFStore emfStore, AccessControl accessControl) throws FatalESException, ESException {
-		// TODO Auto-generated method stub
-		// needs to publish all services
 
+		// needs to publish all services
+		final BundleContext context = FrameworkUtil.getBundle(Activator.class).getBundleContext();
+
+		final Projects projectsService = new Projects(emfStore, accessControl);
+		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
 	}
 
 	/**
@@ -41,8 +51,9 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#stop()
 	 */
 	public void stop() {
-		// TODO Auto-generated method stub
 
+		// needs to stop the services
+		projectServiceRegistration.unregister();
 	}
 
 	/**
