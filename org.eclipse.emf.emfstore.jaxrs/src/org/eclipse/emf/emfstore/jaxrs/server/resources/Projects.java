@@ -25,10 +25,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
 
-import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
@@ -36,6 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.impl.ProjectInfoImpl;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -83,11 +83,13 @@ public class Projects {
 		final java.util.List<ProjectInfo> projects = emfStore.getProjectList(sessionId);
 
 		// convert the list into XML
-		final AdapterFactoryEditingDomain domain =
-			new AdapterFactoryEditingDomain(new AdapterFactoryImpl(), new BasicCommandStack());
+		// final AdapterFactoryEditingDomain domain =
+		// new AdapterFactoryEditingDomain(new AdapterFactoryImpl(), new BasicCommandStack());
+		final EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(ProjectInfoImpl.class);
 
 		final String fileNameURI = "blabla";
 		final XMLResourceImpl resource = (XMLResourceImpl) domain.createResource(fileNameURI);
+		resource.getContents().addAll(projects);
 
 		final StreamingOutput streamingOutput = new StreamingOutput() {
 
