@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.jaxrs.server.resources;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -42,6 +43,11 @@ public class Projects {
 		// TODO implement!
 
 		return Response.status(Status.NOT_IMPLEMENTED).build();
+
+	}
+
+	@POST
+	public void createProject() {
 
 	}
 
