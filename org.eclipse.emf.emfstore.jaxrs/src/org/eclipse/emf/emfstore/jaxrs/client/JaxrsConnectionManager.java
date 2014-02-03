@@ -13,6 +13,10 @@ package org.eclipse.emf.emfstore.jaxrs.client;
 
 import java.util.List;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 
@@ -21,6 +25,15 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
  * 
  */
 public class JaxrsConnectionManager {
+
+	private final WebTarget target;
+
+	private static String BASE_URI = "http://localhost:8080/services";
+
+	public JaxrsConnectionManager() {
+		final Client client = ClientBuilder.newClient();
+		target = client.target(BASE_URI).path("emfstore");
+	}
 
 	public List<ProjectInfo> getProjectList() {
 		// TODO: implement!
