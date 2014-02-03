@@ -16,29 +16,33 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  * @author Pascal
  * 
  */
 
-@Path("/emfstore/projects")
+@Path("emfstore/projects")
 public class Projects {
 
 	@GET
-	@Produces({ MediaType.APPLICATION_XML })
-	public String getProjectList() {
+	@Produces({ MediaType.TEXT_PLAIN })
+	public Response getProjectList() {
 		// TODO implement!
 
-		return "not yet implemented";
+		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@GET
 	@Path("/{projectId}")
 	@Produces({ MediaType.APPLICATION_XML })
-	public String getProject(@PathParam("projectId") String projectId) {
-		// /TODO implement!
+	public Response getProject(@PathParam("projectId") String projectId) {
+		// TODO implement!
 
-		return "not yet implemented";
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+
 	}
+
 }
