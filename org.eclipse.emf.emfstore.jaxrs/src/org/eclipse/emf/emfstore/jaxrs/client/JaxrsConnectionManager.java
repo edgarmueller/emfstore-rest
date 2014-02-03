@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 
 /**
@@ -49,6 +50,12 @@ public class JaxrsConnectionManager {
 	}
 
 	public Project getProject(ProjectId projectId, VersionSpec versionSpec) {
+		// TODO: implement!
+
+		return null;
+	}
+
+	public ProjectInfo createEmptyProject(String name, String description, LogMessage logMessage) {
 		// TODO: implement!
 
 		return null;
