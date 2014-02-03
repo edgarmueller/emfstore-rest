@@ -16,9 +16,13 @@ import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
+import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
-import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 
 /**
  * @author Pascal
@@ -26,23 +30,26 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
  */
 public class JaxrsConnectionManager {
 
-	private final WebTarget target;
-
+	private static final String PATH_PROJECTS = "projects";
 	private static String BASE_URI = "http://localhost:8080/services";
 
+	private final WebTarget target;
+
 	public JaxrsConnectionManager() {
+
 		final Client client = ClientBuilder.newClient();
 		target = client.target(BASE_URI).path("emfstore");
 	}
 
 	public List<ProjectInfo> getProjectList() {
-		// TODO: implement!
+		// TODO: implement!!!
+		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_PLAIN).get();
 
 		return null;
 	}
 
-	public ProjectInfo createEmptyProject(String name, String description, LogMessage logMessage) {
-		// TODO: implement!!!
+	public Project getProject(ProjectId projectId, VersionSpec versionSpec) {
+		// TODO: implement!
 
 		return null;
 	}
