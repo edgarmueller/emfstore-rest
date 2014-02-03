@@ -45,7 +45,7 @@ import org.junit.Before;
  * @author emueller
  * 
  */
-public abstract class ESTestWithLoggedInUser extends ESTestWithServer {
+public abstract class ESTestWithLoggedInUser extends ESTestWithMockServer {
 
 	private ESServer server;
 	private ESUsersession usersession;
