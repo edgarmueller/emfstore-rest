@@ -325,7 +325,7 @@ public final class ServerUtil {
 		ModelUtil.logInfo(Messages.ServerUtil_Added_Superuser + superuser);
 	}
 
-	private static Properties initProperties(Map<String, String> additionalProperties) {
+	public static Properties initProperties(Map<String, String> additionalProperties) {
 		final File propertyFile = new File(ServerConfiguration.getConfFile());
 		final Properties properties = new Properties();
 		FileInputStream fis = null;
