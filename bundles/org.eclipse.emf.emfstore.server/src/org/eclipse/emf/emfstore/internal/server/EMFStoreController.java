@@ -66,7 +66,6 @@ import org.eclipse.emf.emfstore.internal.server.startup.PostStartupListener;
 import org.eclipse.emf.emfstore.internal.server.startup.ServerHrefMigrator;
 import org.eclipse.emf.emfstore.internal.server.startup.StartupListener;
 import org.eclipse.emf.emfstore.internal.server.storage.ServerXMIResourceSetProvider;
-import org.eclipse.emf.emfstore.jaxrs.server.JaxrsConnectionHandler;
 import org.eclipse.emf.emfstore.server.ESDynamicModelProvider;
 import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -92,6 +91,8 @@ public class EMFStoreController implements IApplication, Runnable {
 	private static final String SUPERUSER_FIRST_NAME = "super"; //$NON-NLS-1$
 
 	private static final String RESOURCE_SET_PROVIDER = "org.eclipse.emf.emfstore.server.resourceSetProvider"; //$NON-NLS-1$
+
+	private static final String CONNECTION_HANDLER = "org.eclipse.emf.emfstore.server.connectionHandler"; //$NON-NLS-1$
 
 	private static final String CONFIG_RESOURCE_KEY = "org.eclipse.emf.emfstore.server.configurationResource"; //$NON-NLS-1$
 
@@ -315,6 +316,17 @@ public class EMFStoreController implements IApplication, Runnable {
 
 	}
 
+	private ConnectionHandler<EMFStoreInterface> initConnectionHandler() throws FatalESException {
+
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			CONNECTION_HANDLER, true);
+
+		final ConnectionHandler<EMFStoreInterface> connectionHandler = extensionPoint.getClass("class",
+			ConnectionHandler.class);
+
+		return connectionHandler;
+	}
+
 	private Set<ConnectionHandler<? extends EMFStoreInterface>> initConnectionHandlers() throws FatalESException {
 		final Set<ConnectionHandler<? extends EMFStoreInterface>> connectionHandlers = new LinkedHashSet<ConnectionHandler<? extends EMFStoreInterface>>();
 
@@ -327,10 +339,11 @@ public class EMFStoreController implements IApplication, Runnable {
 		xmlRpcAdminConnectionHander.init(adminEmfStore, accessControl);
 		connectionHandlers.add(xmlRpcAdminConnectionHander);
 
+		final ConnectionHandler<EMFStoreInterface> connectionHandler = initConnectionHandler();
 		// create JAX-RS connection handlers
-		final JaxrsConnectionHandler jaxrsConnectionHandler = new JaxrsConnectionHandler();
+		// final JaxrsConnectionHandler jaxrsConnectionHandler = new JaxrsConnectionHandler();
 		try {
-			jaxrsConnectionHandler.init(emfStore, accessControl);
+			connectionHandler.init(emfStore, accessControl);
 		} catch (final ESException ex) {
 			// TODO Auto-generated catch block
 			// Do NOT catch all Exceptions ("catch (Exception e)")

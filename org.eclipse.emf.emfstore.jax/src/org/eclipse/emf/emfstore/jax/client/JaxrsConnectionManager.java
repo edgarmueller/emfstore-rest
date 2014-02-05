@@ -9,7 +9,7 @@
  * Contributors:
  * Pascal - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.jaxrs.client;
+package org.eclipse.emf.emfstore.jax.client;
 
 import java.io.IOException;
 import java.io.InputStream;
