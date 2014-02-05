@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESRemoteProject;
 import org.eclipse.emf.emfstore.client.ESWorkspaceProvider;
+import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.client.test.common.util.ServerUtil;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
@@ -29,7 +30,6 @@ import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectHistory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
-import org.eclipse.emf.emfstore.server.ESEMFStoreController;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -51,11 +51,9 @@ public abstract class ESTestWithServer extends ESTest {
 		ServerConfiguration.setProperties(ServerUtil.initProperties(properties));
 		ServerConfiguration.setTesting(true);
 
-		// ServerConfiguration.getProperties().setProperty(ServerConfiguration.XML_RPC_PORT,
-		// String.valueOf(ServerUtil.defaultPort()));
 		try {
-			ESEMFStoreController.startEMFStore();
-		} catch (final FatalESException ex) {
+			ServerUtil.startServer();
+		} catch (final ESServerStartFailedException ex) {
 			fail(ex.getMessage());
 		}
 	}
@@ -76,7 +74,7 @@ public abstract class ESTestWithServer extends ESTest {
 	}
 
 	public static void stopEMFStore() {
-		ESEMFStoreController.stopEMFStore();
+		ServerUtil.stopServer();
 		// give the server some time to unbind from it's ips. Not the nicest solution ...
 		try {
 			Thread.sleep(10000);

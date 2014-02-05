@@ -117,7 +117,7 @@ public final class Delete {
 
 	public static void allRemoteProjects(ESServer server, ESUsersession session) throws ESException {
 		for (final ESRemoteProject project : server.getRemoteProjects()) {
-			project.delete(new NullProgressMonitor());
+			project.delete(session, new NullProgressMonitor());
 		}
 	}
 

@@ -40,6 +40,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACOrgUnit;
+import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.ACUser;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.Role;
 import org.eclipse.emf.emfstore.internal.server.model.accesscontrol.roles.ServerAdmin;
 import org.eclipse.emf.emfstore.internal.server.model.impl.api.query.ESHistoryQueryImpl;
@@ -529,10 +530,15 @@ public class ESRemoteProjectImpl implements ESRemoteProject {
 				new UnknownEMFStoreWorkloadCommand<Void>(getProgressMonitor()) {
 					@Override
 					public Void run(IProgressMonitor monitor) throws ESException {
-						final ACOrgUnit user = ESWorkspaceProviderImpl
-							.getInstance()
-							.getAdminConnectionManager()
-							.getOrgUnit(getSessionId(), getUsersession().getACUser().getId());
+						// TODO: do we need to resolve here once more to fetch the actual roles
+						// of a user?
+						// final ACOrgUnit user = ESWorkspaceProviderImpl
+						// .getInstance()
+						// .getConnectionManager()
+						// .get
+						// .getOrgUnit(getSessionId(), getUsersession().getACUser().getId());
+						//
+						final ACUser user = getUsersession().getACUser();
 
 						if (canDeleteFiles(user, getProjectInfo().getProjectId())) {
 							getConnectionManager()
