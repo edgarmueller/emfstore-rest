@@ -66,7 +66,6 @@ public class Projects {
 	@Produces({ MediaType.TEXT_XML })
 	// TODO: maybe application/xml instead?
 	public Response getProjectList() throws ESException {
-		// TODO implement!
 
 		// final EMFStore emfstore = null; not needed because we have class variable
 		// final AccessControl ac = null; not needed because we have class variable
@@ -85,12 +84,7 @@ public class Projects {
 		final java.util.List<ProjectInfo> projects = emfStore.getProjectList(sessionId);
 
 		// convert the list into XML
-		// final AdapterFactoryEditingDomain domain =
-		// new AdapterFactoryEditingDomain(new AdapterFactoryImpl(), new BasicCommandStack());
-//		final EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(ProjectInfoImpl.class);
-
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
-		
 		final String fileNameURI = "blabla";
 		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl.createResource(URI.createURI(fileNameURI));
 		resource.getContents().addAll(projects);
@@ -120,7 +114,8 @@ public class Projects {
 
 	@POST
 	public void createProject() {
-
+		//TODO: Implement!
+		
 	}
 
 }
