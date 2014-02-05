@@ -50,7 +50,6 @@ Export-Package: org.eclipse.emf.emfstore.client;version="1.2.0",
    org.eclipse.emf.emfstore.example.helloworld,
    org.eclipse.emf.emfstore.test.common,
    org.eclipse.emf.emfstore.server.test",
-
  org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc;version="1.2.0";x-friends:="org.eclipse.emf.emfstore.test.common",
  org.eclipse.emf.emfstore.internal.client.model.controller;version="1.2.0";x-friends:="org.eclipse.emf.emfstore.client.ui,org.eclipse.emf.emfstore.client.test,org.eclipse.emf.emfstore.example.merging",
  org.eclipse.emf.emfstore.internal.client.model.exceptions;version="1.2.0";x-friends:="org.eclipse.emf.emfstore.client.ui,org.eclipse.emf.emfstore.client.test",
@@ -67,7 +66,6 @@ Export-Package: org.eclipse.emf.emfstore.client;version="1.2.0",
    org.eclipse.emf.emfstore.fuzzy.emf.test,
    org.eclipse.emf.emfstore.server.test,
    org.eclipse.emf.emfstore.test.common",
-
  org.eclipse.emf.emfstore.internal.client.model.util;version="1.2.0";
   x-friends:="org.eclipse.emf.emfstore.client.model.edit,
    org.eclipse.emf.emfstore.client.transaction,
