@@ -340,6 +340,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		connectionHandlers.add(xmlRpcAdminConnectionHander);
 
 		final ConnectionHandler<EMFStoreInterface> connectionHandler = initConnectionHandler();
+
 		// create JAX-RS connection handlers
 		// final JaxrsConnectionHandler jaxrsConnectionHandler = new JaxrsConnectionHandler();
 		try {
@@ -359,6 +360,7 @@ public class EMFStoreController implements IApplication, Runnable {
 			//
 			// If handling is not possible declare and rethrow Exception
 		}
+		connectionHandlers.add(connectionHandler);
 
 		return connectionHandlers;
 	}
