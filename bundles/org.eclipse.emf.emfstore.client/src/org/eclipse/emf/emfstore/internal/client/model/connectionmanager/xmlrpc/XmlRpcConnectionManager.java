@@ -41,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.jax.client.JaxrsConnectionManager;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -56,9 +57,9 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 */
 	public AuthenticationInformation logIn(String username, String password, ServerInfo serverInfo,
 		ClientVersionInfo clientVersionInfo) throws ESException {
-		XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcConnectionHandler.EMFSTORE);
+		final XmlRpcClientManager clientManager = new XmlRpcClientManager(XmlRpcConnectionHandler.EMFSTORE);
 		clientManager.initConnection(serverInfo);
-		AuthenticationInformation authenticationInformation = clientManager.callWithResult("logIn",
+		final AuthenticationInformation authenticationInformation = clientManager.callWithResult("logIn",
 			AuthenticationInformation.class, username, password, clientVersionInfo);
 		addConnectionProxy(authenticationInformation.getSessionId(), clientManager);
 		return authenticationInformation;
@@ -176,7 +177,9 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public List<ProjectInfo> getProjectList(SessionId sessionId) throws ESException {
-		return getConnectionProxy(sessionId).callWithListResult("getProjectList", ProjectInfo.class, sessionId);
+		// return getConnectionProxy(sessionId).callWithListResult("getProjectList", ProjectInfo.class, sessionId);
+		final JaxrsConnectionManager cm = new JaxrsConnectionManager();
+		return cm.getProjectList();
 	}
 
 	/**

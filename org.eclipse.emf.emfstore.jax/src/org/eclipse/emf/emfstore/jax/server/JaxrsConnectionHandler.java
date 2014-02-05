@@ -9,14 +9,13 @@
  * Contributors:
  * Pascal - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.jaxrs.server;
+package org.eclipse.emf.emfstore.jax.server;
 
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
-import org.eclipse.emf.emfstore.jaxrs.Activator;
-import org.eclipse.emf.emfstore.jaxrs.server.resources.Projects;
+import org.eclipse.emf.emfstore.jax.server.resources.Projects;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -39,7 +38,7 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	public void init(EMFStore emfStore, AccessControl accessControl) throws FatalESException, ESException {
 
 		// needs to publish all services
-		final BundleContext context = FrameworkUtil.getBundle(Activator.class).getBundleContext();
+		final BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
 
 		final Projects projectsService = new Projects(emfStore, accessControl);
 		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);

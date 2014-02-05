@@ -9,7 +9,7 @@
  * Contributors:
  * Pascal - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.emfstore.jaxrs.server.resources;
+package org.eclipse.emf.emfstore.jax.server.resources;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -25,6 +25,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -85,10 +87,12 @@ public class Projects {
 		// convert the list into XML
 		// final AdapterFactoryEditingDomain domain =
 		// new AdapterFactoryEditingDomain(new AdapterFactoryImpl(), new BasicCommandStack());
-		final EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(ProjectInfoImpl.class);
+//		final EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(ProjectInfoImpl.class);
 
+		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
+		
 		final String fileNameURI = "blabla";
-		final XMLResourceImpl resource = (XMLResourceImpl) domain.createResource(fileNameURI);
+		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl.createResource(URI.createURI(fileNameURI));
 		resource.getContents().addAll(projects);
 
 		final StreamingOutput streamingOutput = new StreamingOutput() {

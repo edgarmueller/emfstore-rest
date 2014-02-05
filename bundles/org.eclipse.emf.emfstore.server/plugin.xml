@@ -6,7 +6,8 @@
    <extension-point id="computeChecksum" name="Compute Checksum on Commit" schema="schema/computeChecksum.exsd"/>
    <extension-point id="resourceSetProvider" name="ResourceSet Provider" schema="schema/resourceSetProvider.exsd"/>
    <extension-point id="dynamicModelProvider" name="Dynamic Model Provider" schema="schema/dynamicModelProvider.exsd"/>
-   <extension-point id="serverCallObserver" name="Observer all calls to the server" schema="schema/serverCallObserver.exsd"/>   
+   <extension-point id="serverCallObserver" name="Observer all calls to the server" schema="schema/serverCallObserver.exsd"/>
+   <extension-point id="connectionHandler" name="ConnectionHandler" schema="schema/connectionHandler.exsd"/>   
    <extension
          id="application"
          name="EMFStore server"
