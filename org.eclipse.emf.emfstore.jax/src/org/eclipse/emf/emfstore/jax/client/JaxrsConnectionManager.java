@@ -21,6 +21,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -49,14 +51,18 @@ public class JaxrsConnectionManager {
 	}
 
 	public List<ProjectInfo> getProjectList() {
-
-		final EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(ProjectInfoImpl.class);
+		
+		//create XMLResource 
+		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		final String fileNameURI = "blabla";
-		final XMLResourceImpl resource = (XMLResourceImpl) domain.createResource(fileNameURI);
-
+		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl.createResource(URI.createURI(fileNameURI));
+		
+		//make the http call and get the input stream
 		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).get();
 		final InputStream is = response.readEntity(InputStream.class);
+		
 		try {
+			//
 			resource.doLoad(is, null);
 			return (List<ProjectInfo>) resource.getAllContents();
 		} catch (final IOException ex) {
