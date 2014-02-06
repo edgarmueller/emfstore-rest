@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.jax.server;
 
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
+import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
@@ -19,6 +20,7 @@ import org.eclipse.emf.emfstore.jax.server.resources.Projects;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
 /**
@@ -39,10 +41,12 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 
 		// needs to publish all services
 		final BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		final BundleContext context = FrameworkUtil.getBundle(EMFStoreController.class).getBundleContext();
 
 		final Projects projectsService = new Projects(emfStore, accessControl);
 		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
-//		projectServiceRegistration.unregister();
+		System.out.println("\n\n\n REGISTERED SERVICE: \t" + context.getService(projectServiceRegistration.getReference()).toString() + "\n\n\n");
+
 	}
 
 	/**
@@ -51,9 +55,11 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#stop()
 	 */
 	public void stop() {
-
+				
 		// needs to stop the services
 		projectServiceRegistration.unregister();
+		
+		System.out.println("\n\n\n UNREGISTERED SERVICE!!! \n\n\n");
 	}
 
 	/**

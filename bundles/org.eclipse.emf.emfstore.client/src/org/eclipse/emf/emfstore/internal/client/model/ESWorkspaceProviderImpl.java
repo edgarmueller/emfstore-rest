@@ -427,6 +427,7 @@ public final class ESWorkspaceProviderImpl implements ESWorkspaceProvider, ESCom
 	 */
 	private ConnectionManager initConnectionManager() {
 		KeyStoreManager.getInstance().setupKeys();
+		// return new JaxrsConnectionManager();
 		return new XmlRpcConnectionManager();
 	}
 

@@ -64,6 +64,7 @@ public final class XmlRpcWebserverManager {
 		int tmp = 8080;
 		try {
 			tmp = Integer.valueOf(ServerConfiguration.getProperties().getProperty(ServerConfiguration.XML_RPC_PORT));
+			tmp = 8081; // TODO: hacked by Pascal for testing purposes
 		} catch (final NumberFormatException e) {
 			tmp = Integer.valueOf(ServerConfiguration.XML_RPC_PORT_DEFAULT);
 		}

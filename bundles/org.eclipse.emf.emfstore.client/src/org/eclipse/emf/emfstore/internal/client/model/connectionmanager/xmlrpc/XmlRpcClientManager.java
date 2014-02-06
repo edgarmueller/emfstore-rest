@@ -86,7 +86,8 @@ public class XmlRpcClientManager {
 
 	private URL createURL(ServerInfo serverInfo) throws MalformedURLException {
 		checkUrl(serverInfo.getUrl());
-		return new URL("https", serverInfo.getUrl(), serverInfo.getPort(), "xmlrpc"); //$NON-NLS-1$ //$NON-NLS-2$
+		return new URL("https", serverInfo.getUrl(), 8081,// serverInfo.getPort(),
+			"xmlrpc"); //$NON-NLS-1$ 
 	}
 
 	private void checkUrl(String url) throws MalformedURLException {

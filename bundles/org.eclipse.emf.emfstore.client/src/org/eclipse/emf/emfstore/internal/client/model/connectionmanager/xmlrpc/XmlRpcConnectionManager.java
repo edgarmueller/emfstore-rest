@@ -41,6 +41,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.jax.client.JaxrsConnectionManager;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -176,9 +177,10 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public List<ProjectInfo> getProjectList(SessionId sessionId) throws ESException {
-		return getConnectionProxy(sessionId).callWithListResult("getProjectList", ProjectInfo.class, sessionId);
-		// final JaxrsConnectionManager cm = new JaxrsConnectionManager();
-		// return cm.getProjectList();
+		// return getConnectionProxy(sessionId).callWithListResult("getProjectList", ProjectInfo.class, sessionId);
+		JaxrsConnectionManager cm;
+		cm = new JaxrsConnectionManager();// KeyStoreManager.getInstance().getSSLContext());
+		return cm.getProjectList();
 	}
 
 	/**

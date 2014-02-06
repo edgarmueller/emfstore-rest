@@ -61,12 +61,22 @@ public class Projects {
 		this.accessControl = accessControl;
 	}
 
+//	public Projects() {
+//		//TODO: delete this constructor afterwards!
+//		emfStore = null;
+//		accessControl = null;
+//	}
+
 	@SuppressWarnings("restriction")
 	@GET
 	@Produces({ MediaType.TEXT_XML })
 	// TODO: maybe application/xml instead?
 	public Response getProjectList() throws ESException {
-
+		
+		if(emfStore == null || accessControl == null) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		// final EMFStore emfstore = null; not needed because we have class variable
 		// final AccessControl ac = null; not needed because we have class variable
 

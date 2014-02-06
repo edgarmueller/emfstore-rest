@@ -16,8 +16,6 @@ import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.addEl
 import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.commit;
 import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.commitToBranch;
 import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.defaultName;
-import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.deleteLocalProjects;
-import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.deleteRemoteProjects;
 import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.share;
 import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.tag;
 import static org.eclipse.emf.emfstore.internal.common.APIUtil.toInternal;
@@ -60,21 +58,21 @@ public class ServerInterfaceTest {
 	@BeforeClass
 	public static void beforeClass() throws IllegalArgumentException, ESServerStartFailedException,
 		FatalESException, ESException, IOException {
-		server = ServerUtil.startMockServer().getServer();
+		server = ServerUtil.startServer();
 		session = server.login("super", "super");
-		deleteRemoteProjects(server, session);
-		deleteLocalProjects();
+		// deleteRemoteProjects(server, session);
+		// deleteLocalProjects();
 	}
 
 	@AfterClass
 	public static void afterClass() throws ESException {
-		session.logout();
+		// session.logout();
 	}
 
 	@After
 	public void after() throws Exception {
-		ProjectUtil.deleteRemoteProjects(server, session);
-		ProjectUtil.deleteLocalProjects();
+		// ProjectUtil.deleteRemoteProjects(server, session);
+		// ProjectUtil.deleteLocalProjects();
 	}
 
 	@Test

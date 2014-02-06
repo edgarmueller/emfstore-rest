@@ -345,6 +345,7 @@ public class EMFStoreController implements IApplication, Runnable {
 		// final JaxrsConnectionHandler jaxrsConnectionHandler = new JaxrsConnectionHandler();
 		try {
 			connectionHandler.init(emfStore, accessControl);
+
 		} catch (final ESException ex) {
 			// TODO Auto-generated catch block
 			// Do NOT catch all Exceptions ("catch (Exception e)")
