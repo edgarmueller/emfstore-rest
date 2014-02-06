@@ -40,14 +40,16 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 public class JaxrsConnectionManager {
 
 	private static final String PATH_PROJECTS = "projects";
-	private static String BASE_URI = "http://localhost:8080/services";
+	private static String BASE_URI = "http://localhost:9090/services";
+//	private static String BASE_URI = "https://localhost:9090/services";
 
 	private final WebTarget target;
 
 	public JaxrsConnectionManager() {
 
 		final Client client = ClientBuilder.newClient();
-		target = client.target(BASE_URI).path("emfstore");
+//		final Client client = ClientBuilder.newBuilder().sslContext(ssl).build();
+		target = client.target(BASE_URI);
 	}
 
 	public List<ProjectInfo> getProjectList() {

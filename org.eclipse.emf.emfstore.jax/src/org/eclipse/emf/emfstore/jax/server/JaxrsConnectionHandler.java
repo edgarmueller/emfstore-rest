@@ -42,6 +42,7 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 
 		final Projects projectsService = new Projects(emfStore, accessControl);
 		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
+//		projectServiceRegistration.unregister();
 	}
 
 	/**

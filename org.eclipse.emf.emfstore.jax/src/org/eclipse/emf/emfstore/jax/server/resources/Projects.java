@@ -45,7 +45,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * 
  */
 
-@Path("emfstore/projects")
+@Path("projects")
 public class Projects {
 
 	private final EMFStore emfStore;
@@ -56,7 +56,7 @@ public class Projects {
 	 * @param accessControl
 	 */
 	public Projects(EMFStore emfStore, AccessControl accessControl) {
-		// TODO Auto-generated constructor stub
+		
 		this.emfStore = emfStore;
 		this.accessControl = accessControl;
 	}
