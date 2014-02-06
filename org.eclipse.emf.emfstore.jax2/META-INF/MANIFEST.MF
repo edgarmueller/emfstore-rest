@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Jax2
-Bundle-SymbolicName: org.eclipse.emf.emfstore.jax.server
+Bundle-SymbolicName: org.eclipse.emf.emfstore.jax.server;singleton:=true
 Bundle-Version: 1.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.emf.emfstore.jax.server,
