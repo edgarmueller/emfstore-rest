@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.internal.client.model.connectionmanager.xmlrpc;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.emfstore.common.extensionpoint.ESExtensionPoint;
 import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.AbstractConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
@@ -50,6 +51,8 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  */
 public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcClientManager> implements
 	ConnectionManager {
+
+	private static final String CONNECTION_MANAGER = "org.eclipse.emf.emfstore.client.connectionManager"; //$NON-NLS-1$
 
 	/**
 	 * {@inheritDoc}
@@ -177,9 +180,18 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 */
 	public List<ProjectInfo> getProjectList(SessionId sessionId) throws ESException {
 		// return getConnectionProxy(sessionId).callWithListResult("getProjectList", ProjectInfo.class, sessionId);
-		JaxrsConnectionManager cm;
-		cm = new JaxrsConnectionManager();// KeyStoreManager.getInstance().getSSLContext());
-		return cm.getProjectList();
+
+		// JaxrsConnectionManager cm;
+		// cm = new JaxrsConnectionManager();// KeyStoreManager.getInstance().getSSLContext());
+		// return cm.getProjectList();
+
+		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
+			CONNECTION_MANAGER, true);
+
+		final ConnectionManager connectionManager = extensionPoint.getClass("class",
+			ConnectionManager.class);
+
+		return connectionManager.getProjectList(sessionId);
 	}
 
 	/**
