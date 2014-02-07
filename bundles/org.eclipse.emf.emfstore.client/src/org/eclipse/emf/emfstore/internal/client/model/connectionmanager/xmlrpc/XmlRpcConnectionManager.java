@@ -41,7 +41,6 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
-import org.eclipse.emf.emfstore.jax.client.JaxrsConnectionManager;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
