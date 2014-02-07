@@ -11,4 +11,6 @@ Import-Package: javax.ws.rs.client,
  org.eclipse.emf.ecore.xmi.impl,
  org.eclipse.emf.emfstore.internal.common.model;version="1.1.0",
  org.eclipse.emf.emfstore.internal.server.model;version="1.1.0",
+ org.eclipse.emf.emfstore.internal.server.model.impl;version="1.1.0",
  org.eclipse.emf.emfstore.internal.server.model.versioning;version="1.1.0"
+Require-Bundle: org.eclipse.emf.common;bundle-version="2.9.1"
