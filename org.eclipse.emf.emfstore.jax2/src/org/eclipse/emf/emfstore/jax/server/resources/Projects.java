@@ -45,8 +45,27 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 @Path("projects")
 public class Projects {
 
-	private final EMFStore emfStore;
-	private final AccessControl accessControl;
+//	private final EMFStore emfStore;
+//	private final AccessControl accessControl;
+	
+	private EMFStore emfStore;
+	private AccessControl accessControl;
+
+	public EMFStore getEmfStore() {
+		return emfStore;
+	}
+
+	public void setEmfStore(EMFStore emfStore) {
+		this.emfStore = emfStore;
+	}
+
+	public AccessControl getAccessControl() {
+		return accessControl;
+	}
+
+	public void setAccessControl(AccessControl accessControl) {
+		this.accessControl = accessControl;
+	}
 
 	/**
 	 * @param emfStore
@@ -58,11 +77,11 @@ public class Projects {
 		this.accessControl = accessControl;
 	}
 
-//	public Projects() {
-//		//TODO: delete this constructor afterwards!
-//		emfStore = null;
-//		accessControl = null;
-//	}
+	public Projects() {
+		//TODO: delete this constructor afterwards!
+		emfStore = null;
+		accessControl = null;
+	}
 
 	@SuppressWarnings("restriction")
 	@GET

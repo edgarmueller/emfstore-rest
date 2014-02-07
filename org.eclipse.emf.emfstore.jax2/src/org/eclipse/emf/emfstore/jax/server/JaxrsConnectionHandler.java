@@ -11,6 +11,7 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jax.server;
 
+import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
@@ -41,12 +42,19 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 
 		// needs to publish all services
 		final BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		final BundleContext context = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
+//		final BundleContext context = InternalPlatform.getDefault().getBundleContext();
 //		final BundleContext context = FrameworkUtil.getBundle(EMFStoreController.class).getBundleContext();
 
-		final Projects projectsService = new Projects(emfStore, accessControl);
-		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
-		System.out.println("\n\n\n REGISTERED SERVICE: \t" + context.getService(projectServiceRegistration.getReference()).toString() + "\n\n\n");
-
+//		final Projects projectsService = new Projects(emfStore, accessControl);
+//		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
+//		System.out.println("\n\n\n REGISTERED SERVICE: \t" + context.getService(projectServiceRegistration.getReference()).toString() + "\n\n\n");
+//		
+		ServiceReference<Projects> serviceReference = context.getServiceReference(Projects.class);
+		Projects projectsService = context.getService(serviceReference);
+		projectsService.setAccessControl(accessControl);
+		projectsService.setEmfStore(emfStore);
+		
 	}
 
 	/**
