@@ -55,6 +55,8 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 		projectsService.setAccessControl(accessControl);
 		projectsService.setEmfStore(emfStore);
 		
+		
+		
 	}
 
 	/**
@@ -65,9 +67,9 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	public void stop() {
 				
 		// needs to stop the services
-		projectServiceRegistration.unregister();
+//		projectServiceRegistration.unregister(); //TODO: uncommented because now in Activator!
 		
-		System.out.println("\n\n\n UNREGISTERED SERVICE!!! \n\n\n");
+//		System.out.println("\n\n\n UNREGISTERED SERVICE!!! \n\n\n");
 	}
 
 	/**
