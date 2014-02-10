@@ -80,8 +80,8 @@ public class ServerInterfaceTest {
 
 	@After
 	public void after() throws Exception {
-		// ProjectUtil.deleteRemoteProjects(server, session);
-		// ProjectUtil.deleteLocalProjects();
+		ProjectUtil.deleteRemoteProjects(server, session);
+		ProjectUtil.deleteLocalProjects();
 	}
 
 	@Test
