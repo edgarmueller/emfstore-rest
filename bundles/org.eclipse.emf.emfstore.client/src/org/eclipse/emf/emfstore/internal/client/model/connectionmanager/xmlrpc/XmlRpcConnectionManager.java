@@ -191,6 +191,12 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 		final ConnectionManager connectionManager = extensionPoint.getClass("class",
 			ConnectionManager.class);
 
+		// try {
+		// // Thread.sleep(12000);
+		// } catch (final InterruptedException ex) {
+		// // TODO Auto-generated catch block
+		// }
+
 		return connectionManager.getProjectList(sessionId);
 	}
 
