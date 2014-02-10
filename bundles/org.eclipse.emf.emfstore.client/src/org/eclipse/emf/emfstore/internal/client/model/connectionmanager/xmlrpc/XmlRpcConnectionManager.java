@@ -181,21 +181,11 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	public List<ProjectInfo> getProjectList(SessionId sessionId) throws ESException {
 		// return getConnectionProxy(sessionId).callWithListResult("getProjectList", ProjectInfo.class, sessionId);
 
-		// JaxrsConnectionManager cm;
-		// cm = new JaxrsConnectionManager();// KeyStoreManager.getInstance().getSSLContext());
-		// return cm.getProjectList();
-
 		final ESExtensionPoint extensionPoint = new ESExtensionPoint(
 			CONNECTION_MANAGER, true);
 
 		final ConnectionManager connectionManager = extensionPoint.getClass("class",
 			ConnectionManager.class);
-
-		// try {
-		// // Thread.sleep(12000);
-		// } catch (final InterruptedException ex) {
-		// // TODO Auto-generated catch block
-		// }
 
 		return connectionManager.getProjectList(sessionId);
 	}
