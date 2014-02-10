@@ -20,6 +20,7 @@ import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.share
 import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.tag;
 import static org.eclipse.emf.emfstore.internal.common.APIUtil.toInternal;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.util.Date;
@@ -32,11 +33,14 @@ import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
 import org.eclipse.emf.emfstore.client.test.common.dsl.CreateAPI;
 import org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil;
-import org.eclipse.emf.emfstore.client.test.common.util.ServerUtil;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
+import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
+import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
+import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidProjectIdException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -58,7 +62,12 @@ public class ServerInterfaceTest {
 	@BeforeClass
 	public static void beforeClass() throws IllegalArgumentException, ESServerStartFailedException,
 		FatalESException, ESException, IOException {
-		server = ServerUtil.startServer();
+		// server = ServerUtil.startServer();
+		final ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
+		serverInfo.setCertificateAlias(KeyStoreManager.getInstance().DEFAULT_CERTIFICATE);
+		serverInfo.setUrl("localhost");
+		serverInfo.setPort(8081);
+		server = new ESServerImpl(serverInfo);
 		session = server.login("super", "super");
 		// deleteRemoteProjects(server, session);
 		// deleteLocalProjects();
@@ -89,6 +98,7 @@ public class ServerInterfaceTest {
 			ProjectUtil.defaultName(),
 			"Example Description",
 			Create.logMessage());
+		assertNotNull(projectInfo);
 		final List<ProjectInfo> projectInfos = connectionManager.getProjectList(usersession.getSessionId());
 
 		assertEquals(1, projectInfos.size());

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dummy
+Bundle-SymbolicName: dummy
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: dummy.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.emfstore.server
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
