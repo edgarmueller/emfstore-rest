@@ -37,7 +37,7 @@ public class Activator extends Plugin {
 		try {
 			super.start(context);
 			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new FatalESException("Plugin Bundle start failed!", e);
 		}
 		// END SUPRESS CATCH EXCEPTION
@@ -55,7 +55,7 @@ public class Activator extends Plugin {
 		try {
 			super.stop(context);
 			// BEGIN SUPRESS CATCH EXCEPTION
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new FatalESException("Plugin Bundle stop failed!", e);
 		}
 		// END SUPRESS CATCH EXCEPTION
