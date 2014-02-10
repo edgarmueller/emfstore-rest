@@ -75,7 +75,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		target = client.target(BASE_URI);
 	}
 
-	public List<ProjectInfo> getProjectList() {
+	private List<ProjectInfo> getProjectList() {
 		
 		//create XMLResource 
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
@@ -87,36 +87,17 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		final InputStream is = response.readEntity(InputStream.class);
 		
 		try {
-			//
-			resource.doLoad(is, null);
-//			List<ProjectInfo> projectInfoList = (List<ProjectInfo>) resource.getContents();   
+			//create the List<ProjectInfo> from the input stream
+			resource.doLoad(is, null);   
 			List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
 			Object[] array = resource.getContents().toArray(); 
 			for(Object o : array) {
 				projectInfoList.add((ProjectInfo) o);
 			}
-//			List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
-//			TreeIterator<EObject> allContents = resource.getAllContents();
-//			while (allContents.hasNext()) {
-//				ProjectInfo projectInfo = (ProjectInfoImpl) allContents.next();
-//				projectInfoList.add(projectInfo);
-//			}
 			
 			return projectInfoList;
 		} catch (final IOException ex) {
-			// TODO Auto-generated catch block
-			// Do NOT catch all Exceptions ("catch (Exception e)")
-			// Log AND handle Exceptions if possible
-			//
-			// You can just uncomment one of the lines below to log an exception:
-			// logException will show the logged excpetion to the user
-			// ModelUtil.logException(ex);
-			// ModelUtil.logException("YOUR MESSAGE HERE", ex);
-			// logWarning will only add the message to the error log
-			// ModelUtil.logWarning("YOUR MESSAGE HERE", ex);
-			// ModelUtil.logWarning("YOUR MESSAGE HERE");
-			//
-			// If handling is not possible declare and rethrow Exception
+			System.err.println(ex.getMessage());
 		}
 
 		return null; // TODO: was ist best practice?
