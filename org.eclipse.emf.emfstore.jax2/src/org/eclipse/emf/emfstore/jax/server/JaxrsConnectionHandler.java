@@ -35,6 +35,8 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	/**
 	 * {@inheritDoc}
 	 * 
+	 * get the ServiceReferences and initialise variables there
+	 * 
 	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#init(org.eclipse.emf.emfstore.internal.server.EMFStoreInterface,
 	 *      org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl)
 	 */
