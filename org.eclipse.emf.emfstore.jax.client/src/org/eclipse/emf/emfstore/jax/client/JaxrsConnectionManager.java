@@ -13,6 +13,7 @@ package org.eclipse.emf.emfstore.jax.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -21,7 +22,9 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
@@ -86,7 +89,20 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		try {
 			//
 			resource.doLoad(is, null);
-			return (List<ProjectInfo>) resource.getAllContents();
+//			List<ProjectInfo> projectInfoList = (List<ProjectInfo>) resource.getContents();   
+			List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
+			Object[] array = resource.getContents().toArray(); 
+			for(Object o : array) {
+				projectInfoList.add((ProjectInfo) o);
+			}
+//			List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
+//			TreeIterator<EObject> allContents = resource.getAllContents();
+//			while (allContents.hasNext()) {
+//				ProjectInfo projectInfo = (ProjectInfoImpl) allContents.next();
+//				projectInfoList.add(projectInfo);
+//			}
+			
+			return projectInfoList;
 		} catch (final IOException ex) {
 			// TODO Auto-generated catch block
 			// Do NOT catch all Exceptions ("catch (Exception e)")
