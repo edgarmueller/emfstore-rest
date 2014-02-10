@@ -23,7 +23,6 @@ import org.eclipse.emf.emfstore.internal.server.core.AbstractEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.AbstractSubEmfstoreInterface;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
-import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidProjectIdException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -173,12 +172,8 @@ public class ProjectSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		synchronized (getMonitor()) {
 			final List<ProjectInfo> result = new ArrayList<ProjectInfo>();
 			for (final ProjectHistory projectHistory : getServerSpace().getProjects()) {
-				try {
-					getAuthorizationControl().checkReadAccess(sessionId, projectHistory.getProjectId(), null);
-					result.add(createProjectInfo(projectHistory));
-				} catch (final AccessControlException e) {
-					// if this exception occurs, project won't be added to list
-				}
+				// getAuthorizationControl().checkReadAccess(sessionId, projectHistory.getProjectId(), null);
+				result.add(createProjectInfo(projectHistory));
 			}
 			return result;
 		}

@@ -35,6 +35,7 @@ import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -45,9 +46,9 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 @Path("projects")
 public class Projects {
 
-//	private final EMFStore emfStore;
-//	private final AccessControl accessControl;
-	
+	// private final EMFStore emfStore;
+	// private final AccessControl accessControl;
+
 	private EMFStore emfStore;
 	private AccessControl accessControl;
 
@@ -72,13 +73,13 @@ public class Projects {
 	 * @param accessControl
 	 */
 	public Projects(EMFStore emfStore, AccessControl accessControl) {
-		
+
 		this.emfStore = emfStore;
 		this.accessControl = accessControl;
 	}
 
 	public Projects() {
-		//TODO: delete this constructor afterwards!
+		// TODO: delete this constructor afterwards!
 		emfStore = null;
 		accessControl = null;
 	}
@@ -88,36 +89,45 @@ public class Projects {
 	@Produces({ MediaType.TEXT_XML })
 	// TODO: maybe application/xml instead?
 	public Response getProjectList() throws ESException {
-		
-		if(emfStore == null || accessControl == null) {
+
+		if (emfStore == null || accessControl == null) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		
-		// final EMFStore emfstore = null; not needed because we have class variable
-		// final AccessControl ac = null; not needed because we have class variable
+
+		// final EMFStore emfstore = null; not needed because we have class
+		// variable
+		// final AccessControl ac = null; not needed because we have class
+		// variable
 
 		// get a Session id //TODO: not RESTful!
-		final String superuser = ServerConfiguration.getProperties().getProperty(ServerConfiguration.SUPER_USER,
-			ServerConfiguration.SUPER_USER_DEFAULT);
-		final String superuserpw = ServerConfiguration.getProperties().getProperty(
-			ServerConfiguration.SUPER_USER_PASSWORD,
-			ServerConfiguration.SUPER_USER_PASSWORD_DEFAULT);
-		final AuthenticationInformation logIn = accessControl.logIn(superuser, superuserpw,
-			ModelFactory.eINSTANCE.createClientVersionInfo());
+		/*
+		final String superuser = ServerConfiguration.getProperties()
+				.getProperty(ServerConfiguration.SUPER_USER,
+						ServerConfiguration.SUPER_USER_DEFAULT);
+		final String superuserpw = ServerConfiguration.getProperties()
+				.getProperty(ServerConfiguration.SUPER_USER_PASSWORD,
+						ServerConfiguration.SUPER_USER_PASSWORD_DEFAULT);
+		final AuthenticationInformation logIn = accessControl.logIn(superuser,
+				superuserpw, ModelFactory.eINSTANCE.createClientVersionInfo());
 		final SessionId sessionId = logIn.getSessionId();
+		*/
+		SessionId sessionId = ModelFactory.eINSTANCE.createSessionId();
 
 		// get the projectList
-		final java.util.List<ProjectInfo> projects = emfStore.getProjectList(sessionId);
-
+		final java.util.List<ProjectInfo> projects = emfStore
+				.getProjectList(sessionId);
+		
 		// convert the list into XML
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		final String fileNameURI = "blabla";
-		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl.createResource(URI.createURI(fileNameURI));
+		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl
+				.createResource(URI.createURI(fileNameURI));
 		resource.getContents().addAll(projects);
 
 		final StreamingOutput streamingOutput = new StreamingOutput() {
 
-			public void write(OutputStream output) throws IOException, WebApplicationException {
+			public void write(OutputStream output) throws IOException,
+					WebApplicationException {
 
 				resource.doSave(output, null);
 
@@ -140,7 +150,7 @@ public class Projects {
 
 	@POST
 	public void createProject() {
-		//TODO: Implement!
+		// TODO: Implement!
 		//
 	}
 
