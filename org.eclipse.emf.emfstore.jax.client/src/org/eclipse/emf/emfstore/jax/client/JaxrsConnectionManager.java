@@ -79,30 +79,39 @@ public class JaxrsConnectionManager implements ConnectionManager {
 
 	private List<ProjectInfo> getProjectList() {
 		
-		//create XMLResource 
+		//make the http call and get the input stream
+		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).get();
+		
+		List<ProjectInfo> projectInfoList = getProjectInfoListFromResponse(response);
+
+		return projectInfoList; // TODO: was ist best practice?
+	}
+
+	/**
+	 * @param response
+	 * @return
+	 */
+	private List<ProjectInfo> getProjectInfoListFromResponse(
+			final Response response) {
+		//create XMLResource and read the entity
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		final String fileNameURI = "blabla";
 		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl.createResource(URI.createURI(fileNameURI));
 		
-		//make the http call and get the input stream
-		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).get();
 		final InputStream is = response.readEntity(InputStream.class);
-		
+		List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
 		try {
 			//create the List<ProjectInfo> from the input stream
 			resource.doLoad(is, null);   
-			List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
 			Object[] array = resource.getContents().toArray(); 
 			for(Object o : array) {
 				projectInfoList.add((ProjectInfo) o);
 			}
 			
-			return projectInfoList;
 		} catch (final IOException ex) {
 			System.err.println(ex.getMessage());
 		}
-
-		return null; // TODO: was ist best practice?
+		return projectInfoList;
 	}
 
 	private Project getProject(ProjectId projectId, VersionSpec versionSpec) {
