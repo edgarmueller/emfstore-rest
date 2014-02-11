@@ -6,6 +6,12 @@ import org.eclipse.emf.emfstore.internal.common.model.util.SerializationExceptio
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * class for encapsulating the params of create(Empty)Project into one XML Document using JAXB
+ * 
+ * @author Pascal
+ *
+ */
 @XmlRootElement
 public class ProjectDataTO {
 	
