@@ -1,20 +1,24 @@
 package org.eclipse.emf.emfstore.jax.common;
 
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * used to encapsulate the method params of createEmptyProject() and createProject() into one POJO. This will be (de-)serialized by MessageBodyReader/-Writer
- * 
- * @author Pascal
- *
- */
+@XmlRootElement
 public class ProjectDataTO {
 	
 	private String name;
 	private String description;
-	private LogMessage logMessage;
-	private Project project;
+	/**
+	 * store a LogMessage as a String
+	 */
+	private String logMessage;
+	/**
+	 * store a Project as a String
+	 */
+	private String project;
 	
 	/**
 	 * @param name
@@ -27,8 +31,13 @@ public class ProjectDataTO {
 		super();
 		this.name = name;
 		this.description = description;
-		this.logMessage = logMessage;
-		this.project = project;
+		
+		try {
+			this.logMessage = ModelUtil.eObjectToString(logMessage);
+			this.project = ModelUtil.eObjectToString(project);
+		} catch (SerializationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -40,7 +49,47 @@ public class ProjectDataTO {
 		super();
 		this.name = name;
 		this.description = description;
-		this.logMessage = logMessage;
+		try {
+			this.logMessage = ModelUtil.eObjectToString(logMessage);
+		} catch (SerializationException e) {
+			e.printStackTrace();
+		}
 		this.project = null;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * @return the logMessage as a LogMessage representation
+	 */
+	public LogMessage getLogMessage() {
+		try {
+			return (LogMessage) ModelUtil.stringToEObject(logMessage);
+		} catch (SerializationException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * @return the project as Project representation
+	 */
+	public Project getProject() {
+		if(project == null) {
+			return null;
+		}
+		
+		try {
+			return (Project) ModelUtil.stringToEObject(project);
+		} catch (SerializationException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
