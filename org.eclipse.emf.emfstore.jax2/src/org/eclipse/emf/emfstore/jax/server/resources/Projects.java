@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.jax.server.resources;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
+import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -30,6 +31,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
@@ -121,12 +123,24 @@ public class Projects {
 		final java.util.List<ProjectInfo> projects = emfStore
 				.getProjectList(sessionId);
 		
-		// convert the list into XML
+		final StreamingOutput streamingOutput = convertEObjectsToXmlIntoStreamingOutput(projects);
+
+		// return the Response
+		return Response.ok(streamingOutput).build();
+	}
+
+	/**
+	 * @param eObjects
+	 * @return
+	 */
+	private StreamingOutput convertEObjectsToXmlIntoStreamingOutput(
+			final Collection<? extends EObject> eObjects) {
+		// convert the list into XML and write it to a StreamingOutput
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		final String fileNameURI = "blabla";
 		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl
 				.createResource(URI.createURI(fileNameURI));
-		resource.getContents().addAll(projects);
+		resource.getContents().addAll(eObjects);
 
 		final StreamingOutput streamingOutput = new StreamingOutput() {
 
@@ -137,9 +151,7 @@ public class Projects {
 
 			}
 		};
-
-		// return the Response
-		return Response.ok(streamingOutput).build();
+		return streamingOutput;
 	}
 
 	@GET
