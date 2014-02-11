@@ -75,6 +75,10 @@ public class ProjectDataTO {
 	 * @return the logMessage as a LogMessage representation
 	 */
 	public LogMessage getLogMessage() {
+		if(logMessage == null) {
+			return null;
+		}
+		
 		try {
 			return (LogMessage) ModelUtil.stringToEObject(logMessage);
 		} catch (SerializationException e) {
