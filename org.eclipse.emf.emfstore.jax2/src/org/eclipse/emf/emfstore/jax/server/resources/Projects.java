@@ -14,7 +14,9 @@ package org.eclipse.emf.emfstore.jax.server.resources;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -179,27 +181,43 @@ public class Projects {
 	@Produces({ MediaType.TEXT_XML })
 	public Response createProject(ProjectDataTO projectDataTO) {
 		
+		//extract the received data
 		String name = projectDataTO.getName();
 		String description = projectDataTO.getDescription();
 		LogMessage logMessage = projectDataTO.getLogMessage();
 		Project project = projectDataTO.getProject();
 		
+		//make call to EmfStore
+		ProjectInfo projectInfo = null;
 		if(project == null) {
 			//user wants to create an empty project
 			try {
-				emfStore.createEmptyProject(retrieveSessionId(), name, description, logMessage);
+				projectInfo = emfStore.createEmptyProject(retrieveSessionId(), name, description, logMessage);
+			} catch (ESException e) {
+				e.printStackTrace();
+				return Response.serverError().build();
+			}
+		} else {
+			//user wants to create a non-empty project
+			try {
+				projectInfo = emfStore.createProject(retrieveSessionId(), name, description, logMessage, project);
 			} catch (ESException e) {
 				e.printStackTrace();
 				return Response.serverError().build();
 			}
 		}
 		
+		//create a proper response which contains: URI of the created project + its projectInfo
 		String projectId = "default"; //TODO: change!
 		java.net.URI createdUri;
 		try {
 			
 			createdUri = new java.net.URI(projectId);
-			final StreamingOutput streamingOutput = null;
+			
+			List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
+			projectInfoList.add(projectInfo);
+			final StreamingOutput streamingOutput = convertEObjectsToXmlIntoStreamingOutput(projectInfoList);
+			
 			return Response.created(createdUri).entity(streamingOutput).build();
 			
 		} catch (URISyntaxException e) {
