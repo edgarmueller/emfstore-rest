@@ -103,13 +103,13 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		return null; // TODO: was ist best practice?
 	}
 
-	public Project getProject(ProjectId projectId, VersionSpec versionSpec) {
+	private Project getProject(ProjectId projectId, VersionSpec versionSpec) {
 		// TODO: implement!
 
 		return null;
 	}
 
-	public ProjectInfo createEmptyProject(String name, String description, LogMessage logMessage) {
+	private ProjectInfo createEmptyProject(String name, String description, LogMessage logMessage) {
 		// TODO: implement!
 
 		return null;
