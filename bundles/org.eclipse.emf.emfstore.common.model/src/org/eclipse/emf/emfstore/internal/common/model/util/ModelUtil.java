@@ -12,9 +12,11 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.internal.common.model.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -195,6 +197,32 @@ public final class ModelUtil {
 		}
 
 		return copiedEObjectToString(copy, res);
+	}
+
+	/**
+	 * Converts a String to an EObject. Note: String must be the result of
+	 * {@link SerializationUtil#eObjectToString(EObject)}
+	 * 
+	 * @param object the String representation of the EObject
+	 * @return the deserialized EObject
+	 * @throws SerializationException if deserialization fails
+	 */
+	public static EObject stringToEObject(String object) throws SerializationException {
+		if (object == null) {
+			return null;
+		}
+		final Resource res = new ResourceSetImpl().createResource(VIRTUAL_URI);
+		try {
+			res.load(new ByteArrayInputStream(object.getBytes("UTF-8")), null);
+		} catch (final UnsupportedEncodingException e) {
+			throw new SerializationException(e);
+		} catch (final IOException e) {
+			throw new SerializationException(e);
+		}
+
+		final EObject result = res.getContents().get(0);
+		res.getContents().remove(result);
+		return result;
 	}
 
 	/**
