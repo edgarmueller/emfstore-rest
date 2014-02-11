@@ -18,6 +18,7 @@ import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -54,6 +55,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -110,8 +112,15 @@ public class JaxrsConnectionManager implements ConnectionManager {
 	}
 
 	private ProjectInfo createProject(String name, String description, LogMessage logMessage, Project project) {
-		// TODO: implement!
-
+		
+		//create the TransferObject
+		ProjectDataTO projectDataTO = new ProjectDataTO(name, description, logMessage, project);
+		
+		//make the http call
+		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).post(Entity.entity(projectDataTO, MediaType.TEXT_XML));
+		
+		//read the entity
+		
 		return null;
 	}
 
