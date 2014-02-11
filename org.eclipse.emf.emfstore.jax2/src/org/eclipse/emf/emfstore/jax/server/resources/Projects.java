@@ -59,8 +59,9 @@ public class Projects {
 
 	// private final EMFStore emfStore;
 	// private final AccessControl accessControl;
-
-	public static final String PROJECTS_PATH = "projects";
+	
+	public static final String BASE_PATH = "http://localhost:9090/services";
+	public static final String PROJECTS_PATH = "/projects";
 	
 	private EMFStore emfStore;
 	private AccessControl accessControl;
@@ -210,22 +211,20 @@ public class Projects {
 		}
 		
 		//create a proper response which contains: URI of the created project + its projectInfo
-		String projectId = "default"; //TODO: change!
+		String projectId = projectInfo.getProjectId().getId(); //TODO: change!
 		java.net.URI createdUri;
 		try {
-			
-			createdUri = new java.net.URI(projectId);
-			
-			List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
-			projectInfoList.add(projectInfo);
-			final StreamingOutput streamingOutput = convertEObjectsToXmlIntoStreamingOutput(projectInfoList);
-			
-			return Response.created(createdUri).entity(streamingOutput).build();
-			
+			createdUri = new java.net.URI(BASE_PATH + PROJECTS_PATH + "/" + projectId);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 			return Response.serverError().build();
 		}
+		
+		List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
+		projectInfoList.add(projectInfo);
+		final StreamingOutput streamingOutput = convertEObjectsToXmlIntoStreamingOutput(projectInfoList);
+		
+		return Response.created(createdUri).entity(streamingOutput).build();
 				
 	}
 
