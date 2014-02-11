@@ -54,12 +54,14 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * 
  */
 
-@Path("projects")
+@Path(Projects.PROJECTS_PATH)
 public class Projects {
 
 	// private final EMFStore emfStore;
 	// private final AccessControl accessControl;
 
+	public static final String PROJECTS_PATH = "projects";
+	
 	private EMFStore emfStore;
 	private AccessControl accessControl;
 
