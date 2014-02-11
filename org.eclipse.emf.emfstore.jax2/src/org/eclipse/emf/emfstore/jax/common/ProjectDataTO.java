@@ -39,8 +39,11 @@ public class ProjectDataTO {
 		this.description = description;
 		
 		try {
-			this.logMessage = ModelUtil.eObjectToString(logMessage);
-			this.project = ModelUtil.eObjectToString(project);
+			if(logMessage != null) {
+				this.logMessage = ModelUtil.eObjectToString(logMessage);
+			} if(project != null) {
+				this.project = ModelUtil.eObjectToString(project);
+			}
 		} catch (SerializationException e) {
 			e.printStackTrace();
 		}
@@ -56,7 +59,9 @@ public class ProjectDataTO {
 		this.name = name;
 		this.description = description;
 		try {
-			this.logMessage = ModelUtil.eObjectToString(logMessage);
+			if(logMessage != null) {
+				this.logMessage = ModelUtil.eObjectToString(logMessage);
+			}
 		} catch (SerializationException e) {
 			e.printStackTrace();
 		}
