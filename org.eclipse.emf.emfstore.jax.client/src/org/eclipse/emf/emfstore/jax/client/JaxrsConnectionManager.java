@@ -109,7 +109,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		return null;
 	}
 
-	private ProjectInfo createEmptyProject(String name, String description, LogMessage logMessage) {
+	private ProjectInfo createProject(String name, String description, LogMessage logMessage, Project project) {
 		// TODO: implement!
 
 		return null;
@@ -178,15 +178,15 @@ public class JaxrsConnectionManager implements ConnectionManager {
 
 	public ProjectInfo createEmptyProject(SessionId sessionId, String name,
 			String description, LogMessage logMessage) throws ESException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return createProject(name, description, logMessage, null);
 	}
 
 	public ProjectInfo createProject(SessionId sessionId, String name,
 			String description, LogMessage logMessage, Project project)
 			throws ESException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return createProject(name, description, logMessage, project);
 	}
 
 	public void deleteProject(SessionId sessionId, ProjectId projectId,
