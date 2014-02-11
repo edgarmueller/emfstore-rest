@@ -4,7 +4,7 @@ import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 
 /**
- * used as HTTP entity for createEmptyProject() and createProject()
+ * used to encapsulate the method params of createEmptyProject() and createProject() into one POJO. This will be (de-)serialized by MessageBodyReader/-Writer
  * 
  * @author Pascal
  *

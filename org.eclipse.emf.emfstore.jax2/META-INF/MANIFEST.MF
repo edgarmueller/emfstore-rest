@@ -9,3 +9,4 @@ Bundle-Activator: org.eclipse.emf.emfstore.jax.server.Activator
 Require-Bundle: org.eclipse.emf.emfstore.server,
  javax.ws.rs-api
 Import-Package: org.eclipse.emf.emfstore.client.test.common.util
+Export-Package: org.eclipse.emf.emfstore.jax.common
