@@ -47,7 +47,7 @@ import org.eclipse.emf.emfstore.test.model.TestElement;
 // TODO: can we have common util?
 public class ProjectUtil {
 
-	private static final String DEFAULT_NAME = "TestProject"; //$NON-NLS-1$
+	public static final String DEFAULT_NAME = "TestProject"; //$NON-NLS-1$    //must be public to be accessed by Projects.java in a static way
 
 	public static IProgressMonitor nullProgressMonitor() {
 		return new NullProgressMonitor();
