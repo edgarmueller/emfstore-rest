@@ -34,6 +34,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
@@ -41,6 +42,8 @@ import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
 import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
@@ -117,16 +120,23 @@ public class Projects {
 				superuserpw, ModelFactory.eINSTANCE.createClientVersionInfo());
 		final SessionId sessionId = logIn.getSessionId();
 		*/
-		SessionId sessionId = ModelFactory.eINSTANCE.createSessionId();
 
 		// get the projectList
 		final java.util.List<ProjectInfo> projects = emfStore
-				.getProjectList(sessionId);
+				.getProjectList(retrieveSessionId());
 		
 		final StreamingOutput streamingOutput = convertEObjectsToXmlIntoStreamingOutput(projects);
 
 		// return the Response
 		return Response.ok(streamingOutput).build();
+	}
+
+	/**
+	 * @return
+	 */
+	private SessionId retrieveSessionId() {
+		SessionId sessionId = ModelFactory.eINSTANCE.createSessionId();
+		return sessionId;
 	}
 
 	/**
@@ -167,16 +177,30 @@ public class Projects {
 	@POST
 	@Consumes({ MediaType.TEXT_XML })
 	@Produces({ MediaType.TEXT_XML })
-	public Response createProject(@DefaultValue(
-			"default") @QueryParam("name") String name,
-			@DefaultValue("") @QueryParam("description") String description) {
+	public Response createProject(ProjectDataTO projectDataTO) {
+		
+		String name = projectDataTO.getName();
+		String description = projectDataTO.getDescription();
+		LogMessage logMessage = projectDataTO.getLogMessage();
+		Project project = projectDataTO.getProject();
+		
+		if(project == null) {
+			//user wants to create an empty project
+			try {
+				emfStore.createEmptyProject(retrieveSessionId(), name, description, logMessage);
+			} catch (ESException e) {
+				e.printStackTrace();
+				return Response.serverError().build();
+			}
+		}
 		
 		String projectId = "default"; //TODO: change!
 		java.net.URI createdUri;
 		try {
 			
 			createdUri = new java.net.URI(projectId);
-			return Response.created(createdUri).build();
+			final StreamingOutput streamingOutput = null;
+			return Response.created(createdUri).entity(streamingOutput).build();
 			
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
