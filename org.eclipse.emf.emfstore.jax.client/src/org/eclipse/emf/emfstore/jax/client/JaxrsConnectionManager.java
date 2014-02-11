@@ -129,8 +129,11 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).post(Entity.entity(projectDataTO, MediaType.TEXT_XML));
 		
 		//read the entity
+		List<ProjectInfo> projectInfoList = getProjectInfoListFromResponse(response);
 		
-		return null;
+		//TODO: retrieve and store the URI of the created project!!!!
+		
+		return projectInfoList.get(0);
 	}
 
 	public List<ProjectInfo> getProjectList(SessionId sessionId)
