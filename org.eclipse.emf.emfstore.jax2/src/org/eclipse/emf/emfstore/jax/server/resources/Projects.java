@@ -13,12 +13,16 @@ package org.eclipse.emf.emfstore.jax.server.resources;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URISyntaxException;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,6 +32,7 @@ import javax.ws.rs.core.StreamingOutput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
@@ -149,9 +154,24 @@ public class Projects {
 	}
 
 	@POST
-	public void createProject() {
-		// TODO: Implement!
-		//
+	@Consumes({ MediaType.TEXT_XML })
+	@Produces({ MediaType.TEXT_XML })
+	public Response createProject(@DefaultValue(
+			ProjectUtil.DEFAULT_NAME) @QueryParam("name") String name,
+			@DefaultValue("") @QueryParam("description") String description) {
+		
+		String projectId = "default"; //TODO: change!
+		java.net.URI createdUri;
+		try {
+			
+			createdUri = new java.net.URI(projectId);
+			return Response.created(createdUri).build();
+			
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+				
 	}
 
 }
