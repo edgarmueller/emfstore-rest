@@ -171,7 +171,7 @@ public class Projects {
 
 	@GET
 	@Path("/{projectId}")
-	@Produces({ MediaType.APPLICATION_XML })
+	@Produces({ MediaType.TEXT_XML })
 	public Response getProject(@PathParam("projectId") String projectId) {
 		// TODO implement!
 
