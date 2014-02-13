@@ -99,8 +99,10 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 */
 	public ProjectInfo createProject(SessionId sessionId, String name, String description, LogMessage logMessage,
 		Project project) throws ESException {
-		return getConnectionProxy(sessionId).callWithResult("createProject", ProjectInfo.class, sessionId, name,
-			description, logMessage, project);
+		// return getConnectionProxy(sessionId).callWithResult("createProject", ProjectInfo.class, sessionId, name,
+		// description, logMessage, project);
+
+		return getJaxrsConnectionManager().createProject(sessionId, name, description, logMessage, project);
 	}
 
 	/**
