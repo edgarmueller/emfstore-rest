@@ -175,8 +175,10 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 */
 	public Project getProject(SessionId sessionId, ProjectId projectId, VersionSpec versionSpec)
 		throws InvalidVersionSpecException, ESException {
-		return getConnectionProxy(sessionId).callWithResult("getProject", Project.class, sessionId, projectId,
-			versionSpec);
+		// return getConnectionProxy(sessionId).callWithResult("getProject", Project.class, sessionId, projectId,
+		// versionSpec);
+
+		return getJaxrsConnectionManager().getProject(sessionId, projectId, versionSpec);
 	}
 
 	/**
