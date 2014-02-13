@@ -216,7 +216,7 @@ public class Projects {
 		String projectId = projectInfo.getProjectId().getId(); //TODO: change!
 		java.net.URI createdUri;
 		try {
-			createdUri = new java.net.URI(BASE_PATH + PROJECTS_PATH + "/" + projectId);
+			createdUri = new java.net.URI(BASE_PATH + PROJECTS_PATH + "/" + projectId);  //TODO: is projectID URL-encoded-safe??!
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 			return Response.serverError().build();
