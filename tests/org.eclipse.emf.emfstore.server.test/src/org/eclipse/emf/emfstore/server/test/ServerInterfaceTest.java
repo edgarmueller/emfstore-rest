@@ -158,7 +158,7 @@ public class ServerInterfaceTest {
 			projectInfo.getVersion());
 
 		assertNotNull(retrievedProject);
-		assertEquals(project, retrievedProject);
+		assertEquals(project.getAllModelElements().size(), retrievedProject.getAllModelElements().size());
 
 	}
 
