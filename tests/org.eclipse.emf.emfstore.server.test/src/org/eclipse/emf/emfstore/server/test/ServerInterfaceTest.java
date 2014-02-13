@@ -40,6 +40,7 @@ import org.eclipse.emf.emfstore.internal.client.model.ServerInfo;
 import org.eclipse.emf.emfstore.internal.client.model.Usersession;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.ConnectionManager;
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
+import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidProjectIdException;
@@ -98,6 +99,30 @@ public class ServerInterfaceTest {
 			ProjectUtil.defaultName(),
 			"Example Description",
 			Create.logMessage());
+		assertNotNull(projectInfo);
+		final List<ProjectInfo> projectInfos = connectionManager.getProjectList(usersession.getSessionId());
+
+		assertEquals(1, projectInfos.size());
+		assertEquals(projectInfo.getName(), projectInfos.get(0).getName());
+		assertEquals(projectInfo.getName(), ProjectUtil.defaultName());
+	}
+
+	@Test
+	public void testCreateProject() throws ESException {
+
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+
+		final Usersession usersession = toInternal(Usersession.class, session);
+		final ProjectId projectId = Create.projectId();
+		projectId.setId(ProjectUtil.defaultName());
+
+		final ProjectInfo projectInfo = connectionManager.createProject(
+			usersession.getSessionId(),
+			ProjectUtil.defaultName(),
+			"Example Description",
+			Create.logMessage(),
+			ESLocalProjectImpl.class.cast(Create.project("testName")).toInternalAPI().getProject()
+			);
 		assertNotNull(projectInfo);
 		final List<ProjectInfo> projectInfos = connectionManager.getProjectList(usersession.getSessionId());
 
