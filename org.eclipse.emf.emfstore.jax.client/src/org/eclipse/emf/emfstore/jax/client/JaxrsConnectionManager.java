@@ -130,7 +130,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		final Response response = target.path(PATH_PROJECTS).path(subpath).request(MediaType.TEXT_XML).get();
 		
 		//extract the Project
-		ProjectDataTO projectDataTO = (ProjectDataTO) response.getEntity();
+		ProjectDataTO projectDataTO = (ProjectDataTO) response.readEntity(ProjectDataTO.class);
 		Project project = projectDataTO.getProject();
 
 		return project;
