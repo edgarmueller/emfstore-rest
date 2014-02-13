@@ -233,7 +233,7 @@ public final class ModelUtil {
 	 * @return The string representing the {@link EObject}.
 	 * @throws SerializationException If a serialization problem occurs.
 	 */
-	private static String copiedEObjectToString(EObject copy, XMIResource resource) throws SerializationException {
+	public static String copiedEObjectToString(EObject copy, XMIResource resource) throws SerializationException {
 		final int step = 200;
 		final int initialSize = step;
 		resource.getContents().add(copy);
