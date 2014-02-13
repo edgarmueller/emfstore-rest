@@ -47,6 +47,13 @@ public class ProjectDataTO {
 	private String project;
 	
 	/**
+	 * empty constructor needed for JAXB
+	 */
+	public ProjectDataTO() {
+		
+	}
+	
+	/**
 	 * @param name
 	 * @param description
 	 * @param logMessage
