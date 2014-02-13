@@ -42,6 +42,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.Connecti
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
+import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidProjectIdException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -129,6 +130,35 @@ public class ServerInterfaceTest {
 		assertEquals(1, projectInfos.size());
 		assertEquals(projectInfo.getName(), projectInfos.get(0).getName());
 		assertEquals(projectInfo.getName(), ProjectUtil.defaultName());
+	}
+
+	@Test
+	public void testGetProject() throws ESException {
+
+		// create a Project
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+		final Usersession usersession = toInternal(Usersession.class, session);
+		final ProjectId projectId = Create.projectId();
+		projectId.setId(ProjectUtil.defaultName());
+
+		final Project project = ESLocalProjectImpl.class.cast(Create.project("testName")).toInternalAPI().getProject();
+
+		final ProjectInfo projectInfo = connectionManager.createProject(
+			usersession.getSessionId(),
+			ProjectUtil.defaultName(),
+			"Example Description",
+			Create.logMessage(),
+			project
+			);
+		assertNotNull(projectInfo);
+
+		// get the Project
+		final Project retrievedProject = connectionManager.getProject(usersession.getSessionId(), projectId,
+			projectInfo.getVersion());
+
+		assertNotNull(retrievedProject);
+		assertEquals(project, retrievedProject);
+
 	}
 
 	@Test(expected = InvalidProjectIdException.class)
