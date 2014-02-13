@@ -148,7 +148,7 @@ public class EMFStoreImpl extends AbstractEmfstoreInterface implements Invocatio
 	 */
 	public Object invoke(Object obj, final Method method, final Object[] args) throws ESException {
 		final MethodInvocation methodInvocation = new MethodInvocation(method.getName(), args);
-		getAuthorizationControl().checkAccess(methodInvocation);
+		// getAuthorizationControl().checkAccess(methodInvocation);
 
 		notifyServerCallObservers(new ServerCallObserverNotifier() {
 			public void notify(ESServerCallObserver observer) {
