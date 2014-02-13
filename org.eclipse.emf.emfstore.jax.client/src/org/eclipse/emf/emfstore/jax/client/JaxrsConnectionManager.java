@@ -83,6 +83,8 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).get();
 		
 		List<ProjectInfo> projectInfoList = getProjectInfoListFromResponse(response);
+		
+		//TODO: store the URIs!
 
 		return projectInfoList; // TODO: was ist best practice?
 	}
@@ -115,9 +117,23 @@ public class JaxrsConnectionManager implements ConnectionManager {
 	}
 
 	private Project getProject(ProjectId projectId, VersionSpec versionSpec) {
-		// TODO: implement!
+		
+		if(! (versionSpec instanceof PrimaryVersionSpec)) {
+			//TODO: make this method compatible to all kinds of VersionSpecs
+			throw new UnsupportedOperationException();
+		}
+		
+		// TODO: refactor using a hash map which contains the URIs! using String concatenation is not very RESTful!
+		String subpath = projectId.getId() + "/" + versionSpec.getBranch();
+		
+		//make the http call and get the input stream
+		final Response response = target.path(PATH_PROJECTS).path(subpath).request(MediaType.TEXT_XML).get();
+		
+		//extract the Project
+		ProjectDataTO projectDataTO = (ProjectDataTO) response.getEntity();
+		Project project = projectDataTO.getProject();
 
-		return null;
+		return project;
 	}
 
 	private ProjectInfo createProject(String name, String description, LogMessage logMessage, Project project) {
@@ -144,8 +160,8 @@ public class JaxrsConnectionManager implements ConnectionManager {
 
 	public Project getProject(SessionId sessionId, ProjectId projectId,
 			VersionSpec versionSpec) throws ESException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return getProject(projectId, versionSpec);
 	}
 
 	public PrimaryVersionSpec createVersion(SessionId sessionId,
