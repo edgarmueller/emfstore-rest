@@ -14,6 +14,7 @@ import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,15 +31,19 @@ public class ProjectDataTO {
 	 */
 	public static final URI VIRTUAL_URI = URI.createURI("virtualUri");
 	
+	@XmlElement
 	private String name;
+	@XmlElement
 	private String description;
 	/**
 	 * store a LogMessage as a String
 	 */
+	@XmlElement
 	private String logMessage;
 	/**
 	 * store a Project as a String
 	 */
+	@XmlElement
 	private String project;
 	
 	/**
@@ -105,7 +110,7 @@ public class ProjectDataTO {
 		}
 		
 		try {
-			return (LogMessage) ModelUtil.stringToEObject(logMessage);
+			return (LogMessage) deserializeStringToEObject(logMessage);
 		} catch (SerializationException e) {
 			e.printStackTrace();
 			return null;
@@ -121,7 +126,7 @@ public class ProjectDataTO {
 		}
 		
 		try {
-			return (Project) ModelUtil.stringToEObject(project);
+			return (Project) deserializeStringToEObject(project);
 		} catch (SerializationException e) {
 			e.printStackTrace();
 			return null;
@@ -159,4 +164,11 @@ public class ProjectDataTO {
 		
 		return result;
 	}
+	
+	
+	private EObject deserializeStringToEObject(String eObjectString) throws SerializationException {
+		
+		return ModelUtil.stringToEObject(eObjectString);
+	}
+
 }
