@@ -153,7 +153,8 @@ public class ServerInterfaceTest {
 		assertNotNull(projectInfo);
 
 		// get the Project
-		final Project retrievedProject = connectionManager.getProject(usersession.getSessionId(), projectId,
+		final Project retrievedProject = connectionManager.getProject(usersession.getSessionId(),
+			projectInfo.getProjectId(),
 			projectInfo.getVersion());
 
 		assertNotNull(retrievedProject);
