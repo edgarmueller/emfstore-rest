@@ -34,17 +34,25 @@ import javax.ws.rs.core.StreamingOutput;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
+import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
+import org.eclipse.emf.emfstore.internal.server.model.impl.ProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionSpecImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersioningFactoryImpl;
 import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
 import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -172,10 +180,33 @@ public class Projects {
 	@GET
 	@Path("/{projectId}")
 	@Produces({ MediaType.TEXT_XML })
-	public Response getProject(@PathParam("projectId") String projectId) {
-		// TODO implement!
-
-		return Response.status(Status.NOT_IMPLEMENTED).build();
+	public Response getProject(@PathParam("projectId") String projectIdAsString, @QueryParam("versionSpec") String versionSpecAsString) {
+		
+		//create ProjectId and VersionSpec objects
+		ProjectId projectId = ModelFactory.eINSTANCE.createProjectId();
+		projectId.setId(projectIdAsString);
+		
+		//TODO: adjust so that it not only supports PrimaryVersionSpec
+		VersionSpec versionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+		versionSpec.setBranch(versionSpecAsString);
+		
+		//make call to emfstore
+		Project project = null;
+		try {
+			project = emfStore.getProject(retrieveSessionId(), projectId, versionSpec);
+		} catch (ESException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		} 
+		
+		if(project == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		//create ProjectDataTO
+		ProjectDataTO projectDataTO = new ProjectDataTO(null, null, null, project);
+		
+		return Response.ok(projectDataTO).build();
 
 	}
 
