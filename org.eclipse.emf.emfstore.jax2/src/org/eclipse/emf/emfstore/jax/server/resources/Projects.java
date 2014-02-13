@@ -184,6 +184,8 @@ public class Projects {
 	@Produces({ MediaType.TEXT_XML })
 	public Response createProject(ProjectDataTO projectDataTO) {
 		
+		System.out.println("\n\nProjects.createProject invoked...\n\n");
+		
 		//extract the received data
 		String name = projectDataTO.getName();
 		String description = projectDataTO.getDescription();
