@@ -124,13 +124,11 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		}
 		
 		// TODO: refactor using a hash map which contains the URIs! using String concatenation is not very RESTful!
-		String subpath = projectId.getId() + "/" + versionSpec.getBranch();
+		String subpath = projectId.getId();
+		String versionSpecQueryParam = versionSpec.getBranch();
 		
-		//make the http call and get the input stream
-		final Response response = target.path(PATH_PROJECTS).path(subpath).request(MediaType.TEXT_XML).get();
-		
-		//extract the Project
-		ProjectDataTO projectDataTO = (ProjectDataTO) response.readEntity(ProjectDataTO.class);
+		//make the http call and get the input stream and extract the Project
+		final ProjectDataTO projectDataTO = target.path(PATH_PROJECTS).path(subpath).queryParam("versionSpec", versionSpecQueryParam).request(MediaType.TEXT_XML).get(ProjectDataTO.class);
 		Project project = projectDataTO.getProject();
 
 		return project;
