@@ -24,8 +24,6 @@ public class Activator implements BundleActivator {
 
 	private ServiceRegistration<?> exampleServiceRegistration;
 
-	// private ServiceRegistration<?> projectServiceRegistration;
-
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -37,10 +35,6 @@ public class Activator implements BundleActivator {
 		exampleServiceRegistration = context.registerService(ExampleService.class,
 			exampleService, null);
 
-		// final Projects projectsService = new Projects();
-		// projectServiceRegistration = context.registerService(Projects.class,
-		// projectsService, null);
-
 	}
 
 	/**
@@ -51,7 +45,6 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext context) throws Exception {
 
 		exampleServiceRegistration.unregister();
-		// projectServiceRegistration.unregister();
 
 	}
 

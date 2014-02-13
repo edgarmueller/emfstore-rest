@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.osgi.util.tracker.ServiceTracker;
 
 public class ExampleServiceTest {
 	
