@@ -105,38 +105,7 @@ public class Projects extends JaxrsResource {
 		return Response.ok(streamingOutput).build();
 	}
 
-	/**
-	 * @return
-	 */
-	private SessionId retrieveSessionId() {
-		SessionId sessionId = ModelFactory.eINSTANCE.createSessionId();
-		return sessionId;
-	}
-
-	/**
-	 * @param eObjects
-	 * @return
-	 */
-	private StreamingOutput convertEObjectsToXmlIntoStreamingOutput(
-			final Collection<? extends EObject> eObjects) {
-		// convert the list into XML and write it to a StreamingOutput
-		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
-		final String fileNameURI = "blabla";
-		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl
-				.createResource(URI.createURI(fileNameURI));
-		resource.getContents().addAll(eObjects);
-
-		final StreamingOutput streamingOutput = new StreamingOutput() {
-
-			public void write(OutputStream output) throws IOException,
-					WebApplicationException {
-
-				resource.doSave(output, null);
-
-			}
-		};
-		return streamingOutput;
-	}
+	
 
 	@GET
 	@Path("/{projectId}")
