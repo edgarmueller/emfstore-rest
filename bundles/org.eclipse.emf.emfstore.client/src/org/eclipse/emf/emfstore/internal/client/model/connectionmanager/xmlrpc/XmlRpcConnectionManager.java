@@ -119,7 +119,9 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 * {@inheritDoc}
 	 */
 	public void deleteProject(SessionId sessionId, ProjectId projectId, boolean deleteFiles) throws ESException {
-		getConnectionProxy(sessionId).call("deleteProject", sessionId, projectId, deleteFiles);
+		// getConnectionProxy(sessionId).call("deleteProject", sessionId, projectId, deleteFiles);
+
+		getJaxrsConnectionManager().deleteProject(sessionId, projectId, deleteFiles);
 	}
 
 	/**
