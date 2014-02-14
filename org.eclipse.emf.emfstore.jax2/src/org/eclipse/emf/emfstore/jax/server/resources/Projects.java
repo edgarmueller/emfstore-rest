@@ -181,6 +181,10 @@ public class Projects {
 	@Produces({ MediaType.TEXT_XML })
 	public Response getProject(@PathParam("projectId") String projectIdAsString, @QueryParam("versionSpec") String versionSpecAsString) {
 		
+		if (emfStore == null || accessControl == null) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		//create ProjectId and VersionSpec objects
 		ProjectId projectId = ModelFactory.eINSTANCE.createProjectId();
 		projectId.setId(projectIdAsString);
@@ -213,6 +217,10 @@ public class Projects {
 	@Consumes({ MediaType.TEXT_XML })
 	@Produces({ MediaType.TEXT_XML })
 	public Response createProject(ProjectDataTO projectDataTO) {
+		
+		if (emfStore == null || accessControl == null) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 		
 		System.out.println("\n\nProjects.createProject invoked...\n\n");
 		
@@ -263,6 +271,10 @@ public class Projects {
 	@DELETE
 	@Path("/{projectId}")
 	public Response deleteProject(@PathParam("projectId") String projectIdAsString, @QueryParam("deleteFiles") boolean deleteFiles) {
+		
+		if (emfStore == null || accessControl == null) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 		
 		//create ProjectId
 		ProjectId projectId = ModelFactory.eINSTANCE.createProjectId();
