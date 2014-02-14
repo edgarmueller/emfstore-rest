@@ -160,7 +160,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		//make the http call
 		final Response response = target.path(PATH_PROJECTS).path(subpath).queryParam("deleteFiles", deleteFiles).request().delete();
 		
-		if(response.getStatus() != Status.OK) {
+		if(response.getStatus() != javax.ws.rs.core.Response.Status.OK.getStatusCode()) {
 			throw new ESException("DELETE not successful!");
 		}
 		
