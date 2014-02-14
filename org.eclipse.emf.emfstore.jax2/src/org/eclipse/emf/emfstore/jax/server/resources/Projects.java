@@ -54,6 +54,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionSpecImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersioningFactoryImpl;
+import org.eclipse.emf.emfstore.jax.common.CallParamStrings;
 import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
 import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
@@ -63,14 +64,11 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * 
  */
 
-@Path(Projects.PROJECTS_PATH)
+@Path(CallParamStrings.PROJECTS_PATH)
 public class Projects {
 
 	// private final EMFStore emfStore;
 	// private final AccessControl accessControl;
-	
-	public static final String BASE_PATH = "http://localhost:9090/services";
-	public static final String PROJECTS_PATH = "/projects";
 	
 	private EMFStore emfStore;
 	private AccessControl accessControl;
@@ -248,7 +246,7 @@ public class Projects {
 		String projectId = projectInfo.getProjectId().getId(); //TODO: change!
 		java.net.URI createdUri;
 		try {
-			createdUri = new java.net.URI(BASE_PATH + PROJECTS_PATH + "/" + projectId);  //TODO: is projectID URL-encoded-safe??!
+			createdUri = new java.net.URI(CallParamStrings.BASE_URI + CallParamStrings.PROJECTS_PATH + "/" + projectId);  //TODO: is projectID URL-encoded-safe??!
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 			return Response.serverError().build();
