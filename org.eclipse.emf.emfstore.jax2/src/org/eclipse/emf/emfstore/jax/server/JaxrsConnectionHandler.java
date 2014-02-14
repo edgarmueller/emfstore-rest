@@ -17,6 +17,7 @@ import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
+import org.eclipse.emf.emfstore.jax.server.resources.Branches;
 import org.eclipse.emf.emfstore.jax.server.resources.Projects;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.osgi.framework.BundleContext;
@@ -52,10 +53,15 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 //		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
 //		System.out.println("\n\n\n REGISTERED SERVICE: \t" + context.getService(projectServiceRegistration.getReference()).toString() + "\n\n\n");
 //		
-		ServiceReference<Projects> serviceReference = context.getServiceReference(Projects.class);
-		Projects projectsService = context.getService(serviceReference);
+		ServiceReference<Projects> projectsServiceReference = context.getServiceReference(Projects.class);
+		Projects projectsService = context.getService(projectsServiceReference);
 		projectsService.setAccessControl(accessControl);
 		projectsService.setEmfStore(emfStore);
+		
+		ServiceReference<Branches> branchesServiceReference = context.getServiceReference(Branches.class);
+		Branches branchesService = context.getService(branchesServiceReference);
+		branchesService.setAccessControl(accessControl);
+		branchesService.setEmfStore(emfStore);
 		
 		
 		

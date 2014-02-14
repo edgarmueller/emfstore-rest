@@ -63,47 +63,9 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @author Pascal
  * 
  */
-
+//TODO: do error handling for all {pathParam} stuff where this pathParam is not valid!!!
 @Path(CallParamStrings.PROJECTS_PATH)
-public class Projects {
-
-	// private final EMFStore emfStore;
-	// private final AccessControl accessControl;
-	
-	private EMFStore emfStore;
-	private AccessControl accessControl;
-
-	public EMFStore getEmfStore() {
-		return emfStore;
-	}
-
-	public void setEmfStore(EMFStore emfStore) {
-		this.emfStore = emfStore;
-	}
-
-	public AccessControl getAccessControl() {
-		return accessControl;
-	}
-
-	public void setAccessControl(AccessControl accessControl) {
-		this.accessControl = accessControl;
-	}
-
-	/**
-	 * @param emfStore
-	 * @param accessControl
-	 */
-	public Projects(EMFStore emfStore, AccessControl accessControl) {
-
-		this.emfStore = emfStore;
-		this.accessControl = accessControl;
-	}
-
-	public Projects() {
-		// TODO: delete this constructor afterwards!
-		emfStore = null;
-		accessControl = null;
-	}
+public class Projects extends JaxrsResource {
 
 	@SuppressWarnings("restriction")
 	@GET
