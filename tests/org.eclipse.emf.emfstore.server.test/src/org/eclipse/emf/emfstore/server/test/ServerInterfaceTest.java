@@ -21,6 +21,7 @@ import static org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil.tag;
 import static org.eclipse.emf.emfstore.internal.common.APIUtil.toInternal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Date;
@@ -43,6 +44,7 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStore
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
+import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidProjectIdException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
@@ -159,7 +161,7 @@ public class ServerInterfaceTest {
 
 		assertNotNull(retrievedProject);
 		assertEquals(project.getAllModelElements().size(), retrievedProject.getAllModelElements().size());
-
+		assertTrue(ModelUtil.areEqual(project, retrievedProject));
 	}
 
 	@Test(expected = InvalidProjectIdException.class)
