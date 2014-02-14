@@ -56,6 +56,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
+import org.eclipse.emf.emfstore.jax.common.CallParamStrings;
 import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
@@ -63,12 +64,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @author Pascal
  * 
  */
-//TODO: extract all possibly static fields into Enums
 public class JaxrsConnectionManager implements ConnectionManager {
-
-	private static final String PATH_PROJECTS = "projects";
-	private static String BASE_URI = "http://localhost:9090/services";
-//	private static String BASE_URI = "https://localhost:9090/services";
 
 	private final WebTarget target;
 
@@ -76,13 +72,13 @@ public class JaxrsConnectionManager implements ConnectionManager {
 
 		final Client client = ClientBuilder.newClient();
 //		final Client client = ClientBuilder.newBuilder().sslContext(ssl).build();
-		target = client.target(BASE_URI);
+		target = client.target(CallParamStrings.BASE_URI);
 	}
 
 	private List<ProjectInfo> getProjectList() {
 		
 		//make the http call and get the input stream
-		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).get();
+		final Response response = target.path(CallParamStrings.PROJECTS_PATH).request(MediaType.TEXT_XML).get();
 		
 		List<ProjectInfo> projectInfoList = getProjectInfoListFromResponse(response);
 		
@@ -130,7 +126,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		String versionSpecQueryParam = versionSpec.getBranch();
 		
 		//make the http call and get the input stream and extract the Project
-		final ProjectDataTO projectDataTO = target.path(PATH_PROJECTS).path(subpath).queryParam("versionSpec", versionSpecQueryParam).request(MediaType.TEXT_XML).get(ProjectDataTO.class);
+		final ProjectDataTO projectDataTO = target.path(CallParamStrings.PROJECTS_PATH).path(subpath).queryParam("versionSpec", versionSpecQueryParam).request(MediaType.TEXT_XML).get(ProjectDataTO.class);
 		Project project = projectDataTO.getProject();
 
 		return project;
@@ -142,7 +138,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		ProjectDataTO projectDataTO = new ProjectDataTO(name, description, logMessage, project);
 		
 		//make the http call
-		final Response response = target.path(PATH_PROJECTS).request(MediaType.TEXT_XML).post(Entity.entity(projectDataTO, MediaType.TEXT_XML));
+		final Response response = target.path(CallParamStrings.PROJECTS_PATH).request(MediaType.TEXT_XML).post(Entity.entity(projectDataTO, MediaType.TEXT_XML));
 		
 		//read the entity
 		List<ProjectInfo> projectInfoList = getProjectInfoListFromResponse(response);
@@ -158,7 +154,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		String subpath = projectId.getId();
 		
 		//make the http call
-		final Response response = target.path(PATH_PROJECTS).path(subpath).queryParam("deleteFiles", deleteFiles).request().delete();
+		final Response response = target.path(CallParamStrings.PROJECTS_PATH).path(subpath).queryParam("deleteFiles", deleteFiles).request().delete();
 		
 		if(response.getStatus() != javax.ws.rs.core.Response.Status.OK.getStatusCode()) {
 			throw new ESException("DELETE not successful!");
