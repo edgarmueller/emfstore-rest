@@ -38,17 +38,24 @@ import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.Connecti
 import org.eclipse.emf.emfstore.internal.client.model.connectionmanager.KeyStoreManager;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESLocalProjectImpl;
 import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
+import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// TODO: refactor tests avoiding code copying!!
 public class ServerInterfaceTest {
 
 	private static ESServer server;
@@ -177,6 +184,43 @@ public class ServerInterfaceTest {
 	// Create.primaryVersionSpec(0));
 	// }
 
+	@Test
+	public void testCreateVersion() throws ESException {
+
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+
+		final ESLocalProject localProject = CreateAPI.project(ProjectUtil.defaultName());
+		final ProjectSpace projectSpace = APIUtil.toInternal(ProjectSpace.class, localProject);
+		final Usersession usersession = APIUtil.toInternal(Usersession.class, session);
+		final PrimaryVersionSpec baseVersionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+		final BranchVersionSpec branchVersionSpec = VersioningFactory.eINSTANCE.createBranchVersionSpec();
+
+		final ProjectInfo projectInfo = connectionManager.createProject(
+			usersession.getSessionId(),
+			ProjectUtil.defaultName(),
+			"Example Description",
+			Create.logMessage(),
+			ESLocalProjectImpl.class.cast(localProject).toInternalAPI().getProject()
+			);
+
+		final ProjectId projectId = projectInfo.getProjectId();
+		baseVersionSpec.setBranch("trunk");
+		baseVersionSpec.setIdentifier(0);
+		branchVersionSpec.setBranch("trunk");
+
+		final PrimaryVersionSpec versionSpec = connectionManager.createVersion(
+			usersession.getSessionId(),
+			projectId,
+			baseVersionSpec,
+			VersioningFactory.eINSTANCE.createChangePackage(),
+			branchVersionSpec,
+			projectSpace.getMergedVersion(),
+			VersioningFactory.eINSTANCE.createLogMessage());
+		final List<ProjectInfo> projectInfos = connectionManager.getProjectList(usersession.getSessionId());
+
+		assertNotNull(versionSpec);
+	}
+
 	// @Test(expected = InvalidProjectIdException.class)
 	// public void testCreateVersion() throws ESException {
 	//
@@ -205,24 +249,24 @@ public class ServerInterfaceTest {
 	// List<ProjectInfo> projectInfos = connectionManager.getProjectList(usersession.getSessionId());
 	// }
 
-	// @Test
-	// public void testGetChanges() throws ESException {
-	//
-	// final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
-	//
-	// final ESLocalProject localProject = commit(
-	// addElement(
-	// share(session, CreateAPI.project(defaultName())),
-	// Create.testElement()));
-	//
-	// final List<ChangePackage> changes = connectionManager.getChanges(
-	// toInternal(Usersession.class, session).getSessionId(),
-	// toInternal(ProjectSpace.class, localProject).getProjectId(),
-	// Create.primaryVersionSpec(0),
-	// Create.primaryVersionSpec(1));
-	//
-	// assertEquals(1, changes.size());
-	// }
+	@Test
+	public void testGetChanges() throws ESException {
+
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+
+		final ESLocalProject localProject = ProjectUtil.commit(
+			ProjectUtil.addElement(
+				share(session, CreateAPI.project(defaultName())),
+				Create.testElement()));
+
+		final List<ChangePackage> changes = connectionManager.getChanges(
+			toInternal(Usersession.class, session).getSessionId(),
+			toInternal(ProjectSpace.class, localProject).getProjectId(),
+			Create.primaryVersionSpec(0),
+			Create.primaryVersionSpec(1));
+
+		assertEquals(1, changes.size());
+	}
 
 	// @Test
 	// public void testResolvePagedUpdateVersionSpec() throws ESException {
@@ -347,4 +391,40 @@ public class ServerInterfaceTest {
 	// toInternal(ProjectSpace.class, localProject).getProjectId(),
 	// Create.tagVersionSpec("trunk", "footag"));
 	// }
+
+	@Test
+	public void testGetBranches() throws ESException {
+
+		// code from create Version
+		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+		final ESLocalProject localProject = CreateAPI.project(ProjectUtil.defaultName());
+		final ProjectSpace projectSpace = APIUtil.toInternal(ProjectSpace.class, localProject);
+		final Usersession usersession = APIUtil.toInternal(Usersession.class, session);
+		final PrimaryVersionSpec baseVersionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+		final BranchVersionSpec branchVersionSpec = VersioningFactory.eINSTANCE.createBranchVersionSpec();
+		final ProjectInfo projectInfo = connectionManager.createProject(
+			usersession.getSessionId(),
+			ProjectUtil.defaultName(),
+			"Example Description",
+			Create.logMessage(),
+			ESLocalProjectImpl.class.cast(localProject).toInternalAPI().getProject()
+			);
+		final ProjectId projectId = projectInfo.getProjectId();
+		baseVersionSpec.setBranch("trunk");
+		baseVersionSpec.setIdentifier(0);
+		branchVersionSpec.setBranch("trunk");
+		final PrimaryVersionSpec versionSpec = connectionManager.createVersion(
+			usersession.getSessionId(),
+			projectId,
+			baseVersionSpec,
+			VersioningFactory.eINSTANCE.createChangePackage(),
+			branchVersionSpec,
+			projectSpace.getMergedVersion(),
+			VersioningFactory.eINSTANCE.createLogMessage());
+		final List<ProjectInfo> projectInfos = connectionManager.getProjectList(usersession.getSessionId());
+
+		final List<BranchInfo> branches = connectionManager.getBranches(usersession.getSessionId(), projectId);
+		assertEquals(1, branches.size());
+
+	}
 }
