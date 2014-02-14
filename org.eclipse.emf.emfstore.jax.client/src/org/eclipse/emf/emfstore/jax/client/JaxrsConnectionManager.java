@@ -23,6 +23,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -62,6 +63,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * @author Pascal
  * 
  */
+//TODO: extract all possibly static fields into Enums
 public class JaxrsConnectionManager implements ConnectionManager {
 
 	private static final String PATH_PROJECTS = "projects";
@@ -149,6 +151,20 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		
 		return projectInfoList.get(0);
 	}
+	
+	private void deleteProject(ProjectId projectId, boolean deleteFiles) throws ESException {
+		
+		// TODO: refactor using a hash map which contains the URIs! using String concatenation is not very RESTful!
+		String subpath = projectId.getId();
+		
+		//make the http call
+		final Response response = target.path(PATH_PROJECTS).path(subpath).queryParam("deleteFiles", deleteFiles).request().delete();
+		
+		if(response.getStatus() != Status.OK) {
+			throw new ESException("DELETE not successful!");
+		}
+		
+	}
 
 	public List<ProjectInfo> getProjectList(SessionId sessionId)
 			throws ESException {
@@ -226,7 +242,8 @@ public class JaxrsConnectionManager implements ConnectionManager {
 
 	public void deleteProject(SessionId sessionId, ProjectId projectId,
 			boolean deleteFiles) throws ESException {
-		// TODO Auto-generated method stub
+		
+		deleteProject(projectId, deleteFiles);
 		
 	}
 
