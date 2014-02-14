@@ -86,7 +86,7 @@ public class ShareController extends ServerCall<ProjectInfo> {
 		getProjectSpace().save();
 
 		projectInfo = createProject(logMessage);
-		addParticipant(projectInfo.getProjectId());
+		// addParticipant(projectInfo.getProjectId());
 
 		getProgressMonitor().worked(30);
 		getProgressMonitor().subTask("Finalizing share"); //$NON-NLS-1$
@@ -130,7 +130,8 @@ public class ShareController extends ServerCall<ProjectInfo> {
 					.getConnectionManager()
 					.createProject(
 						getUsersession().getSessionId(),
-						getProjectSpace().getProjectName() == null ? MessageFormat.format(Messages.ShareController_Project_At, new Date())
+						getProjectSpace().getProjectName() == null ? MessageFormat.format(
+							Messages.ShareController_Project_At, new Date())
 							: getProjectSpace().getProjectName(),
 						StringUtils.EMPTY,
 						logMessage,
