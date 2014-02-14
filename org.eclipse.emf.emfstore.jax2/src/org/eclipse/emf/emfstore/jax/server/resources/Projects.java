@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -259,6 +260,24 @@ public class Projects {
 		
 		return Response.created(createdUri).entity(streamingOutput).build();
 				
+	}
+	
+	@DELETE
+	@Path("/{projectId}")
+	public Response deleteProject(@PathParam("projectId") String projectIdAsString, @QueryParam("deleteFiles") boolean deleteFiles) {
+		
+		//create ProjectId
+		ProjectId projectId = ModelFactory.eINSTANCE.createProjectId();
+		projectId.setId(projectIdAsString);
+		
+		try {
+			emfStore.deleteProject(retrieveSessionId(), projectId, deleteFiles);
+		} catch (ESException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+		
+		return Response.ok().build();
 	}
 
 }
