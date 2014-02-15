@@ -49,6 +49,7 @@ import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.impl.ProjectIdImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
@@ -64,6 +65,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
  * 
  */
 //TODO: do error handling for all {pathParam} stuff where this pathParam is not valid!!!
+//TODO: refactor using CallParamStrings everywhere where possible!
 @Path(CallParamStrings.PROJECTS_PATH)
 public class Projects extends JaxrsResource {
 
@@ -219,6 +221,34 @@ public class Projects extends JaxrsResource {
 		}
 		
 		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/{projectId}" + "/" + CallParamStrings.PROJECTS_PATH_CHANGES)
+	@Produces({ MediaType.TEXT_XML })
+	public Response getChanges(@PathParam("projectId") String projectIdAsString, @QueryParam("sourceVersionSpec") String sourceVersionSpecAsString, @QueryParam("targetVersionSpec") String targetVersionSpecAsString) {
+		
+		//create ProjectId and VersionSpecs
+		ProjectId projectId = ModelFactory.eINSTANCE.createProjectId();
+		projectId.setId(projectIdAsString);
+		//TODO: adjust so that it not only supports PrimaryVersionSpec
+		VersionSpec source = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+		source.setBranch(sourceVersionSpecAsString);
+		VersionSpec target = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+		target.setBranch(targetVersionSpecAsString);
+		
+		try {
+			//get changes from emfStore
+			List<ChangePackage> changes = emfStore.getChanges(retrieveSessionId(), projectId, source, target);
+			
+			//return the list as streaming output
+			final StreamingOutput streamingOutput = convertEObjectsToXmlIntoStreamingOutput(changes);
+			return Response.ok(streamingOutput).build();
+			
+		} catch (ESException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
 	}
 
 }

@@ -20,6 +20,7 @@ public interface CallParamStrings {
 	public final static String BRANCHES_PATH_AFTER_PROJECTID = "branches";
 	public final static String BRANCHES_PATH_COMPLETE = BRANCHES_PATH_BEFORE_PROJECTID + "/" + "{" + PROJECT_ID_PATH_PARAM + "}" + "/" + BRANCHES_PATH_AFTER_PROJECTID;
 	public static final String BRANCHES_PATH_CHANGES = "changes";
+	public static final String PROJECTS_PATH_CHANGES = "changes";
 
 	
 	
