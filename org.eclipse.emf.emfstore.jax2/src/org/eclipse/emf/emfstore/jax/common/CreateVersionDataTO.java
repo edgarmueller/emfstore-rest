@@ -48,11 +48,19 @@ public class CreateVersionDataTO extends TO {
 			PrimaryVersionSpec sourceVersion, LogMessage logMessage) {
 		super();
 		
-		this.baseVersionSpec = baseVersionSpec.getBranch();
-		this.sourceVersion = sourceVersion.getBranch();
+		if(baseVersionSpec != null) {
+			this.baseVersionSpec = baseVersionSpec.getBranch();
+		}
+		if(sourceVersion != null) {
+			this.sourceVersion = sourceVersion.getBranch();
+		}
 		try {
-			this.changePackage = serializeEObjectToString(changePackage);
-			this.logMessage = serializeEObjectToString(logMessage);
+			if(changePackage != null) {
+				this.changePackage = serializeEObjectToString(changePackage);
+			}
+			if(logMessage != null) {
+				this.logMessage = serializeEObjectToString(logMessage);
+			}
 		} catch (SerializationException e) {
 			e.printStackTrace();
 		}
