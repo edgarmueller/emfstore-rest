@@ -60,6 +60,8 @@ public class ServerInterfaceTest {
 
 	private static ESServer server;
 	private static ESUsersession session;
+	private static ConnectionManager connectionManager;
+	private static Usersession usersession;
 
 	@BeforeClass
 	public static void beforeClass() throws IllegalArgumentException, ESServerStartFailedException,
@@ -73,6 +75,10 @@ public class ServerInterfaceTest {
 		session = server.login("super", "super");
 		// deleteRemoteProjects(server, session);
 		// deleteLocalProjects();
+
+		connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
+
+		usersession = toInternal(Usersession.class, session);
 	}
 
 	@AfterClass
@@ -89,12 +95,6 @@ public class ServerInterfaceTest {
 	@Test
 	public void testCreateEmptyProject() throws ESException {
 
-		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
-
-		final Usersession usersession = toInternal(Usersession.class, session);
-		final ProjectId projectId = Create.projectId();
-		projectId.setId(ProjectUtil.defaultName());
-
 		final ProjectInfo projectInfo = connectionManager.createEmptyProject(
 			usersession.getSessionId(),
 			ProjectUtil.defaultName(),
@@ -110,12 +110,6 @@ public class ServerInterfaceTest {
 
 	@Test
 	public void testCreateProject() throws ESException {
-
-		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
-
-		final Usersession usersession = toInternal(Usersession.class, session);
-		final ProjectId projectId = Create.projectId();
-		projectId.setId(ProjectUtil.defaultName());
 
 		final ProjectInfo projectInfo = connectionManager.createProject(
 			usersession.getSessionId(),
@@ -136,8 +130,6 @@ public class ServerInterfaceTest {
 	public void testGetProject() throws ESException {
 
 		// create a Project
-		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
-		final Usersession usersession = toInternal(Usersession.class, session);
 		final ProjectId projectId = Create.projectId();
 		projectId.setId(ProjectUtil.defaultName());
 
@@ -187,11 +179,8 @@ public class ServerInterfaceTest {
 	@Test
 	public void testCreateVersion() throws ESException {
 
-		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
-
 		final ESLocalProject localProject = CreateAPI.project(ProjectUtil.defaultName());
 		final ProjectSpace projectSpace = APIUtil.toInternal(ProjectSpace.class, localProject);
-		final Usersession usersession = APIUtil.toInternal(Usersession.class, session);
 		final PrimaryVersionSpec baseVersionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 		final BranchVersionSpec branchVersionSpec = VersioningFactory.eINSTANCE.createBranchVersionSpec();
 
@@ -251,8 +240,6 @@ public class ServerInterfaceTest {
 
 	@Test
 	public void testGetChanges() throws ESException {
-
-		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 
 		final ESLocalProject localProject = ProjectUtil.commit(
 			ProjectUtil.addElement(
@@ -353,7 +340,6 @@ public class ServerInterfaceTest {
 
 	@Test
 	public void testDeleteProject() throws ESException {
-		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 
 		final ESLocalProject localProject = addAndCommit(share(session, CreateAPI.project(defaultName()))).times(1);
 
@@ -396,10 +382,8 @@ public class ServerInterfaceTest {
 	public void testGetBranches() throws ESException {
 
 		// code from create Version
-		final ConnectionManager connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 		final ESLocalProject localProject = CreateAPI.project(ProjectUtil.defaultName());
 		final ProjectSpace projectSpace = APIUtil.toInternal(ProjectSpace.class, localProject);
-		final Usersession usersession = APIUtil.toInternal(Usersession.class, session);
 		final PrimaryVersionSpec baseVersionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 		final BranchVersionSpec branchVersionSpec = VersioningFactory.eINSTANCE.createBranchVersionSpec();
 		final ProjectInfo projectInfo = connectionManager.createProject(
