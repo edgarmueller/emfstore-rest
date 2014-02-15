@@ -83,7 +83,7 @@ public class ServerInterfaceTest {
 
 	@AfterClass
 	public static void afterClass() throws ESException {
-		// session.logout();
+		session.logout();
 	}
 
 	@After
@@ -130,9 +130,6 @@ public class ServerInterfaceTest {
 	public void testGetProject() throws ESException {
 
 		// create a Project
-		final ProjectId projectId = Create.projectId();
-		projectId.setId(ProjectUtil.defaultName());
-
 		final Project project = ESLocalProjectImpl.class.cast(Create.project("testName")).toInternalAPI().getProject();
 
 		final ProjectInfo projectInfo = connectionManager.createProject(
