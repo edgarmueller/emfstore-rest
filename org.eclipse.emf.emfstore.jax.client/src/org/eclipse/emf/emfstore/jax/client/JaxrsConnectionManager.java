@@ -161,6 +161,17 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		}
 		
 	}
+	
+	private List<BranchInfo> getBranches(ProjectId projectId) {
+		
+		// TODO: refactor using a hash map which contains the URIs! using String concatenation is not very RESTful!
+		String projectIdPathParam = projectId.getId();
+				
+		//make the http call
+		final Response response = target.path(CallParamStrings.BRANCHES_PATH_BEFORE_PROJECTID).path(projectIdPathParam).path(CallParamStrings.BRANCHES_PATH_AFTER_PROJECTID).request(MediaType.TEXT_XML).get();
+		
+		return null;
+	}
 
 	public List<ProjectInfo> getProjectList(SessionId sessionId)
 			throws ESException {
@@ -198,8 +209,8 @@ public class JaxrsConnectionManager implements ConnectionManager {
 
 	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId)
 			throws ESException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return getBranches(projectId);
 	}
 
 	public List<HistoryInfo> getHistoryInfo(SessionId sessionId,
