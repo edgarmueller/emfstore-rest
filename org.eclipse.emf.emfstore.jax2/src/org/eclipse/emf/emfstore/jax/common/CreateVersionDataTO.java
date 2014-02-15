@@ -1,5 +1,6 @@
 package org.eclipse.emf.emfstore.jax.common;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.eclipse.emf.emfstore.internal.common.model.util.SerializationException;
@@ -14,18 +15,22 @@ public class CreateVersionDataTO extends TO {
 	/**
 	 * baseVersionSpec as String object
 	 */
+	@XmlElement
 	private String baseVersionSpec;
 	/**
 	 * changePackage as String object
 	 */
+	@XmlElement
 	private String changePackage;
 	/**
 	 * sourceVersion as String object
 	 */
+	@XmlElement
 	private String sourceVersion;
 	/**
 	 * logMessage as String object
 	 */
+	@XmlElement
 	private String logMessage;
 	
 	//empty constructor needed for JAXB
