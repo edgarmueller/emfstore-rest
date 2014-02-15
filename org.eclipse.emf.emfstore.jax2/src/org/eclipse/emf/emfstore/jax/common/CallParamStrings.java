@@ -15,7 +15,10 @@ public interface CallParamStrings {
 	
 	//path constants
 	public final static String PROJECTS_PATH = "projects";
-	public final static String BRANCHES_PATH_COMPLETE = PROJECTS_PATH + "/" + "{" + PROJECT_ID_PATH_PARAM + "}" + "/" + "branches";
+	public final static String BRANCHES_PATH_BEFORE_PROJECTID = PROJECTS_PATH;
+	public final static String BRANCHES_PATH_AFTER_PROJECTID = "branches";
+	public final static String BRANCHES_PATH_COMPLETE = BRANCHES_PATH_BEFORE_PROJECTID + "/" + "{" + PROJECT_ID_PATH_PARAM + "}" + "/" + BRANCHES_PATH_AFTER_PROJECTID;
+	
 	
 	
 }
