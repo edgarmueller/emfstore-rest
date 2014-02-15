@@ -204,6 +204,25 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		
 		return baseVersionSpecResult;
 	}
+	
+
+	private List<ChangePackage> getChanges(ProjectId projectId,
+			VersionSpec sourceSpec, VersionSpec targetSpec) {
+		
+		//convert params to Strings
+		String projectIdAsString = projectId.getId();
+		//TODO: adjust so that it works for every VersionSpec!!!!
+		String sourceAsString = sourceSpec.getBranch();
+		String targetAsString = targetSpec.getBranch();
+		
+		//make http call
+		Response response = target.path(CallParamStrings.PROJECTS_PATH).path(projectIdAsString).path(CallParamStrings.PROJECTS_PATH_CHANGES).queryParam("sourceVersionSpec", sourceAsString).queryParam("targetVersionSpec", targetAsString).request(MediaType.TEXT_XML).get();
+		
+		List<ChangePackage> changes = (this.<ChangePackage>getEObjectListFromResponse(response));
+		
+		return changes;
+	}
+
 
 	public List<ProjectInfo> getProjectList(SessionId sessionId)
 			throws ESException {
@@ -237,8 +256,8 @@ public class JaxrsConnectionManager implements ConnectionManager {
 	public List<ChangePackage> getChanges(SessionId sessionId,
 			ProjectId projectId, VersionSpec source, VersionSpec target)
 			throws ESException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return getChanges(projectId, source, target);
 	}
 
 	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId)
