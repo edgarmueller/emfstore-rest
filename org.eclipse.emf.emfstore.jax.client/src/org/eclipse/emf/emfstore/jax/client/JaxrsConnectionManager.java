@@ -58,6 +58,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionS
 import org.eclipse.emf.emfstore.internal.server.model.versioning.TagVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.jax.common.CallParamStrings;
+import org.eclipse.emf.emfstore.jax.common.CreateVersionDataTO;
 import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
@@ -176,6 +177,33 @@ public class JaxrsConnectionManager implements ConnectionManager {
 
 		return branchInfoList;
 	}
+	
+	private PrimaryVersionSpec createVersion(ProjectId projectId,
+			PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage,
+			BranchVersionSpec targetBranch, PrimaryVersionSpec sourceVersion,
+			LogMessage logMessage) {
+		
+		//create path params as Strings
+		String projectIdPathParam = projectId.getId();
+		String targetBranchPathParam = targetBranch.getBranch();
+		
+		//create Entity-body object
+		CreateVersionDataTO createVersionDataTO = new CreateVersionDataTO(baseVersionSpec, changePackage, sourceVersion, logMessage);
+		
+		//make http call
+		final CreateVersionDataTO response = target
+				.path(CallParamStrings.BRANCHES_PATH_BEFORE_PROJECTID)
+				.path(projectIdPathParam)
+				.path(CallParamStrings.BRANCHES_PATH_AFTER_PROJECTID)
+				.path(targetBranchPathParam)
+				.path(CallParamStrings.BRANCHES_PATH_CHANGES)
+				.request(MediaType.TEXT_XML).post(Entity.entity(createVersionDataTO, MediaType.TEXT_XML), CreateVersionDataTO.class);		
+		
+		//retrieve PrimaryVersionSpec
+		PrimaryVersionSpec baseVersionSpecResult = response.getBaseVersionSpec();
+		
+		return baseVersionSpecResult;
+	}
 
 	public List<ProjectInfo> getProjectList(SessionId sessionId)
 			throws ESException {
@@ -194,8 +222,10 @@ public class JaxrsConnectionManager implements ConnectionManager {
 			ChangePackage changePackage, BranchVersionSpec targetBranch,
 			PrimaryVersionSpec sourceVersion, LogMessage logMessage)
 			throws ESException, InvalidVersionSpecException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return createVersion(projectId, baseVersionSpec,
+			changePackage, targetBranch,
+			sourceVersion, logMessage);
 	}
 
 	public PrimaryVersionSpec resolveVersionSpec(SessionId sessionId,
