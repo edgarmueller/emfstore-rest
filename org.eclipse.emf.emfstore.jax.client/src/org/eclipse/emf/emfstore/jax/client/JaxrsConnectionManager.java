@@ -172,7 +172,9 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		//make the http call
 		final Response response = target.path(CallParamStrings.BRANCHES_PATH_BEFORE_PROJECTID).path(projectIdPathParam).path(CallParamStrings.BRANCHES_PATH_AFTER_PROJECTID).request(MediaType.TEXT_XML).get();
 		
-		return null;
+		List<BranchInfo> branchInfoList = (List<BranchInfo>) (this.<BranchInfo>getEObjectListFromResponse(response));
+
+		return branchInfoList;
 	}
 
 	public List<ProjectInfo> getProjectList(SessionId sessionId)

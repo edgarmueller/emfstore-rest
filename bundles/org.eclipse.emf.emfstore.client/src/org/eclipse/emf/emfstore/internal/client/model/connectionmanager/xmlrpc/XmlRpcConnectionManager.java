@@ -160,7 +160,10 @@ public class XmlRpcConnectionManager extends AbstractConnectionManager<XmlRpcCli
 	 *      org.eclipse.emf.emfstore.internal.server.model.ProjectId)
 	 */
 	public List<BranchInfo> getBranches(SessionId sessionId, ProjectId projectId) throws ESException {
-		return getConnectionProxy(sessionId).callWithListResult("getBranches", BranchInfo.class, sessionId, projectId);
+		// return getConnectionProxy(sessionId).callWithListResult("getBranches", BranchInfo.class, sessionId,
+		// projectId);
+
+		return getJaxrsConnectionManager().getBranches(sessionId, projectId);
 	}
 
 	/**
