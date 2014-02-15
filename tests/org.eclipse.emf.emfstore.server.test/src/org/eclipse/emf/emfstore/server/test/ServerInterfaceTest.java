@@ -73,8 +73,8 @@ public class ServerInterfaceTest {
 		serverInfo.setPort(8081);
 		server = new ESServerImpl(serverInfo);
 		session = server.login("super", "super");
-		// deleteRemoteProjects(server, session);
-		// deleteLocalProjects();
+		ProjectUtil.deleteRemoteProjects(server, session);
+		ProjectUtil.deleteLocalProjects();
 
 		connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 
