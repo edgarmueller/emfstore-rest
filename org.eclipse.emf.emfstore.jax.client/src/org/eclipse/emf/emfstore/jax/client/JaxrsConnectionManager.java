@@ -14,6 +14,7 @@ package org.eclipse.emf.emfstore.jax.client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -80,7 +81,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		//make the http call and get the input stream
 		final Response response = target.path(CallParamStrings.PROJECTS_PATH).request(MediaType.TEXT_XML).get();
 		
-		List<ProjectInfo> projectInfoList = getProjectInfoListFromResponse(response);
+		List<ProjectInfo> projectInfoList = (List<ProjectInfo>) (this.<ProjectInfo>getEObjectListFromResponse(response));
 		
 		//TODO: store the URIs!
 
@@ -88,10 +89,11 @@ public class JaxrsConnectionManager implements ConnectionManager {
 	}
 
 	/**
+	 * converts an response's inputstream to a list of EObjects, for example: List<ProjectInfo>, List<BranchInfo>, ...
 	 * @param response
 	 * @return
 	 */
-	private List<ProjectInfo> getProjectInfoListFromResponse(
+	private <T extends EObject> List<T> getEObjectListFromResponse(
 			final Response response) {
 		//create XMLResource and read the entity
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
@@ -99,19 +101,19 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl.createResource(URI.createURI(fileNameURI));
 		
 		final InputStream is = response.readEntity(InputStream.class);
-		List<ProjectInfo> projectInfoList = new ArrayList<ProjectInfo>();
+		List<T> eObjectList = new ArrayList<T>();
 		try {
 			//create the List<ProjectInfo> from the input stream
 			resource.doLoad(is, null);   
 			Object[] array = resource.getContents().toArray(); 
 			for(Object o : array) {
-				projectInfoList.add((ProjectInfo) o);
+				eObjectList.add((T) o);
 			}
 			
 		} catch (final IOException ex) {
 			System.err.println(ex.getMessage());
 		}
-		return projectInfoList;
+		return eObjectList;
 	}
 
 	private Project getProject(ProjectId projectId, VersionSpec versionSpec) {
@@ -141,7 +143,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		final Response response = target.path(CallParamStrings.PROJECTS_PATH).request(MediaType.TEXT_XML).post(Entity.entity(projectDataTO, MediaType.TEXT_XML));
 		
 		//read the entity
-		List<ProjectInfo> projectInfoList = getProjectInfoListFromResponse(response);
+		List<ProjectInfo> projectInfoList = (List<ProjectInfo>) (this.<ProjectInfo>getEObjectListFromResponse(response));
 		
 		//TODO: retrieve and store the URI of the created project!!!!
 		
