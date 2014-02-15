@@ -17,7 +17,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchInfo;
 import org.eclipse.emf.emfstore.jax.common.CallParamStrings;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
-@Path(CallParamStrings.BRANCHES_PATH)
+@Path(CallParamStrings.BRANCHES_PATH_COMPLETE)
 public class Branches extends JaxrsResource {
 	
 	@GET
