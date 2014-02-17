@@ -212,15 +212,20 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		//convert params to Strings
 		String projectIdAsString = projectId.getId();
 		//TODO: adjust so that it works for every VersionSpec!!!!
-		String sourceAsString = sourceSpec.getBranch();
-		String targetAsString = targetSpec.getBranch();
+		if(sourceSpec instanceof PrimaryVersionSpec && targetSpec instanceof PrimaryVersionSpec) {
+			String sourceAsString = String.valueOf(((PrimaryVersionSpec) sourceSpec).getIdentifier());
+			String targetAsString = String.valueOf(((PrimaryVersionSpec) targetSpec).getIdentifier());
+			
+			//make http call
+			Response response = target.path(CallParamStrings.PROJECTS_PATH).path(projectIdAsString).path(CallParamStrings.PROJECTS_PATH_CHANGES).queryParam("sourceVersionSpec", sourceAsString).queryParam("targetVersionSpec", targetAsString).request(MediaType.TEXT_XML).get();
+			
+			List<ChangePackage> changes = (this.<ChangePackage>getEObjectListFromResponse(response));
+			
+			return changes;
+		}
 		
-		//make http call
-		Response response = target.path(CallParamStrings.PROJECTS_PATH).path(projectIdAsString).path(CallParamStrings.PROJECTS_PATH_CHANGES).queryParam("sourceVersionSpec", sourceAsString).queryParam("targetVersionSpec", targetAsString).request(MediaType.TEXT_XML).get();
+		return null;
 		
-		List<ChangePackage> changes = (this.<ChangePackage>getEObjectListFromResponse(response));
-		
-		return changes;
 	}
 
 
