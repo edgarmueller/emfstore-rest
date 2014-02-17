@@ -72,6 +72,7 @@ public class Branches extends JaxrsResource {
 
 		PrimaryVersionSpec sourceVersion = createVersionDataTO.getSourceVersion();
 		
+		
 		LogMessage logMessage = createVersionDataTO.getLogMessage();
 		
 	

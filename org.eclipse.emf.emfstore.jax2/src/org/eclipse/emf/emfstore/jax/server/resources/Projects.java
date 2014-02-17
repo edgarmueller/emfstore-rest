@@ -51,6 +51,7 @@ import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.impl.ProjectIdImpl;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionSpecImpl;
@@ -232,10 +233,12 @@ public class Projects extends JaxrsResource {
 		ProjectId projectId = ModelFactory.eINSTANCE.createProjectId();
 		projectId.setId(projectIdAsString);
 		//TODO: adjust so that it not only supports PrimaryVersionSpec
-		VersionSpec source = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-		source.setBranch(sourceVersionSpecAsString);
-		VersionSpec target = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
-		target.setBranch(targetVersionSpecAsString);
+		PrimaryVersionSpec source = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+		source.setIdentifier(Integer.valueOf(sourceVersionSpecAsString));
+		source.setBranch("trunk");
+		PrimaryVersionSpec target = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
+		target.setIdentifier(Integer.valueOf(targetVersionSpecAsString));
+		target.setBranch("trunk");
 		
 		try {
 			//get changes from emfStore

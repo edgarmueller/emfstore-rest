@@ -93,6 +93,10 @@ public class CreateVersionDataTO extends TO {
 	 * @return sourceVersion as SourceVersion object
 	 */
 	public PrimaryVersionSpec getSourceVersion() {
+		if(sourceVersion == null) {
+			return null;
+		}
+		
 		PrimaryVersionSpec primaryVersionSpec = VersioningFactory.eINSTANCE.createPrimaryVersionSpec();
 		primaryVersionSpec.setBranch(sourceVersion);
 		return primaryVersionSpec;
