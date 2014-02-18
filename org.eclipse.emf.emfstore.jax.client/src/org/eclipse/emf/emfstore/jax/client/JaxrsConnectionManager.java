@@ -106,8 +106,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		try {
 			//create the List<ProjectInfo> from the input stream
 			resource.doLoad(is, null);   
-			Object[] array = resource.getContents().toArray(); 
-			for(Object o : array) {
+			for(Object o : resource.getContents()) {
 				eObjectList.add((T) o);
 			}
 			
@@ -144,7 +143,7 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		final Response response = target.path(CallParamStrings.PROJECTS_PATH).request(MediaType.TEXT_XML).post(Entity.entity(projectDataTO, MediaType.TEXT_XML));
 		
 		//read the entity
-		List<ProjectInfo> projectInfoList = (List<ProjectInfo>) (this.<ProjectInfo>getEObjectListFromResponse(response));
+		List<ProjectInfo> projectInfoList =  (this.<ProjectInfo>getEObjectListFromResponse(response));
 		
 		//TODO: retrieve and store the URI of the created project!!!!
 		
