@@ -256,7 +256,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		PrimaryVersionSpec baseVersionSpec, ChangePackage changePackage, BranchVersionSpec targetBranch,
 		PrimaryVersionSpec sourceVersion, LogMessage logMessage) throws ESException {
 
-		final ACUser user = getAuthorizationControl().resolveUser(sessionId);
+		// final ACUser user = getAuthorizationControl().resolveUser(sessionId); //TODO: commented to get Jaxrs running
 		sanityCheckObjects(sessionId, projectId, baseVersionSpec, changePackage, logMessage);
 		synchronized (getMonitor()) {
 
@@ -288,7 +288,13 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 				if (!baseVersionSpec.equals(isHeadOfBranch(projectHistory, baseVersion.getPrimarySpec()))) {
 					throw new ESUpdateRequiredException();
 				}
-				newVersion = createVersion(projectHistory, newProjectState, logMessage, user, baseVersion);
+				newVersion = createVersion(projectHistory, newProjectState, logMessage, /* user */null /*
+																										 * TODO:
+																										 * commented to
+																										 * get Jaxrs
+																										 * running
+																										 */,
+					baseVersion);
 				newVersion.setPreviousVersion(baseVersion);
 				baseBranch.setHead(ModelUtil.clone(newVersion.getPrimarySpec()));
 
@@ -302,7 +308,13 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 						+ "' must not be used.");
 				}
 				// when branch does NOT exist, create new branch
-				newVersion = createVersion(projectHistory, newProjectState, logMessage, user, baseVersion);
+				newVersion = createVersion(projectHistory, newProjectState, logMessage, /* user */null /*
+																										 * TODO:
+																										 * commented to
+																										 * get Jaxrs
+																										 * running
+																										 */,
+					baseVersion);
 				newBranch = createNewBranch(projectHistory, baseVersion.getPrimarySpec(), newVersion.getPrimarySpec(),
 					targetBranch);
 				newVersion.setAncestorVersion(baseVersion);
@@ -401,7 +413,7 @@ public class VersionSubInterfaceImpl extends AbstractSubEmfstoreInterface {
 		// newVersion.setChanges(changePackage);
 
 		logMessage.setDate(new Date());
-		logMessage.setAuthor(user.getName());
+		// logMessage.setAuthor(user.getName()); //TODO: comment to get Jaxrs running
 		newVersion.setLogMessage(logMessage);
 
 		// latest version == getVersion.size() (version start with index 0 as
