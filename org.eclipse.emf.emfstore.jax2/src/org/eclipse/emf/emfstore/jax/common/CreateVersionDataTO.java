@@ -9,6 +9,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
 
+//TODO: deprecated!
 @XmlRootElement
 public class CreateVersionDataTO extends TO {
 	
