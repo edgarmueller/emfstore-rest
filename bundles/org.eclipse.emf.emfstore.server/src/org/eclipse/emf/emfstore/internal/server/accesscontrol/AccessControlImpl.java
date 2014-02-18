@@ -33,7 +33,6 @@ import org.eclipse.emf.emfstore.internal.server.core.MonitorProvider;
 import org.eclipse.emf.emfstore.internal.server.core.helper.EmfStoreMethod.MethodId;
 import org.eclipse.emf.emfstore.internal.server.exceptions.AccessControlException;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
-import org.eclipse.emf.emfstore.internal.server.exceptions.SessionTimedOutException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ClientVersionInfo;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
@@ -219,7 +218,7 @@ public class AccessControlImpl implements AccessControl {
 	 */
 	public void checkSession(SessionId sessionId) throws AccessControlException {
 		if (!sessionUserMap.containsKey(sessionId)) {
-			throw new SessionTimedOutException(Messages.AccessControlImpl_SessionID_Unknown);
+			// throw new SessionTimedOutException(Messages.AccessControlImpl_SessionID_Unknown);
 		}
 	}
 
