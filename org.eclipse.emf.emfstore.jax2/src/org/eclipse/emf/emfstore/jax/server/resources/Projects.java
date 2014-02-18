@@ -12,6 +12,7 @@
 package org.eclipse.emf.emfstore.jax.server.resources;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -43,12 +44,14 @@ import org.eclipse.emf.emfstore.internal.common.model.impl.ProjectImpl;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.ServerConfiguration;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
+import org.eclipse.emf.emfstore.internal.server.exceptions.InvalidVersionSpecException;
 import org.eclipse.emf.emfstore.internal.server.model.AuthenticationInformation;
 import org.eclipse.emf.emfstore.internal.server.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
 import org.eclipse.emf.emfstore.internal.server.model.SessionId;
 import org.eclipse.emf.emfstore.internal.server.model.impl.ProjectIdImpl;
+import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.LogMessage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
@@ -58,6 +61,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersionSpe
 import org.eclipse.emf.emfstore.internal.server.model.versioning.impl.VersioningFactoryImpl;
 import org.eclipse.emf.emfstore.jax.common.CallParamStrings;
 import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
+import org.eclipse.emf.emfstore.jax.common.TransferUtil;
 import org.eclipse.emf.emfstore.server.ESServerURIUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
@@ -252,6 +256,61 @@ public class Projects extends JaxrsResource {
 			e.printStackTrace();
 			return Response.serverError().build();
 		}
+	}
+	
+	@POST
+	@Path("/{projectId}")
+	@Consumes({ MediaType.TEXT_XML })
+	@Produces({ MediaType.TEXT_XML })
+	public Response createVersion(
+			@PathParam(CallParamStrings.PROJECT_ID_PATH_PARAM) String projectIdAsString,
+			InputStream is) {
+
+		// create necessary objects
+		ProjectId projectId = ModelFactory.eINSTANCE.createProjectId();
+		projectId.setId(projectIdAsString);
+		
+		List<EObject> eObjects = TransferUtil.<EObject>getEObjectListFromInputStream(is);
+		
+		PrimaryVersionSpec baseVersionSpec = null;
+		ChangePackage changePackage = null;
+		PrimaryVersionSpec sourceVersion = null;
+		LogMessage logMessage = null;
+		BranchVersionSpec targetBranch = null;
+		
+		for(int i=0; i<eObjects.size(); i++) {
+			if(eObjects.get(i) instanceof PrimaryVersionSpec && i==0) {
+				//TODO: Reihenfolge ist hier wichtig! not RESTful !
+				baseVersionSpec = (PrimaryVersionSpec) eObjects.get(i);
+			} else if(eObjects.get(i) instanceof PrimaryVersionSpec) {
+				sourceVersion = (PrimaryVersionSpec) eObjects.get(i);
+			} else if(eObjects.get(i) instanceof ChangePackage) {
+				changePackage = (ChangePackage) eObjects.get(i);
+			} else if(eObjects.get(i) instanceof LogMessage) {
+				logMessage = (LogMessage) eObjects.get(i);
+			} else if(eObjects.get(i) instanceof BranchVersionSpec) {
+				targetBranch = (BranchVersionSpec) eObjects.get(i);
+			}
+		}
+	
+		try {
+			//make the server call
+			PrimaryVersionSpec createVersion = emfStore.createVersion(retrieveSessionId(), projectId, baseVersionSpec, changePackage, targetBranch, sourceVersion, logMessage);
+			
+			//create and return the Response
+			List<PrimaryVersionSpec> createVersionList = new ArrayList<PrimaryVersionSpec>();
+			createVersionList.add(createVersion);
+			StreamingOutput streamingOutput = TransferUtil.convertEObjectsToXmlIntoStreamingOutput(createVersionList);
+			return Response.ok(streamingOutput).build();
+			
+		} catch (InvalidVersionSpecException e) {
+			e.printStackTrace();
+			return Response.status(Status.NOT_FOUND).build();
+		} catch (ESException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+		
 	}
 
 }

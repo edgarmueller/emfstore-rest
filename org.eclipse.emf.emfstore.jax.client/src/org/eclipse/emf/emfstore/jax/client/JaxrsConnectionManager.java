@@ -23,6 +23,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -60,6 +61,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.VersionSpec;
 import org.eclipse.emf.emfstore.jax.common.CallParamStrings;
 import org.eclipse.emf.emfstore.jax.common.CreateVersionDataTO;
 import org.eclipse.emf.emfstore.jax.common.ProjectDataTO;
+import org.eclipse.emf.emfstore.jax.common.TransferUtil;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 
 /**
@@ -184,22 +186,25 @@ public class JaxrsConnectionManager implements ConnectionManager {
 		
 		//create path params as Strings
 		String projectIdPathParam = projectId.getId();
-		String targetBranchPathParam = targetBranch.getBranch();
 		
-		//create Entity-body object
-		CreateVersionDataTO createVersionDataTO = new CreateVersionDataTO(baseVersionSpec, changePackage, sourceVersion, logMessage);
+		List<EObject> eObjects = new ArrayList<EObject>();
+		if(baseVersionSpec != null) eObjects.add(baseVersionSpec);
+		if(changePackage != null) eObjects.add(changePackage);
+		if(sourceVersion != null) eObjects.add(sourceVersion);
+		if(logMessage != null) eObjects.add(logMessage);
+		if(targetBranch != null) eObjects.add(targetBranch);
 		
-		//make http call
-		final CreateVersionDataTO response = target
-				.path(CallParamStrings.BRANCHES_PATH_BEFORE_PROJECTID)
+		StreamingOutput streamingOutput = TransferUtil.convertEObjectsToXmlIntoStreamingOutput(eObjects);
+				
+		Response response = target
+				.path(CallParamStrings.PROJECTS_PATH)
 				.path(projectIdPathParam)
-				.path(CallParamStrings.BRANCHES_PATH_AFTER_PROJECTID)
-				.path(targetBranchPathParam)
-				.path(CallParamStrings.BRANCHES_PATH_CHANGES)
-				.request(MediaType.TEXT_XML).post(Entity.entity(createVersionDataTO, MediaType.TEXT_XML), CreateVersionDataTO.class);		
+				.request(MediaType.TEXT_XML)
+				.post(Entity.entity(streamingOutput, MediaType.TEXT_XML));
 		
-		//retrieve PrimaryVersionSpec
-		PrimaryVersionSpec baseVersionSpecResult = response.getBaseVersionSpec();
+		List<PrimaryVersionSpec> listWithBaseVersionSpec = TransferUtil.getEObjectListFromResponse(response);
+		
+		PrimaryVersionSpec baseVersionSpecResult = listWithBaseVersionSpec.get(0);
 		
 		return baseVersionSpecResult;
 	}
