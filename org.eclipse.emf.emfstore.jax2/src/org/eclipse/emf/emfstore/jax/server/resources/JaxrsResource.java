@@ -10,6 +10,7 @@ import javax.ws.rs.core.StreamingOutput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
@@ -77,7 +78,11 @@ public abstract class JaxrsResource {
 		final String fileNameURI = "blabla";
 		final XMLResourceImpl resource = (XMLResourceImpl) resourceSetImpl
 				.createResource(URI.createURI(fileNameURI));
-		resource.getContents().addAll(eObjects);
+		
+		for(EObject e : eObjects) {
+			EObject copy = EcoreUtil.copy(e);  //neccessary because add() has side effects!
+			resource.getContents().add(copy);
+		}
 
 		final StreamingOutput streamingOutput = new StreamingOutput() {
 
