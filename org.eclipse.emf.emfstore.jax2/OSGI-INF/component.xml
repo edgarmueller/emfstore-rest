@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.eclipse.emf.emfstore.jax.server">
+   <implementation class="org.eclipse.emf.emfstore.jax.server.resources.Projects"/>
+   <service>
+      <provide interface="org.eclipse.emf.emfstore.jax.server.resources.IProjects"/>
+   </service>
+</scr:component>

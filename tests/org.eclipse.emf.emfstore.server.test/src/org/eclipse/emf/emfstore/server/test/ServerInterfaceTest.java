@@ -21,6 +21,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.emf.emfstore.client.ESLocalProject;
 import org.eclipse.emf.emfstore.client.ESServer;
@@ -29,6 +31,7 @@ import org.eclipse.emf.emfstore.client.exceptions.ESServerStartFailedException;
 import org.eclipse.emf.emfstore.client.test.common.dsl.Create;
 import org.eclipse.emf.emfstore.client.test.common.dsl.CreateAPI;
 import org.eclipse.emf.emfstore.client.test.common.util.ProjectUtil;
+import org.eclipse.emf.emfstore.client.test.common.util.ServerUtil;
 import org.eclipse.emf.emfstore.internal.client.model.ESWorkspaceProviderImpl;
 import org.eclipse.emf.emfstore.internal.client.model.ModelFactory;
 import org.eclipse.emf.emfstore.internal.client.model.ProjectSpace;
@@ -49,9 +52,11 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSp
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.jax.server.resources.Projects;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -63,18 +68,43 @@ public class ServerInterfaceTest {
 	private static ConnectionManager connectionManager;
 	private static Usersession usersession;
 
+	private Projects service;
+
+	private static CountDownLatch dependencyLatch = new CountDownLatch(1);
+
+	public synchronized void setQuote(Projects service) {
+		this.service = service;
+		dependencyLatch.countDown();
+		System.out.println("\n\nsetQuote invoked...!\n\n");
+	}
+
+	public synchronized void unsetQuote(Projects service) {
+		if (this.service == service) {
+			this.service = null;
+		}
+	}
+
+	@Before
+	public void before() {
+		try {
+			dependencyLatch.await(10, TimeUnit.SECONDS);
+		} catch (final InterruptedException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	@BeforeClass
 	public static void beforeClass() throws IllegalArgumentException, ESServerStartFailedException,
 		FatalESException, ESException, IOException {
-		// server = ServerUtil.startServer();
+		server = ServerUtil.startServer();
 		final ServerInfo serverInfo = ModelFactory.eINSTANCE.createServerInfo();
 		serverInfo.setCertificateAlias(KeyStoreManager.getInstance().DEFAULT_CERTIFICATE);
 		serverInfo.setUrl("localhost");
 		serverInfo.setPort(8081);
 		server = new ESServerImpl(serverInfo);
 		session = server.login("super", "super");
-		ProjectUtil.deleteRemoteProjects(server, session);
-		ProjectUtil.deleteLocalProjects();
+		// ProjectUtil.deleteRemoteProjects(server, session);
+		// ProjectUtil.deleteLocalProjects();
 
 		connectionManager = ESWorkspaceProviderImpl.getInstance().getConnectionManager();
 

@@ -8,4 +8,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.emf.emfstore.jax.server.Activator
 Require-Bundle: org.eclipse.emf.emfstore.server,
  javax.ws.rs-api
-Export-Package: org.eclipse.emf.emfstore.jax.common
+Export-Package: org.eclipse.emf.emfstore.jax.common,
+ org.eclipse.emf.emfstore.jax.server.resources
+Service-Component: component.xml

@@ -72,7 +72,7 @@ import org.eclipse.emf.emfstore.server.exceptions.ESException;
 //TODO: do error handling for all {pathParam} stuff where this pathParam is not valid!!!
 //TODO: refactor using CallParamStrings everywhere where possible!
 @Path(CallParamStrings.PROJECTS_PATH)
-public class Projects extends JaxrsResource {
+public class Projects extends JaxrsResource implements IProjects {
 
 	@SuppressWarnings("restriction")
 	@GET

@@ -52,16 +52,16 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 //		final Projects projectsService = new Projects(emfStore, accessControl);
 //		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
 //		System.out.println("\n\n\n REGISTERED SERVICE: \t" + context.getService(projectServiceRegistration.getReference()).toString() + "\n\n\n");
-//		
-		ServiceReference<Projects> projectsServiceReference = context.getServiceReference(Projects.class);
-		Projects projectsService = context.getService(projectsServiceReference);
-		projectsService.setAccessControl(accessControl);
-		projectsService.setEmfStore(emfStore);
 		
-		ServiceReference<Branches> branchesServiceReference = context.getServiceReference(Branches.class);
-		Branches branchesService = context.getService(branchesServiceReference);
-		branchesService.setAccessControl(accessControl);
-		branchesService.setEmfStore(emfStore);
+//		ServiceReference<Projects> projectsServiceReference = context.getServiceReference(Projects.class);
+//		Projects projectsService = context.getService(projectsServiceReference);
+//		projectsService.setAccessControl(accessControl);
+//		projectsService.setEmfStore(emfStore);
+//		
+//		ServiceReference<Branches> branchesServiceReference = context.getServiceReference(Branches.class);
+//		Branches branchesService = context.getService(branchesServiceReference);
+//		branchesService.setAccessControl(accessControl);
+//		branchesService.setEmfStore(emfStore);
 		
 		
 		

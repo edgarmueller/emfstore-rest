@@ -23,21 +23,21 @@ public class Activator implements BundleActivator {
 		
 		//Thread.sleep(10000);
 		
-		ServiceReference<Projects> projectsServiceReference = context.getServiceReference(Projects.class);
+//		ServiceReference<Projects> projectsServiceReference = context.getServiceReference(Projects.class);
+//		
+//		if(projectsServiceReference == null) {
+//			final Projects projectsService = new Projects();
+//			 projectServiceRegistration = context.registerService(Projects.class,
+//			 projectsService, null);
+//		}
 		
-		if(projectsServiceReference == null) {
-			final Projects projectsService = new Projects();
-			 projectServiceRegistration = context.registerService(Projects.class,
-			 projectsService, null);
-		}
-		
-		ServiceReference<Branches> branchesServiceReference = context.getServiceReference(Branches.class);
-		
-		if(branchesServiceReference == null) {
-			final Branches branchesService = new Branches();
-			branchesServiceRegistration = context.registerService(Branches.class,
-					branchesService, null);
-		}
+//		ServiceReference<Branches> branchesServiceReference = context.getServiceReference(Branches.class);
+//		
+//		if(branchesServiceReference == null) {
+//			final Branches branchesService = new Branches();
+//			branchesServiceRegistration = context.registerService(Branches.class,
+//					branchesService, null);
+//		}
 		
 		
 		
@@ -52,8 +52,8 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext context) throws Exception {
 
-		projectServiceRegistration.unregister();
-		branchesServiceRegistration.unregister();
+//		projectServiceRegistration.unregister();
+//		branchesServiceRegistration.unregister();
 		
 	}
 
