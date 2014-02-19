@@ -10,4 +10,4 @@ Require-Bundle: org.eclipse.emf.emfstore.server,
  javax.ws.rs-api
 Export-Package: org.eclipse.emf.emfstore.jax.common,
  org.eclipse.emf.emfstore.jax.server.resources
-Service-Component: component.xml
+Service-Component: OSGI-INF/component.xml

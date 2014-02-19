@@ -44,6 +44,9 @@ import org.eclipse.emf.emfstore.internal.client.model.impl.api.ESServerImpl;
 import org.eclipse.emf.emfstore.internal.common.APIUtil;
 import org.eclipse.emf.emfstore.internal.common.model.Project;
 import org.eclipse.emf.emfstore.internal.common.model.util.ModelUtil;
+import org.eclipse.emf.emfstore.internal.server.EMFStore;
+import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
+import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectId;
 import org.eclipse.emf.emfstore.internal.server.model.ProjectInfo;
@@ -52,6 +55,7 @@ import org.eclipse.emf.emfstore.internal.server.model.versioning.BranchVersionSp
 import org.eclipse.emf.emfstore.internal.server.model.versioning.ChangePackage;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.PrimaryVersionSpec;
 import org.eclipse.emf.emfstore.internal.server.model.versioning.VersioningFactory;
+import org.eclipse.emf.emfstore.jax.server.resources.IProjects;
 import org.eclipse.emf.emfstore.jax.server.resources.Projects;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.junit.After;
@@ -59,6 +63,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 
 // TODO: refactor tests avoiding code copying!!
 public class ServerInterfaceTest {
@@ -68,17 +75,17 @@ public class ServerInterfaceTest {
 	private static ConnectionManager connectionManager;
 	private static Usersession usersession;
 
-	private Projects service;
+	private IProjects service;
 
 	private static CountDownLatch dependencyLatch = new CountDownLatch(1);
 
-	public synchronized void setQuote(Projects service) {
+	public void setProjects(IProjects service) {
 		this.service = service;
 		dependencyLatch.countDown();
 		System.out.println("\n\nsetQuote invoked...!\n\n");
 	}
 
-	public synchronized void unsetQuote(Projects service) {
+	public synchronized void unsetQuote(IProjects service) {
 		if (this.service == service) {
 			this.service = null;
 		}
@@ -86,6 +93,17 @@ public class ServerInterfaceTest {
 
 	@Before
 	public void before() {
+		final BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
+		final ServiceReference<IProjects> projectsServiceReference = context.getServiceReference(IProjects.class);
+		if (projectsServiceReference != null) {
+			service = context.getService(projectsServiceReference);
+			final Projects p = Projects.class.cast(service);
+			final EMFStore emfStore = EMFStoreController.getInstance().getEmfStore();
+			final AccessControl accessControl = EMFStoreController.getInstance().getAccessControl();
+			p.setAccessControl(accessControl);
+			p.setEmfStore(emfStore);
+			dependencyLatch.countDown();
+		}
 		try {
 			dependencyLatch.await(10, TimeUnit.SECONDS);
 		} catch (final InterruptedException ex) {

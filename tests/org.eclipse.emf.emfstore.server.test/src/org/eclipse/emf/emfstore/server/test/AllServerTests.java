@@ -11,7 +11,6 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.server.test;
 
-import org.eclipse.emf.emfstore.server.accesscontrol.test.AllAccessControlTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -22,18 +21,18 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	AllAccessControlTests.class,
-	BranchTests.class,
+	// AllAccessControlTests.class,
+	// BranchTests.class,
 	ServerInterfaceTest.class,
-	HistoryAPITests.class,
-	ChangeCertificationTest.class,
-	ChecksumTest.class,
-	FileManagerTest.class,
-	InvalidArgumentsTest.class,
-	PropertiesTest.class,
-	AllServerAPITests.class,
-	VersionSpecTests.class,
-	VersionVerifierTest.class
+// HistoryAPITests.class,
+// ChangeCertificationTest.class,
+// ChecksumTest.class,
+// FileManagerTest.class,
+// InvalidArgumentsTest.class,
+// PropertiesTest.class,
+// AllServerAPITests.class,
+// VersionSpecTests.class,
+// VersionVerifierTest.class
 })
 public class AllServerTests {
 

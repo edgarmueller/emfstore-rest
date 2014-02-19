@@ -11,6 +11,8 @@
  ******************************************************************************/
 package org.eclipse.emf.emfstore.jax.server;
 
+import javax.ws.rs.core.Response;
+
 import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.emf.emfstore.internal.server.EMFStore;
 import org.eclipse.emf.emfstore.internal.server.EMFStoreController;
@@ -18,6 +20,7 @@ import org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl;
 import org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler;
 import org.eclipse.emf.emfstore.internal.server.exceptions.FatalESException;
 import org.eclipse.emf.emfstore.jax.server.resources.Branches;
+import org.eclipse.emf.emfstore.jax.server.resources.IProjects;
 import org.eclipse.emf.emfstore.jax.server.resources.Projects;
 import org.eclipse.emf.emfstore.server.exceptions.ESException;
 import org.osgi.framework.BundleContext;
@@ -32,6 +35,8 @@ import org.osgi.framework.ServiceRegistration;
 public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 
 	private ServiceRegistration<?> projectServiceRegistration;
+	private EMFStore emfStore;
+	private AccessControl accessControl;
 
 	/**
 	 * {@inheritDoc}
@@ -41,30 +46,50 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#init(org.eclipse.emf.emfstore.internal.server.EMFStoreInterface,
 	 *      org.eclipse.emf.emfstore.internal.server.accesscontrol.AccessControl)
 	 */
-	public void init(EMFStore emfStore, AccessControl accessControl) throws FatalESException, ESException {
+	public void init(EMFStore emfStore, AccessControl accessControl)
+			throws FatalESException, ESException {
 
 		// needs to publish all services
-		final BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
-//		final BundleContext context = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
-//		final BundleContext context = InternalPlatform.getDefault().getBundleContext();
-//		final BundleContext context = FrameworkUtil.getBundle(EMFStoreController.class).getBundleContext();
+		this.emfStore = emfStore;
+		this.accessControl = accessControl;
+		// final BundleContext context =
+		// FrameworkUtil.getBundle(this.getClass()).getBundleContext();
+		// final BundleContext context =
+		// InternalPlatform.getDefault().getBundleContext();
+		// final BundleContext context =
+		// FrameworkUtil.getBundle(EMFStoreController.class).getBundleContext();
 
-//		final Projects projectsService = new Projects(emfStore, accessControl);
-//		projectServiceRegistration = context.registerService(Projects.class, projectsService, null);
-//		System.out.println("\n\n\n REGISTERED SERVICE: \t" + context.getService(projectServiceRegistration.getReference()).toString() + "\n\n\n");
-		
-//		ServiceReference<Projects> projectsServiceReference = context.getServiceReference(Projects.class);
-//		Projects projectsService = context.getService(projectsServiceReference);
-//		projectsService.setAccessControl(accessControl);
-//		projectsService.setEmfStore(emfStore);
-//		
-//		ServiceReference<Branches> branchesServiceReference = context.getServiceReference(Branches.class);
-//		Branches branchesService = context.getService(branchesServiceReference);
-//		branchesService.setAccessControl(accessControl);
-//		branchesService.setEmfStore(emfStore);
-		
-		
-		
+		// final Projects projectsService = new Projects(emfStore,
+		// accessControl);
+		// projectServiceRegistration = context.registerService(Projects.class,
+		// projectsService, null);
+		// System.out.println("\n\n\n REGISTERED SERVICE: \t" +
+		// context.getService(projectServiceRegistration.getReference()).toString()
+		// + "\n\n\n");
+
+		// ServiceReference<Projects> projectsServiceReference =
+		// context.getServiceReference(Projects.class);
+		// Projects projectsService =
+		// context.getService(projectsServiceReference);
+		// projectsService.setAccessControl(accessControl);
+		// projectsService.setEmfStore(emfStore);
+		//
+		// ServiceReference<Branches> branchesServiceReference =
+		// context.getServiceReference(Branches.class);
+		// Branches branchesService =
+		// context.getService(branchesServiceReference);
+		// branchesService.setAccessControl(accessControl);
+		// branchesService.setEmfStore(emfStore);
+	}
+
+	public void activate() {
+		final BundleContext context = FrameworkUtil.getBundle(getClass())
+				.getBundleContext();
+		ServiceReference<Projects> projectsServiceReference = context
+				.getServiceReference(Projects.class);
+		Projects projectsService = context.getService(projectsServiceReference);
+		projectsService.setAccessControl(accessControl);
+		projectsService.setEmfStore(emfStore);
 	}
 
 	/**
@@ -73,11 +98,12 @@ public class JaxrsConnectionHandler implements ConnectionHandler<EMFStore> {
 	 * @see org.eclipse.emf.emfstore.internal.server.connection.ConnectionHandler#stop()
 	 */
 	public void stop() {
-				
+
 		// needs to stop the services
-//		projectServiceRegistration.unregister(); //TODO: uncommented because now in Activator!
-		
-//		System.out.println("\n\n\n UNREGISTERED SERVICE!!! \n\n\n");
+		// projectServiceRegistration.unregister(); //TODO: uncommented because
+		// now in Activator!
+
+		// System.out.println("\n\n\n UNREGISTERED SERVICE!!! \n\n\n");
 	}
 
 	/**

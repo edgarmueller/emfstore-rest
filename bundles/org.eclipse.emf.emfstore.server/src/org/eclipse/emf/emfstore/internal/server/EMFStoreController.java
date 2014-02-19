@@ -639,4 +639,11 @@ public class EMFStoreController implements IApplication, Runnable {
 		stopServer();
 	}
 
+	/**
+	 * @return the emfStore
+	 */
+	public EMFStore getEmfStore() {
+		return emfStore;
+	}
+
 }
